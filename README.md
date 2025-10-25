@@ -41,7 +41,7 @@ The full pipeline follows this flow:
 
 1. **Reduction** → shrink dataset size  
 2. **Augmentation** → apply data augmentation on reduced datasets  
-3. **Train & Evaluate EA models** → HybEA, KnowFormer, BERT-INT  
+3. **Train & Evaluate EA models** → HybEA .. 
 4. **Metrics & Analysis** → evaluate performance and gap between reduced, and augmented datasets  
 
 Example command:
