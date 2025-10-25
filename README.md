@@ -70,6 +70,4 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 
 ## 🔗 References
 
-- [HybEA GitHub](https://github.com/fanourakis/HybEA)  
-- [KnowFormer](https://arxiv.org/abs/XXXX.XXXX)  
-- [BERT-INT](https://arxiv.org/abs/XXXX.XXXX)
+- [HybEA GitHub](https://github.com/fanourakis/HybEA)
