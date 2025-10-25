@@ -42,24 +42,13 @@ The full pipeline follows this flow:
 1. **Reduction** → shrink dataset size  
 2. **Augmentation** → apply data augmentation on reduced datasets  
 3. **Train & Evaluate EA models** → HybEA, KnowFormer, BERT-INT  
-4. **Metrics & Analysis** → evaluate performance and gap between original, reduced, and augmented datasets  
+4. **Metrics & Analysis** → evaluate performance and gap between reduced, and augmented datasets  
 
 Example command:
 
 ```bash
 python experiments/run.py --config_exp config/experiments/exp_1.yaml --model hybea
 ```
-
----
-
-## 🧩 Main Modules
-
-- **alignment_models** → model registry and wrappers  
-- **augmentation** → PLM-based methods, literal noise, etc.  
-- **reduction** → random or advanced reduction methods  
-- **dataset** → dataset management with Reader/Writer for different formats  
-- **knowledge_graph** → RDFLib-based graph handling  
-- **statistic** → metrics and analysis tools  
 
 ---
 
@@ -82,5 +71,5 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 ## 🔗 References
 
 - [HybEA GitHub](https://github.com/fanourakis/HybEA)  
-- [KnowFormer Paper](https://arxiv.org/abs/XXXX.XXXX)  
-- [BERT-INT Paper](https://arxiv.org/abs/XXXX.XXXX)
+- [KnowFormer](https://arxiv.org/abs/XXXX.XXXX)  
+- [BERT-INT](https://arxiv.org/abs/XXXX.XXXX)
