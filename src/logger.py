@@ -35,7 +35,7 @@ def get_logger(name=__name__, level=logging.INFO, log_file=None):
         # File handler (ensure dir exists)
         if log_file:
             log_path = Path(log_file)
-            log_path.parent.mkdir(parents=True, exist_ok=True)  # ✅ crea la cartella
+            log_path.parent.mkdir(parents=True, exist_ok=True)
             fh = logging.FileHandler(log_path)
             fh.setLevel(level)
             fh.setFormatter(logging.Formatter("%(asctime)s | %(levelname)s | %(message)s"))

@@ -13,24 +13,24 @@ class HybeaWriter(Writer):
     file_type = "hybea"
 
 
-    def write(self, dir_path: str, dataset: Dataset) -> bool:
+    def write(self, dataset: Dataset, dir_path: str) -> bool:
 
         logger.info("Dataset Hybea Export Start")
 
         kg_writer_1 = WriterFactory.create_writer(self.file_type)
-        kg_writer_1.write(dir_path, dataset.knowledge_graph_source, kg_number=1)
+        kg_writer_1.write(dataset.knowledge_graph_source, dir_path, kg_number=1)
 
         kg_writer_2 = WriterFactory.create_writer(self.file_type)
-        kg_writer_2.write(dir_path, dataset.knowledge_graph_target, kg_number=2)
+        kg_writer_2.write(dataset.knowledge_graph_target, dir_path, kg_number=2)
 
         ## Write aligned entities
         if "attribute_data" in dir_path:
-            return self._write_aligned_entities_attribute(dir_path, dataset.aligned_entities)
+            return self._write_aligned_entities_attribute(dataset.aligned_entities, dir_path)
         else: #knowformer_data
-            return self._write_aligned_entities_knowformer(dir_path, dataset)
+            return self._write_aligned_entities_knowformer(dataset, dir_path)
 
-    def _write_aligned_entities_attribute(self, dir_path, aligned_entities):
-        ## Leggi ent_ids da dir_path
+    def _write_aligned_entities_attribute(self, aligned_entities, dir_path):
+
         ent_ids_1 = read_tsv(os.path.join(dir_path, "ent_ids_1"))
         ent_ids_2 = read_tsv(os.path.join(dir_path, "ent_ids_2"))
         ent_ids = {}
@@ -77,7 +77,7 @@ class HybeaWriter(Writer):
         return True
 
 
-    def _write_aligned_entities_knowformer(self, dir_path, dataset : Dataset):
+    def _write_aligned_entities_knowformer(self, dataset : Dataset, dir_path):
 
         ENT_ILLS = os.path.join(dir_path, "ent_ILLs.txt")
         REF_ENTS = os.path.join(dir_path, "ref_ents.txt")
@@ -188,8 +188,6 @@ class HybeaWriter(Writer):
                     train_triples_expanded.add((train_triple[0],train_triple[1],eq_class))
 
         train_triples_expanded_list = list(train_triples_expanded)
-
-        print(len(train_triples),len(train_triples_expanded_list))
 
         train_triples_final = []
 
