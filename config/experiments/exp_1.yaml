@@ -1,0 +1,10 @@
+experiment:
+  name: "exp_1"
+  reduction_ratio: 0.5
+  augmentation_methods:
+    - "plm_noise"
+    - "literal_shuffle"
+  models_to_run:
+    - "hybea"
+    - "knowformer"
+  output_dir: "experiments/results/exp_1"

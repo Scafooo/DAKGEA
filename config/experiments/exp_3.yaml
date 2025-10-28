@@ -1,0 +1,30 @@
+experiment:
+  name: "multi_dataset_benchmark"
+  output_root: "experiments/results"
+  datasets:
+    - name: "BBC_DB"
+      reader_type: "hybea"
+    - name: "D_W_15K_V1"
+      reader_type: "knowformer"
+    - name: "D_W_15K_V2"
+      reader_type: "knowformer"
+    - name: "fr_en"
+      reader_type: "hybea"
+#    - name: "ICEW_WIKI"
+#      reader_type: "hybea"
+#    - name: "ICEW_YAGO"
+#      reader_type: "hybea"
+    - name: "ja_en"
+      reader_type: "knowformer"
+    - name: "SRPRS_D_W_15K_V1"
+      reader_type: "knowformer"
+    - name: "SRPRS_D_W_15K_V2"
+      reader_type: "knowformer"
+    - name: "zh_en"
+      reader_type: "hybea"
+  reduction_ratios: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+  reduction_method: "random_entities"
+  augmentation_methods:
+    - "plm_augmentation"
+  models_to_run:
+    - "hybea"
