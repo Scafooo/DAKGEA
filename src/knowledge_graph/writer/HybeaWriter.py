@@ -10,18 +10,18 @@ from src.util.writer import write_tsv
 class HybeaWriter(Writer):
     file_type = "hybea"
 
-    def write(self, dir_path, kg : KnowledgeGraph, kg_number = None) -> bool:
+    def write(self, kg : KnowledgeGraph,  dir_path, kg_number = None) -> bool:
 
         logger.info("Knowledge Graph Hybea Export Start")
 
         if "attribute_data" in dir_path:
-            return self.write_attribute(dir_path, kg, kg_number)
+            return self.write_attribute(kg, dir_path, kg_number)
         else: #knowformer
-            return self.write_knowformer(dir_path, kg, kg_number)
+            return self.write_knowformer(kg, dir_path, kg_number)
 
 
 
-    def write_attribute(self, dir_path, kg, kg_number) -> bool:
+    def write_attribute(self, kg, kg_number, dir_path) -> bool:
 
         logger.info("Knowledge Graph Hybea Attribute")
 
@@ -79,7 +79,7 @@ class HybeaWriter(Writer):
         return True
 
 
-    def write_knowformer(self, dir_path, kg, kg_number) -> bool:
+    def write_knowformer(self, kg, dir_path, kg_number) -> bool:
 
         logger.info("Knowledge Graph Hybea Knowformer Export")
 
