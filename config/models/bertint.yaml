@@ -1,0 +1,7 @@
+model:
+  name: "bert-int"
+  embedding_dim: 768
+  learning_rate: 0.0001
+  batch_size: 32
+  epochs: 20
+  device: "cuda"
