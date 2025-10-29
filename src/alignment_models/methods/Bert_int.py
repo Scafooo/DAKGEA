@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import pickle
 from pathlib import Path
-from typing import Dict, Iterable, List, Tuple
+from typing import Dict, Iterable, List, Optional, Tuple
 
 import numpy as np
 import random
@@ -41,6 +42,7 @@ class Bert_int:
     def __init__(self, config):
         self.stage_config = config or {}
         self.model_config = self._load_model_config()
+        self._description_cache: Optional[Dict[str, str]] = None
         logger.debug("[BERT-INT] Loaded configuration: %s", self.model_config.to_dict())
 
     def evaluate(self, dataset_reduced, dataset_augmented):
@@ -55,11 +57,7 @@ class Bert_int:
             logger.warning("[BERT-INT] Not enough aligned entities (%d)", len(aligned_pairs))
             return self._empty_metrics()
 
-        random.seed(self.model_config.seed)
-        np.random.seed(self.model_config.seed)
-        torch.manual_seed(self.model_config.seed)
-        if torch.cuda.is_available():  # pragma: no cover - depends on hardware
-            torch.cuda.manual_seed_all(self.model_config.seed)
+        self._seed_everything()
 
         bert_dataset = build_dataset(dataset, self._train_ratio())
         entity_order = [bert_dataset.index2entity[idx] for idx in range(len(bert_dataset.index2entity))]
@@ -88,7 +86,37 @@ class Bert_int:
             for idx in range(token_ids.size(0))
         }
 
-        device = self._resolve_device()
+        last_error: Optional[torch.cuda.OutOfMemoryError] = None
+        for device in self._candidate_devices():
+            try:
+                self._seed_everything()
+                return self._evaluate_on_device(dataset, bert_dataset, entid2data, tokenizer, device)
+            except torch.cuda.OutOfMemoryError as err:
+                last_error = err
+                if device.type == "cuda":
+                    logger.warning(
+                        "[BERT-INT] CUDA out of memory on device '%s'. Error: %s. Retrying on CPU.",
+                        device,
+                        err,
+                    )
+                    torch.cuda.empty_cache()
+                    continue
+                raise
+
+        if last_error is not None:
+            raise last_error
+        return self._empty_metrics()
+
+    def _evaluate_on_device(
+        self,
+        dataset,
+        bert_dataset: BertIntDataset,
+        entid2data: Dict[int, Tuple[torch.Tensor, torch.Tensor]],
+        tokenizer,
+        device: torch.device,
+    ) -> Dict[str, float]:
+        logger.info("[BERT-INT] Using device '%s' for evaluation.", device)
+
         model = BasicBertUnitModel(
             self.model_config.basic_unit.encoder_name,
             self.model_config.basic_unit.input_dim,
@@ -140,6 +168,83 @@ class Bert_int:
             result["mrr"],
         )
         return result
+
+    def _candidate_devices(self) -> List[torch.device]:
+        primary = self._resolve_device()
+        devices = [primary]
+        if primary.type == "cuda":
+            devices.append(torch.device("cpu"))
+        return devices
+
+    def _description_overrides(self) -> Dict[str, str]:
+        if self._description_cache is not None:
+            return self._description_cache
+
+        overrides: Dict[str, str] = {}
+        for path in self._description_paths():
+            data = self._load_description_dict(path)
+            if not data:
+                continue
+            applied = sum(1 for key in data if key not in overrides)
+            for key, value in data.items():
+                overrides.setdefault(key, value)
+            logger.info(
+                "[BERT-INT] Loaded %d descriptions from '%s' (%d applied, %d total).",
+                len(data),
+                path,
+                applied,
+                len(overrides),
+            )
+        self._description_cache = overrides
+        return overrides
+
+    def _description_paths(self) -> List[Path]:
+        configured: List[Path] = []
+        for path_str in (
+            self.model_config.paths.description_dict,
+            self.model_config.paths.origin_description_dict,
+        ):
+            if not path_str:
+                continue
+            path = Path(path_str)
+            if not path.is_absolute():
+                path = PROJECT_ROOT / path
+            configured.append(path)
+        return configured
+
+    def _load_description_dict(self, path: Path) -> Dict[str, str]:
+        if not path.exists():
+            logger.warning("[BERT-INT] Description dictionary not found: %s", path)
+            return {}
+        try:
+            with path.open("rb") as handle:
+                raw = pickle.load(handle)
+        except Exception as exc:  # pragma: no cover - depends on external files
+            logger.warning("[BERT-INT] Failed to load description dictionary '%s' (%s).", path, exc)
+            return {}
+
+        if not isinstance(raw, dict):
+            logger.warning("[BERT-INT] Description dictionary '%s' is not a dict (type=%s).", path, type(raw))
+            return {}
+
+        cleaned: Dict[str, str] = {}
+        for key, value in raw.items():
+            if not isinstance(key, str):
+                continue
+            if isinstance(value, bytes):
+                try:
+                    value = value.decode("utf-8")
+                except UnicodeDecodeError:
+                    value = value.decode("utf-8", errors="ignore")
+            cleaned[key] = str(value)
+        return cleaned
+
+    def _seed_everything(self) -> None:
+        random.seed(self.model_config.seed)
+        np.random.seed(self.model_config.seed)
+        torch.manual_seed(self.model_config.seed)
+        if torch.cuda.is_available():  # pragma: no cover - depends on hardware
+            torch.cuda.manual_seed_all(self.model_config.seed)
 
     def _run_interaction_stage(
         self,
@@ -279,6 +384,14 @@ class Bert_int:
         target_entities = {URIRef(uri) for uri in bert_dataset.kg2.entities}
         texts = extract_entity_texts(dataset.knowledge_graph_source, source_entities)
         texts.update(extract_entity_texts(dataset.knowledge_graph_target, target_entities))
+        overrides = self._description_overrides()
+        if overrides:
+            replaced = 0
+            for entity in list(texts.keys()):
+                if entity in overrides:
+                    texts[entity] = overrides[entity]
+                    replaced += 1
+            logger.debug("[BERT-INT] Description dictionary applied to %d entities.", replaced)
         return texts
 
     def _train_ratio(self) -> float:

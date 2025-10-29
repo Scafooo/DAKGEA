@@ -120,3 +120,4 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 ## 🔗 References
 
 - [HybEA GitHub](https://github.com/fanourakis/HybEA)
+- [Bert-int](https://github.com/kosugi11037/bert-int?tab=readme-ov-file)

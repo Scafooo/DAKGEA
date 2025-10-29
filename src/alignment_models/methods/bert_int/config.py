@@ -49,6 +49,8 @@ class PathsConfig:
     work_dir: str = "experiments/bert_int"
     models_dir: Optional[str] = None
     cache_dir: Optional[str] = None
+    description_dict: Optional[str] = None
+    origin_description_dict: Optional[str] = None
 
 
 @dataclass

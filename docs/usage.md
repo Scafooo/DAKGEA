@@ -71,6 +71,9 @@ parameters:
         epochs: 20
 ```
 
+- BERT-INT now retries on CPU when a CUDA device runs out of memory. To always run on CPU, set `device: "cpu"` in the override.
+- Provide pre-built description dictionaries with `paths.description_dict` (and optionally `paths.origin_description_dict` for fallback entries). Paths are resolved relative to the project root when not absolute; for example `data/external/bert_int/dbp15k_descriptions_clean.pkl`.
+
 ## 3. Directory Layout
 
 Paths are resolved from `config/global.yaml` and default to:

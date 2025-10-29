@@ -14,11 +14,51 @@ export PYTHONPATH="${PROJECT_ROOT}"
 # Allow overriding config via CLI argument or RUN_CONFIG environment variable
 FILE_NAME="${1:-${RUN_CONFIG:-exp_4.yaml}}"
 
-# Default config file (you can change this)
-if [[ "$FILE_NAME" == /* ]]; then
-    CONFIG_FILE="${FILE_NAME}"
-else
-    CONFIG_FILE="${PROJECT_ROOT}/config/experiments/${FILE_NAME}"
+# Resolve configuration path (supports names without extension)
+resolve_config_path() {
+    local candidate="$1"
+    local search_paths=()
+
+    if [[ "$candidate" == /* ]]; then
+        search_paths+=("$candidate")
+    else
+        if [[ "$candidate" == */* ]]; then
+            search_paths+=("${PROJECT_ROOT}/${candidate}")
+        else
+            search_paths+=("${PROJECT_ROOT}/config/experiments/${candidate}")
+            search_paths+=("${PROJECT_ROOT}/${candidate}")
+        fi
+    fi
+
+    for path in "${search_paths[@]}"; do
+        if [[ -f "$path" ]]; then
+            echo "$path"
+            return 0
+        fi
+
+        case "$path" in
+            *.yaml|*.yml) ;;
+            *)
+                for ext in yaml yml; do
+                    if [[ -f "${path}.${ext}" ]]; then
+                        echo "${path}.${ext}"
+                        return 0
+                    fi
+                done
+                ;;
+        esac
+    done
+
+    return 1
+}
+
+if ! CONFIG_FILE="$(resolve_config_path "$FILE_NAME")"; then
+    if [[ "$FILE_NAME" == /* ]]; then
+        echo "❌ Configuration file not found: ${FILE_NAME}"
+    else
+        echo "❌ Configuration file not found: ${PROJECT_ROOT}/config/experiments/${FILE_NAME}"
+    fi
+    exit 1
 fi
 
 # Activate virtual environment automatically (if it exists)
