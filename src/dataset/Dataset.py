@@ -24,3 +24,12 @@ class Dataset:
         self.knowledge_graph_source = knowledge_graph_source
         self.knowledge_graph_target = knowledge_graph_target
         self.aligned_entities = aligned_entities
+
+    def clone(self) -> "Dataset":
+        """Return a deep copy of the dataset components."""
+
+        source_copy = self.knowledge_graph_source.clone()
+        target_copy = self.knowledge_graph_target.clone()
+        aligned_copy = {(left, right) for left, right in self.aligned_entities}
+
+        return Dataset(source_copy, target_copy, aligned_copy)

@@ -292,7 +292,7 @@ class ExperimentRunner:
                 )
 
         reducer = self.reducer_cls(stage_cfg)
-        dataset_reduced = reducer.reduce(dataset)
+        dataset_reduced = reducer.reduce(dataset.clone())
 
         for plan in writer_plans:
             if plan.write_reduced:
@@ -348,7 +348,7 @@ class ExperimentRunner:
 
         augmenter_cls = AUGMENTATION_REGISTRY.get(augmentation_name)
         augmenter = augmenter_cls(stage_cfg)
-        dataset_augmented = augmenter.augment(dataset_reduced)
+        dataset_augmented = augmenter.augment(dataset_reduced.clone())
 
         for plan in writer_plans:
             if plan.write_augmented:
