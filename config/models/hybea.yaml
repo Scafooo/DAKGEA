@@ -17,8 +17,9 @@ model:
     nearest_sample_num: 128
     candidate_generator_batch_size: 128
     csls: 2
+    train_ratio: 0.7
+    valid_ratio: 0.1
   structure:
-    enabled: true
     random_initialization: false
     hidden_size: 768
     num_hidden_layers: 12

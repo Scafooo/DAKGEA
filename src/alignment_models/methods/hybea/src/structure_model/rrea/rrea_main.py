@@ -36,20 +36,12 @@ def replace_text_with_id_for_both(obj_set, vocab_dict):
 
 def run_rrea_structural(new_training_pairs):
 
-    path = os.path.join(cfg.DATA_TARGET, "rrea_data", cfg.DATASET) + "/"
+    path="structure_model/rrea/data/" + cfg.DATASET + "/"
 
-    if cfg.CUDA_NUM >= 0 and torch.cuda.is_available():
-        os.environ["CUDA_VISIBLE_DEVICES"] = str(cfg.CUDA_NUM)
-    else:
-        os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
+    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     os.environ["TF_CPP_MIN_LOG_LEVEL"]="2"
     tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
-
-    seed = getattr(cfg, "SEED", 2020)
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    tf.compat.v1.set_random_seed(seed)
 
     config = tf.compat.v1.ConfigProto()
     config.gpu_options.allow_growth=True
@@ -196,7 +188,7 @@ def run_rrea_structural(new_training_pairs):
     np.random.shuffle(rest_set_1)
     np.random.shuffle(rest_set_2)
 
-    epoch = getattr(getattr(cfg, "structure", None), "epochs", 1200)
+    epoch = 1200
     #for turn in range(5):
     for turn in range(1):
         print("iteration %d start."%turn)
@@ -234,15 +226,15 @@ def run_rrea_structural(new_training_pairs):
                 rest_set_2.remove(e2)
 
         '''
-    csls_sim_LR, csls_sim_RL, indices_L, indices_R = CSLS_return_matrix()
+    csls_sim_LR, csls_sim_RL, indices_L, indices_R=CSLS_return_matrix()
+    csls_sim_LR = torch.tensor(csls_sim_LR)
+    csls_sim_RL = torch.tensor(csls_sim_RL)
 
-    K.clear_session()
-    sess.close()
-
-    return np.asarray(csls_sim_LR), np.asarray(csls_sim_RL), indices_L, indices_R
+    return csls_sim_LR, csls_sim_RL, indices_L, indices_R
 
 
 
 
 
 #run_rrea_structural({})
+

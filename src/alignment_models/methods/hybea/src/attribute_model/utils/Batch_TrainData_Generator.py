@@ -14,9 +14,12 @@ class Batch_TrainData_Generator(object):
         self.neg_num = neg_num
         self.iter_count = 0
         self.index2entity = index2entity
-        print("In Batch_TrainData_Generator, train ill num: {}".format(len(self.ent_ill)))
-        print("In Batch_TrainData_Generator, ent_ids1 num: {}".format(len(self.ent_ids1)))
-        print("In Batch_TrainData_Generator, ent_ids2 num: {}".format(len(self.ent_ids2)))
+        cfg.logger.debug(
+            "BatchTrainDataGenerator init train=%d ent_ids1=%d ent_ids2=%d",
+            len(self.ent_ill),
+            len(self.ent_ids1),
+            len(self.ent_ids2),
+        )
         # print("In Batch_TrainData_Generator, keys of index2entity num: {}".format(len(self.index2entity)))
 
     def train_index_gene(self,candidate_dict):

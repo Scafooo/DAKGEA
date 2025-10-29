@@ -1,21 +1,84 @@
-import re
-from langdetect import detect
-import os
 import io
+import os
+import re
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
+
+try:  # pragma: no cover - optional dependency
+    from langdetect import detect as _detect_language
+except ModuleNotFoundError:  # pragma: no cover - dependency might be unavailable
+    _detect_language = None
+
 from src.alignment_models.methods.hybea import runtime as cfg
+from src.logger import get_logger
+
+logger = get_logger(__name__)
+
+_LEGACY_LANG_CACHE = None
+
+
+def _load_legacy_language_cache():
+    """Load language annotations from legacy HyBEA analysis files for fallback."""
+    global _LEGACY_LANG_CACHE
+    if _LEGACY_LANG_CACHE is not None:
+        return _LEGACY_LANG_CACHE
+
+    cache = {}
+    try:
+        current_file = Path(__file__).resolve()
+    except OSError:  # pragma: no cover - defensive guard
+        _LEGACY_LANG_CACHE = cache
+        return cache
+
+    legacy_root = None
+    for parent in current_file.parents:
+        candidate = parent / "hybea" / "data" / "entity_names"
+        if candidate.exists():
+            legacy_root = candidate
+            break
+
+    if legacy_root is None:
+        _LEGACY_LANG_CACHE = cache
+        return cache
+
+    for workbook in legacy_root.glob("**/*_analysis.xlsx"):
+        try:
+            df = pd.read_excel(workbook)
+        except Exception:  # pragma: no cover - IO failures or missing engine
+            logger.debug("[HyBEA][names] Unable to read legacy workbook %s", workbook)
+            continue
+
+        for _, row in df.iterrows():
+            key = str(row.get("replaced_puncs", "")).strip()
+            lang = str(row.get("Lang", "")).strip()
+            if key and lang and key not in cache:
+                cache[key] = lang
+
+    _LEGACY_LANG_CACHE = cache
+    logger.debug("[HyBEA][names] Loaded %d legacy language entries", len(cache))
+    return cache
+
 
 """
     Language detection
 """
 def lang_detect(s):
-    try:
-        lang = detect(s)
-    except:
-        lang = "Other"
+    text = "" if s is None else str(s)
 
-    return lang
+    if _detect_language is not None:
+        try:
+            return _detect_language(text)
+        except Exception:  # pragma: no cover - keep behaviour identical
+            logger.debug("[HyBEA][names] langdetect failed for '%s'", text, exc_info=True)
+
+    legacy_cache = _load_legacy_language_cache()
+    lang = legacy_cache.get(text.strip())
+    if lang:
+        return lang
+
+    return "Other"
 
 
 def to_delete(lang):
@@ -77,14 +140,10 @@ def get_ids_to_uris(DATASET, num):
 """
 def load_attr_graph(kg_id):
     data_path = cfg.DATA_TARGET + "/knowformer_data/" + cfg.DATASET + "/attr_triples_" + kg_id
-    # print("vivo qui", data_path)
-    # print("vivo qui", cfg.DATA_TARGET)
-    # print("vivo qui", cfg.DATASET)
     attr_df = pd.read_csv(data_path,  sep='\t', names=["e1", "attr", "val"])
     attr_dict = {}
     with open(data_path, "r") as fp:
         for line in fp:
-            # print(line)
             ent = line.split("\t")[0]
             attr = line.split("\t")[1]
 
@@ -98,6 +157,6 @@ def load_attr_graph(kg_id):
 def create_folder_if_not_exists(folder_path):
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
-        print(f"Folder '{folder_path}' created successfully.")
+        logger.debug("[HyBEA][names] Created folder %s", folder_path)
     else:
-        print(f"Folder '{folder_path}' already exists.")
+        logger.debug("[HyBEA][names] Folder %s already exists", folder_path)

@@ -16,29 +16,4 @@ experiment:
   reduction_ratios: [1.0]
   augmentation_methods: []
   models_to_run:
-    - "bert_int"
-
-  parameters:
-    experiment:
-      seed: 42
-    reduction:
-      random_seed: 42
-      filter_alignment: true
-    models:
-      bert_int:
-        device: "cuda"
-        basic_unit:
-          epochs: 5
-          batch_size: 24
-          max_seq_length: 128
-          negatives: 2
-          candidate_topk: 128
-        interaction:
-          epochs: 200
-          batch_size: 128
-          neighbor_max: 50
-          attribute_max: 50
-          candidate_topk: 1000
-        paths:
-          description_dict: "data/external/bert_int/dbp15k_descriptions_clean.pkl"
-          origin_description_dict: "data/external/bert_int/dbp15k_descriptions_original.pkl"
+    - "hybea"

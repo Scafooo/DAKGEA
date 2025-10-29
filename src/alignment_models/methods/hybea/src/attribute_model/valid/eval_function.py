@@ -5,6 +5,8 @@ import numpy as np
 import time
 from src.alignment_models.methods.hybea import runtime as cfg
 
+log = cfg.logger
+
 def calculate_nearest_k(sim_mat, k):
     sorted_mat = -np.partition(-sim_mat, k + 1, axis=1)  # -np.sort(-sim_mat1)
     nearest_k = sorted_mat[:, 0:k]
@@ -111,22 +113,40 @@ def hit_res(index_mat):
                     topk_n[h]+=1
                 break
     topk_n = [round(x/ent1_num,5) for x in topk_n]
-    print("hit @ 1: {:.5f}    hit @ 5: {:.5f}    hit @10 : {:.5f}    ".format(topk_n[1 - 1]*100,topk_n[5 - 1]*100,topk_n[10 - 1]*100),end="")
-    if ent2_num >= 25:
-        print("hit @ 25: {:.5f}    ".format(topk_n[25 - 1]*100),end="")
-    if ent2_num >= 50:
-        print("hit @ 50: {:.5f}    ".format(topk_n[50 - 1]*100),end="")
-    print("")
+    def _hit_at(index: int) -> float:
+        if ent2_num == 0:
+            return 0.0
+        idx = min(index, ent2_num - 1)
+        return topk_n[idx] * 100
 
-    print("MR without norm:", rank_MR)
-    print("MRR without norm:", rank_MRR)
+    hits1 = _hit_at(0)
+    hits5 = _hit_at(4)
+    hits10 = _hit_at(9)
+    hits25 = _hit_at(24) if ent2_num >= 25 else None
+    hits50 = _hit_at(49) if ent2_num >= 50 else None
+
+    log.debug(
+        "Raw ranking stats: MR=%s MRR=%s ent1=%d ent2=%d",
+        rank_MR,
+        rank_MRR,
+        ent1_num,
+        ent2_num,
+    )
 
     rank_MR /= entities_number
     rank_MRR /= entities_number
-    print("MR:", rank_MR)
-    print("MRR:", rank_MRR)
-    print("ent1_num: ",  ent1_num)
-    print("ent2_num: ",  ent2_num)
-    print("entities_number for test: ", entities_number)
+    info_parts = [
+        f"Hits@1 {hits1:.2f}%",
+        f"Hits@5 {hits5:.2f}%",
+        f"Hits@10 {hits10:.2f}%",
+    ]
+    if hits25 is not None:
+        info_parts.append(f"Hits@25 {hits25:.2f}%")
+    if hits50 is not None:
+        info_parts.append(f"Hits@50 {hits50:.2f}%")
+    info_parts.append(f"MR {rank_MR:.4f}")
+    info_parts.append(f"MRR {rank_MRR:.4f}")
+    info_parts.append(f"entities {entities_number}")
+    log.info(" | ".join(info_parts))
     
     return topk_n[1 - 1]*100

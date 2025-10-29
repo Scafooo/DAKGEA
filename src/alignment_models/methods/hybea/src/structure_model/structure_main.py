@@ -13,7 +13,7 @@ import numpy as np
 import random
 from .train.train_task import entity_alignment_train
 from .valid.test_task import entity_alignment_test
-from src.alignment_models.methods.hybea import runtime as cfg
+from src.alignment_models.methods.hybea import runtime as cfg, path_for_KG
 from .utils.tools import calculate_voc_lim
 # from structure_model.graph_trans import *
 
@@ -67,9 +67,9 @@ def get_args(new_pairs):
     data_g.add_arg("dataset_root_path", str, cfg.DATA_TARGET + "/knowformer_data", "dataset_root_path, default is data")
     data_g.add_arg("task", str, cfg.TASK,
                    "task (entity-alignment), default is entity-alignment")
-    
-    data_g.add_arg("KG1_PATH_FOR_NAMES", str, cfg.path_for_KG(cfg.DATASET)[0], "names for kg1")
-    data_g.add_arg("KG2_PATH_FOR_NAMES", str, cfg.path_for_KG(cfg.DATASET)[1], "names for kg2")
+    kg1_name, kg2_name = path_for_KG(cfg.DATASET)
+    data_g.add_arg("KG1_PATH_FOR_NAMES", str, kg1_name, "names for kg1")
+    data_g.add_arg("KG2_PATH_FOR_NAMES", str, kg2_name, "names for kg2")
     
     data_g.add_arg("VOC_LIM_1", str, VOC_LIM_1, "voc lim 1")
     data_g.add_arg("VOC_LIM_2", str, VOC_LIM_2, "voc lim 2")
@@ -132,7 +132,7 @@ def get_args(new_pairs):
     run_type_g.add_arg("do_test", bool, cfg.DO_TEST, "whether to perform valid, default is True")
     run_type_g.add_arg("use_cuda", bool, True, "whether to use cuda, default is True")
     
-    args_ = parser.parse_args()
+    args_ = parser.parse_args([])
     assert args_.task is not None and (args_.task == "entity-alignment")
 
     return args_

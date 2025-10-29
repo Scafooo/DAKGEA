@@ -1,5 +1,8 @@
 from .utils import *
 from src.alignment_models.methods.hybea import runtime as cfg
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 """
     Find the url of an entity by mapping from id --> url (if need)
@@ -29,15 +32,6 @@ def export_names(df, kg_dest_path, attrs):
     # find the url of an entity
     sorted_df['URLs'] = sorted_df.apply(lambda x: find_url(x.e1), axis=1)
 
-    # # Convert e1 column to string to ensure consistent data types for sorting
-    # filtered_df_1 = filtered_df_1.copy()
-    # filtered_df_1['e1'] = filtered_df_1['e1'].astype(str)
-    #
-    # # sort by entity
-    # sorted_df = filtered_df_1.sort_values(by='e1', ascending=True)
-    # # find the url of an entity
-    # sorted_df['URLs'] = sorted_df.apply(lambda x: find_url(x.e1), axis=1)
-
     # the following steps are for cleaning the text
     sorted_df['replaced_puncs'] = sorted_df.apply(lambda x: clean_text(x.val), axis=1)
     sorted_df["Lang"] = sorted_df.apply(lambda x: lang_detect(x.replaced_puncs), axis=1)
@@ -47,7 +41,7 @@ def export_names(df, kg_dest_path, attrs):
     sorted_df['URL Names'] = sorted_df.apply(lambda x: find_url_name(x.URLs), axis=1)
     # export to excel
     sorted_df.to_excel(kg_dest_path)
-    print(kg_dest_path + " exported successfully !")
+    logger.info("[HyBEA][names] Exported name analysis to %s", kg_dest_path)
 
 
 # Global mappings are no longer created at import time. Initialize them lazily.
@@ -62,8 +56,6 @@ def _ensure_ids_loaded():
         ids_to_uris_2 = get_ids_to_uris(cfg.DATASET, "2")
 
 
-# ... existing code ...
-
 def run_name_analysis():
     _ensure_ids_loaded()
     ids_to_uris_1 = get_ids_to_uris(cfg.DATASET, "1")
@@ -71,12 +63,6 @@ def run_name_analysis():
 
     attr_df_1, attr_dict_kg1 = load_attr_graph("1")
     attr_df_2, attr_dict_kg2 = load_attr_graph("2")
-
-    # Print to see all the available attributes of the two KGs
-    # temp1 = [i for x in attr_dict_kg1.values() for i in x]
-    # temp2 = [i for x in attr_dict_kg2.values() for i in x]
-    # print(set(temp2))
-    # exit()
 
     if cfg.DATASET == "D_W_15K_V1":
 
@@ -118,13 +104,10 @@ def run_name_analysis():
 
     elif cfg.DATASET == "SRPRS_D_W_15K_V1":
 
-        attrs_1 = ["http://xmlns.com/foaf/0.1/name", "http://xmlns.com/foaf/0.1/givenName",
-                   "http://dbpedia.org/ontology/birthName",
-                   "http://dbpedia.org/ontology/name", "http://dbpedia.org/ontology/longName",
-                   "http://dbpedia.org/ontology/otherName", "http://dbpedia.org/ontology/teamName"]
+        attrs_1 = ["http://dbpedia.org/ontology/title", "http://dbpedia.org/ontology/birthName",
+                   "http://dbpedia.org/ontology/longName"]
 
-        attrs_2 = ['http://www.wikidata.org/entity/P373', 'http://www.wikidata.org/entity/P1476',
-                   'http://www.w3.org/2004/02/skos/core#altLabel', 'http://schema.org/description']
+        attrs_2 = ['http://www.wikidata.org/entity/P373', 'http://www.wikidata.org/entity/P1476']
 
         kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
         kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
@@ -189,14 +172,10 @@ def run_name_analysis():
 
     create_folder_if_not_exists(cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET)
 
-    print("Preparing name analysis on KG1 ...")
-    print(kg1_dest_path, attrs_1)
+    logger.info("[HyBEA][names] Preparing name analysis for KG1 (%s)", kg1_dest_path)
+    logger.debug("[HyBEA][names] KG1 tracked attributes: %s", attrs_1)
     export_names(attr_df_1, kg1_dest_path, attrs_1)
 
-    print("Preparing name analysis on KG2 ...")
-    print(kg2_dest_path, attrs_2)
+    logger.info("[HyBEA][names] Preparing name analysis for KG2 (%s)", kg2_dest_path)
+    logger.debug("[HyBEA][names] KG2 tracked attributes: %s", attrs_2)
     export_names(attr_df_2, kg2_dest_path, attrs_2)
-
-    # Read the exported .xslx files for validation
-    # names_df_1 = pd.read_excel(kg1_dest_path)
-    # names_df_2 = pd.read_excel(kg2_dest_path)
