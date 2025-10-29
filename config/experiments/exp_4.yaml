@@ -39,3 +39,6 @@ experiment:
           neighbor_max: 25
           attribute_max: 25
           candidate_topk: 32
+        paths:
+          description_dict: "data/external/bert_int/dbp15k_descriptions_clean.pkl"
+          origin_description_dict: "data/external/bert_int/dbp15k_descriptions_original.pkl"
