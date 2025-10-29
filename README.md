@@ -21,8 +21,8 @@ The loader (`src/config/loader.py`) merges files in that order and automatically
 Clone and enter the repository:
 
 ```bash
-git clone <PROJECT_URL>
-cd <PROJECT_NAME>
+git clone https://github.com/Scafooo/DataAug-KG-EntityResolution
+cd DAKGEA
 ```
 
 Create a Python environment and install dependencies:
