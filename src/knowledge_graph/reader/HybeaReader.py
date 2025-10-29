@@ -107,7 +107,6 @@ class HybeaReader(Reader):
         logger.debug("Parsing attribute-data knowledge graph (kg=%s)", kg_number)
         kg = KnowledgeGraph()
 
-        attr_names_path = data_dir / f"attr_names{kg_number}"
         attr_triple_path = data_dir / f"attr_triples{kg_number}"
         ent_ids_path = data_dir / f"ent_ids_{kg_number}"
         rel_triple_path = data_dir / f"rel_ids_{kg_number}"
@@ -129,23 +128,12 @@ class HybeaReader(Reader):
         for triple in read_tsv(triples_path):
             kg.add_relation_triples((ent_ids[triple[0]], rel_ids[triple[1]], ent_ids[triple[2]]))
 
-        for pair in read_tsv(attr_names_path):
-            if len(pair) < 2:
-                logger.debug(
-                    "Skipping malformed attr_names row in %s: %s",
-                    attr_names_path,
-                    pair,
-                )
-                continue
-            kg.attr_to_name[pair[0].strip()] = pair[1].strip()
-
         return kg
 
     def _read_knowformer_data(self, data_dir: Path, kg_number: Optional[int]) -> KnowledgeGraph:
         logger.debug("Parsing KnowFormer knowledge graph (kg=%s)", kg_number)
         kg = KnowledgeGraph()
 
-        attr_names_path = data_dir / f"attr_names{kg_number}"
         attr_triple_path = data_dir / f"attr_triples_{kg_number}"
         ent_ids_path = data_dir / f"ent_ids_{kg_number}"
         triples_path = data_dir / ("s_triples.txt" if kg_number == 1 else "t_triples.txt")
@@ -171,15 +159,5 @@ class HybeaReader(Reader):
                 )
                 continue
             kg.add_relation_triples(triple)
-
-        for pair in read_tsv(attr_names_path):
-            if len(pair) < 2:
-                logger.debug(
-                    "Skipping malformed KnowFormer attr_names row in %s: %s",
-                    attr_names_path,
-                    pair,
-                )
-                continue
-            kg.attr_to_name[pair[0].strip()] = pair[1].strip()
 
         return kg
