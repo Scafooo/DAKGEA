@@ -3,6 +3,7 @@
 import copy
 import os
 import unicodedata
+from pathlib import Path
 from typing import Iterable, Tuple
 
 from rdflib.term import URIRef
@@ -24,17 +25,29 @@ class HybeaWriter(Writer):
     def write(self, dataset: Dataset, dir_path: str) -> bool:
         """Export a dataset to the requested HybEA directory layout."""
 
+        base_dir = Path(dir_path)
+        if base_dir.name in {"attribute_data", "knowformer_data"}:
+            targets = [base_dir]
+        else:
+            targets = [base_dir / "attribute_data", base_dir / "knowformer_data"]
+
         logger.info("Dataset Hybea Export Start")
 
-        kg_writer_1 = WriterFactory.create_writer(self.file_type)
-        kg_writer_1.write(dataset.knowledge_graph_source, dir_path, kg_number=1)
+        for target in targets:
+            target.mkdir(parents=True, exist_ok=True)
+            kg_writer_1 = WriterFactory.create_writer(self.file_type)
+            kg_writer_1.write(dataset.knowledge_graph_source, str(target), kg_number=1)
 
-        kg_writer_2 = WriterFactory.create_writer(self.file_type)
-        kg_writer_2.write(dataset.knowledge_graph_target, dir_path, kg_number=2)
+            kg_writer_2 = WriterFactory.create_writer(self.file_type)
+            kg_writer_2.write(dataset.knowledge_graph_target, str(target), kg_number=2)
 
-        if "attribute_data" in dir_path:
-            return self._write_aligned_entities_attribute(dataset.aligned_entities, dir_path)
-        return self._write_aligned_entities_knowformer(dataset, dir_path)
+            if target.name == "attribute_data":
+                self._write_aligned_entities_attribute(dataset.aligned_entities, str(target))
+            else:
+                self._write_aligned_entities_knowformer(dataset, str(target))
+
+        logger.info("Dataset Hybea Export End")
+        return True
 
     def _write_aligned_entities_attribute(
         self, aligned_entities: Iterable[Tuple[URIRef, URIRef]], dir_path: str
@@ -89,8 +102,6 @@ class HybeaWriter(Writer):
         write_tsv(os.path.join(dir_path, "ref_pairs"), ref_pairs)
         write_tsv(os.path.join(dir_path, "sup_pairs"), sup_pairs)
         write_tsv(os.path.join(dir_path, "valid_pairs"), valid_pairs)
-
-        logger.info("Dataset Hybea Export End")
 
         return True
 

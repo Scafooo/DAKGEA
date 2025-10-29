@@ -10,7 +10,7 @@ All behaviour is controlled with YAML files:
 
 - `config/global.yaml` – shared defaults such as path aliases and logging level.
 - `config/models/*.yaml` – per-model hyperparameters (HybEA, KnowFormer, BERT-INT, …).
-- `config/experiments/*.yaml` – dataset slices plus augmentation/reduction knobs, including `overwrite_existing` to force regeneration of artefacts for a specific run.
+- `config/experiments/*.yaml` – dataset slices plus augmentation/reduction knobs, with `overwrite_existing` to force regeneration and `writers` to choose one or more export formats (e.g. HybEA, RDF).
 
 The loader (`src/config/loader.py`) merges files in that order and automatically resolves relative paths to absolute locations rooted at the repository. This allows you to move configuration files without breaking downstream consumers.
 
@@ -50,7 +50,7 @@ Example invocation:
 python experiments/run.py config/experiments/exp_1.yaml
 ```
 
-Append `--overwrite-existing` to recompute reductions, augmentations, and results even when cached outputs are present (you can also set `overwrite_existing: true` inside the experiment YAML).
+Append `--overwrite-existing` to recompute reductions, augmentations, and results even when cached outputs are present (you can also set `overwrite_existing: true` inside the experiment YAML). Use multiple `writers` entries in the config to emit additional formats such as RDF/Turtle alongside the default HybEA structure.
 
 The command wires up the requested experiment configuration with the chosen model and kicks off the full reduction→augmentation→training sequence.
 
@@ -78,6 +78,8 @@ Registries automatically discover concrete implementations placed under their re
 ## 🧭 Working with Data
 
 - Raw datasets belong in `data/raw`; reduction and augmentation outputs are stored under `data/reduced` and `data/augmented`.
+- For HybEA inputs the raw location is `data/raw/hybea/<dataset>/{attribute_data,knowformer_data}`; the runner auto-detects the correct reader from the directory layout.
+- Reduced/augmented outputs mirror the selected writers: HybEA exports recreate the original `attribute_data`/`knowformer_data` folders, while the RDF writer stores Turtle graphs (`graph_source.ttl`, `graph_target.ttl`) plus `aligned_entities.tsv`.
 - The logger resolves all path aliases via the config loader, so updating locations in `config/global.yaml` is enough to relocate storage directories.
 - TSV files are read via `src/util/reader.py`, which accepts both `Path` objects and strings and provides compatibility aliases for legacy APIs.
 
