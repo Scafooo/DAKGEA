@@ -300,11 +300,12 @@ class Bert_int:
             pad_token="<PAD>",
         )
         value_set = sorted({value for values in ent2values.values() for value in values if value != "<PAD>"})
+        value_batch_size = max(32, min(512, self.model_config.basic_unit.test_batch_size * 4))
         value_embeddings, value_list = attribute_value_embeddings(
             model,
             value_set,
             tokenizer,
-            batch_size=2048,
+            batch_size=value_batch_size,
             device=device,
         )
         value_embeddings = torch.tensor(value_embeddings, dtype=torch.float32, device=device)
