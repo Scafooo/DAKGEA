@@ -20,13 +20,14 @@ class AttributeConfig:
     nearest_sample_num: int = 128
     candidate_generator_batch_size: int = 128
     csls: int = 2
+    train_ratio: Optional[float] = None
+    valid_ratio: Optional[float] = None
 
 
 @dataclass
 class StructureConfig:
     """Settings for the structural modelling stage (KnowFormer / RREA)."""
 
-    enabled: bool = True
     random_initialization: bool = False
     hidden_size: int = 768
     num_hidden_layers: int = 12

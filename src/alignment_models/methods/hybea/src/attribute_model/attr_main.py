@@ -14,10 +14,11 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 from src.alignment_models.methods.hybea import runtime as cfg
 
+log = cfg.logger
+
 if torch.cuda.is_available() and cfg.CUDA_NUM >= 0:
     torch.cuda.set_device(cfg.CUDA_NUM)
-    print(torch.cuda.current_device())
-    print(torch.cuda.get_device_name(torch.cuda.current_device()))
+    log.info("Using CUDA device %s (%s)", torch.cuda.current_device(), torch.cuda.get_device_name(torch.cuda.current_device()))
 
 def fixed(seed):
     random.seed(seed)
@@ -28,7 +29,7 @@ def fixed(seed):
 def run(new_pairs):
 
     #read data
-    print("start load data....")
+    log.info("Loading attribute-model data from %s", cfg.DATA_PATH)
     ent_ill, train_ill, test_ill, valid_ill, \
     index2rel, index2entity, rel2index, entity2index, \
     ent2data, rel_triples_1, rel_triples_2 = read_data(cfg.DATA_PATH)
@@ -50,34 +51,75 @@ def run(new_pairs):
     # print(len(result))
     # exit()
     
-    print("---------------------------------------")
-
-    print("all entity ILLs num:",len(ent_ill))
-    print("rel num:",len(index2rel))
-    print("ent num:",len(index2entity))
-    print("triple1 num:",len(rel_triples_1))
-    print("triple2 num:",len(rel_triples_2))
+    log.info("Loaded %d ILLs, %d relations, %d entities", len(ent_ill), len(index2rel), len(index2entity))
+    log.info("Triple counts: KG1=%d KG2=%d", len(rel_triples_1), len(rel_triples_2))
 
 
     #get train/test ILLs from file.
-    print("get train/test ILLs from file \"sup_pairs\", \"ref_pairs\" !")
-    print("train ILL num: {}, test ILL num: {}, valid ILL num: {}".format(len(train_ill), len(test_ill), len(valid_ill)))
-    print("train ILL | test ILL | valid ILL:", len(set(train_ill) | set(test_ill) | set(valid_ill)))
-    print("train ILL & test ILL & valid ILL:", len(set(train_ill) & set(test_ill) & set(valid_ill)))
-    
-    print("Adding new pairs")
-    print("#new_pairs: " + str(len(new_pairs)))
+    log.info("Train/valid/test splits: train=%d, test=%d, valid=%d", len(train_ill), len(test_ill), len(valid_ill))
+    log.debug("Train ∪ Test ∪ Valid size: %d", len(set(train_ill) | set(test_ill) | set(valid_ill)))
+    log.debug("Train ∩ Test ∩ Valid size: %d", len(set(train_ill) & set(test_ill) & set(valid_ill)))
+
+    if cfg.TRAIN_RATIO is not None:
+        train_ratio = cfg.TRAIN_RATIO
+        valid_ratio = cfg.VALID_RATIO or 0.0
+        if not 0 < train_ratio < 1:
+            raise ValueError(f"HybEA attribute train_ratio must be between 0 and 1 (got {train_ratio})")
+        if valid_ratio < 0 or train_ratio + valid_ratio >= 1:
+            raise ValueError(
+                f"HybEA attribute split ratios must satisfy train_ratio + valid_ratio < 1 "
+                f"(got train={train_ratio}, valid={valid_ratio})"
+            )
+        rng = random.Random(cfg.SEED_NUM)
+        unique_pairs = list(dict.fromkeys(ent_ill))
+        rng.shuffle(unique_pairs)
+        total_pairs = len(unique_pairs)
+
+        train_count = max(1, int(total_pairs * train_ratio))
+        valid_count = max(0, int(total_pairs * valid_ratio))
+        remaining = total_pairs - train_count - valid_count
+        if remaining <= 0:
+            remaining = 1
+            if train_count > valid_count:
+                train_count = max(1, train_count - 1)
+            elif valid_count > 0:
+                valid_count -= 1
+        test_count = remaining
+
+        new_train = unique_pairs[:train_count]
+        new_valid = unique_pairs[train_count : train_count + valid_count]
+        new_test = unique_pairs[train_count + valid_count :]
+
+        train_ill = list(new_train)
+        valid_ill = list(new_valid)
+        test_ill = list(new_test)
+        ent_ill = train_ill + test_ill + valid_ill
+
+        log.info(
+            "Resampled ILL splits (train=%.2f, valid=%.2f, test=%.2f) -> train=%d, test=%d, valid=%d",
+            train_ratio,
+            valid_ratio,
+            1 - train_ratio - valid_ratio,
+            len(train_ill),
+            len(test_ill),
+            len(valid_ill),
+        )
+        log.debug("Resampled union size: %d", len(set(train_ill) | set(test_ill) | set(valid_ill)))
+        log.debug("Resampled intersections: train∩test=%d train∩valid=%d test∩valid=%d",
+                  len(set(train_ill) & set(test_ill)),
+                  len(set(train_ill) & set(valid_ill)),
+                  len(set(test_ill) & set(valid_ill)))
+
+    log.info("Incorporating %d new pairs", len(new_pairs))
     train_inter = set(train_ill).intersection(new_pairs)
-    print("Train Inter with new pairs: " + str(len(train_inter)))
     test_inter = set(test_ill).intersection(new_pairs)
-    print("Test Inter with new_pairs: " + str(len(test_inter)))
     valid_inter = set(valid_ill).intersection(new_pairs)
-    print("Valid Inter with new_pairs: " + str(len(valid_inter)))
+    log.debug("Overlap with new pairs - train:%d test:%d valid:%d", len(train_inter), len(test_inter), len(valid_inter))
     
     for pair in new_pairs:
         train_ill.append(pair)
         
-    print("train ILL num: {}, test ILL num: {}, valid ILL num: {} after adding new pairs".format(len(train_ill), len(test_ill), len(valid_ill)))
+    log.info("Updated train/test/valid sizes: train=%d, test=%d, valid=%d", len(train_ill), len(test_ill), len(valid_ill))
 
     sbert_model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2')
     attr_dict = {}
@@ -89,9 +131,9 @@ def run(new_pairs):
                 attr_dict[eid].append(x)
     sentences = [value for value_list in attr_dict.values() for value in value_list]
     
-    print("Generating sentence embeddings...")
+    log.info("Generating sentence-transformer embeddings for %d sentences", len(sentences))
     sent_emb = sbert_model.encode(sentences)
-    print("Done")
+    log.debug("Sentence embeddings computed")
     
     emb_dict = {}
     for index, sentence in enumerate(sentences):
@@ -102,7 +144,7 @@ def run(new_pairs):
     Model.cuda(cfg.CUDA_NUM)
 
     # Criterion = losses.ContrastiveLoss(pos_margin=0, neg_margin=1)
-    Criterion = nn.MarginRankingLoss(cfg.MARGIN,size_average=True)
+    Criterion = nn.MarginRankingLoss(margin=cfg.MARGIN, reduction="mean")
     Optimizer = AdamW(Model.parameters(),lr=cfg.LEARNING_RATE)
 
     ent1 = [e1 for e1,e2 in ent_ill]

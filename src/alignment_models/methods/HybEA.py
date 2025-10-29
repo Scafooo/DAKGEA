@@ -7,7 +7,11 @@ from typing import Dict, Iterable, Tuple
 import numpy as np
 import pandas as pd
 
-from src.alignment_models.methods.hybea import runtime as hybea_runtime
+from src.alignment_models.methods.hybea import (
+    runtime as hybea_runtime_state,
+    apply_settings as hybea_apply_settings,
+    path_for_KG as hybea_path_for_KG,
+)
 from src.alignment_models.methods.hybea.configuration import HybeaConfig
 from src.alignment_models.methods.hybea.pipeline import HybeaPipeline
 from src.alignment_models.registry import MODEL_REGISTRY
@@ -44,7 +48,7 @@ class HybEA:
         with tempfile.TemporaryDirectory(prefix="hybea_") as tmp_dir:
             workdir = Path(tmp_dir)
             export_root = workdir / dataset_name
-            self._export_dataset(dataset, export_root)
+            self._export_dataset(dataset, export_root, dataset_name)
 
             ratio_tag = f"{ratio * 100:.1f}"
             iteration_dir = (
@@ -55,7 +59,7 @@ class HybEA:
             )
             iteration_dir.mkdir(parents=True, exist_ok=True)
 
-            hybea_runtime.apply_settings(
+            hybea_apply_settings(
                 self.model_config,
                 dataset_name,
                 base_dir=PROJECT_ROOT / "data" / "hybea_support",
@@ -84,18 +88,42 @@ class HybEA:
             )
             return metrics
 
-    def _export_dataset(self, dataset: Dataset, export_root: Path) -> None:
+    def _export_dataset(self, dataset: Dataset, export_root: Path, dataset_name: str) -> None:
         writer = HybeaWriter()
         logger.debug("[HybEA] Exporting dataset to %s", export_root)
-        writer.write(dataset, str(export_root))
+        writer.write(dataset, str(export_root), dataset_name=dataset_name)
 
     def _prepare_support_artifacts(self, dataset_name: str, export_root: Path) -> None:
-        ratio_tag = str(round(hybea_runtime.SIZE_AFTER_REDUCTION_IN_PERCENTAGE, 1))
-        base_dir = Path(hybea_runtime.BASE_DIR)
+        ratio_tag = str(round(hybea_runtime_state.SIZE_AFTER_REDUCTION_IN_PERCENTAGE, 1))
+        base_dir = Path(hybea_runtime_state.BASE_DIR)
         names_dir = base_dir / "src" / "hybea" / "data" / "entity_names" / ratio_tag / dataset_name
         names_dir.mkdir(parents=True, exist_ok=True)
 
-        kg1_file, kg2_file = hybea_runtime.path_for_KG(dataset_name)
+        kg1_file, kg2_file = hybea_path_for_KG(dataset_name)
+        analysis_targets = [
+            names_dir / kg1_file.replace("names", "analysis"),
+            names_dir / kg2_file.replace("names", "analysis"),
+        ]
+        if any(not path.exists() for path in analysis_targets):
+            try:
+                from src.alignment_models.methods.hybea.src.generate_names.name_analysis import run_name_analysis
+
+                logger.info("[HybEA] Generating name analysis workbooks for %s", dataset_name)
+                run_name_analysis()
+            except Exception as exc:  # pragma: no cover - best effort logging
+                logger.warning("[HybEA] Failed to generate name analysis files: %s", exc)
+
+        name_targets = [names_dir / kg1_file, names_dir / kg2_file]
+        if any(not path.exists() for path in name_targets):
+            try:
+                from src.alignment_models.methods.hybea.src.generate_names.prioritize_names import run_prioritize
+
+                logger.info("[HybEA] Generating prioritized names for %s", dataset_name)
+                run_prioritize()
+            except Exception as exc:  # pragma: no cover - best effort logging
+                logger.warning("[HybEA] Failed to generate prioritized name files: %s", exc)
+
+        # Fallback to quick TSV export if official generators did not create the Excel files.
         self._write_entity_names(export_root / "attribute_data" / "ent_ids_1", names_dir / kg1_file)
         self._write_entity_names(export_root / "attribute_data" / "ent_ids_2", names_dir / kg2_file)
 

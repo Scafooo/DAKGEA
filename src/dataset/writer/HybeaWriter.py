@@ -2,9 +2,10 @@
 
 import copy
 import os
+import shutil
 import unicodedata
 from pathlib import Path
-from typing import Iterable, Tuple
+from typing import Iterable, Tuple, Optional
 
 from rdflib.term import URIRef
 
@@ -14,6 +15,7 @@ from src.knowledge_graph.writer.WriterFactory import WriterFactory
 from src.logger import get_logger
 from src.util.reader import read_tsv
 from src.util.writer import write_tsv
+from src.alignment_models.methods.hybea import runtime as hybea_runtime
 
 logger = get_logger(__name__)
 
@@ -22,7 +24,7 @@ class HybeaWriter(Writer):
 
     file_type = "hybea"
 
-    def write(self, dataset: Dataset, dir_path: str) -> bool:
+    def write(self, dataset: Dataset, dir_path: str, *, dataset_name: Optional[str] = None) -> bool:
         """Export a dataset to the requested HybEA directory layout."""
 
         base_dir = Path(dir_path)
@@ -33,18 +35,30 @@ class HybeaWriter(Writer):
 
         logger.info("Dataset Hybea Export Start")
 
+        if dataset_name is None:
+            dataset_name = getattr(hybea_runtime, "DATASET", "dataset")
+
         for target in targets:
             target.mkdir(parents=True, exist_ok=True)
+            if target.name == "knowformer_data":
+                dataset_dir = target / dataset_name
+                dataset_dir.mkdir(parents=True, exist_ok=True)
+                destination = dataset_dir
+            else:
+                destination = target
+
             kg_writer_1 = WriterFactory.create_writer(self.file_type)
-            kg_writer_1.write(dataset.knowledge_graph_source, str(target), kg_number=1)
+            kg_writer_1.write(dataset.knowledge_graph_source, str(destination), kg_number=1)
 
             kg_writer_2 = WriterFactory.create_writer(self.file_type)
-            kg_writer_2.write(dataset.knowledge_graph_target, str(target), kg_number=2)
+            kg_writer_2.write(dataset.knowledge_graph_target, str(destination), kg_number=2)
 
             if target.name == "attribute_data":
-                self._write_aligned_entities_attribute(dataset.aligned_entities, str(target))
+                self._write_aligned_entities_attribute(dataset.aligned_entities, str(destination))
             else:
-                self._write_aligned_entities_knowformer(dataset, str(target))
+                self._write_aligned_entities_knowformer(dataset, str(destination))
+                if destination != target:
+                    self._mirror_structure_files(destination, target)
 
         logger.info("Dataset Hybea Export End")
         return True
@@ -234,19 +248,33 @@ class HybeaWriter(Writer):
 
         train_triples_expanded_list = list(train_triples_expanded)
 
-        train_triples_final = []
-
-        for triple in train_triples_expanded_list:
-            train_triples_final.append((triple[0], triple[1], triple[2], "MASK_0"))
-            train_triples_final.append((triple[0], triple[1], triple[2], "MASK_2"))
-
         write_tsv(ENT_ILLS, ent_ILLs_pairs)
         write_tsv(REF_ENTS, ref_pairs)
         write_tsv(SUP_ENTS, sup_pairs)
         write_tsv(VALID_ENTS, valid_pairs)
-        write_tsv(TRAIN_TRIPLES, train_triples_final)
+        write_tsv(TRAIN_TRIPLES, train_triples_expanded_list)
         write_tsv(VOCAB, list(vocab.keys()))
 
         logger.info("Dataset Hybea Export End")
 
         return True
+
+    def _mirror_structure_files(self, source_dir: Path, target_dir: Path) -> None:
+        """Duplicate core structure artifacts at the parent level for legacy lookups."""
+
+        filenames = {
+            "vocab.txt",
+            "ent_ids_1",
+            "ent_ids_2",
+            "ent_ILLs.txt",
+            "ref_ents.txt",
+            "sup_ents.txt",
+            "valid_ents.txt",
+            "train.triples.txt",
+        }
+
+        for name in filenames:
+            src = source_dir / name
+            dst = target_dir / name
+            if src.exists():
+                shutil.copy2(src, dst)

@@ -1,5 +1,8 @@
 from .utils import *
 from src.alignment_models.methods.hybea import runtime as cfg
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 """
     Find the url of an entity by mapping from id --> url (if need)
@@ -47,14 +50,6 @@ def gen_names(ids_to_uris, names_df, random_init_flag, url_priority, prior_attr)
             non_prior_attr_rows = rows[~rows["attr"].isin(prior_attr)]
 
             if len(prior_attr_rows) == 0:
-
-                # alt_label_rows = non_prior_attr_rows[non_prior_attr_rows["attr"]
-                #                                 == "https://www.scads.de/movieBenchmark/ontology/originalTitle"]
-                # if len(alt_label_rows) != 0:
-                #     rand_row = alt_label_rows.sample(n=1)
-                # else:
-                #     rand_row = non_prior_attr_rows.sample(n=1)
-
                 rand_row = non_prior_attr_rows.sample(n=1)
                 name = rand_row["replaced_puncs"].values[0]
                 src = "non_prior"
@@ -87,7 +82,6 @@ def run_prioritize():
     ids_to_uris_1 = get_ids_to_uris(cfg.DATASET, "1")
     ids_to_uris_2 = get_ids_to_uris(cfg.DATASET, "2")
 
-    #         kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
     if cfg.DATASET == "D_W_15K_V1":
 
         url_priority_1 = True
@@ -99,11 +93,9 @@ def run_prioritize():
         prior_attr_1 = []
         prior_attr_2 = ["http://www.wikidata.org/entity/P373", 'http://www.wikidata.org/entity/P1476']
 
-        # paths to dataframes exported by name_analysis.py
         kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
         kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
 
-        # path to dataframes with entity names
         kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
         kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
 
@@ -117,11 +109,9 @@ def run_prioritize():
         prior_attr_1 = []
         prior_attr_2 = []
 
-        # paths to dataframes exported by name_analysis.py
         kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_analysis.xlsx"
         kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/wiki_analysis.xlsx"
 
-        # path to dataframes with entity names
         kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_names.xlsx"
         kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/wiki_names.xlsx"
 
@@ -135,31 +125,28 @@ def run_prioritize():
         prior_attr_1 = []
         prior_attr_2 = []
 
-        # paths to dataframes exported by name_analysis.py
         kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_analysis.xlsx"
         kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/yago_analysis.xlsx"
 
-        # path to dataframes with entity names
         kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_names.xlsx"
         kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/yago_names.xlsx"
 
     elif cfg.DATASET == "BBC_DB":
 
-        url_priority_1 = False
-        url_priority_2 = True
+        url_priority_1 = True
+        url_priority_2 = False
 
-        random_init_flag_1 = True
-        random_init_flag_2 = False
+        random_init_flag_1 = False
+        random_init_flag_2 = True
 
-        prior_attr_1 = ['http://purl.org/dc/elements/1.1/title', 'http://xmlns.com/foaf/0.1/name',
-                        'http://open.vocab.org/terms/sortlabel']
-        prior_attr_2 = ['http://xmlns.com/foaf/0.1/name', 'prop:birthname', 'rdfs:label', 'prop:name']
+        prior_attr_1 = []
+        prior_attr_2 = ['http://xmlns.com/foaf/0.1/name', 'prop:birthname', 'rdfs:label', 'prop:name',
+                        'http://xmlns.com/foaf/0.1/givenname', 'http://xmlns.com/foaf/0.1/surname', 'prop:label',
+                        'http://purl.org/dc/elements/1.1/description', 'prop:description', 'prop:shortdescription']
 
-        # paths to dataframes exported by name_analysis.py
         kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/BBC_analysis.xlsx"
         kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
 
-        # path to dataframes with entity names
         kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/BBC_names.xlsx"
         kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
 
@@ -174,11 +161,9 @@ def run_prioritize():
         prior_attr_1 = []
         prior_attr_2 = ["http://www.wikidata.org/entity/P373", 'http://www.wikidata.org/entity/P1476']
 
-        # paths to dataframes exported by name_analysis.py
         kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
         kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
 
-        # path to dataframes with entity names
         kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
         kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
 
@@ -193,11 +178,9 @@ def run_prioritize():
         prior_attr_1 = []
         prior_attr_2 = ["http://www.wikidata.org/entity/P373", 'http://www.wikidata.org/entity/P1476']
 
-        # paths to dataframes exported by name_analysis.py
         kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
         kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
 
-        # path to dataframes with entity names
         kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
         kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
 
@@ -212,11 +195,9 @@ def run_prioritize():
         prior_attr_1 = []
         prior_attr_2 = ["http://www.wikidata.org/entity/P373", 'http://www.wikidata.org/entity/P1476']
 
-        # paths to dataframes exported by name_analysis.py
         kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
         kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
 
-        # path to dataframes with entity names
         kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
         kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
 
@@ -235,14 +216,11 @@ def run_prioritize():
                         "http://dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
                         "http://dbpedia.org/ontology/birthName", "http://dbpedia.org/property/label"]
 
-        # paths to dataframes exported by name_analysis.py
         kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/fr_analysis.xlsx"
         kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
 
-        # path to dataframes with entity names
         kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/fr_names.xlsx"
         kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_names.xlsx"
-
 
     elif cfg.DATASET == "ja_en":
 
@@ -260,11 +238,9 @@ def run_prioritize():
                         "http://dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
                         "http://dbpedia.org/property/label"]
 
-        # paths to dataframes exported by name_analysis.py
         kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/ja_analysis.xlsx"
         kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
 
-        # path to dataframes with entity names
         kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/ja_names.xlsx"
         kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_names.xlsx"
 
@@ -284,27 +260,25 @@ def run_prioritize():
                         "http://dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
                         "http://dbpedia.org/property/label"]
 
-        # paths to dataframes exported by name_analysis.py
         kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/zh_analysis.xlsx"
         kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
 
-        # path to dataframes with entity names
         kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/zh_names.xlsx"
         kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_names.xlsx"
 
     names_df_1 = pd.read_excel(kg1_src_path)
     names_df_2 = pd.read_excel(kg2_src_path)
 
-    print("Preparing KG1 ...")
+    logger.info("[HyBEA][names] Preparing KG1 ...")
     ent_names_1 = gen_names(ids_to_uris_1, names_df_1, random_init_flag_1, url_priority_1, prior_attr_1)
 
-    print("Preparing KG2 ...")
+    logger.info("[HyBEA][names] Preparing KG2 ...")
     ent_names_2 = gen_names(ids_to_uris_2, names_df_2, random_init_flag_2, url_priority_2, prior_attr_2)
 
     ent_names_df_1 = pd.DataFrame(([k, v[0], v[1]] for k, v in ent_names_1.items()), columns=['e1', 'name', 'src'])
     ent_names_df_1.to_excel(kg1_dest_path)
-    print(kg1_dest_path + " exported succesfully")
+    logger.info("[HyBEA][names] Exported KG1 names to %s", kg1_dest_path)
 
     ent_names_df_2 = pd.DataFrame(([k, v[0], v[1]] for k, v in ent_names_2.items()), columns=['e1', 'name', 'src'])
     ent_names_df_2.to_excel(kg2_dest_path)
-    print(kg2_dest_path + " exported succesfully")
+    logger.info("[HyBEA][names] Exported KG2 names to %s", kg2_dest_path)

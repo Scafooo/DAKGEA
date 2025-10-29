@@ -1,10 +1,15 @@
+import collections
+import pickle
+
+import numpy as np
+import pandas as pd
 from scipy.stats import truncnorm
 from sentence_transformers import SentenceTransformer
-import pandas as pd
-import collections
-import numpy as np
-import pickle
+
 from src.alignment_models.methods.hybea import runtime as cfg
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 """
     Truncated normal initialization
@@ -151,5 +156,5 @@ def run_gen_sent_embs():
     name_embs = np.array(name_embs)
     np.save('./entity_names/' + dataset + '/' + dataset + '_name_embs.npy', name_embs)
 
-    print("Name embeddings shape " + str(name_embs.shape))
-    print("# unknown entities " + str(len(randoms)))
+    logger.info("[HyBEA][names] Name embeddings shape %s", name_embs.shape)
+    logger.info("[HyBEA][names] Unknown entities: %d", len(randoms))

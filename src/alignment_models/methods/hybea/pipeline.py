@@ -92,22 +92,29 @@ class HybeaPipeline:
                 logger.debug("[HybEA] Reached turn limit (%d)", self.max_turn)
                 break
 
-            logger.debug(
-                "[HybEA] Turn %d (mode=%s, stop_attr=%s, stop_struct=%s)",
+            attr_enabled = not self.stop_attribute
+            struct_enabled = not self.stop_structure
+            logger.info(
+                "[HybEA] Turn %d | mode=%s | attribute_enabled=%s | structural_enabled=%s",
                 self.turn,
                 self.mode,
-                self.stop_attribute,
-                self.stop_structure,
+                attr_enabled,
+                struct_enabled,
             )
 
             if self.turn % 2 == 0:  # attribute stage
                 new_pairs = self._run_attribute_stage()
                 self.turn += 1
                 if self.stop_attribute:
+                    logger.info("[HybEA] Attribute stage flagged as final turn; stopping pipeline")
                     break
             else:  # structure stage
                 if self.stop_structure:
-                    logger.debug("[HybEA] Structural stage disabled; skipping turn %d", self.turn)
+                    logger.info(
+                        "[HybEA] Structural stage disabled (mode=%s, structure.enabled=%s); finishing after attribute stage",
+                        self.mode,
+                        struct_enabled,
+                    )
                     break
                 new_pairs = self._run_structure_stage()
                 self.turn += 1
@@ -266,10 +273,11 @@ class HybeaPipeline:
             turn = 2
             stop_struct = True
 
-        if not cfg.structure.enabled:
+        structure_enabled = getattr(cfg, "DO_TRAIN", True)
+        if not structure_enabled:
             stop_struct = True
 
-        if cfg.structure.enabled and stop_attr:
+        if structure_enabled and stop_attr:
             logger.info("[HybEA] Structure-only mode active")
 
         return turn, stop_attr, stop_struct, max_turn

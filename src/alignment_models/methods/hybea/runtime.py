@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 import os
+import logging
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, Optional, Tuple
+
+from src.logger import get_logger
 
 from .configuration import AttributeConfig, HybeaConfig, DatasetSpec, StructureConfig
 
@@ -30,6 +33,7 @@ class RuntimeState:
     STRUCTURAL_MODEL: str = "Knowformer"
     MODEL: str = "hybea"
     DATASET: str = "dataset"
+    TASK: str = "entity-alignment"
     SEED: int = 42
     SEED_NUM: int = 11037
     SIZE_AFTER_REDUCTION: float = 1.0
@@ -57,6 +61,8 @@ class RuntimeState:
     TRAIN_BATCH_SIZE: int = 24
     TEST_BATCH_SIZE: int = 128
     CSLS: int = 2
+    TRAIN_RATIO: Optional[float] = None
+    VALID_RATIO: Optional[float] = None
 
     RANDOM_INITIALIZATION: bool = False
     HIDDEN_SIZE: int = 768
@@ -88,6 +94,7 @@ class RuntimeState:
     attribute: AttributeConfig = field(default_factory=AttributeConfig)
     structure: StructureConfig = field(default_factory=StructureConfig)
     _dataset_specs: Dict[str, DatasetSpec] = field(default_factory=dict)
+    logger: logging.Logger = field(default_factory=lambda: get_logger("hybea"))
 
     def dataset_spec(self, dataset: str) -> Optional[DatasetSpec]:
         return self._dataset_specs.get(dataset)
@@ -118,6 +125,8 @@ def apply_settings(
     runtime.STRUCTURAL_MODEL = config.structural_model
     runtime.MODEL = "hybea"
     runtime.DATASET = dataset
+    runtime.TASK = "entity-alignment"
+    runtime.logger = get_logger(f"hybea.{dataset}")
     runtime.SEED = config.pipeline_seed
     runtime.SEED_NUM = config.attribute_seed
     runtime.SIZE_AFTER_REDUCTION = reduction_ratio
@@ -147,6 +156,8 @@ def apply_settings(
     else:
         runtime.CUDA_NUM = 0
 
+    mode_lower = config.mode.lower()
+
     attr = config.attribute
     runtime.attribute = attr
     runtime.MODEL_INPUT_DIM = attr.model_input_dim
@@ -159,8 +170,17 @@ def apply_settings(
     runtime.TRAIN_BATCH_SIZE = attr.train_batch_size
     runtime.TEST_BATCH_SIZE = attr.test_batch_size
     runtime.CSLS = attr.csls
+    runtime.TRAIN_RATIO = attr.train_ratio
+    runtime.VALID_RATIO = attr.valid_ratio
 
     struct = config.structure
+    structure_enabled = mode_lower != "hybea_without_structure"
+    runtime.logger.debug(
+        "[HybEA] Structure stage %s (mode=%s)",
+        "enabled" if structure_enabled else "disabled",
+        config.mode,
+    )
+
     runtime.structure = struct
     runtime.RANDOM_INITIALIZATION = struct.random_initialization
     runtime.HIDDEN_SIZE = struct.hidden_size
@@ -183,8 +203,8 @@ def apply_settings(
     runtime.EVAL_FREQ = struct.eval_freq
     runtime.START_EVAL = struct.start_eval
     runtime.SWA_PRE_NUM = struct.swa_pre_num
-    runtime.DO_TRAIN = struct.enabled
-    runtime.DO_TEST = struct.enabled
+    runtime.DO_TRAIN = structure_enabled
+    runtime.DO_TEST = structure_enabled
     runtime.USE_GELU = struct.use_gelu
     runtime.ADDITION_LOSS_W = struct.addition_loss_w
     runtime.RELATION_COMBINE_DROPOUT_PROB = struct.relation_combine_dropout_prob

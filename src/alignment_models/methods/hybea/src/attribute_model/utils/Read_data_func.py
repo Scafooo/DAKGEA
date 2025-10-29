@@ -9,12 +9,14 @@ logging.getLogger("transformers.tokenization_utils").setLevel(logging.ERROR)
 import pandas as pd
 from src.alignment_models.methods.hybea import runtime as cfg
 
+log = cfg.logger
+
 def read_structure_datas(data_path, reversed=False):
     def read_id2object(file_paths):
         id2object = {}
         for file_path in file_paths:
             with open(file_path, 'r', encoding='utf-8') as f:
-                print('loading a (id2object)file...    ' + file_path)
+                log.debug('Loading id2object file %s', file_path)
                 for line in f:
                     th = line.strip('\n').split('\t')
                     id2object[int(th[0])] = th[1]
@@ -43,7 +45,7 @@ def read_att_data(kg_att_file_name, entity_list, entity2index, dataset, which, a
     """
     load attribute triples file.
     """
-    print("loading attribute triples file from: ",kg_att_file_name)
+    log.debug("Loading attribute triples from %s", kg_att_file_name)
     att_data = []
     added_ents = set()
     with open(kg_att_file_name,"r",encoding="utf-8") as f:
@@ -75,7 +77,7 @@ def read_att_data(kg_att_file_name, entity_list, entity2index, dataset, which, a
 def read_data(data_path):
     data_path = cfg.DATA_PATH
     def read_idtuple_file(file_path):
-        print('loading a idtuple file...   ' + file_path)
+        log.debug('Loading idtuple file %s', file_path)
         ret = []
         with open(file_path, "r", encoding='utf-8') as f:
             for line in f:
@@ -89,13 +91,13 @@ def read_data(data_path):
         id2object = {}
         for file_path in file_paths:
             with open(file_path, 'r', encoding='utf-8') as f:
-                print('loading a (id2object)file...  ' + file_path)
+                log.debug('Loading id2object file %s', file_path)
                 for line in f:
                     th = line.strip('\n').split('\t')
                     id2object[int(th[0])] = th[1]
         return id2object
     def read_idobj_tuple_file(file_path):
-        print('loading a idx_obj file...   ' + file_path)
+        log.debug('Loading idx_obj file %s', file_path)
         ret = []
         with open(file_path, "r", encoding="utf-8") as f:
             for line in f:
@@ -103,7 +105,7 @@ def read_data(data_path):
                 ret.append( ( int(th[0]),th[1] ) )
         return ret
 
-    print("load data from... :", data_path)
+    log.info("Loading HybEA attribute data from %s", data_path)
     #ent_index(ent_id)2entity / relation_index(rel_id)2relation
     index2entity = read_id2object([data_path + "ent_ids_1",data_path + "ent_ids_2"])
     index2rel = read_id2object([data_path + "rel_ids_1",data_path + "rel_ids_2"])

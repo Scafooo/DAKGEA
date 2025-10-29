@@ -63,16 +63,18 @@ class Basic_Bert_Unit_model(nn.Module):
     def value_embs(self, alpha_i_batched,batch_sentences, input_size, llayer, padded_alpha_i):
         value_embs = []
         index = 0
-        random_list = []
-        for lst in padded_alpha_i:
-            temp = []
-            for elem in lst:
+        zero_vec = np.zeros(768, dtype=np.float32)
+        alpha_rows = padded_alpha_i.detach().cpu().tolist()
+        for row in alpha_rows:
+            row_embs = []
+            for elem in row:
                 if elem == input_size:
-                    temp.append(np.zeros(768, dtype=np.float32))
+                    row_embs.append(zero_vec.copy())
                 else:
-                    temp.append(self.emb_dict[batch_sentences[index]])
+                    row_embs.append(self.emb_dict[batch_sentences[index]])
                     index += 1
-            value_embs.append(torch.tensor(temp, dtype=torch.float32))
+            stacked = np.asarray(row_embs, dtype=np.float32)
+            value_embs.append(torch.from_numpy(stacked))
 
         value_embs = pad_sequence(value_embs, batch_first=True).cuda(cfg.CUDA_NUM)
         # output = self.dropout(value_embs)
