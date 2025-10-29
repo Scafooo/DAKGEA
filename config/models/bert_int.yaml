@@ -1,0 +1,29 @@
+model:
+  seed: 11037
+  device: "cuda:0"
+  language: "en"
+  candidate_num: 1000
+  basic_unit:
+    encoder_name: "bert-base-multilingual-cased"
+    input_dim: 768
+    output_dim: 300
+    epochs: 5
+    learning_rate: 1.0e-5
+    batch_size: 24
+    test_batch_size: 128
+    negatives: 2
+    margin: 3.0
+    random_divide_ill: false
+    train_ill_rate: 0.3
+  interaction:
+    epochs: 200
+    learning_rate: 5.0e-4
+    batch_size: 128
+    negatives: 5
+    margin: 1.0
+    candidate_topk: 1000
+    kernel_num: 21
+  paths:
+    work_dir: "experiments/bert_int"
+    models_dir: null
+    cache_dir: null
