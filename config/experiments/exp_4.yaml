@@ -1,0 +1,34 @@
+experiment:
+  name: "bert_int_smoke"
+
+  writers:
+    - type: "hybea"
+      write_reduced: true
+      write_augmented: false
+      write_results: true
+
+  datasets:
+    - name: "D_W_15K_V1"
+      reader: "hybea"
+
+  reduction_method: "random_entities"
+  reduction_ratios: [1.0]
+  augmentation_methods: []
+  models_to_run:
+    - "bert_int"
+
+  parameters:
+    experiment:
+      seed: 42
+    reduction:
+      random_seed: 42
+      filter_alignment: false
+    models:
+      bert_int:
+        device: "cpu"
+        basic_unit:
+          epochs: 1
+          candidate_topk: 32
+        interaction:
+          epochs: 1
+          candidate_topk: 32

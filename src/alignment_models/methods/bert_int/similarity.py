@@ -1,0 +1,34 @@
+"""Similarity helpers mirroring the original BERT-INT implementation."""
+
+from __future__ import annotations
+
+import torch
+import torch.nn.functional as F
+
+
+def cosine_similarity_matrix(emb1, emb2, batch_size: int = 128, device: torch.device | None = None):
+    vec1 = F.normalize(torch.tensor(emb1, dtype=torch.float32), p=2, dim=1)
+    vec2 = F.normalize(torch.tensor(emb2, dtype=torch.float32), p=2, dim=1)
+    return _batched_matmul(vec1, vec2.t(), batch_size=batch_size, device=device)
+
+
+def _batched_matmul(mat1, mat2, batch_size: int, device: torch.device | None = None):
+    device = device or torch.device("cpu")
+    results = []
+    for start in range(0, mat1.shape[0], batch_size):
+        chunk = mat1[start : start + batch_size].to(device)
+        res = chunk.mm(mat2.to(device))
+        results.append(res.cpu())
+    return torch.cat(results, dim=0)
+
+
+def batched_topk(matrix, k: int, batch_size: int = 128, largest: bool = True, device: torch.device | None = None):
+    device = device or torch.device("cpu")
+    scores = []
+    indices = []
+    for start in range(0, matrix.shape[0], batch_size):
+        chunk = matrix[start : start + batch_size].to(device)
+        score_chunk, index_chunk = torch.topk(chunk, k=k, largest=largest)
+        scores.append(score_chunk.cpu())
+        indices.append(index_chunk.cpu())
+    return torch.cat(scores, dim=0), torch.cat(indices, dim=0)
