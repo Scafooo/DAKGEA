@@ -52,3 +52,4 @@ experiment:
       seed: 42
     reduction:
       random_seed: 42
+      filter_alignment: false

@@ -14,6 +14,7 @@ class RandomEntitiesReducer:
         reduction_cfg = self.config.get("reduction", {})
         self.target_entities = max(1, int(reduction_cfg.get("target_entities", 1)))
         self.seed = reduction_cfg.get("random_seed")
+        self.filter_alignment = reduction_cfg.get("filter_alignment", True)
         if self.seed is None:
             experiment_cfg = self.config.get("experiment", {})
             self.seed = experiment_cfg.get("seed")
@@ -54,7 +55,10 @@ class RandomEntitiesReducer:
             remaining = aligned_set
 
         dataset.aligned_entities = remaining
-        dataset.aligned_entities = self._filter_alignment(dataset)
+        if self.filter_alignment:
+            dataset.aligned_entities = self._filter_alignment(dataset)
+        else:
+            logger.debug("Alignment filtering disabled; retaining all sampled pairs.")
 
         source_size_after = len(dataset.knowledge_graph_source)
         target_size_after = len(dataset.knowledge_graph_target)
