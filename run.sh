@@ -11,7 +11,7 @@ PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Ensure that src/ is in PYTHONPATH
 export PYTHONPATH="${PROJECT_ROOT}"
 
-FILE_NAME="exp_3.yaml"
+FILE_NAME="exp_4.yaml"
 
 # Default config file (you can change this)
 CONFIG_FILE="${PROJECT_ROOT}/config/experiments/${FILE_NAME}"

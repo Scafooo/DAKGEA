@@ -105,6 +105,7 @@ Each augmentation reuses the reduced dataset as input, then writes its artefacts
 - Set `parameters.reduction.random_seed` (or `parameters.experiment.seed`) to make random reductions deterministic across runs.
 - Consider enabling `filter_alignment: true` when you want strictly consistent triples/alignment connectivity, and `false` when you need to preserve the original pair count.
 - Use `--overwrite-existing` when updating reducer logic so cached directories are regenerated with the new behaviour.
+- Alignment models may surface additional metrics besides precision/recall/F1; for example, BERT-INT also reports `hits@1`, `hits@10`, and `mrr`.
 
 ## 5. Extending the Pipeline
 
