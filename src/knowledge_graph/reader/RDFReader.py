@@ -7,9 +7,9 @@ logger = get_logger(__name__, level="DEBUG")
 class RDFReader(Reader):
     file_type = "rdf"
 
-    def read(self, file_path) -> KnowledgeGraph:
+    def read(self, file_path, **_) -> KnowledgeGraph:
         logger.debug("Loading RDF graph from %s", file_path)
         kg = KnowledgeGraph()
-        kg.parse(file_path)
+        kg.parse(file_path, format="turtle")
 
         return kg

@@ -1,13 +1,17 @@
 experiment:
-  name: "multi_dataset_benchmark"
+  name: "hybea"
 
   output_root: "experiments/results"
 
-  writer:
-    type: "hybea"
-    write_reduced: true
-    write_augmented: true
-    write_results: true
+  writers:
+    - type: "hybea"
+      write_reduced: true
+      write_augmented: true
+      write_results: true
+    - type: "rdf"
+      write_reduced: true
+      write_augmented: true
+      write_results: false
 
   overwrite_existing: true
 

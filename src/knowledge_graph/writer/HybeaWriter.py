@@ -25,7 +25,7 @@ class HybeaWriter(Writer):
 
 
 
-    def write_attribute(self, kg, kg_number, dir_path) -> bool:
+    def write_attribute(self, kg, dir_path, kg_number) -> bool:
 
         logger.info("Knowledge Graph Hybea Attribute export")
 

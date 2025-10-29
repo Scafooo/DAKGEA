@@ -1,6 +1,5 @@
 paths:
   raw_data: "data/raw"
-  processed_data: "data/processed"
   augmented_data: "data/augmented"
   reduced_data: "data/reduced"
   results: "experiments/results"
