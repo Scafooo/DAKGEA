@@ -11,10 +11,15 @@ PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Ensure that src/ is in PYTHONPATH
 export PYTHONPATH="${PROJECT_ROOT}"
 
-FILE_NAME="exp_4.yaml"
+# Allow overriding config via CLI argument or RUN_CONFIG environment variable
+FILE_NAME="${1:-${RUN_CONFIG:-exp_4.yaml}}"
 
 # Default config file (you can change this)
-CONFIG_FILE="${PROJECT_ROOT}/config/experiments/${FILE_NAME}"
+if [[ "$FILE_NAME" == /* ]]; then
+    CONFIG_FILE="${FILE_NAME}"
+else
+    CONFIG_FILE="${PROJECT_ROOT}/config/experiments/${FILE_NAME}"
+fi
 
 # Activate virtual environment automatically (if it exists)
 if [ -f "${PROJECT_ROOT}/.venv/bin/activate" ]; then

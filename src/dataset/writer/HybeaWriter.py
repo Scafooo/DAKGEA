@@ -66,34 +66,47 @@ class HybeaWriter(Writer):
             ent_ids[key] = str(elem[0])
 
         aligned_list = list(aligned_entities)
-        n = len(aligned_list)
-        n1 = int(n * 0.7)
-        n2 = int(n * 0.9)
-        logger.debug(
-            "Preparing %d aligned entity pairs for attribute export (%d/%d/%d splits)",
-            n,
-            n1,
-            n2 - n1,
-            n - n2,
-        )
+        original_pairs = len(aligned_list)
 
         def norm_entity(entity):
             """Normalize aligned entity entries (URIRef or str) to NFC strings."""
             return unicodedata.normalize("NFC", str(entity))
 
-        list_aligned_entities = sorted(
+        normalised_pairs = sorted(
             [(norm_entity(e1), norm_entity(e2)) for e1, e2 in aligned_list]
         )
 
         missing = []
-        for e1, e2 in list_aligned_entities:
+        list_aligned_entities = []
+        for e1, e2 in normalised_pairs:
             if e1 not in ent_ids or e2 not in ent_ids:
                 missing.append((e1, e2))
+                continue
+            list_aligned_entities.append((e1, e2))
+
         if missing:
-            sample = ", ".join([f"({e1}, {e2})" for e1, e2 in missing])
-            raise KeyError(f"Some aligned entities were not found in ent_ids mapping. "
-                           f"Missing examples: {sample}. "
-                           f"Ensure ent_ids_1/ent_ids_2 contain all aligned entities after normalization.")
+            sample = ", ".join([f"({e1}, {e2})" for e1, e2 in missing[:5]])
+            logger.warning(
+                "Skipping %d aligned pairs missing from ent_ids mapping. Samples: %s",
+                len(missing),
+                sample,
+            )
+            if len(missing) > 5:
+                logger.warning("Additional %d missing pairs omitted from log.", len(missing) - 5)
+
+        n = len(list_aligned_entities)
+        n1 = int(n * 0.7)
+        n2 = int(n * 0.9)
+        logger.debug(
+            "Preparing %d aligned entity pairs for attribute export (%d/%d/%d splits). "
+            "Dropped %d missing pairs from original %d.",
+            n,
+            n1,
+            n2 - n1,
+            n - n2,
+            len(missing),
+            original_pairs,
+        )
 
         ref_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[:n1]]
         sup_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[n1:n2]]

@@ -5,6 +5,7 @@ model:
   candidate_num: 1000
   basic_unit:
     encoder_name: "bert-base-multilingual-cased"
+    encoder_strategy: "auto"
     input_dim: 768
     output_dim: 300
     epochs: 5
