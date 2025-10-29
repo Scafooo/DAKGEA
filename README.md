@@ -81,6 +81,7 @@ Registries automatically discover concrete implementations placed under their re
 - For HybEA inputs the raw location is `data/raw/hybea/<dataset>/{attribute_data,knowformer_data}`; the runner auto-detects the correct reader from the directory layout.
 - Reduced/augmented outputs mirror the selected writers: HybEA exports recreate the original `attribute_data`/`knowformer_data` folders, while the RDF writer stores compact N-Triples graphs (`graph_source.nt`, `graph_target.nt`) plus `aligned_entities.tsv`.
 - Generated artefacts are grouped by reduction method and writer format, e.g. `data/reduced/random_entities/hybea/BBC_DB/10/` alongside `data/reduced/random_entities/rdf/BBC_DB/10/`, while augmented exports live in `data/augmented/<reduction_method>/<augmentation_method>/<writer>/<dataset>/<ratio>/` (e.g. `data/augmented/random_entities/plm_augmentation/hybea/BBC_DB/10/`).
+- A fuller usage walkthrough, including configuration knobs like `filter_alignment`, lives in `docs/usage.md`.
 - The logger resolves all path aliases via the config loader, so updating locations in `config/global.yaml` is enough to relocate storage directories.
 - TSV files are read via `src/util/reader.py`, which accepts both `Path` objects and strings and provides compatibility aliases for legacy APIs.
 
