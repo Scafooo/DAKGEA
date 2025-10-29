@@ -63,6 +63,13 @@ class Bert_int:
 
         bert_dataset = build_dataset(dataset, self._train_ratio())
         entity_order = [bert_dataset.index2entity[idx] for idx in range(len(bert_dataset.index2entity))]
+        logger.info(
+            "[BERT-INT] Dataset prepared: |KG1|=%d entities, |KG2|=%d entities, train_pairs=%d, test_pairs=%d",
+            len(bert_dataset.kg1.entities),
+            len(bert_dataset.kg2.entities),
+            len(bert_dataset.train_pairs),
+            len(bert_dataset.test_pairs),
+        )
 
         entity_texts = self._build_entity_texts(dataset, bert_dataset)
         token_ids, attention_masks, tokenizer = encode_entities(
@@ -103,6 +110,7 @@ class Bert_int:
             eval_topk=self.model_config.interaction.candidate_topk,
             device=device,
         )
+        logger.info("[BERT-INT] Basic unit training complete; starting interaction phase.")
 
         scored_predictions = self._run_interaction_stage(
             model,
@@ -111,6 +119,7 @@ class Bert_int:
             artifacts,
             device,
         )
+        logger.info("[BERT-INT] Interaction phase complete; evaluating metrics.")
 
         truth_pairs = [
             (bert_dataset.index2entity[src], bert_dataset.index2entity[tgt])
@@ -161,12 +170,19 @@ class Bert_int:
             device,
             batch_size=2048,
         )
+        logger.debug("[BERT-INT] Neighbor features ready for %d pairs.", len(neighbor_feats))
 
         fallback_names = {
             idx: normalise_uri(dataset.index2entity[idx]) for idx in all_entities
         }
         all_attribute_triples = dataset.kg1.attribute_triples + dataset.kg2.attribute_triples
+        before_clean = len(all_attribute_triples)
         all_attribute_triples = clean_attribute_triples(all_attribute_triples, threshold=3)
+        logger.debug(
+            "[BERT-INT] Attribute triples cleaned: %d -> %d",
+            before_clean,
+            len(all_attribute_triples),
+        )
         ent2values = build_attribute_values(
             all_attribute_triples,
             all_entities,
@@ -217,7 +233,18 @@ class Bert_int:
             neighbor_feats[i] + attribute_feats[i] + description_feats[i]
             for i in range(len(artifacts.entity_pairs))
         ]
+        logger.debug(
+            "[BERT-INT] Combined feature vector dimension: %d (pairs=%d)",
+            len(combined_features[0]) if combined_features else 0,
+            len(combined_features),
+        )
 
+        logger.info(
+            "[BERT-INT] Interaction training with %d feature vectors; train_pairs=%d, test_pairs=%d",
+            len(combined_features),
+            len(artifacts.train_pairs),
+            len(artifacts.test_pairs),
+        )
         interaction_artifacts = train_interaction_model(
             combined_features,
             artifacts.entity_pairs,

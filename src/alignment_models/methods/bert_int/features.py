@@ -14,6 +14,9 @@ from src.alignment_models.methods.bert_int.dual_aggregation import (
     kernel_sigmas,
 )
 from src.alignment_models.methods.bert_int.similarity import cosine_similarity_matrix
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 def build_neighbor_dict(
@@ -99,6 +102,7 @@ def neighbor_features(
         sim_matrix = torch.bmm(emb1, emb2.transpose(1, 2))
         feats = dual_aggregation_features(sim_matrix, mus, sigmas, mask1, mask2)
         features.extend(feats.detach().cpu().tolist())
+    logger.debug("[BERT-INT] Neighbor features computed for %d pairs.", len(features))
     return features
 
 
@@ -117,6 +121,7 @@ def description_features(
         emb2 = entity_embeddings[e2s]
         sim = F.cosine_similarity(emb1, emb2).unsqueeze(-1)
         features.extend(sim.detach().cpu().tolist())
+    logger.debug("[BERT-INT] Description features computed for %d pairs.", len(features))
     return features
 
 
@@ -144,6 +149,7 @@ def attribute_value_embeddings(
         with torch.no_grad():
             emb = model(tokens, masks)
         embeddings.extend(emb.detach().cpu().tolist())
+    logger.debug("[BERT-INT] Encoded %d attribute values.", len(embeddings))
     return embeddings, list(values)
 
 
@@ -175,4 +181,5 @@ def attribute_features(
         sim_matrix = torch.bmm(emb1, emb2.transpose(1, 2))
         feats = dual_aggregation_features(sim_matrix, mus, sigmas, mask1, mask2)
         features.extend(feats.detach().cpu().tolist())
+    logger.debug("[BERT-INT] Attribute features computed for %d pairs.", len(features))
     return features
