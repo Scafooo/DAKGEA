@@ -1,7 +1,8 @@
-from typing import Type, Dict
+"""Registry utilities for augmentation strategies."""
+
 import importlib
 import pkgutil
-
+from typing import Dict, Type
 
 class AugmentationRegistry:
     """Registry for Data Augmentation methods applied to Knowledge Graph datasets."""
@@ -34,6 +35,4 @@ class AugmentationRegistry:
         for _, modname, _ in pkgutil.iter_modules(pkg.__path__):
             importlib.import_module(f"{package}.{modname}")
 
-
-# Global singleton
 AUGMENTATION_REGISTRY = AugmentationRegistry()

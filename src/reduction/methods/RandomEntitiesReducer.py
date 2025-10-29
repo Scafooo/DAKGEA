@@ -1,4 +1,7 @@
+from src.logger import get_logger
 from src.reduction.registry import REDUCTION_REGISTRY
+
+logger = get_logger(__name__)
 
 @REDUCTION_REGISTRY.register("random_entities")
 class RandomEntitiesReducer:
@@ -8,7 +11,6 @@ class RandomEntitiesReducer:
     def reduce(self, dataset):
         target_entities = self.config["reduction"]["target_entities"]
 
-        from src.logger import logger
-        logger.info(f"Reducing dataset to ~{target_entities} aligned entities (random)")
+        logger.info("Reducing dataset to ~%d aligned entities (random)", target_entities)
 
         return dataset

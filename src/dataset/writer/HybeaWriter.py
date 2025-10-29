@@ -1,19 +1,28 @@
+"""Writer for HybEA-formatted datasets."""
+
 import copy
 import os
-from src.knowledge_graph.writer.WriterFactory import WriterFactory
-from src.logger import logger
-from src.util.reader import read_tsv
-from src.util.writer import write_tsv
-from src.dataset.writer.Writer import Writer
-from src.dataset.Dataset import Dataset
 import unicodedata
+from typing import Iterable, Tuple
+
 from rdflib.term import URIRef
 
+from src.dataset.Dataset import Dataset
+from src.dataset.writer.Writer import Writer
+from src.knowledge_graph.writer.WriterFactory import WriterFactory
+from src.logger import get_logger
+from src.util.reader import read_tsv
+from src.util.writer import write_tsv
+
+logger = get_logger(__name__)
+
 class HybeaWriter(Writer):
+    """Persist datasets back to HybEA/KnowFormer directory layouts."""
+
     file_type = "hybea"
 
-
     def write(self, dataset: Dataset, dir_path: str) -> bool:
+        """Export a dataset to the requested HybEA directory layout."""
 
         logger.info("Dataset Hybea Export Start")
 
@@ -23,18 +32,19 @@ class HybeaWriter(Writer):
         kg_writer_2 = WriterFactory.create_writer(self.file_type)
         kg_writer_2.write(dataset.knowledge_graph_target, dir_path, kg_number=2)
 
-        ## Write aligned entities
         if "attribute_data" in dir_path:
             return self._write_aligned_entities_attribute(dataset.aligned_entities, dir_path)
-        else: #knowformer_data
-            return self._write_aligned_entities_knowformer(dataset, dir_path)
+        return self._write_aligned_entities_knowformer(dataset, dir_path)
 
-    def _write_aligned_entities_attribute(self, aligned_entities, dir_path):
+    def _write_aligned_entities_attribute(
+        self, aligned_entities: Iterable[Tuple[URIRef, URIRef]], dir_path: str
+    ) -> bool:
+        """Persist aligned entities for the attribute-data layout."""
 
         ent_ids_1 = read_tsv(os.path.join(dir_path, "ent_ids_1"))
         ent_ids_2 = read_tsv(os.path.join(dir_path, "ent_ids_2"))
         ent_ids = {}
-        # normalize keys to NFC strings for consistent lookup
+
         for elem in ent_ids_1:
             key = unicodedata.normalize("NFC", str(elem[1]))
             ent_ids[key] = str(elem[0])
@@ -42,17 +52,25 @@ class HybeaWriter(Writer):
             key = unicodedata.normalize("NFC", str(elem[1]))
             ent_ids[key] = str(elem[0])
 
-        n = len(aligned_entities)
+        aligned_list = list(aligned_entities)
+        n = len(aligned_list)
         n1 = int(n * 0.7)
         n2 = int(n * 0.9)
+        logger.debug(
+            "Preparing %d aligned entity pairs for attribute export (%d/%d/%d splits)",
+            n,
+            n1,
+            n2 - n1,
+            n - n2,
+        )
 
-        # normalize aligned entities entries (URIRef or str) to NFC strings
-        def norm_entity(e):
-            if isinstance(e, URIRef):
-                return unicodedata.normalize("NFC", str(e))
-            return unicodedata.normalize("NFC", str(e))
+        def norm_entity(entity):
+            """Normalize aligned entity entries (URIRef or str) to NFC strings."""
+            return unicodedata.normalize("NFC", str(entity))
 
-        list_aligned_entities = sorted([(norm_entity(e1), norm_entity(e2)) for e1, e2 in aligned_entities])
+        list_aligned_entities = sorted(
+            [(norm_entity(e1), norm_entity(e2)) for e1, e2 in aligned_list]
+        )
 
         missing = []
         for e1, e2 in list_aligned_entities:
@@ -77,7 +95,8 @@ class HybeaWriter(Writer):
         return True
 
 
-    def _write_aligned_entities_knowformer(self, dataset : Dataset, dir_path):
+    def _write_aligned_entities_knowformer(self, dataset: Dataset, dir_path: str) -> bool:
+        """Persist aligned entities for the KnowFormer layout."""
 
         ENT_ILLS = os.path.join(dir_path, "ent_ILLs.txt")
         REF_ENTS = os.path.join(dir_path, "ref_ents.txt")
@@ -86,12 +105,13 @@ class HybeaWriter(Writer):
         TRAIN_TRIPLES = os.path.join(dir_path, "train.triples.txt")
         VOCAB = os.path.join(dir_path, "vocab.txt")
 
-        def norm_entity(e):
-            if isinstance(e, URIRef):
-                return unicodedata.normalize("NFC", str(e))
-            return unicodedata.normalize("NFC", str(e))
+        def norm_entity(entity):
+            """Normalize aligned entity entries (URIRef or str) to NFC strings."""
+            return unicodedata.normalize("NFC", str(entity))
 
-        list_aligned_entities = sorted([(norm_entity(e1), norm_entity(e2)) for e1, e2 in dataset.aligned_entities])
+        list_aligned_entities = sorted(
+            (norm_entity(e1), norm_entity(e2)) for e1, e2 in dataset.aligned_entities
+        )
 
         n = len(list_aligned_entities)
         n1 = int(n * 0.7)
@@ -105,7 +125,6 @@ class HybeaWriter(Writer):
 
         vocab["[PAD]"] = None
 
-        #unused
         for i in range(95):
             vocab[f"[unused{i}]"] = None
 
@@ -116,26 +135,24 @@ class HybeaWriter(Writer):
 
         vocab_ent_1 = {}
         vocab_rel_1 = {}
-        vocab_ent_2 ={}
+        vocab_ent_2 = {}
         vocab_rel_2 = {}
 
+        for subj, pred, obj in dataset.knowledge_graph_source:
+            if isinstance(subj, URIRef) and isinstance(obj, URIRef):
+                normalized_subj = unicodedata.normalize("NFC", str(subj))
+                normalized_obj = unicodedata.normalize("NFC", str(obj))
+                vocab_ent_1[normalized_subj] = None
+                vocab_ent_1[normalized_obj] = None
+                vocab_rel_1[pred] = None
 
-
-        for s,p,o in dataset.knowledge_graph_source:
-            if isinstance(s, URIRef) and isinstance(o, URIRef):
-                s = unicodedata.normalize("NFC", str(s))
-                vocab_ent_1[s] = None
-                o = unicodedata.normalize("NFC", str(o))
-                vocab_ent_1[o] = None
-                vocab_rel_1[p] = None
-
-        for s,p,o in dataset.knowledge_graph_target:
-            if isinstance(s, URIRef) and isinstance(o, URIRef):
-                s = unicodedata.normalize("NFC", str(s))
-                vocab_ent_2[s] = None
-                o = unicodedata.normalize("NFC", str(o))
-                vocab_ent_2[o] = None
-                vocab_rel_2[p] = None
+        for subj, pred, obj in dataset.knowledge_graph_target:
+            if isinstance(subj, URIRef) and isinstance(obj, URIRef):
+                normalized_subj = unicodedata.normalize("NFC", str(subj))
+                normalized_obj = unicodedata.normalize("NFC", str(obj))
+                vocab_ent_2[normalized_subj] = None
+                vocab_ent_2[normalized_obj] = None
+                vocab_rel_2[pred] = None
 
         for e1, e2 in ref_pairs:
             vocab_ent_1[e1] = None
@@ -156,13 +173,13 @@ class HybeaWriter(Writer):
 
         train_triples = set()
 
-        for s,p,o in dataset.knowledge_graph_source:
-            if isinstance(s, URIRef) and isinstance(o, URIRef):
-                train_triples.add((str(s),str(p),str(o)))
+        for subj, pred, obj in dataset.knowledge_graph_source:
+            if isinstance(subj, URIRef) and isinstance(obj, URIRef):
+                train_triples.add((str(subj), str(pred), str(obj)))
 
-        for s,p,o in dataset.knowledge_graph_target:
-            if isinstance(s, URIRef) and isinstance(o, URIRef):
-                train_triples.add((str(s),str(p),str(o)))
+        for subj, pred, obj in dataset.knowledge_graph_target:
+            if isinstance(subj, URIRef) and isinstance(obj, URIRef):
+                train_triples.add((str(subj), str(pred), str(obj)))
 
         res_valid_set = set(ref_pairs + valid_pairs)
 
@@ -182,17 +199,21 @@ class HybeaWriter(Writer):
         for train_triple in train_triples:
             if train_triple[0] in eq_classes:
                 for eq_class in eq_classes[train_triple[0]]:
-                    train_triples_expanded.add((eq_class,train_triple[1],train_triple[2]))
+                    train_triples_expanded.add(
+                        (eq_class, train_triple[1], train_triple[2])
+                    )
             if train_triple[2] in eq_classes:
                 for eq_class in eq_classes[train_triple[2]]:
-                    train_triples_expanded.add((train_triple[0],train_triple[1],eq_class))
+                    train_triples_expanded.add(
+                        (train_triple[0], train_triple[1], eq_class)
+                    )
 
         train_triples_expanded_list = list(train_triples_expanded)
 
         train_triples_final = []
 
         for triple in train_triples_expanded_list:
-            train_triples_final.append((triple[0],triple[1],triple[2], "MASK_0"))
+            train_triples_final.append((triple[0], triple[1], triple[2], "MASK_0"))
             train_triples_final.append((triple[0], triple[1], triple[2], "MASK_2"))
 
         write_tsv(ENT_ILLS, ent_ILLs_pairs)

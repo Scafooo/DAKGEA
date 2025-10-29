@@ -1,31 +1,31 @@
 # Data Augmentation for Knowledge Graph Entity Resolution
 
-This project provides a **modular pipeline** for **data augmentation** and **dataset reduction** to support **Entity Alignment (EA)** tasks on Knowledge Graphs. It allows experimenting with multiple EA models and evaluating the impact of reduction and augmentation on alignment performance.
+This repository implements a **modular experimentation framework** for **Entity Alignment (EA)** on Knowledge Graphs. It combines dataset reduction, data augmentation, and model training so you can measure how each component impacts alignment accuracy with minimal plumbing.
 
 ---
 
 ## ⚙️ Configuration
 
-Configurations are managed with **YAML files**:
+All behaviour is controlled with YAML files:
 
-- `config/global.yaml` → global settings (paths, seed, logging)  
-- `config/models/*.yaml` → model-specific parameters (e.g., HybEA, KnowFormer, BERT-INT)  
-- `config/experiments/*.yaml` → experiment-specific settings (dataset subsets, augmentation/reduction parameters)  
+- `config/global.yaml` – shared defaults such as path aliases and logging level.
+- `config/models/*.yaml` – per-model hyperparameters (HybEA, KnowFormer, BERT-INT, …).
+- `config/experiments/*.yaml` – dataset slices plus augmentation/reduction knobs, including `overwrite_existing` to force regeneration of artefacts for a specific run.
 
-All relative paths are automatically resolved by the Python loader (`src/config/loader.py`).
+The loader (`src/config/loader.py`) merges files in that order and automatically resolves relative paths to absolute locations rooted at the repository. This allows you to move configuration files without breaking downstream consumers.
 
 ---
 
 ## 🛠️ Installation
 
-Clone the repository:
+Clone and enter the repository:
 
 ```bash
 git clone <PROJECT_URL>
 cd <PROJECT_NAME>
 ```
 
-Create a virtual environment and install dependencies:
+Create a Python environment and install dependencies:
 
 ```bash
 conda env create -f install/HybEA_env.yml
@@ -37,28 +37,73 @@ pip install -r install/requirements.txt
 
 ## 🚀 Running Experiments
 
-The full pipeline follows this flow:
+The pipeline executes in four stages:
 
-1. **Reduction** → shrink dataset size  
-2. **Augmentation** → apply data augmentation on reduced datasets  
-3. **Train & Evaluate EA models** → HybEA .. 
-4. **Metrics & Analysis** → evaluate performance and gap between reduced, and augmented datasets  
+1. **Reduction** – shrink the dataset while preserving coverage of key entities.
+2. **Augmentation** – generate additional triples or alignments to diversify training data.
+3. **Model training** – fit an EA model (e.g., HybEA) on the processed dataset.
+4. **Evaluation** – compute alignment metrics and export detailed diagnostics.
 
-Example command:
+Example invocation:
 
 ```bash
-python experiments/run.py --config_exp config/experiments/exp_1.yaml --model hybea
+python experiments/run.py config/experiments/exp_1.yaml
 ```
+
+Append `--overwrite-existing` to recompute reductions, augmentations, and results even when cached outputs are present (you can also set `overwrite_existing: true` inside the experiment YAML).
+
+The command wires up the requested experiment configuration with the chosen model and kicks off the full reduction→augmentation→training sequence.
+
+---
+
+## 🧱 Repository Layout
+
+```
+src/
+  alignment_models/    # Pluggable EA model registry and implementations
+  augmentation/        # Data augmentation registry and components
+  reduction/           # Dataset reduction strategies
+  config/              # YAML loader utilities
+  dataset/             # Dataset wrappers around paired knowledge graphs
+  knowledge_graph/     # Thin rdflib-based graph helpers
+  util/                # Reader/write helpers and shared utilities
+experiments/           # Experiment entry points and output artefacts
+tests/                 # Lightweight regression tests for loaders and I/O
+```
+
+Registries automatically discover concrete implementations placed under their respective `methods/` packages, allowing you to drop in new strategies without modifying the core pipeline.
+
+---
+
+## 🧭 Working with Data
+
+- Raw datasets belong in `data/raw`; reduction and augmentation outputs are stored under `data/reduced` and `data/augmented`.
+- The logger resolves all path aliases via the config loader, so updating locations in `config/global.yaml` is enough to relocate storage directories.
+- TSV files are read via `src/util/reader.py`, which accepts both `Path` objects and strings and provides compatibility aliases for legacy APIs.
+
+---
+
+## 🧪 Testing
+
+A lightweight regression suite is provided to validate configuration merging and TSV I/O helpers:
+
+```bash
+python -m unittest discover -s tests
+```
+
+Add your own tests under `tests/` to keep future changes honest, especially when introducing new reduction or augmentation strategies.
 
 ---
 
 ## 📊 Results
 
-All metrics, analyses, and experiment outcomes are saved in:
+Experiment metrics, intermediate artefacts, and logs are written to:
 
 ```
 experiments/results/
 ```
+
+The default location is controlled by `paths.log_file` and other entries inside `config/global.yaml`.
 
 ---
 

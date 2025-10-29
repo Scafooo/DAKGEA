@@ -1,10 +1,14 @@
 import os
+
 from rdflib import Literal, URIRef
+
 from src.knowledge_graph.KnowledgeGraph import KnowledgeGraph
 from src.knowledge_graph.writer.Writer import Writer
-from src.logger import logger
+from src.logger import get_logger
 from src.util.reader import read_tsv
 from src.util.writer import write_tsv
+
+logger = get_logger(__name__)
 
 
 class HybeaWriter(Writer):
@@ -23,7 +27,7 @@ class HybeaWriter(Writer):
 
     def write_attribute(self, kg, kg_number, dir_path) -> bool:
 
-        logger.info("Knowledge Graph Hybea Attribute")
+        logger.info("Knowledge Graph Hybea Attribute export")
 
         ATTR_NAMES = os.path.join(dir_path, "attr_names" + str(kg_number))
         ATTR_TRIPLE = os.path.join(dir_path, "attr_triples" + str(kg_number))
@@ -81,7 +85,7 @@ class HybeaWriter(Writer):
 
     def write_knowformer(self, kg, dir_path, kg_number) -> bool:
 
-        logger.info("Knowledge Graph Hybea Knowformer Export")
+        logger.info("Knowledge Graph Hybea KnowFormer export")
 
         ATTR_NAMES = os.path.join(dir_path, "attr_names" + str(kg_number))
         ATTR_TRIPLE = os.path.join(dir_path, "attr_triples_" + str(kg_number))

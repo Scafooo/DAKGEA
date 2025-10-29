@@ -1,6 +1,8 @@
-from src.logger import logger
+from src.logger import get_logger
 from src.knowledge_graph.KnowledgeGraph import KnowledgeGraph
 from src.knowledge_graph.writer.Writer import Writer
+
+logger = get_logger(__name__)
 
 
 class RDFWriter(Writer):
