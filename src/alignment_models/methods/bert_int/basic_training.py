@@ -39,13 +39,25 @@ def _entlist_to_embeddings(
     device: torch.device,
     *,
     requires_grad: bool = False,
+    batch_size: int = 256,
 ) -> torch.Tensor:
-    token_ids = torch.stack([entid2data[e][0] for e in entids]).to(device)
-    mask_ids = torch.stack([entid2data[e][1] for e in entids]).to(device)
-    if requires_grad:
-        return model(token_ids, mask_ids)
-    with torch.no_grad():
-        return model(token_ids, mask_ids)
+    outputs: List[torch.Tensor] = []
+    effective_batch = batch_size if batch_size > 0 else len(entids)
+    for start in range(0, len(entids), effective_batch):
+        chunk = entids[start : start + effective_batch]
+        if not chunk:
+            continue
+        token_ids = torch.stack([entid2data[e][0] for e in chunk]).to(device)
+        mask_ids = torch.stack([entid2data[e][1] for e in chunk]).to(device)
+        if requires_grad:
+            outputs.append(model(token_ids, mask_ids))
+        else:
+            with torch.no_grad():
+                outputs.append(model(token_ids, mask_ids))
+    if not outputs:
+        out_dim = getattr(getattr(model, "output_layer", None), "out_features", 0)
+        return torch.empty((0, out_dim), device=device)
+    return torch.cat(outputs, dim=0)
 
 
 def _generate_candidate_dict(
@@ -57,6 +69,8 @@ def _generate_candidate_dict(
     pool_ids2: Sequence[int],
     topk: int,
     device: torch.device,
+    *,
+    batch_size: int,
 ) -> Dict[int, List[int]]:
     model.eval()
     logger.debug(
@@ -67,8 +81,20 @@ def _generate_candidate_dict(
         len(pool_ids2),
     )
     with torch.no_grad():
-        emb1 = _entlist_to_embeddings(model, pool_ids1, entid2data, device)
-        emb2 = _entlist_to_embeddings(model, pool_ids2, entid2data, device)
+        emb1 = _entlist_to_embeddings(
+            model,
+            pool_ids1,
+            entid2data,
+            device,
+            batch_size=batch_size,
+        )
+        emb2 = _entlist_to_embeddings(
+            model,
+            pool_ids2,
+            entid2data,
+            device,
+            batch_size=batch_size,
+        )
     emb1 = emb1.cpu()
     emb2 = emb2.cpu()
 
@@ -106,14 +132,44 @@ def _margin_ranking_step(
     batch_ne2: Sequence[int],
     entid2data: Dict[int, Tuple[torch.Tensor, torch.Tensor]],
     device: torch.device,
+    *,
+    embedding_batch_size: int,
 ) -> float:
     model.train()
     optimizer.zero_grad()
 
-    pos_emb1 = _entlist_to_embeddings(model, batch_pe1, entid2data, device, requires_grad=True)
-    pos_emb2 = _entlist_to_embeddings(model, batch_pe2, entid2data, device, requires_grad=True)
-    neg_emb1 = _entlist_to_embeddings(model, batch_ne1, entid2data, device, requires_grad=True)
-    neg_emb2 = _entlist_to_embeddings(model, batch_ne2, entid2data, device, requires_grad=True)
+    pos_emb1 = _entlist_to_embeddings(
+        model,
+        batch_pe1,
+        entid2data,
+        device,
+        requires_grad=True,
+        batch_size=embedding_batch_size,
+    )
+    pos_emb2 = _entlist_to_embeddings(
+        model,
+        batch_pe2,
+        entid2data,
+        device,
+        requires_grad=True,
+        batch_size=embedding_batch_size,
+    )
+    neg_emb1 = _entlist_to_embeddings(
+        model,
+        batch_ne1,
+        entid2data,
+        device,
+        requires_grad=True,
+        batch_size=embedding_batch_size,
+    )
+    neg_emb2 = _entlist_to_embeddings(
+        model,
+        batch_ne2,
+        entid2data,
+        device,
+        requires_grad=True,
+        batch_size=embedding_batch_size,
+    )
 
     pos_score = F.pairwise_distance(pos_emb1, pos_emb2, p=1).unsqueeze(-1)
     neg_score = F.pairwise_distance(neg_emb1, neg_emb2, p=1).unsqueeze(-1)
@@ -141,6 +197,7 @@ def train_basic_unit_model(
     candidate_topk: int,
     eval_topk: int,
     device: torch.device,
+    embedding_batch_size: int,
 ) -> BasicUnitArtifacts:
     logger.info(
         "[BERT-INT] Basic unit training: train_pairs=%d test_pairs=%d batch_size=%d epochs=%d",
@@ -165,6 +222,7 @@ def train_basic_unit_model(
             ent_ids2,
             candidate_topk,
             device,
+            batch_size=embedding_batch_size,
         )
         logger.debug(
             "[BERT-INT] Candidate dict built for %d entities (min candidates per entity=%d)",
@@ -186,6 +244,7 @@ def train_basic_unit_model(
                 ne2s,
                 entid2data,
                 device,
+                embedding_batch_size=embedding_batch_size,
             )
             epoch_loss += loss
             steps += 1
@@ -206,6 +265,7 @@ def train_basic_unit_model(
         ent_ids2,
         candidate_topk,
         device,
+        batch_size=embedding_batch_size,
     )
     test_candidates = _generate_candidate_dict(
         model,
@@ -216,6 +276,7 @@ def train_basic_unit_model(
         ent_ids2,
         eval_topk,
         device,
+        batch_size=embedding_batch_size,
     )
 
     entity_pairs_set = set()
