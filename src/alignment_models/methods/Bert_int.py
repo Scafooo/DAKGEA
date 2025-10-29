@@ -77,6 +77,7 @@ class Bert_int:
             entity_texts,
             entity_order,
             max_length=self.model_config.basic_unit.max_seq_length,
+            cache_dir=self.model_config.paths.cache_dir,
         )
 
         entid2data = {
@@ -92,6 +93,8 @@ class Bert_int:
             self.model_config.basic_unit.encoder_name,
             self.model_config.basic_unit.input_dim,
             self.model_config.basic_unit.output_dim,
+            load_strategy=self.model_config.basic_unit.encoder_strategy,
+            cache_dir=self.model_config.paths.cache_dir,
         ).to(device)
 
         artifacts = train_basic_unit_model(

@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import hashlib
-from typing import Dict, Iterable, List, Sequence, Tuple
+import os
+from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 import torch
 
@@ -67,6 +68,7 @@ def encode_entities(
     entity_order: Sequence[str],
     *,
     max_length: int = 128,
+    cache_dir: Optional[str] = None,
 ) -> Tuple[torch.Tensor, torch.Tensor, object]:
     """Tokenise entity texts and return tensors ready for BERT."""
 
@@ -130,12 +132,35 @@ def encode_entities(
             attention_tensor = torch.tensor(attention_masks, dtype=torch.long)
             return {"input_ids": input_tensor, "attention_mask": attention_tensor}
 
+    resolved_cache_dir = cache_dir or _resolve_cache_dir()
+
+    tokenizer = None
     try:
-        tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, local_files_only=True)
+        tokenizer = AutoTokenizer.from_pretrained(
+            tokenizer_name,
+            local_files_only=True,
+            cache_dir=resolved_cache_dir,
+        )
         logger.debug("[BERT-INT] Loaded tokenizer '%s' from local cache.", tokenizer_name)
-    except OSError:
+    except OSError as exc:
+        logger.info("[BERT-INT] Tokenizer '%s' not cached locally (%s).", tokenizer_name, exc)
+
+    if tokenizer is None:
+        local_dir = _maybe_download_snapshot(tokenizer_name, resolved_cache_dir)
+        if local_dir:
+            try:
+                tokenizer = AutoTokenizer.from_pretrained(local_dir, cache_dir=resolved_cache_dir)
+                logger.debug("[BERT-INT] Loaded tokenizer '%s' from snapshot cache.", tokenizer_name)
+            except OSError as exc:
+                logger.warning(
+                    "[BERT-INT] Snapshot download for tokenizer '%s' is unusable (%s).",
+                    tokenizer_name,
+                    exc,
+                )
+
+    if tokenizer is None:
         try:
-            tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
+            tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, cache_dir=resolved_cache_dir)
             logger.debug("[BERT-INT] Downloaded tokenizer '%s'.", tokenizer_name)
         except OSError as exc:
             logger.warning(
@@ -153,3 +178,26 @@ def encode_entities(
         return_tensors="pt",
     )
     return encoded["input_ids"], encoded["attention_mask"], tokenizer
+
+
+def _maybe_download_snapshot(repo_id: str, cache_dir: Optional[str]) -> Optional[str]:
+    try:
+        from huggingface_hub import snapshot_download
+    except ImportError:
+        logger.debug("[BERT-INT] huggingface_hub not available; skipping snapshot download for '%s'.", repo_id)
+        return None
+
+    try:
+        local_dir = snapshot_download(repo_id=repo_id, cache_dir=cache_dir, local_files_only=False)
+        logger.info("[BERT-INT] Snapshot downloaded for '%s' into '%s'.", repo_id, local_dir)
+        return local_dir
+    except Exception as exc:  # pragma: no cover - network dependent
+        logger.warning("[BERT-INT] Snapshot download for '%s' failed (%s).", repo_id, exc)
+        return None
+
+
+def _resolve_cache_dir() -> Optional[str]:
+    for var in ("DAKGEA_HF_CACHE", "HF_HOME", "TRANSFORMERS_CACHE"):
+        if var in os.environ:
+            return os.environ[var]
+    return None

@@ -11,6 +11,7 @@ class BasicUnitConfig:
     """Hyper-parameters for the basic BERT unit encoder."""
 
     encoder_name: str = "bert-base-multilingual-cased"
+    encoder_strategy: str = "auto"
     input_dim: int = 768
     output_dim: int = 300
     epochs: int = 5
