@@ -56,6 +56,21 @@ parameters:
 
 Reducers and augmenters can read additional fields from this object if needed.
 
+### 2.3 Model Configuration
+
+Model-specific defaults live under `config/models/`. For instance, BERT-INT reads its hyper-parameters from `config/models/bert_int.yaml`, which you can override per experiment by adding:
+
+```yaml
+parameters:
+  models:
+    bert_int:
+      device: "cuda:1"
+      basic_unit:
+        epochs: 2
+      interaction:
+        epochs: 20
+```
+
 ## 3. Directory Layout
 
 Paths are resolved from `config/global.yaml` and default to:
@@ -96,4 +111,3 @@ Each augmentation reuses the reduced dataset as input, then writes its artefacts
 1. Drop new reducers under `src/reduction/methods/` and register them via `@REDUCTION_REGISTRY.register("<name>")`.
 2. Add augmenters in `src/augmentation/methods/` and models in `src/alignment_models/methods/`.
 3. Update experiment YAML with the new method keys. The runner auto-discovers the implementations via the registries.
-
