@@ -1,8 +1,11 @@
+import os
+
 from src.knowledge_graph.reader.Reader import Reader
 from src.knowledge_graph.KnowledgeGraph import KnowledgeGraph
-from src.logger import logger
+from src.logger import get_logger
 from src.util.reader import read_tsv
-import os
+
+logger = get_logger(__name__)
 
 class HybeaReader(Reader):
     """
@@ -20,14 +23,13 @@ class HybeaReader(Reader):
     file_type = "hybea"
 
     def read(self, dir_path, kg_number = None)  -> KnowledgeGraph:
-        logger.info(f"Reading files: in {dir_path}")
+        logger.info("Reading HybEA knowledge graph from %s", dir_path)
         if "attribute_data" in dir_path:
             return self.read_attribute_data(dir_path, kg_number)
-        else: #knowformer_data
-            return self.read_knowformer_data(dir_path, kg_number)
+        return self.read_knowformer_data(dir_path, kg_number)
 
     def read_attribute_data(self, dir_path, kg_number)  -> KnowledgeGraph:
-        logger.info(f"Attribute Data mode")
+        logger.debug("Parsing attribute-data knowledge graph (kg=%s)", kg_number)
         kg = KnowledgeGraph()
 
         attr_names_path = os.path.join(dir_path, "attr_names" + str(kg_number))
@@ -56,7 +58,7 @@ class HybeaReader(Reader):
         return kg
 
     def read_knowformer_data(self, dir_path, kg_number)  -> KnowledgeGraph:
-        logger.info(f"Knowformer Data mode")
+        logger.debug("Parsing KnowFormer knowledge graph (kg=%s)", kg_number)
         kg = KnowledgeGraph()
 
         attr_names_path = os.path.join(dir_path, "attr_names" + str(kg_number))

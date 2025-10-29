@@ -1,6 +1,8 @@
+"""Registry utilities for dataset reduction strategies."""
+
 import importlib
 import pkgutil
-from typing import Type, Dict
+from typing import Dict, Type
 
 class ReductionRegistry:
     """Registry for dataset reduction methods."""
@@ -23,15 +25,15 @@ class ReductionRegistry:
             raise ValueError(f"Reduction method {name} is not registered.")
         return self._registry[name]
 
-    # 🔹 NEW: autoload all submodules under a given package
-    def autoload(self, package_name: str):
-        """Dynamically import all submodules in a package to populate registry."""
+    def autoload(self, package_name: str = "src.reduction.methods") -> None:
+        """Import all submodules in a package so that decorated classes register themselves."""
         package = importlib.import_module(package_name)
         if not hasattr(package, "__path__"):
-            return  # Not a package
+            return
 
-        for _, module_name, _ in pkgutil.walk_packages(package.__path__, package.__name__ + "."):
+        for _, module_name, _ in pkgutil.walk_packages(
+            package.__path__, f"{package.__name__}."
+        ):
             importlib.import_module(module_name)
 
-# Global instance
 REDUCTION_REGISTRY = ReductionRegistry()

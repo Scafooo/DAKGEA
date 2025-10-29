@@ -1,5 +1,7 @@
 from src.alignment_models.registry import MODEL_REGISTRY
-from src.logger import logger
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 @MODEL_REGISTRY.register("hybea")
 class HybEA:
@@ -10,13 +12,16 @@ class HybEA:
 
     def __init__(self, config):
         self.config = config
-        logger.info("[HybEA] Model initialized.")
+        logger.debug("[HybEA] Model initialized with config: %s", config)
 
     def evaluate(self, dataset_reduced, dataset_augmented):
         """
         Dummy evaluation: returns placeholder scores.
         Replace with real HybEA invocation later.
         """
-        logger.info(f"[HybEA] Evaluating on dataset with {len(dataset_reduced.aligned_entities)} entities.")
+        logger.info(
+            "[HybEA] Evaluating on dataset with %d aligned entities.",
+            len(dataset_reduced.aligned_entities),
+        )
         # TODO: implement integration with HybEA repo
         return {"precision": 0.0, "recall": 0.0, "f1": 0.0}

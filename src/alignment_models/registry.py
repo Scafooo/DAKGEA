@@ -1,7 +1,8 @@
-from typing import Type, Dict
+"""Registry utilities for pluggable alignment models."""
+
 import importlib
 import pkgutil
-
+from typing import Dict, Type
 
 class ModelRegistry:
     """Registry for alignment models (e.g., HybEA, Knowformer, BERT-INT, etc.)."""
@@ -34,6 +35,4 @@ class ModelRegistry:
         for _, modname, _ in pkgutil.iter_modules(pkg.__path__):
             importlib.import_module(f"{package}.{modname}")
 
-
-# Global singleton
 MODEL_REGISTRY = ModelRegistry()

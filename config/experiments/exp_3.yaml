@@ -9,29 +9,29 @@ experiment:
     write_augmented: true
     write_results: true
 
-  resume: true
+  overwrite_existing: true
 
   datasets:
     - name: "BBC_DB"
-      reader_type: "hybea"
+      reader: "hybea"
     - name: "D_W_15K_V1"
-      reader_type: "knowformer"
+      reader: "hybea"
     - name: "D_W_15K_V2"
-      reader_type: "knowformer"
+      reader: "hybea"
     - name: "fr_en"
-      reader_type: "hybea"
+      reader: "hybea"
 #    - name: "ICEW_WIKI"
-#      reader_type: "hybea"
+#      reader: "hybea"
 #    - name: "ICEW_YAGO"
-#      reader_type: "hybea"
+#      reader: "hybea"
     - name: "ja_en"
-      reader_type: "knowformer"
+      reader: "hybea"
     - name: "SRPRS_D_W_15K_V1"
-      reader_type: "knowformer"
+      reader: "hybea"
     - name: "SRPRS_D_W_15K_V2"
-      reader_type: "knowformer"
+      reader: "hybea"
     - name: "zh_en"
-      reader_type: "hybea"
+      reader: "hybea"
 
   reduction_ratios: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 
