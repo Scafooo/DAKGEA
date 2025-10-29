@@ -140,6 +140,7 @@ class Bert_int:
             candidate_topk=self.model_config.basic_unit.candidate_topk,
             eval_topk=self.model_config.interaction.candidate_topk,
             device=device,
+            embedding_batch_size=self.model_config.basic_unit.test_batch_size,
         )
         logger.info("[BERT-INT] Basic unit training complete; starting interaction phase.")
 
