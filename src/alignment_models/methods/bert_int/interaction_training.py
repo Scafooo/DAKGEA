@@ -105,6 +105,13 @@ def train_interaction_model(
     candidate_topk: int,
     device: torch.device,
 ) -> InteractionArtifacts:
+    logger.info(
+        "[BERT-INT] Interaction training: features=%d dim=%d train_pairs=%d test_pairs=%d",
+        len(features),
+        len(features[0]) if features else 0,
+        len(train_pairs),
+        len(test_pairs),
+    )
     feature_tensor = torch.tensor(features, dtype=torch.float32)
     pair_index = {pair: idx for idx, pair in enumerate(entity_pairs)}
 
@@ -150,5 +157,7 @@ def train_interaction_model(
     for src in score_map:
         score_map[src].sort(key=lambda x: x[1], reverse=True)
         score_map[src] = score_map[src][:candidate_topk]
+
+    logger.info("[BERT-INT] Interaction training complete; scored %d source entities.", len(score_map))
 
     return InteractionArtifacts(scores=score_map)

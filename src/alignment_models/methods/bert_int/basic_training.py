@@ -56,6 +56,13 @@ def _generate_candidate_dict(
     device: torch.device,
 ) -> Dict[int, List[int]]:
     model.eval()
+    logger.debug(
+        "[BERT-INT] Generating candidate dictionary (|train_ids1|=%d, |train_ids2|=%d, pool1=%d, pool2=%d)",
+        len(train_ids1),
+        len(train_ids2),
+        len(pool_ids1),
+        len(pool_ids2),
+    )
     with torch.no_grad():
         emb1 = _entlist_to_embeddings(model, pool_ids1, entid2data, device)
         emb2 = _entlist_to_embeddings(model, pool_ids2, entid2data, device)
@@ -77,6 +84,10 @@ def _generate_candidate_dict(
         candidate_dict[e1] = [pool_ids2[i] for i in idx1[row].tolist()]
     for row, e2 in enumerate(train_ids2):
         candidate_dict[e2] = [pool_ids1[i] for i in idx2[row].tolist()]
+    logger.debug(
+        "[BERT-INT] Candidate dict built with average %.2f candidates per entity",
+        float(sum(len(v) for v in candidate_dict.values())) / max(1, len(candidate_dict)),
+    )
     return candidate_dict
 
 
@@ -126,12 +137,20 @@ def train_basic_unit_model(
     eval_topk: int,
     device: torch.device,
 ) -> BasicUnitArtifacts:
+    logger.info(
+        "[BERT-INT] Basic unit training: train_pairs=%d test_pairs=%d batch_size=%d epochs=%d",
+        len(train_pairs),
+        len(test_pairs),
+        batch_size,
+        epochs,
+    )
     optimizer = AdamW(model.parameters(), lr=learning_rate)
     criterion = nn.MarginRankingLoss(margin=margin)
 
     generator = BatchTrainDataGenerator(train_pairs, ent_ids1, ent_ids2, batch_size, negatives)
 
     for epoch in range(epochs):
+        logger.info("[BERT-INT] Basic unit epoch %d/%d - sampling candidates", epoch + 1, epochs)
         candidate_dict = _generate_candidate_dict(
             model,
             entid2data,
@@ -141,6 +160,11 @@ def train_basic_unit_model(
             ent_ids2,
             candidate_topk,
             device,
+        )
+        logger.debug(
+            "[BERT-INT] Candidate dict built for %d entities (min candidates per entity=%d)",
+            len(candidate_dict),
+            min(len(v) for v in candidate_dict.values()) if candidate_dict else 0,
         )
         generator.build_candidate_dict(candidate_dict)
 
@@ -165,6 +189,7 @@ def train_basic_unit_model(
     model.eval()
     with torch.no_grad():
         embeddings = _entlist_to_embeddings(model, sorted(entid2data.keys()), entid2data, device)
+    logger.info("[BERT-INT] Basic unit produced embeddings for %d entities.", embeddings.size(0))
 
     entity_embeddings = embeddings.numpy().tolist()
     train_candidates = _generate_candidate_dict(

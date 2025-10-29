@@ -1,5 +1,6 @@
 experiment:
   name: "bert_int_smoke"
+  overwrite_existing: true
 
   writers:
     - type: "hybea"

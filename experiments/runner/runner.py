@@ -129,6 +129,17 @@ class ExperimentRunner:
                         reader, writer_plans, dataset, spec, ratio, stage_cfg
                     )
 
+                    if not self.augmentations:
+                        self._evaluate_models(
+                            writer_plans,
+                            dataset_reduced,
+                            dataset_reduced,
+                            spec,
+                            ratio,
+                            stage_cfg,
+                            "baseline",
+                        )
+
                     for aug_name in self.augmentations:
                         dataset_augmented = self._perform_augmentation(
                             reader,
