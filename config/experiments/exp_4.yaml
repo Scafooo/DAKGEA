@@ -13,7 +13,7 @@ experiment:
       reader: "hybea"
 
   reduction_method: "random_entities"
-  reduction_ratios: [1.0]
+  reduction_ratios: [0.1]
   augmentation_methods: []
   models_to_run:
     - "bert_int"
@@ -23,13 +23,19 @@ experiment:
       seed: 42
     reduction:
       random_seed: 42
-      filter_alignment: false
+      filter_alignment: true
     models:
       bert_int:
-        device: "cpu"
+        device: "cuda"
         basic_unit:
           epochs: 1
+          batch_size: 6
+          max_seq_length: 64
+          negatives: 1
           candidate_topk: 32
         interaction:
           epochs: 1
+          batch_size: 64
+          neighbor_max: 25
+          attribute_max: 25
           candidate_topk: 32

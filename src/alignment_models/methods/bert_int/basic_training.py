@@ -37,12 +37,15 @@ def _entlist_to_embeddings(
     entids: Sequence[int],
     entid2data: Dict[int, Tuple[torch.Tensor, torch.Tensor]],
     device: torch.device,
+    *,
+    requires_grad: bool = False,
 ) -> torch.Tensor:
     token_ids = torch.stack([entid2data[e][0] for e in entids]).to(device)
     mask_ids = torch.stack([entid2data[e][1] for e in entids]).to(device)
+    if requires_grad:
+        return model(token_ids, mask_ids)
     with torch.no_grad():
-        embeddings = model(token_ids, mask_ids)
-    return embeddings.cpu()
+        return model(token_ids, mask_ids)
 
 
 def _generate_candidate_dict(
@@ -66,6 +69,8 @@ def _generate_candidate_dict(
     with torch.no_grad():
         emb1 = _entlist_to_embeddings(model, pool_ids1, entid2data, device)
         emb2 = _entlist_to_embeddings(model, pool_ids2, entid2data, device)
+    emb1 = emb1.cpu()
+    emb2 = emb2.cpu()
 
     pool_index1 = {eid: i for i, eid in enumerate(pool_ids1)}
     pool_index2 = {eid: i for i, eid in enumerate(pool_ids2)}
@@ -105,10 +110,10 @@ def _margin_ranking_step(
     model.train()
     optimizer.zero_grad()
 
-    pos_emb1 = _entlist_to_embeddings(model, batch_pe1, entid2data, device)
-    pos_emb2 = _entlist_to_embeddings(model, batch_pe2, entid2data, device)
-    neg_emb1 = _entlist_to_embeddings(model, batch_ne1, entid2data, device)
-    neg_emb2 = _entlist_to_embeddings(model, batch_ne2, entid2data, device)
+    pos_emb1 = _entlist_to_embeddings(model, batch_pe1, entid2data, device, requires_grad=True)
+    pos_emb2 = _entlist_to_embeddings(model, batch_pe2, entid2data, device, requires_grad=True)
+    neg_emb1 = _entlist_to_embeddings(model, batch_ne1, entid2data, device, requires_grad=True)
+    neg_emb2 = _entlist_to_embeddings(model, batch_ne2, entid2data, device, requires_grad=True)
 
     pos_score = F.pairwise_distance(pos_emb1, pos_emb2, p=1).unsqueeze(-1)
     neg_score = F.pairwise_distance(neg_emb1, neg_emb2, p=1).unsqueeze(-1)
@@ -188,7 +193,7 @@ def train_basic_unit_model(
 
     model.eval()
     with torch.no_grad():
-        embeddings = _entlist_to_embeddings(model, sorted(entid2data.keys()), entid2data, device)
+        embeddings = _entlist_to_embeddings(model, sorted(entid2data.keys()), entid2data, device).cpu()
     logger.info("[BERT-INT] Basic unit produced embeddings for %d entities.", embeddings.size(0))
 
     entity_embeddings = embeddings.numpy().tolist()

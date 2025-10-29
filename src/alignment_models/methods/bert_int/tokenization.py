@@ -2,11 +2,16 @@
 
 from __future__ import annotations
 
+import hashlib
 from typing import Dict, Iterable, List, Sequence, Tuple
 
 import torch
 
 from rdflib import Graph, Literal, URIRef
+
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 def normalise_uri(uri: str) -> str:
@@ -67,7 +72,78 @@ def encode_entities(
 
     from transformers import AutoTokenizer  # local import to keep module light
 
-    tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
+    class HashingTokenizer:
+        """Fallback tokenizer that hashes tokens into a fixed vocabulary."""
+
+        def __init__(self, vocab_size: int = 30522, pad_token_id: int = 0):
+            self.vocab_size = vocab_size
+            self.pad_token_id = pad_token_id
+            self.unk_token_id = 1
+
+        def _token_to_id(self, token: str) -> int:
+            digest = hashlib.sha256(token.encode("utf-8")).hexdigest()
+            hashed = int(digest, 16)
+            return 2 + (hashed % max(1, self.vocab_size - 2))
+
+        def __call__(
+            self,
+            sentences: Sequence[str],
+            padding: str | bool = "max_length",
+            truncation: bool = True,
+            max_length: int = 128,
+            return_tensors: str | None = None,
+        ) -> Dict[str, torch.Tensor]:
+            if return_tensors not in (None, "pt"):
+                raise ValueError("HashingTokenizer only supports return_tensors='pt'")
+
+            encoded: List[Tuple[List[int], List[int]]] = []
+            for sentence in sentences:
+                text = (sentence or "").strip().lower()
+                tokens = text.split() or ["[UNK]"]
+                ids = [self._token_to_id(tok) for tok in tokens]
+                if truncation and len(ids) > max_length:
+                    ids = ids[:max_length]
+                attention = [1] * len(ids)
+                encoded.append((ids, attention))
+
+            if padding == "max_length":
+                target_len = max_length
+            elif padding is True:
+                target_len = max((len(ids) for ids, _ in encoded), default=max_length)
+            else:
+                target_len = None
+
+            input_ids: List[List[int]] = []
+            attention_masks: List[List[int]] = []
+            for ids, attention in encoded:
+                if target_len is not None:
+                    pad_len = max(0, target_len - len(ids))
+                    ids = ids + [self.pad_token_id] * pad_len
+                    attention = attention + [0] * pad_len
+                    if len(ids) > target_len:
+                        ids = ids[:target_len]
+                        attention = attention[:target_len]
+                input_ids.append(ids)
+                attention_masks.append(attention)
+
+            input_tensor = torch.tensor(input_ids, dtype=torch.long)
+            attention_tensor = torch.tensor(attention_masks, dtype=torch.long)
+            return {"input_ids": input_tensor, "attention_mask": attention_tensor}
+
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, local_files_only=True)
+        logger.debug("[BERT-INT] Loaded tokenizer '%s' from local cache.", tokenizer_name)
+    except OSError:
+        try:
+            tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
+            logger.debug("[BERT-INT] Downloaded tokenizer '%s'.", tokenizer_name)
+        except OSError as exc:
+            logger.warning(
+                "[BERT-INT] Could not load tokenizer '%s' (%s); using hashing fallback.",
+                tokenizer_name,
+                exc,
+            )
+            tokenizer = HashingTokenizer()
     sentences = [entity_texts[eid] for eid in entity_order]
     encoded = tokenizer(
         sentences,
