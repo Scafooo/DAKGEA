@@ -19,10 +19,10 @@ class RDFWriter(Writer):
             base_name = "kg"
             if kg_number is not None:
                 base_name = f"kg_{kg_number}"
-            destination = destination / f"{base_name}.ttl"
+            destination = destination / f"{base_name}.nt"
 
         destination.parent.mkdir(parents=True, exist_ok=True)
-        kg.serialize(destination=str(destination), format="turtle")
+        kg.serialize(destination=str(destination), format="nt")
 
         logger.info("Knowledge Graph RDF Export End")
 

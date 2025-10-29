@@ -6,4 +6,4 @@ paths:
   log_file: "experiments/results/log.txt"
 
 logging:
-  level: INFO
+  level: DEBUG
