@@ -1,6 +1,7 @@
 import os
 import argparse
 import torch
+import logging
 
 from .utils.args import ArgumentGroup
 from .utils.args import print_arguments
@@ -8,13 +9,14 @@ from .model.knowformer import Knowformer
 from .utils.tools import device
 from .utils.swa import swa
 from .utils.prepare_data import prepare_entity_alignment_data
-from .utils.logger import get_logger
+from .utils.logger import get_logger as get_logger_local
 import numpy as np
 import random
 from .train.train_task import entity_alignment_train
 from .valid.test_task import entity_alignment_test
 from src.alignment_models.methods.hybea import runtime as cfg, path_for_KG
 from .utils.tools import calculate_voc_lim
+from src.logger import get_logger, get_structured_logger
 # from structure_model.graph_trans import *
 
 def get_args(new_pairs):
@@ -197,8 +199,11 @@ def run(args, logger_, stamp_):
     return export_sim_mat
 
 def run_structure_model(new_pairs):
+    """Run the structure model for entity alignment."""
+    import logging
+    from src.logger import get_structured_logger
 
-    ########### set seed ###########
+    # Set random seeds for reproducibility
     torch.backends.cudnn.deterministic = True
     seed = 2020
     random.seed(seed)
@@ -206,11 +211,36 @@ def run_structure_model(new_pairs):
     torch.manual_seed(seed)
     if torch.cuda.is_available:
         torch.cuda.manual_seed_all(seed)
-    ################################
 
+    logger_init = get_logger(__name__)
+    slogger_init = get_structured_logger(__name__)
+    logger_init.debug(f"Random seed set to {seed}")
+
+    # Get arguments and prepare data
     args = get_args(new_pairs)
-    print(args)
+
+    # Log configuration with structured logger
+    slogger_init.section("Structure Model Configuration")
+
+    config_dict = {
+        "Dataset": args.dataset,
+        "Task": args.task,
+        "Epochs": args.epoch,
+        "Min Epochs": args.min_epochs,
+        "Batch Size": args.batch_size,
+        "Learning Rate": args.learning_rate,
+        "Hidden Size": args.hidden_size,
+        "Num Layers": args.num_hidden_layers,
+        "Attention Heads": args.num_attention_heads,
+    }
+
+    slogger_init.table("Training Configuration", config_dict)
+
+    # Prepare data
     prepare_entity_alignment_data(args, new_pairs)
-    logger, stamp = get_logger(args)
+
+    # Get logger and print full arguments
+    logger, stamp = get_logger_local(args)
     print_arguments(logger, args)
+
     return run(args, logger, stamp)

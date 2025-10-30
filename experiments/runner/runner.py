@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -32,6 +33,12 @@ class ExperimentRunner:
     ) -> None:
         self.exp_cfg = exp_cfg
         self.show_progress = show_progress
+
+        # Auto-disable progress bar if logging is not ERROR level
+        root_logger = logging.getLogger("KG_EA")
+        if root_logger.level < logging.ERROR and self.show_progress:
+            logger.debug("Disabling progress bar due to verbose logging (level < ERROR)")
+            self.show_progress = False
 
         global_cfg = Config().get()
         self.paths = global_cfg["paths"]

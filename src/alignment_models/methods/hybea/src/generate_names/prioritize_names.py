@@ -93,11 +93,11 @@ def run_prioritize():
         prior_attr_1 = []
         prior_attr_2 = ["http://www.wikidata.org/entity/P373", 'http://www.wikidata.org/entity/P1476']
 
-        kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
-        kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
 
     elif cfg.DATASET == "ICEW_WIKI":
         url_priority_1 = True
@@ -109,11 +109,11 @@ def run_prioritize():
         prior_attr_1 = []
         prior_attr_2 = []
 
-        kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_analysis.xlsx"
-        kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/wiki_analysis.xlsx"
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/wiki_analysis.xlsx"
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_names.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/wiki_names.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/wiki_names.xlsx"
 
     elif cfg.DATASET == "ICEW_YAGO":
         url_priority_1 = True
@@ -125,11 +125,11 @@ def run_prioritize():
         prior_attr_1 = []
         prior_attr_2 = []
 
-        kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_analysis.xlsx"
-        kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/yago_analysis.xlsx"
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/yago_analysis.xlsx"
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_names.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/yago_names.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/yago_names.xlsx"
 
     elif cfg.DATASET == "BBC_DB":
 
@@ -144,11 +144,11 @@ def run_prioritize():
                         'http://xmlns.com/foaf/0.1/givenname', 'http://xmlns.com/foaf/0.1/surname', 'prop:label',
                         'http://purl.org/dc/elements/1.1/description', 'prop:description', 'prop:shortdescription']
 
-        kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/BBC_analysis.xlsx"
-        kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/BBC_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/BBC_names.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/BBC_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
 
     elif cfg.DATASET == "D_W_15K_V2":
 
@@ -161,11 +161,11 @@ def run_prioritize():
         prior_attr_1 = []
         prior_attr_2 = ["http://www.wikidata.org/entity/P373", 'http://www.wikidata.org/entity/P1476']
 
-        kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
-        kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
 
     elif cfg.DATASET == "SRPRS_D_W_15K_V1":
 
@@ -178,11 +178,11 @@ def run_prioritize():
         prior_attr_1 = []
         prior_attr_2 = ["http://www.wikidata.org/entity/P373", 'http://www.wikidata.org/entity/P1476']
 
-        kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
-        kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
 
     elif cfg.DATASET == "SRPRS_D_W_15K_V2":
 
@@ -195,11 +195,11 @@ def run_prioritize():
         prior_attr_1 = []
         prior_attr_2 = ["http://www.wikidata.org/entity/P373", 'http://www.wikidata.org/entity/P1476']
 
-        kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
-        kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
 
     elif cfg.DATASET == "fr_en":
 
@@ -216,11 +216,11 @@ def run_prioritize():
                         "http://dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
                         "http://dbpedia.org/ontology/birthName", "http://dbpedia.org/property/label"]
 
-        kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/fr_analysis.xlsx"
-        kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/fr_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/fr_names.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_names.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/fr_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_names.xlsx"
 
     elif cfg.DATASET == "ja_en":
 
@@ -238,11 +238,11 @@ def run_prioritize():
                         "http://dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
                         "http://dbpedia.org/property/label"]
 
-        kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/ja_analysis.xlsx"
-        kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/ja_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/ja_names.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_names.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/ja_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_names.xlsx"
 
     elif cfg.DATASET == "zh_en":
 
@@ -260,11 +260,11 @@ def run_prioritize():
                         "http://dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
                         "http://dbpedia.org/property/label"]
 
-        kg1_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/zh_analysis.xlsx"
-        kg2_src_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/zh_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/zh_names.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_names.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/zh_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_names.xlsx"
 
     names_df_1 = pd.read_excel(kg1_src_path)
     names_df_2 = pd.read_excel(kg2_src_path)

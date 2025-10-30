@@ -48,6 +48,7 @@ class RuntimeState:
     DATA_TARGET: str = "."
     RESULT_DIR: str = "."
     DATA_PATH: str = "attribute_data/"
+    RREA_DATA_DIR: str = ""  # Path to RREA static data files
 
     CUDA_NUM: int = 0
 
@@ -146,6 +147,10 @@ def apply_settings(
     runtime.DATA_TARGET = str(data_root)
     runtime.RESULT_DIR = str(results_dir)
     runtime.DATA_PATH = os.path.join(runtime.DATA_TARGET, "attribute_data", "")
+
+    # Set RREA static data directory (points to original location with pre-existing data files)
+    from src.config.loader import PROJECT_ROOT
+    runtime.RREA_DATA_DIR = str(PROJECT_ROOT / "hybea" / "src" / "structure_model" / "rrea" / "data")
 
     device = config.device or "cuda"
     if device.startswith("cuda"):

@@ -1,7 +1,11 @@
 import numpy as np
 from collections import defaultdict
+import logging
 from ..reader.helper import convert_tokens_to_ids
 from ..reader.helper import load_vocab
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 class KGDataReader(object):
@@ -18,17 +22,20 @@ class KGDataReader(object):
         self.examples = self.read_example(data_path)
 
     def read_example(self, input_file):
-        print("Reading examples from %s" % input_file)
+        logger.info("Reading examples from %s", input_file)
         examples = []
         with open(input_file, encoding="utf-8") as f:
             for line in f:
                 tokens = line.strip().split("\t")
-                if tokens[-1].startswith("MASK"):
-                    # print(tokens, convert_tokens_to_ids(self.vocab, tokens[:-1]))
+                # Check if last token is a MASK token (string starting with "MASK")
+                if len(tokens) > 0 and isinstance(tokens[-1], str) and tokens[-1].startswith("MASK"):
+                    # Convert all tokens except the last one to IDs
                     token_seq_ids = convert_tokens_to_ids(self.vocab, tokens[:-1])
                     self.seq_len = max(self.seq_len, len(token_seq_ids))
+                    # Append the MASK token as a string (not converted to ID)
                     token_seq_ids.append(tokens[-1])
                 else:
+                    # Convert all tokens to IDs
                     token_seq_ids = convert_tokens_to_ids(self.vocab, tokens[:])
                     self.seq_len = max(self.seq_len, len(token_seq_ids))
                 examples.append(token_seq_ids)

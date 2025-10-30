@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import logging
 import time
 from pathlib import Path
 from typing import Optional, Sequence
@@ -76,14 +77,21 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     if args.resume is not None:
         overwrite_existing = not args.resume
 
-    logger.info("🕒 Started at %s", time.strftime("%Y-%m-%d %H:%M:%S"))
+    # Auto-disable progress bar if logging is not ERROR level
+    # This provides cleaner output when verbose logging is enabled
+    root_logger = logging.getLogger("KG_EA")
+    if root_logger.level < logging.ERROR and args.show_progress:
+        logger.debug("Disabling progress bar due to verbose logging (level < ERROR)")
+        args.show_progress = False
+
+    logger.info("Started at %s", time.strftime("%Y-%m-%d %H:%M:%S"))
     runner = ExperimentRunner(
         exp_cfg,
         overwrite_existing=overwrite_existing,
         show_progress=args.show_progress,
     )
     runner.run()
-    logger.info("🏁 Finished at %s", time.strftime("%Y-%m-%d %H:%M:%S"))
+    logger.info("Finished at %s", time.strftime("%Y-%m-%d %H:%M:%S"))
 
 
 if __name__ == "__main__":

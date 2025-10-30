@@ -1,90 +1,86 @@
 #!/usr/bin/env bash
 # ============================================================
 #  DAKGEA Launcher
+#  Data Augmentation for Knowledge Graph Entity Resolution
 #  Runs an experiment with the correct Python path and config
-#  Works on Linux, macOS, and Windows (Git Bash / WSL)
 # ============================================================
 
-# Resolve project root (directory where this script lives)
-PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# ---------- Helpers ----------
+term_width() { tput cols 2>/dev/null || echo 80; }
+full_line() { printf '%*s\n' "$(term_width)" '' | tr ' ' "$1"; }
 
-# Ensure that src/ is in PYTHONPATH
+# ---------- Clear screen + banner ----------
+clear
+full_line '-'
+printf "%*s\n" $((($(term_width) + 40) / 2)) "Data Augmentation for Knowledge Graphs Entity Resolution"
+full_line '-'
+
+# ---------- Setup paths ----------
+PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export PYTHONPATH="${PROJECT_ROOT}"
 
-# Allow overriding config via CLI argument or RUN_CONFIG environment variable
 FILE_NAME="${1:-${RUN_CONFIG:-exp_4.yaml}}"
 
-# Resolve configuration path (supports names without extension)
+# ---------- Resolve configuration ----------
 resolve_config_path() {
     local candidate="$1"
-    local search_paths=()
-
-    if [[ "$candidate" == /* ]]; then
-        search_paths+=("$candidate")
-    else
-        if [[ "$candidate" == */* ]]; then
-            search_paths+=("${PROJECT_ROOT}/${candidate}")
-        else
-            search_paths+=("${PROJECT_ROOT}/config/experiments/${candidate}")
-            search_paths+=("${PROJECT_ROOT}/${candidate}")
-        fi
-    fi
-
-    for path in "${search_paths[@]}"; do
-        if [[ -f "$path" ]]; then
-            echo "$path"
-            return 0
-        fi
-
-        case "$path" in
-            *.yaml|*.yml) ;;
-            *)
-                for ext in yaml yml; do
-                    if [[ -f "${path}.${ext}" ]]; then
-                        echo "${path}.${ext}"
-                        return 0
-                    fi
-                done
-                ;;
-        esac
+    local search_paths=(
+        "$candidate"
+        "${PROJECT_ROOT}/config/experiments/${candidate}"
+        "${PROJECT_ROOT}/${candidate}"
+    )
+    for p in "${search_paths[@]}"; do
+        [[ -f "$p" ]] && { echo "$p"; return 0; }
+        [[ -f "$p.yaml" ]] && { echo "$p.yaml"; return 0; }
+        [[ -f "$p.yml" ]] && { echo "$p.yml"; return 0; }
     done
-
     return 1
 }
 
 if ! CONFIG_FILE="$(resolve_config_path "$FILE_NAME")"; then
-    if [[ "$FILE_NAME" == /* ]]; then
-        echo "❌ Configuration file not found: ${FILE_NAME}"
-    else
-        echo "❌ Configuration file not found: ${PROJECT_ROOT}/config/experiments/${FILE_NAME}"
-    fi
+    echo "❌ Configuration file not found: ${FILE_NAME}"
     exit 1
 fi
 
-# Activate virtual environment automatically (if it exists)
+# ---------- Activate virtual environment ----------
 if [ -f "${PROJECT_ROOT}/.venv/bin/activate" ]; then
     source "${PROJECT_ROOT}/.venv/bin/activate"
 elif [ -f "${PROJECT_ROOT}/.venv/Scripts/activate" ]; then  # Windows
     source "${PROJECT_ROOT}/.venv/Scripts/activate"
 fi
 
-# Show debug info
-echo "-----------------------------------------------"
-echo "🧠 DAKGEA experiment launcher"
+# ---------- Runtime info ----------
+BRANCH=$(git -C "$PROJECT_ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "no-git")
+if command -v nvidia-smi >/dev/null 2>&1; then
+    GPU=$(nvidia-smi --query-gpu=name --format=csv,noheader 2>/dev/null | head -n 1)
+    if [[ -z "$GPU" || "$GPU" == ERROR* ]]; then
+        GPU=$(nvidia-smi -L 2>/dev/null | head -n 1 | sed 's/^GPU [0-9]\+: //')
+    fi
+    [[ -z "$GPU" ]] && GPU="Unknown GPU"
+else
+    GPU="CPU only"
+fi
+
+full_line '-'
 echo "📂 Project root : ${PROJECT_ROOT}"
 echo "🐍 Python path  : ${PYTHONPATH}"
 echo "💼 Environment  : ${VIRTUAL_ENV:-system Python}"
 echo "📘 Config file  : ${CONFIG_FILE}"
-echo "-----------------------------------------------"
+echo "🌿 Git branch   : ${BRANCH}"
+echo "💻 Hardware     : ${GPU}"
+echo "🕓 Started at   : $(date '+%Y-%m-%d %H:%M:%S %Z')"
+full_line '-'
 
-# Verify config exists
-if [ ! -f "${CONFIG_FILE}" ]; then
-    echo "❌ Configuration file not found: ${CONFIG_FILE}"
-    exit 1
+# ---------- Run experiment ----------
+python "${PROJECT_ROOT}/experiments/run.py" "${CONFIG_FILE}"
+EXIT_CODE=$?
+
+echo ""
+if [ $EXIT_CODE -eq 0 ]; then
+    echo "✅ Experiment completed successfully!"
+else
+    echo "❌ Experiment failed with exit code ${EXIT_CODE}"
 fi
 
-# Run the experiment
-python "${PROJECT_ROOT}/experiments/run.py" "${CONFIG_FILE}"
-
-# Forward exit code
-exit $?
+full_line '-'
+exit $EXIT_CODE

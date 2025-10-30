@@ -1,12 +1,14 @@
 import multiprocessing
-
 import gc
 import os
-
+import logging
 import numpy as np
 import time
 
 from scipy.spatial.distance import cdist
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 g = 1000000000
 
@@ -77,13 +79,20 @@ def eval_alignment_by_sim_mat(embed1, embed2, top_k, nums_threads, csls=0, accur
         acc[i] = round(acc[i], 2)
     t_mean /= ref_num
     t_mrr /= ref_num
+
     if output:
+        elapsed_time = time.time() - t
         if accurate:
-            print("accurate results: hits@{} = {}, mr = {:.3f}, mrr = {:.3f}, time = {:.3f} s ".format(top_k, acc, t_mean,
-                                                                                                       t_mrr,
-                                                                                                       time.time() - t))
+            logger.info(f"Evaluation Results (Accurate):")
+            logger.info(f"  Hits@{top_k}: {acc}")
+            logger.info(f"  Mean Rank (MR): {t_mean:.3f}")
+            logger.info(f"  Mean Reciprocal Rank (MRR): {t_mrr:.3f}")
+            logger.info(f"  Time: {elapsed_time:.3f}s")
         else:
-            print("hits@{} = {}, time = {:.3f} s ".format(top_k, acc, time.time() - t))
+            logger.info(f"Evaluation Results:")
+            logger.info(f"  Hits@{top_k}: {acc}")
+            logger.info(f"  Time: {elapsed_time:.3f}s")
+
     hits1 = acc[0]
     del sim_mat
     gc.collect()
@@ -191,13 +200,21 @@ def eval_alignment_by_div_embed(embed1, embed2, top_k, nums_threads, selected_pa
         acc[i] = round(acc[i], 2)
     t_mean /= ref_num
     t_mrr /= ref_num
+
+    elapsed_time = time.time() - t
     if accurate:
-        print("accurate results: hits@{} = {}, mr = {:.3f}, mrr = {:.3f}, time = {:.3f} s ".format(top_k, acc,
-                                                                                                   t_mean, t_mrr,
-                                                                                                   time.time() - t))
+        logger.info(f"Evaluation Results (Accurate):")
+        logger.info(f"  Hits@{top_k}: {acc}")
+        logger.info(f"  Mean Rank (MR): {t_mean:.3f}")
+        logger.info(f"  Mean Reciprocal Rank (MRR): {t_mrr:.3f}")
+        logger.info(f"  Time: {elapsed_time:.3f}s")
     else:
-        print("hits@{} = {}, time = {:.3f} s ".format(top_k, acc, time.time() - t))
+        logger.info(f"Evaluation Results:")
+        logger.info(f"  Hits@{top_k}: {acc}")
+        logger.info(f"  Time: {elapsed_time:.3f}s")
+
     hits1 = acc[0]
+
     if selected_pairs is not None and len(selected_pairs) > 0:
         acc1 = t_num1 / ref_num * 100
         for i in range(len(acc1)):
@@ -205,12 +222,18 @@ def eval_alignment_by_div_embed(embed1, embed2, top_k, nums_threads, selected_pa
         t_mean1 /= ref_num
         t_mrr1 /= ref_num
         hits1 = acc1[0]
+
         if accurate:
-            print("accurate results: hits@{} = {}, mr = {:.3f}, mrr = {:.3f}, time = {:.3f} s ".format(top_k, acc,
-                                                                                                       t_mean, t_mrr,
-                                                                                                       time.time() - t))
+            logger.info(f"Selected Pairs Evaluation Results (Accurate):")
+            logger.info(f"  Hits@{top_k}: {acc1}")
+            logger.info(f"  Mean Rank (MR): {t_mean1:.3f}")
+            logger.info(f"  Mean Reciprocal Rank (MRR): {t_mrr1:.3f}")
+            logger.info(f"  Time: {elapsed_time:.3f}s")
         else:
-            print("hits@{} = {}, time = {:.3f} s ".format(top_k, acc, time.time() - t))
+            logger.info(f"Selected Pairs Evaluation Results:")
+            logger.info(f"  Hits@{top_k}: {acc1}")
+            logger.info(f"  Time: {elapsed_time:.3f}s")
+
     gc.collect()
     return t_prec_set, hits1
 

@@ -8,6 +8,10 @@ import numpy as np
 import timeit
 import json
 from ..reader.kg_reader import KGDataReader
+from src.logger import get_structured_logger
+
+slogger = get_structured_logger(__name__)
+logger = slogger.logger
 
 
 # input_file: "to_predict_blank.txt"
@@ -67,9 +71,17 @@ def predict_blank(args, my_model, input_file, output_file):
             for my_index, i in enumerate(this_predict):
                 this_predict_map.append((myid2entity[i], str(one_sample_score[i])))
             dump_dict["results"].append(this_predict_map)
-            print('[{:.3f}s] #predict triple: {}/{}'.format(timeit.default_timer() - start, examples_index, all_length), end='\r')
             examples_index += 1
-    print()
+            slogger.progress(
+                "Predicting triples",
+                current=examples_index,
+                total=all_length,
+            )
+    logger.info(
+        "KBC prediction finished in %.2fs for %d samples",
+        timeit.default_timer() - start,
+        all_length,
+    )
     with open(os.path.join(args.dataset_root_path, args.dataset, output_file), "w") as f:
         json.dump(dump_dict,f)
     # without_score_dump_dict = {}

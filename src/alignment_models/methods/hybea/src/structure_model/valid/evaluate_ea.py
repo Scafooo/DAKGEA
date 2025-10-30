@@ -6,6 +6,10 @@ from scipy.spatial.distance import cdist
 import multiprocessing
 import gc
 from src.alignment_models.methods.hybea import runtime as cfg
+from src.logger import get_structured_logger
+
+slogger = get_structured_logger(__name__)
+logger = slogger.logger
 
 def calculate_nearest_k(sim_mat, k):
     sorted_mat = -np.partition(-sim_mat, k + 1, axis=1)  # -np.sort(-sim_mat1)
@@ -61,7 +65,7 @@ def sim(embed1, embed2, metric='inner', normalize=False, csls_k=cfg.CSLS):
         sim_mat = np.matmul(embed1, embed2.T)  # numpy.ndarray, float32
     elif metric == 'euclidean':
         sim_mat = 1 - euclidean_distances(embed1, embed2)
-        print(type(sim_mat), sim_mat.dtype)
+        logger.debug("Euclidean similarity matrix dtype: %s", sim_mat.dtype)
         sim_mat = sim_mat.astype(np.float32)
     elif metric == 'cosine':
         sim_mat = 1 - cdist(embed1, embed2, metric='cosine')  # numpy.ndarray, float64
@@ -180,25 +184,33 @@ def greedy_alignment(embed1, embed2, top_k, nums_threads, metric, normalize, csl
     cost = time.time() - t
     if accurate:
         if csls_k > 0:
-            msg = "accurate results with csls: csls={}, hits@{} = {}%, mr = {:.3f}, mrr = {:.6f}, time = {:.3f} s ".format(
-                csls_k, top_k, hits, mr, mrr, cost)
-            print(msg)
+            msg = (
+                "accurate results with csls: csls=%s, hits@%s = %s%%, mr = %.3f, "
+                "mrr = %.6f, time = %.3f s"
+            )
+            msg_text = msg % (csls_k, top_k, hits, mr, mrr, cost)
+            logger.info(msg_text)
         else:
-            msg = "accurate results: hits@{} = {}%, mr = {:.3f}, mrr = {:.6f}, time = {:.3f} s ".format(top_k, hits, mr,
-                                                                                                        mrr, cost)
-            print(msg)
+            msg = (
+                "accurate results: hits@%s = %s%%, mr = %.3f, "
+                "mrr = %.6f, time = %.3f s"
+            )
+            msg_text = msg % (top_k, hits, mr, mrr, cost)
+            logger.info(msg_text)
     else:
         if csls_k > 0:
-            msg = "quick results with csls: csls={}, hits@{} = {}%, time = {:.3f} s ".format(csls_k, top_k, hits, cost)
-            print(msg)
+            msg = "quick results with csls: csls=%s, hits@%s = %s%%, time = %.3f s"
+            msg_text = msg % (csls_k, top_k, hits, cost)
+            logger.info(msg_text)
         else:
-            msg = "quick results: hits@{} = {}%, time = {:.3f} s ".format(top_k, hits, cost)
-            print(msg)
+            msg = "quick results: hits@%s = %s%%, time = %.3f s"
+            msg_text = msg % (top_k, hits, cost)
+            logger.info(msg_text)
     hits1 = hits[0]
     # del sim_mat
 
     gc.collect()
-    return alignment_rest, hits1, mr, mrr, msg, sim_mat
+    return alignment_rest, hits1, mr, mrr, msg_text, sim_mat
 
 
 def ea_evaluation(embeds1, embeds2, mapping, top_k, threads_num, metric='inner', normalize=False, csls_k=cfg.CSLS,

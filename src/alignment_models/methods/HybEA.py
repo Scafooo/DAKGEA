@@ -96,7 +96,7 @@ class HybEA:
     def _prepare_support_artifacts(self, dataset_name: str, export_root: Path) -> None:
         ratio_tag = str(round(hybea_runtime_state.SIZE_AFTER_REDUCTION_IN_PERCENTAGE, 1))
         base_dir = Path(hybea_runtime_state.BASE_DIR)
-        names_dir = base_dir / "src" / "hybea" / "data" / "entity_names" / ratio_tag / dataset_name
+        names_dir = base_dir / "data" / "entity_names" / ratio_tag / dataset_name
         names_dir.mkdir(parents=True, exist_ok=True)
 
         kg1_file, kg2_file = hybea_path_for_KG(dataset_name)
@@ -127,6 +127,10 @@ class HybEA:
         self._write_entity_names(export_root / "attribute_data" / "ent_ids_1", names_dir / kg1_file)
         self._write_entity_names(export_root / "attribute_data" / "ent_ids_2", names_dir / kg2_file)
 
+        # Copy Excel files to the location where tools.py expects them
+        self._copy_entity_names(names_dir / kg1_file, export_root / "attribute_data" / kg1_file)
+        self._copy_entity_names(names_dir / kg2_file, export_root / "attribute_data" / kg2_file)
+
         if self.model_config.structural_model.lower() == "rrea":
             self._prepare_rrea_inputs(dataset_name, export_root)
 
@@ -139,6 +143,19 @@ class HybEA:
         df = pd.read_csv(ent_ids_path, sep="\t", header=None, names=["e1", "uri"])
         df["name"] = df["uri"].map(self._friendly_name)
         df.to_excel(target_xlsx, index=False)
+
+    def _copy_entity_names(self, source_xlsx: Path, target_xlsx: Path) -> None:
+        """Copy entity names Excel file from source to target location."""
+        if not source_xlsx.exists():
+            logger.debug("[HybEA] Source entity names file %s does not exist; skipping copy", source_xlsx)
+            return
+        target_xlsx.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            import shutil
+            shutil.copy2(source_xlsx, target_xlsx)
+            logger.debug("[HybEA] Copied entity names from %s to %s", source_xlsx, target_xlsx)
+        except Exception as exc:
+            logger.warning("[HybEA] Failed to copy entity names file: %s", exc)
 
     @staticmethod
     def _friendly_name(uri: str) -> str:

@@ -74,8 +74,8 @@ def run_name_analysis():
         attrs_2 = ['http://www.wikidata.org/entity/P373', 'http://www.wikidata.org/entity/P1476',
                    'http://www.w3.org/2004/02/skos/core#altLabel', 'http://schema.org/description']
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" +  cfg.DATASET + "/DBpedia_analysis.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" +  cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
 
     elif cfg.DATASET == "BBC_DB":
 
@@ -87,8 +87,8 @@ def run_name_analysis():
 
                    'http://purl.org/dc/elements/1.1/description', 'prop:description', 'prop:shortdescription']
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/BBC_analysis.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/BBC_analysis.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
 
     elif cfg.DATASET == "D_W_15K_V2":
 
@@ -99,8 +99,8 @@ def run_name_analysis():
         attrs_2 = ['http://www.wikidata.org/entity/P373', 'http://www.wikidata.org/entity/P1476',
                    'http://www.w3.org/2004/02/skos/core#altLabel', 'http://schema.org/description']
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
 
     elif cfg.DATASET == "SRPRS_D_W_15K_V1":
 
@@ -109,8 +109,8 @@ def run_name_analysis():
 
         attrs_2 = ['http://www.wikidata.org/entity/P373', 'http://www.wikidata.org/entity/P1476']
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
 
     elif cfg.DATASET == "SRPRS_D_W_15K_V2":
 
@@ -119,8 +119,8 @@ def run_name_analysis():
 
         attrs_2 = ['http://www.wikidata.org/entity/P373', 'http://www.wikidata.org/entity/P1476']
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
 
     elif cfg.DATASET == "fr_en":
 
@@ -131,8 +131,8 @@ def run_name_analysis():
                    "http://dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
                    "http://dbpedia.org/ontology/birthName", "http://dbpedia.org/property/label"]
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/fr_analysis.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/fr_analysis.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
 
     elif cfg.DATASET == "ja_en":
 
@@ -144,8 +144,8 @@ def run_name_analysis():
                    "http://dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
                    "http://dbpedia.org/property/label"]
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/ja_analysis.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/ja_analysis.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
 
     elif cfg.DATASET == "zh_en":
 
@@ -157,20 +157,20 @@ def run_name_analysis():
                    "http://dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
                    "http://dbpedia.org/property/label"]
 
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/zh_analysis.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/zh_analysis.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
     elif cfg.DATASET == "ICEW_WIKI":
         attrs_1 = ["has_name"]
         attrs_2 = ["has_name"]
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_analysis.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/wiki_analysis.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_analysis.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/wiki_analysis.xlsx"
     elif cfg.DATASET == "ICEW_YAGO":
         attrs_1 = ["has_name"]
         attrs_2 = ["has_name"]
-        kg1_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_analysis.xlsx"
-        kg2_dest_path = cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/yago_analysis.xlsx"
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_analysis.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/yago_analysis.xlsx"
 
-    create_folder_if_not_exists(cfg.BASE_DIR + "/src/hybea/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET)
+    create_folder_if_not_exists(cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET)
 
     logger.info("[HyBEA][names] Preparing name analysis for KG1 (%s)", kg1_dest_path)
     logger.debug("[HyBEA][names] KG1 tracked attributes: %s", attrs_1)

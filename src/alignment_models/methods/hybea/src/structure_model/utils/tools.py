@@ -4,6 +4,7 @@ from scipy.stats import truncnorm
 from rich.console import Console
 from rich.table import Table
 import numpy as np
+import logging
 
 from .voc_calculator import calculate_voc_lim
 from ..reader.helper import load_vocab
@@ -11,6 +12,9 @@ import os
 from sentence_transformers import SentenceTransformer
 import pandas as pd
 from src.alignment_models.methods.hybea import runtime as cfg
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 # device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 if torch.cuda.is_available():
@@ -68,12 +72,16 @@ def name_init(x, size, initializer_range, kg, args):
     ids2 = pd.read_csv(cfg.DATA_TARGET + "/knowformer_data/" + args.dataset + "/ent_ids_2", sep="\t", header=None, names=["id", "uri"])
     uris_to_ids2 = dict(zip(ids2["uri"], ids2["id"]))
 
-    names1 = pd.read_excel(cfg.BASE_DIR + '/src/hybea/data/entity_names/' + args.SIZE_AFTER_REDUCTION_IN_PERCENTAGE + "/" + args.dataset + '/' + args.KG1_PATH_FOR_NAMES, index_col=0)
-    print(cfg.BASE_DIR + '/src/hybea/data/entity_names/' + args.SIZE_AFTER_REDUCTION_IN_PERCENTAGE + "/" + args.dataset + '/' + args.KG1_PATH_FOR_NAMES)
-    print("names1", names1)
+    # Convert SIZE_AFTER_REDUCTION_IN_PERCENTAGE to proper format (e.g., '10.0' -> '10.0')
+    size_percentage = str(args.SIZE_AFTER_REDUCTION_IN_PERCENTAGE)
+    names1_path = cfg.BASE_DIR + '/data/entity_names/' + size_percentage + "/" + args.dataset + '/' + args.KG1_PATH_FOR_NAMES
+    names1 = pd.read_excel(names1_path, index_col=0)
+    logger.debug("Loading entity names from: %s", names1_path)
+    logger.debug("Loaded %d entities from names1", len(names1))
     ids_to_names1 = dict(zip(names1["e1"], names1["name"]))
 
-    names2 = pd.read_excel(cfg.BASE_DIR +'/src/hybea/data/entity_names/' + args.SIZE_AFTER_REDUCTION_IN_PERCENTAGE + "/" + args.dataset + '/' + args.KG2_PATH_FOR_NAMES, index_col=0)
+    names2_path = cfg.BASE_DIR + '/data/entity_names/' + size_percentage + "/" + args.dataset + '/' + args.KG2_PATH_FOR_NAMES
+    names2 = pd.read_excel(names2_path, index_col=0)
     ids_to_names2 = dict(zip(names2["e1"], names2["name"]))
 
     this_vocab = load_vocab(os.path.join(args.dataset_root_path, args.dataset, args.vocab_file))
@@ -89,15 +97,18 @@ def name_init(x, size, initializer_range, kg, args):
             uri = k
             if uri in uris_to_ids1.keys():
                 id = uris_to_ids1[uri]
-                name = ids_to_names1[id]
+                if id in ids_to_names1:
+                    name = ids_to_names1[id]
+                    if name != "no_value":
+                        sentences.append(str(name))
             elif uri in uris_to_ids2.keys():
                 id = uris_to_ids2[uri]
-                name = ids_to_names2[id]
+                if id in ids_to_names2:
+                    name = ids_to_names2[id]
+                    if name != "no_value":
+                        sentences.append(str(name))
 
-            if name != "no_value":
-                sentences.append(str(name)) # originale senza str
-
-    print(sentences)
+    logger.debug("Generated %d sentences for entity name embeddings", len(sentences))
 
     model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2')
     embeddings = model.encode(sentences)
@@ -116,11 +127,17 @@ def name_init(x, size, initializer_range, kg, args):
         elif this_vocab[k] < voc_lim_1:
             # print(k, this_vocab[k])
             uri = k
-            id = uris_to_ids1[k]
-            name = ids_to_names1[id]
-            if name != "no_value":
-                name_embs.append(embeddings[index])
-                index = index + 1
+            if k in uris_to_ids1:
+                id = uris_to_ids1[k]
+                if id in ids_to_names1:
+                    name = ids_to_names1[id]
+                    if name != "no_value":
+                        name_embs.append(embeddings[index])
+                        index = index + 1
+                    else:
+                        name_embs.append(truncated_normal(768, initializer_range))
+                else:
+                    name_embs.append(truncated_normal(768, initializer_range))
             else:
                 name_embs.append(truncated_normal(768, initializer_range))
 
@@ -130,11 +147,17 @@ def name_init(x, size, initializer_range, kg, args):
         # elif this_vocab[k] < args.VOC_LIM_2:
         elif this_vocab[k] < voc_lim_2:
             uri = k
-            id = uris_to_ids2[k]
-            name = ids_to_names2[id]
-            if name != "no_value":
-                name_embs.append(embeddings[index])
-                index = index + 1
+            if k in uris_to_ids2:
+                id = uris_to_ids2[k]
+                if id in ids_to_names2:
+                    name = ids_to_names2[id]
+                    if name != "no_value":
+                        name_embs.append(embeddings[index])
+                        index = index + 1
+                    else:
+                        name_embs.append(truncated_normal(768, initializer_range))
+                else:
+                    name_embs.append(truncated_normal(768, initializer_range))
             else:
                 name_embs.append(truncated_normal(768, initializer_range))
         else:

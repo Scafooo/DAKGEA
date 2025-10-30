@@ -1,9 +1,12 @@
 """Progress bar utilities for experiment orchestration."""
 
+import logging
 import sys
 from typing import Optional
 
 from tqdm import tqdm
+
+logger = logging.getLogger(__name__)
 
 
 class ProgressTracker:
@@ -11,6 +14,10 @@ class ProgressTracker:
 
     def __init__(self, total: int, enabled: bool) -> None:
         self.enabled = enabled and total > 0
+
+        if not self.enabled and enabled:
+            logger.debug("Progress bar disabled (total <= 0)")
+
         self._bar = (
             tqdm(
                 total=total,

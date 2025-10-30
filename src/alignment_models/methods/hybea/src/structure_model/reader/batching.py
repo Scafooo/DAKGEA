@@ -36,8 +36,11 @@ def mask(input_tokens, input_mask_index, input_mask_type, mask_id):
         for sent_index, sent in enumerate(input_tokens):
             # print(sent)
             mask_type = input_mask_type[sent_index]
-            if not mask_type.startswith("MASK"):
-                assert 0
+            # Check if mask_type is a string and starts with "MASK"
+            if not isinstance(mask_type, str) or not mask_type.startswith("MASK"):
+                # If mask_type is not a string or doesn't start with "MASK", it's an error
+                # This should not happen if the data is correctly formatted
+                raise ValueError(f"Invalid mask_type: {mask_type} (type: {type(mask_type).__name__}). Expected a string starting with 'MASK'")
             token_index = int(mask_type.split("_")[-1])
             # print("token_index:",token_index)
             mask_label.append(sent[token_index])

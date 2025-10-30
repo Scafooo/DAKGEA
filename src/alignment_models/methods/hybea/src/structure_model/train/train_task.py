@@ -2,6 +2,7 @@ import os
 import time
 import torch
 import numpy as np
+import logging
 from ..reader.kg_reader import KGDataReader
 from ..utils.loss_func import cross_entropy
 from ..reader.batching import prepare_batch_data
@@ -15,10 +16,19 @@ import time
 from contiguous_params import ContiguousParams
 import torch.nn.functional as F
 from src.alignment_models.methods.hybea import runtime as cfg
+from src.logger import get_structured_logger
 
 def entity_alignment_train(args, my_model, logger):
+    slogger = get_structured_logger(__name__)
 
-    print("args.ea_train", args.ea_train_triples_file)
+    slogger.section("Entity Alignment Training")
+    slogger.table("Training Configuration", {
+        "Training File": args.ea_train_triples_file,
+        "Batch Size": args.batch_size,
+        "Learning Rate": args.learning_rate,
+        "Total Epochs": args.epoch,
+        "Min Epochs": args.min_epochs
+    })
 
     train_data_reader = KGDataReader(
         vocab_path=os.path.join(args.dataset_root_path, args.dataset, args.vocab_file),
@@ -37,14 +47,14 @@ def entity_alignment_train(args, my_model, logger):
     one_hot_labels = None
     hits_1_list = []
     epoch_loss_list = []
+
+    slogger.subsection("Training Loop")
+
     for epoch in range(1, args.epoch + 1):
         start_time = time.time()
         epoch_loss = list()
         epoch_another_loss = list()
         my_model.train()
-        # eval_hits1_performance, _ = entity_alignment_test(args, my_model, logger, csls=CSLS, valid=True)
-        # _, _ = entity_alignment_test(args, my_model, logger, csls=0)
-        # exit()
 
         for batch in train_data_reader.data_generator():
             mask_index = -1
@@ -104,32 +114,51 @@ def entity_alignment_train(args, my_model, logger):
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-        msg = "epoch: %d, epoch loss: %f, epoch another loss: %f, training time: %f" % (
-            epoch,
-            float(np.mean(epoch_loss)),
-            float(np.mean(epoch_another_loss)),
-            time.time() - start_time,
-        )
-        epoch_loss_list.append(np.mean(epoch_loss))
-        print(msg)
+
+        # Log epoch statistics
+        mean_loss = float(np.mean(epoch_loss))
+        mean_other_loss = float(np.mean(epoch_another_loss))
+        training_time = time.time() - start_time
+        epoch_loss_list.append(mean_loss)
+
+        # Show progress
+        slogger.progress(f"Epoch {epoch}", epoch, args.epoch)
+
+        # Log epoch details
+        logger.info(f"Epoch {epoch} Summary:")
+        logger.info(f"  Loss: {mean_loss:.6f}")
+        if mean_other_loss > 0:
+            logger.info(f"  Additional Loss: {mean_other_loss:.6f}")
+        logger.info(f"  Training Time: {training_time:.2f}s")
+
         if epoch % args.eval_freq == 0:
-            print("do valid")
+            logger.info("Running validation...")
             my_model.eval()
             with torch.no_grad():
                 # test on validation
                 eval_hits1_performance, _ = entity_alignment_test(args, my_model, logger, csls=cfg.CSLS, valid=True)
                 hits_1_list.append(eval_hits1_performance)
-            
+
                 if eval_hits1_performance > max_hits1:
                     max_hits1 = eval_hits1_performance
                     times = 0
+                    slogger.success(f"New best Hits@1: {eval_hits1_performance:.4f}")
                 else:
                     times += 1
+                    logger.info(f"No improvement. Early stop counter: {times}/{args.early_stop_max_times}")
+
                 if times >= args.early_stop_max_times and epoch >= args.min_epochs:
-                    print("early stop at this epoch")
-                    break    
-                
+                    slogger.warning(f"Early stopping at epoch {epoch}")
+                    break
+
+    slogger.subsection("Final Evaluation")
+
+    logger.info("Running final evaluation without CSLS...")
     _, _ = entity_alignment_test(args, my_model, logger, csls=0)
+
+    logger.info("Running final evaluation with CSLS...")
     eval_hits1_performance, export_sim_mat = entity_alignment_test(args, my_model, logger, csls=cfg.CSLS)
+
+    slogger.success(f"Training completed! Final Hits@1: {eval_hits1_performance:.4f}")
+
     return export_sim_mat[0], export_sim_mat[1], export_sim_mat[2], export_sim_mat[3], export_sim_mat[4], epoch_loss_list, hits_1_list
-    logger.info("Finish training")
