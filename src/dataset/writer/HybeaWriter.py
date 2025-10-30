@@ -12,12 +12,13 @@ from rdflib.term import URIRef
 from src.dataset.Dataset import Dataset
 from src.dataset.writer.Writer import Writer
 from src.knowledge_graph.writer.WriterFactory import WriterFactory
-from src.logger import get_logger
+from src.logger import get_logger, get_structured_logger
 from src.util.reader import read_tsv
 from src.util.writer import write_tsv
 from src.alignment_models.methods.hybea import runtime as hybea_runtime
 
 logger = get_logger(__name__)
+slogger = get_structured_logger(__name__)
 
 class HybeaWriter(Writer):
     """Persist datasets back to HybEA/KnowFormer directory layouts."""
@@ -27,18 +28,26 @@ class HybeaWriter(Writer):
     def write(self, dataset: Dataset, dir_path: str, *, dataset_name: Optional[str] = None) -> bool:
         """Export a dataset to the requested HybEA directory layout."""
 
+        slogger.section("HybEA Dataset Export")
+
         base_dir = Path(dir_path)
         if base_dir.name in {"attribute_data", "knowformer_data"}:
             targets = [base_dir]
         else:
             targets = [base_dir / "attribute_data", base_dir / "knowformer_data"]
 
-        logger.info("Dataset Hybea Export Start")
-
         if dataset_name is None:
             dataset_name = getattr(hybea_runtime, "DATASET", "dataset")
 
-        for target in targets:
+        slogger.table("Export Configuration", {
+            "Dataset Name": dataset_name,
+            "Output Targets": len(targets),
+            "Base Directory": str(base_dir)
+        })
+
+        for idx, target in enumerate(targets, 1):
+            slogger.subsection(f"Processing Target {idx}/{len(targets)}: {target.name}")
+
             target.mkdir(parents=True, exist_ok=True)
             if target.name == "knowformer_data":
                 dataset_dir = target / dataset_name
@@ -47,20 +56,25 @@ class HybeaWriter(Writer):
             else:
                 destination = target
 
+            logger.info(f"Writing KG1 (Source) to {destination}")
             kg_writer_1 = WriterFactory.create_writer(self.file_type)
             kg_writer_1.write(dataset.knowledge_graph_source, str(destination), kg_number=1)
 
+            logger.info(f"Writing KG2 (Target) to {destination}")
             kg_writer_2 = WriterFactory.create_writer(self.file_type)
             kg_writer_2.write(dataset.knowledge_graph_target, str(destination), kg_number=2)
 
             if target.name == "attribute_data":
+                logger.info("Writing aligned entities (attribute layout)")
                 self._write_aligned_entities_attribute(dataset.aligned_entities, str(destination))
             else:
+                logger.info("Writing aligned entities (KnowFormer layout)")
                 self._write_aligned_entities_knowformer(dataset, str(destination))
                 if destination != target:
+                    logger.info("Mirroring structure files")
                     self._mirror_structure_files(destination, target)
 
-        logger.info("Dataset Hybea Export End")
+        slogger.success("Dataset HybEA export completed successfully")
         return True
 
     def _write_aligned_entities_attribute(
@@ -136,6 +150,8 @@ class HybeaWriter(Writer):
     def _write_aligned_entities_knowformer(self, dataset: Dataset, dir_path: str) -> bool:
         """Persist aligned entities for the KnowFormer layout."""
 
+        slogger.subsection("KnowFormer Aligned Entities Export")
+
         ENT_ILLS = os.path.join(dir_path, "ent_ILLs.txt")
         REF_ENTS = os.path.join(dir_path, "ref_ents.txt")
         SUP_ENTS = os.path.join(dir_path, "sup_ents.txt")
@@ -147,6 +163,7 @@ class HybeaWriter(Writer):
             """Normalize aligned entity entries (URIRef or str) to NFC strings."""
             return unicodedata.normalize("NFC", str(entity))
 
+        logger.info("Normalizing aligned entities...")
         list_aligned_entities = sorted(
             (norm_entity(e1), norm_entity(e2)) for e1, e2 in dataset.aligned_entities
         )
@@ -154,6 +171,13 @@ class HybeaWriter(Writer):
         n = len(list_aligned_entities)
         n1 = int(n * 0.7)
         n2 = int(n * 0.9)
+
+        slogger.table("Entity Split Configuration", {
+            "Total Aligned Entities": n,
+            "Reference Set (70%)": n1,
+            "Support Set (20%)": n2 - n1,
+            "Validation Set (10%)": n - n2
+        })
 
         ent_ILLs_pairs = list_aligned_entities
         ref_pairs = list_aligned_entities[:n1]
@@ -209,16 +233,43 @@ class HybeaWriter(Writer):
         for elem in vocab_rel_2:
             vocab[elem] = None
 
-        train_triples = set()
-
+        # Collect source triples (from KG1)
+        logger.info("Collecting source triples (KG1)...")
+        source_triples = set()
         for subj, pred, obj in dataset.knowledge_graph_source:
             if isinstance(subj, URIRef) and isinstance(obj, URIRef):
-                train_triples.add((str(subj), str(pred), str(obj)))
+                source_triples.add((str(subj), str(pred), str(obj)))
+        logger.debug(f"Collected {len(source_triples)} source triples")
 
+        # Collect target triples (from KG2)
+        logger.info("Collecting target triples (KG2)...")
+        target_triples = set()
         for subj, pred, obj in dataset.knowledge_graph_target:
             if isinstance(subj, URIRef) and isinstance(obj, URIRef):
-                train_triples.add((str(subj), str(pred), str(obj)))
+                target_triples.add((str(subj), str(pred), str(obj)))
+        logger.debug(f"Collected {len(target_triples)} target triples")
 
+        # Create mapping from target entities to source entities using aligned entities
+        logger.info("Creating entity mapping from target to source...")
+        target_to_source_map = {}
+        for e1, e2 in ent_ILLs_pairs:
+            # e1 is from source (DBpedia), e2 is from target (Wikidata)
+            target_to_source_map[e2] = e1
+        logger.debug(f"Created mapping for {len(target_to_source_map)} entities")
+
+        # Merge triples: start with source triples, then add target triples with mapped entities
+        logger.info("Merging triples with entity mapping...")
+        train_triples = copy.deepcopy(source_triples)
+
+        for subj, pred, obj in target_triples:
+            # Map target entities to source entities
+            mapped_subj = target_to_source_map.get(subj, subj)
+            mapped_obj = target_to_source_map.get(obj, obj)
+            train_triples.add((mapped_subj, pred, mapped_obj))
+        logger.debug(f"Merged triples: {len(train_triples)} total")
+
+        # Expand triples using equivalence classes from ref_pairs and valid_pairs
+        logger.info("Building equivalence classes from aligned entities...")
         res_valid_set = set(ref_pairs + valid_pairs)
 
         eq_classes = {}
@@ -231,8 +282,11 @@ class HybeaWriter(Writer):
                 eq_classes[str(e2)] = [str(e1)]
             else:
                 eq_classes[str(e2)].append(str(e1))
+        logger.debug(f"Built {len(eq_classes)} equivalence classes")
 
+        logger.info("Expanding training triples using equivalence classes...")
         train_triples_expanded = copy.deepcopy(train_triples)
+        initial_count = len(train_triples)
 
         for train_triple in train_triples:
             if train_triple[0] in eq_classes:
@@ -246,18 +300,94 @@ class HybeaWriter(Writer):
                         (train_triple[0], train_triple[1], eq_class)
                     )
 
+        expansion_ratio = len(train_triples_expanded) / initial_count if initial_count > 0 else 1
+        logger.info(f"Triple expansion: {initial_count} → {len(train_triples_expanded)} (ratio: {expansion_ratio:.2f}x)")
+
         train_triples_expanded_list = list(train_triples_expanded)
 
+        slogger.subsection("Writing Output Files")
+
+        # Write entity alignment files
+        logger.info(f"Writing aligned entities to {ENT_ILLS}")
         write_tsv(ENT_ILLS, ent_ILLs_pairs)
+        slogger.progress("Entity files", 1, 4)
+
+        logger.info(f"Writing reference entities to {REF_ENTS}")
         write_tsv(REF_ENTS, ref_pairs)
+        slogger.progress("Entity files", 2, 4)
+
+        logger.info(f"Writing support entities to {SUP_ENTS}")
         write_tsv(SUP_ENTS, sup_pairs)
+        slogger.progress("Entity files", 3, 4)
+
+        logger.info(f"Writing validation entities to {VALID_ENTS}")
         write_tsv(VALID_ENTS, valid_pairs)
-        write_tsv(TRAIN_TRIPLES, train_triples_expanded_list)
-        write_tsv(VOCAB, list(vocab.keys()))
+        slogger.progress("Entity files", 4, 4)
+
+        # Write training triples with MASK tokens using the helper function
+        logger.info(f"Writing training triples to {TRAIN_TRIPLES}")
+        self._write_triples_with_masks(TRAIN_TRIPLES, train_triples_expanded_list)
+        logger.info(f"✓ Wrote {len(train_triples_expanded_list) * 2} triple instances (with MASK tokens)")
+
+        # Write vocab.txt with entities and relations from training triples
+        logger.info(f"Writing vocabulary to {VOCAB}")
+        self._write_vocab_from_triples(VOCAB, train_triples_expanded_list)
+
+        slogger.success("All output files written successfully")
 
         logger.info("Dataset Hybea Export End")
 
         return True
+
+    def _write_triples_with_masks(self, triples_path: str, triples: list) -> None:
+        """Write triples with MASK tokens for KnowFormer compatibility.
+
+        Each triple is written twice: once with MASK_0 (masking head entity)
+        and once with MASK_2 (masking tail entity).
+        """
+        with open(triples_path, "w", encoding="utf-8") as f:
+            for triple in triples:
+                # Convert triple to list of strings
+                triple_str = [str(item) for item in triple]
+                triple_line = "\t".join(triple_str)
+                # Write with MASK_0 (mask head entity)
+                f.write(triple_line + "\tMASK_0\n")
+                # Write with MASK_2 (mask tail entity)
+                f.write(triple_line + "\tMASK_2\n")
+
+    def _write_vocab_from_triples(self, vocab_path: str, triples: list) -> None:
+        """Write vocabulary file from training triples.
+
+        Extracts entities and relations from triples and writes them to vocab file
+        in the format expected by KnowFormer (with special tokens at the beginning).
+        """
+        entities_set = set()
+        relations_set = set()
+
+        # Extract entities and relations from triples
+        for triple in triples:
+            # triple is (subject, predicate, object)
+            entities_set.add(str(triple[0]))
+            relations_set.add(str(triple[1]))
+            entities_set.add(str(triple[2]))
+
+        # Sort for consistency
+        entities_list = sorted(list(entities_set))
+        relations_list = sorted(list(relations_set))
+
+        # Write vocab file with special tokens first
+        with open(vocab_path, "w", encoding="utf-8") as f:
+            f.write("[PAD]\n")
+            for i in range(0, 95):
+                f.write("[unused{}]\n".format(i))
+            f.write("[UNK]\n")
+            f.write("[CLS]\n")
+            f.write("[SEP]\n")
+            f.write("[MASK]\n")
+            for entity in entities_list:
+                f.write(entity + "\n")
+            for relation in relations_list:
+                f.write(relation + "\n")
 
     def _mirror_structure_files(self, source_dir: Path, target_dir: Path) -> None:
         """Duplicate core structure artifacts at the parent level for legacy lookups."""

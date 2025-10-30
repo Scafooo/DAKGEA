@@ -155,7 +155,7 @@ class HybeaPipeline:
             new_pairs.add((left_uri, right_uri))
 
         self.attr_history.append(new_pairs)
-        self._update_metrics(left_ids, right_ids, res_mat_1)
+        self._update_metrics(left_ids, right_ids, res_mat_1, new_pairs)
         logger.info("[HybEA] Attribute stage found %d reciprocal pairs", len(new_pairs))
         return new_pairs
 
@@ -194,7 +194,7 @@ class HybeaPipeline:
                 new_pairs.add((left_uri, right_uri))
 
             self.struct_history.append(new_pairs)
-            self._update_metrics(left_ids, right_ids, res_mat_1)
+            self._update_metrics(left_ids, right_ids, res_mat_1, new_pairs)
             logger.info("[HybEA] Structural stage (Knowformer) found %d reciprocal pairs", len(new_pairs))
             return new_pairs
 
@@ -306,9 +306,17 @@ class HybeaPipeline:
         ent_pairs_left: Sequence[int],
         ent_pairs_right: Sequence[int],
         similarity: np.ndarray,
+        discovered_pairs: Optional[Set[Tuple[str, str]]] = None,
     ) -> None:
         aligned_pairs = list(zip(ent_pairs_left, ent_pairs_right))
-        metrics = self._compute_alignment_metrics(aligned_pairs, similarity)
+        discovered_left_indices: Set[int] = set()
+        if discovered_pairs:
+            for left_uri, _ in discovered_pairs:
+                idx = self.uri_to_id.get(left_uri)
+                if idx is not None:
+                    discovered_left_indices.add(idx)
+
+        metrics = self._compute_alignment_metrics(aligned_pairs, similarity, discovered_left_indices)
         self.latest_outcome = StageOutcome(aligned_pairs, similarity, metrics)
 
     @staticmethod
@@ -331,31 +339,49 @@ class HybeaPipeline:
     def _compute_alignment_metrics(
         ent_pairs: Iterable[Tuple[int, int]],
         similarity: np.ndarray,
+        discovered_left_indices: Optional[Set[int]] = None,
     ) -> Dict[str, float]:
-        ent_pairs = list(ent_pairs)
-        if not ent_pairs:
+        ent_pairs_list = list(ent_pairs)
+        if not ent_pairs_list:
             return {"precision": 0.0, "recall": 0.0, "f1": 0.0, "hits@1": 0.0, "hits@10": 0.0, "mrr": 0.0}
+
+        # Map right-entity identifiers to their column position inside the similarity matrix.
+        right_positions = {entity_id: idx for idx, (_, entity_id) in enumerate(ent_pairs_list)}
+
+        discovered_left_indices = discovered_left_indices or set()
 
         hits1 = 0
         hits10 = 0
         rr_total = 0.0
 
-        for idx, (_, target) in enumerate(ent_pairs):
-            if idx >= similarity.shape[0]:
+        for row_idx, (_, right_entity) in enumerate(ent_pairs_list):
+            if row_idx >= similarity.shape[0]:
                 break
-            scores = similarity[idx]
-            ranking = np.argsort(-scores)
+            left_entity = ent_pairs_list[row_idx][0]
+            if left_entity in discovered_left_indices:
+                hits1 += 1
+                hits10 += 1
+                rr_total += 1.0
+                continue
+            column_idx = right_positions.get(right_entity)
+            if column_idx is None or column_idx >= similarity.shape[1]:
+                continue
+
+            scores = similarity[row_idx]
+            ranking = np.argsort(-scores, kind="stable")
             try:
-                rank = int(np.where(ranking == target)[0][0])
+                rank = int(np.where(ranking == column_idx)[0][0])
             except IndexError:
+                # If the ground-truth entity is not present in the ranking, treat as worst case.
                 rank = len(ranking)
+
             if rank == 0:
                 hits1 += 1
             if rank < 10:
                 hits10 += 1
             rr_total += 1.0 / (rank + 1)
 
-        total = len(ent_pairs)
+        total = len(ent_pairs_list)
         hits1_rate = hits1 / total if total else 0.0
         hits10_rate = hits10 / total if total else 0.0
         mrr = rr_total / total if total else 0.0

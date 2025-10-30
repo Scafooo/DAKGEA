@@ -1,0 +1,147 @@
+"""
+Bridge module for legacy HybEA code.
+
+This module provides backward compatibility for the legacy HybEA codebase
+by re-exporting the runtime configuration from the new system.
+
+Legacy code imports: import config.config as cfg
+New code imports: from src.alignment_models.methods.hybea import runtime as cfg
+"""
+
+from src.alignment_models.methods.hybea.runtime import (
+    runtime,
+    path_for_KG,
+    dataset_spec,
+    topk_inputsize1_inputsize2,
+)
+
+# Re-export all runtime attributes for backward compatibility
+MODE = runtime.MODE
+STRUCTURAL_MODEL = runtime.STRUCTURAL_MODEL
+MODEL = runtime.MODEL
+DATASET = runtime.DATASET
+TASK = runtime.TASK
+SEED = runtime.SEED
+SEED_NUM = runtime.SEED_NUM
+SIZE_AFTER_REDUCTION = runtime.SIZE_AFTER_REDUCTION
+SIZE_AFTER_REDUCTION_IN_PERCENTAGE = runtime.SIZE_AFTER_REDUCTION_IN_PERCENTAGE
+
+BASE_DIR = runtime.BASE_DIR
+DATA_DIR = runtime.DATA_DIR
+RAW_DATA_DIR = runtime.RAW_DATA_DIR
+PROCESSED_DATA_DIR = runtime.PROCESSED_DATA_DIR
+AUGMENTED_DATA_DIR = runtime.AUGMENTED_DATA_DIR
+REDUCED_DATA_DIR = runtime.REDUCED_DATA_DIR
+DATA_TARGET = runtime.DATA_TARGET
+RESULT_DIR = runtime.RESULT_DIR
+DATA_PATH = runtime.DATA_PATH
+RREA_DATA_DIR = runtime.RREA_DATA_DIR
+
+CUDA_NUM = runtime.CUDA_NUM
+
+MODEL_INPUT_DIM = runtime.MODEL_INPUT_DIM
+EPOCH_NUM = runtime.EPOCH_NUM
+NEAREST_SAMPLE_NUM = runtime.NEAREST_SAMPLE_NUM
+CANDIDATE_GENERATOR_BATCH_SIZE = runtime.CANDIDATE_GENERATOR_BATCH_SIZE
+NEG_NUM = runtime.NEG_NUM
+MARGIN = runtime.MARGIN
+LEARNING_RATE = runtime.LEARNING_RATE
+TRAIN_BATCH_SIZE = runtime.TRAIN_BATCH_SIZE
+TEST_BATCH_SIZE = runtime.TEST_BATCH_SIZE
+CSLS = runtime.CSLS
+TRAIN_RATIO = runtime.TRAIN_RATIO
+VALID_RATIO = runtime.VALID_RATIO
+
+RANDOM_INITIALIZATION = runtime.RANDOM_INITIALIZATION
+HIDDEN_SIZE = runtime.HIDDEN_SIZE
+NUM_HIDDEN_LAYERS = runtime.NUM_HIDDEN_LAYERS
+NUM_ATTENTION_HEADS = runtime.NUM_ATTENTION_HEADS
+INPUT_DROPOUT_PROB = runtime.INPUT_DROPOUT_PROB
+ATTENTION_DROPOUT_PROB = runtime.ATTENTION_DROPOUT_PROB
+HIDDEN_DROPOUT_PROB = runtime.HIDDEN_DROPOUT_PROB
+RESIDUAL_DROPOUT_PROB = runtime.RESIDUAL_DROPOUT_PROB
+INITIALIZER_RANGE = runtime.INITIALIZER_RANGE
+INTERMEDIATE_SIZE = runtime.INTERMEDIATE_SIZE
+RESIDUAL_W = runtime.RESIDUAL_W
+EPOCH = runtime.EPOCH
+MIN_EPOCHS = runtime.MIN_EPOCHS
+LEARNING_RATE_STRUCTURE = runtime.LEARNING_RATE_STRUCTURE
+BATCH_SIZE = runtime.BATCH_SIZE
+EVAL_BATCH_SIZE = runtime.EVAL_BATCH_SIZE
+EARLY_STOP_MAX_TIMES = runtime.EARLY_STOP_MAX_TIMES
+SOFT_LABEL = runtime.SOFT_LABEL
+EVAL_FREQ = runtime.EVAL_FREQ
+START_EVAL = runtime.START_EVAL
+SWA_PRE_NUM = runtime.SWA_PRE_NUM
+DO_TRAIN = runtime.DO_TRAIN
+DO_TEST = runtime.DO_TEST
+USE_GELU = runtime.USE_GELU
+ADDITION_LOSS_W = runtime.ADDITION_LOSS_W
+RELATION_COMBINE_DROPOUT_PROB = runtime.RELATION_COMBINE_DROPOUT_PROB
+
+# Re-export functions
+__all__ = [
+    'runtime',
+    'path_for_KG',
+    'dataset_spec',
+    'topk_inputsize1_inputsize2',
+    'MODE',
+    'STRUCTURAL_MODEL',
+    'MODEL',
+    'DATASET',
+    'TASK',
+    'SEED',
+    'SEED_NUM',
+    'SIZE_AFTER_REDUCTION',
+    'SIZE_AFTER_REDUCTION_IN_PERCENTAGE',
+    'BASE_DIR',
+    'DATA_DIR',
+    'RAW_DATA_DIR',
+    'PROCESSED_DATA_DIR',
+    'AUGMENTED_DATA_DIR',
+    'REDUCED_DATA_DIR',
+    'DATA_TARGET',
+    'RESULT_DIR',
+    'DATA_PATH',
+    'RREA_DATA_DIR',
+    'CUDA_NUM',
+    'MODEL_INPUT_DIM',
+    'EPOCH_NUM',
+    'NEAREST_SAMPLE_NUM',
+    'CANDIDATE_GENERATOR_BATCH_SIZE',
+    'NEG_NUM',
+    'MARGIN',
+    'LEARNING_RATE',
+    'TRAIN_BATCH_SIZE',
+    'TEST_BATCH_SIZE',
+    'CSLS',
+    'TRAIN_RATIO',
+    'VALID_RATIO',
+    'RANDOM_INITIALIZATION',
+    'HIDDEN_SIZE',
+    'NUM_HIDDEN_LAYERS',
+    'NUM_ATTENTION_HEADS',
+    'INPUT_DROPOUT_PROB',
+    'ATTENTION_DROPOUT_PROB',
+    'HIDDEN_DROPOUT_PROB',
+    'RESIDUAL_DROPOUT_PROB',
+    'INITIALIZER_RANGE',
+    'INTERMEDIATE_SIZE',
+    'RESIDUAL_W',
+    'EPOCH',
+    'MIN_EPOCHS',
+    'LEARNING_RATE_STRUCTURE',
+    'BATCH_SIZE',
+    'EVAL_BATCH_SIZE',
+    'EARLY_STOP_MAX_TIMES',
+    'SOFT_LABEL',
+    'EVAL_FREQ',
+    'START_EVAL',
+    'SWA_PRE_NUM',
+    'DO_TRAIN',
+    'DO_TEST',
+    'USE_GELU',
+    'ADDITION_LOSS_W',
+    'RELATION_COMBINE_DROPOUT_PROB',
+]
+

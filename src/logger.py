@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import os
 import sys
 from functools import lru_cache
 from pathlib import Path
@@ -23,23 +24,61 @@ _LOG_LEVELS = {
 
 
 class ColorFormatter(logging.Formatter):
-    """Render log records with ANSI colors and concise metadata."""
+    """Render log records with ANSI colors and concise metadata with improved formatting."""
 
+    # ANSI color codes for different log levels
     COLORS = {
-        "DEBUG": "\033[37m",
-        "INFO": "\033[36m",
-        "WARNING": "\033[33m",
-        "ERROR": "\033[31m",
-        "CRITICAL": "\033[41m",
+        "DEBUG": "\033[37m",      # White
+        "INFO": "\033[36m",       # Cyan
+        "WARNING": "\033[33m",    # Yellow
+        "ERROR": "\033[31m",      # Red
+        "CRITICAL": "\033[41m",   # Red background
     }
+
+    # ANSI color codes for file locations
+    LOCATION_COLOR = "\033[35m"  # Magenta
+
+    # ANSI color codes for separators
+    SEPARATOR_COLOR = "\033[90m" # Dark gray
+
     RESET = "\033[0m"
 
     def format(self, record: logging.LogRecord) -> str:
-        color = self.COLORS.get(record.levelname, self.RESET)
-        levelname = f"{color}{record.levelname:<8}{self.RESET}"
-        filename = Path(record.pathname).name
+        """Format log record with colors and improved indentation."""
         message = record.getMessage()
-        return f"{levelname} | {filename}:{record.lineno} | {message}"
+
+        # Check if this is an empty line (only whitespace)
+        stripped_msg = message.strip()
+
+        # Skip prefix for:
+        # 1. Completely empty lines
+        # 2. Lines with only separator characters (=, -)
+        if not stripped_msg or all(c in '=- ' for c in stripped_msg):
+            # For empty/separator lines, just return the message without prefixes
+            return message
+
+        # Get color for this level
+        color = self.COLORS.get(record.levelname, self.RESET)
+
+        # Column 1: Level with color and brackets
+        # Format: [LEVEL   ] where LEVEL is left-aligned in 7 chars
+        levelname_text = f"[{record.levelname:<7}]"
+        levelname = f"{color}{levelname_text}{self.RESET}"
+
+        # Column 2: Filename and line number with color and brackets
+        # Format: [filename:line                ] where content is left-aligned in 28 chars
+        filename = Path(record.pathname).name
+        location = f"{filename}:{record.lineno}"
+        location_text = f"[{location:<28}]"
+        location_colored = f"{self.LOCATION_COLOR}{location_text}{self.RESET}"
+
+        # Format with fixed-width columns and colored separators
+        separator = f"{self.SEPARATOR_COLOR}│{self.RESET}"
+        return (
+            f"{levelname} {separator} "
+            f"{location_colored} {separator} "
+            f"{message}"
+        )
 
 
 def _parse_level(level: Union[str, int, None]) -> int:
@@ -91,6 +130,10 @@ def _configure_root_logger() -> logging.Logger:
         root.setLevel(level)
         for handler in root.handlers:
             handler.setLevel(level)
+            # Ensure all handlers use ColorFormatter for console output
+            if isinstance(handler, logging.StreamHandler) and not isinstance(handler, logging.FileHandler):
+                if not isinstance(handler.formatter, ColorFormatter):
+                    handler.setFormatter(ColorFormatter())
 
     return root
 
@@ -112,3 +155,106 @@ def set_global_level(level: Union[str, int]) -> None:
     root.setLevel(numeric_level)
     for handler in root.handlers:
         handler.setLevel(numeric_level)
+
+
+class StructuredLogger:
+    """Wrapper for structured logging with formatted output."""
+
+    def __init__(self, logger: logging.Logger):
+        """Initialize with a logger instance."""
+        self.logger = logger
+        # Get terminal width, default to 80 if not available
+        try:
+            self.terminal_width = os.get_terminal_size().columns
+        except (AttributeError, ValueError, OSError):
+            self.terminal_width = 80
+
+    def section(self, title: str) -> None:
+        """Log a section header."""
+        self.logger.info(f"\n  {title.upper()}\n")
+
+    def subsection(self, title: str) -> None:
+        """Log a subsection header."""
+        self.logger.info(f"\n  {title}\n")
+
+    def table(self, title: str, data: dict, indent: int = 2) -> None:
+        """Log a formatted table of key-value pairs."""
+        indent_str = " " * indent
+        self.logger.info(f"\n{indent_str}{title}:")
+
+        if not data:
+            self.logger.info(f"{indent_str}  (empty)")
+            return
+
+        # Calculate column widths
+        max_key_len = max(len(str(k)) for k in data.keys()) if data else 0
+
+        for key, value in data.items():
+            formatted_key = str(key).ljust(max_key_len)
+            self.logger.info(f"{indent_str}  {formatted_key} : {value}")
+
+        self.logger.info("")
+
+    def list_items(self, title: str, items: list, indent: int = 2) -> None:
+        """Log a formatted list of items."""
+        indent_str = " " * indent
+        self.logger.info(f"\n{indent_str}{title}:")
+
+        if not items:
+            self.logger.info(f"{indent_str}  (empty)")
+            return
+
+        for i, item in enumerate(items, 1):
+            self.logger.info(f"{indent_str}  {i}. {item}")
+
+        self.logger.info("")
+
+    def progress(self, message: str, current: int, total: int, indent: int = 2) -> None:
+        """Log progress with percentage."""
+        indent_str = " " * indent
+        percentage = (current / total * 100) if total > 0 else 0
+        bar_length = 30
+        filled = int(bar_length * current / total) if total > 0 else 0
+        bar = "█" * filled + "░" * (bar_length - filled)
+
+        self.logger.info(
+            f"{indent_str}{message}: [{bar}] {percentage:.1f}% ({current}/{total})"
+        )
+
+    def success(self, message: str) -> None:
+        """Log a success message."""
+        self.logger.info(f"[SUCCESS] {message}")
+
+    def warning(self, message: str) -> None:
+        """Log a warning message."""
+        self.logger.warning(f"[WARNING] {message}")
+
+    def error(self, message: str) -> None:
+        """Log an error message."""
+        self.logger.error(f"[ERROR] {message}")
+
+    def debug_dict(self, title: str, data: dict, indent: int = 2) -> None:
+        """Log a dictionary in debug mode with nice formatting."""
+        if self.logger.level > logging.DEBUG:
+            return
+
+        indent_str = " " * indent
+        self.logger.debug(f"\n{indent_str}{title}:")
+
+        for key, value in data.items():
+            if isinstance(value, dict):
+                self.logger.debug(f"{indent_str}  {key}:")
+                for k, v in value.items():
+                    self.logger.debug(f"{indent_str}    {k}: {v}")
+            elif isinstance(value, (list, tuple)):
+                self.logger.debug(f"{indent_str}  {key}: [{len(value)} items]")
+            else:
+                self.logger.debug(f"{indent_str}  {key}: {value}")
+
+        self.logger.debug("")
+
+
+def get_structured_logger(name: str, level: Union[str, int, None] = None) -> StructuredLogger:
+    """Return a structured logger scoped under the global project namespace."""
+    logger = get_logger(name, level)
+    return StructuredLogger(logger)

@@ -35,8 +35,17 @@ def replace_text_with_id_for_both(obj_set, vocab_dict):
     return replaced_set
 
 def run_rrea_structural(new_training_pairs):
+    # Use runtime-configured path for RREA static data
+    # Falls back to original location if RREA_DATA_DIR not set
+    import os
+    from pathlib import Path
 
-    path="structure_model/rrea/data/" + cfg.DATASET + "/"
+    if hasattr(cfg, 'RREA_DATA_DIR') and cfg.RREA_DATA_DIR:
+        path = os.path.join(cfg.RREA_DATA_DIR, cfg.DATASET, "")
+    else:
+        # Fallback to original location relative to project root
+        from src.config.loader import PROJECT_ROOT
+        path = str(PROJECT_ROOT / "hybea" / "src" / "structure_model" / "rrea" / "data" / cfg.DATASET) + "/"
 
 
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
@@ -188,10 +197,14 @@ def run_rrea_structural(new_training_pairs):
     np.random.shuffle(rest_set_1)
     np.random.shuffle(rest_set_2)
 
+    import logging
+    from src.logger import get_logger
+    logger = get_logger(__name__)
+
     epoch = 1200
     #for turn in range(5):
     for turn in range(1):
-        print("iteration %d start."%turn)
+        logger.info(f"Starting iteration {turn}")
         for i in trange(epoch):
             train_set = get_train_set()
             inputs = [adj_matrix,r_index,r_val,rel_matrix,ent_matrix,train_set]
@@ -214,7 +227,7 @@ def run_rrea_structural(new_training_pairs):
         for a,b in A:
             if  B[b][1] == a:
                 new_pair.append([rest_set_1[a],rest_set_2[b]])
-        print("generate new semi-pairs: %d." % len(new_pair))
+        logger.info(f"Generated {len(new_pair)} new semi-pairs")
 
         train_pair = np.concatenate([train_pair,np.array(new_pair)],axis = 0)
         for e1,e2 in new_pair:

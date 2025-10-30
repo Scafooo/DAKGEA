@@ -58,9 +58,13 @@ def load_alignment_pair(file_name):
     return alignment_pair
 
 def get_matrix(triples,entity,rel):
+        import logging
+        from src.logger import get_logger
+        logger = get_logger(__name__)
+
         ent_size = max(entity)+1
         rel_size = (max(rel) + 1)
-        print(ent_size,rel_size)
+        logger.debug(f"Matrix dimensions - Entities: {ent_size}, Relations: {rel_size}")
         adj_matrix = sp.lil_matrix((ent_size,ent_size))
         adj_features = sp.lil_matrix((ent_size,ent_size))
         radj = []
@@ -171,11 +175,23 @@ def get_hits(vec, test_pair, wrank = None, top_k=(1, 5, 10)):
         for j in range(len(top_k)):
             if rank_index < top_k[j]:
                 top_rl[j] += 1
-    print('For each left:')
+
+    import logging
+    from src.logger import get_logger
+    logger = get_logger(__name__)
+
+    # Log results for left entities
+    logger.info("Evaluation Results - Left Entities:")
     for i in range(len(top_lr)):
-        print('Hits@%d: %.2f%%' % (top_k[i], top_lr[i] / len(test_pair) * 100))
-    print('MRR: %.3f' % (MRR_lr / Lvec.shape[0]))  
-    print('For each right:')
+        hits_percentage = top_lr[i] / len(test_pair) * 100
+        logger.info(f"  Hits@{top_k[i]}: {hits_percentage:.2f}%")
+    mrr_lr = MRR_lr / Lvec.shape[0]
+    logger.info(f"  MRR: {mrr_lr:.3f}")
+
+    # Log results for right entities
+    logger.info("Evaluation Results - Right Entities:")
     for i in range(len(top_rl)):
-        print('Hits@%d: %.2f%%' % (top_k[i], top_rl[i] / len(test_pair) * 100))
-    print('MRR: %.3f' % (MRR_rl / Rvec.shape[0]))
+        hits_percentage = top_rl[i] / len(test_pair) * 100
+        logger.info(f"  Hits@{top_k[i]}: {hits_percentage:.2f}%")
+    mrr_rl = MRR_rl / Rvec.shape[0]
+    logger.info(f"  MRR: {mrr_rl:.3f}")
