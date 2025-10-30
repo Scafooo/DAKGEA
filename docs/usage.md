@@ -115,3 +115,35 @@ Each augmentation reuses the reduced dataset as input, then writes its artefacts
 1. Drop new reducers under `src/reduction/methods/` and register them via `@REDUCTION_REGISTRY.register("<name>")`.
 2. Add augmenters in `src/augmentation/methods/` and models in `src/alignment_models/methods/`.
 3. Update experiment YAML with the new method keys. The runner auto-discovers the implementations via the registries.
+
+## 6. HybEA Experiments
+
+- **Data layout** The HybEA reader expects datasets under `data/raw/hybea/<dataset>/` with both `attribute_data/` and `knowformer_data/` subdirectories. You can point the reader directly at either subdirectory, but keeping both present lets the loader pick the most complete variant.
+- **Experiment recipe** Add `reader: "hybea"` to each dataset entry, include the HybEA writer when you want the legacy files recreated, and list `"hybea"` inside `models_to_run`. Example:
+
+  ```yaml
+  models_to_run:
+    - "hybea"
+  writers:
+    - type: "hybea"
+      write_reduced: true
+      write_results: true
+  ```
+
+- **Model settings** Defaults live in `config/models/hybea.yaml`. Create `config/models/hybea.local.yaml` or pass overrides through the experiment payload to tweak runs, e.g.:
+
+  ```yaml
+  parameters:
+    models:
+      hybea:
+        device: "cpu"
+        mode: "Hybea_without_structure"
+        attribute:
+          epochs: 50
+  ```
+
+  Stage metadata (`dataset`, `ratio`, `seed`) is injected automatically; you only need to override knobs you want to change.
+
+- **Running** Launch the runner as usual (`./run.sh` or `python experiments/run.py config/experiments/exp_3.yaml`). For each ratio the pipeline exports the dataset into a temporary workspace, mirrors support artefacts under `data/hybea_support/`, and alternates attribute/structure stages before returning metrics.
+- **Outputs** Metrics land in `experiments/results/<experiment>/<dataset>/<ratio_tag>/hybea_<augmentation>.json` (`hybea_baseline.json` when no augmentation is applied). The HybEA writer replicates both `attribute_data/` and `knowformer_data/` layouts inside `data/{reduced,augmented}/...` when enabled.
+- **First-run helpers** If the Excel workbooks under `data/hybea_support/src/hybea/data/entity_names/` are missing, the pipeline tries to build them automatically; leave the directory writable. The default config assumes a CUDA device—set `device: "cpu"` if you want to stay on CPU.

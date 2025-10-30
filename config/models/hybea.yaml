@@ -1,6 +1,6 @@
 model:
   device: "cuda"
-  mode: "Hybea"
+  mode: "Hybea_without_factual"
   structural_model: "Knowformer"
   reduction_ratio: 1.0
   seeds:
@@ -85,5 +85,3 @@ model:
       candidate_topk: 300
       source_input_size: 1
       target_input_size: 1
-  paths:
-    results_dir: "experiments/hybea"
