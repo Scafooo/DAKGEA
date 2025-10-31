@@ -8,7 +8,6 @@ import numpy as np
 import random
 import torch
 import torch.nn.functional as F
-from rdflib import URIRef
 
 from src.alignment_models.methods.bert_int.basic_training import BasicUnitArtifacts, train_basic_unit_model
 from src.alignment_models.methods.bert_int.basic_unit_model import BasicBertUnitModel
@@ -25,7 +24,8 @@ from src.alignment_models.methods.bert_int.features import (
 )
 from src.alignment_models.methods.bert_int.interaction_training import train_interaction_model
 from src.alignment_models.methods.bert_int.metrics import evaluate_alignment
-from src.alignment_models.methods.bert_int.tokenization import encode_entities, extract_entity_texts, normalise_uri
+from src.alignment_models.methods.bert_int.text import build_graph_entity_texts, friendly_name
+from src.alignment_models.methods.bert_int.tokenization import encode_entities, normalise_uri
 from src.alignment_models.registry import MODEL_REGISTRY
 from src.config.loader import PROJECT_ROOT, load_yaml
 from src.logger import get_logger
@@ -389,10 +389,20 @@ class Bert_int:
         return scored_predictions
 
     def _build_entity_texts(self, dataset, bert_dataset: BertIntDataset) -> Dict[str, str]:
-        source_entities = {URIRef(uri) for uri in bert_dataset.kg1.entities}
-        target_entities = {URIRef(uri) for uri in bert_dataset.kg2.entities}
-        texts = extract_entity_texts(dataset.knowledge_graph_source, source_entities)
-        texts.update(extract_entity_texts(dataset.knowledge_graph_target, target_entities))
+        dataset_name = self.stage_config.get("experiment", {}).get("dataset", "")
+
+        source_texts = build_graph_entity_texts(
+            dataset.knowledge_graph_source,
+            dataset_name,
+            kg_index=1,
+        )
+        target_texts = build_graph_entity_texts(
+            dataset.knowledge_graph_target,
+            dataset_name,
+            kg_index=2,
+        )
+
+        texts = {**source_texts, **target_texts}
         overrides = self._description_overrides()
         if overrides:
             replaced = 0
@@ -401,6 +411,9 @@ class Bert_int:
                     texts[entity] = overrides[entity]
                     replaced += 1
             logger.debug("[BERT-INT] Description dictionary applied to %d entities.", replaced)
+        for entity in bert_dataset.index2entity.values():
+            if entity not in texts:
+                texts[entity] = friendly_name(entity, dataset_name)
         return texts
 
     def _train_ratio(self) -> float:

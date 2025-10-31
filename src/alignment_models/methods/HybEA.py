@@ -59,10 +59,12 @@ class HybEA:
             )
             iteration_dir.mkdir(parents=True, exist_ok=True)
 
+            support_base_dir = self._resolve_support_base(dataset_name)
+
             hybea_apply_settings(
                 self.model_config,
                 dataset_name,
-                base_dir=PROJECT_ROOT / "data" / "hybea_support",
+                base_dir=support_base_dir,
                 workspace_dir=workdir,
                 data_root=export_root,
                 results_dir=iteration_dir,
@@ -133,6 +135,49 @@ class HybEA:
 
         if self.model_config.structural_model.lower() == "rrea":
             self._prepare_rrea_inputs(dataset_name, export_root)
+
+    def _resolve_support_base(self, dataset_name: str) -> Path:
+        """Return the base directory for HybEA support artefacts."""
+
+        lineage = self.stage_config.get("lineage", {})
+        source = lineage.get("active_source", "reduced")
+        reduction_method = lineage.get("reduction_method")
+        augmentation_name = lineage.get("augmentation_name")
+        ratio_tag = lineage.get("ratio_tag") or self.stage_config.get("experiment", {}).get("ratio_tag")
+
+        support_root = (PROJECT_ROOT / "data" / "hybea_support").resolve()
+        components = [source]
+        if reduction_method:
+            components.append(reduction_method)
+        if source == "augmented" and augmentation_name:
+            components.append(augmentation_name)
+
+        hybea_dataset_path = lineage.get("hybea_dataset_path")
+        hybea_dataset_base = lineage.get("hybea_dataset_base")
+        writer_components: list[str] = []
+
+        if hybea_dataset_path and hybea_dataset_base:
+            try:
+                dataset_path = Path(hybea_dataset_path).resolve()
+                base_root = Path(hybea_dataset_base).resolve()
+                relative_parts = list(dataset_path.relative_to(base_root).parts)
+
+                if ratio_tag and relative_parts and relative_parts[-1] == ratio_tag:
+                    relative_parts.pop()
+                if relative_parts and relative_parts[-1] == dataset_name:
+                    relative_parts.pop()
+                if source == "augmented" and augmentation_name and relative_parts and relative_parts[0] == augmentation_name:
+                    relative_parts.pop(0)
+
+                writer_components = relative_parts
+            except Exception:
+                writer_components = []
+
+        if not writer_components:
+            writer_components = ["hybea"]
+
+        components.extend(writer_components)
+        return support_root.joinpath(*components)
 
     def _write_entity_names(self, ent_ids_path: Path, target_xlsx: Path) -> None:
         if target_xlsx.exists():
