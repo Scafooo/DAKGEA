@@ -120,6 +120,7 @@ def description_features(
         emb1 = entity_embeddings[e1s]
         emb2 = entity_embeddings[e2s]
         sim = F.cosine_similarity(emb1, emb2).unsqueeze(-1)
+        # Convert to list of lists: each row is [similarity_score]
         features.extend(sim.detach().cpu().tolist())
     logger.debug("[BERT-INT] Description features computed for %d pairs.", len(features))
     return features

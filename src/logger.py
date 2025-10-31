@@ -44,41 +44,32 @@ class ColorFormatter(logging.Formatter):
     RESET = "\033[0m"
 
     def format(self, record: logging.LogRecord) -> str:
-        """Format log record with colors and improved indentation."""
-        message = record.getMessage()
-
-        # Check if this is an empty line (only whitespace)
+        """Format log record with colors, level, and detailed source location."""
+        message = record.getMessage().rstrip()
         stripped_msg = message.strip()
 
-        # Skip prefix for:
-        # 1. Completely empty lines
-        # 2. Lines with only separator characters (=, -)
         if not stripped_msg or all(c in '=- ' for c in stripped_msg):
-            # For empty/separator lines, just return the message without prefixes
             return message
 
-        # Get color for this level
         color = self.COLORS.get(record.levelname, self.RESET)
-
-        # Column 1: Level with color and brackets
-        # Format: [LEVEL   ] where LEVEL is left-aligned in 7 chars
         levelname_text = f"[{record.levelname:<7}]"
         levelname = f"{color}{levelname_text}{self.RESET}"
 
-        # Column 2: Filename and line number with color and brackets
-        # Format: [filename:line                ] where content is left-aligned in 28 chars
-        filename = Path(record.pathname).name
-        location = f"{filename}:{record.lineno}"
-        location_text = f"[{location:<28}]"
+        # Resolve relative path within the project (fallback to basename)
+        try:
+            project_root = Path(__file__).resolve().parents[2]
+            rel_path = Path(record.pathname).resolve().relative_to(project_root)
+        except Exception:
+            rel_path = Path(record.pathname).name
+
+        # Include logger name for extra context
+        # module_info = f"{record.name} ({rel_path}:{record.lineno})"
+        module_info = f"{record.name}"
+        location_text = f"[{module_info:<80}]"
         location_colored = f"{self.LOCATION_COLOR}{location_text}{self.RESET}"
 
-        # Format with fixed-width columns and colored separators
         separator = f"{self.SEPARATOR_COLOR}│{self.RESET}"
-        return (
-            f"{levelname} {separator} "
-            f"{location_colored} {separator} "
-            f"{message}"
-        )
+        return f"{levelname} {separator} {location_colored} {separator} {message}"
 
 
 def _parse_level(level: Union[str, int, None]) -> int:
@@ -171,16 +162,16 @@ class StructuredLogger:
 
     def section(self, title: str) -> None:
         """Log a section header."""
-        self.logger.info(f"\n  {title.upper()}\n")
+        self.logger.info(f"  {title.upper()}")
 
     def subsection(self, title: str) -> None:
         """Log a subsection header."""
-        self.logger.info(f"\n  {title}\n")
+        self.logger.info(f"  {title}")
 
     def table(self, title: str, data: dict, indent: int = 2) -> None:
         """Log a formatted table of key-value pairs."""
         indent_str = " " * indent
-        self.logger.info(f"\n{indent_str}{title}:")
+        self.logger.info(f"{indent_str}{title}:")
 
         if not data:
             self.logger.info(f"{indent_str}  (empty)")
@@ -193,12 +184,10 @@ class StructuredLogger:
             formatted_key = str(key).ljust(max_key_len)
             self.logger.info(f"{indent_str}  {formatted_key} : {value}")
 
-        self.logger.info("")
-
     def list_items(self, title: str, items: list, indent: int = 2) -> None:
         """Log a formatted list of items."""
         indent_str = " " * indent
-        self.logger.info(f"\n{indent_str}{title}:")
+        self.logger.info(f"{indent_str}{title}:")
 
         if not items:
             self.logger.info(f"{indent_str}  (empty)")
@@ -206,8 +195,6 @@ class StructuredLogger:
 
         for i, item in enumerate(items, 1):
             self.logger.info(f"{indent_str}  {i}. {item}")
-
-        self.logger.info("")
 
     def progress(self, message: str, current: int, total: int, indent: int = 2) -> None:
         """Log progress with percentage."""
@@ -217,8 +204,13 @@ class StructuredLogger:
         filled = int(bar_length * current / total) if total > 0 else 0
         bar = "█" * filled + "░" * (bar_length - filled)
 
+        # Format current and total with padding for alignment
+        total_width = len(str(total))
+        current_str = str(current).rjust(total_width)
+        percentage_str = f"{percentage:5.1f}%"  # Right-align percentage to 5 chars (e.g., " 8.0%")
+
         self.logger.info(
-            f"{indent_str}{message}: [{bar}] {percentage:.1f}% ({current}/{total})"
+            f"{indent_str}{message}:  [{bar}] {percentage_str} ({current_str}/{total})"
         )
 
     def success(self, message: str) -> None:

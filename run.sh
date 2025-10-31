@@ -5,6 +5,12 @@
 #  Runs an experiment with the correct Python path and config
 # ============================================================
 
+# ============================================================
+#  EXPERIMENT SELECTION
+#  Modify this line to select a different experiment
+# ============================================================
+EXPERIMENT="${EXPERIMENT:-exp_5.yaml}"
+
 # ---------- Helpers ----------
 term_width() { tput cols 2>/dev/null || echo 80; }
 full_line() { printf '%*s\n' "$(term_width)" '' | tr ' ' "$1"; }
@@ -19,7 +25,7 @@ full_line '-'
 PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export PYTHONPATH="${PROJECT_ROOT}"
 
-FILE_NAME="${1:-${RUN_CONFIG:-exp_4.yaml}}"
+FILE_NAME="${1:-${RUN_CONFIG:-${EXPERIMENT}}}"
 
 # ---------- Resolve configuration ----------
 resolve_config_path() {

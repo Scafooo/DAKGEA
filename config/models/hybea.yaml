@@ -1,6 +1,6 @@
 model:
   device: "cuda"
-  mode: "Hybea_without_factual"
+  mode: "hybea_without_factual"
   structural_model: "Knowformer"
   reduction_ratio: 1.0
   seeds:

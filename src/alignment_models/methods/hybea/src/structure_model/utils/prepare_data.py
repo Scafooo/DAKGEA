@@ -256,9 +256,9 @@ def prepare_entity_alignment_data(args, new_pairs):
         expected_tokens = set(entities_list + relations_list)
         extra_tokens = vocab_tokens - expected_tokens
 
-        if extra_tokens:
-            logger.warning(f"Found {len(extra_tokens)} extra tokens in vocabulary file")
-            logger.debug(f"Extra tokens: {extra_tokens}")
+        if len(extra_tokens) > 100:
+            logger.warning(f"Found {len(extra_tokens) -100} extra tokens in vocabulary file")
+            # logger.debug(f"Extra tokens: {extra_tokens}")
 
     # Write or verify vocabulary
     if not os.path.exists(vocab_path):
