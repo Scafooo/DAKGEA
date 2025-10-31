@@ -4,6 +4,9 @@ from __future__ import annotations
 
 import numpy as np
 
+from src.logger import get_structured_logger
+
+logger = get_structured_logger(__name__)
 
 class BatchTrainDataGenerator:
     """Generate positive/negative training tuples for margin ranking."""
@@ -27,14 +30,14 @@ class BatchTrainDataGenerator:
 
     def build_candidate_dict(self, candidate_dict):
         lengths = [len(values) for values in candidate_dict.values() if len(values) > 0]
-        print(f"[BATCH_GEN] Candidate dict: {len(candidate_dict)} entities, {len(lengths)} with candidates")
+        logger.info(f"[BATCH_GEN] Candidate dict: {len(candidate_dict)} entities, {len(lengths)} with candidates")
         if not lengths:
-            print("[BATCH_GEN] No candidates found!")
+            logger.info("[BATCH_GEN] No candidates found!")
             self.train_index = []
             self.batch_num = 0
             return
         minim = min(lengths)
-        print(f"[BATCH_GEN] Min candidates per entity: {minim}")
+        logger.info(f"[BATCH_GEN] Min candidates per entity: {minim}")
         for ent in candidate_dict:
             candidate_dict[ent] = np.array(candidate_dict[ent][:minim])
         self._generate_training_indices(candidate_dict)
@@ -59,7 +62,7 @@ class BatchTrainDataGenerator:
         np.random.shuffle(train_index)
         self.train_index = train_index
         self.batch_num = int(np.ceil(len(self.train_index) / self.batch_size))
-        print(f"[BATCH_GEN] Training indices: {len(train_index)} pairs, {skipped} skipped, {self.batch_num} batches")
+        logger.info(f"[BATCH_GEN] Training indices: {len(train_index)} pairs, {skipped} skipped, {self.batch_num} batches")
 
     def __iter__(self):
         return self

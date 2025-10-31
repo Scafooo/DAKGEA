@@ -1,5 +1,5 @@
 experiment:
-  name: "reductio_test"
+  name: "reduction"
   overwrite_existing: true
 
   writers:
