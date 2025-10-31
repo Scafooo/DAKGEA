@@ -216,6 +216,24 @@ class Bert_int:
 
     def _description_paths(self) -> List[Path]:
         configured: List[Path] = []
+
+        dataset_name = self.stage_config.get("experiment", {}).get("dataset")
+        external_base = (PROJECT_ROOT / "data" / "external" / "bert_int").resolve()
+        if external_base.exists():
+            candidate_paths: List[Path] = []
+            if dataset_name:
+                dataset_slug = str(dataset_name).replace("/", "_")
+                candidate_paths.extend(
+                    [
+                        external_base / f"{dataset_slug}_descriptions_clean.pkl",
+                        external_base / f"{dataset_slug}_descriptions_original.pkl",
+                    ]
+                )
+            candidate_paths.extend(sorted(external_base.glob("*.pkl")))
+            for path in candidate_paths:
+                if path not in configured:
+                    configured.append(path)
+
         for path_str in (
             self.model_config.paths.description_dict,
             self.model_config.paths.origin_description_dict,
