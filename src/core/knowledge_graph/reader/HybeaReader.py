@@ -1,7 +1,7 @@
 """Knowledge graph reader for HybEA datasets."""
 
 from pathlib import Path
-from typing import Iterable, Optional, Tuple
+from typing import Dict, Iterable, Optional, Tuple
 
 from src.core.knowledge_graph import KnowledgeGraph
 from src.core.knowledge_graph.reader.Reader import Reader
@@ -111,6 +111,10 @@ class HybeaReader(Reader):
         ent_ids_path = data_dir / f"ent_ids_{kg_number}"
         rel_triple_path = data_dir / f"rel_ids_{kg_number}"
         triples_path = data_dir / f"triples_{kg_number}"
+        attr_names_path = data_dir / f"attr_names{kg_number}"
+
+        attr_uri_to_label = self._load_attr_names(attr_names_path)
+        kg.attr_to_name.update(attr_uri_to_label)
 
         for attr_triple in read_tsv(attr_triple_path):
             if len(attr_triple) < 3:
@@ -120,7 +124,8 @@ class HybeaReader(Reader):
                     attr_triple,
                 )
                 continue
-            kg.add_attribute_triples(attr_triple)
+            subject, predicate, value = attr_triple[:3]
+            kg.add_attribute_triples((subject, predicate, value))
 
         ent_ids = {id_: name for id_, name in read_tsv(ent_ids_path)}
         rel_ids = {id_: name for id_, name in read_tsv(rel_triple_path)}
@@ -137,6 +142,10 @@ class HybeaReader(Reader):
         attr_triple_path = data_dir / f"attr_triples_{kg_number}"
         ent_ids_path = data_dir / f"ent_ids_{kg_number}"
         triples_path = data_dir / ("s_triples.txt" if kg_number == 1 else "t_triples.txt")
+        attr_names_path = data_dir / f"attr_names{kg_number}"
+
+        attr_uri_to_label = self._load_attr_names(attr_names_path)
+        kg.attr_to_name.update(attr_uri_to_label)
 
         ent_ids = {id_: name for id_, name in read_tsv(ent_ids_path)}
 
@@ -161,3 +170,20 @@ class HybeaReader(Reader):
             kg.add_relation_triples(triple)
 
         return kg
+
+    def _load_attr_names(self, path: Path) -> Dict[str, str]:
+        if not path.exists():
+            return {}
+
+        uri_to_label: Dict[str, str] = {}
+        for row in read_tsv(path):
+            if not row:
+                continue
+            uri = str(row[0]).strip()
+            label: Optional[str] = None
+            if len(row) >= 2:
+                label = str(row[1]).strip() or None
+            if label is None:
+                label = uri.split("/")[-1]
+            uri_to_label[uri] = label
+        return uri_to_label

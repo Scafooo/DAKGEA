@@ -50,9 +50,7 @@ class HybeaWriter(Writer):
 
             target.mkdir(parents=True, exist_ok=True)
             if target.name == "knowformer_data":
-                dataset_dir = target / dataset_name
-                dataset_dir.mkdir(parents=True, exist_ok=True)
-                destination = dataset_dir
+                destination = target
             else:
                 destination = target
 
