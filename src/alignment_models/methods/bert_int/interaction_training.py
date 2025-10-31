@@ -152,15 +152,20 @@ def train_interaction_model(
     with torch.no_grad():
         scores = model(feature_tensor.to(device)).cpu().numpy()
 
+    logger.info("[BERT-INT] Model produced %d scores for %d entity pairs", len(scores), len(entity_pairs))
+
     score_map: Dict[int, List[Tuple[int, float]]] = {}
     for (src, tgt), score in zip(entity_pairs, scores):
         score_map.setdefault(src, []).append((tgt, float(score)))
+
+    logger.info("[BERT-INT] Score map has %d source entities before filtering", len(score_map))
 
     # keep top-k for evaluation
     for src in score_map:
         score_map[src].sort(key=lambda x: x[1], reverse=True)
         score_map[src] = score_map[src][:candidate_topk]
 
-    logger.info("[BERT-INT] Interaction training complete; scored %d source entities.", len(score_map))
+    logger.info("[BERT-INT] Interaction training complete; scored %d source entities with top-%d candidates.",
+                len(score_map), candidate_topk)
 
     return InteractionArtifacts(scores=score_map)

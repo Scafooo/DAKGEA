@@ -27,20 +27,25 @@ class BatchTrainDataGenerator:
 
     def build_candidate_dict(self, candidate_dict):
         lengths = [len(values) for values in candidate_dict.values() if len(values) > 0]
+        print(f"[BATCH_GEN] Candidate dict: {len(candidate_dict)} entities, {len(lengths)} with candidates")
         if not lengths:
+            print("[BATCH_GEN] No candidates found!")
             self.train_index = []
             self.batch_num = 0
             return
         minim = min(lengths)
+        print(f"[BATCH_GEN] Min candidates per entity: {minim}")
         for ent in candidate_dict:
             candidate_dict[ent] = np.array(candidate_dict[ent][:minim])
         self._generate_training_indices(candidate_dict)
 
     def _generate_training_indices(self, candidate_dict):
         train_index = []
+        skipped = 0
         for pe1, pe2 in self.ent_ill:
             # Skip if either entity doesn't have candidates
             if pe1 not in candidate_dict or pe2 not in candidate_dict:
+                skipped += 1
                 continue
             for _ in range(self.neg_num):
                 if np.random.rand() <= 0.5:
@@ -54,6 +59,7 @@ class BatchTrainDataGenerator:
         np.random.shuffle(train_index)
         self.train_index = train_index
         self.batch_num = int(np.ceil(len(self.train_index) / self.batch_size))
+        print(f"[BATCH_GEN] Training indices: {len(train_index)} pairs, {skipped} skipped, {self.batch_num} batches")
 
     def __iter__(self):
         return self

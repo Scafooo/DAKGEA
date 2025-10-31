@@ -372,13 +372,20 @@ class Bert_int:
         )
 
         scored_predictions: List[Tuple[str, str, float]] = []
+        logger.info("[BERT-INT] Interaction artifacts scores: %d source entities", len(interaction_artifacts.scores))
         for src, candidates in interaction_artifacts.scores.items():
             src_uri = dataset.index2entity[src]
             allowed = set(artifacts.test_candidates.get(src, []))
-            filtered = [(tgt, score) for tgt, score in candidates if not allowed or tgt in allowed]
+            # If allowed is empty, include all candidates; otherwise only include allowed ones
+            if allowed:
+                filtered = [(tgt, score) for tgt, score in candidates if tgt in allowed]
+            else:
+                filtered = candidates
+            logger.debug("[BERT-INT] Source %s: %d candidates, %d filtered", src_uri, len(candidates), len(filtered))
             for tgt, score in filtered:
                 tgt_uri = dataset.index2entity[tgt]
                 scored_predictions.append((src_uri, tgt_uri, score))
+        logger.info("[BERT-INT] Total scored predictions: %d", len(scored_predictions))
         return scored_predictions
 
     def _build_entity_texts(self, dataset, bert_dataset: BertIntDataset) -> Dict[str, str]:

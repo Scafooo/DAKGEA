@@ -115,9 +115,13 @@ def _generate_candidate_dict(
         candidate_dict[e1] = [pool_ids2[i] for i in idx1[row].tolist()]
     for row, e2 in enumerate(train_ids2):
         candidate_dict[e2] = [pool_ids1[i] for i in idx2[row].tolist()]
-    logger.debug(
-        "[BERT-INT] Candidate dict built with average %.2f candidates per entity",
-        float(sum(len(v) for v in candidate_dict.values())) / max(1, len(candidate_dict)),
+
+    avg_cands = float(sum(len(v) for v in candidate_dict.values())) / max(1, len(candidate_dict))
+    logger.info(
+        "[BERT-INT] Candidate dict: %d entities, avg %.2f candidates per entity, topk=%d",
+        len(candidate_dict),
+        avg_cands,
+        topk,
     )
     return candidate_dict
 
@@ -286,6 +290,8 @@ def train_basic_unit_model(
                 entity_pairs_set.add((source, target))
     entity_pairs_set.update(train_pairs)
     entity_pairs = sorted(entity_pairs_set)
+    logger.info("[BERT-INT] Entity pairs: %d (from train_candidates=%d, test_candidates=%d, train_pairs=%d)",
+                len(entity_pairs), len(train_candidates), len(test_candidates), len(train_pairs))
 
     return BasicUnitArtifacts(
         entity_embeddings=entity_embeddings,
