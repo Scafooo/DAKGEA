@@ -134,9 +134,8 @@ def train_interaction_model(
             neg_feat = feature_tensor[neg_idx].to(device)
             pos_score = model(pos_feat).unsqueeze(-1)
             neg_score = model(neg_feat).unsqueeze(-1)
-            # label=-1 means pos_score should be ranked lower than neg_score (i.e., pos_score < neg_score)
-            # This is used with L1 distance where lower distance = better match
-            label = -torch.ones_like(pos_score)
+            # label=1 means pos_score should be ranked higher than neg_score
+            label = torch.ones_like(pos_score)
             loss = criterion(pos_score, neg_score, label)
             loss.backward()
             optimizer.step()
