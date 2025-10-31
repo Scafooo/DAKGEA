@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import json
 import pickle
+from datetime import datetime
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 import numpy as np
 import random
@@ -43,6 +45,8 @@ class Bert_int:
         self.stage_config = config or {}
         self.model_config = self._load_model_config()
         self._description_cache: Optional[Dict[str, str]] = None
+        self.debug_info: Dict[str, object] = {}
+        self._debug_dir: Optional[Path] = None
         logger.debug("[BERT-INT] Loaded configuration: %s", self.model_config.to_dict())
 
     def evaluate(self, dataset_reduced, dataset_augmented):
@@ -51,6 +55,8 @@ class Bert_int:
             self.stage_config.get("experiment", {}).get("dataset"),
         )
         logger.info("[STEP] BERT-INT evaluation starting")
+        self.debug_info = {}
+        self._debug_dir = None
 
         dataset = dataset_augmented or dataset_reduced
         aligned_pairs = list(self._normalise_pairs(dataset.aligned_entities))
@@ -63,14 +69,14 @@ class Bert_int:
         lineage = self.stage_config.get("lineage")
         dataset_name = self.stage_config.get("experiment", {}).get("dataset", "")
 
-        dataset_name = self.stage_config.get("experiment", {}).get("dataset", "")
-
         bert_dataset = build_dataset(
             dataset,
             self._train_ratio(),
             lineage=lineage,
             dataset_name=dataset_name,
         )
+        if self.stage_config.get("debug"):
+            self._record_split_diagnostics(bert_dataset, dataset_name)
         entity_order = [bert_dataset.index2entity[idx] for idx in range(len(bert_dataset.index2entity))]
         logger.info(
             "[BERT-INT] Dataset prepared: |KG1|=%d entities, |KG2|=%d entities, train_pairs=%d, test_pairs=%d",
@@ -156,6 +162,8 @@ class Bert_int:
             device=device,
             embedding_batch_size=self.model_config.basic_unit.test_batch_size,
         )
+        if self.stage_config.get("debug"):
+            self._record_basic_unit_diagnostics(bert_dataset, artifacts)
         logger.info("[BERT-INT] Basic unit training complete; starting interaction phase.")
         logger.info("[STEP] Running interaction stage")
 
@@ -462,6 +470,267 @@ class Bert_int:
         overrides = self.stage_config.get("models", {}).get("bert_int", {})
         merged = {**base_cfg, **overrides}
         return BertIntConfig.from_dict(merged)
+
+    def _record_split_diagnostics(self, dataset: BertIntDataset, dataset_name: str) -> None:
+        run_dir = self._ensure_debug_run_dir(dataset_name)
+        train_pairs_uri, missing_train = self._pairs_to_uris(dataset.train_pairs, dataset.index2entity)
+        test_pairs_uri, missing_test = self._pairs_to_uris(dataset.test_pairs, dataset.index2entity)
+
+        train_sources = {src for src, _ in dataset.train_pairs}
+        train_targets = {tgt for _, tgt in dataset.train_pairs}
+        test_sources = {src for src, _ in dataset.test_pairs}
+        test_targets = {tgt for _, tgt in dataset.test_pairs}
+        overlap = len(set(dataset.train_pairs) & set(dataset.test_pairs))
+
+        summary = {
+            "dataset": dataset_name,
+            "timestamp": datetime.utcnow().isoformat(timespec="seconds") + "Z",
+            "train_pairs": len(dataset.train_pairs),
+            "test_pairs": len(dataset.test_pairs),
+            "train_unique_sources": len(train_sources),
+            "train_unique_targets": len(train_targets),
+            "test_unique_sources": len(test_sources),
+            "test_unique_targets": len(test_targets),
+            "overlap_pairs": overlap,
+            "missing_pairs": {
+                "train": missing_train,
+                "test": missing_test,
+            },
+            "kg1_entities": len(dataset.kg1.entities),
+            "kg2_entities": len(dataset.kg2.entities),
+            "relation_triples": len(dataset.kg1.relation_triples) + len(dataset.kg2.relation_triples),
+            "attribute_triples": len(dataset.kg1.attribute_triples) + len(dataset.kg2.attribute_triples),
+            "hybea_dataset_path": self.stage_config.get("lineage", {}).get("hybea_dataset_path"),
+            "sample_train_pairs": train_pairs_uri[:5],
+            "sample_test_pairs": test_pairs_uri[:5],
+        }
+
+        self.debug_info["split"] = summary
+        logger.info(
+            "[BERT-INT][DEBUG] Split summary: train=%d test=%d overlap=%d missing(train=%d,test=%d)",
+            summary["train_pairs"],
+            summary["test_pairs"],
+            overlap,
+            missing_train,
+            missing_test,
+        )
+
+        if not run_dir:
+            return
+
+        self._write_json(run_dir / "split_summary.json", summary)
+        self._write_tsv(run_dir / "train_pairs.tsv", train_pairs_uri)
+        self._write_tsv(run_dir / "test_pairs.tsv", test_pairs_uri)
+        self._write_pickle(run_dir / "train_pairs_indices.pkl", list(dataset.train_pairs))
+        self._write_pickle(run_dir / "test_pairs_indices.pkl", list(dataset.test_pairs))
+
+    def _record_basic_unit_diagnostics(
+        self,
+        dataset: BertIntDataset,
+        artifacts: BasicUnitArtifacts,
+    ) -> None:
+        dataset_name = self.stage_config.get("experiment", {}).get("dataset", "")
+        run_dir = self._ensure_debug_run_dir(dataset_name)
+
+        train_pairs_uri, missing_train = self._pairs_to_uris(artifacts.train_pairs, dataset.index2entity)
+        test_pairs_uri, missing_test = self._pairs_to_uris(artifacts.test_pairs, dataset.index2entity)
+        entity_pairs_uri, missing_entity_pairs = self._pairs_to_uris(artifacts.entity_pairs, dataset.index2entity)
+
+        train_candidates_uri, train_candidate_missing = self._candidate_map_to_uris(
+            artifacts.train_candidates,
+            dataset.index2entity,
+        )
+        test_candidates_uri, test_candidate_missing = self._candidate_map_to_uris(
+            artifacts.test_candidates,
+            dataset.index2entity,
+        )
+
+        train_stats = self._candidate_stats(artifacts.train_candidates)
+        test_stats = self._candidate_stats(artifacts.test_candidates)
+
+        train_mismatch = sorted(artifacts.train_pairs) != sorted(dataset.train_pairs)
+        test_mismatch = sorted(artifacts.test_pairs) != sorted(dataset.test_pairs)
+
+        summary = {
+            "train_pairs": len(artifacts.train_pairs),
+            "test_pairs": len(artifacts.test_pairs),
+            "entity_pairs": len(artifacts.entity_pairs),
+            "entity_embeddings": len(artifacts.entity_embeddings),
+            "train_candidate_stats": train_stats,
+            "test_candidate_stats": test_stats,
+            "train_pair_mismatch": train_mismatch,
+            "test_pair_mismatch": test_mismatch,
+            "missing_pairs": {
+                "train": missing_train,
+                "test": missing_test,
+                "entity_pairs": missing_entity_pairs,
+            },
+            "missing_candidates": {
+                "train_sources": train_candidate_missing["missing_sources"],
+                "train_targets": train_candidate_missing["missing_targets"],
+                "test_sources": test_candidate_missing["missing_sources"],
+                "test_targets": test_candidate_missing["missing_targets"],
+            },
+            "sample_train_pairs": train_pairs_uri[:5],
+            "sample_test_pairs": test_pairs_uri[:5],
+            "sample_train_candidates": self._sample_candidate_map(train_candidates_uri),
+            "sample_test_candidates": self._sample_candidate_map(test_candidates_uri),
+        }
+
+        self.debug_info["basic_unit"] = summary
+        logger.info(
+            "[BERT-INT][DEBUG] Basic unit artifacts: embeddings=%d entity_pairs=%d train_candidates=%d test_candidates=%d",
+            summary["entity_embeddings"],
+            summary["entity_pairs"],
+            train_stats["entities"],
+            test_stats["entities"],
+        )
+        if train_mismatch or test_mismatch:
+            logger.warning(
+                "[BERT-INT][DEBUG] Pair mismatch detected (train=%s, test=%s)",
+                train_mismatch,
+                test_mismatch,
+            )
+
+        if not run_dir:
+            return
+
+        self._write_json(run_dir / "basic_unit_summary.json", summary)
+        self._write_tsv(run_dir / "basic_unit_train_pairs.tsv", train_pairs_uri)
+        self._write_tsv(run_dir / "basic_unit_test_pairs.tsv", test_pairs_uri)
+        self._write_tsv(run_dir / "entity_pairs.tsv", entity_pairs_uri)
+        self._write_json(run_dir / "train_candidates.json", train_candidates_uri)
+        self._write_json(run_dir / "test_candidates.json", test_candidates_uri)
+        self._write_pickle(run_dir / "entity_embeddings.pkl", artifacts.entity_embeddings)
+        self._write_pickle(run_dir / "train_candidates_indices.pkl", artifacts.train_candidates)
+        self._write_pickle(run_dir / "test_candidates_indices.pkl", artifacts.test_candidates)
+        self._write_pickle(run_dir / "entity_pairs_indices.pkl", list(artifacts.entity_pairs))
+
+    def _ensure_debug_run_dir(self, dataset_name: str) -> Optional[Path]:
+        if self._debug_dir is not None:
+            return self._debug_dir
+
+        debug_cfg: Any = self.stage_config.get("debug")
+        if not debug_cfg:
+            return None
+
+        enabled = True
+        output_override: Optional[Path] = None
+
+        if isinstance(debug_cfg, dict):
+            enabled = debug_cfg.get("enabled", True)
+            override = debug_cfg.get("output_dir")
+            if override:
+                output_override = Path(override)
+        elif isinstance(debug_cfg, (str, Path)):
+            output_override = Path(debug_cfg)
+        elif isinstance(debug_cfg, bool):
+            enabled = debug_cfg
+
+        if not enabled:
+            return None
+
+        if output_override is not None and not output_override.is_absolute():
+            output_override = PROJECT_ROOT / output_override
+
+        base_dir = output_override or (PROJECT_ROOT / "data" / "external" / "bert_int" / "debug")
+        dataset_slug = str(dataset_name or "unnamed").replace("/", "_")
+        run_dir = (base_dir / dataset_slug / datetime.utcnow().strftime("%Y%m%dT%H%M%S")).resolve()
+        run_dir.mkdir(parents=True, exist_ok=True)
+        self._debug_dir = run_dir
+        self.debug_info["debug_dir"] = str(run_dir)
+        logger.info("[BERT-INT][DEBUG] Diagnostics directory prepared at %s", run_dir)
+        return run_dir
+
+    @staticmethod
+    def _pairs_to_uris(
+        pairs: Iterable[Tuple[int, int]],
+        index2entity: Dict[int, str],
+    ) -> Tuple[List[Tuple[str, str]], int]:
+        converted: List[Tuple[str, str]] = []
+        missing = 0
+        for src_idx, tgt_idx in pairs:
+            src_uri = index2entity.get(src_idx)
+            tgt_uri = index2entity.get(tgt_idx)
+            if src_uri is None or tgt_uri is None:
+                missing += 1
+                continue
+            converted.append((src_uri, tgt_uri))
+        return converted, missing
+
+    @staticmethod
+    def _candidate_map_to_uris(
+        candidate_map: Dict[int, List[int]],
+        index2entity: Dict[int, str],
+    ) -> Tuple[Dict[str, List[str]], Dict[str, int]]:
+        converted: Dict[str, List[str]] = {}
+        missing_sources = 0
+        missing_targets = 0
+        for src_idx, tgt_indices in candidate_map.items():
+            src_uri = index2entity.get(src_idx)
+            if src_uri is None:
+                missing_sources += 1
+                continue
+            targets: List[str] = []
+            for tgt_idx in tgt_indices:
+                tgt_uri = index2entity.get(tgt_idx)
+                if tgt_uri is None:
+                    missing_targets += 1
+                    continue
+                targets.append(tgt_uri)
+            converted[src_uri] = targets
+        return converted, {
+            "missing_sources": missing_sources,
+            "missing_targets": missing_targets,
+        }
+
+    @staticmethod
+    def _candidate_stats(candidate_map: Dict[int, List[int]]) -> Dict[str, float]:
+        lengths = [len(values) for values in candidate_map.values()]
+        total_entities = len(lengths)
+        empty = sum(1 for value in lengths if value == 0)
+        return {
+            "entities": total_entities,
+            "average": (sum(lengths) / total_entities) if total_entities else 0.0,
+            "minimum": min(lengths) if lengths else 0,
+            "maximum": max(lengths) if lengths else 0,
+            "empty": empty,
+        }
+
+    @staticmethod
+    def _sample_candidate_map(
+        candidates: Dict[str, List[str]],
+        limit: int = 3,
+        topn: int = 5,
+    ) -> List[Dict[str, object]]:
+        samples: List[Dict[str, object]] = []
+        for idx, (src, targets) in enumerate(sorted(candidates.items())):
+            if idx >= limit:
+                break
+            samples.append(
+                {
+                    "source": src,
+                    "total": len(targets),
+                    "preview": targets[:topn],
+                }
+            )
+        return samples
+
+    @staticmethod
+    def _write_json(path: Path, payload: Any) -> None:
+        with path.open("w", encoding="utf-8") as handle:
+            json.dump(payload, handle, indent=2)
+
+    @staticmethod
+    def _write_tsv(path: Path, rows: Iterable[Tuple[str, str]]) -> None:
+        with path.open("w", encoding="utf-8") as handle:
+            for left, right in rows:
+                handle.write(f"{left}\t{right}\n")
+
+    @staticmethod
+    def _write_pickle(path: Path, payload: Any) -> None:
+        with path.open("wb") as handle:
+            pickle.dump(payload, handle)
 
     @staticmethod
     def _normalise_pairs(pairs: Iterable[Tuple[URIRef, URIRef]]):
