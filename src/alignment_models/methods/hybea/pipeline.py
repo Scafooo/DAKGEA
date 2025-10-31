@@ -102,20 +102,26 @@ class HybeaPipeline:
                 struct_enabled,
             )
 
-            if self.turn % 2 == 0:  # attribute stage
+            # Check if both stages are disabled
+            if self.stop_attribute and self.stop_structure:
+                logger.info("[HybEA] Both stages disabled; stopping pipeline")
+                break
+
+            # Determine which stage should run based on turn parity
+            is_attribute_turn = self.turn % 2 == 0
+
+            if is_attribute_turn:
+                if self.stop_attribute:
+                    # Attribute is disabled, skip to structure
+                    self.turn += 1
+                    continue
                 new_pairs = self._run_attribute_stage()
                 self.turn += 1
-                if self.stop_attribute:
-                    logger.info("[HybEA] Attribute stage flagged as final turn; stopping pipeline")
-                    break
-            else:  # structure stage
+            else:
                 if self.stop_structure:
-                    logger.info(
-                        "[HybEA] Structural stage disabled (mode=%s, structure.enabled=%s); finishing after attribute stage",
-                        self.mode,
-                        struct_enabled,
-                    )
-                    break
+                    # Structure is disabled, skip to attribute
+                    self.turn += 1
+                    continue
                 new_pairs = self._run_structure_stage()
                 self.turn += 1
 
@@ -164,6 +170,10 @@ class HybeaPipeline:
 
         new_pairs_uri = self._gather_pair_history()
         new_pairs_indices = self._collect_all_pair_indices()
+
+        # If no pairs from history (first iteration), use empty set to let structure model use initial sup_pairs
+        if not new_pairs_uri:
+            logger.debug("[HybEA] No pairs from history; structure model will use initial support pairs")
 
         if self.structural_model == "knowformer":
             from src.alignment_models.methods.hybea.src.structure_model.structure_main import run_structure_model

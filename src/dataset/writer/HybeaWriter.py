@@ -305,32 +305,17 @@ class HybeaWriter(Writer):
 
         train_triples_expanded_list = list(train_triples_expanded)
 
-        slogger.subsection("Writing Output Files")
-
         # Write entity alignment files
-        logger.info(f"Writing aligned entities to {ENT_ILLS}")
         write_tsv(ENT_ILLS, ent_ILLs_pairs)
-        slogger.progress("Entity files", 1, 4)
-
-        logger.info(f"Writing reference entities to {REF_ENTS}")
         write_tsv(REF_ENTS, ref_pairs)
-        slogger.progress("Entity files", 2, 4)
-
-        logger.info(f"Writing support entities to {SUP_ENTS}")
         write_tsv(SUP_ENTS, sup_pairs)
-        slogger.progress("Entity files", 3, 4)
-
-        logger.info(f"Writing validation entities to {VALID_ENTS}")
         write_tsv(VALID_ENTS, valid_pairs)
-        slogger.progress("Entity files", 4, 4)
 
         # Write training triples with MASK tokens using the helper function
-        logger.info(f"Writing training triples to {TRAIN_TRIPLES}")
         self._write_triples_with_masks(TRAIN_TRIPLES, train_triples_expanded_list)
         logger.info(f"✓ Wrote {len(train_triples_expanded_list) * 2} triple instances (with MASK tokens)")
 
         # Write vocab.txt with entities and relations from training triples
-        logger.info(f"Writing vocabulary to {VOCAB}")
         self._write_vocab_from_triples(VOCAB, train_triples_expanded_list)
 
         slogger.success("All output files written successfully")

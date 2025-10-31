@@ -17,3 +17,4 @@ keras<=2.13
 tensorflow-estimator<=2.13
 h5py>=3.9
 rich>=13.3
+colorama>=0.4.6

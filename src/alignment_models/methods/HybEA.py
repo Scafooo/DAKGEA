@@ -30,7 +30,7 @@ class HybEA:
     def __init__(self, config):
         self.stage_config = config or {}
         self.model_config = self._load_model_config()
-        logger.debug("[HybEA] Loaded configuration: %s", self.model_config)
+        # logger.debug("[HybEA] Loaded configuration: %s", self.model_config)
 
     def evaluate(self, dataset_reduced: Dataset, dataset_augmented: Dataset | None) -> Dict[str, float]:
         dataset = dataset_augmented or dataset_reduced

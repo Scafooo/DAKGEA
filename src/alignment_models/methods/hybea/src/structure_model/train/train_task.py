@@ -1,4 +1,8 @@
 import os
+
+# Disable tokenizers parallelism to avoid deadlocks when using multiprocessing
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 import time
 import torch
 import numpy as np
@@ -22,6 +26,20 @@ def entity_alignment_train(args, my_model, logger):
     slogger = get_structured_logger(__name__)
 
     slogger.section("Entity Alignment Training")
+
+    # Log general configuration information
+    slogger.table("General Configuration", {
+        "Model": cfg.MODEL,
+        "Dataset": cfg.DATASET,
+        "Mode": cfg.MODE,
+        "Structural Model": cfg.STRUCTURAL_MODEL,
+        "Task": cfg.TASK,
+        "Device": "CUDA" if torch.cuda.is_available() else "CPU",
+        "Reduction Ratio": f"{cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE:.1f}%",
+        "Pipeline Seed": cfg.SEED,
+        "Attribute Seed": cfg.SEED_NUM,
+    })
+
     slogger.table("Training Configuration", {
         "Training File": args.ea_train_triples_file,
         "Batch Size": args.batch_size,

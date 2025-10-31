@@ -57,7 +57,9 @@ class TrainIndexGenerator:
         for src, tgt in self.train_pairs:
             if src not in self.candidates:
                 continue
-            neg_samples = np.random.choice(self.candidates[src], size=self.neg_num, replace=True)
+            # Use randint to sample indices, then get candidates (matches original BERT-INT)
+            neg_indices = np.random.randint(len(self.candidates[src]), size=self.neg_num)
+            neg_samples = self.candidates[src][neg_indices].tolist()
             for neg in neg_samples:
                 if neg == tgt:
                     continue
@@ -130,8 +132,9 @@ def train_interaction_model(
             optimizer.zero_grad()
             pos_feat = feature_tensor[pos_idx].to(device)
             neg_feat = feature_tensor[neg_idx].to(device)
-            pos_score = model(pos_feat)
-            neg_score = model(neg_feat)
+            pos_score = model(pos_feat).unsqueeze(-1)
+            neg_score = model(neg_feat).unsqueeze(-1)
+            # label=1 means pos_score should be ranked higher than neg_score
             label = torch.ones_like(pos_score)
             loss = criterion(pos_score, neg_score, label)
             loss.backward()
