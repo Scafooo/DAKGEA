@@ -60,4 +60,6 @@ def batched_topk(matrix, k: int = None, topn: int = None, batch_size: int = 128,
         scores.append(score_chunk.cpu())
         indices.append(index_chunk.cpu())
 
-    return torch.cat(scores, dim=0), torch.cat(indices, dim=0)
+    result_scores = torch.cat(scores, dim=0)
+    result_indices = torch.cat(indices, dim=0)
+    return result_scores, result_indices
