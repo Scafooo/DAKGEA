@@ -114,7 +114,8 @@ Each augmentation reuses the reduced dataset as input, then writes its artefacts
 
 1. Drop new reducers under `src/reduction/methods/` and register them via `@REDUCTION_REGISTRY.register("<name>")`.
 2. Add augmenters in `src/augmentation/methods/` and models in `src/alignment_models/methods/`.
-3. Update experiment YAML with the new method keys. The runner auto-discovers the implementations via the registries.
+3. Import shared domain objects from the `src.core` namespace (`from src.core.dataset import Dataset`, `from src.core.knowledge_graph import KnowledgeGraph`) whenever you need to construct datasets or graphs manually.
+4. Update experiment YAML with the new method keys. The runner auto-discovers the implementations via the registries.
 
 ## 6. HybEA Experiments
 

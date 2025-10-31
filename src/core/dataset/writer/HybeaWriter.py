@@ -9,9 +9,9 @@ from typing import Iterable, Tuple, Optional
 
 from rdflib.term import URIRef
 
-from src.dataset.Dataset import Dataset
-from src.dataset.writer.Writer import Writer
-from src.knowledge_graph.writer.WriterFactory import WriterFactory
+from src.core.dataset import Dataset
+from src.core.dataset.writer import Writer
+from src.core.knowledge_graph.writer import WriterFactory
 from src.logger import get_logger, get_structured_logger
 from src.util.reader import read_tsv
 from src.util.writer import write_tsv

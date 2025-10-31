@@ -3,7 +3,7 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
-from src.dataset.writer.WriterFactory import WriterFactory
+from src.core.dataset.writer.WriterFactory import WriterFactory
 
 
 class Writer(ABC):
@@ -17,6 +17,6 @@ class Writer(ABC):
             WriterFactory.register_writer(cls.file_type, cls)
 
     @abstractmethod
-    def write(self, *args: Any, **kwargs: Any) -> bool:
-        """Persist a dataset to disk."""
+    def write(self, *args: Any, **kwargs: Any):
+        """Persist a dataset to storage."""
         raise NotImplementedError

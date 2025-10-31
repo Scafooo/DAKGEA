@@ -64,8 +64,7 @@ src/
   augmentation/        # Data augmentation registry and components
   reduction/           # Dataset reduction strategies
   config/              # YAML loader utilities
-  dataset/             # Dataset wrappers around paired knowledge graphs
-  knowledge_graph/     # Thin rdflib-based graph helpers
+  core/                # Canonical dataset/knowledge-graph domain objects + IO
   util/                # Reader/write helpers and shared utilities
 experiments/           # Experiment entry points and output artefacts
 tests/                 # Lightweight regression tests for loaders and I/O

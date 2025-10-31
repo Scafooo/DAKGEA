@@ -6,9 +6,9 @@ from typing import Dict, Iterable, Optional, Set, Tuple
 
 from rdflib import URIRef
 
-from src.dataset.Dataset import Dataset
-from src.dataset.reader.Reader import Reader
-from src.knowledge_graph.reader.ReaderFactory import ReaderFactory
+from src.core.dataset import Dataset
+from src.core.dataset.reader.Reader import Reader
+from src.core.knowledge_graph.reader import ReaderFactory
 from src.logger import get_logger
 from src.util.reader import read_tsv
 
