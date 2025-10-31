@@ -20,6 +20,39 @@ logger = get_logger(__name__)
 Pair = Tuple[int, int]
 
 
+class EarlyStopping:
+    """Early stopping to avoid overfitting."""
+
+    def __init__(self, patience: int = 10, min_delta: float = 0.0):
+        self.patience = patience
+        self.min_delta = min_delta
+        self.counter = 0
+        self.best_loss = None
+        self.should_stop = False
+
+    def __call__(self, loss: float) -> bool:
+        """
+        Check if training should stop.
+
+        Args:
+            loss: Current loss value
+
+        Returns:
+            True if training should stop, False otherwise
+        """
+        if self.best_loss is None:
+            self.best_loss = loss
+        elif loss < self.best_loss - self.min_delta:
+            self.best_loss = loss
+            self.counter = 0
+        else:
+            self.counter += 1
+            if self.counter >= self.patience:
+                self.should_stop = True
+                return True
+        return False
+
+
 class InteractionMLP(nn.Module):
     def __init__(self, input_dim: int, hidden_dim: int) -> None:
         super().__init__()
@@ -120,6 +153,7 @@ def train_interaction_model(
     model = InteractionMLP(feature_tensor.shape[1], hidden_dim=11).to(device)
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
     criterion = nn.MarginRankingLoss(margin=margin)
+    early_stopping = EarlyStopping(patience=10, min_delta=1e-5)
 
     generator = TrainIndexGenerator(train_pairs, train_candidates, pair_index, neg_num, batch_size)
 
@@ -141,12 +175,19 @@ def train_interaction_model(
             optimizer.step()
             epoch_loss += float(loss.item())
             steps += 1
+
+        avg_loss = epoch_loss / max(1, steps)
         logger.info(
             "[BERT-INT] Interaction epoch %d/%d loss=%.4f",
             epoch + 1,
             epochs,
-            epoch_loss / max(1, steps),
+            avg_loss,
         )
+
+        # Early stopping check
+        if early_stopping(avg_loss):
+            logger.info("[BERT-INT] Early stopping triggered at epoch %d/%d", epoch + 1, epochs)
+            break
 
     model.eval()
     with torch.no_grad():
