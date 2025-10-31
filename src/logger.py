@@ -69,8 +69,8 @@ class ColorFormatter(logging.Formatter):
             rel_path = Path(record.pathname).resolve().relative_to(project_root)
         except Exception:
             rel_path = Path(record.pathname).name
-        location = f"{rel_path}:{record.lineno}"
-        location_colored = f"{self.LOCATION_COLOR}{location:<60}{self.RESET}"
+        location = self._shorten_location(f"{rel_path}:{record.lineno}")
+        location_colored = f"{self.LOCATION_COLOR}{location:<40}{self.RESET}"
 
         timestamp = datetime.fromtimestamp(record.created).strftime("%H:%M:%S")
         timestamp_text = f"{self.SEPARATOR_COLOR}{timestamp}{self.RESET}"
@@ -85,6 +85,12 @@ class ColorFormatter(logging.Formatter):
 
         separator = f"{self.SEPARATOR_COLOR}│{self.RESET}"
         return f"{timestamp_text} {separator} {levelname} {separator} {location_colored} {separator} {formatted_message}"
+
+    @staticmethod
+    def _shorten_location(text: str, width: int = 40) -> str:
+        if len(text) <= width:
+            return text
+        return "…" + text[-(width - 1):]
 
 
 def _parse_level(level: Union[str, int, None]) -> int:

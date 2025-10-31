@@ -58,6 +58,8 @@ class HybeaReader(Reader):
         else:
             if subtype:
                 add_if_exists(base_path / subtype)
+                if variants:
+                    return tuple(variants)
             add_if_exists(base_path / "attribute_data")
             add_if_exists(base_path / "knowformer_data")
             if not variants:
