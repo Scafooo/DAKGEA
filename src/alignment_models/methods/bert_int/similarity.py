@@ -22,13 +22,41 @@ def _batched_matmul(mat1, mat2, batch_size: int, device: torch.device | None = N
     return torch.cat(results, dim=0)
 
 
-def batched_topk(matrix, k: int, batch_size: int = 128, largest: bool = True, device: torch.device | None = None):
+def batched_topk(matrix, k: int = None, topn: int = None, batch_size: int = 128, largest: bool = True, device: torch.device | None = None):
+    """
+    Compute top-k elements for each row of a matrix in batches.
+
+    Args:
+        matrix: 2D tensor of shape [n_rows, n_cols]
+        k: number of top elements to return (preferred parameter)
+        topn: number of top elements to return (legacy parameter, alternative to k)
+        batch_size: batch size for processing
+        largest: if True, return largest elements; if False, return smallest
+        device: device to use for computation
+
+    Returns:
+        Tuple of (scores, indices) tensors
+    """
+    # Handle both k and topn parameters for backward compatibility
+    if k is None and topn is None:
+        raise ValueError("Either 'k' or 'topn' must be specified")
+    if k is None:
+        k = topn
+
     device = device or torch.device("cpu")
     scores = []
     indices = []
     for start in range(0, matrix.shape[0], batch_size):
         chunk = matrix[start : start + batch_size].to(device)
-        score_chunk, index_chunk = torch.topk(chunk, k=k, largest=largest)
-        scores.append(score_chunk.cpu())
-        indices.append(index_chunk.cpu())
+        # Ensure k doesn't exceed the number of columns
+        k_actual = min(k, chunk.shape[1])
+        if k_actual > 0:
+            score_chunk, index_chunk = torch.topk(chunk, k=k_actual, largest=largest)
+            scores.append(score_chunk.cpu())
+            indices.append(index_chunk.cpu())
+
+    if not scores:
+        # Return empty tensors with correct shape
+        return torch.empty((matrix.shape[0], 0)), torch.empty((matrix.shape[0], 0), dtype=torch.long)
+
     return torch.cat(scores, dim=0), torch.cat(indices, dim=0)
