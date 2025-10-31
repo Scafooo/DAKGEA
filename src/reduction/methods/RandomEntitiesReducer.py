@@ -20,6 +20,7 @@ class RandomEntitiesReducer:
             self.seed = experiment_cfg.get("seed")
 
     def reduce(self, dataset: Dataset) -> Dataset:
+        logger.info("[STEP] RandomEntities reduction started")
         aligned_set = self._normalise_alignment(dataset.aligned_entities)
         total_pairs = len(aligned_set)
 
@@ -72,6 +73,7 @@ class RandomEntitiesReducer:
             total_pairs,
             len(dataset.aligned_entities),
         )
+        logger.info("[SUCCESS] RandomEntities reduction finished")
 
         return dataset
 

@@ -3,11 +3,16 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Dict, Iterable, List, Sequence, Set, Tuple
+from pathlib import Path
+from typing import Dict, Iterable, List, Optional, Sequence, Set, Tuple
 
 from rdflib import Literal, URIRef
 
 from src.core.dataset import Dataset
+from src.logger import get_logger
+from src.util.reader import read_tsv
+
+logger = get_logger(__name__)
 
 
 @dataclass
@@ -138,6 +143,9 @@ def _build_snapshot(graph, base_offset: int = 0) -> KnowledgeGraphSnapshot:
 def build_dataset(
     dataset: Dataset,
     train_ratio: float,
+    *,
+    lineage: Optional[Dict[str, object]] = None,
+    dataset_name: str = "",
 ) -> BertIntDataset:
     """Convert a Dataset object into the structures expected by BERT-INT."""
 
@@ -166,6 +174,9 @@ def build_dataset(
     aligned_pairs = sorted(
         (str(src), str(tgt)) for src, tgt in dataset.aligned_entities
     )
+
+    hybea_pairs = _load_pairs_from_hybea(lineage, dataset_name, entity2index)
+
     def _remap_rel_triples(snapshot: KnowledgeGraphSnapshot) -> List[Tuple[int, int, int]]:
         remapped: List[Tuple[int, int, int]] = []
         for head, rel_str, tail in snapshot.relation_triples:
@@ -176,13 +187,20 @@ def build_dataset(
     kg1_snapshot.relation_triples = _remap_rel_triples(kg1_snapshot)
     kg2_snapshot.relation_triples = _remap_rel_triples(kg2_snapshot)
 
-    train_pairs_raw, test_pairs_raw = _split_alignment(aligned_pairs, train_ratio)
-
     ent_ids_1 = [entity2index[e] for e in kg1_snapshot.entities]
     ent_ids_2 = [entity2index[e] for e in kg2_snapshot.entities]
 
-    train_pairs = [(entity2index[src], entity2index[tgt]) for src, tgt in train_pairs_raw]
-    test_pairs = [(entity2index[src], entity2index[tgt]) for src, tgt in test_pairs_raw]
+    if hybea_pairs is not None:
+        train_pairs, test_pairs = hybea_pairs
+        logger.debug(
+            "[BERT-INT] Loaded train/test pairs from HybEA artefacts (%d train, %d test)",
+            len(train_pairs),
+            len(test_pairs),
+        )
+    else:
+        train_pairs_raw, test_pairs_raw = _split_alignment(aligned_pairs, train_ratio)
+        train_pairs = [(entity2index[src], entity2index[tgt]) for src, tgt in train_pairs_raw]
+        test_pairs = [(entity2index[src], entity2index[tgt]) for src, tgt in test_pairs_raw]
 
     source_global_to_local = {entity2index[entity]: idx for idx, entity in enumerate(kg1_snapshot.entities)}
     target_global_to_local = {entity2index[entity]: idx for idx, entity in enumerate(kg2_snapshot.entities)}
@@ -201,3 +219,109 @@ def build_dataset(
         source_global_to_local=source_global_to_local,
         target_global_to_local=target_global_to_local,
     )
+
+
+def _load_pairs_from_hybea(
+    lineage: Optional[Dict[str, object]],
+    dataset_name: str,
+    entity2index: Dict[str, int],
+) -> Optional[Tuple[List[Tuple[int, int]], List[Tuple[int, int]]]]:
+    if not lineage:
+        return None
+    path_str = lineage.get("hybea_dataset_path")
+    if not path_str:
+        return None
+
+    base = Path(path_str)
+    if not base.exists():
+        logger.debug("[BERT-INT] HybEA path %s does not exist", base)
+        return None
+
+    attr_sup = base / "sup_pairs"
+    attr_ref = base / "ref_pairs"
+    knowformer_sup = base / "sup_ents.txt"
+    knowformer_ref = base / "ref_ents.txt"
+
+    if attr_sup.exists() and attr_ref.exists():
+        ent_map1 = _load_ent_ids(base / "ent_ids_1")
+        ent_map2 = _load_ent_ids(base / "ent_ids_2")
+        train_raw = _load_pair_file(attr_sup, ent_map1, ent_map2)
+        test_raw = _load_pair_file(attr_ref, ent_map1, ent_map2)
+    elif knowformer_sup.exists() and knowformer_ref.exists():
+        ent_map1 = _load_ent_ids(base / "ent_ids_1")
+        ent_map2 = _load_ent_ids(base / "ent_ids_2")
+        train_raw = _load_pair_file(knowformer_sup, ent_map1, ent_map2)
+        test_raw = _load_pair_file(knowformer_ref, ent_map1, ent_map2)
+    else:
+        logger.debug(
+            "[BERT-INT] No HybEA split files found at %s (dataset=%s)",
+            base,
+            dataset_name,
+        )
+        return None
+
+    def to_indices(pairs: List[Tuple[str, str]], label: str) -> List[Tuple[int, int]]:
+        results: List[Tuple[int, int]] = []
+        skipped = 0
+        for left_uri, right_uri in pairs:
+            if left_uri not in entity2index or right_uri not in entity2index:
+                skipped += 1
+                continue
+            results.append((entity2index[left_uri], entity2index[right_uri]))
+        if skipped:
+            logger.debug(
+                "[BERT-INT] Skipped %d %s pairs missing from entity index (dataset=%s)",
+                skipped,
+                label,
+                dataset_name,
+            )
+        return results
+
+    train_idx = to_indices(train_raw, "train")
+    test_idx = to_indices(test_raw, "test")
+
+    if not train_idx or not test_idx:
+        logger.warning(
+            "[BERT-INT] HybEA-derived splits were empty (train=%d, test=%d); falling back to ratio split",
+            len(train_idx),
+            len(test_idx),
+        )
+        return None
+
+    return train_idx, test_idx
+
+
+def _load_ent_ids(path: Path) -> Dict[str, str]:
+    mapping: Dict[str, str] = {}
+    if not path.exists():
+        return mapping
+    for row in read_tsv(path):
+        if len(row) < 2:
+            continue
+        key = str(row[0]).strip()
+        uri = str(row[1]).strip()
+        mapping[key] = uri
+        try:
+            mapping[str(int(key))] = uri
+        except (ValueError, TypeError):
+            pass
+    return mapping
+
+
+def _load_pair_file(
+    path: Path,
+    map_left: Dict[str, str],
+    map_right: Dict[str, str],
+) -> List[Tuple[str, str]]:
+    pairs: List[Tuple[str, str]] = []
+    if not path.exists():
+        return pairs
+    for row in read_tsv(path):
+        if len(row) < 2:
+            continue
+        left_raw = str(row[0]).strip()
+        right_raw = str(row[1]).strip()
+        left = map_left.get(left_raw, left_raw)
+        right = map_right.get(right_raw, right_raw)
+        pairs.append((left, right))
+    return pairs
