@@ -9,7 +9,7 @@ import torch
 from rdflib import Literal, URIRef
 from sentence_transformers import SentenceTransformer, util
 
-from src.dataset.Dataset import Dataset
+from src.core.dataset import Dataset
 from src.logger import get_logger
 
 logger = get_logger(__name__)

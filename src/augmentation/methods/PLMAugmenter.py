@@ -13,8 +13,8 @@ from tqdm.contrib.logging import logging_redirect_tqdm
 from .bart_interpolator import BartInterpolatorPLM, _clean_pred
 from .predicate_matching import match_relations
 from src.augmentation.registry import AUGMENTATION_REGISTRY
-from src.dataset.Dataset import Dataset
-from src.knowledge_graph.KnowledgeGraph import KnowledgeGraph
+from src.core.dataset import Dataset
+from src.core.knowledge_graph import KnowledgeGraph
 from src.logger import get_logger
 
 logger = get_logger(__name__)

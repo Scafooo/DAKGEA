@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from src.knowledge_graph.reader.ReaderFactory import ReaderFactory
+from src.core.knowledge_graph.reader.ReaderFactory import ReaderFactory
 
 
 class Reader(ABC):

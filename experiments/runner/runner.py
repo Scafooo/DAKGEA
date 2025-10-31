@@ -10,9 +10,9 @@ from typing import Any, Dict, List
 from src.alignment_models.registry import MODEL_REGISTRY
 from src.augmentation.registry import AUGMENTATION_REGISTRY
 from src.config.loader import Config
-from src.dataset.Dataset import Dataset
-from src.dataset.reader.ReaderFactory import ReaderFactory
-from src.dataset.writer.WriterFactory import WriterFactory
+from src.core.dataset import Dataset
+from src.core.dataset.reader import ReaderFactory
+from src.core.dataset.writer import WriterFactory
 from src.logger import get_logger
 
 logger = get_logger(__name__)

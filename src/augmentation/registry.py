@@ -1,38 +1,17 @@
 """Registry utilities for augmentation strategies."""
 
-import importlib
-import pkgutil
-from typing import Dict, Type
+from src.util.registry import Registry
 
-class AugmentationRegistry:
+
+class AugmentationRegistry(Registry):
     """Registry for Data Augmentation methods applied to Knowledge Graph datasets."""
 
-    def __init__(self):
-        self._registry: Dict[str, Type] = {}
+    def __init__(self) -> None:
+        super().__init__("Augmentation")
 
-    def register(self, name: str):
-        """Decorator to register an augmentation method with a given name."""
-        def decorator(cls):
-            if name in self._registry:
-                raise ValueError(f"Augmentation '{name}' already registered.")
-            self._registry[name] = cls
-            return cls
-        return decorator
-
-    def get(self, name: str):
-        """Retrieve an augmentation class by name."""
-        if name not in self._registry:
-            raise ValueError(f"Augmentation '{name}' not registered.")
-        return self._registry[name]
-
-    def list(self):
-        """List all registered augmentations."""
-        return list(self._registry.keys())
-
-    def autoload(self, package: str = "src.augmentation.methods"):
+    def autoload(self, package: str = "src.augmentation.methods") -> None:
         """Automatically import all augmentation methods under the given package."""
-        pkg = importlib.import_module(package)
-        for _, modname, _ in pkgutil.iter_modules(pkg.__path__):
-            importlib.import_module(f"{package}.{modname}")
+        super().autoload(package, recursive=False)
+
 
 AUGMENTATION_REGISTRY = AugmentationRegistry()

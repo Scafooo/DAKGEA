@@ -2,26 +2,34 @@
 
 import importlib
 import pkgutil
-from typing import Any, Dict, Type
+from typing import Any, Type
+
+from src.util.registry import Registry
+
 
 class WriterFactory:
     """Registry-backed factory that returns writer implementations by file type."""
 
-    _writers: Dict[str, Type] = {}
+    _registry = Registry("Dataset writer")
+    _autoloaded = False
 
     @classmethod
     def register_writer(cls, file_type: str, writer_cls: Type) -> None:
         """Register a writer implementation for a file type key."""
-        cls._writers[file_type.lower()] = writer_cls
+        cls._registry.add(file_type.lower(), writer_cls)
+
+    @classmethod
+    def _ensure_autoload(cls) -> None:
+        if cls._autoloaded:
+            return
+        cls._autoload("src.core.dataset.writer")
+        cls._autoloaded = True
 
     @classmethod
     def create_writer(cls, file_type: str, *args: Any, **kwargs: Any):
         """Instantiate a writer, auto-discovering implementations on first use."""
-        if not cls._writers:
-            cls._autoload("src.dataset.writer")
-        writer_cls = cls._writers.get(file_type.lower())
-        if writer_cls is None:
-            raise ValueError(f"Unknown file type: {file_type}")
+        cls._ensure_autoload()
+        writer_cls = cls._registry.get(file_type.lower())
         return writer_cls(*args, **kwargs)
 
     @classmethod

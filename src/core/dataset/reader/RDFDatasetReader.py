@@ -1,9 +1,9 @@
 from pathlib import Path
 from typing import Optional
 
-from src.dataset.Dataset import Dataset
-from src.dataset.reader.Reader import Reader
-from src.knowledge_graph.reader.ReaderFactory import ReaderFactory as KGReaderFactory
+from src.core.dataset import Dataset
+from src.core.dataset.reader.Reader import Reader
+from src.core.knowledge_graph.reader import ReaderFactory as KGReaderFactory
 from src.util.reader import read_tsv
 
 
@@ -23,9 +23,7 @@ class RDFDatasetReader(Reader):
         kg_target = kg_reader.read(str(kg_target_path))
 
         aligned_path = base_path / "aligned_entities.tsv"
-        aligned_entities = [
-            (row[0], row[1]) for row in read_tsv(aligned_path)
-        ]
+        aligned_entities = [(row[0], row[1]) for row in read_tsv(aligned_path)]
 
         return Dataset(kg_source, kg_target, aligned_entities)
 

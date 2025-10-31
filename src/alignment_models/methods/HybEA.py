@@ -16,8 +16,8 @@ from src.alignment_models.methods.hybea.configuration import HybeaConfig
 from src.alignment_models.methods.hybea.pipeline import HybeaPipeline
 from src.alignment_models.registry import MODEL_REGISTRY
 from src.config.loader import PROJECT_ROOT, load_yaml
-from src.dataset.Dataset import Dataset
-from src.dataset.writer.HybeaWriter import HybeaWriter
+from src.core.dataset import Dataset
+from src.core.dataset.writer import HybeaWriter
 from src.logger import get_logger
 
 logger = get_logger(__name__)

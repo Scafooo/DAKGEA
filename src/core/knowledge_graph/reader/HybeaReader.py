@@ -3,8 +3,8 @@
 from pathlib import Path
 from typing import Iterable, Optional, Tuple
 
-from src.knowledge_graph.KnowledgeGraph import KnowledgeGraph
-from src.knowledge_graph.reader.Reader import Reader
+from src.core.knowledge_graph import KnowledgeGraph
+from src.core.knowledge_graph.reader.Reader import Reader
 from src.logger import get_logger
 from src.util.reader import read_tsv
 

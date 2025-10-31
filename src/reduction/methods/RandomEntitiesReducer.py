@@ -1,7 +1,7 @@
 import random
 from typing import Iterable, Set, Tuple
 from rdflib import Literal, URIRef
-from src.dataset.Dataset import Dataset
+from src.core.dataset import Dataset
 from src.logger import get_logger
 from src.reduction.registry import REDUCTION_REGISTRY
 

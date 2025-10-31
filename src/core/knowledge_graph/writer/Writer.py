@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from src.knowledge_graph.writer.WriterFactory import WriterFactory
+from src.core.knowledge_graph.writer.WriterFactory import WriterFactory
 
 
 class Writer(ABC):

@@ -7,7 +7,7 @@ from typing import Dict, Iterable, List, Sequence, Set, Tuple
 
 from rdflib import Literal, URIRef
 
-from src.dataset.Dataset import Dataset
+from src.core.dataset import Dataset
 
 
 @dataclass

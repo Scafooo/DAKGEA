@@ -2,8 +2,8 @@ import os
 
 from rdflib import Literal, URIRef
 
-from src.knowledge_graph.KnowledgeGraph import KnowledgeGraph
-from src.knowledge_graph.writer.Writer import Writer
+from src.core.knowledge_graph import KnowledgeGraph
+from src.core.knowledge_graph.writer.Writer import Writer
 from src.logger import get_logger
 from src.util.reader import read_tsv
 from src.util.writer import write_tsv

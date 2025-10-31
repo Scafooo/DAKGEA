@@ -1,9 +1,9 @@
 from pathlib import Path
 from typing import Iterable, Tuple
 
-from src.dataset.Dataset import Dataset
-from src.dataset.writer.Writer import Writer
-from src.knowledge_graph.writer.WriterFactory import WriterFactory
+from src.core.dataset import Dataset
+from src.core.dataset.writer.Writer import Writer
+from src.core.knowledge_graph.writer import WriterFactory
 from src.logger import get_logger
 from src.util.writer import write_tsv
 

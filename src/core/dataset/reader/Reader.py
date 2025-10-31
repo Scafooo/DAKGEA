@@ -3,8 +3,7 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
-from src.dataset.Dataset import Dataset
-from src.dataset.reader.ReaderFactory import ReaderFactory
+from src.core.dataset.reader.ReaderFactory import ReaderFactory
 
 
 class Reader(ABC):
@@ -18,6 +17,6 @@ class Reader(ABC):
             ReaderFactory.register_reader(cls.file_type, cls)
 
     @abstractmethod
-    def read(self, *args: Any, **kwargs: Any) -> Dataset:
+    def read(self, *args: Any, **kwargs: Any):
         """Read data from storage and return a dataset instance."""
         raise NotImplementedError

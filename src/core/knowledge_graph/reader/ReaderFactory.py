@@ -1,0 +1,39 @@
+"""Factory and auto-discovery utilities for knowledge-graph readers."""
+
+import importlib
+import pkgutil
+from typing import Any, Type
+
+from src.util.registry import Registry
+
+
+class ReaderFactory:
+    _registry = Registry("Knowledge-graph reader")
+    _autoloaded = False
+
+    @classmethod
+    def register_reader(cls, file_type: str, reader_cls: Type) -> None:
+        cls._registry.add(file_type.lower(), reader_cls)
+
+    @classmethod
+    def _ensure_autoload(cls) -> None:
+        if cls._autoloaded:
+            return
+        cls._autoload("src.core.knowledge_graph.reader")
+        cls._autoloaded = True
+
+    @classmethod
+    def create_reader(cls, file_type: str, *args: Any, **kwargs):
+        cls._ensure_autoload()
+        reader_cls = cls._registry.get(file_type.lower())
+        return reader_cls(*args, **kwargs)
+
+    @classmethod
+    def _autoload(cls, package_name: str) -> None:
+        package = importlib.import_module(package_name)
+        if not hasattr(package, "__path__"):
+            return
+        for _, module_name, _ in pkgutil.walk_packages(
+            package.__path__, f"{package.__name__}."
+        ):
+            importlib.import_module(module_name)
