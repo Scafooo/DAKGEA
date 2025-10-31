@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.logger import get_structured_logger
+from src.logger import get_logger
 
-logger = get_structured_logger(__name__)
+logger = get_logger(__name__)
 
 class BatchTrainDataGenerator:
     """Generate positive/negative training tuples for margin ranking."""
