@@ -44,19 +44,20 @@ def batched_topk(matrix, k: int = None, topn: int = None, batch_size: int = 128,
         k = topn
 
     device = device or torch.device("cpu")
+
+    # Ensure k doesn't exceed the number of columns in the matrix
+    k_actual = min(k, matrix.shape[1]) if matrix.shape[1] > 0 else 0
+
+    if k_actual == 0:
+        # Return empty tensors with correct shape
+        return torch.empty((matrix.shape[0], 0)), torch.empty((matrix.shape[0], 0), dtype=torch.long)
+
     scores = []
     indices = []
     for start in range(0, matrix.shape[0], batch_size):
         chunk = matrix[start : start + batch_size].to(device)
-        # Ensure k doesn't exceed the number of columns
-        k_actual = min(k, chunk.shape[1])
-        if k_actual > 0:
-            score_chunk, index_chunk = torch.topk(chunk, k=k_actual, largest=largest)
-            scores.append(score_chunk.cpu())
-            indices.append(index_chunk.cpu())
-
-    if not scores:
-        # Return empty tensors with correct shape
-        return torch.empty((matrix.shape[0], 0)), torch.empty((matrix.shape[0], 0), dtype=torch.long)
+        score_chunk, index_chunk = torch.topk(chunk, k=k_actual, largest=largest)
+        scores.append(score_chunk.cpu())
+        indices.append(index_chunk.cpu())
 
     return torch.cat(scores, dim=0), torch.cat(indices, dim=0)

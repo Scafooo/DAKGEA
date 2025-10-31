@@ -39,6 +39,9 @@ class BatchTrainDataGenerator:
     def _generate_training_indices(self, candidate_dict):
         train_index = []
         for pe1, pe2 in self.ent_ill:
+            # Skip if either entity doesn't have candidates
+            if pe1 not in candidate_dict or pe2 not in candidate_dict:
+                continue
             for _ in range(self.neg_num):
                 if np.random.rand() <= 0.5:
                     ne1 = np.random.choice(candidate_dict[pe2])
