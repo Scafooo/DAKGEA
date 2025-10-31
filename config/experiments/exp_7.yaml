@@ -1,0 +1,22 @@
+experiment:
+  name: "bert_int_0_1"
+  overwrite_existing: false
+
+  writers:
+    - type: "hybea"
+      write_reduced: false
+      write_augmented: false
+      write_results: true
+
+  datasets:
+    - name: "D_W_15K_V1"
+
+  reduction_method: "random_entities"
+  reduction_ratios: [0.1]
+  augmentation_methods: []
+  models_to_run: ["bert_int"]
+
+  parameters:
+    lineage:
+      hybea_dataset_path: "data/reduced/random_entities/hybea/D_W_15K_V1/10/attribute_data"
+    debug: true
