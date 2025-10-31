@@ -49,8 +49,10 @@ def build_attribute_values(
     for ent, attr, val, _ in attribute_triples:
         ent2values.setdefault(ent, []).append(val)
     for ent in entities:
-        if not ent2values[ent] and ent in fallback_names:
-            ent2values[ent].append(fallback_names[ent])
+        if ent in fallback_names:
+            name_val = fallback_names[ent]
+            if name_val and name_val not in ent2values[ent]:
+                ent2values[ent].append(name_val)
         np.random.shuffle(ent2values[ent])
         values = ent2values[ent][:max_values]
         values += [pad_token] * (max_values - len(values))
