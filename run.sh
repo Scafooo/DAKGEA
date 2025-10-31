@@ -9,7 +9,7 @@
 #  EXPERIMENT SELECTION
 #  Modify this line to select a different experiment
 # ============================================================
-EXPERIMENT="${EXPERIMENT:-exp_5.yaml}"
+EXPERIMENT="${EXPERIMENT:-exp_6.yaml}"
 
 # ---------- Helpers ----------
 term_width() { tput cols 2>/dev/null || echo 80; }

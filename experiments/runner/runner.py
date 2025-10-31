@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import json
 import logging
 from pathlib import Path
@@ -251,8 +252,23 @@ class ExperimentRunner:
                 "name": self.name,
                 "dataset": dataset_name,
                 "ratio": ratio,
+                "ratio_tag": self._format_ratio_tag(ratio),
             }
         )
+        lineage = cfg.setdefault("lineage", {})
+        lineage.setdefault("reduction_method", self.reduction_method)
+        lineage.setdefault(
+            "reduced_base",
+            str((self.base_reduced / self.reduction_method).resolve()),
+        )
+        lineage.setdefault(
+            "augmented_base",
+            str((self.base_augmented / self.reduction_method).resolve()),
+        )
+        lineage.setdefault("reduced_paths", {})
+        lineage.setdefault("augmented_paths", {})
+        lineage.setdefault("augmented_hybea_paths", {})
+        lineage.setdefault("ratio_tag", experiment_meta["ratio_tag"])
         logger.debug(
             "Stage config prepared for dataset=%s ratio=%.3f (target_entities=%d)",
             dataset_name,
@@ -312,15 +328,22 @@ class ExperimentRunner:
         reducer = self.reducer_cls(stage_cfg)
         dataset_reduced = reducer.reduce(dataset.clone())
 
+        lineage = stage_cfg.setdefault("lineage", {})
+        reduced_paths = lineage.setdefault("reduced_paths", {})
+
         for plan in writer_plans:
+            plan_root = (
+                self.base_reduced
+                / self.reduction_method
+                / plan.name
+                / spec.name
+                / ratio_tag
+            )
+            reduced_paths[plan.name] = str(plan_root)
+            if getattr(plan.writer, "file_type", None) == "hybea" or plan.name == "hybea":
+                lineage["reduced_hybea_path"] = str(plan_root)
+
             if plan.write_reduced:
-                plan_root = (
-                    self.base_reduced
-                    / self.reduction_method
-                    / plan.name
-                    / spec.name
-                    / ratio_tag
-                )
                 plan.writer.write(dataset_reduced, str(plan_root))
                 logger.info("📝 [%s] Saved reduced dataset → %s", plan.name, plan_root)
 
@@ -368,16 +391,25 @@ class ExperimentRunner:
         augmenter = augmenter_cls(stage_cfg)
         dataset_augmented = augmenter.augment(dataset_reduced.clone())
 
+        lineage = stage_cfg.setdefault("lineage", {})
+        augmented_paths = lineage.setdefault("augmented_paths", {})
+        per_aug_paths = augmented_paths.setdefault(augmentation_name, {})
+        hybea_aug_paths = lineage.setdefault("augmented_hybea_paths", {})
+
         for plan in writer_plans:
+            plan_root = (
+                self.base_augmented
+                / self.reduction_method
+                / augmentation_name
+                / plan.name
+                / spec.name
+                / ratio_tag
+            )
+            per_aug_paths[plan.name] = str(plan_root)
+            if getattr(plan.writer, "file_type", None) == "hybea" or plan.name == "hybea":
+                hybea_aug_paths[augmentation_name] = str(plan_root)
+
             if plan.write_augmented:
-                plan_root = (
-                    self.base_augmented
-                    / self.reduction_method
-                    / augmentation_name
-                    / plan.name
-                    / spec.name
-                    / ratio_tag
-                )
                 plan.writer.write(dataset_augmented, str(plan_root))
                 logger.info("📝 [%s] Saved augmented dataset → %s", plan.name, plan_root)
 
@@ -408,8 +440,32 @@ class ExperimentRunner:
                 )
                 continue
 
+            stage_cfg_eval = copy.deepcopy(stage_cfg)
+            experiment_meta = stage_cfg_eval.setdefault("experiment", {})
+            experiment_meta["augmentation"] = augmentation_name
+            experiment_meta["reduction_method"] = self.reduction_method
+
+            lineage = stage_cfg_eval.setdefault("lineage", {})
+            lineage.setdefault("reduction_method", self.reduction_method)
+            lineage["augmentation_name"] = (
+                augmentation_name if augmentation_name != "baseline" else None
+            )
+            lineage["active_source"] = (
+                "augmented" if augmentation_name != "baseline" else "reduced"
+            )
+
+            if augmentation_name == "baseline":
+                hybea_path = lineage.get("reduced_hybea_path")
+                base_root = lineage.get("reduced_base")
+            else:
+                hybea_path = lineage.get("augmented_hybea_paths", {}).get(augmentation_name)
+                base_root = lineage.get("augmented_base")
+
+            lineage["hybea_dataset_path"] = hybea_path
+            lineage["hybea_dataset_base"] = base_root
+
             model_cls = MODEL_REGISTRY.get(model_name)
-            model = model_cls(stage_cfg)
+            model = model_cls(stage_cfg_eval)
             results = model.evaluate(dataset_reduced, dataset_augmented)
 
             wrote_results = False

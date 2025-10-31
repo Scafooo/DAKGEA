@@ -1,0 +1,36 @@
+experiment:
+  name: "reductio_test"
+  overwrite_existing: true
+
+  writers:
+    - type: "hybea"
+      write_reduced: true
+      write_augmented: false
+      write_results: true
+
+  datasets:
+    - name: "BBC_DB"
+      reader: "hybea"
+    - name: "D_W_15K_V1"
+      reader: "hybea"
+    - name: "D_W_15K_V2"
+      reader: "hybea"
+    - name: "fr_en"
+      reader: "hybea"
+#    - name: "ICEW_WIKI"
+#      reader: "hybea"
+#    - name: "ICEW_YAGO"
+#      reader: "hybea"
+    - name: "ja_en"
+      reader: "hybea"
+    - name: "SRPRS_D_W_15K_V1"
+      reader: "hybea"
+    - name: "SRPRS_D_W_15K_V2"
+      reader: "hybea"
+    - name: "zh_en"
+      reader: "hybea"
+
+  reduction_method: "random_entities"
+  reduction_ratios: [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
+  augmentation_methods: []
+  models_to_run: []
