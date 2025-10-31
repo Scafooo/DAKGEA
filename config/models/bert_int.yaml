@@ -18,6 +18,8 @@ model:
     random_divide_ill: false
     train_ill_rate: 0.7
     candidate_topk: 128
+    early_stopping_patience: 3
+    early_stopping_min_delta: 1.0e-4
   interaction:
     epochs: 200
     learning_rate: 5.0e-4
@@ -29,6 +31,8 @@ model:
     neighbor_max: 50
     attribute_max: 50
     hidden_dim: 11
+    early_stopping_patience: 10
+    early_stopping_min_delta: 1.0e-5
   paths:
     work_dir: "experiments/bert_int"
     models_dir: null

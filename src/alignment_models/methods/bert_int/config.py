@@ -24,6 +24,8 @@ class BasicUnitConfig:
     random_divide_ill: bool = False
     train_ill_rate: float = 0.3
     candidate_topk: int = 128
+    early_stopping_patience: int = 3
+    early_stopping_min_delta: float = 1e-4
 
 
 @dataclass
@@ -40,6 +42,8 @@ class InteractionConfig:
     neighbor_max: int = 50
     attribute_max: int = 50
     hidden_dim: int = 11
+    early_stopping_patience: int = 10
+    early_stopping_min_delta: float = 1e-5
 
 
 @dataclass
