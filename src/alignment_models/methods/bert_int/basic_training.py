@@ -21,39 +21,6 @@ logger = get_logger(__name__)
 Pair = Tuple[int, int]
 
 
-class EarlyStopping:
-    """Early stopping to avoid overfitting."""
-
-    def __init__(self, patience: int = 5, min_delta: float = 0.0):
-        self.patience = patience
-        self.min_delta = min_delta
-        self.counter = 0
-        self.best_loss = None
-        self.should_stop = False
-
-    def __call__(self, loss: float) -> bool:
-        """
-        Check if training should stop.
-
-        Args:
-            loss: Current loss value
-
-        Returns:
-            True if training should stop, False otherwise
-        """
-        if self.best_loss is None:
-            self.best_loss = loss
-        elif loss < self.best_loss - self.min_delta:
-            self.best_loss = loss
-            self.counter = 0
-        else:
-            self.counter += 1
-            if self.counter >= self.patience:
-                self.should_stop = True
-                return True
-        return False
-
-
 @dataclass
 class BasicUnitArtifacts:
     entity_embeddings: List[List[float]]
@@ -245,8 +212,6 @@ def train_basic_unit_model(
     )
     optimizer = AdamW(model.parameters(), lr=learning_rate)
     criterion = nn.MarginRankingLoss(margin=margin)
-    early_stopping = EarlyStopping(patience=3, min_delta=1e-4)
-
     generator = BatchTrainDataGenerator(train_pairs, ent_ids1, ent_ids2, batch_size, negatives)
 
     for epoch in range(epochs):
@@ -289,11 +254,6 @@ def train_basic_unit_model(
 
         avg_loss = epoch_loss / max(1, steps)
         logger.info("[BERT-INT] Basic unit epoch %d/%d loss=%.4f", epoch + 1, epochs, avg_loss)
-
-        # Early stopping check
-        if early_stopping(avg_loss):
-            logger.info("[BERT-INT] Early stopping triggered at epoch %d/%d", epoch + 1, epochs)
-            break
 
     model.eval()
     with torch.no_grad():

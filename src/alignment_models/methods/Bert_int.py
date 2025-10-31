@@ -63,6 +63,8 @@ class Bert_int:
         lineage = self.stage_config.get("lineage")
         dataset_name = self.stage_config.get("experiment", {}).get("dataset", "")
 
+        dataset_name = self.stage_config.get("experiment", {}).get("dataset", "")
+
         bert_dataset = build_dataset(
             dataset,
             self._train_ratio(),

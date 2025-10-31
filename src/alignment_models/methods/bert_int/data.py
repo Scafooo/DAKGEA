@@ -92,16 +92,31 @@ def _extract_relation_triples(
     return triples
 
 
-def _attribute_type(value: str) -> str:
+def _normalise_literal_value(lit: Literal) -> Tuple[str, str]:
+    """Return cleaned literal text and a lightweight type label."""
+
+    # Determine type / language label
+    if lit.language:
+        value_type = lit.language
+    elif lit.datatype:
+        value_type = str(lit.datatype)
+    else:
+        value_type = "string"
+
+    # Obtain textual representation without rdflib decorations
     try:
-        int(value)
-        return "integer"
-    except ValueError:
-        try:
-            float(value)
-            return "float"
-        except ValueError:
-            return "string"
+        raw = lit.value  # may be Python primitive
+        text = str(raw)
+    except Exception:
+        text = str(lit)
+
+    text = text.replace("\t", " ")
+    text = text.strip().strip('"')
+
+    # Normalise whitespace
+    text = " ".join(text.split())
+
+    return text, value_type
 
 
 def _extract_attribute_triples(
@@ -112,10 +127,12 @@ def _extract_attribute_triples(
     for subj, pred, obj in graph.triples((None, None, None)):
         if not isinstance(obj, Literal):
             continue
-        s = entity_index[str(subj)]
+        subject_uri = str(subj)
+        if subject_uri not in entity_index:
+            continue
+        s = entity_index[subject_uri]
         attr = str(pred)
-        value = str(obj)
-        value_type = _attribute_type(value)
+        value, value_type = _normalise_literal_value(obj)
         triples.append((s, attr, value, value_type))
     return triples
 
