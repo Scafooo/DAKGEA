@@ -16,7 +16,7 @@ model:
     negatives: 2
     margin: 3.0
     random_divide_ill: false
-    train_ill_rate: 0.3
+    train_ill_rate: 0.7
     candidate_topk: 128
   interaction:
     epochs: 200
