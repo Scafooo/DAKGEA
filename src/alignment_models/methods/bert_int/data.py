@@ -42,6 +42,221 @@ class BertIntDataset:
     target_global_to_local: Dict[int, int]
 
 
+def _resolve_hybea_data_dir(base: Path) -> Optional[Path]:
+    candidates = [
+        base,
+        base / "attribute_data",
+        base / "ATTRIBUTE_DATA",
+    ]
+    for candidate in candidates:
+        if (candidate / "ent_ids_1").exists() and (candidate / "ent_ids_2").exists():
+            return candidate
+    return None
+
+
+def _read_id_map_int(path: Path) -> Dict[int, str]:
+    mapping: Dict[int, str] = {}
+    if not path.exists():
+        return mapping
+    for row in read_tsv(path):
+        if len(row) < 2:
+            continue
+        try:
+            idx = int(str(row[0]).strip())
+        except ValueError:
+            continue
+        uri = str(row[1]).strip()
+        mapping[idx] = uri
+    return mapping
+
+
+def _read_pairs(path: Path) -> List[Tuple[int, int]]:
+    pairs: List[Tuple[int, int]] = []
+    if not path.exists():
+        return pairs
+    for row in read_tsv(path):
+        if len(row) < 2:
+            continue
+        try:
+            left = int(str(row[0]).strip())
+            right = int(str(row[1]).strip())
+        except ValueError:
+            continue
+        pairs.append((left, right))
+    return pairs
+
+
+def _read_numeric_triples(path: Path) -> List[Tuple[int, int, int]]:
+    triples: List[Tuple[int, int, int]] = []
+    if not path.exists():
+        return triples
+    for row in read_tsv(path):
+        if len(row) < 3:
+            continue
+        try:
+            head = int(str(row[0]).strip())
+            rel = int(str(row[1]).strip())
+            tail = int(str(row[2]).strip())
+        except ValueError:
+            continue
+        triples.append((head, rel, tail))
+    return triples
+
+
+def _parse_literal_text(raw: str) -> Tuple[str, str]:
+    text = raw.strip()
+    if not text:
+        return "", "string"
+    try:
+        literal = Literal.from_n3(text)
+    except Exception:
+        cleaned = text.strip('"').replace("\t", " ")
+        cleaned = " ".join(cleaned.split())
+        return cleaned, "string"
+    if literal.language:
+        value_type = literal.language
+    elif literal.datatype:
+        value_type = str(literal.datatype)
+    else:
+        value_type = "string"
+    cleaned_text = str(literal).replace("\t", " ")
+    cleaned_text = " ".join(cleaned_text.split())
+    return cleaned_text, value_type
+
+
+def _read_attribute_triples(path: Path, entity_lookup: Dict[str, int]) -> List[Tuple[int, str, str, str]]:
+    triples: List[Tuple[int, str, str, str]] = []
+    if not path.exists():
+        return triples
+    for row in read_tsv(path):
+        if len(row) < 3:
+            continue
+        subj_raw = str(row[0]).strip()
+        attr = str(row[1]).strip()
+        value_raw = "\t".join(str(part) for part in row[2:]).strip()
+        entity_id = entity_lookup.get(subj_raw)
+        if entity_id is None:
+            continue
+        value_text, value_type = _parse_literal_text(value_raw)
+        triples.append((entity_id, attr, value_text, value_type))
+    return triples
+
+
+def _build_dataset_from_hybea(
+    lineage: Optional[Dict[str, object]],
+    dataset_name: str,
+) -> Optional[BertIntDataset]:
+    if not lineage:
+        return None
+    path_str = lineage.get("hybea_dataset_path")
+    if not path_str:
+        return None
+    base = Path(path_str)
+    if not base.exists():
+        logger.warning("[BERT-INT] HybEA dataset path does not exist: %s", base)
+        return None
+
+    data_dir = _resolve_hybea_data_dir(base)
+    if data_dir is None:
+        logger.warning("[BERT-INT] HybEA dataset missing attribute data directory at %s (dataset=%s)", base, dataset_name)
+        return None
+
+    ent_map1 = _read_id_map_int(data_dir / "ent_ids_1")
+    ent_map2 = _read_id_map_int(data_dir / "ent_ids_2")
+    if not ent_map1 or not ent_map2:
+        logger.warning("[BERT-INT] HybEA entity files missing or empty at %s (dataset=%s)", data_dir, dataset_name)
+        return None
+
+    index2entity: Dict[int, str] = {**ent_map1, **ent_map2}
+    entity2index: Dict[str, int] = {uri: idx for idx, uri in index2entity.items()}
+
+    rel_map1 = _read_id_map_int(data_dir / "rel_ids_1")
+    rel_map2 = _read_id_map_int(data_dir / "rel_ids_2")
+    index2rel: Dict[int, str] = {**rel_map1, **rel_map2}
+    rel2index: Dict[str, int] = {uri: idx for idx, uri in index2rel.items()}
+
+    triples1_raw = _read_numeric_triples(data_dir / "triples_1")
+    triples2_raw = _read_numeric_triples(data_dir / "triples_2")
+    kg1_rel_triples: List[Tuple[int, str, int]] = []
+    for head, rel_idx, tail in triples1_raw:
+        rel_uri = index2rel.get(rel_idx)
+        if rel_uri is None:
+            continue
+        kg1_rel_triples.append((head, rel_uri, tail))
+    kg2_rel_triples: List[Tuple[int, str, int]] = []
+    for head, rel_idx, tail in triples2_raw:
+        rel_uri = index2rel.get(rel_idx)
+        if rel_uri is None:
+            continue
+        kg2_rel_triples.append((head, rel_uri, tail))
+
+    attr_triples1 = _read_attribute_triples(data_dir / "attr_triples1", entity2index)
+    attr_triples2 = _read_attribute_triples(data_dir / "attr_triples2", entity2index)
+
+    train_pairs = _read_pairs(data_dir / "sup_pairs")
+    test_pairs = _read_pairs(data_dir / "ref_pairs")
+    if not train_pairs or not test_pairs:
+        logger.warning(
+            "[BERT-INT] HybEA split files missing/empty at %s (train=%d, test=%d); falling back to graph-derived splits.",
+            data_dir,
+            len(train_pairs),
+            len(test_pairs),
+        )
+        return None
+
+    kg1_entities = [ent_map1[idx] for idx in sorted(ent_map1.keys())]
+    kg2_entities = [ent_map2[idx] for idx in sorted(ent_map2.keys())]
+    ent_ids_1 = [entity2index[uri] for uri in kg1_entities]
+    ent_ids_2 = [entity2index[uri] for uri in kg2_entities]
+
+    kg1_relations = [rel_map1[idx] for idx in sorted(rel_map1.keys())]
+    kg2_relations = [rel_map2[idx] for idx in sorted(rel_map2.keys())]
+    kg1_relation_index = {uri: pos for pos, uri in enumerate(kg1_relations)}
+    kg2_relation_index = {uri: pos for pos, uri in enumerate(kg2_relations)}
+
+    kg1_snapshot = KnowledgeGraphSnapshot(
+        entities=kg1_entities,
+        relations=kg1_relations,
+        relation_triples=kg1_rel_triples,
+        attribute_triples=attr_triples1,
+        local_relation_index=kg1_relation_index,
+    )
+    kg2_snapshot = KnowledgeGraphSnapshot(
+        entities=kg2_entities,
+        relations=kg2_relations,
+        relation_triples=kg2_rel_triples,
+        attribute_triples=attr_triples2,
+        local_relation_index=kg2_relation_index,
+    )
+
+    source_global_to_local = {ent_id: idx for idx, ent_id in enumerate(ent_ids_1)}
+    target_global_to_local = {ent_id: idx for idx, ent_id in enumerate(ent_ids_2)}
+
+    logger.info(
+        "[BERT-INT] Loaded HybEA artefacts for dataset '%s': |KG1|=%d, |KG2|=%d, train=%d, test=%d",
+        dataset_name,
+        len(ent_ids_1),
+        len(ent_ids_2),
+        len(train_pairs),
+        len(test_pairs),
+    )
+
+    return BertIntDataset(
+        kg1=kg1_snapshot,
+        kg2=kg2_snapshot,
+        index2entity=index2entity,
+        entity2index=entity2index,
+        index2rel=index2rel,
+        rel2index=rel2index,
+        ent_ids_1=ent_ids_1,
+        ent_ids_2=ent_ids_2,
+        train_pairs=train_pairs,
+        test_pairs=test_pairs,
+        source_global_to_local=source_global_to_local,
+        target_global_to_local=target_global_to_local,
+    )
+
+
 def _split_alignment(
     aligned_entities: Sequence[Tuple[URIRef, URIRef]],
     train_ratio: float,
@@ -166,6 +381,22 @@ def build_dataset(
 ) -> BertIntDataset:
     """Convert a Dataset object into the structures expected by BERT-INT."""
 
+    hybea_dataset = _build_dataset_from_hybea(lineage, dataset_name)
+    if hybea_dataset is not None:
+
+        def _remap_from_strings(snapshot: KnowledgeGraphSnapshot) -> List[Tuple[int, int, int]]:
+            remapped: List[Tuple[int, int, int]] = []
+            for head, rel_str, tail in snapshot.relation_triples:
+                rel_id = hybea_dataset.rel2index.get(rel_str)
+                if rel_id is None:
+                    continue
+                remapped.append((head, rel_id, tail))
+            return remapped
+
+        hybea_dataset.kg1.relation_triples = _remap_from_strings(hybea_dataset.kg1)
+        hybea_dataset.kg2.relation_triples = _remap_from_strings(hybea_dataset.kg2)
+        return hybea_dataset
+
     kg1_snapshot = _build_snapshot(dataset.knowledge_graph_source, base_offset=0)
     kg2_snapshot = _build_snapshot(
         dataset.knowledge_graph_target,
@@ -254,25 +485,30 @@ def _load_pairs_from_hybea(
         logger.debug("[BERT-INT] HybEA path %s does not exist", base)
         return None
 
-    attr_sup = base / "sup_pairs"
-    attr_ref = base / "ref_pairs"
-    knowformer_sup = base / "sup_ents.txt"
-    knowformer_ref = base / "ref_ents.txt"
+    data_dir = _resolve_hybea_data_dir(base)
+    if data_dir is None:
+        logger.debug("[BERT-INT] HybEA attribute data missing at %s", base)
+        return None
+
+    attr_sup = data_dir / "sup_pairs"
+    attr_ref = data_dir / "ref_pairs"
+    knowformer_sup = data_dir / "sup_ents.txt"
+    knowformer_ref = data_dir / "ref_ents.txt"
 
     if attr_sup.exists() and attr_ref.exists():
-        ent_map1 = _load_ent_ids(base / "ent_ids_1")
-        ent_map2 = _load_ent_ids(base / "ent_ids_2")
+        ent_map1 = _load_ent_ids(data_dir / "ent_ids_1")
+        ent_map2 = _load_ent_ids(data_dir / "ent_ids_2")
         train_raw = _load_pair_file(attr_sup, ent_map1, ent_map2)
         test_raw = _load_pair_file(attr_ref, ent_map1, ent_map2)
     elif knowformer_sup.exists() and knowformer_ref.exists():
-        ent_map1 = _load_ent_ids(base / "ent_ids_1")
-        ent_map2 = _load_ent_ids(base / "ent_ids_2")
+        ent_map1 = _load_ent_ids(data_dir / "ent_ids_1")
+        ent_map2 = _load_ent_ids(data_dir / "ent_ids_2")
         train_raw = _load_pair_file(knowformer_sup, ent_map1, ent_map2)
         test_raw = _load_pair_file(knowformer_ref, ent_map1, ent_map2)
     else:
         logger.debug(
             "[BERT-INT] No HybEA split files found at %s (dataset=%s)",
-            base,
+            data_dir,
             dataset_name,
         )
         return None
