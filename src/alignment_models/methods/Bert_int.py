@@ -50,6 +50,7 @@ class Bert_int:
             "[BERT-INT] Evaluating dataset '%s'",
             self.stage_config.get("experiment", {}).get("dataset"),
         )
+        logger.info("[STEP] BERT-INT evaluation starting")
 
         dataset = dataset_augmented or dataset_reduced
         aligned_pairs = list(self._normalise_pairs(dataset.aligned_entities))
@@ -59,7 +60,15 @@ class Bert_int:
 
         self._seed_everything()
 
-        bert_dataset = build_dataset(dataset, self._train_ratio())
+        lineage = self.stage_config.get("lineage")
+        dataset_name = self.stage_config.get("experiment", {}).get("dataset", "")
+
+        bert_dataset = build_dataset(
+            dataset,
+            self._train_ratio(),
+            lineage=lineage,
+            dataset_name=dataset_name,
+        )
         entity_order = [bert_dataset.index2entity[idx] for idx in range(len(bert_dataset.index2entity))]
         logger.info(
             "[BERT-INT] Dataset prepared: |KG1|=%d entities, |KG2|=%d entities, train_pairs=%d, test_pairs=%d",
@@ -68,6 +77,7 @@ class Bert_int:
             len(bert_dataset.train_pairs),
             len(bert_dataset.test_pairs),
         )
+        logger.info("[STEP] Tokenising entities")
 
         entity_texts = self._build_entity_texts(dataset, bert_dataset)
         token_ids, attention_masks, tokenizer = encode_entities(
@@ -90,6 +100,7 @@ class Bert_int:
         for device in self._candidate_devices():
             try:
                 self._seed_everything()
+                logger.info("[STEP] Evaluating on device %s", device)
                 return self._evaluate_on_device(dataset, bert_dataset, entid2data, tokenizer, device)
             except torch.cuda.OutOfMemoryError as err:
                 last_error = err
@@ -116,6 +127,7 @@ class Bert_int:
         device: torch.device,
     ) -> Dict[str, float]:
         logger.info("[BERT-INT] Using device '%s' for evaluation.", device)
+        logger.info("[STEP] Training basic unit")
 
         model = BasicBertUnitModel(
             self.model_config.basic_unit.encoder_name,
@@ -143,6 +155,7 @@ class Bert_int:
             embedding_batch_size=self.model_config.basic_unit.test_batch_size,
         )
         logger.info("[BERT-INT] Basic unit training complete; starting interaction phase.")
+        logger.info("[STEP] Running interaction stage")
 
         scored_predictions = self._run_interaction_stage(
             model,

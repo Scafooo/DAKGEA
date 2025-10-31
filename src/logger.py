@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 import os
 import sys
+from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
 from typing import Optional, Union
@@ -41,6 +42,13 @@ class ColorFormatter(logging.Formatter):
     # ANSI color codes for separators
     SEPARATOR_COLOR = "\033[90m" # Dark gray
 
+    # Highlight tags
+    HIGHLIGHTS = {
+        "[STEP]": "\033[95m",      # Magenta
+        "[SUCCESS]": "\033[32m",   # Green
+        "[IMPORTANT]": "\033[96m", # Bright cyan
+    }
+
     RESET = "\033[0m"
 
     def format(self, record: logging.LogRecord) -> str:
@@ -61,15 +69,22 @@ class ColorFormatter(logging.Formatter):
             rel_path = Path(record.pathname).resolve().relative_to(project_root)
         except Exception:
             rel_path = Path(record.pathname).name
+        location = f"{rel_path}:{record.lineno}"
+        location_colored = f"{self.LOCATION_COLOR}{location:<60}{self.RESET}"
 
-        # Include logger name for extra context
-        # module_info = f"{record.name} ({rel_path}:{record.lineno})"
-        module_info = f"{record.name}"
-        location_text = f"[{module_info:<80}]"
-        location_colored = f"{self.LOCATION_COLOR}{location_text}{self.RESET}"
+        timestamp = datetime.fromtimestamp(record.created).strftime("%H:%M:%S")
+        timestamp_text = f"{self.SEPARATOR_COLOR}{timestamp}{self.RESET}"
+
+        formatted_message = message
+        for tag, tag_color in self.HIGHLIGHTS.items():
+            if formatted_message.startswith(tag):
+                formatted_message = formatted_message.replace(
+                    tag, f"{tag_color}{tag}{self.RESET}", 1
+                )
+                break
 
         separator = f"{self.SEPARATOR_COLOR}│{self.RESET}"
-        return f"{levelname} {separator} {location_colored} {separator} {message}"
+        return f"{timestamp_text} {separator} {levelname} {separator} {location_colored} {separator} {formatted_message}"
 
 
 def _parse_level(level: Union[str, int, None]) -> int:
@@ -162,11 +177,12 @@ class StructuredLogger:
 
     def section(self, title: str) -> None:
         """Log a section header."""
-        self.logger.info(f"  {title.upper()}")
+        self.logger.info("")
+        self.logger.info(f"[STEP] {title.upper()}")
 
     def subsection(self, title: str) -> None:
         """Log a subsection header."""
-        self.logger.info(f"  {title}")
+        self.logger.info(f"[STEP] -> {title}")
 
     def table(self, title: str, data: dict, indent: int = 2) -> None:
         """Log a formatted table of key-value pairs."""

@@ -126,10 +126,12 @@ class ExperimentRunner:
                     spec.reader,
                     spec.subtype,
                 )
+                logger.info("[STEP] Preparing dataset '%s'", spec.name)
 
                 for ratio in self.ratios:
                     ratio_desc = f"{ratio * 100:.1f}%"
                     progress.set_description(f"📦 {spec.name} [{ratio_desc}]")
+                    logger.info("[STEP] Ratio %.1f%% for dataset '%s'", ratio * 100, spec.name)
                     stage_cfg = self._build_stage_config(
                         spec.name, len(dataset.aligned_entities), ratio
                     )
@@ -275,6 +277,7 @@ class ExperimentRunner:
             ratio,
             reduction_cfg["target_entities"],
         )
+        logger.debug("[IMPORTANT] Lineage tracking: %s", lineage)
         return cfg
 
     @staticmethod
@@ -301,6 +304,7 @@ class ExperimentRunner:
     ) -> Dataset:
         """Reduce the dataset or reuse cached artefacts when resuming."""
         ratio_tag = self._format_ratio_tag(ratio)
+        logger.info("[STEP] Reduction stage → dataset=%s ratio=%s", spec.name, ratio_tag)
         reader_plan = self._select_reader_plan(writer_plans, spec.reader)
         reader_root = (
             self.base_reduced
@@ -325,8 +329,10 @@ class ExperimentRunner:
                     ratio_tag,
                 )
 
+        logger.debug("[IMPORTANT] Instantiating reducer '%s'", self.reduction_method)
         reducer = self.reducer_cls(stage_cfg)
         dataset_reduced = reducer.reduce(dataset.clone())
+        logger.info("[SUCCESS] Reduction complete (%d aligned pairs)", len(dataset_reduced.aligned_entities))
 
         lineage = stage_cfg.setdefault("lineage", {})
         reduced_paths = lineage.setdefault("reduced_paths", {})
@@ -346,6 +352,8 @@ class ExperimentRunner:
             if plan.write_reduced:
                 plan.writer.write(dataset_reduced, str(plan_root))
                 logger.info("📝 [%s] Saved reduced dataset → %s", plan.name, plan_root)
+            else:
+                logger.debug("Skipping reduced write for plan '%s' (write_reduced=False)", plan.name)
 
         return dataset_reduced
 
@@ -361,6 +369,7 @@ class ExperimentRunner:
     ) -> Dataset:
         """Augment the reduced dataset or reuse cached artefacts when resuming."""
         ratio_tag = self._format_ratio_tag(ratio)
+        logger.info("[STEP] Augmentation stage → %s (ratio=%s)", augmentation_name, ratio_tag)
         reader_plan = self._select_reader_plan(writer_plans, spec.reader)
         reader_root = (
             self.base_augmented
@@ -388,8 +397,10 @@ class ExperimentRunner:
                 )
 
         augmenter_cls = AUGMENTATION_REGISTRY.get(augmentation_name)
+        logger.debug("[IMPORTANT] Instantiating augmenter '%s'", augmentation_name)
         augmenter = augmenter_cls(stage_cfg)
         dataset_augmented = augmenter.augment(dataset_reduced.clone())
+        logger.info("[SUCCESS] Augmentation '%s' complete (%d aligned pairs)", augmentation_name, len(dataset_augmented.aligned_entities))
 
         lineage = stage_cfg.setdefault("lineage", {})
         augmented_paths = lineage.setdefault("augmented_paths", {})
@@ -412,6 +423,8 @@ class ExperimentRunner:
             if plan.write_augmented:
                 plan.writer.write(dataset_augmented, str(plan_root))
                 logger.info("📝 [%s] Saved augmented dataset → %s", plan.name, plan_root)
+            else:
+                logger.debug("Skipping augmented write for plan '%s' (write_augmented=False)", plan.name)
 
         return dataset_augmented
 
@@ -427,6 +440,7 @@ class ExperimentRunner:
     ) -> None:
         """Evaluate all configured models and persist results when requested."""
         ratio_tag = self._format_ratio_tag(ratio)
+        logger.info("[STEP] Evaluation stage → augmentation=%s", augmentation_name)
         results_dir = self.base_output / spec.name / ratio_tag
         results_dir.mkdir(parents=True, exist_ok=True)
 
@@ -465,8 +479,10 @@ class ExperimentRunner:
             lineage["hybea_dataset_base"] = base_root
 
             model_cls = MODEL_REGISTRY.get(model_name)
+            logger.info("[STEP] → Evaluating model '%s' (augmentation=%s)", model_name, augmentation_name)
             model = model_cls(stage_cfg_eval)
             results = model.evaluate(dataset_reduced, dataset_augmented)
+            logger.info("[SUCCESS] Model '%s' evaluation finished", model_name)
 
             wrote_results = False
             for plan in writer_plans:

@@ -44,10 +44,12 @@ class HybEA:
             ratio,
             len(dataset.aligned_entities),
         )
+        logger.info("[STEP] HybEA evaluation starting")
 
         with tempfile.TemporaryDirectory(prefix="hybea_") as tmp_dir:
             workdir = Path(tmp_dir)
             export_root = workdir / dataset_name
+            logger.info("[STEP] Exporting dataset to temporary workspace %s", export_root)
             self._export_dataset(dataset, export_root, dataset_name)
 
             ratio_tag = f"{ratio * 100:.1f}"
@@ -58,8 +60,10 @@ class HybEA:
                 / f"{dataset_name}_{self.model_config.structural_model}_{self.model_config.mode}"
             )
             iteration_dir.mkdir(parents=True, exist_ok=True)
+            logger.info("[STEP] Preparing HybEA iteration directory %s", iteration_dir)
 
             support_base_dir = self._resolve_support_base(dataset_name)
+            logger.debug("[IMPORTANT] HybEA support directory resolved to %s", support_base_dir)
 
             hybea_apply_settings(
                 self.model_config,
@@ -72,6 +76,7 @@ class HybEA:
             )
 
             self._prepare_support_artifacts(dataset_name, export_root)
+            logger.info("[STEP] Support artefacts ready")
 
             pipeline = HybeaPipeline(
                 dataset_name=dataset_name,
@@ -80,8 +85,10 @@ class HybEA:
                 mode=self.model_config.mode,
                 structural_model=self.model_config.structural_model,
             )
+            logger.info("[STEP] Launching HybEA pipeline")
 
             metrics = pipeline.run()
+            logger.info("[SUCCESS] HybEA pipeline completed")
             logger.info(
                 "[HybEA] Metrics: hits@1=%.4f hits@10=%.4f mrr=%.4f",
                 metrics["hits@1"],
