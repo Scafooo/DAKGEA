@@ -1,3 +1,6 @@
+"""Public interface for the HybEA alignment model package."""
+
+from .model import HybEA
 from .runtime import (
     apply_settings,
     dataset_spec,
@@ -6,10 +9,11 @@ from .runtime import (
     topk_inputsize1_inputsize2,
 )
 
-__all__ = [
+__all__ = (
+    "HybEA",
     "runtime",
     "apply_settings",
     "path_for_KG",
     "dataset_spec",
     "topk_inputsize1_inputsize2",
-]
+)

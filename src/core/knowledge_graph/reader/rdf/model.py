@@ -1,3 +1,7 @@
+"""Reader for RDF knowledge graph files."""
+
+from __future__ import annotations
+
 from pathlib import Path
 
 from src.core.knowledge_graph import KnowledgeGraph
@@ -5,6 +9,7 @@ from src.core.knowledge_graph.reader.Reader import Reader
 from src.logger import get_logger
 
 logger = get_logger(__name__, level="DEBUG")
+
 
 class RDFReader(Reader):
     file_type = "rdf"

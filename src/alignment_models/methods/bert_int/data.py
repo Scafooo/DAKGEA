@@ -158,13 +158,21 @@ def _build_dataset_from_hybea(
 
     data_dir = _resolve_hybea_data_dir(base)
     if data_dir is None:
-        logger.warning("[BERT-INT] HybEA dataset missing attribute data directory at %s (dataset=%s)", base, dataset_name)
+        logger.warning(
+            "[BERT-INT] HybEA dataset missing attribute data directory at %s (dataset=%s)",
+            base,
+            dataset_name,
+        )
         return None
 
     ent_map1 = _read_id_map_int(data_dir / "ent_ids_1")
     ent_map2 = _read_id_map_int(data_dir / "ent_ids_2")
     if not ent_map1 or not ent_map2:
-        logger.warning("[BERT-INT] HybEA entity files missing or empty at %s (dataset=%s)", data_dir, dataset_name)
+        logger.warning(
+            "[BERT-INT] HybEA entity files missing or empty at %s (dataset=%s)",
+            data_dir,
+            dataset_name,
+        )
         return None
 
     index2entity: Dict[int, str] = {**ent_map1, **ent_map2}
@@ -310,7 +318,6 @@ def _extract_relation_triples(
 def _normalise_literal_value(lit: Literal) -> Tuple[str, str]:
     """Return cleaned literal text and a lightweight type label."""
 
-    # Determine type / language label
     if lit.language:
         value_type = lit.language
     elif lit.datatype:
@@ -318,19 +325,15 @@ def _normalise_literal_value(lit: Literal) -> Tuple[str, str]:
     else:
         value_type = "string"
 
-    # Obtain textual representation without rdflib decorations
     try:
-        raw = lit.value  # may be Python primitive
+        raw = lit.value
         text = str(raw)
     except Exception:
         text = str(lit)
 
     text = text.replace("\t", " ")
     text = text.strip().strip('"')
-
-    # Normalise whitespace
     text = " ".join(text.split())
-
     return text, value_type
 
 
@@ -419,11 +422,10 @@ def build_dataset(
         index2rel[rel_offset] = relation
         rel_offset += 1
 
-    aligned_pairs = sorted(
-        (str(src), str(tgt)) for src, tgt in dataset.aligned_entities
-    )
-
-    hybea_pairs = _load_pairs_from_hybea(lineage, dataset_name, entity2index)
+    aligned_pairs = sorted((str(src), str(tgt)) for src, tgt in dataset.aligned_entities)
+    train_pairs_raw, test_pairs_raw = _split_alignment(aligned_pairs, train_ratio)
+    train_pairs = [(entity2index[src], entity2index[tgt]) for src, tgt in train_pairs_raw]
+    test_pairs = [(entity2index[src], entity2index[tgt]) for src, tgt in test_pairs_raw]
 
     def _remap_rel_triples(snapshot: KnowledgeGraphSnapshot) -> List[Tuple[int, int, int]]:
         remapped: List[Tuple[int, int, int]] = []
@@ -437,18 +439,6 @@ def build_dataset(
 
     ent_ids_1 = [entity2index[e] for e in kg1_snapshot.entities]
     ent_ids_2 = [entity2index[e] for e in kg2_snapshot.entities]
-
-    if hybea_pairs is not None:
-        train_pairs, test_pairs = hybea_pairs
-        logger.debug(
-            "[BERT-INT] Loaded train/test pairs from HybEA artefacts (%d train, %d test)",
-            len(train_pairs),
-            len(test_pairs),
-        )
-    else:
-        train_pairs_raw, test_pairs_raw = _split_alignment(aligned_pairs, train_ratio)
-        train_pairs = [(entity2index[src], entity2index[tgt]) for src, tgt in train_pairs_raw]
-        test_pairs = [(entity2index[src], entity2index[tgt]) for src, tgt in test_pairs_raw]
 
     source_global_to_local = {entity2index[entity]: idx for idx, entity in enumerate(kg1_snapshot.entities)}
     target_global_to_local = {entity2index[entity]: idx for idx, entity in enumerate(kg2_snapshot.entities)}
@@ -467,6 +457,42 @@ def build_dataset(
         source_global_to_local=source_global_to_local,
         target_global_to_local=target_global_to_local,
     )
+
+
+def _load_ent_ids(path: Path) -> Dict[str, str]:
+    mapping: Dict[str, str] = {}
+    if not path.exists():
+        return mapping
+    for row in read_tsv(path):
+        if len(row) < 2:
+            continue
+        key = str(row[0]).strip()
+        uri = str(row[1]).strip()
+        mapping[key] = uri
+        try:
+            mapping[str(int(key))] = uri
+        except (ValueError, TypeError):
+            pass
+    return mapping
+
+
+def _load_pair_file(
+    path: Path,
+    map_left: Dict[str, str],
+    map_right: Dict[str, str],
+) -> List[Tuple[str, str]]:
+    pairs: List[Tuple[str, str]] = []
+    if not path.exists():
+        return pairs
+    for row in read_tsv(path):
+        if len(row) < 2:
+            continue
+        left_raw = str(row[0]).strip()
+        right_raw = str(row[1]).strip()
+        left = map_left.get(left_raw, left_raw)
+        right = map_right.get(right_raw, right_raw)
+        pairs.append((left, right))
+    return pairs
 
 
 def _load_pairs_from_hybea(
@@ -542,39 +568,3 @@ def _load_pairs_from_hybea(
         return None
 
     return train_idx, test_idx
-
-
-def _load_ent_ids(path: Path) -> Dict[str, str]:
-    mapping: Dict[str, str] = {}
-    if not path.exists():
-        return mapping
-    for row in read_tsv(path):
-        if len(row) < 2:
-            continue
-        key = str(row[0]).strip()
-        uri = str(row[1]).strip()
-        mapping[key] = uri
-        try:
-            mapping[str(int(key))] = uri
-        except (ValueError, TypeError):
-            pass
-    return mapping
-
-
-def _load_pair_file(
-    path: Path,
-    map_left: Dict[str, str],
-    map_right: Dict[str, str],
-) -> List[Tuple[str, str]]:
-    pairs: List[Tuple[str, str]] = []
-    if not path.exists():
-        return pairs
-    for row in read_tsv(path):
-        if len(row) < 2:
-            continue
-        left_raw = str(row[0]).strip()
-        right_raw = str(row[1]).strip()
-        left = map_left.get(left_raw, left_raw)
-        right = map_right.get(right_raw, right_raw)
-        pairs.append((left, right))
-    return pairs

@@ -1,13 +1,13 @@
 """Knowledge graph writer implementations and registries."""
 
-from src.core.knowledge_graph.writer.Writer import Writer
-from src.core.knowledge_graph.writer.WriterFactory import WriterFactory
-from src.core.knowledge_graph.writer.RDFWriter import RDFWriter
-from src.core.knowledge_graph.writer.HybeaWriter import HybeaWriter
+from .Writer import Writer
+from .WriterFactory import WriterFactory
+from .hybea import HybeaWriter
+from .rdf import RDFWriter
 
-__all__ = [
+__all__ = (
     "Writer",
     "WriterFactory",
     "RDFWriter",
     "HybeaWriter",
-]
+)
