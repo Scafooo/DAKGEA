@@ -1,0 +1,19 @@
+experiment:
+  name: "bert_int_dev"
+  overwrite_existing: true
+
+  writers:
+    - type: "rdf"
+      write_reduced: true
+      write_augmented: false
+      write_results: true
+
+  datasets:
+    - name: "D_W_15K_V1"
+      reader: "hybea"
+      subtype: "attribute_data"
+
+  reduction_method: "random_entities"
+  reduction_ratios: [0.1]
+  augmentation_methods: []
+  models_to_run: ["bert_int"]

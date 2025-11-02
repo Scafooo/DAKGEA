@@ -1,7 +1,6 @@
-"""Factory and auto-discovery utilities for knowledge-graph readers."""
+"""Factory utilities for knowledge-graph readers."""
 
 import importlib
-import pkgutil
 from typing import Any, Type
 
 from src.util.registry import Registry
@@ -9,31 +8,29 @@ from src.util.registry import Registry
 
 class KnowledgeGraphReaderFactory:
     _registry = Registry("Knowledge graph reader")
-    _autoloaded = False
 
     @classmethod
     def register_reader(cls, file_type: str, reader_cls: Type) -> None:
         cls._registry.add(file_type.lower(), reader_cls)
 
     @classmethod
-    def _ensure_autoload(cls) -> None:
-        if cls._autoloaded:
-            return
-        cls._autoload("src.core.knowledge_graph.reader")
-        cls._autoloaded = True
-
-    @classmethod
     def create_reader(cls, file_type: str, *args: Any, **kwargs):
-        cls._ensure_autoload()
-        reader_cls = cls._registry.get(file_type.lower())
+        key = file_type.lower()
+        try:
+            reader_cls = cls._registry.get(key)
+        except ValueError:
+            _ensure_registered(key)
+            reader_cls = cls._registry.get(key)
         return reader_cls(*args, **kwargs)
 
-    @classmethod
-    def _autoload(cls, package_name: str) -> None:
-        package = importlib.import_module(package_name)
-        if not hasattr(package, "__path__"):
-            return
-        for _, module_name, _ in pkgutil.walk_packages(
-            package.__path__, f"{package.__name__}."
-        ):
-            importlib.import_module(module_name)
+
+_READER_MODULES = {
+    "hybea": "src.core.knowledge_graph.reader.hybea_knowledge_graph_reader",
+    "rdf": "src.core.knowledge_graph.reader.rdf_knowledge_graph_reader",
+}
+
+
+def _ensure_registered(file_type: str) -> None:
+    module_path = _READER_MODULES.get(file_type)
+    if module_path:
+        importlib.import_module(module_path)

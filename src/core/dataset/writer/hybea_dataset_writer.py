@@ -15,7 +15,8 @@ from src.core.knowledge_graph.writer import KnowledgeGraphWriterFactory
 from src.logger import get_logger, get_structured_logger
 from src.util.reader import read_tsv
 from src.util.writer import write_tsv
-from src.alignment_models.methods.hybea import runtime as hybea_runtime
+
+DEFAULT_DATASET_NAME = "dataset"
 
 logger = get_logger(__name__)
 slogger = get_structured_logger(__name__)
@@ -37,7 +38,7 @@ class HybeaDatasetWriter(DatasetWriter):
             targets = [base_dir / "attribute_data", base_dir / "knowformer_data"]
 
         if dataset_name is None:
-            dataset_name = getattr(hybea_runtime, "DATASET", "dataset")
+            dataset_name = DEFAULT_DATASET_NAME
 
         slogger.table("Export Configuration", {
             "Dataset Name": dataset_name,
