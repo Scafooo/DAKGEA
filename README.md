@@ -4,18 +4,6 @@ This repository implements a **modular experimentation framework** for **Entity 
 
 ---
 
-## ⚙️ Configuration
-
-All behaviour is controlled with YAML files:
-
-- `config/global.yaml` – shared defaults such as path aliases and logging level.
-- `config/models/*.yaml` – per-model hyperparameters (HybEA, KnowFormer, BERT-INT, …).
-- `config/experiments/*.yaml` – dataset slices plus augmentation/reduction knobs, with `overwrite_existing` to force regeneration and `writers` to choose one or more export formats (e.g. HybEA, RDF).
-
-The loader (`src/config/loader.py`) merges files in that order and automatically resolves relative paths to absolute locations rooted at the repository. This allows you to move configuration files without breaking downstream consumers.
-
----
-
 ## 🛠️ Installation
 
 Clone and enter the repository:
@@ -28,21 +16,15 @@ cd DAKGEA
 Create a Python environment and install dependencies:
 
 ```bash
-conda env create -f install/HybEA_env.yml
-# or
-pip install -r install/requirements.txt
+conda env create -f install/HybEA_env.yml  # or: pip install -r install/requirements.txt
+# activate: conda activate hybea   |   source .venv/bin/activate
 ```
+
+> Need more detail? See the [User Guide](docs/user-guide.md#1-install--setup).
 
 ---
 
 ## 🚀 Running Experiments
-
-The pipeline executes in four stages:
-
-1. **Reduction** – shrink the dataset while preserving coverage of key entities.
-2. **Augmentation** – generate additional triples or alignments to diversify training data.
-3. **Model training** – fit an EA model (e.g., HybEA) on the processed dataset.
-4. **Evaluation** – compute alignment metrics and export detailed diagnostics.
 
 Example invocation:
 
@@ -50,9 +32,7 @@ Example invocation:
 python experiments/run.py config/experiments/exp_1.yaml
 ```
 
-Append `--overwrite-existing` to recompute reductions, augmentations, and results even when cached outputs are present (you can also set `overwrite_existing: true` inside the experiment YAML). Use multiple `writers` entries in the config to emit additional formats such as RDF/Turtle alongside the default HybEA structure.
-
-The command wires up the requested experiment configuration with the chosen model and kicks off the full reduction→augmentation→training sequence.
+CLI flags like `--overwrite-existing`, `--resume`, and `--no-progress` tweak caching and logging behaviour. All configuration options are documented in the [User Guide](docs/user-guide.md#2-run-an-experiment).
 
 ---
 
@@ -65,36 +45,24 @@ src/
   reduction/           # Dataset reduction strategies
   config/              # YAML loader utilities
   core/                # Canonical dataset/knowledge-graph domain objects + IO
-  util/                # Reader/write helpers and shared utilities
-experiments/           # Experiment entry points and output artefacts
-tests/                 # Lightweight regression tests for loaders and I/O
+  util/                # Registry utilities, readers/writers helpers, logging
+experiments/           # Experiment entry points, stage orchestration
+tests/                 # Smoke/unit tests
 ```
 
-Registries automatically discover concrete implementations placed under their respective `methods/` packages, allowing you to drop in new strategies without modifying the core pipeline.
-
----
-
-## 🧭 Working with Data
-
-- Raw datasets belong in `data/raw`; reduction and augmentation outputs are stored under `data/reduced` and `data/augmented`.
-- For HybEA inputs the raw location is `data/raw/hybea/<dataset>/{attribute_data,knowformer_data}`; the runner auto-detects the correct reader from the directory layout.
-- Reduced/augmented outputs mirror the selected writers: HybEA exports recreate the original `attribute_data`/`knowformer_data` folders, while the RDF writer stores compact N-Triples graphs (`graph_source.nt`, `graph_target.nt`) plus `aligned_entities.tsv`.
-- Generated artefacts are grouped by reduction method and writer format, e.g. `data/reduced/random_entities/hybea/BBC_DB/10/` alongside `data/reduced/random_entities/rdf/BBC_DB/10/`, while augmented exports live in `data/augmented/<reduction_method>/<augmentation_method>/<writer>/<dataset>/<ratio>/` (e.g. `data/augmented/random_entities/plm_augmentation/hybea/BBC_DB/10/`).
-- A fuller usage walkthrough, including configuration knobs like `filter_alignment`, lives in `docs/usage.md`.
-- The logger resolves all path aliases via the config loader, so updating locations in `config/global.yaml` is enough to relocate storage directories.
-- TSV files are read via `src/util/reader.py`, which accepts both `Path` objects and strings and provides compatibility aliases for legacy APIs.
+Developers should read the [Developer Guide](docs/developer-guide.md) for a deep dive into registries, stages, and coding conventions.
 
 ---
 
 ## 🧪 Testing
 
-A lightweight regression suite is provided to validate configuration merging and TSV I/O helpers:
+Run the pytest suite:
 
 ```bash
-python -m unittest discover -s tests
+pytest tests/
 ```
 
-Add your own tests under `tests/` to keep future changes honest, especially when introducing new reduction or augmentation strategies.
+This exercises registry registration, pipeline stages, and IO helpers. Extend the suite whenever you add reducers, augmenters, or models.
 
 ---
 
@@ -103,10 +71,24 @@ Add your own tests under `tests/` to keep future changes honest, especially when
 Experiment metrics, intermediate artefacts, and logs are written to:
 
 ```
-experiments/results/
+results/<experiment>/<dataset>/<ratio>/
+├─ reduction/artefacts/<writer>/...
+├─ augmentation/<augmentation>/artefacts/<writer>/...
+└─ evaluation/<variant>/<model>.json
 ```
 
-The default location is controlled by `paths.log_file` and other entries inside `config/global.yaml`.
+Stage summaries (`summary.json`) sit beside each folder to capture method metadata.
+`<variant>` is `baseline` for the unaugmented run, otherwise the augmentation key.
+The default root is controlled by `paths.results` (and `paths.log_file`) inside `config/global.yaml`.
+
+More context, including troubleshooting tips, lives in the [User Guide](docs/user-guide.md#3-understand-the-outputs).
+
+---
+
+## 📚 Further Reading
+
+- [User Guide](docs/user-guide.md) – installation, experiment execution, artefact overview, troubleshooting.
+- [Developer Guide](docs/developer-guide.md) – architecture, plugin registration, code structure, testing guidance.
 
 ---
 

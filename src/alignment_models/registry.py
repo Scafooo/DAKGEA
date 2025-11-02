@@ -1,38 +1,20 @@
 """Registry utilities for pluggable alignment models."""
 
 import importlib
-import pkgutil
-from typing import Dict, Type
+from typing import Iterable
 
-class ModelRegistry:
-    """Registry for alignment models (e.g., HybEA, Knowformer, BERT-INT, etc.)."""
+from src.util.registry import Registry
 
-    def __init__(self):
-        self._registry: Dict[str, Type] = {}
+MODEL_REGISTRY: Registry[type] = Registry("Alignment model")
 
-    def register(self, name: str):
-        """Decorator to register an alignment model with a given name."""
-        def decorator(cls):
-            if name in self._registry:
-                raise ValueError(f"Alignment model '{name}' already registered.")
-            self._registry[name] = cls
-            return cls
-        return decorator
+_BUILTIN_MODEL_MODULES: Iterable[str] = (
+    "src.alignment_models.methods.stub",      # smoke-test model
+    "src.alignment_models.methods.bert_int",  # BERT-INT integration
+    "src.alignment_models.methods.hybea",     # HybEA integration
+)
 
-    def get(self, name: str):
-        """Retrieve an alignment model by name."""
-        if name not in self._registry:
-            raise ValueError(f"Alignment model '{name}' not registered.")
-        return self._registry[name]
 
-    def list(self):
-        """List all registered models."""
-        return list(self._registry.keys())
-
-    def autoload(self, package: str = "src.alignment_models.methods"):
-        """Automatically import all model modules under the given package."""
-        pkg = importlib.import_module(package)
-        for _, modname, _ in pkgutil.iter_modules(pkg.__path__):
-            importlib.import_module(f"{package}.{modname}")
-
-MODEL_REGISTRY = ModelRegistry()
+def load_builtin_models() -> None:
+    """Import built-in alignment model modules so they register themselves."""
+    for module_path in _BUILTIN_MODEL_MODULES:
+        importlib.import_module(module_path)

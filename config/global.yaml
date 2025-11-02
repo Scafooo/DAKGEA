@@ -1,9 +1,8 @@
 paths:
   raw_data: "data/raw"
-  augmented_data: "data/augmented"
-  reduced_data: "data/reduced"
-  results: "experiments/results"
-  log_file: "experiments/results/log.txt"
+  external_data: "data/external"
+  results: "results"
+  log_file: "results/logs/log.txt"
 
 logging:
   level: INFO

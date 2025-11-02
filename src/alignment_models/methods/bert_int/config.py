@@ -16,14 +16,14 @@ class BasicUnitConfig:
     output_dim: int = 300
     epochs: int = 5
     learning_rate: float = 1e-5
-    batch_size: int = 16
-    test_batch_size: int = 64
+    batch_size: int = 24
+    test_batch_size: int = 128
     max_seq_length: int = 128
     negatives: int = 2
     margin: float = 3.0
     random_divide_ill: bool = False
     train_ill_rate: float = 0.3
-    candidate_topk: int = 512
+    candidate_topk: int = 128
 
 
 @dataclass
@@ -35,7 +35,7 @@ class InteractionConfig:
     batch_size: int = 128
     negatives: int = 5
     margin: float = 1.0
-    candidate_topk: int = 512
+    candidate_topk: int = 50
     kernel_num: int = 21
     neighbor_max: int = 50
     attribute_max: int = 50
@@ -60,7 +60,7 @@ class BertIntConfig:
     seed: int = 11037
     device: str = "cuda:0"
     language: str = "en"
-    candidate_num: int = 512
+    candidate_num: int = 50
     basic_unit: BasicUnitConfig = field(default_factory=BasicUnitConfig)
     interaction: InteractionConfig = field(default_factory=InteractionConfig)
     paths: PathsConfig = field(default_factory=PathsConfig)

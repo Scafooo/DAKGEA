@@ -1,11 +1,11 @@
 experiment:
-  name: "bert_int_0_1"
-  overwrite_existing: false
+  name: "stub"
+  overwrite_existing: true
 
   writers:
-    - type: "hybea"
-      write_reduced: false
-      write_augmented: false
+    - type: "rdf"
+      write_reduced: true
+      write_augmented: true
       write_results: true
 
   datasets:
@@ -14,7 +14,7 @@ experiment:
   reduction_method: "random_entities"
   reduction_ratios: [0.1]
   augmentation_methods: []
-  models_to_run: ["bert_int"]
+  models_to_run: ["stub"]
 
   parameters:
     lineage:

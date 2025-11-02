@@ -1,17 +1,19 @@
 """Registry utilities for augmentation strategies."""
 
+import importlib
+from typing import Iterable
+
 from src.util.registry import Registry
 
+AUGMENTATION_REGISTRY: Registry[type] = Registry("Augmentation")
 
-class AugmentationRegistry(Registry):
-    """Registry for Data Augmentation methods applied to Knowledge Graph datasets."""
-
-    def __init__(self) -> None:
-        super().__init__("Augmentation")
-
-    def autoload(self, package: str = "src.augmentation.methods") -> None:
-        """Automatically import all augmentation methods under the given package."""
-        super().autoload(package, recursive=False)
+_BUILTIN_AUGMENTATION_MODULES: Iterable[str] = (
+    "src.augmentation.methods.plm.augmenter",
+    "src.augmentation.methods.stub",
+)
 
 
-AUGMENTATION_REGISTRY = AugmentationRegistry()
+def load_builtin_augmentations() -> None:
+    """Import built-in augmentation modules so they self-register."""
+    for module_path in _BUILTIN_AUGMENTATION_MODULES:
+        importlib.import_module(module_path)

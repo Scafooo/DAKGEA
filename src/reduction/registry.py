@@ -1,17 +1,19 @@
 """Registry utilities for dataset reduction strategies."""
 
+import importlib
+from typing import Iterable
+
 from src.util.registry import Registry
 
+REDUCTION_REGISTRY: Registry[type] = Registry("Reduction method")
 
-class ReductionRegistry(Registry):
-    """Registry for dataset reduction methods."""
-
-    def __init__(self) -> None:
-        super().__init__("Reduction method")
-
-    def autoload(self, package_name: str = "src.reduction.methods") -> None:
-        """Import all submodules in a package so that decorated classes register themselves."""
-        super().autoload(package_name, recursive=True)
+_BUILTIN_REDUCTION_MODULES: Iterable[str] = (
+    "src.reduction.methods.random_entities",  # module registering RandomEntitiesReducer
+    "src.reduction.methods.stub",              # stub reducer
+)
 
 
-REDUCTION_REGISTRY = ReductionRegistry()
+def load_builtin_reducers() -> None:
+    """Import the built-in reduction modules so they register with the registry."""
+    for module_path in _BUILTIN_REDUCTION_MODULES:
+        importlib.import_module(module_path)

@@ -1,14 +1,23 @@
+"""Random-entities reduction strategy."""
+
+from __future__ import annotations
+
 import random
 from typing import Iterable, Set, Tuple
+
 from rdflib import Literal, URIRef
+
 from src.core.dataset import Dataset
 from src.logger import get_logger
 from src.reduction.registry import REDUCTION_REGISTRY
 
 logger = get_logger(__name__)
 
+
 @REDUCTION_REGISTRY.register("random_entities")
 class RandomEntitiesReducer:
+    """Sample aligned entity pairs uniformly at random and prune orphan triples."""
+
     def __init__(self, config):
         self.config = config
         reduction_cfg = self.config.get("reduction", {})
@@ -84,7 +93,12 @@ class RandomEntitiesReducer:
         """Convert aligned entity pairs to a set of URIRefs."""
         normalised: Set[Tuple[URIRef, URIRef]] = set()
         for left, right in aligned_entities:
-            normalised.add((RandomEntitiesReducer._ensure_uri(left), RandomEntitiesReducer._ensure_uri(right)))
+            normalised.add(
+                (
+                    RandomEntitiesReducer._ensure_uri(left),
+                    RandomEntitiesReducer._ensure_uri(right),
+                )
+            )
         return normalised
 
     @staticmethod
@@ -97,7 +111,7 @@ class RandomEntitiesReducer:
     def _sample_pairs_to_remove(
         aligned_entities: Set[Tuple[URIRef, URIRef]],
         remove_count: int,
-        seed: int = None,
+        seed: int | None = None,
     ) -> Set[Tuple[URIRef, URIRef]]:
         """Randomly select a subset of alignment pairs to discard."""
         if remove_count <= 0:
@@ -153,3 +167,6 @@ class RandomEntitiesReducer:
         }
 
         return filtered
+
+
+__all__ = ["RandomEntitiesReducer"]

@@ -1,5 +1,7 @@
 """Knowledge graph reader for HybEA datasets."""
 
+from __future__ import annotations
+
 from pathlib import Path
 from typing import Dict, Iterable, Optional, Tuple
 
@@ -30,9 +32,9 @@ class HybeaReader(Reader):
         return chosen
 
     def _gather_variant_dirs(self, base_path: Path, subtype: Optional[str]) -> Tuple[Path, ...]:
-        variants = []
+        variants: list[Path] = []
 
-        def add(path: Path):
+        def add(path: Path) -> None:
             if path.exists() and path not in variants:
                 variants.append(path)
 
@@ -160,30 +162,18 @@ class HybeaReader(Reader):
             kg.add_attribute_triples((ent_ids[attr_triple[0]], attr_triple[1], attr_triple[2]))
 
         for triple in read_tsv(triples_path):
-            if len(triple) < 3:
-                logger.debug(
-                    "Skipping malformed KnowFormer relation triple in %s: %s",
-                    triples_path,
-                    triple,
-                )
+            subj = ent_ids.get(triple[0])
+            obj = ent_ids.get(triple[2])
+            if subj is None or obj is None:
+                logger.debug("Skipping triple referencing unknown entities: %s", triple)
                 continue
-            kg.add_relation_triples(triple)
+            kg.add_relation_triples((subj, triple[1], obj))
 
         return kg
 
-    def _load_attr_names(self, path: Path) -> Dict[str, str]:
-        if not path.exists():
-            return {}
-
-        uri_to_label: Dict[str, str] = {}
-        for row in read_tsv(path):
-            if not row:
-                continue
-            uri = str(row[0]).strip()
-            label: Optional[str] = None
+    def _load_attr_names(self, attr_names_path: Path) -> Dict[str, str]:
+        attr_uri_to_label: Dict[str, str] = {}
+        for row in read_tsv(attr_names_path):
             if len(row) >= 2:
-                label = str(row[1]).strip() or None
-            if label is None:
-                label = uri.split("/")[-1]
-            uri_to_label[uri] = label
-        return uri_to_label
+                attr_uri_to_label[row[0]] = row[1]
+        return attr_uri_to_label

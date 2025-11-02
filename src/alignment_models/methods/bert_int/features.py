@@ -8,15 +8,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from src.alignment_models.methods.bert_int.dual_aggregation import (
-    dual_aggregation_features,
-    kernel_mus,
-    kernel_sigmas,
-)
-from src.alignment_models.methods.bert_int.similarity import cosine_similarity_matrix
-from src.logger import get_logger
-
-logger = get_logger(__name__)
+from .dual_aggregation import dual_aggregation_features, kernel_mus, kernel_sigmas
 
 
 def build_neighbor_dict(
@@ -29,12 +21,10 @@ def build_neighbor_dict(
     for head, _, tail in rel_triples:
         neigh.setdefault(head, []).append(tail)
         neigh.setdefault(tail, []).append(head)
-    for entity, values in neigh.items():
-        np.random.shuffle(values)
-        neigh[entity] = values[:max_neighbors]
     for entity in neigh:
-        padded = neigh[entity] + [pad_id] * (max_neighbors - len(neigh[entity]))
-        neigh[entity] = padded
+        np.random.shuffle(neigh[entity])
+        neigh[entity] = neigh[entity][:max_neighbors]
+        neigh[entity].extend([pad_id] * (max_neighbors - len(neigh[entity])))
     return neigh
 
 
@@ -46,7 +36,7 @@ def build_attribute_values(
     pad_token: str,
 ) -> Dict[int, List[str]]:
     ent2values: Dict[int, List[str]] = {ent: [] for ent in entities}
-    for ent, attr, val, _ in attribute_triples:
+    for ent, _, val, _ in attribute_triples:
         ent2values.setdefault(ent, []).append(val)
     for ent in entities:
         if ent in fallback_names:
@@ -55,7 +45,7 @@ def build_attribute_values(
                 ent2values[ent].append(name_val)
         np.random.shuffle(ent2values[ent])
         values = ent2values[ent][:max_values]
-        values += [pad_token] * (max_values - len(values))
+        values.extend([pad_token] * (max_values - len(values)))
         ent2values[ent] = values
     return ent2values
 
@@ -104,7 +94,6 @@ def neighbor_features(
         sim_matrix = torch.bmm(emb1, emb2.transpose(1, 2))
         feats = dual_aggregation_features(sim_matrix, mus, sigmas, mask1, mask2)
         features.extend(feats.detach().cpu().tolist())
-    logger.debug("[BERT-INT] Neighbor features computed for %d pairs.", len(features))
     return features
 
 
@@ -122,9 +111,7 @@ def description_features(
         emb1 = entity_embeddings[e1s]
         emb2 = entity_embeddings[e2s]
         sim = F.cosine_similarity(emb1, emb2).unsqueeze(-1)
-        # Convert to list of lists: each row is [similarity_score]
         features.extend(sim.detach().cpu().tolist())
-    logger.debug("[BERT-INT] Description features computed for %d pairs.", len(features))
     return features
 
 
@@ -152,7 +139,6 @@ def attribute_value_embeddings(
         with torch.no_grad():
             emb = model(tokens, masks)
         embeddings.extend(emb.detach().cpu().tolist())
-    logger.debug("[BERT-INT] Encoded %d attribute values.", len(embeddings))
     return embeddings, list(values)
 
 
@@ -184,5 +170,4 @@ def attribute_features(
         sim_matrix = torch.bmm(emb1, emb2.transpose(1, 2))
         feats = dual_aggregation_features(sim_matrix, mus, sigmas, mask1, mask2)
         features.extend(feats.detach().cpu().tolist())
-    logger.debug("[BERT-INT] Attribute features computed for %d pairs.", len(features))
     return features

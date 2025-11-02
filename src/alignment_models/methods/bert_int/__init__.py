@@ -1,5 +1,5 @@
-"""Utilities and models for the BERT-INT entity alignment approach."""
+"""Public interface for the BERT-INT alignment model package."""
 
-from .config import BertIntConfig  # noqa: F401
-from .metrics import AlignmentMetrics  # noqa: F401
-from .basic_unit_model import BasicBertUnitModel  # noqa: F401
+from .model import Bert_int
+
+__all__ = ("Bert_int",)

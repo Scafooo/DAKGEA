@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Dict, Iterable, List, Sequence, Tuple
+from typing import Dict, Sequence, Tuple
 
 import numpy as np
 import torch
@@ -11,9 +11,10 @@ import torch.nn.functional as F
 from torch import nn
 from torch.optim import AdamW
 
-from src.alignment_models.methods.bert_int.batch_generator import BatchTrainDataGenerator
-from src.alignment_models.methods.bert_int.similarity import batched_topk, cosine_similarity_matrix
 from src.logger import get_logger
+
+from .batch_generator import BatchTrainDataGenerator
+from .similarity import batched_topk, cosine_similarity_matrix
 
 logger = get_logger(__name__)
 
@@ -23,12 +24,12 @@ Pair = Tuple[int, int]
 
 @dataclass
 class BasicUnitArtifacts:
-    entity_embeddings: List[List[float]]
-    train_pairs: List[Pair]
-    test_pairs: List[Pair]
-    train_candidates: Dict[int, List[int]]
-    test_candidates: Dict[int, List[int]]
-    entity_pairs: List[Pair]
+    entity_embeddings: Sequence[Sequence[float]]
+    train_pairs: Sequence[Pair]
+    test_pairs: Sequence[Pair]
+    train_candidates: Dict[int, Sequence[int]]
+    test_candidates: Dict[int, Sequence[int]]
+    entity_pairs: Sequence[Pair]
     entid2data: Dict[int, Tuple[torch.Tensor, torch.Tensor]]
 
 
@@ -41,7 +42,7 @@ def _entlist_to_embeddings(
     requires_grad: bool = False,
     batch_size: int = 256,
 ) -> torch.Tensor:
-    outputs: List[torch.Tensor] = []
+    outputs: list[torch.Tensor] = []
     effective_batch = batch_size if batch_size > 0 else len(entids)
     for start in range(0, len(entids), effective_batch):
         chunk = entids[start : start + effective_batch]
@@ -71,7 +72,7 @@ def _generate_candidate_dict(
     device: torch.device,
     *,
     batch_size: int,
-) -> Dict[int, List[int]]:
+) -> Dict[int, list[int]]:
     model.eval()
     logger.debug(
         "[BERT-INT] Generating candidate dictionary (|train_ids1|=%d, |train_ids2|=%d, pool1=%d, pool2=%d)",
@@ -110,7 +111,7 @@ def _generate_candidate_dict(
     sim2 = cosine_similarity_matrix(train_emb2, pool_emb1, batch_size=2048, device=device)
     _, idx2 = batched_topk(sim2, k=topk, batch_size=2048, device=device)
 
-    candidate_dict: Dict[int, List[int]] = {}
+    candidate_dict: Dict[int, list[int]] = {}
     for row, e1 in enumerate(train_ids1):
         candidate_dict[e1] = [pool_ids2[i] for i in idx1[row].tolist()]
     for row, e2 in enumerate(train_ids2):
@@ -203,39 +204,35 @@ def train_basic_unit_model(
     device: torch.device,
     embedding_batch_size: int,
 ) -> BasicUnitArtifacts:
-    logger.info(
-        "[BERT-INT] Basic unit training: train_pairs=%d test_pairs=%d batch_size=%d epochs=%d",
-        len(train_pairs),
-        len(test_pairs),
-        batch_size,
-        epochs,
-    )
+    model.to(device)
     optimizer = AdamW(model.parameters(), lr=learning_rate)
     criterion = nn.MarginRankingLoss(margin=margin)
-    generator = BatchTrainDataGenerator(train_pairs, ent_ids1, ent_ids2, batch_size, negatives)
+
+    generator = BatchTrainDataGenerator(
+        train_pairs,
+        ent_ids1,
+        ent_ids2,
+        {idx: str(idx) for idx in range(len(entid2data))},
+        batch_size=batch_size,
+        neg_num=negatives,
+    )
+
+    dummy_candidates: Dict[int, Sequence[int]] = {}
+    ent_ids1_list = list(ent_ids1)
+    ent_ids2_list = list(ent_ids2)
+    for idx in ent_ids1_list:
+        candidates = ent_ids2_list if ent_ids2_list else [idx]
+        dummy_candidates[idx] = candidates
+    for idx in ent_ids2_list:
+        candidates = ent_ids1_list if ent_ids1_list else [idx]
+        dummy_candidates[idx] = candidates
+    if not dummy_candidates:
+        raise ValueError("No training entities available to build negative samples.")
+    generator.train_index_gene(dummy_candidates)
 
     for epoch in range(epochs):
-        logger.info("[BERT-INT] Basic unit epoch %d/%d - sampling candidates", epoch + 1, epochs)
-        candidate_dict = _generate_candidate_dict(
-            model,
-            entid2data,
-            [src for src, _ in train_pairs],
-            [tgt for _, tgt in train_pairs],
-            ent_ids1,
-            ent_ids2,
-            candidate_topk,
-            device,
-            batch_size=embedding_batch_size,
-        )
-        logger.debug(
-            "[BERT-INT] Candidate dict built for %d entities (min candidates per entity=%d)",
-            len(candidate_dict),
-            min(len(v) for v in candidate_dict.values()) if candidate_dict else 0,
-        )
-        generator.build_candidate_dict(candidate_dict)
-
         epoch_loss = 0.0
-        steps = 0
+        batches = 0
         for pe1s, pe2s, ne1s, ne2s in generator:
             loss = _margin_ranking_step(
                 model,
@@ -250,12 +247,14 @@ def train_basic_unit_model(
                 embedding_batch_size=embedding_batch_size,
             )
             epoch_loss += loss
-            steps += 1
+            batches += 1
+        logger.info(
+            "[BERT-INT] Basic unit epoch %d loss %.4f (batches=%d)",
+            epoch + 1,
+            epoch_loss / max(1, batches),
+            batches,
+        )
 
-        avg_loss = epoch_loss / max(1, steps)
-        logger.info("[BERT-INT] Basic unit epoch %d/%d loss=%.4f", epoch + 1, epochs, avg_loss)
-
-    model.eval()
     with torch.no_grad():
         embeddings = _entlist_to_embeddings(model, sorted(entid2data.keys()), entid2data, device).cpu()
     logger.info("[BERT-INT] Basic unit produced embeddings for %d entities.", embeddings.size(0))
@@ -291,8 +290,13 @@ def train_basic_unit_model(
                 entity_pairs_set.add((source, target))
     entity_pairs_set.update(train_pairs)
     entity_pairs = sorted(entity_pairs_set)
-    logger.info("[BERT-INT] Entity pairs: %d (from train_candidates=%d, test_candidates=%d, train_pairs=%d)",
-                len(entity_pairs), len(train_candidates), len(test_candidates), len(train_pairs))
+    logger.info(
+        "[BERT-INT] Entity pairs: %d (train_candidates=%d, test_candidates=%d, train_pairs=%d)",
+        len(entity_pairs),
+        len(train_candidates),
+        len(test_candidates),
+        len(train_pairs),
+    )
 
     return BasicUnitArtifacts(
         entity_embeddings=entity_embeddings,

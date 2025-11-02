@@ -2,7 +2,7 @@ model:
   seed: 11037
   device: "cuda:0"
   language: "en"
-  candidate_num: 512
+  candidate_num: 50
   basic_unit:
     encoder_name: "bert-base-multilingual-cased"
     encoder_strategy: "auto"
@@ -10,21 +10,21 @@ model:
     output_dim: 300
     epochs: 5
     learning_rate: 1.0e-5
-    batch_size: 16
-    test_batch_size: 64
+    batch_size: 24
+    test_batch_size: 128
     max_seq_length: 128
     negatives: 2
     margin: 3.0
     random_divide_ill: false
     train_ill_rate: 0.3
-    candidate_topk: 512
+    candidate_topk: 128
   interaction:
     epochs: 200
     learning_rate: 5.0e-4
     batch_size: 128
     negatives: 5
     margin: 1.0
-    candidate_topk: 512
+    candidate_topk: 50
     kernel_num: 21
     neighbor_max: 50
     attribute_max: 50

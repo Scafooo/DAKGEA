@@ -397,3 +397,6 @@ class HybEA:
             "hits@10": hits10_rate,
             "mrr": mrr,
         }
+
+
+__all__ = ["HybEA"]
