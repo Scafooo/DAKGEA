@@ -1,5 +1,5 @@
-"""Public interface for the BERT-INT alignment model package."""
+"""BERT-INT support package."""
 
-from .model import Bert_int
+from .basic_unit_model import BasicBertUnitModel
 
-__all__ = ("Bert_int",)
+__all__ = ("BasicBertUnitModel",)

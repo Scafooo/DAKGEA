@@ -1,56 +1,57 @@
-"""Basic BERT unit used in the BERT-INT pipeline."""
+"""Torch module implementing the Basic BERT Unit from the original BERT-INT code."""
 
 from __future__ import annotations
 
 from typing import Optional
 
 import torch
-from torch import nn
-from transformers import AutoConfig, AutoModel
+import torch.nn as nn
+from transformers import BertConfig, BertModel
+
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 class BasicBertUnitModel(nn.Module):
-    """Wrapper around a transformer encoder that produces entity embeddings."""
+    """Thin wrapper around HuggingFace's `BertModel` for the Basic BERT Unit step."""
 
     def __init__(
         self,
-        encoder_name: str,
-        input_dim: int,
-        output_dim: int,
+        input_size: int,
+        result_size: int,
+        pretrained_model: str = "bert-base-multilingual-cased",
+        dropout: float = 0.1,
         *,
-        load_strategy: str = "auto",
-        cache_dir: Optional[str] = None,
+        device: Optional[torch.device] = None,
+        load_pretrained: bool = True,
     ) -> None:
+        """Initialise the encoder."""
         super().__init__()
-        config = AutoConfig.from_pretrained(encoder_name, cache_dir=cache_dir)
-        encoder = self._load_encoder(encoder_name, config, load_strategy, cache_dir)
-        self.encoder = encoder
-        self.dropout = nn.Dropout(p=0.1)
-        self.output_layer = nn.Linear(input_dim, output_dim)
+        self.result_size = result_size
+        self.input_size = input_size
+        if load_pretrained:
+            try:
+                self.bert_model = BertModel.from_pretrained(pretrained_model)
+            except Exception as exc:  # pragma: no cover - network dependent
+                logger.warning(
+                    "[BERT-INT] Failed to load pretrained model '%s' (%s). Falling back to random init.",
+                    pretrained_model,
+                    exc,
+                )
+                self.bert_model = BertModel(BertConfig())
+        else:
+            self.bert_model = BertModel(BertConfig())
+        self.out_linear_layer = nn.Linear(self.input_size, self.result_size)
+        self.dropout = nn.Dropout(p=dropout)
 
-    def forward(self, token_ids: torch.Tensor, attention_mask: torch.Tensor) -> torch.Tensor:
-        outputs = self.encoder(input_ids=token_ids, attention_mask=attention_mask)
-        sequence_output = outputs[0]
+        if device is not None:
+            self.to(device)
+
+    def forward(self, batch_word_list: torch.Tensor, attention_mask: torch.Tensor) -> torch.Tensor:
+        """Encode a batch of token ids and return projected CLS vectors."""
+        outputs = self.bert_model(input_ids=batch_word_list, attention_mask=attention_mask)
+        sequence_output = outputs.last_hidden_state if hasattr(outputs, "last_hidden_state") else outputs[0]
         cls_vec = sequence_output[:, 0]
         cls_vec = self.dropout(cls_vec)
-        return self.output_layer(cls_vec)
-
-    @staticmethod
-    def _load_encoder(
-        encoder_name: str,
-        config,
-        strategy: str,
-        cache_dir: Optional[str],
-    ) -> AutoModel:
-        """Load the transformer encoder according to the chosen strategy."""
-        strategy = (strategy or "auto").lower()
-        if strategy == "config":
-            return AutoModel.from_config(config)
-        if strategy == "pretrained":
-            return AutoModel.from_pretrained(encoder_name, cache_dir=cache_dir)
-
-        # auto: prefer pretrained weights, but fall back to config if unavailable
-        try:
-            return AutoModel.from_pretrained(encoder_name, cache_dir=cache_dir)
-        except OSError:
-            return AutoModel.from_config(config)
+        return self.out_linear_layer(cls_vec)

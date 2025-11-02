@@ -8,7 +8,7 @@ import shutil
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
-from src.alignment_models.registry import MODEL_REGISTRY
+from src.alignment_models.registry import MODEL_REGISTRY, get_alignment_model
 from src.augmentation.registry import AUGMENTATION_REGISTRY
 from src.core.dataset import Dataset
 from src.logger import get_logger
@@ -133,11 +133,8 @@ class ReductionStage:
         except FileNotFoundError:
             return None
 
-    @staticmethod
     def _select_reader_plan(self) -> str:
-        if self.writer_plans:
-            return self.writer_plans[0].name
-        return "default"
+        return self.writer_plans[0].name if self.writer_plans else "default"
 
     def _record_plan_paths(
         self,
@@ -350,7 +347,7 @@ class EvaluationStage:
             lineage["hybea_dataset_path"] = hybea_path
             lineage["hybea_dataset_base"] = base_root
 
-            model_cls = MODEL_REGISTRY.get(model_name)
+            model_cls = get_alignment_model(model_name)
             logger.info("[STEP] → Evaluating model '%s' (augmentation=%s)", model_name, augmentation_name)
             model = model_cls(stage_cfg_eval)
             results = model.evaluate(dataset_reduced, dataset_augmented)

@@ -22,7 +22,7 @@ class RDFKnowledgeGraphWriter(KnowledgeGraphWriter):
             destination = destination / f"{base_name}.nt"
 
         destination.parent.mkdir(parents=True, exist_ok=True)
-        kg.serialize(destination=str(destination), format="nt")
+        kg.serialize(destination=str(destination), format="nt", encoding="utf-8")
 
         logger.info("Knowledge Graph RDF Export End")
 

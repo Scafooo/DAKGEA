@@ -1,6 +1,10 @@
 """Smoke tests covering registry registration behaviour."""
 
-from src.alignment_models.registry import MODEL_REGISTRY, load_builtin_models
+from src.alignment_models.registry import (
+    MODEL_REGISTRY,
+    get_alignment_model,
+    load_builtin_models,
+)
 from src.augmentation.registry import AUGMENTATION_REGISTRY, load_builtin_augmentations
 from src.reduction.registry import REDUCTION_REGISTRY, load_builtin_reducers
 
@@ -12,7 +16,11 @@ def setup_module(_module):
 
 
 def test_alignment_models_stub_registered():
-    assert MODEL_REGISTRY.get("stub"), "Stub alignment model should be registered"
+    assert get_alignment_model("stub")
+
+
+def test_alignment_models_bert_int_registered():
+    assert get_alignment_model("bert_int")
 
 
 def test_augmentation_stub_registered():
