@@ -3,10 +3,10 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
-from src.core.dataset.reader.ReaderFactory import ReaderFactory
+from src.core.dataset.reader.dataset_reader_factory import DatasetReaderFactory
 
 
-class Reader(ABC):
+class DatasetReader(ABC):
     """Base class for dataset readers that register themselves via `file_type`."""
 
     file_type = None
@@ -14,7 +14,7 @@ class Reader(ABC):
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
         if cls.file_type:
-            ReaderFactory.register_reader(cls.file_type, cls)
+            DatasetReaderFactory.register_reader(cls.file_type, cls)
 
     @abstractmethod
     def read(self, *args: Any, **kwargs: Any):

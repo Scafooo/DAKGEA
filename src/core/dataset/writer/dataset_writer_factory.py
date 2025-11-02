@@ -7,8 +7,8 @@ from typing import Any, Type
 from src.util.registry import Registry
 
 
-class WriterFactory:
-    """Registry-backed factory that returns writer implementations by file type."""
+class DatasetWriterFactory:
+    """Registry-backed factory that returns dataset writer implementations."""
 
     _registry = Registry("Dataset writer")
     _autoloaded = False

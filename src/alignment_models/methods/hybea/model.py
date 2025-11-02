@@ -17,7 +17,7 @@ from src.alignment_models.methods.hybea.pipeline import HybeaPipeline
 from src.alignment_models.registry import MODEL_REGISTRY
 from src.config.loader import PROJECT_ROOT, load_yaml
 from src.core.dataset import Dataset
-from src.core.dataset.writer import HybeaWriter
+from src.core.dataset.writer import HybeaDatasetWriter
 from src.logger import get_logger
 
 logger = get_logger(__name__)
@@ -98,7 +98,7 @@ class HybEA:
             return metrics
 
     def _export_dataset(self, dataset: Dataset, export_root: Path, dataset_name: str) -> None:
-        writer = HybeaWriter()
+        writer = HybeaDatasetWriter()
         logger.debug("[HybEA] Exporting dataset to %s", export_root)
         writer.write(dataset, str(export_root), dataset_name=dataset_name)
 

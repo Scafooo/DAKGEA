@@ -1,13 +1,13 @@
 from pathlib import Path
 
 from src.core.knowledge_graph import KnowledgeGraph
-from src.core.knowledge_graph.writer.Writer import Writer
+from src.core.knowledge_graph.writer.knowledge_graph_writer_base import KnowledgeGraphWriter
 from src.logger import get_logger
 
 logger = get_logger(__name__)
 
 
-class RDFWriter(Writer):
+class RDFKnowledgeGraphWriter(KnowledgeGraphWriter):
 
     file_type = "rdf"
 

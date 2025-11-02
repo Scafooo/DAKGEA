@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 from src.config.loader import Config
-from src.core.dataset.reader import ReaderFactory
-from src.core.dataset.writer import WriterFactory
+from src.core.dataset.reader import DatasetReaderFactory
+from src.core.dataset.writer import DatasetWriterFactory
 from src.logger import get_logger
 
 logger = get_logger(__name__)
@@ -122,7 +122,7 @@ class ExperimentRunner:
                     spec, dataset_root
                 )
 
-                reader = ReaderFactory.create_reader(spec.reader)
+                reader = DatasetReaderFactory.create_reader(spec.reader)
                 dataset = reader.read(str(dataset_root), subtype=spec.subtype)
                 writer_plans = self._resolve_writer_plans(spec)
                 reduction_stage = ReductionStage(
@@ -312,7 +312,7 @@ class ExperimentRunner:
             else:
                 raise ValueError(f"Unsupported writer configuration: {entry!r}")
 
-            writer = WriterFactory.create_writer(writer_type)
+            writer = DatasetWriterFactory.create_writer(writer_type)
             plans.append(
                 WriterPlan(
                     name=writer_type,

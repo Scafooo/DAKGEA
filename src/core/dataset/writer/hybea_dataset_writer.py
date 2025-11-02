@@ -10,8 +10,8 @@ from typing import Iterable, Tuple, Optional
 from rdflib.term import URIRef
 
 from src.core.dataset import Dataset
-from src.core.dataset.writer import Writer
-from src.core.knowledge_graph.writer import WriterFactory
+from src.core.dataset.writer import DatasetWriter
+from src.core.knowledge_graph.writer import KnowledgeGraphWriterFactory
 from src.logger import get_logger, get_structured_logger
 from src.util.reader import read_tsv
 from src.util.writer import write_tsv
@@ -20,7 +20,7 @@ from src.alignment_models.methods.hybea import runtime as hybea_runtime
 logger = get_logger(__name__)
 slogger = get_structured_logger(__name__)
 
-class HybeaWriter(Writer):
+class HybeaDatasetWriter(DatasetWriter):
     """Persist datasets back to HybEA/KnowFormer directory layouts."""
 
     file_type = "hybea"
@@ -55,11 +55,11 @@ class HybeaWriter(Writer):
                 destination = target
 
             logger.info(f"Writing KG1 (Source) to {destination}")
-            kg_writer_1 = WriterFactory.create_writer(self.file_type)
+            kg_writer_1 = KnowledgeGraphWriterFactory.create_writer(self.file_type)
             kg_writer_1.write(dataset.knowledge_graph_source, str(destination), kg_number=1)
 
             logger.info(f"Writing KG2 (Target) to {destination}")
-            kg_writer_2 = WriterFactory.create_writer(self.file_type)
+            kg_writer_2 = KnowledgeGraphWriterFactory.create_writer(self.file_type)
             kg_writer_2.write(dataset.knowledge_graph_target, str(destination), kg_number=2)
 
             if target.name == "attribute_data":
