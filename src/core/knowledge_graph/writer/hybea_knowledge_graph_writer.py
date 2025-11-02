@@ -3,7 +3,7 @@ import os
 from rdflib import Literal, URIRef
 
 from src.core.knowledge_graph import KnowledgeGraph
-from src.core.knowledge_graph.writer.Writer import Writer
+from src.core.knowledge_graph.writer.knowledge_graph_writer_base import KnowledgeGraphWriter
 from src.logger import get_logger
 from src.util.reader import read_tsv
 from src.util.writer import write_tsv
@@ -11,7 +11,7 @@ from src.util.writer import write_tsv
 logger = get_logger(__name__)
 
 
-class HybeaWriter(Writer):
+class HybeaKnowledgeGraphWriter(KnowledgeGraphWriter):
     file_type = "hybea"
 
     def write(self, kg : KnowledgeGraph,  dir_path, kg_number = None) -> bool:

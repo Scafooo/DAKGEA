@@ -4,8 +4,9 @@ from typing import Any, Type
 
 from src.util.registry import Registry
 
-class WriterFactory:
-    _registry = Registry("Knowledge-graph writer")
+
+class KnowledgeGraphWriterFactory:
+    _registry = Registry("Knowledge graph writer")
     _autoloaded = False
 
     @classmethod

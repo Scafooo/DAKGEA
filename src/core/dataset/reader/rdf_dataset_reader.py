@@ -2,19 +2,19 @@ from pathlib import Path
 from typing import Optional
 
 from src.core.dataset import Dataset
-from src.core.dataset.reader.Reader import Reader
-from src.core.knowledge_graph.reader import ReaderFactory as KGReaderFactory
+from src.core.dataset.reader.dataset_reader_base import DatasetReader
+from src.core.knowledge_graph.reader import KnowledgeGraphReaderFactory
 from src.util.reader import read_tsv
 
 
-class RDFDatasetReader(Reader):
+class RDFDatasetReader(DatasetReader):
     """Reconstruct datasets exported in RDF format (TTL or N-Triples)."""
 
     file_type = "rdf"
 
     def read(self, dir_path: str, subtype: Optional[str] = None, **_) -> Dataset:
         base_path = Path(dir_path)
-        kg_reader = KGReaderFactory.create_reader("rdf")
+        kg_reader = KnowledgeGraphReaderFactory.create_reader("rdf")
 
         kg_source_path = self._resolve_graph_path(base_path, "graph_source")
         kg_target_path = self._resolve_graph_path(base_path, "graph_target")

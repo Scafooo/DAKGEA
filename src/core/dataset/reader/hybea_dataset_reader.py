@@ -7,15 +7,15 @@ from typing import Dict, Iterable, Optional, Set, Tuple
 from rdflib import URIRef
 
 from src.core.dataset import Dataset
-from src.core.dataset.reader.Reader import Reader
-from src.core.knowledge_graph.reader import ReaderFactory
+from src.core.dataset.reader.dataset_reader_base import DatasetReader
+from src.core.knowledge_graph.reader import KnowledgeGraphReaderFactory
 from src.logger import get_logger
 from src.util.reader import read_tsv
 
 logger = get_logger(__name__)
 
 
-class HybeaReader(Reader):
+class HybeaDatasetReader(DatasetReader):
     """Assemble a `Dataset` object from HybEA/KnowFormer data layouts."""
 
     file_type = "hybea"
@@ -68,7 +68,7 @@ class HybeaReader(Reader):
         return tuple(variants) if variants else (base_path,)
 
     def _load_dataset(self, data_dir: Path) -> Dataset:
-        kg_reader = ReaderFactory.create_reader(self.file_type)
+        kg_reader = KnowledgeGraphReaderFactory.create_reader(self.file_type)
         subtype = data_dir.name if data_dir.name in {"attribute_data", "knowformer_data"} else None
 
         kg1 = kg_reader.read(str(data_dir), kg_number=1, subtype=subtype)

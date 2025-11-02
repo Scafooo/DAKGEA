@@ -1,19 +1,17 @@
 """Knowledge graph reader for HybEA datasets."""
 
-from __future__ import annotations
-
 from pathlib import Path
 from typing import Dict, Iterable, Optional, Tuple
 
 from src.core.knowledge_graph import KnowledgeGraph
-from src.core.knowledge_graph.reader.Reader import Reader
+from src.core.knowledge_graph.reader.knowledge_graph_reader_base import KnowledgeGraphReader
 from src.logger import get_logger
 from src.util.reader import read_tsv
 
 logger = get_logger(__name__)
 
 
-class HybeaReader(Reader):
+class HybeaKnowledgeGraphReader(KnowledgeGraphReader):
     """Load individual knowledge graphs from HybEA attribute or KnowFormer layouts."""
 
     file_type = "hybea"
@@ -32,9 +30,9 @@ class HybeaReader(Reader):
         return chosen
 
     def _gather_variant_dirs(self, base_path: Path, subtype: Optional[str]) -> Tuple[Path, ...]:
-        variants: list[Path] = []
+        variants = []
 
-        def add(path: Path) -> None:
+        def add(path: Path):
             if path.exists() and path not in variants:
                 variants.append(path)
 
@@ -162,18 +160,30 @@ class HybeaReader(Reader):
             kg.add_attribute_triples((ent_ids[attr_triple[0]], attr_triple[1], attr_triple[2]))
 
         for triple in read_tsv(triples_path):
-            subj = ent_ids.get(triple[0])
-            obj = ent_ids.get(triple[2])
-            if subj is None or obj is None:
-                logger.debug("Skipping triple referencing unknown entities: %s", triple)
+            if len(triple) < 3:
+                logger.debug(
+                    "Skipping malformed KnowFormer relation triple in %s: %s",
+                    triples_path,
+                    triple,
+                )
                 continue
-            kg.add_relation_triples((subj, triple[1], obj))
+            kg.add_relation_triples(triple)
 
         return kg
 
-    def _load_attr_names(self, attr_names_path: Path) -> Dict[str, str]:
-        attr_uri_to_label: Dict[str, str] = {}
-        for row in read_tsv(attr_names_path):
+    def _load_attr_names(self, path: Path) -> Dict[str, str]:
+        if not path.exists():
+            return {}
+
+        uri_to_label: Dict[str, str] = {}
+        for row in read_tsv(path):
+            if not row:
+                continue
+            uri = str(row[0]).strip()
+            label: Optional[str] = None
             if len(row) >= 2:
-                attr_uri_to_label[row[0]] = row[1]
-        return attr_uri_to_label
+                label = str(row[1]).strip() or None
+            if label is None:
+                label = uri.split("/")[-1]
+            uri_to_label[uri] = label
+        return uri_to_label
