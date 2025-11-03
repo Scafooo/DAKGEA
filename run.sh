@@ -24,7 +24,6 @@ full_line '-'
 # ---------- Setup paths ----------
 PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export PYTHONPATH="${PROJECT_ROOT}"
-
 FILE_NAME="${1:-${RUN_CONFIG:-${EXPERIMENT}}}"
 
 # ---------- Resolve configuration ----------
