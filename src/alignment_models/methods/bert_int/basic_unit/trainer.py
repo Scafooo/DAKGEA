@@ -3,9 +3,8 @@
 from __future__ import annotations
 
 import random
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 import numpy as np
 import torch
@@ -20,7 +19,6 @@ from src.alignment_models.methods.bert_int.basic_unit.metrics import (
     compute_hits,
 )
 from src.alignment_models.methods.bert_int.basic_unit.model import BasicBertUnit
-from src.alignment_models.methods.bert_int.config import BasicUnitConfig, PathsConfigResolved
 from src.logger import get_logger
 
 logger = get_logger(__name__)
@@ -47,29 +45,35 @@ def _select_device(device_spec: Optional[int | str], fallback_cuda: int) -> torc
     return torch.device("cpu")
 
 
-@dataclass
 class BasicUnitTrainer:
     """Train and evaluate the BERT-INT basic unit."""
 
-    model: BasicBertUnit
-    config: BasicUnitConfig
-    data: BasicUnitDataBundle
-    paths: PathsConfigResolved
-    device_spec: Optional[int | str] = None
+    def __init__(
+        self,
+        model: BasicBertUnit,
+        config: Dict[str, Any],
+        data: BasicUnitDataBundle,
+        paths: Dict[str, Any],
+        device_spec: Optional[int | str] = None,
+    ) -> None:
+        self.model = model
+        self.config = config
+        self.data = data
+        self.paths = paths
+        self.device_spec = device_spec
 
-    def __post_init__(self) -> None:
-        self.device = _select_device(self.device_spec, self.config.cuda_device)
+        self.device = _select_device(self.device_spec, self.config.get("cuda_device", 0))
         self.model.to(self.device)
 
     def fit(self) -> List[Dict[str, float]]:
         """Train the model for the configured number of epochs, returning metrics per epoch."""
-        self._set_seeds(self.config.seed)
+        self._set_seeds(self.config.get("seed", 11037))
         optimizer = AdamW(
             self.model.parameters(),
-            lr=self.config.learning_rate,
-            weight_decay=self.config.weight_decay,
+            lr=self.config.get("learning_rate", 1.0e-5),
+            weight_decay=self.config.get("weight_decay", 0.0),
         )
-        criterion = torch.nn.MarginRankingLoss(margin=self.config.margin)
+        criterion = torch.nn.MarginRankingLoss(margin=self.config.get("margin", 1.0))
 
         ent_ids_left = [e1 for e1, _ in self.data.ent_ill]
         ent_ids_right = [e2 for _, e2 in self.data.ent_ill]
@@ -77,19 +81,20 @@ class BasicUnitTrainer:
             train_ill=self.data.train_ill,
             ent_ids_left=ent_ids_left,
             ent_ids_right=ent_ids_right,
-            batch_size=self.config.batch_size,
-            negatives_per_positive=self.config.negatives_per_positive,
+            batch_size=self.config.get("batch_size", 24),
+            negatives_per_positive=self.config.get("negatives_per_positive", 2),
         )
 
         history: List[Dict[str, float]] = []
-        for epoch in range(self.config.epochs):
-            logger.info("[BERT-INT] Epoch %d/%d", epoch + 1, self.config.epochs)
+        epochs = self.config.get("epochs", 1)
+        for epoch in range(epochs):
+            logger.info("[BERT-INT] Epoch %d/%d", epoch + 1, epochs)
 
             candidate_dict = self._generate_candidate_dict(generator)
             generator.build_indices(candidate_dict)
             train_loss = self._train_epoch(generator, optimizer, criterion)
 
-            metrics = self.evaluate(self.data.test_ill, batch_size=self.config.eval_batch_size)
+            metrics = self.evaluate(self.data.test_ill, batch_size=self.config.get("eval_batch_size", 128))
             metrics["loss"] = train_loss
             metrics["epoch"] = epoch + 1
             history.append(metrics)
@@ -112,7 +117,8 @@ class BasicUnitTrainer:
         if not pairs:
             return {"hits@1": 0.0, "hits@10": 0.0, "mrr": 0.0, "evaluated": 0}
 
-        batch_size = batch_size or self.config.eval_batch_size
+        if batch_size is None:
+            batch_size = self.config.get("eval_batch_size", 128)
         self.model.eval()
         with torch.no_grad():
             ent_left = [left for left, _ in pairs]
@@ -129,7 +135,7 @@ class BasicUnitTrainer:
             _, indices = batch_topk(
                 sim_matrix,
                 batch_size=batch_size,
-                topk=min(self.config.eval_top_k, sim_matrix.size(1)),
+                topk=min(self.config.get("eval_top_k", 1000), sim_matrix.size(1)),
                 device=self.device,
             )
         return compute_hits(indices)
@@ -152,7 +158,10 @@ class BasicUnitTrainer:
             target = -torch.ones_like(pos_score, device=self.device)
             loss = criterion(pos_score, neg_score, target)
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.config.max_grad_norm)
+            torch.nn.utils.clip_grad_norm_(
+                self.model.parameters(),
+                self.config.get("max_grad_norm", 1.0),
+            )
             optimizer.step()
 
             batch_size = pos_score.size(0)
@@ -168,33 +177,36 @@ class BasicUnitTrainer:
         candidates_left = generator.ent_ids_left
         candidates_right = generator.ent_ids_right
 
-        emb_left_train = self._encode_entities(train_left, self.config.candidate_batch_size)
-        emb_right_candidates = self._encode_entities(candidates_right, self.config.candidate_batch_size)
+        candidate_batch = self.config.get("candidate_batch_size", 128)
+        nearest = self.config.get("nearest_sample_num", 128)
+
+        emb_left_train = self._encode_entities(train_left, candidate_batch)
+        emb_right_candidates = self._encode_entities(candidates_right, candidate_batch)
         sim_left = batch_cosine_similarity(
             emb_left_train,
             emb_right_candidates,
-            batch_size=self.config.candidate_batch_size,
+            batch_size=candidate_batch,
             device=self.device,
         )
         _, idx_left = batch_topk(
             sim_left,
-            batch_size=self.config.candidate_batch_size,
-            topk=self.config.nearest_sample_num,
+            batch_size=candidate_batch,
+            topk=nearest,
             device=self.device,
         )
 
-        emb_right_train = self._encode_entities(train_right, self.config.candidate_batch_size)
-        emb_left_candidates = self._encode_entities(candidates_left, self.config.candidate_batch_size)
+        emb_right_train = self._encode_entities(train_right, candidate_batch)
+        emb_left_candidates = self._encode_entities(candidates_left, candidate_batch)
         sim_right = batch_cosine_similarity(
             emb_right_train,
             emb_left_candidates,
-            batch_size=self.config.candidate_batch_size,
+            batch_size=candidate_batch,
             device=self.device,
         )
         _, idx_right = batch_topk(
             sim_right,
-            batch_size=self.config.candidate_batch_size,
-            topk=self.config.nearest_sample_num,
+            batch_size=candidate_batch,
+            topk=nearest,
             device=self.device,
         )
 
@@ -240,11 +252,12 @@ class BasicUnitTrainer:
         return tokens, masks
 
     def _maybe_save(self, epoch: int) -> None:
-        if self.paths.model_save_dir is None:
+        model_save_dir = self.paths.get("model_save_dir")
+        if not model_save_dir:
             return
-        save_dir = Path(self.paths.model_save_dir)
+        save_dir = Path(model_save_dir)
         save_dir.mkdir(parents=True, exist_ok=True)
-        prefix = self.paths.model_save_prefix or "model"
+        prefix = self.paths.get("model_save_prefix") or "model"
         model_path = save_dir / f"{prefix}_epoch_{epoch}.pt"
         torch.save(self.model.state_dict(), model_path)
 

@@ -2,41 +2,26 @@ model:
   device: "cpu"
   paths:
     cache_dir: "results/cache/bert_int"
-    dataset_root: "Bert-int-pure/survey_data/D_W_15K_V1/10/attribute_data"
-    description_dict: "Bert-int-pure/2016-10-des_dict.pkl"
-    model_save_dir: "Bert-int-pure/basic_bert_unit/Save_model/BPR_D_W_15K_V2"
-    model_save_prefix: "fold2"
+    dataset_root: null
+    description_dict: null
+    model_save_dir: "results/bert_int/basic_unit"
+    model_save_prefix: "run"
 
   basic_unit:
-    language: "ja"
-    cuda_device: 0
     encoder_name: "bert-base-multilingual-cased"
     encoder_strategy: "auto"
     max_seq_length: 128
     dropout: 0.1
     model_input_dim: 768
     learning_rate: 1.0e-5
-    weight_decay: 0.0
-    epochs: 5
-    batch_size: 24
-    gradient_accumulation: 1
     load_pretrained: true
-    warmup_steps: 100
-    max_grad_norm: 1.0
-    random_divide_ill: false
-    train_ratio: null
-    seed: 11037
     negatives_per_positive: 2
     margin: 3.0
     eval_batch_size: 128
-    eval_top_k: 1000
-    candidate_top_k: 128
-    candidate_batch_size: 128
-    nearest_sample_num: 128
     result_size: 300
     dataset:
-      name: "D_W_15K_V2"
-      fold: "2"
+      name: null
+      fold: null
 
   interaction:
     batch_size: 64
