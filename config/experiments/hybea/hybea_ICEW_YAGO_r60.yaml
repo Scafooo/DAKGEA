@@ -1,0 +1,9 @@
+experiment:
+  name: hybea-ICEW_YAGO-r60
+  dataset:
+    name: ICEW_YAGO
+    reader: hybea
+    subtype: attribute_data
+  reduction_ratio: 0.6
+  writer: hybea
+  model: hybea

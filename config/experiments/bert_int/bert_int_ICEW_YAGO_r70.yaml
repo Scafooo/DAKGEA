@@ -1,0 +1,9 @@
+experiment:
+  name: bert_int-ICEW_YAGO-r70
+  dataset:
+    name: ICEW_YAGO
+    reader: hybea
+    subtype: attribute_data
+  reduction_ratio: 0.7
+  writer: hybea
+  model: bert_int

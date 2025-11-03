@@ -1,0 +1,9 @@
+experiment:
+  name: hybea-ICEW_WIKI-r100
+  dataset:
+    name: ICEW_WIKI
+    reader: hybea
+    subtype: attribute_data
+  reduction_ratio: 1.0
+  writer: hybea
+  model: hybea
