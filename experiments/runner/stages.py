@@ -347,6 +347,20 @@ class EvaluationStage:
             lineage["hybea_dataset_path"] = hybea_path
             lineage["hybea_dataset_base"] = base_root
 
+            overrides = self._build_model_overrides(
+                model_name,
+                augmentation_name,
+                stage_cfg_eval,
+                lineage_cfg,
+                evaluation_dir,
+                variant_key,
+            )
+            if overrides:
+                if len(self.models) == 1:
+                    stage_cfg_eval.setdefault("model", {}).update(overrides)
+                else:
+                    stage_cfg_eval.setdefault("models", {}).setdefault(model_name, {}).update(overrides)
+
             model_cls = get_alignment_model(model_name)
             logger.info("[STEP] → Evaluating model '%s' (augmentation=%s)", model_name, augmentation_name)
             model = model_cls(stage_cfg_eval)
@@ -401,6 +415,65 @@ class EvaluationStage:
                     shutil.copy2(legacy_file, destination)
                     legacy_file.unlink(missing_ok=True)
                 break
+
+    @staticmethod
+    def _select_primary_path(path_mapping: Optional[Dict[str, str]]) -> Optional[Path]:
+        if not path_mapping:
+            return None
+        for value in path_mapping.values():
+            if value:
+                return Path(value)
+        return None
+
+    def _build_model_overrides(
+        self,
+        model_name: str,
+        augmentation_name: Optional[str],
+        stage_cfg_eval: Dict[str, Any],
+        lineage_cfg: Dict[str, Any],
+        evaluation_dir: Path,
+        variant_key: str,
+    ) -> Dict[str, Any]:
+        if model_name != "bert_int":
+            return {}
+
+        if augmentation_name in (None, "baseline"):
+            candidate_root = self._select_primary_path(lineage_cfg.get("reduced_paths"))
+            fallback_root = lineage_cfg.get("reduced_base")
+        else:
+            candidate_root = self._select_primary_path(
+                lineage_cfg.get("augmented_paths", {}).get(augmentation_name)
+            )
+            fallback_root = lineage_cfg.get("augmented_base")
+
+        dataset_root = candidate_root or (Path(fallback_root) if fallback_root else None)
+        if dataset_root is None:
+            logger.warning("[BERT-INT] Unable to resolve dataset path for evaluation variant '%s'.", variant_key)
+            return {}
+
+        attribute_dir = dataset_root / "attribute_data"
+        if attribute_dir.exists():
+            dataset_root = attribute_dir
+
+        save_root = Path(lineage_cfg.get("evaluation_root", evaluation_dir.parent)) / "bert_int"
+        save_variant_dir = save_root / variant_key
+        save_variant_dir.mkdir(parents=True, exist_ok=True)
+
+        overrides: Dict[str, Any] = {
+            "paths": {
+                "dataset_root": str(dataset_root.resolve()),
+                "description_dict": None,
+                "model_save_dir": str(save_variant_dir.resolve()),
+                "model_save_prefix": variant_key,
+            }
+        }
+
+        experiment_meta = stage_cfg_eval.get("experiment", {})
+        dataset_name = experiment_meta.get("dataset")
+        if dataset_name:
+            overrides.setdefault("basic_unit", {}).setdefault("dataset", {}).setdefault("name", dataset_name)
+
+        return overrides
 
     def _write_results(self, out_file: Path, results: Dict[str, Any]) -> None:
         wrote_results = False
