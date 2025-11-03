@@ -1,0 +1,6 @@
+experiment:
+  name: hybea-ja_en-r50
+  dataset:
+    name: ja_en
+  reduction_ratio: 0.5
+  model: hybea

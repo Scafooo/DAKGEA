@@ -45,13 +45,54 @@ class ExperimentRunner:
 
         try:
             self.name = exp_cfg["name"]
-            self.datasets_cfg = exp_cfg["datasets"]
-            self.ratios = [float(r) for r in exp_cfg["reduction_ratios"]]
-            self.augmentations = exp_cfg.get("augmentation_methods", [])
-            self.models = exp_cfg.get("models_to_run", [])
-            self.reduction_method = exp_cfg.get("reduction_method", "ids")
         except KeyError as exc:
-            raise KeyError(f"Missing required experiment configuration key: {exc}") from exc
+            raise KeyError("Missing required experiment configuration key: 'name'") from exc
+
+        # Normalise dataset configuration to a list of entries
+        if "datasets" in exp_cfg:
+            datasets_cfg = exp_cfg["datasets"]
+            if not isinstance(datasets_cfg, (list, tuple)):
+                datasets_cfg = [datasets_cfg]
+        elif "dataset" in exp_cfg:
+            datasets_cfg = [exp_cfg["dataset"]]
+        else:
+            raise KeyError("Experiment configuration must define 'dataset' or 'datasets'.")
+        self.datasets_cfg = list(datasets_cfg)
+
+        # Normalise reduction ratios to a list of floats
+        if "reduction_ratios" in exp_cfg:
+            ratios = exp_cfg["reduction_ratios"]
+            if not isinstance(ratios, (list, tuple)):
+                ratios = [ratios]
+        elif "reduction_ratio" in exp_cfg:
+            ratios = [exp_cfg["reduction_ratio"]]
+        else:
+            raise KeyError("Experiment configuration must define 'reduction_ratio' or 'reduction_ratios'.")
+        self.ratios = [float(r) for r in ratios]
+
+        # Single augmentation method (optional)
+        if "augmentation_methods" in exp_cfg:
+            augmentations = exp_cfg.get("augmentation_methods", [])
+            if not isinstance(augmentations, (list, tuple)):
+                augmentations = [augmentations]
+        elif "augmentation_method" in exp_cfg:
+            augmentations = [exp_cfg["augmentation_method"]] if exp_cfg["augmentation_method"] else []
+        else:
+            augmentations = []
+        self.augmentations = [a for a in augmentations if a]
+
+        # Single evaluation model (required)
+        if "models_to_run" in exp_cfg:
+            models = exp_cfg["models_to_run"]
+            if not isinstance(models, (list, tuple)):
+                models = [models]
+        elif "model" in exp_cfg:
+            models = [exp_cfg["model"]]
+        else:
+            raise KeyError("Experiment configuration must define 'model' or 'models_to_run'.")
+        self.models = [m for m in models if m]
+
+        self.reduction_method = exp_cfg.get("reduction_method", "ids")
 
         effective_overwrite = (
             overwrite_existing
@@ -148,11 +189,15 @@ class ExperimentRunner:
                 )
                 logger.info("[STEP] Preparing dataset '%s'", spec.name)
 
+                single_ratio = len(self.ratios) == 1
                 for ratio in self.ratios:
                     ratio_desc = f"{ratio * 100:.1f}%"
                     ratio_tag = self._format_ratio_tag(ratio)
-                    ratio_root = dataset_workspace / ratio_tag
-                    ratio_root.mkdir(parents=True, exist_ok=True)
+                    if single_ratio:
+                        ratio_root = dataset_workspace
+                    else:
+                        ratio_root = dataset_workspace / ratio_tag
+                        ratio_root.mkdir(parents=True, exist_ok=True)
 
                     progress.set_description(f"📦 {spec.name} [{ratio_desc}]")
                     logger.info("[STEP] Ratio %.1f%% for dataset '%s'", ratio * 100, spec.name)
@@ -353,12 +398,10 @@ class ExperimentRunner:
         lineage["ratio_tag"] = ratio_tag
         lineage["ratio_root"] = str(ratio_root.resolve())
         reduction_root = ratio_root / "reduction"
-        reduction_artefacts = reduction_root / "artefacts"
         augmentation_root = ratio_root / "augmentation"
         evaluation_root = ratio_root / "evaluation"
         lineage["reduction_root"] = str(reduction_root.resolve())
-        lineage["reduction_artefacts"] = str(reduction_artefacts.resolve())
-        lineage["reduced_base"] = str(reduction_artefacts.resolve())
+        lineage["reduced_base"] = str(reduction_root.resolve())
         lineage["augmentation_root"] = str(augmentation_root.resolve())
         lineage["augmented_base"] = str(augmentation_root.resolve())
         lineage["evaluation_root"] = str(evaluation_root.resolve())

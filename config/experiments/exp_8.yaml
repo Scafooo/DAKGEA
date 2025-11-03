@@ -14,6 +14,6 @@ experiment:
       subtype: "attribute_data"
 
   reduction_method: "random_entities"
-  reduction_ratios: [0.1]
-  augmentation_methods: []
-  models_to_run: ["bert_int"]
+  reduction_ratios: 0.1
+  augmentation_methods:
+  models_to_run: "bert_int"

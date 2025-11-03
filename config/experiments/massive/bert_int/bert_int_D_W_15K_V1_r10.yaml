@@ -1,0 +1,6 @@
+experiment:
+  name: bert_int-D_W_15K_V1-r10
+  dataset:
+    name: D_W_15K_V1
+  reduction_ratio: 0.1
+  model: bert_int

@@ -1,0 +1,6 @@
+experiment:
+  name: hybea-D_W_15K_V1-r20
+  dataset:
+    name: D_W_15K_V1
+  reduction_ratio: 0.2
+  model: hybea

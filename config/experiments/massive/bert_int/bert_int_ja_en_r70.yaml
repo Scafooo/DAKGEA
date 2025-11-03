@@ -1,0 +1,6 @@
+experiment:
+  name: bert_int-ja_en-r70
+  dataset:
+    name: ja_en
+  reduction_ratio: 0.7
+  model: bert_int
