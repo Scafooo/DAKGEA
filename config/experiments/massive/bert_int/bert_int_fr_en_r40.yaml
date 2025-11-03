@@ -1,0 +1,6 @@
+experiment:
+  name: bert_int-fr_en-r40
+  dataset:
+    name: fr_en
+  reduction_ratio: 0.4
+  model: bert_int

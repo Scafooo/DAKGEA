@@ -8,6 +8,7 @@
 # ============================================================
 #  EXPERIMENT SELECTION
 #  Modify this line to select a different experiment
+#  can be also a directory containing multiple experiments
 # ============================================================
 EXPERIMENT="${EXPERIMENT:-exp_8.yaml}"
 
@@ -26,8 +27,8 @@ PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export PYTHONPATH="${PROJECT_ROOT}"
 FILE_NAME="${1:-${RUN_CONFIG:-${EXPERIMENT}}}"
 
-# ---------- Resolve configuration ----------
-resolve_config_path() {
+# ---------- Resolve configuration target (file or directory) ----------
+resolve_target_path() {
     local candidate="$1"
     local search_paths=(
         "$candidate"
@@ -35,16 +36,51 @@ resolve_config_path() {
         "${PROJECT_ROOT}/${candidate}"
     )
     for p in "${search_paths[@]}"; do
-        [[ -f "$p" ]] && { echo "$p"; return 0; }
-        [[ -f "$p.yaml" ]] && { echo "$p.yaml"; return 0; }
-        [[ -f "$p.yml" ]] && { echo "$p.yml"; return 0; }
+        if [[ -f "$p" || -d "$p" ]]; then
+            echo "$p"
+            return 0
+        fi
+        if [[ -f "$p.yaml" ]]; then
+            echo "$p.yaml"
+            return 0
+        fi
+        if [[ -f "$p.yml" ]]; then
+            echo "$p.yml"
+            return 0
+        fi
     done
     return 1
 }
 
-if ! CONFIG_FILE="$(resolve_config_path "$FILE_NAME")"; then
-    echo "❌ Configuration file not found: ${FILE_NAME}"
+if ! TARGET_PATH="$(resolve_target_path "$FILE_NAME")"; then
+    echo "❌ Configuration target not found: ${FILE_NAME}"
     exit 1
+fi
+
+if [[ -d "$TARGET_PATH" ]]; then
+    MODE="batch"
+    mapfile -t CONFIG_SET < <(find "$TARGET_PATH" -maxdepth 1 -type f \( -name '*.yaml' -o -name '*.yml' \) | sort)
+    if [[ ${#CONFIG_SET[@]} -eq 0 ]]; then
+        echo "❌ No YAML configuration files found in directory: ${TARGET_PATH}"
+        exit 1
+    fi
+    echo "Found the following configurations in ${TARGET_PATH}:"
+    for cfg in "${CONFIG_SET[@]}"; do
+        echo "  - ${cfg}"
+    done
+    echo ""
+    read -r -p "Run all ${#CONFIG_SET[@]} configurations? [y/N] " CONFIRM
+    case "${CONFIRM,,}" in
+        y|yes)
+            ;;
+        *)
+            echo "ℹ️  Aborted by user."
+            exit 0
+            ;;
+    esac
+else
+    MODE="single"
+    CONFIG_SET=("$TARGET_PATH")
 fi
 
 # ---------- Activate virtual environment ----------
@@ -70,22 +106,46 @@ full_line '-'
 echo "📂 Project root : ${PROJECT_ROOT}"
 echo "🐍 Python path  : ${PYTHONPATH}"
 echo "💼 Environment  : ${VIRTUAL_ENV:-system Python}"
-echo "📘 Config file  : ${CONFIG_FILE}"
+if [[ "$MODE" == "single" ]]; then
+    echo "📘 Config file  : ${CONFIG_SET[0]}"
+else
+    echo "📁 Config dir   : ${TARGET_PATH}"
+    echo "🧪 Config count : ${#CONFIG_SET[@]}"
+fi
 echo "🌿 Git branch   : ${BRANCH}"
 echo "💻 Hardware     : ${GPU}"
 echo "🕓 Started at   : $(date '+%Y-%m-%d %H:%M:%S %Z')"
 full_line '-'
 
-# ---------- Run experiment ----------
-python "${PROJECT_ROOT}/experiments/run.py" "${CONFIG_FILE}"
-EXIT_CODE=$?
+# ---------- Run experiment(s) ----------
+OVERALL_EXIT=0
+FAILED_RUNS=()
+
+for CONFIG_FILE in "${CONFIG_SET[@]}"; do
+    echo ""
+    full_line '='
+    echo "▶️  Running configuration: ${CONFIG_FILE}"
+    python "${PROJECT_ROOT}/experiments/run.py" "${CONFIG_FILE}"
+    RUN_EXIT=$?
+    if [[ $RUN_EXIT -eq 0 ]]; then
+        echo "✅ Completed: ${CONFIG_FILE}"
+    else
+        echo "❌ Failed (${RUN_EXIT}): ${CONFIG_FILE}"
+        FAILED_RUNS+=("${CONFIG_FILE} [exit ${RUN_EXIT}]")
+        OVERALL_EXIT=$RUN_EXIT
+    fi
+    full_line '='
+done
 
 echo ""
-if [ $EXIT_CODE -eq 0 ]; then
-    echo "✅ Experiment completed successfully!"
+if [[ ${#FAILED_RUNS[@]} -eq 0 ]]; then
+    echo "✅ All experiments completed successfully!"
 else
-    echo "❌ Experiment failed with exit code ${EXIT_CODE}"
+    echo "❌ ${#FAILED_RUNS[@]} experiment(s) failed:"
+    for entry in "${FAILED_RUNS[@]}"; do
+        echo "   - ${entry}"
+    done
 fi
 
 full_line '-'
-exit $EXIT_CODE
+exit $OVERALL_EXIT

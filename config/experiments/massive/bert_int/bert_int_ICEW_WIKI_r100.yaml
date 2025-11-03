@@ -1,0 +1,6 @@
+experiment:
+  name: bert_int-ICEW_WIKI-r100
+  dataset:
+    name: ICEW_WIKI
+  reduction_ratio: 1.0
+  model: bert_int

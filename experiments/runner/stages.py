@@ -61,12 +61,12 @@ class ReductionStage:
         subtype: Optional[str] = None,
     ) -> Dataset:
         reduction_root = Path(lineage.get("reduction_root", ratio_root / "reduction"))
-        artefacts_root = reduction_root / "artefacts"
+        _ensure_directory(reduction_root)
         reader_plan = lineage.setdefault("reader_plan", {}).get("reduction")
         if reader_plan is None:
             reader_plan = self._select_reader_plan()
             lineage.setdefault("reader_plan", {})["reduction"] = reader_plan
-        reader_root = artefacts_root / reader_plan
+        reader_root = reduction_root / reader_plan
 
         reduction_meta = ratio_meta.setdefault(
             "reduction", {"method": self.reducer_name, "paths": {}}
@@ -82,7 +82,7 @@ class ReductionStage:
                 "⏭️  Skipping reduction — cached artefacts detected (ratio=%s)", ratio_tag
             )
             self._record_plan_paths(
-                artefacts_root,
+                reduction_root,
                 reduced_paths,
                 reduction_paths,
                 reduction_meta,
@@ -103,7 +103,7 @@ class ReductionStage:
         )
 
         for plan in self.writer_plans:
-            plan_root = artefacts_root / plan.name
+            plan_root = reduction_root / plan.name
             if plan.write_reduced:
                 _ensure_directory(plan_root)
                 plan.writer.write(dataset_reduced, str(plan_root))
@@ -138,14 +138,14 @@ class ReductionStage:
 
     def _record_plan_paths(
         self,
-        artefacts_root: Path,
+        base_root: Path,
         reduced_paths: Dict[str, str],
         reduction_paths: Dict[str, str],
         reduction_meta: Dict[str, Any],
         lineage: Dict[str, Any],
     ) -> None:
         for plan in self.writer_plans:
-            plan_root = artefacts_root / plan.name
+            plan_root = base_root / plan.name
             if plan_root.exists():
                 reduced_paths[plan.name] = str(plan_root)
                 reduction_paths[plan.name] = str(plan_root.resolve())
@@ -189,12 +189,12 @@ class AugmentationStage:
     ) -> Dataset:
         augmentation_root = Path(lineage.get("augmentation_root", ratio_root / "augmentation"))
         stage_root = augmentation_root / augmentation_name
-        artefacts_root = stage_root / "artefacts"
+        _ensure_directory(stage_root)
         reader_plan = lineage.setdefault("reader_plan", {}).get("augmentation")
         if reader_plan is None:
             reader_plan = self._select_reader_plan(reader)
             lineage.setdefault("reader_plan", {})["augmentation"] = reader_plan
-        reader_root = artefacts_root / reader_plan
+        reader_root = stage_root / reader_plan
 
         augmentations_meta = ratio_meta.setdefault("augmentations", {})
         augmentation_meta = augmentations_meta.setdefault(
@@ -218,7 +218,7 @@ class AugmentationStage:
                 ratio_tag,
             )
             for plan in self.writer_plans:
-                plan_root = artefacts_root / plan.name
+                plan_root = stage_root / plan.name
                 if plan_root.exists():
                     per_aug_paths[plan.name] = str(plan_root)
                     augmentation_paths[plan.name] = str(plan_root.resolve())
@@ -244,7 +244,7 @@ class AugmentationStage:
         )
 
         for plan in self.writer_plans:
-            plan_root = artefacts_root / plan.name
+            plan_root = stage_root / plan.name
             if plan.write_augmented:
                 _ensure_directory(plan_root)
                 plan.writer.write(dataset_augmented, str(plan_root))
@@ -301,19 +301,19 @@ class EvaluationStage:
         ratio_meta: Dict[str, Any],
     ) -> None:
         evaluation_dir = self._resolve_evaluation_dir(lineage_cfg, ratio_root, augmentation_name)
+        variant_key = self._normalise_variant_key(augmentation_name)
 
         evaluations_meta = ratio_meta.setdefault("evaluations", {})
-        evaluation_meta = evaluations_meta.setdefault(augmentation_name, {})
+        evaluation_meta = evaluations_meta.setdefault(variant_key, {})
         evaluation_meta["summary"] = str((evaluation_dir / "summary.json").resolve())
         evaluation_paths = evaluation_meta.setdefault("paths", {})
 
-        base_dir_str = self._resolve_base_dir(augmentation_name, lineage_cfg, ratio_root, ratio_tag)
-        base_dir = Path(base_dir_str)
+        base_root = Path(lineage_cfg.get("evaluation_root", ratio_root / "evaluation"))
 
         for model_name in self.models:
             out_file = evaluation_dir / f"{model_name}.json"
             if self.resume and not out_file.exists():
-                self._migrate_legacy_result(base_dir, out_file)
+                self._migrate_legacy_result(base_root, variant_key, out_file)
             evaluation_paths[model_name] = str(out_file.resolve())
             if self.resume and out_file.exists():
                 logger.info(
@@ -331,18 +331,18 @@ class EvaluationStage:
             lineage = stage_cfg_eval.setdefault("lineage", {})
             lineage.setdefault("reduction_method", stage_cfg.get("lineage", {}).get("reduction_method"))
             lineage["augmentation_name"] = (
-                augmentation_name if augmentation_name != "baseline" else None
+                augmentation_name if augmentation_name not in (None, "baseline") else None
             )
             lineage["active_source"] = (
-                "augmented" if augmentation_name != "baseline" else "reduced"
+                "augmented" if augmentation_name not in (None, "baseline") else "reduced"
             )
 
-            if augmentation_name == "baseline":
+            if augmentation_name in (None, "baseline"):
                 hybea_path = lineage.get("reduced_hybea_path")
-                base_root = base_dir_str
+                base_root = lineage_cfg.get("reduced_base")
             else:
                 hybea_path = lineage.get("augmented_hybea_paths", {}).get(augmentation_name)
-                base_root = lineage.get("augmented_base")
+                base_root = lineage_cfg.get("augmented_base")
 
             lineage["hybea_dataset_path"] = hybea_path
             lineage["hybea_dataset_base"] = base_root
@@ -358,8 +358,8 @@ class EvaluationStage:
         StageSummaryWriter.write(
             evaluation_dir / "summary.json",
             {
-                "augmentation": augmentation_name if augmentation_name != "baseline" else None,
-                "variant": augmentation_name,
+                "augmentation": augmentation_name if augmentation_name not in (None, "baseline") else None,
+                "variant": variant_key,
                 "models": sorted(self.models),
                 "files": sorted(evaluation_paths.values()),
             },
@@ -376,38 +376,21 @@ class EvaluationStage:
         key = EvaluationStage._normalise_variant_key(augmentation_name)
         target = evaluation_root / key
         _ensure_directory(target)
-        lineage_cfg.setdefault("evaluation_dirs", {})[augmentation_name] = str(target.resolve())
+        lineage_cfg.setdefault("evaluation_dirs", {})[key] = str(target.resolve())
         return target
 
     @staticmethod
     def _normalise_variant_key(name: Optional[str]) -> str:
         if not name or name == "baseline":
-            return "baseline"
+            return "reduced"
         return name.replace("/", "_")
 
     @staticmethod
-    def _resolve_base_dir(augmentation_name: str, lineage_cfg: Dict[str, Any], ratio_root: Path, ratio_tag: str) -> str:
-        if augmentation_name == "baseline":
-            base_dir_str = lineage_cfg.get("reduced_base")
-            if base_dir_str is None:
-                base_dir_str = str(ratio_root / "reduction" / "artefacts")
-            return base_dir_str
-        base_dir_str = lineage_cfg.get("augmentation_roots", {}).get(augmentation_name)
-        if base_dir_str is None:
-            aug_root_str = lineage_cfg.get("augmentation_root")
-            if aug_root_str:
-                base_dir_str = str(Path(aug_root_str) / augmentation_name / "artefacts")
-            else:
-                base_dir_str = str(ratio_root / "augmentation" / augmentation_name / "artefacts")
-        return base_dir_str
-
-    @staticmethod
-    def _migrate_legacy_result(base_dir: Path, destination: Path) -> None:
-        variant_name = destination.parent.name
+    def _migrate_legacy_result(base_root: Path, variant_key: str, destination: Path) -> None:
         ratio_root = destination.parent.parent.parent
         candidates = [
-            base_dir / "results" / destination.name,
-            ratio_root / "results" / variant_name / destination.name,
+            base_root / "results" / destination.name,
+            ratio_root / "results" / variant_key / destination.name,
         ]
         for legacy_file in candidates:
             if legacy_file.exists() and not destination.exists():
