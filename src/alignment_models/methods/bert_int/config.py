@@ -20,7 +20,7 @@ DEFAULT_CONFIG: Dict[str, Any] = {
     "paths": {
         "cache_dir": "results/cache/bert_int",
         "dataset_root": None,
-        "description_dict": None,
+        "description_dict": "Bert-int-pure/2016-10-des_dict.pkl",
         "model_save_dir": "results/bert_int/basic_unit",
         "model_save_prefix": "run",
     },

@@ -462,7 +462,6 @@ class EvaluationStage:
         overrides: Dict[str, Any] = {
             "paths": {
                 "dataset_root": str(dataset_root.resolve()),
-                "description_dict": None,
                 "model_save_dir": str(save_variant_dir.resolve()),
                 "model_save_prefix": variant_key,
             }
