@@ -92,7 +92,7 @@ class ExperimentRunner:
             raise KeyError("Experiment configuration must define 'model' or 'models_to_run'.")
         self.models = [m for m in models if m]
 
-        self.reduction_method = exp_cfg.get("reduction_method", "ids")
+        self.reduction_method = exp_cfg.get("reduction_method", "random_entities")
 
         effective_overwrite = (
             overwrite_existing
@@ -208,6 +208,7 @@ class ExperimentRunner:
                         ratio_tag,
                         dataset_workspace,
                         ratio_root,
+                        dataset_root,
                     )
                     ratio_meta = dataset_meta["ratios"].setdefault(ratio_tag, {})
                     ratio_meta.update(
@@ -377,6 +378,7 @@ class ExperimentRunner:
         ratio_tag: str,
         dataset_workspace: Path,
         ratio_root: Path,
+        dataset_root: Path,
     ) -> Dict[str, Any]:
         """Create a configuration payload passed to reducers, augmenters, and models."""
         cfg = dict(self.exp_cfg.get("parameters", {}))
@@ -397,6 +399,7 @@ class ExperimentRunner:
         lineage["dataset_workspace"] = str(dataset_workspace.resolve())
         lineage["ratio_tag"] = ratio_tag
         lineage["ratio_root"] = str(ratio_root.resolve())
+        lineage["raw_source"] = str(dataset_root.resolve())
         reduction_root = ratio_root / "reduction"
         augmentation_root = ratio_root / "augmentation"
         evaluation_root = ratio_root / "evaluation"

@@ -437,6 +437,11 @@ class EvaluationStage:
         if model_name != "bert_int":
             return {}
 
+        raw_source = lineage_cfg.get("raw_source")
+        raw_path = Path(raw_source) if raw_source else None
+        if raw_path and (raw_path / "attribute_data").exists():
+            raw_path = raw_path / "attribute_data"
+
         if augmentation_name in (None, "baseline"):
             candidate_root = self._select_primary_path(lineage_cfg.get("reduced_paths"))
             fallback_root = lineage_cfg.get("reduced_base")
@@ -446,7 +451,10 @@ class EvaluationStage:
             )
             fallback_root = lineage_cfg.get("augmented_base")
 
-        dataset_root = candidate_root or (Path(fallback_root) if fallback_root else None)
+        if augmentation_name in (None, "baseline"):
+            dataset_root = raw_path or candidate_root or (Path(fallback_root) if fallback_root else None)
+        else:
+            dataset_root = candidate_root or raw_path or (Path(fallback_root) if fallback_root else None)
         if dataset_root is None:
             logger.warning("[BERT-INT] Unable to resolve dataset path for evaluation variant '%s'.", variant_key)
             return {}

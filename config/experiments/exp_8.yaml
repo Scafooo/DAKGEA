@@ -1,14 +1,14 @@
-experiment:
-  name: bert_int_dev
-  overwrite_existing: true
+  experiment:
+    name: bert_int_raw
 
-  dataset:
-    name: D_W_15K_V1
-    reader: hybea
-    subtype: attribute_data
+    dataset:
+      name: D_W_15K_V1
+      reader: hybea
+      subtype: attribute_data
+    reduction_ratio: 0.1
+    model: bert_int
 
-  reduction_method: random_entities
-  reduction_ratio: 0.1
-
-  writer: hybea
-  model: bert_int
+    model_overrides:
+      paths:
+        dataset_root: "data/raw/hybea/D_W_15K_V1/attribute_data"
+        description_dict: "Bert-int-pure/2016-10-des_dict.pkl"
