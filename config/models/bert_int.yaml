@@ -1,5 +1,5 @@
 model:
-  device: "cpu"
+  device: "cuda"
   paths:
     cache_dir: "results/cache/bert_int"
     dataset_root: null
