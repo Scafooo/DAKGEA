@@ -6,12 +6,11 @@ import logging
 import pickle
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
 from transformers import AutoTokenizer
 
-from src.alignment_models.methods.bert_int.config import BasicUnitConfig, PathsConfig, PathsConfigResolved
 
 logger = logging.getLogger(__name__)
 
@@ -36,24 +35,26 @@ class BasicUnitDataBundle:
 
 
 def load_basic_unit_data(
-    config: BasicUnitConfig,
-    paths: PathsConfig | PathsConfigResolved,
+    config: Mapping[str, Any],
+    paths: Mapping[str, Any],
 ) -> BasicUnitDataBundle:
     """Load tensors and metadata required by the basic unit stage."""
-    resolved = paths.resolved() if isinstance(paths, PathsConfig) else paths
-    dataset_root = resolved.dataset_root
+    dataset_root = paths.get("dataset_root")
     if dataset_root is None:
         raise ValueError("BERT-INT basic unit requires paths.dataset_root in the configuration.")
 
-    dataset_name = config.dataset.name or dataset_root.name
+    dataset_root_path = Path(dataset_root)
+    dataset_name = config.get("dataset", {}).get("name") or dataset_root_path.name
 
-    tokenizer = AutoTokenizer.from_pretrained(config.encoder_name)
+    tokenizer = AutoTokenizer.from_pretrained(config.get("encoder_name", "bert-base-multilingual-cased"))
+    description_path = paths.get("description_dict")
+    description_path = Path(description_path) if description_path else None
     ent_ill, train_ill, test_ill, index2rel, index2entity, rel2index, entity2index, ent2data, rel_triples_1, rel_triples_2 = _read_data(
-        dataset_root,
-        resolved.description_dict,
+        dataset_root_path,
+        description_path,
         tokenizer,
         dataset_name,
-        max_length=config.max_seq_length,
+        max_length=config.get("max_seq_length", 128),
     )
 
     return BasicUnitDataBundle(

@@ -36,38 +36,42 @@ class BertIntAlignment:
         self.stage_config = stage_config or {}
         overrides = _extract_overrides(self.stage_config)
         self.config = load_bert_int_config(overrides=overrides)
-        self.paths = self.config.resolved_paths
-        self.basic_cfg = self.config.basic_unit
+        self.paths = self.config["paths_resolved"]
+        self.basic_cfg = self.config["basic_unit"]
         logger.info(
             "[BERT-INT] Initialised (encoder=%s, device=%s, epochs=%d, pretrained=%s)",
-            self.basic_cfg.encoder_name,
-            self.config.device,
-            self.basic_cfg.epochs,
-            self.basic_cfg.load_pretrained,
+            self.basic_cfg.get("encoder_name"),
+            self.config.get("device"),
+            self.basic_cfg.get("epochs"),
+            self.basic_cfg.get("load_pretrained"),
         )
 
     def evaluate(self, dataset_reduced, dataset_augmented):
         """Execute the basic unit training/evaluation loop and return metrics."""
-        data_bundle = load_basic_unit_data(self.basic_cfg, self.config.paths)
+        data_bundle = load_basic_unit_data(self.basic_cfg, self.config["paths_resolved"])
         model = BasicBertUnit(self.basic_cfg)
         trainer = BasicUnitTrainer(
             model=model,
             config=self.basic_cfg,
             data=data_bundle,
             paths=self.paths,
-            device_spec=self.config.device,
+            device_spec=self.config.get("device"),
         )
 
         skip_training = bool(self.stage_config.get("skip_training"))
         history: Sequence[Dict[str, float]] = []
-        if not skip_training and self.basic_cfg.epochs > 0:
+        if not skip_training and self.basic_cfg.get("epochs", 0) > 0:
             history = trainer.fit()
         else:
-            logger.info("[BERT-INT] Skipping training (skip_training=%s, epochs=%d)", skip_training, self.basic_cfg.epochs)
+            logger.info(
+                "[BERT-INT] Skipping training (skip_training=%s, epochs=%d)",
+                skip_training,
+                self.basic_cfg.get("epochs", 0),
+            )
 
         metrics = trainer.evaluate(
             self._evaluation_pairs(data_bundle),
-            batch_size=self.basic_cfg.eval_batch_size,
+            batch_size=self.basic_cfg.get("eval_batch_size"),
         )
         if history:
             metrics.update(

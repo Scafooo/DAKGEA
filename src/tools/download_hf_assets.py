@@ -10,7 +10,7 @@ from typing import Optional
 
 from transformers import AutoTokenizer, BertModel
 
-from src.alignment_models.methods.bert_int.config import BertIntConfig
+from src.alignment_models.methods.bert_int.config import normalise_bert_int_config
 from src.config.loader import PROJECT_ROOT, load_yaml
 from src.logger import get_logger, set_global_level
 
@@ -106,16 +106,16 @@ def main(argv: Optional[list[str]] = None) -> int:
     set_global_level(args.log_level)
 
     model_cfg = load_yaml(args.model_config).get("model", {})
-    config = BertIntConfig.from_dict(model_cfg)
+    config = normalise_bert_int_config(model_cfg)
 
-    strategy = args.strategy or config.basic_unit.encoder_strategy
+    strategy = args.strategy or config["basic_unit"].get("encoder_strategy")
     strategy = (strategy or "auto").lower()
     if strategy == "random":
         logger.info("Encoder strategy set to 'random'; nothing to download.")
         return 0
 
-    cache_dir = resolve_cache_dir(args.cache_dir, config.paths.cache_dir)
-    repo_id = config.basic_unit.encoder_name
+    cache_dir = resolve_cache_dir(args.cache_dir, config["paths"].get("cache_dir"))
+    repo_id = config["basic_unit"].get("encoder_name", "bert-base-multilingual-cased")
 
     if strategy == "local":
         logger.info("Strategy 'local' selected; verifying local cache for '%s'.", repo_id)
