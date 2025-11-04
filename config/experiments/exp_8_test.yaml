@@ -14,11 +14,7 @@ experiment:
 
   basic_unit:
     epochs: 2  # Fast test: 2 epochs instead of default 20
-    batch_size: 32  # Reduced for 7.6GB GPU
-    eval_batch_size: 16  # Reduced for 7.6GB GPU
-    candidate_batch_size: 16  # Reduced for 7.6GB GPU
 
   interaction_model:
     epochs: 5  # Fast test: 5 epochs instead of default 100
     eval_every: 2  # Evaluate every 2 epochs
-    batch_size: 64  # Reduced for 7.6GB GPU
