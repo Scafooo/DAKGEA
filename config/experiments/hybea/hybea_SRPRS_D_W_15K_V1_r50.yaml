@@ -1,9 +1,0 @@
-experiment:
-  name: hybea-SRPRS_D_W_15K_V1-r50
-  dataset:
-    name: SRPRS_D_W_15K_V1
-    reader: hybea
-    subtype: attribute_data
-  reduction_ratio: 0.5
-  writer: hybea
-  model: hybea

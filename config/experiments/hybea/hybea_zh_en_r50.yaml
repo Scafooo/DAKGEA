@@ -1,9 +1,0 @@
-experiment:
-  name: hybea-zh_en-r50
-  dataset:
-    name: zh_en
-    reader: hybea
-    subtype: attribute_data
-  reduction_ratio: 0.5
-  writer: hybea
-  model: hybea

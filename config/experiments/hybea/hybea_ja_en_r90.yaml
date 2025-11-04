@@ -1,9 +1,0 @@
-experiment:
-  name: hybea-ja_en-r90
-  dataset:
-    name: ja_en
-    reader: hybea
-    subtype: attribute_data
-  reduction_ratio: 0.9
-  writer: hybea
-  model: hybea

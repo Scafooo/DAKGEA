@@ -1,9 +1,0 @@
-experiment:
-  name: bert_int-zh_en-r20
-  dataset:
-    name: zh_en
-    reader: hybea
-    subtype: attribute_data
-  reduction_ratio: 0.2
-  writer: hybea
-  model: bert_int
