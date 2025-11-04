@@ -736,7 +736,12 @@ class InteractionModelStage:
 
         # Load basic_unit model and other data
         logger.info("Loading basic_unit model and data...")
-        basic_unit_other_data_path = basic_unit_checkpoint_dir / f"{variant_key}_other_data.pkl"
+
+        # Determine the actual file prefix used for saving
+        # BERT-INT saves with "reduced" pattern for baseline, not "baseline" pattern
+        file_prefix = "reduced" if variant_key == "baseline" else variant_key
+
+        basic_unit_other_data_path = basic_unit_checkpoint_dir / f"{file_prefix}_other_data.pkl"
 
         if not basic_unit_other_data_path.exists():
             raise FileNotFoundError(
@@ -751,7 +756,17 @@ class InteractionModelStage:
         logger.info(f"Test ILL: {len(test_ill)} pairs")
 
         # Find and load basic_unit model checkpoint
-        checkpoint_files = sorted(basic_unit_checkpoint_dir.glob(f"{variant_key}_model_epoch_*.pt"))
+        # Try multiple patterns to find checkpoints
+        checkpoint_patterns = [
+            f"{file_prefix}_model_epoch_*.pt",  # Pattern: reduced_model_epoch_N.pt
+            f"{file_prefix}_epoch_*.pt",         # Pattern: reduced_epoch_N.pt
+        ]
+
+        checkpoint_files = []
+        for pattern in checkpoint_patterns:
+            checkpoint_files = sorted(basic_unit_checkpoint_dir.glob(pattern))
+            if checkpoint_files:
+                break
         if not checkpoint_files:
             raise FileNotFoundError(
                 f"No basic_unit checkpoint found in {basic_unit_checkpoint_dir}"

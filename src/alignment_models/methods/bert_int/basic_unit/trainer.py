@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import pickle
 import random
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple, Union
@@ -284,8 +285,17 @@ class BasicUnitTrainer:
         save_dir = Path(model_save_dir)
         save_dir.mkdir(parents=True, exist_ok=True)
         prefix = self.paths.get("model_save_prefix") or "model"
+
+        # Save model checkpoint
         model_path = save_dir / f"{prefix}_epoch_{epoch}.pt"
         torch.save(self.model.state_dict(), model_path)
+
+        # Save other_data.pkl for interaction_model (only once, not per epoch)
+        other_data_path = save_dir / f"{prefix}_other_data.pkl"
+        if not other_data_path.exists():
+            with open(other_data_path, "wb") as f:
+                pickle.dump((self.data.train_ill, self.data.test_ill, self.data.ent2data), f)
+            logger.info("[BERT-INT] Saved other_data.pkl to %s", other_data_path)
 
     @staticmethod
     def _set_seeds(seed: int) -> None:
