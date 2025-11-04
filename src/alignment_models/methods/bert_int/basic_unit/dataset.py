@@ -44,6 +44,7 @@ def load_basic_unit_data(
         raise ValueError("BERT-INT basic unit requires paths.dataset_root in the configuration.")
 
     dataset_root_path = Path(dataset_root)
+    logger.info("[BERT-INT] Loading basic unit data from %s", dataset_root_path)
     dataset_name = config.get("dataset", {}).get("name") or dataset_root_path.name
 
     tokenizer = AutoTokenizer.from_pretrained(config.get("encoder_name", "bert-base-multilingual-cased"))
@@ -183,7 +184,8 @@ def _ent2description_tokens(
     for entity, text in descriptions.items():
         if entity not in ent_set_1 and entity not in ent_set_2:
             continue
-        token_ids = tokenizer.encode(text, add_special_tokens=False)[:max_length]
+        # Replicate original behavior: encode WITH special tokens (will be added again later)
+        token_ids = tokenizer.encode(text)[:max_length]
         ent2tokens[entity] = token_ids
     logger.info("Loaded descriptions for %d entities", len(ent2tokens))
     return ent2tokens
@@ -204,10 +206,12 @@ def _entities_to_token_ids(
         if ent2des_tokens and entity_iri in ent2des_tokens:
             tokens = ent2des_tokens[entity_iri]
         elif entity_iri in attributes:
-            tokens = tokenizer.encode(attributes[entity_iri], add_special_tokens=False)[:max_length]
+            # Replicate original behavior: encode WITH special tokens
+            tokens = tokenizer.encode(attributes[entity_iri])[:max_length]
         else:
             surface = _friendly_name(entity_iri, dataset_label)
-            tokens = tokenizer.encode(surface, add_special_tokens=False)[:max_length]
+            # Replicate original behavior: encode WITH special tokens
+            tokens = tokenizer.encode(surface)[:max_length]
         ent2token_ids[ent_id] = tokens
     return ent2token_ids
 

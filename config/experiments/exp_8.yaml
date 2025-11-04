@@ -1,14 +1,20 @@
-  experiment:
-    name: bert_int_raw
+experiment:
+  name: bert_int_raw
+  dataset:
+    name: D_W_15K_V1
+    reader: hybea
+    subtype: attribute_data
+  reduction_ratio: 0.1
+  writer: hybea
+  model: bert_int
+  seed: 11037
 
-    dataset:
-      name: D_W_15K_V1
-      reader: hybea
-      subtype: attribute_data
-    reduction_ratio: 0.1
-    model: bert_int
+  # BERT-INT is always a two-phase model (basic_unit → interaction_model)
+  # Default parameters are loaded from config/models/bert_int.yaml
+  # Specify sections below only to override defaults
 
-    model_overrides:
-      paths:
-        dataset_root: "data/raw/hybea/D_W_15K_V1/attribute_data"
-        description_dict: "Bert-int-pure/2016-10-des_dict.pkl"
+  basic_unit:
+    eval_frequency: 5  # Override: evaluate every 5 epochs instead of default 1
+
+  interaction_model:
+    eval_every: 10  # Override: evaluate every 10 epochs instead of default 2

@@ -1,0 +1,20 @@
+experiment:
+  name: bert_int_full_pipeline
+  dataset:
+    name: D_W_15K_V1
+    reader: hybea
+    subtype: attribute_data
+  reduction_ratio: 0.1
+  writer: hybea
+  model: bert_int
+  seed: 11037
+
+  # BERT-INT is always a two-phase model (basic_unit → interaction_model)
+  # Default parameters loaded from config/models/bert_int.yaml
+  # Only override parameters that differ from defaults
+
+  basic_unit:
+    eval_frequency: 5
+
+  interaction_model:
+    eval_every: 10

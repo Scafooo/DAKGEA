@@ -25,41 +25,62 @@ DEFAULT_CONFIG: Dict[str, Any] = {
         "model_save_prefix": "run",
     },
     "basic_unit": {
+        # Model architecture
         "encoder_name": "bert-base-multilingual-cased",
         "encoder_strategy": "auto",
         "max_seq_length": 128,
         "dropout": 0.1,
         "model_input_dim": 768,
-        "learning_rate": 1.0e-5,
+        "output_dim": 300,
+        "result_size": 300,  # Legacy alias for output_dim
+        # Training parameters
+        "epochs": 20,
+        "batch_size": 256,
+        "learning_rate": 5.0e-5,
         "weight_decay": 0.0,
-        "epochs": 5,
-        "batch_size": 24,
         "gradient_accumulation": 1,
         "load_pretrained": True,
         "warmup_steps": 100,
         "max_grad_norm": 1.0,
-        "random_divide_ill": False,
-        "train_ratio": None,
-        "seed": 11037,
         "negatives_per_positive": 2,
         "margin": 3.0,
+        # Evaluation parameters
+        "eval_frequency": 1,
         "eval_batch_size": 128,
         "eval_top_k": 1000,
         "candidate_top_k": 128,
         "candidate_batch_size": 128,
         "nearest_sample_num": 128,
-        "result_size": 300,
+        # Device
+        "device": "cuda:0",
         "cuda_device": 0,
+        # Legacy/optional parameters
+        "random_divide_ill": False,
+        "train_ratio": None,
+        "seed": 11037,
         "language": None,
         "dataset": {
             "name": None,
             "fold": None,
         },
     },
-    "interaction": {
-        "batch_size": 64,
-        "cosine_top_k": 50,
-        "temperature": 0.1,
+    "interaction_model": {
+        # Feature extraction parameters
+        "kernel_num": 21,
+        "entity_neigh_max_num": 50,
+        "entity_attvalue_max_num": 20,
+        "candidate_topk": 50,
+        # Model architecture
+        "mlp_hidden_dim": 11,
+        # Training parameters
+        "epochs": 100,
+        "batch_size": 256,
+        "learning_rate": 0.001,
+        "margin": 1.0,
+        "neg_num": 5,
+        "eval_every": 2,
+        # Device
+        "device": "cuda:0",
     },
     "seed": {
         "global": 42,
