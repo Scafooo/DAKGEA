@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import random
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple, Union
 
 import numpy as np
 import torch
@@ -24,9 +24,30 @@ from src.logger import get_logger
 logger = get_logger(__name__)
 
 Pair = Tuple[int, int]
+DeviceSpec = Union[int, str, torch.device]
 
 
-def _select_device(device_spec: Optional[int | str], fallback_cuda: int) -> torch.device:
+def _select_device(device_spec: Optional[DeviceSpec], fallback_cuda: int) -> torch.device:
+    """
+    Select PyTorch device based on specification with fallback logic.
+
+    Args:
+        device_spec: Device specification. Can be:
+            - int: CUDA device index (e.g., 0 for cuda:0)
+            - str: Device string (e.g., "cuda:0", "cpu")
+            - torch.device: Direct device object
+            - None: Use fallback_cuda if CUDA available, else CPU
+        fallback_cuda: CUDA device index to use when device_spec is None
+
+    Returns:
+        torch.device: Selected PyTorch device
+
+    Examples:
+        >>> _select_device(0, fallback_cuda=0)
+        device(type='cuda', index=0)
+        >>> _select_device("cpu", fallback_cuda=0)
+        device(type='cpu')
+    """
     if device_spec is not None:
         if isinstance(device_spec, torch.device):
             return device_spec
@@ -67,13 +88,18 @@ class BasicUnitTrainer:
 
     def fit(self) -> List[Dict[str, float]]:
         """Train the model for the configured number of epochs, returning metrics per epoch."""
-        self._set_seeds(self.config.get("seed", 11037))
+        self._set_seeds(int(self.config.get("seed", 11037)))
+
+        learning_rate = float(self.config.get("learning_rate", 1.0e-5))
+        weight_decay = float(self.config.get("weight_decay", 0.0))
+        margin = float(self.config.get("margin", 1.0))
+
         optimizer = AdamW(
             self.model.parameters(),
-            lr=self.config.get("learning_rate", 1.0e-5),
-            weight_decay=self.config.get("weight_decay", 0.0),
+            lr=learning_rate,
+            weight_decay=weight_decay,
         )
-        criterion = torch.nn.MarginRankingLoss(margin=self.config.get("margin", 1.0))
+        criterion = torch.nn.MarginRankingLoss(margin=margin)
 
         ent_ids_left = [e1 for e1, _ in self.data.ent_ill]
         ent_ids_right = [e2 for _, e2 in self.data.ent_ill]

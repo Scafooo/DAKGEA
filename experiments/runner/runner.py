@@ -5,9 +5,10 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from src.config.loader import Config
+from src.core.dataset import Dataset
 from src.core.dataset.reader import DatasetReaderFactory
 from src.core.dataset.writer import DatasetWriterFactory
 from src.logger import get_logger
@@ -16,7 +17,16 @@ logger = get_logger(__name__)
 
 from .progress import ProgressTracker
 from .specs import DatasetSpec, WriterPlan
-from .stages import AugmentationStage, EvaluationStage, ReductionStage
+from .stages import (
+    ATTRIBUTE_DATA_DIR,
+    MODEL_BERT_INT,
+    RATIO_THRESHOLD,
+    VARIANT_BASELINE,
+    VARIANT_REDUCED,
+    AugmentationStage,
+    EvaluationStage,
+    ReductionStage,
+)
 
 
 class ExperimentRunner:
@@ -46,7 +56,10 @@ class ExperimentRunner:
         try:
             self.name = exp_cfg["name"]
         except KeyError as exc:
-            raise KeyError("Missing required experiment configuration key: 'name'") from exc
+            raise KeyError(
+                f"Missing required experiment configuration key: 'name'. "
+                f"Available keys: {list(exp_cfg.keys())}"
+            ) from exc
 
         # Normalise dataset configuration to a list of entries
         if "datasets" in exp_cfg:
@@ -56,7 +69,10 @@ class ExperimentRunner:
         elif "dataset" in exp_cfg:
             datasets_cfg = [exp_cfg["dataset"]]
         else:
-            raise KeyError("Experiment configuration must define 'dataset' or 'datasets'.")
+            raise KeyError(
+                f"Experiment configuration must define 'dataset' or 'datasets'. "
+                f"Available keys: {list(exp_cfg.keys())}"
+            )
         self.datasets_cfg = list(datasets_cfg)
 
         # Normalise reduction ratios to a list of floats
@@ -67,7 +83,10 @@ class ExperimentRunner:
         elif "reduction_ratio" in exp_cfg:
             ratios = [exp_cfg["reduction_ratio"]]
         else:
-            raise KeyError("Experiment configuration must define 'reduction_ratio' or 'reduction_ratios'.")
+            raise KeyError(
+                f"Experiment configuration must define 'reduction_ratio' or 'reduction_ratios'. "
+                f"Available keys: {list(exp_cfg.keys())}"
+            )
         self.ratios = [float(r) for r in ratios]
 
         # Single augmentation method (optional)
@@ -89,7 +108,10 @@ class ExperimentRunner:
         elif "model" in exp_cfg:
             models = [exp_cfg["model"]]
         else:
-            raise KeyError("Experiment configuration must define 'model' or 'models_to_run'.")
+            raise KeyError(
+                f"Experiment configuration must define 'model' or 'models_to_run'. "
+                f"Available keys: {list(exp_cfg.keys())}"
+            )
         self.models = [m for m in models if m]
 
         self.reduction_method = exp_cfg.get("reduction_method", "random_entities")
@@ -129,9 +151,11 @@ class ExperimentRunner:
 
     def _infer_reader(self, dataset_name: str) -> str:
         """Guess the reader type based on the raw data directory structure."""
+        available_dirs = []
         for candidate in self.base_data.iterdir():
             if not candidate.is_dir():
                 continue
+            available_dirs.append(candidate.name)
             if (candidate / dataset_name).is_dir():
                 logger.debug(
                     "Auto-detected reader '%s' for dataset '%s'",
@@ -141,7 +165,8 @@ class ExperimentRunner:
                 return candidate.name
         raise FileNotFoundError(
             f"Unable to infer reader for dataset '{dataset_name}'. "
-            f"Expected to find it under {self.base_data}."
+            f"Expected to find it under {self.base_data}. "
+            f"Available reader directories: {available_dirs}"
         )
 
     def run(self) -> None:
@@ -227,53 +252,21 @@ class ExperimentRunner:
                     ratio_meta.setdefault("evaluations", {})
 
                     lineage = stage_cfg.setdefault("lineage", {})
-                    dataset_reduced = reduction_stage.execute(
-                        stage_cfg,
-                        dataset,
-                        reader,
-                        ratio,
-                        ratio_tag,
-                        lineage,
-                        ratio_root,
-                        ratio_meta,
-                        spec.subtype,
+                    lineage["_reduction_executed"] = False
+
+                    # Execute reduction or use raw dataset
+                    dataset_reduced = self._execute_reduction_if_needed(
+                        ratio, dataset, reader, reduction_stage, stage_cfg,
+                        ratio_tag, lineage, ratio_root, ratio_meta, dataset_root, spec
                     )
 
-                    if not self.augmentations:
-                        evaluation_stage.execute(
-                            "baseline",
-                            dataset_reduced,
-                            dataset_reduced,
-                            stage_cfg,
-                            lineage,
-                            ratio_root,
-                            ratio_tag,
-                            ratio_meta,
-                        )
+                    # Execute baseline and augmented evaluations
+                    self._execute_evaluations(
+                        dataset_reduced, augmentation_stage, evaluation_stage,
+                        stage_cfg, lineage, ratio, ratio_tag, ratio_root, ratio_meta,
+                        reader, spec
+                    )
 
-                    for aug_name in self.augmentations:
-                        dataset_augmented = augmentation_stage.execute(
-                            stage_cfg,
-                            aug_name,
-                            dataset_reduced,
-                            reader,
-                            lineage,
-                            ratio,
-                            ratio_tag,
-                            ratio_root,
-                            ratio_meta,
-                            spec.subtype,
-                        )
-                        evaluation_stage.execute(
-                            aug_name,
-                            dataset_reduced,
-                            dataset_augmented,
-                            stage_cfg,
-                            lineage,
-                            ratio_root,
-                            ratio_tag,
-                            ratio_meta,
-                        )
                     progress.step()
         finally:
             progress.close()
@@ -394,6 +387,22 @@ class ExperimentRunner:
                 "reduction_method": self.reduction_method,
             }
         )
+
+        # Copy model-specific configurations from experiment config
+        # Note: self.exp_cfg is already the content under "experiment" key from YAML
+        # Copy basic_unit config if present
+        if "basic_unit" in self.exp_cfg:
+            cfg["basic_unit"] = self.exp_cfg["basic_unit"]
+        # Copy interaction_model config if present
+        if "interaction_model" in self.exp_cfg:
+            cfg["interaction_model"] = self.exp_cfg["interaction_model"]
+        # Copy model config if present (only if it's a dict with sub-config)
+        if "model" in self.exp_cfg and isinstance(self.exp_cfg["model"], dict):
+            cfg.setdefault("model", {}).update(self.exp_cfg["model"])
+        # Copy seed if present
+        if "seed" in self.exp_cfg:
+            cfg["seed"] = self.exp_cfg["seed"]
+
         lineage = cfg.setdefault("lineage", {})
         lineage["reduction_method"] = self.reduction_method
         lineage["dataset_workspace"] = str(dataset_workspace.resolve())
@@ -425,6 +434,316 @@ class ExperimentRunner:
     def _format_ratio_tag(ratio: float) -> str:
         """Return a normalized percentage tag (e.g., 0.1 -> '10')."""
         return str(int(round(ratio * 100)))
+
+    def _execute_reduction_if_needed(
+        self,
+        ratio: float,
+        dataset,
+        reader,
+        reduction_stage,
+        stage_cfg: Dict[str, Any],
+        ratio_tag: str,
+        lineage: Dict[str, Any],
+        ratio_root: Path,
+        ratio_meta: Dict[str, Any],
+        dataset_root: Path,
+        spec,
+    ):
+        """
+        Execute reduction stage if ratio < threshold, otherwise use raw dataset.
+
+        When ratio is less than RATIO_THRESHOLD (0.999999), this method executes
+        the reduction stage to create a reduced dataset. Otherwise, it clones
+        the original dataset and uses it as-is.
+
+        Args:
+            ratio: Reduction ratio (0.0 to 1.0)
+            dataset: Original dataset to reduce
+            reader: Dataset reader instance
+            reduction_stage: ReductionStage instance
+            stage_cfg: Stage configuration dictionary
+            ratio_tag: String tag for the ratio (e.g., "10" for 0.1)
+            lineage: Lineage tracking dictionary
+            ratio_root: Root directory for this ratio's outputs
+            ratio_meta: Metadata dictionary for this ratio
+            dataset_root: Root directory of the original dataset
+            spec: DatasetSpec instance
+
+        Returns:
+            Dataset: Reduced or cloned dataset
+        """
+        reduced_datasets = lineage.setdefault("reduced_datasets", {})
+
+        if ratio < RATIO_THRESHOLD:  # perform reduction only when ratio < 1
+            dataset_reduced = reduction_stage.execute(
+                stage_cfg,
+                dataset,
+                reader,
+                ratio,
+                ratio_tag,
+                lineage,
+                ratio_root,
+                ratio_meta,
+                spec.subtype,
+            )
+            lineage["_reduction_executed"] = True
+        else:
+            dataset_reduced = dataset.clone()
+            raw_attr = dataset_root / ATTRIBUTE_DATA_DIR
+            dataset_path = raw_attr if raw_attr.exists() else dataset_root
+            reduced_datasets["raw"] = str(dataset_path.resolve())
+            lineage.setdefault("reduced_paths", {})["raw"] = str(dataset_path.resolve())
+            reduction_meta = ratio_meta.setdefault(
+                "reduction",
+                {"method": self.reduction_method, "paths": {}},
+            )
+            reduction_meta["method"] = self.reduction_method
+            reduction_meta.setdefault("paths", {})
+
+        return dataset_reduced
+
+    def _execute_evaluations(
+        self,
+        dataset_reduced,
+        augmentation_stage,
+        evaluation_stage,
+        stage_cfg: Dict[str, Any],
+        lineage: Dict[str, Any],
+        ratio: float,
+        ratio_tag: str,
+        ratio_root: Path,
+        ratio_meta: Dict[str, Any],
+        reader,
+        spec,
+    ) -> None:
+        """
+        Execute baseline and augmentation evaluations.
+
+        If no augmentation methods are configured, evaluates the baseline (reduced)
+        dataset only. Otherwise, iterates through all configured augmentation methods,
+        augments the dataset, and evaluates each augmented variant.
+
+        For BERT-INT model with interaction_model enabled, also runs the interaction
+        model stage after basic_unit evaluation.
+
+        Args:
+            dataset_reduced: The reduced (or full) dataset to evaluate
+            augmentation_stage: AugmentationStage instance
+            evaluation_stage: EvaluationStage instance
+            stage_cfg: Stage configuration dictionary
+            lineage: Lineage tracking dictionary
+            ratio: Reduction ratio
+            ratio_tag: String tag for the ratio
+            ratio_root: Root directory for this ratio's outputs
+            ratio_meta: Metadata dictionary for this ratio
+            reader: Dataset reader instance
+            spec: DatasetSpec instance
+        """
+        from .stages import InteractionModelStage
+
+        # Check if we need to run interaction model
+        should_run_interaction = self._should_run_interaction_model(stage_cfg)
+
+        if not self.augmentations:
+            evaluation_stage.execute(
+                VARIANT_BASELINE,
+                dataset_reduced,
+                dataset_reduced,
+                stage_cfg,
+                lineage,
+                ratio_root,
+                ratio_tag,
+                ratio_meta,
+            )
+
+            # Run interaction model for baseline if applicable
+            if should_run_interaction:
+                self._run_interaction_model_stage(
+                    dataset_reduced,
+                    stage_cfg,
+                    lineage,
+                    ratio_root,
+                    augmentation_name=None,
+                )
+
+        for aug_name in self.augmentations:
+            dataset_augmented = augmentation_stage.execute(
+                stage_cfg,
+                aug_name,
+                dataset_reduced,
+                reader,
+                lineage,
+                ratio,
+                ratio_tag,
+                ratio_root,
+                ratio_meta,
+                spec.subtype,
+            )
+            evaluation_stage.execute(
+                aug_name,
+                dataset_reduced,
+                dataset_augmented,
+                stage_cfg,
+                lineage,
+                ratio_root,
+                ratio_tag,
+                ratio_meta,
+            )
+
+            # Run interaction model for this augmentation if applicable
+            if should_run_interaction:
+                self._run_interaction_model_stage(
+                    dataset_augmented,
+                    stage_cfg,
+                    lineage,
+                    ratio_root,
+                    augmentation_name=aug_name,
+                )
+
+    def _should_run_interaction_model(self, stage_cfg: Dict[str, Any]) -> bool:
+        """Check if interaction model should be run based on model type.
+
+        For BERT-INT, interaction_model is always run as it's an integral
+        part of the two-phase architecture (basic_unit → interaction_model).
+
+        Args:
+            stage_cfg: Stage configuration
+
+        Returns:
+            True if model is bert_int, False otherwise
+        """
+        # BERT-INT is always a two-phase model
+        return MODEL_BERT_INT in self.models
+
+    def _run_interaction_model_stage(
+        self,
+        dataset: Dataset,
+        stage_cfg: Dict[str, Any],
+        lineage: Dict[str, Any],
+        ratio_root: Path,
+        augmentation_name: Optional[str] = None,
+    ) -> None:
+        """Run the interaction model stage for BERT-INT.
+
+        Args:
+            dataset: Dataset to use
+            stage_cfg: Stage configuration
+            lineage: Lineage tracking
+            ratio_root: Root directory for this ratio
+            augmentation_name: Optional augmentation name (None for baseline)
+        """
+        from .stages import InteractionModelStage
+
+        logger.info("[STEP] → Running BERT-INT Interaction Model (Phase 2)")
+
+        # Determine checkpoint directory based on variant
+        variant_key = augmentation_name if augmentation_name else "baseline"
+        evaluation_dirs = lineage.get("evaluation_dirs", {})
+
+        # For baseline, use "reduced" as key
+        if variant_key == "baseline":
+            variant_key_for_eval = VARIANT_REDUCED
+        else:
+            variant_key_for_eval = variant_key.replace("/", "_")
+
+        evaluation_dir = evaluation_dirs.get(variant_key_for_eval)
+
+        if not evaluation_dir:
+            logger.warning(
+                f"Evaluation directory not found for variant '{variant_key_for_eval}', "
+                f"skipping interaction model"
+            )
+            return
+
+        # The checkpoint directory should be under the evaluation directory
+        checkpoint_dir = Path(evaluation_dir)
+
+        # Create and execute interaction model stage
+        interaction_stage = InteractionModelStage(resume=self.resume)
+
+        try:
+            results = interaction_stage.execute(
+                dataset=dataset,
+                basic_unit_checkpoint_dir=checkpoint_dir,
+                stage_cfg=stage_cfg,
+                lineage_cfg=lineage,
+                ratio_root=ratio_root,
+                augmentation_name=augmentation_name,
+            )
+
+            logger.info("[SUCCESS] Interaction model completed successfully")
+
+            # Log key metrics if available
+            if results and "final_evaluation" in results:
+                eval_results = results["final_evaluation"]
+                logger.info(
+                    f"  Hits@1: {eval_results.get('hits@1', 0):.2f}%  "
+                    f"Hits@10: {eval_results.get('hits@10', 0):.2f}%  "
+                    f"MRR: {eval_results.get('mrr', 0):.4f}"
+                )
+
+                # Update bert_int.json with interaction model results (final results)
+                self._update_bert_int_results_with_interaction(
+                    checkpoint_dir, eval_results
+                )
+
+        except Exception as e:
+            logger.error(f"Interaction model failed: {e}", exc_info=True)
+            logger.warning("Continuing without interaction model results")
+
+    def _update_bert_int_results_with_interaction(
+        self,
+        evaluation_dir: Path,
+        interaction_results: Dict[str, Any],
+    ) -> None:
+        """Update bert_int.json with final interaction model results.
+
+        This makes the interaction model results the "official" BERT-INT results,
+        while preserving the basic_unit results for reference.
+
+        Args:
+            evaluation_dir: Evaluation directory containing bert_int.json
+            interaction_results: Results from interaction model evaluation
+        """
+        bert_int_json = evaluation_dir / "bert_int.json"
+
+        if not bert_int_json.exists():
+            logger.warning(f"bert_int.json not found at {bert_int_json}, skipping update")
+            return
+
+        # Load existing results (basic_unit)
+        with bert_int_json.open("r") as f:
+            basic_unit_results = json.load(f)
+
+        # Create comprehensive results combining both phases
+        final_results = {
+            "model": "bert_int",
+            "phases": {
+                "basic_unit": basic_unit_results,  # Preserve original basic_unit results
+                "interaction_model": interaction_results,  # Add interaction model results
+            },
+            # Top-level metrics are from interaction model (final results)
+            "hits@1": interaction_results.get("hits@1", 0.0),
+            "hits@5": interaction_results.get("hits@5", 0.0),
+            "hits@10": interaction_results.get("hits@10", 0.0),
+            "hits@25": interaction_results.get("hits@25", 0.0),
+            "hits@50": interaction_results.get("hits@50", 0.0),
+            "mr": interaction_results.get("mr", 0.0),
+            "mrr": interaction_results.get("mrr", 0.0),
+            "evaluated": interaction_results.get("total", 0),
+            # Add note about the two-phase nature
+            "_note": "BERT-INT is a two-phase model: basic_unit (phase 1) + interaction_model (phase 2). "
+                     "Top-level metrics are from interaction_model (final results).",
+        }
+
+        # Write updated results
+        with bert_int_json.open("w") as f:
+            json.dump(final_results, f, indent=2)
+
+        logger.info(f"✓ Updated {bert_int_json.name} with interaction model results (final)")
+        logger.info(
+            f"  Basic unit results preserved in phases.basic_unit"
+        )
 
     def _write_metadata(self) -> None:
         """Persist the experiment metadata summary alongside artefacts."""

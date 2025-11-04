@@ -125,7 +125,7 @@ class HybeaDatasetWriter(DatasetWriter):
         n1 = int(n * 0.7)
         n2 = int(n * 0.9)
         logger.debug(
-            "Preparing %d aligned entity pairs for attribute export (%d/%d/%d splits). "
+            "Preparing %d aligned entity pairs for attribute export (train=%d/test=%d/valid=%d). "
             "Dropped %d missing pairs from original %d.",
             n,
             n1,
@@ -135,8 +135,10 @@ class HybeaDatasetWriter(DatasetWriter):
             original_pairs,
         )
 
-        ref_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[:n1]]
-        sup_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[n1:n2]]
+        # FIXED: Inverted to have train=70% (large) and test=20% (small)
+        # sup_pairs is used as train_ill, ref_pairs is used as test_ill
+        sup_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[:n1]]
+        ref_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[n1:n2]]
         valid_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[n2:]]
 
         write_tsv(os.path.join(dir_path, "ref_pairs"), ref_pairs)
@@ -173,14 +175,15 @@ class HybeaDatasetWriter(DatasetWriter):
 
         slogger.table("Entity Split Configuration", {
             "Total Aligned Entities": n,
-            "Reference Set (70%)": n1,
-            "Support Set (20%)": n2 - n1,
+            "Support Set (70%) [train]": n1,
+            "Reference Set (20%) [test]": n2 - n1,
             "Validation Set (10%)": n - n2
         })
 
         ent_ILLs_pairs = list_aligned_entities
-        ref_pairs = list_aligned_entities[:n1]
-        sup_pairs = list_aligned_entities[n1:n2]
+        # FIXED: Inverted to have train=70% (large) and test=20% (small)
+        sup_pairs = list_aligned_entities[:n1]
+        ref_pairs = list_aligned_entities[n1:n2]
         valid_pairs = list_aligned_entities[n2:]
         vocab = {}
 

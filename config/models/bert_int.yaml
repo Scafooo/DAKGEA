@@ -1,32 +1,66 @@
 model:
-  device: "cpu"
+  device: cuda
   paths:
-    cache_dir: "results/cache/bert_int"
-    dataset_root: null
-    description_dict: "Bert-int-pure/2016-10-des_dict.pkl"
-    model_save_dir: "results/bert_int/basic_unit"
-    model_save_prefix: "run"
+    cache_dir: results/cache/bert_int
+    dataset_root:
+    description_dict: Bert_int_reference/2016-10-des_dict.pkl
+    model_save_dir: results/bert_int/basic_unit
+    model_save_prefix: run
 
+  # ============================================================================
+  # Phase 1: Basic Unit (BERT fine-tuning for entity embeddings)
+  # ============================================================================
   basic_unit:
-    encoder_name: "bert-base-multilingual-cased"
-    encoder_strategy: "auto"
+    # Model architecture
+    encoder_name: bert-base-multilingual-cased
+    encoder_strategy: auto
     max_seq_length: 128
     dropout: 0.1
     model_input_dim: 768
-    learning_rate: 1.0e-5
+    output_dim: 300
+
+    # Training parameters
+    epochs: 5
+    batch_size: 256
+    learning_rate: 5e-05
     load_pretrained: true
     negatives_per_positive: 2
     margin: 3.0
-    eval_batch_size: 128
-    result_size: 300
-    dataset:
-      name: null
-      fold: null
 
-  interaction:
-    batch_size: 64
-    cosine_top_k: 50
-    temperature: 0.1
+    # Evaluation parameters
+    eval_frequency: 1
+    eval_batch_size: 64
+    eval_top_k: 1000
+    candidate_batch_size: 128
+    nearest_sample_num: 128
 
+    # Device
+    device: cuda:0
+
+  # ============================================================================
+  # Phase 2: Interaction Model (Multi-view features + MLP)
+  # ============================================================================
+  interaction_model:
+    # Feature extraction
+    kernel_num: 21                  # Gaussian kernels for dual aggregation
+    entity_neigh_max_num: 50        # Max neighbors per entity
+    entity_attvalue_max_num: 20     # Max attribute values per entity
+    candidate_topk: 50              # Top candidates to consider
+
+    # Model architecture
+    mlp_hidden_dim: 11              # MLP: 85 → 11 → 1
+
+    # Training parameters
+    epochs: 100
+    batch_size: 256
+    learning_rate: 0.001
+    margin: 1.0
+    neg_num: 5                      # Negative samples per positive
+    eval_every: 2                   # Evaluate every N epochs
+
+    # Device
+    device: cuda:0
+
+  # Global seed
   seed:
     global: 42

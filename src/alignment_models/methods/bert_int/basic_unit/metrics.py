@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Iterable, List, Optional
 
+import numpy as np
+
 import torch
 
 
@@ -24,8 +26,21 @@ def batch_cosine_similarity(
     device: Optional[int | str | torch.device] = None,
 ) -> torch.Tensor:
     """Return the cosine similarity matrix computed in mini-batches."""
-    left_tensor = torch.as_tensor(list(embeddings_left), dtype=torch.float32)
-    right_tensor = torch.as_tensor(list(embeddings_right), dtype=torch.float32)
+    left_list = list(embeddings_left)
+    right_list = list(embeddings_right)
+
+    if not left_list or not right_list:
+        return torch.empty((0, 0), dtype=torch.float32)
+
+    if isinstance(left_list[0], torch.Tensor):
+        left_tensor = torch.stack(left_list).to(torch.float32)
+    else:
+        left_tensor = torch.from_numpy(np.asarray(left_list, dtype=np.float32))
+
+    if isinstance(right_list[0], torch.Tensor):
+        right_tensor = torch.stack(right_list).to(torch.float32)
+    else:
+        right_tensor = torch.from_numpy(np.asarray(right_list, dtype=np.float32))
 
     device_t = _resolve_device(device)
     left_norm = torch.nn.functional.normalize(left_tensor, p=2, dim=1)
@@ -51,7 +66,9 @@ def batch_topk(
     indices: List[torch.Tensor] = []
     for start in range(0, matrix.size(0), batch_size):
         batch = matrix[start : start + batch_size].to(device_t)
-        batch_scores, batch_indices = batch.topk(topk, largest=True)
+        # Ensure k does not exceed the number of columns (replicate original behavior)
+        k = min(topk, batch.size(1))
+        batch_scores, batch_indices = batch.topk(k, largest=True)
         scores.append(batch_scores.cpu())
         indices.append(batch_indices.cpu())
     return torch.cat(scores, dim=0), torch.cat(indices, dim=0)
