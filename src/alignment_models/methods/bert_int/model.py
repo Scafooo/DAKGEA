@@ -21,9 +21,50 @@ def _extract_overrides(stage_config: Dict[str, Any]) -> Dict[str, Any]:
     """Return model-specific overrides from the stage configuration."""
     if not stage_config:
         return {}
+
+    # Check if basic_unit and/or interaction_model are directly in stage_config
+    # (This is the new pattern where runner copies them directly)
+    if "basic_unit" in stage_config or "interaction_model" in stage_config:
+        overrides = {}
+        if "basic_unit" in stage_config:
+            overrides["basic_unit"] = stage_config["basic_unit"]
+        if "interaction_model" in stage_config:
+            overrides["interaction_model"] = stage_config["interaction_model"]
+
+        # Extract dataset_root from lineage if available
+        # IMPORTANT: Use the REDUCED dataset path, not the raw source
+        lineage = stage_config.get("lineage", {})
+        from pathlib import Path
+
+        # Priority: reduced_hybea_path > reduced_paths['hybea'] > raw_source
+        dataset_root = None
+        if "reduced_hybea_path" in lineage:
+            # HybEA reduced dataset - need to add subtype subdirectory
+            dataset_root = Path(lineage["reduced_hybea_path"])
+        elif "reduced_paths" in lineage and "hybea" in lineage["reduced_paths"]:
+            # Alternative path for HybEA reduced dataset
+            dataset_root = Path(lineage["reduced_paths"]["hybea"])
+        elif "raw_source" in lineage:
+            # Fallback to raw (only if no reduction happened)
+            dataset_root = Path(lineage["raw_source"])
+
+        # Check if we need to append subtype subdirectory for HybEA datasets
+        # (Both raw and reduced HybEA datasets have attribute_data/knowformer_data subdirs)
+        if dataset_root:
+            dataset_section = stage_config.get("dataset", {})
+            subtype = dataset_section.get("subtype") if isinstance(dataset_section, dict) else None
+            if subtype:
+                # For HybEA datasets with subtypes, files are in a subdirectory
+                dataset_root = dataset_root / subtype
+            overrides.setdefault("paths", {})["dataset_root"] = str(dataset_root)
+
+        return overrides
+
+    # Legacy: check for "model" key
     if "model" in stage_config:
-        # Allow direct overrides under "model"
         return stage_config.get("model") or {}
+
+    # Legacy: check for "models/bert_int" structure
     models_section = stage_config.get("models") or {}
     return models_section.get("bert_int") or {}
 

@@ -402,6 +402,9 @@ class ExperimentRunner:
         # Copy seed if present
         if "seed" in self.exp_cfg:
             cfg["seed"] = self.exp_cfg["seed"]
+        # Copy dataset info if present (needed for subtype resolution)
+        if "dataset" in self.exp_cfg:
+            cfg["dataset"] = self.exp_cfg["dataset"]
 
         lineage = cfg.setdefault("lineage", {})
         lineage["reduction_method"] = self.reduction_method
@@ -655,8 +658,15 @@ class ExperimentRunner:
             )
             return
 
-        # The checkpoint directory should be under the evaluation directory
-        checkpoint_dir = Path(evaluation_dir)
+        # BERT-INT saves checkpoints in evaluation/bert_int/reduced/ not evaluation/reduced/
+        # We need to find the actual checkpoint directory
+        evaluation_root = lineage.get("evaluation_root")
+        if evaluation_root:
+            # Checkpoints are saved in evaluation_root/bert_int/variant_key
+            checkpoint_dir = Path(evaluation_root) / MODEL_BERT_INT / variant_key_for_eval
+        else:
+            # Fallback: try to infer from evaluation_dir
+            checkpoint_dir = Path(evaluation_dir).parent / MODEL_BERT_INT / variant_key_for_eval
 
         # Create and execute interaction model stage
         interaction_stage = InteractionModelStage(resume=self.resume)
