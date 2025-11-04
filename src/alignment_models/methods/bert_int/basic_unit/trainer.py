@@ -207,6 +207,7 @@ class BasicUnitTrainer:
         candidate_batch = self.config.get("candidate_batch_size", 128)
         nearest = self.config.get("nearest_sample_num", 128)
 
+        # Generate candidates for left entities
         emb_left_train = self._encode_entities(train_left, candidate_batch)
         emb_right_candidates = self._encode_entities(candidates_right, candidate_batch)
         sim_left = batch_cosine_similarity(
@@ -221,7 +222,12 @@ class BasicUnitTrainer:
             topk=nearest,
             device=self.device,
         )
+        # Move indices to CPU and free GPU memory immediately
+        idx_left = idx_left.cpu()
+        del sim_left, emb_left_train, emb_right_candidates
+        torch.cuda.empty_cache()
 
+        # Generate candidates for right entities
         emb_right_train = self._encode_entities(train_right, candidate_batch)
         emb_left_candidates = self._encode_entities(candidates_left, candidate_batch)
         sim_right = batch_cosine_similarity(
@@ -236,12 +242,20 @@ class BasicUnitTrainer:
             topk=nearest,
             device=self.device,
         )
+        # Move indices to CPU and free GPU memory immediately
+        idx_right = idx_right.cpu()
+        del sim_right, emb_right_train, emb_left_candidates
+        torch.cuda.empty_cache()
 
+        # Build candidate dictionary (now using CPU tensors)
         candidate_dict: Dict[int, List[int]] = {}
         for pos, entity in enumerate(train_left):
             candidate_dict[entity] = [int(candidates_right[i]) for i in idx_left[pos].tolist()]
         for pos, entity in enumerate(train_right):
             candidate_dict[entity] = [int(candidates_left[i]) for i in idx_right[pos].tolist()]
+
+        # Final cleanup
+        del idx_left, idx_right
         return candidate_dict
 
     def _forward_entities(self, entity_ids: Sequence[int]) -> torch.Tensor:
