@@ -22,7 +22,7 @@ logger = get_logger(__name__)
 RATIO_THRESHOLD = 0.999999
 VARIANT_BASELINE = "baseline"
 VARIANT_REDUCED = "reduced"
-MODEL_BERT_INT = "bert_int"
+MODEL_BERT_INT = "support"
 WRITER_HYBEA = "hybea"
 ATTRIBUTE_DATA_DIR = "attribute_data"
 
@@ -123,7 +123,7 @@ class ReductionStage:
         )
 
         for plan in self.writer_plans:
-            plan_root = reduction_root / plan.name
+            plan_root = reduction_root / f"dataset_format_{plan.name}"
             if plan.write_reduced:
                 _ensure_directory(plan_root)
                 plan.writer.write(dataset_reduced, str(plan_root))
@@ -154,7 +154,8 @@ class ReductionStage:
             return None
 
     def _select_reader_plan(self) -> str:
-        return self.writer_plans[0].name if self.writer_plans else "default"
+        plan_name = self.writer_plans[0].name if self.writer_plans else "default"
+        return f"dataset_format_{plan_name}"
 
     def _record_plan_paths(
         self,
@@ -166,7 +167,7 @@ class ReductionStage:
         lineage: Dict[str, Any],
     ) -> None:
         for plan in self.writer_plans:
-            plan_root = base_root / plan.name
+            plan_root = base_root / f"dataset_format_{plan.name}"
             if plan_root.exists():
                 self._record_single_plan(plan, plan_root, reduced_paths, reduced_datasets,
                                         reduction_paths, reduction_meta, lineage)
@@ -254,7 +255,7 @@ class AugmentationStage:
                 ratio_tag,
             )
             for plan in self.writer_plans:
-                plan_root = stage_root / plan.name
+                plan_root = stage_root / f"dataset_format_{plan.name}"
                 if plan_root.exists():
                     resolved_path = str(plan_root.resolve())
                     per_aug_paths[plan.name] = resolved_path
@@ -282,7 +283,7 @@ class AugmentationStage:
         )
 
         for plan in self.writer_plans:
-            plan_root = stage_root / plan.name
+            plan_root = stage_root / f"dataset_format_{plan.name}"
             if plan.write_augmented:
                 _ensure_directory(plan_root)
                 plan.writer.write(dataset_augmented, str(plan_root))
@@ -313,7 +314,8 @@ class AugmentationStage:
 
     @staticmethod
     def _select_reader_plan(reader) -> str:
-        return getattr(reader, "file_type", "default")
+        format_name = getattr(reader, "file_type", "default")
+        return f"dataset_format_{format_name}"
 
 
 class EvaluationStage:
@@ -738,8 +740,8 @@ class InteractionModelStage:
         logger.info("Loading basic_unit model and data...")
 
         # Determine the actual file prefix used for saving
-        # BERT-INT saves with "reduced" pattern for baseline, not "baseline" pattern
-        file_prefix = "reduced" if variant_key == "baseline" else variant_key
+        # BERT-INT saves with "run" prefix, not "reduced" pattern
+        file_prefix = "run"
 
         basic_unit_other_data_path = basic_unit_checkpoint_dir / f"{file_prefix}_other_data.pkl"
 

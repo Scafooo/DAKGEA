@@ -46,11 +46,15 @@ def batch_cosine_similarity(
     left_norm = torch.nn.functional.normalize(left_tensor, p=2, dim=1)
     right_norm = torch.nn.functional.normalize(right_tensor, p=2, dim=1)
 
+    # Move right matrix to device ONCE before loop
+    right_norm_t = right_norm.t().to(device_t)
+
     result_chunks: List[torch.Tensor] = []
     for start in range(0, left_norm.size(0), batch_size):
         chunk = left_norm[start : start + batch_size].to(device_t)
-        prod = chunk @ right_norm.t().to(device_t)
+        prod = chunk @ right_norm_t
         result_chunks.append(prod.cpu())
+
     return torch.cat(result_chunks, dim=0)
 
 

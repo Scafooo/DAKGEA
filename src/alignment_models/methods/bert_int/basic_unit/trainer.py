@@ -190,6 +190,10 @@ class BasicUnitTrainer:
                 self.config.get("max_grad_norm", 1.0),
             )
             optimizer.step()
+            
+            # Clear cache to prevent memory accumulation
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
 
             batch_size = pos_score.size(0)
             total_loss += loss.item() * batch_size
@@ -222,10 +226,6 @@ class BasicUnitTrainer:
             topk=nearest,
             device=self.device,
         )
-        # Move indices to CPU and free GPU memory immediately
-        idx_left = idx_left.cpu()
-        del sim_left, emb_left_train, emb_right_candidates
-        torch.cuda.empty_cache()
 
         # Generate candidates for right entities
         emb_right_train = self._encode_entities(train_right, candidate_batch)
@@ -242,20 +242,14 @@ class BasicUnitTrainer:
             topk=nearest,
             device=self.device,
         )
-        # Move indices to CPU and free GPU memory immediately
-        idx_right = idx_right.cpu()
-        del sim_right, emb_right_train, emb_left_candidates
-        torch.cuda.empty_cache()
 
-        # Build candidate dictionary (now using CPU tensors)
+        # Build candidate dictionary
         candidate_dict: Dict[int, List[int]] = {}
         for pos, entity in enumerate(train_left):
             candidate_dict[entity] = [int(candidates_right[i]) for i in idx_left[pos].tolist()]
         for pos, entity in enumerate(train_right):
             candidate_dict[entity] = [int(candidates_left[i]) for i in idx_right[pos].tolist()]
 
-        # Final cleanup
-        del idx_left, idx_right
         return candidate_dict
 
     def _forward_entities(self, entity_ids: Sequence[int]) -> torch.Tensor:

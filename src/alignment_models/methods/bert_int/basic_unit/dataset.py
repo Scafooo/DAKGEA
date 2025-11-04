@@ -86,11 +86,17 @@ def _read_data(
     entity2index = {entity: idx for idx, entity in index2entity.items()}
     rel2index = {rel: idx for idx, rel in index2rel.items()}
 
+    # DEBUG: Log entity counts
+    logger.info("[BERT-INT DEBUG] Total entities loaded: %d", len(index2entity))
+
     rel_triples_1 = _read_idtuple_file(data_path / "triples_1")
     rel_triples_2 = _read_idtuple_file(data_path / "triples_2")
 
     ent_ids_1 = _read_idobj_tuple_file(data_path / "ent_ids_1")
     ent_ids_2 = _read_idobj_tuple_file(data_path / "ent_ids_2")
+
+    # DEBUG: Log entity counts per KG
+    logger.info("[BERT-INT DEBUG] KG1 entities: %d, KG2 entities: %d", len(ent_ids_1), len(ent_ids_2))
 
     train_ill = _read_idtuple_file(data_path / "sup_pairs")
     test_ill = _read_idtuple_file(data_path / "ref_pairs")

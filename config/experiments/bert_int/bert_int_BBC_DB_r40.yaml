@@ -1,9 +1,0 @@
-experiment:
-  name: bert_int-BBC_DB-r40
-  dataset:
-    name: BBC_DB
-    reader: hybea
-    subtype: attribute_data
-  reduction_ratio: 0.4
-  writer: hybea
-  model: bert_int

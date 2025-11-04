@@ -22,18 +22,18 @@ def _extract_overrides(stage_config: Dict[str, Any]) -> Dict[str, Any]:
     if not stage_config:
         return {}
 
+    overrides = {}
+    
     # Check if basic_unit and/or interaction_model are directly in stage_config
-    # (This is the new pattern where runner copies them directly)
-    if "basic_unit" in stage_config or "interaction_model" in stage_config:
-        overrides = {}
-        if "basic_unit" in stage_config:
-            overrides["basic_unit"] = stage_config["basic_unit"]
-        if "interaction_model" in stage_config:
-            overrides["interaction_model"] = stage_config["interaction_model"]
+    if "basic_unit" in stage_config:
+        overrides["basic_unit"] = stage_config["basic_unit"]
+    if "interaction_model" in stage_config:
+        overrides["interaction_model"] = stage_config["interaction_model"]
 
-        # Extract dataset_root from lineage if available
-        # IMPORTANT: Use the REDUCED dataset path, not the raw source
-        lineage = stage_config.get("lineage", {})
+    # Always extract dataset_root from lineage if available
+    # IMPORTANT: Use the REDUCED dataset path, not the raw source
+    lineage = stage_config.get("lineage", {})
+    if lineage:
         from pathlib import Path
 
         # Priority: reduced_hybea_path > reduced_paths['hybea'] > raw_source
@@ -58,6 +58,15 @@ def _extract_overrides(stage_config: Dict[str, Any]) -> Dict[str, Any]:
                 dataset_root = dataset_root / subtype
             overrides.setdefault("paths", {})["dataset_root"] = str(dataset_root)
 
+        # Set model_save_dir dynamically based on experiment name
+        if "evaluation_root" in lineage:
+            evaluation_root = Path(lineage["evaluation_root"])
+            model_save_dir = evaluation_root / "support"
+            overrides.setdefault("paths", {})["model_save_dir"] = str(model_save_dir)
+            logger.info(f"[BERT-INT] Dynamic model_save_dir set to: {model_save_dir}")
+
+    # If we have model-specific overrides, return them
+    if overrides:
         return overrides
 
     # Legacy: check for "model" key

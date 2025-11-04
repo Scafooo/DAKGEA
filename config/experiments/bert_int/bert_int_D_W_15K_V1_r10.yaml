@@ -1,9 +1,0 @@
-experiment:
-  name: bert_int-D_W_15K_V1-r10
-  dataset:
-    name: D_W_15K_V1
-    reader: hybea
-    subtype: attribute_data
-  reduction_ratio: 0.1
-  writer: hybea
-  model: bert_int

@@ -1,9 +1,0 @@
-experiment:
-  name: hybea-BBC_DB-r70
-  dataset:
-    name: BBC_DB
-    reader: hybea
-    subtype: attribute_data
-  reduction_ratio: 0.7
-  writer: hybea
-  model: hybea
