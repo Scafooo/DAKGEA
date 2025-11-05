@@ -130,7 +130,8 @@ class InteractionEvaluator:
         for k in [1, 5, 10, 25, 50]:
             if k <= topk:
                 cumulative_hits = sum(hits_per_position[:k])
-                topk_metrics[f"hits@{k}"] = (cumulative_hits / all_test_num) * 100
+                # Store as fraction (0-1) for consistency with Basic Unit
+                topk_metrics[f"hits@{k}"] = cumulative_hits / all_test_num
 
         # Compute MR and MRR
         mr_sum = 0

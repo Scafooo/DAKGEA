@@ -122,8 +122,8 @@ class HybeaDatasetWriter(DatasetWriter):
                 logger.warning("Additional %d missing pairs omitted from log.", len(missing) - 5)
 
         n = len(list_aligned_entities)
-        n1 = int(n * 0.7)
-        n2 = int(n * 0.9)
+        n1 = int(n * 0.9)
+        n2 = int(n * 0.7)
         logger.debug(
             "Preparing %d aligned entity pairs for attribute export (train=%d/test=%d/valid=%d). "
             "Dropped %d missing pairs from original %d.",
@@ -135,7 +135,7 @@ class HybeaDatasetWriter(DatasetWriter):
             original_pairs,
         )
 
-        # FIXED: Inverted to have train=70% (large) and test=20% (small)
+        # FIXED: Inverted to have train=20% (large) and test=20% (small)
         # sup_pairs is used as train_ill, ref_pairs is used as test_ill
         sup_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[:n1]]
         ref_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[n1:n2]]

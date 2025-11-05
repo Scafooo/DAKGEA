@@ -97,10 +97,10 @@ class BertIntWriter(DatasetWriter):
                 f"Sample: {sample}"
             )
 
-        # Split: 70% sup (train), 20% ref (test), 10% valid
+        # Split: 20% sup (train), 70% ref (test), 10% valid
         n = len(list_aligned_entities)
-        n1 = int(n * 0.7)
-        n2 = int(n * 0.9)
+        n1 = int(n * 0.9)
+        n2 = int(n * 0.7)
 
         logger.info(
             f"Aligned entities: {n} total, {n1} sup (train), "

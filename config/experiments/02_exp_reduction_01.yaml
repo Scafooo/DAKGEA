@@ -1,0 +1,10 @@
+experiment:
+  name: 02_exp_reduction_01
+  dataset:
+    name: BBC_DB
+  augmentation:
+    method: stub
+    reduction: 0.1
+  model: bert_int
+  seed: 11037
+  clear: true

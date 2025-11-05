@@ -1,7 +1,7 @@
 """BERT-INT knowledge graph reader."""
 from pathlib import Path
 
-from rdflib import URIRef
+from rdflib import URIRef, Literal
 
 from src.core.knowledge_graph import KnowledgeGraph
 from src.core.knowledge_graph.reader.knowledge_graph_reader_base import (
@@ -36,6 +36,7 @@ class BertIntKnowledgeGraphReader(KnowledgeGraphReader):
         ent_ids_file = dir_path / f"ent_ids_{kg_number}"
         rel_ids_file = dir_path / f"rel_ids_{kg_number}"
         triples_file = dir_path / f"triples_{kg_number}"
+        attr_triples_file = dir_path / f"attr_triples{kg_number}"
 
         # Read entity ID mapping (index -> URI)
         ent_data = read_tsv(str(ent_ids_file))
@@ -45,7 +46,7 @@ class BertIntKnowledgeGraphReader(KnowledgeGraphReader):
         rel_data = read_tsv(str(rel_ids_file))
         index2relation = {int(row[0]): row[1] for row in rel_data}
 
-        # Read triples (as indices)
+        # Read relation triples (as indices)
         triple_data = read_tsv(str(triples_file))
 
         # Create knowledge graph
@@ -63,9 +64,21 @@ class BertIntKnowledgeGraphReader(KnowledgeGraphReader):
 
             kg.add((subj_uri, pred_uri, obj_uri))
 
+        # Read attribute triples if they exist
+        attr_count = 0
+        if attr_triples_file.exists():
+            attr_data = read_tsv(str(attr_triples_file))
+            for row in attr_data:
+                subj_uri = URIRef(row[0])
+                pred_uri = URIRef(row[1])
+                literal_value = Literal(row[2])
+                kg.add((subj_uri, pred_uri, literal_value))
+                attr_count += 1
+
         logger.info(
             f"BERT-INT KG {kg_number}: loaded {len(index2entity)} entities, "
-            f"{len(index2relation)} relations, {len(triple_data)} triples"
+            f"{len(index2relation)} relations, {len(triple_data)} relation triples, "
+            f"{attr_count} attribute triples"
         )
 
         return kg

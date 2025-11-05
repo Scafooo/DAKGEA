@@ -1,5 +1,5 @@
 """PLM augmentation package."""
 
-from src.augmentation.methods.plm.augmenter import PLMAugmenter
+from src.augmentation.methods.plm.plm_augmenter import PLMAugmenter
 
 __all__ = ["PLMAugmenter"]
