@@ -1,0 +1,6 @@
+experiment:
+  name: test_ref10_attribute_data
+  dataset:
+    path: /home/federico/Programming/Python/DAKGEA/Bert_int_reference/survey_data/D_W_15K_V1/10/attribute_data
+  model: bert_int
+  seed: 11037

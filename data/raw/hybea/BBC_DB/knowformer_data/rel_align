@@ -1,0 +1,4 @@
+[http://xmlns.com/foaf/0.1/name]	[prop:name, prop:fullname, prop:legalname, prop:realname, prop:birthname, prop:othernames, prop:alternativenames, prop:nickname, prop:nicknames, dbo:alias, prop:alias, http://xmlns.com/foaf/0.1/givenname, http://xmlns.com/foaf/0.1/surname]
+[http://purl.org/dc/elements/1.1/title]	[prop:title, dbo:title, prop:langtitle, prop:concerttourname, prop:showname, prop:albumname, prop:header, prop:headline]
+[rdfs:comment]	[rdfs:comment, prop:description, http://purl.org/dc/elements/1.1/description, prop:shortdescription, prop:shortsummary, dbo:abstract]
+[http://open.vocab.org/terms/sortlabel]	[prop:sortlabel, prop:order, prop:position, prop:rank, prop:number]

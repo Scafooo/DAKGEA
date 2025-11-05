@@ -108,12 +108,12 @@ class BertIntAlignment:
         logger.info("=" * 80)
         logger.info("BERT-INT Completed: Two-Phase Results")
         logger.info(
-            f"  Basic Unit  - Hits@1: {basic_unit_results.get('hits@1', 0):.2f}% | "
-            f"Hits@10: {basic_unit_results.get('hits@10', 0):.2f}%"
+            f"  Basic Unit  - Hits@1: {basic_unit_results.get('hits@1', 0):.4f} | "
+            f"Hits@10: {basic_unit_results.get('hits@10', 0):.4f}"
         )
         logger.info(
-            f"  Interaction - Hits@1: {interaction_results.get('hits@1', 0):.2f}% | "
-            f"Hits@10: {interaction_results.get('hits@10', 0):.2f}%"
+            f"  Interaction - Hits@1: {interaction_results.get('hits@1', 0):.4f} | "
+            f"Hits@10: {interaction_results.get('hits@10', 0):.4f}"
         )
         logger.info("=" * 80)
 
@@ -169,8 +169,8 @@ class BertIntAlignment:
 
         logger.info(
             "[BERT-INT Phase 1] Basic unit completed: "
-            f"hits@1={metrics.get('hits@1', 0.0):.2f}% "
-            f"hits@10={metrics.get('hits@10', 0.0):.2f}% "
+            f"hits@1={metrics.get('hits@1', 0.0):.4f} "
+            f"hits@10={metrics.get('hits@10', 0.0):.4f} "
             f"mrr={metrics.get('mrr', 0.0):.4f}"
         )
 
@@ -317,8 +317,8 @@ class BertIntAlignment:
 
         logger.info(
             f"[BERT-INT Phase 2] Interaction model completed: "
-            f"hits@1={final_results.get('hits@1', 0):.2f}% "
-            f"hits@10={final_results.get('hits@10', 0):.2f}% "
+            f"hits@1={final_results.get('hits@1', 0):.4f} "
+            f"hits@10={final_results.get('hits@10', 0):.4f} "
             f"mrr={final_results.get('mrr', 0):.4f}"
         )
 

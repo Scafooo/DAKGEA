@@ -111,6 +111,7 @@ class ExperimentRunner:
         self.models = [m for m in models if m]
 
         self.reduction_method = exp_cfg.get("reduction_method", "random_entities")
+        self.clear_intermediate = exp_cfg.get("clear", False)
 
         effective_overwrite = (
             overwrite_existing
@@ -218,6 +219,10 @@ class ExperimentRunner:
             self._run_direct_mode()
         else:
             self._run_standard_mode()
+        
+        # Clean up intermediate files if requested
+        if self.clear_intermediate:
+            self._cleanup_intermediate_files()
 
     def _run_direct_mode(self) -> None:
         """Run experiments in direct path mode: read datasets directly, skip reduction/writer."""
@@ -257,8 +262,8 @@ class ExperimentRunner:
                     "lineage": {
                         "dataset_workspace": str(spec.direct_path),
                         "direct_mode": True,
+                        "evaluation_root": str(dataset_workspace / "evaluation"),
                     },
-                    "evaluation_root": str(dataset_workspace / "evaluation"),
                 }
 
                 # Run evaluation directly using execute method
@@ -688,3 +693,28 @@ class ExperimentRunner:
         with self.metadata_file.open("w", encoding="utf-8") as handle:
             json.dump(self.metadata, handle, indent=2)
         logger.info("🗒️  Experiment metadata saved → %s", self.metadata_file)
+
+    def _cleanup_intermediate_files(self) -> None:
+        """Remove intermediate files from current experiment folder."""
+        logger.info("🧹 Cleaning intermediate files from experiment: %s", self.name)
+        
+        files_removed = 0
+        space_freed = 0
+        
+        # Clean only current experiment folder
+        for file_path in self.base_workspace.rglob("*"):
+            if file_path.is_file():
+                if (file_path.name.startswith("run_epoch_") and file_path.suffix == ".pt") or \
+                   file_path.name == "run_other_data.pkl" or \
+                   file_path.name == "interaction_model.pt":
+                    try:
+                        size = file_path.stat().st_size
+                        file_path.unlink()
+                        files_removed += 1
+                        space_freed += size
+                    except OSError:
+                        pass
+        
+        if files_removed > 0:
+            space_mb = space_freed / (1024 * 1024)
+            logger.info("🧹 Removed %d files, freed %.1f MB", files_removed, space_mb)

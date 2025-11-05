@@ -68,14 +68,14 @@ DEFAULT_CONFIG: Dict[str, Any] = {
         # Feature extraction parameters
         "kernel_num": 21,
         "entity_neigh_max_num": 50,
-        "entity_attvalue_max_num": 20,
+        "entity_attvalue_max_num": 50,  # Aligned with reference (was 20)
         "candidate_topk": 50,
         # Model architecture
         "mlp_hidden_dim": 11,
         # Training parameters
         "epochs": 100,
-        "batch_size": 256,
-        "learning_rate": 0.001,
+        "batch_size": 128,  # Aligned with reference (was 256)
+        "learning_rate": 5e-4,  # Aligned with reference (was 0.001)
         "margin": 1.0,
         "neg_num": 5,
         "eval_every": 2,

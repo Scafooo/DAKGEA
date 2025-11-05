@@ -40,11 +40,13 @@ class BertIntKnowledgeGraphWriter(KnowledgeGraphWriter):
         ent_ids_file = dir_path / f"ent_ids_{kg_number}"
         rel_ids_file = dir_path / f"rel_ids_{kg_number}"
         triples_file = dir_path / f"triples_{kg_number}"
+        attr_triples_file = dir_path / f"attr_triples{kg_number}"
 
         # Build mappings
         entity2index = {}
         relation2index = {}
         triples = []
+        attr_triples = []
 
         # Sort triples for consistency
         ordered_triples = sorted([[s, p, o] for s, p, o in kg])
@@ -67,34 +69,35 @@ class BertIntKnowledgeGraphWriter(KnowledgeGraphWriter):
                 rel_idx = len(kg1_rels)
                 logger.debug(f"KG2: starting relation index at {rel_idx} (offset from KG1)")
 
-        # Process triples (only relation triples, not attributes)
+        # Process triples: separate relation triples from attribute triples
         for s, p, o in ordered_triples:
-            # Skip attribute triples (where object is Literal)
-            if isinstance(o, Literal):
-                continue
-
-            # Index entities
+            # Index subject entity (always present)
             if str(s) not in entity2index:
                 entity2index[str(s)] = ent_idx
                 ent_idx += 1
 
-            if str(o) not in entity2index:
-                entity2index[str(o)] = ent_idx
-                ent_idx += 1
-
-            # Index relations
+            # Index predicate
             if str(p) not in relation2index:
                 relation2index[str(p)] = rel_idx
                 rel_idx += 1
 
-            # Store triple as indices
-            triples.append(
-                (
-                    str(entity2index[str(s)]),
-                    str(relation2index[str(p)]),
-                    str(entity2index[str(o)]),
+            if isinstance(o, Literal):
+                # Attribute triple: subject predicate literal_value
+                attr_triples.append((str(s), str(p), str(o)))
+            else:
+                # Relation triple: index the object entity
+                if str(o) not in entity2index:
+                    entity2index[str(o)] = ent_idx
+                    ent_idx += 1
+
+                # Store triple as indices
+                triples.append(
+                    (
+                        str(entity2index[str(s)]),
+                        str(relation2index[str(p)]),
+                        str(entity2index[str(o)]),
+                    )
                 )
-            )
 
         # Write entity IDs (index, URI)
         ent_data = [
@@ -117,9 +120,15 @@ class BertIntKnowledgeGraphWriter(KnowledgeGraphWriter):
         # Write triples (as indices)
         write_tsv(str(triples_file), triples)
 
+        # Write attribute triples (subject_uri, predicate_uri, literal_value)
+        if attr_triples:
+            write_tsv(str(attr_triples_file), attr_triples)
+            logger.info(f"BERT-INT KG {kg_number}: wrote {len(attr_triples)} attribute triples")
+
         logger.info(
             f"BERT-INT KG {kg_number}: {len(entity2index)} entities, "
-            f"{len(relation2index)} relations, {len(triples)} triples"
+            f"{len(relation2index)} relations, {len(triples)} relation triples, "
+            f"{len(attr_triples)} attribute triples"
         )
 
         return True

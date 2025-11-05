@@ -1,6 +1,0 @@
-experiment:
-  name: bert_int_raw
-  skip_reduction: true  # Skip reduction - use existing dataset
-  skip_writer: true  # Skip writer - use existing dataset
-  model: bert_int
-  seed: 11037

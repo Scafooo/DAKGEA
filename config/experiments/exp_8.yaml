@@ -1,6 +1,0 @@
-experiment:
-  name: bert_int_raw
-  dataset:
-    name: D_W_15K_V1
-  model: bert_int
-  seed: 11037
