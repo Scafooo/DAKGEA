@@ -1,38 +1,72 @@
-# Data Augmentation for Knowledge Graph Entity Resolution
+# DAKGEA - Data Augmentation for Knowledge Graph Entity Alignment
 
-This repository implements a **modular experimentation framework** for **Entity Alignment (EA)** on Knowledge Graphs. It combines dataset reduction, data augmentation, and model training so you can measure how each component impacts alignment accuracy with minimal plumbing.
+A **modular experimentation framework** for **Entity Alignment (EA)** on Knowledge Graphs. DAKGEA combines dataset reduction, data augmentation, and model training to measure how each component impacts alignment accuracy.
+
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
 
-## 🛠️ Installation
+## ✨ Features
 
-Clone and enter the repository:
+- **Multi-Format Support**: HybEA, BERT-INT, RDF formats with automatic conversion
+- **Flexible Dataset Configuration**: Simple names, explicit readers, or direct paths
+- **Two-Phase BERT-INT**: Complete implementation with attribute support
+- **Modular Pipeline**: Reduction → Augmentation → Evaluation stages
+- **Production Ready**: Comprehensive logging, checkpointing, and error handling
+
+---
+
+## 🛠️ Quick Start
+
+### Installation
 
 ```bash
+# Clone repository
 git clone https://github.com/Scafooo/DataAug-KG-EntityResolution
 cd DAKGEA
+
+# Create environment (choose one)
+conda env create -f install/HybEA_env.yml && conda activate hybea
+# OR
+python -m venv .venv && source .venv/bin/activate && pip install -r install/requirements.txt
 ```
 
-Create a Python environment and install dependencies:
+### Run Your First Experiment
 
 ```bash
-conda env create -f install/HybEA_env.yml  # or: pip install -r install/requirements.txt
-# activate: conda activate hybea   |   source .venv/bin/activate
+# Using the helper script
+./run.sh config/experiments/01_exp_direct.yaml
+
+# Or directly with Python
+python experiments/run.py config/experiments/01_exp_direct.yaml
 ```
 
-> Need more detail? See the [User Guide](docs/user-guide.md#1-install--setup).
+### Create a Custom Experiment
 
----
+```yaml
+# config/experiments/my_experiment.yaml
+experiment:
+  name: "my_first_experiment"
+  dataset:
+    name: "hybea/BBC_DB"           # Explicit reader/dataset format
+  augmentation:
+    method: "stub"                  # No augmentation
+    reduction: 0.1                  # Use 10% of training data
+  model: bert_int
+  seed: 42
+  clear: true                       # Clean up intermediate files
+```
 
-## 🚀 Running Experiments
-
-Example invocation:
-
+Run it:
 ```bash
-python experiments/run.py config/experiments/exp_1.yaml
+./run.sh config/experiments/my_experiment.yaml
 ```
 
-CLI flags like `--overwrite-existing`, `--resume`, and `--no-progress` tweak caching and logging behaviour. All configuration options are documented in the [User Guide](docs/user-guide.md#2-run-an-experiment).
+Check results:
+```bash
+cat results/my_first_experiment/BBC_DB/0.1/evaluation/reduced/bert_int.json
+```
 
 ---
 
@@ -85,10 +119,101 @@ More context, including troubleshooting tips, lives in the [User Guide](docs/use
 
 ---
 
-## 📚 Further Reading
+## 📚 Documentation
 
-- [User Guide](docs/user-guide.md) – installation, experiment execution, artefact overview, troubleshooting.
-- [Developer Guide](docs/developer-guide.md) – architecture, plugin registration, code structure, testing guidance.
+### User Documentation
+- **[User Guide](docs/user-guide.md)** - Installation, running experiments, understanding outputs
+- **[Configuration Guide](docs/configuration-guide.md)** - Complete configuration reference with examples
+- **[Dataset Guide](docs/dataset-guide.md)** - Dataset formats, readers, writers, and conversions
+- **[BERT-INT Guide](docs/bert-int-guide.md)** - BERT-INT model architecture, training, and tuning
+- **[FAQ](docs/faq.md)** - Frequently asked questions and troubleshooting
+
+### Developer Documentation
+- **[Developer Guide](docs/developer-guide.md)** - Architecture, registries, extending the framework
+
+### Quick Links
+- **Common Tasks**
+  - [Create an experiment](docs/configuration-guide.md#complete-examples)
+  - [Add a custom dataset](docs/dataset-guide.md#adding-custom-datasets)
+  - [Configure BERT-INT](docs/bert-int-guide.md#configuration)
+  - [Troubleshoot errors](docs/faq.md#errors--troubleshooting)
+
+---
+
+## 📊 Example Results
+
+BERT-INT on BBC_DB (reduction=0.1, seed=11037):
+
+```json
+{
+  "model": "bert_int",
+  "phases": {
+    "basic_unit": {
+      "hits@1": 0.3456,
+      "hits@10": 0.7823,
+      "mrr": 0.5234
+    },
+    "interaction_model": {
+      "hits@1": 0.4521,
+      "hits@10": 0.8345,
+      "mrr": 0.6123
+    }
+  }
+}
+```
+
+**Note:** All metrics are fractions (0-1 range), not percentages.
+
+---
+
+## 🔧 Key Capabilities
+
+### Multiple Dataset Formats
+
+```yaml
+# HybEA format
+dataset:
+  name: "hybea/BBC_DB"
+
+# BERT-INT format
+dataset:
+  name: "bert_int/D_W_15K_V1"
+
+# RDF format
+dataset:
+  name: "rdf/DW_15"
+
+# Direct path (pre-processed data)
+dataset:
+  path: "/path/to/preprocessed/data"
+```
+
+### Flexible Augmentation
+
+```yaml
+# Reduction only (no augmentation)
+augmentation:
+  method: "stub"
+  reduction: 0.1      # Keep 10% of training data
+
+# PLM-based augmentation
+augmentation:
+  method: "plm_augmentation"
+  reduction: 0.2
+  parameters:
+    model_name: "bert-base-multilingual-cased"
+    augmentation_factor: 2.0
+```
+
+### Multi-Model Evaluation
+
+```yaml
+# Compare multiple models
+models_to_run: ["bert_int", "hybea"]
+
+# Or sweep reduction ratios
+reduction_ratios: [0.1, 0.2, 0.5, 1.0]
+```
 
 ---
 
