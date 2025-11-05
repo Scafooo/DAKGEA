@@ -1,7 +1,8 @@
 experiment:
   name: 02_exp_reduction_01
   dataset:
-    name: BBC_DB
+    name: hybea/BBC_DB
+    writer: bert_int
   augmentation:
     method: stub
     reduction: 0.1

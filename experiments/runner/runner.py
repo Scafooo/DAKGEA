@@ -81,6 +81,13 @@ class ExperimentRunner:
             self.ratios = [float(r) for r in ratios]
         elif "reduction_ratio" in exp_cfg:
             self.ratios = [float(exp_cfg["reduction_ratio"])]
+        elif "augmentation" in exp_cfg and isinstance(exp_cfg["augmentation"], dict):
+            # New structure: augmentation: {method: stub, reduction: 0.1}
+            aug_cfg = exp_cfg["augmentation"]
+            if "reduction" in aug_cfg:
+                self.ratios = [float(aug_cfg["reduction"])]
+            else:
+                self.ratios = []
         else:
             # No reduction ratio: direct path mode (skip reduction/augmentation/writer)
             self.ratios = []
@@ -92,6 +99,13 @@ class ExperimentRunner:
                 augmentations = [augmentations]
         elif "augmentation_method" in exp_cfg:
             augmentations = [exp_cfg["augmentation_method"]] if exp_cfg["augmentation_method"] else []
+        elif "augmentation" in exp_cfg and isinstance(exp_cfg["augmentation"], dict):
+            # New structure: augmentation: {method: stub, reduction: 0.1}
+            aug_cfg = exp_cfg["augmentation"]
+            if "method" in aug_cfg and aug_cfg["method"]:
+                augmentations = [aug_cfg["method"]]
+            else:
+                augmentations = []
         else:
             augmentations = []
         self.augmentations = [a for a in augmentations if a]
@@ -146,8 +160,39 @@ class ExperimentRunner:
 
         self.datasets: List[DatasetSpec] = self._build_dataset_specs()
 
-    def _infer_reader(self, dataset_name: str) -> str:
-        """Guess the reader type based on the raw data directory structure."""
+    def _infer_reader(self, dataset_name: str) -> Tuple[str, str]:
+        """Guess the reader type based on the raw data directory structure.
+
+        Supports two formats:
+        1. Simple name: 'BBC_DB' -> searches for it under all reader directories
+        2. Reader/dataset format: 'hybea/BBC_DB' or 'rdf/DW_15' -> uses explicit reader
+
+        Returns:
+            Tuple of (reader_name, actual_dataset_name)
+        """
+        # Check if dataset_name contains '/' (explicit reader/dataset format)
+        if "/" in dataset_name:
+            parts = dataset_name.split("/", 1)
+            reader_name = parts[0]
+            actual_dataset_name = parts[1]
+
+            # Verify that the path exists
+            dataset_path = self.base_data / reader_name / actual_dataset_name
+            if dataset_path.is_dir():
+                logger.debug(
+                    "Using explicit reader '%s' for dataset '%s' (from '%s')",
+                    reader_name,
+                    actual_dataset_name,
+                    dataset_name,
+                )
+                return reader_name, actual_dataset_name
+            else:
+                raise FileNotFoundError(
+                    f"Dataset path not found: {dataset_path}. "
+                    f"Expected format: data/raw/{reader_name}/{actual_dataset_name}"
+                )
+
+        # Original behavior: search for dataset under all reader directories
         available_dirs = []
         for candidate in self.base_data.iterdir():
             if not candidate.is_dir():
@@ -159,7 +204,7 @@ class ExperimentRunner:
                     candidate.name,
                     dataset_name,
                 )
-                return candidate.name
+                return candidate.name, dataset_name
         raise FileNotFoundError(
             f"Unable to infer reader for dataset '{dataset_name}'. "
             f"Expected to find it under {self.base_data}. "
@@ -439,7 +484,8 @@ class ExperimentRunner:
 
             # Infer reader from path if not explicitly provided (standard mode only)
             if reader is None and direct_path is None:
-                reader = self._infer_reader(name)
+                reader, actual_name = self._infer_reader(name)
+                name = actual_name  # Update name to the extracted dataset name
 
             specs.append(
                 DatasetSpec(
