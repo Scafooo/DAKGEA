@@ -81,8 +81,16 @@ class ExperimentRunner:
             self.ratios = [float(r) for r in ratios]
         elif "reduction_ratio" in exp_cfg:
             self.ratios = [float(exp_cfg["reduction_ratio"])]
+        elif "reduction" in exp_cfg and isinstance(exp_cfg["reduction"], dict):
+            # New structure: reduction: {method: random_entities, ratio: 0.1}
+            red_cfg = exp_cfg["reduction"]
+            if "ratio" in red_cfg:
+                ratio = red_cfg["ratio"]
+                self.ratios = [float(ratio)] if not isinstance(ratio, (list, tuple)) else [float(r) for r in ratio]
+            else:
+                self.ratios = []
         elif "augmentation" in exp_cfg and isinstance(exp_cfg["augmentation"], dict):
-            # New structure: augmentation: {method: stub, reduction: 0.1}
+            # Legacy: augmentation: {method: stub, reduction: 0.1}
             aug_cfg = exp_cfg["augmentation"]
             if "reduction" in aug_cfg:
                 self.ratios = [float(aug_cfg["reduction"])]
@@ -124,7 +132,14 @@ class ExperimentRunner:
             )
         self.models = [m for m in models if m]
 
-        self.reduction_method = exp_cfg.get("reduction_method", "random_entities")
+        # Parse reduction method
+        if "reduction" in exp_cfg and isinstance(exp_cfg["reduction"], dict):
+            # New structure: reduction: {method: random_entities, ratio: 0.1}
+            self.reduction_method = exp_cfg["reduction"].get("method", "random_entities")
+        else:
+            # Legacy: reduction_method at top level
+            self.reduction_method = exp_cfg.get("reduction_method", "random_entities")
+
         self.clear_intermediate = exp_cfg.get("clear", False)
 
         effective_overwrite = (

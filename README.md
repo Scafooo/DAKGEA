@@ -9,10 +9,10 @@ A **modular experimentation framework** for **Entity Alignment (EA)** on Knowled
 
 ## ✨ Features
 
-- **Multi-Format Support**: HybEA, BERT-INT, RDF formats with automatic conversion
-- **Flexible Dataset Configuration**: Simple names, explicit readers, or direct paths
-- **Two-Phase BERT-INT**: Complete implementation with attribute support
+- **Multi-Format Support**: Multiple dataset formats with automatic conversion
+- **Flexible Configuration**: Simple names, explicit readers, or direct paths
 - **Modular Pipeline**: Reduction → Augmentation → Evaluation stages
+- **Extensible Architecture**: Easy to add new models, datasets, and augmentation methods
 - **Production Ready**: Comprehensive logging, checkpointing, and error handling
 
 ---
@@ -36,10 +36,10 @@ python -m venv .venv && source .venv/bin/activate && pip install -r install/requ
 
 ```bash
 # Using the helper script
-./run.sh config/experiments/01_exp_direct.yaml
+./run.sh config/experiments/your_config.yaml
 
 # Or directly with Python
-python experiments/run.py config/experiments/01_exp_direct.yaml
+python experiments/run.py config/experiments/your_config.yaml
 ```
 
 ### Create a Custom Experiment
@@ -49,13 +49,13 @@ python experiments/run.py config/experiments/01_exp_direct.yaml
 experiment:
   name: "my_first_experiment"
   dataset:
-    name: "hybea/BBC_DB"           # Explicit reader/dataset format
+    name: "reader_name/dataset_name"  # Explicit reader/dataset format
   augmentation:
-    method: "stub"                  # No augmentation
-    reduction: 0.1                  # Use 10% of training data
-  model: bert_int
+    method: "stub"                     # Augmentation method
+    reduction: 0.1                     # Use 10% of training data
+  model: model_name                    # Your model
   seed: 42
-  clear: true                       # Clean up intermediate files
+  clear: true                          # Clean up intermediate files
 ```
 
 Run it:
@@ -65,7 +65,7 @@ Run it:
 
 Check results:
 ```bash
-cat results/my_first_experiment/BBC_DB/0.1/evaluation/reduced/bert_int.json
+cat results/my_first_experiment/<dataset>/<ratio>/evaluation/reduced/<model>.json
 ```
 
 ---
@@ -82,9 +82,11 @@ src/
   util/                # Registry utilities, readers/writers helpers, logging
 experiments/           # Experiment entry points, stage orchestration
 tests/                 # Smoke/unit tests
+config/
+  experiments/         # Experiment configurations
+  models/             # Model configurations
+  global.yaml         # Global settings
 ```
-
-Developers should read the [Developer Guide](docs/developer-guide.md) for a deep dive into registries, stages, and coding conventions.
 
 ---
 
@@ -107,7 +109,7 @@ Experiment metrics, intermediate artefacts, and logs are written to:
 ```
 results/<experiment>/<dataset>/<ratio>/
 ├─ reduction/artefacts/<writer>/...
-├─ augmentation/<augmentation>/artefacts/<writer>/...
+├─ augmentation/<method>/artefacts/<writer>/...
 └─ evaluation/<variant>/<model>.json
 ```
 
@@ -115,105 +117,139 @@ Stage summaries (`summary.json`) sit beside each folder to capture method metada
 `<variant>` is `baseline` for the unaugmented run, otherwise the augmentation key.
 The default root is controlled by `paths.results` (and `paths.log_file`) inside `config/global.yaml`.
 
-More context, including troubleshooting tips, lives in the [User Guide](docs/user-guide.md#3-understand-the-outputs).
-
 ---
 
 ## 📚 Documentation
 
-### User Documentation
-- **[User Guide](docs/user-guide.md)** - Installation, running experiments, understanding outputs
-- **[Configuration Guide](docs/configuration-guide.md)** - Complete configuration reference with examples
-- **[Dataset Guide](docs/dataset-guide.md)** - Dataset formats, readers, writers, and conversions
-- **[BERT-INT Guide](docs/bert-int-guide.md)** - BERT-INT model architecture, training, and tuning
-- **[FAQ](docs/faq.md)** - Frequently asked questions and troubleshooting
-
-### Developer Documentation
-- **[Developer Guide](docs/developer-guide.md)** - Architecture, registries, extending the framework
-
-### Quick Links
-- **Common Tasks**
-  - [Create an experiment](docs/configuration-guide.md#complete-examples)
-  - [Add a custom dataset](docs/dataset-guide.md#adding-custom-datasets)
-  - [Configure BERT-INT](docs/bert-int-guide.md#configuration)
-  - [Troubleshoot errors](docs/faq.md#errors--troubleshooting)
+- [User Guide](docs/user-guide.md) – Installation, experiment execution, output overview, troubleshooting
+- [Developer Guide](docs/developer-guide.md) – Architecture, plugin registration, code structure, testing guidance
 
 ---
 
-## 📊 Example Results
+## ⚙️ Configuration
 
-BERT-INT on BBC_DB (reduction=0.1, seed=11037):
+### Dataset Formats
 
-```json
-{
-  "model": "bert_int",
-  "phases": {
-    "basic_unit": {
-      "hits@1": 0.3456,
-      "hits@10": 0.7823,
-      "mrr": 0.5234
-    },
-    "interaction_model": {
-      "hits@1": 0.4521,
-      "hits@10": 0.8345,
-      "mrr": 0.6123
-    }
-  }
-}
+DAKGEA supports multiple dataset specification formats:
+
+**Explicit reader/dataset:**
+```yaml
+dataset:
+  name: "reader_name/dataset_name"  # e.g., "hybea/BBC_DB"
 ```
 
-**Note:** All metrics are fractions (0-1 range), not percentages.
+**Simple name (auto-detect reader):**
+```yaml
+dataset:
+  name: "dataset_name"  # Searches all reader directories
+```
+
+**Direct path:**
+```yaml
+dataset:
+  path: "/absolute/path/to/dataset"  # Pre-processed data
+```
+
+### Augmentation Configuration
+
+**Modern syntax (recommended):**
+```yaml
+augmentation:
+  method: "method_name"  # Augmentation method
+  reduction: 0.1         # Reduction ratio (0-1)
+```
+
+**Legacy syntax (still supported):**
+```yaml
+reduction_ratio: 0.1
+augmentation_method: "method_name"
+```
+
+### Model Configuration
+
+```yaml
+model: "model_name"
+
+# Or for multiple models
+models_to_run: ["model_1", "model_2"]
+
+# Override parameters
+parameters:
+  models:
+    model_name:
+      parameter1: value1
+      parameter2: value2
+```
 
 ---
 
-## 🔧 Key Capabilities
+## 🔧 CLI Options
 
-### Multiple Dataset Formats
+```bash
+# Overwrite cached data
+./run.sh config.yaml --overwrite-existing
+
+# Resume from cache
+./run.sh config.yaml --resume
+
+# Disable progress bar
+./run.sh config.yaml --no-progress
+```
+
+---
+
+## 🚀 Advanced Features
+
+### Multiple Reduction Ratios
 
 ```yaml
-# HybEA format
+reduction_ratios: [0.1, 0.2, 0.5, 1.0]  # Test multiple ratios
+```
+
+### Custom Writers
+
+```yaml
 dataset:
   name: "hybea/BBC_DB"
-
-# BERT-INT format
-dataset:
-  name: "bert_int/D_W_15K_V1"
-
-# RDF format
-dataset:
-  name: "rdf/DW_15"
-
-# Direct path (pre-processed data)
-dataset:
-  path: "/path/to/preprocessed/data"
+  writer: "writer_name"  # Specify output format
+  # Or multiple writers
+  writers:
+    - type: "writer_1"
+    - type: "writer_2"
 ```
 
-### Flexible Augmentation
+### Skip Training (Re-evaluation)
 
 ```yaml
-# Reduction only (no augmentation)
+dataset:
+  path: "/path/to/checkpoint"
+skip_training: true  # Load existing model
+```
+
+---
+
+## 🐛 Common Issues
+
+### "Unable to infer reader for dataset"
+
+**Solution:** Use explicit `reader/dataset` format:
+```yaml
+dataset:
+  name: "reader_name/dataset_name"
+```
+
+### "Direct path mode requires 'path' field"
+
+**Solution:** Add reduction ratio for standard mode:
+```yaml
 augmentation:
   method: "stub"
-  reduction: 0.1      # Keep 10% of training data
-
-# PLM-based augmentation
-augmentation:
-  method: "plm_augmentation"
-  reduction: 0.2
-  parameters:
-    model_name: "bert-base-multilingual-cased"
-    augmentation_factor: 2.0
+  reduction: 0.1
 ```
 
-### Multi-Model Evaluation
+### Model-specific errors
 
-```yaml
-# Compare multiple models
-models_to_run: ["bert_int", "hybea"]
-
-# Or sweep reduction ratios
-reduction_ratios: [0.1, 0.2, 0.5, 1.0]
-```
+Check that you've specified the correct writer for your model. Some models require specific dataset formats.
 
 ---
 
@@ -226,4 +262,27 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 ## 🔗 References
 
 - [HybEA GitHub](https://github.com/fanourakis/HybEA)
-- [Bert-int](https://github.com/kosugi11037/bert-int?tab=readme-ov-file)
+- [BERT-INT](https://github.com/kosugi11037/bert-int)
+
+---
+
+## 🙏 Contributing
+
+We welcome contributions! Please see the [Developer Guide](docs/developer-guide.md) for:
+- Code structure and conventions
+- How to add new models
+- How to add new dataset readers/writers
+- How to add augmentation methods
+- Testing guidelines
+
+---
+
+## 📞 Support
+
+- **Documentation**: Check [docs/](docs/) for guides
+- **Issues**: Report bugs via [GitHub Issues](https://github.com/Scafooo/DataAug-KG-EntityResolution/issues)
+- **Questions**: Open a discussion on GitHub
+
+---
+
+**Built with ❤️ for Knowledge Graph Entity Alignment research**
