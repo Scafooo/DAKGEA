@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
+from rdflib import Literal
 from transformers import AutoTokenizer
 
 
@@ -34,9 +35,180 @@ class BasicUnitDataBundle:
     rel_triples_2: List[Triple]
 
 
-def load_basic_unit_data(
+def load_basic_unit_data_from_dataset(
     config: Mapping[str, Any],
     paths: Mapping[str, Any],
+    dataset,
+    dataset_workspace_path: Optional[Path] = None,
+) -> BasicUnitDataBundle:
+    """Load tensors and metadata from in-memory dataset object.
+
+    Args:
+        config: Configuration for basic unit
+        paths: Resolved paths (currently unused)
+        dataset: Dataset object with knowledge graphs
+        dataset_workspace_path: Path to dataset files (sup_ents.txt, ref_ents.txt, etc.)
+    """
+    from transformers import AutoTokenizer
+
+    tokenizer = AutoTokenizer.from_pretrained(config.get("encoder_name", "bert-base-multilingual-cased"))
+
+    # Convert dataset to BERT-INT format
+    ent_ill, train_ill, test_ill, index2rel, index2entity, rel2index, entity2index, ent2data, rel_triples_1, rel_triples_2 = _convert_dataset_to_bert_format(
+        dataset, tokenizer, config.get("max_seq_length", 128), dataset_workspace_path
+    )
+
+    return BasicUnitDataBundle(
+        ent_ill=ent_ill,
+        train_ill=train_ill,
+        test_ill=test_ill,
+        index2rel=index2rel,
+        index2entity=index2entity,
+        rel2index=rel2index,
+        entity2index=entity2index,
+        ent2data=ent2data,
+        rel_triples_1=rel_triples_1,
+        rel_triples_2=rel_triples_2,
+    )
+
+
+def _convert_dataset_to_bert_format(dataset, tokenizer, max_length, dataset_workspace_path=None):
+    """Convert in-memory dataset to BERT-INT format.
+
+    IMPORTANT: For proper evaluation, we need to maintain the original
+    train/test split from the dataset files (sup_ents.txt/ref_ents.txt).
+    We cannot do a random split as it would cause data leakage.
+
+    Args:
+        dataset: Dataset object with knowledge graphs
+        tokenizer: BERT tokenizer
+        max_length: Maximum sequence length
+        dataset_workspace_path: Path to dataset files (sup_ents.txt, ref_ents.txt, etc.)
+    """
+    # Build entity mappings first from all entities in the dataset
+    all_entities = set()
+    for src, tgt in dataset.aligned_entities:
+        all_entities.add(str(src))
+        all_entities.add(str(tgt))
+
+    entity2index = {ent: idx for idx, ent in enumerate(sorted(all_entities))}
+    index2entity = {idx: ent for ent, idx in entity2index.items()}
+
+    # Read train/test split from files if available
+    train_ill = []
+    test_ill = []
+
+    logger.info(f"[BERT-INT] dataset_workspace_path = {dataset_workspace_path}")
+    if dataset_workspace_path:
+        logger.info(f"[BERT-INT] Path exists: {Path(dataset_workspace_path).exists()}")
+
+    if dataset_workspace_path and Path(dataset_workspace_path).exists():
+        workspace = Path(dataset_workspace_path)
+        sup_ents_file = workspace / "sup_ents.txt"
+        ref_ents_file = workspace / "ref_ents.txt"
+
+        if sup_ents_file.exists() and ref_ents_file.exists():
+            logger.info(f"[BERT-INT] Reading train/test split from {workspace}")
+
+            # Read sup_ents.txt (training pairs)
+            with open(sup_ents_file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    src, tgt = line.strip().split('\t')
+                    if src in entity2index and tgt in entity2index:
+                        train_ill.append((entity2index[src], entity2index[tgt]))
+
+            # Read ref_ents.txt (test pairs)
+            with open(ref_ents_file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    src, tgt = line.strip().split('\t')
+                    if src in entity2index and tgt in entity2index:
+                        test_ill.append((entity2index[src], entity2index[tgt]))
+
+            logger.info(f"[BERT-INT] Loaded {len(train_ill)} train pairs and {len(test_ill)} test pairs from files")
+        else:
+            logger.warning(f"[BERT-INT] Files {sup_ents_file} or {ref_ents_file} not found")
+
+    # Fallback: use 70/30 split if files not available
+    if not train_ill and not test_ill:
+        logger.warning("[BERT-INT] No train/test files found, falling back to 70/30 split")
+        aligned_indices = [
+            (entity2index[str(src)], entity2index[str(tgt)])
+            for src, tgt in dataset.aligned_entities
+        ]
+        split_idx = int(len(aligned_indices) * 0.7)
+        train_ill = aligned_indices[:split_idx]
+        test_ill = aligned_indices[split_idx:]
+
+    ent_ill = train_ill + test_ill  # All pairs for candidate generation
+    
+    # Build relation mappings from triples
+    all_relations = set()
+    for subj, pred, obj in dataset.knowledge_graph_source:
+        all_relations.add(str(pred))
+    for subj, pred, obj in dataset.knowledge_graph_target:
+        all_relations.add(str(pred))
+    
+    rel2index = {rel: idx for idx, rel in enumerate(sorted(all_relations))}
+    index2rel = {idx: rel for rel, idx in rel2index.items()}
+    
+    # Convert triples (only relation triples, not attribute triples)
+    rel_triples_1 = []
+    for subj, pred, obj in dataset.knowledge_graph_source:
+        subj_str = str(subj)
+        pred_str = str(pred)
+        obj_str = str(obj)
+        # Skip if object is a literal (attribute triple)
+        if subj_str in entity2index and obj_str in entity2index and pred_str in rel2index:
+            rel_triples_1.append((entity2index[subj_str], rel2index[pred_str], entity2index[obj_str]))
+
+    rel_triples_2 = []
+    for subj, pred, obj in dataset.knowledge_graph_target:
+        subj_str = str(subj)
+        pred_str = str(pred)
+        obj_str = str(obj)
+        # Skip if object is a literal (attribute triple)
+        if subj_str in entity2index and obj_str in entity2index and pred_str in rel2index:
+            rel_triples_2.append((entity2index[subj_str], rel2index[pred_str], entity2index[obj_str]))
+    
+    # Create entity data (usando attributi se disponibili)
+    # Raccogliamo attributi dai knowledge graphs (triples con literal values)
+    entity_attributes = {}
+    for subj, pred, obj in dataset.knowledge_graph_source:
+        subj_str = str(subj)
+        if subj_str in all_entities and isinstance(obj, Literal):
+            if subj_str not in entity_attributes:
+                entity_attributes[subj_str] = []
+            entity_attributes[subj_str].append(str(obj))
+
+    for subj, pred, obj in dataset.knowledge_graph_target:
+        subj_str = str(subj)
+        if subj_str in all_entities and isinstance(obj, Literal):
+            if subj_str not in entity_attributes:
+                entity_attributes[subj_str] = []
+            entity_attributes[subj_str].append(str(obj))
+
+    ent2data = {}
+    for ent in all_entities:
+        # Usa gli attributi se disponibili, altrimenti usa il nome dell'entità
+        if ent in entity_attributes:
+            desc = " ".join(entity_attributes[ent])
+        else:
+            # Extract last part of URI as name
+            desc = ent.split('/')[-1].split('#')[-1].replace('_', ' ')
+
+        tokens = tokenizer(desc, max_length=max_length, truncation=True, padding='max_length', return_tensors='pt')
+        # BasicUnit expects (input_ids, attention_mask) tuple
+        ent2data[entity2index[ent]] = (
+            tokens['input_ids'].squeeze().tolist(),
+            tokens['attention_mask'].squeeze().tolist()
+        )
+    
+    return ent_ill, train_ill, test_ill, index2rel, index2entity, rel2index, entity2index, ent2data, rel_triples_1, rel_triples_2
+
+
+def load_basic_unit_data(
+    config: Mapping[str, Any],
+    paths: Mapping[str, Any]
 ) -> BasicUnitDataBundle:
     """Load tensors and metadata required by the basic unit stage."""
     dataset_root = paths.get("dataset_root")
@@ -375,25 +547,26 @@ def _get_preferred_attributes(path: Path, dataset_label: str) -> Dict[str, str]:
             }
     elif "DBP_en_WD_en" in path_str or "D_W" in path_str:
         if "attr_triples1" in path_str:
+            # Priority from reference implementation (Read_data_func.py line 176-185)
             priority = {
                 "http://xmlns.com/foaf/0.1/name": 0,
                 "http://dbpedia.org/ontology/birthName": 1,
-                "http://dbpedia.org/ontology/title": 2,
+                "http://purl.org/dc/elements/1.1/description": 2,
                 "http://xmlns.com/foaf/0.1/nick": 3,
-                "http://dbpedia.org/ontology/synonym": 4,
-                "http://dbpedia.org/ontology/leaderTitle": 4,
-                "http://dbpedia.org/ontology/motto": 5,
-                "http://dbpedia.org/ontology/office": 5,
+                "http://xmlns.com/foaf/0.1/givenName": 4,
+                "http://dbpedia.org/ontology/leaderTitle": 5,
+                "http://dbpedia.org/ontology/alias": 6,
+                "http://dbpedia.org/ontology/motto": 7,
+                "http://dbpedia.org/ontology/office": 7,
             }
         else:
+            # Priority from reference implementation (Read_data_func.py line 169-173)
             priority = {
-                "http://www.w3.org/2000/01/rdf-schema#label": 0,
-                "http://schema.org/name": 1,
-                "http://www.w3.org/2004/02/skos/core#prefLabel": 2,
-                "http://www.wikidata.org/prop/direct/P373": 3,
+                "http://www.wikidata.org/entity/P373": 0,
+                "http://schema.org/description": 1,
+                "http://www.wikidata.org/entity/P1476": 2,
+                "http://www.wikidata.org/entity/P935": 3,
                 "http://www.w3.org/2004/02/skos/core#altLabel": 4,
-                "http://schema.org/description": 5,
-                "http://www.wikidata.org/prop/direct/P1549": 6,
             }
     elif "D_Y" in path_str:
         if "attr_triples1" in path_str:

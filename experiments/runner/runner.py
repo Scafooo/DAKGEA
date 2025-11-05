@@ -18,8 +18,6 @@ logger = get_logger(__name__)
 from .progress import ProgressTracker
 from .specs import DatasetSpec, WriterPlan
 from .stages import (
-    ATTRIBUTE_DATA_DIR,
-    MODEL_BERT_INT,
     RATIO_THRESHOLD,
     VARIANT_BASELINE,
     VARIANT_REDUCED,
@@ -75,19 +73,17 @@ class ExperimentRunner:
             )
         self.datasets_cfg = list(datasets_cfg)
 
-        # Normalise reduction ratios to a list of floats
+        # Normalise reduction ratios to a list of floats (optional for direct path mode)
         if "reduction_ratios" in exp_cfg:
             ratios = exp_cfg["reduction_ratios"]
             if not isinstance(ratios, (list, tuple)):
                 ratios = [ratios]
+            self.ratios = [float(r) for r in ratios]
         elif "reduction_ratio" in exp_cfg:
-            ratios = [exp_cfg["reduction_ratio"]]
+            self.ratios = [float(exp_cfg["reduction_ratio"])]
         else:
-            raise KeyError(
-                f"Experiment configuration must define 'reduction_ratio' or 'reduction_ratios'. "
-                f"Available keys: {list(exp_cfg.keys())}"
-            )
-        self.ratios = [float(r) for r in ratios]
+            # No reduction ratio: direct path mode (skip reduction/augmentation/writer)
+            self.ratios = []
 
         # Single augmentation method (optional)
         if "augmentation_methods" in exp_cfg:
@@ -169,8 +165,129 @@ class ExperimentRunner:
             f"Available reader directories: {available_dirs}"
         )
 
+    def _infer_reader_from_direct_path(self, path: str) -> str:
+        """Infer reader type from a direct dataset path by checking for known format indicators."""
+        from pathlib import Path
+
+        path_obj = Path(path)
+        path_str = str(path_obj).lower()
+
+        # Check for known reader types in path components
+        known_readers = ["hybea", "rdf", "bert_int"]
+        for reader in known_readers:
+            if reader in path_str or reader.replace("_", "") in path_str:
+                logger.debug(
+                    "Auto-detected reader '%s' from direct path '%s'",
+                    reader,
+                    path,
+                )
+                return reader
+
+        # Check for format-specific files to infer reader
+        if path_obj.is_dir():
+            files = [f.name for f in path_obj.iterdir()]
+
+            # BERT-INT format: has ent_ids_1, ent_ids_2, sup_pairs, ref_pairs
+            if "ent_ids_1" in files and "sup_pairs" in files:
+                logger.debug("Detected BERT-INT format from file structure in '%s'", path)
+                return "bert_int"
+
+            # HybEA format: has rel_triples_1, rel_triples_2 or attr_triples1
+            if "rel_triples_1" in files or "attr_triples1" in files or "triples_1" in files:
+                logger.debug("Detected HybEA format from file structure in '%s'", path)
+                return "hybea"
+
+            # RDF format: has .ttl or .nt files
+            for file in files:
+                if file.endswith(".ttl") or file.endswith(".nt"):
+                    logger.debug("Detected RDF format from file extensions in '%s'", path)
+                    return "rdf"
+
+        raise ValueError(
+            f"Unable to infer reader type from path '{path}'. "
+            f"Path should contain 'hybea', 'rdf', or 'bert_int', "
+            f"or have recognizable file structure."
+        )
+
     def run(self) -> None:
         """Execute the experiment suite over the configured datasets and ratios."""
+        # Check if we're in direct path mode (no ratios = direct dataset access)
+        direct_mode = len(self.ratios) == 0
+
+        if direct_mode:
+            self._run_direct_mode()
+        else:
+            self._run_standard_mode()
+
+    def _run_direct_mode(self) -> None:
+        """Run experiments in direct path mode: read datasets directly, skip reduction/writer."""
+        logger.info(
+            "=== Running in DIRECT PATH mode: '%s' ===",
+            self.name,
+        )
+        logger.info("Skipping reduction, augmentation, and writer stages")
+
+        progress = ProgressTracker(total=len(self.datasets), enabled=self.show_progress)
+
+        try:
+            for spec in self.datasets:
+                if not spec.direct_path:
+                    raise ValueError(
+                        f"Direct path mode requires 'path' field in dataset config for '{spec.name}'"
+                    )
+
+                logger.info(
+                    "→ Dataset '%s' (reader=%s, path=%s)",
+                    spec.name,
+                    spec.reader,
+                    spec.direct_path,
+                )
+
+                # Read dataset directly from path
+                reader = DatasetReaderFactory.create_reader(spec.reader)
+                dataset = reader.read(str(spec.direct_path))
+
+                # Create workspace for results
+                dataset_workspace = self.base_workspace / spec.name
+                dataset_workspace.mkdir(parents=True, exist_ok=True)
+
+                # Build stage config for direct evaluation
+                stage_cfg = {
+                    "dataset_name": spec.name,
+                    "lineage": {
+                        "dataset_workspace": str(spec.direct_path),
+                        "direct_mode": True,
+                    },
+                    "evaluation_root": str(dataset_workspace / "evaluation"),
+                }
+
+                # Run evaluation directly using execute method
+                from experiments.runner.stages import EvaluationStage
+
+                evaluation_stage = EvaluationStage([], self.models, self.resume)
+                logger.info("[STEP] Running evaluation for '%s'", spec.name)
+
+                # Use execute method with simplified parameters for direct mode
+                ratio_meta = {"augmentations": {}}
+                evaluation_stage.execute(
+                    augmentation_name="direct",  # No augmentation in direct mode
+                    dataset_reduced=dataset,  # Use original dataset as "reduced"
+                    dataset_augmented=dataset,  # Same dataset for augmented
+                    stage_cfg=stage_cfg,
+                    lineage_cfg=stage_cfg["lineage"],
+                    ratio_root=dataset_workspace,
+                    ratio_tag="direct",
+                    ratio_meta=ratio_meta,
+                )
+
+                progress.step()
+        finally:
+            progress.close()
+            self._write_metadata()
+            logger.info("=== Direct mode experiments completed ===")
+
+    def _run_standard_mode(self) -> None:
+        """Run experiments in standard mode with reduction, augmentation, and writer."""
         progress = ProgressTracker(
             total=len(self.datasets) * len(self.ratios), enabled=self.show_progress
         )
@@ -189,7 +306,7 @@ class ExperimentRunner:
                 )
 
                 reader = DatasetReaderFactory.create_reader(spec.reader)
-                dataset = reader.read(str(dataset_root), subtype=spec.subtype)
+                dataset = reader.read(str(dataset_root))
                 writer_plans = self._resolve_writer_plans(spec)
                 reduction_stage = ReductionStage(
                     self.reduction_method,
@@ -207,10 +324,9 @@ class ExperimentRunner:
                 )
 
                 logger.info(
-                    "→ Dataset '%s' (reader=%s, subtype=%s)",
+                    "→ Dataset '%s' (reader=%s)",
                     spec.name,
                     spec.reader,
-                    spec.subtype,
                 )
                 logger.info("[STEP] Preparing dataset '%s'", spec.name)
 
@@ -274,25 +390,50 @@ class ExperimentRunner:
             logger.info("=== All experiments completed ===")
 
     def _build_dataset_specs(self) -> List[DatasetSpec]:
-        """Expand dataset entries into normalized specifications."""
+        """Expand dataset entries into normalized specifications.
+
+        Two modes supported:
+        1. Standard: Reader inferred from data/raw/{reader}/{name}
+        2. Direct: Read from specified path, skip reduction/writer
+
+        Reader type is automatically inferred from the dataset path structure
+        (e.g., data/raw/hybea/D_W_15K_V1 -> reader=hybea) unless explicitly
+        specified in the configuration.
+        """
         default_writer = self.exp_cfg.get("writers", self.exp_cfg.get("writer"))
         default_readers: Dict[str, str] = self.exp_cfg.get("readers", {})
-        default_subtype = self.exp_cfg.get("dataset_type", "attribute_data")
 
         specs: List[DatasetSpec] = []
         for entry in self.datasets_cfg:
+            direct_path = None
+
             if isinstance(entry, dict):
-                name = entry["name"]
-                reader = entry.get("reader") or entry.get("reader_type") or default_readers.get(name)
-                subtype = entry.get("subtype", default_subtype)
-                writer_conf = entry.get("writers", entry.get("writer", default_writer))
+                # Check for direct path mode
+                direct_path = entry.get("path")
+
+                if direct_path:
+                    # Direct path mode: infer name and reader from path
+                    from pathlib import Path
+                    path_obj = Path(direct_path)
+                    name = entry.get("name", path_obj.name)
+                    # Infer reader from path: look for known reader types in path
+                    reader = self._infer_reader_from_direct_path(direct_path)
+                    subtype = None
+                    writer_conf = None  # No writer in direct mode
+                else:
+                    # Standard mode
+                    name = entry["name"]
+                    reader = entry.get("reader") or entry.get("reader_type") or default_readers.get(name)
+                    subtype = entry.get("subtype", None)  # Deprecated: kept for backwards compat
+                    writer_conf = entry.get("writers", entry.get("writer", default_writer))
             else:
                 name = str(entry)
                 reader = default_readers.get(name)
-                subtype = default_subtype
+                subtype = None  # Inferred from path
                 writer_conf = default_writer
 
-            if reader is None:
+            # Infer reader from path if not explicitly provided (standard mode only)
+            if reader is None and direct_path is None:
                 reader = self._infer_reader(name)
 
             specs.append(
@@ -301,6 +442,7 @@ class ExperimentRunner:
                     reader=reader,
                     subtype=subtype,
                     writer_conf=writer_conf,
+                    direct_path=direct_path,
                 )
             )
         return specs
@@ -388,42 +530,14 @@ class ExperimentRunner:
             }
         )
 
-        # Copy model-specific configurations from experiment config
-        # Note: self.exp_cfg is already the content under "experiment" key from YAML
-        # Copy basic_unit config if present
-        if "basic_unit" in self.exp_cfg:
-            cfg["basic_unit"] = self.exp_cfg["basic_unit"]
-        # Copy interaction_model config if present
-        if "interaction_model" in self.exp_cfg:
-            cfg["interaction_model"] = self.exp_cfg["interaction_model"]
-        # Copy model config if present (only if it's a dict with sub-config)
-        if "model" in self.exp_cfg and isinstance(self.exp_cfg["model"], dict):
-            cfg.setdefault("model", {}).update(self.exp_cfg["model"])
-        # Copy seed if present
+        # Copy seed if present (global configuration parameter)
         if "seed" in self.exp_cfg:
             cfg["seed"] = self.exp_cfg["seed"]
-        # Copy dataset info if present (needed for subtype resolution)
-        if "dataset" in self.exp_cfg:
-            cfg["dataset"] = self.exp_cfg["dataset"]
 
+        # Lineage: essential metadata for models to determine context and paths
         lineage = cfg.setdefault("lineage", {})
-        lineage["reduction_method"] = self.reduction_method
-        lineage["dataset_workspace"] = str(dataset_workspace.resolve())
-        lineage["ratio_tag"] = ratio_tag
-        lineage["ratio_root"] = str(ratio_root.resolve())
-        lineage["raw_source"] = str(dataset_root.resolve())
-        reduction_root = ratio_root / "reduction"
-        augmentation_root = ratio_root / "augmentation"
-        evaluation_root = ratio_root / "evaluation"
-        lineage["reduction_root"] = str(reduction_root.resolve())
-        lineage["reduced_base"] = str(reduction_root.resolve())
-        lineage["augmentation_root"] = str(augmentation_root.resolve())
-        lineage["augmented_base"] = str(augmentation_root.resolve())
-        lineage["evaluation_root"] = str(evaluation_root.resolve())
+        lineage["evaluation_root"] = str((ratio_root / "evaluation").resolve())
         lineage.setdefault("evaluation_dirs", {})
-        lineage["reduced_paths"] = lineage.get("reduced_paths", {})
-        lineage["augmented_paths"] = lineage.get("augmented_paths", {})
-        lineage["augmented_hybea_paths"] = lineage.get("augmented_hybea_paths", {})
         logger.debug(
             "Stage config prepared for dataset=%s ratio=%.3f (target_entities=%d)",
             dataset_name,
@@ -475,8 +589,6 @@ class ExperimentRunner:
         Returns:
             Dataset: Reduced or cloned dataset
         """
-        reduced_datasets = lineage.setdefault("reduced_datasets", {})
-
         if ratio < RATIO_THRESHOLD:  # perform reduction only when ratio < 1
             dataset_reduced = reduction_stage.execute(
                 stage_cfg,
@@ -489,19 +601,14 @@ class ExperimentRunner:
                 ratio_meta,
                 spec.subtype,
             )
-            lineage["_reduction_executed"] = True
         else:
+            # No reduction needed - use full dataset
             dataset_reduced = dataset.clone()
-            raw_attr = dataset_root / ATTRIBUTE_DATA_DIR
-            dataset_path = raw_attr if raw_attr.exists() else dataset_root
-            reduced_datasets["raw"] = str(dataset_path.resolve())
-            lineage.setdefault("reduced_paths", {})["raw"] = str(dataset_path.resolve())
             reduction_meta = ratio_meta.setdefault(
                 "reduction",
-                {"method": self.reduction_method, "paths": {}},
+                {"method": "none", "paths": {}},
             )
-            reduction_meta["method"] = self.reduction_method
-            reduction_meta.setdefault("paths", {})
+            reduction_meta["method"] = "none"
 
         return dataset_reduced
 
@@ -526,9 +633,6 @@ class ExperimentRunner:
         dataset only. Otherwise, iterates through all configured augmentation methods,
         augments the dataset, and evaluates each augmented variant.
 
-        For BERT-INT model with interaction_model enabled, also runs the interaction
-        model stage after basic_unit evaluation.
-
         Args:
             dataset_reduced: The reduced (or full) dataset to evaluate
             augmentation_stage: AugmentationStage instance
@@ -542,11 +646,6 @@ class ExperimentRunner:
             reader: Dataset reader instance
             spec: DatasetSpec instance
         """
-        from .stages import InteractionModelStage
-
-        # Check if we need to run interaction model
-        should_run_interaction = self._should_run_interaction_model(stage_cfg)
-
         if not self.augmentations:
             evaluation_stage.execute(
                 VARIANT_BASELINE,
@@ -558,16 +657,6 @@ class ExperimentRunner:
                 ratio_tag,
                 ratio_meta,
             )
-
-            # Run interaction model for baseline if applicable
-            if should_run_interaction:
-                self._run_interaction_model_stage(
-                    dataset_reduced,
-                    stage_cfg,
-                    lineage,
-                    ratio_root,
-                    augmentation_name=None,
-                )
 
         for aug_name in self.augmentations:
             dataset_augmented = augmentation_stage.execute(
@@ -592,168 +681,6 @@ class ExperimentRunner:
                 ratio_tag,
                 ratio_meta,
             )
-
-            # Run interaction model for this augmentation if applicable
-            if should_run_interaction:
-                self._run_interaction_model_stage(
-                    dataset_augmented,
-                    stage_cfg,
-                    lineage,
-                    ratio_root,
-                    augmentation_name=aug_name,
-                )
-
-    def _should_run_interaction_model(self, stage_cfg: Dict[str, Any]) -> bool:
-        """Check if interaction model should be run based on model type.
-
-        For BERT-INT, interaction_model is always run as it's an integral
-        part of the two-phase architecture (basic_unit → interaction_model).
-
-        Args:
-            stage_cfg: Stage configuration
-
-        Returns:
-            True if model is bert_int, False otherwise
-        """
-        # BERT-INT is always a two-phase model
-        return MODEL_BERT_INT in self.models
-
-    def _run_interaction_model_stage(
-        self,
-        dataset: Dataset,
-        stage_cfg: Dict[str, Any],
-        lineage: Dict[str, Any],
-        ratio_root: Path,
-        augmentation_name: Optional[str] = None,
-    ) -> None:
-        """Run the interaction model stage for BERT-INT.
-
-        Args:
-            dataset: Dataset to use
-            stage_cfg: Stage configuration
-            lineage: Lineage tracking
-            ratio_root: Root directory for this ratio
-            augmentation_name: Optional augmentation name (None for baseline)
-        """
-        from .stages import InteractionModelStage
-
-        logger.info("[STEP] → Running BERT-INT Interaction Model (Phase 2)")
-
-        # Determine checkpoint directory based on variant
-        variant_key = augmentation_name if augmentation_name else "baseline"
-        evaluation_dirs = lineage.get("evaluation_dirs", {})
-
-        # For baseline, use "reduced" as key
-        if variant_key == "baseline":
-            variant_key_for_eval = VARIANT_REDUCED
-        else:
-            variant_key_for_eval = variant_key.replace("/", "_")
-
-        evaluation_dir = evaluation_dirs.get(variant_key_for_eval)
-
-        if not evaluation_dir:
-            logger.warning(
-                f"Evaluation directory not found for variant '{variant_key_for_eval}', "
-                f"skipping interaction model"
-            )
-            return
-
-        # BERT-INT saves checkpoints in evaluation/bert_int/reduced/ not evaluation/reduced/
-        # We need to find the actual checkpoint directory
-        evaluation_root = lineage.get("evaluation_root")
-        if evaluation_root:
-            # Checkpoints are saved in evaluation_root/bert_int/variant_key
-            checkpoint_dir = Path(evaluation_root) / MODEL_BERT_INT / variant_key_for_eval
-        else:
-            # Fallback: try to infer from evaluation_dir
-            checkpoint_dir = Path(evaluation_dir).parent / MODEL_BERT_INT / variant_key_for_eval
-
-        # Create and execute interaction model stage
-        interaction_stage = InteractionModelStage(resume=self.resume)
-
-        try:
-            results = interaction_stage.execute(
-                dataset=dataset,
-                basic_unit_checkpoint_dir=checkpoint_dir,
-                stage_cfg=stage_cfg,
-                lineage_cfg=lineage,
-                ratio_root=ratio_root,
-                augmentation_name=augmentation_name,
-            )
-
-            logger.info("[SUCCESS] Interaction model completed successfully")
-
-            # Log key metrics if available
-            if results and "final_evaluation" in results:
-                eval_results = results["final_evaluation"]
-                logger.info(
-                    f"  Hits@1: {eval_results.get('hits@1', 0):.2f}%  "
-                    f"Hits@10: {eval_results.get('hits@10', 0):.2f}%  "
-                    f"MRR: {eval_results.get('mrr', 0):.4f}"
-                )
-
-                # Update bert_int.json with interaction model results (final results)
-                self._update_bert_int_results_with_interaction(
-                    checkpoint_dir, eval_results
-                )
-
-        except Exception as e:
-            logger.error(f"Interaction model failed: {e}", exc_info=True)
-            logger.warning("Continuing without interaction model results")
-
-    def _update_bert_int_results_with_interaction(
-        self,
-        evaluation_dir: Path,
-        interaction_results: Dict[str, Any],
-    ) -> None:
-        """Update bert_int.json with final interaction model results.
-
-        This makes the interaction model results the "official" BERT-INT results,
-        while preserving the basic_unit results for reference.
-
-        Args:
-            evaluation_dir: Evaluation directory containing bert_int.json
-            interaction_results: Results from interaction model evaluation
-        """
-        bert_int_json = evaluation_dir / "bert_int.json"
-
-        if not bert_int_json.exists():
-            logger.warning(f"bert_int.json not found at {bert_int_json}, skipping update")
-            return
-
-        # Load existing results (basic_unit)
-        with bert_int_json.open("r") as f:
-            basic_unit_results = json.load(f)
-
-        # Create comprehensive results combining both phases
-        final_results = {
-            "model": "bert_int",
-            "phases": {
-                "basic_unit": basic_unit_results,  # Preserve original basic_unit results
-                "interaction_model": interaction_results,  # Add interaction model results
-            },
-            # Top-level metrics are from interaction model (final results)
-            "hits@1": interaction_results.get("hits@1", 0.0),
-            "hits@5": interaction_results.get("hits@5", 0.0),
-            "hits@10": interaction_results.get("hits@10", 0.0),
-            "hits@25": interaction_results.get("hits@25", 0.0),
-            "hits@50": interaction_results.get("hits@50", 0.0),
-            "mr": interaction_results.get("mr", 0.0),
-            "mrr": interaction_results.get("mrr", 0.0),
-            "evaluated": interaction_results.get("total", 0),
-            # Add note about the two-phase nature
-            "_note": "BERT-INT is a two-phase model: basic_unit (phase 1) + interaction_model (phase 2). "
-                     "Top-level metrics are from interaction_model (final results).",
-        }
-
-        # Write updated results
-        with bert_int_json.open("w") as f:
-            json.dump(final_results, f, indent=2)
-
-        logger.info(f"✓ Updated {bert_int_json.name} with interaction model results (final)")
-        logger.info(
-            f"  Basic unit results preserved in phases.basic_unit"
-        )
 
     def _write_metadata(self) -> None:
         """Persist the experiment metadata summary alongside artefacts."""

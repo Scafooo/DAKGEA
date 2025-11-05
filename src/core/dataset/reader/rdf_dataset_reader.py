@@ -12,7 +12,7 @@ class RDFDatasetReader(DatasetReader):
 
     file_type = "rdf"
 
-    def read(self, dir_path: str, subtype: Optional[str] = None, **_) -> Dataset:
+    def read(self, dir_path: str, **_) -> Dataset:
         base_path = Path(dir_path)
         kg_reader = KnowledgeGraphReaderFactory.create_reader("rdf")
 

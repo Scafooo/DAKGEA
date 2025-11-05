@@ -1,0 +1,6 @@
+experiment:
+  name: direct_path_test
+  dataset:
+    path: /home/federico/Programming/Python/DAKGEA/data/test/hybea/D1_C1
+  model: bert_int
+  seed: 11037

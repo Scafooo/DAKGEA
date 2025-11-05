@@ -144,47 +144,42 @@ class HybEA:
             self._prepare_rrea_inputs(dataset_name, export_root)
 
     def _resolve_support_base(self, dataset_name: str) -> Path:
-        """Return the base directory for HybEA support artefacts."""
+        """Return the base directory for HybEA support artefacts.
 
+        Creates a deterministic path based on:
+        - Whether we're on reduced or augmented data
+        - The reduction method used
+        - The augmentation method (if any)
+
+        Example paths:
+        - data/hybea_support/reduced/random_entities/hybea
+        - data/hybea_support/augmented/random_entities/chatgpt/hybea
+        """
         lineage = self.stage_config.get("lineage", {})
-        source = lineage.get("active_source", "reduced")
-        reduction_method = lineage.get("reduction_method")
         augmentation_name = lineage.get("augmentation_name")
-        ratio_tag = lineage.get("ratio_tag") or self.stage_config.get("experiment", {}).get("ratio_tag")
+        experiment = self.stage_config.get("experiment", {})
+        reduction_method = experiment.get("reduction_method") or "random_entities"
 
         support_root = (PROJECT_ROOT / "data" / "hybea_support").resolve()
-        components = [source]
-        if reduction_method:
+
+        # Build path components
+        components = []
+
+        # Determine if we're on reduced or augmented data
+        if augmentation_name:
+            components.append("augmented")
             components.append(reduction_method)
-        if source == "augmented" and augmentation_name:
             components.append(augmentation_name)
+        else:
+            components.append("reduced")
+            components.append(reduction_method)
 
-        hybea_dataset_path = lineage.get("hybea_dataset_path")
-        hybea_dataset_base = lineage.get("hybea_dataset_base")
-        writer_components: list[str] = []
+        # Always end with "hybea" (writer format identifier)
+        components.append("hybea")
 
-        if hybea_dataset_path and hybea_dataset_base:
-            try:
-                dataset_path = Path(hybea_dataset_path).resolve()
-                base_root = Path(hybea_dataset_base).resolve()
-                relative_parts = list(dataset_path.relative_to(base_root).parts)
-
-                if ratio_tag and relative_parts and relative_parts[-1] == ratio_tag:
-                    relative_parts.pop()
-                if relative_parts and relative_parts[-1] == dataset_name:
-                    relative_parts.pop()
-                if source == "augmented" and augmentation_name and relative_parts and relative_parts[0] == augmentation_name:
-                    relative_parts.pop(0)
-
-                writer_components = relative_parts
-            except Exception:
-                writer_components = []
-
-        if not writer_components:
-            writer_components = ["hybea"]
-
-        components.extend(writer_components)
-        return support_root.joinpath(*components)
+        result = support_root.joinpath(*components)
+        logger.debug(f"[HybEA] Support base resolved to: {result}")
+        return result
 
     def _write_entity_names(self, ent_ids_path: Path, target_xlsx: Path) -> None:
         if target_xlsx.exists():

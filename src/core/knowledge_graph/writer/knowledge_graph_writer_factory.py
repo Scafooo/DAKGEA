@@ -25,6 +25,7 @@ class KnowledgeGraphWriterFactory:
 
 
 _WRITER_MODULES = {
+    "bert_int": "src.core.knowledge_graph.writer.bert_int_knowledge_graph_writer",
     "hybea": "src.core.knowledge_graph.writer.hybea_knowledge_graph_writer",
     "rdf": "src.core.knowledge_graph.writer.rdf_knowledge_graph_writer",
 }

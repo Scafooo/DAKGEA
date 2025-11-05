@@ -25,6 +25,7 @@ class KnowledgeGraphReaderFactory:
 
 
 _READER_MODULES = {
+    "bert_int": "src.core.knowledge_graph.reader.bert_int_knowledge_graph_reader",
     "hybea": "src.core.knowledge_graph.reader.hybea_knowledge_graph_reader",
     "rdf": "src.core.knowledge_graph.reader.rdf_knowledge_graph_reader",
 }

@@ -28,14 +28,24 @@ class HybeaDatasetReader(DatasetReader):
 
     KF_ILL = "ent_ILLs.txt"
 
-    def read(self, dir_path: str, subtype: Optional[str] = None, **_) -> Dataset:
-        """Load knowledge graphs plus aligned entity pairs from a directory tree."""
+    def read(self, dir_path: str, **_) -> Dataset:
+        """Load knowledge graphs plus aligned entity pairs from a directory tree.
+
+        The subtype (attribute_data/knowformer_data) is inferred from the path structure:
+        - If dir_path ends with attribute_data or knowformer_data, use that directly
+        - Otherwise, search for subdirectories with those names
+        """
         base_path = Path(dir_path)
         dataset_name = (
             base_path.parent.name
             if base_path.name in {"attribute_data", "knowformer_data"}
             else base_path.name
         )
+
+        # Infer subtype from path instead of using parameter
+        subtype = None
+        if base_path.name in {"attribute_data", "knowformer_data"}:
+            subtype = base_path.name
 
         variant_dirs = self._gather_variant_dirs(base_path, subtype)
         datasets = [(variant.name, self._load_dataset(variant)) for variant in variant_dirs]
