@@ -3,9 +3,11 @@ experiment:
   dataset:
     name: hybea/BBC_DB
     writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.1
   augmentation:
     method: stub
-    reduction: 0.1
   model: bert_int
   seed: 11037
   clear: true
