@@ -10,7 +10,7 @@
 #  Modify this line to select a different experiment
 #  can be also a directory containing multiple experiments
 # ============================================================
-EXPERIMENT="${EXPERIMENT:-exp_no_export.yaml}"
+EXPERIMENT="${EXPERIMENT:-exp_8.yaml}"
 
 # ---------- Helpers ----------
 term_width() { tput cols 2>/dev/null || echo 80; }

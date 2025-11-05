@@ -1,0 +1,6 @@
+experiment:
+  name: test_ref10_direct
+  dataset:
+    path: /home/federico/Programming/Python/DAKGEA/Bert_int_reference/D_W_15K_V1/10/attribute_date
+  model: bert_int
+  seed: 11037
