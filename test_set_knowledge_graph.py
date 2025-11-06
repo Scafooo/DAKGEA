@@ -1,4 +1,4 @@
-from src.augmentation.set_knowledge_graph.set_knowledge_graph import SetKnowledgeGraph
+from augmentation.methods.plm.set_knowledge_graph.set_knowledge_graph import SetKnowledgeGraph
 from src.core import DatasetReaderFactory
 
 reader = DatasetReaderFactory.create_reader("bert_int")

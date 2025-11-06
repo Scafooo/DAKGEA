@@ -10,7 +10,7 @@ logger = get_logger(__name__)
 
 
 @AUGMENTATION_REGISTRY.register("stub")
-class StubAugmentation(AugmentationMethod):
+class StubAugmenter(AugmentationMethod):
     """Return the reduced dataset without modifications."""
 
     def augment(self, dataset):
@@ -18,4 +18,4 @@ class StubAugmentation(AugmentationMethod):
         return dataset
 
 
-__all__ = ("StubAugmentation",)
+__all__ = ("StubAugmenter",)
