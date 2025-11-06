@@ -1,0 +1,6 @@
+experiment:
+  name: hybea-BBC_DB-r50
+  dataset:
+    name: BBC_DB
+  reduction_ratio: 0.5
+  model: hybea

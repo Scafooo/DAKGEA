@@ -1,0 +1,6 @@
+experiment:
+  name: bert_int-ja_en-r10
+  dataset:
+    name: ja_en
+  reduction_ratio: 0.1
+  model: bert_int
