@@ -6,8 +6,10 @@ experiment:
   reduction:
     method: random_entities
     ratio: 0.1
+    writer: bert_int
   augmentation:
     method: stub
+    writer: bert_int
   model: bert_int
   seed: 11037
   clear: true
