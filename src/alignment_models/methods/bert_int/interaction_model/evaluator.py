@@ -90,6 +90,8 @@ class InteractionEvaluator:
         # Score all test pairs
         test_pairs, scores = self._score_all_test_pairs()
 
+        logger.info(f"Scored {len(test_pairs)} test pairs for evaluation")
+
         # Group scores by source entity
         test_ill_set = set(self.dataset.test_ill)
         entity_to_candidates: Dict[int, List[Tuple[int, float, int]]] = {}
@@ -117,6 +119,15 @@ class InteractionEvaluator:
             result_labels.append(label_list)
 
         result_labels = np.array(result_labels)
+
+        # Debug: log information about evaluation
+        avg_candidates = sum(len(c) for c in entity_to_candidates.values()) / all_test_num
+        logger.info(f"Evaluating {all_test_num} test entities with avg {avg_candidates:.1f} candidates each")
+        logger.debug(f"result_labels shape: {result_labels.shape}")
+
+        # Count how many test entities have their correct match in candidates
+        correct_in_candidates = sum(1 for e1 in entity_to_candidates if any(label == 1 for _, _, label in entity_to_candidates[e1]))
+        logger.info(f"Correct match in candidates: {correct_in_candidates}/{all_test_num} ({correct_in_candidates/all_test_num*100:.1f}%)")
 
         # Count how many test entities have at least one correct match in top-K
         count_found = 0

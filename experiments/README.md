@@ -32,10 +32,10 @@ Run entity alignment experiments with various configurations.
 **Quick Start:**
 ```bash
 # Run a single experiment
-./run.sh config/experiments/my_experiment.yaml
+./scripts/run_experiment.sh config/experiments/my_experiment.yaml
 
 # Run with specific options
-./run.sh config/experiments/my_experiment.yaml --overwrite-existing
+./scripts/run_experiment.sh config/experiments/my_experiment.yaml --overwrite-existing
 ```
 
 **Features:**
@@ -78,10 +78,10 @@ Analyze and validate HybEA attribute_data format datasets.
 **Quick Start:**
 ```bash
 # Analyze a dataset
-./run_analysis.sh data/raw/hybea/BBC_DB/attribute_data
+./scripts/analyze_dataset.sh data/raw/hybea/BBC_DB/attribute_data
 
 # Save results to JSON
-./run_analysis.sh data/raw/hybea/BBC_DB/attribute_data -o results.json
+./scripts/analyze_dataset.sh data/raw/hybea/BBC_DB/attribute_data -o results.json
 ```
 
 **Features:**
@@ -111,12 +111,12 @@ Analyze and validate HybEA attribute_data format datasets.
 
 1. **Validate dataset** (optional but recommended):
    ```bash
-   ./run_analysis.sh data/raw/hybea/BBC_DB/attribute_data
+   ./scripts/analyze_dataset.sh data/raw/hybea/BBC_DB/attribute_data
    ```
 
 2. **Run experiment**:
    ```bash
-   ./run.sh config/experiments/my_experiment.yaml
+   ./scripts/run_experiment.sh config/experiments/my_experiment.yaml
    ```
 
 3. **Check results**:
@@ -130,7 +130,7 @@ Analyze and validate HybEA attribute_data format datasets.
 **Run multiple experiments:**
 ```bash
 for config in config/experiments/*.yaml; do
-    ./run.sh "$config"
+    ./scripts/run_experiment.sh "$config"
 done
 ```
 
@@ -138,7 +138,7 @@ done
 ```bash
 for dataset in data/raw/hybea/*/attribute_data; do
     dataset_name=$(basename $(dirname "$dataset"))
-    ./run_analysis.sh "$dataset" -o "results/analysis_${dataset_name}.json"
+    ./scripts/analyze_dataset.sh "$dataset" -o "results/analysis_${dataset_name}.json"
 done
 ```
 
@@ -158,7 +158,7 @@ done
 
 3. **Run experiment:**
    ```bash
-   ./run.sh config/experiments/my_new_exp.yaml --overwrite-existing
+   ./scripts/run_experiment.sh config/experiments/my_new_exp.yaml --overwrite-existing
    ```
 
 4. **Analyze results:**

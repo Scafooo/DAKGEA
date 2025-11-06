@@ -273,9 +273,9 @@ class InteractionTrainer:
 
                 slogger.subsection(f"Evaluation at Epoch {epoch + 1}")
                 slogger.table("Metrics", {
-                    "Hits@1": f"{hits_at_1:.2f}%",
-                    "Hits@5": f"{hits_at_5:.2f}%",
-                    "Hits@10": f"{hits_at_10:.2f}%",
+                    "Hits@1": f"{hits_at_1:.4f}",
+                    "Hits@5": f"{hits_at_5:.4f}",
+                    "Hits@10": f"{hits_at_10:.4f}",
                     "MRR": f"{mrr:.4f}",
                     "Eval Time": f"{eval_time:.2f}s",
                 })
@@ -297,7 +297,7 @@ class InteractionTrainer:
                     "mrr": mrr,
                 })
 
-        slogger.success(f"Training completed! Best Hits@1: {best_hits_at_1:.2f}% at epoch {best_epoch}")
+        slogger.success(f"Training completed! Best Hits@1: {best_hits_at_1:.4f} at epoch {best_epoch}")
 
         return {
             "best_hits@1": best_hits_at_1,
