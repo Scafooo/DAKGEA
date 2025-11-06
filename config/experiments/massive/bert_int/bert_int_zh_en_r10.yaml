@@ -1,6 +1,0 @@
-experiment:
-  name: bert_int-zh_en-r10
-  dataset:
-    name: zh_en
-  reduction_ratio: 0.1
-  model: bert_int

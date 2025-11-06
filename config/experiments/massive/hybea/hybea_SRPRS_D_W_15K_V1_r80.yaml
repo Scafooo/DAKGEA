@@ -1,6 +1,0 @@
-experiment:
-  name: hybea-SRPRS_D_W_15K_V1-r80
-  dataset:
-    name: SRPRS_D_W_15K_V1
-  reduction_ratio: 0.8
-  model: hybea
