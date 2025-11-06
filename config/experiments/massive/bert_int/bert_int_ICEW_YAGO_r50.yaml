@@ -1,0 +1,6 @@
+experiment:
+  name: bert_int-ICEW_YAGO-r50
+  dataset:
+    name: ICEW_YAGO
+  reduction_ratio: 0.5
+  model: bert_int

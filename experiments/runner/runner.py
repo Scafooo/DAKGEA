@@ -132,21 +132,13 @@ class ExperimentRunner:
             )
         self.models = [m for m in models if m]
 
-        # Parse reduction method and writer
+        # Parse reduction method
         if "reduction" in exp_cfg and isinstance(exp_cfg["reduction"], dict):
-            # New structure: reduction: {method: random_entities, ratio: 0.1, writer: bert_int}
+            # New structure: reduction: {method: random_entities, ratio: 0.1}
             self.reduction_method = exp_cfg["reduction"].get("method", "random_entities")
-            self.reduction_writer = exp_cfg["reduction"].get("writer")
         else:
             # Legacy: reduction_method at top level
             self.reduction_method = exp_cfg.get("reduction_method", "random_entities")
-            self.reduction_writer = None
-
-        # Parse augmentation writer
-        if "augmentation" in exp_cfg and isinstance(exp_cfg["augmentation"], dict):
-            self.augmentation_writer = exp_cfg["augmentation"].get("writer")
-        else:
-            self.augmentation_writer = None
 
         self.clear_intermediate = exp_cfg.get("clear", False)
 
@@ -380,30 +372,18 @@ class ExperimentRunner:
 
                 reader = DatasetReaderFactory.create_reader(spec.reader)
                 dataset = reader.read(str(dataset_root))
-
-                # Resolve writer plans for each stage
-                # Reduction stage: use reduction.writer if specified, else dataset.writer
-                reduction_writer_plans = self._resolve_writer_plans(
-                    spec, override_writer=self.reduction_writer
-                )
-                # Augmentation stage: use augmentation.writer if specified, else dataset.writer
-                augmentation_writer_plans = self._resolve_writer_plans(
-                    spec, override_writer=self.augmentation_writer
-                )
-                # Evaluation stage: always use dataset.writer (no phase-specific override)
-                evaluation_writer_plans = self._resolve_writer_plans(spec)
-
+                writer_plans = self._resolve_writer_plans(spec)
                 reduction_stage = ReductionStage(
                     self.reduction_method,
-                    reduction_writer_plans,
+                    writer_plans,
                     self.resume,
                 )
                 augmentation_stage = AugmentationStage(
-                    augmentation_writer_plans,
+                    writer_plans,
                     self.resume,
                 )
                 evaluation_stage = EvaluationStage(
-                    evaluation_writer_plans,
+                    writer_plans,
                     self.models,
                     self.resume,
                 )
@@ -559,25 +539,9 @@ class ExperimentRunner:
 
         return dataset_workspace, dataset_meta
 
-    def _resolve_writer_plans(
-        self, spec: DatasetSpec, override_writer: Optional[str] = None
-    ) -> List[WriterPlan]:
-        """Instantiate writers based on dataset or global writer configuration.
-
-        Args:
-            spec: Dataset specification
-            override_writer: Optional writer name to use instead of spec.writer_conf
-                           (e.g., from reduction.writer or augmentation.writer)
-
-        Returns:
-            List of WriterPlan instances
-        """
-        # Use override writer if provided, otherwise use dataset writer_conf
-        if override_writer is not None:
-            conf = override_writer
-        else:
-            conf = spec.writer_conf
-
+    def _resolve_writer_plans(self, spec: DatasetSpec) -> List[WriterPlan]:
+        """Instantiate writers based on dataset or global writer configuration."""
+        conf = spec.writer_conf
         if conf is None:
             return []
 

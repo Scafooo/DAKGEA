@@ -1,0 +1,6 @@
+experiment:
+  name: hybea-ICEW_WIKI-r90
+  dataset:
+    name: ICEW_WIKI
+  reduction_ratio: 0.9
+  model: hybea

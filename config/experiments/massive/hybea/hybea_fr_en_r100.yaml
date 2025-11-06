@@ -1,0 +1,6 @@
+experiment:
+  name: hybea-fr_en-r100
+  dataset:
+    name: fr_en
+  reduction_ratio: 1.0
+  model: hybea

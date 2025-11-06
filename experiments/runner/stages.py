@@ -90,7 +90,7 @@ class ReductionStage:
             logger.info(
                 "⏭️  Skipping reduction — cached artefacts detected (ratio=%s)", ratio_tag
             )
-            self._record_plan_paths(reduction_root, reduction_paths, reduction_meta, lineage)
+            self._record_plan_paths(reduction_root, reduction_paths, reduction_meta)
             cached = self._read_cached_dataset(reader, reader_root, subtype)
             if cached:
                 return cached
@@ -149,16 +149,12 @@ class ReductionStage:
         base_root: Path,
         reduction_paths: Dict[str, str],
         reduction_meta: Dict[str, Any],
-        lineage: Optional[Dict[str, Any]] = None,
     ) -> None:
         """Record paths for all writer plans in metadata."""
         for plan in self.writer_plans:
             plan_root = base_root / f"dataset_format_{plan.name}"
             if plan_root.exists():
                 reduction_paths[plan.name] = str(plan_root.resolve())
-                # Also set lineage dataset_workspace if provided
-                if lineage is not None:
-                    lineage["dataset_workspace"] = str(plan_root.resolve())
 
 
 class AugmentationStage:
