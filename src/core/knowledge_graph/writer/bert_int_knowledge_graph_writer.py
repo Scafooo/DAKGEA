@@ -76,16 +76,16 @@ class BertIntKnowledgeGraphWriter(KnowledgeGraphWriter):
                 entity2index[str(s)] = ent_idx
                 ent_idx += 1
 
-            # Index predicate
-            if str(p) not in relation2index:
-                relation2index[str(p)] = rel_idx
-                rel_idx += 1
-
             if isinstance(o, Literal):
-                # Attribute triple: subject predicate literal_value
-                attr_triples.append((str(s), str(p), str(o)))
+                # Attribute triple: entity_index predicate_uri literal_value
+                # Note: predicates in attr_triples are NOT indexed (kept as URIs)
+                attr_triples.append((str(entity2index[str(s)]), str(p), str(o)))
             else:
-                # Relation triple: index the object entity
+                # Relation triple: index the predicate and object entity
+                if str(p) not in relation2index:
+                    relation2index[str(p)] = rel_idx
+                    rel_idx += 1
+
                 if str(o) not in entity2index:
                     entity2index[str(o)] = ent_idx
                     ent_idx += 1
