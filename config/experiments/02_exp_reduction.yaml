@@ -1,5 +1,5 @@
 experiment:
-  name: 02_exp_reduction_01
+  name: 02_exp_reduction
   dataset:
     name: hybea/BBC_DB
     writer: bert_int

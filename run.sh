@@ -10,7 +10,7 @@
 #  Modify this line to select a different experiment
 #  can be also a directory containing multiple experiments
 # ============================================================
-EXPERIMENT="${EXPERIMENT:-02_exp_reduction_01.yaml}"
+EXPERIMENT="${EXPERIMENT:-02_exp_reduction.yaml}"
 
 # ---------- Helpers ----------
 term_width() { tput cols 2>/dev/null || echo 80; }
@@ -125,7 +125,7 @@ for CONFIG_FILE in "${CONFIG_SET[@]}"; do
     echo ""
     full_line '='
     echo "▶️  Running configuration: ${CONFIG_FILE}"
-    python "${PROJECT_ROOT}/experiments/run.py" "${CONFIG_FILE}"
+    python "${PROJECT_ROOT}/experiments/runner/run.py" "${CONFIG_FILE}"
     RUN_EXIT=$?
     if [[ $RUN_EXIT -eq 0 ]]; then
         echo "✅ Completed: ${CONFIG_FILE}"

@@ -1,5 +1,5 @@
 """Public interface for the stub augmentation package."""
 
-from .model import StubAugmentation
+from .augmenter import StubAugmenter
 
-__all__ = ("StubAugmentation",)
+__all__ = ("StubAugmenter",)
