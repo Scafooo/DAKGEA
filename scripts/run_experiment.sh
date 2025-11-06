@@ -23,7 +23,8 @@ printf "%*s\n" $((($(term_width) + 40) / 2)) "Data Augmentation for Knowledge Gr
 full_line '-'
 
 # ---------- Setup paths ----------
-PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$( cd "${SCRIPT_DIR}/.." && pwd )"
 export PYTHONPATH="${PROJECT_ROOT}"
 FILE_NAME="${1:-${RUN_CONFIG:-${EXPERIMENT}}}"
 

@@ -36,10 +36,10 @@ python -m venv .venv && source .venv/bin/activate && pip install -r install/requ
 
 ```bash
 # Using the helper script
-./run.sh config/experiments/your_config.yaml
+./scripts/run_experiment.sh config/experiments/your_config.yaml
 
 # Or directly with Python
-python experiments/run.py config/experiments/your_config.yaml
+python experiments/runner/run.py config/experiments/your_config.yaml
 ```
 
 ### Create a Custom Experiment
@@ -60,7 +60,7 @@ experiment:
 
 Run it:
 ```bash
-./run.sh config/experiments/my_experiment.yaml
+./scripts/run_experiment.sh config/experiments/my_experiment.yaml
 ```
 
 Check results:
@@ -80,12 +80,19 @@ src/
   config/              # YAML loader utilities
   core/                # Canonical dataset/knowledge-graph domain objects + IO
   util/                # Registry utilities, readers/writers helpers, logging
-experiments/           # Experiment entry points, stage orchestration
+experiments/           # Experiment orchestration and analysis tools
+  runner/              # Experiment runner (reduction → augmentation → evaluation)
+  dataset_analysis/    # Dataset structure analysis and validation
+scripts/               # Utility scripts and tools
+  run_experiment.sh    # Main experiment runner
+  analyze_dataset.sh   # Dataset analysis tool
+  convert_hybea_to_rdf.py  # Format conversion utility
+examples/              # Example usage scripts
 tests/                 # Smoke/unit tests
 config/
   experiments/         # Experiment configurations
-  models/             # Model configurations
-  global.yaml         # Global settings
+  models/              # Model configurations
+  global.yaml          # Global settings
 ```
 
 ---
