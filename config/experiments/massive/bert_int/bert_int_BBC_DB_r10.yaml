@@ -1,6 +1,0 @@
-experiment:
-  name: bert_int-BBC_DB-r10
-  dataset:
-    name: BBC_DB
-  reduction_ratio: 0.1
-  model: bert_int

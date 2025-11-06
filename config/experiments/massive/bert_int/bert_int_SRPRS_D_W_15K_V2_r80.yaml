@@ -1,6 +1,0 @@
-experiment:
-  name: bert_int-SRPRS_D_W_15K_V2-r80
-  dataset:
-    name: SRPRS_D_W_15K_V2
-  reduction_ratio: 0.8
-  model: bert_int

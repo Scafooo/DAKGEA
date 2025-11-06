@@ -1,6 +1,0 @@
-experiment:
-  name: bert_int-ICEW_WIKI-r50
-  dataset:
-    name: ICEW_WIKI
-  reduction_ratio: 0.5
-  model: bert_int

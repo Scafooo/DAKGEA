@@ -1,7 +1,7 @@
 experiment:
   name: 01_exp_direct
   dataset:
-    path: /home/federico/Programming/Python/DAKGEA/Bert_int_reference/D_W_15K_V1/10/attribute_date
+    path: /home/federico/Programming/Python/DAKGEA/Bert_int_reference/D_W_15K_V1/50/attribute_data
   model: bert_int
   seed: 11037
   clear: true

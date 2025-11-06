@@ -1,0 +1,342 @@
+http://dbpedia.org/ontology/iso6391Code	iso code
+http://dbpedia.org/ontology/acquirementDate	acquirement date
+http://dbpedia.org/ontology/numberOfGraduateStudents	number of graduate students
+http://xmlns.com/foaf/0.1/givenName	http xmlns com foaf given name
+http://dbpedia.org/ontology/serviceStartYear	service start year
+http://dbpedia.org/ontology/motto	motto
+http://dbpedia.org/ontology/numberOfDoctoralStudents	number of doctoral students
+http://dbpedia.org/ontology/maximumElevation	maximum elevation
+http://purl.org/dc/elements/1.1/description	http purl org dc elements description
+http://dbpedia.org/ontology/seatingCapacity	seating capacity
+http://dbpedia.org/ontology/cmykCoordinateMagenta	cmyk coordinate magenta
+http://dbpedia.org/ontology/maximumDepth	maximum depth
+http://dbpedia.org/ontology/shareOfAudience	share of audience
+http://dbpedia.org/ontology/passengersPerYear	passengers per year
+http://dbpedia.org/ontology/draftYear	draft year
+http://dbpedia.org/ontology/icaoLocationIdentifier	icao location identifier
+http://dbpedia.org/ontology/cmykCoordinateYellow	cmyk coordinate yellow
+http://dbpedia.org/ontology/lowerAge	lower age
+http://dbpedia.org/ontology/callsignMeaning	callsign meaning
+http://dbpedia.org/ontology/capitalElevation	capital elevation
+http://dbpedia.org/ontology/assets	assets
+http://dbpedia.org/ontology/area	area
+http://dbpedia.org/ontology/firstAppearance	first appearance
+http://dbpedia.org/ontology/upperAge	upper age
+http://dbpedia.org/ontology/distanceToCharingCross	distance to charing cross
+http://dbpedia.org/ontology/municipalityCode	municipality code
+http://dbpedia.org/ontology/numberOfTeams	number of teams
+http://dbpedia.org/ontology/iso6392Code	iso code
+http://dbpedia.org/ontology/areaUrban	area urban
+http://dbpedia.org/ontology/activeYearsStartYear	active years start year
+http://dbpedia.org/ontology/timeshiftChannel	timeshift channel
+http://dbpedia.org/ontology/populationTotal	population total
+http://dbpedia.org/ontology/debut	debut
+http://dbpedia.org/ontology/foundingDate	founding date
+http://dbpedia.org/ontology/latestReleaseDate	latest release date
+http://dbpedia.org/ontology/activeYearsEndYear	active years end year
+http://dbpedia.org/ontology/distanceToEdinburgh	distance to edinburgh
+http://dbpedia.org/ontology/colourHexCode	colour hex code
+http://dbpedia.org/ontology/ranking	ranking
+http://dbpedia.org/ontology/sourceConfluenceElevation	source confluence elevation
+http://dbpedia.org/ontology/omim	omim
+http://dbpedia.org/ontology/individualisedGnd	individualised gnd
+http://dbpedia.org/ontology/name	name
+http://dbpedia.org/ontology/settingOfPlay	setting of play
+http://dbpedia.org/ontology/added	added
+http://dbpedia.org/ontology/role	role
+http://dbpedia.org/ontology/yearOfElectrification	year of electrification
+http://dbpedia.org/ontology/tournamentRecord	tournament record
+http://dbpedia.org/ontology/formerName	former name
+http://dbpedia.org/ontology/wheelbase	wheelbase
+http://dbpedia.org/ontology/fareZone	fare zone
+http://dbpedia.org/ontology/other	other
+http://dbpedia.org/ontology/discovered	discovered
+http://dbpedia.org/ontology/callSign	call sign
+http://dbpedia.org/ontology/areaRural	area rural
+http://dbpedia.org/ontology/icd10	icd
+http://dbpedia.org/ontology/notes	notes
+http://dbpedia.org/ontology/timeInSpace	time in space
+http://dbpedia.org/ontology/areaMetro	area metro
+http://dbpedia.org/ontology/isoCodeRegion	iso code region
+http://dbpedia.org/ontology/fate	fate
+http://dbpedia.org/ontology/hallOfFame	hall of fame
+http://dbpedia.org/ontology/gross	gross
+http://dbpedia.org/ontology/averageSpeed	average speed
+http://dbpedia.org/ontology/numberOfPages	number of pages
+http://dbpedia.org/ontology/campusSize	campus size
+http://dbpedia.org/ontology/frequency	frequency
+http://dbpedia.org/ontology/extinctionYear	extinction year
+http://dbpedia.org/ontology/draft	draft
+http://dbpedia.org/ontology/shipLaunch	ship launch
+http://dbpedia.org/ontology/meshId	mesh id
+http://dbpedia.org/ontology/electionMajority	election majority
+http://dbpedia.org/ontology/areaCode	area code
+http://dbpedia.org/ontology/plays	plays
+http://dbpedia.org/ontology/imdbId	imdb id
+http://dbpedia.org/ontology/nutsCode	nuts code
+http://dbpedia.org/ontology/inseeCode	insee code
+http://dbpedia.org/ontology/teamSize	team size
+http://dbpedia.org/ontology/managementElevation	management elevation
+http://dbpedia.org/ontology/publiclyAccessible	publicly accessible
+http://dbpedia.org/ontology/modelStartYear	model start year
+http://xmlns.com/foaf/0.1/nick	http xmlns com foaf nick
+http://dbpedia.org/ontology/lowest	lowest
+http://dbpedia.org/ontology/publicationDate	publication date
+http://dbpedia.org/ontology/trackNumber	track number
+http://dbpedia.org/ontology/fileSize	file size
+http://dbpedia.org/ontology/buildingEndDate	building end date
+http://dbpedia.org/ontology/draftRound	draft round
+http://dbpedia.org/ontology/visitorStatisticsAsOf	visitor statistics as of
+http://dbpedia.org/ontology/equity	equity
+http://dbpedia.org/ontology/numberOfEmployees	number of employees
+http://dbpedia.org/ontology/aSide	a side
+http://dbpedia.org/ontology/status	status
+http://dbpedia.org/ontology/internationally	internationally
+http://dbpedia.org/ontology/waistSize	waist size
+http://dbpedia.org/ontology/wavelength	wavelength
+http://dbpedia.org/ontology/managerTitle	manager title
+http://dbpedia.org/ontology/periapsis	periapsis
+http://dbpedia.org/ontology/meaning	meaning
+http://dbpedia.org/ontology/firstPublicationDate	first publication date
+http://dbpedia.org/ontology/populationAsOf	population as of
+http://dbpedia.org/ontology/longtype	longtype
+http://dbpedia.org/ontology/buildingStartYear	building start year
+http://dbpedia.org/ontology/releaseDate	release date
+http://dbpedia.org/ontology/firstPublicationYear	first publication year
+http://dbpedia.org/ontology/numberOfParticipatingNations	number of participating nations
+http://dbpedia.org/ontology/apparentMagnitude	apparent magnitude
+http://dbpedia.org/ontology/shipDisplacement	ship displacement
+http://dbpedia.org/ontology/lastPublicationDate	last publication date
+http://dbpedia.org/ontology/demonym	demonym
+http://dbpedia.org/ontology/voltageOfElectrification	voltage of electrification
+http://dbpedia.org/ontology/subdivisions	subdivisions
+http://dbpedia.org/ontology/commissioningDate	commissioning date
+http://dbpedia.org/ontology/decommissioningDate	decommissioning date
+http://dbpedia.org/ontology/serviceEndYear	service end year
+http://dbpedia.org/ontology/whaDraft	wha draft
+http://dbpedia.org/ontology/title	title
+http://dbpedia.org/ontology/nrhpReferenceNumber	nrhp reference number
+http://dbpedia.org/ontology/conservationStatusSystem	conservation status system
+http://dbpedia.org/ontology/bustSize	bust size
+http://dbpedia.org/ontology/hsvCoordinateHue	hsv coordinate hue
+http://dbpedia.org/ontology/campusType	campus type
+http://dbpedia.org/ontology/formationDate	formation date
+http://dbpedia.org/ontology/orbitalPeriod	orbital period
+http://dbpedia.org/ontology/isHandicappedAccessible	is handicapped accessible
+http://dbpedia.org/ontology/productionEndYear	production end year
+http://dbpedia.org/ontology/serviceNumber	service number
+http://dbpedia.org/ontology/background	background
+http://dbpedia.org/ontology/conservationStatus	conservation status
+http://dbpedia.org/ontology/lastAirDate	last air date
+http://dbpedia.org/ontology/seasonNumber	season number
+http://dbpedia.org/ontology/latestReleaseVersion	latest release version
+http://dbpedia.org/ontology/populationTotalRanking	population total ranking
+http://dbpedia.org/ontology/hipSize	hip size
+http://dbpedia.org/ontology/budget	budget
+http://dbpedia.org/ontology/officialSchoolColour	official school colour
+http://dbpedia.org/ontology/certification	certification
+http://dbpedia.org/ontology/lcc	lcc
+http://dbpedia.org/ontology/populationMetro	population metro
+http://dbpedia.org/ontology/viafId	viaf id
+http://dbpedia.org/ontology/postalCode	postal code
+http://dbpedia.org/ontology/topSpeed	top speed
+http://dbpedia.org/ontology/modelEndYear	model end year
+http://dbpedia.org/ontology/causalties	causalties
+http://dbpedia.org/ontology/formationYear	formation year
+http://dbpedia.org/ontology/numberOfSeasons	number of seasons
+http://dbpedia.org/ontology/railGauge	rail gauge
+http://dbpedia.org/ontology/numberOfTracks	number of tracks
+http://dbpedia.org/ontology/cmykCoordinateBlack	cmyk coordinate black
+http://dbpedia.org/ontology/floorCount	floor count
+http://dbpedia.org/ontology/completionDate	completion date
+http://dbpedia.org/ontology/signature	signature
+http://dbpedia.org/ontology/runwaySurface	runway surface
+http://dbpedia.org/ontology/sourceElevation	source elevation
+http://dbpedia.org/ontology/netIncome	net income
+http://dbpedia.org/ontology/episodeNumber	episode number
+http://dbpedia.org/ontology/yearOfConstruction	year of construction
+http://dbpedia.org/ontology/hairColor	hair color
+http://dbpedia.org/ontology/volume	volume
+http://dbpedia.org/ontology/staff	staff
+http://dbpedia.org/ontology/transmission	transmission
+http://dbpedia.org/ontology/purpose	purpose
+http://dbpedia.org/ontology/draftPick	draft pick
+http://dbpedia.org/ontology/runtime	runtime
+http://dbpedia.org/ontology/operatingIncome	operating income
+http://dbpedia.org/ontology/frequencyOfPublication	frequency of publication
+http://dbpedia.org/ontology/openingYear	opening year
+http://dbpedia.org/ontology/licensee	licensee
+http://dbpedia.org/ontology/buildingStartDate	building start date
+http://dbpedia.org/ontology/leaderTitle	leader title
+http://dbpedia.org/ontology/iataAirlineCode	iata airline code
+http://dbpedia.org/ontology/grossDomesticProduct	gross domestic product
+http://dbpedia.org/ontology/deathDate	death date
+http://dbpedia.org/ontology/rgbCoordinateBlue	rgb coordinate blue
+http://dbpedia.org/ontology/participant	participant
+http://dbpedia.org/ontology/orderDate	order date
+http://dbpedia.org/ontology/minimumTemperature	minimum temperature
+http://dbpedia.org/ontology/abbreviation	abbreviation
+http://dbpedia.org/ontology/elevation	elevation
+http://dbpedia.org/ontology/wins	wins
+http://dbpedia.org/ontology/overallRecord	overall record
+http://dbpedia.org/ontology/teamName	team name
+http://dbpedia.org/ontology/headLabel	head label
+http://dbpedia.org/ontology/eyeColor	eye color
+http://dbpedia.org/ontology/stationStructure	station structure
+http://dbpedia.org/ontology/cmykCoordinateCyanic	cmyk coordinate cyanic
+http://dbpedia.org/ontology/seniority	seniority
+http://dbpedia.org/ontology/bSide	b side
+http://dbpedia.org/ontology/rebuildingYear	rebuilding year
+http://dbpedia.org/ontology/iataLocationIdentifier	iata location identifier
+http://dbpedia.org/ontology/length	length
+http://dbpedia.org/ontology/speedLimit	speed limit
+http://dbpedia.org/ontology/colourName	colour name
+http://dbpedia.org/ontology/result	result
+http://dbpedia.org/ontology/capacity	capacity
+http://dbpedia.org/ontology/militaryUnitSize	military unit size
+http://dbpedia.org/ontology/trackLength	track length
+http://dbpedia.org/ontology/oclc	oclc
+http://dbpedia.org/ontology/mouthElevation	mouth elevation
+http://dbpedia.org/ontology/weight	weight
+http://dbpedia.org/ontology/formerChannel	former channel
+http://dbpedia.org/ontology/dcc	dcc
+http://dbpedia.org/ontology/percentageOfAreaWater	percentage of area water
+http://dbpedia.org/ontology/activeYearsEndDate	active years end date
+http://dbpedia.org/ontology/icaoAirlineCode	icao airline code
+http://dbpedia.org/ontology/facilityId	facility id
+http://dbpedia.org/ontology/totalPopulation	total population
+http://dbpedia.org/ontology/passengersPerDay	passengers per day
+http://dbpedia.org/ontology/runwayLength	runway length
+http://dbpedia.org/ontology/membership	membership
+http://dbpedia.org/ontology/beatifiedDate	beatified date
+http://dbpedia.org/ontology/openingDate	opening date
+http://dbpedia.org/ontology/routeTypeAbbreviation	route type abbreviation
+http://dbpedia.org/ontology/birthName	birth name
+http://dbpedia.org/ontology/epoch	epoch
+http://dbpedia.org/ontology/formerCallsign	former callsign
+http://dbpedia.org/ontology/rgbCoordinateRed	rgb coordinate red
+http://dbpedia.org/ontology/shipBeam	ship beam
+http://xmlns.com/foaf/0.1/name	http xmlns com foaf name
+http://dbpedia.org/ontology/shoreLength	shore length
+http://dbpedia.org/ontology/otherServingLines	other serving lines
+http://dbpedia.org/ontology/collection	collection
+http://dbpedia.org/ontology/iucnCategory	iucn category
+http://dbpedia.org/ontology/iso6393Code	iso code
+http://dbpedia.org/ontology/networth	networth
+http://dbpedia.org/ontology/year	year
+http://dbpedia.org/ontology/oversight	oversight
+http://dbpedia.org/ontology/frequentlyUpdated	frequently updated
+http://dbpedia.org/ontology/discharge	discharge
+http://dbpedia.org/ontology/utcOffset	utc offset
+http://dbpedia.org/ontology/production	production
+http://dbpedia.org/ontology/populationDensity	population density
+http://dbpedia.org/ontology/chorusCharacterInPlay	chorus character in play
+http://dbpedia.org/ontology/rgbCoordinateGreen	rgb coordinate green
+http://dbpedia.org/ontology/areaLand	area land
+http://dbpedia.org/ontology/shareSource	share source
+http://dbpedia.org/ontology/date	date
+http://dbpedia.org/ontology/currentSeason	current season
+http://dbpedia.org/ontology/activeYearsStartDate	active years start date
+http://dbpedia.org/ontology/closingYear	closing year
+http://dbpedia.org/ontology/mascot	mascot
+http://dbpedia.org/ontology/code	code
+http://dbpedia.org/ontology/runwayDesignation	runway designation
+http://dbpedia.org/ontology/numberOfStaff	number of staff
+http://dbpedia.org/ontology/hsvCoordinateValue	hsv coordinate value
+http://dbpedia.org/ontology/barPassRate	bar pass rate
+http://dbpedia.org/ontology/chairmanTitle	chairman title
+http://dbpedia.org/ontology/firstAscentYear	first ascent year
+http://dbpedia.org/ontology/averageDepth	average depth
+http://dbpedia.org/ontology/premiereYear	premiere year
+http://dbpedia.org/ontology/routeStartDirection	route start direction
+http://dbpedia.org/ontology/distanceToLondon	distance to london
+http://dbpedia.org/ontology/productionStartYear	production start year
+http://dbpedia.org/ontology/rebuildingDate	rebuilding date
+http://dbpedia.org/ontology/undraftedYear	undrafted year
+http://dbpedia.org/ontology/temperature	temperature
+http://dbpedia.org/ontology/areaTotal	area total
+http://dbpedia.org/ontology/bicycleInformation	bicycle information
+http://dbpedia.org/ontology/routeNumber	route number
+http://dbpedia.org/ontology/foundingYear	founding year
+http://dbpedia.org/ontology/careerPrizeMoney	career prize money
+http://dbpedia.org/ontology/militaryCommand	military command
+http://dbpedia.org/ontology/extinctionDate	extinction date
+http://dbpedia.org/ontology/strength	strength
+http://dbpedia.org/ontology/address	address
+http://dbpedia.org/ontology/cost	cost
+http://dbpedia.org/ontology/endowment	endowment
+http://dbpedia.org/ontology/minimumElevation	minimum elevation
+http://dbpedia.org/ontology/facultySize	faculty size
+http://dbpedia.org/ontology/numberOfFilms	number of films
+http://dbpedia.org/ontology/icd9	icd
+http://dbpedia.org/ontology/populationMetroDensity	population metro density
+http://dbpedia.org/ontology/numberOfVolunteers	number of volunteers
+http://dbpedia.org/ontology/longName	long name
+http://dbpedia.org/ontology/populationUrban	population urban
+http://dbpedia.org/ontology/apoapsis	apoapsis
+http://dbpedia.org/ontology/numberOfStations	number of stations
+http://dbpedia.org/ontology/numberOfStudents	number of students
+http://dbpedia.org/ontology/identificationSymbol	identification symbol
+http://dbpedia.org/ontology/numberOfLocations	number of locations
+http://dbpedia.org/ontology/numberOfEpisodes	number of episodes
+http://dbpedia.org/ontology/analogChannel	analog channel
+http://dbpedia.org/ontology/numberOfUndergraduateStudents	number of undergraduate students
+http://dbpedia.org/ontology/alias	alias
+http://dbpedia.org/ontology/startDate	start date
+http://dbpedia.org/ontology/recordDate	record date
+http://dbpedia.org/ontology/numberOfLines	number of lines
+http://dbpedia.org/ontology/digitalChannel	digital channel
+http://dbpedia.org/ontology/icdo	icdo
+http://dbpedia.org/ontology/layingDown	laying down
+http://dbpedia.org/ontology/finalPublicationYear	final publication year
+http://dbpedia.org/ontology/pseudonym	pseudonym
+http://dbpedia.org/ontology/birthYear	birth year
+http://dbpedia.org/ontology/governmentElevation	government elevation
+http://dbpedia.org/ontology/office	office
+http://dbpedia.org/ontology/characterInPlay	character in play
+http://dbpedia.org/ontology/combatant	combatant
+http://dbpedia.org/ontology/routeEndDirection	route end direction
+http://dbpedia.org/ontology/numberOfPostgraduateStudents	number of postgraduate students
+http://dbpedia.org/ontology/birthDate	birth date
+http://dbpedia.org/ontology/synonym	synonym
+http://dbpedia.org/ontology/absoluteMagnitude	absolute magnitude
+http://dbpedia.org/ontology/depictionDescription	depiction description
+http://dbpedia.org/ontology/dissolutionYear	dissolution year
+http://dbpedia.org/ontology/censusYear	census year
+http://dbpedia.org/ontology/agencyStationCode	agency station code
+http://dbpedia.org/ontology/populationUrbanDensity	population urban density
+http://dbpedia.org/ontology/revenue	revenue
+http://dbpedia.org/ontology/issn	issn
+http://dbpedia.org/ontology/shipDraft	ship draft
+http://dbpedia.org/ontology/numberOfVisitors	number of visitors
+http://dbpedia.org/ontology/isbn	isbn
+http://dbpedia.org/ontology/geologicPeriod	geologic period
+http://dbpedia.org/ontology/orderInOffice	order in office
+http://dbpedia.org/ontology/gridReference	grid reference
+http://dbpedia.org/ontology/numberOfParticipatingAthletes	number of participating athletes
+http://dbpedia.org/ontology/areaWater	area water
+http://dbpedia.org/ontology/slogan	slogan
+http://dbpedia.org/ontology/firstAirDate	first air date
+http://dbpedia.org/ontology/recommissioningDate	recommissioning date
+http://dbpedia.org/ontology/number	number
+http://dbpedia.org/ontology/lineLength	line length
+http://dbpedia.org/ontology/shoots	shoots
+http://dbpedia.org/ontology/dissolutionDate	dissolution date
+http://dbpedia.org/ontology/hsvCoordinateSaturation	hsv coordinate saturation
+http://dbpedia.org/ontology/otherName	other name
+http://dbpedia.org/ontology/committee	committee
+http://dbpedia.org/ontology/numberOfVolumes	number of volumes
+http://dbpedia.org/ontology/maximumTemperature	maximum temperature
+http://dbpedia.org/ontology/parkingInformation	parking information
+http://dbpedia.org/ontology/deathYear	death year
+http://dbpedia.org/ontology/railwayPlatforms	railway platforms
+http://dbpedia.org/ontology/ethnicGroupsInYear	ethnic groups in year
+http://dbpedia.org/ontology/prominence	prominence
+http://dbpedia.org/ontology/broadcastStationClass	broadcast station class
+http://dbpedia.org/ontology/access	access
+http://dbpedia.org/ontology/height	height
+http://dbpedia.org/ontology/areaOfCatchment	area of catchment
+http://dbpedia.org/ontology/allegiance	allegiance
+http://dbpedia.org/ontology/width	width
+http://dbpedia.org/ontology/flag	flag
+http://dbpedia.org/ontology/geology	geology

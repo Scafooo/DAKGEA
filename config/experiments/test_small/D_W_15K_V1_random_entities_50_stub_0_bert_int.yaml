@@ -1,7 +1,7 @@
 experiment:
-  name: 02_exp_reduction_01
+  name: D_W_15K_V1_random_entities_50_stub_0_bert_int
   dataset:
-    name: hybea/BBC_DB
+    name: hybea/D_W_15K_V1
     writer: bert_int
   reduction:
     method: random_entities
