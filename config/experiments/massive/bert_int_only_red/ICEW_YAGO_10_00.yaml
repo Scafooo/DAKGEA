@@ -1,0 +1,20 @@
+experiment:
+  name: ICEW_YAGO_10_00
+  dataset:
+    name: hybea/ICEW_YAGO
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 1.0
+    writer: bert_int
+    save: false
+    eval: true
+  augmentation:
+    method: stub
+    writer: bert_int
+    save: false
+    eval: false
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: false
