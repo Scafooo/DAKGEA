@@ -86,6 +86,13 @@ class BasicUnitTrainer:
 
         self.device = _select_device(self.device_spec, self.config.get("cuda_device", 0))
         self.model.to(self.device)
+        logger.info(
+            "[BERT-INT] Basic unit ready on %s | train_pairs=%d | test_pairs=%d | entities=%d",
+            self.device,
+            len(self.data.train_ill),
+            len(self.data.test_ill),
+            len(self.data.ent2data),
+        )
 
     def fit(self) -> List[Dict[str, float]]:
         """Train the model for the configured number of epochs, returning metrics per epoch."""
@@ -114,6 +121,13 @@ class BasicUnitTrainer:
 
         history: List[Dict[str, float]] = []
         epochs = self.config.get("epochs", 1)
+        logger.info(
+            "[BERT-INT] Training config → epochs=%d batch_size=%d negatives=%d lr=%.2e",
+            epochs,
+            self.config.get("batch_size", 24),
+            self.config.get("negatives_per_positive", 2),
+            learning_rate,
+        )
         for epoch in range(epochs):
             logger.info("[BERT-INT] Epoch %d/%d", epoch + 1, epochs)
 
@@ -210,6 +224,15 @@ class BasicUnitTrainer:
 
         candidate_batch = self.config.get("candidate_batch_size", 128)
         nearest = self.config.get("nearest_sample_num", 128)
+        logger.info(
+            "[BERT-INT] Candidate search → train_left=%d train_right=%d cand_left=%d cand_right=%d batch=%d topk=%d",
+            len(train_left),
+            len(train_right),
+            len(candidates_left),
+            len(candidates_right),
+            candidate_batch,
+            nearest,
+        )
 
         # Generate candidates for left entities
         emb_left_train = self._encode_entities(train_left, candidate_batch)
@@ -250,6 +273,10 @@ class BasicUnitTrainer:
         for pos, entity in enumerate(train_right):
             candidate_dict[entity] = [int(candidates_left[i]) for i in idx_right[pos].tolist()]
 
+        logger.info(
+            "[BERT-INT] Candidate dictionary built with %d keys",
+            len(candidate_dict),
+        )
         return candidate_dict
 
     def _forward_entities(self, entity_ids: Sequence[int]) -> torch.Tensor:

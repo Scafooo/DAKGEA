@@ -1,0 +1,20 @@
+experiment:
+  name: fr_en_0.5
+  dataset:
+    name: hybea/fr_en
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.5
+    writer: bert_int
+    save: false
+    eval: true
+  augmentation:
+    method: stub
+    writer: bert_int
+    save: false
+    eval: false
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: true
