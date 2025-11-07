@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import shutil
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -15,6 +16,7 @@ from src.logger import get_logger
 
 logger = get_logger(__name__)
 
+from .configuration import ExperimentConfig
 from .progress import ProgressTracker
 from .specs import DatasetSpec, WriterPlan
 from .stages import (
@@ -33,7 +35,7 @@ class ExperimentRunner:
     def __init__(
         self,
         exp_cfg: Dict[str, Any],
-        overwrite_existing: bool = False,
+        overwrite_existing: Optional[bool] = None,
         show_progress: bool = True,
     ) -> None:
         self.exp_cfg = exp_cfg
@@ -51,114 +53,26 @@ class ExperimentRunner:
             "overwrite_existing", False
         )
 
-        try:
-            self.name = exp_cfg["name"]
-        except KeyError as exc:
-            raise KeyError(
-                f"Missing required experiment configuration key: 'name'. "
-                f"Available keys: {list(exp_cfg.keys())}"
-            ) from exc
-
-        # Normalise dataset configuration to a list of entries
-        if "datasets" in exp_cfg:
-            datasets_cfg = exp_cfg["datasets"]
-            if not isinstance(datasets_cfg, (list, tuple)):
-                datasets_cfg = [datasets_cfg]
-        elif "dataset" in exp_cfg:
-            datasets_cfg = [exp_cfg["dataset"]]
-        else:
-            raise KeyError(
-                f"Experiment configuration must define 'dataset' or 'datasets'. "
-                f"Available keys: {list(exp_cfg.keys())}"
-            )
-        self.datasets_cfg = list(datasets_cfg)
-
-        # Normalise reduction ratios to a list of floats (optional for direct path mode)
-        if "reduction_ratios" in exp_cfg:
-            ratios = exp_cfg["reduction_ratios"]
-            if not isinstance(ratios, (list, tuple)):
-                ratios = [ratios]
-            self.ratios = [float(r) for r in ratios]
-        elif "reduction_ratio" in exp_cfg:
-            self.ratios = [float(exp_cfg["reduction_ratio"])]
-        elif "reduction" in exp_cfg and isinstance(exp_cfg["reduction"], dict):
-            # New structure: reduction: {method: random_entities, ratio: 0.1}
-            red_cfg = exp_cfg["reduction"]
-            if "ratio" in red_cfg:
-                ratio = red_cfg["ratio"]
-                self.ratios = [float(ratio)] if not isinstance(ratio, (list, tuple)) else [float(r) for r in ratio]
-            else:
-                self.ratios = []
-        elif "augmentation" in exp_cfg and isinstance(exp_cfg["augmentation"], dict):
-            # Legacy: augmentation: {method: stub, reduction: 0.1}
-            aug_cfg = exp_cfg["augmentation"]
-            if "reduction" in aug_cfg:
-                self.ratios = [float(aug_cfg["reduction"])]
-            else:
-                self.ratios = []
-        else:
-            # No reduction ratio: direct path mode (skip reduction/augmentation/writer)
-            self.ratios = []
-
-        # Single augmentation method (optional)
-        if "augmentation_methods" in exp_cfg:
-            augmentations = exp_cfg.get("augmentation_methods", [])
-            if not isinstance(augmentations, (list, tuple)):
-                augmentations = [augmentations]
-        elif "augmentation_method" in exp_cfg:
-            augmentations = [exp_cfg["augmentation_method"]] if exp_cfg["augmentation_method"] else []
-        elif "augmentation" in exp_cfg and isinstance(exp_cfg["augmentation"], dict):
-            # New structure: augmentation: {method: stub, reduction: 0.1}
-            aug_cfg = exp_cfg["augmentation"]
-            if "method" in aug_cfg and aug_cfg["method"]:
-                augmentations = [aug_cfg["method"]]
-            else:
-                augmentations = []
-        else:
-            augmentations = []
-        self.augmentations = [a for a in augmentations if a]
-
-        # Single evaluation model (required)
-        if "models_to_run" in exp_cfg:
-            models = exp_cfg["models_to_run"]
-            if not isinstance(models, (list, tuple)):
-                models = [models]
-        elif "model" in exp_cfg:
-            models = [exp_cfg["model"]]
-        else:
-            raise KeyError(
-                f"Experiment configuration must define 'model' or 'models_to_run'. "
-                f"Available keys: {list(exp_cfg.keys())}"
-            )
-        self.models = [m for m in models if m]
-
-        # Parse reduction method and writer
-        if "reduction" in exp_cfg and isinstance(exp_cfg["reduction"], dict):
-            # New structure: reduction: {method: random_entities, ratio: 0.1, writer: bert_int}
-            self.reduction_method = exp_cfg["reduction"].get("method", "random_entities")
-            self.reduction_writer = exp_cfg["reduction"].get("writer")
-        else:
-            # Legacy: reduction_method at top level
-            self.reduction_method = exp_cfg.get("reduction_method", "random_entities")
-            self.reduction_writer = None
-
-        # Parse augmentation writer
-        if "augmentation" in exp_cfg and isinstance(exp_cfg["augmentation"], dict):
-            self.augmentation_writer = exp_cfg["augmentation"].get("writer")
-        else:
-            self.augmentation_writer = None
-
-        self.clear_intermediate = exp_cfg.get("clear", False)
-
-        effective_overwrite = (
-            overwrite_existing
-            if overwrite_existing is not None
-            else exp_cfg.get("overwrite_existing")
+        self.normalized_cfg = ExperimentConfig.from_payload(
+            exp_cfg,
+            cli_overwrite=overwrite_existing,
+            default_overwrite=default_overwrite,
         )
-        if effective_overwrite is None:
-            effective_overwrite = default_overwrite
-        self.overwrite_existing = bool(effective_overwrite)
-        self.resume = not self.overwrite_existing
+        self.name = self.normalized_cfg.name
+        self.datasets_cfg = list(self.normalized_cfg.datasets)
+        self.ratios = list(self.normalized_cfg.ratios)
+        self.augmentations = list(self.normalized_cfg.augmentations)
+        self.models = list(self.normalized_cfg.models)
+        self.reduction_method = self.normalized_cfg.reduction_method
+        self.reduction_writer = self.normalized_cfg.reduction_writer
+        self.reduction_save = self.normalized_cfg.reduction_save
+        self.reduction_eval = self.normalized_cfg.reduction_eval
+        self.augmentation_writer = self.normalized_cfg.augmentation_writer
+        self.augmentation_save = self.normalized_cfg.augmentation_save
+        self.augmentation_eval = self.normalized_cfg.augmentation_eval
+        self.clear_intermediate = self.normalized_cfg.clear_intermediate
+        self.overwrite_existing = self.normalized_cfg.overwrite_existing
+        self.resume = self.normalized_cfg.resume
 
         self.base_data: Path = Path(self.paths["raw_data"])
         self.external_data: Path = Path(
@@ -281,7 +195,7 @@ class ExperimentRunner:
     def run(self) -> None:
         """Execute the experiment suite over the configured datasets and ratios."""
         # Check if we're in direct path mode (no ratios = direct dataset access)
-        direct_mode = len(self.ratios) == 0
+        direct_mode = self.normalized_cfg.direct_mode
 
         if direct_mode:
             self._run_direct_mode()
@@ -304,55 +218,74 @@ class ExperimentRunner:
 
         try:
             for spec in self.datasets:
-                if not spec.direct_path:
+                direct_path = spec.direct_path
+                if not direct_path:
                     raise ValueError(
                         f"Direct path mode requires 'path' field in dataset config for '{spec.name}'"
                     )
 
+                dataset_root = Path(direct_path)
                 logger.info(
                     "→ Dataset '%s' (reader=%s, path=%s)",
                     spec.name,
                     spec.reader,
-                    spec.direct_path,
+                    dataset_root,
                 )
 
-                # Read dataset directly from path
+                dataset_workspace, dataset_meta = self._prepare_dataset_workspace(
+                    spec, dataset_root
+                )
                 reader = DatasetReaderFactory.create_reader(spec.reader)
-                dataset = reader.read(str(spec.direct_path))
+                dataset = reader.read(str(dataset_root))
 
-                # Create workspace for results
-                dataset_workspace = self.base_workspace / spec.name
-                dataset_workspace.mkdir(parents=True, exist_ok=True)
+                ratio_tag = "direct"
+                ratio = 1.0
+                ratio_root = dataset_workspace
 
-                # Build stage config for direct evaluation
-                stage_cfg = {
-                    "dataset_name": spec.name,
-                    "lineage": {
-                        "dataset_workspace": str(spec.direct_path),
-                        "direct_mode": True,
-                        "evaluation_root": str(dataset_workspace / "evaluation"),
-                    },
-                }
-
-                # Run evaluation directly using execute method
-                from experiments.runner.stages import EvaluationStage
-
-                evaluation_stage = EvaluationStage([], self.models, self.resume)
-                logger.info("[STEP] Running evaluation for '%s'", spec.name)
-
-                # Use execute method with simplified parameters for direct mode
-                ratio_meta = {"augmentations": {}}
-                evaluation_stage.execute(
-                    augmentation_name="direct",  # No augmentation in direct mode
-                    dataset_reduced=dataset,  # Use original dataset as "reduced"
-                    dataset_augmented=dataset,  # Same dataset for augmented
-                    stage_cfg=stage_cfg,
-                    lineage_cfg=stage_cfg["lineage"],
-                    ratio_root=dataset_workspace,
-                    ratio_tag="direct",
-                    ratio_meta=ratio_meta,
+                stage_cfg = self._build_stage_config(
+                    spec.name,
+                    len(dataset.aligned_entities),
+                    ratio,
+                    ratio_tag,
+                    dataset_workspace,
+                    ratio_root,
+                    dataset_root,
                 )
+                lineage = stage_cfg.setdefault("lineage", {})
+                lineage["direct_mode"] = True
+                lineage["dataset_workspace"] = str(dataset_root.resolve())
+                lineage["raw_source"] = str(dataset_root.resolve())
 
+                ratio_meta = dataset_meta["ratios"].setdefault(ratio_tag, {})
+                ratio_meta.update(
+                    {
+                        "ratio": ratio,
+                        "target_entities": stage_cfg["reduction"]["target_entities"],
+                    }
+                )
+                ratio_meta.setdefault(
+                    "reduction", {"method": "direct", "paths": {}}
+                )
+                ratio_meta.setdefault("augmentations", {})
+                ratio_meta.setdefault("evaluations", {})
+
+                evaluation_stage = EvaluationStage(
+                    self._resolve_writer_plans(spec),
+                    self.models,
+                    self.resume,
+                )
+                logger.info("[STEP] Running evaluation for '%s' (direct path)", spec.name)
+
+                evaluation_stage.execute(
+                    VARIANT_BASELINE,
+                    dataset,
+                    dataset,
+                    stage_cfg,
+                    lineage,
+                    ratio_root,
+                    ratio_tag,
+                    ratio_meta,
+                )
                 progress.step()
         finally:
             progress.close()
@@ -640,6 +573,7 @@ class ExperimentRunner:
         lineage = cfg.setdefault("lineage", {})
         lineage["evaluation_root"] = str((ratio_root / "evaluation").resolve())
         lineage.setdefault("evaluation_dirs", {})
+        lineage["raw_source"] = str(dataset_root.resolve())
         logger.debug(
             "Stage config prepared for dataset=%s ratio=%.3f (target_entities=%d)",
             dataset_name,
@@ -794,24 +728,65 @@ class ExperimentRunner:
     def _cleanup_intermediate_files(self) -> None:
         """Remove intermediate files from current experiment folder."""
         logger.info("🧹 Cleaning intermediate files from experiment: %s", self.name)
-        
-        files_removed = 0
-        space_freed = 0
-        
-        # Clean only current experiment folder
-        for file_path in self.base_workspace.rglob("*"):
+        metadata = self._load_metadata_snapshot()
+        target_dirs = self._collect_intermediate_dirs(metadata)
+
+        removed = 0
+        reclaimed_bytes = 0
+        for path in sorted(target_dirs):
+            dir_path = Path(path)
+            if not dir_path.exists():
+                continue
+            if not self._is_within_workspace(dir_path):
+                logger.debug("Skipping cleanup for path outside workspace: %s", dir_path)
+                continue
+            reclaimed_bytes += self._directory_size(dir_path)
+            shutil.rmtree(dir_path, ignore_errors=True)
+            removed += 1
+
+        if removed:
+            logger.info(
+                "🧹 Removed %d artefact directories, freed %.1f MB",
+                removed,
+                reclaimed_bytes / (1024 * 1024),
+            )
+        else:
+            logger.info("🧹 No intermediate artefacts detected for cleanup.")
+
+    def _load_metadata_snapshot(self) -> Dict[str, Any]:
+        """Return the latest metadata dictionary, reading from disk if needed."""
+        if self.metadata.get("datasets"):
+            return self.metadata
+        if self.metadata_file.exists():
+            with self.metadata_file.open("r", encoding="utf-8") as handle:
+                return json.load(handle)
+        return self.metadata
+
+    def _collect_intermediate_dirs(self, metadata: Dict[str, Any]) -> List[str]:
+        """Collect directories produced during reduction/augmentation stages."""
+        targets: List[str] = []
+        for dataset_meta in metadata.get("datasets", {}).values():
+            for ratio_meta in dataset_meta.get("ratios", {}).values():
+                reduction_paths = ratio_meta.get("reduction", {}).get("paths", {})
+                targets.extend(reduction_paths.values())
+                for augmentation_meta in ratio_meta.get("augmentations", {}).values():
+                    targets.extend(augmentation_meta.get("paths", {}).values())
+        return targets
+
+    def _is_within_workspace(self, path: Path) -> bool:
+        try:
+            path.resolve().relative_to(self.base_workspace.resolve())
+            return True
+        except ValueError:
+            return False
+
+    @staticmethod
+    def _directory_size(path: Path) -> int:
+        total = 0
+        for file_path in path.rglob("*"):
             if file_path.is_file():
-                if (file_path.name.startswith("run_epoch_") and file_path.suffix == ".pt") or \
-                   file_path.name == "run_other_data.pkl" or \
-                   file_path.name == "interaction_model.pt":
-                    try:
-                        size = file_path.stat().st_size
-                        file_path.unlink()
-                        files_removed += 1
-                        space_freed += size
-                    except OSError:
-                        pass
-        
-        if files_removed > 0:
-            space_mb = space_freed / (1024 * 1024)
-            logger.info("🧹 Removed %d files, freed %.1f MB", files_removed, space_mb)
+                try:
+                    total += file_path.stat().st_size
+                except OSError:
+                    continue
+        return total
