@@ -66,11 +66,16 @@ class BertIntAlignment:
 
         # Determine paths from lineage
         lineage = self.stage_config.get("lineage", {})
-        self.evaluation_root = Path(lineage.get("evaluation_root", "results/evaluation"))
         self.variant = lineage.get("variant", "reduced")
+        artifact_root = Path(lineage.get("artifact_root", "results/artifact"))
+        artifact_root.mkdir(parents=True, exist_ok=True)
+        self.artifact_root = artifact_root
+        self.evaluation_root = Path(
+            lineage.get("evaluation_root", (artifact_root / "evaluation"))
+        )
 
         # Create checkpoint directory for this variant
-        self.checkpoint_dir = self.evaluation_root / "bert_int" / self.variant
+        self.checkpoint_dir = artifact_root / "bert_int" / self.variant
         self.checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
         logger.info(
