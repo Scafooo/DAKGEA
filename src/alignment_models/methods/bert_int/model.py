@@ -9,6 +9,7 @@ from typing import Any, Dict, Optional, Sequence, Tuple
 
 import numpy as np
 import torch
+from torch.utils.data import DataLoader, TensorDataset
 
 from src.alignment_models.methods.bert_int import (
     load_basic_unit_data,
@@ -175,25 +176,53 @@ class BertIntAlignment:
         )
 
         # Generate entity embeddings for phase 2
+        eid2data = data_bundle.ent2data
+        entity_embeddings = self._generate_entity_embeddings(model, eid2data)
+
+        return metrics, data_bundle, entity_embeddings, eid2data
+
+    def _generate_entity_embeddings(self, model: torch.nn.Module, eid2data) -> np.ndarray:
+        """Batch inference helper that exports entity embeddings for phase 2."""
+        if not eid2data:
+            return np.zeros((0, 0), dtype=np.float32)
+
         device = torch.device(
             self.interaction_cfg["device"] if torch.cuda.is_available() else "cpu"
         )
         model.eval()
         model = model.to(device)
-        entity_embeddings = []
-        eid2data = data_bundle.ent2data
 
-        for eid in range(len(eid2data)):
-            token_input = torch.LongTensor([eid2data[eid][0]]).to(device)
-            mask_input = torch.FloatTensor([eid2data[eid][1]]).to(device)
-            with torch.no_grad():
-                vec = model(token_input, mask_input)
-            entity_embeddings.append(vec.cpu().numpy()[0])
+        key_iterable = eid2data.keys() if hasattr(eid2data, "keys") else range(len(eid2data))
+        ordered_ids = sorted(key_iterable)
+        token_tensor = torch.tensor(
+            [eid2data[eid][0] for eid in ordered_ids],
+            dtype=torch.long,
+        )
+        mask_tensor = torch.tensor(
+            [eid2data[eid][1] for eid in ordered_ids],
+            dtype=torch.float,
+        )
 
-        entity_embeddings = np.array(entity_embeddings)
-        logger.info(f"[BERT-INT] Generated entity embeddings: {entity_embeddings.shape}")
+        dataset = TensorDataset(token_tensor, mask_tensor)
+        batch_size = int(self.interaction_cfg.get("embedding_batch_size") or 256)
+        loader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
 
-        return metrics, data_bundle, entity_embeddings, eid2data
+        embeddings: list[torch.Tensor] = []
+        with torch.no_grad():
+            for tokens, masks in loader:
+                tokens = tokens.to(device)
+                masks = masks.to(device)
+                batch_vec = model(tokens, masks)
+                embeddings.append(batch_vec.cpu())
+
+        entity_embeddings = torch.cat(embeddings, dim=0).numpy()
+        logger.info(
+            "[BERT-INT] Generated entity embeddings: %s (batches=%d, batch_size=%d)",
+            entity_embeddings.shape,
+            len(loader),
+            batch_size,
+        )
+        return entity_embeddings
 
     def _train_interaction_model(self, dataset, data_bundle, entity_embeddings, eid2data):
         """Train interaction model (phase 2) and return results."""

@@ -44,7 +44,70 @@ class StageSummaryWriter:
             json.dump(payload, handle, indent=2)
 
 
-class ReductionStage:
+class _WriterStage:
+    """Shared helpers for stages that materialize datasets to disk."""
+
+    def __init__(
+        self,
+        stage_key: str,
+        writer_plans: Iterable[WriterPlan],
+        resume: bool,
+    ) -> None:
+        self.stage_key = stage_key
+        self.writer_plans = list(writer_plans)
+        self.resume = resume
+
+    def _ensure_reader_plan(
+        self,
+        lineage: Dict[str, Any],
+        reader_hint: Optional[Any] = None,
+    ) -> str:
+        bucket = lineage.setdefault("reader_plan", {})
+        plan_name = bucket.get(self.stage_key)
+        if plan_name is None:
+            plan_name = self._select_reader_plan(reader_hint)
+            bucket[self.stage_key] = plan_name
+        return plan_name
+
+    def _select_reader_plan(self, reader_hint: Optional[Any] = None) -> str:
+        if reader_hint is not None:
+            format_name = getattr(reader_hint, "file_type", None)
+            if format_name:
+                return f"dataset_format_{format_name}"
+        if self.writer_plans:
+            return f"dataset_format_{self.writer_plans[0].name}"
+        return "dataset_format_default"
+
+    @staticmethod
+    def _has_cached(path: Path) -> bool:
+        return path.exists() and any(path.iterdir())
+
+    @staticmethod
+    def _read_cached_dataset(reader, reader_root: Path, subtype: Optional[str]):
+        try:
+            return reader.read(str(reader_root), subtype=subtype)
+        except FileNotFoundError:
+            return None
+
+    def _record_plan_paths(
+        self,
+        base_root: Path,
+        path_bucket: Dict[str, str],
+        lineage: Optional[Dict[str, Any]] = None,
+    ) -> None:
+        for plan in self.writer_plans:
+            plan_root = self._plan_root(base_root, plan)
+            if plan_root.exists():
+                path_bucket[plan.name] = str(plan_root.resolve())
+                if lineage is not None:
+                    lineage["dataset_workspace"] = str(plan_root.resolve())
+
+    @staticmethod
+    def _plan_root(base_root: Path, plan: WriterPlan) -> Path:
+        return base_root / f"dataset_format_{plan.name}"
+
+
+class ReductionStage(_WriterStage):
     """Encapsulate the reduction logic and caching behaviour."""
 
     def __init__(
@@ -53,10 +116,9 @@ class ReductionStage:
         writer_plans: Iterable[WriterPlan],
         resume: bool,
     ) -> None:
+        super().__init__("reduction", writer_plans, resume)
         self.reducer_cls = REDUCTION_REGISTRY.get(reducer_name)
         self.reducer_name = reducer_name
-        self.writer_plans = list(writer_plans)
-        self.resume = resume
 
     def execute(
         self,
@@ -72,10 +134,7 @@ class ReductionStage:
     ) -> Dataset:
         reduction_root = Path(lineage.get("reduction_root", ratio_root / "reduction"))
         _ensure_directory(reduction_root)
-        reader_plan = lineage.setdefault("reader_plan", {}).get("reduction")
-        if reader_plan is None:
-            reader_plan = self._select_reader_plan()
-            lineage.setdefault("reader_plan", {})["reduction"] = reader_plan
+        reader_plan = self._ensure_reader_plan(lineage)
         reader_root = reduction_root / reader_plan
 
         reduction_meta = ratio_meta.setdefault(
@@ -90,7 +149,7 @@ class ReductionStage:
             logger.info(
                 "⏭️  Skipping reduction — cached artefacts detected (ratio=%s)", ratio_tag
             )
-            self._record_plan_paths(reduction_root, reduction_paths, reduction_meta, lineage)
+            self._record_plan_paths(reduction_root, reduction_paths, lineage)
             cached = self._read_cached_dataset(reader, reader_root, subtype)
             if cached:
                 return cached
@@ -106,7 +165,7 @@ class ReductionStage:
         )
 
         for plan in self.writer_plans:
-            plan_root = reduction_root / f"dataset_format_{plan.name}"
+            plan_root = self._plan_root(reduction_root, plan)
             if plan.write_reduced:
                 _ensure_directory(plan_root)
                 plan.writer.write(dataset_reduced, str(plan_root))
@@ -129,39 +188,10 @@ class ReductionStage:
         )
         return dataset_reduced
 
-    @staticmethod
-    def _has_cached(path: Path) -> bool:
-        return path.exists() and any(path.iterdir())
-
-    @staticmethod
-    def _read_cached_dataset(reader, reader_root: Path, subtype: Optional[str]):
-        try:
-            return reader.read(str(reader_root), subtype=subtype)
-        except FileNotFoundError:
-            return None
-
-    def _select_reader_plan(self) -> str:
-        plan_name = self.writer_plans[0].name if self.writer_plans else "default"
-        return f"dataset_format_{plan_name}"
-
-    def _record_plan_paths(
-        self,
-        base_root: Path,
-        reduction_paths: Dict[str, str],
-        reduction_meta: Dict[str, Any],
-        lineage: Optional[Dict[str, Any]] = None,
-    ) -> None:
-        """Record paths for all writer plans in metadata."""
-        for plan in self.writer_plans:
-            plan_root = base_root / f"dataset_format_{plan.name}"
-            if plan_root.exists():
-                reduction_paths[plan.name] = str(plan_root.resolve())
-                # Also set lineage dataset_workspace if provided
-                if lineage is not None:
-                    lineage["dataset_workspace"] = str(plan_root.resolve())
+        return dataset_reduced
 
 
-class AugmentationStage:
+class AugmentationStage(_WriterStage):
     """Encapsulate augmentation logic and artefact management."""
 
     def __init__(
@@ -169,8 +199,7 @@ class AugmentationStage:
         writer_plans: Iterable[WriterPlan],
         resume: bool,
     ) -> None:
-        self.writer_plans = list(writer_plans)
-        self.resume = resume
+        super().__init__("augmentation", writer_plans, resume)
 
     def execute(
         self,
@@ -188,10 +217,7 @@ class AugmentationStage:
         augmentation_root = Path(lineage.get("augmentation_root", ratio_root / "augmentation"))
         stage_root = augmentation_root / augmentation_name
         _ensure_directory(stage_root)
-        reader_plan = lineage.setdefault("reader_plan", {}).get("augmentation")
-        if reader_plan is None:
-            reader_plan = self._select_reader_plan(reader)
-            lineage.setdefault("reader_plan", {})["augmentation"] = reader_plan
+        reader_plan = self._ensure_reader_plan(lineage, reader)
         reader_root = stage_root / reader_plan
 
         augmentations_meta = ratio_meta.setdefault("augmentations", {})
@@ -209,10 +235,10 @@ class AugmentationStage:
                 ratio_tag,
             )
             for plan in self.writer_plans:
-                plan_root = stage_root / f"dataset_format_{plan.name}"
+                plan_root = self._plan_root(stage_root, plan)
                 if plan_root.exists():
                     augmentation_paths[plan.name] = str(plan_root.resolve())
-            cached = ReductionStage._read_cached_dataset(reader, reader_root, subtype)
+            cached = self._read_cached_dataset(reader, reader_root, subtype)
             if cached:
                 return cached
             logger.warning(
@@ -231,7 +257,7 @@ class AugmentationStage:
         )
 
         for plan in self.writer_plans:
-            plan_root = stage_root / f"dataset_format_{plan.name}"
+            plan_root = self._plan_root(stage_root, plan)
             if plan.write_augmented:
                 _ensure_directory(plan_root)
                 plan.writer.write(dataset_augmented, str(plan_root))
@@ -250,14 +276,7 @@ class AugmentationStage:
         )
         return dataset_augmented
 
-    @staticmethod
-    def _has_cached(path: Path) -> bool:
-        return path.exists() and any(path.iterdir())
-
-    @staticmethod
-    def _select_reader_plan(reader) -> str:
-        format_name = getattr(reader, "file_type", "default")
-        return f"dataset_format_{format_name}"
+        return dataset_augmented
 
 
 class EvaluationStage:
