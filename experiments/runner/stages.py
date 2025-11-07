@@ -70,13 +70,12 @@ class _WriterStage:
         return plan_name
 
     def _select_reader_plan(self, reader_hint: Optional[Any] = None) -> str:
-        if reader_hint is not None:
-            format_name = getattr(reader_hint, "file_type", None)
-            if format_name:
-                return f"dataset_format_{format_name}"
         if self.writer_plans:
-            return f"dataset_format_{self.writer_plans[0].name}"
-        return "dataset_format_default"
+            return self._plan_name(self.writer_plans[0].name)
+        if reader_hint is not None:
+            format_name = getattr(reader_hint, "file_type", None) or "default"
+            return self._plan_name(format_name)
+        return self._plan_name("default")
 
     @staticmethod
     def _has_cached(path: Path) -> bool:
@@ -104,7 +103,11 @@ class _WriterStage:
 
     @staticmethod
     def _plan_root(base_root: Path, plan: WriterPlan) -> Path:
-        return base_root / f"dataset_format_{plan.name}"
+        return base_root / "dataset" / plan.name
+
+    @staticmethod
+    def _plan_name(plan_name: str) -> str:
+        return f"dataset/{plan_name}"
 
 
 class ReductionStage(_WriterStage):
@@ -170,10 +173,10 @@ class ReductionStage(_WriterStage):
                 _ensure_directory(plan_root)
                 plan.writer.write(dataset_reduced, str(plan_root))
                 logger.info("📝 [%s] Saved reduced dataset → %s", plan.name, plan_root)
-            if plan_root.exists():
                 reduction_paths[plan.name] = str(plan_root.resolve())
-                # Store the last writer's output path in lineage
-                # Models can use this to locate dataset files
+                lineage["dataset_workspace"] = str(plan_root.resolve())
+            elif plan_root.exists():
+                reduction_paths[plan.name] = str(plan_root.resolve())
                 lineage["dataset_workspace"] = str(plan_root.resolve())
 
         StageSummaryWriter.write(
@@ -186,8 +189,6 @@ class ReductionStage(_WriterStage):
                 "writers": sorted(plan.name for plan in self.writer_plans if plan.write_reduced),
             },
         )
-        return dataset_reduced
-
         return dataset_reduced
 
 
@@ -215,7 +216,7 @@ class AugmentationStage(_WriterStage):
         subtype: Optional[str] = None,
     ) -> Dataset:
         augmentation_root = Path(lineage.get("augmentation_root", ratio_root / "augmentation"))
-        stage_root = augmentation_root / augmentation_name
+        stage_root = augmentation_root
         _ensure_directory(stage_root)
         reader_plan = self._ensure_reader_plan(lineage, reader)
         reader_root = stage_root / reader_plan
@@ -262,7 +263,8 @@ class AugmentationStage(_WriterStage):
                 _ensure_directory(plan_root)
                 plan.writer.write(dataset_augmented, str(plan_root))
                 logger.info("📝 [%s] Saved augmented dataset → %s", plan.name, plan_root)
-            if plan_root.exists():
+                augmentation_paths[plan.name] = str(plan_root.resolve())
+            elif plan_root.exists():
                 augmentation_paths[plan.name] = str(plan_root.resolve())
 
         StageSummaryWriter.write(
@@ -274,8 +276,6 @@ class AugmentationStage(_WriterStage):
                 "writers": sorted(plan.name for plan in self.writer_plans if plan.write_augmented),
             },
         )
-        return dataset_augmented
-
         return dataset_augmented
 
 

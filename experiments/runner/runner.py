@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import json
 import logging
 import shutil
@@ -26,6 +27,7 @@ from .stages import (
     AugmentationStage,
     EvaluationStage,
     ReductionStage,
+    StageSummaryWriter,
 )
 
 
@@ -59,9 +61,12 @@ class ExperimentRunner:
             default_overwrite=default_overwrite,
         )
         self.name = self.normalized_cfg.name
-        self.datasets_cfg = list(self.normalized_cfg.datasets)
-        self.ratios = list(self.normalized_cfg.ratios)
-        self.augmentations = list(self.normalized_cfg.augmentations)
+        self.dataset_cfg = self.normalized_cfg.dataset
+        self.datasets_cfg = [self.dataset_cfg]
+        self.ratio_value = self.normalized_cfg.ratio
+        self.ratios = [self.ratio_value] if self.ratio_value is not None else []
+        augmentation_method = self.normalized_cfg.augmentation
+        self.augmentations = [augmentation_method] if augmentation_method else []
         self.models = list(self.normalized_cfg.models)
         self.reduction_method = self.normalized_cfg.reduction_method
         self.reduction_writer = self.normalized_cfg.reduction_writer
@@ -96,6 +101,7 @@ class ExperimentRunner:
         }
 
         self.datasets: List[DatasetSpec] = self._build_dataset_specs()
+        self.single_dataset = len(self.datasets) == 1
 
     def _infer_reader(self, dataset_name: str) -> Tuple[str, str]:
         """Guess the reader type based on the raw data directory structure.
@@ -214,68 +220,96 @@ class ExperimentRunner:
         )
         logger.info("Skipping reduction, augmentation, and writer stages")
 
-        progress = ProgressTracker(total=len(self.datasets), enabled=self.show_progress)
+        progress = ProgressTracker(total=1, enabled=self.show_progress)
 
+        pending_cleanup: List[Path] = []
         try:
-            for spec in self.datasets:
-                direct_path = spec.direct_path
-                if not direct_path:
-                    raise ValueError(
-                        f"Direct path mode requires 'path' field in dataset config for '{spec.name}'"
-                    )
-
-                dataset_root = Path(direct_path)
-                logger.info(
-                    "→ Dataset '%s' (reader=%s, path=%s)",
-                    spec.name,
-                    spec.reader,
-                    dataset_root,
+            spec = self.datasets[0]
+            direct_path = spec.direct_path
+            if not direct_path:
+                raise ValueError(
+                    f"Direct path mode requires 'path' field in dataset config for '{spec.name}'"
                 )
 
-                dataset_workspace, dataset_meta = self._prepare_dataset_workspace(
-                    spec, dataset_root
-                )
-                reader = DatasetReaderFactory.create_reader(spec.reader)
-                dataset = reader.read(str(dataset_root))
+            dataset_root = Path(direct_path)
+            logger.info(
+                "→ Dataset '%s' (reader=%s, path=%s)",
+                spec.name,
+                spec.reader,
+                dataset_root,
+            )
 
-                ratio_tag = "direct"
-                ratio = 1.0
-                ratio_root = dataset_workspace
+            dataset_workspace, dataset_meta = self._prepare_dataset_workspace(
+                spec, dataset_root
+            )
+            artifact_root = dataset_workspace / "artifact"
+            artifact_root.mkdir(parents=True, exist_ok=True)
+            dataset_meta["artifact_root"] = str(artifact_root.resolve())
 
-                stage_cfg = self._build_stage_config(
-                    spec.name,
-                    len(dataset.aligned_entities),
-                    ratio,
-                    ratio_tag,
-                    dataset_workspace,
-                    ratio_root,
-                    dataset_root,
-                )
-                lineage = stage_cfg.setdefault("lineage", {})
-                lineage["direct_mode"] = True
-                lineage["dataset_workspace"] = str(dataset_root.resolve())
-                lineage["raw_source"] = str(dataset_root.resolve())
+            reader = DatasetReaderFactory.create_reader(spec.reader)
+            dataset = reader.read(str(dataset_root))
 
-                ratio_meta = dataset_meta["ratios"].setdefault(ratio_tag, {})
-                ratio_meta.update(
-                    {
-                        "ratio": ratio,
-                        "target_entities": stage_cfg["reduction"]["target_entities"],
-                    }
-                )
-                ratio_meta.setdefault(
-                    "reduction", {"method": "direct", "paths": {}}
-                )
-                ratio_meta.setdefault("augmentations", {})
-                ratio_meta.setdefault("evaluations", {})
+            ratio_tag = "direct"
+            ratio = 1.0
+            ratio_root = dataset_workspace
 
-                evaluation_stage = EvaluationStage(
-                    self._resolve_writer_plans(spec),
-                    self.models,
-                    self.resume,
-                )
-                logger.info("[STEP] Running evaluation for '%s' (direct path)", spec.name)
+            stage_cfg = self._build_stage_config(
+                spec.name,
+                len(dataset.aligned_entities),
+                ratio,
+                ratio_tag,
+                dataset_workspace,
+                ratio_root,
+                dataset_root,
+            )
+            lineage = stage_cfg.setdefault("lineage", {})
+            lineage.update(
+                {
+                    "direct_mode": True,
+                    "dataset_workspace": str(dataset_root.resolve()),
+                    "raw_source": str(dataset_root.resolve()),
+                    "artifact_root": str(artifact_root.resolve()),
+                    "reduction_root": str((dataset_workspace / "reduction").resolve()),
+                    "evaluation_root": str((artifact_root / "evaluation").resolve()),
+                }
+            )
 
+            ratio_meta = dataset_meta["ratios"].setdefault(ratio_tag, {})
+            ratio_meta.update(
+                {
+                    "ratio": ratio,
+                    "target_entities": len(dataset.aligned_entities),
+                }
+            )
+            reduction_meta = ratio_meta.setdefault(
+                "reduction",
+                {"method": "direct", "paths": {}},
+            )
+            reduction_meta["source"] = str(dataset_root.resolve())
+            ratio_meta.setdefault("augmentations", {})
+            ratio_meta.setdefault("evaluations", {})
+
+            reduction_root = dataset_workspace / "reduction"
+            reduction_root.mkdir(parents=True, exist_ok=True)
+            StageSummaryWriter.write(
+                reduction_root / "summary.json",
+                {
+                    "method": "direct",
+                    "ratio": ratio,
+                    "target_entities": len(dataset.aligned_entities),
+                    "aligned_pairs": len(dataset.aligned_entities),
+                    "writers": [],
+                },
+            )
+
+            evaluation_stage = EvaluationStage(
+                self._resolve_writer_plans(spec),
+                self.models,
+                self.resume,
+            )
+            logger.info("[STEP] Running evaluation for '%s' (direct path)", spec.name)
+
+            if self.reduction_eval:
                 evaluation_stage.execute(
                     VARIANT_BASELINE,
                     dataset,
@@ -286,17 +320,27 @@ class ExperimentRunner:
                     ratio_tag,
                     ratio_meta,
                 )
-                progress.step()
+                persisted = self._persist_stage_results(
+                    ratio_meta,
+                    VARIANT_BASELINE,
+                    reduction_root / "results.json",
+                )
+                if persisted:
+                    reduction_meta["results"] = str(persisted)
+            else:
+                logger.info("⏭️  Skipping evaluation (reduction.eval=false)")
+
+            progress.step()
+            pending_cleanup = self._schedule_stage_cleanup()
         finally:
             progress.close()
             self._write_metadata()
+            self._remove_stage_outputs(pending_cleanup)
             logger.info("=== Direct mode experiments completed ===")
 
     def _run_standard_mode(self) -> None:
         """Run experiments in standard mode with reduction, augmentation, and writer."""
-        progress = ProgressTracker(
-            total=len(self.datasets) * len(self.ratios), enabled=self.show_progress
-        )
+        progress = ProgressTracker(total=1, enabled=self.show_progress)
         logger.info(
             "=== Starting experiment suite '%s' (resume=%s, overwrite=%s) ===",
             self.name,
@@ -304,107 +348,129 @@ class ExperimentRunner:
             self.overwrite_existing,
         )
 
+        pending_cleanup: List[Path] = []
         try:
-            for spec in self.datasets:
-                dataset_root = self.base_data / spec.reader / spec.name
-                dataset_workspace, dataset_meta = self._prepare_dataset_workspace(
-                    spec, dataset_root
-                )
+            spec = self.datasets[0]
+            dataset_root = self.base_data / spec.reader / spec.name
+            dataset_workspace, dataset_meta = self._prepare_dataset_workspace(
+                spec, dataset_root
+            )
+            artifact_root = dataset_workspace / "artifact"
+            artifact_root.mkdir(parents=True, exist_ok=True)
+            dataset_meta["artifact_root"] = str(artifact_root.resolve())
 
-                reader = DatasetReaderFactory.create_reader(spec.reader)
-                dataset = reader.read(str(dataset_root))
+            reader = DatasetReaderFactory.create_reader(spec.reader)
+            dataset = reader.read(str(dataset_root))
 
-                # Resolve writer plans for each stage
-                # Reduction stage: use reduction.writer if specified, else dataset.writer
-                reduction_writer_plans = self._resolve_writer_plans(
-                    spec, override_writer=self.reduction_writer
-                )
-                # Augmentation stage: use augmentation.writer if specified, else dataset.writer
-                augmentation_writer_plans = self._resolve_writer_plans(
-                    spec, override_writer=self.augmentation_writer
-                )
-                # Evaluation stage: always use dataset.writer (no phase-specific override)
-                evaluation_writer_plans = self._resolve_writer_plans(spec)
+            reduction_writer_plans = self._resolve_writer_plans(
+                spec,
+                override_writer=self.reduction_writer,
+            )
+            augmentation_writer_plans = self._resolve_writer_plans(
+                spec,
+                override_writer=self.augmentation_writer,
+            )
+            evaluation_writer_plans = self._resolve_writer_plans(spec)
 
-                reduction_stage = ReductionStage(
-                    self.reduction_method,
-                    reduction_writer_plans,
-                    self.resume,
-                )
-                augmentation_stage = AugmentationStage(
-                    augmentation_writer_plans,
-                    self.resume,
-                )
-                evaluation_stage = EvaluationStage(
-                    evaluation_writer_plans,
-                    self.models,
-                    self.resume,
-                )
+            reduction_stage = ReductionStage(
+                self.reduction_method,
+                reduction_writer_plans,
+                self.resume,
+            )
+            augmentation_stage = AugmentationStage(
+                augmentation_writer_plans,
+                self.resume,
+            )
+            evaluation_stage = EvaluationStage(
+                evaluation_writer_plans,
+                self.models,
+                self.resume,
+            )
 
-                logger.info(
-                    "→ Dataset '%s' (reader=%s)",
-                    spec.name,
-                    spec.reader,
-                )
-                logger.info("[STEP] Preparing dataset '%s'", spec.name)
+            logger.info(
+                "→ Dataset '%s' (reader=%s)",
+                spec.name,
+                spec.reader,
+            )
+            logger.info("[STEP] Preparing dataset '%s'", spec.name)
 
-                single_ratio = len(self.ratios) == 1
-                for ratio in self.ratios:
-                    ratio_desc = f"{ratio * 100:.1f}%"
-                    ratio_tag = self._format_ratio_tag(ratio)
-                    if single_ratio:
-                        ratio_root = dataset_workspace
-                    else:
-                        ratio_root = dataset_workspace / ratio_tag
-                        ratio_root.mkdir(parents=True, exist_ok=True)
+            ratio = self.ratio_value if self.ratio_value is not None else 1.0
+            ratio_desc = f"{ratio * 100:.1f}%"
+            ratio_tag = self._format_ratio_tag(ratio)
+            ratio_root = dataset_workspace
 
-                    progress.set_description(f"📦 {spec.name} [{ratio_desc}]")
-                    logger.info("[STEP] Ratio %.1f%% for dataset '%s'", ratio * 100, spec.name)
-                    stage_cfg = self._build_stage_config(
-                        spec.name,
-                        len(dataset.aligned_entities),
-                        ratio,
-                        ratio_tag,
-                        dataset_workspace,
-                        ratio_root,
-                        dataset_root,
-                    )
-                    ratio_meta = dataset_meta["ratios"].setdefault(ratio_tag, {})
-                    ratio_meta.update(
-                        {
-                            "ratio": ratio,
-                            "target_entities": stage_cfg["reduction"]["target_entities"],
-                        }
-                    )
-                    reduction_meta = ratio_meta.setdefault(
-                        "reduction",
-                        {"method": self.reduction_method, "paths": {}},
-                    )
-                    reduction_meta["method"] = self.reduction_method
-                    reduction_meta.setdefault("paths", {})
-                    ratio_meta.setdefault("augmentations", {})
-                    ratio_meta.setdefault("evaluations", {})
+            progress.set_description(f"📦 {spec.name} [{ratio_desc}]")
+            logger.info("[STEP] Ratio %.1f%% for dataset '%s'", ratio * 100, spec.name)
+            stage_cfg = self._build_stage_config(
+                spec.name,
+                len(dataset.aligned_entities),
+                ratio,
+                ratio_tag,
+                dataset_workspace,
+                ratio_root,
+                dataset_root,
+            )
+            lineage = stage_cfg.setdefault("lineage", {})
+            lineage.update(
+                {
+                    "artifact_root": str(artifact_root.resolve()),
+                    "reduction_root": str((dataset_workspace / "reduction").resolve()),
+                    "augmentation_root": str((dataset_workspace / "augmentation").resolve()),
+                    "evaluation_root": str((artifact_root / "evaluation").resolve()),
+                }
+            )
+            lineage["_reduction_executed"] = False
 
-                    lineage = stage_cfg.setdefault("lineage", {})
-                    lineage["_reduction_executed"] = False
+            ratio_meta = dataset_meta["ratios"].setdefault(ratio_tag, {})
+            ratio_meta.update(
+                {
+                    "ratio": ratio,
+                    "target_entities": stage_cfg["reduction"]["target_entities"],
+                }
+            )
+            reduction_meta = ratio_meta.setdefault(
+                "reduction",
+                {"method": self.reduction_method, "paths": {}},
+            )
+            reduction_meta["method"] = self.reduction_method
+            reduction_meta.setdefault("paths", {})
+            ratio_meta.setdefault("augmentations", {})
+            ratio_meta.setdefault("evaluations", {})
 
-                    # Execute reduction or use raw dataset
-                    dataset_reduced = self._execute_reduction_if_needed(
-                        ratio, dataset, reader, reduction_stage, stage_cfg,
-                        ratio_tag, lineage, ratio_root, ratio_meta, dataset_root, spec
-                    )
+            dataset_reduced = self._execute_reduction_if_needed(
+                ratio,
+                dataset,
+                reader,
+                reduction_stage,
+                stage_cfg,
+                ratio_tag,
+                lineage,
+                ratio_root,
+                ratio_meta,
+                dataset_root,
+                spec,
+            )
 
-                    # Execute baseline and augmented evaluations
-                    self._execute_evaluations(
-                        dataset_reduced, augmentation_stage, evaluation_stage,
-                        stage_cfg, lineage, ratio, ratio_tag, ratio_root, ratio_meta,
-                        reader, spec
-                    )
-
-                    progress.step()
+            self._execute_evaluations(
+                dataset_reduced,
+                augmentation_stage,
+                evaluation_stage,
+                stage_cfg,
+                lineage,
+                ratio,
+                ratio_tag,
+                ratio_root,
+                ratio_meta,
+                reader,
+                spec,
+                dataset_workspace,
+            )
+            progress.step()
+            pending_cleanup = self._schedule_stage_cleanup()
         finally:
             progress.close()
             self._write_metadata()
+            self._remove_stage_outputs(pending_cleanup)
             logger.info("=== All experiments completed ===")
 
     def _build_dataset_specs(self) -> List[DatasetSpec]:
@@ -472,28 +538,28 @@ class ExperimentRunner:
         dataset_root: Path,
     ) -> Tuple[Path, Dict[str, Any]]:
         """Create or refresh the per-dataset workspace within the experiment folder."""
-        dataset_workspace = self.base_workspace / spec.name
+        dataset_workspace = self.base_workspace if self.single_dataset else self.base_workspace / spec.name
         dataset_workspace.mkdir(parents=True, exist_ok=True)
 
         dataset_meta = self.metadata["datasets"].setdefault(
             spec.name,
             {
                 "reader": spec.reader,
-                "subtype": spec.subtype,
                 "raw_source": str(dataset_root.resolve()),
                 "workspace": str(dataset_workspace.resolve()),
                 "ratios": {},
             },
         )
         dataset_meta["reader"] = spec.reader
-        dataset_meta["subtype"] = spec.subtype
         dataset_meta["raw_source"] = str(dataset_root.resolve())
         dataset_meta["workspace"] = str(dataset_workspace.resolve())
 
         return dataset_workspace, dataset_meta
 
     def _resolve_writer_plans(
-        self, spec: DatasetSpec, override_writer: Optional[str] = None
+        self,
+        spec: DatasetSpec,
+        override_writer: Optional[str] = None,
     ) -> List[WriterPlan]:
         """Instantiate writers based on dataset or global writer configuration.
 
@@ -529,13 +595,30 @@ class ExperimentRunner:
                 raise ValueError(f"Unsupported writer configuration: {entry!r}")
 
             writer = DatasetWriterFactory.create_writer(writer_type)
+
+            write_reduced = settings.get("write_reduced")
+            if write_reduced is None:
+                write_reduced = settings.get("write", True)
+            if write_reduced is None:
+                write_reduced = True
+
+            write_augmented = settings.get("write_augmented")
+            if write_augmented is None:
+                write_augmented = settings.get("write", True)
+            if write_augmented is None:
+                write_augmented = True
+
+            write_results = settings.get("write_results")
+            if write_results is None:
+                write_results = True
+
             plans.append(
                 WriterPlan(
                     name=writer_type,
                     writer=writer,
-                    write_reduced=settings.get("write_reduced", True),
-                    write_augmented=settings.get("write_augmented", True),
-                    write_results=settings.get("write_results", True),
+                    write_reduced=bool(write_reduced),
+                    write_augmented=bool(write_augmented),
+                    write_results=bool(write_results),
                 )
             )
         return plans
@@ -661,6 +744,7 @@ class ExperimentRunner:
         ratio_meta: Dict[str, Any],
         reader,
         spec,
+        dataset_workspace: Path,
     ) -> None:
         """
         Execute baseline and augmentation evaluations.
@@ -681,8 +765,12 @@ class ExperimentRunner:
             ratio_meta: Metadata dictionary for this ratio
             reader: Dataset reader instance
             spec: DatasetSpec instance
+            dataset_workspace: Root directory for dataset-level artefacts
         """
-        if not self.augmentations:
+        reduction_meta = ratio_meta.get("reduction", {})
+        reduction_results = Path(dataset_workspace / "reduction" / "results.json")
+
+        if self.reduction_eval:
             evaluation_stage.execute(
                 VARIANT_BASELINE,
                 dataset_reduced,
@@ -693,6 +781,15 @@ class ExperimentRunner:
                 ratio_tag,
                 ratio_meta,
             )
+            persisted = self._persist_stage_results(
+                ratio_meta,
+                VARIANT_BASELINE,
+                reduction_results,
+            )
+            if persisted:
+                reduction_meta["results"] = str(persisted)
+        else:
+            logger.info("⏭️  Skipping baseline evaluation (reduction.eval=false)")
 
         for aug_name in self.augmentations:
             dataset_augmented = augmentation_stage.execute(
@@ -707,6 +804,13 @@ class ExperimentRunner:
                 ratio_meta,
                 spec.subtype,
             )
+            if not self.augmentation_eval:
+                logger.info(
+                    "⏭️  Skipping evaluation for augmentation '%s' (augmentation.eval=false)",
+                    aug_name,
+                )
+                continue
+
             evaluation_stage.execute(
                 aug_name,
                 dataset_reduced,
@@ -718,11 +822,93 @@ class ExperimentRunner:
                 ratio_meta,
             )
 
+            augmentation_meta = ratio_meta.setdefault("augmentations", {}).setdefault(
+                aug_name, {}
+            )
+            persisted = self._persist_stage_results(
+                ratio_meta,
+                aug_name,
+                Path(dataset_workspace / "augmentation" / "results.json"),
+            )
+            if persisted:
+                augmentation_meta["results"] = str(persisted)
+
+    def _persist_stage_results(
+        self,
+        ratio_meta: Dict[str, Any],
+        variant_name: Optional[str],
+        target_file: Path,
+    ) -> Optional[Path]:
+        """Aggregate per-model evaluation results into a single stage file."""
+        variant_key = EvaluationStage._normalise_variant_key(variant_name)
+        evaluation_meta = ratio_meta.get("evaluations", {}).get(variant_key)
+        if not evaluation_meta:
+            return None
+
+        aggregated = self._collect_model_results(evaluation_meta)
+        if not aggregated:
+            return None
+
+        target_file.parent.mkdir(parents=True, exist_ok=True)
+        with target_file.open("w", encoding="utf-8") as handle:
+            json.dump(aggregated, handle, indent=2)
+        logger.info("💾 Saved aggregated results → %s", target_file)
+        return target_file
+
+    def _collect_model_results(self, evaluation_meta: Dict[str, Any]) -> Dict[str, Any]:
+        """Return a dictionary with model scores loaded from their JSON files."""
+        aggregated: Dict[str, Any] = {}
+        for model_name, file_path in evaluation_meta.get("paths", {}).items():
+            path_obj = Path(file_path)
+            if not path_obj.exists():
+                continue
+            try:
+                with path_obj.open("r", encoding="utf-8") as handle:
+                    aggregated[model_name] = json.load(handle)
+            except json.JSONDecodeError:
+                logger.warning("Failed to parse evaluation results from %s", path_obj)
+        return aggregated
+
+    def _build_metadata_payload(self) -> Dict[str, Any]:
+        """Return a flattened metadata dictionary for persistence."""
+        dataset_entry = next(iter(self.metadata.get("datasets", {}).items()), (None, {}))
+        dataset_name, dataset_meta = dataset_entry
+        ratio_meta = next(iter(dataset_meta.get("ratios", {}).values()), {})
+
+        augmentation_section = None
+        augmentations_dict = ratio_meta.get("augmentations", {})
+        if augmentations_dict:
+            aug_name, aug_meta = next(iter(augmentations_dict.items()))
+            augmentation_section = {
+                "name": aug_name,
+                "details": copy.deepcopy(aug_meta),
+            }
+
+        payload = {
+            "name": self.name,
+            "dataset": dataset_name,
+            "reader": dataset_meta.get("reader"),
+            "raw_source": dataset_meta.get("raw_source"),
+            "workspace": dataset_meta.get("workspace"),
+            "artifact_root": dataset_meta.get("artifact_root"),
+            "reduction_method": self.reduction_method,
+            "ratio": self.ratio_value,
+            "reduction": copy.deepcopy(ratio_meta.get("reduction")),
+            "augmentation": augmentation_section,
+            "evaluations": copy.deepcopy(ratio_meta.get("evaluations")),
+            "augmentation_method": self.augmentations[0] if self.augmentations else None,
+            "models": self.models,
+            "overwrite_existing": self.overwrite_existing,
+            "workspace_root": str(self.base_workspace.resolve()),
+        }
+        return payload
+
     def _write_metadata(self) -> None:
         """Persist the experiment metadata summary alongside artefacts."""
         self.metadata_file.parent.mkdir(parents=True, exist_ok=True)
+        payload = self._build_metadata_payload()
         with self.metadata_file.open("w", encoding="utf-8") as handle:
-            json.dump(self.metadata, handle, indent=2)
+            json.dump(payload, handle, indent=2)
         logger.info("🗒️  Experiment metadata saved → %s", self.metadata_file)
 
     def _cleanup_intermediate_files(self) -> None:
@@ -765,13 +951,64 @@ class ExperimentRunner:
     def _collect_intermediate_dirs(self, metadata: Dict[str, Any]) -> List[str]:
         """Collect directories produced during reduction/augmentation stages."""
         targets: List[str] = []
-        for dataset_meta in metadata.get("datasets", {}).values():
-            for ratio_meta in dataset_meta.get("ratios", {}).values():
-                reduction_paths = ratio_meta.get("reduction", {}).get("paths", {})
-                targets.extend(reduction_paths.values())
-                for augmentation_meta in ratio_meta.get("augmentations", {}).values():
-                    targets.extend(augmentation_meta.get("paths", {}).values())
+        dataset_iterable = []
+        datasets_section = metadata.get("datasets")
+        if isinstance(datasets_section, dict):
+            dataset_iterable = datasets_section.values()
+        elif datasets_section is None:
+            dataset_iterable = [metadata]
+        else:
+            dataset_iterable = datasets_section
+
+        for dataset_meta in dataset_iterable:
+            artifact_root = dataset_meta.get("artifact_root")
+            if artifact_root:
+                targets.append(artifact_root)
         return targets
+
+    def _schedule_stage_cleanup(self) -> List[Path]:
+        """Determine which stage artefacts should be deleted after the run."""
+        pending: List[Path] = []
+
+        for dataset_meta in self.metadata.get("datasets", {}).values():
+            for ratio_meta in dataset_meta.get("ratios", {}).values():
+                if not self.reduction_save:
+                    pending.extend(
+                        self._extract_stage_paths(ratio_meta.get("reduction"), delete_parent=True)
+                    )
+                if not self.augmentation_save:
+                    for augmentation_meta in ratio_meta.get("augmentations", {}).values():
+                        pending.extend(
+                            self._extract_stage_paths(augmentation_meta, delete_parent=True)
+                        )
+
+        return pending
+
+    @staticmethod
+    def _extract_stage_paths(
+        stage_meta: Optional[Dict[str, Any]], *, delete_parent: bool = False
+    ) -> List[Path]:
+        if not stage_meta:
+            return []
+        path_dict = stage_meta.get("paths", {})
+        collected = [Path(path) for path in path_dict.values()]
+        stage_meta["paths"] = {}
+        if delete_parent and path_dict:
+            first_path = next(iter(path_dict.values()))
+            parent_dir = Path(first_path).parent
+            collected.append(parent_dir)
+        return collected
+
+    @staticmethod
+    def _remove_stage_outputs(paths: List[Path]) -> None:
+        for path in paths:
+            if not path.exists():
+                continue
+            try:
+                shutil.rmtree(path)
+                logger.info("🧽 Removed stage artefacts at %s (save=false)", path)
+            except OSError as exc:
+                logger.warning("Failed to remove artefacts at %s: %s", path, exc)
 
     def _is_within_workspace(self, path: Path) -> bool:
         try:

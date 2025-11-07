@@ -19,9 +19,9 @@ class ExperimentConfig:
     """Normalized experiment configuration derived from the raw YAML payload."""
 
     name: str
-    datasets: List[Any]
-    ratios: List[float]
-    augmentations: List[str]
+    dataset: Any
+    ratio: Optional[float]
+    augmentation: Optional[str]
     models: List[str]
     reduction_method: str
     reduction_writer: Optional[str]
@@ -39,7 +39,7 @@ class ExperimentConfig:
 
     @property
     def direct_mode(self) -> bool:
-        return len(self.ratios) == 0
+        return self.ratio is None
 
     @classmethod
     def from_payload(
@@ -51,8 +51,26 @@ class ExperimentConfig:
     ) -> "ExperimentConfig":
         name = cls._extract_name(payload)
         datasets = cls._extract_datasets(payload)
+        if len(datasets) != 1:
+            raise ValueError(
+                f"Exactly one dataset must be defined per experiment (found {len(datasets)})."
+            )
+        dataset_entry = datasets[0]
+
         ratios = cls._extract_ratios(payload)
+        if len(ratios) > 1:
+            raise ValueError(
+                f"Only one reduction ratio is supported per experiment (found {ratios})."
+            )
+        ratio_value = ratios[0] if ratios else None
+
         augmentations = cls._extract_augmentations(payload)
+        if len(augmentations) > 1:
+            raise ValueError(
+                f"Only one augmentation method is supported per experiment (found {augmentations})."
+            )
+        augmentation_entry = augmentations[0] if augmentations else None
+
         models = cls._extract_models(payload)
         reduction_method, reduction_writer, reduction_save, reduction_eval = cls._extract_reduction(payload)
         augmentation_writer, augmentation_save, augmentation_eval = cls._extract_augmentation(payload)
@@ -66,9 +84,9 @@ class ExperimentConfig:
 
         return cls(
             name=name,
-            datasets=datasets,
-            ratios=ratios,
-            augmentations=augmentations,
+            dataset=dataset_entry,
+            ratio=ratio_value,
+            augmentation=augmentation_entry,
             models=models,
             reduction_method=reduction_method,
             reduction_writer=reduction_writer,
@@ -159,10 +177,10 @@ class ExperimentConfig:
             red_cfg = payload["reduction"]
             method = red_cfg.get("method", "random_entities")
             writer = red_cfg.get("writer")
-            save = bool(red_cfg.get("save", False))
-            eval_flag = bool(red_cfg.get("eval", False))
+            save = bool(red_cfg.get("save", True))
+            eval_flag = bool(red_cfg.get("eval", True))
             return method, writer, save, eval_flag
-        return payload.get("reduction_method", "random_entities"), None, False, False
+        return payload.get("reduction_method", "random_entities"), None, True, True
 
     @staticmethod
     def _extract_augmentation(payload: Dict[str, Any]) -> tuple[Optional[str], bool, bool]:
@@ -170,10 +188,10 @@ class ExperimentConfig:
         aug_cfg = payload.get("augmentation")
         if isinstance(aug_cfg, dict):
             writer = aug_cfg.get("writer")
-            save = bool(aug_cfg.get("save", False))
-            eval_flag = bool(aug_cfg.get("eval", False))
+            save = bool(aug_cfg.get("save", True))
+            eval_flag = bool(aug_cfg.get("eval", True))
             return writer, save, eval_flag
-        return None, False, False
+        return None, True, True
 
     @staticmethod
     def _resolve_overwrite(
