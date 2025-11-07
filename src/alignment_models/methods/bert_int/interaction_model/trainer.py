@@ -16,6 +16,7 @@ from .dataset import InteractionDataset
 from .model import InteractionMLP
 from .evaluator import InteractionEvaluator
 from src.logger import get_logger, get_structured_logger
+from src.alignment_models.methods.bert_int.config import DEFAULT_CONFIG
 
 logger = get_logger(__name__)
 slogger = get_structured_logger(__name__)
@@ -169,8 +170,27 @@ class InteractionTrainer:
         self.device = device
         self.seed = seed
 
+        # Normalise learning rate (fall back to default if invalid)
+        default_lr = float(DEFAULT_CONFIG["interaction_model"]["learning_rate"])
+        try:
+            learning_rate_value = float(learning_rate)
+        except (TypeError, ValueError):
+            logger.warning(
+                "Invalid learning rate '%s' received; falling back to default %.4g",
+                learning_rate,
+                default_lr,
+            )
+            learning_rate_value = default_lr
+        if learning_rate_value <= 0.0:
+            logger.warning(
+                "Non-positive learning rate %.4g received; using default %.4g instead",
+                learning_rate_value,
+                default_lr,
+            )
+            learning_rate_value = default_lr
+
         # Setup optimizer and loss
-        self.optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+        self.optimizer = optim.Adam(model.parameters(), lr=learning_rate_value)
         self.criterion = nn.MarginRankingLoss(margin=margin, reduction="mean")
 
         # Setup batch generator
@@ -183,7 +203,7 @@ class InteractionTrainer:
 
         logger.info(f"Trainer initialized:")
         logger.info(f"  Device: {device}")
-        logger.info(f"  Learning rate: {learning_rate}")
+        logger.info(f"  Learning rate: {learning_rate_value}")
         logger.info(f"  Margin: {margin}")
         logger.info(f"  Optimizer: Adam")
 
