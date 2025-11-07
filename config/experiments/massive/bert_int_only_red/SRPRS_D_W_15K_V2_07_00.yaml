@@ -1,0 +1,20 @@
+experiment:
+  name: SRPRS_D_W_15K_V2_07_00
+  dataset:
+    name: hybea/SRPRS_D_W_15K_V2
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.7
+    writer: bert_int
+    save: false
+    eval: true
+  augmentation:
+    method: stub
+    writer: bert_int
+    save: false
+    eval: false
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: false
