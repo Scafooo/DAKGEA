@@ -93,6 +93,11 @@ def _convert_dataset_to_bert_format(dataset, tokenizer, max_length, dataset_work
 
     entity2index = {ent: idx for idx, ent in enumerate(sorted(all_entities))}
     index2entity = {idx: ent for ent, idx in entity2index.items()}
+    logger.info(
+        "[BERT-INT] Converted dataset with %d unique entities and %d aligned pairs",
+        len(all_entities),
+        len(dataset.aligned_entities),
+    )
 
     # Read train/test split from files if available
     train_ill = []
@@ -140,6 +145,12 @@ def _convert_dataset_to_bert_format(dataset, tokenizer, max_length, dataset_work
         test_ill = aligned_indices[split_idx:]
 
     ent_ill = train_ill + test_ill  # All pairs for candidate generation
+    logger.info(
+        "[BERT-INT] Final train/test split: %d train pairs, %d test pairs (total %d)",
+        len(train_ill),
+        len(test_ill),
+        len(ent_ill),
+    )
     
     # Build relation mappings from triples
     all_relations = set()
@@ -188,6 +199,7 @@ def _convert_dataset_to_bert_format(dataset, tokenizer, max_length, dataset_work
             entity_attributes[subj_str].append(str(obj))
 
     ent2data = {}
+    missing_attributes = 0
     for ent in all_entities:
         # Usa gli attributi se disponibili, altrimenti usa il nome dell'entità
         if ent in entity_attributes:
@@ -195,6 +207,7 @@ def _convert_dataset_to_bert_format(dataset, tokenizer, max_length, dataset_work
         else:
             # Extract last part of URI as name
             desc = ent.split('/')[-1].split('#')[-1].replace('_', ' ')
+            missing_attributes += 1
 
         tokens = tokenizer(desc, max_length=max_length, truncation=True, padding='max_length', return_tensors='pt')
         # BasicUnit expects (input_ids, attention_mask) tuple
@@ -202,7 +215,14 @@ def _convert_dataset_to_bert_format(dataset, tokenizer, max_length, dataset_work
             tokens['input_ids'].squeeze().tolist(),
             tokens['attention_mask'].squeeze().tolist()
         )
-    
+
+    if missing_attributes:
+        logger.info(
+            "[BERT-INT] %d/%d entities lacked attributes (falling back to URI name)",
+            missing_attributes,
+            len(all_entities),
+        )
+
     return ent_ill, train_ill, test_ill, index2rel, index2entity, rel2index, entity2index, ent2data, rel_triples_1, rel_triples_2
 
 
@@ -568,28 +588,7 @@ def _get_preferred_attributes(path: Path, dataset_label: str) -> Dict[str, str]:
                 "http://www.wikidata.org/entity/P935": 3,
                 "http://www.w3.org/2004/02/skos/core#altLabel": 4,
             }
-    elif "D_Y" in path_str:
-        if "attr_triples1" in path_str:
-            priority = {
-                "http://xmlns.com/foaf/0.1/name": 0,
-                "http://dbpedia.org/ontology/birthName": 1,
-                "http://purl.org/dc/elements/1.1/description": 2,
-                "http://xmlns.com/foaf/0.1/nick": 3,
-                "http://xmlns.com/foaf/0.1/givenName": 4,
-                "http://dbpedia.org/ontology/leaderTitle": 5,
-                "http://dbpedia.org/ontology/alias": 6,
-                "http://dbpedia.org/ontology/motto": 7,
-                "http://dbpedia.org/ontology/office": 7,
-            }
-        else:
-            priority = {
-                "skos:prefLabel": 0,
-                "redirectedFrom": 1,
-                "hasFamilyName": 2,
-                "hasGivenName": 3,
-                "hasMotto": 4,
-            }
-    elif "bbc" in path_str:
+    elif "BBC" in path_str:
         if "attr_triples1" in path_str:
             priority = {
                 "http://purl.org/dc/elements/1.1/title": 0,

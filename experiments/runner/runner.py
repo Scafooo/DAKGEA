@@ -101,7 +101,6 @@ class ExperimentRunner:
         }
 
         self.datasets: List[DatasetSpec] = self._build_dataset_specs()
-        self.single_dataset = len(self.datasets) == 1
 
     def _infer_reader(self, dataset_name: str) -> Tuple[str, str]:
         """Guess the reader type based on the raw data directory structure.
@@ -538,7 +537,7 @@ class ExperimentRunner:
         dataset_root: Path,
     ) -> Tuple[Path, Dict[str, Any]]:
         """Create or refresh the per-dataset workspace within the experiment folder."""
-        dataset_workspace = self.base_workspace if self.single_dataset else self.base_workspace / spec.name
+        dataset_workspace = self.base_workspace / spec.name
         dataset_workspace.mkdir(parents=True, exist_ok=True)
 
         dataset_meta = self.metadata["datasets"].setdefault(

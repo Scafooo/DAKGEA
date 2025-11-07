@@ -1,6 +1,0 @@
-experiment:
-  name: hybea-ICEW_YAGO-r100
-  dataset:
-    name: ICEW_YAGO
-  reduction_ratio: 1.0
-  model: hybea

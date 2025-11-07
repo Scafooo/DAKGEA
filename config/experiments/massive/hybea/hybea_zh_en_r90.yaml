@@ -1,6 +1,0 @@
-experiment:
-  name: hybea-zh_en-r90
-  dataset:
-    name: zh_en
-  reduction_ratio: 0.9
-  model: hybea
