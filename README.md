@@ -11,7 +11,7 @@
 python -m venv .venv
 source .venv/bin/activate
 pip install -r install/requirements.txt
-./scripts/run_experiment.sh config/experiments/02_exp_reduction.yaml
+./scripts/run_experiment.sh config/experiments/exp_direct.yaml
 ```
 
 Results land under `results/<experiment>/`; metadata and logs keep track of cache hits.
