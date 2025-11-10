@@ -1,5 +1,9 @@
 # Data Augmentation for Knowledge Graph Entity Resolution (DAKGEA)
 
+<p align="center">
+  <img src="assets/images/banner.png" alt="Data Augmentation for Knowledge Graph Entity Resolution" width="80%">
+</p>
+
 ## Quickstart
 
 ```bash
