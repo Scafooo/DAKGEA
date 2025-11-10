@@ -1,4 +1,5 @@
-# DAKGEA - Data Augmentation for Knowledge Graph Entity Alignment (TO BE FIXED)
+# (DOCUMENTATION TO BE FIXED)
+# DAKGEA - Data Augmentation for Knowledge Graph Entity Alignment
 
 A **modular experimentation framework** for **Entity Alignment (EA)** on Knowledge Graphs. DAKGEA combines dataset reduction, data augmentation, and model training to measure how each component impacts alignment accuracy.
 
