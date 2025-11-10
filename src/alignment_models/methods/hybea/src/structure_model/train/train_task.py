@@ -1,0 +1,182 @@
+import os
+
+# Disable tokenizers parallelism to avoid deadlocks when using multiprocessing
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
+import time
+import torch
+import numpy as np
+import logging
+from ..reader.kg_reader import KGDataReader
+from ..utils.loss_func import cross_entropy
+from ..reader.batching import prepare_batch_data
+from ..utils.tools import device
+from ..valid.evaluate_kbc import kbc_predict
+from ..utils.swa import swa
+from ..valid.test_task import entity_alignment_test
+from torch.optim.swa_utils import AveragedModel, SWALR
+from torch.optim.lr_scheduler import CosineAnnealingLR
+import time
+from contiguous_params import ContiguousParams
+import torch.nn.functional as F
+from src.alignment_models.methods.hybea import runtime as cfg
+from src.logger import get_structured_logger
+
+def entity_alignment_train(args, my_model, logger):
+    slogger = get_structured_logger(__name__)
+
+    slogger.section("Entity Alignment Training")
+
+    # Log general configuration information
+    slogger.table("General Configuration", {
+        "Model": cfg.MODEL,
+        "Dataset": cfg.DATASET,
+        "Mode": cfg.MODE,
+        "Structural Model": cfg.STRUCTURAL_MODEL,
+        "Task": cfg.TASK,
+        "Device": "CUDA" if torch.cuda.is_available() else "CPU",
+        "Reduction Ratio": f"{cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE:.1f}%",
+        "Pipeline Seed": cfg.SEED,
+        "Attribute Seed": cfg.SEED_NUM,
+    })
+
+    slogger.table("Training Configuration", {
+        "Training File": args.ea_train_triples_file,
+        "Batch Size": args.batch_size,
+        "Learning Rate": args.learning_rate,
+        "Total Epochs": args.epoch,
+        "Min Epochs": args.min_epochs
+    })
+
+    train_data_reader = KGDataReader(
+        vocab_path=os.path.join(args.dataset_root_path, args.dataset, args.vocab_file),
+        data_path=os.path.join(
+            args.dataset_root_path, args.dataset, args.ea_train_triples_file
+        ),
+        batch_size=args.batch_size,
+        is_training=True,
+    )
+
+    criterion = cross_entropy
+    optimizer = torch.optim.Adam(my_model.parameters(), lr=args.learning_rate)
+
+    max_hits1, times = 0, 0
+    is_relation = None
+    one_hot_labels = None
+    hits_1_list = []
+    epoch_loss_list = []
+
+    slogger.subsection("Training Loop")
+
+    for epoch in range(1, args.epoch + 1):
+        start_time = time.time()
+        epoch_loss = list()
+        epoch_another_loss = list()
+        my_model.train()
+
+        for batch in train_data_reader.data_generator():
+            mask_index = -1
+            batch_data = prepare_batch_data(batch, -1, train_data_reader.mask_id)
+            
+            src_ids, input_mask, mask_label, mask_pos, mask_pos_2, r_flag = batch_data
+            src_ids = torch.LongTensor(src_ids).to(device)
+            input_mask = torch.LongTensor(input_mask).to(device)
+            mask_label = torch.LongTensor(mask_label).to(device)
+            mask_pos = torch.LongTensor(mask_pos).to(device)
+            if mask_pos_2 is not None:
+                mask_pos_2 = torch.LongTensor(mask_pos_2).to(device)
+            if r_flag is not None:
+                r_flag = torch.LongTensor(r_flag).to(device)
+
+            fc_out, fc_out_other = my_model(
+                src_ids,
+                input_mask,
+                mask_pos,
+                mask_index=mask_index,
+                mask_pos_2=mask_pos_2,
+                r_flag=r_flag,
+            )
+
+            if one_hot_labels is None or one_hot_labels.shape[0] != mask_label.shape[0]:
+                one_hot_labels = (
+                    torch.zeros(mask_label.shape[0], args.vocab_size)
+                    .to(device)
+                    .scatter_(1, mask_label, 1)
+                )
+            else:
+                one_hot_labels.fill_(0).scatter_(1, mask_label, 1)
+
+            if is_relation is None or is_relation.shape[0] != mask_label.shape[0]:
+                entity_indicator = torch.zeros(
+                    mask_label.shape[0], args.vocab_size - args.num_relations
+                ).to(device)
+                relation_indicator = torch.ones(
+                    mask_label.shape[0], args.num_relations
+                ).to(device)
+                is_relation = torch.cat((entity_indicator, relation_indicator), dim=-1)
+
+            soft_labels = one_hot_labels * args.soft_label + (
+                1.0 - one_hot_labels - is_relation
+            ) * ((1.0 - args.soft_label) / (args.vocab_size - 1 - args.num_relations))
+            soft_labels.requires_grad = False
+
+            loss = criterion(fc_out, soft_labels)
+            epoch_loss.append(loss.item())
+
+            if fc_out_other is not None:
+                loss_other = criterion(fc_out_other, soft_labels)
+                loss_other *= args.addition_loss_w
+                epoch_another_loss.append(loss_other.item())
+                loss += loss_other
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+        # Log epoch statistics
+        mean_loss = float(np.mean(epoch_loss))
+        mean_other_loss = float(np.mean(epoch_another_loss))
+        training_time = time.time() - start_time
+        epoch_loss_list.append(mean_loss)
+
+        # Show progress
+        slogger.progress(f"Epoch {epoch}", epoch, args.epoch)
+
+        # Log epoch details
+        logger.info(f"Epoch {epoch} Summary:")
+        logger.info(f"  Loss: {mean_loss:.6f}")
+        if mean_other_loss > 0:
+            logger.info(f"  Additional Loss: {mean_other_loss:.6f}")
+        logger.info(f"  Training Time: {training_time:.2f}s")
+
+        if epoch % args.eval_freq == 0:
+            logger.info("Running validation...")
+            my_model.eval()
+            with torch.no_grad():
+                # test on validation
+                eval_hits1_performance, _ = entity_alignment_test(args, my_model, logger, csls=cfg.CSLS, valid=True)
+                hits_1_list.append(eval_hits1_performance)
+
+                if eval_hits1_performance > max_hits1:
+                    max_hits1 = eval_hits1_performance
+                    times = 0
+                    slogger.success(f"New best Hits@1: {eval_hits1_performance:.4f}")
+                else:
+                    times += 1
+                    logger.info(f"No improvement. Early stop counter: {times}/{args.early_stop_max_times}")
+
+                if times >= args.early_stop_max_times and epoch >= args.min_epochs:
+                    slogger.warning(f"Early stopping at epoch {epoch}")
+                    break
+
+    slogger.subsection("Final Evaluation")
+
+    logger.info("Running final evaluation without CSLS...")
+    _, _ = entity_alignment_test(args, my_model, logger, csls=0)
+
+    logger.info("Running final evaluation with CSLS...")
+    eval_hits1_performance, export_sim_mat = entity_alignment_test(args, my_model, logger, csls=cfg.CSLS)
+
+    slogger.success(f"Training completed! Final Hits@1: {eval_hits1_performance:.4f}")
+
+    return export_sim_mat[0], export_sim_mat[1], export_sim_mat[2], export_sim_mat[3], export_sim_mat[4], epoch_loss_list, hits_1_list

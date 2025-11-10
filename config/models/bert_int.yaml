@@ -1,0 +1,66 @@
+model:
+  device: cuda
+  paths:
+    cache_dir: results/cache/bert_int
+    dataset_root:
+    description_dict: data/external/bert_int/dbp15k_descriptions_clean.pkl
+    model_save_dir:
+    model_save_prefix: run
+
+  # ============================================================================
+  # Phase 1: Basic Unit (BERT fine-tuning for entity embeddings)
+  # ============================================================================
+  basic_unit:
+    # Model architecture
+    encoder_name: bert-base-multilingual-cased
+    encoder_strategy: auto
+    max_seq_length: 128
+    dropout: 0.1
+    model_input_dim: 768
+    output_dim: 300
+
+    # Training parameters
+    epochs: 5
+    batch_size: 12          # Original BERT-INT value
+    learning_rate: 1e-05    # Original BERT-INT value  
+    load_pretrained: true
+    negatives_per_positive: 2
+    margin: 3.0
+
+    # Evaluation parameters
+    eval_frequency: 1
+    eval_batch_size: 64     # Original BERT-INT value
+    eval_top_k: 1000
+    candidate_batch_size: 128
+    nearest_sample_num: 128
+
+    # Device
+    device: cuda:0
+
+  # ============================================================================
+  # Phase 2: Interaction Model (Multi-view features + MLP)
+  # ============================================================================
+  interaction_model:
+    # Feature extraction
+    kernel_num: 21                  # Gaussian kernels for dual aggregation
+    entity_neigh_max_num: 50        # Max neighbors per entity
+    entity_attvalue_max_num: 50     # Max attribute values per entity (FIXED: was 20)
+    candidate_topk: 1000            # Top candidates to consider (FIXED: was 50)
+
+    # Model architecture
+    mlp_hidden_dim: 11              # MLP: 85 → 11 → 1
+
+    # Training parameters
+    epochs: 200                     # FIXED: was 100
+    batch_size: 128                 # FIXED: was 256
+    learning_rate: 0.0005           # 5e-4 in original
+    margin: 1.0
+    neg_num: 5                      # Negative samples per positive
+    eval_every: 2                   # Evaluate every N epochs
+
+    # Device
+    device: cuda:0
+
+  # Global seed
+  seed:
+    global: 42

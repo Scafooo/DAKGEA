@@ -1,0 +1,29 @@
+from pathlib import Path
+
+from src.core.knowledge_graph import KnowledgeGraph
+from src.core.knowledge_graph.writer.knowledge_graph_writer_base import KnowledgeGraphWriter
+from src.logger import get_logger
+
+logger = get_logger(__name__)
+
+
+class RDFKnowledgeGraphWriter(KnowledgeGraphWriter):
+
+    file_type = "rdf"
+
+    def write(self, kg: KnowledgeGraph, output_path, kg_number=None) -> bool:
+        logger.info("Knowledge Graph RDF Export Start")
+
+        destination = Path(output_path)
+        if destination.is_dir() or destination.suffix == "":
+            base_name = "kg"
+            if kg_number is not None:
+                base_name = f"kg_{kg_number}"
+            destination = destination / f"{base_name}.nt"
+
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        kg.serialize(destination=str(destination), format="nt", encoding="utf-8")
+
+        logger.info("Knowledge Graph RDF Export End")
+
+        return True

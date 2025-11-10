@@ -1,0 +1,54 @@
+# Byte-compiled / cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment / dependency managers
+env/
+venv/
+*.egg-info/
+dist/
+build/
+*.egg
+*.whl
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Dati grandi / temporanei
+data/processed/
+data/augmented/
+data/reduced/
+results/
+*.tsv
+*.csv
+*.h5
+*.pkl
+*.jsonl
+*.npy
+*.npz
+
+# Logs
+*.log
+logs/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# HybEA / modelli EA
+src/hybea/**/*.pyc
+src/hybea/**/*.pkl
+src/hybea/**/*.h5
+
+# Temporary experiment files
+*.tmp
+*.bak

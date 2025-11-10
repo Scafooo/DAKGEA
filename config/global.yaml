@@ -1,0 +1,8 @@
+paths:
+  raw_data: data/raw
+  external_data: data/external
+  results: results
+  log_file: results/logs/log.txt
+
+logging:
+  level: DEBUG

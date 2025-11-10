@@ -1,0 +1,284 @@
+from .utils import *
+from src.alignment_models.methods.hybea import runtime as cfg
+from src.logger import get_logger
+
+logger = get_logger(__name__)
+
+"""
+    Find the url of an entity by mapping from id --> url (if need)
+"""
+
+
+def find_url(e1):
+    if e1 in ids_to_uris_1:
+        return ids_to_uris_1[e1]
+    elif e1 in ids_to_uris_2:
+        return ids_to_uris_2[e1]
+    else:
+        return e1
+
+
+def gen_names(ids_to_uris, names_df, random_init_flag, url_priority, prior_attr):
+    ent_names = {}
+    for ent in ids_to_uris:
+
+        rows = names_df[names_df["e1"] == ent]
+
+        # in case entity not in dataframe from name_analysis.py, random init or find the URL name manually
+        # depending of the URL is meaningful in this graph
+        if len(rows) == 0:
+            if random_init_flag:
+                name = "no_value"
+                src = "random"
+                ent_names[ent] = (name, src)
+            else:
+                name = find_url_name(find_url(ent))
+                src = "url"
+                ent_names[ent] = (name, src)
+            continue
+
+        # give priority to url
+        if url_priority:
+            rand_row = rows.sample(n=1)
+            name = rand_row["URL Names"].values[0]
+            src = "url"
+            ent_names[ent] = (name, src)
+
+        # give priority to attributes
+        else:
+            prior_attr_rows = rows[rows["attr"].isin(prior_attr)]
+            non_prior_attr_rows = rows[~rows["attr"].isin(prior_attr)]
+
+            if len(prior_attr_rows) == 0:
+                rand_row = non_prior_attr_rows.sample(n=1)
+                name = rand_row["replaced_puncs"].values[0]
+                src = "non_prior"
+                ent_names[ent] = (name, src)
+            elif len(prior_attr_rows) > 0:
+                rand_row = prior_attr_rows.sample(n=1)
+                name = rand_row["replaced_puncs"].values[0]
+                src = "prior"
+                ent_names[ent] = (name, src)
+            else:
+                if random_init_flag:
+                    name = "no_value"
+                    src = "random"
+                    ent_names[ent] = (name, src)
+                else:
+                    rand_row = prior_attr_rows.sample(n=1)
+                    name = rand_row["URL Names"].values[0]
+                    src = "url"
+                    ent_names[ent] = (name, src)
+    return ent_names
+
+
+# Global to be used in utils
+ids_to_uris_1 = None
+ids_to_uris_2 = None
+
+
+def run_prioritize():
+    global ids_to_uris_1, ids_to_uris_2
+    ids_to_uris_1 = get_ids_to_uris(cfg.DATASET, "1")
+    ids_to_uris_2 = get_ids_to_uris(cfg.DATASET, "2")
+
+    if cfg.DATASET == "D_W_15K_V1":
+
+        url_priority_1 = True
+        url_priority_2 = False
+
+        random_init_flag_1 = False
+        random_init_flag_2 = True
+
+        prior_attr_1 = []
+        prior_attr_2 = ["http://www.wikidata.org/entity/P373", 'http://www.wikidata.org/entity/P1476']
+
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
+
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
+
+    elif cfg.DATASET == "ICEW_WIKI":
+        url_priority_1 = True
+        url_priority_2 = True
+
+        random_init_flag_1 = False
+        random_init_flag_2 = False
+
+        prior_attr_1 = []
+        prior_attr_2 = []
+
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/wiki_analysis.xlsx"
+
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/wiki_names.xlsx"
+
+    elif cfg.DATASET == "ICEW_YAGO":
+        url_priority_1 = True
+        url_priority_2 = True
+
+        random_init_flag_1 = False
+        random_init_flag_2 = False
+
+        prior_attr_1 = []
+        prior_attr_2 = []
+
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/yago_analysis.xlsx"
+
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/icew_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/yago_names.xlsx"
+
+    elif cfg.DATASET == "BBC_DB":
+
+        url_priority_1 = True
+        url_priority_2 = False
+
+        random_init_flag_1 = False
+        random_init_flag_2 = True
+
+        prior_attr_1 = []
+        prior_attr_2 = ['http://xmlns.com/foaf/0.1/name', 'prop:birthname', 'rdfs:label', 'prop:name',
+                        'http://xmlns.com/foaf/0.1/givenname', 'http://xmlns.com/foaf/0.1/surname', 'prop:label',
+                        'http://purl.org/dc/elements/1.1/description', 'prop:description', 'prop:shortdescription']
+
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/BBC_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/BBC_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
+
+    elif cfg.DATASET == "D_W_15K_V2":
+
+        url_priority_1 = True
+        url_priority_2 = False
+
+        random_init_flag_1 = False
+        random_init_flag_2 = True
+
+        prior_attr_1 = []
+        prior_attr_2 = ["http://www.wikidata.org/entity/P373", 'http://www.wikidata.org/entity/P1476']
+
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
+
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
+
+    elif cfg.DATASET == "SRPRS_D_W_15K_V1":
+
+        url_priority_1 = True
+        url_priority_2 = False
+
+        random_init_flag_1 = False
+        random_init_flag_2 = True
+
+        prior_attr_1 = []
+        prior_attr_2 = ["http://www.wikidata.org/entity/P373", 'http://www.wikidata.org/entity/P1476']
+
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
+
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
+
+    elif cfg.DATASET == "SRPRS_D_W_15K_V2":
+
+        url_priority_1 = True
+        url_priority_2 = False
+
+        random_init_flag_1 = False
+        random_init_flag_2 = True
+
+        prior_attr_1 = []
+        prior_attr_2 = ["http://www.wikidata.org/entity/P373", 'http://www.wikidata.org/entity/P1476']
+
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_analysis.xlsx"
+
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/DBpedia_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/Wikidata_names.xlsx"
+
+    elif cfg.DATASET == "fr_en":
+
+        url_priority_1 = True
+        url_priority_2 = True
+
+        random_init_flag_1 = False
+        random_init_flag_2 = False
+
+        prior_attr_1 = ["http://fr.dbpedia.org/property/titre", "http://xmlns.com/foaf/0.1/name",
+                        "http://fr.dbpedia.org/property/name", "http://fr.dbpedia.org/property/label"]
+
+        prior_attr_2 = ["http://dbpedia.org/property/title", "http://xmlns.com/foaf/0.1/name",
+                        "http://dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
+                        "http://dbpedia.org/ontology/birthName", "http://dbpedia.org/property/label"]
+
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/fr_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
+
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/fr_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_names.xlsx"
+
+    elif cfg.DATASET == "ja_en":
+
+        url_priority_1 = False
+        url_priority_2 = False
+
+        random_init_flag_1 = True
+        random_init_flag_2 = False
+
+        prior_attr_1 = ["http://ja.dbpedia.org/property/title", "http://xmlns.com/foaf/0.1/name",
+                        "http://ja.dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
+                        "http://ja.dbpedia.org/property/label"]
+
+        prior_attr_2 = ["http://dbpedia.org/property/title", "http://xmlns.com/foaf/0.1/name",
+                        "http://dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
+                        "http://dbpedia.org/property/label"]
+
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/ja_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
+
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/ja_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_names.xlsx"
+
+    elif cfg.DATASET == "zh_en":
+
+        url_priority_1 = False
+        url_priority_2 = False
+
+        random_init_flag_1 = True
+        random_init_flag_2 = False
+
+        prior_attr_1 = ["http://zh.dbpedia.org/property/title", "http://xmlns.com/foaf/0.1/name",
+                        "http://ja.dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
+                        "http://ja.dbpedia.org/property/label"]
+
+        prior_attr_2 = ["http://dbpedia.org/property/title", "http://xmlns.com/foaf/0.1/name",
+                        "http://dbpedia.org/property/name", "http://xmlns.com/foaf/0.1/givenName",
+                        "http://dbpedia.org/property/label"]
+
+        kg1_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/zh_analysis.xlsx"
+        kg2_src_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_analysis.xlsx"
+
+        kg1_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/zh_names.xlsx"
+        kg2_dest_path = cfg.BASE_DIR + "/data/entity_names/" + str(round(cfg.SIZE_AFTER_REDUCTION_IN_PERCENTAGE,1)) + "/" + cfg.DATASET + "/en_names.xlsx"
+
+    names_df_1 = pd.read_excel(kg1_src_path)
+    names_df_2 = pd.read_excel(kg2_src_path)
+
+    logger.info("[HyBEA][names] Preparing KG1 ...")
+    ent_names_1 = gen_names(ids_to_uris_1, names_df_1, random_init_flag_1, url_priority_1, prior_attr_1)
+
+    logger.info("[HyBEA][names] Preparing KG2 ...")
+    ent_names_2 = gen_names(ids_to_uris_2, names_df_2, random_init_flag_2, url_priority_2, prior_attr_2)
+
+    ent_names_df_1 = pd.DataFrame(([k, v[0], v[1]] for k, v in ent_names_1.items()), columns=['e1', 'name', 'src'])
+    ent_names_df_1.to_excel(kg1_dest_path)
+    logger.info("[HyBEA][names] Exported KG1 names to %s", kg1_dest_path)
+
+    ent_names_df_2 = pd.DataFrame(([k, v[0], v[1]] for k, v in ent_names_2.items()), columns=['e1', 'name', 'src'])
+    ent_names_df_2.to_excel(kg2_dest_path)
+    logger.info("[HyBEA][names] Exported KG2 names to %s", kg2_dest_path)
