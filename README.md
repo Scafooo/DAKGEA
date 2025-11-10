@@ -1,8 +1,10 @@
 # Data Augmentation for Knowledge Graph Entity Resolution (DAKGEA)
 
-<p align="center">
-  <img src="assets/images/banner.png" alt="Data Augmentation for Knowledge Graph Entity Resolution" width="80%">
-</p>
+<div style="text-align: center;">
+  <img src="assets/images/banner.png" alt="DAKGEA Banner" width="80%">
+  <br>
+  <b>Data Augmentation for Knowledge Graph Entity Resolution</b>
+</div>
 
 ## Quickstart
 
