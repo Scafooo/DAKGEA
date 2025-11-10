@@ -92,10 +92,29 @@ def test_plm_augmenter_creates_augmented_alignment():
         predicate == derived_predicate for _, predicate, _ in augmented.knowledge_graph_source.triples((new_src_uri, None, None))
     ), "Augmented node should reference its origin"
 
-    assert any(
-        obj == URIRef("http://src.example.org/entity/B")
-        for _, _, obj in augmented.knowledge_graph_source.triples((new_src_uri, linked_predicate, None))
-    ), "Augmented node should mirror source relations"
+    clone_targets = [
+        obj for _, _, obj in augmented.knowledge_graph_source.triples((new_src_uri, linked_predicate, None))
+    ]
+    assert clone_targets, "Expected augmented source node to connect to synthetic neighbor"
+    clone_uri = clone_targets[0]
+    assert clone_uri != URIRef("http://src.example.org/entity/B")
+    assert (
+        clone_uri,
+        derived_predicate,
+        URIRef("http://src.example.org/entity/B"),
+    ) in augmented.knowledge_graph_source, "Synthetic neighbor should retain provenance"
+
+    target_clone_targets = [
+        obj for _, _, obj in augmented.knowledge_graph_target.triples((URIRef(synthetic_pairs[0][1]), linked_predicate, None))
+    ]
+    assert target_clone_targets, "Expected augmented target node to connect to synthetic neighbor"
+    target_clone_uri = target_clone_targets[0]
+    assert target_clone_uri != URIRef("http://tgt.example.org/entity/C")
+    assert (
+        target_clone_uri,
+        derived_predicate,
+        URIRef("http://tgt.example.org/entity/C"),
+    ) in augmented.knowledge_graph_target
 
     assert any(
         literal.toPython() == "Alpha"
@@ -116,3 +135,18 @@ def test_ratio_controls_number_of_augmented_pairs():
 
     assert len(dataset.aligned_entities) == 2
     assert len(augmented.aligned_entities) == 3, "Ratio=0.5 over 2 pairs should add exactly one alignment"
+
+
+def test_plm_augmenter_is_deterministic_with_same_seed():
+    cfg = {"augmentation": {"ratio": 1.0, "max_depth": 1}, "experiment": {"seed": 1234}}
+    augmenter = PLMAugmenter(cfg)
+
+    dataset_a = _build_dataset_with_two_pairs()
+    dataset_b = _build_dataset_with_two_pairs()
+
+    augmented_a = augmenter.augment(dataset_a)
+    augmented_b = augmenter.augment(dataset_b)
+
+    assert augmented_a.aligned_entities == augmented_b.aligned_entities
+    assert set(augmented_a.knowledge_graph_source) == set(augmented_b.knowledge_graph_source)
+    assert set(augmented_a.knowledge_graph_target) == set(augmented_b.knowledge_graph_target)

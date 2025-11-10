@@ -45,8 +45,8 @@ class PLMAugmenter(AugmentationMethod):
             except (TypeError, ValueError):
                 self.logger.warning("Invalid augmentation.ratio '%s'; ignoring.", ratio)
 
-        seed = experiment_cfg.get("seed", cfg.get("seed"))
-        self.seed = seed
+        seed = experiment_cfg.get("seed", cfg.get("seed", 0))
+        self.seed = int(seed) if seed is not None else 0
 
         derived_predicate = augmentation_cfg.get("derived_predicate", cfg.get("derived_predicate"))
         self.derived_predicate = URIRef(derived_predicate) if derived_predicate else self._DEFAULT_DERIVED_PREDICATE
@@ -65,7 +65,7 @@ class PLMAugmenter(AugmentationMethod):
             return dataset_augmented
 
         set_graph = SetKnowledgeGraph.from_dataset(dataset)
-        set_nodes = list(set_graph.iter_set_nodes())
+        set_nodes = sorted(set_graph.iter_set_nodes(), key=lambda uri: str(uri))
         if not set_nodes:
             self.logger.warning("SetKnowledgeGraph is empty; nothing to augment.")
             return dataset_augmented
@@ -73,11 +73,12 @@ class PLMAugmenter(AugmentationMethod):
         pair_budget = self._compute_pair_budget(initial_pairs)
         budget_display = pair_budget if pair_budget is not None else "unbounded"
         self.logger.info(
-            "[PLM] Augmentation budget=%s (initial_pairs=%d, ratio=%s, max_pairs=%s)",
+            "[PLM] Augmentation budget=%s (initial_pairs=%d, ratio=%s, max_pairs=%s, seed=%d)",
             budget_display,
             initial_pairs,
             f"{self.augmentation_ratio:.2f}" if self.augmentation_ratio is not None else "-",
             self.max_pairs_config if self.max_pairs_config is not None else "-",
+            self.seed,
         )
 
         rng = random.Random(self.seed)
@@ -85,6 +86,7 @@ class PLMAugmenter(AugmentationMethod):
 
         self.section("PLM Augmentation")
         visited: set[URIRef] = set()
+        expansion_chain: List[str] = []
         queue: Deque[Tuple[URIRef, int]] = deque()
         remaining_seeds: Deque[URIRef] = deque(set_nodes)
         expanded_pairs = 0
@@ -103,6 +105,7 @@ class PLMAugmenter(AugmentationMethod):
             if node in visited:
                 continue
             visited.add(node)
+            expansion_chain.append(str(node))
 
             self._log_node_connections(set_graph, node)
 
@@ -125,16 +128,23 @@ class PLMAugmenter(AugmentationMethod):
                         continue
 
                     if set_graph.is_set_node(neighbor):
-                        if neighbor not in visited and neighbor not in direct_enqueued:
-                            queue.append((neighbor, depth + 1))
+                        next_depth = depth + 1
+                        if neighbor not in visited and neighbor not in direct_enqueued and next_depth <= self.max_depth:
+                            queue.append((neighbor, next_depth))
                             direct_enqueued.add(neighbor)
                             self.logger.info("[PLM][Queue] direct set neighbor queued")
                             self.logger.info("    • current → %s", node)
                             self.logger.info("    • neighbor → %s", neighbor)
-                            self.logger.info("    • depth → %d", depth + 1)
+                            self.logger.info("    • depth → %d", next_depth)
                         continue
 
-                    self._augment_non_set_neighbor(dataset_augmented, neighbor, predicate, direction, src_aug, tgt_aug)
+                    created_neighbors = self._augment_non_set_neighbor(
+                        dataset_augmented, neighbor, predicate, direction, src_aug, tgt_aug
+                    )
+                    if created_neighbors:
+                        expansion_chain.extend(str(uri) for uri in created_neighbors)
+                    else:
+                        expansion_chain.append(str(neighbor))
 
                     if depth + 1 > self.max_depth:
                         continue
@@ -151,13 +161,16 @@ class PLMAugmenter(AugmentationMethod):
                             continue
                         if inner_neighbor in bridged_enqueued:
                             continue
-                        queue.append((inner_neighbor, depth + 1))
+                        next_depth = depth + 2
+                        if next_depth > self.max_depth:
+                            continue
+                        queue.append((inner_neighbor, next_depth))
                         bridged_enqueued.add(inner_neighbor)
                         self.logger.info("[PLM][Queue] bridged via non-set")
                         self.logger.info("    • current → %s", node)
                         self.logger.info("    • bridge → %s", neighbor)
                         self.logger.info("    • next → %s", inner_neighbor)
-                        self.logger.info("    • depth → %d", depth + 1)
+                        self.logger.info("    • depth → %d", next_depth)
 
 
         self.logger.info(
@@ -166,6 +179,11 @@ class PLMAugmenter(AugmentationMethod):
             budget_display,
             self.max_depth,
         )
+        if expansion_chain:
+            chain_repr = " -> ".join(expansion_chain)
+            self.logger.info("[PLM] Expansion chain: %s", chain_repr)
+        else:
+            self.logger.info("[PLM] Expansion chain: (none)")
         return dataset_augmented
 
     # ------------------------------------------------------------------
@@ -242,15 +260,21 @@ class PLMAugmenter(AugmentationMethod):
         direction: str,
         src_aug: URIRef,
         tgt_aug: URIRef,
-    ) -> None:
+    ) -> List[URIRef]:
         self.logger.info("[PLM][Neighbor] augmenting non-set")
         self.logger.info("    • neighbor → %s", neighbor)
         self.logger.info("    • predicate → %s", predicate)
         self.logger.info("    • direction → %s", direction)
+        created: List[URIRef] = []
         if self._node_in_graph(dataset.knowledge_graph_source, neighbor):
-            self._mirror_relation(dataset.knowledge_graph_source, src_aug, predicate, neighbor, direction)
+            clone = self._clone_non_set_node(dataset.knowledge_graph_source, neighbor)
+            created.append(clone)
+            self._mirror_relation(dataset.knowledge_graph_source, src_aug, predicate, clone, direction)
         if self._node_in_graph(dataset.knowledge_graph_target, neighbor):
-            self._mirror_relation(dataset.knowledge_graph_target, tgt_aug, predicate, neighbor, direction)
+            clone = self._clone_non_set_node(dataset.knowledge_graph_target, neighbor)
+            created.append(clone)
+            self._mirror_relation(dataset.knowledge_graph_target, tgt_aug, predicate, clone, direction)
+        return created
 
     def _mirror_relation(self, graph, subject: URIRef, predicate: URIRef, neighbor: URIRef, direction: str) -> None:
         if direction == "out":
@@ -282,6 +306,15 @@ class PLMAugmenter(AugmentationMethod):
         self._id_counter += 1
         base = str(reference)
         return URIRef(f"{base}_aug{self._id_counter}")
+
+    def _clone_non_set_node(self, graph, node: URIRef) -> URIRef:
+        clone = self._mint_augmented_uri(node)
+        graph.add((clone, self.derived_predicate, node))
+        for _, predicate, obj in graph.triples((node, None, None)):
+            if isinstance(obj, Literal):
+                graph.add((clone, predicate, obj))
+        self.logger.info("    • cloned → %s (graph=%s)", clone, graph.identifier)
+        return clone
 
     def _compute_pair_budget(self, initial_pairs: int) -> Optional[int]:
         ratio_limit: Optional[int] = None
@@ -354,7 +387,11 @@ class PLMAugmenter(AugmentationMethod):
             "Expansion step skipped for node %s ->",
             set_node
         )
-        self.logger.debug("         (%s, %s); implementation pending.",
-            src_aug,
+
+        self.logger.debug("          • %s",
+            src_aug
+        )
+
+        self.logger.debug("          • %s",
             tgt_aug
         )
