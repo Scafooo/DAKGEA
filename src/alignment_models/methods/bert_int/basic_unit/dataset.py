@@ -477,8 +477,10 @@ def _friendly_name(entity: str, dataset_label: str) -> str:
 def _get_preferred_attributes(path: Path, dataset_label: str) -> Dict[str, str]:
     priority: Dict[str, int] = {}
     path_str = str(path)
+    # Use dataset_label for dataset identification (case-insensitive)
+    dataset_label_lower = dataset_label.lower()
 
-    if "EN_JA" in path_str:
+    if "en_ja" in dataset_label_lower:
         if "attr_triples1" in path_str:
             priority = {
                 "http://xmlns.com/foaf/0.1/name": 0,
@@ -502,7 +504,7 @@ def _get_preferred_attributes(path: Path, dataset_label: str) -> Dict[str, str]:
                 "http://dbpedia.org/ontology/background": 6,
                 "http://dbpedia.org/ontology/purpose": 6,
             }
-    elif "EN_DE" in path_str:
+    elif "en_de" in dataset_label_lower:
         if "attr_triples1" in path_str:
             priority = {
                 "http://xmlns.com/foaf/0.1/name": 0,
@@ -521,7 +523,7 @@ def _get_preferred_attributes(path: Path, dataset_label: str) -> Dict[str, str]:
                 "http://dbpedia.org/ontology/motto": 3,
                 "http://dbpedia.org/ontology/leaderTitle": 4,
             }
-    elif "EN_FR" in path_str:
+    elif "en_fr" in dataset_label_lower:
         if "attr_triples1" in path_str:
             priority = {
                 "http://xmlns.com/foaf/0.1/name": 0,
@@ -544,7 +546,7 @@ def _get_preferred_attributes(path: Path, dataset_label: str) -> Dict[str, str]:
                 "http://dbpedia.org/ontology/motto": 5,
                 "http://dbpedia.org/ontology/title": 5,
             }
-    elif "DBP_en_YG_en" in path_str:
+    elif "dbp_en_yg_en" in dataset_label_lower or "d_y" in dataset_label_lower:
         if "attr_triples1" in path_str:
             priority = {
                 "http://xmlns.com/foaf/0.1/name": 0,
@@ -565,7 +567,7 @@ def _get_preferred_attributes(path: Path, dataset_label: str) -> Dict[str, str]:
                 "hasGivenName": 4,
                 "hasMotto": 5,
             }
-    elif "DBP_en_WD_en" in path_str or "D_W" in path_str:
+    elif "dbp_en_wd_en" in dataset_label_lower or "d_w" in dataset_label_lower:
         if "attr_triples1" in path_str:
             # Priority from reference implementation (Read_data_func.py line 176-185)
             priority = {
@@ -588,7 +590,7 @@ def _get_preferred_attributes(path: Path, dataset_label: str) -> Dict[str, str]:
                 "http://www.wikidata.org/entity/P935": 3,
                 "http://www.w3.org/2004/02/skos/core#altLabel": 4,
             }
-    elif "BBC" in path_str:
+    elif "bbc" in dataset_label_lower:
         if "attr_triples1" in path_str:
             priority = {
                 "http://purl.org/dc/elements/1.1/title": 0,

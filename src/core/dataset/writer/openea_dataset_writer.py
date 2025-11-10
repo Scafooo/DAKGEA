@@ -1,4 +1,4 @@
-"""Writer for HybEA-formatted datasets."""
+"""Writer for OpenEA-formatted datasets."""
 
 import copy
 import os
@@ -21,15 +21,15 @@ DEFAULT_DATASET_NAME = "dataset"
 logger = get_logger(__name__)
 slogger = get_structured_logger(__name__)
 
-class HybeaDatasetWriter(DatasetWriter):
-    """Persist datasets back to HybEA/KnowFormer directory layouts."""
+class OpeneaDatasetWriter(DatasetWriter):
+    """Persist datasets back to OpenEA/KnowFormer directory layouts."""
 
-    file_type = "hybea"
+    file_type = "openea"
 
     def write(self, dataset: Dataset, dir_path: str, *, dataset_name: Optional[str] = None) -> bool:
-        """Export a dataset to the requested HybEA directory layout."""
+        """Export a dataset to the requested OpenEA directory layout."""
 
-        slogger.section("HybEA Dataset Export")
+        slogger.section("OpenEA Dataset Export")
 
         base_dir = Path(dir_path)
         if base_dir.name in {"attribute_data", "knowformer_data"}:
@@ -73,7 +73,7 @@ class HybeaDatasetWriter(DatasetWriter):
                     logger.info("Mirroring structure files")
                     self._mirror_structure_files(destination, target)
 
-        slogger.success("Dataset HybEA export completed successfully")
+        slogger.success("Dataset OpenEA export completed successfully")
         return True
 
     def _write_aligned_entities_attribute(

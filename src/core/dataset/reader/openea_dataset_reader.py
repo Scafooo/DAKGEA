@@ -1,4 +1,4 @@
-"""Reader for HybEA-formatted datasets."""
+"""Reader for OpenEA-formatted datasets."""
 
 from pathlib import Path
 import unicodedata
@@ -15,10 +15,10 @@ from src.util.reader import read_tsv
 logger = get_logger(__name__)
 
 
-class HybeaDatasetReader(DatasetReader):
-    """Assemble a `Dataset` object from HybEA/KnowFormer data layouts."""
+class OpeneaDatasetReader(DatasetReader):
+    """Assemble a `Dataset` object from OpenEA/KnowFormer data layouts."""
 
-    file_type = "hybea"
+    file_type = "openea"
 
     ATTR_ENT_IDS_1 = "ent_ids_1"
     ATTR_ENT_IDS_2 = "ent_ids_2"
@@ -109,7 +109,7 @@ class HybeaDatasetReader(DatasetReader):
         for label, _, summary in summaries[1:]:
             if summary != base_summary:
                 logger.warning(
-                    "HybEA dataset '%s': mismatch between variants. baseline=%s, %s=%s",
+                    "OpenEA dataset '%s': mismatch between variants. baseline=%s, %s=%s",
                     dataset_name,
                     base_summary,
                     label,
@@ -121,7 +121,7 @@ class HybeaDatasetReader(DatasetReader):
             key=lambda item: item[2]["source_triples"] + item[2]["target_triples"],
         )
         logger.info(
-            "HybEA dataset '%s': selected variant '%s' with summary %s",
+            "OpenEA dataset '%s': selected variant '%s' with summary %s",
             dataset_name,
             chosen_label,
             chosen_summary,

@@ -29,7 +29,7 @@ class DatasetWriterFactory:
 
 
 _WRITER_MODULES = {
-    "hybea": "src.core.dataset.writer.hybea_dataset_writer",
+    "openea": "src.core.dataset.writer.openea_dataset_writer",
     "rdf": "src.core.dataset.writer.rdf_dataset_writer",
 }
 

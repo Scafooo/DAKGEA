@@ -138,8 +138,16 @@ class BertIntAlignment:
             )
 
         logger.info(f"[BERT-INT] Loading dataset from {dataset_root}")
+        # Pass dataset name from experiment metadata for attribute selection
+        experiment_meta = self.stage_config.get("experiment", {})
+        dataset_name = experiment_meta.get("dataset", "")
+        basic_cfg_with_dataset = dict(self.basic_cfg)
+        if dataset_name:
+            basic_cfg_with_dataset.setdefault("dataset", {})["name"] = dataset_name
+            logger.info(f"[BERT-INT] Using dataset name: {dataset_name}")
+
         data_bundle = load_basic_unit_data(
-            self.basic_cfg, {"dataset_root": dataset_root}
+            basic_cfg_with_dataset, {"dataset_root": dataset_root}
         )
 
         model = BasicBertUnit(self.basic_cfg)

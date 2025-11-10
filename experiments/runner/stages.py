@@ -179,6 +179,13 @@ class ReductionStage(_WriterStage):
                 reduction_paths[plan.name] = str(plan_root.resolve())
                 lineage["dataset_workspace"] = str(plan_root.resolve())
 
+        # Get the writer name (single writer per stage)
+        writer_name = None
+        for plan in self.writer_plans:
+            if plan.write_reduced:
+                writer_name = plan.name
+                break
+
         StageSummaryWriter.write(
             reduction_root / "summary.json",
             {
@@ -186,7 +193,7 @@ class ReductionStage(_WriterStage):
                 "ratio": ratio,
                 "target_entities": stage_cfg.get("reduction", {}).get("target_entities"),
                 "aligned_pairs": len(dataset_reduced.aligned_entities),
-                "writers": sorted(plan.name for plan in self.writer_plans if plan.write_reduced),
+                "writer": writer_name,
             },
         )
         return dataset_reduced
@@ -267,13 +274,20 @@ class AugmentationStage(_WriterStage):
             elif plan_root.exists():
                 augmentation_paths[plan.name] = str(plan_root.resolve())
 
+        # Get the writer name (single writer per stage)
+        writer_name = None
+        for plan in self.writer_plans:
+            if plan.write_augmented:
+                writer_name = plan.name
+                break
+
         StageSummaryWriter.write(
             stage_root / "summary.json",
             {
                 "augmentation": augmentation_name,
                 "ratio": ratio,
                 "aligned_pairs": len(dataset_augmented.aligned_entities),
-                "writers": sorted(plan.name for plan in self.writer_plans if plan.write_augmented),
+                "writer": writer_name,
             },
         )
         return dataset_augmented

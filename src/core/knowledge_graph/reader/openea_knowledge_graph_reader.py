@@ -1,4 +1,4 @@
-"""Knowledge graph reader for HybEA datasets."""
+"""Knowledge graph reader for OpenEA datasets."""
 
 from pathlib import Path
 from typing import Dict, Iterable, Optional, Tuple
@@ -11,10 +11,10 @@ from src.util.reader import read_tsv
 logger = get_logger(__name__)
 
 
-class HybeaKnowledgeGraphReader(KnowledgeGraphReader):
-    """Load individual knowledge graphs from HybEA attribute or KnowFormer layouts."""
+class OpeneaKnowledgeGraphReader(KnowledgeGraphReader):
+    """Load individual knowledge graphs from OpenEA attribute or KnowFormer layouts."""
 
-    file_type = "hybea"
+    file_type = "openea"
 
     def read(self, dir_path, kg_number=None, subtype: Optional[str] = None, **_) -> KnowledgeGraph:
         base_path = Path(dir_path)

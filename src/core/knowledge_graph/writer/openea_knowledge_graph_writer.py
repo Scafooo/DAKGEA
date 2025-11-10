@@ -11,12 +11,12 @@ from src.util.writer import write_tsv
 logger = get_logger(__name__)
 
 
-class HybeaKnowledgeGraphWriter(KnowledgeGraphWriter):
-    file_type = "hybea"
+class OpeneaKnowledgeGraphWriter(KnowledgeGraphWriter):
+    file_type = "openea"
 
     def write(self, kg : KnowledgeGraph,  dir_path, kg_number = None) -> bool:
 
-        logger.info("Knowledge Graph Hybea Export Start")
+        logger.info("Knowledge Graph OpenEA Export Start")
 
         if "attribute_data" in dir_path:
             return self.write_attribute(kg, dir_path, kg_number)
@@ -27,7 +27,7 @@ class HybeaKnowledgeGraphWriter(KnowledgeGraphWriter):
 
     def write_attribute(self, kg, dir_path, kg_number) -> bool:
 
-        logger.info("Knowledge Graph Hybea Attribute export")
+        logger.info("Knowledge Graph OpenEA Attribute export")
 
         ATTR_NAMES = os.path.join(dir_path, "attr_names" + str(kg_number))
         ATTR_TRIPLE = os.path.join(dir_path, "attr_triples" + str(kg_number))

@@ -29,7 +29,7 @@ class DatasetReaderFactory:
 
 
 _READER_MODULES = {
-    "hybea": "src.core.dataset.reader.hybea_dataset_reader",
+    "openea": "src.core.dataset.reader.openea_dataset_reader",
     "rdf": "src.core.dataset.reader.rdf_dataset_reader",
 }
 

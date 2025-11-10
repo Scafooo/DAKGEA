@@ -252,6 +252,11 @@ class ExperimentRunner:
             ratio = 1.0
             ratio_root = dataset_workspace
 
+            # Skip entire experiment if already fully completed
+            if self._is_experiment_complete(dataset_workspace, artifact_root, ratio_tag):
+                progress.step()
+                return
+
             stage_cfg = self._build_stage_config(
                 spec.name,
                 len(dataset.aligned_entities),
@@ -297,7 +302,7 @@ class ExperimentRunner:
                     "ratio": ratio,
                     "target_entities": len(dataset.aligned_entities),
                     "aligned_pairs": len(dataset.aligned_entities),
-                    "writers": [],
+                    "writer": None,
                 },
             )
 
@@ -397,6 +402,11 @@ class ExperimentRunner:
             ratio_desc = f"{ratio * 100:.1f}%"
             ratio_tag = self._format_ratio_tag(ratio)
             ratio_root = dataset_workspace
+
+            # Skip entire experiment if already fully completed
+            if self._is_experiment_complete(dataset_workspace, artifact_root, ratio_tag):
+                progress.step()
+                return
 
             progress.set_description(f"📦 {spec.name} [{ratio_desc}]")
             logger.info("[STEP] Ratio %.1f%% for dataset '%s'", ratio * 100, spec.name)
@@ -537,7 +547,8 @@ class ExperimentRunner:
         dataset_root: Path,
     ) -> Tuple[Path, Dict[str, Any]]:
         """Create or refresh the per-dataset workspace within the experiment folder."""
-        dataset_workspace = self.base_workspace / spec.name
+        # Use experiment workspace directly, no per-dataset subdirectory
+        dataset_workspace = self.base_workspace
         dataset_workspace.mkdir(parents=True, exist_ok=True)
 
         dataset_meta = self.metadata["datasets"].setdefault(
@@ -621,6 +632,60 @@ class ExperimentRunner:
                 )
             )
         return plans
+
+    def _is_experiment_complete(
+        self,
+        dataset_workspace: Path,
+        artifact_root: Path,
+        ratio_tag: str,
+    ) -> bool:
+        """Check if the experiment has been fully completed for this dataset and ratio.
+
+        Returns True only if ALL required stages have been completed:
+        - Reduction (if reduction_eval is true)
+        - Augmentation (if augmentations exist and augmentation_eval is true)
+        - Evaluation (for all specified models)
+        """
+        if not self.resume:
+            return False
+
+        # Check reduction results
+        if self.reduction_eval:
+            reduction_results = dataset_workspace / "reduction" / "results.json"
+            if not reduction_results.exists():
+                logger.debug(f"Experiment incomplete: reduction results missing at {reduction_results}")
+                return False
+
+        # Check augmentation results
+        if self.augmentations and self.augmentation_eval:
+            augmentation_results = dataset_workspace / "augmentation" / "results.json"
+            if not augmentation_results.exists():
+                logger.debug(f"Experiment incomplete: augmentation results missing at {augmentation_results}")
+                return False
+
+        # Check evaluation results for all models
+        evaluation_root = artifact_root / "evaluation"
+        for model_name in self.models:
+            # Check baseline (reduction) evaluation
+            if self.reduction_eval:
+                baseline_result = evaluation_root / "baseline" / f"{model_name}.json"
+                if not baseline_result.exists():
+                    logger.debug(f"Experiment incomplete: baseline evaluation missing for {model_name} at {baseline_result}")
+                    return False
+
+            # Check augmentation evaluations
+            if self.augmentations:
+                for aug_name in self.augmentations:
+                    aug_result = evaluation_root / aug_name / f"{model_name}.json"
+                    if not aug_result.exists():
+                        logger.debug(f"Experiment incomplete: augmentation evaluation missing for {model_name}/{aug_name} at {aug_result}")
+                        return False
+
+        logger.info(
+            "✅ Experiment fully completed for ratio=%s — skipping execution",
+            ratio_tag
+        )
+        return True
 
     def _build_stage_config(
         self,

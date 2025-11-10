@@ -1,11 +1,14 @@
-"""PLM-based augmentation strategy leveraging latent interpolation scaffolding."""
+"""PLM-based augmentation strategy leveraging latent interpolation scaffolding.
+
+Refactored version with improved modularity and clarity.
+"""
 
 from __future__ import annotations
 
 import math
 import random
 from collections import deque
-from typing import Deque, Dict, Iterable, Iterator, List, Optional, Tuple
+from typing import Deque, List, Optional
 
 from rdflib import Literal, URIRef
 
@@ -13,12 +16,31 @@ from src.augmentation.base import AugmentationMethod
 from src.augmentation.registry import AUGMENTATION_REGISTRY
 from src.core.dataset import Dataset
 
+from .expansion_node import ExpansionNode
+from .neighbor_handler import NeighborHandler
+from .node_expander import NodeExpander
 from .set_knowledge_graph.set_knowledge_graph import SetKnowledgeGraph
 
 
 @AUGMENTATION_REGISTRY.register("plm_augmentation")
 class PLMAugmenter(AugmentationMethod):
-    """Augment datasets via BART-based latent interpolation of literal attributes."""
+    """Augment datasets via PLM-based expansion of fused entity sets.
+
+    The augmentation process:
+    1. Creates a SetKnowledgeGraph where aligned entities are fused
+    2. Performs BFS expansion starting from random set nodes
+    3. For each set node, creates an aligned pair of augmented entities
+    4. Bootstraps literal attributes from original entities
+    5. Expands to neighbors while maintaining structural coherence
+    6. Handles bridging through non-set nodes for 2-hop expansion
+
+    Configuration:
+        - max_depth: Maximum BFS depth (default: 1)
+        - ratio: Augmentation ratio (e.g., 0.5 = 50% more entities)
+        - max_pairs: Absolute maximum number of pairs to generate
+        - seed: Random seed for reproducibility
+        - add_derived_predicate: Whether to add derivedFrom triples (default: False)
+    """
 
     registry_name = "plm_augmentation"
     _DEFAULT_DERIVED_PREDICATE = URIRef("http://dakgea.org/augmentation/derivedFrom")
@@ -29,10 +51,12 @@ class PLMAugmenter(AugmentationMethod):
         augmentation_cfg = cfg.get("augmentation", cfg)
         experiment_cfg = cfg.get("experiment", cfg)
 
+        # Expansion parameters
         self.max_depth = int(augmentation_cfg.get("max_depth", 1))
         max_pairs = augmentation_cfg.get("max_pairs")
         self.max_pairs_config = max(1, int(max_pairs)) if max_pairs is not None else None
 
+        # Augmentation ratio
         ratio = augmentation_cfg.get("ratio")
         self.augmentation_ratio: Optional[float] = None
         if ratio is not None:
@@ -45,310 +69,428 @@ class PLMAugmenter(AugmentationMethod):
             except (TypeError, ValueError):
                 self.logger.warning("Invalid augmentation.ratio '%s'; ignoring.", ratio)
 
+        # Reproducibility
         seed = experiment_cfg.get("seed", cfg.get("seed", 0))
         self.seed = int(seed) if seed is not None else 0
 
+        # Provenance tracking
+        self.add_derived_predicate = bool(augmentation_cfg.get("add_derived_predicate", False))
         derived_predicate = augmentation_cfg.get("derived_predicate", cfg.get("derived_predicate"))
-        self.derived_predicate = URIRef(derived_predicate) if derived_predicate else self._DEFAULT_DERIVED_PREDICATE
-        self._membership_cache: Dict[Tuple[str, URIRef], bool] = {}
-        self._id_counter = 0
+        self.derived_predicate = (
+            URIRef(derived_predicate) if derived_predicate else self._DEFAULT_DERIVED_PREDICATE
+        )
+
+        # Initialize helper classes
+        self.node_expander = NodeExpander(self.derived_predicate, self.add_derived_predicate)
+        self.neighbor_handler = NeighborHandler()
 
     # ------------------------------------------------------------------
     # Public API
     # ------------------------------------------------------------------
     def augment(self, dataset: Dataset) -> Dataset:
-        """Augment a dataset by spawning aligned synthetic entities."""
+        """Augment a dataset by spawning aligned synthetic entities.
+
+        Args:
+            dataset: Input dataset to augment
+
+        Returns:
+            Augmented dataset with new aligned entity pairs
+        """
         initial_pairs = len(dataset.aligned_entities)
         dataset_augmented = dataset.clone()
+
         if not dataset.aligned_entities:
             self.logger.warning("Skipping PLM augmentation: no aligned entities available.")
             return dataset_augmented
 
+        # Create fused set graph
         set_graph = SetKnowledgeGraph.from_dataset(dataset)
         set_nodes = sorted(set_graph.iter_set_nodes(), key=lambda uri: str(uri))
+
         if not set_nodes:
             self.logger.warning("SetKnowledgeGraph is empty; nothing to augment.")
             return dataset_augmented
 
+        # Calculate expansion budget
         pair_budget = self._compute_pair_budget(initial_pairs)
-        budget_display = pair_budget if pair_budget is not None else "unbounded"
-        self.logger.info(
-            "[PLM] Augmentation budget=%s (initial_pairs=%d, ratio=%s, max_pairs=%s, seed=%d)",
-            budget_display,
-            initial_pairs,
-            f"{self.augmentation_ratio:.2f}" if self.augmentation_ratio is not None else "-",
-            self.max_pairs_config if self.max_pairs_config is not None else "-",
-            self.seed,
-        )
+        self._log_augmentation_start(initial_pairs, pair_budget)
 
+        # Randomize starting order
         rng = random.Random(self.seed)
         rng.shuffle(set_nodes)
 
+        # Perform BFS expansion
         self.section("PLM Augmentation")
+        expanded_pairs = self._bfs_expansion(dataset_augmented, set_graph, set_nodes, pair_budget)
+
+        self.logger.info(
+            "[PLM] Augmentation complete: expanded %d pairs (target: %s)",
+            expanded_pairs,
+            pair_budget if pair_budget is not None else "unbounded",
+        )
+
+        return dataset_augmented
+
+    # ------------------------------------------------------------------
+    # BFS Expansion
+    # ------------------------------------------------------------------
+    def _bfs_expansion(
+        self,
+        dataset: Dataset,
+        set_graph: SetKnowledgeGraph,
+        set_nodes: List[URIRef],
+        pair_budget: Optional[int],
+    ) -> int:
+        """Perform BFS expansion of set nodes.
+
+        Args:
+            dataset: Dataset to augment
+            set_graph: Set knowledge graph
+            set_nodes: List of set nodes to potentially expand
+            pair_budget: Maximum number of pairs to create (None = unlimited)
+
+        Returns:
+            Number of pairs actually expanded
+        """
         visited: set[URIRef] = set()
         expansion_chain: List[str] = []
-        queue: Deque[Tuple[URIRef, int]] = deque()
+        queue: Deque[ExpansionNode] = deque()
         remaining_seeds: Deque[URIRef] = deque(set_nodes)
         expanded_pairs = 0
-        self._membership_cache.clear()
-        self._id_counter = 0
 
         while (queue or remaining_seeds) and (pair_budget is None or expanded_pairs < pair_budget):
+            # Refill queue from remaining seeds if empty
             if not queue:
                 while remaining_seeds and remaining_seeds[0] in visited:
                     remaining_seeds.popleft()
                 if not remaining_seeds:
                     break
-                queue.append((remaining_seeds.popleft(), 0))
+                next_seed = remaining_seeds.popleft()
+                queue.append(ExpansionNode(uri=next_seed, depth=0, node_type="set"))
 
-            node, depth = queue.popleft()
-            if node in visited:
+            # Process next node in queue
+            exp_node = queue.popleft()
+
+            if exp_node.uri in visited:
                 continue
-            visited.add(node)
-            expansion_chain.append(str(node))
 
-            self._log_node_connections(set_graph, node)
+            visited.add(exp_node.uri)
+            expansion_chain.append(str(exp_node.uri))
 
-            src_aug, tgt_aug, src_original, tgt_original = self._spawn_augmented_pair(
-                dataset_augmented, set_graph, node
-            )
-            expanded_pairs += 1
+            # Expand the node
+            if exp_node.is_set_node:
+                self._expand_set_node_with_neighbors(
+                    dataset, set_graph, exp_node, queue, visited
+                )
+                expanded_pairs += 1
+            else:
+                # Non-set nodes will be handled by PLM expansion (future work)
+                self.logger.debug("[PLM] Non-set node encountered (future expansion): %s", exp_node.uri)
 
-            self._bootstrap_literals(dataset_augmented, src_original, tgt_original, src_aug, tgt_aug)
-            self._expansion(dataset_augmented, set_graph, node, src_aug, tgt_aug)
+        # Log expansion summary
+        self._log_expansion_summary(expanded_pairs, pair_budget, expansion_chain)
 
-            if depth < self.max_depth:
-                direct_enqueued: set[URIRef] = set()
-                for direction, predicate, neighbor in self._iter_neighbors(set_graph, node):
-                    if isinstance(neighbor, Literal):
-                        self._attach_literal(dataset_augmented, predicate, neighbor, direction, src_aug, tgt_aug)
-                        continue
+        return expanded_pairs
 
-                    if not isinstance(neighbor, URIRef):
-                        continue
+    def _expand_set_node_with_neighbors(
+        self,
+        dataset: Dataset,
+        set_graph: SetKnowledgeGraph,
+        exp_node: ExpansionNode,
+        queue: Deque[ExpansionNode],
+        visited: set[URIRef],
+    ) -> None:
+        """Expand a set node and process its neighbors.
 
-                    if set_graph.is_set_node(neighbor):
-                        next_depth = depth + 1
-                        if neighbor not in visited and neighbor not in direct_enqueued and next_depth <= self.max_depth:
-                            queue.append((neighbor, next_depth))
-                            direct_enqueued.add(neighbor)
-                            self.logger.info("[PLM][Queue] direct set neighbor queued")
-                            self.logger.info("    • current → %s", node)
-                            self.logger.info("    • neighbor → %s", neighbor)
-                            self.logger.info("    • depth → %d", next_depth)
-                        continue
+        Args:
+            dataset: Dataset to augment
+            set_graph: Set knowledge graph
+            exp_node: Expansion node to process
+            queue: BFS queue to add new nodes to
+            visited: Set of already visited nodes
+        """
+        set_node = exp_node.uri
+        depth = exp_node.depth
 
-                    created_neighbors = self._augment_non_set_neighbor(
-                        dataset_augmented, neighbor, predicate, direction, src_aug, tgt_aug
-                    )
-                    if created_neighbors:
-                        expansion_chain.extend(str(uri) for uri in created_neighbors)
-                    else:
-                        expansion_chain.append(str(neighbor))
+        # Log connections for debugging
+        self._log_node_connections(set_graph, set_node)
 
-                    if depth + 1 > self.max_depth:
-                        continue
-
-                    bridged_enqueued: set[URIRef] = set()
-                    for inner_direction, inner_predicate, inner_neighbor in self._iter_neighbors(set_graph, neighbor):
-                        if not isinstance(inner_neighbor, URIRef):
-                            continue
-                        if not set_graph.is_set_node(inner_neighbor):
-                            continue
-                        if inner_neighbor is node:
-                            continue
-                        if inner_neighbor in visited:
-                            continue
-                        if inner_neighbor in bridged_enqueued:
-                            continue
-                        next_depth = depth + 2
-                        if next_depth > self.max_depth:
-                            continue
-                        queue.append((inner_neighbor, next_depth))
-                        bridged_enqueued.add(inner_neighbor)
-                        self.logger.info("[PLM][Queue] bridged via non-set")
-                        self.logger.info("    • current → %s", node)
-                        self.logger.info("    • bridge → %s", neighbor)
-                        self.logger.info("    • next → %s", inner_neighbor)
-                        self.logger.info("    • depth → %d", next_depth)
-
-
-        self.logger.info(
-            "[PLM] Augmented %d/%s fused nodes (max_depth=%d).",
-            expanded_pairs,
-            budget_display,
-            self.max_depth,
+        # Create augmented pair
+        src_aug, tgt_aug, src_original, tgt_original = self.node_expander.expand_set_node(
+            dataset, set_graph, set_node
         )
-        if expansion_chain:
-            chain_repr = " -> ".join(expansion_chain)
-            self.logger.info("[PLM] Expansion chain: %s", chain_repr)
-        else:
-            self.logger.info("[PLM] Expansion chain: (none)")
-        return dataset_augmented
 
-    # ------------------------------------------------------------------
-    # Helpers
-    # ------------------------------------------------------------------
-    def _spawn_augmented_pair(
-        self, dataset: Dataset, set_graph: SetKnowledgeGraph, set_node: URIRef
-    ) -> Tuple[URIRef, URIRef, Optional[URIRef], Optional[URIRef]]:
-        components = set_graph.get_components(set_node)
-        src_component = components[0] if components else None
-        tgt_component = components[1] if len(components) > 1 else None
+        # Bootstrap literal attributes
+        self.node_expander.bootstrap_literals(
+            dataset, src_original, tgt_original, src_aug, tgt_aug
+        )
 
-        src_aug = self._mint_augmented_uri(src_component or set_node)
-        tgt_aug = self._mint_augmented_uri(tgt_component or set_node)
+        # TODO: PLM-driven expansion (future implementation)
+        # This will use a language model to generate variations of literals
+        # self._plm_expansion(dataset, set_graph, set_node, src_aug, tgt_aug)
 
-        src_reference = src_component or set_node
-        tgt_reference = tgt_component or set_node
+        # Process neighbors if we haven't reached max depth
+        if depth < self.max_depth:
+            self._process_neighbors(
+                dataset, set_graph, set_node, src_aug, tgt_aug, depth, queue, visited
+            )
 
-        dataset.knowledge_graph_source.add((src_aug, self.derived_predicate, src_reference))
-        dataset.knowledge_graph_target.add((tgt_aug, self.derived_predicate, tgt_reference))
-
-        alignments = list(dataset.aligned_entities)
-        alignments.append((str(src_aug), str(tgt_aug)))
-        dataset.aligned_entities = tuple(alignments)
-
-        return src_aug, tgt_aug, src_component, tgt_component
-
-    def _bootstrap_literals(
+    def _process_neighbors(
         self,
         dataset: Dataset,
-        src_component: Optional[URIRef],
-        tgt_component: Optional[URIRef],
+        set_graph: SetKnowledgeGraph,
+        current_node: URIRef,
         src_aug: URIRef,
         tgt_aug: URIRef,
+        current_depth: int,
+        queue: Deque[ExpansionNode],
+        visited: set[URIRef],
     ) -> None:
-        self._copy_literals(dataset.knowledge_graph_source, src_component, src_aug)
-        self._copy_literals(dataset.knowledge_graph_target, tgt_component, tgt_aug)
+        """Process all neighbors of the current node.
 
-    @staticmethod
-    def _copy_literals(graph, original: Optional[URIRef], augmented: URIRef) -> None:
-        if not original:
-            return
-        for _, predicate, obj in graph.triples((original, None, None)):
-            if isinstance(obj, Literal):
-                graph.add((augmented, predicate, obj))
+        Args:
+            dataset: Dataset to augment
+            set_graph: Set knowledge graph
+            current_node: Current set node being processed
+            src_aug: Augmented source entity
+            tgt_aug: Augmented target entity
+            current_depth: Current BFS depth
+            queue: BFS queue
+            visited: Set of visited nodes
+        """
+        direct_enqueued: set[URIRef] = set()
 
-    def _iter_neighbors(
-        self, graph: SetKnowledgeGraph, node: URIRef
-    ) -> Iterator[Tuple[str, URIRef, URIRef | Literal]]:
-        for _, predicate, neighbor in graph.triples((node, None, None)):
-            yield "out", predicate, neighbor
-        for neighbor, predicate, _ in graph.triples((None, None, node)):
-            yield "in", predicate, neighbor
+        for direction, predicate, neighbor in self.neighbor_handler.iter_neighbors(
+            set_graph, current_node
+        ):
+            # Handle literal neighbors
+            if isinstance(neighbor, Literal):
+                self.neighbor_handler.attach_literal_to_augmented(
+                    dataset, predicate, neighbor, direction, src_aug, tgt_aug
+                )
+                continue
 
-    def _attach_literal(
+            # Skip non-URI neighbors
+            if not isinstance(neighbor, URIRef):
+                continue
+
+            # Handle set node neighbors (direct expansion)
+            if set_graph.is_set_node(neighbor):
+                self._enqueue_set_neighbor(
+                    neighbor, current_node, current_depth, queue, visited, direct_enqueued
+                )
+                continue
+
+            # Handle non-set node neighbors
+            self._handle_non_set_neighbor(
+                dataset,
+                set_graph,
+                neighbor,
+                predicate,
+                direction,
+                current_node,
+                src_aug,
+                tgt_aug,
+                current_depth,
+                queue,
+                visited,
+            )
+
+    def _enqueue_set_neighbor(
+        self,
+        neighbor: URIRef,
+        current_node: URIRef,
+        current_depth: int,
+        queue: Deque[ExpansionNode],
+        visited: set[URIRef],
+        direct_enqueued: set[URIRef],
+    ) -> None:
+        """Enqueue a set node neighbor for direct expansion.
+
+        Args:
+            neighbor: The set node neighbor to enqueue
+            current_node: Current node being processed
+            current_depth: Current BFS depth
+            queue: BFS queue
+            visited: Set of visited nodes
+            direct_enqueued: Set of nodes already enqueued in this iteration
+        """
+        next_depth = current_depth + 1
+
+        # Check if we should enqueue this neighbor
+        if (
+            next_depth <= self.max_depth
+            and neighbor not in visited
+            and neighbor not in direct_enqueued
+        ):
+            queue.append(ExpansionNode(uri=neighbor, depth=next_depth, node_type="set", parent=current_node))
+            direct_enqueued.add(neighbor)
+
+            self.logger.info("[PLM][Queue] Direct set neighbor enqueued")
+            self.logger.info("    • current → %s", current_node)
+            self.logger.info("    • neighbor → %s", neighbor)
+            self.logger.info("    • depth → %d", next_depth)
+
+    def _handle_non_set_neighbor(
         self,
         dataset: Dataset,
-        predicate: URIRef,
-        literal: Literal,
-        direction: str,
-        src_aug: URIRef,
-        tgt_aug: URIRef,
-    ) -> None:
-        if direction != "out":
-            return
-        dataset.knowledge_graph_source.add((src_aug, predicate, literal))
-        dataset.knowledge_graph_target.add((tgt_aug, predicate, literal))
-
-    def _augment_non_set_neighbor(
-        self,
-        dataset: Dataset,
+        set_graph: SetKnowledgeGraph,
         neighbor: URIRef,
         predicate: URIRef,
         direction: str,
+        current_node: URIRef,
         src_aug: URIRef,
         tgt_aug: URIRef,
-    ) -> List[URIRef]:
-        self.logger.info("[PLM][Neighbor] augmenting non-set")
-        self.logger.info("    • neighbor → %s", neighbor)
-        self.logger.info("    • predicate → %s", predicate)
-        self.logger.info("    • direction → %s", direction)
-        created: List[URIRef] = []
-        if self._node_in_graph(dataset.knowledge_graph_source, neighbor):
-            clone = self._clone_non_set_node(dataset.knowledge_graph_source, neighbor)
-            created.append(clone)
-            self._mirror_relation(dataset.knowledge_graph_source, src_aug, predicate, clone, direction)
-        if self._node_in_graph(dataset.knowledge_graph_target, neighbor):
-            clone = self._clone_non_set_node(dataset.knowledge_graph_target, neighbor)
-            created.append(clone)
-            self._mirror_relation(dataset.knowledge_graph_target, tgt_aug, predicate, clone, direction)
-        return created
+        current_depth: int,
+        queue: Deque[ExpansionNode],
+        visited: set[URIRef],
+    ) -> None:
+        """Handle a non-set node neighbor.
 
-    def _mirror_relation(self, graph, subject: URIRef, predicate: URIRef, neighbor: URIRef, direction: str) -> None:
-        if direction == "out":
-            graph.add((subject, predicate, neighbor))
-        else:
-            graph.add((neighbor, predicate, subject))
+        Non-set nodes are connected to the augmented entities and checked for bridging
+        to other set nodes.
 
-    def _node_in_graph(self, graph, node: URIRef) -> bool:
-        if not isinstance(node, URIRef):
-            return False
-        key = (graph.identifier, node)
-        if key in self._membership_cache:
-            return self._membership_cache[key]
-        exists = self._has_triple(graph.triples((node, None, None))) or self._has_triple(
-            graph.triples((None, None, node))
+        Args:
+            dataset: Dataset to augment
+            set_graph: Set knowledge graph
+            neighbor: The non-set neighbor node
+            predicate: Predicate connecting to the neighbor
+            direction: Direction of the edge ("out" or "in")
+            current_node: Current set node
+            src_aug: Augmented source entity
+            tgt_aug: Augmented target entity
+            current_depth: Current BFS depth
+            queue: BFS queue
+            visited: Set of visited nodes
+        """
+        # Connect the non-set node to augmented entities
+        self.neighbor_handler.connect_non_set_to_augmented(
+            dataset, neighbor, predicate, direction, src_aug, tgt_aug
         )
-        self._membership_cache[key] = exists
-        return exists
 
-    @staticmethod
-    def _has_triple(iterator: Iterable) -> bool:
-        try:
-            next(iterator)
-            return True
-        except StopIteration:
-            return False
+        # Check for bridging to other set nodes (2-hop expansion)
+        if current_depth + 2 <= self.max_depth:
+            self._check_bridging(
+                set_graph, neighbor, current_node, current_depth, queue, visited
+            )
 
-    def _mint_augmented_uri(self, reference: URIRef) -> URIRef:
-        self._id_counter += 1
-        base = str(reference)
-        return URIRef(f"{base}_aug{self._id_counter}")
+    def _check_bridging(
+        self,
+        set_graph: SetKnowledgeGraph,
+        non_set_node: URIRef,
+        current_node: URIRef,
+        current_depth: int,
+        queue: Deque[ExpansionNode],
+        visited: set[URIRef],
+    ) -> None:
+        """Check if a non-set node bridges to other set nodes.
 
-    def _clone_non_set_node(self, graph, node: URIRef) -> URIRef:
-        clone = self._mint_augmented_uri(node)
-        graph.add((clone, self.derived_predicate, node))
-        for _, predicate, obj in graph.triples((node, None, None)):
-            if isinstance(obj, Literal):
-                graph.add((clone, predicate, obj))
-        self.logger.info("    • cloned → %s (graph=%s)", clone, graph.identifier)
-        return clone
+        Bridging allows 2-hop expansion: set_node -> non_set_node -> another_set_node
 
+        Args:
+            set_graph: Set knowledge graph
+            non_set_node: The intermediate non-set node
+            current_node: Current set node
+            current_depth: Current BFS depth
+            queue: BFS queue
+            visited: Set of visited nodes
+        """
+        bridged_nodes = self.neighbor_handler.find_bridged_set_neighbors(
+            set_graph, non_set_node, current_node
+        )
+
+        bridged_enqueued: set[URIRef] = set()
+        next_depth = current_depth + 2
+
+        for bridged_node in bridged_nodes:
+            if bridged_node in visited or bridged_node in bridged_enqueued:
+                continue
+
+            queue.append(
+                ExpansionNode(
+                    uri=bridged_node,
+                    depth=next_depth,
+                    node_type="set",
+                    parent=non_set_node,
+                )
+            )
+            bridged_enqueued.add(bridged_node)
+
+            self.logger.info("[PLM][Queue] Bridged via non-set node")
+            self.logger.info("    • current → %s", current_node)
+            self.logger.info("    • bridge → %s", non_set_node)
+            self.logger.info("    • next → %s", bridged_node)
+            self.logger.info("    • depth → %d", next_depth)
+
+    # ------------------------------------------------------------------
+    # Budget Calculation
+    # ------------------------------------------------------------------
     def _compute_pair_budget(self, initial_pairs: int) -> Optional[int]:
+        """Compute the maximum number of pairs to generate.
+
+        Takes the minimum of ratio-based and config-based limits.
+
+        Args:
+            initial_pairs: Number of aligned pairs in input dataset
+
+        Returns:
+            Maximum number of pairs to generate, or None for unlimited
+        """
         ratio_limit: Optional[int] = None
         if self.augmentation_ratio is not None:
             ratio_limit = max(1, math.ceil(initial_pairs * self.augmentation_ratio))
 
         config_limit = self.max_pairs_config
+
         if ratio_limit is None:
             return config_limit
         if config_limit is None:
             return ratio_limit
+
         return min(ratio_limit, config_limit)
 
-    def _collect_node_triples(self, graph, node: URIRef) -> Dict[str, List[Dict[str, object]]]:
-        def fmt(subject: URIRef, predicate: URIRef, obj) -> Dict[str, object]:
-            is_literal = isinstance(obj, Literal)
-            value = obj.toPython() if is_literal else str(obj)
-            if not isinstance(value, str):
-                value = str(value)
-            return {
-                "subject": str(subject),
-                "predicate": str(predicate),
-                "object": value,
-                "object_is_literal": is_literal,
-            }
+    # ------------------------------------------------------------------
+    # Logging Helpers
+    # ------------------------------------------------------------------
+    def _log_augmentation_start(self, initial_pairs: int, pair_budget: Optional[int]) -> None:
+        """Log augmentation initialization parameters."""
+        budget_display = pair_budget if pair_budget is not None else "unbounded"
+        self.logger.info(
+            "[PLM] Starting augmentation: budget=%s (initial=%d, ratio=%s, max_pairs=%s, seed=%d, derived=%s)",
+            budget_display,
+            initial_pairs,
+            f"{self.augmentation_ratio:.2f}" if self.augmentation_ratio is not None else "-",
+            self.max_pairs_config if self.max_pairs_config is not None else "-",
+            self.seed,
+            "enabled" if self.add_derived_predicate else "disabled",
+        )
 
-        outgoing = [fmt(node, predicate, obj) for _, predicate, obj in graph.triples((node, None, None))]
-        incoming = [fmt(subject, predicate, node) for subject, predicate, _ in graph.triples((None, None, node))]
-        return {"outgoing": outgoing, "incoming": incoming}
+    def _log_expansion_summary(
+        self, expanded_pairs: int, pair_budget: Optional[int], expansion_chain: List[str]
+    ) -> None:
+        """Log expansion summary."""
+        budget_display = pair_budget if pair_budget is not None else "unbounded"
+        self.logger.info(
+            "[PLM] Expanded %d/%s set nodes (max_depth=%d)",
+            expanded_pairs,
+            budget_display,
+            self.max_depth,
+        )
+
+        if expansion_chain:
+            chain_repr = " -> ".join(expansion_chain[:10])
+            if len(expansion_chain) > 10:
+                chain_repr += f" ... (+{len(expansion_chain) - 10} more)"
+            self.logger.info("[PLM] Expansion chain: %s", chain_repr)
+        else:
+            self.logger.info("[PLM] Expansion chain: (none)")
 
     def _log_node_connections(self, graph: SetKnowledgeGraph, node: URIRef) -> None:
+        """Log all connections of a node for debugging."""
         outgoing: list[str] = []
         incoming: list[str] = []
-        for direction, predicate, neighbor in self._iter_neighbors(graph, node):
+
+        for direction, predicate, neighbor in self.neighbor_handler.iter_neighbors(graph, node):
             if isinstance(neighbor, Literal):
                 value = neighbor.toPython()
                 if not isinstance(value, str):
@@ -356,6 +498,7 @@ class PLMAugmenter(AugmentationMethod):
                 neighbor_repr = f'"{value}"'
             else:
                 neighbor_repr = str(neighbor)
+
             if direction == "out":
                 outgoing.append(f"{predicate} -> {neighbor_repr}")
             else:
@@ -370,28 +513,3 @@ class PLMAugmenter(AugmentationMethod):
             self.logger.debug("    • incoming (%d)", len(incoming))
             for rel in incoming:
                 self.logger.debug("        <- %s", rel)
-
-    # ------------------------------------------------------------------
-    # Placeholder for PLM expansion
-    # ------------------------------------------------------------------
-    def _expansion(
-        self,
-        dataset: Dataset,
-        set_graph: SetKnowledgeGraph,
-        set_node: URIRef,
-        src_aug: URIRef,
-        tgt_aug: URIRef,
-    ) -> None:
-        """Placeholder for PLM-driven literal interpolation (implemented later)."""
-        self.logger.debug(
-            "Expansion step skipped for node %s ->",
-            set_node
-        )
-
-        self.logger.debug("          • %s",
-            src_aug
-        )
-
-        self.logger.debug("          • %s",
-            tgt_aug
-        )
