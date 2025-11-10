@@ -5,7 +5,6 @@ from __future__ import annotations
 from src.augmentation.base import AugmentationMethod
 from src.augmentation.registry import AUGMENTATION_REGISTRY
 from src.core.dataset import Dataset
-from src.core.knowledge_graph import KnowledgeGraph
 
 
 @AUGMENTATION_REGISTRY.register("plm_augmentation")
