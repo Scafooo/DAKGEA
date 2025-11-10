@@ -10,11 +10,3 @@ pip install -r install/requirements.txt
 ```
 
 Results land under `results/<experiment>/`; metadata and logs keep track of cache hits.
-
----
-
-## Testing
-
-```bash
-pytest tests/
-```
