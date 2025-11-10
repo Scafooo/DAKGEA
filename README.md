@@ -1,6 +1,4 @@
-# DAKGEA
-
-Lightweight runner for reduction → augmentation → evaluation of EA models.
+# Data Augmentation for Knowledge Graph Entity Resolution (DAKGEA)
 
 ## Quickstart
 
