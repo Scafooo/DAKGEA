@@ -2,20 +2,8 @@
 
 A **modular experimentation framework** for **Entity Alignment (EA)** on Knowledge Graphs. DAKGEA combines dataset reduction, data augmentation, and model training to measure how each component impacts alignment accuracy.
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
----
-
-## ✨ Features
-
-- **Multi-Format Support**: Multiple dataset formats with automatic conversion
-- **Flexible Configuration**: Simple names, explicit readers, or direct paths
-- **Modular Pipeline**: Reduction → Augmentation → Evaluation stages
-- **Extensible Architecture**: Easy to add new models, datasets, and augmentation methods
-- **Production Ready**: Comprehensive logging, checkpointing, and error handling
-
----
 
 ## 🛠️ Quick Start
 
@@ -23,7 +11,7 @@ A **modular experimentation framework** for **Entity Alignment (EA)** on Knowled
 
 ```bash
 # Clone repository
-git clone https://github.com/Scafooo/DataAug-KG-EntityResolution
+git clone <REPOSITORY_URL>
 cd DAKGEA
 
 # Create environment (choose one)
@@ -291,5 +279,3 @@ We welcome contributions! Please see the [Developer Guide](docs/developer-guide.
 - **Questions**: Open a discussion on GitHub
 
 ---
-
-**Built with ❤️ for Knowledge Graph Entity Alignment research**
