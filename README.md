@@ -279,5 +279,3 @@ We welcome contributions! Please see the [Developer Guide](docs/developer-guide.
 - **Questions**: Open a discussion on GitHub
 
 ---
-
-**Built with ❤️ for Knowledge Graph Entity Alignment research**
