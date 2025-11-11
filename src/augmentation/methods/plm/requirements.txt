@@ -1,0 +1,20 @@
+# PLM Augmentation Requirements
+#
+# Core dependencies for PLM-based data augmentation with BART interpolation
+
+# BART and transformers
+transformers>=4.30.0
+torch>=2.0.0
+
+# Sentence transformers for semantic predicate matching
+sentence-transformers>=2.2.0
+
+# HuggingFace datasets
+datasets>=2.12.0
+
+# Scientific computing
+numpy>=1.24.0
+scipy>=1.10.0
+
+# RDF/Knowledge Graphs (should already be installed)
+rdflib>=6.0.0

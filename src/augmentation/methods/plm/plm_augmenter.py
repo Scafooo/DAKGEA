@@ -147,6 +147,7 @@ class PLMAugmenter(AugmentationMethod):
         bart_cfg = augmentation_cfg.get("bart", {})
         self.enable_bart_finetuning = bool(bart_cfg.get("enable_finetuning", True))
         self.bart_model_name = bart_cfg.get("model_name", "facebook/bart-base")
+        self.bart_advanced_training_config = bart_cfg.get("advanced_training", {})
 
         # Determine BART output directory
         # Priority: stage_root/model > configured out_dir > default ./bart_plm_model
@@ -159,6 +160,9 @@ class PLMAugmenter(AugmentationMethod):
         self.bart_epochs = int(bart_cfg.get("epochs", 10))
         self.bart_batch_size = int(bart_cfg.get("batch_size", 16))
         self.bart_force_retrain = bool(bart_cfg.get("force_retrain", False))
+
+        # Predicate matching configuration
+        self.predicate_matcher_config = bart_cfg.get("predicate_matching", {})
 
         # Initialize helper classes
         self.neighbor_handler = NeighborHandler()
@@ -197,11 +201,12 @@ class PLMAugmenter(AugmentationMethod):
         else:
             self.logger.info("[PLM] BART fine-tuning disabled in configuration.")
 
-        # Initialize NodeExpander with BART interpolator (if available)
+        # Initialize NodeExpander with BART interpolator and predicate matcher config
         self.node_expander = NodeExpander(
             self.derived_predicate,
             self.add_derived_predicate,
             self.bart_interpolator,
+            self.predicate_matcher_config,
         )
 
         # ------------------------------------------------------------------
@@ -254,11 +259,13 @@ class PLMAugmenter(AugmentationMethod):
             self.logger.warning("[BART] PyTorch not available, using CPU.")
 
         self.logger.info("[BART] Initializing BartInterpolatorPLM...")
+
         self.bart_interpolator = BartInterpolatorPLM(
             model_name=self.bart_model_name,
             out_dir=self.bart_out_dir,
             device=device,
             seed=self.seed,
+            advanced_training_config=self.bart_advanced_training_config,
         )
 
         # Build training pairs from aligned entities

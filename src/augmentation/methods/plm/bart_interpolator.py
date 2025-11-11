@@ -4,7 +4,7 @@ import random
 import re
 from collections import defaultdict
 from dataclasses import dataclass
-from typing import List, Tuple, Iterable, Optional
+from typing import List, Tuple, Iterable, Optional, Dict, Any
 
 import torch
 from torch.nn import functional as F
@@ -20,6 +20,20 @@ from transformers.modeling_outputs import BaseModelOutput
 
 from src.core.dataset import Dataset
 from src.core.knowledge_graph import KnowledgeGraph
+
+# Import advanced training modules
+from src.augmentation.methods.plm.bart_training_modules import (
+    StratifiedSampler,
+    ContrastiveLoss,
+    NegativeSampler,
+    AttributeTypeClassifier,
+    PredicateMatchClassifier,
+    AttributeTypeInference,
+    AdvancedNoiser,
+    CurriculumScheduler,
+    TrainingAugmenter,
+    PairExample as AdvancedPairExample,
+)
 
 # Evita kernel SDPA in caso di maschere non standard/bug di broadcast
 try:
@@ -109,6 +123,7 @@ class BartInterpolatorPLM:
         max_len_out: int = 48,
         seed: int = 42,
         reuse_if_available: bool = True,
+        advanced_training_config: Optional[Dict[str, Any]] = None,
     ):
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.model_name = model_name
@@ -122,7 +137,98 @@ class BartInterpolatorPLM:
 
         os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
+        # Initialize advanced training modules
+        self.advanced_config = advanced_training_config or {}
+        self._init_advanced_modules()
+
         self.model, self.tokenizer = self._load_or_init_model()
+
+    def _init_advanced_modules(self):
+        """Initialize advanced training modules based on configuration."""
+        import logging
+        logger = logging.getLogger(__name__)
+
+        # Stratified Sampling
+        strat_cfg = self.advanced_config.get("stratified_sampling", {})
+        if strat_cfg.get("enable", False):
+            self.stratified_sampler = StratifiedSampler(
+                min_samples=strat_cfg.get("min_samples_per_predicate", 10),
+                max_samples=strat_cfg.get("max_samples_per_predicate", 1000),
+                strategy=strat_cfg.get("balancing_strategy", "sqrt"),
+            )
+            logger.info("[BART] Stratified sampling enabled")
+        else:
+            self.stratified_sampler = None
+
+        # Contrastive Learning
+        contr_cfg = self.advanced_config.get("contrastive_learning", {})
+        if contr_cfg.get("enable", False):
+            self.contrastive_loss = ContrastiveLoss(temperature=contr_cfg.get("temperature", 0.07))
+            self.negative_sampler = NegativeSampler(
+                num_negatives=contr_cfg.get("num_negatives", 3),
+                strategy=contr_cfg.get("negative_strategy", "same_predicate"),
+            )
+            self.contrastive_weight = contr_cfg.get("contrastive_weight", 0.3)
+            logger.info("[BART] Contrastive learning enabled")
+        else:
+            self.contrastive_loss = None
+            self.negative_sampler = None
+            self.contrastive_weight = 0.0
+
+        # Multi-task Learning
+        mtl_cfg = self.advanced_config.get("multi_task_learning", {})
+        if mtl_cfg.get("enable", False):
+            self.use_multi_task = True
+            self.predict_attr_type = mtl_cfg.get("predict_attribute_type", True)
+            self.predict_pred_match = mtl_cfg.get("predict_predicate_match", True)
+            self.auxiliary_weight = mtl_cfg.get("auxiliary_weight", 0.2)
+            # Classifiers will be initialized after model is loaded
+            self.attr_type_classifier = None
+            self.pred_match_classifier = None
+            logger.info("[BART] Multi-task learning enabled")
+        else:
+            self.use_multi_task = False
+            self.predict_attr_type = False
+            self.predict_pred_match = False
+            self.auxiliary_weight = 0.0
+
+        # Advanced Noising
+        noise_cfg = self.advanced_config.get("advanced_noising", {})
+        if noise_cfg.get("enable", False):
+            self.advanced_noiser = AdvancedNoiser(
+                span_corruption_ratio=noise_cfg.get("span_corruption_ratio", 0.3),
+                mean_span_length=noise_cfg.get("mean_span_length", 3),
+                entity_aware_masking=noise_cfg.get("entity_aware_masking", True),
+                entity_mask_prob=noise_cfg.get("entity_mask_prob", 0.5),
+            )
+            logger.info("[BART] Advanced noising enabled")
+        else:
+            self.advanced_noiser = None
+
+        # Curriculum Learning
+        curr_cfg = self.advanced_config.get("curriculum_learning", {})
+        if curr_cfg.get("enable", False):
+            self.curriculum_scheduler = CurriculumScheduler(
+                strategy=curr_cfg.get("strategy", "length"),
+                num_phases=curr_cfg.get("num_phases", 3),
+                phase_epochs=curr_cfg.get("phase_epochs", [3, 3, 4]),
+            )
+            logger.info("[BART] Curriculum learning enabled")
+        else:
+            self.curriculum_scheduler = None
+
+        # Training Augmentation
+        aug_cfg = self.advanced_config.get("training_augmentation", {})
+        if aug_cfg.get("enable", False):
+            self.training_augmenter = TrainingAugmenter(
+                synonym_replacement=aug_cfg.get("synonym_replacement", False),
+                back_translation=aug_cfg.get("back_translation", False),
+                random_noise=aug_cfg.get("random_noise", False),
+                augmentation_ratio=aug_cfg.get("augmentation_ratio", 0.3),
+            )
+            logger.info("[BART] Training augmentation enabled")
+        else:
+            self.training_augmenter = None
 
     # ------------------------------------------------------------------
     # Model loading / initialization logic
@@ -198,8 +304,36 @@ class BartInterpolatorPLM:
 
         return HFDataset.from_list(rows)
 
+    def _apply_advanced_preprocessing(self, pairs: List[PairExample]) -> List[PairExample]:
+        """Apply advanced training preprocessing: stratified sampling, augmentation, etc."""
+        import logging
+        logger = logging.getLogger(__name__)
+
+        # 1. Training Data Augmentation
+        if self.training_augmenter:
+            pairs = self.training_augmenter.augment(pairs)
+
+        # 2. Stratified Sampling
+        if self.stratified_sampler:
+            # Group by predicate
+            by_predicate = defaultdict(list)
+            for ex in pairs:
+                by_predicate[ex.predicate].append(ex)
+            pairs = self.stratified_sampler.sample(by_predicate)
+
+        # 3. Curriculum Learning - assign difficulties
+        if self.curriculum_scheduler:
+            pairs = self.curriculum_scheduler.assign_difficulties(pairs)
+
+        # 4. Index for contrastive learning
+        if self.negative_sampler:
+            self.negative_sampler.index_examples(pairs)
+            logger.info(f"[BART] Indexed {len(pairs)} examples for contrastive learning")
+
+        return pairs
+
     # ------------------------------------------------------------------
-    # Fine-tuning con BART (GPU-safe + Early Stopping)
+    # Fine-tuning con BART (GPU-safe + Early Stopping + Advanced Modules)
     # ------------------------------------------------------------------
     def fine_tune(
         self,
@@ -216,9 +350,13 @@ class BartInterpolatorPLM:
         """
         Esegue fine-tuning di BART sul dataset di coppie (src,tgt) generate dai KGs,
         con early stopping automatico basato sulla loss di validazione.
+        Supports advanced training modules (stratified sampling, contrastive learning, etc.)
         """
         import inspect
+        import logging
         from transformers import TrainingArguments, Trainer, EarlyStoppingCallback
+
+        logger = logging.getLogger(__name__)
 
         # 🧩 skip se modello già addestrato e reuse abilitato
         if (
@@ -230,29 +368,39 @@ class BartInterpolatorPLM:
             print(f"[BART-PLM] Skipping fine-tuning — model already exists in {self.out_dir}.")
             return
 
-        # ✂️ opzionale: sottocampiona se troppo grande
+        # ✂️ opzionale: sottocampiona se troppo grande (before advanced preprocessing)
         if max_train_samples and len(pairs) > max_train_samples:
             pairs = random.sample(pairs, max_train_samples)
 
-        print(f"[BART-PLM] Preparing fine-tuning dataset with {len(pairs)} examples...")
+        logger.info(f"[BART-PLM] Preparing fine-tuning dataset with {len(pairs)} examples...")
+
+        # Apply advanced preprocessing
+        pairs = self._apply_advanced_preprocessing(pairs)
+
+        logger.info(f"[BART-PLM] After preprocessing: {len(pairs)} examples")
 
         # ------------------------------------------------------------------
         # Dataset creation + noise
         # ------------------------------------------------------------------
-        def _noise_str(x: str) -> str:
-            import re, random
-            if not x:
-                return x
-            ops = [
-                lambda s: s.lower(),
-                lambda s: re.sub(r"\s+", " ", s),
-                lambda s: re.sub(r"[^\w\s\.\-']", " ", s),
-                lambda s: re.sub(r"\b(\w+)( \1\b)+", r"\1", s, flags=re.IGNORECASE),
-                lambda s: s[: max(3, int(len(s) * random.uniform(0.7, 1.0)))],
-            ]
-            for f in random.sample(ops, random.randint(1, 3)):
-                x = f(x)
-            return re.sub(r"\s+", " ", x).strip(" .-")
+        # Use advanced noiser if available, otherwise use default
+        if self.advanced_noiser:
+            def _noise_str(x: str) -> str:
+                return self.advanced_noiser.noise(x) if x else x
+        else:
+            def _noise_str(x: str) -> str:
+                import re, random
+                if not x:
+                    return x
+                ops = [
+                    lambda s: s.lower(),
+                    lambda s: re.sub(r"\s+", " ", s),
+                    lambda s: re.sub(r"[^\w\s\.\-']", " ", s),
+                    lambda s: re.sub(r"\b(\w+)( \1\b)+", r"\1", s, flags=re.IGNORECASE),
+                    lambda s: s[: max(3, int(len(s) * random.uniform(0.7, 1.0)))],
+                ]
+                for f in random.sample(ops, random.randint(1, 3)):
+                    x = f(x)
+                return re.sub(r"\s+", " ", x).strip(" .-")
 
         def to_rows(pairs):
             rows = []
@@ -407,6 +555,11 @@ class BartInterpolatorPLM:
         # Trova predicati in comune (stesso local name)
         common_predicates = set(preds_src.keys()) & set(preds_tgt.keys())
 
+        # Calculate predicate frequencies for curriculum learning
+        pred_frequencies = {lname: len(preds_src[lname]) + len(preds_tgt[lname])
+                           for lname in common_predicates}
+        max_freq = max(pred_frequencies.values()) if pred_frequencies else 1
+
         per_pred_count = {}
         examples: List[PairExample] = []
 
@@ -423,6 +576,10 @@ class BartInterpolatorPLM:
             if len(vals_tgt) > max_vals:
                 vals_tgt = random.sample(vals_tgt, max_vals)
 
+            # Infer predicate type once for all examples
+            sample_val = vals_src[0] if vals_src else vals_tgt[0]
+            pred_type = AttributeTypeInference.infer_type(lname, sample_val)
+
             # Crea coppie (possibilmente campionando)
             for v_src in vals_src:
                 for v_tgt in vals_tgt:
@@ -432,13 +589,29 @@ class BartInterpolatorPLM:
                         break
                     per_pred_count[lname] = c + 1
 
+                    src_clean = _simple_clean(v_src)
+                    tgt_clean = _simple_clean(v_tgt)
+
+                    # Calculate difficulty for curriculum learning
+                    difficulty = None
+                    if self.curriculum_scheduler:
+                        if self.curriculum_scheduler.strategy == "predicate_frequency":
+                            # Normalize frequency to [0, 1], invert so rare = harder
+                            difficulty = 1.0 - (pred_frequencies[lname] / max_freq)
+                        else:
+                            # Length-based difficulty (calculated later by scheduler)
+                            difficulty = None
+
                     ex = PairExample(
                         predicate=lname,
-                        src_val=_simple_clean(v_src),
-                        tgt_val=_simple_clean(v_tgt),
-                        out_src=self._canonicalize(lname, _simple_clean(v_src)),
-                        out_tgt=self._canonicalize(lname, _simple_clean(v_tgt)),
+                        src_val=src_clean,
+                        tgt_val=tgt_clean,
+                        out_src=self._canonicalize(lname, src_clean),
+                        out_tgt=self._canonicalize(lname, tgt_clean),
                     )
+                    # Add metadata as attributes (for compatibility)
+                    ex.predicate_type = pred_type
+                    ex.difficulty = difficulty
                     examples.append(ex)
 
                 # Break outer loop too if we reached the limit

@@ -12,3 +12,23 @@ augmentation:
     batch_size: 8                 # Smaller batch for less memory
     max_train_samples: 1000       # Limit training samples
     force_retrain: false
+
+    # Advanced training (all disabled for minimal config)
+    advanced_training:
+      stratified_sampling:
+        enable: false
+      contrastive_learning:
+        enable: false
+      multi_task_learning:
+        enable: false
+      advanced_noising:
+        enable: false
+      curriculum_learning:
+        enable: false
+      training_augmentation:
+        enable: false
+
+    # Semantic predicate matching (default config)
+    predicate_matching:
+      embedding_model: "all-MiniLM-L6-v2"
+      similarity_threshold: 0.7

@@ -45,3 +45,57 @@ augmentation:
       repetition_penalty: 2.0     # Penalize repetitions
       length_penalty: 1.0         # Length penalty
       no_repeat_ngram_size: 4     # Prevent n-gram repetition
+
+    # Semantic predicate matching configuration
+    predicate_matching:
+      embedding_model: "all-MiniLM-L6-v2"  # Sentence transformer model
+      similarity_threshold: 0.7    # Minimum similarity for match [0-1]
+      cache_dir: ".cache/embeddings"  # Cache directory for embeddings
+      device: null                 # "cuda", "cpu", or null (auto-detect)
+
+    # Advanced training techniques (modular - can be toggled on/off)
+    advanced_training:
+      # Stratified sampling: balance predicate distribution
+      stratified_sampling:
+        enable: false             # Enable stratified sampling
+        min_samples_per_predicate: 10  # Minimum samples per predicate
+        max_samples_per_predicate: 1000  # Maximum samples per predicate
+        balancing_strategy: "sqrt"  # "uniform", "sqrt", "log"
+
+      # Contrastive learning: learn from negative examples
+      contrastive_learning:
+        enable: false             # Enable contrastive learning
+        num_negatives: 3          # Number of hard negatives per positive
+        contrastive_weight: 0.3   # Weight of contrastive loss (vs reconstruction)
+        temperature: 0.07         # Temperature for contrastive loss
+        negative_strategy: "same_predicate"  # "same_predicate", "same_type", "random"
+
+      # Multi-task learning: auxiliary prediction tasks
+      multi_task_learning:
+        enable: false             # Enable multi-task learning
+        predict_attribute_type: true   # Predict attribute type (name, date, etc.)
+        predict_predicate_match: true  # Predict if values share predicate
+        auxiliary_weight: 0.2     # Weight of auxiliary losses
+
+      # Advanced noising: better corruption strategies
+      advanced_noising:
+        enable: false             # Enable advanced noising
+        span_corruption_ratio: 0.3  # Ratio of spans to corrupt
+        mean_span_length: 3       # Average span length to mask
+        entity_aware_masking: true  # Mask named entities with higher probability
+        entity_mask_prob: 0.5     # Probability of masking detected entities
+
+      # Curriculum learning: easy to hard examples
+      curriculum_learning:
+        enable: false             # Enable curriculum learning
+        strategy: "length"        # "length", "predicate_frequency", "custom"
+        num_phases: 3             # Number of curriculum phases
+        phase_epochs: [3, 3, 4]   # Epochs per phase (must sum to total epochs)
+
+      # Data augmentation for training: synthetic variations
+      training_augmentation:
+        enable: false             # Enable training data augmentation
+        synonym_replacement: false  # Replace words with synonyms
+        back_translation: false   # Use back-translation
+        random_noise: false       # Add random character noise
+        augmentation_ratio: 0.3   # Ratio of augmented samples to add
