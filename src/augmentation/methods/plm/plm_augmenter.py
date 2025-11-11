@@ -6,8 +6,11 @@ Refactored version with improved modularity and clarity.
 from __future__ import annotations
 
 import math
+import os
 import random
+import yaml
 from collections import deque
+from pathlib import Path
 from typing import Deque, List, Optional
 
 from rdflib import Literal, URIRef
@@ -16,6 +19,7 @@ from src.augmentation.base import AugmentationMethod
 from src.augmentation.registry import AUGMENTATION_REGISTRY
 from src.core.dataset import Dataset
 
+from .bart_interpolator import BartInterpolatorPLM
 from .expansion_node import ExpansionNode
 from .neighbor_handler import NeighborHandler
 from .node_expander import NodeExpander
@@ -44,12 +48,71 @@ class PLMAugmenter(AugmentationMethod):
 
     registry_name = "plm_augmentation"
     _DEFAULT_DERIVED_PREDICATE = URIRef("http://dakgea.org/augmentation/derivedFrom")
+    _DEFAULT_CONFIG_PATH = "config/augmentation/plm.yaml"
+
+    @staticmethod
+    def _load_default_config() -> dict:
+        """Load default configuration from config/augmentation/plm.yaml.
+
+        Returns:
+            Default configuration dictionary
+        """
+        config_path = Path(PLMAugmenter._DEFAULT_CONFIG_PATH)
+
+        if config_path.exists():
+            try:
+                with open(config_path, "r") as f:
+                    default_cfg = yaml.safe_load(f)
+                return default_cfg or {}
+            except Exception as e:
+                # If loading fails, return empty dict (will use hardcoded defaults)
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.warning(f"Failed to load default config from {config_path}: {e}")
+                return {}
+        else:
+            # Config file doesn't exist, use hardcoded defaults
+            return {}
+
+    @staticmethod
+    def _merge_configs(base: dict, override: dict) -> dict:
+        """Deep merge two configuration dictionaries.
+
+        Args:
+            base: Base configuration
+            override: Override configuration (takes precedence)
+
+        Returns:
+            Merged configuration
+        """
+        result = base.copy()
+        for key, value in override.items():
+            if key in result and isinstance(result[key], dict) and isinstance(value, dict):
+                result[key] = PLMAugmenter._merge_configs(result[key], value)
+            else:
+                result[key] = value
+        return result
 
     def __init__(self, config: Optional[dict] = None):
-        super().__init__(config)
+        # Load default config and merge with provided config
+        default_cfg = self._load_default_config()
+        if config:
+            merged_cfg = self._merge_configs(default_cfg, config)
+        else:
+            merged_cfg = default_cfg
+
+        super().__init__(merged_cfg)
         cfg = self.config or {}
         augmentation_cfg = cfg.get("augmentation", cfg)
         experiment_cfg = cfg.get("experiment", cfg)
+
+        # Log config source
+        if config:
+            self.logger.info("[PLM] Using merged configuration (default + user-provided)")
+        elif default_cfg:
+            self.logger.info(f"[PLM] Using default configuration from {self._DEFAULT_CONFIG_PATH}")
+        else:
+            self.logger.info("[PLM] Using hardcoded default configuration")
 
         # Expansion parameters
         self.max_depth = int(augmentation_cfg.get("max_depth", 1))
@@ -80,9 +143,31 @@ class PLMAugmenter(AugmentationMethod):
             URIRef(derived_predicate) if derived_predicate else self._DEFAULT_DERIVED_PREDICATE
         )
 
+        # BART fine-tuning parameters
+        bart_cfg = augmentation_cfg.get("bart", {})
+        self.enable_bart_finetuning = bool(bart_cfg.get("enable_finetuning", True))
+        self.bart_model_name = bart_cfg.get("model_name", "facebook/bart-base")
+
+        # Determine BART output directory
+        # Priority: stage_root/model > configured out_dir > default ./bart_plm_model
+        stage_root = augmentation_cfg.get("stage_root")
+        if stage_root:
+            self.bart_out_dir = str(Path(stage_root) / "model")
+        else:
+            self.bart_out_dir = bart_cfg.get("out_dir", "./bart_plm_model")
+
+        self.bart_epochs = int(bart_cfg.get("epochs", 10))
+        self.bart_batch_size = int(bart_cfg.get("batch_size", 16))
+        self.bart_force_retrain = bool(bart_cfg.get("force_retrain", False))
+
         # Initialize helper classes
-        self.node_expander = NodeExpander(self.derived_predicate, self.add_derived_predicate)
         self.neighbor_handler = NeighborHandler()
+
+        # Initialize BART interpolator (lazy initialization - only if fine-tuning is enabled)
+        self.bart_interpolator: Optional[BartInterpolatorPLM] = None
+
+        # Node expander will be initialized after BART (needs interpolator reference)
+        self.node_expander: Optional[NodeExpander] = None
 
     # ------------------------------------------------------------------
     # Public API
@@ -103,6 +188,25 @@ class PLMAugmenter(AugmentationMethod):
             self.logger.warning("Skipping PLM augmentation: no aligned entities available.")
             return dataset_augmented
 
+        # ------------------------------------------------------------------
+        # Step 1: BART Fine-tuning (if enabled)
+        # ------------------------------------------------------------------
+        if self.enable_bart_finetuning:
+            self.section("BART Fine-tuning")
+            self._initialize_and_finetune_bart(dataset)
+        else:
+            self.logger.info("[PLM] BART fine-tuning disabled in configuration.")
+
+        # Initialize NodeExpander with BART interpolator (if available)
+        self.node_expander = NodeExpander(
+            self.derived_predicate,
+            self.add_derived_predicate,
+            self.bart_interpolator,
+        )
+
+        # ------------------------------------------------------------------
+        # Step 2: Create SetKnowledgeGraph and prepare for expansion
+        # ------------------------------------------------------------------
         # Create fused set graph
         set_graph = SetKnowledgeGraph.from_dataset(dataset)
         set_nodes = sorted(set_graph.iter_set_nodes(), key=lambda uri: str(uri))
@@ -119,8 +223,10 @@ class PLMAugmenter(AugmentationMethod):
         rng = random.Random(self.seed)
         rng.shuffle(set_nodes)
 
-        # Perform BFS expansion
-        self.section("PLM Augmentation")
+        # ------------------------------------------------------------------
+        # Step 3: Perform BFS expansion
+        # ------------------------------------------------------------------
+        self.section("PLM BFS Expansion")
         expanded_pairs = self._bfs_expansion(dataset_augmented, set_graph, set_nodes, pair_budget)
 
         self.logger.info(
@@ -130,6 +236,52 @@ class PLMAugmenter(AugmentationMethod):
         )
 
         return dataset_augmented
+
+    # ------------------------------------------------------------------
+    # BART Fine-tuning
+    # ------------------------------------------------------------------
+    def _initialize_and_finetune_bart(self, dataset: Dataset) -> None:
+        """Initialize BART interpolator and perform fine-tuning.
+
+        Args:
+            dataset: Dataset to extract training pairs from
+        """
+        try:
+            import torch
+            device = "cuda" if torch.cuda.is_available() else "cpu"
+        except ImportError:
+            device = "cpu"
+            self.logger.warning("[BART] PyTorch not available, using CPU.")
+
+        self.logger.info("[BART] Initializing BartInterpolatorPLM...")
+        self.bart_interpolator = BartInterpolatorPLM(
+            model_name=self.bart_model_name,
+            out_dir=self.bart_out_dir,
+            device=device,
+            seed=self.seed,
+        )
+
+        # Build training pairs from aligned entities
+        self.logger.info("[BART] Building training pairs from dataset...")
+        pairs = self.bart_interpolator.build_pairs_from_dataset(
+            dataset.knowledge_graph_source,
+            dataset.knowledge_graph_target,
+            dataset.aligned_entities,
+        )
+        self.logger.info(f"[BART] Built {len(pairs)} training pairs.")
+
+        # Fine-tune BART
+        if len(pairs) > 0:
+            self.logger.info("[BART] Starting fine-tuning...")
+            self.bart_interpolator.fine_tune(
+                pairs,
+                epochs=self.bart_epochs,
+                batch_size=self.bart_batch_size,
+                force_retrain=self.bart_force_retrain,
+            )
+            self.logger.info("[BART] Fine-tuning complete.")
+        else:
+            self.logger.warning("[BART] No training pairs found. Skipping fine-tuning.")
 
     # ------------------------------------------------------------------
     # BFS Expansion

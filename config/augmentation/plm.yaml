@@ -1,0 +1,47 @@
+# PLM Augmentation Configuration
+# This file contains the default configuration for PLM-based augmentation
+
+augmentation:
+  # Augmentation method name (must match registry)
+  method: plm_augmentation
+
+  # BFS expansion parameters
+  max_depth: 2                    # Maximum BFS depth for expansion
+  ratio: 0.5                      # Augmentation ratio (0.5 = 50% more entities)
+  max_pairs: null                 # Absolute maximum pairs (null = use ratio)
+
+  # Provenance tracking
+  add_derived_predicate: false    # Add derivedFrom triples for lineage tracking
+  derived_predicate: "http://dakgea.org/augmentation/derivedFrom"
+
+  # BART fine-tuning configuration
+  bart:
+    enable_finetuning: true       # Enable BART fine-tuning
+    model_name: "facebook/bart-base"  # BART model to use
+    out_dir: "./bart_plm_model"   # Output directory for fine-tuned model
+    epochs: 10                    # Number of training epochs
+    batch_size: 16                # Training batch size
+    learning_rate: 5.0e-5         # Learning rate
+    force_retrain: false          # Force retraining even if model exists
+    max_train_samples: 4000       # Maximum training samples (null = unlimited)
+    val_split: 0.1                # Validation split ratio
+    patience: 3                   # Early stopping patience
+    max_per_predicate: 5000       # Max examples per predicate
+
+    # BART interpolation parameters
+    base_alpha: 0.35              # Base interpolation alpha
+    alpha_spread: 0.25            # Alpha variation range
+    max_len_in: 96                # Max input token length
+    max_len_out: 48               # Max output token length
+
+    # Generation parameters
+    generation:
+      max_new_tokens: 32          # Max tokens to generate
+      do_sample: true             # Enable sampling
+      top_k: 50                   # Top-k sampling
+      top_p: 0.95                 # Nucleus sampling threshold
+      temperature: 1.2            # Sampling temperature
+      num_beams: 1                # Number of beams (1 = no beam search)
+      repetition_penalty: 2.0     # Penalize repetitions
+      length_penalty: 1.0         # Length penalty
+      no_repeat_ngram_size: 4     # Prevent n-gram repetition

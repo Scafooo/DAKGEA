@@ -1,6 +1,6 @@
 """Node expansion logic for PLM augmentation."""
 
-from typing import Optional, Tuple
+from typing import Optional, Tuple, TYPE_CHECKING
 
 from rdflib import Literal, URIRef
 
@@ -9,21 +9,31 @@ from src.logger import get_logger
 
 from .set_knowledge_graph.set_knowledge_graph import SetKnowledgeGraph
 
+if TYPE_CHECKING:
+    from .bart_interpolator import BartInterpolatorPLM
+
 logger = get_logger(__name__)
 
 
 class NodeExpander:
     """Handles the expansion of nodes during PLM augmentation."""
 
-    def __init__(self, derived_predicate: URIRef, add_derived_predicate: bool = False):
+    def __init__(
+        self,
+        derived_predicate: URIRef,
+        add_derived_predicate: bool = False,
+        bart_interpolator: Optional["BartInterpolatorPLM"] = None,
+    ):
         """Initialize the node expander.
 
         Args:
             derived_predicate: Predicate URI to use for derivation tracking
             add_derived_predicate: Whether to actually add derivedFrom triples
+            bart_interpolator: Optional BART interpolator for literal generation
         """
         self.derived_predicate = derived_predicate
         self.add_derived_predicate = add_derived_predicate
+        self.bart_interpolator = bart_interpolator
         self._id_counter = 0
 
     def expand_set_node(
@@ -77,7 +87,10 @@ class NodeExpander:
         src_aug: URIRef,
         tgt_aug: URIRef,
     ) -> None:
-        """Copy literal attributes from original entities to augmented ones.
+        """Generate literal attributes for augmented entities using BART interpolation.
+
+        Only generates literals if BART interpolator is available.
+        Augmented entities without BART will have no literals.
 
         Args:
             dataset: Dataset containing the knowledge graphs
@@ -86,23 +99,94 @@ class NodeExpander:
             src_aug: Augmented source entity URI
             tgt_aug: Augmented target entity URI
         """
-        self._copy_literals(dataset.knowledge_graph_source, src_component, src_aug)
-        self._copy_literals(dataset.knowledge_graph_target, tgt_component, tgt_aug)
+        if self.bart_interpolator:
+            self._interpolate_literals(
+                dataset, src_component, tgt_component, src_aug, tgt_aug
+            )
+        else:
+            logger.debug("    • no BART interpolator - skipping literals")
 
-    @staticmethod
-    def _copy_literals(graph, original: Optional[URIRef], augmented: URIRef) -> None:
-        """Copy all literal attributes from original to augmented entity."""
-        if not original:
+    def _interpolate_literals(
+        self,
+        dataset: Dataset,
+        src_component: Optional[URIRef],
+        tgt_component: Optional[URIRef],
+        src_aug: URIRef,
+        tgt_aug: URIRef,
+    ) -> None:
+        """Interpolate literals using BART for augmented entities.
+
+        Collects matching predicates from source and target, then uses BART
+        to generate interpolated literal values.
+        """
+        if not src_component or not tgt_component:
+            logger.debug("    • missing components - skipping interpolation")
             return
 
-        literal_count = 0
-        for _, predicate, obj in graph.triples((original, None, None)):
-            if isinstance(obj, Literal):
-                graph.add((augmented, predicate, obj))
-                literal_count += 1
+        # Collect literals from both components, grouped by predicate local name
+        src_literals = self._collect_predicate_literals(
+            dataset.knowledge_graph_source, src_component
+        )
+        tgt_literals = self._collect_predicate_literals(
+            dataset.knowledge_graph_target, tgt_component
+        )
 
-        if literal_count > 0:
-            logger.debug("    • bootstrapped %d literals", literal_count)
+        # Find common predicates (by local name)
+        common_predicates = set(src_literals.keys()) & set(tgt_literals.keys())
+
+        interpolated_count = 0
+        for pred_name in common_predicates:
+            src_pred, src_vals = src_literals[pred_name]
+            tgt_pred, tgt_vals = tgt_literals[pred_name]
+
+            # Use first value from each (or could sample randomly)
+            src_val = src_vals[0] if src_vals else ""
+            tgt_val = tgt_vals[0] if tgt_vals else ""
+
+            if not src_val or not tgt_val:
+                continue
+
+            # Interpolate using BART
+            try:
+                aug_src_val, aug_tgt_val = self.bart_interpolator.interpolate_pair(
+                    str(src_val), str(tgt_val), predicate=pred_name
+                )
+
+                # Add interpolated literals to augmented entities
+                dataset.knowledge_graph_source.add(
+                    (src_aug, src_pred, Literal(aug_src_val))
+                )
+                dataset.knowledge_graph_target.add(
+                    (tgt_aug, tgt_pred, Literal(aug_tgt_val))
+                )
+                interpolated_count += 1
+
+            except Exception as e:
+                logger.warning(
+                    "Failed to interpolate predicate %s: %s. Skipping this predicate.",
+                    pred_name, e
+                )
+
+        if interpolated_count > 0:
+            logger.debug("    • interpolated %d literals with BART", interpolated_count)
+
+    @staticmethod
+    def _collect_predicate_literals(graph, entity: URIRef) -> dict:
+        """Collect literals grouped by predicate local name.
+
+        Returns:
+            Dict mapping predicate_local_name -> (predicate_uri, [literal_values])
+        """
+        from .bart_interpolator import _clean_pred
+
+        pred_map = {}
+        for _, predicate, obj in graph.triples((entity, None, None)):
+            if isinstance(obj, Literal):
+                local_name = _clean_pred(str(predicate))
+                if local_name not in pred_map:
+                    pred_map[local_name] = (predicate, [])
+                pred_map[local_name][1].append(obj)
+        return pred_map
 
     def _mint_augmented_uri(self, reference: URIRef) -> URIRef:
         """Generate a new augmented URI based on a reference URI.

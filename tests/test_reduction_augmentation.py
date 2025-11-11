@@ -10,7 +10,7 @@ logging.getLogger("rdflib.term").setLevel(logging.ERROR)
 # 1. Dataset loading
 # ----------------------------------------------------------------------------
 reader = DatasetReaderFactory.create_reader("bert_int")
-dataset = reader.read("/home/federico/Programming/Python/DAKGEA/data/raw/hybea/BBC_DB/attribute_data")
+dataset = reader.read("/home/federico/Programming/Python/DAKGEA/data/raw/openea/BBC_DB/attribute_data")
 
 # ----------------------------------------------------------------------------
 # 2. Reduction (optional)
@@ -31,5 +31,6 @@ skg = SetKnowledgeGraph.from_dataset(dataset)
 # ----------------------------------------------------------------------------
 augmenter = PLMAugmenter({"augmentation": {"ratio": 0.5, "max_depth": 2}, "experiment": {"seed": 11037}})
 dataset_augmented = augmenter.augment(dataset)
+
 
 

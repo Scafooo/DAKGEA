@@ -256,13 +256,21 @@ class AugmentationStage(_WriterStage):
             )
 
         augmenter_cls = AUGMENTATION_REGISTRY.get(augmentation_name)
-        augmenter = augmenter_cls(stage_cfg)
+        # Add stage_root to config so augmenter can save artifacts
+        augmenter_config = dict(stage_cfg)
+        augmenter_config.setdefault("augmentation", {})["stage_root"] = str(stage_root)
+        augmenter = augmenter_cls(augmenter_config)
         dataset_augmented = augmenter.augment(dataset_reduced.clone())
         logger.info(
             "[SUCCESS] Augmentation '%s' complete (%d aligned pairs)",
             augmentation_name,
             len(dataset_augmented.aligned_entities),
         )
+
+        # Track model directory for cleanup if needed (e.g., BART fine-tuned model)
+        model_dir = stage_root / "model"
+        if model_dir.exists():
+            augmentation_paths["model"] = str(model_dir.resolve())
 
         for plan in self.writer_plans:
             plan_root = self._plan_root(stage_root, plan)

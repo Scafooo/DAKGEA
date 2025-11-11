@@ -52,3 +52,9 @@ src/hybea/**/*.h5
 # Temporary experiment files
 *.tmp
 *.bak
+
+# BART fine-tuned models
+bart_plm_model/
+**/model/
+*.bin
+*.safetensors
