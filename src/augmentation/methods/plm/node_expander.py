@@ -161,6 +161,16 @@ class NodeExpander:
                 )
                 interpolated_count += 1
 
+                # Log interpolation details
+                src_str = str(src_val)[:40]
+                tgt_str = str(tgt_val)[:40]
+                aug_src_str = str(aug_src_val)[:40]
+                aug_tgt_str = str(aug_tgt_val)[:40]
+
+                logger.info("      [%s]", pred_name)
+                logger.info("        src: '%s' + '%s' → '%s'", src_str, tgt_str, aug_src_str)
+                logger.info("        tgt: '%s' + '%s' → '%s'", src_str, tgt_str, aug_tgt_str)
+
             except Exception as e:
                 logger.warning(
                     "Failed to interpolate predicate %s: %s. Skipping this predicate.",
@@ -168,7 +178,7 @@ class NodeExpander:
                 )
 
         if interpolated_count > 0:
-            logger.debug("    • interpolated %d literals with BART", interpolated_count)
+            logger.info("    • ✓ interpolated %d literals with BART", interpolated_count)
 
     @staticmethod
     def _collect_predicate_literals(graph, entity: URIRef) -> dict:

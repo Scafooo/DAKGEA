@@ -29,7 +29,20 @@ skg = SetKnowledgeGraph.from_dataset(dataset)
 # ----------------------------------------------------------------------------
 # 4. PLM Augmentation
 # ----------------------------------------------------------------------------
-augmenter = PLMAugmenter({"augmentation": {"ratio": 0.5, "max_depth": 2}, "experiment": {"seed": 11037}})
+augmenter = PLMAugmenter({
+    "augmentation": {
+        "ratio": 0.5,
+        "max_depth": 2,
+        "bart": {
+            "enable_finetuning": True,
+            "force_retrain": False,  # Riutilizza modello esistente
+            "out_dir": "./tests/bart_test_model",  # Percorso fisso per test
+            "epochs": 300,  # Ridotto per test veloci
+            "max_train_samples": 200000,  # Limitato per test veloci
+        }
+    },
+    "experiment": {"seed": 11037}
+})
 dataset_augmented = augmenter.augment(dataset)
 
 

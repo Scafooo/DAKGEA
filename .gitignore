@@ -56,5 +56,6 @@ src/hybea/**/*.h5
 # BART fine-tuned models
 bart_plm_model/
 **/model/
+tests/bart_test_model/
 *.bin
 *.safetensors
