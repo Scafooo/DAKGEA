@@ -157,6 +157,8 @@ class PLMAugmenter(AugmentationMethod):
         queue: Deque[ExpansionNode] = deque()
         remaining_seeds: Deque[URIRef] = deque(set_nodes)
         expanded_pairs = 0
+        # Track mapping from set_node to its augmented entities
+        set_node_to_augmented: dict[URIRef, tuple[URIRef, URIRef]] = {}
 
         while (queue or remaining_seeds) and (pair_budget is None or expanded_pairs < pair_budget):
             # Refill queue from remaining seeds if empty
@@ -180,7 +182,7 @@ class PLMAugmenter(AugmentationMethod):
             # Expand the node
             if exp_node.is_set_node:
                 self._expand_set_node_with_neighbors(
-                    dataset, set_graph, exp_node, queue, visited
+                    dataset, set_graph, exp_node, queue, visited, set_node_to_augmented
                 )
                 expanded_pairs += 1
             else:
@@ -199,6 +201,7 @@ class PLMAugmenter(AugmentationMethod):
         exp_node: ExpansionNode,
         queue: Deque[ExpansionNode],
         visited: set[URIRef],
+        set_node_to_augmented: dict[URIRef, tuple[URIRef, URIRef]],
     ) -> None:
         """Expand a set node and process its neighbors.
 
@@ -208,6 +211,7 @@ class PLMAugmenter(AugmentationMethod):
             exp_node: Expansion node to process
             queue: BFS queue to add new nodes to
             visited: Set of already visited nodes
+            set_node_to_augmented: Mapping from set nodes to their augmented entities
         """
         set_node = exp_node.uri
         depth = exp_node.depth
@@ -219,6 +223,9 @@ class PLMAugmenter(AugmentationMethod):
         src_aug, tgt_aug, src_original, tgt_original = self.node_expander.expand_set_node(
             dataset, set_graph, set_node
         )
+
+        # Save mapping for future relation creation
+        set_node_to_augmented[set_node] = (src_aug, tgt_aug)
 
         # Bootstrap literal attributes
         self.node_expander.bootstrap_literals(
@@ -232,7 +239,7 @@ class PLMAugmenter(AugmentationMethod):
         # Process neighbors if we haven't reached max depth
         if depth < self.max_depth:
             self._process_neighbors(
-                dataset, set_graph, set_node, src_aug, tgt_aug, depth, queue, visited
+                dataset, set_graph, set_node, src_aug, tgt_aug, depth, queue, visited, set_node_to_augmented
             )
 
     def _process_neighbors(
@@ -245,6 +252,7 @@ class PLMAugmenter(AugmentationMethod):
         current_depth: int,
         queue: Deque[ExpansionNode],
         visited: set[URIRef],
+        set_node_to_augmented: dict[URIRef, tuple[URIRef, URIRef]],
     ) -> None:
         """Process all neighbors of the current node.
 
@@ -257,6 +265,7 @@ class PLMAugmenter(AugmentationMethod):
             current_depth: Current BFS depth
             queue: BFS queue
             visited: Set of visited nodes
+            set_node_to_augmented: Mapping from set nodes to their augmented entities
         """
         direct_enqueued: set[URIRef] = set()
 
@@ -277,7 +286,8 @@ class PLMAugmenter(AugmentationMethod):
             # Handle set node neighbors (direct expansion)
             if set_graph.is_set_node(neighbor):
                 self._enqueue_set_neighbor(
-                    neighbor, current_node, current_depth, queue, visited, direct_enqueued
+                    dataset, set_graph, neighbor, predicate, direction, current_node, src_aug, tgt_aug,
+                    current_depth, queue, visited, direct_enqueued, set_node_to_augmented
                 )
                 continue
 
@@ -298,26 +308,52 @@ class PLMAugmenter(AugmentationMethod):
 
     def _enqueue_set_neighbor(
         self,
+        dataset: Dataset,
+        set_graph: SetKnowledgeGraph,
         neighbor: URIRef,
+        predicate: URIRef,
+        direction: str,
         current_node: URIRef,
+        src_aug: URIRef,
+        tgt_aug: URIRef,
         current_depth: int,
         queue: Deque[ExpansionNode],
         visited: set[URIRef],
         direct_enqueued: set[URIRef],
+        set_node_to_augmented: dict[URIRef, tuple[URIRef, URIRef]],
     ) -> None:
-        """Enqueue a set node neighbor for direct expansion.
+        """Enqueue a set node neighbor and create relations between augmented entities.
 
         Args:
+            dataset: Dataset to augment
+            set_graph: Set knowledge graph
             neighbor: The set node neighbor to enqueue
+            predicate: The predicate connecting current_node to neighbor
+            direction: Direction of the edge ("out" or "in")
             current_node: Current node being processed
+            src_aug: Augmented source entity of current node
+            tgt_aug: Augmented target entity of current node
             current_depth: Current BFS depth
             queue: BFS queue
             visited: Set of visited nodes
             direct_enqueued: Set of nodes already enqueued in this iteration
+            set_node_to_augmented: Mapping from set nodes to their augmented entities
         """
-        next_depth = current_depth + 1
+        # If neighbor was already expanded, create relations immediately
+        if neighbor in set_node_to_augmented:
+            neighbor_src_aug, neighbor_tgt_aug = set_node_to_augmented[neighbor]
+            self._create_set_to_set_relations(
+                dataset, set_graph, current_node, neighbor, src_aug, tgt_aug,
+                neighbor_src_aug, neighbor_tgt_aug, predicate, direction
+            )
+            self.logger.info("[PLM][Relation] Created relations to already-expanded set neighbor")
+            self.logger.info("    • from set → %s", current_node)
+            self.logger.info("    • to set → %s", neighbor)
+            self.logger.info("    • predicate → %s", predicate)
+            self.logger.info("    • direction → %s", direction)
 
-        # Check if we should enqueue this neighbor
+        # Enqueue for future expansion if not visited yet
+        next_depth = current_depth + 1
         if (
             next_depth <= self.max_depth
             and neighbor not in visited
@@ -330,6 +366,80 @@ class PLMAugmenter(AugmentationMethod):
             self.logger.info("    • current → %s", current_node)
             self.logger.info("    • neighbor → %s", neighbor)
             self.logger.info("    • depth → %d", next_depth)
+
+    def _create_set_to_set_relations(
+        self,
+        dataset: Dataset,
+        set_graph: SetKnowledgeGraph,
+        current_node: URIRef,
+        neighbor_node: URIRef,
+        src_aug: URIRef,
+        tgt_aug: URIRef,
+        neighbor_src_aug: URIRef,
+        neighbor_tgt_aug: URIRef,
+        predicate: URIRef,
+        direction: str,
+    ) -> None:
+        """Create relations between augmented entities from two set nodes.
+
+        IMPORTANT: Only creates relations in graphs where they originally existed.
+
+        Example:
+            If in original graphs:
+                kg_source: e1 --r1--> e3
+                kg_target: e2 --r1--> e4
+            Then in set graph: {e1,e2} --r1--> {e3,e4}
+            Creates:
+                e1_aug1 --r1--> e3_aug1 (in kg_source)
+                e2_aug1 --r1--> e4_aug1 (in kg_target)
+
+            But if kg_target doesn't have e2--r1-->e4, then we DON'T create e2_aug1--r1-->e4_aug1
+
+        Args:
+            dataset: Dataset to augment
+            set_graph: Set knowledge graph (for checking relation origins)
+            current_node: Current set node
+            neighbor_node: Neighbor set node
+            src_aug: Augmented source entity from current set node
+            tgt_aug: Augmented target entity from current set node
+            neighbor_src_aug: Augmented source entity from neighbor set node
+            neighbor_tgt_aug: Augmented target entity from neighbor set node
+            predicate: Predicate connecting the set nodes
+            direction: Direction of the edge ("out" or "in")
+        """
+        # Get relation origins for the current node
+        origins = set_graph.get_relation_origins(current_node)
+
+        # Check if this specific relation exists in source/target graphs
+        # The relation is stored as (predicate, neighbor, direction)
+        relation_key = (predicate, neighbor_node, direction)
+
+        exists_in_source = relation_key in origins.get("source", set())
+        exists_in_target = relation_key in origins.get("target", set())
+
+        # Create relations only in graphs where they originally existed
+        if direction == "out":
+            # current --predicate--> neighbor
+            if exists_in_source:
+                dataset.knowledge_graph_source.add((src_aug, predicate, neighbor_src_aug))
+                self.logger.debug("    • [source] %s --%s--> %s", src_aug, predicate, neighbor_src_aug)
+            if exists_in_target:
+                dataset.knowledge_graph_target.add((tgt_aug, predicate, neighbor_tgt_aug))
+                self.logger.debug("    • [target] %s --%s--> %s", tgt_aug, predicate, neighbor_tgt_aug)
+        else:
+            # neighbor --predicate--> current (incoming edge)
+            if exists_in_source:
+                dataset.knowledge_graph_source.add((neighbor_src_aug, predicate, src_aug))
+                self.logger.debug("    • [source] %s --%s--> %s", neighbor_src_aug, predicate, src_aug)
+            if exists_in_target:
+                dataset.knowledge_graph_target.add((neighbor_tgt_aug, predicate, tgt_aug))
+                self.logger.debug("    • [target] %s --%s--> %s", neighbor_tgt_aug, predicate, tgt_aug)
+
+        if not exists_in_source and not exists_in_target:
+            self.logger.warning(
+                "[PLM][Relation] Skipped relation (not in original graphs): %s --%s(%s)--> %s",
+                current_node, predicate, direction, neighbor_node
+            )
 
     def _handle_non_set_neighbor(
         self,
@@ -385,13 +495,14 @@ class PLMAugmenter(AugmentationMethod):
     ) -> None:
         """Check if a non-set node bridges to other set nodes.
 
-        Bridging allows 2-hop expansion: set_node -> non_set_node -> another_set_node
+        When a set node is found from a non-set node, it starts a NEW expansion
+        with depth=0 (acts as a new seed).
 
         Args:
             set_graph: Set knowledge graph
             non_set_node: The intermediate non-set node
             current_node: Current set node
-            current_depth: Current BFS depth
+            current_depth: Current BFS depth (ignored for bridged nodes)
             queue: BFS queue
             visited: Set of visited nodes
         """
@@ -400,27 +511,26 @@ class PLMAugmenter(AugmentationMethod):
         )
 
         bridged_enqueued: set[URIRef] = set()
-        next_depth = current_depth + 2
 
         for bridged_node in bridged_nodes:
             if bridged_node in visited or bridged_node in bridged_enqueued:
                 continue
 
+            # Depth restarts at 0 - this set node becomes a new seed
             queue.append(
                 ExpansionNode(
                     uri=bridged_node,
-                    depth=next_depth,
+                    depth=0,
                     node_type="set",
                     parent=non_set_node,
                 )
             )
             bridged_enqueued.add(bridged_node)
 
-            self.logger.info("[PLM][Queue] Bridged via non-set node")
-            self.logger.info("    • current → %s", current_node)
-            self.logger.info("    • bridge → %s", non_set_node)
-            self.logger.info("    • next → %s", bridged_node)
-            self.logger.info("    • depth → %d", next_depth)
+            self.logger.info("[PLM][Queue] Bridged set node (new seed, depth=0)")
+            self.logger.info("    • from set node → %s", current_node)
+            self.logger.info("    • via non-set → %s", non_set_node)
+            self.logger.info("    • to set node → %s (depth restarted)", bridged_node)
 
     # ------------------------------------------------------------------
     # Budget Calculation
