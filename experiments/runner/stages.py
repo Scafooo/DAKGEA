@@ -373,15 +373,26 @@ class EvaluationStage:
 
             self._write_results(out_file, results)
 
-        StageSummaryWriter.write(
-            evaluation_dir / "summary.json",
-            {
-                "augmentation": augmentation_name if not _is_baseline_variant(augmentation_name) else None,
-                "variant": variant_key,
-                "models": sorted(self.models),
-                "files": sorted(evaluation_paths.values()),
-            },
-        )
+        # Merge evaluation metadata with existing summary if present
+        summary_path = evaluation_dir / "summary.json"
+        summary_data = {}
+
+        # Read existing summary if it exists (from augmentation stage)
+        if summary_path.exists():
+            try:
+                with summary_path.open("r", encoding="utf-8") as handle:
+                    summary_data = json.load(handle)
+            except (json.JSONDecodeError, OSError):
+                pass
+
+        # Add evaluation metadata
+        summary_data.update({
+            "variant": variant_key,
+            "models": sorted(self.models),
+            "evaluation_files": sorted(evaluation_paths.values()),
+        })
+
+        StageSummaryWriter.write(summary_path, summary_data)
 
     @staticmethod
     def _resolve_evaluation_dir(
@@ -389,11 +400,15 @@ class EvaluationStage:
         ratio_root: Path,
         augmentation_name: str,
     ) -> Path:
-        evaluation_root_str = lineage_cfg.get("evaluation_root")
-        evaluation_root = Path(evaluation_root_str) if evaluation_root_str else ratio_root / "evaluation"
-        key = EvaluationStage._normalise_variant_key(augmentation_name)
-        target = evaluation_root / key
+        # Save evaluation results directly in reduction/ or augmentation/
+        # No subdirectories - files go directly in the stage directory
+        if _is_baseline_variant(augmentation_name):
+            target = ratio_root / "reduction"
+        else:
+            target = ratio_root / "augmentation"
+
         _ensure_directory(target)
+        key = EvaluationStage._normalise_variant_key(augmentation_name)
         lineage_cfg.setdefault("evaluation_dirs", {})[key] = str(target.resolve())
         return target
 

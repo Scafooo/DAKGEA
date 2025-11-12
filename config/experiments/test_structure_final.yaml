@@ -1,0 +1,22 @@
+experiment:
+  name: test_structure_final
+  dataset:
+    name: openea/BBC_DB
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.1
+    writer: bert_int
+    save: false
+    eval: false  # Skip baseline for speed
+  augmentation:
+    method: plm
+    ratio: 0.1
+    writer: bert_int
+    save: false
+    eval: true
+    config: plm_no_finetune  # Use config without BART training
+  model: bert_int
+  seed: 11037
+  clear: true  # TEST: should remove artifact/ but keep augmentation/evaluation/
+  overwrite_existing: true

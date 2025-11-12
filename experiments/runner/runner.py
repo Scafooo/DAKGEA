@@ -1013,9 +1013,10 @@ class ExperimentRunner:
         return self.metadata
 
     def _collect_intermediate_dirs(self, metadata: Dict[str, Any]) -> List[str]:
-        """Collect directories produced during reduction/augmentation stages.
+        """Collect directories to remove with clear: true.
 
-        Preserves evaluation results while removing model artifacts.
+        Removes the entire artifact/ directory since evaluation results
+        are now stored in augmentation/evaluation/ instead.
         """
         targets: List[str] = []
         dataset_iterable = []
@@ -1032,10 +1033,8 @@ class ExperimentRunner:
             if artifact_root:
                 artifact_path = Path(artifact_root)
                 if artifact_path.exists():
-                    # Add only model subdirectories, not evaluation/
-                    for subdir in artifact_path.iterdir():
-                        if subdir.is_dir() and subdir.name != "evaluation":
-                            targets.append(str(subdir))
+                    # Remove the entire artifact/ directory
+                    targets.append(str(artifact_path))
         return targets
 
     def _schedule_stage_cleanup(self) -> List[Path]:

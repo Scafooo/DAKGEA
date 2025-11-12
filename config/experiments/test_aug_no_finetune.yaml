@@ -1,0 +1,26 @@
+experiment:
+  name: test_aug_no_finetune
+  dataset:
+    name: openea/BBC_DB
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.1
+    writer: bert_int
+    save: false
+    eval: false
+  augmentation:
+    method: plm
+    ratio: 0.1
+    max_depth: 1  # Reduce depth for faster execution
+    writer: bert_int
+    save: false
+    eval: true
+    config:
+      # Override PLM config to disable fine-tuning
+      bart:
+        enable_finetuning: false
+  model: bert_int
+  seed: 11037
+  clear: false
+  overwrite_existing: true
