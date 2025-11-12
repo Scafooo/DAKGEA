@@ -6,7 +6,7 @@ augmentation:
   method: plm
 
   # BFS expansion parameters
-  max_depth: 1                    # TEMP: Reduced for quick testing
+  max_depth: 2                    # Maximum BFS depth for expansion
   ratio: 0.5                      # Augmentation ratio (0.5 = 50% more entities)
   max_pairs: null                 # Absolute maximum pairs (null = use ratio)
 
@@ -16,7 +16,7 @@ augmentation:
 
   # BART fine-tuning configuration
   bart:
-    enable_finetuning: false      # TEMP: Disabled for quick testing
+    enable_finetuning: true       # Enable BART fine-tuning
     model_name: "facebook/bart-base"  # BART model to use
     out_dir: "./bart_plm_model"   # Output directory for fine-tuned model
     epochs: 10                    # Number of training epochs
