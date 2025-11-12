@@ -1013,7 +1013,10 @@ class ExperimentRunner:
         return self.metadata
 
     def _collect_intermediate_dirs(self, metadata: Dict[str, Any]) -> List[str]:
-        """Collect directories produced during reduction/augmentation stages."""
+        """Collect directories produced during reduction/augmentation stages.
+
+        Preserves evaluation results while removing model artifacts.
+        """
         targets: List[str] = []
         dataset_iterable = []
         datasets_section = metadata.get("datasets")
@@ -1027,7 +1030,12 @@ class ExperimentRunner:
         for dataset_meta in dataset_iterable:
             artifact_root = dataset_meta.get("artifact_root")
             if artifact_root:
-                targets.append(artifact_root)
+                artifact_path = Path(artifact_root)
+                if artifact_path.exists():
+                    # Add only model subdirectories, not evaluation/
+                    for subdir in artifact_path.iterdir():
+                        if subdir.is_dir() and subdir.name != "evaluation":
+                            targets.append(str(subdir))
         return targets
 
     def _schedule_stage_cleanup(self) -> List[Path]:
