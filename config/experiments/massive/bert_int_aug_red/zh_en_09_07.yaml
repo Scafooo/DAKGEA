@@ -1,0 +1,21 @@
+experiment:
+  name: zh_en_09_07
+  dataset:
+    name: openea/zh_en
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.9
+    writer: bert_int
+    save: false
+    eval: true
+  augmentation:
+    method: plm
+    ratio: 0.7
+    writer: bert_int
+    save: false
+    eval: true
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: false
