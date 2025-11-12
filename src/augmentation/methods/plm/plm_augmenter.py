@@ -562,11 +562,11 @@ class PLMAugmenter(AugmentationMethod):
                 dataset, set_graph, current_node, neighbor, src_aug, tgt_aug,
                 neighbor_src_aug, neighbor_tgt_aug, predicate, direction
             )
-            self.logger.info("[PLM][Relation] Created relations to already-expanded set neighbor")
-            self.logger.info("    • from set → %s", current_node)
-            self.logger.info("    • to set → %s", neighbor)
-            self.logger.info("    • predicate → %s", predicate)
-            self.logger.info("    • direction → %s", direction)
+            # Show the relation as an explicit RDF triple for clarity
+            if direction == "out":
+                self.logger.info("[PLM][Relation] Created: %s --%s--> %s", current_node, predicate, neighbor)
+            else:
+                self.logger.info("[PLM][Relation] Created: %s <--%s-- %s", current_node, predicate, neighbor)
 
         # Enqueue for future expansion if not visited yet
         next_depth = current_depth + 1
@@ -638,18 +638,16 @@ class PLMAugmenter(AugmentationMethod):
             # current --predicate--> neighbor
             if exists_in_source:
                 dataset.knowledge_graph_source.add((src_aug, predicate, neighbor_src_aug))
-                self.logger.debug("    • [source] %s --%s--> %s", src_aug, predicate, neighbor_src_aug)
             if exists_in_target:
                 dataset.knowledge_graph_target.add((tgt_aug, predicate, neighbor_tgt_aug))
-                self.logger.debug("    • [target] %s --%s--> %s", tgt_aug, predicate, neighbor_tgt_aug)
         else:
             # neighbor --predicate--> current (incoming edge)
             if exists_in_source:
                 dataset.knowledge_graph_source.add((neighbor_src_aug, predicate, src_aug))
-                self.logger.debug("    • [source] %s --%s--> %s", neighbor_src_aug, predicate, src_aug)
             if exists_in_target:
                 dataset.knowledge_graph_target.add((neighbor_tgt_aug, predicate, tgt_aug))
-                self.logger.debug("    • [target] %s --%s--> %s", neighbor_tgt_aug, predicate, tgt_aug)
+
+        # Log removed - too verbose and not essential for tracking progress
 
         if not exists_in_source and not exists_in_target:
             self.logger.warning(

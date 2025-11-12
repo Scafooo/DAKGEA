@@ -210,9 +210,20 @@ class NodeExpander:
             # Don't return - continue to generate unmatched attributes
             interpolated_count = 0
         else:
+            # Deduplicate: keep only best match per source predicate
+            best_matches = {}
+            for match in matches:
+                src = match.src_predicate
+                if src not in best_matches or match.confidence > best_matches[src].confidence:
+                    best_matches[src] = match
+
+            matches = list(best_matches.values())
+            matches.sort(key=lambda m: m.confidence, reverse=True)
+
             avg_confidence = sum(m.confidence for m in matches) / len(matches)
-            logger.info("  ✓ Found %d matches (avg confidence: %.3f)", len(matches), avg_confidence)
+            logger.info("  ✓ Found %d best matches (avg confidence: %.3f)", len(matches), avg_confidence)
             interpolated_count = 0
+
         for idx, match in enumerate(matches, 1):
             src_pred, src_vals = src_literals[match.src_predicate]
             tgt_pred, tgt_vals = tgt_literals[match.tgt_predicate]
@@ -259,11 +270,26 @@ class NodeExpander:
             logger.info("  ✓ Generated %d matched attributes", interpolated_count)
 
         # Generate variations for unmatched attributes (if enabled)
+        unmatched_count = 0
         if self.generate_unmatched and self.bart_interpolator:
-            self._generate_unmatched_attributes(
+            unmatched_count = self._generate_unmatched_attributes(
                 dataset, src_component, tgt_component, src_aug, tgt_aug,
                 src_literals, tgt_literals, matches
             )
+
+        # Recap: count total triples generated for this node
+        # Matched generates triples for BOTH source and target (2x)
+        # Unmatched generates triples only for the side that had the unmatched predicate (1x)
+        matched_triples = interpolated_count * 2  # Both source and target
+        unmatched_triples = unmatched_count  # Only one side per unmatched
+        total_triples = matched_triples + unmatched_triples
+
+        logger.info("")
+        logger.info("  📊 RECAP for this node:")
+        logger.info("    • Matched attributes: %d (→ %d triples, both sides)", interpolated_count, matched_triples)
+        logger.info("    • Unmatched attributes: %d (→ %d triples, one side)", unmatched_count, unmatched_triples)
+        logger.info("    • Total triples generated: %d", total_triples)
+        logger.info("")
 
     def _generate_unmatched_attributes(
         self,
@@ -295,7 +321,7 @@ class NodeExpander:
 
         if total_unmatched == 0:
             logger.info("  All attributes matched, no unmatched to generate")
-            return
+            return 0
 
         logger.info("  Unmatched: Source=%d | Target=%d | Total=%d",
                    len(unmatched_src), len(unmatched_tgt), total_unmatched)
@@ -353,6 +379,8 @@ class NodeExpander:
 
         if generated_count > 0:
             logger.info("  ✓ Generated %d unmatched attributes", generated_count)
+
+        return generated_count
 
     @staticmethod
     def _collect_predicate_literals(graph, entity: URIRef) -> dict:
