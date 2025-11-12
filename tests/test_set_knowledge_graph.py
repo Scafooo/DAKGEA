@@ -108,7 +108,7 @@ if __name__ == "__main__":
     # 1. Dataset loading
     # ----------------------------------------------------------------------------
     reader = DatasetReaderFactory.create_reader("bert_int")
-    dataset = reader.read("/home/federico/Programming/Python/DAKGEA/data/raw/hybea/BBC_DB/attribute_data")
+    dataset = reader.read("/home/federico/Programming/Python/DAKGEA/data/raw/openea/BBC_DB/attribute_data")
 
     # ----------------------------------------------------------------------------
     # 2. Reduction (optional)

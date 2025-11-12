@@ -189,6 +189,58 @@ class PredicateMatcher:
 
         return embedding
 
+    def _get_embedding_with_attr_names(
+        self,
+        predicate_local_name: str,
+        predicate_uri: URIRef,
+        attr_names: Optional[Dict[str, str]] = None,
+    ) -> np.ndarray:
+        """
+        Get embedding for a predicate, using attr_names if available.
+
+        Priority:
+        1. Use natural name from attr_names if available
+        2. Fallback to automatic expansion of local name
+
+        Args:
+            predicate_local_name: Local name (e.g., "birthDate")
+            predicate_uri: Full URI (e.g., URIRef("dbo:birthDate"))
+            attr_names: Optional mapping of URI -> natural name
+
+        Returns:
+            Embedding vector
+        """
+        # Try to find natural name in attr_names
+        natural_name = None
+        if attr_names:
+            uri_str = str(predicate_uri)
+            natural_name = attr_names.get(uri_str)
+
+        # Use natural name if found, otherwise use local name with expansion
+        text_to_embed = natural_name if natural_name else predicate_local_name
+
+        # Create cache key that includes source (attr_names vs expansion)
+        cache_key = f"attr:{text_to_embed}" if natural_name else f"exp:{predicate_local_name}"
+
+        # Check cache
+        if cache_key in self._embedding_cache:
+            return self._embedding_cache[cache_key]
+
+        # Initialize model if needed
+        self._init_model()
+
+        # Expand if not using attr_names
+        if not natural_name:
+            text_to_embed = self._expand_predicate_name(text_to_embed)
+
+        # Compute embedding
+        embedding = self.model.encode(text_to_embed, convert_to_numpy=True, show_progress_bar=False)
+
+        # Cache it
+        self._embedding_cache[cache_key] = embedding
+
+        return embedding
+
     def _compute_similarity(self, emb1: np.ndarray, emb2: np.ndarray) -> float:
         """
         Compute cosine similarity between two embeddings.
@@ -216,6 +268,8 @@ class PredicateMatcher:
         self,
         src_predicates: Dict[str, Tuple[URIRef, List[Literal]]],
         tgt_predicates: Dict[str, Tuple[URIRef, List[Literal]]],
+        src_attr_names: Optional[Dict[str, str]] = None,
+        tgt_attr_names: Optional[Dict[str, str]] = None,
     ) -> List[PredicateMatch]:
         """
         Match predicates between source and target using semantic similarity.
@@ -223,6 +277,8 @@ class PredicateMatcher:
         Args:
             src_predicates: Dict mapping local_name -> (uri, [literals])
             tgt_predicates: Dict mapping local_name -> (uri, [literals])
+            src_attr_names: Optional dict mapping predicate URI -> natural name
+            tgt_attr_names: Optional dict mapping predicate URI -> natural name
 
         Returns:
             List of PredicateMatch objects sorted by confidence (descending)
@@ -230,60 +286,97 @@ class PredicateMatcher:
         if not src_predicates or not tgt_predicates:
             return []
 
-        logger.debug(f"[PredicateMatcher] Matching {len(src_predicates)} source predicates "
-                    f"with {len(tgt_predicates)} target predicates")
+        logger.info(f"[PredicateMatcher] Matching {len(src_predicates)} source ↔ {len(tgt_predicates)} target predicates")
+
+        # Count how many predicates have attr_names
+        src_with_attr = sum(1 for name in src_predicates.keys()
+                           if src_attr_names and str(src_predicates[name][0]) in src_attr_names)
+        tgt_with_attr = sum(1 for name in tgt_predicates.keys()
+                           if tgt_attr_names and str(tgt_predicates[name][0]) in tgt_attr_names)
+
+        if src_attr_names and src_with_attr > 0:
+            logger.info(f"[PredicateMatcher] Source: {src_with_attr}/{len(src_predicates)} predicates using attr_names, "
+                       f"{len(src_predicates) - src_with_attr} using expansion")
+        else:
+            logger.info(f"[PredicateMatcher] Source: all {len(src_predicates)} predicates using automatic expansion")
+
+        if tgt_attr_names and tgt_with_attr > 0:
+            logger.info(f"[PredicateMatcher] Target: {tgt_with_attr}/{len(tgt_predicates)} predicates using attr_names, "
+                       f"{len(tgt_predicates) - tgt_with_attr} using expansion")
+        else:
+            logger.info(f"[PredicateMatcher] Target: all {len(tgt_predicates)} predicates using automatic expansion")
 
         # Compute embeddings for all predicates
         src_names = list(src_predicates.keys())
         tgt_names = list(tgt_predicates.keys())
 
-        src_embeddings = np.array([self._get_embedding(name) for name in src_names])
-        tgt_embeddings = np.array([self._get_embedding(name) for name in tgt_names])
+        # Use attr_names if available, otherwise use expansion
+        src_embeddings = np.array([
+            self._get_embedding_with_attr_names(name, src_predicates[name][0], src_attr_names)
+            for name in src_names
+        ])
+        tgt_embeddings = np.array([
+            self._get_embedding_with_attr_names(name, tgt_predicates[name][0], tgt_attr_names)
+            for name in tgt_names
+        ])
 
         # Compute similarity matrix
         # Shape: (num_src, num_tgt)
         similarity_matrix = self._compute_similarity_matrix(src_embeddings, tgt_embeddings)
 
-        # Find best matches
+        # Find ALL matches above threshold (many-to-many matching)
         matches = []
-        matched_tgt = set()  # Track which target predicates are already matched
 
-        # For each source predicate, find best target match
+        # For each source predicate, find ALL target matches above threshold
         for i, src_name in enumerate(src_names):
-            best_j = -1
-            best_sim = -1.0
+            src_matches = []
 
             for j, tgt_name in enumerate(tgt_names):
-                if j in matched_tgt:
-                    continue  # Skip already matched targets
-
                 sim = similarity_matrix[i, j]
 
-                if sim > best_sim and sim >= self.similarity_threshold:
-                    best_sim = sim
-                    best_j = j
+                if sim >= self.similarity_threshold:
+                    match = PredicateMatch(
+                        src_predicate=src_name,
+                        tgt_predicate=tgt_name,
+                        src_uri=src_predicates[src_name][0],
+                        tgt_uri=tgt_predicates[tgt_name][0],
+                        confidence=sim,
+                        strategy="semantic_embedding",
+                    )
+                    src_matches.append(match)
 
-            # Create match if found
-            if best_j >= 0:
-                tgt_name = tgt_names[best_j]
-                matched_tgt.add(best_j)
+            # Log all matches for this source predicate
+            if src_matches:
+                if len(src_matches) > 1:
+                    logger.debug(f"  {src_name} → {len(src_matches)} matches: " +
+                               ", ".join(f"{m.tgt_predicate}({m.confidence:.2f})" for m in src_matches))
+                else:
+                    logger.debug(f"  {src_name} ↔ {src_matches[0].tgt_predicate} (confidence: {src_matches[0].confidence:.3f})")
 
-                match = PredicateMatch(
-                    src_predicate=src_name,
-                    tgt_predicate=tgt_name,
-                    src_uri=src_predicates[src_name][0],
-                    tgt_uri=tgt_predicates[tgt_name][0],
-                    confidence=best_sim,
-                    strategy="semantic_embedding",
-                )
-                matches.append(match)
-
-                logger.debug(f"  Matched: {src_name} ↔ {tgt_name} (confidence: {best_sim:.3f})")
+                matches.extend(src_matches)
 
         # Sort by confidence (descending)
         matches.sort(key=lambda m: m.confidence, reverse=True)
 
-        logger.info(f"[PredicateMatcher] Found {len(matches)} matches above threshold {self.similarity_threshold}")
+        # Log summary
+        if matches:
+            avg_conf = sum(m.confidence for m in matches) / len(matches)
+            high_conf = sum(1 for m in matches if m.confidence >= 0.85)
+
+            # Count unique source and target predicates involved
+            unique_src = len(set(m.src_predicate for m in matches))
+            unique_tgt = len(set(m.tgt_predicate for m in matches))
+
+            logger.info(f"[PredicateMatcher] ✓ Found {len(matches)} matches ({unique_src} src → {unique_tgt} tgt, "
+                       f"avg conf: {avg_conf:.3f}, {high_conf} excellent ≥0.85)")
+        else:
+            logger.info(f"[PredicateMatcher] No matches found above threshold {self.similarity_threshold}")
+            # Show best candidates that didn't make the cut (for debugging)
+            if similarity_matrix.size > 0:
+                max_sim = similarity_matrix.max()
+                max_idx = np.unravel_index(similarity_matrix.argmax(), similarity_matrix.shape)
+                logger.info(f"[PredicateMatcher] Best candidate: {src_names[max_idx[0]]} ↔ {tgt_names[max_idx[1]]} "
+                           f"(similarity: {max_sim:.3f}, threshold is {self.similarity_threshold})")
 
         # Save cache to disk (async would be better, but keep it simple)
         if len(self._embedding_cache) > 0:

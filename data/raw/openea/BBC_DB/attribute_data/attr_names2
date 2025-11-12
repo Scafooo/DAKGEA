@@ -62,7 +62,7 @@ prop:award2n 	 award2n
 prop:notableworks 	 notable works
 prop:owner 	 owner
 prop:imgcapt 	 imgcapt
-dbo:debut 	 dbo:debut
+dbo:debut 	 debut
 prop:s 	 s
 prop:branding 	 branding
 prop:cover 	 cover
@@ -77,7 +77,7 @@ prop:cat 	 cat
 prop:plugn 	 plugn
 prop:rev26score 	 rev26score
 prop:budget 	 budget
-dbo:bandmember 	 dbo:bandmember
+dbo:bandmember 	 band member
 prop:originalresearch 	 original research
 prop:peak8b 	 peak8b
 prop:albumspan 	 album span
@@ -91,8 +91,8 @@ prop:page 	 page
 prop:nationalgoals 	 national goals
 prop:misc 	 misc
 prop:imageflag 	 image flag
-dbo:runtime 	 dbo:runtime
-http://xmlns.com/foaf/0.1/nick 	 http://xmlns.com/foaf/0.1/nick
+dbo:runtime 	 runtime
+http://xmlns.com/foaf/0.1/nick 	 nick
 prop:sexuality 	 sexuality
 prop:prose 	 prose
 prop:rrstage 	 rrstage
@@ -107,13 +107,13 @@ prop:rev6score 	 rev6score
 prop:goldenmelodyawards 	 golden melody awards
 prop:size 	 size
 prop:blpsources 	 blp sources
-dbo:foundingyear 	 dbo:foundingyear
+dbo:foundingyear 	 founding year
 prop:fullname 	 full name
 prop:legalname 	 legal name
 prop:patronage 	 patronage
 prop:inappropriatetone 	 inappropriate tone
 prop:peak13e 	 peak13e
-dbo:status 	 dbo:status
+dbo:status 	 status
 prop:total 	 total
 prop:apran 	 apran
 prop:format 	 format
@@ -127,7 +127,7 @@ prop:linecolor 	 line color
 prop:studiolink 	 studio link
 prop:hkfcsawards 	 hkfcs awards
 prop:compiler 	 compiler
-rdfs:comment 	 rdfs:comment
+rdfs:comment 	 comment
 prop:wikt 	 wikt
 prop:coi 	 coi
 prop:marriedto 	 married to
@@ -145,14 +145,14 @@ prop:author 	 author
 prop:instrument 	 instrument
 prop:shortdescription 	 short description
 prop:schools 	 schools
-http://xmlns.com/foaf/0.1/name 	 http://xmlns.com/foaf/0.1/name
+http://xmlns.com/foaf/0.1/name 	 name
 prop:founder 	 founder
-dbo:facilityid 	 dbo:facilityid
+dbo:facilityid 	 facility id
 prop:pnd 	 pnd
 prop:nationalcaps 	 national caps
 dbo:office 	 dbo:office
 prop:classwins 	 class wins
-http://www.w3.org/2003/01/geo/wgs84_pos#long 	 http://www.w3.org/2003/01/geo/wgs84_pos#long
+http://www.w3.org/2003/01/geo/wgs84_pos#long 	 wgs84 pos long
 prop:peak2b 	 peak2b
 prop:bordercolor 	 border color
 prop:lang 	 lang
@@ -161,19 +161,19 @@ prop:othername 	 other name
 prop:medium 	 medium
 prop:header 	 header
 prop:audio 	 audio
-prop:rev7score 	 rev7score
+prop:rev7score 	 rev7 score
 prop:nosales 	 no sales
 prop:souln 	 souln
 prop:mtvjapann 	 mtvjapann
 prop:peak10b 	 peak10b
 prop:mtvaustraliaw 	 mtv australiaw
-prop:peak17a 	 peak17a
+prop:peak17a 	 peak 17a
 dbo:budget 	 budget
 prop:blpunsourced 	 blp unsourced
-prop:rev16score 	 rev16score
+prop:rev16score 	 rev 16 score
 prop:option 	 option
-prop:peak13d 	 peak13d
-dbo:title 	 dbo:title
+prop:peak13d 	 peak 13d
+dbo:title 	 title
 prop:plugw 	 plugw
 prop:collaborators 	 collaborators
 prop:peak8e 	 peak8e
@@ -181,7 +181,7 @@ prop:rev20score 	 rev20score
 prop:peak16g 	 peak16g
 prop:autocat 	 autocat
 prop:certification 	 certification
-dbo:weight 	 dbo:weight
+dbo:weight 	 weight
 prop:rev5score 	 rev5score
 prop:precededby 	 preceded by
 prop:peak16a 	 peak16a
@@ -191,8 +191,8 @@ prop:citizenship 	 citizenship
 prop:weight 	 weight
 http://www.georss.org/georss/point 	 georss point
 prop:cause 	 cause
-prop:peak15e 	 peak15e
-dbo:birthyear 	 dbo:birthyear
+prop:peak15e 	 peak 15e
+dbo:birthyear 	 birth year
 prop:knownfor 	 known for
 prop:fg 	 fg
 prop:bgcolor 	 bg color
@@ -208,19 +208,19 @@ prop:dateofbirth 	 date of birth
 prop:currentbandmembers 	 current band members
 prop:nmen 	 nmen
 prop:border 	 border
-prop:rev10score 	 rev10score
+prop:rev10score 	 rev 10 score
 prop:nationalismbybirth 	 nationalism by birth
 prop:text 	 text
-prop:single1date 	 single1 date
+prop:single1date 	 single 1 date
 prop:currentlocation 	 current location
 prop:showname 	 show name
 prop:grammar 	 grammar
 prop:alt 	 alt
 prop:quote 	 quote
-dbo:background 	 dbo:background
+dbo:background 	 background
 prop:home 	 home
-dbo:work/runtime 	 dbo:work/runtime
-prop:award4w 	 award4w
+dbo:work/runtime 	 work runtime
+prop:award4w 	 award 4w
 prop:tone 	 tone
 prop:wsopbraceletcount 	 wsop bracelet count
 prop:almamater 	 almamater
@@ -247,7 +247,7 @@ prop:bodytype 	 body type
 prop:worldw 	 worldw
 prop:placeofdeat 	 place of deat
 prop:caption 	 caption
-prop:rev2score 	 rev2score
+prop:rev2score 	 rev 2 score
 prop:deathdate 	 death date
 prop:office 	 office
 prop:officialsite 	 official site
@@ -308,11 +308,11 @@ prop:predecessor 	 predecessor
 prop:relmonth 	 rel month
 prop:peak13b 	 peak13b
 prop:imgcaption 	 img caption
-dbo:gross 	 dbo:gross
+dbo:gross 	 gross
 prop:en 	 en
 prop:wife 	 wife
 prop:name 	 name
-prop:peak13a 	 peak13a
+prop:peak13a 	 peak 13a
 prop:publisher 	 publisher
 dbo:associatedmusicalartist 	 associated musical artist
 prop:relationships 	 relationships
@@ -327,22 +327,22 @@ prop:likeresume 	 like resume
 prop:video 	 video
 prop:ref 	 ref
 prop:musiccredits 	 music credits
-prop:rev11score 	 rev11score
+prop:rev11score 	 rev 11 score
 prop:toolong 	 toolong
-prop:refimproveblp 	 refimproveblp
+prop:refimproveblp 	 ref improve blp
 prop:hangulstage 	 hangulstage
 dbo:alias 	 dbo:alias
 prop:notablework 	 notable work
 prop:filename 	 file name
 prop:mtvvideow 	 mtv videow
 prop:peoplesn 	 peoplesn
-dbo:networth 	 dbo:net worth
+dbo:networth 	 net worth
 prop:sources 	 sources
 dbo:broadcaststationclass 	 broadcast station class
 prop:singleslink 	 singles link
 prop:currently 	 currently
 prop:help 	 help
-prop:honorificsuffix 	 honorificsuffix
+prop:honorificsuffix 	 honorific suffix
 prop:awards 	 awards
 prop:imagewidth 	 image width
 prop:brothers 	 brothers
@@ -351,19 +351,19 @@ prop:ko 	 ko
 prop:award 	 award
 prop:optionlink 	 option link
 prop:music 	 music
-prop:peak8d 	 peak8d
+prop:peak8d 	 peak 8d
 prop:v 	 v
 prop:occupation 	 occupation
 prop:note 	 note
 dbo:associatedband 	 associated band
 prop:year 	 year
-prop:peak12c 	 peak12c
+prop:peak12c 	 peak 12c
 prop:section 	 section
 prop:optioncolor 	 option color
 prop:othernames 	 other names
 prop:background 	 background
 prop:npov 	 npov
-prop:nickaustraliaw 	 nickaustraliaw
+prop:nickaustraliaw 	 nick australiaw
 prop:peak10g 	 peak10g
 prop:eyecolor 	 eyecolor
 prop:degrees 	 degrees
@@ -372,7 +372,7 @@ prop:outofdate 	 out of date
 prop:onesource 	 one source
 prop:previousnames 	 previous names
 prop:coversize 	 cover size
-dbo:activeyearsstartyear 	 dbo:active years start year
+dbo:activeyearsstartyear 	 active years start year
 prop:type 	 type
 prop:parents 	 parents
 prop:pinyinchinesename 	 pinyin chinese name
@@ -385,10 +385,10 @@ prop:director 	 director
 prop:formed 	 formed
 prop:expiry 	 expiry
 prop:pictureformat 	 picture format
-prop:single3date 	 single3date
-prop:peak18a 	 peak18a
+prop:single3date 	 single 3date
+prop:peak18a 	 peak 18a
 prop:agency 	 agency
-dbo:numberofseasons 	 dbo:number of seasons
+dbo:numberofseasons 	 number of seasons
 prop:peak12d 	 peak12d
 prop:extra 	 extra
 prop:colwidth 	 col width
@@ -398,8 +398,8 @@ prop:executiveproducers 	 executive producers
 prop:youthyears 	 youth years
 prop:optionname 	 option name
 prop:tmfw 	 tmfw
-dbo:abstract 	 dbo:abstract
-prop:rev1score 	 rev1score
+dbo:abstract 	 abstract
+prop:rev1score 	 rev 1score
 prop:fa 	 fa
 prop:archiveurl 	 archive url
 prop:rr 	 rr
@@ -411,14 +411,14 @@ dbo:wikipagedisambiguates 	 wikipage disambiguates
 prop:color 	 color
 prop:aux 	 aux
 prop:termend 	 termend
-prop:peak9a 	 peak9a
+prop:peak9a 	 peak 9a
 prop:expert 	 expert
 prop:tab 	 tab
-prop:rev13score 	 rev13score
+prop:rev13score 	 rev 13 score
 prop:nrjn 	 nrjn
-prop:peak13c 	 peak13c
+prop:peak13c 	 peak 13c
 prop:lowercaption 	 lower caption
-prop:award1w 	 award1w
+prop:award1w 	 award 1w
 prop:arian 	 arian
 prop:olivierawards 	 olivier awards
 prop:honorificprefix 	 honorific prefix
@@ -432,7 +432,7 @@ prop:wsopmaineventbestfinishrank 	 wsop main event best finish rank
 prop:review 	 review
 prop:recent 	 recent
 prop:as 	 as
-prop:peak16d 	 peak16d
+prop:peak16d 	 peak 16d
 prop:small 	 small
 prop:manager 	 manager
 prop:albumcode 	 album code
@@ -440,39 +440,39 @@ prop:bridge 	 bridge
 prop:reason 	 reason
 prop:grammyn 	 grammyn
 prop:leadmissing 	 lead missing
-prop:peak11b 	 peak11b
+prop:peak11b 	 peak 11b
 prop:birthname 	 birth name
-prop:blprefimprove 	 blprefimprove
+prop:blprefimprove 	 blpref improve
 prop:class 	 class
 prop:peacock 	 peacock
 prop:salesamount 	 sales amount
 prop:peak8i 	 peak8i
 prop:britn 	 britn
 prop:footer 	 footer
-rdfs:label 	 rdfs:label
+rdfs:label 	 label
 prop:peak12a 	 peak12a
 prop:peak2a 	 peak2a
 prop:termstart 	 term start
-prop:rev28score 	 rev28score
+prop:rev28score 	 rev 28score
 prop:concerttourname 	 concert tour name
 prop:pseudonym 	 pseudonym
 prop:peak8g 	 peak8g
 prop:alias 	 alias
 prop:peoplesw 	 peoplesw
-prop:peak1b 	 peak1b
+prop:peak1b 	 peak 1b
 prop:date 	 date
-prop:single4date 	 single4date
-prop:rev15score 	 rev15score
+prop:single4date 	 single 4 date
+prop:rev15score 	 rev 15score
 prop:resides 	 resides
 prop:jn 	 jn
 prop:chartf 	 chartf
-prop:award4n 	 award4n
+prop:award4n 	 award 4n
 prop:number 	 number
 prop:nrjw 	 nrjw
 prop:education 	 education
-prop:peak5a 	 peak5a
+prop:peak5a 	 peak 5a
 prop:eptfinaltables 	 ept final tables
-dbo:position 	 dbo:position
+dbo:position 	 position
 prop:birthplace 	 birth place
 prop:pov 	 pov
 prop:transformicename 	 transform ice name
@@ -481,10 +481,10 @@ prop:b 	 b
 prop:before 	 before
 prop:mtveuropen 	 mtv europen
 prop:primarysources 	 primary sources
-prop:peak15a 	 peak15a
+prop:peak15a 	 peak 15a
 prop:totalgoals 	 total goals
 prop:relatedacts 	 related acts
-prop:single2date 	 single2date
+prop:single2date 	 single 2 date
 prop:spouse 	 spouse
 prop:livelink 	 live link
 prop:episodenumber 	 episode number
@@ -492,23 +492,23 @@ prop:runtime 	 runtime
 prop:presenter 	 presenter
 prop:thistour 	 this tour
 prop:tradchinesename 	 trad chinese name
-dbo:activeyearsstartdate 	 dbo:active years start date
-prop:rev12score 	 rev12score
+dbo:activeyearsstartdate 	 active years start date
+prop:rev12score 	 rev 12 score
 prop:muchmusicw 	 muchmusicw
-prop:peak11a 	 peak11a
-prop:peak16h 	 peak16h
+prop:peak11a 	 peak 11a
+prop:peak16h 	 peak 16h
 prop:charts 	 charts
-dbo:activeyearsendyear 	 dbo:active years end year
-prop:rev24score 	 rev24score
-prop:peak15f 	 peak15f
+dbo:activeyearsendyear 	 active years end year
+prop:rev24score 	 rev 24 score
+prop:peak15f 	 peak 15f
 prop:essaylike 	 essay like
-prop:rev14score 	 rev14score
+prop:rev14score 	 rev 14 score
 prop:placeofactivity 	 place of activity
 prop:prodcode 	 prod code
 prop:listepisodes 	 list episodes
 prop:halign 	 halign
 prop:url 	 url
-prop:peak16b 	 peak16b
+prop:peak16b 	 peak 16b
 prop:award2w 	 award2w
 prop:renownname 	 renown name
 prop:pastmembers 	 past members
@@ -531,11 +531,11 @@ prop:extranote 	 extra note
 prop:q 	 q
 prop:restingplace 	 resting place
 prop:povcheck 	 pov check
-dbo:numberofepisodes 	 dbo:number of episodes
+dbo:numberofepisodes 	 number of episodes
 prop:peak13h 	 peak13h
-http://xmlns.com/foaf/0.1/givenname 	 givenname
+http://xmlns.com/foaf/0.1/givenname 	 given name
 prop:rev 	 rev
-prop:rev22score 	 rev22score
+prop:rev22score 	 rev 22 score
 prop:footeralign 	 footer align
 prop:influencedby 	 influenced by
 prop:yearspan 	 year span
@@ -544,18 +544,18 @@ prop:influenced 	 influenced
 prop:imgcap 	 imgcap
 prop:shoesize 	 shoe size
 prop:order 	 order
-prop:peak9e 	 peak9e
+prop:peak9e 	 peak 9e
 prop:alternativenames 	 alternative names
-prop:peak12b 	 peak12b
+prop:peak12b 	 peak 12b
 prop:nounspecified 	 noun specified
 prop:j 	 j
 prop:previoustothat 	 previous to that
 prop:qn 	 qn
-prop:peak8h 	 peak8h
+prop:peak8h 	 peak 8h
 prop:blpimdbrefimprove 	 blp imdb ref improve
 prop:update 	 update
 prop:starsign 	 star sign
-prop:peak9d 	 peak9d
+prop:peak9d 	 peak 9d
 prop:notes 	 notes
 prop:album 	 album
 prop:numberoflegs 	 number of legs
@@ -564,7 +564,7 @@ prop:active 	 active
 prop:coverart 	 cover art
 prop:wptmoneyfinishes 	 wpt money finishes
 prop:signature 	 signature
-dbo:formerbandmember 	 dbo:former band member
+dbo:formerbandmember 	 former band member
 prop:allcerts 	 all certs
 prop:peak4a 	 peak4a
 prop:fancruft 	 fan cruft
@@ -578,7 +578,7 @@ prop:birthdate 	 birt hdate
 prop:archivedate 	 archive date
 prop:allwriting 	 all writing
 prop:latestalbum 	 latest album
-prop:peak17d 	 peak17d
+prop:peak17d 	 peak 17d
 prop:chartb 	 chart b
 prop:start 	 start
 prop:placeof 	 place of
@@ -589,20 +589,20 @@ prop:college 	 college
 prop:cite 	 cite
 prop:studio 	 studio
 prop:height 	 height
-prop:peak20a 	 peak20a
+prop:peak20a 	 peak 20a
 prop:bot 	 bot
 prop:founded 	 founded
 prop:mc 	 mc
 prop:bg 	 bg
 prop:junon 	 junon
-prop:rev4score 	 rev4score
+prop:rev4score 	 rev 4 score
 prop:auto 	 auto
-prop:peak14a 	 peak14a
+prop:peak14a 	 peak 14a
 prop:fansite 	 fansite
 prop:above 	 above
 prop:district 	 district
 prop:soulw 	 soulw
-prop:videolink 	 videolink
+prop:videolink 	 video link
 prop:lastaired 	 last aired
 prop:estimatedwealth 	 estimated wealth
 prop:blp 	 blp
@@ -614,8 +614,8 @@ http://www.w3.org/2003/01/geo/wgs84_pos#lat 	 pos lat
 prop:members 	 members
 prop:networth 	 networth
 prop:n 	 n
-prop:peak16e 	 peak16e
-prop:peak6d 	 peak6d
+prop:peak16e 	 peak 16e
+prop:peak6d 	 peak 6d
 prop:religion 	 religion
 prop:captsize 	 capt size
 prop:source 	 source
@@ -626,15 +626,15 @@ prop:albumname 	 album name
 prop:numberofshows 	 number of shows
 prop:accessdate 	 access date
 prop:trivia 	 trivia
-prop:peak12i 	 peak12i
+prop:peak12i 	 peak 12i
 prop:face 	 face
-dbo:frequency 	 dbo:frequency
+dbo:frequency 	 frequency
 prop:imagesize 	 image size
 prop:qalign 	 q align
-prop:peak15c 	 peak 15 c
+prop:peak15c 	 peak 15c
 prop:cleanup 	 cleanup
 prop:rev9score 	 rev 9 score
-dbo:longtype 	 dbo:long type
+dbo:longtype 	 long type
 prop:hp 	 hp
 prop:backgroun 	 backgroun
 prop:award3w 	 award3w
@@ -644,7 +644,7 @@ prop:management 	 management
 prop:mtvaustralian 	 mtv australian
 prop:notablesongs 	 notable songs
 prop:haircolor 	 hair color
-prop:peak8f 	 peak8f
+prop:peak8f 	 peak 8f
 http://purl.org/dc/elements/1.1/description 	 description
 prop:rev18score 	 rev 18 score
 prop:title 	 title
@@ -653,17 +653,17 @@ prop:rows 	 rows
 prop:simpchinesename 	 simp chinese name
 prop:tmfn 	 tmfn
 prop:spanish 	 spanish
-prop:rev29score 	 rev29score
+prop:rev29score 	 rev 29 score
 prop:langtitle 	 lang title
 prop:style 	 style
 prop:viaf 	 viaf
-prop:peak16i 	 peak16i
+prop:peak16i 	 peak 16i
 prop:orphan 	 orphan
-dbo:review 	 dbo:review
+dbo:review 	 review
 prop:followedby 	 followed by
 prop:posttext 	 post text
 prop:timeslot 	 time slot
-prop:peak19c 	 peak19c
+prop:peak19c 	 peak 19c
 prop:billboardw 	 bill boardw
 prop:imgalt 	 img alt
 prop:deathplace 	 deathp lace
@@ -674,14 +674,14 @@ prop:location 	 location
 prop:region 	 region
 prop:february 	 february
 prop:drumtech 	 drum tech
-prop:peak12h 	 peak12h
+prop:peak12h 	 peak 12h
 http://xmlns.com/foaf/0.1/surname 	 surname
 prop:t 	 t
 prop:executiveproducer 	 executive producer
 prop:disputed 	 disputed
 prop:fromalbum 	 from album
 prop:alsoknownas 	 also known as
-prop:rev19score 	 rev19score
+prop:rev19score 	 rev 19 score
 prop:junow 	 junow
 prop:died 	 died
 prop:confusing 	 confusing
@@ -700,24 +700,24 @@ prop:totallength 	 total length
 prop:award3n 	 award3n
 prop:complink 	 comp link
 prop:nationalyears 	 national years
-dbo:orderinoffice 	 dbo:order in office
+dbo:orderinoffice 	 order in office
 prop:reflink 	 reflink
 prop:p 	 p
-dbo:instrument 	 dbo:instrument
+dbo:instrument 	 instrument
 prop:notablealbums 	 notable albums
-prop:peak3a 	 peak3a
-dbo:activeyearsenddate 	 dbo:active years end date
+prop:peak3a 	 peak 3a
+dbo:activeyearsenddate 	 active years end date
 prop:yearssinging 	 years singing
 prop:mrstage 	 mr stage
 prop:collapsed 	 collapsed
 prop:id 	 id
-prop:rev21score 	 rev21score
+prop:rev21score 	 rev 21 score
 prop:ep 	 ep
-prop:peak6a 	 peak6a
+prop:peak6a 	 peak 6a
 prop:jackn 	 jackn
 prop:position 	 position
 prop:release 	 release
 prop:nominations 	 nominations
 prop:leadtooshort 	 lead too short
-prop:peak7d 	 peak7d
+prop:peak7d 	 peak 7d
 prop:nocontests 	 no contests

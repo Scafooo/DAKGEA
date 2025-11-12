@@ -42,6 +42,8 @@ class StratifiedSampler:
         self.min_samples = min_samples
         self.max_samples = max_samples
         self.strategy = strategy
+        logger.info(f"[StratifiedSampler] Initialized with strategy={strategy}, "
+                   f"min={min_samples}, max={max_samples}")
 
     def sample(self, examples_by_predicate: Dict[str, List[PairExample]]) -> List[PairExample]:
         """Apply stratified sampling to balance predicates."""
@@ -292,6 +294,9 @@ class AdvancedNoiser:
         self.entity_aware_masking = entity_aware_masking
         self.entity_mask_prob = entity_mask_prob
         self.mask_token = mask_token
+        logger.info(f"[AdvancedNoiser] Initialized with span_corruption={span_corruption_ratio}, "
+                   f"mean_span_length={mean_span_length}, entity_aware={entity_aware_masking}, "
+                   f"entity_mask_prob={entity_mask_prob}")
 
     def apply_span_corruption(self, text: str) -> str:
         """Apply span corruption: mask contiguous spans of tokens."""

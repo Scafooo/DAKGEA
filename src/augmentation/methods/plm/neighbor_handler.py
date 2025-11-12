@@ -62,7 +62,7 @@ class NeighborHandler:
 
         dataset.knowledge_graph_source.add((src_aug, predicate, literal))
         dataset.knowledge_graph_target.add((tgt_aug, predicate, literal))
-        logger.debug("    • attached literal: %s → %s", predicate, literal)
+        # Log removed - already covered by node_expander logging
 
     def find_bridged_set_neighbors(
         self,

@@ -37,16 +37,37 @@ def test_semantic_matching():
         "email": (URIRef("ex:contactEmail"), [Literal("jean@example.fr")]),
     }
 
+    # Simulate attr_names (like those loaded from dataset files)
+    src_attr_names = {
+        "dbo:birthDate": "birth date",
+        "dbo:name": "full name",
+        "dbo:phone": "phone number",
+        "dbo:birthPlace": "city of birth",
+        "dbo:occupation": "occupation",
+        "dbo:email": "email address",
+    }
+
+    tgt_attr_names = {
+        "foaf:birthday": "date of birth",
+        "foaf:name": "name",
+        "foaf:phone": "telephone",
+        "ex:placeOfBirth": "birth city",
+        "ex:profession": "job",
+        "ex:contactEmail": "email",
+    }
+
     print("Source Predicates (DBpedia-style):")
     for pred, (uri, _) in src_predicates.items():
-        print(f"  • {pred:20s} ({uri})")
+        natural = src_attr_names.get(str(uri), "N/A")
+        print(f"  • {pred:20s} ({uri}) → \"{natural}\"")
 
     print("\nTarget Predicates (FOAF-style + custom):")
     for pred, (uri, _) in tgt_predicates.items():
-        print(f"  • {pred:20s} ({uri})")
+        natural = tgt_attr_names.get(str(uri), "N/A")
+        print(f"  • {pred:20s} ({uri}) → \"{natural}\"")
 
     print("\n" + "-"*80)
-    print("Running Semantic Matching...")
+    print("Running Semantic Matching WITH attr_names...")
     print("-"*80 + "\n")
 
     # Create matcher with default config
@@ -56,8 +77,11 @@ def test_semantic_matching():
         "cache_dir": ".cache/embeddings_test",
     })
 
-    # Perform matching
-    matches = matcher.match_predicates(src_predicates, tgt_predicates)
+    # Perform matching WITH attr_names
+    matches = matcher.match_predicates(
+        src_predicates, tgt_predicates,
+        src_attr_names, tgt_attr_names
+    )
 
     # Display matches
     print(f"Found {len(matches)} matches:\n")

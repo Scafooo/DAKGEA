@@ -49,9 +49,19 @@ augmentation:
     # Semantic predicate matching configuration
     predicate_matching:
       embedding_model: "all-MiniLM-L6-v2"  # Sentence transformer model
-      similarity_threshold: 0.7    # Minimum similarity for match [0-1]
+      similarity_threshold: 0.6    # Minimum similarity for match [0-1]
       cache_dir: ".cache/embeddings"  # Cache directory for embeddings
       device: null                 # "cuda", "cpu", or null (auto-detect)
+
+      # Hybrid matching (name + value similarity)
+      use_value_similarity: true   # Enable value-based matching
+      name_weight: 0.85            # Weight for semantic name similarity (85%)
+      value_weight: 0.15           # Weight for value similarity (15%)
+      alignment_sample_size: 100   # Entities to sample for pre-computation
+
+    # Unmatched attributes generation (NEW!)
+    generate_unmatched: true       # Generate variations for non-matching attributes
+    unmatched_sample_rate: 1.0     # Sample 100% of unmatched attrs (0.0-1.0, 1.0=all)
 
     # Advanced training techniques (modular - can be toggled on/off)
     advanced_training:

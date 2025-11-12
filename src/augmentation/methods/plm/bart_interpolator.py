@@ -124,6 +124,7 @@ class BartInterpolatorPLM:
         seed: int = 42,
         reuse_if_available: bool = True,
         advanced_training_config: Optional[Dict[str, Any]] = None,
+        generation_config: Optional[Dict[str, Any]] = None,
     ):
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.model_name = model_name
@@ -134,6 +135,18 @@ class BartInterpolatorPLM:
         self.max_len_out = max_len_out
         self.reuse_if_available = reuse_if_available
         random.seed(seed)
+
+        # Generation parameters (configurable)
+        gen_cfg = generation_config or {}
+        self.gen_max_new_tokens = int(gen_cfg.get("max_new_tokens", 32))
+        self.gen_do_sample = bool(gen_cfg.get("do_sample", True))
+        self.gen_top_k = int(gen_cfg.get("top_k", 50))
+        self.gen_top_p = float(gen_cfg.get("top_p", 0.95))
+        self.gen_temperature = float(gen_cfg.get("temperature", 1.2))
+        self.gen_num_beams = int(gen_cfg.get("num_beams", 1))
+        self.gen_repetition_penalty = float(gen_cfg.get("repetition_penalty", 2.0))
+        self.gen_length_penalty = float(gen_cfg.get("length_penalty", 1.0))
+        self.gen_no_repeat_ngram_size = int(gen_cfg.get("no_repeat_ngram_size", 4))
 
         os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
@@ -265,6 +278,36 @@ class BartInterpolatorPLM:
     import math
     from collections import defaultdict
 
+    def _build_input_with_context(self, ex: PairExample, noise_fn) -> str:
+        """
+        Build input text with context attributes if available.
+
+        Format without context: "{predicate} <SEP> {noisy_src} <SEP> {noisy_tgt}"
+        Format with context: "[attr1=val1|attr2=val2] {predicate} <SEP> {noisy_src} <SEP> {noisy_tgt}"
+
+        Args:
+            ex: PairExample (may have context_attrs attribute)
+            noise_fn: Function to apply noise to values
+
+        Returns:
+            Formatted input string
+        """
+        # Check if context is available
+        context_attrs = getattr(ex, 'context_attrs', None)
+
+        if context_attrs and len(context_attrs) > 0:
+            # Build context prefix: [attr1=val1|attr2=val2|...]
+            # Apply noise to context values too for consistency
+            context_pairs = [f"{k}={noise_fn(v)}" for k, v in sorted(context_attrs.items())]
+            context_prefix = "[" + "|".join(context_pairs) + "] "
+        else:
+            context_prefix = ""
+
+        # Build standard input with context prefix
+        input_text = f"{context_prefix}{ex.predicate} <SEP> {noise_fn(ex.src_val)} <SEP> {noise_fn(ex.tgt_val)}"
+
+        return input_text
+
     def _build_hf_dataset_from_pairs(self, pairs, balance_by_predicate: bool = True):
         """
         Costruisce un Dataset HuggingFace dai PairExample.
@@ -273,8 +316,10 @@ class BartInterpolatorPLM:
         if not balance_by_predicate:
             rows = []
             for ex in pairs:
+                # Build input with context if available
+                input_text = self._build_input_with_context(ex, _noise_str)
                 rows.append({
-                    "input_text": f"{ex.predicate} <SEP> {_noise_str(ex.src_val)} <SEP> {_noise_str(ex.tgt_val)}",
+                    "input_text": input_text,
                     "output_text": f"{ex.out_src} | {ex.out_tgt}",
                     "predicate": ex.predicate,
                 })
@@ -296,8 +341,10 @@ class BartInterpolatorPLM:
             for k in keys:
                 if i < len(buckets[k]):
                     ex = buckets[k][i]
+                    # Build input with context if available
+                    input_text = self._build_input_with_context(ex, _noise_str)
                     rows.append({
-                        "input_text": f"{ex.predicate} <SEP> {_noise_str(ex.src_val)} <SEP> {_noise_str(ex.tgt_val)}",
+                        "input_text": input_text,
                         "output_text": f"{ex.out_src} | {ex.out_tgt}",
                         "predicate": ex.predicate,
                     })
@@ -315,11 +362,14 @@ class BartInterpolatorPLM:
 
         # 2. Stratified Sampling
         if self.stratified_sampler:
+            original_count = len(pairs)
+            logger.info("[BART] Applying stratified sampling...")
             # Group by predicate
             by_predicate = defaultdict(list)
             for ex in pairs:
                 by_predicate[ex.predicate].append(ex)
             pairs = self.stratified_sampler.sample(by_predicate)
+            logger.info(f"[BART] Stratified sampling: {original_count} → {len(pairs)} examples")
 
         # 3. Curriculum Learning - assign difficulties
         if self.curriculum_scheduler:
@@ -384,9 +434,11 @@ class BartInterpolatorPLM:
         # ------------------------------------------------------------------
         # Use advanced noiser if available, otherwise use default
         if self.advanced_noiser:
+            logger.info("[BART] Using advanced noising strategy")
             def _noise_str(x: str) -> str:
                 return self.advanced_noiser.noise(x) if x else x
         else:
+            logger.info("[BART] Using default noising strategy")
             def _noise_str(x: str) -> str:
                 import re, random
                 if not x:
@@ -405,8 +457,9 @@ class BartInterpolatorPLM:
         def to_rows(pairs):
             rows = []
             for ex in pairs:
-                inp = f"{ex.predicate} <s> {_noise_str(ex.src_val)} <t> {_noise_str(ex.tgt_val)}"
-                out = f"{ex.out_src} <t> {ex.out_tgt}"
+                # Standard format - keep it simple!
+                inp = f"{_noise_str(ex.src_val)} <sep> {_noise_str(ex.tgt_val)}"
+                out = f"{ex.out_src} <sep> {ex.out_tgt}"
                 rows.append({"input_text": inp, "output_text": out})
             return rows
 
@@ -621,6 +674,101 @@ class BartInterpolatorPLM:
         random.shuffle(examples)
         return examples
 
+    def build_pairs_from_dataset_with_context(
+        self,
+        knowledge_graph_source,
+        knowledge_graph_target,
+        aligned_entities: Iterable[Tuple[URIRef, URIRef]],
+        max_per_predicate: int = 5000,
+        max_context_attrs: int = 10,  # Limit context size
+    ) -> List[PairExample]:
+        """
+        Build training pairs with context from other attributes of the same entity.
+
+        For each aligned entity pair, collects ALL literal attributes and creates
+        training examples where each attribute uses OTHER attributes as context.
+
+        Format: "[attr1=val1|attr2=val2|...] src_val <SEP> tgt_val" → "interpolated"
+
+        Args:
+            knowledge_graph_source: Source KG
+            knowledge_graph_target: Target KG
+            aligned_entities: List of aligned (src_uri, tgt_uri) pairs
+            max_per_predicate: Maximum examples per predicate
+            max_context_attrs: Maximum attributes to include in context
+
+        Returns:
+            List of PairExample with context information
+        """
+        import logging
+        logger = logging.getLogger(__name__)
+
+        logger.info("[BART] Building context-aware training pairs...")
+
+        def collect_entity_literals(kg, entity_uri):
+            """Collect all literal attributes for an entity."""
+            attrs = {}
+            for s, p, o in kg.triples((entity_uri, None, None)):
+                if isinstance(o, Literal):
+                    lname = _clean_pred(p)
+                    attrs[lname] = str(o)
+            return attrs
+
+        examples: List[PairExample] = []
+        per_pred_count = {}
+
+        # Process each aligned entity pair
+        for src_uri, tgt_uri in aligned_entities:
+            # Collect all attributes for both entities
+            src_attrs = collect_entity_literals(knowledge_graph_source, src_uri)
+            tgt_attrs = collect_entity_literals(knowledge_graph_target, tgt_uri)
+
+            # Find common predicates (attributes that exist in both)
+            common_preds = set(src_attrs.keys()) & set(tgt_attrs.keys())
+
+            if not common_preds:
+                continue
+
+            # For each common predicate, create a training example with context
+            for pred_to_generate in common_preds:
+                # Check if we've reached the limit for this predicate
+                if per_pred_count.get(pred_to_generate, 0) >= max_per_predicate:
+                    continue
+
+                # Build context from OTHER attributes (exclude the one we're generating)
+                context_attrs = {}
+                for pred, val in src_attrs.items():
+                    if pred != pred_to_generate and len(context_attrs) < max_context_attrs:
+                        context_attrs[pred] = _simple_clean(val)
+
+                # Get the values to interpolate
+                src_val = _simple_clean(src_attrs[pred_to_generate])
+                tgt_val = _simple_clean(tgt_attrs[pred_to_generate])
+
+                # Create example with context
+                ex = PairExample(
+                    predicate=pred_to_generate,
+                    src_val=src_val,
+                    tgt_val=tgt_val,
+                    out_src=self._canonicalize(pred_to_generate, src_val),
+                    out_tgt=self._canonicalize(pred_to_generate, tgt_val),
+                )
+
+                # Store context as attribute for later use
+                ex.context_attrs = context_attrs
+
+                # Infer type
+                ex.predicate_type = AttributeTypeInference.infer_type(pred_to_generate, src_val)
+                ex.difficulty = None  # Can be assigned later by curriculum scheduler
+
+                examples.append(ex)
+                per_pred_count[pred_to_generate] = per_pred_count.get(pred_to_generate, 0) + 1
+
+        logger.info(f"[BART] Built {len(examples)} context-aware training pairs from {len(list(aligned_entities))} aligned entities")
+
+        random.shuffle(examples)
+        return examples
+
     # piccola canonicalizzazione euristica (solo minima per supervision)
     def _canonicalize(self, pred: str, val: str) -> str:
         if not val:
@@ -655,8 +803,25 @@ class BartInterpolatorPLM:
         # clamp in [0.05, 0.95]
         return max(0.05, min(0.95, alpha))
 
-    def interpolate_pair(self, val_src: str, val_tgt: str, max_new_tokens: int = 32, predicate: str = "") -> Tuple[
-        str, str]:
+    def interpolate_pair(
+        self,
+        val_src: str,
+        val_tgt: str,
+        max_new_tokens: int = 32,
+        predicate: str = "",
+    ) -> Tuple[str, str]:
+        """
+        Interpolate between source and target values using latent mixing.
+
+        Args:
+            val_src: Source value
+            val_tgt: Target value
+            max_new_tokens: Maximum tokens to generate
+            predicate: Predicate name (for conservative alpha on names)
+
+        Returns:
+            Tuple of (interpolated_src, interpolated_tgt)
+        """
         if not val_src and not val_tgt:
             return "", ""
         if not val_src:
@@ -666,6 +831,7 @@ class BartInterpolatorPLM:
             s = _simple_clean(val_src)
             return s, s
 
+        # Standard approach: tokenize values directly
         toks = self.tokenizer([val_src, val_tgt], return_tensors="pt",
                               padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
 
@@ -699,17 +865,18 @@ class BartInterpolatorPLM:
         start = torch.tensor([[self.model.config.decoder_start_token_id]], device=self.device)
         bad = self.tokenizer.convert_tokens_to_ids(['<SRC>', '<TGT>', '<SEP>'])
 
+        # Use configurable generation parameters
         gen_kwargs = dict(
             decoder_input_ids=start,
-            max_new_tokens=max_new_tokens,
-            do_sample=True,
-            top_k=50,
-            top_p=0.95,
-            temperature=1.2,
-            num_beams=1,
-            no_repeat_ngram_size=4,
-            repetition_penalty=2.0,
-            length_penalty=1.0,
+            max_new_tokens=self.gen_max_new_tokens if max_new_tokens == 32 else max_new_tokens,
+            do_sample=self.gen_do_sample,
+            top_k=self.gen_top_k,
+            top_p=self.gen_top_p,
+            temperature=self.gen_temperature,
+            num_beams=self.gen_num_beams,
+            no_repeat_ngram_size=self.gen_no_repeat_ngram_size,
+            repetition_penalty=self.gen_repetition_penalty,
+            length_penalty=self.gen_length_penalty,
             early_stopping=True,
             remove_invalid_values=True,
             bad_words_ids=[[i] for i in bad],

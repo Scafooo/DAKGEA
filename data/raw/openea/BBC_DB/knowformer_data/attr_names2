@@ -145,7 +145,7 @@ prop:author 	 author
 prop:instrument 	 instrument
 prop:shortdescription 	 short description
 prop:schools 	 schools
-http://xmlns.com/foaf/0.1/name 	 http://xmlns.com/foaf/0.1/name
+http://xmlns.com/foaf/0.1/name 	 name
 prop:founder 	 founder
 dbo:facilityid 	 dbo:facilityid
 prop:pnd 	 pnd

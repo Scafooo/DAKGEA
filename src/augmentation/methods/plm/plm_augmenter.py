@@ -145,6 +145,7 @@ class PLMAugmenter(AugmentationMethod):
 
         # BART fine-tuning parameters
         bart_cfg = augmentation_cfg.get("bart", {})
+        self.bart_cfg = bart_cfg  # Store full config for NodeExpander
         self.enable_bart_finetuning = bool(bart_cfg.get("enable_finetuning", True))
         self.bart_model_name = bart_cfg.get("model_name", "facebook/bart-base")
         self.bart_advanced_training_config = bart_cfg.get("advanced_training", {})
@@ -160,6 +161,13 @@ class PLMAugmenter(AugmentationMethod):
         self.bart_epochs = int(bart_cfg.get("epochs", 10))
         self.bart_batch_size = int(bart_cfg.get("batch_size", 16))
         self.bart_force_retrain = bool(bart_cfg.get("force_retrain", False))
+
+        # BART interpolation parameters
+        self.bart_base_alpha = float(bart_cfg.get("base_alpha", 0.35))
+        self.bart_alpha_spread = float(bart_cfg.get("alpha_spread", 0.25))
+
+        # Generation parameters
+        self.bart_generation_config = bart_cfg.get("generation", {})
 
         # Predicate matching configuration
         self.predicate_matcher_config = bart_cfg.get("predicate_matching", {})
@@ -201,12 +209,58 @@ class PLMAugmenter(AugmentationMethod):
         else:
             self.logger.info("[PLM] BART fine-tuning disabled in configuration.")
 
-        # Initialize NodeExpander with BART interpolator and predicate matcher config
+        # ------------------------------------------------------------------
+        # Step 1.5: Pre-compute predicate alignments (if enabled)
+        # ------------------------------------------------------------------
+        alignment_cache = None
+        use_value_based_matching = self.predicate_matcher_config.get("use_value_similarity", False)
+
+        if use_value_based_matching:
+            self.section("Predicate Alignment Pre-computation")
+            try:
+                from .predicate_alignment import PredicateAlignmentCache
+
+                name_weight = self.predicate_matcher_config.get("name_weight", 0.7)
+                value_weight = self.predicate_matcher_config.get("value_weight", 0.3)
+                sample_size = self.predicate_matcher_config.get("alignment_sample_size", 100)
+
+                self.logger.info(f"[PLM] Initializing alignment cache (name_weight={name_weight}, value_weight={value_weight}, sample_size={sample_size})")
+
+                alignment_cache = PredicateAlignmentCache(
+                    predicate_matcher_config=self.predicate_matcher_config,
+                    name_weight=name_weight,
+                    value_weight=value_weight,
+                    sample_size=sample_size,
+                )
+
+                self.logger.info("[PLM] Computing predicate alignments...")
+                # Pre-compute alignments
+                alignments = alignment_cache.compute_alignments(dataset_augmented)
+                self.logger.info(f"[PLM] ✓ Predicate alignment pre-computation complete: {len(alignments)} alignments found")
+
+                if alignments:
+                    avg_combined = sum(a.combined_score for a in alignments) / len(alignments)
+                    self.logger.info(f"[PLM] Average combined score: {avg_combined:.3f}")
+                    self.logger.info(f"[PLM] Top 3 alignments:")
+                    for i, align in enumerate(alignments[:3], 1):
+                        self.logger.info(f"  {i}. {align.src_uri} ↔ {align.tgt_uri}")
+                        self.logger.info(f"     name={align.name_similarity:.3f}, value={align.value_similarity:.3f}, combined={align.combined_score:.3f}")
+                else:
+                    self.logger.warning("[PLM] No alignments found! Check threshold or dataset.")
+            except Exception as e:
+                self.logger.error(f"[PLM] Failed to pre-compute alignments: {e}", exc_info=True)
+                self.logger.warning("[PLM] Falling back to on-the-fly matching")
+                alignment_cache = None
+
+        # Initialize NodeExpander with BART interpolator and predicate alignment cache
         self.node_expander = NodeExpander(
             self.derived_predicate,
             self.add_derived_predicate,
             self.bart_interpolator,
             self.predicate_matcher_config,
+            alignment_cache,  # Pass the cache
+            advanced_training_config=self.bart_advanced_training_config,
+            bart_config=self.bart_cfg,  # Pass full BART config for unmatched generation
         )
 
         # ------------------------------------------------------------------
@@ -265,7 +319,10 @@ class PLMAugmenter(AugmentationMethod):
             out_dir=self.bart_out_dir,
             device=device,
             seed=self.seed,
+            base_alpha=self.bart_base_alpha,
+            alpha_spread=self.bart_alpha_spread,
             advanced_training_config=self.bart_advanced_training_config,
+            generation_config=self.bart_generation_config,
         )
 
         # Build training pairs from aligned entities
