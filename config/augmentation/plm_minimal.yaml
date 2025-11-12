@@ -2,7 +2,7 @@
 # Fast configuration for testing and development
 
 augmentation:
-  method: plm_augmentation
+  method: plm
   max_depth: 1
   ratio: 0.2
 

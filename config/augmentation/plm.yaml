@@ -3,7 +3,7 @@
 
 augmentation:
   # Augmentation method name (must match registry)
-  method: plm_augmentation
+  method: plm
 
   # BFS expansion parameters
   max_depth: 2                    # Maximum BFS depth for expansion
