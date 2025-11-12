@@ -40,6 +40,11 @@ augmenter = PLMAugmenter({
             "epochs": 2,  # Ridotto per test veloci
             "max_train_samples": 1000,  # Limitato per test veloci
 
+            # Regularization (prevent overfitting)
+            "weight_decay": 0.01,            # L2 regularization
+            "warmup_steps": 50,              # LR warmup (reduced for test)
+            "max_grad_norm": 1.0,            # Gradient clipping
+
             # BART interpolation parameters (for tuning)
             "base_alpha": 0.35,       # Base interpolation weight [0.0-1.0]
             "alpha_spread": 0.15,     # Variation range for adaptive alpha

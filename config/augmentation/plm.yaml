@@ -25,8 +25,13 @@ augmentation:
     force_retrain: false          # Force retraining even if model exists
     max_train_samples: 4000       # Maximum training samples (null = unlimited)
     val_split: 0.1                # Validation split ratio
-    patience: 3                   # Early stopping patience
+    patience: 3                   # Early stopping patience (stop if no improvement)
     max_per_predicate: 5000       # Max examples per predicate
+
+    # Regularization (prevent overfitting)
+    weight_decay: 0.01            # L2 regularization weight
+    warmup_steps: 100             # Learning rate warmup steps
+    max_grad_norm: 1.0            # Gradient clipping threshold
 
     # BART interpolation parameters
     base_alpha: 0.35              # Base interpolation alpha

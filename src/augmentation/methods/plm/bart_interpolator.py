@@ -125,6 +125,7 @@ class BartInterpolatorPLM:
         reuse_if_available: bool = True,
         advanced_training_config: Optional[Dict[str, Any]] = None,
         generation_config: Optional[Dict[str, Any]] = None,
+        training_config: Optional[Dict[str, Any]] = None,
     ):
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.model_name = model_name
@@ -134,6 +135,7 @@ class BartInterpolatorPLM:
         self.max_len_in = max_len_in
         self.max_len_out = max_len_out
         self.reuse_if_available = reuse_if_available
+        self.training_config = training_config or {}
         random.seed(seed)
 
         # Generation parameters (configurable)
@@ -516,6 +518,11 @@ class BartInterpolatorPLM:
             metric_for_best = None
             greater_is_better = None
 
+        # Get regularization parameters from config (with defaults)
+        weight_decay = self.training_config.get("weight_decay", 0.01)
+        warmup_steps = self.training_config.get("warmup_steps", 100)
+        max_grad_norm = self.training_config.get("max_grad_norm", 1.0)
+
         args_kwargs = dict(
             output_dir=self.out_dir,
             overwrite_output_dir=force_retrain,
@@ -523,7 +530,9 @@ class BartInterpolatorPLM:
             learning_rate=lr,
             per_device_train_batch_size=batch_size,
             per_device_eval_batch_size=batch_size,
-            weight_decay=0.01,
+            weight_decay=weight_decay,
+            warmup_steps=warmup_steps,
+            max_grad_norm=max_grad_norm,
             save_strategy=save_strategy,
             save_total_limit=2,
             logging_dir=os.path.join(self.out_dir, "logs"),
