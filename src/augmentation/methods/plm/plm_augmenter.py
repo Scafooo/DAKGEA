@@ -26,7 +26,7 @@ from .node_expander import NodeExpander
 from .set_knowledge_graph.set_knowledge_graph import SetKnowledgeGraph
 
 
-@AUGMENTATION_REGISTRY.register("plm_augmentation")
+@AUGMENTATION_REGISTRY.register("plm")
 class PLMAugmenter(AugmentationMethod):
     """Augment datasets via PLM-based expansion of fused entity sets.
 
