@@ -335,11 +335,12 @@ class EvaluationStage:
 
         base_root = Path(lineage_cfg.get("evaluation_root", ratio_root / "evaluation"))
 
+        # Use a single results.json file instead of per-model files
+        out_file = evaluation_dir / "results.json"
+
+        # Collect all model results
+        all_results = {}
         for model_name in self.models:
-            out_file = evaluation_dir / f"{model_name}.json"
-            if self.resume and not out_file.exists():
-                self._migrate_legacy_result(base_root, variant_key, out_file)
-            evaluation_paths[model_name] = str(out_file.resolve())
             if self.resume and out_file.exists():
                 logger.info(
                     "⏭️  Skipping model '%s' (%s) — results already cached",
@@ -371,7 +372,12 @@ class EvaluationStage:
             results = model.evaluate(dataset_reduced, dataset_augmented)
             logger.info("[SUCCESS] Model '%s' evaluation finished", model_name)
 
-            self._write_results(out_file, results)
+            all_results[model_name] = results
+
+        # Write all results to a single file
+        if all_results:
+            self._write_results(out_file, all_results)
+            evaluation_paths["results"] = str(out_file.resolve())
 
         # Merge evaluation metadata with existing summary if present
         summary_path = evaluation_dir / "summary.json"

@@ -903,21 +903,19 @@ class ExperimentRunner:
         variant_name: Optional[str],
         target_file: Path,
     ) -> Optional[Path]:
-        """Aggregate per-model evaluation results into a single stage file."""
+        """Results are now saved directly by EvaluationStage, so this just checks if they exist."""
         variant_key = EvaluationStage._normalise_variant_key(variant_name)
         evaluation_meta = ratio_meta.get("evaluations", {}).get(variant_key)
         if not evaluation_meta:
             return None
 
-        aggregated = self._collect_model_results(evaluation_meta)
-        if not aggregated:
-            return None
+        # Check if results.json exists in the stage directory
+        results_path = evaluation_meta.get("paths", {}).get("results")
+        if results_path and Path(results_path).exists():
+            logger.info("💾 Results already saved → %s", results_path)
+            return Path(results_path)
 
-        target_file.parent.mkdir(parents=True, exist_ok=True)
-        with target_file.open("w", encoding="utf-8") as handle:
-            json.dump(aggregated, handle, indent=2)
-        logger.info("💾 Saved aggregated results → %s", target_file)
-        return target_file
+        return None
 
     def _collect_model_results(self, evaluation_meta: Dict[str, Any]) -> Dict[str, Any]:
         """Return a dictionary with model scores loaded from their JSON files."""
