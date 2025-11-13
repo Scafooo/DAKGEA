@@ -34,6 +34,66 @@ def _is_baseline_variant(name: Optional[str]) -> bool:
     return name in (None, VARIANT_BASELINE)
 
 
+def _extract_dataset_statistics(dataset: Dataset) -> Dict[str, Any]:
+    """Extract detailed statistics from a dataset.
+
+    Returns:
+        Dictionary containing:
+        - kg1: Statistics for source KG (triples, entities, relations, attributes)
+        - kg2: Statistics for target KG (triples, entities, relations, attributes)
+        - aligned_pairs: Number of aligned entity pairs
+    """
+    from rdflib import Literal
+
+    kg1 = dataset.knowledge_graph_source
+    kg2 = dataset.knowledge_graph_target
+
+    # Extract entities (subjects and objects that are URIRefs, not Literals)
+    kg1_entities = set()
+    kg2_entities = set()
+    for s, p, o in kg1:
+        kg1_entities.add(str(s))
+        if not isinstance(o, Literal):
+            kg1_entities.add(str(o))
+    for s, p, o in kg2:
+        kg2_entities.add(str(s))
+        if not isinstance(o, Literal):
+            kg2_entities.add(str(o))
+
+    # Extract relations (predicates where object is URIRef) and attributes (predicates where object is Literal)
+    kg1_relations = set()
+    kg1_attributes = set()
+    for s, p, o in kg1:
+        if isinstance(o, Literal):
+            kg1_attributes.add(str(p))
+        else:
+            kg1_relations.add(str(p))
+
+    kg2_relations = set()
+    kg2_attributes = set()
+    for s, p, o in kg2:
+        if isinstance(o, Literal):
+            kg2_attributes.add(str(p))
+        else:
+            kg2_relations.add(str(p))
+
+    return {
+        "kg1": {
+            "triples": len(kg1),
+            "entities": len(kg1_entities),
+            "relations": len(kg1_relations),
+            "attributes": len(kg1_attributes),
+        },
+        "kg2": {
+            "triples": len(kg2),
+            "entities": len(kg2_entities),
+            "relations": len(kg2_relations),
+            "attributes": len(kg2_attributes),
+        },
+        "aligned_pairs": len(dataset.aligned_entities),
+    }
+
+
 class StageSummaryWriter:
     """Utility that writes stage summaries to JSON files."""
 
@@ -186,14 +246,18 @@ class ReductionStage(_WriterStage):
                 writer_name = plan.name
                 break
 
+        # Extract detailed dataset statistics
+        stats = _extract_dataset_statistics(dataset_reduced)
+
         StageSummaryWriter.write(
             reduction_root / "summary.json",
             {
                 "method": self.reducer_name,
                 "ratio": ratio,
                 "target_entities": stage_cfg.get("reduction", {}).get("target_entities"),
-                "aligned_pairs": len(dataset_reduced.aligned_entities),
+                "aligned_pairs": stats["aligned_pairs"],
                 "writer": writer_name,
+                "statistics": stats,
             },
         )
         return dataset_reduced
@@ -289,13 +353,17 @@ class AugmentationStage(_WriterStage):
                 writer_name = plan.name
                 break
 
+        # Extract detailed dataset statistics
+        stats = _extract_dataset_statistics(dataset_augmented)
+
         StageSummaryWriter.write(
             stage_root / "summary.json",
             {
                 "augmentation": augmentation_name,
                 "ratio": ratio,
-                "aligned_pairs": len(dataset_augmented.aligned_entities),
+                "aligned_pairs": stats["aligned_pairs"],
                 "writer": writer_name,
+                "statistics": stats,
             },
         )
         return dataset_augmented

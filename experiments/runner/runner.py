@@ -1029,6 +1029,18 @@ class ExperimentRunner:
             dataset_iterable = datasets_section
 
         for dataset_meta in dataset_iterable:
+            # Add artifact_root to targets if neither dataset nor model should be saved
+            artifact_root = dataset_meta.get("artifact_root")
+            if artifact_root:
+                artifact_path = Path(artifact_root)
+                # Only add artifact_root if both save flags are false
+                if not self.reduction_save_dataset and not self.reduction_save_model:
+                    if not self.augmentation_save_dataset and not self.augmentation_save_model:
+                        if artifact_path.exists():
+                            targets.append(str(artifact_path))
+                            # If we're removing the entire artifact_root, skip collecting individual paths
+                            continue
+
             # Instead of removing the entire artifact_root, collect specific
             # stage directories based on save flags
             for ratio_meta in dataset_meta.get("ratios", {}).values():
