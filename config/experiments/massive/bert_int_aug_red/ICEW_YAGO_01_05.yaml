@@ -7,14 +7,16 @@ experiment:
     method: random_entities
     ratio: 0.1
     writer: bert_int
-    save: false
     eval: true
+    save_dataset: false
+    save_model: false
   augmentation:
     method: plm
     ratio: 0.5
     writer: bert_int
-    save: false
     eval: true
+    save_dataset: false
+    save_model: false
   model: bert_int
   seed: 11037
   clear: true

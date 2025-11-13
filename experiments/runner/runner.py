@@ -70,10 +70,12 @@ class ExperimentRunner:
         self.models = list(self.normalized_cfg.models)
         self.reduction_method = self.normalized_cfg.reduction_method
         self.reduction_writer = self.normalized_cfg.reduction_writer
-        self.reduction_save = self.normalized_cfg.reduction_save
+        self.reduction_save_dataset = self.normalized_cfg.reduction_save_dataset
+        self.reduction_save_model = self.normalized_cfg.reduction_save_model
         self.reduction_eval = self.normalized_cfg.reduction_eval
         self.augmentation_writer = self.normalized_cfg.augmentation_writer
-        self.augmentation_save = self.normalized_cfg.augmentation_save
+        self.augmentation_save_dataset = self.normalized_cfg.augmentation_save_dataset
+        self.augmentation_save_model = self.normalized_cfg.augmentation_save_model
         self.augmentation_eval = self.normalized_cfg.augmentation_eval
         self.clear_intermediate = self.normalized_cfg.clear_intermediate
         self.overwrite_existing = self.normalized_cfg.overwrite_existing
@@ -1013,8 +1015,8 @@ class ExperimentRunner:
     def _collect_intermediate_dirs(self, metadata: Dict[str, Any]) -> List[str]:
         """Collect directories to remove with clear: true.
 
-        Removes the entire artifact/ directory since evaluation results
-        are now stored in augmentation/evaluation/ instead.
+        Respects save_dataset and save_model flags - only deletes artifacts
+        that are not explicitly saved.
         """
         targets: List[str] = []
         dataset_iterable = []
@@ -1027,29 +1029,78 @@ class ExperimentRunner:
             dataset_iterable = datasets_section
 
         for dataset_meta in dataset_iterable:
-            artifact_root = dataset_meta.get("artifact_root")
-            if artifact_root:
-                artifact_path = Path(artifact_root)
-                if artifact_path.exists():
-                    # Remove the entire artifact/ directory
-                    targets.append(str(artifact_path))
+            # Instead of removing the entire artifact_root, collect specific
+            # stage directories based on save flags
+            for ratio_meta in dataset_meta.get("ratios", {}).values():
+                # Collect reduction artifacts to delete
+                reduction_meta = ratio_meta.get("reduction")
+                if reduction_meta:
+                    paths_dict = reduction_meta.get("paths", {})
+                    for key, path_str in paths_dict.items():
+                        path = Path(path_str)
+                        # Delete dataset artifacts if save_dataset=false
+                        if "dataset" in key.lower() and not self.reduction_save_dataset:
+                            if path.exists():
+                                targets.append(str(path))
+                        # Delete model artifacts if save_model=false
+                        elif "model" in key.lower() and not self.reduction_save_model:
+                            if path.exists():
+                                targets.append(str(path))
+                        # Delete other artifacts if both flags are false
+                        elif not self.reduction_save_dataset and not self.reduction_save_model:
+                            if path.exists():
+                                targets.append(str(path))
+
+                # Collect augmentation artifacts to delete
+                for augmentation_meta in ratio_meta.get("augmentations", {}).values():
+                    paths_dict = augmentation_meta.get("paths", {})
+                    for key, path_str in paths_dict.items():
+                        path = Path(path_str)
+                        # Delete dataset artifacts if save_dataset=false
+                        if "dataset" in key.lower() and not self.augmentation_save_dataset:
+                            if path.exists():
+                                targets.append(str(path))
+                        # Delete model artifacts if save_model=false
+                        elif "model" in key.lower() and not self.augmentation_save_model:
+                            if path.exists():
+                                targets.append(str(path))
+                        # Delete other artifacts if both flags are false
+                        elif not self.augmentation_save_dataset and not self.augmentation_save_model:
+                            if path.exists():
+                                targets.append(str(path))
+
         return targets
 
     def _schedule_stage_cleanup(self) -> List[Path]:
-        """Determine which stage artefacts should be deleted after the run."""
+        """Determine which stage artefacts should be deleted after the run.
+
+        Uses granular save_dataset and save_model flags to selectively delete
+        only the artifacts that should not be saved.
+        """
         pending: List[Path] = []
 
         for dataset_meta in self.metadata.get("datasets", {}).values():
             for ratio_meta in dataset_meta.get("ratios", {}).values():
-                if not self.reduction_save:
+                # Handle reduction cleanup with granular flags
+                reduction_meta = ratio_meta.get("reduction")
+                if reduction_meta:
                     pending.extend(
-                        self._extract_stage_paths(ratio_meta.get("reduction"), delete_parent=True)
-                    )
-                if not self.augmentation_save:
-                    for augmentation_meta in ratio_meta.get("augmentations", {}).values():
-                        pending.extend(
-                            self._extract_stage_paths(augmentation_meta, delete_parent=True)
+                        self._extract_stage_paths_granular(
+                            reduction_meta,
+                            save_dataset=self.reduction_save_dataset,
+                            save_model=self.reduction_save_model
                         )
+                    )
+
+                # Handle augmentation cleanup with granular flags
+                for augmentation_meta in ratio_meta.get("augmentations", {}).values():
+                    pending.extend(
+                        self._extract_stage_paths_granular(
+                            augmentation_meta,
+                            save_dataset=self.augmentation_save_dataset,
+                            save_model=self.augmentation_save_model
+                        )
+                    )
 
         return pending
 
@@ -1067,6 +1118,50 @@ class ExperimentRunner:
         # which must be preserved even when save=false.
         # Instead, we only delete the specific subdirectories (dataset/, model/, etc.)
         return collected
+
+    @staticmethod
+    def _extract_stage_paths_granular(
+        stage_meta: Optional[Dict[str, Any]],
+        *,
+        save_dataset: bool,
+        save_model: bool
+    ) -> List[Path]:
+        """Extract paths to delete based on granular save flags.
+
+        Args:
+            stage_meta: Metadata for the stage (reduction or augmentation)
+            save_dataset: Whether to preserve the dataset
+            save_model: Whether to preserve the model
+
+        Returns:
+            List of paths to delete
+        """
+        if not stage_meta:
+            return []
+
+        path_dict = stage_meta.get("paths", {})
+        paths_to_delete: List[Path] = []
+
+        # Selectively delete based on flags
+        for key, path_str in list(path_dict.items()):
+            path = Path(path_str)
+
+            # Check if this is a dataset or model path
+            if "dataset" in key.lower():
+                if not save_dataset:
+                    paths_to_delete.append(path)
+                    del path_dict[key]
+            elif "model" in key.lower():
+                if not save_model:
+                    paths_to_delete.append(path)
+                    del path_dict[key]
+            else:
+                # For other paths (e.g., "output"), delete if neither flag is set
+                if not save_dataset and not save_model:
+                    paths_to_delete.append(path)
+                    del path_dict[key]
+
+        return paths_to_delete
 
     @staticmethod
     def _remove_stage_outputs(paths: List[Path]) -> None:

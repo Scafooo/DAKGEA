@@ -20,11 +20,14 @@ class TrainingPairGenerator(Iterator[Tuple[List[int], List[int], List[int], List
     ent_ids_right: Sequence[int]
     batch_size: int
     negatives_per_positive: int
+    seed: int | None = None
 
     def __post_init__(self) -> None:
         self._iter_index = 0
         self._batches: List[Example] | None = None
         self._batch_count = 0
+        # Create a dedicated RNG for reproducible negative sampling
+        self._rng = np.random.RandomState(self.seed) if self.seed is not None else np.random
 
     def build_indices(self, candidate_dict: Dict[int, Sequence[int]]) -> None:
         """Prepare shuffled training tuples based on the provided candidates."""
@@ -34,17 +37,17 @@ class TrainingPairGenerator(Iterator[Tuple[List[int], List[int], List[int], List
         examples: List[Example] = []
         for pos_left, pos_right in self.train_ill:
             for _ in range(self.negatives_per_positive):
-                if np.random.rand() <= 0.5:
-                    neg_left = int(np.random.choice(candidates[pos_right][:candidate_size]))
+                if self._rng.rand() <= 0.5:
+                    neg_left = int(self._rng.choice(candidates[pos_right][:candidate_size]))
                     neg_right = pos_right
                 else:
                     neg_left = pos_left
-                    neg_right = int(np.random.choice(candidates[pos_left][:candidate_size]))
+                    neg_right = int(self._rng.choice(candidates[pos_left][:candidate_size]))
 
                 if pos_left != neg_left or pos_right != neg_right:
                     examples.append((pos_left, pos_right, neg_left, neg_right))
 
-        np.random.shuffle(examples)
+        self._rng.shuffle(examples)
         self._batches = examples
         self._batch_count = int(np.ceil(len(examples) / self.batch_size))
         self._iter_index = 0

@@ -25,10 +25,12 @@ class ExperimentConfig:
     models: List[str]
     reduction_method: str
     reduction_writer: Optional[str]
-    reduction_save: bool
+    reduction_save_dataset: bool
+    reduction_save_model: bool
     reduction_eval: bool
     augmentation_writer: Optional[str]
-    augmentation_save: bool
+    augmentation_save_dataset: bool
+    augmentation_save_model: bool
     augmentation_eval: bool
     clear_intermediate: bool
     overwrite_existing: bool
@@ -72,8 +74,19 @@ class ExperimentConfig:
         augmentation_entry = augmentations[0] if augmentations else None
 
         models = cls._extract_models(payload)
-        reduction_method, reduction_writer, reduction_save, reduction_eval = cls._extract_reduction(payload)
-        augmentation_writer, augmentation_save, augmentation_eval = cls._extract_augmentation(payload)
+        (
+            reduction_method,
+            reduction_writer,
+            reduction_save_dataset,
+            reduction_save_model,
+            reduction_eval,
+        ) = cls._extract_reduction(payload)
+        (
+            augmentation_writer,
+            augmentation_save_dataset,
+            augmentation_save_model,
+            augmentation_eval,
+        ) = cls._extract_augmentation(payload)
         clear_intermediate = bool(payload.get("clear", False))
 
         effective_overwrite = cls._resolve_overwrite(
@@ -90,10 +103,12 @@ class ExperimentConfig:
             models=models,
             reduction_method=reduction_method,
             reduction_writer=reduction_writer,
-            reduction_save=reduction_save,
+            reduction_save_dataset=reduction_save_dataset,
+            reduction_save_model=reduction_save_model,
             reduction_eval=reduction_eval,
             augmentation_writer=augmentation_writer,
-            augmentation_save=augmentation_save,
+            augmentation_save_dataset=augmentation_save_dataset,
+            augmentation_save_model=augmentation_save_model,
             augmentation_eval=augmentation_eval,
             clear_intermediate=clear_intermediate,
             overwrite_existing=effective_overwrite,
@@ -171,27 +186,57 @@ class ExperimentConfig:
         return [m for m in _ensure_sequence(models) if m]
 
     @staticmethod
-    def _extract_reduction(payload: Dict[str, Any]) -> tuple[str, Optional[str], bool, bool]:
-        """Extract reduction configuration: method, writer, save, eval."""
+    def _extract_reduction(payload: Dict[str, Any]) -> tuple[str, Optional[str], bool, bool, bool]:
+        """Extract reduction configuration: method, writer, save_dataset, save_model, eval.
+
+        Supports both legacy 'save' flag and new 'save_dataset'/'save_model' flags.
+        If 'save' is specified, it applies to both dataset and model.
+        """
         if isinstance(payload.get("reduction"), dict):
             red_cfg = payload["reduction"]
             method = red_cfg.get("method", "random_entities")
             writer = red_cfg.get("writer")
-            save = bool(red_cfg.get("save", True))
+
+            # Support both legacy 'save' and new granular flags
+            if "save" in red_cfg:
+                # Legacy mode: 'save' controls both
+                save_value = bool(red_cfg["save"])
+                save_dataset = save_value
+                save_model = save_value
+            else:
+                # New granular mode
+                save_dataset = bool(red_cfg.get("save_dataset", True))
+                save_model = bool(red_cfg.get("save_model", True))
+
             eval_flag = bool(red_cfg.get("eval", True))
-            return method, writer, save, eval_flag
-        return payload.get("reduction_method", "random_entities"), None, True, True
+            return method, writer, save_dataset, save_model, eval_flag
+        return payload.get("reduction_method", "random_entities"), None, True, True, True
 
     @staticmethod
-    def _extract_augmentation(payload: Dict[str, Any]) -> tuple[Optional[str], bool, bool]:
-        """Extract augmentation configuration: writer, save, eval."""
+    def _extract_augmentation(payload: Dict[str, Any]) -> tuple[Optional[str], bool, bool, bool]:
+        """Extract augmentation configuration: writer, save_dataset, save_model, eval.
+
+        Supports both legacy 'save' flag and new 'save_dataset'/'save_model' flags.
+        If 'save' is specified, it applies to both dataset and model.
+        """
         aug_cfg = payload.get("augmentation")
         if isinstance(aug_cfg, dict):
             writer = aug_cfg.get("writer")
-            save = bool(aug_cfg.get("save", True))
+
+            # Support both legacy 'save' and new granular flags
+            if "save" in aug_cfg:
+                # Legacy mode: 'save' controls both
+                save_value = bool(aug_cfg["save"])
+                save_dataset = save_value
+                save_model = save_value
+            else:
+                # New granular mode
+                save_dataset = bool(aug_cfg.get("save_dataset", True))
+                save_model = bool(aug_cfg.get("save_model", True))
+
             eval_flag = bool(aug_cfg.get("eval", True))
-            return writer, save, eval_flag
-        return None, True, True
+            return writer, save_dataset, save_model, eval_flag
+        return None, True, True, True
 
     @staticmethod
     def _resolve_overwrite(

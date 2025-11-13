@@ -118,6 +118,7 @@ class BasicUnitTrainer:
             ent_ids_right=ent_ids_right,
             batch_size=self.config.get("batch_size", 24),
             negatives_per_positive=self.config.get("negatives_per_positive", 2),
+            seed=int(self.config.get("seed", 11037)),
         )
 
         history: List[Dict[str, float]] = []
