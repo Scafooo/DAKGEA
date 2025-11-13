@@ -1,0 +1,23 @@
+# Test that augmentation results.json and summary.json are preserved
+# even when save=false (only datasets/models should be deleted)
+experiment:
+  name: test_augmentation_cleanup
+  dataset:
+    name: openea/BBC_DB
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.1
+    writer: bert_int
+    save: false
+    eval: true
+  augmentation:
+    method: plm
+    ratio: 0.1
+    writer: bert_int
+    save: false  # Should preserve results.json and summary.json!
+    eval: true
+  model: bert_int
+  seed: 12345
+  clear: false
+  overwrite_existing: true
