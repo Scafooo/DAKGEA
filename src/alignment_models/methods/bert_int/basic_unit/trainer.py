@@ -21,6 +21,7 @@ from src.alignment_models.methods.bert_int.basic_unit.metrics import (
 )
 from src.alignment_models.methods.bert_int.basic_unit.model import BasicBertUnit
 from src.logger import get_logger
+from src.utils.reproducibility import set_random_seeds
 
 logger = get_logger(__name__)
 
@@ -334,8 +335,4 @@ class BasicUnitTrainer:
 
     @staticmethod
     def _set_seeds(seed: int) -> None:
-        random.seed(seed)
-        np.random.seed(seed)
-        torch.manual_seed(seed)
-        if torch.cuda.is_available():
-            torch.cuda.manual_seed_all(seed)
+        set_random_seeds(seed)

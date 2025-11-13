@@ -6,6 +6,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from typing import List, Tuple, Iterable, Optional, Dict, Any
 
+import numpy as np
 import torch
 from torch.nn import functional as F
 from transformers import (
@@ -17,6 +18,8 @@ from transformers import (
 from datasets import Dataset as HFDataset
 from rdflib import URIRef, Literal
 from transformers.modeling_outputs import BaseModelOutput
+
+from src.utils.reproducibility import set_random_seeds
 
 from src.core.dataset import Dataset
 from src.core.knowledge_graph import KnowledgeGraph
@@ -136,7 +139,9 @@ class BartInterpolatorPLM:
         self.max_len_out = max_len_out
         self.reuse_if_available = reuse_if_available
         self.training_config = training_config or {}
-        random.seed(seed)
+
+        # Set all random seeds for reproducibility
+        set_random_seeds(seed)
 
         # Generation parameters (configurable)
         gen_cfg = generation_config or {}

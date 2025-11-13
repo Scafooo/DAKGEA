@@ -6,3 +6,9 @@ paths:
 
 logging:
   level: DEBUG
+
+# Reproducibility settings
+reproducibility:
+  deterministic: true  # Enable deterministic mode for reproducible results
+                       # Note: Enabling this may reduce performance by ~10-20%
+                       # but ensures identical results across runs with same seed
