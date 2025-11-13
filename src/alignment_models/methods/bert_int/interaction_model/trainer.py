@@ -45,8 +45,8 @@ class TrainingBatchGenerator:
         self.batch_size = batch_size
         self.iter_count = 0
 
-        if seed is not None:
-            np.random.seed(seed)
+        # Create a dedicated RNG for reproducible negative sampling
+        self._rng = np.random.RandomState(seed) if seed is not None else np.random
 
         # Convert train candidates to numpy arrays for efficient sampling
         self.train_candidates_np = {}
@@ -82,7 +82,7 @@ class TrainingBatchGenerator:
                 continue
 
             # Randomly sample neg_num negative entities
-            neg_indices = np.random.randint(len(candidates), size=self.neg_num)
+            neg_indices = self._rng.randint(len(candidates), size=self.neg_num)
             neg_e2_list = candidates[neg_indices].tolist()
 
             for neg_e2 in neg_e2_list:
@@ -94,9 +94,9 @@ class TrainingBatchGenerator:
                 train_pairs.append((pos_e1, pos_e2, neg_e1, neg_e2))
 
         # Shuffle training pairs
-        np.random.shuffle(train_pairs)
-        np.random.shuffle(train_pairs)
-        np.random.shuffle(train_pairs)
+        self._rng.shuffle(train_pairs)
+        self._rng.shuffle(train_pairs)
+        self._rng.shuffle(train_pairs)
 
         batch_num = int(np.ceil(len(train_pairs) / self.batch_size))
         return train_pairs, batch_num
