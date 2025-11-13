@@ -2,7 +2,7 @@ paths:
   raw_data: data/raw
   external_data: data/external
   results: results
-  statistics: results_analysis
+  statistics: results/statistics
   log_file: results/logs/log.txt
 
 logging:

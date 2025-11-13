@@ -11,7 +11,7 @@ from statistics import mean, pstdev
 from typing import Dict, Iterable, List, Tuple
 
 import matplotlib.pyplot as plt
-
+import logging
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -24,10 +24,13 @@ RESULTS_FILENAME = "results.json"
 SUMMARY_FILENAME = "summary.json"
 METADATA_FILENAME = "metadata.json"
 STAGES = ("reduction", "augmentation")
-DEFAULT_METRICS = ["hits@1", "hits@5", "hits@10", "mrr", "mr"]
+DEFAULT_METRICS = ["hits@1", "hits@5", "hits@10", "hits@25", "hits@50", "mrr", "mr"]
+PLOT_METRICS = ["hits@1", "hits@5", "hits@10", "hits@25", "hits@50"]
+DEFAULT_DPI = 200
+PLOT_DPI = DEFAULT_DPI
 
 
-def parse_args(default_plots_dir: Path) -> argparse.Namespace:
+def parse_args(default_plots_dir: Path, default_results_dir: Path) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Aggregate reduction vs augmentation metrics per dataset.")
     parser.add_argument(
         "paths",
@@ -64,14 +67,25 @@ def parse_args(default_plots_dir: Path) -> argparse.Namespace:
         default=str(default_plots_dir),
         help=f"Directory where TSV summaries will be written (default: {default_plots_dir}).",
     )
+    parser.add_argument(
+        "--results-root",
+        default=str(default_results_dir),
+        help=f"Root directory containing experiment runs (default: {default_results_dir}).",
+    )
+    parser.add_argument(
+        "--dpi",
+        type=int,
+        default=DEFAULT_DPI,
+        help="Resolution (DPI) for saved plots (default: %(default)s).",
+    )
     return parser.parse_args()
 
 
-def discover_experiments(candidate_paths: Iterable[str]) -> List[Path]:
+def discover_experiments(candidate_paths: Iterable[str], results_root: Path) -> List[Path]:
     if candidate_paths:
         paths = [Path(p) for p in candidate_paths]
         return [p.resolve() for p in paths if p.exists()]
-    root = Path("results")
+    root = results_root
     if not root.exists():
         raise FileNotFoundError("No experiment directories found and no explicit paths provided.")
     return sorted(p.resolve() for p in root.iterdir() if p.is_dir())
@@ -210,8 +224,134 @@ def plot_dataset(
     plt.ylim(0, max(values) * 1.1)
     outfile = plots_dir / f"{dataset}_{metric.replace('@', 'at').replace('/', '_')}.png"
     plt.tight_layout()
-    plt.savefig(outfile)
+    plt.savefig(outfile, dpi=PLOT_DPI)
     plt.close()
+
+
+def build_ratio_plot_data(
+    ratio_entries: Dict[str, List[Dict]],
+    metrics: List[str],
+) -> Dict[str, Dict[float, Dict[float, Dict[str, Dict[str, float]]]]]:
+    plot_data: Dict[str, Dict[float, Dict[float, Dict[str, Dict[str, float]]]]] = {}
+    for dataset, entries in ratio_entries.items():
+        dataset_group = plot_data.setdefault(dataset, {})
+        for entry in entries:
+            red_ratio = entry.get("reduction", {}).get("ratio")
+            aug_ratio = entry.get("augmentation", {}).get("ratio")
+            if red_ratio is None or aug_ratio is None:
+                continue
+            try:
+                red_ratio = round(float(red_ratio), 6)
+                aug_ratio = round(float(aug_ratio), 6)
+            except (TypeError, ValueError):
+                continue
+            red_metrics = entry.get("reduction", {}).get("metrics", {})
+            aug_metrics = entry.get("augmentation", {}).get("metrics", {})
+            red_group = dataset_group.setdefault(red_ratio, {})
+            agg_entry = red_group.setdefault(
+                aug_ratio,
+                {
+                    "reduction": {metric: [] for metric in metrics},
+                    "augmentation": {metric: [] for metric in metrics},
+                },
+            )
+            for metric in metrics:
+                if metric in red_metrics:
+                    agg_entry["reduction"][metric].append(red_metrics[metric])
+                if metric in aug_metrics:
+                    agg_entry["augmentation"][metric].append(aug_metrics[metric])
+
+    for _, red_group in plot_data.items():
+        for _, aug_group in red_group.items():
+            for _, values in aug_group.items():
+                for stage in ("reduction", "augmentation"):
+                    for metric in metrics:
+                        vals = values[stage][metric]
+                        values[stage][metric] = mean(vals) if vals else None
+    return plot_data
+
+
+def plot_ratio_groups(
+    dataset: str,
+    ratio_plot_data: Dict[float, Dict[float, Dict[str, Dict[str, float]]]],
+    metrics: List[str],
+    plots_dir: Path,
+) -> None:
+    ratio_dir = plots_dir / "ratio_charts"
+    ensure_dir(ratio_dir)
+    for red_ratio, aug_group in sorted(ratio_plot_data.items()):
+        if not aug_group:
+            continue
+        aug_ratios = sorted(aug_group.keys())
+        if not aug_ratios:
+            continue
+
+        metrics_count = len(metrics)
+        bar_width = 0.35
+
+        fig, axes = plt.subplots(
+            1,
+            len(aug_ratios),
+            figsize=(4 * len(aug_ratios), 4),
+            sharey=True,
+        )
+        if len(aug_ratios) == 1:
+            axes = [axes]
+
+        for ax, aug_ratio in zip(axes, aug_ratios):
+            data = aug_group[aug_ratio]
+            x = range(metrics_count)
+            red_values = [data["reduction"].get(metric) for metric in metrics]
+            aug_values = [data["augmentation"].get(metric) for metric in metrics]
+
+            ax.bar(
+                [i - bar_width / 2 for i in x],
+                red_values,
+                width=bar_width,
+                color="#264653",
+                label="Reduction",
+            )
+            ax.bar(
+                [i + bar_width / 2 for i in x],
+                aug_values,
+                width=bar_width,
+                color="#e76f51",
+                label="Augmentation",
+            )
+
+            ax.set_xticks(list(x))
+            ax.set_xticklabels(metrics, rotation=45)
+            ax.set_ylim(0, 1.05)
+            ax.set_title(f"Aug ratio {aug_ratio:.2f}")
+            for i, (r_val, a_val) in enumerate(zip(red_values, aug_values)):
+                if r_val is not None:
+                    ax.text(
+                        i - bar_width / 2,
+                        r_val + 0.01,
+                        f"{r_val:.2f}",
+                        ha="center",
+                        va="bottom",
+                        fontsize=7,
+                    )
+                if a_val is not None:
+                    ax.text(
+                        i + bar_width / 2,
+                        a_val + 0.01,
+                        f"{a_val:.2f}",
+                        ha="center",
+                        va="bottom",
+                        fontsize=7,
+                    )
+            if ax is axes[0]:
+                ax.set_ylabel("Score")
+
+        handles, labels = axes[0].get_legend_handles_labels()
+        fig.legend(handles, labels, loc="upper center", ncol=2)
+        fig.suptitle(f"{dataset} – reduction ratio {red_ratio:.2f}", y=1.05)
+        plt.tight_layout()
+        outfile = ratio_dir / f"{dataset}_red{red_ratio:.2f}_comparison.png"
+        plt.savefig(outfile, bbox_inches="tight", dpi=args_dpi())
+        plt.close(fig)
 
 
 def write_dataset_summary_tsv(
@@ -323,24 +463,32 @@ def load_global_config() -> Dict:
 
 
 def main() -> None:
+    logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(message)s")
+    logger = logging.getLogger("experiments.statistics")
+
     global_cfg = load_global_config()
-    default_plots_dir = Path(global_cfg.get("paths", {}).get("statistics", "results_analysis"))
-    args = parse_args(default_plots_dir)
-    experiments = discover_experiments(args.paths)
+    default_plots_dir = (PROJECT_ROOT / global_cfg.get("paths", {}).get("statistics", "results_analysis")).resolve()
+    default_results_dir = (PROJECT_ROOT / global_cfg.get("paths", {}).get("results", "results")).resolve()
+    args = parse_args(default_plots_dir, default_results_dir)
+    global PLOT_DPI
+    PLOT_DPI = args.dpi
+    experiments = discover_experiments(args.paths, Path(args.results_root).resolve())
     datasets, ratio_entries = collect_data(experiments, args.metrics, args.models)
     if not datasets:
         raise SystemExit("No metrics found in the specified experiments.")
 
     aggregated_output = {}
     dataset_stage_stats: Dict[str, Dict[str, Dict[str, Dict[str, float]]]] = {}
-    print(f"Loaded data from {len(experiments)} experiment directories.\n")
+    plots_base = Path(args.plots_dir)
+    logger.info("Loaded data from %d experiment directories.", len(experiments))
+    logger.info("")
     for dataset, stages in sorted(datasets.items()):
-        print(f"=== Dataset: {dataset} ===")
+        logger.info("=== Dataset: %s ===", dataset)
         stage_stats: Dict[str, Dict[str, Dict[str, float]]] = {}
         for stage in STAGES:
             records = stages[stage]["records"]
             if not records:
-                print(f"  {stage.capitalize()}: no data")
+                logger.info("  %s: no data", stage.capitalize())
                 continue
             stats = summarize_records(records, args.metrics)
             ratios = summarize_ratios(stages[stage]["ratios"])
@@ -348,16 +496,21 @@ def main() -> None:
             ratio_str = ""
             if ratios:
                 ratio_str = f" (ratio mean={ratios['mean']:.3f})"
-            print(f"  {stage.capitalize()}{ratio_str}")
+            logger.info("  %s%s", stage.capitalize(), ratio_str)
             for metric in args.metrics:
                 if metric not in stats:
                     continue
                 m = stats[metric]
-                print(
-                    f"    - {metric}: mean={m['mean']:.4f}, std={m['std']:.4f}, "
-                    f"min={m['min']:.4f}, max={m['max']:.4f}, n={m['count']}"
+                logger.info(
+                    "    - %s: mean=%.4f, std=%.4f, min=%.4f, max=%.4f, n=%d",
+                    metric,
+                    m["mean"],
+                    m["std"],
+                    m["min"],
+                    m["max"],
+                    m["count"],
                 )
-        plot_dataset(dataset, args.plot_metric, stage_stats, Path(args.plots_dir))
+        plot_dataset(dataset, args.plot_metric, stage_stats, plots_base)
         dataset_stage_stats[dataset] = stage_stats
         aggregated_output[dataset] = {
             stage: {
@@ -366,20 +519,24 @@ def main() -> None:
             }
             for stage in STAGES
         }
-        print()
+        logger.info("")
 
     tsv_dir = Path(args.tsv_dir)
     write_dataset_summary_tsv(tsv_dir / "dataset_summary.tsv", dataset_stage_stats, args.metrics)
     write_ratio_summary_tsv(tsv_dir / "ratio_summary.tsv", ratio_entries, args.metrics)
 
+    ratio_plot_groups = build_ratio_plot_data(ratio_entries, PLOT_METRICS)
+    for dataset, ratio_group in ratio_plot_groups.items():
+        plot_ratio_groups(dataset, ratio_group, PLOT_METRICS, plots_base)
+
     if args.output_json:
         out_path = Path(args.output_json)
         ensure_dir(out_path.parent)
         out_path.write_text(json.dumps(aggregated_output, indent=2), encoding="utf-8")
-        print(f"Aggregated data saved to {out_path.resolve()}")
+        logger.info("Aggregated data saved to %s", out_path.resolve())
 
-    print(f"Plots (if produced) are stored under {Path(args.plots_dir).resolve()}")
-    print(f"TSV summaries saved under {tsv_dir.resolve()}")
+    logger.info("Plots (if produced) are stored under %s", Path(args.plots_dir).resolve())
+    logger.info("TSV summaries saved under %s", tsv_dir.resolve())
 
 
 if __name__ == "__main__":
