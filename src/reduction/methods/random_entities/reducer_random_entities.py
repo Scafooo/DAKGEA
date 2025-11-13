@@ -130,7 +130,8 @@ class RandomEntitiesReducer:
         src_graph = dataset.knowledge_graph_source
         tgt_graph = dataset.knowledge_graph_target
 
-        for left, right in pairs_to_remove:
+        # Sort pairs to ensure deterministic iteration order
+        for left, right in sorted(pairs_to_remove, key=lambda p: (str(p[0]), str(p[1]))):
             src_graph.remove((left, None, None))
             src_graph.remove((None, None, left))
             tgt_graph.remove((right, None, None))
