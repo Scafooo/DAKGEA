@@ -17,7 +17,7 @@ When you instantiate a model (e.g. `bert_int`) you normally do **not** need to p
 
 ## Available configurations
 
-### 1. `bert_int.yaml` — Two-phase BERT-INT pipeline (DEFAULT)
+### 1. `bert_int.yaml` — Two-phase BERT-INT pipeline
 End-to-end settings for the reference BERT-INT implementation:
 
 - **Paths** (`model.paths`): cache location, dataset root, description dictionary, and checkpoint prefix. Non-absolute paths are resolved against `PROJECT_ROOT`.
