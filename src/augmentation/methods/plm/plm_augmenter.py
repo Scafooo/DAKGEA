@@ -267,7 +267,7 @@ class PLMAugmenter(AugmentationMethod):
         # Step 2: Create SetKnowledgeGraph and prepare for expansion
         # ------------------------------------------------------------------
         # Create fused set graph
-        set_graph = SetKnowledgeGraph.from_dataset(dataset)
+        set_graph = SetKnowledgeGraph.from_dataset(dataset_augmented)
         set_nodes = sorted(set_graph.iter_set_nodes(), key=lambda uri: str(uri))
 
         if not set_nodes:
