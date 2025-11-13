@@ -21,10 +21,10 @@ Artifacts are stored in `results/<experiment>/`, including caches, logs, and JSO
 
 ```
 src/
-  alignment_models/   # BERT-INT, OpenEA/Knowformer, HybEA, stub implementations
-  augmentation/       # PLM augmenter + registry helpers
-  reduction/          # Reducers (random_entities, stub, ...)
-  core/               # Dataset / knowledge-graph wrappers, readers, writers
+  alignment_models/   # Alignment Models: BERT-INT, OpenEA/Knowformer ...
+  augmentation/       # Augmenter: PLM augmenter ...
+  reduction/          # Reducers: Random Entities, ...
+  core/               # Core classes I/O ...
 config/
   experiments/        # Multi-stage experiment recipes
   augmentation/       # PLM parameter sets (default + variants)
@@ -35,7 +35,7 @@ install/
   requirements.txt    # Development + runtime dependencies
 ```
 
-Additional notes live in `docs/` (PLM logging, BART tuning, predicate matching).
+Additional notes live in `docs/`.
 
 ## Running an experiment
 
@@ -47,29 +47,6 @@ Additional notes live in `docs/` (PLM logging, BART tuning, predicate matching).
 3. The pipeline executes reduction → augmentation → evaluation according to the `eval/save` flags.
 
 Each stage writes outputs below `results/<name>/<stage>/`, following the `WriterPlan` definitions in `experiments/runner/specs.py`.
-
-## PLM augmentation
-
-- Default config: `config/augmentation/plm.yaml` (auto-loaded).
-- Key knobs:
-  - `max_depth`: BFS depth over fused set nodes
-  - `ratio`: number of synthetic aligned pairs vs. originals
-  - `bart.*`: optional fine-tuning / generation settings
-- Log format is documented in `docs/plm_logging_structure.md`.
-
-## Alignment models
-
-- **BERT-INT** — `config/models/bert_int.yaml`, loader in `src/alignment_models/methods/bert_int/config.py`.
-- **OpenEA / Knowformer** — `config/models/openea.yaml`.
-- **HybEA** — create `config/models/hybea.yaml` (plus optional `.local` / `.stage`).
-- **Stub** — `config/models/stub.yaml` for smoke tests.
-
-See `config/models/README.md` for a deeper breakdown.
-
-## Dataset I/O
-
-Dataset readers live under `src/core/dataset/reader`; writers and their names live in `experiments/runner/specs.py`.
-Experiments can reference a dataset by registry name (`experiment.dataset.name`) or by explicit filesystem path (`experiment.dataset.path`).
 
 ## Contributing & License
 
