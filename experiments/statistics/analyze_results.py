@@ -26,8 +26,44 @@ METADATA_FILENAME = "metadata.json"
 STAGES = ("reduction", "augmentation")
 DEFAULT_METRICS = ["hits@1", "hits@5", "hits@10", "hits@25", "hits@50", "mrr", "mr"]
 PLOT_METRICS = ["hits@1", "hits@5", "hits@10", "hits@25", "hits@50"]
+METRIC_COLORS = {
+    "hits@1": "#1f77b4",
+    "hits@5": "#ff7f0e",
+    "hits@10": "#2ca02c",
+    "hits@25": "#d62728",
+    "hits@50": "#9467bd",
+    "mrr": "#8c564b",
+    "mr": "#e377c2",
+}
 DEFAULT_DPI = 200
 PLOT_DPI = DEFAULT_DPI
+
+
+def _parse_experiment_name(path: Path) -> Tuple[str | None, float | None, float | None]:
+    parts = path.name.split("_")
+    if len(parts) < 3:
+        return None, None, None
+    try:
+        reduction_raw = int(parts[-2])
+        augmentation_raw = int(parts[-1])
+    except ValueError:
+        return None, None, None
+    reduction_ratio = reduction_raw / 10.0
+    augmentation_ratio = augmentation_raw / 10.0
+    dataset = "_".join(parts[:-2]) or None
+    return dataset, reduction_ratio, augmentation_ratio
+
+
+def _sanitize_metric(metric: str, value) -> float | None:
+    if value is None:
+        return None
+    try:
+        value = float(value)
+    except (TypeError, ValueError):
+        return None
+    if metric.lower().startswith("hits@") or metric.lower() == "mrr":
+        return max(0.0, min(1.0, value))
+    return value
 
 
 def parse_args(default_plots_dir: Path, default_results_dir: Path) -> argparse.Namespace:
@@ -47,6 +83,23 @@ def parse_args(default_plots_dir: Path, default_results_dir: Path) -> argparse.N
         "--models",
         nargs="+",
         help="Restrict aggregation to specific model names (default: use all).",
+    )
+    parser.add_argument(
+        "--datasets",
+        nargs="+",
+        help="Only include these dataset names (case-insensitive).",
+    )
+    parser.add_argument(
+        "--reduction-ratios",
+        nargs="+",
+        type=float,
+        help="Only include experiments whose reduction ratio matches one of these values.",
+    )
+    parser.add_argument(
+        "--augmentation-ratios",
+        nargs="+",
+        type=float,
+        help="Only include experiments whose augmentation ratio matches one of these values.",
     )
     parser.add_argument(
         "--plot-metric",
@@ -88,7 +141,12 @@ def discover_experiments(candidate_paths: Iterable[str], results_root: Path) -> 
     root = results_root
     if not root.exists():
         raise FileNotFoundError("No experiment directories found and no explicit paths provided.")
-    return sorted(p.resolve() for p in root.iterdir() if p.is_dir())
+    skip = {"logs", "statistics"}
+    return sorted(
+        p.resolve()
+        for p in root.iterdir()
+        if p.is_dir() and p.name not in skip
+    )
 
 
 def load_json(path: Path) -> Dict:
@@ -110,7 +168,13 @@ def load_stage_metrics(
     for model_name, stats in payload.items():
         if model_filter and model_name not in model_filter:
             continue
-        record_metrics = {metric: float(stats[metric]) for metric in metrics if metric in stats}
+        record_metrics = {}
+        for metric in metrics:
+            if metric not in stats:
+                continue
+            value = _sanitize_metric(metric, stats[metric])
+            if value is not None:
+                record_metrics[metric] = value
         if record_metrics:
             records.append({"model": model_name, "metrics": record_metrics})
     return records
@@ -138,15 +202,35 @@ def collect_data(
     experiments: List[Path],
     metrics: List[str],
     model_filter: List[str] | None,
+    dataset_filter: set[str] | None,
+    reduction_filter: set[float] | None,
+    augmentation_filter: set[float] | None,
 ) -> Tuple[Dict[str, Dict[str, Dict]], Dict[str, List[Dict]]]:
     datasets: Dict[str, Dict[str, Dict]] = defaultdict(
-        lambda: {stage: {"records": [], "ratios": []} for stage in STAGES}
+        lambda: {
+            stage: {"records": [], "ratios": [], "ratio_records": defaultdict(list)}
+            for stage in STAGES
+        }
     )
     ratio_entries: Dict[str, List[Dict]] = defaultdict(list)
     for exp_dir in experiments:
         metadata = load_json(exp_dir / METADATA_FILENAME)
-        dataset_name = metadata.get("dataset") or exp_dir.name
-        entry_data: Dict[str, Dict] = {}
+        parsed_dataset, parsed_reduction, parsed_augmentation = _parse_experiment_name(exp_dir)
+        dataset_name = metadata.get("dataset") or parsed_dataset or exp_dir.name
+        dataset_key = dataset_name.lower()
+        if dataset_filter and dataset_key not in dataset_filter:
+            continue
+
+        reduction_ratio_meta = metadata.get("ratio")
+        try:
+            reduction_ratio_value = float(reduction_ratio_meta)
+        except (TypeError, ValueError):
+            reduction_ratio_value = parsed_reduction
+        reduction_ratio_key = round(reduction_ratio_value, 6) if reduction_ratio_value is not None else None
+        if reduction_filter and (reduction_ratio_key is None or reduction_ratio_key not in reduction_filter):
+            continue
+
+        entry_data: Dict[str, Dict] = {"experiment": exp_dir.name}
         for stage in STAGES:
             stage_dir = exp_dir / stage
             if not stage_dir.exists():
@@ -155,9 +239,20 @@ def collect_data(
             if not records:
                 continue
             ratio = load_stage_ratio(stage_dir)
-            datasets[dataset_name][stage]["records"].extend(records)
-            if ratio is not None:
-                datasets[dataset_name][stage]["ratios"].append(ratio)
+            if ratio is None:
+                ratio = reduction_ratio_value if stage == "reduction" else parsed_augmentation
+            elif stage == "augmentation" and parsed_augmentation is not None:
+                ratio = parsed_augmentation
+            ratio_key = round(float(ratio), 6) if ratio is not None else None
+            if stage == "augmentation" and augmentation_filter:
+                if ratio_key is None or ratio_key not in augmentation_filter:
+                    continue
+
+            stage_bucket = datasets[dataset_name][stage]
+            stage_bucket["records"].extend(records)
+            if ratio_key is not None:
+                stage_bucket["ratios"].append(ratio)
+                stage_bucket["ratio_records"][ratio_key].extend(records)
             entry_data[stage] = {
                 "ratio": ratio,
                 "metrics": average_record(records, metrics),
@@ -228,46 +323,59 @@ def plot_dataset(
     plt.close()
 
 
+def _aggregate_ratio_metrics(entries: List[Dict], metrics: List[str]) -> Dict[float, Dict[str, float]]:
+    best_per_ratio: Dict[float, Dict[str, float]] = {}
+    best_score: Dict[float, float] = {}
+    for entry in entries:
+        aug = entry.get("augmentation")
+        if not aug:
+            continue
+        try:
+            ratio_key = round(float(aug.get("ratio")), 6)
+        except (TypeError, ValueError):
+            continue
+        score = aug["metrics"].get("hits@1")
+        if score is None:
+            continue
+        if ratio_key not in best_score or score > best_score[ratio_key]:
+            best_score[ratio_key] = score
+            best_per_ratio[ratio_key] = {metric: aug["metrics"].get(metric) for metric in metrics}
+    return best_per_ratio
+
+
 def build_ratio_plot_data(
     ratio_entries: Dict[str, List[Dict]],
     metrics: List[str],
 ) -> Dict[str, Dict[float, Dict[float, Dict[str, Dict[str, float]]]]]:
     plot_data: Dict[str, Dict[float, Dict[float, Dict[str, Dict[str, float]]]]] = {}
     for dataset, entries in ratio_entries.items():
-        dataset_group = plot_data.setdefault(dataset, {})
+        dataset_block = plot_data.setdefault(dataset, {})
+        best_per_ratio: Dict[Tuple[float, float], Dict] = {}
         for entry in entries:
-            red_ratio = entry.get("reduction", {}).get("ratio")
-            aug_ratio = entry.get("augmentation", {}).get("ratio")
-            if red_ratio is None or aug_ratio is None:
+            red = entry.get("reduction")
+            aug = entry.get("augmentation")
+            if not red or not aug:
                 continue
             try:
-                red_ratio = round(float(red_ratio), 6)
-                aug_ratio = round(float(aug_ratio), 6)
+                red_ratio = round(float(red.get("ratio")), 6)
+                aug_ratio = round(float(aug.get("ratio")), 6)
             except (TypeError, ValueError):
                 continue
-            red_metrics = entry.get("reduction", {}).get("metrics", {})
-            aug_metrics = entry.get("augmentation", {}).get("metrics", {})
-            red_group = dataset_group.setdefault(red_ratio, {})
-            agg_entry = red_group.setdefault(
-                aug_ratio,
-                {
-                    "reduction": {metric: [] for metric in metrics},
-                    "augmentation": {metric: [] for metric in metrics},
-                },
-            )
-            for metric in metrics:
-                if metric in red_metrics:
-                    agg_entry["reduction"][metric].append(red_metrics[metric])
-                if metric in aug_metrics:
-                    agg_entry["augmentation"][metric].append(aug_metrics[metric])
+            pair = (red_ratio, aug_ratio)
+            current_best = best_per_ratio.get(pair)
+            current_score = current_best["augmentation"]["metrics"].get("hits@1") if current_best else None
+            candidate_score = aug["metrics"].get("hits@1")
+            if current_best is None or (candidate_score is not None and candidate_score > (current_score or -1)):
+                best_per_ratio[pair] = entry
 
-    for _, red_group in plot_data.items():
-        for _, aug_group in red_group.items():
-            for _, values in aug_group.items():
-                for stage in ("reduction", "augmentation"):
-                    for metric in metrics:
-                        vals = values[stage][metric]
-                        values[stage][metric] = mean(vals) if vals else None
+        for (red_ratio, aug_ratio), entry in best_per_ratio.items():
+            red_metrics = entry["reduction"]["metrics"]
+            aug_metrics = entry["augmentation"]["metrics"]
+            red_block = dataset_block.setdefault(red_ratio, {})
+            red_block[aug_ratio] = {
+                "reduction": {metric: red_metrics.get(metric) for metric in metrics},
+                "augmentation": {metric: aug_metrics.get(metric) for metric in metrics},
+            }
     return plot_data
 
 
@@ -288,69 +396,124 @@ def plot_ratio_groups(
 
         metrics_count = len(metrics)
         bar_width = 0.35
+        gap_between_metrics = 0.15
+        gap_between_ratios = bar_width * metrics_count * 2 + 0.8
 
-        fig, axes = plt.subplots(
-            1,
-            len(aug_ratios),
-            figsize=(4 * len(aug_ratios), 4),
-            sharey=True,
+        fig, ax = plt.subplots(
+            figsize=(max(8, len(aug_ratios) * metrics_count), 5)
         )
-        if len(aug_ratios) == 1:
-            axes = [axes]
+        positions = []
+        labels = []
+        current_x = 0.0
+        axis_transform = ax.get_xaxis_transform()
 
-        for ax, aug_ratio in zip(axes, aug_ratios):
+        for aug_ratio in aug_ratios:
             data = aug_group[aug_ratio]
-            x = range(metrics_count)
-            red_values = [data["reduction"].get(metric) for metric in metrics]
-            aug_values = [data["augmentation"].get(metric) for metric in metrics]
-
-            ax.bar(
-                [i - bar_width / 2 for i in x],
-                red_values,
-                width=bar_width,
-                color="#264653",
-                label="Reduction",
-            )
-            ax.bar(
-                [i + bar_width / 2 for i in x],
-                aug_values,
-                width=bar_width,
-                color="#e76f51",
-                label="Augmentation",
-            )
-
-            ax.set_xticks(list(x))
-            ax.set_xticklabels(metrics, rotation=45)
-            ax.set_ylim(0, 1.05)
-            ax.set_title(f"Aug ratio {aug_ratio:.2f}")
-            for i, (r_val, a_val) in enumerate(zip(red_values, aug_values)):
-                if r_val is not None:
-                    ax.text(
-                        i - bar_width / 2,
-                        r_val + 0.01,
-                        f"{r_val:.2f}",
-                        ha="center",
-                        va="bottom",
-                        fontsize=7,
+            for metric_idx, metric in enumerate(metrics):
+                red_value = data["reduction"].get(metric)
+                aug_value = data["augmentation"].get(metric)
+                metric_offset = metric_idx * (2 * bar_width + gap_between_metrics)
+                red_x = current_x + metric_offset
+                aug_x = red_x + bar_width
+                if red_value is not None:
+                    ax.bar(
+                        red_x,
+                        red_value,
+                        width=bar_width,
+                        color="#264653",
+                        label="Reduction" if (aug_ratio == aug_ratios[0] and metric_idx == 0) else "",
                     )
-                if a_val is not None:
-                    ax.text(
-                        i + bar_width / 2,
-                        a_val + 0.01,
-                        f"{a_val:.2f}",
-                        ha="center",
-                        va="bottom",
-                        fontsize=7,
+                    ax.text(red_x, red_value + 0.01, f"{red_value:.2f}", ha="center", va="bottom", fontsize=7)
+                if aug_value is not None:
+                    ax.bar(
+                        aug_x,
+                        aug_value,
+                        width=bar_width,
+                        color="#e76f51",
+                        label="Augmentation" if (aug_ratio == aug_ratios[0] and metric_idx == 0) else "",
                     )
-            if ax is axes[0]:
-                ax.set_ylabel("Score")
+                    ax.text(aug_x, aug_value + 0.01, f"{aug_value:.2f}", ha="center", va="bottom", fontsize=7)
+                center_x = red_x + bar_width / 2
+                ax.text(
+                    center_x,
+                    -0.07,
+                    metric,
+                    ha="right",
+                    va="top",
+                    fontsize=8,
+                    rotation=45,
+                    transform=axis_transform,
+                )
 
-        handles, labels = axes[0].get_legend_handles_labels()
-        fig.legend(handles, labels, loc="upper center", ncol=2)
-        fig.suptitle(f"{dataset} – reduction ratio {red_ratio:.2f}", y=1.05)
+            ratio_center = current_x + (metrics_count * (2 * bar_width + gap_between_metrics) - gap_between_metrics) / 2
+            positions.append(ratio_center)
+            labels.append(f"{aug_ratio:.2f}")
+            current_x += metrics_count * (2 * bar_width + gap_between_metrics) + gap_between_ratios
+
+        ax.set_xticks(positions)
+        ax.set_xticklabels(labels)
+        ax.set_xlabel("Augmentation ratio")
+        ax.set_ylabel("Score")
+        ax.set_ylim(0, 1.05)
+        ax.set_title(f"{dataset} – reduction ratio {red_ratio:.2f}")
+        ax.legend()
+        fig.subplots_adjust(bottom=0.2)
         plt.tight_layout()
         outfile = ratio_dir / f"{dataset}_red{red_ratio:.2f}_comparison.png"
-        plt.savefig(outfile, bbox_inches="tight", dpi=args_dpi())
+        plt.savefig(outfile, dpi=PLOT_DPI)
+        plt.close(fig)
+
+
+def plot_ratio_trends(
+    dataset: str,
+    ratio_plot_data: Dict[float, Dict[float, Dict[str, Dict[str, float]]]],
+    metrics: List[str],
+    plots_dir: Path,
+) -> None:
+    trend_dir = plots_dir / "ratio_trends"
+    ensure_dir(trend_dir)
+    stage_styles = {
+        "reduction": {"linestyle": "--", "marker": "x", "alpha": 0.9},
+        "augmentation": {"linestyle": "-", "marker": "o", "alpha": 0.9},
+    }
+    for red_ratio, aug_group in sorted(ratio_plot_data.items()):
+        if not aug_group:
+            continue
+        aug_ratios = sorted(aug_group.keys())
+        if not aug_ratios:
+            continue
+        fig, ax = plt.subplots(figsize=(max(8, len(aug_ratios) * 1.2), 4.5))
+        for metric in metrics:
+            color = METRIC_COLORS.get(metric, None)
+            if color is None:
+                color = "#333333"
+            for stage in ("reduction", "augmentation"):
+                y_values = [
+                    aug_group[ratio][stage].get(metric) if stage in aug_group[ratio] else None
+                    for ratio in aug_ratios
+                ]
+                if not any(value is not None for value in y_values):
+                    continue
+                y_series = [value if value is not None else float("nan") for value in y_values]
+                style = stage_styles.get(stage, {})
+                ax.plot(
+                    aug_ratios,
+                    y_series,
+                    label=f"{metric} ({stage})",
+                    color=color,
+                    linestyle=style.get("linestyle", "-"),
+                    marker=style.get("marker"),
+                    alpha=style.get("alpha", 1.0),
+                )
+        ax.set_xlabel("Augmentation ratio")
+        ax.set_ylabel("Score")
+        ax.set_title(f"{dataset} – trend (reduction {red_ratio:.2f})")
+        ax.set_ylim(0, 1.05)
+        ax.grid(True, linestyle="--", alpha=0.3)
+        ax.legend(ncol=2, fontsize=8)
+        plt.tight_layout()
+        outfile = trend_dir / f"{dataset}_red{red_ratio:.2f}_trend.png"
+        plt.savefig(outfile, dpi=PLOT_DPI)
         plt.close(fig)
 
 
@@ -420,8 +583,9 @@ def write_ratio_summary_tsv(
             for entry in entries:
                 red_ratio = entry.get("reduction", {}).get("ratio")
                 aug_ratio = entry.get("augmentation", {}).get("ratio")
-                key = (round(red_ratio, 6) if red_ratio is not None else None,
-                       round(aug_ratio, 6) if aug_ratio is not None else None)
+                if red_ratio is None or aug_ratio is None:
+                    continue
+                key = (round(float(red_ratio), 6), round(float(aug_ratio), 6))
                 group[key].append(entry)
             for (red_ratio, aug_ratio), grouped_entries in sorted(group.items()):
                 for metric in metrics:
@@ -473,7 +637,18 @@ def main() -> None:
     global PLOT_DPI
     PLOT_DPI = args.dpi
     experiments = discover_experiments(args.paths, Path(args.results_root).resolve())
-    datasets, ratio_entries = collect_data(experiments, args.metrics, args.models)
+    dataset_filter = {name.lower() for name in args.datasets} if args.datasets else None
+    reduction_filter = {round(val, 6) for val in args.reduction_ratios} if args.reduction_ratios else None
+    augmentation_filter = {round(val, 6) for val in args.augmentation_ratios} if args.augmentation_ratios else None
+
+    datasets, ratio_entries = collect_data(
+        experiments,
+        args.metrics,
+        args.models,
+        dataset_filter,
+        reduction_filter,
+        augmentation_filter,
+    )
     if not datasets:
         raise SystemExit("No metrics found in the specified experiments.")
 
@@ -484,6 +659,7 @@ def main() -> None:
     logger.info("")
     for dataset, stages in sorted(datasets.items()):
         logger.info("=== Dataset: %s ===", dataset)
+        dataset_entries = ratio_entries.get(dataset, [])
         stage_stats: Dict[str, Dict[str, Dict[str, float]]] = {}
         for stage in STAGES:
             records = stages[stage]["records"]
@@ -497,6 +673,18 @@ def main() -> None:
             if ratios:
                 ratio_str = f" (ratio mean={ratios['mean']:.3f})"
             logger.info("  %s%s", stage.capitalize(), ratio_str)
+            if stage == "augmentation" and dataset_entries:
+                ratio_summary = _aggregate_ratio_metrics(dataset_entries, PLOT_METRICS)
+                if ratio_summary:
+                    logger.info("      augmentation ratios:")
+                    for ratio_value in sorted(ratio_summary.keys()):
+                        metric_summary = ", ".join(
+                            f"{metric}={ratio_summary[ratio_value][metric]:.3f}"
+                            for metric in PLOT_METRICS
+                            if metric in ratio_summary[ratio_value]
+                        )
+                        logger.info("        - %0.3f: %s", ratio_value, metric_summary)
+
             for metric in args.metrics:
                 if metric not in stats:
                     continue
@@ -528,6 +716,7 @@ def main() -> None:
     ratio_plot_groups = build_ratio_plot_data(ratio_entries, PLOT_METRICS)
     for dataset, ratio_group in ratio_plot_groups.items():
         plot_ratio_groups(dataset, ratio_group, PLOT_METRICS, plots_base)
+        plot_ratio_trends(dataset, ratio_group, PLOT_METRICS, plots_base)
 
     if args.output_json:
         out_path = Path(args.output_json)

@@ -36,4 +36,17 @@ echo "📊 Stats dir    : ${DEFAULT_STATS_DIR}"
 echo "🕓 Started at   : $(date '+%Y-%m-%d %H:%M:%S %Z')"
 full_line '='
 
-python "$PROJECT_ROOT/experiments/statistics/analyze_results.py" "$@" --results-root "$RESULTS_ROOT"
+TARGET_PATH=""
+if [[ $# -gt 0 && -e "$1" ]]; then
+    TARGET_PATH="$1"
+    shift
+    echo "🎯 Target path  : ${TARGET_PATH}"
+    full_line '='
+fi
+
+python "$PROJECT_ROOT/experiments/statistics/analyze_results.py" \
+    ${TARGET_PATH:+ "$TARGET_PATH"} \
+    --results-root "$RESULTS_ROOT" \
+    --plots-dir "$DEFAULT_STATS_DIR" \
+    --tsv-dir "$DEFAULT_STATS_DIR" \
+    "$@"
