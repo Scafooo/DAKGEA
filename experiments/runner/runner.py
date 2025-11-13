@@ -1062,10 +1062,10 @@ class ExperimentRunner:
         path_dict = stage_meta.get("paths", {})
         collected = [Path(path) for path in path_dict.values()]
         stage_meta["paths"] = {}
-        if delete_parent and path_dict:
-            first_path = next(iter(path_dict.values()))
-            parent_dir = Path(first_path).parent
-            collected.append(parent_dir)
+        # NOTE: We no longer delete the parent directory when delete_parent=True
+        # because the parent (e.g., augmentation/) contains results.json and summary.json
+        # which must be preserved even when save=false.
+        # Instead, we only delete the specific subdirectories (dataset/, model/, etc.)
         return collected
 
     @staticmethod

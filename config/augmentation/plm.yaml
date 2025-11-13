@@ -16,7 +16,7 @@ augmentation:
 
   # BART fine-tuning configuration
   bart:
-    enable_finetuning: true       # Enable BART fine-tuning
+    enable_finetuning: false      # Enable BART fine-tuning
     model_name: "facebook/bart-base"  # BART model to use
     out_dir: "./bart_plm_model"   # Output directory for fine-tuned model
     epochs: 10                    # Number of training epochs
