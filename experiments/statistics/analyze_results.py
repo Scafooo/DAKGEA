@@ -19,6 +19,24 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.config.loader import PROJECT_ROOT, load_yaml
+from experiments.statistics.exporters import (
+    write_dataset_summary_csv,
+    write_dataset_summary_markdown,
+    write_dataset_summary_latex,
+    try_write_excel,
+)
+from experiments.statistics.advanced_stats import (
+    summarize_with_advanced_stats,
+    cohens_d,
+    paired_t_test,
+)
+from experiments.statistics.visualizations import (
+    plot_heatmap,
+    plot_boxplot,
+    plot_violin,
+    plot_scatter_correlation,
+    plot_delta_chart,
+)
 
 RESULTS_FILENAME = "results.json"
 SUMMARY_FILENAME = "summary.json"
@@ -130,6 +148,23 @@ def parse_args(default_plots_dir: Path, default_results_dir: Path) -> argparse.N
         type=int,
         default=DEFAULT_DPI,
         help="Resolution (DPI) for saved plots (default: %(default)s).",
+    )
+    parser.add_argument(
+        "--export-formats",
+        nargs="+",
+        choices=["tsv", "csv", "markdown", "latex", "excel"],
+        default=["tsv", "csv"],
+        help="Export formats to generate (default: %(default)s).",
+    )
+    parser.add_argument(
+        "--enable-advanced-plots",
+        action="store_true",
+        help="Generate heatmaps, boxplots, violin plots, scatter plots, and delta charts.",
+    )
+    parser.add_argument(
+        "--advanced-stats",
+        action="store_true",
+        help="Include confidence intervals, t-tests, effect sizes in console output.",
     )
     return parser.parse_args()
 
@@ -522,6 +557,7 @@ def write_dataset_summary_tsv(
     dataset_stage_stats: Dict[str, Dict[str, Dict[str, Dict[str, float]]]],
     metrics: List[str],
 ) -> None:
+    """Write enhanced TSV export with min, max, and delta percentage."""
     ensure_dir(path.parent)
     with path.open("w", encoding="utf-8") as handle:
         header = [
@@ -529,11 +565,16 @@ def write_dataset_summary_tsv(
             "metric",
             "reduction_mean",
             "reduction_std",
+            "reduction_min",
+            "reduction_max",
             "reduction_count",
             "augmentation_mean",
             "augmentation_std",
+            "augmentation_min",
+            "augmentation_max",
             "augmentation_count",
             "delta_mean",
+            "delta_percentage",
         ]
         handle.write("\t".join(header) + "\n")
         for dataset, stage_stats in sorted(dataset_stage_stats.items()):
@@ -542,20 +583,29 @@ def write_dataset_summary_tsv(
                 aug_stats = stage_stats.get("augmentation", {}).get(metric)
                 if not red_stats and not aug_stats:
                     continue
+
+                delta = None
+                delta_pct = None
+                if red_stats and aug_stats:
+                    delta = aug_stats["mean"] - red_stats["mean"]
+                    if red_stats["mean"] != 0:
+                        delta_pct = (delta / red_stats["mean"]) * 100
+
                 row = [
                     dataset,
                     metric,
                     f"{red_stats['mean']:.6f}" if red_stats else "",
                     f"{red_stats['std']:.6f}" if red_stats else "",
+                    f"{red_stats['min']:.6f}" if red_stats else "",
+                    f"{red_stats['max']:.6f}" if red_stats else "",
                     str(red_stats["count"]) if red_stats else "",
                     f"{aug_stats['mean']:.6f}" if aug_stats else "",
                     f"{aug_stats['std']:.6f}" if aug_stats else "",
+                    f"{aug_stats['min']:.6f}" if aug_stats else "",
+                    f"{aug_stats['max']:.6f}" if aug_stats else "",
                     str(aug_stats["count"]) if aug_stats else "",
-                    (
-                        f"{(aug_stats['mean'] - red_stats['mean']):.6f}"
-                        if red_stats and aug_stats
-                        else ""
-                    ),
+                    f"{delta:.6f}" if delta is not None else "",
+                    f"{delta_pct:.2f}" if delta_pct is not None else "",
                 ]
                 handle.write("\t".join(row) + "\n")
 
@@ -681,7 +731,7 @@ def main() -> None:
                         metric_summary = ", ".join(
                             f"{metric}={ratio_summary[ratio_value][metric]:.3f}"
                             for metric in PLOT_METRICS
-                            if metric in ratio_summary[ratio_value]
+                            if metric in ratio_summary[ratio_value] and ratio_summary[ratio_value][metric] is not None
                         )
                         logger.info("        - %0.3f: %s", ratio_value, metric_summary)
 
@@ -698,6 +748,46 @@ def main() -> None:
                     m["max"],
                     m["count"],
                 )
+
+        # Advanced statistics if requested
+        if args.advanced_stats and "reduction" in stage_stats and "augmentation" in stage_stats:
+            logger.info("  Advanced statistics:")
+            for metric in args.metrics:
+                red_stats = stage_stats.get("reduction", {}).get(metric)
+                aug_stats = stage_stats.get("augmentation", {}).get(metric)
+
+                if not red_stats or not aug_stats:
+                    continue
+
+                # Collect individual values for statistical tests
+                dataset_entries = ratio_entries.get(dataset, [])
+                red_values = []
+                aug_values = []
+                for entry in dataset_entries:
+                    red_entry = entry.get("reduction")
+                    aug_entry = entry.get("augmentation")
+                    if red_entry and metric in red_entry.get("metrics", {}):
+                        red_values.append(red_entry["metrics"][metric])
+                    if aug_entry and metric in aug_entry.get("metrics", {}):
+                        aug_values.append(aug_entry["metrics"][metric])
+
+                # Cohen's d effect size
+                if red_values and aug_values:
+                    effect_size = cohens_d(red_values, aug_values)
+                    if effect_size is not None:
+                        logger.info("    - %s: Cohen's d = %.4f", metric, effect_size)
+
+                # Paired t-test
+                if len(red_values) == len(aug_values) and len(red_values) >= 2:
+                    t_test_result = paired_t_test(red_values, aug_values)
+                    if t_test_result:
+                        logger.info(
+                            "    - %s: t-test t=%.4f, p=%.4f, mean_diff=%.4f",
+                            metric,
+                            t_test_result["t_statistic"],
+                            t_test_result["p_value"],
+                            t_test_result["mean_difference"],
+                        )
         plot_dataset(dataset, args.plot_metric, stage_stats, plots_base)
         dataset_stage_stats[dataset] = stage_stats
         aggregated_output[dataset] = {
@@ -709,14 +799,91 @@ def main() -> None:
         }
         logger.info("")
 
-    tsv_dir = Path(args.tsv_dir)
-    write_dataset_summary_tsv(tsv_dir / "dataset_summary.tsv", dataset_stage_stats, args.metrics)
-    write_ratio_summary_tsv(tsv_dir / "ratio_summary.tsv", ratio_entries, args.metrics)
+    # Export results in requested formats
+    export_dir = Path(args.tsv_dir)
+
+    if "tsv" in args.export_formats:
+        write_dataset_summary_tsv(export_dir / "dataset_summary.tsv", dataset_stage_stats, args.metrics)
+        write_ratio_summary_tsv(export_dir / "ratio_summary.tsv", ratio_entries, args.metrics)
+        logger.info("TSV summaries saved under %s", export_dir.resolve())
+
+    if "csv" in args.export_formats:
+        write_dataset_summary_csv(export_dir / "dataset_summary.csv", dataset_stage_stats, args.metrics)
+        logger.info("CSV export saved to %s", (export_dir / "dataset_summary.csv").resolve())
+
+    if "markdown" in args.export_formats:
+        write_dataset_summary_markdown(export_dir / "dataset_summary.md", dataset_stage_stats, args.metrics)
+        logger.info("Markdown export saved to %s", (export_dir / "dataset_summary.md").resolve())
+
+    if "latex" in args.export_formats:
+        write_dataset_summary_latex(export_dir / "dataset_summary.tex", dataset_stage_stats, args.metrics)
+        logger.info("LaTeX export saved to %s", (export_dir / "dataset_summary.tex").resolve())
+
+    if "excel" in args.export_formats:
+        excel_success = try_write_excel(export_dir / "dataset_summary.xlsx", dataset_stage_stats, args.metrics)
+        if excel_success:
+            logger.info("Excel export saved to %s", (export_dir / "dataset_summary.xlsx").resolve())
+        else:
+            logger.warning("Excel export skipped (openpyxl not installed). Install with: pip install openpyxl")
 
     ratio_plot_groups = build_ratio_plot_data(ratio_entries, PLOT_METRICS)
     for dataset, ratio_group in ratio_plot_groups.items():
         plot_ratio_groups(dataset, ratio_group, PLOT_METRICS, plots_base)
         plot_ratio_trends(dataset, ratio_group, PLOT_METRICS, plots_base)
+
+    # Generate advanced visualizations if requested
+    if args.enable_advanced_plots:
+        logger.info("Generating advanced visualizations...")
+        for dataset, stage_stats in sorted(dataset_stage_stats.items()):
+            for metric in args.metrics:
+                red_stats = stage_stats.get("reduction", {}).get(metric)
+                aug_stats = stage_stats.get("augmentation", {}).get(metric)
+
+                # Collect values for plotting
+                red_values = []
+                aug_values = []
+
+                # Extract individual values from ratio_entries for more granular plots
+                dataset_entries = ratio_entries.get(dataset, [])
+                for entry in dataset_entries:
+                    red_entry = entry.get("reduction")
+                    aug_entry = entry.get("augmentation")
+                    if red_entry and metric in red_entry.get("metrics", {}):
+                        red_values.append(red_entry["metrics"][metric])
+                    if aug_entry and metric in aug_entry.get("metrics", {}):
+                        aug_values.append(aug_entry["metrics"][metric])
+
+                # Generate boxplot
+                if red_values or aug_values:
+                    plot_boxplot(dataset, red_values, aug_values, metric, plots_base, dpi=args.dpi)
+
+                # Generate violin plot
+                if red_values or aug_values:
+                    plot_violin(dataset, red_values, aug_values, metric, plots_base, dpi=args.dpi)
+
+                # Generate scatter plot (requires paired values)
+                if len(red_values) == len(aug_values) and len(red_values) >= 2:
+                    plot_scatter_correlation(dataset, red_values, aug_values, metric, plots_base, dpi=args.dpi)
+
+                # Generate delta chart
+                if len(red_values) == len(aug_values) and red_values:
+                    plot_delta_chart(dataset, red_values, aug_values, metric, plots_base, dpi=args.dpi)
+
+        # Generate heatmaps for ratio combinations
+        for dataset, ratio_group in ratio_plot_groups.items():
+            for metric in args.metrics:
+                heatmap_data = {}
+                for red_ratio, aug_dict in ratio_group.items():
+                    heatmap_data[red_ratio] = {}
+                    for aug_ratio, stage_data in aug_dict.items():
+                        aug_value = stage_data.get("augmentation", {}).get(metric)
+                        if aug_value is not None:
+                            heatmap_data[red_ratio][aug_ratio] = aug_value
+
+                if heatmap_data:
+                    plot_heatmap(dataset, heatmap_data, metric, plots_base, dpi=args.dpi)
+
+        logger.info("Advanced visualizations saved under %s/{heatmaps,boxplots,violins,scatter,deltas}", plots_base.resolve())
 
     if args.output_json:
         out_path = Path(args.output_json)
@@ -725,7 +892,7 @@ def main() -> None:
         logger.info("Aggregated data saved to %s", out_path.resolve())
 
     logger.info("Plots (if produced) are stored under %s", Path(args.plots_dir).resolve())
-    logger.info("TSV summaries saved under %s", tsv_dir.resolve())
+    logger.info("Export formats generated: %s", ", ".join(args.export_formats))
 
 
 if __name__ == "__main__":

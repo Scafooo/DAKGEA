@@ -26,6 +26,7 @@ full_line '-'
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_ROOT="$( cd "${SCRIPT_DIR}/.." && pwd )"
 export PYTHONPATH="${PROJECT_ROOT}"
+export PYTHONHASHSEED=0
 FILE_NAME="${1:-${RUN_CONFIG:-${EXPERIMENT}}}"
 
 # ---------- Resolve configuration target (file or directory) ----------
@@ -106,6 +107,7 @@ fi
 full_line '-'
 echo "📂 Project root : ${PROJECT_ROOT}"
 echo "🐍 Python path  : ${PYTHONPATH}"
+echo "🔢 Hash seed    : ${PYTHONHASHSEED} (deterministic) ⚠️ NOT WORKING"
 echo "💼 Environment  : ${VIRTUAL_ENV:-system Python}"
 if [[ "$MODE" == "single" ]]; then
     echo "📘 Config file  : ${CONFIG_SET[0]}"
