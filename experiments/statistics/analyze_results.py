@@ -42,7 +42,11 @@ RESULTS_FILENAME = "results.json"
 SUMMARY_FILENAME = "summary.json"
 METADATA_FILENAME = "metadata.json"
 STAGES = ("reduction", "augmentation")
-DEFAULT_METRICS = ["hits@1", "hits@5", "hits@10", "hits@25", "hits@50", "mrr", "mr"]
+DEFAULT_METRICS = [
+    "hits@1", "hits@5", "hits@10", "hits@25", "hits@50",
+    "mrr", "mr",
+    "precision", "recall", "f-measure"
+]
 PLOT_METRICS = ["hits@1", "hits@5", "hits@10", "hits@25", "hits@50"]
 METRIC_COLORS = {
     "hits@1": "#1f77b4",
@@ -52,6 +56,9 @@ METRIC_COLORS = {
     "hits@50": "#9467bd",
     "mrr": "#8c564b",
     "mr": "#e377c2",
+    "precision": "#17becf",
+    "recall": "#bcbd22",
+    "f-measure": "#7f7f7f",
 }
 DEFAULT_DPI = 200
 PLOT_DPI = DEFAULT_DPI
@@ -79,7 +86,9 @@ def _sanitize_metric(metric: str, value) -> float | None:
         value = float(value)
     except (TypeError, ValueError):
         return None
-    if metric.lower().startswith("hits@") or metric.lower() == "mrr":
+    # Clamp metrics that should be in [0, 1] range
+    normalized_metrics = {"hits@1", "hits@5", "hits@10", "hits@25", "hits@50", "mrr", "precision", "recall", "f-measure"}
+    if metric.lower() in normalized_metrics:
         return max(0.0, min(1.0, value))
     return value
 
