@@ -60,7 +60,7 @@ experiment:
 | `augmentation.eval` | Run alignment evaluation on the augmented dataset. |
 | `augmentation.save_dataset` / `save_model` | Persist augmented dataset / trained models (if the augmenter trains one). |
 | `model` | Alignment model key registered in `src.alignment_models.registry` (e.g. `bert_int`, `openea`, `hybea`). |
-| `seed` | Global seed propagated to reduction/augmentation/model stages for reproducibilità. |
+| `seed` | Global seed propagated to reduction/augmentation/model stages for reproducibility. |
 | `clear` | If true, previous outputs are deleted before running the experiment. |
 | `overwrite_existing` | Controls whether the runner can reuse cached artefacts. |
 

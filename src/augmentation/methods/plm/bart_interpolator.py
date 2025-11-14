@@ -49,7 +49,7 @@ except Exception:
 
 
 # ----------------------------
-# Utils: semplice “noise injector”
+# Utils: simple noise injector
 # ----------------------------
 def _noise_str(x: str) -> str:
     if not x:
@@ -109,10 +109,10 @@ class BartInterpolatorPLM:
     """
     BART-based latent interpolator + on-the-fly fine-tuner.
 
-    Supporta:
-      - fine-tuning "domain-aware" con denoising
-      - α adattivo in base alla similarità
-      - riuso automatico del modello già fine-tunato
+    Supports:
+      - domain-aware fine-tuning with denoising
+      - adaptive α based on similarity
+      - automatic reuse of already fine-tuned model
     """
 
     def __init__(
@@ -255,8 +255,8 @@ class BartInterpolatorPLM:
     # ------------------------------------------------------------------
     def _load_or_init_model(self):
         """
-        Se esiste già un modello fine-tunato in out_dir → caricalo.
-        Altrimenti inizializza un BART pre-addestrato.
+        If a fine-tuned model already exists in out_dir → load it.
+        Otherwise initialize a pre-trained BART.
         """
         if (
             self.reuse_if_available
@@ -415,7 +415,7 @@ class BartInterpolatorPLM:
 
         logger = logging.getLogger(__name__)
 
-        # 🧩 skip se modello già addestrato e reuse abilitato
+        # Skip if model already trained and reuse enabled
         if (
             self.reuse_if_available
             and not force_retrain
@@ -425,7 +425,7 @@ class BartInterpolatorPLM:
             print(f"[BART-PLM] Skipping fine-tuning — model already exists in {self.out_dir}.")
             return
 
-        # ✂️ opzionale: sottocampiona se troppo grande (before advanced preprocessing)
+        # Optional: subsample if too large (before advanced preprocessing)
         if max_train_samples and len(pairs) > max_train_samples:
             pairs = random.sample(pairs, max_train_samples)
 
@@ -557,7 +557,7 @@ class BartInterpolatorPLM:
         args = TrainingArguments(**args_kwargs)
 
         # ------------------------------------------------------------------
-        # Trainer setup (usa EarlyStopping solo se supportato)
+        # Trainer setup (use EarlyStopping only if supported)
         # ------------------------------------------------------------------
         from transformers import EarlyStoppingCallback
 
@@ -604,9 +604,9 @@ class BartInterpolatorPLM:
           input  = "<pred> <SEP> noisy(src) <SEP> noisy(tgt)"
           output = "clean(src) | clean(tgt)"
 
-        NOTE: Non si limita alle entità allineate - usa tutti gli attributi disponibili.
+        NOTE: Not limited to aligned entities - uses all available attributes.
         """
-        # Raccogli tutti i literal raggruppati per predicato (local name)
+        # Collect all literals grouped by predicate (local name)
         def collect_literals_by_predicate(kg):
             """Returns: {predicate_local_name: [literal_values]}"""
             pred_to_literals = defaultdict(list)
@@ -783,20 +783,20 @@ class BartInterpolatorPLM:
         random.shuffle(examples)
         return examples
 
-    # piccola canonicalizzazione euristica (solo minima per supervision)
+    # Small heuristic canonicalization (minimal for supervision)
     def _canonicalize(self, pred: str, val: str) -> str:
         if not val:
             return val
         v = val.strip()
-        # nomi -> Title Case
+        # names -> Title Case
         if any(k in pred.lower() for k in ["name", "surname", "givenname", "birthname", "fullname"]):
             v = " ".join(w.capitalize() for w in v.split())
-        # date semplici (YYYY-MM-DD già ok), altrimenti non toccare qui
+        # simple dates (YYYY-MM-DD already ok), otherwise don't touch here
         return v
 
 
     # ------------------------------------------------------------------
-    # Interpolazione con α adattivo
+    # Interpolation with adaptive α
     # ------------------------------------------------------------------
     def _mean_pool(self, H: torch.Tensor, attn: Optional[torch.Tensor] = None) -> torch.Tensor:
         # H: (seq, dim) o (1, seq, dim)
@@ -808,11 +808,11 @@ class BartInterpolatorPLM:
         return (H * mask).sum(0) / mask.sum(0).clamp_min(1.0)
 
     def _adaptive_alpha(self, h1_mean: torch.Tensor, h2_mean: torch.Tensor) -> float:
-        # similarità coseno ∈ [-1, 1] -> rimappi a [0,1]
+        # cosine similarity ∈ [-1, 1] -> remap to [0,1]
         cos = F.cosine_similarity(h1_mean.unsqueeze(0), h2_mean.unsqueeze(0)).item()
         sim01 = (cos + 1.0) / 2.0
         # α = base ± spread * (2*sim - 1)
-        # se sim alta → α più grande (mischio di più), se bassa → α più piccolo
+        # if high similarity → larger α (mix more), if low → smaller α
         alpha = self.base_alpha + self.alpha_spread * (2 * sim01 - 1)
         # clamp in [0.05, 0.95]
         return max(0.05, min(0.95, alpha))
@@ -859,7 +859,7 @@ class BartInterpolatorPLM:
         a1 = toks.attention_mask[0]  # (seq1,)
         a2 = toks.attention_mask[1]  # (seq2,)
 
-        # alpha adattivo (più conservativo su nomi/titoli)
+        # adaptive alpha (more conservative on names/titles)
         m1 = self._mean_pool(h1, a1)
         m2 = self._mean_pool(h2, a2)
         alpha = self._adaptive_alpha(m1, m2)
@@ -867,7 +867,7 @@ class BartInterpolatorPLM:
                ["name", "givenname", "surname", "fullname", "birthname", "title"]):
             alpha = max(0.10, min(alpha, 0.30))
 
-        # mix latente asimmetrico
+        # asymmetric latent mix
         h_mix_src = (1 - alpha) * h1 + alpha * h2
         h_mix_tgt = (1 - alpha) * h2 + alpha * h1
 

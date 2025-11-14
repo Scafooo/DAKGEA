@@ -181,8 +181,8 @@ def _convert_dataset_to_bert_format(dataset, tokenizer, max_length, dataset_work
         if subj_str in entity2index and obj_str in entity2index and pred_str in rel2index:
             rel_triples_2.append((entity2index[subj_str], rel2index[pred_str], entity2index[obj_str]))
     
-    # Create entity data (usando attributi se disponibili)
-    # Raccogliamo attributi dai knowledge graphs (triples con literal values)
+    # Create entity data (using attributes if available)
+    # Collect attributes from knowledge graphs (triples with literal values)
     entity_attributes = {}
     for subj, pred, obj in dataset.knowledge_graph_source:
         subj_str = str(subj)
@@ -201,7 +201,7 @@ def _convert_dataset_to_bert_format(dataset, tokenizer, max_length, dataset_work
     ent2data = {}
     missing_attributes = 0
     for ent in all_entities:
-        # Usa gli attributi se disponibili, altrimenti usa il nome dell'entità
+        # Use attributes if available, otherwise use entity name
         if ent in entity_attributes:
             desc = " ".join(entity_attributes[ent])
         else:
