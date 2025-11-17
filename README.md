@@ -1,7 +1,7 @@
 # Data Augmentation for Knowledge Graph Entity Resolution
 
 <div style="display: flex; justify-content: center;">
-  <img src="assets/images/banner.png" alt="Data Augmentation for Knowledge Graph Entity Resolution" style="max-width: 85%; height: auto;">
+  <img src="assets/images/banner.png" alt="Data Augmentation for Knowledge Graph Entity Resolution" style="max-width: 55%; height: auto;">
 </div>
 
 DAKGEA is a modular Python 3.11 pipeline for dataset reduction, augmentation, and evaluation in Entity Alignment tasks.
