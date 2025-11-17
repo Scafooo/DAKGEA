@@ -1,0 +1,215 @@
+# Attribute matches for ja_en
+# Format: attr1 [,attr1.2,...] <TAB> attr2 [,attr2.2,...]
+# Generated with smart_attr_matcher.py - REVIEW MANUALLY!
+
+# HIGH CONFIDENCE MATCHES (>= 0.95)
+http://ja.dbpedia.org/property/3a	http://dbpedia.org/property/2011a,http://dbpedia.org/property/2012a,http://dbpedia.org/property/2010a,http://dbpedia.org/property/8a,http://dbpedia.org/property/7a,http://dbpedia.org/property/2013a,http://dbpedia.org/property/3a,http://dbpedia.org/property/1a,http://dbpedia.org/property/2a,http://dbpedia.org/property/2015a,http://dbpedia.org/property/6a,http://dbpedia.org/property/2002a,http://dbpedia.org/property/2014a,http://dbpedia.org/property/2008a,http://dbpedia.org/property/4a,http://dbpedia.org/property/5a
+http://ja.dbpedia.org/property/aPatternS	http://dbpedia.org/property/aPatternS
+http://ja.dbpedia.org/property/abbrevpinyin	http://dbpedia.org/property/abbrevpinyin
+http://ja.dbpedia.org/property/aliases	http://dbpedia.org/property/aliases
+http://ja.dbpedia.org/property/alltimes	http://dbpedia.org/property/alltimes
+http://ja.dbpedia.org/property/areaFootnotes	http://dbpedia.org/property/areaFootnote
+http://ja.dbpedia.org/property/areaLandImperial	http://dbpedia.org/property/areaLandImperial
+http://ja.dbpedia.org/property/areaPercentageRound	http://dbpedia.org/property/areaPercentageRound
+http://ja.dbpedia.org/property/areaTotalKm	http://dbpedia.org/property/areaTotalKm
+http://ja.dbpedia.org/property/areaWaterKm	http://dbpedia.org/property/areaWaterKm
+http://ja.dbpedia.org/property/areaWaterPercent	http://dbpedia.org/property/areaWaterPercent
+http://ja.dbpedia.org/property/augMeanF	http://dbpedia.org/property/augMeanF
+http://ja.dbpedia.org/property/augRecordHighC	http://dbpedia.org/property/augRecordHighC
+http://ja.dbpedia.org/property/award1pub	http://dbpedia.org/property/award4pub,http://dbpedia.org/property/award5pub,http://dbpedia.org/property/award3pub,http://dbpedia.org/property/award2pub,http://dbpedia.org/property/award1pub
+http://ja.dbpedia.org/property/awardYears	http://dbpedia.org/property/awardYears
+http://ja.dbpedia.org/property/banknoteArticle	http://dbpedia.org/property/banknoteArticle
+http://ja.dbpedia.org/property/bc	http://dbpedia.org/property/bc
+http://ja.dbpedia.org/property/birthName	http://dbpedia.org/property/birthname,http://dbpedia.org/property/birthName
+http://ja.dbpedia.org/property/birthdate	http://dbpedia.org/property/born,http://dbpedia.org/property/birthdate,http://dbpedia.org/property/birthDate,http://dbpedia.org/property/dateOfBirth
+http://ja.dbpedia.org/property/blankEmblemType	http://dbpedia.org/property/blankEmblemType
+http://ja.dbpedia.org/property/blank3Info	http://dbpedia.org/property/blank3Info,http://dbpedia.org/property/blank9Info,http://dbpedia.org/property/blank5Info,http://dbpedia.org/property/blank4Info,http://dbpedia.org/property/blank7Info,http://dbpedia.org/property/blank1Info,http://dbpedia.org/property/blankInfo,http://dbpedia.org/property/blank2Info,http://dbpedia.org/property/blank6Info
+http://ja.dbpedia.org/property/borderColor	http://dbpedia.org/property/bordercolor
+http://ja.dbpedia.org/property/bpmf	http://dbpedia.org/property/bpmf
+http://ja.dbpedia.org/property/careerStart	http://dbpedia.org/property/careerStart
+http://ja.dbpedia.org/property/chiefexec	http://dbpedia.org/property/chiefexec
+http://ja.dbpedia.org/property/coaRes	http://dbpedia.org/property/coaRes
+http://ja.dbpedia.org/property/coatOfArms	http://dbpedia.org/property/coatOfArms
+http://ja.dbpedia.org/property/coatofarms	http://dbpedia.org/property/coatofarms
+http://ja.dbpedia.org/property/coinToss	http://dbpedia.org/property/coinToss
+http://ja.dbpedia.org/property/communes	http://dbpedia.org/property/communes
+http://ja.dbpedia.org/property/con	http://dbpedia.org/property/con
+http://ja.dbpedia.org/property/continent	http://dbpedia.org/property/continent
+http://ja.dbpedia.org/property/cover	http://dbpedia.org/property/cover
+http://ja.dbpedia.org/property/creator	http://dbpedia.org/property/creator
+http://ja.dbpedia.org/property/crewSize	http://dbpedia.org/property/crewSize
+http://ja.dbpedia.org/property/criminalActivities	http://dbpedia.org/property/criminalActivities
+http://ja.dbpedia.org/property/debianApproved	http://dbpedia.org/property/debianApproved
+http://ja.dbpedia.org/property/debutWorks	http://dbpedia.org/property/debutworks
+http://ja.dbpedia.org/property/decLowC	http://dbpedia.org/property/decLowC
+http://ja.dbpedia.org/property/decSnowCm	http://dbpedia.org/property/decSnowCm
+http://ja.dbpedia.org/property/decSun	http://dbpedia.org/property/decSun
+http://ja.dbpedia.org/property/density	http://dbpedia.org/property/2000density,http://dbpedia.org/property/density,http://dbpedia.org/property/2010density
+http://ja.dbpedia.org/property/director	http://dbpedia.org/property/director
+http://ja.dbpedia.org/property/discharge1Location	http://dbpedia.org/property/discharge2Location,http://dbpedia.org/property/dischargeLocation,http://dbpedia.org/property/discharge1Location
+http://ja.dbpedia.org/property/dissolution	http://dbpedia.org/property/dissolution
+http://ja.dbpedia.org/property/divisions	http://dbpedia.org/property/divisions
+http://ja.dbpedia.org/property/docking	http://dbpedia.org/property/docking
+http://ja.dbpedia.org/property/drivers	http://dbpedia.org/property/2016Drivers,http://dbpedia.org/property/drivers
+http://ja.dbpedia.org/property/elevation	http://dbpedia.org/property/elevation
+http://ja.dbpedia.org/property/espn	http://dbpedia.org/property/espn
+http://ja.dbpedia.org/property/est	http://dbpedia.org/property/est
+http://ja.dbpedia.org/property/ethnicity	http://dbpedia.org/property/ethnicity
+http://ja.dbpedia.org/property/eventEnd	http://dbpedia.org/property/eventEnd
+http://ja.dbpedia.org/property/exImageCap	http://dbpedia.org/property/exImageCap,http://dbpedia.org/property/exImageCa
+http://ja.dbpedia.org/property/faa	http://dbpedia.org/property/faa
+http://ja.dbpedia.org/property/febHighF	http://dbpedia.org/property/febHighF
+http://ja.dbpedia.org/property/febLowC	http://dbpedia.org/property/febLowC
+http://ja.dbpedia.org/property/febPrecipitationDays	http://dbpedia.org/property/febPrecipitationDays
+http://ja.dbpedia.org/property/febRainDays	http://dbpedia.org/property/febRainDays
+http://ja.dbpedia.org/property/febRecordHighC	http://dbpedia.org/property/febRecordHighC
+http://ja.dbpedia.org/property/febRecordLowC	http://dbpedia.org/property/febRecordLowC
+http://ja.dbpedia.org/property/firstRace	http://dbpedia.org/property/firstRace
+http://ja.dbpedia.org/property/fitF	http://dbpedia.org/property/fitF
+http://ja.dbpedia.org/property/flagcaption	http://dbpedia.org/property/flagcaption,http://dbpedia.org/property/flagCaption
+http://ja.dbpedia.org/property/fontColor	http://dbpedia.org/property/fontColor
+http://ja.dbpedia.org/property/footnotes	http://dbpedia.org/property/footnotes
+http://ja.dbpedia.org/property/formerNames	http://dbpedia.org/property/formerNames,http://dbpedia.org/property/formernames,http://dbpedia.org/property/formerName
+http://ja.dbpedia.org/property/foundedDate	http://dbpedia.org/property/foundedDate
+http://ja.dbpedia.org/property/foundingYear	http://dbpedia.org/property/foundingYear
+http://ja.dbpedia.org/property/freeType	http://dbpedia.org/property/free4Type,http://dbpedia.org/property/free1Type,http://dbpedia.org/property/free3Type,http://dbpedia.org/property/free2Type,http://dbpedia.org/property/freeType
+http://ja.dbpedia.org/property/fullName	http://dbpedia.org/property/fullname,http://dbpedia.org/property/name,http://dbpedia.org/property/givenName,http://dbpedia.org/property/fullName
+http://ja.dbpedia.org/property/fullname	http://dbpedia.org/property/fullname,http://dbpedia.org/property/name,http://dbpedia.org/property/givenName,http://dbpedia.org/property/fullName
+http://ja.dbpedia.org/property/garrison	http://dbpedia.org/property/garrison
+http://ja.dbpedia.org/property/gdppercapita	http://dbpedia.org/property/gdppercapita
+http://ja.dbpedia.org/property/hPatternB	http://dbpedia.org/property/hPatternB
+http://ja.dbpedia.org/property/hPatternS	http://dbpedia.org/property/hPatternS
+http://ja.dbpedia.org/property/halign	http://dbpedia.org/property/halign
+http://ja.dbpedia.org/property/hoovers	http://dbpedia.org/property/hoovers
+http://purl.org/dc/elements/1.1/description	http://purl.org/dc/elements/1.1/description
+http://ja.dbpedia.org/property/iata	http://dbpedia.org/property/iata
+http://ja.dbpedia.org/property/identificationSymbol	http://dbpedia.org/property/identificationSymbol
+http://ja.dbpedia.org/property/imageCaption	http://dbpedia.org/property/imageCaption,http://dbpedia.org/property/imagecaption
+http://ja.dbpedia.org/property/influenced	http://dbpedia.org/property/influenced
+http://ja.dbpedia.org/property/insigniaSize	http://dbpedia.org/property/insigniasize
+http://ja.dbpedia.org/property/iso31661追記	http://dbpedia.org/property/iso
+http://ja.dbpedia.org/property/jahr	http://dbpedia.org/property/jahr
+http://ja.dbpedia.org/property/julMean°c	http://dbpedia.org/property/julMeanC
+http://ja.dbpedia.org/property/julSun	http://dbpedia.org/property/julSun
+http://ja.dbpedia.org/property/junPrecipitationInch	http://dbpedia.org/property/junPrecipitationInch,http://dbpedia.org/property/julPrecipitationInch,http://dbpedia.org/property/janPrecipitationInch
+http://ja.dbpedia.org/property/junRainInch	http://dbpedia.org/property/junRainInch
+http://ja.dbpedia.org/property/jyutpingchinesename	http://dbpedia.org/property/jyutpingchinesename
+http://ja.dbpedia.org/property/lastAlbum	http://dbpedia.org/property/lastAlbum
+http://ja.dbpedia.org/property/lastAward	http://dbpedia.org/property/lastAward
+http://ja.dbpedia.org/property/lat2Deg	http://dbpedia.org/property/latDeg
+http://ja.dbpedia.org/property/latitude	http://dbpedia.org/property/latitude
+http://ja.dbpedia.org/property/layout	http://dbpedia.org/property/layout
+http://ja.dbpedia.org/property/ld	http://dbpedia.org/property/ld
+http://ja.dbpedia.org/property/lengthKm	http://dbpedia.org/property/lengthKm
+http://ja.dbpedia.org/property/logocaption	http://dbpedia.org/property/logocaption,http://dbpedia.org/property/logoCaption
+http://ja.dbpedia.org/property/lon2Min	http://dbpedia.org/property/lonMin
+http://ja.dbpedia.org/property/longDirection	http://dbpedia.org/property/longDirection
+http://ja.dbpedia.org/property/longs	http://dbpedia.org/property/longs
+http://ja.dbpedia.org/property/lowest	http://dbpedia.org/property/lowest
+http://ja.dbpedia.org/property/lowestAttendance	http://dbpedia.org/property/lowestAttendance
+http://ja.dbpedia.org/property/mapType	http://dbpedia.org/property/mapType
+http://ja.dbpedia.org/property/marMean°c	http://dbpedia.org/property/marMeanC
+http://ja.dbpedia.org/property/marMeanF	http://dbpedia.org/property/marMeanF
+http://ja.dbpedia.org/property/marPrecipitationInch	http://dbpedia.org/property/marPrecipitationInch,http://dbpedia.org/property/mayPrecipitationInch,http://dbpedia.org/property/aprPrecipitationInch
+http://ja.dbpedia.org/property/marRainInch	http://dbpedia.org/property/marRainInch
+http://ja.dbpedia.org/property/marSnowCm	http://dbpedia.org/property/marSnowCm
+http://ja.dbpedia.org/property/marks	http://dbpedia.org/property/marks
+http://ja.dbpedia.org/property/membershipEst	http://dbpedia.org/property/membershipEst
+http://ja.dbpedia.org/property/mime	http://dbpedia.org/property/mime
+http://ja.dbpedia.org/property/運用者More	http://dbpedia.org/property/more
+http://ja.dbpedia.org/property/mostWinsManufacturer	http://dbpedia.org/property/mostWinsManufacturer
+http://ja.dbpedia.org/property/moto2LastPosition	http://dbpedia.org/property/moto2LastPosition
+http://ja.dbpedia.org/property/mouthLongM	http://dbpedia.org/property/mouthLongM
+http://ja.dbpedia.org/property/msize	http://dbpedia.org/property/msize
+http://ja.dbpedia.org/property/mtvjapann	http://dbpedia.org/property/mtvjapann
+http://ja.dbpedia.org/property/name	http://dbpedia.org/property/fullname,http://dbpedia.org/property/name,http://dbpedia.org/property/givenName,http://dbpedia.org/property/fullName
+http://ja.dbpedia.org/property/nationalAnthem	http://dbpedia.org/property/nationalAnthem
+http://ja.dbpedia.org/property/nationalteam	http://dbpedia.org/property/nationalteam
+http://ja.dbpedia.org/property/nocert	http://dbpedia.org/property/nocert
+http://ja.dbpedia.org/property/notableIdeas	http://dbpedia.org/property/notableIdeas
+http://ja.dbpedia.org/property/novHighF	http://dbpedia.org/property/novHighF
+http://ja.dbpedia.org/property/novMean°c	http://dbpedia.org/property/novMeanC
+http://ja.dbpedia.org/property/octMeanF	http://dbpedia.org/property/octMeanF
+http://ja.dbpedia.org/property/onlineChan	http://dbpedia.org/property/onlineChan
+http://ja.dbpedia.org/property/ons	http://dbpedia.org/property/ons
+http://ja.dbpedia.org/property/ontheissuespath	http://dbpedia.org/property/ontheissuespath
+http://ja.dbpedia.org/property/orbitPeriapsis	http://dbpedia.org/property/orbitPeriapsis
+http://ja.dbpedia.org/property/os	http://dbpedia.org/property/os
+http://ja.dbpedia.org/property/otherCountries	http://dbpedia.org/property/otherCountries
+http://ja.dbpedia.org/property/packageManager	http://dbpedia.org/property/packageManager
+http://ja.dbpedia.org/property/pictureWidth	http://dbpedia.org/property/pictureWidth
+http://ja.dbpedia.org/property/placeOfDeath	http://dbpedia.org/property/placeOfDeath
+http://ja.dbpedia.org/property/placeofburialLabel	http://dbpedia.org/property/placeofburialLabel
+http://ja.dbpedia.org/property/popMunicunit	http://dbpedia.org/property/popMunicunit
+http://ja.dbpedia.org/property/populationDensityUrbanKm	http://dbpedia.org/property/populationDensityUrbanKm,http://dbpedia.org/property/populationUrbanDensityKm
+http://ja.dbpedia.org/property/populationEstimate	http://dbpedia.org/property/populationEstimate
+http://ja.dbpedia.org/property/por	http://dbpedia.org/property/por
+http://ja.dbpedia.org/property/position	http://dbpedia.org/property/position
+http://ja.dbpedia.org/property/postalabbreviaion	http://dbpedia.org/property/postalabbreviation
+http://ja.dbpedia.org/property/powers	http://dbpedia.org/property/powers
+http://ja.dbpedia.org/property/prevNo	http://dbpedia.org/property/prevNo
+http://ja.dbpedia.org/property/prevSeriesYears	http://dbpedia.org/property/prevSeriesYears
+http://ja.dbpedia.org/property/producedEnd	http://dbpedia.org/property/producedEnd
+http://ja.dbpedia.org/property/promotion	http://dbpedia.org/property/promotion
+http://ja.dbpedia.org/property/pushpinLabelPosition	http://dbpedia.org/property/pushpinLabelPosition
+http://ja.dbpedia.org/property/ranking	http://dbpedia.org/property/ranking
+http://ja.dbpedia.org/property/rd3Score01Agg	http://dbpedia.org/property/rd3Score01Agg,http://dbpedia.org/property/rd1Score12Agg,http://dbpedia.org/property/rd2Score08Agg,http://dbpedia.org/property/rd1Score04Agg,http://dbpedia.org/property/rd2Score3Agg,http://dbpedia.org/property/rd1Score06Agg,http://dbpedia.org/property/rd2Score01Agg,http://dbpedia.org/property/rd3Score03Agg,http://dbpedia.org/property/rd1Score8Agg,http://dbpedia.org/property/rd1Score7Agg,http://dbpedia.org/property/rd1Score6Agg,http://dbpedia.org/property/rd3Score1Agg,http://dbpedia.org/property/rd2Score02Agg,http://dbpedia.org/property/rd1Score08Agg,http://dbpedia.org/property/rd1Score15Agg,http://dbpedia.org/property/rd2Score07Agg,http://dbpedia.org/property/rd2Score1Agg,http://dbpedia.org/property/rd4Score01Agg,http://dbpedia.org/property/rd1Score10Agg,http://dbpedia.org/property/rd2Score2Agg,http://dbpedia.org/property/rd1Score13Agg,http://dbpedia.org/property/rd2Score05Agg,http://dbpedia.org/property/rd1Score14Agg,http://dbpedia.org/property/rd4Score02Agg,http://dbpedia.org/property/rd3Score04Agg,http://dbpedia.org/property/rd1Score02Agg,http://dbpedia.org/property/rd1Score4Agg,http://dbpedia.org/property/rd2Score04Agg,http://dbpedia.org/property/rd1Score05Agg,http://dbpedia.org/property/rd3Score2Agg,http://dbpedia.org/property/rd1Score07Agg,http://dbpedia.org/property/rd2Score03Agg,http://dbpedia.org/property/rd3Score02Agg,http://dbpedia.org/property/rd1Score3Agg,http://dbpedia.org/property/rd1Score16Agg,http://dbpedia.org/property/rd1Score5Agg,http://dbpedia.org/property/rd1Score11Agg,http://dbpedia.org/property/rd1Score2Agg,http://dbpedia.org/property/rd1Score1Agg,http://dbpedia.org/property/rd1Score01Agg,http://dbpedia.org/property/rd1Score09Agg,http://dbpedia.org/property/rd2Score4Agg,http://dbpedia.org/property/rd1Score03Agg,http://dbpedia.org/property/rd2Score06Agg
+http://ja.dbpedia.org/property/rd1Score14Agg	http://dbpedia.org/property/rd3Score01Agg,http://dbpedia.org/property/rd1Score12Agg,http://dbpedia.org/property/rd2Score08Agg,http://dbpedia.org/property/rd1Score04Agg,http://dbpedia.org/property/rd2Score3Agg,http://dbpedia.org/property/rd1Score06Agg,http://dbpedia.org/property/rd2Score01Agg,http://dbpedia.org/property/rd3Score03Agg,http://dbpedia.org/property/rd1Score8Agg,http://dbpedia.org/property/rd1Score7Agg,http://dbpedia.org/property/rd1Score6Agg,http://dbpedia.org/property/rd3Score1Agg,http://dbpedia.org/property/rd2Score02Agg,http://dbpedia.org/property/rd1Score08Agg,http://dbpedia.org/property/rd1Score15Agg,http://dbpedia.org/property/rd2Score07Agg,http://dbpedia.org/property/rd2Score1Agg,http://dbpedia.org/property/rd4Score01Agg,http://dbpedia.org/property/rd1Score10Agg,http://dbpedia.org/property/rd2Score2Agg,http://dbpedia.org/property/rd1Score13Agg,http://dbpedia.org/property/rd2Score05Agg,http://dbpedia.org/property/rd1Score14Agg,http://dbpedia.org/property/rd4Score02Agg,http://dbpedia.org/property/rd3Score04Agg,http://dbpedia.org/property/rd1Score02Agg,http://dbpedia.org/property/rd1Score4Agg,http://dbpedia.org/property/rd2Score04Agg,http://dbpedia.org/property/rd1Score05Agg,http://dbpedia.org/property/rd3Score2Agg,http://dbpedia.org/property/rd1Score07Agg,http://dbpedia.org/property/rd2Score03Agg,http://dbpedia.org/property/rd3Score02Agg,http://dbpedia.org/property/rd1Score3Agg,http://dbpedia.org/property/rd1Score16Agg,http://dbpedia.org/property/rd1Score5Agg,http://dbpedia.org/property/rd1Score11Agg,http://dbpedia.org/property/rd1Score2Agg,http://dbpedia.org/property/rd1Score1Agg,http://dbpedia.org/property/rd1Score01Agg,http://dbpedia.org/property/rd1Score09Agg,http://dbpedia.org/property/rd2Score4Agg,http://dbpedia.org/property/rd1Score03Agg,http://dbpedia.org/property/rd2Score06Agg
+http://ja.dbpedia.org/property/realm	http://dbpedia.org/property/realm
+http://ja.dbpedia.org/property/recordYear	http://dbpedia.org/property/recordYear
+http://ja.dbpedia.org/property/relmonth	http://dbpedia.org/property/relmonth
+http://ja.dbpedia.org/property/reportsTo	http://dbpedia.org/property/reportsTo
+http://ja.dbpedia.org/property/residence	http://dbpedia.org/property/residence
+http://ja.dbpedia.org/property/result	http://dbpedia.org/property/result
+http://ja.dbpedia.org/property/royalName	http://dbpedia.org/property/royalName
+http://ja.dbpedia.org/property/rushonly	http://dbpedia.org/property/rushonly
+http://ja.dbpedia.org/property/sealCaption	http://dbpedia.org/property/sealCaption
+http://ja.dbpedia.org/property/seatWl	http://dbpedia.org/property/seatWl
+http://ja.dbpedia.org/property/sepLowC	http://dbpedia.org/property/sepLowC
+http://ja.dbpedia.org/property/sepMeanC	http://dbpedia.org/property/sepMeanC
+http://ja.dbpedia.org/property/sepRecordHighF	http://dbpedia.org/property/sepRecordHighF
+http://ja.dbpedia.org/property/shore	http://dbpedia.org/property/shore
+http://ja.dbpedia.org/property/signatureAlt	http://dbpedia.org/property/signatureAlt
+http://ja.dbpedia.org/property/sponsorshipName	http://dbpedia.org/property/sponsorshipName
+http://ja.dbpedia.org/property/sports	http://dbpedia.org/property/sports
+http://ja.dbpedia.org/property/stage2engines	http://dbpedia.org/property/stage1engines,http://dbpedia.org/property/stage4engines,http://dbpedia.org/property/stage3engines,http://dbpedia.org/property/stage2engines
+http://ja.dbpedia.org/property/start	http://dbpedia.org/property/start
+http://ja.dbpedia.org/property/startdate	http://dbpedia.org/property/startDate
+http://ja.dbpedia.org/property/stateType	http://dbpedia.org/property/stateType
+http://ja.dbpedia.org/property/states	http://dbpedia.org/property/states
+http://ja.dbpedia.org/property/summary	http://dbpedia.org/property/summary
+http://ja.dbpedia.org/property/teams	http://dbpedia.org/property/teams
+http://ja.dbpedia.org/property/thisSingle	http://dbpedia.org/property/thisSingle
+http://ja.dbpedia.org/property/timezoneDst	http://dbpedia.org/property/timezone1Dst,http://dbpedia.org/property/timezoneDst,http://dbpedia.org/property/timeZoneDst
+http://ja.dbpedia.org/property/totalcaps	http://dbpedia.org/property/totalcaps
+http://ja.dbpedia.org/property/typing	http://dbpedia.org/property/typing
+http://ja.dbpedia.org/property/useminandrec	http://dbpedia.org/property/useminandrec
+http://ja.dbpedia.org/property/vg	http://dbpedia.org/property/vg
+http://ja.dbpedia.org/property/votesmart	http://dbpedia.org/property/votesmart
+http://ja.dbpedia.org/property/wamoNu	http://dbpedia.org/property/wamoNu
+http://ja.dbpedia.org/property/with	http://dbpedia.org/property/with
+http://ja.dbpedia.org/property/workInstitutions	http://dbpedia.org/property/workInstitutions,http://dbpedia.org/property/workInstitution
+http://ja.dbpedia.org/property/works	http://dbpedia.org/property/works
+http://ja.dbpedia.org/property/worldcat	http://dbpedia.org/property/worldcat
+http://ja.dbpedia.org/property/yearRainDays	http://dbpedia.org/property/yearRainDays
+http://ja.dbpedia.org/property/yearRecordLowF	http://dbpedia.org/property/yearRecordLowF
+
+# MEDIUM CONFIDENCE MATCHES (0.80-0.95) - VERIFY MANUALLY
+# http://ja.dbpedia.org/property/alphabet	http://dbpedia.org/property/alphabets
+# http://ja.dbpedia.org/property/areaLandSqKm	http://dbpedia.org/property/areaLandSqMi,http://dbpedia.org/property/areaLandKm
+# http://ja.dbpedia.org/property/augRecLo°f	http://dbpedia.org/property/augRecordLowF
+# http://ja.dbpedia.org/property/crewCaption	http://dbpedia.org/property/cvrCaption
+# http://ja.dbpedia.org/property/densityUrban	http://dbpedia.org/property/densityRank
+# http://ja.dbpedia.org/property/janLo°f	http://dbpedia.org/property/janLowF
+# http://ja.dbpedia.org/property/julRecLo°f	http://dbpedia.org/property/julRecordLowF
+# http://ja.dbpedia.org/property/kowins	http://dbpedia.org/property/koWins
+# http://ja.dbpedia.org/property/mayRecLo°c	http://dbpedia.org/property/mayRecordLowC
+# http://ja.dbpedia.org/property/novLo°f	http://dbpedia.org/property/novLowF
+# http://ja.dbpedia.org/property/placeofbirth	http://dbpedia.org/property/placeOfBirth
+# http://ja.dbpedia.org/property/pop2007rankb	http://dbpedia.org/property/popRank,http://dbpedia.org/property/poprank
+# http://ja.dbpedia.org/property/popden2007rankb	http://dbpedia.org/property/popdensRank
+# http://ja.dbpedia.org/property/popdensity	http://dbpedia.org/property/popdensityKm
+# http://ja.dbpedia.org/property/pref	http://dbpedia.org/property/ref
+# http://ja.dbpedia.org/property/rd3Date	http://dbpedia.org/property/odDate,http://dbpedia.org/property/sdDate,http://dbpedia.org/property/fdDate
+# http://ja.dbpedia.org/property/rd1Score3l	http://dbpedia.org/property/rd2Score,http://dbpedia.org/property/rd3Score,http://dbpedia.org/property/rd4Score
+# http://ja.dbpedia.org/property/rd1Score4l	http://dbpedia.org/property/rd2Score,http://dbpedia.org/property/rd3Score,http://dbpedia.org/property/rd4Score

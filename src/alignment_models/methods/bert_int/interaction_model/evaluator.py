@@ -157,12 +157,27 @@ class InteractionEvaluator:
         mr = mr_sum / all_test_num
         mrr = mrr_sum / all_test_num
 
+        # Compute precision, recall, and f-measure
+        # True positives: hits@1 (correct predictions at top-1)
+        true_positives = hits_per_position[0] if len(hits_per_position) > 0 else 0
+        # False positives: top-1 predictions that are wrong
+        false_positives = all_test_num - true_positives
+        # False negatives: entities where correct match not at top-1
+        false_negatives = all_test_num - true_positives
+
+        precision = true_positives / max(true_positives + false_positives, 1)
+        recall = true_positives / max(true_positives + false_negatives, 1)
+        f_measure = 2 * precision * recall / max(precision + recall, 1e-10)
+
         metrics = {
             "hits@1": topk_metrics.get("hits@1", 0.0),
             "hits@5": topk_metrics.get("hits@5", 0.0),
             "hits@10": topk_metrics.get("hits@10", 0.0),
             "mr": mr,
             "mrr": mrr,
+            "precision": precision,
+            "recall": recall,
+            "f-measure": f_measure,
             "found": count_found,
             "total": all_test_num,
         }

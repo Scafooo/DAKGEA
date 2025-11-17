@@ -1,0 +1,6 @@
+# Attribute matches for ICEW_WIKI
+# Format: attr1 [,attr1.2,...] <TAB> attr2 [,attr2.2,...]
+# Generated with fast_attr_matcher.py (exact + semantic only)
+
+# HIGH CONFIDENCE MATCHES (>= 0.95)
+has_name	has_name

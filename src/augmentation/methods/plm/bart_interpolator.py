@@ -863,6 +863,8 @@ class BartInterpolatorPLM:
         m1 = self._mean_pool(h1, a1)
         m2 = self._mean_pool(h2, a2)
         alpha = self._adaptive_alpha(m1, m2)
+
+        # TODO FIX MAYBE CAN BE INFERRED BY DATA
         if any(k in (predicate or "").lower() for k in
                ["name", "givenname", "surname", "fullname", "birthname", "title"]):
             alpha = max(0.10, min(alpha, 0.30))

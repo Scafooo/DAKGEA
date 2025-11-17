@@ -1,0 +1,396 @@
+# Attribute matches for fr_en
+# Format: attr1 [,attr1.2,...] <TAB> attr2 [,attr2.2,...]
+# Generated with fast_attr_matcher.py (exact + semantic only)
+
+# HIGH CONFIDENCE MATCHES (>= 0.95)
+http://fr.dbpedia.org/property/Nom 	 nom	http://dbpedia.org/property/nom 	 nom
+http://fr.dbpedia.org/property/accessdate 	 accessdate	http://dbpedia.org/property/accessdate 	 accessdate
+http://fr.dbpedia.org/property/ad 	 ad	http://dbpedia.org/property/ad 	 ad
+http://fr.dbpedia.org/property/adresse 	 adresse	http://dbpedia.org/property/adresse 	 adresse
+http://fr.dbpedia.org/property/ae 	 ae	http://dbpedia.org/property/ae 	 ae
+http://fr.dbpedia.org/property/affiliation 	 affiliation	http://dbpedia.org/property/affiliation 	 affiliation
+http://fr.dbpedia.org/property/age 	 age	http://dbpedia.org/property/age 	 age
+http://fr.dbpedia.org/property/album 	 album	http://dbpedia.org/property/album 	 album
+http://fr.dbpedia.org/property/alexa 	 alexa	http://dbpedia.org/property/alexa 	 alexa
+http://fr.dbpedia.org/property/alias 	 alias	http://dbpedia.org/property/alias 	 alias
+http://fr.dbpedia.org/property/align 	 align	http://dbpedia.org/property/align 	 align
+http://fr.dbpedia.org/property/alignLeft 	 align left	http://dbpedia.org/property/alignLeft 	 align left
+http://fr.dbpedia.org/property/aliment 	 aliment	http://dbpedia.org/property/aliment 	 aliment
+http://fr.dbpedia.org/property/allLyrics 	 all lyrics	http://dbpedia.org/property/allLyrics 	 all lyrics
+http://fr.dbpedia.org/property/allMusic 	 all music	http://dbpedia.org/property/allMusic 	 all music
+http://fr.dbpedia.org/property/allWriting 	 all writing	http://dbpedia.org/property/allWriting 	 all writing
+http://fr.dbpedia.org/property/allign 	 allign	http://dbpedia.org/property/allign 	 allign
+http://fr.dbpedia.org/property/alt 	 alt	http://dbpedia.org/property/alt 	 alt
+http://fr.dbpedia.org/property/alternative 	 alternative	http://dbpedia.org/property/alternative 	 alternative
+http://fr.dbpedia.org/property/altname 	 altname	http://dbpedia.org/property/altname 	 altname
+http://fr.dbpedia.org/property/aprSun 	 apr sun	http://dbpedia.org/property/aprSun 	 apr sun
+http://fr.dbpedia.org/property/arrondissement 	 arrondissement	http://dbpedia.org/property/arrondissement 	 arrondissement
+http://fr.dbpedia.org/property/art 	 art	http://dbpedia.org/property/art 	 art
+http://fr.dbpedia.org/property/article 	 article	http://dbpedia.org/property/article 	 article
+http://fr.dbpedia.org/property/artikel 	 artikel	http://dbpedia.org/property/artikel 	 artikel
+http://fr.dbpedia.org/property/artist 	 artist	http://dbpedia.org/property/artist 	 artist
+http://fr.dbpedia.org/property/assistant 	 assistant	http://dbpedia.org/property/assistant 	 assistant
+http://fr.dbpedia.org/property/association 	 association	http://dbpedia.org/property/association 	 association
+http://fr.dbpedia.org/property/augSun 	 aug sun	http://dbpedia.org/property/augSun 	 aug sun
+http://fr.dbpedia.org/property/author 	 author	http://dbpedia.org/property/author 	 author
+http://fr.dbpedia.org/property/authorlink 	 authorlink	http://dbpedia.org/property/authorlink 	 authorlink
+http://fr.dbpedia.org/property/autor 	 autor	http://dbpedia.org/property/autor 	 autor
+http://fr.dbpedia.org/property/aux 	 aux	http://dbpedia.org/property/aux 	 aux
+http://fr.dbpedia.org/property/background 	 background	http://dbpedia.org/property/background 	 background
+http://fr.dbpedia.org/property/backgroundColor 	 background color	http://dbpedia.org/property/backgroundColor 	 background color
+http://fr.dbpedia.org/property/band 	 band	http://dbpedia.org/property/band 	 band
+http://fr.dbpedia.org/property/base 	 base	http://dbpedia.org/property/base 	 base
+http://fr.dbpedia.org/property/bc 	 bc	http://dbpedia.org/property/bc 	 bc
+http://fr.dbpedia.org/property/bg 	 bg	http://dbpedia.org/property/bg 	 bg
+http://fr.dbpedia.org/property/bgcolor 	 bgcolor	http://dbpedia.org/property/bgcolor 	 bgcolor
+http://fr.dbpedia.org/property/bnf 	 bnf	http://dbpedia.org/property/bnf 	 bnf
+http://fr.dbpedia.org/property/body 	 body	http://dbpedia.org/property/body 	 body
+http://fr.dbpedia.org/property/border 	 border	http://dbpedia.org/property/border 	 border
+http://fr.dbpedia.org/property/borough 	 borough	http://dbpedia.org/property/borough 	 borough
+http://fr.dbpedia.org/property/bp 	 bp	http://dbpedia.org/property/bp 	 bp
+http://fr.dbpedia.org/property/branches 	 branches	http://dbpedia.org/property/branches 	 branches
+http://fr.dbpedia.org/property/budget 	 budget	http://dbpedia.org/property/budget 	 budget
+http://fr.dbpedia.org/property/callsign 	 callsign	http://dbpedia.org/property/callsign 	 callsign
+http://fr.dbpedia.org/property/campus 	 campus	http://dbpedia.org/property/campus 	 campus
+http://fr.dbpedia.org/property/cand 	 cand	http://dbpedia.org/property/cand 	 cand
+http://fr.dbpedia.org/property/candidates 	 candidates	http://dbpedia.org/property/candidates 	 candidates
+http://fr.dbpedia.org/property/canton 	 canton	http://dbpedia.org/property/canton 	 canton
+http://fr.dbpedia.org/property/capital 	 capital	http://dbpedia.org/property/capital 	 capital
+http://fr.dbpedia.org/property/caps 	 caps	http://dbpedia.org/property/caps 	 caps
+http://fr.dbpedia.org/property/caption 	 caption	http://dbpedia.org/property/caption 	 caption
+http://fr.dbpedia.org/property/casus 	 casus	http://dbpedia.org/property/casus 	 casus
+http://fr.dbpedia.org/property/cat 	 cat	http://dbpedia.org/property/cat 	 cat
+http://fr.dbpedia.org/property/catalogue 	 catalogue	http://dbpedia.org/property/catalogue 	 catalogue
+http://fr.dbpedia.org/property/cellpadding 	 cellpadding	http://dbpedia.org/property/cellpadding 	 cellpadding
+http://fr.dbpedia.org/property/centre 	 centre	http://dbpedia.org/property/centre 	 centre
+http://fr.dbpedia.org/property/certification 	 certification	http://dbpedia.org/property/certification 	 certification
+http://fr.dbpedia.org/property/champion 	 champion	http://dbpedia.org/property/champion 	 champion
+http://fr.dbpedia.org/property/chapter 	 chapter	http://dbpedia.org/property/chapter 	 chapter
+http://fr.dbpedia.org/property/chassis 	 chassis	http://dbpedia.org/property/chassis 	 chassis
+http://fr.dbpedia.org/property/circuitImage 	 circuit image	http://dbpedia.org/property/circuitImage 	 circuit image
+http://fr.dbpedia.org/property/class 	 class	http://dbpedia.org/property/class 	 class
+http://fr.dbpedia.org/property/club 	 club	http://dbpedia.org/property/club 	 club
+http://fr.dbpedia.org/property/clubnat 	 clubnat	http://dbpedia.org/property/clubnat 	 clubnat
+http://fr.dbpedia.org/property/cname 	 cname	http://dbpedia.org/property/cname 	 cname
+http://fr.dbpedia.org/property/coach 	 coach	http://dbpedia.org/property/coach 	 coach
+http://fr.dbpedia.org/property/coalition 	 coalition	http://dbpedia.org/property/coalition 	 coalition
+http://fr.dbpedia.org/property/code 	 code	http://dbpedia.org/property/code 	 code
+http://fr.dbpedia.org/property/col 	 col	http://dbpedia.org/property/col 	 col
+http://fr.dbpedia.org/property/collapsed 	 collapsed	http://dbpedia.org/property/collapsed 	 collapsed
+http://fr.dbpedia.org/property/college 	 college	http://dbpedia.org/property/college 	 college
+http://fr.dbpedia.org/property/color 	 color	http://dbpedia.org/property/color 	 color
+http://fr.dbpedia.org/property/commercial 	 commercial	http://dbpedia.org/property/commercial 	 commercial
+http://fr.dbpedia.org/property/commons 	 commons	http://dbpedia.org/property/commons 	 commons
+http://fr.dbpedia.org/property/commonscat 	 commonscat	http://dbpedia.org/property/commonscat 	 commonscat
+http://fr.dbpedia.org/property/communes 	 communes	http://dbpedia.org/property/communes 	 communes
+http://fr.dbpedia.org/property/configuration 	 configuration	http://dbpedia.org/property/configuration 	 configuration
+http://fr.dbpedia.org/property/conscription 	 conscription	http://dbpedia.org/property/conscription 	 conscription
+http://fr.dbpedia.org/property/content 	 content	http://dbpedia.org/property/content 	 content
+http://fr.dbpedia.org/property/continent 	 continent	http://dbpedia.org/property/continent 	 continent
+http://fr.dbpedia.org/property/course 	 course	http://dbpedia.org/property/course 	 course
+http://fr.dbpedia.org/property/cover 	 cover	http://dbpedia.org/property/cover 	 cover
+http://fr.dbpedia.org/property/cpu 	 cpu	http://dbpedia.org/property/cpu 	 cpu
+http://fr.dbpedia.org/property/creation 	 creation	http://dbpedia.org/property/creation 	 creation
+http://fr.dbpedia.org/property/création 	 cr ation	http://dbpedia.org/property/création 	 cr ation
+http://fr.dbpedia.org/property/current 	 current	http://dbpedia.org/property/current 	 current
+http://fr.dbpedia.org/property/cvg 	 cvg	http://dbpedia.org/property/cvg 	 cvg
+http://fr.dbpedia.org/property/dab 	 dab	http://dbpedia.org/property/dab 	 dab
+http://fr.dbpedia.org/property/date 	 date	http://dbpedia.org/property/date 	 date
+http://fr.dbpedia.org/property/dates 	 dates	http://dbpedia.org/property/dates 	 dates
+http://fr.dbpedia.org/property/day 	 day	http://dbpedia.org/property/day 	 day
+http://fr.dbpedia.org/property/debut 	 debut	http://dbpedia.org/property/debut 	 debut
+http://fr.dbpedia.org/property/dec 	 dec	http://dbpedia.org/property/dec 	 dec
+http://fr.dbpedia.org/property/decSun 	 dec sun	http://dbpedia.org/property/decSun 	 dec sun
+http://fr.dbpedia.org/property/decorations 	 decorations	http://dbpedia.org/property/decorations 	 decorations
+http://fr.dbpedia.org/property/description 	 description	http://dbpedia.org/property/description 	 description
+http://fr.dbpedia.org/property/destinations 	 destinations	http://dbpedia.org/property/destinations 	 destinations
+http://fr.dbpedia.org/property/dimensions 	 dimensions	http://dbpedia.org/property/dimensions 	 dimensions
+http://fr.dbpedia.org/property/dir 	 dir	http://dbpedia.org/property/dir 	 dir
+http://fr.dbpedia.org/property/direction 	 direction	http://dbpedia.org/property/direction 	 direction
+http://fr.dbpedia.org/property/dissolution 	 dissolution	http://dbpedia.org/property/dissolution 	 dissolution
+http://fr.dbpedia.org/property/distance 	 distance	http://dbpedia.org/property/distance 	 distance
+http://fr.dbpedia.org/property/district 	 district	http://dbpedia.org/property/district 	 district
+http://fr.dbpedia.org/property/districts 	 districts	http://dbpedia.org/property/districts 	 districts
+http://fr.dbpedia.org/property/div 	 div	http://dbpedia.org/property/div 	 div
+http://fr.dbpedia.org/property/division 	 division	http://dbpedia.org/property/division 	 division
+http://fr.dbpedia.org/property/dp 	 dp	http://dbpedia.org/property/dp 	 dp
+http://fr.dbpedia.org/property/département 	 d partement	http://dbpedia.org/property/département 	 d partement
+http://fr.dbpedia.org/property/ecussonB 	 ecusson b	http://dbpedia.org/property/ecussonB 	 ecusson b
+http://fr.dbpedia.org/property/edge 	 edge	http://dbpedia.org/property/edge 	 edge
+http://fr.dbpedia.org/property/edition 	 edition	http://dbpedia.org/property/edition 	 edition
+http://fr.dbpedia.org/property/editor 	 editor	http://dbpedia.org/property/editor 	 editor
+http://fr.dbpedia.org/property/en 	 en	http://dbpedia.org/property/en 	 en
+http://fr.dbpedia.org/property/ep 	 ep	http://dbpedia.org/property/ep 	 ep
+http://fr.dbpedia.org/property/extension 	 extension	http://dbpedia.org/property/extension 	 extension
+http://fr.dbpedia.org/property/extra 	 extra	http://dbpedia.org/property/extra 	 extra
+http://fr.dbpedia.org/property/extraColumn 	 extra column	http://dbpedia.org/property/extraColumn 	 extra column
+http://fr.dbpedia.org/property/fam 	 fam	http://dbpedia.org/property/fam 	 fam
+http://fr.dbpedia.org/property/familycolor 	 familycolor	http://dbpedia.org/property/familycolor 	 familycolor
+http://fr.dbpedia.org/property/fc 	 fc	http://dbpedia.org/property/fc 	 fc
+http://fr.dbpedia.org/property/febSun 	 feb sun	http://dbpedia.org/property/febSun 	 feb sun
+http://fr.dbpedia.org/property/filename 	 filename	http://dbpedia.org/property/filename 	 filename
+http://fr.dbpedia.org/property/filetype 	 filetype	http://dbpedia.org/property/filetype 	 filetype
+http://fr.dbpedia.org/property/first 	 first	http://dbpedia.org/property/first 	 first
+http://fr.dbpedia.org/property/float 	 float	http://dbpedia.org/property/float 	 float
+http://fr.dbpedia.org/property/fontSize 	 font size	http://dbpedia.org/property/fontSize 	 font size
+http://fr.dbpedia.org/property/fontsize 	 fontsize	http://dbpedia.org/property/fontsize 	 fontsize
+http://fr.dbpedia.org/property/footer 	 footer	http://dbpedia.org/property/footer 	 footer
+http://fr.dbpedia.org/property/footerAlign 	 footer align	http://dbpedia.org/property/footerAlign 	 footer align
+http://fr.dbpedia.org/property/format 	 format	http://dbpedia.org/property/format 	 format
+http://fr.dbpedia.org/property/formation 	 formation	http://dbpedia.org/property/formation 	 formation
+http://fr.dbpedia.org/property/franchise 	 franchise	http://dbpedia.org/property/franchise 	 franchise
+http://fr.dbpedia.org/property/from 	 from	http://dbpedia.org/property/from 	 from
+http://fr.dbpedia.org/property/ft 	 ft	http://dbpedia.org/property/ft 	 ft
+http://fr.dbpedia.org/property/geldig 	 geldig	http://dbpedia.org/property/geldig 	 geldig
+http://fr.dbpedia.org/property/genre 	 genre	http://dbpedia.org/property/genre 	 genre
+http://fr.dbpedia.org/property/genres 	 genres	http://dbpedia.org/property/genres 	 genres
+http://fr.dbpedia.org/property/gentilé 	 gentil	http://dbpedia.org/property/gentilé 	 gentil
+http://fr.dbpedia.org/property/goals 	 goals	http://dbpedia.org/property/goals 	 goals
+http://fr.dbpedia.org/property/gpu 	 gpu	http://dbpedia.org/property/gpu 	 gpu
+http://fr.dbpedia.org/property/grades 	 grades	http://dbpedia.org/property/grades 	 grades
+http://fr.dbpedia.org/property/group 	 group	http://dbpedia.org/property/group 	 group
+http://fr.dbpedia.org/property/halloffame 	 halloffame	http://dbpedia.org/property/halloffame 	 halloffame
+http://fr.dbpedia.org/property/hangul 	 hangul	http://dbpedia.org/property/hangul 	 hangul
+http://fr.dbpedia.org/property/hanja 	 hanja	http://dbpedia.org/property/hanja 	 hanja
+http://fr.dbpedia.org/property/header 	 header	http://dbpedia.org/property/header 	 header
+http://fr.dbpedia.org/property/headerAlign 	 header align	http://dbpedia.org/property/headerAlign 	 header align
+http://fr.dbpedia.org/property/headline 	 headline	http://dbpedia.org/property/headline 	 headline
+http://fr.dbpedia.org/property/id 	 id	http://dbpedia.org/property/id 	 id
+http://fr.dbpedia.org/property/ign 	 ign	http://dbpedia.org/property/ign 	 ign
+http://fr.dbpedia.org/property/image 	 image	http://dbpedia.org/property/image 	 image
+http://fr.dbpedia.org/property/imageMap 	 image map	http://dbpedia.org/property/imageMap 	 image map
+http://fr.dbpedia.org/property/imdb 	 imdb	http://dbpedia.org/property/imdb 	 imdb
+http://fr.dbpedia.org/property/img 	 img	http://dbpedia.org/property/img 	 img
+http://fr.dbpedia.org/property/in 	 in	http://dbpedia.org/property/in 	 in
+http://fr.dbpedia.org/property/influences 	 influences	http://dbpedia.org/property/influences 	 influences
+http://fr.dbpedia.org/property/insee 	 insee	http://dbpedia.org/property/insee 	 insee
+http://fr.dbpedia.org/property/institutions 	 institutions	http://dbpedia.org/property/institutions 	 institutions
+http://fr.dbpedia.org/property/instrument 	 instrument	http://dbpedia.org/property/instrument 	 instrument
+http://fr.dbpedia.org/property/instruments 	 instruments	http://dbpedia.org/property/instruments 	 instruments
+http://fr.dbpedia.org/property/isbn 	 isbn	http://dbpedia.org/property/isbn 	 isbn
+http://fr.dbpedia.org/property/iso 	 iso	http://dbpedia.org/property/iso 	 iso
+http://fr.dbpedia.org/property/issn 	 issn	http://dbpedia.org/property/issn 	 issn
+http://fr.dbpedia.org/property/issue 	 issue	http://dbpedia.org/property/issue 	 issue
+http://fr.dbpedia.org/property/janSun 	 jan sun	http://dbpedia.org/property/janSun 	 jan sun
+http://fr.dbpedia.org/property/journal 	 journal	http://dbpedia.org/property/journal 	 journal
+http://fr.dbpedia.org/property/julSun 	 jul sun	http://dbpedia.org/property/julSun 	 jul sun
+http://fr.dbpedia.org/property/junSun 	 jun sun	http://dbpedia.org/property/junSun 	 jun sun
+http://fr.dbpedia.org/property/ko 	 ko	http://dbpedia.org/property/ko 	 ko
+http://fr.dbpedia.org/property/label 	 label	http://dbpedia.org/property/label 	 label
+http://fr.dbpedia.org/property/lang 	 lang	http://dbpedia.org/property/lang 	 lang
+http://fr.dbpedia.org/property/language 	 language	http://dbpedia.org/property/language 	 language
+http://fr.dbpedia.org/property/last 	 last	http://dbpedia.org/property/last 	 last
+http://fr.dbpedia.org/property/lat 	 lat	http://dbpedia.org/property/lat 	 lat
+http://fr.dbpedia.org/property/latest 	 latest	http://dbpedia.org/property/latest 	 latest
+http://fr.dbpedia.org/property/latin 	 latin	http://dbpedia.org/property/latin 	 latin
+http://fr.dbpedia.org/property/latitude 	 latitude	http://dbpedia.org/property/latitude 	 latitude
+http://fr.dbpedia.org/property/lccn 	 lccn	http://dbpedia.org/property/lccn 	 lccn
+http://fr.dbpedia.org/property/leader 	 leader	http://dbpedia.org/property/leader 	 leader
+http://fr.dbpedia.org/property/leader1Type 	 leader type	http://dbpedia.org/property/leader1Type 	 leader type
+http://fr.dbpedia.org/property/leader2Type 	 leader type	http://dbpedia.org/property/leader2Type 	 leader type
+http://fr.dbpedia.org/property/leader3Type 	 leader type	http://dbpedia.org/property/leader3Type 	 leader type
+http://fr.dbpedia.org/property/leader4Type 	 leader type	http://dbpedia.org/property/leader4Type 	 leader type
+http://fr.dbpedia.org/property/leftarm 	 leftarm	http://dbpedia.org/property/leftarm 	 leftarm
+http://fr.dbpedia.org/property/length 	 length	http://dbpedia.org/property/length 	 length
+http://fr.dbpedia.org/property/licence 	 licence	http://dbpedia.org/property/licence 	 licence
+http://fr.dbpedia.org/property/lingua 	 lingua	http://dbpedia.org/property/lingua 	 lingua
+http://fr.dbpedia.org/property/link 	 link	http://dbpedia.org/property/link 	 link
+http://fr.dbpedia.org/property/location 	 location	http://dbpedia.org/property/location 	 location
+http://fr.dbpedia.org/property/logo 	 logo	http://dbpedia.org/property/logo 	 logo
+http://fr.dbpedia.org/property/longitude 	 longitude	http://dbpedia.org/property/longitude 	 longitude
+http://fr.dbpedia.org/property/lyrics 	 lyrics	http://dbpedia.org/property/lyrics 	 lyrics
+http://fr.dbpedia.org/property/lyricsCredits 	 lyrics credits	http://dbpedia.org/property/lyricsCredits 	 lyrics credits
+http://fr.dbpedia.org/property/manager 	 manager	http://dbpedia.org/property/manager 	 manager
+http://fr.dbpedia.org/property/mandat 	 mandat	http://dbpedia.org/property/mandat 	 mandat
+http://fr.dbpedia.org/property/marSun 	 mar sun	http://dbpedia.org/property/marSun 	 mar sun
+http://fr.dbpedia.org/property/match 	 match	http://dbpedia.org/property/match 	 match
+http://fr.dbpedia.org/property/maySun 	 may sun	http://dbpedia.org/property/maySun 	 may sun
+http://fr.dbpedia.org/property/mc 	 mc	http://dbpedia.org/property/mc 	 mc
+http://fr.dbpedia.org/property/meilleurButeur 	 meilleur buteur	http://dbpedia.org/property/meilleurButeur 	 meilleur buteur
+http://fr.dbpedia.org/property/metricFirst 	 metric first	http://dbpedia.org/property/metricFirst 	 metric first
+http://fr.dbpedia.org/property/mission 	 mission	http://dbpedia.org/property/mission 	 mission
+http://fr.dbpedia.org/property/month 	 month	http://dbpedia.org/property/month 	 month
+http://fr.dbpedia.org/property/music 	 music	http://dbpedia.org/property/music 	 music
+http://fr.dbpedia.org/property/musicCredits 	 music credits	http://dbpedia.org/property/musicCredits 	 music credits
+http://fr.dbpedia.org/property/name 	 name	http://dbpedia.org/property/name 	 name
+http://fr.dbpedia.org/property/nat 	 nat	http://dbpedia.org/property/nat 	 nat
+http://fr.dbpedia.org/property/nation 	 nation	http://dbpedia.org/property/nation 	 nation
+http://fr.dbpedia.org/property/natvar 	 natvar	http://dbpedia.org/property/natvar 	 natvar
+http://fr.dbpedia.org/property/nbco 	 nbco	http://dbpedia.org/property/nbco 	 nbco
+http://fr.dbpedia.org/property/nice 	 nice	http://dbpedia.org/property/nice 	 nice
+http://fr.dbpedia.org/property/no 	 no	http://dbpedia.org/property/no 	 no
+http://fr.dbpedia.org/property/nocat 	 nocat	http://dbpedia.org/property/nocat 	 nocat
+http://fr.dbpedia.org/property/nolink 	 nolink	http://dbpedia.org/property/nolink 	 nolink
+http://fr.dbpedia.org/property/nom 	 nom	http://dbpedia.org/property/nom 	 nom
+http://fr.dbpedia.org/property/noprose 	 noprose	http://dbpedia.org/property/noprose 	 noprose
+http://fr.dbpedia.org/property/note 	 note	http://dbpedia.org/property/note 	 note
+http://fr.dbpedia.org/property/notes 	 notes	http://dbpedia.org/property/notes 	 notes
+http://fr.dbpedia.org/property/notice 	 notice	http://dbpedia.org/property/notice 	 notice
+http://fr.dbpedia.org/property/novSun 	 nov sun	http://dbpedia.org/property/novSun 	 nov sun
+http://fr.dbpedia.org/property/num 	 num	http://dbpedia.org/property/num 	 num
+http://fr.dbpedia.org/property/number 	 number	http://dbpedia.org/property/number 	 number
+http://fr.dbpedia.org/property/occupation 	 occupation	http://dbpedia.org/property/occupation 	 occupation
+http://fr.dbpedia.org/property/oclc 	 oclc	http://dbpedia.org/property/oclc 	 oclc
+http://fr.dbpedia.org/property/octSun 	 oct sun	http://dbpedia.org/property/octSun 	 oct sun
+http://fr.dbpedia.org/property/ordination 	 ordination	http://dbpedia.org/property/ordination 	 ordination
+http://fr.dbpedia.org/property/org 	 org	http://dbpedia.org/property/org 	 org
+http://fr.dbpedia.org/property/os 	 os	http://dbpedia.org/property/os 	 os
+http://fr.dbpedia.org/property/other 	 other	http://dbpedia.org/property/other 	 other
+http://fr.dbpedia.org/property/otherDevice 	 other device	http://dbpedia.org/property/otherDevice 	 other device
+http://fr.dbpedia.org/property/page 	 page	http://dbpedia.org/property/page 	 page
+http://fr.dbpedia.org/property/pages 	 pages	http://dbpedia.org/property/pages 	 pages
+http://fr.dbpedia.org/property/part 	 part	http://dbpedia.org/property/part 	 part
+http://fr.dbpedia.org/property/participants 	 participants	http://dbpedia.org/property/participants 	 participants
+http://fr.dbpedia.org/property/parties 	 parties	http://dbpedia.org/property/parties 	 parties
+http://fr.dbpedia.org/property/patron 	 patron	http://dbpedia.org/property/patron 	 patron
+http://fr.dbpedia.org/property/patternB 	 pattern b	http://dbpedia.org/property/patternB 	 pattern b
+http://fr.dbpedia.org/property/patternBl 	 pattern bl	http://dbpedia.org/property/patternBl 	 pattern bl
+http://fr.dbpedia.org/property/patternLa 	 pattern la	http://dbpedia.org/property/patternLa 	 pattern la
+http://fr.dbpedia.org/property/patternName 	 pattern name	http://dbpedia.org/property/patternName 	 pattern name
+http://fr.dbpedia.org/property/patternRa 	 pattern ra	http://dbpedia.org/property/patternRa 	 pattern ra
+http://fr.dbpedia.org/property/patternS 	 pattern s	http://dbpedia.org/property/patternS 	 pattern s
+http://fr.dbpedia.org/property/patternSh 	 pattern sh	http://dbpedia.org/property/patternSh 	 pattern sh
+http://fr.dbpedia.org/property/patternSo 	 pattern so	http://dbpedia.org/property/patternSo 	 pattern so
+http://fr.dbpedia.org/property/patternso 	 patternso	http://dbpedia.org/property/patternso 	 patternso
+http://fr.dbpedia.org/property/phone 	 phone	http://dbpedia.org/property/phone 	 phone
+http://fr.dbpedia.org/property/photo 	 photo	http://dbpedia.org/property/photo 	 photo
+http://fr.dbpedia.org/property/place 	 place	http://dbpedia.org/property/place 	 place
+http://fr.dbpedia.org/property/pn 	 pn	http://dbpedia.org/property/pn 	 pn
+http://fr.dbpedia.org/property/podiums 	 podiums	http://dbpedia.org/property/podiums 	 podiums
+http://fr.dbpedia.org/property/points 	 points	http://dbpedia.org/property/points 	 points
+http://fr.dbpedia.org/property/poj 	 poj	http://dbpedia.org/property/poj 	 poj
+http://fr.dbpedia.org/property/polePositions 	 pole positions	http://dbpedia.org/property/polePositions 	 pole positions
+http://fr.dbpedia.org/property/poles 	 poles	http://dbpedia.org/property/poles 	 poles
+http://fr.dbpedia.org/property/pop 	 pop	http://dbpedia.org/property/pop 	 pop
+http://fr.dbpedia.org/property/popDate 	 pop date	http://dbpedia.org/property/popDate 	 pop date
+http://fr.dbpedia.org/property/population 	 population	http://dbpedia.org/property/population 	 population
+http://fr.dbpedia.org/property/populationDate 	 population date	http://dbpedia.org/property/populationDate 	 population date
+http://fr.dbpedia.org/property/pos 	 pos	http://dbpedia.org/property/pos 	 pos
+http://fr.dbpedia.org/property/position 	 position	http://dbpedia.org/property/position 	 position
+http://fr.dbpedia.org/property/possessions 	 possessions	http://dbpedia.org/property/possessions 	 possessions
+http://fr.dbpedia.org/property/postgraduate 	 postgraduate	http://dbpedia.org/property/postgraduate 	 postgraduate
+http://fr.dbpedia.org/property/premier 	 premier	http://dbpedia.org/property/premier 	 premier
+http://fr.dbpedia.org/property/president 	 president	http://dbpedia.org/property/president 	 president
+http://fr.dbpedia.org/property/production 	 production	http://dbpedia.org/property/production 	 production
+http://fr.dbpedia.org/property/profession 	 profession	http://dbpedia.org/property/profession 	 profession
+http://fr.dbpedia.org/property/projectManager 	 project manager	http://dbpedia.org/property/projectManager 	 project manager
+http://fr.dbpedia.org/property/province 	 province	http://dbpedia.org/property/province 	 province
+http://fr.dbpedia.org/property/provinces 	 provinces	http://dbpedia.org/property/provinces 	 provinces
+http://fr.dbpedia.org/property/ratio 	 ratio	http://dbpedia.org/property/ratio 	 ratio
+http://fr.dbpedia.org/property/rd1Score 	 rd score	http://dbpedia.org/property/rd1Score 	 rd score
+http://fr.dbpedia.org/property/rd1Seed 	 rd seed	http://dbpedia.org/property/rd1Seed 	 rd seed
+http://fr.dbpedia.org/property/rd1Team 	 rd team	http://dbpedia.org/property/rd1Team 	 rd team
+http://fr.dbpedia.org/property/rd2Score 	 rd score	http://dbpedia.org/property/rd2Score 	 rd score
+http://fr.dbpedia.org/property/rd2Seed 	 rd seed	http://dbpedia.org/property/rd2Seed 	 rd seed
+http://fr.dbpedia.org/property/rd2Team 	 rd team	http://dbpedia.org/property/rd2Team 	 rd team
+http://fr.dbpedia.org/property/rd3Score 	 rd score	http://dbpedia.org/property/rd3Score 	 rd score
+http://fr.dbpedia.org/property/rd3Seed 	 rd seed	http://dbpedia.org/property/rd3Seed 	 rd seed
+http://fr.dbpedia.org/property/rd3Team 	 rd team	http://dbpedia.org/property/rd3Team 	 rd team
+http://fr.dbpedia.org/property/rd4Score 	 rd score	http://dbpedia.org/property/rd4Score 	 rd score
+http://fr.dbpedia.org/property/rd4Seed 	 rd seed	http://dbpedia.org/property/rd4Seed 	 rd seed
+http://fr.dbpedia.org/property/rd4Team 	 rd team	http://dbpedia.org/property/rd4Team 	 rd team
+http://fr.dbpedia.org/property/ref 	 ref	http://dbpedia.org/property/ref 	 ref
+http://fr.dbpedia.org/property/region 	 region	http://dbpedia.org/property/region 	 region
+http://fr.dbpedia.org/property/relief 	 relief	http://dbpedia.org/property/relief 	 relief
+http://fr.dbpedia.org/property/religion 	 religion	http://dbpedia.org/property/religion 	 religion
+http://fr.dbpedia.org/property/resultatenhuidig 	 resultatenhuidig	http://dbpedia.org/property/resultatenhuidig 	 resultatenhuidig
+http://fr.dbpedia.org/property/rev 	 rev	http://dbpedia.org/property/rev 	 rev
+http://fr.dbpedia.org/property/rev10score 	 rev score	http://dbpedia.org/property/rev10score 	 rev score
+http://fr.dbpedia.org/property/rev11score 	 rev score	http://dbpedia.org/property/rev11score 	 rev score
+http://fr.dbpedia.org/property/rev12score 	 rev score	http://dbpedia.org/property/rev12score 	 rev score
+http://fr.dbpedia.org/property/rev13score 	 rev score	http://dbpedia.org/property/rev13score 	 rev score
+http://fr.dbpedia.org/property/rev1score 	 rev score	http://dbpedia.org/property/rev1score 	 rev score
+http://fr.dbpedia.org/property/rev2score 	 rev score	http://dbpedia.org/property/rev2score 	 rev score
+http://fr.dbpedia.org/property/rev3score 	 rev score	http://dbpedia.org/property/rev3score 	 rev score
+http://fr.dbpedia.org/property/rev4score 	 rev score	http://dbpedia.org/property/rev4score 	 rev score
+http://fr.dbpedia.org/property/rev5score 	 rev score	http://dbpedia.org/property/rev5score 	 rev score
+http://fr.dbpedia.org/property/rev6score 	 rev score	http://dbpedia.org/property/rev6score 	 rev score
+http://fr.dbpedia.org/property/rev7score 	 rev score	http://dbpedia.org/property/rev7score 	 rev score
+http://fr.dbpedia.org/property/rev8score 	 rev score	http://dbpedia.org/property/rev8score 	 rev score
+http://fr.dbpedia.org/property/rev9score 	 rev score	http://dbpedia.org/property/rev9score 	 rev score
+http://fr.dbpedia.org/property/ribbon 	 ribbon	http://dbpedia.org/property/ribbon 	 ribbon
+http://fr.dbpedia.org/property/rightarm 	 rightarm	http://dbpedia.org/property/rightarm 	 rightarm
+http://fr.dbpedia.org/property/rite 	 rite	http://dbpedia.org/property/rite 	 rite
+http://fr.dbpedia.org/property/role 	 role	http://dbpedia.org/property/role 	 role
+http://fr.dbpedia.org/property/s01v 	 s v	http://dbpedia.org/property/s01v 	 s v
+http://fr.dbpedia.org/property/scale 	 scale	http://dbpedia.org/property/scale 	 scale
+http://fr.dbpedia.org/property/scope 	 scope	http://dbpedia.org/property/scope 	 scope
+http://fr.dbpedia.org/property/score 	 score	http://dbpedia.org/property/score 	 score
+http://fr.dbpedia.org/property/seats 	 seats	http://dbpedia.org/property/seats 	 seats
+http://fr.dbpedia.org/property/seats4Title 	 seats title	http://dbpedia.org/property/seats4Title 	 seats title
+http://fr.dbpedia.org/property/sepSun 	 sep sun	http://dbpedia.org/property/sepSun 	 sep sun
+http://fr.dbpedia.org/property/series 	 series	http://dbpedia.org/property/series 	 series
+http://fr.dbpedia.org/property/services 	 services	http://dbpedia.org/property/services 	 services
+http://fr.dbpedia.org/property/sessionRoom 	 session room	http://dbpedia.org/property/sessionRoom 	 session room
+http://fr.dbpedia.org/property/short 	 short	http://dbpedia.org/property/short 	 short
+http://fr.dbpedia.org/property/shorts 	 shorts	http://dbpedia.org/property/shorts 	 shorts
+http://fr.dbpedia.org/property/signature 	 signature	http://dbpedia.org/property/signature 	 signature
+http://fr.dbpedia.org/property/simhor 	 simhor	http://dbpedia.org/property/simhor 	 simhor
+http://fr.dbpedia.org/property/single 	 single	http://dbpedia.org/property/single 	 single
+http://fr.dbpedia.org/property/singleLine 	 single line	http://dbpedia.org/property/singleLine 	 single line
+http://fr.dbpedia.org/property/singles 	 singles	http://dbpedia.org/property/singles 	 singles
+http://fr.dbpedia.org/property/site 	 site	http://dbpedia.org/property/site 	 site
+http://fr.dbpedia.org/property/slogan 	 slogan	http://dbpedia.org/property/slogan 	 slogan
+http://fr.dbpedia.org/property/socks 	 socks	http://dbpedia.org/property/socks 	 socks
+http://fr.dbpedia.org/property/source 	 source	http://dbpedia.org/property/source 	 source
+http://fr.dbpedia.org/property/sourceConfluence 	 source confluence	http://dbpedia.org/property/sourceConfluence 	 source confluence
+http://fr.dbpedia.org/property/spalten 	 spalten	http://dbpedia.org/property/spalten 	 spalten
+http://fr.dbpedia.org/property/sport 	 sport	http://dbpedia.org/property/sport 	 sport
+http://fr.dbpedia.org/property/squadname 	 squadname	http://dbpedia.org/property/squadname 	 squadname
+http://fr.dbpedia.org/property/station 	 station	http://dbpedia.org/property/station 	 station
+http://fr.dbpedia.org/property/strasbourg 	 strasbourg	http://dbpedia.org/property/strasbourg 	 strasbourg
+http://fr.dbpedia.org/property/structure 	 structure	http://dbpedia.org/property/structure 	 structure
+http://fr.dbpedia.org/property/structure1Res 	 structure res	http://dbpedia.org/property/structure1Res 	 structure res
+http://fr.dbpedia.org/property/studio 	 studio	http://dbpedia.org/property/studio 	 studio
+http://fr.dbpedia.org/property/style 	 style	http://dbpedia.org/property/style 	 style
+http://fr.dbpedia.org/property/subdivision 	 subdivision	http://dbpedia.org/property/subdivision 	 subdivision
+http://fr.dbpedia.org/property/subdivisions 	 subdivisions	http://dbpedia.org/property/subdivisions 	 subdivisions
+http://fr.dbpedia.org/property/surface 	 surface	http://dbpedia.org/property/surface 	 surface
+http://fr.dbpedia.org/property/svg 	 svg	http://dbpedia.org/property/svg 	 svg
+http://fr.dbpedia.org/property/team 	 team	http://dbpedia.org/property/team 	 team
+http://fr.dbpedia.org/property/terzaDivisa 	 terza divisa	http://dbpedia.org/property/terzaDivisa 	 terza divisa
+http://fr.dbpedia.org/property/text 	 text	http://dbpedia.org/property/text 	 text
+http://fr.dbpedia.org/property/textColor 	 text color	http://dbpedia.org/property/textColor 	 text color
+http://fr.dbpedia.org/property/textcolor 	 textcolor	http://dbpedia.org/property/textcolor 	 textcolor
+http://fr.dbpedia.org/property/thumb 	 thumb	http://dbpedia.org/property/thumb 	 thumb
+http://fr.dbpedia.org/property/titelderdeshirt 	 titelderdeshirt	http://dbpedia.org/property/titelderdeshirt 	 titelderdeshirt
+http://fr.dbpedia.org/property/title 	 title	http://dbpedia.org/property/title 	 title
+http://fr.dbpedia.org/property/to 	 to	http://dbpedia.org/property/to 	 to
+http://fr.dbpedia.org/property/topic 	 topic	http://dbpedia.org/property/topic 	 topic
+http://fr.dbpedia.org/property/total 	 total	http://dbpedia.org/property/total 	 total
+http://fr.dbpedia.org/property/totalLength 	 total length	http://dbpedia.org/property/totalLength 	 total length
+http://fr.dbpedia.org/property/touchpad 	 touchpad	http://dbpedia.org/property/touchpad 	 touchpad
+http://fr.dbpedia.org/property/tramaPantalón 	 trama pantal n	http://dbpedia.org/property/tramaPantalón 	 trama pantal n
+http://fr.dbpedia.org/property/tramaSocks 	 trama socks	http://dbpedia.org/property/tramaSocks 	 trama socks
+http://fr.dbpedia.org/property/transmission 	 transmission	http://dbpedia.org/property/transmission 	 transmission
+http://fr.dbpedia.org/property/type 	 type	http://dbpedia.org/property/type 	 type
+http://fr.dbpedia.org/property/undergraduate 	 undergraduate	http://dbpedia.org/property/undergraduate 	 undergraduate
+http://fr.dbpedia.org/property/unicode 	 unicode	http://dbpedia.org/property/unicode 	 unicode
+http://fr.dbpedia.org/property/union 	 union	http://dbpedia.org/property/union 	 union
+http://fr.dbpedia.org/property/unité 	 unit	http://dbpedia.org/property/unit 	 unit
+http://fr.dbpedia.org/property/urbanisation 	 urbanisation	http://dbpedia.org/property/urbanisation 	 urbanisation
+http://fr.dbpedia.org/property/url 	 url	http://dbpedia.org/property/url 	 url
+http://fr.dbpedia.org/property/version 	 version	http://dbpedia.org/property/version 	 version
+http://fr.dbpedia.org/property/viaf 	 viaf	http://dbpedia.org/property/viaf 	 viaf
+http://fr.dbpedia.org/property/volume 	 volume	http://dbpedia.org/property/volume 	 volume
+http://fr.dbpedia.org/property/volumes 	 volumes	http://dbpedia.org/property/volumes 	 volumes
+http://fr.dbpedia.org/property/vote 	 vote	http://dbpedia.org/property/vote 	 vote
+http://fr.dbpedia.org/property/votes 	 votes	http://dbpedia.org/property/votes 	 votes
+http://fr.dbpedia.org/property/voy 	 voy	http://dbpedia.org/property/voy 	 voy
+http://fr.dbpedia.org/property/web 	 web	http://dbpedia.org/property/web 	 web
+http://fr.dbpedia.org/property/website 	 website	http://dbpedia.org/property/website 	 website
+http://fr.dbpedia.org/property/width 	 width	http://dbpedia.org/property/width 	 width
+http://fr.dbpedia.org/property/wikibooks 	 wikibooks	http://dbpedia.org/property/wikibooks 	 wikibooks
+http://fr.dbpedia.org/property/wikisource 	 wikisource	http://dbpedia.org/property/wikisource 	 wikisource
+http://fr.dbpedia.org/property/wikt 	 wikt	http://dbpedia.org/property/wikt 	 wikt
+http://fr.dbpedia.org/property/wiktionary 	 wiktionary	http://dbpedia.org/property/wiktionary 	 wiktionary
+http://fr.dbpedia.org/property/work 	 work	http://dbpedia.org/property/work 	 work
+http://fr.dbpedia.org/property/writer 	 writer	http://dbpedia.org/property/writer 	 writer
+http://fr.dbpedia.org/property/writingCredits 	 writing credits	http://dbpedia.org/property/writingCredits 	 writing credits
+http://fr.dbpedia.org/property/yMax 	 y max	http://dbpedia.org/property/yMax 	 y max
+http://fr.dbpedia.org/property/yMin 	 y min	http://dbpedia.org/property/yMin 	 y min
+http://fr.dbpedia.org/property/year 	 year	http://dbpedia.org/property/year 	 year
+http://fr.dbpedia.org/property/yearSun 	 year sun	http://dbpedia.org/property/yearSun 	 year sun
+http://fr.dbpedia.org/property/zone 	 zone	http://dbpedia.org/property/zone 	 zone
+http://xmlns.com/foaf/0.1/name 	 http xmlns com foaf name	http://xmlns.com/foaf/0.1/name 	 http xmlns com foaf name
+http://xmlns.com/foaf/0.1/nick 	 http xmlns com foaf nick	http://xmlns.com/foaf/0.1/nick 	 http xmlns com foaf nick

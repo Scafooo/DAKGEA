@@ -1,5 +1,8 @@
 # PLM Augmentation Configuration
 # This file contains the default configuration for PLM-based augmentation
+#
+# Note: Attribute matches (match_attr files) are loaded automatically by the dataset reader
+# if available in the dataset's attribute_data directory.
 
 augmentation:
   # Augmentation method name (must match registry)

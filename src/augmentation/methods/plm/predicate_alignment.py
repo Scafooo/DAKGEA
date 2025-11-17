@@ -6,6 +6,7 @@ source and target KGs, combining semantic name similarity with value similarity.
 
 import logging
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
 import numpy as np
@@ -13,6 +14,7 @@ from rdflib import Literal, URIRef
 
 from src.core.dataset import Dataset
 from src.logger import get_logger
+from src.util.reader import read_tsv
 from .predicate_matcher import PredicateMatcher, PredicateMatch
 
 logger = get_logger(__name__)
@@ -78,6 +80,11 @@ class PredicateAlignmentCache:
         """
         logger.info("[PredicateAlignment] Pre-computing predicate alignments...")
 
+        # Use ground-truth matches from dataset if available
+        ground_truth_matches = dataset.attribute_matches or {}
+        if ground_truth_matches:
+            logger.info(f"[PredicateAlignment] Using {len(ground_truth_matches)} ground-truth attribute matches from dataset")
+
         # Auto-adjust sample size for small datasets
         num_aligned = len(dataset.aligned_entities)
         if sample_entities is None:
@@ -141,13 +148,82 @@ class PredicateAlignmentCache:
 
         logger.info(f"[PredicateAlignment] Found {len(name_matches)} name-based matches (before value similarity filtering)")
 
-        # Step 3: Enhance with value similarity
-        logger.info("[PredicateAlignment] Computing value similarities...")
+        # Step 3: Create alignments from ground-truth matches first
         alignments = []
+        ground_truth_pairs = set()  # Track which pairs are from ground truth
+
+        if ground_truth_matches:
+            logger.info("[PredicateAlignment] Creating alignments from ground-truth matches...")
+            gt_count = 0
+
+            for src_uri_str, tgt_uri_list in ground_truth_matches.items():
+                # Find if this src_uri exists in src_samples
+                src_match = None
+                for local_name, (uri, values) in src_samples.items():
+                    if str(uri) == src_uri_str:
+                        src_match = (local_name, uri, values)
+                        break
+
+                if not src_match:
+                    logger.debug(f"[PredicateAlignment] Ground-truth src not found in samples: {src_uri_str}")
+                    continue
+
+                src_local, src_uri, src_values = src_match
+
+                # Find matching target URIs
+                for tgt_uri_str in tgt_uri_list:
+                    tgt_match = None
+                    for local_name, (uri, values) in tgt_samples.items():
+                        if str(uri) == tgt_uri_str:
+                            tgt_match = (local_name, uri, values)
+                            break
+
+                    if not tgt_match:
+                        logger.debug(f"[PredicateAlignment] Ground-truth tgt not found in samples: {tgt_uri_str}")
+                        continue
+
+                    tgt_local, tgt_uri, tgt_values = tgt_match
+
+                    # Compute value similarity
+                    value_sim = self._compute_value_similarity(src_values, tgt_values)
+
+                    # Ground-truth matches get perfect name similarity (1.0)
+                    # Combined score will be high due to perfect name match
+                    combined = self.name_weight * 1.0 + self.value_weight * value_sim
+
+                    alignment = PredicateAlignment(
+                        src_uri=src_uri,
+                        tgt_uri=tgt_uri,
+                        name_similarity=1.0,  # Perfect match from ground truth
+                        value_similarity=value_sim,
+                        combined_score=combined,
+                        src_sample_values=[str(v)[:30] for v in src_values[:3]],
+                        tgt_sample_values=[str(v)[:30] for v in tgt_values[:3]],
+                    )
+                    alignments.append(alignment)
+                    ground_truth_pairs.add((str(src_uri), str(tgt_uri)))
+
+                    # Cache by URI
+                    self._alignment_cache[(str(src_uri), str(tgt_uri))] = alignment
+                    # Cache by local name
+                    self._by_local_name[(src_local, tgt_local)] = alignment
+
+                    gt_count += 1
+
+            logger.info(f"[PredicateAlignment] Created {gt_count} alignments from ground-truth matches")
+
+        # Step 4: Add semantic matches that are NOT in ground truth (as fallback)
+        logger.info("[PredicateAlignment] Adding semantic similarity matches...")
+        semantic_count = 0
 
         for match in name_matches:
             src_uri = match.src_uri
             tgt_uri = match.tgt_uri
+
+            # Skip if already in ground truth
+            if (str(src_uri), str(tgt_uri)) in ground_truth_pairs:
+                continue
+
             src_values = src_samples[match.src_predicate][1]
             tgt_values = tgt_samples[match.tgt_predicate][1]
 
@@ -176,13 +252,21 @@ class PredicateAlignmentCache:
             # Cache by local name
             self._by_local_name[(match.src_predicate, match.tgt_predicate)] = alignment
 
+            semantic_count += 1
+
+        logger.info(f"[PredicateAlignment] Added {semantic_count} semantic matches (excluding ground-truth overlaps)")
+
         # Sort by combined score (best matches first)
         alignments.sort(key=lambda a: a.combined_score, reverse=True)
 
         # Keep all alignments - filtering will be done during usage based on context
         # This allows the system to use even weaker matches when needed
 
-        logger.info(f"[PredicateAlignment] ✓ Pre-computed {len(alignments)} alignments")
+        # Count ground-truth vs semantic
+        gt_final = len(ground_truth_pairs)
+        semantic_final = len(alignments) - gt_final
+
+        logger.info(f"[PredicateAlignment] ✓ Pre-computed {len(alignments)} alignments ({gt_final} ground-truth + {semantic_final} semantic)")
         if alignments:
             logger.info(f"[PredicateAlignment] Average combined score: {np.mean([a.combined_score for a in alignments]):.3f}")
 

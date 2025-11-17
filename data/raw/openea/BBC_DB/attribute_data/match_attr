@@ -1,0 +1,10 @@
+# Attribute matches for BBC_DB
+# Format: attr1 [,attr1.2,...] <TAB> attr2 [,attr2.2,...]
+# Generated with smart_attr_matcher.py - REVIEW MANUALLY!
+
+# HIGH CONFIDENCE MATCHES (>= 0.95)
+rdfs:comment	prop:description,rdfs:comment,dbo:abstract,http://purl.org/dc/elements/1.1/description
+http://xmlns.com/foaf/0.1/name	prop:fullname,prop:legalname,http://xmlns.com/foaf/0.1/name,prop:name,http://xmlns.com/foaf/0.1/givenname
+http://purl.org/dc/elements/1.1/title	dbo:title,prop:title
+
+# MEDIUM CONFIDENCE MATCHES (0.80-0.95) - VERIFY MANUALLY

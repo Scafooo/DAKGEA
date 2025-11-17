@@ -79,13 +79,19 @@ def batch_topk(
 
 
 def compute_hits(topk_indices: torch.Tensor) -> dict[str, float]:
-    """Compute standard hit@k, mean rank, and MRR metrics."""
+    """Compute standard hit@k, mean rank, MRR, and classification metrics."""
     hits = [0.0 for _ in range(topk_indices.size(1))]
     mr = 0.0
     mrr = 0.0
     evaluated = 0
 
+    # For precision/recall/f-measure computation
+    true_positives = 0  # Correctly predicted alignments (hits@1)
+    false_positives = 0  # Incorrectly predicted alignments
+    false_negatives = 0  # Missed alignments
+
     for row, indices in enumerate(topk_indices):
+        found = False
         for rank, candidate in enumerate(indices.tolist()):
             if candidate == row:
                 mr += rank + 1
@@ -93,7 +99,21 @@ def compute_hits(topk_indices: torch.Tensor) -> dict[str, float]:
                 evaluated += 1
                 for k in range(rank, len(hits)):
                     hits[k] += 1.0
+
+                # Classification metrics: consider hits@1 as true positive
+                if rank == 0:
+                    true_positives += 1
+                else:
+                    false_negatives += 1  # Found but not at rank 1
+                found = True
                 break
+
+        if not found:
+            false_negatives += 1
+
+        # Top-1 prediction that's wrong is a false positive
+        if len(indices) > 0 and indices[0].item() != row:
+            false_positives += 1
 
     total = topk_indices.size(0)
     if total == 0:
@@ -103,15 +123,27 @@ def compute_hits(topk_indices: torch.Tensor) -> dict[str, float]:
             "hits@10": 0.0,
             "mr": 0.0,
             "mrr": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f-measure": 0.0,
             "evaluated": 0,
         }
 
     hits = [value / total for value in hits]
+
+    # Compute precision, recall, and f-measure
+    precision = true_positives / max(true_positives + false_positives, 1)
+    recall = true_positives / max(true_positives + false_negatives, 1)
+    f_measure = 2 * precision * recall / max(precision + recall, 1e-10)
+
     return {
         "hits@1": hits[0] if len(hits) >= 1 else 0.0,
         "hits@5": hits[4] if len(hits) >= 5 else hits[-1],
         "hits@10": hits[9] if len(hits) >= 10 else hits[-1],
         "mr": mr / max(evaluated, 1),
         "mrr": mrr / max(evaluated, 1),
+        "precision": precision,
+        "recall": recall,
+        "f-measure": f_measure,
         "evaluated": evaluated,
     }

@@ -234,7 +234,7 @@ class PLMAugmenter(AugmentationMethod):
                 )
 
                 self.logger.info("[PLM] Computing predicate alignments...")
-                # Pre-compute alignments
+                # Pre-compute alignments (uses dataset.attribute_matches if available)
                 alignments = alignment_cache.compute_alignments(dataset_augmented)
                 self.logger.info(f"[PLM] ✓ Predicate alignment pre-computation complete: {len(alignments)} alignments found")
 

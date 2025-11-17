@@ -2,7 +2,7 @@
 
 from pathlib import Path
 import unicodedata
-from typing import Dict, Iterable, Optional, Set, Tuple
+from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 from rdflib import URIRef
 
@@ -13,6 +13,71 @@ from src.logger import get_logger
 from src.util.reader import read_tsv
 
 logger = get_logger(__name__)
+
+
+def _load_attribute_matches(data_dir: Path) -> Dict[str, List[str]]:
+    """Load attribute matches from match_attr file.
+
+    Args:
+        data_dir: Path to the dataset directory (e.g., data/raw/openea/BBC_DB or BBC_DB/attribute_data)
+
+    Returns:
+        Dict mapping source_uri -> [list of target_uris]
+    """
+    # Try common locations
+    match_file_locations = [
+        data_dir / "match_attr",
+        data_dir / "attribute_data" / "match_attr",
+        data_dir / "knowformer_data" / "match_attr",
+    ]
+
+    # Also try parent directory if we're already in attribute_data/knowformer_data
+    if data_dir.name in {"attribute_data", "knowformer_data"}:
+        match_file_locations.append(data_dir.parent / "attribute_data" / "match_attr")
+
+    match_file = None
+    for location in match_file_locations:
+        if location.exists():
+            match_file = location
+            break
+
+    if not match_file:
+        return {}
+
+    matches: Dict[str, List[str]] = {}
+
+    try:
+        with open(match_file, 'r') as f:
+            for line in f:
+                line = line.strip()
+
+                # Skip comments and empty lines
+                if not line or line.startswith('#'):
+                    continue
+
+                # Parse: attr1[,attr1.2] <TAB> attr2[,attr2.2]
+                parts = line.split('\t')
+                if len(parts) != 2:
+                    logger.warning(f"Malformed match_attr line: {line}")
+                    continue
+
+                src_attrs = [a.strip() for a in parts[0].split(',')]
+                tgt_attrs = [a.strip() for a in parts[1].split(',')]
+
+                # Create matches for all combinations
+                for src_attr in src_attrs:
+                    if src_attr not in matches:
+                        matches[src_attr] = []
+                    matches[src_attr].extend(tgt_attrs)
+
+        if matches:
+            logger.info(f"Loaded {len(matches)} attribute matches from {match_file}")
+
+    except Exception as e:
+        logger.warning(f"Failed to load match_attr file from {match_file}: {e}")
+        return {}
+
+    return matches
 
 
 class OpeneaDatasetReader(DatasetReader):
@@ -89,7 +154,10 @@ class OpeneaDatasetReader(DatasetReader):
         else:
             aligned_entities = self._aligned_entities_knowformer_data(data_dir)
 
-        return Dataset(kg1, kg2, aligned_entities)
+        # Load attribute matches from match_attr file if available
+        attribute_matches = _load_attribute_matches(data_dir)
+
+        return Dataset(kg1, kg2, aligned_entities, attribute_matches)
 
     def _choose_dataset(self, dataset_name: str, datasets: Iterable[Tuple[str, Dataset]]) -> Dataset:
         datasets = list(datasets)
