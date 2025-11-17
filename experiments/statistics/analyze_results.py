@@ -47,7 +47,7 @@ DEFAULT_METRICS = [
     "mrr", "mr",
     "precision", "recall", "f-measure"
 ]
-PLOT_METRICS = ["hits@1", "hits@5", "hits@10", "hits@25", "hits@50"]
+PLOT_METRICS = ["hits@1", "hits@5", "hits@10"] #, "hits@25", "hits@50"]
 METRIC_COLORS = {
     "hits@1": "#1f77b4",
     "hits@5": "#ff7f0e",
