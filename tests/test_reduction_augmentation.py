@@ -10,7 +10,7 @@ logging.getLogger("rdflib.term").setLevel(logging.ERROR)
 # 1. Dataset loading
 # ----------------------------------------------------------------------------
 reader = DatasetReaderFactory.create_reader("bert_int")
-dataset = reader.read("/home/federico/Programming/Python/DAKGEA/data/raw/openea/D_W_15K_V1/attribute_data")
+dataset = reader.read("/home/federico/Programming/Python/DAKGEA/data/raw/openea/BBC_DB/attribute_data")
 
 # ----------------------------------------------------------------------------
 # 2. Reduction (optional)
