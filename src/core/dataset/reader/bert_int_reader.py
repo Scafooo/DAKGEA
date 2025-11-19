@@ -6,6 +6,7 @@ Reads datasets in the format written by BERT-INT writer.
 import os
 import unicodedata
 from pathlib import Path
+from typing import Dict, List
 
 from rdflib import URIRef
 
@@ -16,6 +17,56 @@ from src.logger import get_logger
 from src.util.reader import read_tsv
 
 logger = get_logger(__name__)
+
+
+def _load_attribute_matches(data_dir: Path) -> Dict[str, List[str]]:
+    """Load attribute matches from match_attr file.
+
+    Args:
+        data_dir: Path to the dataset directory
+
+    Returns:
+        Dict mapping source_uri -> [list of target_uris]
+    """
+    match_file = data_dir / "match_attr"
+
+    if not match_file.exists():
+        return {}
+
+    matches: Dict[str, List[str]] = {}
+
+    try:
+        with open(match_file, 'r') as f:
+            for line in f:
+                line = line.strip()
+
+                # Skip comments and empty lines
+                if not line or line.startswith('#'):
+                    continue
+
+                # Parse: attr1[,attr1.2] <TAB> attr2[,attr2.2]
+                parts = line.split('\t')
+                if len(parts) != 2:
+                    logger.warning(f"Malformed match_attr line: {line}")
+                    continue
+
+                src_attrs = [a.strip() for a in parts[0].split(',')]
+                tgt_attrs = [a.strip() for a in parts[1].split(',')]
+
+                # Create matches for all combinations
+                for src_attr in src_attrs:
+                    if src_attr not in matches:
+                        matches[src_attr] = []
+                    matches[src_attr].extend(tgt_attrs)
+
+        if matches:
+            logger.info(f"Loaded {len(matches)} attribute matches from {match_file}")
+
+    except Exception as e:
+        logger.warning(f"Failed to load match_attr file from {match_file}: {e}")
+        return {}
+
+    return matches
 
 
 class BertIntReader(DatasetReader):
@@ -48,10 +99,14 @@ class BertIntReader(DatasetReader):
         logger.debug("Reading aligned entities")
         aligned_entities = self._read_aligned_entities(root)
 
+        # Load attribute matches if available
+        attribute_matches = _load_attribute_matches(root)
+
         dataset = Dataset(
             knowledge_graph_source=kg1,
             knowledge_graph_target=kg2,
             aligned_entities=aligned_entities,
+            attribute_matches=attribute_matches,
         )
 
         logger.info(

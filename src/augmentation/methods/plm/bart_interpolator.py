@@ -263,14 +263,14 @@ class BartInterpolatorPLM:
             and os.path.isdir(self.out_dir)
             and any(f in os.listdir(self.out_dir) for f in ["pytorch_model.bin", "config.json"])
         ):
-            print(f"[BART-PLM] Found fine-tuned model in {self.out_dir}, reusing it.")
+            logger.warning(f"[BART-PLM] Found fine-tuned model in {self.out_dir}, reusing it.")
             tok = BartTokenizer.from_pretrained(self.out_dir)
             mdl = BartForConditionalGeneration.from_pretrained(self.out_dir).to(self.device)
             specials = {'additional_special_tokens': ['<SRC>', '<TGT>', '<SEP>']}
             tok.add_special_tokens(specials)
             mdl.resize_token_embeddings(len(tok))
         else:
-            print(f"[BART-PLM] Initializing from pretrained {self.model_name}.")
+            logger.info(f"[BART-PLM] Initializing from pretrained {self.model_name}.")
             tok = BartTokenizer.from_pretrained(self.model_name)
             mdl = BartForConditionalGeneration.from_pretrained(self.model_name).to(self.device)
             specials = {'additional_special_tokens': ['<SRC>', '<TGT>', '<SEP>']}
@@ -422,7 +422,7 @@ class BartInterpolatorPLM:
             and os.path.isdir(self.out_dir)
             and any(f in os.listdir(self.out_dir) for f in ["pytorch_model.bin", "config.json"])
         ):
-            print(f"[BART-PLM] Skipping fine-tuning — model already exists in {self.out_dir}.")
+            logger.warning(f"[BART-PLM] Skipping fine-tuning — model already exists in {self.out_dir}.")
             return
 
         # Optional: subsample if too large (before advanced preprocessing)
@@ -482,7 +482,7 @@ class BartInterpolatorPLM:
         # ------------------------------------------------------------------
         os.environ["TOKENIZERS_PARALLELISM"] = "false"
         use_num_proc = None if torch.cuda.is_available() else num_proc
-        print(f"[BART-PLM] Tokenizing on {'GPU' if torch.cuda.is_available() else 'CPU'}...")
+        logger.info(f"[BART-PLM] Tokenizing on {'GPU' if torch.cuda.is_available() else 'CPU'}...")
 
         def preprocess(batch):
             model_inputs = self.tokenizer(
@@ -574,7 +574,7 @@ class BartInterpolatorPLM:
             callbacks=callbacks,
         )
 
-        print(f"[BART-PLM] Starting fine-tuning "
+        logger.info(f"[BART-PLM] Starting fine-tuning "
               f"({'with early stopping' if has_eval_strategy else 'without evaluation'})...")
 
         trainer.train()
@@ -584,7 +584,7 @@ class BartInterpolatorPLM:
         # ------------------------------------------------------------------
         self.model.save_pretrained(self.out_dir)
         self.tokenizer.save_pretrained(self.out_dir)
-        print(f"[BART-PLM] Fine-tuned model saved to {self.out_dir}")
+        logger.info(f"[BART-PLM] Fine-tuned model saved to {self.out_dir}")
 
     # ------------------------------------------------------------------
     # Build supervised pairs (self-supervised, denoising auto-encoding)
