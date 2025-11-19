@@ -5,7 +5,9 @@ import re
 from collections import defaultdict
 from dataclasses import dataclass
 from typing import List, Tuple, Iterable, Optional, Dict, Any
+import logging
 
+logger = logging.getLogger(__name__)
 import numpy as np
 import torch
 from torch.nn import functional as F
@@ -165,8 +167,6 @@ class BartInterpolatorPLM:
 
     def _init_advanced_modules(self):
         """Initialize advanced training modules based on configuration."""
-        import logging
-        logger = logging.getLogger(__name__)
 
         # Stratified Sampling
         strat_cfg = self.advanced_config.get("stratified_sampling", {})
