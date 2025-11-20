@@ -13,8 +13,8 @@ from src.core.dataset import Dataset
 from src.core.dataset.writer import DatasetWriter
 from src.core.knowledge_graph.writer import KnowledgeGraphWriterFactory
 from src.logger import get_logger, get_structured_logger
-from src.util.reader import read_tsv
-from src.util.writer import write_tsv
+from src.utils.reader import read_tsv
+from src.utils.writer import write_tsv
 
 DEFAULT_DATASET_NAME = "dataset"
 

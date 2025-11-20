@@ -9,7 +9,7 @@ from src.core.knowledge_graph.writer.knowledge_graph_writer_base import (
     KnowledgeGraphWriter,
 )
 from src.logger import get_logger
-from src.util.writer import write_tsv
+from src.utils.writer import write_tsv
 
 logger = get_logger(__name__)
 
@@ -57,14 +57,14 @@ class BertIntKnowledgeGraphWriter(KnowledgeGraphWriter):
         if kg_number == 2:
             kg1_ent_file = dir_path / "ent_ids_1"
             if kg1_ent_file.exists():
-                from src.util.reader import read_tsv
+                from src.utils.reader import read_tsv
                 kg1_ents = read_tsv(str(kg1_ent_file))
                 ent_idx = len(kg1_ents)
                 logger.debug(f"KG2: starting entity index at {ent_idx} (offset from KG1)")
 
             kg1_rel_file = dir_path / "rel_ids_1"
             if kg1_rel_file.exists():
-                from src.util.reader import read_tsv
+                from src.utils.reader import read_tsv
                 kg1_rels = read_tsv(str(kg1_rel_file))
                 rel_idx = len(kg1_rels)
                 logger.debug(f"KG2: starting relation index at {rel_idx} (offset from KG1)")

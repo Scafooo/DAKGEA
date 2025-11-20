@@ -4,7 +4,7 @@ from typing import Optional
 from src.core.dataset import Dataset
 from src.core.dataset.reader.dataset_reader_base import DatasetReader
 from src.core.knowledge_graph.reader import KnowledgeGraphReaderFactory
-from src.util.reader import read_tsv
+from src.utils.reader import read_tsv
 
 
 class RDFDatasetReader(DatasetReader):

@@ -6,7 +6,7 @@ from typing import Dict, Iterable, Optional, Tuple
 from src.core.knowledge_graph import KnowledgeGraph
 from src.core.knowledge_graph.reader.knowledge_graph_reader_base import KnowledgeGraphReader
 from src.logger import get_logger
-from src.util.reader import read_tsv
+from src.utils.reader import read_tsv
 
 logger = get_logger(__name__)
 

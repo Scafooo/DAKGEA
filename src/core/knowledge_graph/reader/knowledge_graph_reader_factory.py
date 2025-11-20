@@ -3,7 +3,7 @@
 import importlib
 from typing import Any, Type
 
-from src.util.registry import Registry
+from src.utils.registry import Registry
 
 
 class KnowledgeGraphReaderFactory:

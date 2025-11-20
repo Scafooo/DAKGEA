@@ -5,8 +5,8 @@ from rdflib import Literal, URIRef
 from src.core.knowledge_graph import KnowledgeGraph
 from src.core.knowledge_graph.writer.knowledge_graph_writer_base import KnowledgeGraphWriter
 from src.logger import get_logger
-from src.util.reader import read_tsv
-from src.util.writer import write_tsv
+from src.utils.reader import read_tsv
+from src.utils.writer import write_tsv
 
 logger = get_logger(__name__)
 

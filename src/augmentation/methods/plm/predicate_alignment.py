@@ -14,7 +14,7 @@ from rdflib import Literal, URIRef
 
 from src.core.dataset import Dataset
 from src.logger import get_logger
-from src.util.reader import read_tsv
+from src.utils.reader import read_tsv
 from .predicate_matcher import PredicateMatcher, PredicateMatch
 
 logger = get_logger(__name__)

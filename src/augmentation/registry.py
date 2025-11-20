@@ -3,7 +3,7 @@
 import importlib
 from typing import Iterable
 
-from src.util.registry import Registry
+from src.utils.registry import Registry
 
 AUGMENTATION_REGISTRY: Registry[type] = Registry("Augmentation")
 

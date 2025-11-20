@@ -3,7 +3,7 @@
 import importlib
 from typing import Dict
 
-from src.util.registry import Registry
+from src.utils.registry import Registry
 
 MODEL_REGISTRY: Registry[type] = Registry("Alignment model")
 

@@ -11,8 +11,8 @@ from src.core.dataset.dataset import Dataset
 from src.core.dataset.writer.dataset_writer_base import DatasetWriter
 from src.core.knowledge_graph.writer import KnowledgeGraphWriterFactory
 from src.logger import get_logger
-from src.util.reader import read_tsv
-from src.util.writer import write_tsv
+from src.utils.reader import read_tsv
+from src.utils.writer import write_tsv
 
 logger = get_logger(__name__)
 
