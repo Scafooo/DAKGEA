@@ -433,9 +433,17 @@ class GraphExpansionService:
         """Log expansion summary."""
         budget_display = pair_budget if pair_budget is not None else "unbounded"
         logger.info(
-            f"[GraphExpansion] Expanded {expanded_pairs}/{budget_display} pairs "
+            f"[GraphExpansion] Expanded {expanded_pairs}/{budget_display} set node pairs "
             f"(max_depth={self.max_depth})"
         )
+
+        # Log non-set node statistics
+        non_set_count = getattr(self, '_non_set_aug_counter', 0)
+        if non_set_count > 0:
+            logger.info(
+                f"[GraphExpansion] Expanded {non_set_count} non-set nodes "
+                f"(self-interpolation)"
+            )
 
         if expansion_chain:
             chain_repr = " -> ".join(expansion_chain[:10])
@@ -537,6 +545,12 @@ class GraphExpansionService:
         else:
             tgt_aug = None
 
+        # Statistics tracking
+        src_generated_count = 0
+        src_failed_count = 0
+        tgt_generated_count = 0
+        tgt_failed_count = 0
+
         # Expand attributes from source graph
         if in_source and src_aug:
             literals = list(dataset.knowledge_graph_source.predicate_objects(non_set_node))
@@ -550,12 +564,16 @@ class GraphExpansionService:
                         )
                         if generated:
                             dataset.knowledge_graph_source.add((src_aug, predicate, Literal(generated)))
+                            src_generated_count += 1
                             logger.debug(
-                                f"[GraphExpansion] [src] non-set {predicate}: '{val[:30]}' → '{generated[:30]}'"
+                                f"    [src] non-set {predicate}: '{val[:30]}' → '{generated[:30]}'"
                             )
+                        else:
+                            src_failed_count += 1
                     except Exception as e:
-                        logger.warning(
-                            f"[GraphExpansion] [src] Failed to generate for {predicate}: {e}"
+                        src_failed_count += 1
+                        logger.debug(
+                            f"    [src] ✗ Failed to generate for {predicate}: {e}"
                         )
 
         # Expand attributes from target graph
@@ -571,13 +589,29 @@ class GraphExpansionService:
                         )
                         if generated:
                             dataset.knowledge_graph_target.add((tgt_aug, predicate, Literal(generated)))
+                            tgt_generated_count += 1
                             logger.debug(
-                                f"[GraphExpansion] [tgt] non-set {predicate}: '{val[:30]}' → '{generated[:30]}'"
+                                f"    [tgt] non-set {predicate}: '{val[:30]}' → '{generated[:30]}'"
                             )
+                        else:
+                            tgt_failed_count += 1
                     except Exception as e:
-                        logger.warning(
-                            f"[GraphExpansion] [tgt] Failed to generate for {predicate}: {e}"
+                        tgt_failed_count += 1
+                        logger.debug(
+                            f"    [tgt] ✗ Failed to generate for {predicate}: {e}"
                         )
+
+        # Log recap for non-set node
+        total_generated = src_generated_count + tgt_generated_count
+        total_failed = src_failed_count + tgt_failed_count
+
+        if total_generated > 0 or total_failed > 0:
+            logger.info("  📊 RECAP for non-set node:")
+            if in_source and src_aug:
+                logger.info(f"    • Source: {src_generated_count} attributes generated, {src_failed_count} failed")
+            if in_target and tgt_aug:
+                logger.info(f"    • Target: {tgt_generated_count} attributes generated, {tgt_failed_count} failed")
+            logger.info(f"    • Total: {total_generated} self-interpolated attributes")
 
         return src_aug, tgt_aug
 
