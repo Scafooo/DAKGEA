@@ -208,7 +208,8 @@ class ReductionStage(_WriterStage):
         reduction_paths = reduction_meta.setdefault("paths", {})
         reduction_meta["summary"] = str((reduction_root / "summary.json").resolve())
 
-        if not self.overwrite_existing and self._has_cached(reader_root):
+        # Check if we can resume from cache
+        if self.resume and self._has_cached(reader_root):
             logger.info(
                 "⏭️  Skipping reduction — cached artefacts detected (ratio=%s)", ratio_tag
             )
@@ -300,7 +301,7 @@ class AugmentationStage(_WriterStage):
         augmentation_meta["summary"] = str((stage_root / "summary.json").resolve())
         augmentation_paths = augmentation_meta.setdefault("paths", {})
 
-        if not self.overwrite_existing and self._has_cached(reader_root):
+        if self.resume and self._has_cached(reader_root):
             logger.info(
                 "⏭️  Skipping augmentation '%s' — cached artefacts detected (ratio=%s)",
                 augmentation_name,
@@ -409,7 +410,7 @@ class EvaluationStage:
         # Collect all model results
         all_results = {}
         for model_name in self.models:
-            if not self.overwrite_existing and out_file.exists():
+            if self.resume and out_file.exists():
                 logger.info(
                     "⏭️  Skipping model '%s' (%s) — results already cached",
                     model_name,
