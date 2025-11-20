@@ -46,12 +46,12 @@ augmentation:
     generation:
       max_new_tokens: 32          # Max tokens to generate
       do_sample: true             # Enable sampling
-      top_k: 60                   # Top-k sampling
-      top_p: 0.95                 # Nucleus sampling threshold
-      temperature: 1.9            # Sampling temperature
-      num_beams: 2                # Number of beams (1 = no beam search)
-      repetition_penalty: 1.7     # Penalize repetitions
-      length_penalty: 1.5         # Length penalty
+      top_k: 0                    # Top-k sampling (0 = disabled, use top_p)
+      top_p: 0.80                 # Nucleus sampling threshold (92% probability mass)
+      temperature: 1.2            # Sampling temperature (creative but coherent)
+      num_beams: 10                # Number of beams (higher = better quality/coherence)
+      repetition_penalty: 1.6     # Penalize repetitions
+      length_penalty: 1.0         # Length penalty (neutral)
       no_repeat_ngram_size: 4     # Prevent n-gram repetition
 
     # Semantic predicate matching configuration

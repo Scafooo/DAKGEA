@@ -49,19 +49,17 @@ augmenter = PLMAugmenter({
             "base_alpha": 0.35,       # Base interpolation weight [0.0-1.0]
             "alpha_spread": 0.15,     # Variation range for adaptive alpha
 
-            # Generation parameters (TUNE THESE for better quality)
+            # Generation parameters (ORIGINAL values - worked better)
             "generation": {
-                "max_new_tokens": 32,          # Max tokens to generate
-                "do_sample": True,             # Enable sampling (False = greedy)
-                "top_k": 50,                   # Top-k sampling (0 = disabled)
-                "top_p": 0.95,                 # Nucleus sampling [0.0-1.0]
-                "temperature": 2.0,            # Sampling temperature [0.1-2.0]
-                                               # Lower = more conservative/repetitive
-                                               # Higher = more creative/diverse
-                "num_beams": 2,                # Beam search (1 = no beam search)
-                "repetition_penalty": 1.7,     # Penalize repetitions [1.0-3.0]
-                "length_penalty": 1.5,         # Length preference [0.0-2.0]
-                "no_repeat_ngram_size": 4,     # Prevent n-gram repetition
+                "max_new_tokens": 32,
+                "do_sample": True,
+                "top_k": 50,
+                "top_p": 0.95,
+                "temperature": 2.0,
+                "num_beams": 2,
+                "repetition_penalty": 1.7,
+                "length_penalty": 1.5,
+                "no_repeat_ngram_size": 4,
             },
 
             # Semantic predicate matching configuration
