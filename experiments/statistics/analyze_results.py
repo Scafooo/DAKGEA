@@ -19,6 +19,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.config.loader import PROJECT_ROOT, load_yaml
+from experiments.statistics.config import get_statistics_config
 from experiments.statistics.exporters import (
     write_dataset_summary_csv,
     write_dataset_summary_markdown,
@@ -38,29 +39,18 @@ from experiments.statistics.visualizations import (
     plot_delta_chart,
 )
 
-RESULTS_FILENAME = "results.json"
-SUMMARY_FILENAME = "summary.json"
-METADATA_FILENAME = "metadata.json"
-STAGES = ("reduction", "augmentation")
-DEFAULT_METRICS = [
-    "hits@1", "hits@5", "hits@10", "hits@25", "hits@50",
-    "mrr", "mr",
-    "precision", "recall", "f-measure"
-]
-PLOT_METRICS = ["hits@1", "hits@10"]
-METRIC_COLORS = {
-    "hits@1": "#1f77b4",
-    "hits@5": "#ff7f0e",
-    "hits@10": "#2ca02c",
-    "hits@25": "#d62728",
-    "hits@50": "#9467bd",
-    "mrr": "#8c564b",
-    "mr": "#e377c2",
-    "precision": "#17becf",
-    "recall": "#bcbd22",
-    "f-measure": "#7f7f7f",
-}
-DEFAULT_DPI = 200
+# Load configuration
+stats_config = get_statistics_config()
+
+# Configuration constants (loaded from YAML)
+RESULTS_FILENAME = stats_config.results_filename
+SUMMARY_FILENAME = stats_config.summary_filename
+METADATA_FILENAME = stats_config.metadata_filename
+STAGES = tuple(stats_config.stages)
+DEFAULT_METRICS = stats_config.default_metrics
+PLOT_METRICS = stats_config.plot_metrics
+METRIC_COLORS = stats_config.metric_colors
+DEFAULT_DPI = stats_config.default_dpi
 PLOT_DPI = DEFAULT_DPI
 
 
@@ -86,8 +76,8 @@ def _sanitize_metric(metric: str, value) -> float | None:
         value = float(value)
     except (TypeError, ValueError):
         return None
-    # Clamp metrics that should be in [0, 1] range
-    normalized_metrics = {"hits@1", "hits@5", "hits@10", "hits@25", "hits@50", "mrr", "precision", "recall", "f-measure"}
+    # Clamp metrics that should be in [0, 1] range (from configuration)
+    normalized_metrics = set(stats_config.normalized_metrics)
     if metric.lower() in normalized_metrics:
         return max(0.0, min(1.0, value))
     return value
@@ -185,7 +175,7 @@ def discover_experiments(candidate_paths: Iterable[str], results_root: Path) -> 
     root = results_root
     if not root.exists():
         raise FileNotFoundError("No experiment directories found and no explicit paths provided.")
-    skip = {"logs", "statistics"}
+    skip = set(stats_config.skip_directories)
     return sorted(
         p.resolve()
         for p in root.iterdir()
@@ -354,8 +344,13 @@ def plot_dataset(
     if len(values) < 2:
         return
     ensure_dir(plots_dir)
-    plt.figure(figsize=(5, 4))
-    bars = plt.bar(labels, values, color=["#457b9d", "#e76f51"])
+    fig_size = stats_config.figure_size_default
+    plt.figure(figsize=(fig_size[0], fig_size[1]))
+    bars = plt.bar(
+        labels,
+        values,
+        color=[stats_config.bar_color_reduction, stats_config.bar_color_augmentation]
+    )
     for bar, value in zip(bars, values):
         plt.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), f"{value:.3f}", ha="center", va="bottom")
     plt.title(f"{dataset} – {metric}")
@@ -689,9 +684,16 @@ def main() -> None:
     logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(message)s")
     logger = logging.getLogger("experiments.statistics")
 
+    # Use statistics config for defaults, fall back to global config
     global_cfg = load_global_config()
-    default_plots_dir = (PROJECT_ROOT / global_cfg.get("paths", {}).get("statistics", "results_analysis")).resolve()
-    default_results_dir = (PROJECT_ROOT / global_cfg.get("paths", {}).get("results", "results")).resolve()
+    default_plots_dir = (
+        PROJECT_ROOT /
+        global_cfg.get("paths", {}).get("statistics", stats_config.plots_output_dir)
+    ).resolve()
+    default_results_dir = (
+        PROJECT_ROOT /
+        global_cfg.get("paths", {}).get("results", "results")
+    ).resolve()
     args = parse_args(default_plots_dir, default_results_dir)
     global PLOT_DPI
     PLOT_DPI = args.dpi
