@@ -58,9 +58,9 @@ augmenter = PLMAugmenter({
                 "temperature": 1.1,            # Sampling temperature [0.1-2.0]
                                                # Lower = more conservative/repetitive
                                                # Higher = more creative/diverse
-                "num_beams": 1,                # Beam search (1 = no beam search)
+                "num_beams": 3,                # Beam search (1 = no beam search)
                 "repetition_penalty": 2.0,     # Penalize repetitions [1.0-3.0]
-                "length_penalty": 1.0,         # Length preference [0.0-2.0]
+                "length_penalty": 1.5,         # Length preference [0.0-2.0]
                 "no_repeat_ngram_size": 4,     # Prevent n-gram repetition
             },
 

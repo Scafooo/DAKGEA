@@ -812,6 +812,12 @@ class PLMAugmenter(AugmentationMethod):
         else:
             tgt_aug = None
 
+        # Statistics tracking
+        src_generated_count = 0
+        src_failed_count = 0
+        tgt_generated_count = 0
+        tgt_failed_count = 0
+
         # Expand attributes from source graph
         if in_source and src_aug:
             literals = list(dataset.knowledge_graph_source.predicate_objects(non_set_node))
@@ -825,10 +831,14 @@ class PLMAugmenter(AugmentationMethod):
                         )
                         if generated:
                             dataset.knowledge_graph_source.add((src_aug, predicate, Literal(generated)))
+                            src_generated_count += 1
                             self.logger.debug("    [src] non-set %s: '%s' → '%s'",
                                             predicate, val[:30], generated[:30])
+                        else:
+                            src_failed_count += 1
                     except Exception as e:
-                        self.logger.warning("    [src] ✗ Failed to generate for %s: %s", predicate, e)
+                        src_failed_count += 1
+                        self.logger.debug("    [src] ✗ Failed to generate for %s: %s", predicate, e)
 
         # Expand attributes from target graph
         if in_target and tgt_aug:
@@ -843,10 +853,28 @@ class PLMAugmenter(AugmentationMethod):
                         )
                         if generated:
                             dataset.knowledge_graph_target.add((tgt_aug, predicate, Literal(generated)))
+                            tgt_generated_count += 1
                             self.logger.debug("    [tgt] non-set %s: '%s' → '%s'",
                                             predicate, val[:30], generated[:30])
+                        else:
+                            tgt_failed_count += 1
                     except Exception as e:
-                        self.logger.warning("    [tgt] ✗ Failed to generate for %s: %s", predicate, e)
+                        tgt_failed_count += 1
+                        self.logger.debug("    [tgt] ✗ Failed to generate for %s: %s", predicate, e)
+
+        # Log recap for non-set node
+        total_generated = src_generated_count + tgt_generated_count
+        total_failed = src_failed_count + tgt_failed_count
+
+        if total_generated > 0 or total_failed > 0:
+            self.logger.info("  📊 RECAP for non-set node:")
+            if in_source and src_aug:
+                self.logger.info("    • Source: %d attributes generated, %d failed",
+                               src_generated_count, src_failed_count)
+            if in_target and tgt_aug:
+                self.logger.info("    • Target: %d attributes generated, %d failed",
+                               tgt_generated_count, tgt_failed_count)
+            self.logger.info("    • Total: %d self-interpolated attributes", total_generated)
 
         return src_aug, tgt_aug
 
@@ -1045,11 +1073,19 @@ class PLMAugmenter(AugmentationMethod):
         """Log expansion summary."""
         budget_display = pair_budget if pair_budget is not None else "unbounded"
         self.logger.info(
-            "[PLM] Expanded %d/%s set nodes (max_depth=%d)",
+            "[PLM] Expanded %d/%s set node pairs (max_depth=%d)",
             expanded_pairs,
             budget_display,
             self.max_depth,
         )
+
+        # Log non-set node statistics
+        non_set_count = getattr(self, '_non_set_aug_counter', 0)
+        if non_set_count > 0:
+            self.logger.info(
+                "[PLM] Expanded %d non-set nodes (self-interpolation)",
+                non_set_count
+            )
 
         if expansion_chain:
             chain_repr = " -> ".join(expansion_chain[:10])
