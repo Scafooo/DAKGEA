@@ -261,6 +261,7 @@ class PLMAugmenter(AugmentationMethod):
             alignment_cache,  # Pass the cache
             advanced_training_config=self.bart_advanced_training_config,
             bart_config=self.bart_cfg,  # Pass full BART config for unmatched generation
+            value_consistency_config=self.cfg.get("value_consistency", {}),
         )
 
         # ------------------------------------------------------------------
@@ -379,6 +380,25 @@ class PLMAugmenter(AugmentationMethod):
         # Track mapping from non_set_node to its augmented entities
         non_set_to_augmented: dict[URIRef, tuple[URIRef, URIRef]] = {}
 
+        # Inter-node value consistency cache management
+        global_cache = None
+        cluster_cache = None
+
+        if self.node_expander.inter_node_consistency_enabled:
+            scope = self.node_expander.inter_node_scope
+
+            if scope == "global":
+                # Create global cache once for entire augmentation
+                global_cache = {}
+                self.node_expander.set_inter_node_cache(global_cache)
+                self.logger.debug("[VALUE_CONSISTENCY] Using global inter-node cache")
+            elif scope == "expansion_cluster":
+                # Cache will be created per BFS cluster (per seed)
+                self.logger.debug("[VALUE_CONSISTENCY] Using expansion_cluster inter-node cache")
+            elif scope == "alignment_pair":
+                # Cache will be created per alignment pair (per set_node)
+                self.logger.debug("[VALUE_CONSISTENCY] Using alignment_pair inter-node cache")
+
         while (queue or remaining_seeds) and (pair_budget is None or expanded_pairs < pair_budget):
             # Refill queue from remaining seeds if empty
             if not queue:
@@ -388,6 +408,13 @@ class PLMAugmenter(AugmentationMethod):
                     break
                 next_seed = remaining_seeds.popleft()
                 queue.append(ExpansionNode(uri=next_seed, depth=0, node_type="set"))
+
+                # New cluster starting - create cluster-level cache if needed
+                if self.node_expander.inter_node_consistency_enabled:
+                    if self.node_expander.inter_node_scope == "expansion_cluster":
+                        cluster_cache = {}
+                        self.node_expander.set_inter_node_cache(cluster_cache)
+                        self.logger.debug("[VALUE_CONSISTENCY] Created new cluster cache for seed %s", next_seed)
 
             # Process next node in queue
             exp_node = queue.popleft()
@@ -400,10 +427,23 @@ class PLMAugmenter(AugmentationMethod):
 
             # Expand the node
             if exp_node.is_set_node:
+                # Create alignment_pair cache if needed
+                if self.node_expander.inter_node_consistency_enabled:
+                    if self.node_expander.inter_node_scope == "alignment_pair":
+                        pair_cache = {}
+                        self.node_expander.set_inter_node_cache(pair_cache)
+                        self.logger.debug("[VALUE_CONSISTENCY] Created new pair cache for set_node %s", exp_node.uri)
+
                 self._expand_set_node_with_neighbors(
                     dataset, set_graph, exp_node, queue, visited, set_node_to_augmented, non_set_to_augmented
                 )
                 expanded_pairs += 1
+
+                # Clear alignment_pair cache after processing
+                if self.node_expander.inter_node_consistency_enabled:
+                    if self.node_expander.inter_node_scope == "alignment_pair":
+                        self.node_expander.clear_inter_node_cache()
+                        self.logger.debug("[VALUE_CONSISTENCY] Cleared pair cache for set_node %s", exp_node.uri)
             else:
                 # Non-set node: process its neighbors
                 self._expand_non_set_node_with_neighbors(

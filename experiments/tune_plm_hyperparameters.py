@@ -54,28 +54,38 @@ class HyperparameterEvaluator:
         pairs = []
 
         # Get aligned entity pairs
-        alignment_pairs = list(self.dataset.aligned_entities)[:100]
+        alignment_pairs = list(self.dataset.aligned_entities)[:200]  # More entities for better coverage
 
         for src_entity, tgt_entity in alignment_pairs:
-            # Get literals from source
-            src_triples = list(self.dataset.knowledge_graph_source.triples((src_entity, None, None)))
-
-            for s, p, o in src_triples:
+            # Get all literals from source
+            src_literals = []
+            for s, p, o in self.dataset.knowledge_graph_source.triples((src_entity, None, None)):
                 if isinstance(o, Literal):
-                    src_val = str(o).strip()
+                    val = str(o).strip()
+                    if 3 <= len(val) <= 200:  # Filter early
+                        src_literals.append((val, str(p)))
 
-                    # Find corresponding value in target
-                    tgt_triples = list(self.dataset.knowledge_graph_target.triples((tgt_entity, p, None)))
-                    for _, _, o_tgt in tgt_triples:
-                        if isinstance(o_tgt, Literal):
-                            tgt_val = str(o_tgt).strip()
+            # Get all literals from target
+            tgt_literals = []
+            for s, p, o in self.dataset.knowledge_graph_target.triples((tgt_entity, None, None)):
+                if isinstance(o, Literal):
+                    val = str(o).strip()
+                    if 3 <= len(val) <= 200:  # Filter early
+                        tgt_literals.append((val, str(p)))
 
-                            # Filter out very short or very long values
-                            if 3 <= len(src_val) <= 200 and 3 <= len(tgt_val) <= 200:
-                                pairs.append((src_val, tgt_val, str(p)))
+            # Create pairs (cartesian product limited)
+            # This gives us pairs even if predicates don't match
+            if src_literals and tgt_literals:
+                # Sample up to 3 pairs per entity pair
+                for i, (src_val, src_p) in enumerate(src_literals[:3]):
+                    if i < len(tgt_literals):
+                        tgt_val, tgt_p = tgt_literals[i]
+                        # Use a generic predicate name since they don't match
+                        predicate = "attribute"
+                        pairs.append((src_val, tgt_val, predicate))
 
-                            if len(pairs) >= self.sample_size:
-                                return pairs
+                        if len(pairs) >= self.sample_size:
+                            return pairs
 
         return pairs
 

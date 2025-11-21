@@ -27,6 +27,7 @@ class NodeExpander:
         predicate_alignment_cache=None,  # Pre-computed alignment cache
         advanced_training_config: Optional[dict] = None,  # Advanced training config
         bart_config: Optional[dict] = None,  # Full BART config for unmatched generation
+        value_consistency_config: Optional[dict] = None,  # Value consistency configuration
     ):
         """Initialize the node expander.
 
@@ -38,6 +39,7 @@ class NodeExpander:
             predicate_alignment_cache: Pre-computed PredicateAlignmentCache (optional)
             advanced_training_config: Advanced training configuration
             bart_config: Full BART configuration (for unmatched attributes generation)
+            value_consistency_config: Value consistency configuration
         """
         self.derived_predicate = derived_predicate
         self.add_derived_predicate = add_derived_predicate
@@ -58,6 +60,32 @@ class NodeExpander:
         bart_cfg = bart_config or {}
         self.generate_unmatched = bart_cfg.get("generate_unmatched", False)
         self.unmatched_sample_rate = float(bart_cfg.get("unmatched_sample_rate", 0.5))
+
+        # Value consistency configuration
+        self.value_consistency_config = value_consistency_config or {}
+        intra_node_cfg = self.value_consistency_config.get("intra_node", {})
+        self.intra_node_consistency_enabled = intra_node_cfg.get("enabled", False)
+        self.consistency_selection = intra_node_cfg.get("selection", "first")
+
+        inter_node_cfg = self.value_consistency_config.get("inter_node", {})
+        self.inter_node_consistency_enabled = inter_node_cfg.get("enabled", False)
+        self.inter_node_scope = inter_node_cfg.get("scope", "alignment_pair")
+
+        # Inter-node cache (will be set externally per scope)
+        self.inter_node_cache = None
+
+    def set_inter_node_cache(self, cache: dict):
+        """Set the inter-node value cache for the current scope.
+
+        Args:
+            cache: Dictionary mapping original values to augmented values
+        """
+        self.inter_node_cache = cache
+
+    def clear_inter_node_cache(self):
+        """Clear the inter-node cache (e.g., when changing scope)."""
+        if self.inter_node_cache is not None:
+            self.inter_node_cache.clear()
 
     def expand_set_node(
         self,
@@ -154,6 +182,21 @@ class NodeExpander:
             dataset.knowledge_graph_target, tgt_component
         )
 
+        # Value consistency cache: maps original value -> augmented value
+        # Intra-node: local cache for this node only
+        # Inter-node: shared cache across nodes (if enabled)
+        if self.intra_node_consistency_enabled:
+            # Start with inter-node cache if available, otherwise empty
+            if self.inter_node_consistency_enabled and self.inter_node_cache is not None:
+                # Use inter-node cache as base (shared across nodes)
+                value_cache = self.inter_node_cache
+                logger.debug("    • Using inter-node value cache (scope: %s)", self.inter_node_scope)
+            else:
+                # Local cache only (intra-node)
+                value_cache = {}
+        else:
+            value_cache = None
+
         # Log attributes of original entities
         src_preview = ", ".join(list(src_literals.keys())[:3]) + ("..." if len(src_literals) > 3 else "")
         tgt_preview = ", ".join(list(tgt_literals.keys())[:3]) + ("..." if len(tgt_literals) > 3 else "")
@@ -235,14 +278,55 @@ class NodeExpander:
             if not src_val or not tgt_val:
                 continue
 
-            # Interpolate using BART
-            try:
+            # Check value consistency cache
+            src_val_str = str(src_val)
+            tgt_val_str = str(tgt_val)
+
+            if self.intra_node_consistency_enabled and value_cache is not None:
+                # Check if we already generated a variation for these values
+                if src_val_str in value_cache:
+                    aug_src_val = value_cache[src_val_str]
+                    logger.debug("      └─ Reusing cached variation for src: '%s' → '%s'", src_val_str[:30], aug_src_val[:30])
+                else:
+                    aug_src_val = None
+
+                if tgt_val_str in value_cache:
+                    aug_tgt_val = value_cache[tgt_val_str]
+                    logger.debug("      └─ Reusing cached variation for tgt: '%s' → '%s'", tgt_val_str[:30], aug_tgt_val[:30])
+                else:
+                    aug_tgt_val = None
+
+                # If both are cached, use them; otherwise generate
+                if aug_src_val is not None and aug_tgt_val is not None:
+                    # Both cached - use them
+                    pass
+                elif aug_src_val is None and aug_tgt_val is None:
+                    # Neither cached - generate new and cache
+                    aug_src_val, aug_tgt_val = self.bart_interpolator.interpolate_pair(
+                        src_val_str, tgt_val_str, predicate=match.src_predicate
+                    )
+                    value_cache[src_val_str] = aug_src_val
+                    value_cache[tgt_val_str] = aug_tgt_val
+                else:
+                    # One cached, one not - generate both but prefer consistency
+                    # For "first" strategy: if one exists, generate the other to match context
+                    aug_src_val_new, aug_tgt_val_new = self.bart_interpolator.interpolate_pair(
+                        src_val_str, tgt_val_str, predicate=match.src_predicate
+                    )
+                    if aug_src_val is None:
+                        aug_src_val = aug_src_val_new
+                        value_cache[src_val_str] = aug_src_val
+                    if aug_tgt_val is None:
+                        aug_tgt_val = aug_tgt_val_new
+                        value_cache[tgt_val_str] = aug_tgt_val
+            else:
+                # No consistency - generate normally
                 aug_src_val, aug_tgt_val = self.bart_interpolator.interpolate_pair(
-                    str(src_val),
-                    str(tgt_val),
-                    predicate=match.src_predicate,
+                    src_val_str, tgt_val_str, predicate=match.src_predicate
                 )
 
+            # Interpolate using BART
+            try:
                 # Add interpolated literals to augmented entities
                 dataset.knowledge_graph_source.add(
                     (src_aug, src_pred, Literal(aug_src_val))

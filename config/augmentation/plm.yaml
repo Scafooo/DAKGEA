@@ -17,6 +17,15 @@ augmentation:
   add_derived_predicate: false    # Add derivedFrom triples for lineage tracking
   derived_predicate: "http://dakgea.org/augmentation/derivedFrom"
 
+  # Value consistency - ensures consistent variations for duplicate values
+  value_consistency:
+    intra_node:
+      enabled: true               # Maintain consistency within same augmented node
+      selection: "first"          # "first" | "random" | "best" - which variation to use
+    inter_node:
+      enabled: true               # Maintain consistency across augmented nodes
+      scope: "alignment_pair"     # "alignment_pair" | "expansion_cluster" | "global"
+
   # BART fine-tuning configuration
   bart:
     enable_finetuning: true       # Enable BART fine-tuning
@@ -37,8 +46,8 @@ augmentation:
     max_grad_norm: 1.0            # Gradient clipping threshold
 
     # BART interpolation parameters
-    base_alpha: 0.35              # Base interpolation alpha
-    alpha_spread: 0.25            # Alpha variation range
+    base_alpha: 0.5              # Base interpolation alpha
+    alpha_spread: 0.09            # Alpha variation range
     max_len_in: 96                # Max input token length
     max_len_out: 48               # Max output token length
 
