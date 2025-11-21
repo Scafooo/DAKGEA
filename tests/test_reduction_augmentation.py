@@ -33,6 +33,7 @@ augmenter = PLMAugmenter({
     "augmentation": {
         "ratio": 0.5,
         "max_depth": 2,
+        # Note: value_consistency config is loaded from config/augmentation/plm.yaml
         "bart": {
             "enable_finetuning": True,
             "force_retrain": False,  # Riutilizza modello esistente
@@ -45,20 +46,20 @@ augmenter = PLMAugmenter({
             "warmup_steps": 50,              # LR warmup (reduced for test)
             "max_grad_norm": 1.0,            # Gradient clipping
 
-            # BART interpolation parameters (for tuning)
-            "base_alpha": 0.35,       # Base interpolation weight [0.0-1.0]
-            "alpha_spread": 0.15,     # Variation range for adaptive alpha
+            # BART interpolation parameters (HIGH CREATIVITY + COHERENT ALIGNMENT)
+            "base_alpha": 0.5,        # Base interpolation weight (balanced = aligned values stay similar)
+            "alpha_spread": 0.25,     # HIGH variation range (more creative, different from input)
 
-            # Generation parameters (ORIGINAL values - worked better)
+            # Generation parameters (OPTIMIZED for creativity + coherence)
             "generation": {
                 "max_new_tokens": 32,
                 "do_sample": True,
-                "top_k": 50,
-                "top_p": 0.95,
-                "temperature": 1.9,
-                "num_beams": 7,
+                "top_k": 0,              # Disabled (use top_p instead)
+                "top_p": 0.90,           # More diversity
+                "temperature": 1.5,      # High creativity
+                "num_beams": 5,          # Balance quality/creativity
                 "repetition_penalty": 1.7,
-                "length_penalty": 1.5,
+                "length_penalty": 1.0,   # Neutral
                 "no_repeat_ngram_size": 4,
             },
 

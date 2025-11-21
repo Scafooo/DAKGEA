@@ -17,6 +17,7 @@ from rdflib import Literal, URIRef
 
 from src.augmentation.base import AugmentationMethod
 from src.augmentation.registry import AUGMENTATION_REGISTRY
+from src.config.loader import PROJECT_ROOT
 from src.core.dataset import Dataset
 
 from .bart_interpolator import BartInterpolatorPLM
@@ -57,7 +58,7 @@ class PLMAugmenter(AugmentationMethod):
         Returns:
             Default configuration dictionary
         """
-        config_path = Path(PLMAugmenter._DEFAULT_CONFIG_PATH)
+        config_path = PROJECT_ROOT / PLMAugmenter._DEFAULT_CONFIG_PATH
 
         if config_path.exists():
             try:
@@ -96,6 +97,7 @@ class PLMAugmenter(AugmentationMethod):
     def __init__(self, config: Optional[dict] = None):
         # Load default config and merge with provided config
         default_cfg = self._load_default_config()
+
         if config:
             merged_cfg = self._merge_configs(default_cfg, config)
         else:
@@ -142,6 +144,9 @@ class PLMAugmenter(AugmentationMethod):
         self.derived_predicate = (
             URIRef(derived_predicate) if derived_predicate else self._DEFAULT_DERIVED_PREDICATE
         )
+
+        # Store augmentation config for later use
+        self.augmentation_cfg = augmentation_cfg
 
         # BART fine-tuning parameters
         bart_cfg = augmentation_cfg.get("bart", {})
@@ -261,7 +266,7 @@ class PLMAugmenter(AugmentationMethod):
             alignment_cache,  # Pass the cache
             advanced_training_config=self.bart_advanced_training_config,
             bart_config=self.bart_cfg,  # Pass full BART config for unmatched generation
-            value_consistency_config=self.cfg.get("value_consistency", {}),
+            value_consistency_config=self.augmentation_cfg.get("value_consistency", {}),
         )
 
         # ------------------------------------------------------------------

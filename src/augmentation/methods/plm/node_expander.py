@@ -71,6 +71,11 @@ class NodeExpander:
         self.inter_node_consistency_enabled = inter_node_cfg.get("enabled", False)
         self.inter_node_scope = inter_node_cfg.get("scope", "alignment_pair")
 
+        # Log value consistency configuration
+        logger.info(f"[VALUE_CONSISTENCY] Configuration loaded:")
+        logger.info(f"  • Intra-node: enabled={self.intra_node_consistency_enabled}, selection={self.consistency_selection}")
+        logger.info(f"  • Inter-node: enabled={self.inter_node_consistency_enabled}, scope={self.inter_node_scope}")
+
         # Inter-node cache (will be set externally per scope)
         self.inter_node_cache = None
 

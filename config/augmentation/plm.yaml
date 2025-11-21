@@ -46,8 +46,8 @@ augmentation:
     max_grad_norm: 1.0            # Gradient clipping threshold
 
     # BART interpolation parameters
-    base_alpha: 0.5              # Base interpolation alpha
-    alpha_spread: 0.09            # Alpha variation range
+    base_alpha: 0.5              # Base interpolation alpha (0.5 = balanced mixing)
+    alpha_spread: 0.25            # Alpha variation range (HIGH = more creative variations)
     max_len_in: 96                # Max input token length
     max_len_out: 48               # Max output token length
 
@@ -56,10 +56,10 @@ augmentation:
       max_new_tokens: 32          # Max tokens to generate
       do_sample: true             # Enable sampling
       top_k: 0                    # Top-k sampling (0 = disabled, use top_p)
-      top_p: 0.80                 # Nucleus sampling threshold (92% probability mass)
-      temperature: 1.2            # Sampling temperature (creative but coherent)
-      num_beams: 10                # Number of beams (higher = better quality/coherence)
-      repetition_penalty: 1.6     # Penalize repetitions
+      top_p: 0.90                 # Nucleus sampling threshold (higher = more diverse)
+      temperature: 1.5            # Sampling temperature (HIGHER = very creative)
+      num_beams: 5                # Number of beams (balance creativity/quality)
+      repetition_penalty: 1.7     # Penalize repetitions (prevent boring outputs)
       length_penalty: 1.0         # Length penalty (neutral)
       no_repeat_ngram_size: 4     # Prevent n-gram repetition
 
