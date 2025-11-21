@@ -492,8 +492,151 @@ class TrainingAugmenter:
         self.augmentation_ratio = augmentation_ratio
 
     def augment(self, examples: List[PairExample]) -> List[PairExample]:
-        """Generate augmented examples."""
-        # TODO: Implement when needed
-        # For now, return original examples
-        logger.info("[TrainingAugmenter] Not yet implemented - returning original examples")
-        return examples
+        """Generate augmented examples with character-level noise.
+
+        Returns:
+            Original examples + augmented examples
+        """
+        if not any([self.synonym_replacement, self.back_translation, self.random_noise]):
+            # No augmentation enabled
+            return examples
+
+        augmented = []
+        num_to_augment = int(len(examples) * self.augmentation_ratio)
+
+        if num_to_augment == 0:
+            return examples
+
+        # Sample examples to augment
+        import random
+        examples_to_augment = random.sample(examples, min(num_to_augment, len(examples)))
+
+        for example in examples_to_augment:
+            if self.random_noise:
+                # Apply character-level noise
+                aug_src = self._add_character_noise(example.val_src)
+                aug_tgt = self._add_character_noise(example.val_tgt)
+
+                augmented.append(PairExample(
+                    val_src=aug_src,
+                    val_tgt=aug_tgt,
+                    predicate=example.predicate,
+                    predicate_type=example.predicate_type,
+                    difficulty=example.difficulty
+                ))
+
+        if augmented:
+            logger.info(f"[TrainingAugmenter] Generated {len(augmented)} augmented examples with character noise")
+
+        return examples + augmented
+
+    def _add_character_noise(self, text: str, noise_prob: float = 0.1) -> str:
+        """Add character-level noise to text.
+
+        Args:
+            text: Input text
+            noise_prob: Probability of adding noise to each character
+
+        Returns:
+            Text with character-level noise
+        """
+        import random
+        import string
+
+        if not text or len(text) < 3:
+            return text
+
+        chars = list(text)
+        noisy_chars = []
+
+        i = 0
+        while i < len(chars):
+            char = chars[i]
+
+            # Skip spaces and punctuation
+            if char in string.whitespace or char in string.punctuation:
+                noisy_chars.append(char)
+                i += 1
+                continue
+
+            # Decide if we apply noise
+            if random.random() < noise_prob:
+                noise_type = random.choice(['substitute', 'swap', 'delete', 'insert'])
+
+                if noise_type == 'substitute' and char.isalpha():
+                    # Substitute with similar character
+                    similar_chars = self._get_similar_chars(char)
+                    noisy_chars.append(random.choice(similar_chars) if similar_chars else char)
+
+                elif noise_type == 'swap' and i < len(chars) - 1 and chars[i+1].isalpha():
+                    # Swap with next character
+                    noisy_chars.append(chars[i+1])
+                    noisy_chars.append(char)
+                    i += 1  # Skip next char since we already added it
+
+                elif noise_type == 'delete':
+                    # Delete character (skip it)
+                    pass
+
+                elif noise_type == 'insert':
+                    # Insert duplicate or similar character
+                    noisy_chars.append(char)
+                    if char.isalpha():
+                        similar = self._get_similar_chars(char)
+                        noisy_chars.append(random.choice(similar) if similar else char)
+                    else:
+                        noisy_chars.append(char)
+                else:
+                    # No noise applied
+                    noisy_chars.append(char)
+            else:
+                # No noise
+                noisy_chars.append(char)
+
+            i += 1
+
+        return ''.join(noisy_chars)
+
+    def _get_similar_chars(self, char: str) -> List[str]:
+        """Get list of similar characters for substitution.
+
+        Args:
+            char: Character to find similar ones for
+
+        Returns:
+            List of similar characters
+        """
+        # Common character confusions (visually or phonetically similar)
+        similar_map = {
+            'a': ['a', 'e', 'o'],
+            'e': ['e', 'a', 'i'],
+            'i': ['i', 'e', 'y'],
+            'o': ['o', 'a', 'u'],
+            'u': ['u', 'o', 'v'],
+            'b': ['b', 'p', 'd'],
+            'p': ['p', 'b'],
+            'd': ['d', 'b', 't'],
+            't': ['t', 'd'],
+            'g': ['g', 'j', 'q'],
+            'j': ['j', 'g'],
+            'c': ['c', 'k', 's'],
+            'k': ['k', 'c'],
+            's': ['s', 'c', 'z'],
+            'z': ['z', 's'],
+            'n': ['n', 'm'],
+            'm': ['m', 'n'],
+            'w': ['w', 'v'],
+            'v': ['v', 'w', 'u'],
+            'f': ['f', 'v', 'ph'],
+            'l': ['l', 'r'],
+            'r': ['r', 'l'],
+        }
+
+        char_lower = char.lower()
+        similar = similar_map.get(char_lower, [char_lower])
+
+        # Preserve case
+        if char.isupper():
+            similar = [c.upper() for c in similar]
+
+        return similar

@@ -206,13 +206,14 @@ class PLMAugmenter(AugmentationMethod):
             return dataset_augmented
 
         # ------------------------------------------------------------------
-        # Step 1: BART Fine-tuning (if enabled)
+        # Step 1: BART Initialization and Fine-tuning
         # ------------------------------------------------------------------
+        self.section("BART Initialization")
         if self.enable_bart_finetuning:
-            self.section("BART Fine-tuning")
             self._initialize_and_finetune_bart(dataset)
         else:
-            self.logger.info("[PLM] BART fine-tuning disabled in configuration.")
+            self.logger.info("[PLM] BART fine-tuning disabled - initializing pretrained model only.")
+            self._initialize_bart_only(dataset)
 
         # ------------------------------------------------------------------
         # Step 1.5: Pre-compute predicate alignments (if enabled)
@@ -301,6 +302,38 @@ class PLMAugmenter(AugmentationMethod):
         )
 
         return dataset_augmented
+
+    # ------------------------------------------------------------------
+    # BART Initialization
+    # ------------------------------------------------------------------
+    def _initialize_bart_only(self, dataset: Dataset) -> None:
+        """Initialize BART interpolator without fine-tuning (use pretrained model).
+
+        Args:
+            dataset: Dataset (not used, kept for consistency)
+        """
+        try:
+            import torch
+            device = "cuda" if torch.cuda.is_available() else "cpu"
+        except ImportError:
+            device = "cpu"
+            self.logger.warning("[BART] PyTorch not available, using CPU.")
+
+        self.logger.info("[BART] Initializing pretrained BartInterpolatorPLM...")
+
+        self.bart_interpolator = BartInterpolatorPLM(
+            model_name=self.bart_model_name,
+            out_dir=self.bart_out_dir,
+            device=device,
+            seed=self.seed,
+            base_alpha=self.bart_base_alpha,
+            alpha_spread=self.bart_alpha_spread,
+            advanced_training_config=self.bart_advanced_training_config,
+            generation_config=self.bart_generation_config,
+            training_config=self.bart_cfg,
+        )
+
+        self.logger.info("[BART] Pretrained model ready (no fine-tuning).")
 
     # ------------------------------------------------------------------
     # BART Fine-tuning

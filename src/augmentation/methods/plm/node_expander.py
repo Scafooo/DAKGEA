@@ -291,13 +291,13 @@ class NodeExpander:
                 # Check if we already generated a variation for these values
                 if src_val_str in value_cache:
                     aug_src_val = value_cache[src_val_str]
-                    logger.debug("      └─ Reusing cached variation for src: '%s' → '%s'", src_val_str[:30], aug_src_val[:30])
+                    logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s'", src_val_str[:30], aug_src_val[:30])
                 else:
                     aug_src_val = None
 
                 if tgt_val_str in value_cache:
                     aug_tgt_val = value_cache[tgt_val_str]
-                    logger.debug("      └─ Reusing cached variation for tgt: '%s' → '%s'", tgt_val_str[:30], aug_tgt_val[:30])
+                    logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s'", tgt_val_str[:30], aug_tgt_val[:30])
                 else:
                     aug_tgt_val = None
 
@@ -363,7 +363,7 @@ class NodeExpander:
         if self.generate_unmatched and self.bart_interpolator:
             unmatched_count = self._generate_unmatched_attributes(
                 dataset, src_component, tgt_component, src_aug, tgt_aug,
-                src_literals, tgt_literals, matches
+                src_literals, tgt_literals, matches, value_cache
             )
 
         # Recap: count total triples generated for this node
@@ -390,11 +390,15 @@ class NodeExpander:
         src_literals: dict,
         tgt_literals: dict,
         matches: list,
+        value_cache: Optional[dict] = None,
     ):
         """Generate synthetic variations for attributes that didn't match.
 
         For attributes that exist only in source OR only in target (not in both),
         generate a small variation by passing the value twice to BART (self-interpolation).
+
+        Args:
+            value_cache: Shared cache for value consistency (from matched attributes)
         """
         import random
 
@@ -426,6 +430,9 @@ class NodeExpander:
 
         generated_count = 0
 
+        # Use the same value cache from matched attributes (for consistency)
+        # value_cache is passed from _interpolate_literals
+
         # Generate for source unmatched attributes
         for pred_name in unmatched_src:
             pred_uri, values = src_literals[pred_name]
@@ -435,7 +442,17 @@ class NodeExpander:
             val = str(values[0])
 
             try:
-                aug_val, _ = self.bart_interpolator.interpolate_pair(val, val, predicate=pred_name)
+                # Check cache first (VALUE CONSISTENCY)
+                if value_cache is not None and val in value_cache:
+                    aug_val = value_cache[val]
+                    logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s'", val[:30], aug_val[:30])
+                else:
+                    # Generate new value
+                    aug_val, _ = self.bart_interpolator.interpolate_pair(val, val, predicate=pred_name)
+                    # Save to cache
+                    if value_cache is not None:
+                        value_cache[val] = aug_val
+
                 dataset.knowledge_graph_source.add((src_aug, pred_uri, Literal(aug_val)))
                 generated_count += 1
 
@@ -455,7 +472,17 @@ class NodeExpander:
             val = str(values[0])
 
             try:
-                aug_val, _ = self.bart_interpolator.interpolate_pair(val, val, predicate=pred_name)
+                # Check cache first (VALUE CONSISTENCY)
+                if value_cache is not None and val in value_cache:
+                    aug_val = value_cache[val]
+                    logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s'", val[:30], aug_val[:30])
+                else:
+                    # Generate new value
+                    aug_val, _ = self.bart_interpolator.interpolate_pair(val, val, predicate=pred_name)
+                    # Save to cache
+                    if value_cache is not None:
+                        value_cache[val] = aug_val
+
                 dataset.knowledge_graph_target.add((tgt_aug, pred_uri, Literal(aug_val)))
                 generated_count += 1
 

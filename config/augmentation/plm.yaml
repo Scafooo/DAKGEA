@@ -47,7 +47,7 @@ augmentation:
 
     # BART interpolation parameters
     base_alpha: 0.5              # Base interpolation alpha (0.5 = balanced mixing)
-    alpha_spread: 0.25            # Alpha variation range (HIGH = more creative variations)
+    alpha_spread: 0.35            # Alpha variation range (VERY HIGH = more creative variations)
     max_len_in: 96                # Max input token length
     max_len_out: 48               # Max output token length
 
@@ -56,8 +56,8 @@ augmentation:
       max_new_tokens: 32          # Max tokens to generate
       do_sample: true             # Enable sampling
       top_k: 0                    # Top-k sampling (0 = disabled, use top_p)
-      top_p: 0.90                 # Nucleus sampling threshold (higher = more diverse)
-      temperature: 1.5            # Sampling temperature (HIGHER = very creative)
+      top_p: 0.92                 # Nucleus sampling threshold (higher = more diverse)
+      temperature: 1.8            # Sampling temperature (VERY HIGH = extremely creative)
       num_beams: 5                # Number of beams (balance creativity/quality)
       repetition_penalty: 1.7     # Penalize repetitions (prevent boring outputs)
       length_penalty: 1.0         # Length penalty (neutral)
@@ -121,8 +121,8 @@ augmentation:
 
       # Data augmentation for training: synthetic variations
       training_augmentation:
-        enable: false             # Enable training data augmentation
+        enable: true              # Enable training data augmentation
         synonym_replacement: false  # Replace words with synonyms
         back_translation: false   # Use back-translation
-        random_noise: false       # Add random character noise
-        augmentation_ratio: 0.3   # Ratio of augmented samples to add
+        random_noise: true        # Add random character noise (downing → dowing, kenneth → kennith)
+        augmentation_ratio: 0.3   # Ratio of augmented samples to add (30% more samples with noise)
