@@ -29,10 +29,10 @@ augmentation:
   # BART fine-tuning configuration
   bart:
     enable_finetuning: true       # Enable BART fine-tuning
-    model_name: "facebook/bart-large"  # BART model to use facebook/bart-base
-    out_dir: "./bart_plm_model"   # Output directory for fine-tuned model
+    model_name: "facebook/bart-base"  # BART-BASE for 8GB GPU compatibility
+    out_dir: "./bart_plm_model_base"  # Output directory for fine-tuned model
     epochs: 10                    # Number of training epochs
-    batch_size: 16                # Training batch size
+    batch_size: 8                 # Training batch size (8 for bart-base)
     learning_rate: 5.0e-5         # Learning rate
     force_retrain: false          # Force retraining even if model exists
     max_train_samples: 4000       # Maximum training samples (null = unlimited)
@@ -47,21 +47,21 @@ augmentation:
 
     # BART interpolation parameters
     base_alpha: 0.5              # Base interpolation alpha (0.5 = balanced mixing)
-    alpha_spread: 0.35            # Alpha variation range (VERY HIGH = more creative variations)
+    alpha_spread: 0.35            # Alpha variation range (high creativity)
     max_len_in: 96                # Max input token length
     max_len_out: 48               # Max output token length
 
-    # Generation parameters
+    # Generation parameters (OPTIMAL TUNED VALUES - score: 0.924)
     generation:
       max_new_tokens: 32          # Max tokens to generate
       do_sample: true             # Enable sampling
       top_k: 0                    # Top-k sampling (0 = disabled, use top_p)
-      top_p: 0.92                 # Nucleus sampling threshold (higher = more diverse)
-      temperature: 1.8            # Sampling temperature (VERY HIGH = extremely creative)
-      num_beams: 5                # Number of beams (balance creativity/quality)
-      repetition_penalty: 1.7     # Penalize repetitions (prevent boring outputs)
+      top_p: 0.9                  # Nucleus sampling (optimal from tuning)
+      temperature: 1.0            # Sampling temperature (optimal from tuning)
+      num_beams: 2                # Beam search (optimal from tuning)
+      repetition_penalty: 1.7     # Repetition penalty (optimal from tuning)
       length_penalty: 1.0         # Length penalty (neutral)
-      no_repeat_ngram_size: 4     # Prevent n-gram repetition
+      no_repeat_ngram_size: 3     # N-gram blocking (optimal from tuning)
 
     # Semantic predicate matching configuration
     predicate_matching:
