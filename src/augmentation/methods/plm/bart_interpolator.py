@@ -1030,7 +1030,10 @@ class BartInterpolatorPLM:
                         output_token = src_output_tokens[src_pos]
                         token_mapping[input_token] = output_token
                     else:
-                        logger.warning(f"[TOKEN_CONSISTENCY] Source position {src_pos} out of bounds (generated {len(src_output_tokens)} tokens)")
+                        # Output generated fewer tokens than input - cannot map this position
+                        logger.debug(f"[TOKEN_CONSISTENCY] Cannot map '{input_token}' at position {src_pos}: "
+                                    f"output has only {len(src_output_tokens)} tokens (valid indices: 0-{len(src_output_tokens)-1}). "
+                                    f"Skipping this token.")
 
                 logger.debug(f"[TOKEN_CONSISTENCY] Source output: '{out_src}'")
                 logger.debug(f"[TOKEN_CONSISTENCY] Target output (before): '{out_tgt}'")
@@ -1038,10 +1041,17 @@ class BartInterpolatorPLM:
 
                 # Apply consistent transformations to target
                 for input_token, tgt_pos in tgt_token_positions.items():
-                    if input_token in token_mapping and tgt_pos < len(tgt_output_tokens):
-                        # Replace target token with source transformation
-                        tgt_output_tokens[tgt_pos] = token_mapping[input_token]
-                        logger.debug(f"[TOKEN_CONSISTENCY] Position {tgt_pos}: '{tgt_output_tokens[tgt_pos]}' → '{token_mapping[input_token]}'")
+                    if input_token in token_mapping:
+                        if tgt_pos < len(tgt_output_tokens):
+                            # Replace target token with source transformation
+                            old_token = tgt_output_tokens[tgt_pos]
+                            tgt_output_tokens[tgt_pos] = token_mapping[input_token]
+                            logger.debug(f"[TOKEN_CONSISTENCY] Position {tgt_pos}: '{old_token}' → '{token_mapping[input_token]}'")
+                        else:
+                            logger.debug(f"[TOKEN_CONSISTENCY] Cannot apply mapping for '{input_token}' at position {tgt_pos}: "
+                                        f"target output has only {len(tgt_output_tokens)} tokens (valid indices: 0-{len(tgt_output_tokens)-1})")
+                    else:
+                        logger.debug(f"[TOKEN_CONSISTENCY] Skipping '{input_token}' at position {tgt_pos}: no mapping available from source")
 
                 out_tgt = ' '.join(tgt_output_tokens)
                 logger.debug(f"[TOKEN_CONSISTENCY] Target output (after): '{out_tgt}'")
