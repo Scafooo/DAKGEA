@@ -26,6 +26,28 @@ from src.utils.reproducibility import set_random_seeds
 from src.core.dataset import Dataset
 from src.core.knowledge_graph import KnowledgeGraph
 
+# Levenshtein distance for edit distance constraint
+try:
+    from Levenshtein import distance as levenshtein_distance
+except ImportError:
+    # Fallback implementation if python-Levenshtein not installed
+    def levenshtein_distance(s1: str, s2: str) -> int:
+        """Calculate Levenshtein distance between two strings."""
+        if len(s1) < len(s2):
+            return levenshtein_distance(s2, s1)
+        if len(s2) == 0:
+            return len(s1)
+        previous_row = range(len(s2) + 1)
+        for i, c1 in enumerate(s1):
+            current_row = [i + 1]
+            for j, c2 in enumerate(s2):
+                insertions = previous_row[j + 1] + 1
+                deletions = current_row[j] + 1
+                substitutions = previous_row[j] + (c1 != c2)
+                current_row.append(min(insertions, deletions, substitutions))
+            previous_row = current_row
+        return previous_row[-1]
+
 # Import advanced training modules
 from src.augmentation.methods.plm.bart_training_modules import (
     StratifiedSampler,
@@ -157,6 +179,14 @@ class BartInterpolatorPLM:
         self.gen_length_penalty = float(gen_cfg.get("length_penalty", 1.0))
         self.gen_no_repeat_ngram_size = int(gen_cfg.get("no_repeat_ngram_size", 4))
 
+        # Edit distance constraint parameters
+        self.enable_edit_distance_constraint = bool(gen_cfg.get("enable_edit_distance_constraint", False))
+        self.max_edit_distance = int(gen_cfg.get("max_edit_distance", 5))
+        self.num_candidates = int(gen_cfg.get("num_candidates", 10))  # For constraint generation
+
+        # Token-level consistency (ensure shared tokens get same transformation)
+        self.enable_token_consistency = bool(gen_cfg.get("enable_token_consistency", True))
+
         os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
         # Initialize advanced training modules
@@ -245,6 +275,7 @@ class BartInterpolatorPLM:
                 back_translation=aug_cfg.get("back_translation", False),
                 random_noise=aug_cfg.get("random_noise", False),
                 augmentation_ratio=aug_cfg.get("augmentation_ratio", 0.3),
+                noise_prob=aug_cfg.get("noise_prob", 0.1),
             )
             logger.info("[BART] Training augmentation enabled")
         else:
@@ -845,6 +876,31 @@ class BartInterpolatorPLM:
             s = _simple_clean(val_src)
             return s, s
 
+        # TOKEN-LEVEL CONSISTENCY with FORCED DECODING:
+        # 1. Generate source with latent mixing
+        # 2. Identify token alignment input→output
+        # 3. Generate target FORCING same tokens for shared positions
+
+        # Initialize variables for forced decoding
+        shared_tokens = set()
+        src_token_positions = {}
+        tgt_token_positions = {}
+
+        if self.enable_token_consistency:
+            # Step 1: Tokenize inputs to identify shared tokens and their positions
+            src_tokens = val_src.lower().split()
+            tgt_tokens = val_tgt.lower().split()
+
+            # Find shared tokens and their positions
+            shared_tokens = set(src_tokens) & set(tgt_tokens)
+            src_token_positions = {token: idx for idx, token in enumerate(src_tokens) if token in shared_tokens}
+            tgt_token_positions = {token: idx for idx, token in enumerate(tgt_tokens) if token in shared_tokens}
+
+            logger.debug(f"[FORCED_DECODING] Input: '{val_src}' + '{val_tgt}'")
+            logger.debug(f"[FORCED_DECODING] Shared tokens: {shared_tokens}")
+            logger.debug(f"[FORCED_DECODING] Source positions: {src_token_positions}")
+            logger.debug(f"[FORCED_DECODING] Target positions: {tgt_token_positions}")
+
         # Standard approach: tokenize values directly
         toks = self.tokenizer([val_src, val_tgt], return_tensors="pt",
                               padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
@@ -898,17 +954,97 @@ class BartInterpolatorPLM:
             bad_words_ids=[[i] for i in bad],
         )
 
-        with torch.no_grad():
-            ids_src = self.model.generate(
-                encoder_outputs=enc_src,
-                **gen_kwargs
-            )
-            ids_tgt = self.model.generate(
-                encoder_outputs=enc_tgt,
-                **gen_kwargs
-            )
+        # If edit distance constraint is enabled, generate multiple candidates
+        if self.enable_edit_distance_constraint:
+            # Ensure num_beams >= num_candidates for diversity
+            constraint_gen_kwargs = gen_kwargs.copy()
+            constraint_gen_kwargs["num_beams"] = max(self.gen_num_beams, self.num_candidates)
+            constraint_gen_kwargs["num_return_sequences"] = self.num_candidates
+            constraint_gen_kwargs["do_sample"] = False  # Use beam search for better quality
 
-        out_src = _simple_clean(self.tokenizer.decode(ids_src[0], skip_special_tokens=True))
-        out_tgt = _simple_clean(self.tokenizer.decode(ids_tgt[0], skip_special_tokens=True))
+            with torch.no_grad():
+                ids_src_candidates = self.model.generate(
+                    encoder_outputs=enc_src,
+                    **constraint_gen_kwargs
+                )
+                ids_tgt_candidates = self.model.generate(
+                    encoder_outputs=enc_tgt,
+                    **constraint_gen_kwargs
+                )
+
+            # Filter candidates based on edit distance
+            def select_best_candidate(candidates_ids, original_text):
+                """Select best candidate that satisfies edit distance constraint."""
+                valid_candidates = []
+                for candidate_ids in candidates_ids:
+                    candidate = _simple_clean(self.tokenizer.decode(candidate_ids, skip_special_tokens=True))
+                    distance = levenshtein_distance(candidate.lower(), original_text.lower())
+                    if distance <= self.max_edit_distance:
+                        valid_candidates.append((candidate, distance))
+
+                if valid_candidates:
+                    # Return candidate with smallest edit distance (closest to original)
+                    return min(valid_candidates, key=lambda x: x[1])[0]
+                else:
+                    # If no candidates satisfy constraint, return the one with smallest distance anyway
+                    all_candidates = [
+                        (_simple_clean(self.tokenizer.decode(cand, skip_special_tokens=True)),
+                         levenshtein_distance(_simple_clean(self.tokenizer.decode(cand, skip_special_tokens=True)).lower(), original_text.lower()))
+                        for cand in candidates_ids
+                    ]
+                    logger.warning(f"[EDIT_DISTANCE] No candidates within max_edit_distance={self.max_edit_distance} "
+                                   f"for '{original_text}'. Using closest candidate.")
+                    return min(all_candidates, key=lambda x: x[1])[0]
+
+            out_src = select_best_candidate(ids_src_candidates, val_src)
+            out_tgt = select_best_candidate(ids_tgt_candidates, val_tgt)
+
+        else:
+            # Standard generation (single candidate)
+
+            # STEP 1: Generate source with latent mixing
+            with torch.no_grad():
+                ids_src = self.model.generate(
+                    encoder_outputs=enc_src,
+                    **gen_kwargs
+                )
+            out_src = _simple_clean(self.tokenizer.decode(ids_src[0], skip_special_tokens=True))
+
+            # STEP 2: Generate target normally, then apply token consistency via post-processing
+            with torch.no_grad():
+                ids_tgt = self.model.generate(
+                    encoder_outputs=enc_tgt,
+                    **gen_kwargs
+                )
+            out_tgt = _simple_clean(self.tokenizer.decode(ids_tgt[0], skip_special_tokens=True))
+
+            # STEP 3: If token consistency enabled, post-process target to match source transformations
+            if self.enable_token_consistency and shared_tokens:
+                src_output_tokens = out_src.split()  # Keep original case
+                tgt_output_tokens = out_tgt.split()
+
+                # Create mapping: input token → output token (from source)
+                token_mapping = {}
+                for input_token, src_pos in src_token_positions.items():
+                    if src_pos < len(src_output_tokens):
+                        output_token = src_output_tokens[src_pos]
+                        token_mapping[input_token] = output_token
+                    else:
+                        logger.warning(f"[TOKEN_CONSISTENCY] Source position {src_pos} out of bounds (generated {len(src_output_tokens)} tokens)")
+
+                logger.debug(f"[TOKEN_CONSISTENCY] Source output: '{out_src}'")
+                logger.debug(f"[TOKEN_CONSISTENCY] Target output (before): '{out_tgt}'")
+                logger.debug(f"[TOKEN_CONSISTENCY] Token mapping: {token_mapping}")
+
+                # Apply consistent transformations to target
+                for input_token, tgt_pos in tgt_token_positions.items():
+                    if input_token in token_mapping and tgt_pos < len(tgt_output_tokens):
+                        # Replace target token with source transformation
+                        tgt_output_tokens[tgt_pos] = token_mapping[input_token]
+                        logger.debug(f"[TOKEN_CONSISTENCY] Position {tgt_pos}: '{tgt_output_tokens[tgt_pos]}' → '{token_mapping[input_token]}'")
+
+                out_tgt = ' '.join(tgt_output_tokens)
+                logger.debug(f"[TOKEN_CONSISTENCY] Target output (after): '{out_tgt}'")
+
         return out_src, out_tgt
 

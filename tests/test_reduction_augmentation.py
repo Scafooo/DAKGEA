@@ -48,7 +48,7 @@ augmenter = PLMAugmenter({
 
             # BART interpolation parameters (HIGH CREATIVITY + COHERENT ALIGNMENT)
             "base_alpha": 0.5,        # Base interpolation weight (balanced = aligned values stay similar)
-            "alpha_spread": 0.25,     # HIGH variation range (more creative, different from input)
+            "alpha_spread": 0.10,     # HIGH variation range (more creative, different from input)
 
             # Generation parameters (OPTIMIZED for creativity + coherence)
             "generation": {
@@ -56,8 +56,8 @@ augmenter = PLMAugmenter({
                 "do_sample": True,
                 "top_k": 0,              # Disabled (use top_p instead)
                 "top_p": 0.90,           # More diversity
-                "temperature": 1.5,      # High creativity
-                "num_beams": 5,          # Balance quality/creativity
+                "temperature": 0.5,      # High creativity
+                "num_beams": 3,          # Balance quality/creativity
                 "repetition_penalty": 1.7,
                 "length_penalty": 1.0,   # Neutral
                 "no_repeat_ngram_size": 4,

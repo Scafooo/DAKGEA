@@ -485,11 +485,13 @@ class TrainingAugmenter:
         back_translation: bool = False,
         random_noise: bool = False,
         augmentation_ratio: float = 0.3,
+        noise_prob: float = 0.1,
     ):
         self.synonym_replacement = synonym_replacement
         self.back_translation = back_translation
         self.random_noise = random_noise
         self.augmentation_ratio = augmentation_ratio
+        self.noise_prob = noise_prob
 
     def augment(self, examples: List[PairExample]) -> List[PairExample]:
         """Generate augmented examples with character-level noise.
@@ -514,15 +516,20 @@ class TrainingAugmenter:
         for example in examples_to_augment:
             if self.random_noise:
                 # Apply character-level noise
-                aug_src = self._add_character_noise(example.val_src)
-                aug_tgt = self._add_character_noise(example.val_tgt)
+                aug_src = self._add_character_noise(example.src_val, noise_prob=self.noise_prob)
+                aug_tgt = self._add_character_noise(example.tgt_val, noise_prob=self.noise_prob)
+                aug_out_src = self._add_character_noise(example.out_src, noise_prob=self.noise_prob)
+                aug_out_tgt = self._add_character_noise(example.out_tgt, noise_prob=self.noise_prob)
 
-                augmented.append(PairExample(
-                    val_src=aug_src,
-                    val_tgt=aug_tgt,
+                # Import from bart_interpolator to use correct PairExample
+                from .bart_interpolator import PairExample as BartPairExample
+
+                augmented.append(BartPairExample(
                     predicate=example.predicate,
-                    predicate_type=example.predicate_type,
-                    difficulty=example.difficulty
+                    src_val=aug_src,
+                    tgt_val=aug_tgt,
+                    out_src=aug_out_src,
+                    out_tgt=aug_out_tgt
                 ))
 
         if augmented:
