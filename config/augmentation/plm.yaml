@@ -47,7 +47,7 @@ augmentation:
 
     # BART interpolation parameters
     base_alpha: 0.5              # Base interpolation alpha (0.5 = balanced mixing)
-    alpha_spread: 0.35            # Alpha variation range (high creativity)
+    alpha_spread: 0.45            # Alpha variation range (optimal from noise tuning)
     max_len_in: 96                # Max input token length
     max_len_out: 48               # Max output token length
 
@@ -64,8 +64,8 @@ augmentation:
       no_repeat_ngram_size: 3     # N-gram blocking (optimal from tuning)
 
       # Noise injection (force creativity when source=target)
-      enable_noise_injection: false  # Enable noise injection (default: false)
-      noise_std: 0.1              # Gaussian noise standard deviation
+      enable_noise_injection: true  # Enable noise injection (optimal from tuning)
+      noise_std: 0.21             # Gaussian noise std (optimal: 100% good results, no gibberish)
       noise_apply_when: "identical_inputs"  # "identical_inputs" or "always"
 
     # Semantic predicate matching configuration
