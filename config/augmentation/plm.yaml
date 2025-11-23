@@ -65,7 +65,7 @@ augmentation:
 
       # Noise injection (force creativity when source=target)
       enable_noise_injection: true  # Enable noise injection (optimal from tuning)
-      noise_std: 0.21             # Gaussian noise std (optimal: 100% good results, no gibberish)
+      noise_std: 0.20             # Gaussian noise std (optimal: 91.7% good, stable results)
       noise_apply_when: "identical_inputs"  # "identical_inputs" or "always"
 
     # Semantic predicate matching configuration

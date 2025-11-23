@@ -68,7 +68,7 @@ augmenter = PLMAugmenter({
 
                 # Noise injection (moderate noise + moderate alpha_spread = balanced creativity)
                 "enable_noise_injection": True,  # Enable noise injection
-                "noise_std": 0.21,       # Increased to eliminate conservative cases
+                "noise_std": 0.20,       # Sweet spot: 0.20 (balanced creativity)
                 "noise_apply_when": "identical_inputs",  # Only when source=target
             },
 
