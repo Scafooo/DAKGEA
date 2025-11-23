@@ -35,18 +35,20 @@ augmenter = PLMAugmenter({
         "max_depth": 2,
         # Note: value_consistency config is loaded from config/augmentation/plm.yaml
         "bart": {
-            "model_name": "facebook/bart-base",  # Use smaller model for 8GB GPU
+            "model_name": "facebook/bart-base",  # BART-base for 8GB GPU (optimal)
             "enable_finetuning": True,
             "force_retrain": False,  # Use existing model (noise injection works at runtime!)
             "out_dir": "./bart_plm_model_base",  # Use existing model
-            "epochs": 2,  # Ridotto per test veloci
-            "batch_size": 4,  # Reduced batch size for 8GB GPU
-            "max_train_samples": 1000,  # Limitato per test veloci
+            "epochs": 10,  # Optimal epochs (early stopping at patience=3)
+            "batch_size": 8,  # Maximum batch size for 8GB GPU
+            "learning_rate": 5.0e-5,         # Learning rate
+            "max_train_samples": 4000,  # Full training samples
 
             # Regularization (prevent overfitting)
             "weight_decay": 0.01,            # L2 regularization
-            "warmup_steps": 50,              # LR warmup (reduced for test)
+            "warmup_steps": 100,             # LR warmup steps
             "max_grad_norm": 1.0,            # Gradient clipping
+            "patience": 3,                   # Early stopping patience
 
             # BART interpolation parameters (OPTIMAL TUNED VALUES)
             "base_alpha": 0.5,        # Base interpolation weight (balanced)
