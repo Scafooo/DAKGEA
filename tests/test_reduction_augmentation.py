@@ -68,8 +68,13 @@ augmenter = PLMAugmenter({
 
                 # Noise injection (moderate noise + moderate alpha_spread = balanced creativity)
                 "enable_noise_injection": True,  # Enable noise injection
-                "noise_std": 0.20,       # Sweet spot: 0.20 (balanced creativity)
+                "noise_std": 0.20,       # Base noise level
                 "noise_apply_when": "identical_inputs",  # Only when source=target
+
+                # Retry mechanism to avoid identical tokens
+                "enable_retry_on_identical_tokens": True,  # Retry if output has identical tokens
+                "max_retries": 3,        # Maximum retry attempts
+                "noise_increment": 0.05, # Increase noise by this amount on each retry
             },
 
             # Semantic predicate matching configuration

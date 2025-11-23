@@ -192,6 +192,11 @@ class BartInterpolatorPLM:
         self.noise_std = float(gen_cfg.get("noise_std", 0.1))  # Standard deviation for gaussian noise
         self.noise_apply_when = str(gen_cfg.get("noise_apply_when", "identical_inputs"))  # "identical_inputs" or "always"
 
+        # Retry mechanism for identical tokens
+        self.enable_retry_on_identical_tokens = bool(gen_cfg.get("enable_retry_on_identical_tokens", False))
+        self.max_retries = int(gen_cfg.get("max_retries", 3))
+        self.noise_increment = float(gen_cfg.get("noise_increment", 0.05))  # Increase noise on each retry
+
         os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
         # Initialize advanced training modules
@@ -880,6 +885,72 @@ class BartInterpolatorPLM:
         if not val_tgt:
             s = _simple_clean(val_src)
             return s, s
+
+        # Retry mechanism for identical tokens
+        if self.enable_retry_on_identical_tokens and self.enable_noise_injection:
+            return self._interpolate_with_retry(val_src, val_tgt, max_new_tokens, predicate)
+        else:
+            return self._interpolate_single(val_src, val_tgt, max_new_tokens, predicate)
+
+    def _has_identical_tokens(self, input_text: str, output_text: str) -> bool:
+        """Check if output contains exact tokens from input (case-insensitive)."""
+        input_tokens = set(input_text.lower().split())
+        output_tokens = set(output_text.lower().split())
+
+        # Filter out very short tokens (1-2 chars) and common stopwords
+        stopwords = {'a', 'an', 'the', 'in', 'on', 'at', 'to', 'of', 'and', 'or', 'is', 'are', 'was', 'were', 'be', 'been', 'by'}
+        input_tokens = {t for t in input_tokens if len(t) > 2 and t not in stopwords}
+        output_tokens = {t for t in output_tokens if len(t) > 2 and t not in stopwords}
+
+        identical = input_tokens & output_tokens
+        return len(identical) > 0
+
+    def _interpolate_with_retry(
+        self,
+        val_src: str,
+        val_tgt: str,
+        max_new_tokens: int = 32,
+        predicate: str = "",
+    ) -> Tuple[str, str]:
+        """Interpolate with retry mechanism if output contains identical tokens."""
+        original_noise_std = self.noise_std
+
+        for attempt in range(self.max_retries):
+            # Generate output
+            out_src, out_tgt = self._interpolate_single(val_src, val_tgt, max_new_tokens, predicate)
+
+            # Check if inputs are identical (noise was injected)
+            if val_src.lower().strip() == val_tgt.lower().strip():
+                # Check for identical tokens
+                has_identical_src = self._has_identical_tokens(val_src, out_src)
+                has_identical_tgt = self._has_identical_tokens(val_tgt, out_tgt)
+
+                if has_identical_src or has_identical_tgt:
+                    if attempt < self.max_retries - 1:
+                        # Increase noise and retry
+                        self.noise_std += self.noise_increment
+                        logger.debug(f"[RETRY] Attempt {attempt + 1}/{self.max_retries}: Found identical tokens, increasing noise to {self.noise_std:.3f}")
+                        logger.debug(f"  Input: '{val_src}' → Output: '{out_src}' / '{out_tgt}'")
+                        continue
+                    else:
+                        logger.debug(f"[RETRY] Max retries reached, accepting output with identical tokens")
+
+            # Success - restore original noise and return
+            self.noise_std = original_noise_std
+            return out_src, out_tgt
+
+        # Max retries reached - restore noise and return last attempt
+        self.noise_std = original_noise_std
+        return out_src, out_tgt
+
+    def _interpolate_single(
+        self,
+        val_src: str,
+        val_tgt: str,
+        max_new_tokens: int = 32,
+        predicate: str = "",
+    ) -> Tuple[str, str]:
+        """Single interpolation attempt (original logic)."""
 
         # TOKEN-LEVEL CONSISTENCY with FORCED DECODING:
         # 1. Generate source with latent mixing
