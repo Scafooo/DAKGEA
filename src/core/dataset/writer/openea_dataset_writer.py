@@ -127,24 +127,24 @@ class OpeneaDatasetWriter(DatasetWriter):
                 logger.warning("Additional %d missing pairs omitted from log.", len(missing) - 5)
 
         n = len(list_aligned_entities)
-        n1 = int(n * 0.9)
-        n2 = int(n * 0.7)
+        sup_cutoff = int(n * 0.2)
+        ref_cutoff = int(n * 0.9)
         logger.debug(
             "Preparing %d aligned entity pairs for attribute export (train=%d/test=%d/valid=%d). "
             "Dropped %d missing pairs from original %d.",
             n,
-            n1,
-            n2 - n1,
-            n - n2,
+            sup_cutoff,
+            ref_cutoff - sup_cutoff,
+            n - ref_cutoff,
             len(missing),
             original_pairs,
         )
 
-        # FIXED: Inverted to have train=20% (large) and test=20% (small)
+        # Split: 20% sup (train), 70% ref (test), 10% valid
         # sup_pairs is used as train_ill, ref_pairs is used as test_ill
-        sup_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[:n1]]
-        ref_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[n1:n2]]
-        valid_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[n2:]]
+        sup_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[:sup_cutoff]]
+        ref_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[sup_cutoff:ref_cutoff]]
+        valid_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[ref_cutoff:]]
 
         write_tsv(os.path.join(dir_path, "ref_pairs"), ref_pairs)
         write_tsv(os.path.join(dir_path, "sup_pairs"), sup_pairs)
@@ -175,21 +175,21 @@ class OpeneaDatasetWriter(DatasetWriter):
         )
 
         n = len(list_aligned_entities)
-        n1 = int(n * 0.7)
-        n2 = int(n * 0.9)
+        sup_cutoff = int(n * 0.2)
+        ref_cutoff = int(n * 0.9)
 
         slogger.table("Entity Split Configuration", {
             "Total Aligned Entities": n,
-            "Support Set (70%) [train]": n1,
-            "Reference Set (20%) [test]": n2 - n1,
-            "Validation Set (10%)": n - n2
+            "Support Set (20%) [train]": sup_cutoff,
+            "Reference Set (70%) [test]": ref_cutoff - sup_cutoff,
+            "Validation Set (10%)": n - ref_cutoff
         })
 
         ent_ILLs_pairs = list_aligned_entities
-        # FIXED: Inverted to have train=70% (large) and test=20% (small)
-        sup_pairs = list_aligned_entities[:n1]
-        ref_pairs = list_aligned_entities[n1:n2]
-        valid_pairs = list_aligned_entities[n2:]
+        # Split: 20% sup (train), 70% ref (test), 10% valid
+        sup_pairs = list_aligned_entities[:sup_cutoff]
+        ref_pairs = list_aligned_entities[sup_cutoff:ref_cutoff]
+        valid_pairs = list_aligned_entities[ref_cutoff:]
         vocab = {}
 
         vocab["[PAD]"] = None

@@ -1,8 +1,6 @@
 """Dataset loading utilities for the BERT-INT basic unit."""
 
 from __future__ import annotations
-
-import logging
 import pickle
 from dataclasses import dataclass
 from pathlib import Path
@@ -13,7 +11,9 @@ from rdflib import Literal
 from transformers import AutoTokenizer
 
 
-logger = logging.getLogger(__name__)
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 Pair = Tuple[int, int]
 Triple = Tuple[int, int, int]

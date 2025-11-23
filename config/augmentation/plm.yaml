@@ -63,6 +63,11 @@ augmentation:
       length_penalty: 1.0         # Length penalty (neutral)
       no_repeat_ngram_size: 3     # N-gram blocking (optimal from tuning)
 
+      # Noise injection (force creativity when source=target)
+      enable_noise_injection: false  # Enable noise injection (default: false)
+      noise_std: 0.1              # Gaussian noise standard deviation
+      noise_apply_when: "identical_inputs"  # "identical_inputs" or "always"
+
     # Semantic predicate matching configuration
     predicate_matching:
       embedding_model: "all-MiniLM-L6-v2"  # Sentence transformer model

@@ -3,16 +3,16 @@
 This service provides a unified interface for all BART-related operations.
 """
 
-import logging
 from typing import Tuple, Optional, Dict, Any
 
 from src.core.dataset import Dataset
+from src.logger import get_logger
 
 from ..bart.trainer import BARTTrainer
 from ..bart.interpolator import BARTInterpolator
 from ..models import InterpolationConfig
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class BARTService:

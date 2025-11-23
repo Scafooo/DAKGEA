@@ -6,7 +6,6 @@ the quality of generated attribute values using automatic metrics.
 """
 
 import sys
-import logging
 from pathlib import Path
 from typing import List, Dict, Tuple, Any
 import numpy as np
@@ -31,9 +30,9 @@ except ImportError:
     print("⚠️  sentence-transformers not available, using simpler metrics")
 
 
-logging.basicConfig(level=logging.WARNING, format='%(message)s')
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+from src.logger import get_logger
+
+logger = get_logger(__name__, level="INFO")
 
 
 class HyperparameterEvaluator:

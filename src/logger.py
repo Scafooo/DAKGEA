@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 import os
 import sys
+from types import MethodType
 from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
@@ -13,6 +14,8 @@ from typing import Optional, Union
 from src.config.loader import Config
 
 LOG_NAMESPACE = "KG_EA"
+VERBOSE_LEVEL = logging.DEBUG - 5
+logging.addLevelName(VERBOSE_LEVEL, "VERBOSE")
 
 _LOG_LEVELS = {
     "CRITICAL": logging.CRITICAL,
@@ -20,6 +23,7 @@ _LOG_LEVELS = {
     "WARNING": logging.WARNING,
     "INFO": logging.INFO,
     "DEBUG": logging.DEBUG,
+    "VERBOSE": VERBOSE_LEVEL,
     "NOTSET": logging.NOTSET,
 }
 
@@ -155,6 +159,13 @@ def get_logger(name: str, level: Union[str, int, None] = None) -> logging.Logger
     root = _configure_root_logger()
     qualified_name = f"{root.name}.{name}" if name else root.name
     logger = logging.getLogger(qualified_name)
+    # Add a convenience verbose method using the custom VERBOSE level
+    def verbose(self, message, *args, **kwargs):
+        if self.isEnabledFor(VERBOSE_LEVEL):
+            self._log(VERBOSE_LEVEL, message, args, **kwargs)
+
+    if not hasattr(logger, "verbose"):
+        logger.verbose = MethodType(verbose, logger)  # type: ignore[attr-defined]
     if level is not None:
         logger.setLevel(_parse_level(level))
     return logger

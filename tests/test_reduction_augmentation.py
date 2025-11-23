@@ -37,8 +37,8 @@ augmenter = PLMAugmenter({
         "bart": {
             "model_name": "facebook/bart-base",  # Use smaller model for 8GB GPU
             "enable_finetuning": True,
-            "force_retrain": True,  # Force retrain to apply new optimal parameters
-            "out_dir": "./bart_plm_model_base_optimal",  # New model with optimal params
+            "force_retrain": False,  # Use existing model (noise injection works at runtime!)
+            "out_dir": "./bart_plm_model_base",  # Use existing model
             "epochs": 2,  # Ridotto per test veloci
             "batch_size": 4,  # Reduced batch size for 8GB GPU
             "max_train_samples": 1000,  # Limitato per test veloci
@@ -50,7 +50,7 @@ augmenter = PLMAugmenter({
 
             # BART interpolation parameters (OPTIMAL TUNED VALUES)
             "base_alpha": 0.5,        # Base interpolation weight (balanced)
-            "alpha_spread": 0.35,     # High variation for creative transformations
+            "alpha_spread": 0.45,     # Moderate spread for balanced mixing (reduced from 0.55)
 
             # Generation parameters (OPTIMAL TUNED VALUES - score: 0.924)
             "generation": {
@@ -63,6 +63,11 @@ augmenter = PLMAugmenter({
                 "repetition_penalty": 1.7,  # Repetition penalty (optimal from tuning)
                 "length_penalty": 1.0,   # Neutral
                 "no_repeat_ngram_size": 3,  # N-gram blocking (optimal from tuning)
+
+                # Noise injection (moderate noise + moderate alpha_spread = balanced creativity)
+                "enable_noise_injection": True,  # Enable noise injection
+                "noise_std": 0.20,       # Moderate noise (sweet spot between 0.15-0.25)
+                "noise_apply_when": "identical_inputs",  # Only when source=target
             },
 
             # Semantic predicate matching configuration

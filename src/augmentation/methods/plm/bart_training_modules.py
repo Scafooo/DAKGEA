@@ -4,7 +4,7 @@ Each module can be independently enabled/disabled via configuration.
 """
 
 import random
-import logging
+from src.logger import get_logger
 from typing import List, Dict, Tuple, Optional, Any
 from collections import defaultdict
 import numpy as np
@@ -13,7 +13,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from dataclasses import dataclass
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 @dataclass

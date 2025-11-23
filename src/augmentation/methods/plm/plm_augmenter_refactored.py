@@ -12,9 +12,12 @@ from typing import Optional
 from src.augmentation.base import AugmentationMethod
 from src.augmentation.registry import AUGMENTATION_REGISTRY
 from src.core.dataset import Dataset
+from src.logger import get_logger
 
 from .services import AttributeMatchingService, BARTService, GraphExpansionService
 from .set_knowledge_graph.set_knowledge_graph import SetKnowledgeGraph
+
+logger = get_logger(__name__)
 
 
 @AUGMENTATION_REGISTRY.register("plm_refactored")
@@ -73,8 +76,6 @@ class PLMAugmenterRefactored(AugmentationMethod):
                     default_cfg = yaml.safe_load(f)
                 return default_cfg or {}
             except Exception as e:
-                import logging
-                logger = logging.getLogger(__name__)
                 logger.warning(f"Failed to load default config from {config_path}: {e}")
                 return {}
         return {}

@@ -4,7 +4,6 @@ This module handles the training logic extracted from bart_interpolator.py.
 """
 
 import os
-import logging
 from typing import List, Optional, Dict, Any
 from pathlib import Path
 
@@ -13,12 +12,13 @@ from transformers import BartForConditionalGeneration, BartTokenizer
 
 from src.core.dataset import Dataset
 from src.utils.reproducibility import set_random_seeds
+from src.logger import get_logger
 
 # Import the existing BartInterpolatorPLM for now
 # We'll gradually migrate functionality
 from ..bart_interpolator import BartInterpolatorPLM
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class BARTTrainer:

@@ -19,12 +19,15 @@ from src.augmentation.base import AugmentationMethod
 from src.augmentation.registry import AUGMENTATION_REGISTRY
 from src.config.loader import PROJECT_ROOT
 from src.core.dataset import Dataset
+from src.logger import get_logger
 
 from .bart_interpolator import BartInterpolatorPLM
 from .expansion_node import ExpansionNode
 from .neighbor_handler import NeighborHandler
 from .node_expander import NodeExpander
 from .set_knowledge_graph.set_knowledge_graph import SetKnowledgeGraph
+
+logger = get_logger(__name__)
 
 
 @AUGMENTATION_REGISTRY.register("plm")
@@ -67,8 +70,6 @@ class PLMAugmenter(AugmentationMethod):
                 return default_cfg or {}
             except Exception as e:
                 # If loading fails, return empty dict (will use hardcoded defaults)
-                import logging
-                logger = logging.getLogger(__name__)
                 logger.warning(f"Failed to load default config from {config_path}: {e}")
                 return {}
         else:

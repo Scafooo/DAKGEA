@@ -5,9 +5,9 @@ import re
 from collections import defaultdict
 from dataclasses import dataclass
 from typing import List, Tuple, Iterable, Optional, Dict, Any
-import logging
+from src.logger import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 import numpy as np
 import torch
 from torch.nn import functional as F
@@ -186,6 +186,11 @@ class BartInterpolatorPLM:
 
         # Token-level consistency (ensure shared tokens get same transformation)
         self.enable_token_consistency = bool(gen_cfg.get("enable_token_consistency", True))
+
+        # Noise injection (force creativity when source=target)
+        self.enable_noise_injection = bool(gen_cfg.get("enable_noise_injection", False))
+        self.noise_std = float(gen_cfg.get("noise_std", 0.1))  # Standard deviation for gaussian noise
+        self.noise_apply_when = str(gen_cfg.get("noise_apply_when", "identical_inputs"))  # "identical_inputs" or "always"
 
         os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
@@ -392,7 +397,7 @@ class BartInterpolatorPLM:
     def _apply_advanced_preprocessing(self, pairs: List[PairExample]) -> List[PairExample]:
         """Apply advanced training preprocessing: stratified sampling, augmentation, etc."""
         import logging
-        logger = logging.getLogger(__name__)
+        logger = get_logger(__name__)
 
         # 1. Training Data Augmentation
         if self.training_augmenter:
@@ -444,7 +449,7 @@ class BartInterpolatorPLM:
         import logging
         from transformers import TrainingArguments, Trainer, EarlyStoppingCallback
 
-        logger = logging.getLogger(__name__)
+        logger = get_logger(__name__)
 
         # Skip if model already trained and reuse enabled
         if (
@@ -746,7 +751,7 @@ class BartInterpolatorPLM:
             List of PairExample with context information
         """
         import logging
-        logger = logging.getLogger(__name__)
+        logger = get_logger(__name__)
 
         logger.info("[BART] Building context-aware training pairs...")
 
@@ -896,10 +901,10 @@ class BartInterpolatorPLM:
             src_token_positions = {token: idx for idx, token in enumerate(src_tokens) if token in shared_tokens}
             tgt_token_positions = {token: idx for idx, token in enumerate(tgt_tokens) if token in shared_tokens}
 
-            logger.debug(f"[FORCED_DECODING] Input: '{val_src}' + '{val_tgt}'")
-            logger.debug(f"[FORCED_DECODING] Shared tokens: {shared_tokens}")
-            logger.debug(f"[FORCED_DECODING] Source positions: {src_token_positions}")
-            logger.debug(f"[FORCED_DECODING] Target positions: {tgt_token_positions}")
+            logger.verbose(f"[FORCED_DECODING] Input: '{val_src}' + '{val_tgt}'")
+            logger.verbose(f"[FORCED_DECODING] Shared tokens: {shared_tokens}")
+            logger.verbose(f"[FORCED_DECODING] Source positions: {src_token_positions}")
+            logger.verbose(f"[FORCED_DECODING] Target positions: {tgt_token_positions}")
 
         # Standard approach: tokenize values directly
         toks = self.tokenizer([val_src, val_tgt], return_tensors="pt",
@@ -928,6 +933,23 @@ class BartInterpolatorPLM:
         # asymmetric latent mix
         h_mix_src = (1 - alpha) * h1 + alpha * h2
         h_mix_tgt = (1 - alpha) * h2 + alpha * h1
+
+        # Noise injection (force creativity when inputs are identical)
+        if self.enable_noise_injection:
+            should_inject = False
+            if self.noise_apply_when == "identical_inputs":
+                # Only inject when source and target are identical
+                should_inject = (val_src.lower().strip() == val_tgt.lower().strip())
+            elif self.noise_apply_when == "always":
+                # Always inject noise
+                should_inject = True
+
+            if should_inject:
+                noise_src = torch.randn_like(h_mix_src) * self.noise_std
+                noise_tgt = torch.randn_like(h_mix_tgt) * self.noise_std
+                h_mix_src = h_mix_src + noise_src
+                h_mix_tgt = h_mix_tgt + noise_tgt
+                logger.info(f"[NOISE_INJECTION] Injected noise (std={self.noise_std}) for identical inputs: '{val_src}'")
 
         enc_src = BaseModelOutput(last_hidden_state=h_mix_src.unsqueeze(0))  # (1, seq, dim)
         enc_tgt = BaseModelOutput(last_hidden_state=h_mix_tgt.unsqueeze(0))  # (1, seq, dim)
@@ -1031,13 +1053,17 @@ class BartInterpolatorPLM:
                         token_mapping[input_token] = output_token
                     else:
                         # Output generated fewer tokens than input - cannot map this position
-                        logger.debug(f"[TOKEN_CONSISTENCY] Cannot map '{input_token}' at position {src_pos}: "
-                                    f"output has only {len(src_output_tokens)} tokens (valid indices: 0-{len(src_output_tokens)-1}). "
-                                    f"Skipping this token.")
+                        logger.verbose(
+                            "[TOKEN_CONSISTENCY] Cannot map '%s' at position %s: output has only %s tokens (valid indices: 0-%s). Skipping this token.",
+                            input_token,
+                            src_pos,
+                            len(src_output_tokens),
+                            len(src_output_tokens) - 1,
+                        )
 
-                logger.debug(f"[TOKEN_CONSISTENCY] Source output: '{out_src}'")
-                logger.debug(f"[TOKEN_CONSISTENCY] Target output (before): '{out_tgt}'")
-                logger.debug(f"[TOKEN_CONSISTENCY] Token mapping: {token_mapping}")
+                logger.verbose(f"[TOKEN_CONSISTENCY] Source output: '{out_src}'")
+                logger.verbose(f"[TOKEN_CONSISTENCY] Target output (before): '{out_tgt}'")
+                logger.verbose(f"[TOKEN_CONSISTENCY] Token mapping: {token_mapping}")
 
                 # Apply consistent transformations to target
                 for input_token, tgt_pos in tgt_token_positions.items():
@@ -1046,15 +1072,14 @@ class BartInterpolatorPLM:
                             # Replace target token with source transformation
                             old_token = tgt_output_tokens[tgt_pos]
                             tgt_output_tokens[tgt_pos] = token_mapping[input_token]
-                            logger.debug(f"[TOKEN_CONSISTENCY] Position {tgt_pos}: '{old_token}' → '{token_mapping[input_token]}'")
+                            logger.verbose(f"[TOKEN_CONSISTENCY] Position {tgt_pos}: '{old_token}' → '{token_mapping[input_token]}'")
                         else:
-                            logger.debug(f"[TOKEN_CONSISTENCY] Cannot apply mapping for '{input_token}' at position {tgt_pos}: "
+                            logger.verbose(f"[TOKEN_CONSISTENCY] Cannot apply mapping for '{input_token}' at position {tgt_pos}: "
                                         f"target output has only {len(tgt_output_tokens)} tokens (valid indices: 0-{len(tgt_output_tokens)-1})")
                     else:
-                        logger.debug(f"[TOKEN_CONSISTENCY] Skipping '{input_token}' at position {tgt_pos}: no mapping available from source")
+                        logger.verbose(f"[TOKEN_CONSISTENCY] Skipping '{input_token}' at position {tgt_pos}: no mapping available from source")
 
                 out_tgt = ' '.join(tgt_output_tokens)
-                logger.debug(f"[TOKEN_CONSISTENCY] Target output (after): '{out_tgt}'")
+                logger.verbose(f"[TOKEN_CONSISTENCY] Target output (after): '{out_tgt}'")
 
         return out_src, out_tgt
-

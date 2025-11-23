@@ -11,7 +11,6 @@ from statistics import mean, pstdev
 from typing import Dict, Iterable, List, Tuple
 
 import matplotlib.pyplot as plt
-import logging
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -38,6 +37,7 @@ from experiments.statistics.visualizations import (
     plot_scatter_correlation,
     plot_delta_chart,
 )
+from src.logger import get_logger
 
 # Load configuration
 stats_config = get_statistics_config()
@@ -52,6 +52,8 @@ PLOT_METRICS = stats_config.plot_metrics
 METRIC_COLORS = stats_config.metric_colors
 DEFAULT_DPI = stats_config.default_dpi
 PLOT_DPI = DEFAULT_DPI
+
+logger = get_logger("experiments.statistics")
 
 
 def _parse_experiment_name(path: Path) -> Tuple[str | None, float | None, float | None]:
@@ -681,8 +683,7 @@ def load_global_config() -> Dict:
 
 
 def main() -> None:
-    logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(message)s")
-    logger = logging.getLogger("experiments.statistics")
+    logger = get_logger("experiments.statistics", level="INFO")
 
     # Use statistics config for defaults, fall back to global config
     global_cfg = load_global_config()

@@ -5,7 +5,6 @@ This module provides sophisticated predicate matching capabilities using
 sentence transformer embeddings for semantic similarity.
 """
 
-import logging
 import os
 import pickle
 import re
@@ -16,7 +15,9 @@ from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
 from rdflib import URIRef, Literal
 
-logger = logging.getLogger(__name__)
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 @dataclass
