@@ -38,7 +38,7 @@ augmenter = PLMAugmenter({
             "model_name": "facebook/bart-base",  # Use smaller model for 8GB GPU
             "enable_finetuning": True,
             "force_retrain": True,  # Force retrain to apply new optimal parameters
-            "out_dir": "./tests/bart_test_model",  # Percorso originale
+            "out_dir": "./bart_plm_model_base_optimal",  # New model with optimal params
             "epochs": 2,  # Ridotto per test veloci
             "batch_size": 4,  # Reduced batch size for 8GB GPU
             "max_train_samples": 1000,  # Limitato per test veloci
