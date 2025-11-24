@@ -57,7 +57,7 @@ augmentation:
       do_sample: true             # Enable sampling
       top_k: 0                    # Top-k sampling (0 = disabled, use top_p)
       top_p: 0.9                  # Nucleus sampling (optimal from tuning)
-      temperature: 1.0            # Sampling temperature (optimal from tuning)
+      temperature: 0.9            # Sampling temperature (optimal from tuning)
       num_beams: 2                # Beam search (optimal from tuning)
       repetition_penalty: 1.7     # Repetition penalty (optimal from tuning)
       length_penalty: 1.0         # Length penalty (neutral)
@@ -65,12 +65,12 @@ augmentation:
 
       # Noise injection (force creativity when source=target)
       enable_noise_injection: true  # Enable noise injection (optimal from tuning)
-      noise_std: 0.20             # Base noise level (increases on retry if needed)
+      noise_std: 0.10             # Base noise level (increases on retry if needed)
       noise_apply_when: "identical_inputs"  # "identical_inputs" or "always"
 
       # Retry mechanism to avoid identical tokens in output
       enable_retry_on_identical_tokens: true  # Retry if output contains identical tokens from input
-      max_retries: 3              # Maximum retry attempts (noise increases each time)
+      max_retries: 10              # Maximum retry attempts (noise increases each time)
       noise_increment: 0.05       # Increase noise by this amount on each retry
 
     # Semantic predicate matching configuration

@@ -52,7 +52,7 @@ augmenter = PLMAugmenter({
 
             # BART interpolation parameters (OPTIMAL TUNED VALUES)
             "base_alpha": 0.5,        # Base interpolation weight (balanced)
-            "alpha_spread": 0.45,     # Moderate spread for balanced mixing (reduced from 0.55)
+            "alpha_spread": 0.50,     # Moderate spread for balanced mixing (reduced from 0.55)
 
             # Generation parameters (OPTIMAL TUNED VALUES - score: 0.924)
             "generation": {
@@ -60,20 +60,20 @@ augmenter = PLMAugmenter({
                 "do_sample": True,
                 "top_k": 0,              # Disabled (use top_p instead)
                 "top_p": 0.9,            # Nucleus sampling (optimal from tuning)
-                "temperature": 1.0,      # Sampling temperature (optimal from tuning)
+                "temperature": 0.9,      # Sampling temperature (optimal from tuning)
                 "num_beams": 2,          # Beam search (optimal from tuning)
                 "repetition_penalty": 1.7,  # Repetition penalty (optimal from tuning)
-                "length_penalty": 1.0,   # Neutral
+                "length_penalty": 1.3,   # Neutral
                 "no_repeat_ngram_size": 3,  # N-gram blocking (optimal from tuning)
 
                 # Noise injection (moderate noise + moderate alpha_spread = balanced creativity)
                 "enable_noise_injection": True,  # Enable noise injection
-                "noise_std": 0.20,       # Base noise level
+                "noise_std": 0.10,       # Base noise level
                 "noise_apply_when": "identical_inputs",  # Only when source=target
 
                 # Retry mechanism to avoid identical tokens
                 "enable_retry_on_identical_tokens": True,  # Retry if output has identical tokens
-                "max_retries": 3,        # Maximum retry attempts
+                "max_retries": 10,        # Maximum retry attempts
                 "noise_increment": 0.05, # Increase noise by this amount on each retry
             },
 
