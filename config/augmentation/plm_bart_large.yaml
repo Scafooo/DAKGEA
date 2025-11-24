@@ -1,0 +1,138 @@
+# PLM Augmentation Configuration
+# This file contains the default configuration for PLM-based augmentation
+#
+# Note: Attribute matches (match_attr files) are loaded automatically by the dataset reader
+# if available in the dataset's attribute_data directory.
+
+augmentation:
+  # Augmentation method name (must match registry)
+  method: plm
+
+  # BFS expansion parameters
+  max_depth: 2                    # Maximum BFS depth for expansion
+  ratio: 0.5                      # Augmentation ratio (0.5 = 50% more entities)
+  max_pairs: null                 # Absolute maximum pairs (null = use ratio)
+
+  # Provenance tracking
+  add_derived_predicate: false    # Add derivedFrom triples for lineage tracking
+  derived_predicate: "http://dakgea.org/augmentation/derivedFrom"
+
+  # Value consistency - ensures consistent variations for duplicate values
+  value_consistency:
+    intra_node:
+      enabled: true               # Maintain consistency within same augmented node
+      selection: "first"          # "first" | "random" | "best" - which variation to use
+    inter_node:
+      enabled: true               # Maintain consistency across augmented nodes
+      scope: "alignment_pair"     # "alignment_pair" | "expansion_cluster" | "global"
+
+  # BART fine-tuning configuration
+  bart:
+    enable_finetuning: true       # Enable BART fine-tuning
+    model_name: "facebook/bart-large"  # BART-BASE for 8GB GPU compatibility
+    out_dir: "./bart_plm_model_base"  # Output directory for fine-tuned model
+    epochs: 16                    # Number of training epochs
+    batch_size: 64                 # Training batch size (8 for bart-base)
+    learning_rate: 3.0e-5         # Learning rate
+    force_retrain: false          # Force retraining even if model exists
+    max_train_samples: None       # Maximum training samples (null = unlimited)
+    val_split: 0.1                # Validation split ratio
+    patience: 5                   # Early stopping patience (stop if no improvement)
+    max_per_predicate: 5000       # Max examples per predicate
+
+    # Regularization (prevent overfitting)
+    weight_decay: 0.01            # L2 regularization weight
+    warmup_steps: 100             # Learning rate warmup steps
+    max_grad_norm: 1.0            # Gradient clipping threshold
+
+    # BART interpolation parameters
+    base_alpha: 0.5              # Base interpolation alpha (0.5 = balanced mixing)
+    alpha_spread: 0.35            # Alpha variation range (optimal from noise tuning)
+    max_len_in: 128                # Max input token length
+    max_len_out: 64               # Max output token length
+
+    # Generation parameters (OPTIMAL TUNED VALUES - score: 0.924)
+    generation:
+      max_new_tokens: 48          # Max tokens to generate
+      do_sample: true             # Enable sampling
+      top_k: 0                    # Top-k sampling (0 = disabled, use top_p)
+      top_p: 0.9                  # Nucleus sampling (optimal from tuning)
+      temperature: 1.2            # Sampling temperature (optimal from tuning)
+      num_beams: 4                # Beam search (optimal from tuning)
+      repetition_penalty: 1.7     # Repetition penalty (optimal from tuning)
+      length_penalty: 1.0         # Length penalty (neutral)
+      no_repeat_ngram_size: 3     # N-gram blocking (optimal from tuning)
+
+      # Noise injection (force creativity when source=target)
+      enable_noise_injection: true  # Enable noise injection (optimal from tuning)
+      noise_std: 0.045             # Base noise level (increases on retry if needed)
+      noise_apply_when: "identical_inputs"  # "identical_inputs" or "always"
+
+      # Retry mechanism to avoid identical tokens in output
+      enable_retry_on_identical_tokens: true  # Retry if output contains identical tokens from input
+      max_retries: 15              # Maximum retry attempts (noise increases each time)
+      noise_increment: 0.005       # Increase noise by this amount on each retry
+
+    # Semantic predicate matching configuration
+    predicate_matching:
+      embedding_model: "all-MiniLM-L6-v2"  # Sentence transformer model
+      similarity_threshold: 0.6    # Minimum similarity for match [0-1]
+      cache_dir: ".cache/embeddings"  # Cache directory for embeddings
+      device: null                 # "cuda", "cpu", or null (auto-detect)
+
+      # Hybrid matching (name + value similarity)
+      use_value_similarity: true   # Enable value-based matching
+      name_weight: 0.85            # Weight for semantic name similarity (85%)
+      value_weight: 0.15           # Weight for value similarity (15%)
+      alignment_sample_size: 100   # Entities to sample for pre-computation
+
+    # Unmatched attributes generation (NEW!)
+    generate_unmatched: true       # Generate variations for non-matching attributes
+    unmatched_sample_rate: 1.0     # Sample 100% of unmatched attrs (0.0-1.0, 1.0=all)
+
+    # Advanced training techniques (modular - can be toggled on/off)
+    advanced_training:
+      # Stratified sampling: balance predicate distribution
+      stratified_sampling:
+        enable: false             # Enable stratified sampling
+        min_samples_per_predicate: 10  # Minimum samples per predicate
+        max_samples_per_predicate: 1000  # Maximum samples per predicate
+        balancing_strategy: "sqrt"  # "uniform", "sqrt", "log"
+
+      # Contrastive learning: learn from negative examples
+      contrastive_learning:
+        enable: false             # Enable contrastive learning
+        num_negatives: 3          # Number of hard negatives per positive
+        contrastive_weight: 0.3   # Weight of contrastive loss (vs reconstruction)
+        temperature: 0.07         # Temperature for contrastive loss
+        negative_strategy: "same_predicate"  # "same_predicate", "same_type", "random"
+
+      # Multi-task learning: auxiliary prediction tasks
+      multi_task_learning:
+        enable: false             # Enable multi-task learning
+        predict_attribute_type: true   # Predict attribute type (name, date, etc.)
+        predict_predicate_match: true  # Predict if values share predicate
+        auxiliary_weight: 0.2     # Weight of auxiliary losses
+
+      # Advanced noising: better corruption strategies
+      advanced_noising:
+        enable: false             # Enable advanced noising
+        span_corruption_ratio: 0.3  # Ratio of spans to corrupt
+        mean_span_length: 3       # Average span length to mask
+        entity_aware_masking: true  # Mask named entities with higher probability
+        entity_mask_prob: 0.5     # Probability of masking detected entities
+
+      # Curriculum learning: easy to hard examples
+      curriculum_learning:
+        enable: false             # Enable curriculum learning
+        strategy: "length"        # "length", "predicate_frequency", "custom"
+        num_phases: 3             # Number of curriculum phases
+        phase_epochs: [3, 3, 4]   # Epochs per phase (must sum to total epochs)
+
+      # Data augmentation for training: synthetic variations
+      training_augmentation:
+        enable: true              # Enable training data augmentation
+        synonym_replacement: false  # Replace words with synonyms
+        back_translation: false   # Use back-translation
+        random_noise: true        # Add random character noise (downing → dowing, kenneth → kennith)
+        augmentation_ratio: 0.3   # Ratio of augmented samples to add (30% more samples with noise)
