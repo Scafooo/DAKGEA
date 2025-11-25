@@ -73,8 +73,10 @@ augmenter = PLMAugmenter({
 
                 # Retry mechanism to avoid identical tokens
                 "enable_retry_on_identical_tokens": True,  # Retry if output has identical tokens
-                "max_retries": 10,        # Maximum retry attempts
-                "noise_increment": 0.05, # Increase noise by this amount on each retry
+                "max_retries": 100,        # Maximum retry attempts
+                "noise_increment": 0.0,    # Increase noise by this amount on each retry (0.0 = keep fixed)
+                "temperature_increment": 0.02,  # Increase temperature by this amount on each retry
+                "identical_tokens_threshold": 0.3,  # Trigger retry only if >30% of tokens are identical
             },
 
             # Semantic predicate matching configuration

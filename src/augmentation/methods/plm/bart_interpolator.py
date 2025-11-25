@@ -196,6 +196,8 @@ class BartInterpolatorPLM:
         self.enable_retry_on_identical_tokens = bool(gen_cfg.get("enable_retry_on_identical_tokens", False))
         self.max_retries = int(gen_cfg.get("max_retries", 3))
         self.noise_increment = float(gen_cfg.get("noise_increment", 0.05))  # Increase noise on each retry
+        self.temperature_increment = float(gen_cfg.get("temperature_increment", 0.02))  # Increase temperature on each retry
+        self.identical_tokens_threshold = float(gen_cfg.get("identical_tokens_threshold", 0.3))  # Overlap threshold for retry
 
         os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
@@ -892,10 +894,38 @@ class BartInterpolatorPLM:
         else:
             return self._interpolate_single(val_src, val_tgt, max_new_tokens, predicate)
 
-    def _has_identical_tokens(self, input_text: str, output_text: str) -> bool:
-        """Check if output contains exact tokens from input (case-insensitive)."""
+    def _calculate_token_overlap(self, input_text: str, output_text: str) -> float:
+        """Calculate percentage of identical tokens between input and output (excluding stopwords).
+
+        Returns:
+            Overlap ratio (0.0-1.0): number of identical tokens / total output tokens
+        """
         input_tokens = set(input_text.lower().split())
-        output_tokens = set(output_text.lower().split())
+        output_tokens_list = output_text.lower().split()
+
+        # Filter out very short tokens (1-2 chars) and common stopwords
+        stopwords = {'a', 'an', 'the', 'in', 'on', 'at', 'to', 'of', 'and', 'or', 'is', 'are', 'was', 'were', 'be', 'been', 'by'}
+        input_tokens = {t for t in input_tokens if len(t) > 2 and t not in stopwords}
+        output_tokens_filtered = [t for t in output_tokens_list if len(t) > 2 and t not in stopwords]
+
+        if not output_tokens_filtered:
+            return 0.0
+
+        # Count identical tokens in output
+        identical_count = sum(1 for t in output_tokens_filtered if t in input_tokens)
+        overlap_ratio = identical_count / len(output_tokens_filtered)
+
+        return overlap_ratio
+
+    def _has_identical_tokens(self, input_text: str, output_text: str) -> bool:
+        """Check if output contains identical tokens above threshold."""
+        overlap = self._calculate_token_overlap(input_text, output_text)
+        return overlap > self.identical_tokens_threshold
+
+    def _get_identical_tokens(self, input_text: str, output_text: str) -> List[str]:
+        """Get list of identical tokens between input and output (for blocking)."""
+        input_tokens = set(input_text.lower().strip().split())
+        output_tokens = set(output_text.lower().strip().split())
 
         # Filter out very short tokens (1-2 chars) and common stopwords
         stopwords = {'a', 'an', 'the', 'in', 'on', 'at', 'to', 'of', 'and', 'or', 'is', 'are', 'was', 'were', 'be', 'been', 'by'}
@@ -903,7 +933,7 @@ class BartInterpolatorPLM:
         output_tokens = {t for t in output_tokens if len(t) > 2 and t not in stopwords}
 
         identical = input_tokens & output_tokens
-        return len(identical) > 0
+        return list(identical)
 
     def _interpolate_with_retry(
         self,
@@ -914,33 +944,51 @@ class BartInterpolatorPLM:
     ) -> Tuple[str, str]:
         """Interpolate with retry mechanism if output contains identical tokens."""
         original_noise_std = self.noise_std
+        original_temperature = self.gen_temperature
+        blocked_tokens = []
 
         for attempt in range(self.max_retries):
-            # Generate output
-            out_src, out_tgt = self._interpolate_single(val_src, val_tgt, max_new_tokens, predicate)
+            # Generate output - force noise on retry attempts (attempt > 0)
+            force_noise = (attempt > 0)
+            out_src, out_tgt = self._interpolate_single(
+                val_src, val_tgt, max_new_tokens, predicate,
+                force_noise=force_noise,
+                blocked_tokens=blocked_tokens if attempt > 0 else None
+            )
 
-            # Check if inputs are identical (noise was injected)
-            if val_src.lower().strip() == val_tgt.lower().strip():
-                # Check for identical tokens
-                has_identical_src = self._has_identical_tokens(val_src, out_src)
-                has_identical_tgt = self._has_identical_tokens(val_tgt, out_tgt)
+            # Check for identical tokens (regardless of whether inputs are identical)
+            overlap_src = self._calculate_token_overlap(val_src, out_src)
+            overlap_tgt = self._calculate_token_overlap(val_tgt, out_tgt)
+            has_identical_src = overlap_src > self.identical_tokens_threshold
+            has_identical_tgt = overlap_tgt > self.identical_tokens_threshold
 
-                if has_identical_src or has_identical_tgt:
-                    if attempt < self.max_retries - 1:
-                        # Increase noise and retry
-                        self.noise_std += self.noise_increment
-                        logger.debug(f"[RETRY] Attempt {attempt + 1}/{self.max_retries}: Found identical tokens, increasing noise to {self.noise_std:.3f}")
-                        logger.debug(f"  Input: '{val_src}' → Output: '{out_src}' / '{out_tgt}'")
-                        continue
-                    else:
-                        logger.debug(f"[RETRY] Max retries reached, accepting output with identical tokens")
+            if has_identical_src or has_identical_tgt:
+                if attempt < self.max_retries - 1:
+                    # Extract identical tokens to block in next attempt
+                    identical_src = self._get_identical_tokens(val_src, out_src)
+                    identical_tgt = self._get_identical_tokens(val_tgt, out_tgt)
+                    blocked_tokens = list(set(identical_src + identical_tgt))
 
-            # Success - restore original noise and return
+                    # Increase noise and temperature for next retry
+                    self.noise_std += self.noise_increment
+                    self.gen_temperature += self.temperature_increment
+                    logger.debug(f"[RETRY] Attempt {attempt + 1}/{self.max_retries}: Overlap {overlap_src:.1%}/{overlap_tgt:.1%} > {self.identical_tokens_threshold:.1%}")
+                    logger.debug(f"[CONSTRAINED_DECODING] Will block tokens: {blocked_tokens}")
+                    logger.debug(f"[NOISE_INJECTION] Increasing noise to {self.noise_std:.3f}")
+                    logger.debug(f"[TEMPERATURE_INJECTION] Increasing temperature to {self.gen_temperature:.3f}")
+                    logger.debug(f"  Input: '{val_src}' / '{val_tgt}' → Output: '{out_src}' / '{out_tgt}'")
+                    continue
+                else:
+                    logger.debug(f"[RETRY] Max retries reached, accepting output with identical tokens")
+
+            # Success - restore original parameters and return
             self.noise_std = original_noise_std
+            self.gen_temperature = original_temperature
             return out_src, out_tgt
 
-        # Max retries reached - restore noise and return last attempt
+        # Max retries reached - restore parameters and return last attempt
         self.noise_std = original_noise_std
+        self.gen_temperature = original_temperature
         return out_src, out_tgt
 
     def _interpolate_single(
@@ -949,8 +997,14 @@ class BartInterpolatorPLM:
         val_tgt: str,
         max_new_tokens: int = 32,
         predicate: str = "",
+        force_noise: bool = False,
+        blocked_tokens: Optional[List[str]] = None,
     ) -> Tuple[str, str]:
-        """Single interpolation attempt (original logic)."""
+        """Single interpolation attempt (original logic).
+
+        Args:
+            blocked_tokens: List of tokens to block from generation (constrained decoding)
+        """
 
         # TOKEN-LEVEL CONSISTENCY with FORCED DECODING:
         # 1. Generate source with latent mixing
@@ -1005,10 +1059,13 @@ class BartInterpolatorPLM:
         h_mix_src = (1 - alpha) * h1 + alpha * h2
         h_mix_tgt = (1 - alpha) * h2 + alpha * h1
 
-        # Noise injection (force creativity when inputs are identical)
+        # Noise injection (force creativity when inputs are identical or when retrying)
         if self.enable_noise_injection:
             should_inject = False
-            if self.noise_apply_when == "identical_inputs":
+            if force_noise:
+                # Force noise during retry attempts
+                should_inject = True
+            elif self.noise_apply_when == "identical_inputs":
                 # Only inject when source and target are identical
                 should_inject = (val_src.lower().strip() == val_tgt.lower().strip())
             elif self.noise_apply_when == "always":
@@ -1020,7 +1077,8 @@ class BartInterpolatorPLM:
                 noise_tgt = torch.randn_like(h_mix_tgt) * self.noise_std
                 h_mix_src = h_mix_src + noise_src
                 h_mix_tgt = h_mix_tgt + noise_tgt
-                logger.info(f"[NOISE_INJECTION] Injected noise (std={self.noise_std}) for identical inputs: '{val_src}'")
+                reason = "retry" if force_noise else "identical inputs"
+                logger.info(f"[NOISE_INJECTION] Injected noise (std={self.noise_std:.3f}) for {reason}: '{val_src}' / '{val_tgt}'")
 
         enc_src = BaseModelOutput(last_hidden_state=h_mix_src.unsqueeze(0))  # (1, seq, dim)
         enc_tgt = BaseModelOutput(last_hidden_state=h_mix_tgt.unsqueeze(0))  # (1, seq, dim)
@@ -1029,6 +1087,18 @@ class BartInterpolatorPLM:
 
         start = torch.tensor([[self.model.config.decoder_start_token_id]], device=self.device)
         bad = self.tokenizer.convert_tokens_to_ids(['<SRC>', '<TGT>', '<SEP>'])
+
+        # Add blocked tokens to bad_words_ids (constrained decoding)
+        bad_words_ids_list = [[i] for i in bad]
+        if blocked_tokens:
+            # Tokenize blocked tokens and add to bad_words list
+            for token in blocked_tokens:
+                # Get token IDs for the blocked token (handle subword tokenization)
+                token_ids = self.tokenizer.encode(token, add_special_tokens=False)
+                for tid in token_ids:
+                    if [tid] not in bad_words_ids_list:
+                        bad_words_ids_list.append([tid])
+            logger.debug(f"[CONSTRAINED_DECODING] Blocking {len(blocked_tokens)} tokens: {blocked_tokens}")
 
         # Use configurable generation parameters
         gen_kwargs = dict(
@@ -1044,7 +1114,7 @@ class BartInterpolatorPLM:
             length_penalty=self.gen_length_penalty,
             early_stopping=True,
             remove_invalid_values=True,
-            bad_words_ids=[[i] for i in bad],
+            bad_words_ids=bad_words_ids_list,
         )
 
         # If edit distance constraint is enabled, generate multiple candidates
