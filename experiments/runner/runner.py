@@ -6,6 +6,7 @@ import copy
 import json
 import logging
 import shutil
+import warnings
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -14,6 +15,15 @@ from src.core.dataset import Dataset
 from src.core.dataset.reader import DatasetReaderFactory
 from src.core.dataset.writer import DatasetWriterFactory
 from src.logger import get_logger
+
+# Suppress RDFLib warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="rdflib")
+warnings.filterwarnings("ignore", message=".*rdflib.*")
+
+# Suppress specific RDFLib loggers
+logging.getLogger("rdflib").setLevel(logging.ERROR)
+logging.getLogger("rdflib.term").setLevel(logging.ERROR)
+logging.getLogger("rdflib.plugins").setLevel(logging.ERROR)
 
 logger = get_logger(__name__)
 
