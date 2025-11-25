@@ -384,6 +384,9 @@ class BertIntAlignment:
             "hits@50": interaction_results.get("hits@50", 0.0),
             "mr": interaction_results.get("mr", 0.0),
             "mrr": interaction_results.get("mrr", 0.0),
+            "precision": interaction_results.get("precision", 0.0),
+            "recall": interaction_results.get("recall", 0.0),
+            "f-measure": interaction_results.get("f-measure", 0.0),
             "evaluated": interaction_results.get("total", 0),
             "_note": "BERT-INT is a two-phase model. Top-level metrics are from phase 2 (interaction_model).",
         }

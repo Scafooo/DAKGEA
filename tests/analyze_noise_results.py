@@ -159,10 +159,41 @@ def main():
     print(f"  TOTAL:         {total:3d}")
     print("="*140 + "\n")
 
+    # Calculate metrics
+    # True Positives (TP): GOOD results
+    # False Positives (FP): TOO_CREATIVE results
+    # False Negatives (FN): CONSERVATIVE results
+    tp = stats['GOOD']
+    fp = stats['TOO_CREATIVE']
+    fn = stats['CONSERVATIVE']
+
+    # Precision: TP / (TP + FP)
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+
+    # Recall: TP / (TP + FN)
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+
+    # F1-Score: 2 × (Precision × Recall) / (Precision + Recall)
+    f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
+
     # Show score
     score = stats['GOOD'] - 0.5 * stats['CONSERVATIVE'] - stats['TOO_CREATIVE']
     print(f"SCORE: {score:.1f} (max = {total})")
     print(f"  Formula: GOOD - 0.5×CONSERVATIVE - TOO_CREATIVE")
+    print()
+
+    # Show metrics
+    print("="*140)
+    print("METRICS")
+    print("="*140)
+    print(f"Precision: {precision:.3f}  (TP / (TP + FP) = GOOD / (GOOD + TOO_CREATIVE))")
+    print(f"Recall:    {recall:.3f}  (TP / (TP + FN) = GOOD / (GOOD + CONSERVATIVE))")
+    print(f"F1-Score:  {f1_score:.3f}  (2 × Precision × Recall / (Precision + Recall))")
+    print("="*140 + "\n")
+    print(f"Where:")
+    print(f"  TP (True Positives)  = {tp:3d} (GOOD results)")
+    print(f"  FP (False Positives) = {fp:3d} (TOO_CREATIVE results)")
+    print(f"  FN (False Negatives) = {fn:3d} (CONSERVATIVE results)")
     print()
 
 
