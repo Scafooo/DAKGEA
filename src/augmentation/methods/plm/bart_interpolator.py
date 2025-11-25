@@ -903,10 +903,10 @@ class BartInterpolatorPLM:
         input_tokens = set(input_text.lower().split())
         output_tokens_list = output_text.lower().split()
 
-        # Filter out very short tokens (1-2 chars) and common stopwords
+        # Filter out only common stopwords (but keep short tokens like "al", "di", etc.)
         stopwords = {'a', 'an', 'the', 'in', 'on', 'at', 'to', 'of', 'and', 'or', 'is', 'are', 'was', 'were', 'be', 'been', 'by'}
-        input_tokens = {t for t in input_tokens if len(t) > 2 and t not in stopwords}
-        output_tokens_filtered = [t for t in output_tokens_list if len(t) > 2 and t not in stopwords]
+        input_tokens = {t for t in input_tokens if t not in stopwords}
+        output_tokens_filtered = [t for t in output_tokens_list if t not in stopwords]
 
         if not output_tokens_filtered:
             return 0.0
@@ -916,6 +916,31 @@ class BartInterpolatorPLM:
         overlap_ratio = identical_count / len(output_tokens_filtered)
 
         return overlap_ratio
+
+    def _calculate_output_similarity(self, out_src: str, out_tgt: str) -> float:
+        """Calculate similarity between two outputs.
+
+        Returns:
+            Similarity ratio (0.0-1.0): Jaccard similarity of tokens
+        """
+        tokens_src = set(out_src.lower().split())
+        tokens_tgt = set(out_tgt.lower().split())
+
+        # Filter out only common stopwords (but keep short tokens like "al", "di", etc.)
+        stopwords = {'a', 'an', 'the', 'in', 'on', 'at', 'to', 'of', 'and', 'or', 'is', 'are', 'was', 'were', 'be', 'been', 'by'}
+        tokens_src = {t for t in tokens_src if t not in stopwords}
+        tokens_tgt = {t for t in tokens_tgt if t not in stopwords}
+
+        if not tokens_src and not tokens_tgt:
+            return 0.0
+        if not tokens_src or not tokens_tgt:
+            return 0.0
+
+        # Jaccard similarity
+        intersection = tokens_src & tokens_tgt
+        union = tokens_src | tokens_tgt
+
+        return len(intersection) / len(union) if union else 0.0
 
     def _has_identical_tokens(self, input_text: str, output_text: str) -> bool:
         """Check if output contains identical tokens above threshold."""
@@ -960,12 +985,19 @@ class BartInterpolatorPLM:
                 blocked_tokens=blocked_tokens if attempt > 0 else None
             )
 
-            # Check for identical tokens (regardless of whether inputs are identical)
+            # Check for identical tokens between input and output
             overlap_src = self._calculate_token_overlap(val_src, out_src)
             overlap_tgt = self._calculate_token_overlap(val_tgt, out_tgt)
+
             max_overlap = max(overlap_src, overlap_tgt)
             has_identical_src = overlap_src > self.identical_tokens_threshold
             has_identical_tgt = overlap_tgt > self.identical_tokens_threshold
+
+            # Debug log for the first attempt
+            if attempt == 0:
+                logger.debug(f"[RETRY_CHECK] Input: '{val_src}' / '{val_tgt}' → Output: '{out_src}' / '{out_tgt}'")
+                logger.debug(f"[RETRY_CHECK] Overlaps: src={overlap_src:.1%} tgt={overlap_tgt:.1%} (threshold={self.identical_tokens_threshold:.1%})")
+                logger.debug(f"[RETRY_CHECK] Will retry: {has_identical_src or has_identical_tgt}")
 
             # Track best attempt
             if max_overlap < best_overlap:
@@ -982,7 +1014,7 @@ class BartInterpolatorPLM:
                     # Increase noise and temperature for next retry
                     self.noise_std += self.noise_increment
                     self.gen_temperature += self.temperature_increment
-                    logger.debug(f"[RETRY] Attempt {attempt + 1}/{self.max_retries}: Overlap {overlap_src:.1%}/{overlap_tgt:.1%} > {self.identical_tokens_threshold:.1%}")
+                    logger.debug(f"[RETRY] Attempt {attempt + 1}/{self.max_retries}: Overlap src={overlap_src:.1%} tgt={overlap_tgt:.1%} > threshold={self.identical_tokens_threshold:.1%}")
                     logger.debug(f"[CONSTRAINED_DECODING] Will block tokens: {blocked_tokens}")
                     logger.debug(f"[NOISE_INJECTION] Increasing noise to {self.noise_std:.3f}")
                     logger.debug(f"[TEMPERATURE_INJECTION] Increasing temperature to {self.gen_temperature:.3f}")
