@@ -875,8 +875,47 @@ class ExperimentRunner:
             if retry_enabled and self.augmentation_eval and self.reduction_eval:
                 # Check if augmentation results already exist (for resume)
                 results_path = dataset_workspace / "augmentation" / "results.json"
+                should_skip_retry = False
+
                 if results_path.exists() and not self.overwrite_existing:
-                    logger.info("⏭️  Skipping augmentation with retry '%s' (results already exist)", aug_name)
+                    # Check if existing results meet the improvement threshold
+                    metric = retry_config.get("metric", "hits@1")
+                    min_improvement = retry_config.get("min_improvement", 0.01)
+
+                    # Get reduction baseline
+                    reduction_results_path = dataset_workspace / "reduction" / "results.json"
+                    if reduction_results_path.exists():
+                        with reduction_results_path.open("r") as f:
+                            reduction_results = json.load(f)
+
+                        baseline_value = None
+                        for model_name, model_results in reduction_results.items():
+                            if isinstance(model_results, dict) and metric in model_results:
+                                baseline_value = model_results[metric]
+                                break
+
+                        if baseline_value is not None:
+                            # Check existing augmentation results
+                            with results_path.open("r") as f:
+                                aug_results = json.load(f)
+
+                            current_value = None
+                            for model_name, model_results in aug_results.items():
+                                if isinstance(model_results, dict) and metric in model_results:
+                                    current_value = model_results[metric]
+                                    break
+
+                            if current_value is not None:
+                                improvement = current_value - baseline_value
+                                if improvement >= min_improvement:
+                                    logger.info("✅ Skipping augmentation with retry '%s' (results already meet improvement threshold: %.4f >= %.4f)",
+                                              aug_name, improvement, min_improvement)
+                                    should_skip_retry = True
+                                else:
+                                    logger.info("🔁 Existing results insufficient (improvement: %.4f < %.4f), will retry augmentation '%s'",
+                                              improvement, min_improvement, aug_name)
+
+                if should_skip_retry:
                     augmentation_meta = ratio_meta.setdefault("augmentations", {}).setdefault(
                         aug_name, {}
                     )
