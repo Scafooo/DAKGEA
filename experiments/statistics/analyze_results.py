@@ -48,7 +48,8 @@ SUMMARY_FILENAME = stats_config.summary_filename
 METADATA_FILENAME = stats_config.metadata_filename
 STAGES = tuple(stats_config.stages)
 DEFAULT_METRICS = stats_config.default_metrics
-PLOT_METRICS = stats_config.plot_metrics
+PLOT_METRICS = stats_config.plot_metrics  # Dict[str, List[str]] - grouped by metric type
+METRIC_GROUPS = stats_config.metric_groups  # Dict[str, List[str]] - all metric groups
 METRIC_COLORS = stats_config.metric_colors
 DEFAULT_DPI = stats_config.default_dpi
 PLOT_DPI = DEFAULT_DPI
@@ -736,13 +737,15 @@ def main() -> None:
                 ratio_str = f" (ratio mean={ratios['mean']:.3f})"
             logger.info("  %s%s", stage.capitalize(), ratio_str)
             if stage == "augmentation" and dataset_entries:
-                ratio_summary = _aggregate_ratio_metrics(dataset_entries, PLOT_METRICS)
+                # Flatten all plot metrics from all groups for summary
+                all_plot_metrics = [m for group_metrics in PLOT_METRICS.values() for m in group_metrics]
+                ratio_summary = _aggregate_ratio_metrics(dataset_entries, all_plot_metrics)
                 if ratio_summary:
                     logger.info("      augmentation ratios:")
                     for ratio_value in sorted(ratio_summary.keys()):
                         metric_summary = ", ".join(
                             f"{metric}={ratio_summary[ratio_value][metric]:.3f}"
-                            for metric in PLOT_METRICS
+                            for metric in all_plot_metrics
                             if metric in ratio_summary[ratio_value] and ratio_summary[ratio_value][metric] is not None
                         )
                         logger.info("        - %0.3f: %s", ratio_value, metric_summary)
@@ -838,10 +841,19 @@ def main() -> None:
         else:
             logger.warning("Excel export skipped (openpyxl not installed). Install with: pip install openpyxl")
 
-    ratio_plot_groups = build_ratio_plot_data(ratio_entries, PLOT_METRICS)
-    for dataset, ratio_group in ratio_plot_groups.items():
-        plot_ratio_groups(dataset, ratio_group, PLOT_METRICS, plots_base)
-        plot_ratio_trends(dataset, ratio_group, PLOT_METRICS, plots_base)
+    # Generate plots for each metric group (ranking, classification, etc.)
+    for group_name, group_metrics in PLOT_METRICS.items():
+        logger.info(f"Generating {group_name} metrics plots...")
+
+        # Get output directory for this group
+        group_plots_dir = Path(stats_config.get_plots_output_dir_for_group(group_name))
+        group_plots_dir.mkdir(parents=True, exist_ok=True)
+
+        # Build and plot ratio data for this group
+        ratio_plot_groups = build_ratio_plot_data(ratio_entries, group_metrics)
+        for dataset, ratio_group in ratio_plot_groups.items():
+            plot_ratio_groups(dataset, ratio_group, group_metrics, group_plots_dir)
+            plot_ratio_trends(dataset, ratio_group, group_metrics, group_plots_dir)
 
     # Generate advanced visualizations if requested
     if args.enable_advanced_plots:

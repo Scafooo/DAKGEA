@@ -60,8 +60,21 @@ class StatisticsConfig:
         ])
 
     @property
-    def plot_metrics(self) -> List[str]:
-        return self._config.get("metrics", {}).get("plot", ["hits@1", "hits@10"])
+    def metric_groups(self) -> Dict[str, List[str]]:
+        """Get metric groups (ranking, classification, etc.)."""
+        return self._config.get("metrics", {}).get("groups", {
+            "ranking": ["hits@1", "hits@5", "hits@10", "mrr", "mr"],
+            "classification": ["precision", "recall", "f-measure"]
+        })
+
+    @property
+    def plot_metrics(self) -> Dict[str, List[str]]:
+        """Get plot metrics organized by group."""
+        plot_config = self._config.get("metrics", {}).get("plot", {})
+        if isinstance(plot_config, list):
+            # Backward compatibility: if plot is a list, return as ranking metrics
+            return {"ranking": plot_config}
+        return plot_config
 
     @property
     def normalized_metrics(self) -> List[str]:
@@ -118,6 +131,23 @@ class StatisticsConfig:
     @property
     def plots_output_dir(self) -> str:
         return self._config.get("export", {}).get("output_dirs", {}).get("plots", "results_analysis")
+
+    @property
+    def plots_ranking_output_dir(self) -> str:
+        return self._config.get("export", {}).get("output_dirs", {}).get("plots_ranking", "results_analysis/ranking_metrics")
+
+    @property
+    def plots_classification_output_dir(self) -> str:
+        return self._config.get("export", {}).get("output_dirs", {}).get("plots_classification", "results_analysis/classification_metrics")
+
+    def get_plots_output_dir_for_group(self, group: str) -> str:
+        """Get output directory for a specific metric group."""
+        if group == "ranking":
+            return self.plots_ranking_output_dir
+        elif group == "classification":
+            return self.plots_classification_output_dir
+        else:
+            return self.plots_output_dir
 
     @property
     def exports_output_dir(self) -> str:

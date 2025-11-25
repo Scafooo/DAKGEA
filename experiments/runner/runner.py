@@ -873,6 +873,16 @@ class ExperimentRunner:
             retry_enabled = retry_config.get("enabled", False)
 
             if retry_enabled and self.augmentation_eval and self.reduction_eval:
+                # Check if augmentation results already exist (for resume)
+                results_path = dataset_workspace / "augmentation" / "results.json"
+                if results_path.exists() and not self.overwrite_existing:
+                    logger.info("⏭️  Skipping augmentation with retry '%s' (results already exist)", aug_name)
+                    augmentation_meta = ratio_meta.setdefault("augmentations", {}).setdefault(
+                        aug_name, {}
+                    )
+                    augmentation_meta["results"] = str(results_path)
+                    continue
+
                 # Retry mechanism: repeat augmentation until improvement
                 self._run_augmentation_with_retry(
                     augmentation_stage,
