@@ -65,7 +65,7 @@ augmentation:
 
       # Noise injection (force creativity when source=target)
       enable_noise_injection: true  # Enable noise injection (optimal from tuning)
-      noise_std: 0.10             # Base noise level (increases on retry if needed)
+      noise_std: 0.001             # Base noise level (increases on retry if needed)
       noise_apply_when: "identical_inputs"  # "identical_inputs" or "always"
 
       # Retry mechanism to avoid identical tokens in output
@@ -73,7 +73,7 @@ augmentation:
       enable_retry_on_identical_tokens: true  # Enable token-level retry (set false to disable)
       max_retries: 100             # Maximum retry attempts per generation
       noise_increment: 0.0         # Increase noise by this amount on each retry (0.0 = keep fixed)
-      temperature_increment: 0.02  # Increase temperature by this amount on each retry (e.g., 0.02 = +2% per retry)
+      temperature_increment: 0.01  # Increase temperature by this amount on each retry (e.g., 0.02 = +2% per retry)
       identical_tokens_threshold: 0.3  # Trigger retry only if >30% of tokens are identical (0.0-1.0)
 
     # Semantic predicate matching configuration
