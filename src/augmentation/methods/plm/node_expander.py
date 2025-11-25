@@ -297,43 +297,44 @@ class NodeExpander:
             def reorder_output_to_match_input(input_text: str, normalized_input: str, output_text: str) -> str:
                 """Reorder output tokens to match the order of input tokens.
 
-                Example:
+                Works even when output has different number of tokens than input.
+                Reorders based on the relative positions of matching tokens in the original input.
+
+                Example with same length:
                     input_text = 'martin ain eric'
                     normalized_input = 'ain eric martin' (sorted)
-                    output_text = 'Alan Osmond Eric' (generated for normalized)
+                    output_text = 'Arms Rdy Osmond' (generated for normalized)
+                    Returns: 'Osmond Arms Rdy' (reordered to match 'martin ain eric')
 
-                    Returns: 'Osmond Alan Eric' (reordered to match 'martin ain eric')
+                Example with different lengths:
+                    input_text = 'eric ain martin'
+                    normalized_input = 'ain eric martin' (sorted)
+                    output_text = 'Arms Rdy' (only 2 tokens, for 'ain' and 'eric')
+                    Returns: 'Rdy Arms' ('eric' comes before 'ain' in input)
                 """
                 input_tokens = input_text.lower().strip().split()
                 normalized_tokens = normalized_input.lower().strip().split()
                 output_tokens = output_text.strip().split()
 
-                # If output doesn't have same number of tokens, can't reliably reorder
-                if len(output_tokens) != len(normalized_tokens):
-                    return output_text
-
                 # Create mapping: normalized position -> output token
-                token_map = {i: output_tokens[i] for i in range(len(output_tokens))}
+                token_map = {i: output_tokens[i] for i in range(min(len(output_tokens), len(normalized_tokens)))}
 
-                # Create mapping: input token -> normalized position
-                input_to_normalized_pos = {}
-                for i, token in enumerate(input_tokens):
+                # Create list of (input_position, output_token) for tokens that match
+                position_token_pairs = []
+
+                for i, input_token in enumerate(input_tokens):
+                    # Find this token in normalized
                     for j, norm_token in enumerate(normalized_tokens):
-                        if token == norm_token and j not in input_to_normalized_pos.values():
-                            input_to_normalized_pos[i] = j
+                        if input_token == norm_token and j in token_map:
+                            # This token has a corresponding output token
+                            position_token_pairs.append((i, token_map[j]))
                             break
 
-                # Reorder output to match input order
-                reordered = []
-                for i in range(len(input_tokens)):
-                    norm_pos = input_to_normalized_pos.get(i)
-                    if norm_pos is not None:
-                        reordered.append(token_map[norm_pos])
-                    else:
-                        # Fallback: use original output token
-                        reordered.append(output_tokens[i] if i < len(output_tokens) else '')
+                # Sort by input position and extract tokens
+                position_token_pairs.sort(key=lambda x: x[0])
+                reordered = [token for _, token in position_token_pairs]
 
-                return ' '.join(reordered)
+                return ' '.join(reordered) if reordered else output_text
 
             src_cache_key = normalize_cache_key(src_val_str)
             tgt_cache_key = normalize_cache_key(tgt_val_str)
