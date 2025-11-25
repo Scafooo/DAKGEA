@@ -858,6 +858,136 @@ class ExperimentRunner:
             logger.info("⏭️  Skipping baseline evaluation (reduction.eval=false)")
 
         for aug_name in self.augmentations:
+            # Check if auto-retry until improvement is enabled (from global config)
+            retry_config = global_cfg.get("auto_retry_until_improvement", {})
+            retry_enabled = retry_config.get("enabled", False)
+
+            if retry_enabled and self.augmentation_eval and self.reduction_eval:
+                # Retry mechanism: repeat augmentation until improvement
+                self._run_augmentation_with_retry(
+                    augmentation_stage,
+                    evaluation_stage,
+                    aug_name,
+                    dataset_reduced,
+                    reader,
+                    stage_cfg,
+                    lineage,
+                    ratio,
+                    ratio_tag,
+                    ratio_root,
+                    ratio_meta,
+                    spec,
+                    dataset_workspace,
+                    retry_config,
+                )
+            else:
+                # Standard execution (no retry)
+                dataset_augmented = augmentation_stage.execute(
+                    stage_cfg,
+                    aug_name,
+                    dataset_reduced,
+                    reader,
+                    lineage,
+                    ratio,
+                    ratio_tag,
+                    ratio_root,
+                    ratio_meta,
+                    spec.subtype,
+                )
+                if not self.augmentation_eval:
+                    logger.info(
+                        "⏭️  Skipping evaluation for augmentation '%s' (augmentation.eval=false)",
+                        aug_name,
+                    )
+                    continue
+
+                evaluation_stage.execute(
+                    aug_name,
+                    dataset_reduced,
+                    dataset_augmented,
+                    stage_cfg,
+                    lineage,
+                    ratio_root,
+                    ratio_tag,
+                    ratio_meta,
+                )
+
+                augmentation_meta = ratio_meta.setdefault("augmentations", {}).setdefault(
+                    aug_name, {}
+                )
+                persisted = self._persist_stage_results(
+                    ratio_meta,
+                    aug_name,
+                    Path(dataset_workspace / "augmentation" / "results.json"),
+                )
+                if persisted:
+                    augmentation_meta["results"] = str(persisted)
+
+    def _run_augmentation_with_retry(
+        self,
+        augmentation_stage,
+        evaluation_stage,
+        aug_name: str,
+        dataset_reduced,
+        reader,
+        stage_cfg: Dict[str, Any],
+        lineage: Dict[str, Any],
+        ratio: float,
+        ratio_tag: str,
+        ratio_root: Path,
+        ratio_meta: Dict[str, Any],
+        spec,
+        dataset_workspace: Path,
+        retry_config: Dict[str, Any],
+    ) -> None:
+        """Run augmentation with retry mechanism until improvement or max attempts."""
+        max_attempts = retry_config.get("max_attempts", 5)
+        metric = retry_config.get("metric", "hits@1")
+        min_improvement = retry_config.get("min_improvement", 0.01)
+        save_all = retry_config.get("save_all_attempts", True)
+
+        # Get reduction baseline results
+        reduction_results_path = dataset_workspace / "reduction" / "results.json"
+        if not reduction_results_path.exists():
+            logger.warning(
+                "⚠️  Cannot use auto-retry: reduction results not found at %s",
+                reduction_results_path,
+            )
+            return
+
+        with reduction_results_path.open("r") as f:
+            reduction_results = json.load(f)
+
+        # Extract baseline metric value
+        baseline_value = None
+        for model_name, model_results in reduction_results.items():
+            if isinstance(model_results, dict) and metric in model_results:
+                baseline_value = model_results[metric]
+                break
+
+        if baseline_value is None:
+            logger.warning(
+                "⚠️  Cannot use auto-retry: metric '%s' not found in reduction results",
+                metric,
+            )
+            return
+
+        logger.info("="*80)
+        logger.info("🔁 AUTO-RETRY ENABLED: Will retry augmentation until improvement")
+        logger.info(f"   Baseline ({metric}): {baseline_value:.4f}")
+        logger.info(f"   Min improvement: {min_improvement:.4f}")
+        logger.info(f"   Max attempts: {max_attempts}")
+        logger.info("="*80)
+
+        best_value = baseline_value
+        best_attempt = 0
+
+        for attempt in range(1, max_attempts + 1):
+            logger.info(f"\n{'='*80}")
+            logger.info(f"🔄 ATTEMPT {attempt}/{max_attempts}")
+            logger.info(f"{'='*80}")
+
+            # Run augmentation
             dataset_augmented = augmentation_stage.execute(
                 stage_cfg,
                 aug_name,
@@ -870,13 +1000,8 @@ class ExperimentRunner:
                 ratio_meta,
                 spec.subtype,
             )
-            if not self.augmentation_eval:
-                logger.info(
-                    "⏭️  Skipping evaluation for augmentation '%s' (augmentation.eval=false)",
-                    aug_name,
-                )
-                continue
 
+            # Run evaluation
             evaluation_stage.execute(
                 aug_name,
                 dataset_reduced,
@@ -888,16 +1013,68 @@ class ExperimentRunner:
                 ratio_meta,
             )
 
+            # Get results
             augmentation_meta = ratio_meta.setdefault("augmentations", {}).setdefault(
                 aug_name, {}
             )
+            results_path = dataset_workspace / "augmentation" / "results.json"
             persisted = self._persist_stage_results(
                 ratio_meta,
                 aug_name,
-                Path(dataset_workspace / "augmentation" / "results.json"),
+                results_path,
             )
-            if persisted:
-                augmentation_meta["results"] = str(persisted)
+
+            if persisted and persisted.exists():
+                with persisted.open("r") as f:
+                    aug_results = json.load(f)
+
+                # Extract metric value
+                current_value = None
+                for model_name, model_results in aug_results.items():
+                    if isinstance(model_results, dict) and metric in model_results:
+                        current_value = model_results[metric]
+                        break
+
+                if current_value is not None:
+                    improvement = current_value - baseline_value
+                    logger.info(f"📊 Results - Attempt {attempt}:")
+                    logger.info(f"   {metric}: {current_value:.4f}")
+                    logger.info(f"   Improvement: {improvement:+.4f} ({improvement/baseline_value*100:+.2f}%)")
+
+                    # Save attempt results if configured
+                    if save_all and attempt > 1:
+                        attempt_file = results_path.parent / f"results_attempt_{attempt}.json"
+                        shutil.copy(persisted, attempt_file)
+                        logger.info(f"💾 Saved attempt {attempt} → {attempt_file}")
+
+                    # Check if improvement is sufficient
+                    if improvement >= min_improvement:
+                        logger.info(f"✅ SUCCESS: Improvement >= {min_improvement:.4f}!")
+                        logger.info(f"   Best result achieved at attempt {attempt}")
+                        augmentation_meta["results"] = str(persisted)
+                        augmentation_meta["retry_attempts"] = attempt
+                        augmentation_meta["retry_improvement"] = improvement
+                        return
+                    elif current_value > best_value:
+                        best_value = current_value
+                        best_attempt = attempt
+                        logger.info(f"   New best value: {best_value:.4f}")
+                else:
+                    logger.warning(f"⚠️  Could not extract metric '{metric}' from attempt {attempt}")
+            else:
+                logger.warning(f"⚠️  Results file not found for attempt {attempt}")
+
+        # Max attempts reached without sufficient improvement
+        logger.warning(f"⚠️  Max attempts ({max_attempts}) reached without sufficient improvement")
+        logger.info(f"   Best value: {best_value:.4f} (attempt {best_attempt})")
+        logger.info(f"   Improvement: {best_value - baseline_value:+.4f}")
+
+        # Keep last attempt results
+        if persisted:
+            augmentation_meta["results"] = str(persisted)
+            augmentation_meta["retry_attempts"] = max_attempts
+            augmentation_meta["retry_improvement"] = best_value - baseline_value
+            augmentation_meta["retry_best_attempt"] = best_attempt
 
     def _persist_stage_results(
         self,
