@@ -287,17 +287,74 @@ class NodeExpander:
             src_val_str = str(src_val)
             tgt_val_str = str(tgt_val)
 
+            # Create normalized cache keys (sort tokens alphabetically for structural consistency)
+            # This ensures 'ain martin eric' and 'martin ain eric' use the same cached value
+            def normalize_cache_key(text: str) -> str:
+                """Normalize text for cache key by sorting tokens alphabetically."""
+                tokens = text.lower().strip().split()
+                return ' '.join(sorted(tokens))
+
+            def reorder_output_to_match_input(input_text: str, normalized_input: str, output_text: str) -> str:
+                """Reorder output tokens to match the order of input tokens.
+
+                Example:
+                    input_text = 'martin ain eric'
+                    normalized_input = 'ain eric martin' (sorted)
+                    output_text = 'Alan Osmond Eric' (generated for normalized)
+
+                    Returns: 'Osmond Alan Eric' (reordered to match 'martin ain eric')
+                """
+                input_tokens = input_text.lower().strip().split()
+                normalized_tokens = normalized_input.lower().strip().split()
+                output_tokens = output_text.strip().split()
+
+                # If output doesn't have same number of tokens, can't reliably reorder
+                if len(output_tokens) != len(normalized_tokens):
+                    return output_text
+
+                # Create mapping: normalized position -> output token
+                token_map = {i: output_tokens[i] for i in range(len(output_tokens))}
+
+                # Create mapping: input token -> normalized position
+                input_to_normalized_pos = {}
+                for i, token in enumerate(input_tokens):
+                    for j, norm_token in enumerate(normalized_tokens):
+                        if token == norm_token and j not in input_to_normalized_pos.values():
+                            input_to_normalized_pos[i] = j
+                            break
+
+                # Reorder output to match input order
+                reordered = []
+                for i in range(len(input_tokens)):
+                    norm_pos = input_to_normalized_pos.get(i)
+                    if norm_pos is not None:
+                        reordered.append(token_map[norm_pos])
+                    else:
+                        # Fallback: use original output token
+                        reordered.append(output_tokens[i] if i < len(output_tokens) else '')
+
+                return ' '.join(reordered)
+
+            src_cache_key = normalize_cache_key(src_val_str)
+            tgt_cache_key = normalize_cache_key(tgt_val_str)
+
             if self.intra_node_consistency_enabled and value_cache is not None:
                 # Check if we already generated a variation for these values
-                if src_val_str in value_cache:
-                    aug_src_val = value_cache[src_val_str]
-                    logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s'", src_val_str[:30], aug_src_val[:30])
+                if src_cache_key in value_cache:
+                    aug_src_val_cached = value_cache[src_cache_key]
+                    # Reorder output to match input order (structural consistency)
+                    aug_src_val = reorder_output_to_match_input(src_val_str, src_cache_key, aug_src_val_cached)
+                    logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s' (reordered from '%s')",
+                               src_val_str[:30], aug_src_val[:30], aug_src_val_cached[:30])
                 else:
                     aug_src_val = None
 
-                if tgt_val_str in value_cache:
-                    aug_tgt_val = value_cache[tgt_val_str]
-                    logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s'", tgt_val_str[:30], aug_tgt_val[:30])
+                if tgt_cache_key in value_cache:
+                    aug_tgt_val_cached = value_cache[tgt_cache_key]
+                    # Reorder output to match input order (structural consistency)
+                    aug_tgt_val = reorder_output_to_match_input(tgt_val_str, tgt_cache_key, aug_tgt_val_cached)
+                    logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s' (reordered from '%s')",
+                               tgt_val_str[:30], aug_tgt_val[:30], aug_tgt_val_cached[:30])
                 else:
                     aug_tgt_val = None
 
@@ -306,12 +363,12 @@ class NodeExpander:
                     # Both cached - use them
                     pass
                 elif aug_src_val is None and aug_tgt_val is None:
-                    # Neither cached - generate new and cache
+                    # Neither cached - generate new and cache with normalized keys
                     aug_src_val, aug_tgt_val = self.bart_interpolator.interpolate_pair(
                         src_val_str, tgt_val_str, predicate=match.src_predicate
                     )
-                    value_cache[src_val_str] = aug_src_val
-                    value_cache[tgt_val_str] = aug_tgt_val
+                    value_cache[src_cache_key] = aug_src_val
+                    value_cache[tgt_cache_key] = aug_tgt_val
                 else:
                     # One cached, one not - generate both but prefer consistency
                     # For "first" strategy: if one exists, generate the other to match context
@@ -320,10 +377,10 @@ class NodeExpander:
                     )
                     if aug_src_val is None:
                         aug_src_val = aug_src_val_new
-                        value_cache[src_val_str] = aug_src_val
+                        value_cache[src_cache_key] = aug_src_val
                     if aug_tgt_val is None:
                         aug_tgt_val = aug_tgt_val_new
-                        value_cache[tgt_val_str] = aug_tgt_val
+                        value_cache[tgt_cache_key] = aug_tgt_val
             else:
                 # No consistency - generate normally
                 aug_src_val, aug_tgt_val = self.bart_interpolator.interpolate_pair(
