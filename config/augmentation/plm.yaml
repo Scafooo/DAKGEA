@@ -71,8 +71,8 @@ augmentation:
       # Retry mechanism to avoid identical tokens in output
       # If output contains exact tokens from input (excluding stopwords), regenerate with increased noise
       enable_retry_on_identical_tokens: true  # Enable token-level retry (set false to disable)
-      max_retries: 10             # Maximum retry attempts per generation
-      noise_increment: 0.05       # Increase noise by this amount on each retry
+      max_retries: 100             # Maximum retry attempts per generation
+      noise_increment: 0.005       # Increase noise by this amount on each retry
 
     # Semantic predicate matching configuration
     predicate_matching:
