@@ -947,6 +947,10 @@ class BartInterpolatorPLM:
         original_temperature = self.gen_temperature
         blocked_tokens = []
 
+        # Track best attempt (lowest overlap)
+        best_out_src, best_out_tgt = None, None
+        best_overlap = float('inf')
+
         for attempt in range(self.max_retries):
             # Generate output - force noise on retry attempts (attempt > 0)
             force_noise = (attempt > 0)
@@ -959,8 +963,14 @@ class BartInterpolatorPLM:
             # Check for identical tokens (regardless of whether inputs are identical)
             overlap_src = self._calculate_token_overlap(val_src, out_src)
             overlap_tgt = self._calculate_token_overlap(val_tgt, out_tgt)
+            max_overlap = max(overlap_src, overlap_tgt)
             has_identical_src = overlap_src > self.identical_tokens_threshold
             has_identical_tgt = overlap_tgt > self.identical_tokens_threshold
+
+            # Track best attempt
+            if max_overlap < best_overlap:
+                best_overlap = max_overlap
+                best_out_src, best_out_tgt = out_src, out_tgt
 
             if has_identical_src or has_identical_tgt:
                 if attempt < self.max_retries - 1:
@@ -979,17 +989,18 @@ class BartInterpolatorPLM:
                     logger.debug(f"  Input: '{val_src}' / '{val_tgt}' → Output: '{out_src}' / '{out_tgt}'")
                     continue
                 else:
-                    logger.debug(f"[RETRY] Max retries reached, accepting output with identical tokens")
+                    logger.debug(f"[RETRY] Max retries reached, using best attempt (overlap: {best_overlap:.1%})")
 
             # Success - restore original parameters and return
             self.noise_std = original_noise_std
             self.gen_temperature = original_temperature
             return out_src, out_tgt
 
-        # Max retries reached - restore parameters and return last attempt
+        # Max retries reached - restore parameters and return best attempt
         self.noise_std = original_noise_std
         self.gen_temperature = original_temperature
-        return out_src, out_tgt
+        logger.debug(f"[RETRY] Returning best attempt: '{best_out_src}' / '{best_out_tgt}' (overlap: {best_overlap:.1%})")
+        return best_out_src, best_out_tgt
 
     def _interpolate_single(
         self,

@@ -991,6 +991,7 @@ class ExperimentRunner:
 
         best_value = baseline_value
         best_attempt = 0
+        best_results_file = None
 
         for attempt in range(1, max_attempts + 1):
             logger.info(f"\n{'='*80}")
@@ -1068,6 +1069,7 @@ class ExperimentRunner:
                     elif current_value > best_value:
                         best_value = current_value
                         best_attempt = attempt
+                        best_results_file = persisted
                         logger.info(f"   New best value: {best_value:.4f}")
                 else:
                     logger.warning(f"⚠️  Could not extract metric '{metric}' from attempt {attempt}")
@@ -1079,8 +1081,20 @@ class ExperimentRunner:
         logger.info(f"   Best value: {best_value:.4f} (attempt {best_attempt})")
         logger.info(f"   Improvement: {best_value - baseline_value:+.4f}")
 
-        # Keep last attempt results
-        if persisted:
+        # Use best attempt results (not last attempt!)
+        if best_results_file and best_results_file.exists():
+            # Copy best attempt to main results.json
+            results_path = dataset_workspace / "augmentation" / "results.json"
+            shutil.copy(best_results_file, results_path)
+            logger.info(f"✅ Using best attempt {best_attempt} → {results_path}")
+
+            augmentation_meta["results"] = str(results_path)
+            augmentation_meta["retry_attempts"] = max_attempts
+            augmentation_meta["retry_improvement"] = best_value - baseline_value
+            augmentation_meta["retry_best_attempt"] = best_attempt
+        elif persisted:
+            # Fallback to last attempt if no best found
+            logger.warning("⚠️  No best attempt found, using last attempt")
             augmentation_meta["results"] = str(persisted)
             augmentation_meta["retry_attempts"] = max_attempts
             augmentation_meta["retry_improvement"] = best_value - baseline_value
