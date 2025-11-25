@@ -69,8 +69,9 @@ augmentation:
       noise_apply_when: "identical_inputs"  # "identical_inputs" or "always"
 
       # Retry mechanism to avoid identical tokens in output
-      enable_retry_on_identical_tokens: true  # Retry if output contains identical tokens from input
-      max_retries: 10              # Maximum retry attempts (noise increases each time)
+      # If output contains exact tokens from input (excluding stopwords), regenerate with increased noise
+      enable_retry_on_identical_tokens: true  # Enable token-level retry (set false to disable)
+      max_retries: 10             # Maximum retry attempts per generation
       noise_increment: 0.05       # Increase noise by this amount on each retry
 
     # Semantic predicate matching configuration
