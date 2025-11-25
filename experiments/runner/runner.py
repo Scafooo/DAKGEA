@@ -59,9 +59,9 @@ class ExperimentRunner:
             logger.debug("Disabling progress bar due to verbose logging (level < ERROR)")
             self.show_progress = False
 
-        global_cfg = Config().get()
-        self.paths = global_cfg["paths"]
-        default_overwrite = global_cfg.get("experiment_defaults", {}).get(
+        self.global_cfg = Config().get()
+        self.paths = self.global_cfg["paths"]
+        default_overwrite = self.global_cfg.get("experiment_defaults", {}).get(
             "overwrite_existing", False
         )
 
@@ -869,7 +869,7 @@ class ExperimentRunner:
 
         for aug_name in self.augmentations:
             # Check if auto-retry until improvement is enabled (from global config)
-            retry_config = global_cfg.get("auto_retry_until_improvement", {})
+            retry_config = self.global_cfg.get("auto_retry_until_improvement", {})
             retry_enabled = retry_config.get("enabled", False)
 
             if retry_enabled and self.augmentation_eval and self.reduction_eval:
