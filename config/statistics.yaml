@@ -94,10 +94,10 @@ export:
 
   # Output directories (relative to project root)
   output_dirs:
-    plots: "results_analysis"     # Where to save plots
-    plots_ranking: "results_analysis/ranking_metrics"  # Ranking metrics plots
-    plots_classification: "results_analysis/classification_metrics"  # Classification metrics plots
-    exports: "results_analysis"   # Where to save export files
+    plots: "results/statistics"     # Where to save plots
+    plots_ranking: "results/statistics/ranking_metrics"  # Ranking metrics plots
+    plots_classification: "results/statistics/classification_metrics"  # Classification metrics plots
+    exports: "results/statistics"   # Where to save export files
 
 # Advanced statistics
 advanced_stats:
