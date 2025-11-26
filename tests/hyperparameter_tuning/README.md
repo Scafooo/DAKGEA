@@ -132,6 +132,46 @@ python tests/hyperparameter_tuning/interactive_tuning.py \
 
 ---
 
+### 8. `interactive_dataset_tests.py` ⭐ **RECOMMENDED**
+Interactive testing with hardcoded dataset-specific examples.
+
+**Features:**
+- Hardcoded examples from each dataset (BBC_DB, D_W_15K_V1, ICEW_WIKI, ICEW_YAGO)
+- Iterative parameter adjustment with immediate feedback
+- Encoding issue detection (escape sequences, non-ASCII, replacement characters)
+- Real-time quality scoring (swap/copy/interpolation rates)
+- Save optimized parameters to config
+
+**Usage:**
+```bash
+CUDA_VISIBLE_DEVICES=0 python tests/hyperparameter_tuning/interactive_dataset_tests.py \
+  --config config/augmentation/plm.yaml
+```
+
+**Interactive menu:**
+1. Test all datasets with current parameters
+2. Test specific dataset
+3. Adjust parameters
+4. Save current parameters to config
+5. Quit
+
+**Example output:**
+```
+BBC_DB Dataset (10 examples):
+  Swap:          9 (90.0%)  ❌
+  Copy:          0 ( 0.0%)
+  Interpolation: 1 (10.0%)  ✅
+  Quality Score: -35.00
+```
+
+**When to use:**
+- Before running full experiments (fastest feedback loop)
+- To see exactly how parameters affect real dataset values
+- When investigating encoding issues
+- For iterative parameter optimization
+
+---
+
 ## Common Issues and Solutions
 
 ### Issue: High Swapping Rate (>50%)
@@ -202,29 +242,36 @@ python tests/hyperparameter_tuning/interactive_tuning.py \
 
 ## Workflow
 
-### 1. Initial Analysis
+### 1. Quick Interactive Testing ⭐ **START HERE**
 ```bash
-# Analyze current parameters
+# Use the interactive tool for fastest feedback
+CUDA_VISIBLE_DEVICES=0 python tests/hyperparameter_tuning/interactive_dataset_tests.py
+```
+This gives you immediate feedback on real dataset values and allows iterative parameter adjustment.
+
+### 2. Initial Analysis
+```bash
+# Analyze current parameters in detail
 CUDA_VISIBLE_DEVICES=0 python tests/hyperparameter_tuning/analyze_current_parameters.py
 ```
 
-### 2. Test Alternatives
+### 3. Test Alternatives
 ```bash
 # Compare different configurations
 CUDA_VISIBLE_DEVICES=0 python tests/hyperparameter_tuning/test_parameter_configs.py --configs all
 ```
 
-### 3. Verify on Real Data
+### 4. Verify on Real Data
 ```bash
 # Test on actual dataset values
 CUDA_VISIBLE_DEVICES=0 python tests/hyperparameter_tuning/visualize_augmentation_by_dataset.py \
   --datasets BBC_DB --examples-per-dataset 5
 ```
 
-### 4. Apply Best Configuration
-Edit `config/augmentation/plm.yaml` with the best parameters found.
+### 5. Apply Best Configuration
+Edit `config/augmentation/plm.yaml` with the best parameters found (or use option 4 in interactive tool).
 
-### 5. Run Full Experiment
+### 6. Run Full Experiment
 Test with complete augmentation pipeline to verify improvements.
 
 ---
