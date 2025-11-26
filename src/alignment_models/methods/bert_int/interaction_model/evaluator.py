@@ -122,12 +122,12 @@ class InteractionEvaluator:
 
         # Debug: log information about evaluation
         avg_candidates = sum(len(c) for c in entity_to_candidates.values()) / all_test_num
-        logger.info(f"Evaluating {all_test_num} test entities with avg {avg_candidates:.1f} candidates each")
+        logger.verbose(f"Evaluating {all_test_num} test entities with avg {avg_candidates:.1f} candidates each")
         logger.debug(f"result_labels shape: {result_labels.shape}")
 
         # Count how many test entities have their correct match in candidates
         correct_in_candidates = sum(1 for e1 in entity_to_candidates if any(label == 1 for _, _, label in entity_to_candidates[e1]))
-        logger.info(f"Correct match in candidates: {correct_in_candidates}/{all_test_num} ({correct_in_candidates/all_test_num*100:.1f}%)")
+        logger.verbose(f"Correct match in candidates: {correct_in_candidates}/{all_test_num} ({correct_in_candidates/all_test_num*100:.1f}%)")
 
         # Count how many test entities have at least one correct match in top-K
         count_found = 0

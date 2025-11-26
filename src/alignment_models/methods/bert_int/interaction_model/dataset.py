@@ -123,7 +123,7 @@ class CandidateGenerator:
             target_candidates = [entities_target[idx] for idx in indices[i].tolist()]
             candidates[source_id] = target_candidates
 
-        logger.info(f"Generated {len(candidates)} candidate mappings")
+        logger.verbose(f"Generated {len(candidates)} candidate mappings")
         return candidates
 
 
@@ -254,5 +254,5 @@ class InteractionDataset:
                 entity_pairs.add((e1, e2))
 
         result = sorted(list(entity_pairs))
-        logger.info(f"Generated {len(result)} unique entity pairs")
+        logger.verbose(f"Generated {len(result)} unique entity pairs")
         return result
