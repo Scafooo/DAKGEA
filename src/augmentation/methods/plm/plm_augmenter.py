@@ -664,14 +664,14 @@ class PLMAugmenter(AugmentationMethod):
 
                 if direction == "out":
                     if exists_in_source:
-                        self.logger.info("[PLM][Relation][src] %s --%s--> %s", src_aug, predicate, neighbor_src_aug)
+                        self.logger.verbose("[PLM][Relation][src] %s --%s--> %s", src_aug, predicate, neighbor_src_aug)
                     if exists_in_target:
-                        self.logger.info("[PLM][Relation][tgt] %s --%s--> %s", tgt_aug, predicate, neighbor_tgt_aug)
+                        self.logger.verbose("[PLM][Relation][tgt] %s --%s--> %s", tgt_aug, predicate, neighbor_tgt_aug)
                 else:
                     if exists_in_source:
-                        self.logger.info("[PLM][Relation][src] %s <--%s-- %s", src_aug, predicate, neighbor_src_aug)
+                        self.logger.verbose("[PLM][Relation][src] %s <--%s-- %s", src_aug, predicate, neighbor_src_aug)
                     if exists_in_target:
-                        self.logger.info("[PLM][Relation][tgt] %s <--%s-- %s", tgt_aug, predicate, neighbor_tgt_aug)
+                        self.logger.verbose("[PLM][Relation][tgt] %s <--%s-- %s", tgt_aug, predicate, neighbor_tgt_aug)
 
         # Enqueue for future expansion if not visited yet
         next_depth = current_depth + 1
@@ -683,7 +683,7 @@ class PLMAugmenter(AugmentationMethod):
             queue.append(ExpansionNode(uri=neighbor, depth=next_depth, node_type="set", parent=current_node))
             direct_enqueued.add(neighbor)
 
-            self.logger.info("[PLM][Queue] Direct set neighbor enqueued")
+            self.logger.verbose("[PLM][Queue] Direct set neighbor enqueued")
             self.logger.info("    • current → %s", current_node)
             self.logger.info("    • neighbor → %s", neighbor)
             self.logger.info("    • depth → %d", next_depth)
@@ -821,7 +821,7 @@ class PLMAugmenter(AugmentationMethod):
                 if self.neighbor_handler._node_in_graph(dataset.knowledge_graph_target, neighbor):
                     dataset.knowledge_graph_target.add((neighbor_tgt_aug, predicate, tgt_aug))
 
-            self.logger.info("[PLM][NonSet] Expanded non-set node: %s", neighbor)
+            self.logger.verbose("[PLM][NonSet] Expanded non-set node: %s", neighbor)
 
             # Enqueue for further exploration if depth allows
             if next_depth < self.max_depth:
@@ -1053,7 +1053,7 @@ class PLMAugmenter(AugmentationMethod):
                     # Enqueue for further exploration
                     queue.append(ExpansionNode(uri=neighbor, depth=current_depth + 1, node_type="non_set", parent=non_set_node))
                     visited.add(neighbor)
-                    self.logger.info("[PLM][NonSet] Expanded and enqueued non-set neighbor: %s", neighbor)
+                    self.logger.verbose("[PLM][NonSet] Expanded and enqueued non-set neighbor: %s", neighbor)
 
     def _check_bridging(
         self,
@@ -1098,7 +1098,7 @@ class PLMAugmenter(AugmentationMethod):
             )
             bridged_enqueued.add(bridged_node)
 
-            self.logger.info("[PLM][Queue] Bridged set node (new seed, depth=0)")
+            self.logger.verbose("[PLM][Queue] Bridged set node (new seed, depth=0)")
             self.logger.info("    • from set node → %s", current_node)
             self.logger.info("    • via non-set → %s", non_set_node)
             self.logger.info("    • to set node → %s (depth restarted)", bridged_node)
