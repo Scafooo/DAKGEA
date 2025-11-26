@@ -158,7 +158,7 @@ def interpolate_long_text(
         logger.debug(f"[SENTENCE_INTERPOLATION] Texts short enough ({max_len} < {min_length_for_chunking}), using standard interpolation")
         return interpolate_fn(text1, text2)
 
-    logger.info(f"[SENTENCE_INTERPOLATION] Long text detected ({max_len} tokens), using sentence-level interpolation")
+    logger.verbose(f"[SENTENCE_INTERPOLATION] Long text detected ({max_len} tokens), using sentence-level interpolation")
 
     # Split into sentences
     sentences1 = split_into_sentences(text1)
@@ -216,7 +216,7 @@ def interpolate_long_text(
     result1 = " ".join(interpolated_chunks1)
     result2 = " ".join(interpolated_chunks2)
 
-    logger.info(f"[SENTENCE_INTERPOLATION] Completed: {len(interpolated_chunks1)} chunks → {count_tokens(result1, tokenizer)} tokens")
+    logger.verbose(f"[SENTENCE_INTERPOLATION] Completed: {len(interpolated_chunks1)} chunks → {count_tokens(result1, tokenizer)} tokens")
 
     return result1, result2
 

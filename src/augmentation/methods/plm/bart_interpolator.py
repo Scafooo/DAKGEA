@@ -1161,7 +1161,7 @@ class BartInterpolatorPLM:
                 h_mix_src = h_mix_src + noise_src
                 h_mix_tgt = h_mix_tgt + noise_tgt
                 reason = "retry" if force_noise else "identical inputs"
-                logger.info(f"[NOISE_INJECTION] Injected noise (std={self.noise_std:.3f}) for {reason}: '{val_src}' / '{val_tgt}'")
+                logger.verbose(f"[NOISE_INJECTION] Injected noise (std={self.noise_std:.3f}) for {reason}: '{val_src}' / '{val_tgt}'")
 
         enc_src = BaseModelOutput(last_hidden_state=h_mix_src.unsqueeze(0))  # (1, seq, dim)
         enc_tgt = BaseModelOutput(last_hidden_state=h_mix_tgt.unsqueeze(0))  # (1, seq, dim)
