@@ -391,13 +391,22 @@ def build_ratio_plot_data(
 ) -> Dict[str, Dict[float, Dict[float, Dict[str, Dict[str, float]]]]]:
     plot_data: Dict[str, Dict[float, Dict[float, Dict[str, Dict[str, float]]]]] = {}
     for dataset, entries in ratio_entries.items():
+        logger.debug(f"[BUILD_RATIO_PLOT] Processing dataset={dataset} with {len(entries)} entries")
         dataset_block = plot_data.setdefault(dataset, {})
         best_per_ratio: Dict[Tuple[float, float], Dict] = {}
+        entries_with_both = 0
+        entries_red_only = 0
+        entries_aug_only = 0
         for entry in entries:
             red = entry.get("reduction")
             aug = entry.get("augmentation")
             if not red or not aug:
+                if red and not aug:
+                    entries_red_only += 1
+                elif aug and not red:
+                    entries_aug_only += 1
                 continue
+            entries_with_both += 1
             try:
                 red_ratio = round(float(red.get("ratio")), 6)
                 aug_ratio = round(float(aug.get("ratio")), 6)
@@ -410,6 +419,9 @@ def build_ratio_plot_data(
             if current_best is None or (candidate_score is not None and candidate_score > (current_score or -1)):
                 best_per_ratio[pair] = entry
 
+        logger.debug(f"[BUILD_RATIO_PLOT]   Entries: {entries_with_both} with both, {entries_red_only} reduction-only, {entries_aug_only} augmentation-only")
+        logger.debug(f"[BUILD_RATIO_PLOT]   Best pairs found: {len(best_per_ratio)}")
+
         for (red_ratio, aug_ratio), entry in best_per_ratio.items():
             red_metrics = entry["reduction"]["metrics"]
             aug_metrics = entry["augmentation"]["metrics"]
@@ -418,6 +430,9 @@ def build_ratio_plot_data(
                 "reduction": {metric: red_metrics.get(metric) for metric in metrics},
                 "augmentation": {metric: aug_metrics.get(metric) for metric in metrics},
             }
+
+        logger.debug(f"[BUILD_RATIO_PLOT]   Final plot_data for {dataset}: {len(dataset_block)} reduction ratios")
+
     return plot_data
 
 
@@ -514,15 +529,27 @@ def plot_ratio_trends(
 ) -> None:
     trend_dir = plots_dir / "ratio_trends"
     ensure_dir(trend_dir)
+
+    # Debug logging
+    logger.debug(f"[RATIO_TRENDS] Called for dataset={dataset}")
+    logger.debug(f"[RATIO_TRENDS]   ratio_plot_data has {len(ratio_plot_data)} reduction ratios")
+    logger.debug(f"[RATIO_TRENDS]   plots_dir={plots_dir}")
+    logger.debug(f"[RATIO_TRENDS]   trend_dir={trend_dir}")
+
     stage_styles = {
         "reduction": {"linestyle": "--", "marker": "x", "alpha": 0.9},
         "augmentation": {"linestyle": "-", "marker": "o", "alpha": 0.9},
     }
+
+    plots_generated = 0
     for red_ratio, aug_group in sorted(ratio_plot_data.items()):
+        logger.debug(f"[RATIO_TRENDS]   Processing red_ratio={red_ratio}, aug_group has {len(aug_group)} entries")
         if not aug_group:
+            logger.debug(f"[RATIO_TRENDS]   Skipping red_ratio={red_ratio}: aug_group is empty")
             continue
         aug_ratios = sorted(aug_group.keys())
         if not aug_ratios:
+            logger.debug(f"[RATIO_TRENDS]   Skipping red_ratio={red_ratio}: no aug_ratios")
             continue
         fig, ax = plt.subplots(figsize=(max(8, len(aug_ratios) * 1.2), 4.5))
         for metric in metrics:
@@ -557,6 +584,13 @@ def plot_ratio_trends(
         outfile = trend_dir / f"{dataset}_red{red_ratio:.2f}_trend.png"
         plt.savefig(outfile, dpi=PLOT_DPI)
         plt.close(fig)
+        plots_generated += 1
+        logger.debug(f"[RATIO_TRENDS]   ✓ Generated plot: {outfile}")
+
+    if plots_generated > 0:
+        logger.info(f"Generated {plots_generated} ratio trend plots in {trend_dir}")
+    else:
+        logger.warning(f"No ratio trend plots generated for dataset={dataset} (ratio_plot_data was empty or invalid)")
 
 
 def write_dataset_summary_tsv(
@@ -844,6 +878,10 @@ def main() -> None:
     # Generate plots for each metric group (ranking, classification, etc.)
     for group_name, group_metrics in PLOT_METRICS.items():
         logger.info(f"Generating {group_name} metrics plots...")
+        logger.debug(f"[PLOT_GENERATION] Group={group_name}, metrics={group_metrics}")
+        logger.debug(f"[PLOT_GENERATION] ratio_entries has {len(ratio_entries)} datasets")
+        for ds, entries in ratio_entries.items():
+            logger.debug(f"[PLOT_GENERATION]   {ds}: {len(entries)} entries")
 
         # Get output directory for this group
         group_plots_dir = Path(stats_config.get_plots_output_dir_for_group(group_name))
