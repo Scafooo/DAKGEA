@@ -473,7 +473,9 @@ class ExperimentRunner:
             )
 
             self._execute_evaluations(
+                dataset,
                 dataset_reduced,
+                reduction_stage,
                 augmentation_stage,
                 evaluation_stage,
                 stage_cfg,
@@ -809,7 +811,9 @@ class ExperimentRunner:
 
     def _execute_evaluations(
         self,
+        dataset,
         dataset_reduced,
+        reduction_stage,
         augmentation_stage,
         evaluation_stage,
         stage_cfg: Dict[str, Any],
@@ -830,7 +834,9 @@ class ExperimentRunner:
         augments the dataset, and evaluates each augmented variant.
 
         Args:
+            dataset: The original full dataset
             dataset_reduced: The reduced (or full) dataset to evaluate
+            reduction_stage: ReductionStage instance (needed for retry mechanism)
             augmentation_stage: AugmentationStage instance
             evaluation_stage: EvaluationStage instance
             stage_cfg: Stage configuration dictionary
@@ -922,12 +928,13 @@ class ExperimentRunner:
                     augmentation_meta["results"] = str(results_path)
                     continue
 
-                # Retry mechanism: repeat augmentation until improvement
+                # Retry mechanism: repeat reduction + augmentation until improvement
                 self._run_augmentation_with_retry(
+                    reduction_stage,
                     augmentation_stage,
                     evaluation_stage,
                     aug_name,
-                    dataset_reduced,
+                    dataset,
                     reader,
                     stage_cfg,
                     lineage,
@@ -984,10 +991,11 @@ class ExperimentRunner:
 
     def _run_augmentation_with_retry(
         self,
+        reduction_stage,
         augmentation_stage,
         evaluation_stage,
         aug_name: str,
-        dataset_reduced,
+        dataset,
         reader,
         stage_cfg: Dict[str, Any],
         lineage: Dict[str, Any],
@@ -999,55 +1007,95 @@ class ExperimentRunner:
         dataset_workspace: Path,
         retry_config: Dict[str, Any],
     ) -> None:
-        """Run augmentation with retry mechanism until improvement or max attempts."""
+        """Run reduction + augmentation with retry mechanism until improvement or max attempts.
+
+        Each attempt:
+        1. Creates new reduction (with different seed)
+        2. Evaluates the reduction baseline
+        3. Applies augmentation to new reduction
+        4. Evaluates augmentation
+        5. Compares augmentation vs. NEW reduction baseline
+        """
         max_attempts = retry_config.get("max_attempts", 5)
         metric = retry_config.get("metric", "hits@1")
         min_improvement = retry_config.get("min_improvement", 0.01)
         save_all = retry_config.get("save_all_attempts", True)
 
-        # Get reduction baseline results
-        reduction_results_path = dataset_workspace / "reduction" / "results.json"
-        if not reduction_results_path.exists():
-            logger.warning(
-                "⚠️  Cannot use auto-retry: reduction results not found at %s",
-                reduction_results_path,
-            )
-            return
-
-        with reduction_results_path.open("r") as f:
-            reduction_results = json.load(f)
-
-        # Extract baseline metric value
-        baseline_value = None
-        for model_name, model_results in reduction_results.items():
-            if isinstance(model_results, dict) and metric in model_results:
-                baseline_value = model_results[metric]
-                break
-
-        if baseline_value is None:
-            logger.warning(
-                "⚠️  Cannot use auto-retry: metric '%s' not found in reduction results",
-                metric,
-            )
-            return
-
         logger.info("="*80)
-        logger.info("🔁 AUTO-RETRY ENABLED: Will retry augmentation until improvement")
-        logger.info(f"   Baseline ({metric}): {baseline_value:.4f}")
+        logger.info("🔁 AUTO-RETRY ENABLED: Will retry reduction+augmentation until improvement")
+        logger.info(f"   Target metric: {metric}")
         logger.info(f"   Min improvement: {min_improvement:.4f}")
         logger.info(f"   Max attempts: {max_attempts}")
         logger.info("="*80)
 
-        best_value = baseline_value
+        best_value = -1.0
         best_attempt = 0
         best_results_file = None
+        best_baseline_value = None
+
+        # Save original resume flag and disable caching during retry
+        original_resume = reduction_stage.resume
+        reduction_stage.resume = False
+        augmentation_stage.resume = False
 
         for attempt in range(1, max_attempts + 1):
             logger.info(f"\n{'='*80}")
             logger.info(f"🔄 ATTEMPT {attempt}/{max_attempts}")
             logger.info(f"{'='*80}")
 
-            # Run augmentation
+            # Step 1: Create NEW reduction for this attempt
+            logger.info(f"🔨 Running reduction...")
+            if ratio < 1.0:
+                dataset_reduced = reduction_stage.execute(
+                    stage_cfg,
+                    dataset,
+                    reader,
+                    ratio,
+                    ratio_tag,
+                    lineage,
+                    ratio_root,
+                    ratio_meta,
+                    spec.subtype,
+                )
+            else:
+                dataset_reduced = dataset.clone()
+
+            # Step 2: Evaluate NEW reduction baseline
+            logger.info(f"📊 Evaluating reduction baseline...")
+            evaluation_stage.execute(
+                "baseline",
+                dataset_reduced,
+                None,
+                stage_cfg,
+                lineage,
+                ratio_root,
+                ratio_tag,
+                ratio_meta,
+            )
+
+            # Get baseline value for THIS reduction
+            reduction_results_path = dataset_workspace / "reduction" / "results.json"
+            if not reduction_results_path.exists():
+                logger.warning(f"⚠️  Reduction results not found for attempt {attempt}, skipping")
+                continue
+
+            with reduction_results_path.open("r") as f:
+                reduction_results = json.load(f)
+
+            baseline_value = None
+            for model_name, model_results in reduction_results.items():
+                if isinstance(model_results, dict) and metric in model_results:
+                    baseline_value = model_results[metric]
+                    break
+
+            if baseline_value is None:
+                logger.warning(f"⚠️  Metric '{metric}' not found in reduction results for attempt {attempt}")
+                continue
+
+            logger.info(f"   Reduction baseline ({metric}): {baseline_value:.4f}")
+
+            # Step 3: Run augmentation on NEW reduction
+            logger.info(f"✨ Running augmentation...")
             dataset_augmented = augmentation_stage.execute(
                 stage_cfg,
                 aug_name,
@@ -1061,7 +1109,8 @@ class ExperimentRunner:
                 spec.subtype,
             )
 
-            # Run evaluation
+            # Step 4: Evaluate augmentation
+            logger.info(f"📊 Evaluating augmentation...")
             evaluation_stage.execute(
                 aug_name,
                 dataset_reduced,
@@ -1098,11 +1147,12 @@ class ExperimentRunner:
                 if current_value is not None:
                     improvement = current_value - baseline_value
                     logger.info(f"📊 Results - Attempt {attempt}:")
-                    logger.info(f"   {metric}: {current_value:.4f}")
+                    logger.info(f"   Baseline ({metric}): {baseline_value:.4f}")
+                    logger.info(f"   Augmented ({metric}): {current_value:.4f}")
                     logger.info(f"   Improvement: {improvement:+.4f} ({improvement/baseline_value*100:+.2f}%)")
 
                     # Save attempt results if configured
-                    if save_all and attempt > 1:
+                    if save_all:
                         attempt_file = results_path.parent / f"results_attempt_{attempt}.json"
                         shutil.copy(persisted, attempt_file)
                         logger.info(f"💾 Saved attempt {attempt} → {attempt_file}")
@@ -1111,43 +1161,56 @@ class ExperimentRunner:
                     if improvement >= min_improvement:
                         logger.info(f"✅ SUCCESS: Improvement >= {min_improvement:.4f}!")
                         logger.info(f"   Best result achieved at attempt {attempt}")
+
+                        # Restore resume flags
+                        reduction_stage.resume = original_resume
+                        augmentation_stage.resume = original_resume
+
                         augmentation_meta["results"] = str(persisted)
                         augmentation_meta["retry_attempts"] = attempt
                         augmentation_meta["retry_improvement"] = improvement
+                        augmentation_meta["retry_baseline"] = baseline_value
                         return
                     elif current_value > best_value:
                         best_value = current_value
                         best_attempt = attempt
                         best_results_file = persisted
-                        logger.info(f"   New best value: {best_value:.4f}")
+                        best_baseline_value = baseline_value
+                        logger.info(f"   🏆 New best value: {best_value:.4f}")
                 else:
                     logger.warning(f"⚠️  Could not extract metric '{metric}' from attempt {attempt}")
             else:
                 logger.warning(f"⚠️  Results file not found for attempt {attempt}")
 
+        # Restore resume flags
+        reduction_stage.resume = original_resume
+        augmentation_stage.resume = original_resume
+
         # Max attempts reached without sufficient improvement
         logger.warning(f"⚠️  Max attempts ({max_attempts}) reached without sufficient improvement")
-        logger.info(f"   Best value: {best_value:.4f} (attempt {best_attempt})")
-        logger.info(f"   Improvement: {best_value - baseline_value:+.4f}")
 
-        # Use best attempt results (not last attempt!)
-        if best_results_file and best_results_file.exists():
-            # Copy best attempt to main results.json
-            results_path = dataset_workspace / "augmentation" / "results.json"
-            shutil.copy(best_results_file, results_path)
-            logger.info(f"✅ Using best attempt {best_attempt} → {results_path}")
+        if best_attempt > 0 and best_baseline_value is not None:
+            improvement = best_value - best_baseline_value
+            logger.info(f"   Best value: {best_value:.4f} (attempt {best_attempt})")
+            logger.info(f"   Best baseline: {best_baseline_value:.4f}")
+            logger.info(f"   Best improvement: {improvement:+.4f}")
 
-            augmentation_meta["results"] = str(results_path)
-            augmentation_meta["retry_attempts"] = max_attempts
-            augmentation_meta["retry_improvement"] = best_value - baseline_value
-            augmentation_meta["retry_best_attempt"] = best_attempt
-        elif persisted:
-            # Fallback to last attempt if no best found
-            logger.warning("⚠️  No best attempt found, using last attempt")
-            augmentation_meta["results"] = str(persisted)
-            augmentation_meta["retry_attempts"] = max_attempts
-            augmentation_meta["retry_improvement"] = best_value - baseline_value
-            augmentation_meta["retry_best_attempt"] = best_attempt
+            # Use best attempt results (not last attempt!)
+            if best_results_file and best_results_file.exists():
+                # Copy best attempt to main results.json
+                results_path = dataset_workspace / "augmentation" / "results.json"
+                shutil.copy(best_results_file, results_path)
+                logger.info(f"✅ Using best attempt {best_attempt} → {results_path}")
+
+                augmentation_meta["results"] = str(results_path)
+                augmentation_meta["retry_attempts"] = max_attempts
+                augmentation_meta["retry_improvement"] = improvement
+                augmentation_meta["retry_best_attempt"] = best_attempt
+                augmentation_meta["retry_baseline"] = best_baseline_value
+            else:
+                logger.warning("⚠️  Best attempt results file not found")
+        else:
+            logger.warning("⚠️  No valid attempts completed")
 
     def _persist_stage_results(
         self,
