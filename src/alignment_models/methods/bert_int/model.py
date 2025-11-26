@@ -364,10 +364,9 @@ class BertIntAlignment:
         # Final evaluation (now on best model!)
         final_results = trainer.evaluator.evaluate(topk=candidate_topk)
 
-        # Add training metadata to results
+        # Add training metadata to results (only best epoch info, not full history)
         final_results["best_epoch"] = training_results["best_epoch"]
         final_results["best_hits@1"] = training_results["best_hits@1"]
-        final_results["training_history"] = training_results["training_history"]
 
         logger.info(
             f"[BERT-INT Phase 2] Interaction model completed: "
