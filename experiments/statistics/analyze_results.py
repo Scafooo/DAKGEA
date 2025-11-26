@@ -752,6 +752,11 @@ def main() -> None:
     aggregated_output = {}
     dataset_stage_stats: Dict[str, Dict[str, Dict[str, Dict[str, float]]]] = {}
     plots_base = Path(args.plots_dir)
+    # Ensure plots_base is absolute - resolve relative to PROJECT_ROOT if needed
+    if not plots_base.is_absolute():
+        plots_base = (PROJECT_ROOT / plots_base).resolve()
+    else:
+        plots_base = plots_base.resolve()
     logger.info("Loaded data from %d experiment directories.", len(experiments))
     logger.info("")
     for dataset, stages in sorted(datasets.items()):
@@ -850,6 +855,11 @@ def main() -> None:
 
     # Export results in requested formats
     export_dir = Path(args.tsv_dir)
+    # Ensure export_dir is absolute - resolve relative to PROJECT_ROOT if needed
+    if not export_dir.is_absolute():
+        export_dir = (PROJECT_ROOT / export_dir).resolve()
+    else:
+        export_dir = export_dir.resolve()
 
     if "tsv" in args.export_formats:
         write_dataset_summary_tsv(export_dir / "dataset_summary.tsv", dataset_stage_stats, args.metrics)
