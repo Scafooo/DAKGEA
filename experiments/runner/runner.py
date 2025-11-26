@@ -1043,7 +1043,7 @@ class ExperimentRunner:
             logger.info(f"🔄 ATTEMPT {attempt}/{max_attempts}")
             logger.info(f"{'='*80}")
 
-            # Step 1: Create NEW reduction for this attempt
+            # Step 1: Create NEW reduction for this attempt (skip writing datasets during retry)
             logger.info(f"🔨 Running reduction...")
             if ratio < 1.0:
                 dataset_reduced = reduction_stage.execute(
@@ -1056,6 +1056,7 @@ class ExperimentRunner:
                     ratio_root,
                     ratio_meta,
                     spec.subtype,
+                    skip_dataset_write=True,
                 )
             else:
                 dataset_reduced = dataset.clone()
@@ -1094,7 +1095,7 @@ class ExperimentRunner:
 
             logger.info(f"   Reduction baseline ({metric}): {baseline_value:.4f}")
 
-            # Step 3: Run augmentation on NEW reduction
+            # Step 3: Run augmentation on NEW reduction (skip writing datasets during retry)
             logger.info(f"✨ Running augmentation...")
             dataset_augmented = augmentation_stage.execute(
                 stage_cfg,
@@ -1107,6 +1108,7 @@ class ExperimentRunner:
                 ratio_root,
                 ratio_meta,
                 spec.subtype,
+                skip_dataset_write=True,
             )
 
             # Step 4: Evaluate augmentation

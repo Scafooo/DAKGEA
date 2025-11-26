@@ -194,6 +194,7 @@ class ReductionStage(_WriterStage):
         ratio_root: Path,
         ratio_meta: Dict[str, Any],
         subtype: Optional[str] = None,
+        skip_dataset_write: bool = False,
     ) -> Dataset:
         reduction_root = Path(lineage.get("reduction_root", ratio_root / "reduction"))
         _ensure_directory(reduction_root)
@@ -230,7 +231,7 @@ class ReductionStage(_WriterStage):
 
         for plan in self.writer_plans:
             plan_root = self._plan_root(reduction_root, plan)
-            if plan.write_reduced:
+            if plan.write_reduced and not skip_dataset_write:
                 _ensure_directory(plan_root)
                 plan.writer.write(dataset_reduced, str(plan_root))
                 logger.info("📝 [%s] Saved reduced dataset → %s", plan.name, plan_root)
@@ -286,6 +287,7 @@ class AugmentationStage(_WriterStage):
         ratio_root: Path,
         ratio_meta: Dict[str, Any],
         subtype: Optional[str] = None,
+        skip_dataset_write: bool = False,
     ) -> Dataset:
         augmentation_root = Path(lineage.get("augmentation_root", ratio_root / "augmentation"))
         stage_root = augmentation_root
@@ -339,7 +341,7 @@ class AugmentationStage(_WriterStage):
 
         for plan in self.writer_plans:
             plan_root = self._plan_root(stage_root, plan)
-            if plan.write_augmented:
+            if plan.write_augmented and not skip_dataset_write:
                 _ensure_directory(plan_root)
                 plan.writer.write(dataset_augmented, str(plan_root))
                 logger.info("📝 [%s] Saved augmented dataset → %s", plan.name, plan_root)
