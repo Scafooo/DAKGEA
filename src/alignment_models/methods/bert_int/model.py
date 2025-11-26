@@ -354,14 +354,27 @@ class BertIntAlignment:
             save_path=checkpoint_path,
         )
 
-        # Final evaluation
+        # Load best model before final evaluation
+        if checkpoint_path.exists():
+            trainer.model.load_state_dict(torch.load(checkpoint_path, map_location=device))
+            logger.info(f"Loaded best model from {checkpoint_path} (best epoch: {training_results['best_epoch']})")
+        else:
+            logger.warning(f"No checkpoint found at {checkpoint_path}, using final model state")
+
+        # Final evaluation (now on best model!)
         final_results = trainer.evaluator.evaluate(topk=candidate_topk)
+
+        # Add training metadata to results
+        final_results["best_epoch"] = training_results["best_epoch"]
+        final_results["best_hits@1"] = training_results["best_hits@1"]
+        final_results["training_history"] = training_results["training_history"]
 
         logger.info(
             f"[BERT-INT Phase 2] Interaction model completed: "
             f"hits@1={final_results.get('hits@1', 0):.4f} "
             f"hits@10={final_results.get('hits@10', 0):.4f} "
-            f"mrr={final_results.get('mrr', 0):.4f}"
+            f"mrr={final_results.get('mrr', 0):.4f} "
+            f"(best epoch: {training_results['best_epoch']})"
         )
 
         return final_results
