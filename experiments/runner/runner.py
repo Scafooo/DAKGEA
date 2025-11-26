@@ -1043,8 +1043,10 @@ class ExperimentRunner:
             logger.info(f"🔄 ATTEMPT {attempt}/{max_attempts}")
             logger.info(f"{'='*80}")
 
-            # Step 1: Create NEW reduction for this attempt (skip writing datasets during retry)
-            logger.info(f"🔨 Running reduction...")
+            # Step 1: Create NEW reduction for this attempt
+            # Skip writing datasets ONLY if we don't need to save them later
+            skip_write = not self.reduction_save_dataset and not self.reduction_save_model
+            logger.info(f"🔨 Running reduction (skip_write={skip_write})...")
             if ratio < 1.0:
                 dataset_reduced = reduction_stage.execute(
                     stage_cfg,
@@ -1056,7 +1058,7 @@ class ExperimentRunner:
                     ratio_root,
                     ratio_meta,
                     spec.subtype,
-                    skip_dataset_write=True,
+                    skip_dataset_write=skip_write,
                 )
             else:
                 dataset_reduced = dataset.clone()
@@ -1095,8 +1097,10 @@ class ExperimentRunner:
 
             logger.info(f"   Reduction baseline ({metric}): {baseline_value:.4f}")
 
-            # Step 3: Run augmentation on NEW reduction (skip writing datasets during retry)
-            logger.info(f"✨ Running augmentation...")
+            # Step 3: Run augmentation on NEW reduction
+            # Skip writing datasets ONLY if we don't need to save them later
+            skip_write_aug = not self.augmentation_save_dataset and not self.augmentation_save_model
+            logger.info(f"✨ Running augmentation (skip_write={skip_write_aug})...")
             dataset_augmented = augmentation_stage.execute(
                 stage_cfg,
                 aug_name,
@@ -1108,7 +1112,7 @@ class ExperimentRunner:
                 ratio_root,
                 ratio_meta,
                 spec.subtype,
-                skip_dataset_write=True,
+                skip_dataset_write=skip_write_aug,
             )
 
             # Step 4: Evaluate augmentation
