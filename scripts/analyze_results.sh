@@ -11,10 +11,10 @@ full_line() { printf '%*s\n' "$(term_width)" '' | tr ' ' "$1"; }
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export PYTHONPATH="$PROJECT_ROOT:${PYTHONPATH:-}"
 
-mapfile -t _STAT_PATHS < <(python <<'PY'
+mapfile -t _STAT_PATHS < <(python <<PY
 from pathlib import Path
 import sys
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path("$PROJECT_ROOT")
 sys.path.insert(0, str(ROOT))
 from src.config.loader import PROJECT_ROOT, load_yaml
 cfg = load_yaml(PROJECT_ROOT / "config/global.yaml") or {}
