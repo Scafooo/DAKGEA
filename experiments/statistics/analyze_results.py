@@ -895,6 +895,11 @@ def main() -> None:
 
         # Get output directory for this group
         group_plots_dir = Path(stats_config.get_plots_output_dir_for_group(group_name))
+        # Ensure group_plots_dir is absolute - resolve relative to PROJECT_ROOT if needed
+        if not group_plots_dir.is_absolute():
+            group_plots_dir = (PROJECT_ROOT / group_plots_dir).resolve()
+        else:
+            group_plots_dir = group_plots_dir.resolve()
         group_plots_dir.mkdir(parents=True, exist_ok=True)
 
         # Build and plot ratio data for this group
