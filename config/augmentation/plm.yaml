@@ -76,6 +76,12 @@ augmentation:
       temperature_increment: 0.02  # Increase temperature by this amount on each retry (e.g., 0.02 = +2% per retry)
       identical_tokens_threshold: 0.3  # Trigger retry only if >30% of tokens are identical (0.0-1.0)
 
+      # Sentence-level interpolation for long texts (descriptions, comments, bio, etc.)
+      # Splits long text into sentences, chunks them, and interpolates each chunk separately
+      enable_sentence_level: true  # Enable sentence-level interpolation for long text attributes
+      sentence_chunk_max_tokens: 80  # Max tokens per chunk (must be < max_len_in)
+      sentence_min_length_for_chunking: 60  # Min text length (tokens) to trigger sentence-level interpolation
+
     # Semantic predicate matching configuration
     predicate_matching:
       embedding_model: "all-MiniLM-L6-v2"  # Sentence transformer model

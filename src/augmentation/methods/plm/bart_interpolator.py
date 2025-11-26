@@ -26,6 +26,13 @@ from src.utils.reproducibility import set_random_seeds
 from src.core.dataset import Dataset
 from src.core.knowledge_graph import KnowledgeGraph
 
+# Sentence-level interpolation for long texts
+from .sentence_interpolator import (
+    interpolate_long_text,
+    is_long_text_predicate,
+    count_tokens,
+)
+
 # Levenshtein distance for edit distance constraint
 try:
     from Levenshtein import distance as levenshtein_distance
@@ -198,6 +205,11 @@ class BartInterpolatorPLM:
         self.noise_increment = float(gen_cfg.get("noise_increment", 0.05))  # Increase noise on each retry
         self.temperature_increment = float(gen_cfg.get("temperature_increment", 0.02))  # Increase temperature on each retry
         self.identical_tokens_threshold = float(gen_cfg.get("identical_tokens_threshold", 0.3))  # Overlap threshold for retry
+
+        # Sentence-level interpolation for long texts
+        self.enable_sentence_level = bool(gen_cfg.get("enable_sentence_level", True))
+        self.sentence_chunk_max_tokens = int(gen_cfg.get("sentence_chunk_max_tokens", 80))
+        self.sentence_min_length_for_chunking = int(gen_cfg.get("sentence_min_length_for_chunking", 60))
 
         os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
@@ -888,7 +900,35 @@ class BartInterpolatorPLM:
             s = _simple_clean(val_src)
             return s, s
 
-        # Retry mechanism for identical tokens
+        # Check if we should use sentence-level interpolation for long texts
+        if self.enable_sentence_level and is_long_text_predicate(predicate):
+            # Check text length
+            max_len = max(
+                count_tokens(val_src, self.tokenizer),
+                count_tokens(val_tgt, self.tokenizer)
+            )
+
+            if max_len >= self.sentence_min_length_for_chunking:
+                logger.debug(f"[INTERPOLATE_PAIR] Using sentence-level interpolation for predicate '{predicate}' ({max_len} tokens)")
+
+                # Create a wrapper function for standard interpolation
+                def _standard_interpolate(text1: str, text2: str) -> Tuple[str, str]:
+                    if self.enable_retry_on_identical_tokens and self.enable_noise_injection:
+                        return self._interpolate_with_retry(text1, text2, max_new_tokens, predicate)
+                    else:
+                        return self._interpolate_single(text1, text2, max_new_tokens, predicate)
+
+                # Use sentence-level interpolation
+                return interpolate_long_text(
+                    val_src,
+                    val_tgt,
+                    _standard_interpolate,
+                    self.tokenizer,
+                    max_tokens=self.sentence_chunk_max_tokens,
+                    min_length_for_chunking=self.sentence_min_length_for_chunking,
+                )
+
+        # Standard interpolation for short texts or non-long-text predicates
         if self.enable_retry_on_identical_tokens and self.enable_noise_injection:
             return self._interpolate_with_retry(val_src, val_tgt, max_new_tokens, predicate)
         else:
