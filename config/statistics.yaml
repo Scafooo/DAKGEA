@@ -40,7 +40,6 @@ metrics:
   plot:
     ranking:
       - "hits@1"
-      - "hits@10"
       - "mrr"
 
 # Metric display colors for visualizations
@@ -55,7 +54,7 @@ colors:
 
 # Plot settings
 plots:
-  dpi: 200                        # Default resolution for saved plots
+  dpi: 400                        # Default resolution for saved plots
   figure_size:
     default: [5, 4]               # Width, height in inches
     ratio_chart: [8, 5]           # For ratio comparison charts
