@@ -80,11 +80,19 @@ def plot_boxplot(
     augmentation_values: List[float],
     metric: str,
     plots_dir: Path,
+    stage_colors: Dict[str, Dict[str, str]] = None,
     dpi: int = 200,
 ) -> None:
     """Create boxplot comparing reduction vs augmentation."""
     if not reduction_values and not augmentation_values:
         return
+
+    # Default colors if not provided
+    if stage_colors is None:
+        stage_colors = {
+            "reduction": {"primary": "#264653"},
+            "augmentation": {"primary": "#e76f51"},
+        }
 
     ensure_dir(plots_dir / "boxplots")
 
@@ -97,12 +105,12 @@ def plot_boxplot(
     if reduction_values:
         data.append(reduction_values)
         labels.append("Reduction")
-        colors.append("#457b9d")
+        colors.append(stage_colors.get("reduction", {}).get("primary", "#264653"))
 
     if augmentation_values:
         data.append(augmentation_values)
         labels.append("Augmentation")
-        colors.append("#e76f51")
+        colors.append(stage_colors.get("augmentation", {}).get("primary", "#e76f51"))
 
     bp = ax.boxplot(data, labels=labels, patch_artist=True, notch=True,
                      showmeans=True, meanline=True)
@@ -127,11 +135,19 @@ def plot_violin(
     augmentation_values: List[float],
     metric: str,
     plots_dir: Path,
+    stage_colors: Dict[str, Dict[str, str]] = None,
     dpi: int = 200,
 ) -> None:
     """Create violin plot comparing reduction vs augmentation."""
     if (not reduction_values or len(reduction_values) < 2) and (not augmentation_values or len(augmentation_values) < 2):
         return
+
+    # Default colors if not provided
+    if stage_colors is None:
+        stage_colors = {
+            "reduction": {"primary": "#264653"},
+            "augmentation": {"primary": "#e76f51"},
+        }
 
     ensure_dir(plots_dir / "violins")
 
@@ -140,18 +156,21 @@ def plot_violin(
     data = []
     positions = []
     labels = []
+    colors = []
 
     pos = 1
     if reduction_values and len(reduction_values) >= 2:
         data.append(reduction_values)
         positions.append(pos)
         labels.append("Reduction")
+        colors.append(stage_colors.get("reduction", {}).get("primary", "#264653"))
         pos += 1
 
     if augmentation_values and len(augmentation_values) >= 2:
         data.append(augmentation_values)
         positions.append(pos)
         labels.append("Augmentation")
+        colors.append(stage_colors.get("augmentation", {}).get("primary", "#e76f51"))
 
     if not data:
         return
@@ -159,7 +178,6 @@ def plot_violin(
     parts = ax.violinplot(data, positions=positions, showmeans=True, showmedians=True)
 
     # Color the violins
-    colors = ["#457b9d", "#e76f51"]
     for i, pc in enumerate(parts["bodies"]):
         if i < len(colors):
             pc.set_facecolor(colors[i])
@@ -224,11 +242,20 @@ def plot_delta_chart(
     augmentation_values: List[float],
     metric: str,
     plots_dir: Path,
+    delta_colors: Dict[str, str] = None,
     dpi: int = 200,
 ) -> None:
     """Create chart showing delta (augmentation - reduction) for each experiment."""
     if len(reduction_values) != len(augmentation_values) or not reduction_values:
         return
+
+    # Default delta colors if not provided
+    if delta_colors is None:
+        delta_colors = {
+            "positive": "#2a9d8f",
+            "negative": "#e63946",
+            "neutral": "#6c757d",
+        }
 
     ensure_dir(plots_dir / "deltas")
 
@@ -237,7 +264,7 @@ def plot_delta_chart(
 
     fig, ax = plt.subplots(figsize=(max(8, len(deltas) * 0.5), 5))
 
-    colors = ["#2a9d8f" if d > 0 else "#e76f51" for d in deltas]
+    colors = [delta_colors.get("positive", "#2a9d8f") if d > 0 else delta_colors.get("negative", "#e63946") for d in deltas]
     ax.bar(indices, deltas, color=colors, alpha=0.7, edgecolor="black", linewidth=0.5)
 
     # Add zero line

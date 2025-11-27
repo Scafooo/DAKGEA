@@ -906,7 +906,46 @@ def main() -> None:
     # Generate advanced visualizations if requested
     if args.enable_advanced_plots:
         logger.info("Generating advanced visualizations...")
+
+        # Prepare color configurations from stats_config
+        stage_colors = {
+            "reduction": {
+                "primary": stats_config.stage_color_reduction_primary,
+                "light": stats_config.stage_color_reduction_light,
+                "linestyle": stats_config.stage_color_reduction_linestyle,
+                "marker": stats_config.stage_color_reduction_marker,
+                "alpha": stats_config.stage_color_reduction_alpha,
+            },
+            "augmentation": {
+                "primary": stats_config.stage_color_augmentation_primary,
+                "light": stats_config.stage_color_augmentation_light,
+                "linestyle": stats_config.stage_color_augmentation_linestyle,
+                "marker": stats_config.stage_color_augmentation_marker,
+                "alpha": stats_config.stage_color_augmentation_alpha,
+            },
+        }
+
+        delta_colors = {
+            "positive": stats_config.delta_color_positive,
+            "negative": stats_config.delta_color_negative,
+            "neutral": stats_config.delta_color_neutral,
+        }
+
         for dataset, stage_stats in sorted(dataset_stage_stats.items()):
+            # Generate radar chart for multi-metric comparison (once per dataset)
+            red_metrics = {}
+            aug_metrics = {}
+            for metric in args.metrics:
+                red_stats = stage_stats.get("reduction", {}).get(metric)
+                aug_stats = stage_stats.get("augmentation", {}).get(metric)
+                if red_stats:
+                    red_metrics[metric] = red_stats["mean"]
+                if aug_stats:
+                    aug_metrics[metric] = aug_stats["mean"]
+
+            if red_metrics or aug_metrics:
+                plot_radar_chart(dataset, red_metrics, aug_metrics, args.metrics, plots_base, stage_colors, dpi=args.dpi)
+
             for metric in args.metrics:
                 red_stats = stage_stats.get("reduction", {}).get(metric)
                 aug_stats = stage_stats.get("augmentation", {}).get(metric)
@@ -925,13 +964,17 @@ def main() -> None:
                     if aug_entry and metric in aug_entry.get("metrics", {}):
                         aug_values.append(aug_entry["metrics"][metric])
 
+                # Generate ridge plot for distribution comparison
+                if red_values or aug_values:
+                    plot_ridge(dataset, red_values, aug_values, metric, plots_base, stage_colors, dpi=args.dpi)
+
                 # Generate boxplot
                 if red_values or aug_values:
-                    plot_boxplot(dataset, red_values, aug_values, metric, plots_base, dpi=args.dpi)
+                    plot_boxplot(dataset, red_values, aug_values, metric, plots_base, stage_colors, dpi=args.dpi)
 
                 # Generate violin plot
                 if red_values or aug_values:
-                    plot_violin(dataset, red_values, aug_values, metric, plots_base, dpi=args.dpi)
+                    plot_violin(dataset, red_values, aug_values, metric, plots_base, stage_colors, dpi=args.dpi)
 
                 # Generate scatter plot (requires paired values)
                 if len(red_values) == len(aug_values) and len(red_values) >= 2:
@@ -939,7 +982,7 @@ def main() -> None:
 
                 # Generate delta chart
                 if len(red_values) == len(aug_values) and red_values:
-                    plot_delta_chart(dataset, red_values, aug_values, metric, plots_base, dpi=args.dpi)
+                    plot_delta_chart(dataset, red_values, aug_values, metric, plots_base, delta_colors, dpi=args.dpi)
 
         # Generate heatmaps for ratio combinations
         for dataset, ratio_group in ratio_plot_groups.items():
@@ -955,7 +998,35 @@ def main() -> None:
                 if heatmap_data:
                     plot_heatmap(dataset, heatmap_data, metric, plots_base, dpi=args.dpi)
 
-        logger.info("Advanced visualizations saved under %s/{heatmaps,boxplots,violins,scatter,deltas}", plots_base.resolve())
+        # Generate performance matrices (dataset x experiment heatmaps)
+        for metric in args.metrics:
+            # Build reduction stage data
+            red_stage_data = {}
+            for dataset, entries in ratio_entries.items():
+                for entry in entries:
+                    red_entry = entry.get("reduction")
+                    if red_entry and metric in red_entry.get("metrics", {}):
+                        if dataset not in red_stage_data:
+                            red_stage_data[dataset] = []
+                        red_stage_data[dataset].append(red_entry["metrics"][metric])
+
+            if red_stage_data:
+                plot_performance_matrix(red_stage_data, metric, "reduction", plots_base, stage_colors, dpi=args.dpi)
+
+            # Build augmentation stage data
+            aug_stage_data = {}
+            for dataset, entries in ratio_entries.items():
+                for entry in entries:
+                    aug_entry = entry.get("augmentation")
+                    if aug_entry and metric in aug_entry.get("metrics", {}):
+                        if dataset not in aug_stage_data:
+                            aug_stage_data[dataset] = []
+                        aug_stage_data[dataset].append(aug_entry["metrics"][metric])
+
+            if aug_stage_data:
+                plot_performance_matrix(aug_stage_data, metric, "augmentation", plots_base, stage_colors, dpi=args.dpi)
+
+        logger.info("Advanced visualizations saved under %s/{heatmaps,boxplots,violins,scatter,deltas,radar_charts,ridge_plots,performance_matrices}", plots_base.resolve())
 
     if args.output_json:
         out_path = Path(args.output_json)
