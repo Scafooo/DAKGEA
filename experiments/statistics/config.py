@@ -105,11 +105,67 @@ class StatisticsConfig:
 
     @property
     def bar_color_reduction(self) -> str:
-        return self._config.get("plots", {}).get("bar_colors", {}).get("reduction", "#457b9d")
+        """Legacy property for backward compatibility. Use stage_color_reduction_primary instead."""
+        return self.stage_color_reduction_primary
 
     @property
     def bar_color_augmentation(self) -> str:
-        return self._config.get("plots", {}).get("bar_colors", {}).get("augmentation", "#e76f51")
+        """Legacy property for backward compatibility. Use stage_color_augmentation_primary instead."""
+        return self.stage_color_augmentation_primary
+
+    # Unified stage colors (NEW)
+    @property
+    def stage_color_reduction_primary(self) -> str:
+        return self._config.get("plots", {}).get("stage_colors", {}).get("reduction", {}).get("primary", "#264653")
+
+    @property
+    def stage_color_reduction_light(self) -> str:
+        return self._config.get("plots", {}).get("stage_colors", {}).get("reduction", {}).get("light", "#2a9d8f")
+
+    @property
+    def stage_color_reduction_linestyle(self) -> str:
+        return self._config.get("plots", {}).get("stage_colors", {}).get("reduction", {}).get("linestyle", "--")
+
+    @property
+    def stage_color_reduction_marker(self) -> str:
+        return self._config.get("plots", {}).get("stage_colors", {}).get("reduction", {}).get("marker", "x")
+
+    @property
+    def stage_color_reduction_alpha(self) -> float:
+        return self._config.get("plots", {}).get("stage_colors", {}).get("reduction", {}).get("alpha", 0.85)
+
+    @property
+    def stage_color_augmentation_primary(self) -> str:
+        return self._config.get("plots", {}).get("stage_colors", {}).get("augmentation", {}).get("primary", "#e76f51")
+
+    @property
+    def stage_color_augmentation_light(self) -> str:
+        return self._config.get("plots", {}).get("stage_colors", {}).get("augmentation", {}).get("light", "#f4a261")
+
+    @property
+    def stage_color_augmentation_linestyle(self) -> str:
+        return self._config.get("plots", {}).get("stage_colors", {}).get("augmentation", {}).get("linestyle", "-")
+
+    @property
+    def stage_color_augmentation_marker(self) -> str:
+        return self._config.get("plots", {}).get("stage_colors", {}).get("augmentation", {}).get("marker", "o")
+
+    @property
+    def stage_color_augmentation_alpha(self) -> float:
+        return self._config.get("plots", {}).get("stage_colors", {}).get("augmentation", {}).get("alpha", 0.85)
+
+    # Delta/improvement colors
+    @property
+    def delta_color_positive(self) -> str:
+        return self._config.get("plots", {}).get("delta_colors", {}).get("positive", "#2a9d8f")
+
+    @property
+    def delta_color_negative(self) -> str:
+        return self._config.get("plots", {}).get("delta_colors", {}).get("negative", "#e63946")
+
+    @property
+    def delta_color_neutral(self) -> str:
+        return self._config.get("plots", {}).get("delta_colors", {}).get("neutral", "#6c757d")
 
     @property
     def ratio_chart_bar_width(self) -> float:
@@ -185,6 +241,82 @@ class StatisticsConfig:
     @property
     def skip_directories(self) -> List[str]:
         return self._config.get("filtering", {}).get("skip_directories", ["logs", "statistics"])
+
+    # New figure sizes
+    @property
+    def figure_size_radar_chart(self) -> List[int]:
+        return self._config.get("plots", {}).get("figure_size", {}).get("radar_chart", [7, 7])
+
+    @property
+    def figure_size_ridge_plot(self) -> List[int]:
+        return self._config.get("plots", {}).get("figure_size", {}).get("ridge_plot", [10, 6])
+
+    @property
+    def figure_size_performance_matrix(self) -> List[int]:
+        return self._config.get("plots", {}).get("figure_size", {}).get("performance_matrix", [10, 8])
+
+    # Console settings
+    @property
+    def console_use_rich(self) -> bool:
+        return self._config.get("console", {}).get("use_rich", True)
+
+    @property
+    def console_show_progress(self) -> bool:
+        return self._config.get("console", {}).get("show_progress", True)
+
+    @property
+    def console_colors(self) -> Dict[str, str]:
+        return self._config.get("console", {}).get("colors", {})
+
+    @property
+    def console_delta_thresholds(self) -> Dict[str, float]:
+        return self._config.get("console", {}).get("delta_thresholds", {})
+
+    @property
+    def console_summary_table_show(self) -> bool:
+        return self._config.get("console", {}).get("summary_table", {}).get("show", True)
+
+    @property
+    def console_summary_table_top_n(self) -> int:
+        return self._config.get("console", {}).get("summary_table", {}).get("top_n", 5)
+
+    @property
+    def console_summary_table_sort_by(self) -> str:
+        return self._config.get("console", {}).get("summary_table", {}).get("sort_by", "hits@1")
+
+    # Outlier detection
+    @property
+    def outliers_enabled(self) -> bool:
+        return self._config.get("outliers", {}).get("enabled", True)
+
+    @property
+    def outliers_method(self) -> str:
+        return self._config.get("outliers", {}).get("method", "iqr")
+
+    @property
+    def outliers_iqr_multiplier(self) -> float:
+        return self._config.get("outliers", {}).get("iqr_multiplier", 1.5)
+
+    @property
+    def outliers_zscore_threshold(self) -> float:
+        return self._config.get("outliers", {}).get("zscore_threshold", 3.0)
+
+    @property
+    def outliers_highlight_in_plots(self) -> bool:
+        return self._config.get("outliers", {}).get("highlight_in_plots", True)
+
+    # Best/worst tracking
+    @property
+    def tracking_enabled(self) -> bool:
+        return self._config.get("tracking", {}).get("enabled", True)
+
+    @property
+    def tracking_criteria(self) -> List[Dict[str, Any]]:
+        return self._config.get("tracking", {}).get("criteria", [])
+
+    @property
+    def tracking_save_summary(self) -> bool:
+        return self._config.get("tracking", {}).get("save_summary", True)
 
 
 # Global instance (lazy-loaded)

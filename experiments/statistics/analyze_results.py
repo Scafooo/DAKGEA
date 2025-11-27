@@ -19,12 +19,6 @@ if str(ROOT) not in sys.path:
 
 from src.config.loader import PROJECT_ROOT, load_yaml
 from experiments.statistics.config import get_statistics_config
-from experiments.statistics.exporters import (
-    write_dataset_summary_csv,
-    write_dataset_summary_markdown,
-    write_dataset_summary_latex,
-    try_write_excel,
-)
 from experiments.statistics.advanced_stats import (
     summarize_with_advanced_stats,
     cohens_d,
@@ -36,6 +30,25 @@ from experiments.statistics.visualizations import (
     plot_violin,
     plot_scatter_correlation,
     plot_delta_chart,
+    plot_radar_chart,
+    plot_ridge,
+    plot_performance_matrix,
+)
+from experiments.statistics.console_output import (
+    create_console,
+    create_progress_bar,
+    print_header,
+    print_dataset_header,
+    format_delta_with_color,
+    print_metric_summary,
+    create_summary_table,
+    RICH_AVAILABLE,
+)
+from experiments.statistics.outlier_detection import detect_outliers, get_outlier_summary
+from experiments.statistics.tracking import (
+    identify_best_worst_experiments,
+    get_top_n_experiments,
+    calculate_improvement_rankings,
 )
 from src.logger import get_logger
 
@@ -154,9 +167,9 @@ def parse_args(default_plots_dir: Path, default_results_dir: Path) -> argparse.N
     parser.add_argument(
         "--export-formats",
         nargs="+",
-        choices=["tsv", "csv", "markdown", "latex", "excel"],
-        default=["tsv", "csv"],
-        help="Export formats to generate (default: %(default)s).",
+        choices=["tsv"],
+        default=["tsv"],
+        help="Export formats to generate (default: %(default)s). Only TSV is supported.",
     )
     parser.add_argument(
         "--enable-advanced-plots",
@@ -861,29 +874,11 @@ def main() -> None:
     else:
         export_dir = export_dir.resolve()
 
+    # Export only TSV format (as configured)
     if "tsv" in args.export_formats:
         write_dataset_summary_tsv(export_dir / "dataset_summary.tsv", dataset_stage_stats, args.metrics)
         write_ratio_summary_tsv(export_dir / "ratio_summary.tsv", ratio_entries, args.metrics)
         logger.info("TSV summaries saved under %s", export_dir.resolve())
-
-    if "csv" in args.export_formats:
-        write_dataset_summary_csv(export_dir / "dataset_summary.csv", dataset_stage_stats, args.metrics)
-        logger.info("CSV export saved to %s", (export_dir / "dataset_summary.csv").resolve())
-
-    if "markdown" in args.export_formats:
-        write_dataset_summary_markdown(export_dir / "dataset_summary.md", dataset_stage_stats, args.metrics)
-        logger.info("Markdown export saved to %s", (export_dir / "dataset_summary.md").resolve())
-
-    if "latex" in args.export_formats:
-        write_dataset_summary_latex(export_dir / "dataset_summary.tex", dataset_stage_stats, args.metrics)
-        logger.info("LaTeX export saved to %s", (export_dir / "dataset_summary.tex").resolve())
-
-    if "excel" in args.export_formats:
-        excel_success = try_write_excel(export_dir / "dataset_summary.xlsx", dataset_stage_stats, args.metrics)
-        if excel_success:
-            logger.info("Excel export saved to %s", (export_dir / "dataset_summary.xlsx").resolve())
-        else:
-            logger.warning("Excel export skipped (openpyxl not installed). Install with: pip install openpyxl")
 
     # Generate plots for each metric group (ranking, classification, etc.)
     for group_name, group_metrics in PLOT_METRICS.items():

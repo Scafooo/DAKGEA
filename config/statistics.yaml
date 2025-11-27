@@ -14,6 +14,7 @@ stages:
 
 # Default metrics to analyze
 # These can be overridden via command-line arguments
+# NOTE: precision, recall, and f-measure removed - they are aliases of hits@1 (bug in BERT-INT evaluator)
 metrics:
   default:
     - "hits@1"
@@ -23,9 +24,6 @@ metrics:
     - "hits@50"
     - "mrr"
     - "mr"
-    - "precision"
-    - "recall"
-    - "f-measure"
 
   # Metric groups (for organized visualization)
   groups:
@@ -37,10 +35,6 @@ metrics:
       - "hits@50"
       - "mrr"
       - "mr"
-    classification:
-      - "precision"
-      - "recall"
-      - "f-measure"
 
   # Metrics to use for plots (organized by group)
   plot:
@@ -48,23 +42,16 @@ metrics:
       - "hits@1"
       - "hits@10"
       - "mrr"
-    classification:
-      - "precision"
-      - "recall"
-      - "f-measure"
 
 # Metric display colors for visualizations
 colors:
-  "hits@1": "#1f77b4"
-  "hits@5": "#ff7f0e"
-  "hits@10": "#2ca02c"
-  "hits@25": "#d62728"
-  "hits@50": "#9467bd"
-  "mrr": "#8c564b"
-  "mr": "#e377c2"
-  "precision": "#17becf"
-  "recall": "#bcbd22"
-  "f-measure": "#7f7f7f"
+  "hits@1": "#1f77b4"        # Blue
+  "hits@5": "#ff7f0e"        # Orange
+  "hits@10": "#2ca02c"       # Green
+  "hits@25": "#d62728"       # Red
+  "hits@50": "#9467bd"       # Purple
+  "mrr": "#8c564b"           # Brown
+  "mr": "#e377c2"            # Pink
 
 # Plot settings
 plots:
@@ -73,11 +60,30 @@ plots:
     default: [5, 4]               # Width, height in inches
     ratio_chart: [8, 5]           # For ratio comparison charts
     trend_chart: [8, 4.5]         # For trend line charts
+    radar_chart: [7, 7]           # For radar/spider charts (square)
+    ridge_plot: [10, 6]           # For ridge plots
+    performance_matrix: [10, 8]   # For dataset x model heatmaps
 
-  # Bar chart colors
-  bar_colors:
-    reduction: "#457b9d"          # Blue shade
-    augmentation: "#e76f51"       # Red/orange shade
+  # Unified color scheme for reduction/augmentation across ALL plots
+  stage_colors:
+    reduction:
+      primary: "#264653"          # Dark blue-green (primary)
+      light: "#2a9d8f"           # Light teal (accents)
+      linestyle: "--"             # Dashed line
+      marker: "x"                 # X marker
+      alpha: 0.85                 # Transparency
+    augmentation:
+      primary: "#e76f51"          # Warm orange/red (primary)
+      light: "#f4a261"            # Light orange (accents)
+      linestyle: "-"              # Solid line
+      marker: "o"                 # Circle marker
+      alpha: 0.85                 # Transparency
+
+  # Delta/improvement colors (for comparison charts)
+  delta_colors:
+    positive: "#2a9d8f"           # Teal green (improvement)
+    negative: "#e63946"           # Red (degradation)
+    neutral: "#6c757d"            # Gray (no change)
 
   # Ratio chart settings
   ratio_chart:
@@ -87,16 +93,14 @@ plots:
 
 # Export settings
 export:
-  # Available formats: tsv, csv, markdown, latex, excel
+  # Available formats: tsv only (as requested)
   default_formats:
     - "tsv"
-    - "csv"
 
   # Output directories (relative to project root)
   output_dirs:
     plots: "results/statistics"     # Where to save plots
     plots_ranking: "results/statistics/ranking_metrics"  # Ranking metrics plots
-    plots_classification: "results/statistics/classification_metrics"  # Classification metrics plots
     exports: "results/statistics"   # Where to save export files
 
 # Advanced statistics
@@ -117,6 +121,58 @@ advanced_plots:
     - "violin"
     - "scatter"
     - "delta_chart"
+    - "radar_chart"             # NEW: Multi-metric radar/spider chart
+    - "ridge_plot"              # NEW: Distribution ridge plot
+    - "performance_matrix"      # NEW: Dataset × Model heatmap
+
+# Console output settings (using rich library)
+console:
+  # Enable colored output with rich
+  use_rich: true
+
+  # Show progress bars during analysis
+  show_progress: true
+
+  # Color scheme for console output
+  colors:
+    improvement: "green"          # Positive delta
+    degradation: "red"            # Negative delta
+    neutral: "yellow"             # No significant change
+    header: "cyan bold"           # Section headers
+    dataset: "blue bold"          # Dataset names
+    metric: "white"               # Metric names
+    value: "white"                # Metric values
+
+  # Thresholds for delta highlighting
+  delta_thresholds:
+    significant_improvement: 0.05    # >= 5% improvement
+    significant_degradation: -0.05   # <= -5% degradation
+
+  # Summary table settings
+  summary_table:
+    show: true                    # Show summary table at end
+    top_n: 5                      # Show top N best/worst experiments
+    sort_by: "hits@1"             # Metric to sort by
+
+# Outlier detection
+outliers:
+  enabled: true                   # Enable automatic outlier detection
+  method: "iqr"                   # Method: "iqr" (interquartile range) or "zscore"
+  iqr_multiplier: 1.5             # IQR multiplier for outlier detection
+  zscore_threshold: 3.0           # Z-score threshold for outlier detection
+  highlight_in_plots: true        # Mark outliers on plots
+
+# Best/worst experiment tracking
+tracking:
+  enabled: true                   # Enable best/worst experiment identification
+  criteria:
+    - metric: "hits@1"
+      maximize: true              # Higher is better
+    - metric: "mrr"
+      maximize: true
+    - metric: "mr"
+      maximize: false             # Lower is better
+  save_summary: true              # Save best/worst to separate file
 
 # Filtering
 filtering:
@@ -133,6 +189,3 @@ filtering:
     - "hits@25"
     - "hits@50"
     - "mrr"
-    - "precision"
-    - "recall"
-    - "f-measure"
