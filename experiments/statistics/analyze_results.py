@@ -1003,12 +1003,14 @@ def main() -> None:
             # Build reduction stage data
             red_stage_data = {}
             for dataset, entries in ratio_entries.items():
-                for entry in entries:
+                for idx, entry in enumerate(entries):
                     red_entry = entry.get("reduction")
                     if red_entry and metric in red_entry.get("metrics", {}):
                         if dataset not in red_stage_data:
-                            red_stage_data[dataset] = []
-                        red_stage_data[dataset].append(red_entry["metrics"][metric])
+                            red_stage_data[dataset] = {}
+                        # Use experiment index or ratio as identifier
+                        exp_id = entry.get("experiment", f"exp_{idx}")
+                        red_stage_data[dataset][exp_id] = red_entry["metrics"][metric]
 
             if red_stage_data:
                 plot_performance_matrix(red_stage_data, metric, "reduction", plots_base, stage_colors, dpi=args.dpi)
@@ -1016,12 +1018,14 @@ def main() -> None:
             # Build augmentation stage data
             aug_stage_data = {}
             for dataset, entries in ratio_entries.items():
-                for entry in entries:
+                for idx, entry in enumerate(entries):
                     aug_entry = entry.get("augmentation")
                     if aug_entry and metric in aug_entry.get("metrics", {}):
                         if dataset not in aug_stage_data:
-                            aug_stage_data[dataset] = []
-                        aug_stage_data[dataset].append(aug_entry["metrics"][metric])
+                            aug_stage_data[dataset] = {}
+                        # Use experiment index or ratio as identifier
+                        exp_id = entry.get("experiment", f"exp_{idx}")
+                        aug_stage_data[dataset][exp_id] = aug_entry["metrics"][metric]
 
             if aug_stage_data:
                 plot_performance_matrix(aug_stage_data, metric, "augmentation", plots_base, stage_colors, dpi=args.dpi)
