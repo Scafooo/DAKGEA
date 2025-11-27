@@ -348,34 +348,69 @@ def plot_dataset(
     metric: str,
     stage_stats: Dict[str, Dict[str, Dict]],
     plots_dir: Path,
+    stage_colors: Dict[str, Dict[str, str]] = None,
 ) -> None:
+    """Plot bar chart comparing reduction vs augmentation for a single metric.
+
+    Args:
+        dataset: Dataset name
+        metric: Metric to plot
+        stage_stats: Stage statistics dictionary
+        plots_dir: Output directory for plots
+        stage_colors: Color configuration for stages
+    """
+    # Default colors if not provided
+    if stage_colors is None:
+        stage_colors = {
+            "reduction": {"primary": "#264653"},
+            "augmentation": {"primary": "#e76f51"},
+        }
+
     values = []
     labels = []
+    colors = []
     for stage in STAGES:
         stats = stage_stats.get(stage, {})
         metric_stats = stats.get(metric)
         if metric_stats:
             values.append(metric_stats["mean"])
             labels.append(stage.capitalize())
+            colors.append(stage_colors.get(stage, {}).get("primary", "#264653"))
+
     if len(values) < 2:
         return
+
     ensure_dir(plots_dir)
     fig_size = stats_config.figure_size_default
-    plt.figure(figsize=(fig_size[0], fig_size[1]))
-    bars = plt.bar(
-        labels,
-        values,
-        color=[stats_config.bar_color_reduction, stats_config.bar_color_augmentation]
-    )
+    fig, ax = plt.subplots(figsize=(fig_size[0], fig_size[1]))
+
+    bars = ax.bar(labels, values, color=colors, alpha=0.85, edgecolor='black', linewidth=0.8)
+
+    # Add value labels on bars
     for bar, value in zip(bars, values):
-        plt.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), f"{value:.3f}", ha="center", va="bottom")
-    plt.title(f"{dataset} – {metric}")
-    plt.ylabel(metric)
-    plt.ylim(0, max(values) * 1.1)
-    outfile = plots_dir / f"{dataset}_{metric.replace('@', 'at').replace('/', '_')}.png"
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width() / 2, height,
+                f"{value:.3f}", ha="center", va="bottom", fontsize=10, fontweight='bold')
+
+    # Calculate and display delta
+    if len(values) == 2:
+        delta = values[1] - values[0]  # augmentation - reduction
+        delta_pct = (delta / values[0] * 100) if values[0] != 0 else 0
+        delta_color = "#2a9d8f" if delta > 0 else "#e63946"
+        ax.text(0.5, 0.95, f"Δ = {delta:+.4f} ({delta_pct:+.2f}%)",
+                transform=ax.transAxes, ha='center', va='top',
+                fontsize=11, fontweight='bold', color=delta_color,
+                bbox=dict(boxstyle='round,pad=0.5', facecolor='white', edgecolor=delta_color, linewidth=2, alpha=0.9))
+
+    ax.set_title(f"{dataset} – {metric}", fontsize=13, fontweight="bold")
+    ax.set_ylabel(metric, fontsize=11)
+    ax.set_ylim(0, max(values) * 1.15)
+    ax.grid(axis='y', linestyle='--', alpha=0.3)
+
     plt.tight_layout()
+    outfile = plots_dir / f"{dataset}_{metric.replace('@', 'at').replace('/', '_')}.png"
     plt.savefig(outfile, dpi=PLOT_DPI)
-    plt.close()
+    plt.close(fig)
 
 
 def _aggregate_ratio_metrics(entries: List[Dict], metrics: List[str]) -> Dict[float, Dict[str, float]]:
@@ -855,7 +890,15 @@ def main() -> None:
                             t_test_result["p_value"],
                             t_test_result["mean_difference"],
                         )
-        plot_dataset(dataset, args.plot_metric, stage_stats, plots_base)
+
+        # Generate comparison bar charts for all metrics with unified colors
+        stage_colors_for_plot = {
+            "reduction": {"primary": stats_config.stage_color_reduction_primary},
+            "augmentation": {"primary": stats_config.stage_color_augmentation_primary},
+        }
+        for metric in args.metrics:
+            plot_dataset(dataset, metric, stage_stats, plots_base, stage_colors_for_plot)
+
         dataset_stage_stats[dataset] = stage_stats
         aggregated_output[dataset] = {
             stage: {
