@@ -22,6 +22,10 @@ from experiments.qualitative_analysis.diversity_metrics import (
     DiversityAnalyzer,
     analyze_diversity,
 )
+from experiments.qualitative_analysis.ea_specific_metrics import (
+    EntityAlignmentMetrics,
+    analyze_ea_metrics,
+)
 from experiments.qualitative_analysis.entity_sampler import (
     EntitySampler,
     sample_entities,
@@ -39,11 +43,13 @@ __all__ = [
     # Analyzers
     "DiversityAnalyzer",
     "RealismAnalyzer",
+    "EntityAlignmentMetrics",
     "EntitySampler",
     "QualityReportGenerator",
     # Convenience functions
     "analyze_diversity",
     "analyze_realism",
+    "analyze_ea_metrics",
     "sample_entities",
     "generate_quality_report",
 ]

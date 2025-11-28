@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Dict, List
 
 from experiments.qualitative_analysis.diversity_metrics import DiversityAnalyzer
+from experiments.qualitative_analysis.ea_specific_metrics import EntityAlignmentMetrics
 from experiments.qualitative_analysis.entity_sampler import EntitySampler
 from experiments.qualitative_analysis.realism_metrics import RealismAnalyzer
 from src.core.data_io import load_dataset
@@ -26,6 +27,7 @@ class QualityReportGenerator:
         """Initialize report generator."""
         self.diversity_analyzer = DiversityAnalyzer()
         self.realism_analyzer = RealismAnalyzer()
+        self.ea_analyzer = EntityAlignmentMetrics()
         self.sampler = EntitySampler()
 
     def generate_report(
@@ -67,6 +69,11 @@ class QualityReportGenerator:
             orig_dataset, aug_dataset, stage=stage
         )
 
+        print("Computing EA-specific metrics...")
+        ea_metrics = self.ea_analyzer.analyze_all(
+            orig_dataset, aug_dataset, stage=stage
+        )
+
         # Extract samples
         print(f"Extracting {n_samples} samples...")
         samples_random = self.sampler.extract_samples(
@@ -93,6 +100,7 @@ class QualityReportGenerator:
             },
             "diversity": diversity_metrics,
             "realism": realism_metrics,
+            "entity_alignment": ea_metrics,
             "samples": {
                 "random": len(samples_random),
                 "diverse": len(samples_diverse),
@@ -154,6 +162,12 @@ class QualityReportGenerator:
             f.write("## ✨ Realism Metrics\n\n")
             f.write("Realism measures how plausible and well-formed the generated entities are.\n\n")
             self._write_metrics_table(f, report["realism"], "Realism")
+            f.write("\n")
+
+            # Entity Alignment Metrics
+            f.write("## 🔗 Entity Alignment-Specific Metrics\n\n")
+            f.write("EA-specific metrics assess properties critical for Entity Alignment tasks.\n\n")
+            self._write_metrics_table(f, report["entity_alignment"], "Entity Alignment")
             f.write("\n")
 
             # Interpretation Guide
@@ -231,9 +245,11 @@ class QualityReportGenerator:
     def _get_interpretations(self) -> Dict[str, str]:
         """Get metric interpretations."""
         return {
+            # Diversity
             "novelty_ratio": "Higher = more new values (good for diversity)",
             "embedding_diversity_synthetic": "Higher = more semantically diverse",
             "self_bleu_synthetic": "Lower = more diverse (less repetitive)",
+            # Realism
             "fluency_rate": "Higher = better text quality",
             "empty_value_rate": "Lower = better (fewer missing values)",
             "date_validity_rate": "Higher = better formatted dates",
@@ -241,6 +257,18 @@ class QualityReportGenerator:
             "semantic_coherence_mean": "Moderate (0.3-0.6) = good diversity within entity",
             "alignment_consistency_mean": "Higher = aligned pairs are more consistent",
             "repetition_rate": "Lower = better (less repetitive text)",
+            # EA-specific
+            "alignment_preservation_score": "Higher = synthetic pairs remain alignable (target: >0.7)",
+            "avg_alignment_similarity": "Similarity of aligned pairs (target: >0.5)",
+            "avg_random_similarity": "Similarity to random entities (should be lower)",
+            "structural_consistency_score": "Higher = KG structure preserved (target: >0.7)",
+            "predicate_overlap_jaccard": "Predicate set overlap (target: >0.6)",
+            "kl_divergence": "Distribution difference (lower = better, target: <0.5)",
+            "cooccurrence_preservation_score": "Attribute patterns preserved (target: >0.6)",
+            "style_consistency_score": "Cross-KG style maintained (target: >0.2)",
+            "within_kg_similarity": "Same-KG entities similarity (should be high)",
+            "cross_kg_similarity": "Cross-KG entities similarity (should be lower)",
+            "nndr_mean": "Diversity/realism balance (target: 0.8-1.2)",
         }
 
     def _write_interpretation_guide(self, f) -> None:
@@ -260,6 +288,18 @@ class QualityReportGenerator:
         f.write("  - Target: >90%\n\n")
         f.write("- **Alignment Consistency**: Semantic similarity of aligned pairs\n")
         f.write("  - Target: >0.5 (aligned pairs should be semantically related)\n\n")
+
+        f.write("### Entity Alignment Metrics\n\n")
+        f.write("- **Alignment Preservation Score**: Percentage of synthetic pairs that remain correctly alignable\n")
+        f.write("  - Target: >70% (synthetic entities should preserve alignability)\n\n")
+        f.write("- **Structural Consistency Score**: Degree to which KG structural patterns are preserved\n")
+        f.write("  - Target: >70% (entity structure should match originals)\n\n")
+        f.write("- **Co-occurrence Preservation**: Consistency of predicate co-occurrence patterns\n")
+        f.write("  - Target: >60% (attribute patterns should be maintained)\n\n")
+        f.write("- **Style Consistency Score**: Separation between source/target KG styles\n")
+        f.write("  - Target: >0.2 (each KG should maintain distinct style)\n\n")
+        f.write("- **NNDR (Nearest Neighbor Distance Ratio)**: Balance between diversity and realism\n")
+        f.write("  - Target: 0.8-1.2 (not too similar to originals, not too different)\n\n")
 
     def _write_recommendations(self, f, report: Dict) -> None:
         """Write recommendations based on metrics."""
