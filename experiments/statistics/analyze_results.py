@@ -641,6 +641,146 @@ def plot_ratio_trends(
         logger.warning(f"No ratio trend plots generated for dataset={dataset} (ratio_plot_data was empty or invalid)")
 
 
+def build_reverse_ratio_plot_data(
+    ratio_entries: Dict[str, List[Dict]],
+    metrics: List[str],
+) -> Dict[str, Dict[float, Dict[float, Dict[str, Dict[str, float]]]]]:
+    """Build plot data with augmentation ratio as primary key, reduction ratio as secondary.
+
+    This is the reverse of build_ratio_plot_data - used for plotting reduction trends.
+
+    Returns:
+        Dict[dataset -> augmentation_ratio -> reduction_ratio -> stage -> metric -> value]
+    """
+    plot_data: Dict[str, Dict[float, Dict[float, Dict[str, Dict[str, float]]]]] = {}
+    for dataset, entries in ratio_entries.items():
+        logger.debug(f"[BUILD_REVERSE_RATIO_PLOT] Processing dataset={dataset} with {len(entries)} entries")
+        dataset_block = plot_data.setdefault(dataset, {})
+        best_per_ratio: Dict[Tuple[float, float], Dict] = {}
+        entries_with_both = 0
+        entries_red_only = 0
+        entries_aug_only = 0
+        for entry in entries:
+            red = entry.get("reduction")
+            aug = entry.get("augmentation")
+            if not red or not aug:
+                if red and not aug:
+                    entries_red_only += 1
+                elif aug and not red:
+                    entries_aug_only += 1
+                continue
+            entries_with_both += 1
+            try:
+                red_ratio = round(float(red.get("ratio")), 6)
+                aug_ratio = round(float(aug.get("ratio")), 6)
+            except (TypeError, ValueError):
+                continue
+            pair = (aug_ratio, red_ratio)  # Reversed compared to build_ratio_plot_data
+            current_best = best_per_ratio.get(pair)
+            current_score = current_best["augmentation"]["metrics"].get("hits@1") if current_best else None
+            candidate_score = aug["metrics"].get("hits@1")
+            if current_best is None or (candidate_score is not None and candidate_score > (current_score or -1)):
+                best_per_ratio[pair] = entry
+
+        logger.debug(f"[BUILD_REVERSE_RATIO_PLOT]   Entries: {entries_with_both} with both, {entries_red_only} reduction-only, {entries_aug_only} augmentation-only")
+        logger.debug(f"[BUILD_REVERSE_RATIO_PLOT]   Best pairs found: {len(best_per_ratio)}")
+
+        for (aug_ratio, red_ratio), entry in best_per_ratio.items():
+            red_metrics = entry["reduction"]["metrics"]
+            aug_metrics = entry["augmentation"]["metrics"]
+            aug_block = dataset_block.setdefault(aug_ratio, {})  # Primary key is augmentation
+            aug_block[red_ratio] = {  # Secondary key is reduction
+                "reduction": {metric: red_metrics.get(metric) for metric in metrics},
+                "augmentation": {metric: aug_metrics.get(metric) for metric in metrics},
+            }
+
+        logger.debug(f"[BUILD_REVERSE_RATIO_PLOT]   Final plot_data for {dataset}: {len(dataset_block)} augmentation ratios")
+
+    return plot_data
+
+
+def plot_reduction_trends(
+    dataset: str,
+    ratio_plot_data: Dict[float, Dict[float, Dict[str, Dict[str, float]]]],
+    metrics: List[str],
+    plots_dir: Path,
+) -> None:
+    """Plot trends with reduction ratio on X-axis (augmentation ratio fixed).
+
+    This is the inverse of plot_ratio_trends - shows how metrics change as reduction varies.
+
+    Args:
+        dataset: Dataset name
+        ratio_plot_data: Dict[aug_ratio -> red_ratio -> stage -> metric -> value]
+        metrics: List of metrics to plot
+        plots_dir: Base output directory
+    """
+    trend_dir = plots_dir / "reduction_trends"
+    ensure_dir(trend_dir)
+
+    # Debug logging
+    logger.debug(f"[REDUCTION_TRENDS] Called for dataset={dataset}")
+    logger.debug(f"[REDUCTION_TRENDS]   ratio_plot_data has {len(ratio_plot_data)} augmentation ratios")
+    logger.debug(f"[REDUCTION_TRENDS]   plots_dir={plots_dir}")
+    logger.debug(f"[REDUCTION_TRENDS]   trend_dir={trend_dir}")
+
+    stage_styles = {
+        "reduction": {"linestyle": "--", "marker": "x", "alpha": 0.9},
+        "augmentation": {"linestyle": "-", "marker": "o", "alpha": 0.9},
+    }
+
+    plots_generated = 0
+    for aug_ratio, red_group in sorted(ratio_plot_data.items()):
+        logger.debug(f"[REDUCTION_TRENDS]   Processing aug_ratio={aug_ratio}, red_group has {len(red_group)} entries")
+        if not red_group:
+            logger.debug(f"[REDUCTION_TRENDS]   Skipping aug_ratio={aug_ratio}: red_group is empty")
+            continue
+        red_ratios = sorted(red_group.keys())
+        if not red_ratios:
+            logger.debug(f"[REDUCTION_TRENDS]   Skipping aug_ratio={aug_ratio}: no red_ratios")
+            continue
+        fig, ax = plt.subplots(figsize=(max(8, len(red_ratios) * 1.2), 4.5))
+        for metric in metrics:
+            color = METRIC_COLORS.get(metric, None)
+            if color is None:
+                color = "#333333"
+            for stage in ("reduction", "augmentation"):
+                y_values = [
+                    red_group[ratio][stage].get(metric) if stage in red_group[ratio] else None
+                    for ratio in red_ratios
+                ]
+                if not any(value is not None for value in y_values):
+                    continue
+                y_series = [value if value is not None else float("nan") for value in y_values]
+                style = stage_styles.get(stage, {})
+                ax.plot(
+                    red_ratios,
+                    y_series,
+                    label=f"{metric} ({stage})",
+                    color=color,
+                    linestyle=style.get("linestyle", "-"),
+                    marker=style.get("marker"),
+                    alpha=style.get("alpha", 1.0),
+                )
+        ax.set_xlabel("Reduction ratio")
+        ax.set_ylabel("Score")
+        ax.set_title(f"{dataset} – trend (augmentation {aug_ratio:.2f})")
+        ax.set_ylim(0, 1.05)
+        ax.grid(True, linestyle="--", alpha=0.3)
+        ax.legend(ncol=2, fontsize=8)
+        plt.tight_layout()
+        outfile = trend_dir / f"{dataset}_aug{aug_ratio:.2f}_reduction_trend.png"
+        plt.savefig(outfile, dpi=PLOT_DPI)
+        plt.close(fig)
+        plots_generated += 1
+        logger.debug(f"[REDUCTION_TRENDS]   ✓ Generated plot: {outfile}")
+
+    if plots_generated > 0:
+        logger.info(f"Generated {plots_generated} reduction trend plots in {trend_dir}")
+    else:
+        logger.warning(f"No reduction trend plots generated for dataset={dataset} (ratio_plot_data was empty or invalid)")
+
+
 def write_dataset_summary_tsv(
     path: Path,
     dataset_stage_stats: Dict[str, Dict[str, Dict[str, Dict[str, float]]]],
@@ -945,6 +1085,12 @@ def main() -> None:
         for dataset, ratio_group in ratio_plot_groups.items():
             plot_ratio_groups(dataset, ratio_group, group_metrics, group_plots_dir)
             plot_ratio_trends(dataset, ratio_group, group_metrics, group_plots_dir)
+
+        # Build and plot reverse ratio data (reduction varying, augmentation fixed)
+        logger.info(f"Generating reduction trend plots for {group_name} metrics...")
+        reverse_ratio_plot_groups = build_reverse_ratio_plot_data(ratio_entries, group_metrics)
+        for dataset, reverse_ratio_group in reverse_ratio_plot_groups.items():
+            plot_reduction_trends(dataset, reverse_ratio_group, group_metrics, group_plots_dir)
 
     # Generate advanced visualizations if requested
     if args.enable_advanced_plots:

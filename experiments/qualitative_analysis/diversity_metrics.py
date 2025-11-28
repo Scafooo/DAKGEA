@@ -21,9 +21,10 @@ from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
 import numpy as np
+from rdflib import Literal, URIRef
 from sentence_transformers import SentenceTransformer
 
-from src.core.data_structures import Dataset, KnowledgeGraph
+from src.core import Dataset, KnowledgeGraph
 
 
 class DiversityAnalyzer:
@@ -56,15 +57,15 @@ class DiversityAnalyzer:
         """
         # Extract entities from appropriate KG based on stage
         if stage == "augmentation":
-            orig_kg = original_dataset.kg1
-            aug_kg = augmented_dataset.kg1
+            orig_kg = original_dataset.knowledge_graph_source
+            aug_kg = augmented_dataset.knowledge_graph_source
         else:
-            orig_kg = original_dataset.kg2
-            aug_kg = augmented_dataset.kg2
+            orig_kg = original_dataset.knowledge_graph_target
+            aug_kg = augmented_dataset.knowledge_graph_target
 
-        # Identify synthetic entities (those in augmented but not in original)
-        orig_uris = set(orig_kg.entities.keys())
-        aug_uris = set(aug_kg.entities.keys())
+        # Identify entity URIs from triples
+        orig_uris = self._get_entity_uris(orig_kg)
+        aug_uris = self._get_entity_uris(aug_kg)
         synthetic_uris = aug_uris - orig_uris
 
         if not synthetic_uris:
@@ -99,6 +100,21 @@ class DiversityAnalyzer:
 
         return metrics
 
+    def _get_entity_uris(self, kg: KnowledgeGraph) -> Set[str]:
+        """Extract all entity URIs from knowledge graph.
+
+        Args:
+            kg: Knowledge graph
+
+        Returns:
+            Set of entity URI strings
+        """
+        entities = set()
+        for s, p, o in kg.triples((None, None, None)):
+            if isinstance(s, URIRef):
+                entities.add(str(s))
+        return entities
+
     def _extract_attribute_values(
         self,
         kg: KnowledgeGraph,
@@ -116,13 +132,11 @@ class DiversityAnalyzer:
         values_by_predicate = defaultdict(list)
 
         for uri in entity_uris:
-            entity = kg.entities.get(uri)
-            if not entity:
-                continue
-
-            for attr in entity.attributes:
-                if hasattr(attr, 'value') and attr.value:
-                    values_by_predicate[str(attr.predicate)].append(str(attr.value))
+            # Query all triples for this entity
+            for s, p, o in kg.triples((URIRef(uri), None, None)):
+                # Only consider attribute triples (with Literal objects)
+                if isinstance(o, Literal):
+                    values_by_predicate[str(p)].append(str(o))
 
         return dict(values_by_predicate)
 
@@ -317,9 +331,12 @@ class DiversityAnalyzer:
         def get_attribute_counts(kg: KnowledgeGraph, uris: Set[str]) -> List[int]:
             counts = []
             for uri in uris:
-                entity = kg.entities.get(uri)
-                if entity:
-                    counts.append(len(entity.attributes))
+                # Count literal triples for this entity
+                attr_count = sum(
+                    1 for s, p, o in kg.triples((URIRef(uri), None, None))
+                    if isinstance(o, Literal)
+                )
+                counts.append(attr_count)
             return counts
 
         orig_counts = get_attribute_counts(orig_kg, orig_uris)
@@ -350,11 +367,12 @@ def analyze_diversity(
     Returns:
         Dictionary of diversity metrics
     """
-    from src.core.data_io import load_dataset
+    from src.core import DatasetReaderFactory
 
     # Load datasets
-    orig_dataset = load_dataset(original_path)
-    aug_dataset = load_dataset(augmented_path)
+    reader = DatasetReaderFactory.create_reader("openea")
+    orig_dataset = reader.read(original_path)
+    aug_dataset = reader.read(augmented_path)
 
     # Analyze
     analyzer = DiversityAnalyzer()

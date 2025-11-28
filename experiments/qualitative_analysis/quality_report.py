@@ -17,7 +17,7 @@ from experiments.qualitative_analysis.diversity_metrics import DiversityAnalyzer
 from experiments.qualitative_analysis.ea_specific_metrics import EntityAlignmentMetrics
 from experiments.qualitative_analysis.entity_sampler import EntitySampler
 from experiments.qualitative_analysis.realism_metrics import RealismAnalyzer
-from src.core.data_io import load_dataset
+from src.core import DatasetReaderFactory
 
 
 class QualityReportGenerator:
@@ -55,8 +55,9 @@ class QualityReportGenerator:
 
         # Load datasets
         print("Loading datasets...")
-        orig_dataset = load_dataset(original_path)
-        aug_dataset = load_dataset(augmented_path)
+        reader = DatasetReaderFactory.create_reader("openea")
+        orig_dataset = reader.read(original_path)
+        aug_dataset = reader.read(augmented_path)
 
         # Compute metrics
         print("Computing diversity metrics...")
@@ -107,10 +108,10 @@ class QualityReportGenerator:
             }
         }
 
-        # Save JSON report
+        # Save JSON report (convert numpy types to Python types)
         json_path = output_dir / "quality_report.json"
         with json_path.open("w") as f:
-            json.dump(report, f, indent=2)
+            json.dump(report, f, indent=2, default=lambda x: float(x) if hasattr(x, 'item') else str(x))
         print(f"✓ Saved JSON report: {json_path}")
 
         # Save Markdown report

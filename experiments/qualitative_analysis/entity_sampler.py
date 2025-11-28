@@ -1,44 +1,33 @@
 #!/usr/bin/env python3
-"""Sample extractor for human evaluation of generated entities.
+"""Entity sampler for human evaluation of augmented entities.
 
-This module helps extract representative samples of synthetic entities
-for manual human evaluation. It provides structured output formats
-suitable for annotation tasks.
-
-Features:
-    - Random sampling
-    - Stratified sampling (by dataset, by diversity level)
-    - Export to TSV for spreadsheet annotation
-    - Side-by-side comparison of original vs synthetic
-    - Extract aligned pairs for consistency checking
+Extracts representative samples of synthetic entities for manual quality assessment.
+Supports different sampling strategies: random, diverse, aligned.
 """
 
 from __future__ import annotations
 
 import csv
-import json
-import random
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Set, Tuple
 
 import numpy as np
+from rdflib import Literal, URIRef
 from sentence_transformers import SentenceTransformer
 
-from src.core.data_structures import Dataset, Entity, KnowledgeGraph
+from src.core import Dataset, KnowledgeGraph
 
 
 class EntitySampler:
-    """Extracts representative samples of synthetic entities."""
+    """Extract representative samples of synthetic entities."""
 
-    def __init__(self, seed: int = 42):
-        """Initialize sampler.
+    def __init__(self, embedding_model: str = "all-MiniLM-L6-v2"):
+        """Initialize entity sampler.
 
         Args:
-            seed: Random seed for reproducibility
+            embedding_model: Model for computing diversity
         """
-        self.seed = seed
-        random.seed(seed)
-        np.random.seed(seed)
+        self.embedding_model_name = embedding_model
         self.encoder = None
 
     def extract_samples(
@@ -49,31 +38,29 @@ class EntitySampler:
         strategy: str = "random",
         stage: str = "augmentation"
     ) -> List[Dict]:
-        """Extract n samples of synthetic entities.
+        """Extract samples of synthetic entities.
 
         Args:
             original_dataset: Original dataset
             augmented_dataset: Augmented dataset
             n_samples: Number of samples to extract
-            strategy: Sampling strategy ('random', 'diverse', 'aligned')
-            stage: Stage name ('reduction' or 'augmentation')
+            strategy: Sampling strategy ('random', 'diverse', or 'aligned')
+            stage: Stage name
 
         Returns:
-            List of sample dictionaries with entity data
+            List of sample dictionaries
         """
-        # Get KGs based on stage
+        # Get appropriate KGs
         if stage == "augmentation":
-            orig_kg = original_dataset.kg1
-            aug_kg = augmented_dataset.kg1
-            paired_kg = augmented_dataset.kg2
+            orig_kg = original_dataset.knowledge_graph_source
+            aug_kg = augmented_dataset.knowledge_graph_source
         else:
-            orig_kg = original_dataset.kg2
-            aug_kg = augmented_dataset.kg2
-            paired_kg = augmented_dataset.kg1
+            orig_kg = original_dataset.knowledge_graph_target
+            aug_kg = augmented_dataset.knowledge_graph_target
 
         # Identify synthetic entities
-        orig_uris = set(orig_kg.entities.keys())
-        aug_uris = set(aug_kg.entities.keys())
+        orig_uris = self._get_entity_uris(orig_kg)
+        aug_uris = self._get_entity_uris(aug_kg)
         synthetic_uris = list(aug_uris - orig_uris)
 
         if not synthetic_uris:
@@ -85,316 +72,262 @@ class EntitySampler:
         elif strategy == "diverse":
             sampled_uris = self._diverse_sample(aug_kg, synthetic_uris, n_samples)
         elif strategy == "aligned":
-            sampled_uris = self._aligned_sample(
-                augmented_dataset, synthetic_uris, n_samples
-            )
+            sampled_uris = self._aligned_sample(augmented_dataset, synthetic_uris, n_samples, stage)
         else:
             raise ValueError(f"Unknown strategy: {strategy}")
 
-        # Extract entity data
+        # Build sample records
         samples = []
         for uri in sampled_uris:
-            sample = self._extract_entity_sample(
-                uri,
-                aug_kg,
-                paired_kg,
-                augmented_dataset,
-                orig_kg
+            sample = self._build_sample_record(
+                uri, aug_kg, orig_kg, augmented_dataset, stage
             )
-            if sample:
-                samples.append(sample)
+            samples.append(sample)
 
         return samples
 
-    def _random_sample(
-        self,
-        uris: List[str],
-        n: int
-    ) -> List[str]:
+    def _get_entity_uris(self, kg: KnowledgeGraph) -> Set[str]:
+        """Extract all entity URIs from knowledge graph."""
+        entities = set()
+        for s, p, o in kg.triples((None, None, None)):
+            if isinstance(s, URIRef):
+                entities.add(str(s))
+        return entities
+
+    def _random_sample(self, uris: List[str], n: int) -> List[str]:
         """Random sampling."""
-        return random.sample(uris, min(n, len(uris)))
+        n = min(n, len(uris))
+        return np.random.choice(uris, n, replace=False).tolist()
 
-    def _diverse_sample(
-        self,
-        kg: KnowledgeGraph,
-        uris: List[str],
-        n: int
-    ) -> List[str]:
-        """Sample diverse entities using embedding clustering.
-
-        Maximizes diversity by selecting entities far apart in embedding space.
-        """
-        if len(uris) <= n:
-            return uris
-
-        # Lazy load encoder
+    def _diverse_sample(self, kg: KnowledgeGraph, uris: List[str], n: int) -> List[str]:
+        """Sample diverse entities using embeddings."""
         if self.encoder is None:
-            self.encoder = SentenceTransformer("all-MiniLM-L6-v2")
+            self.encoder = SentenceTransformer(self.embedding_model_name)
 
-        # Create text representations
-        texts = []
-        valid_uris = []
+        # Get text representations
+        entity_texts = {}
         for uri in uris:
-            entity = kg.entities.get(uri)
-            if not entity:
-                continue
-
-            # Concatenate all attribute values
-            text = " ".join(
-                str(attr.value) for attr in entity.attributes
-                if attr.value
-            )
-            if text:
-                texts.append(text)
-                valid_uris.append(uri)
-
-        if not texts:
-            return random.sample(uris, min(n, len(uris)))
+            texts = []
+            for s, p, o in kg.triples((URIRef(uri), None, None)):
+                if isinstance(o, Literal):
+                    texts.append(str(o))
+            entity_texts[uri] = " ".join(texts[:10]) if texts else uri
 
         # Encode
-        embeddings = self.encoder.encode(texts, convert_to_tensor=False, show_progress_bar=False)
+        uris_list = list(entity_texts.keys())
+        texts_list = [entity_texts[uri] for uri in uris_list]
+        embeddings = self.encoder.encode(texts_list, convert_to_tensor=False, show_progress_bar=False)
 
-        # Greedy diverse sampling
-        selected_indices = []
-        selected_indices.append(random.randint(0, len(embeddings) - 1))
+        # Greedy diversity sampling
+        selected = []
+        selected_embs = []
 
-        for _ in range(n - 1):
-            if len(selected_indices) >= len(embeddings):
-                break
+        # Start with random
+        first_idx = np.random.randint(len(uris_list))
+        selected.append(uris_list[first_idx])
+        selected_embs.append(embeddings[first_idx])
 
-            # Find entity farthest from selected ones
+        # Greedily select most diverse
+        while len(selected) < min(n, len(uris_list)):
             max_min_dist = -1
             best_idx = -1
 
-            for i in range(len(embeddings)):
-                if i in selected_indices:
+            for i, emb in enumerate(embeddings):
+                if uris_list[i] in selected:
                     continue
 
-                # Compute minimum distance to any selected entity
-                min_dist = min(
-                    1 - np.dot(embeddings[i], embeddings[j]) / (
-                        np.linalg.norm(embeddings[i]) * np.linalg.norm(embeddings[j])
-                    )
-                    for j in selected_indices
-                )
+                # Compute minimum distance to selected
+                min_dist = min([
+                    1 - np.dot(emb, sel_emb) / (np.linalg.norm(emb) * np.linalg.norm(sel_emb))
+                    for sel_emb in selected_embs
+                ])
 
                 if min_dist > max_min_dist:
                     max_min_dist = min_dist
                     best_idx = i
 
             if best_idx >= 0:
-                selected_indices.append(best_idx)
+                selected.append(uris_list[best_idx])
+                selected_embs.append(embeddings[best_idx])
 
-        return [valid_uris[i] for i in selected_indices]
+        return selected
 
     def _aligned_sample(
         self,
         dataset: Dataset,
-        synthetic_uris: List[str],
-        n: int
+        uris: List[str],
+        n: int,
+        stage: str
     ) -> List[str]:
-        """Sample synthetic entities that have aligned pairs."""
-        # Find synthetic entities in alignment pairs
-        synthetic_set = set(synthetic_uris)
-        aligned_synthetic = [
-            src_uri for src_uri, tgt_uri in dataset.alignment_pairs
-            if src_uri in synthetic_set
-        ]
+        """Sample synthetic entities that are part of aligned pairs."""
+        # For augmentation stage, source entities are the ones we augmented
+        if stage == "augmentation":
+            kg = dataset.knowledge_graph_source
+        else:
+            kg = dataset.knowledge_graph_target
 
-        return random.sample(aligned_synthetic, min(n, len(aligned_synthetic)))
+        # Filter to only entities that have synthetic counterparts
+        aligned_synthetic = []
+        for uri in uris:
+            # Check if this entity appears in any alignment
+            for src_uri, tgt_uri in dataset.aligned_entities:
+                if stage == "augmentation" and str(src_uri) == uri:
+                    aligned_synthetic.append(uri)
+                    break
+                elif stage == "reduction" and str(tgt_uri) == uri:
+                    aligned_synthetic.append(uri)
+                    break
 
-    def _extract_entity_sample(
+        if not aligned_synthetic:
+            # Fall back to random if no aligned synthetics
+            return self._random_sample(uris, n)
+
+        return self._random_sample(aligned_synthetic, n)
+
+    def _build_sample_record(
         self,
-        uri: str,
-        kg: KnowledgeGraph,
-        paired_kg: KnowledgeGraph,
+        synthetic_uri: str,
+        aug_kg: KnowledgeGraph,
+        orig_kg: KnowledgeGraph,
         dataset: Dataset,
-        orig_kg: KnowledgeGraph
-    ) -> Optional[Dict]:
-        """Extract detailed sample for a single entity."""
-        entity = kg.entities.get(uri)
-        if not entity:
-            return None
+        stage: str
+    ) -> Dict:
+        """Build a sample record for human evaluation."""
+        # Get attributes of synthetic entity
+        synth_attrs = {}
+        for s, p, o in aug_kg.triples((URIRef(synthetic_uri), None, None)):
+            if isinstance(o, Literal):
+                pred_name = str(p).split('/')[-1].split('#')[-1]
+                synth_attrs[pred_name] = str(o)
 
-        sample = {
-            "uri": uri,
-            "attributes": [],
-            "num_attributes": len(entity.attributes),
-        }
-
-        # Extract attributes
-        for attr in entity.attributes:
-            sample["attributes"].append({
-                "predicate": str(attr.predicate),
-                "value": str(attr.value) if attr.value else "",
-            })
-
-        # Find aligned pair if exists
-        aligned_uri = None
-        for src_uri, tgt_uri in dataset.alignment_pairs:
-            if src_uri == uri:
-                aligned_uri = tgt_uri
-                break
-
-        if aligned_uri:
-            aligned_entity = paired_kg.entities.get(aligned_uri)
-            if aligned_entity:
-                sample["aligned_uri"] = aligned_uri
-                sample["aligned_attributes"] = [
-                    {
-                        "predicate": str(attr.predicate),
-                        "value": str(attr.value) if attr.value else "",
-                    }
-                    for attr in aligned_entity.attributes
-                ]
-
-        # Find closest original entity (for comparison)
-        sample["closest_original"] = self._find_closest_original(
-            entity, orig_kg
+        # Find closest original entity
+        closest_orig_uri = self._find_closest_original(
+            synthetic_uri, aug_kg, orig_kg, self._get_entity_uris(orig_kg)
         )
 
-        return sample
+        # Get attributes of closest original
+        orig_attrs = {}
+        if closest_orig_uri:
+            for s, p, o in orig_kg.triples((URIRef(closest_orig_uri), None, None)):
+                if isinstance(o, Literal):
+                    pred_name = str(p).split('/')[-1].split('#')[-1]
+                    orig_attrs[pred_name] = str(o)
+
+        # Get aligned counterpart if exists
+        aligned_uri = None
+        if stage == "augmentation":
+            for src, tgt in dataset.aligned_entities:
+                if str(src) == synthetic_uri:
+                    aligned_uri = str(tgt)
+                    break
+        else:
+            for src, tgt in dataset.aligned_entities:
+                if str(tgt) == synthetic_uri:
+                    aligned_uri = str(src)
+                    break
+
+        return {
+            "synthetic_uri": synthetic_uri,
+            "synthetic_attributes": synth_attrs,
+            "closest_original_uri": closest_orig_uri or "N/A",
+            "closest_original_attributes": orig_attrs,
+            "aligned_counterpart_uri": aligned_uri or "N/A",
+            "realism_score": "",  # To be filled by human annotator
+            "consistency_score": "",  # To be filled by human annotator
+            "notes": "",
+        }
 
     def _find_closest_original(
         self,
-        synthetic_entity: Entity,
+        synth_uri: str,
+        aug_kg: KnowledgeGraph,
         orig_kg: KnowledgeGraph,
-        top_k: int = 1
-    ) -> Optional[Dict]:
+        orig_uris: Set[str]
+    ) -> str:
         """Find most similar original entity."""
-        # Lazy load encoder
         if self.encoder is None:
-            self.encoder = SentenceTransformer("all-MiniLM-L6-v2")
+            self.encoder = SentenceTransformer(self.embedding_model_name)
 
-        # Text from synthetic
-        synth_text = " ".join(
-            str(attr.value) for attr in synthetic_entity.attributes
-            if attr.value
-        )
-        if not synth_text:
+        # Get text of synthetic
+        synth_texts = []
+        for s, p, o in aug_kg.triples((URIRef(synth_uri), None, None)):
+            if isinstance(o, Literal):
+                synth_texts.append(str(o))
+
+        if not synth_texts:
             return None
 
+        synth_text = " ".join(synth_texts[:10])
         synth_emb = self.encoder.encode([synth_text], convert_to_tensor=False, show_progress_bar=False)[0]
 
-        # Sample originals for efficiency
-        orig_uris = list(orig_kg.entities.keys())
-        if len(orig_uris) > 200:
-            orig_uris = random.sample(orig_uris, 200)
-
-        # Find closest
+        # Compare with originals
         best_sim = -1
         best_uri = None
-        best_entity = None
 
-        for uri in orig_uris:
-            entity = orig_kg.entities.get(uri)
-            if not entity:
+        # Sample originals for performance
+        sampled_orig = list(orig_uris)
+        if len(sampled_orig) > 200:
+            sampled_orig = np.random.choice(sampled_orig, 200, replace=False).tolist()
+
+        for orig_uri in sampled_orig:
+            orig_texts = []
+            for s, p, o in orig_kg.triples((URIRef(orig_uri), None, None)):
+                if isinstance(o, Literal):
+                    orig_texts.append(str(o))
+
+            if not orig_texts:
                 continue
 
-            orig_text = " ".join(
-                str(attr.value) for attr in entity.attributes
-                if attr.value
-            )
-            if not orig_text:
-                continue
-
+            orig_text = " ".join(orig_texts[:10])
             orig_emb = self.encoder.encode([orig_text], convert_to_tensor=False, show_progress_bar=False)[0]
 
-            sim = np.dot(synth_emb, orig_emb) / (
-                np.linalg.norm(synth_emb) * np.linalg.norm(orig_emb)
-            )
-
+            sim = np.dot(synth_emb, orig_emb) / (np.linalg.norm(synth_emb) * np.linalg.norm(orig_emb))
             if sim > best_sim:
                 best_sim = sim
-                best_uri = uri
-                best_entity = entity
+                best_uri = orig_uri
 
-        if best_entity:
-            return {
-                "uri": best_uri,
-                "similarity": float(best_sim),
-                "attributes": [
-                    {
-                        "predicate": str(attr.predicate),
-                        "value": str(attr.value) if attr.value else "",
-                    }
-                    for attr in best_entity.attributes
-                ]
-            }
+        return best_uri
 
-        return None
-
-    def export_to_tsv(
-        self,
-        samples: List[Dict],
-        output_path: Path,
-        include_comparison: bool = True
-    ) -> None:
-        """Export samples to TSV for human annotation.
-
-        Args:
-            samples: List of sample dictionaries
-            output_path: Path to save TSV
-            include_comparison: Include closest original for comparison
-        """
+    def export_to_tsv(self, samples: List[Dict], output_path: Path) -> None:
+        """Export samples to TSV for human annotation."""
+        output_path = Path(output_path)
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        with output_path.open("w", newline="", encoding="utf-8") as f:
-            fieldnames = [
-                "sample_id",
+        with output_path.open("w", newline='', encoding='utf-8') as f:
+            # Flatten attributes for TSV export
+            if not samples:
+                return
+
+            # Write header
+            writer = csv.writer(f, delimiter='\t')
+            header = [
                 "synthetic_uri",
                 "synthetic_attributes",
-                "aligned_uri",
-                "aligned_attributes",
-                "realism_score",  # For annotator
-                "consistency_score",  # For annotator
-                "notes",  # For annotator
+                "closest_original_uri",
+                "closest_original_attributes",
+                "aligned_counterpart_uri",
+                "realism_score_1_5",
+                "consistency_score_1_5",
+                "notes"
             ]
+            writer.writerow(header)
 
-            if include_comparison:
-                fieldnames.insert(3, "closest_original_uri")
-                fieldnames.insert(4, "closest_original_attributes")
-                fieldnames.insert(5, "similarity")
+            # Write samples
+            for sample in samples:
+                synth_attrs_str = "; ".join([f"{k}: {v}" for k, v in sample["synthetic_attributes"].items()])
+                orig_attrs_str = "; ".join([f"{k}: {v}" for k, v in sample["closest_original_attributes"].items()])
 
-            writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter="\t")
-            writer.writeheader()
-
-            for i, sample in enumerate(samples):
-                row = {
-                    "sample_id": i + 1,
-                    "synthetic_uri": sample["uri"],
-                    "synthetic_attributes": self._format_attributes(sample["attributes"]),
-                    "aligned_uri": sample.get("aligned_uri", ""),
-                    "aligned_attributes": self._format_attributes(
-                        sample.get("aligned_attributes", [])
-                    ),
-                    "realism_score": "",
-                    "consistency_score": "",
-                    "notes": "",
-                }
-
-                if include_comparison and sample.get("closest_original"):
-                    closest = sample["closest_original"]
-                    row["closest_original_uri"] = closest["uri"]
-                    row["closest_original_attributes"] = self._format_attributes(
-                        closest["attributes"]
-                    )
-                    row["similarity"] = f"{closest['similarity']:.3f}"
-
+                row = [
+                    sample["synthetic_uri"],
+                    synth_attrs_str,
+                    sample["closest_original_uri"],
+                    orig_attrs_str,
+                    sample["aligned_counterpart_uri"],
+                    sample.get("realism_score", ""),
+                    sample.get("consistency_score", ""),
+                    sample.get("notes", "")
+                ]
                 writer.writerow(row)
-
-    def _format_attributes(self, attributes: List[Dict]) -> str:
-        """Format attributes as readable string."""
-        if not attributes:
-            return ""
-
-        parts = []
-        for attr in attributes:
-            pred = attr["predicate"].split("/")[-1].split("#")[-1]  # Get local name
-            value = attr["value"]
-            parts.append(f"{pred}: {value}")
-
-        return " | ".join(parts)
 
 
 def sample_entities(
@@ -403,45 +336,36 @@ def sample_entities(
     output_path: Path,
     n_samples: int = 50,
     strategy: str = "random",
-    stage: str = "augmentation",
-    format: str = "tsv"
+    stage: str = "augmentation"
 ) -> List[Dict]:
-    """Sample and export synthetic entities for evaluation.
+    """Extract and export entity samples.
 
     Args:
         original_path: Path to original dataset
         augmented_path: Path to augmented dataset
-        output_path: Path to save samples
+        output_path: Path to save TSV
         n_samples: Number of samples
-        strategy: Sampling strategy ('random', 'diverse', 'aligned')
+        strategy: Sampling strategy
         stage: Stage name
-        format: Export format ('tsv', 'json')
 
     Returns:
-        List of sample dictionaries
+        List of samples
     """
-    from src.core.data_io import load_dataset
+    from src.core import DatasetReaderFactory
 
     # Load datasets
-    orig_dataset = load_dataset(original_path)
-    aug_dataset = load_dataset(augmented_path)
+    reader = DatasetReaderFactory.create_reader("openea")
+    orig_dataset = reader.read(original_path)
+    aug_dataset = reader.read(augmented_path)
 
     # Sample
     sampler = EntitySampler()
     samples = sampler.extract_samples(
-        orig_dataset,
-        aug_dataset,
-        n_samples=n_samples,
-        strategy=strategy,
-        stage=stage
+        orig_dataset, aug_dataset, n_samples=n_samples, strategy=strategy, stage=stage
     )
 
     # Export
-    if format == "tsv":
-        sampler.export_to_tsv(samples, output_path, include_comparison=True)
-    elif format == "json":
-        with output_path.open("w") as f:
-            json.dump(samples, f, indent=2)
+    sampler.export_to_tsv(samples, output_path)
 
     return samples
 
@@ -449,18 +373,13 @@ def sample_entities(
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Sample entities for human evaluation")
-    parser.add_argument("--original", type=str, required=True, help="Path to original dataset")
-    parser.add_argument("--augmented", type=str, required=True, help="Path to augmented dataset")
-    parser.add_argument("--output", type=str, required=True, help="Path to save samples")
-    parser.add_argument("--n-samples", type=int, default=50, help="Number of samples")
-    parser.add_argument("--strategy", type=str, default="random",
-                       choices=["random", "diverse", "aligned"],
-                       help="Sampling strategy")
-    parser.add_argument("--stage", type=str, default="augmentation",
-                       choices=["reduction", "augmentation"])
-    parser.add_argument("--format", type=str, default="tsv",
-                       choices=["tsv", "json"])
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--original", type=str, required=True)
+    parser.add_argument("--augmented", type=str, required=True)
+    parser.add_argument("--output", type=str, required=True)
+    parser.add_argument("--n-samples", type=int, default=50)
+    parser.add_argument("--strategy", type=str, default="random", choices=["random", "diverse", "aligned"])
+    parser.add_argument("--stage", type=str, default="augmentation")
 
     args = parser.parse_args()
 
@@ -470,14 +389,7 @@ if __name__ == "__main__":
         Path(args.output),
         n_samples=args.n_samples,
         strategy=args.strategy,
-        stage=args.stage,
-        format=args.format
+        stage=args.stage
     )
 
-    print(f"\n✓ Extracted {len(samples)} samples")
-    print(f"✓ Saved to: {args.output}")
-    print(f"\nNext steps:")
-    print(f"1. Open {args.output} in a spreadsheet")
-    print(f"2. Annotate realism_score (1-5) and consistency_score (1-5)")
-    print(f"3. Add notes about quality issues")
-    print(f"4. Save and use for analysis")
+    print(f"Extracted {len(samples)} samples to {args.output}")

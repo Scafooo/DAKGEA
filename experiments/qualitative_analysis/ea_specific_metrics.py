@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 """Entity Alignment-specific quality metrics for synthetic entities.
 
-This module provides metrics tailored for evaluating synthetic entities
+This module provides metrics to evaluate synthetic entities specifically
 in the context of Entity Alignment tasks. These metrics go beyond general
-diversity/realism to assess EA-specific properties.
+diversity/realism and assess properties critical for EA.
 
-Metrics:
+The 6 EA-Specific Metrics:
     1. Alignment Preservation Score: Do synthetic pairs remain alignable?
-    2. Structural Consistency Score: Are KG structural patterns preserved?
+    2. Structural Consistency Score: Is KG structure preserved?
     3. Predicate Co-occurrence Preservation: Are attribute patterns maintained?
-    4. Cross-KG Style Consistency: Do source/target maintain distinct styles?
+    4. Cross-KG Style Consistency: Do KGs maintain distinct styles?
     5. Nearest Neighbor Distance Ratio (NNDR): Balance diversity vs realism
-    6. Alignment Model Performance Gain: Ultimate downstream task metric
+    6. Alignment Model Performance Gain: Does augmentation improve EA models?
+       (This requires training an EA model, so it's a placeholder here)
 """
 
 from __future__ import annotations
@@ -22,13 +23,16 @@ from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
 import numpy as np
+from rdflib import Literal, URIRef
+from scipy.spatial.distance import cosine
+from scipy.stats import entropy
 from sentence_transformers import SentenceTransformer
 
-from src.core.data_structures import Dataset, Entity, KnowledgeGraph
+from src.core import Dataset, KnowledgeGraph
 
 
 class EntityAlignmentMetrics:
-    """EA-specific quality metrics for synthetic entities."""
+    """Compute EA-specific quality metrics for synthetic entities."""
 
     def __init__(self, embedding_model: str = "all-MiniLM-L6-v2"):
         """Initialize EA metrics analyzer.
@@ -37,7 +41,7 @@ class EntityAlignmentMetrics:
             embedding_model: Sentence transformer for semantic analysis
         """
         self.embedding_model_name = embedding_model
-        self.encoder = None  # Lazy loading
+        self.encoder = None
 
     def analyze_all(
         self,
@@ -45,35 +49,44 @@ class EntityAlignmentMetrics:
         augmented_dataset: Dataset,
         stage: str = "augmentation"
     ) -> Dict[str, float]:
-        """Compute all EA-specific metrics.
+        """Compute all 6 EA-specific metrics.
 
         Args:
-            original_dataset: Original dataset before augmentation
-            augmented_dataset: Dataset after augmentation
-            stage: Stage name ('reduction' or 'augmentation')
+            original_dataset: Original dataset
+            augmented_dataset: Augmented dataset
+            stage: Stage name
 
         Returns:
-            Dictionary of metric_name -> value
+            Dictionary of EA metrics
         """
         metrics = {}
 
+        # Get appropriate KGs
+        if stage == "augmentation":
+            orig_src_kg = original_dataset.knowledge_graph_source
+            orig_tgt_kg = original_dataset.knowledge_graph_target
+            aug_src_kg = augmented_dataset.knowledge_graph_source
+            aug_tgt_kg = augmented_dataset.knowledge_graph_target
+        else:
+            orig_src_kg = original_dataset.knowledge_graph_target
+            orig_tgt_kg = original_dataset.knowledge_graph_source
+            aug_src_kg = augmented_dataset.knowledge_graph_target
+            aug_tgt_kg = augmented_dataset.knowledge_graph_source
+
         # 1. Alignment Preservation Score
         metrics.update(self.alignment_preservation_score(
-            original_dataset, augmented_dataset, stage
+            augmented_dataset, stage
         ))
 
         # 2. Structural Consistency Score
-        if stage == "augmentation":
-            orig_kg = original_dataset.kg1
-            aug_kg = augmented_dataset.kg1
-        else:
-            orig_kg = original_dataset.kg2
-            aug_kg = augmented_dataset.kg2
-
-        metrics.update(self.structural_consistency_score(orig_kg, aug_kg))
+        metrics.update(self.structural_consistency_score(
+            orig_src_kg, aug_src_kg
+        ))
 
         # 3. Predicate Co-occurrence Preservation
-        metrics.update(self.predicate_cooccurrence_preservation(orig_kg, aug_kg))
+        metrics.update(self.predicate_cooccurrence_preservation(
+            orig_src_kg, aug_src_kg
+        ))
 
         # 4. Cross-KG Style Consistency
         metrics.update(self.cross_kg_style_consistency(
@@ -81,110 +94,82 @@ class EntityAlignmentMetrics:
         ))
 
         # 5. Nearest Neighbor Distance Ratio
-        metrics.update(self.nearest_neighbor_distance_ratio(orig_kg, aug_kg))
+        metrics.update(self.nearest_neighbor_distance_ratio(
+            orig_src_kg, aug_src_kg
+        ))
+
+        # 6. Alignment Model Performance Gain
+        # Note: This requires training EA models, which is expensive
+        # We provide a placeholder that can be filled externally
+        metrics["alignment_model_performance_gain"] = None
 
         return metrics
 
     def alignment_preservation_score(
         self,
-        original_dataset: Dataset,
-        augmented_dataset: Dataset,
-        stage: str = "augmentation"
+        dataset: Dataset,
+        stage: str
     ) -> Dict[str, float]:
-        """Measure if synthetic pairs remain alignable.
+        """Metric #1: Alignment Preservation Score.
 
-        Idea: If (A, B) are aligned entities, and we generate synthetic (A', B'),
-        then A' should be more similar to B' than to any other entity in the
-        opposite KG. This measures if the augmentation preserves alignability.
-
-        Returns:
-            - alignment_preservation_score: % of synthetic pairs where
-              sim(A', B') > sim(A', B_random)
-            - avg_alignment_similarity: Average similarity of aligned pairs
-            - avg_random_similarity: Average similarity to random non-aligned entities
+        Measures if synthetic entity pairs remain alignable.
+        If (A, B) are aligned and we generate (A', B'), then A' should be
+        more similar to B' than to random entities.
         """
-        # Lazy load encoder
         if self.encoder is None:
             self.encoder = SentenceTransformer(self.embedding_model_name)
 
-        # Get KGs
-        if stage == "augmentation":
-            kg1 = augmented_dataset.kg1
-            kg2 = augmented_dataset.kg2
-            orig_kg1_uris = set(original_dataset.kg1.entities.keys())
-        else:
-            kg1 = augmented_dataset.kg2
-            kg2 = augmented_dataset.kg1
-            orig_kg1_uris = set(original_dataset.kg2.entities.keys())
-
-        # Find synthetic aligned pairs
-        synthetic_pairs = []
-        for src_uri, tgt_uri in augmented_dataset.alignment_pairs:
-            if src_uri not in orig_kg1_uris:  # Synthetic entity
-                synthetic_pairs.append((src_uri, tgt_uri))
-
-        if not synthetic_pairs:
-            return {
-                "alignment_preservation_score": 0.0,
-                "avg_alignment_similarity": 0.0,
-                "avg_random_similarity": 0.0,
-                "num_synthetic_pairs": 0,
-            }
-
-        # Sample for performance
-        if len(synthetic_pairs) > 50:
-            synthetic_pairs = [synthetic_pairs[i] for i in np.random.choice(
-                len(synthetic_pairs), 50, replace=False
-            )]
+        src_kg = dataset.knowledge_graph_source
+        tgt_kg = dataset.knowledge_graph_target
 
         preserved_count = 0
-        alignment_sims = []
-        random_sims = []
+        total_pairs = 0
 
-        for src_uri, tgt_uri in synthetic_pairs:
-            src_entity = kg1.entities.get(src_uri)
-            tgt_entity = kg2.entities.get(tgt_uri)
+        # Sample aligned pairs
+        aligned_pairs = list(dataset.aligned_entities)
+        sampled_pairs = aligned_pairs
+        if len(aligned_pairs) > 100:
+            indices = np.random.choice(len(aligned_pairs), 100, replace=False)
+            sampled_pairs = [aligned_pairs[i] for i in indices]
 
-            if not src_entity or not tgt_entity:
-                continue
+        # Get all target entities for random sampling
+        tgt_uris = self._get_entity_uris(tgt_kg)
 
+        for src_uri, tgt_uri in sampled_pairs:
             # Get text representations
-            src_text = self._entity_to_text(src_entity)
-            tgt_text = self._entity_to_text(tgt_entity)
+            src_text = self._entity_to_text(src_kg, str(src_uri))
+            tgt_text = self._entity_to_text(tgt_kg, str(tgt_uri))
 
             if not src_text or not tgt_text:
                 continue
 
             # Encode
-            src_emb = self.encoder.encode([src_text], convert_to_tensor=False, show_progress_bar=False)[0]
-            tgt_emb = self.encoder.encode([tgt_text], convert_to_tensor=False, show_progress_bar=False)[0]
+            embeddings = self.encoder.encode([src_text, tgt_text], convert_to_tensor=False, show_progress_bar=False)
+            src_emb, tgt_emb = embeddings[0], embeddings[1]
 
-            # Similarity with aligned pair
-            aligned_sim = np.dot(src_emb, tgt_emb) / (
-                np.linalg.norm(src_emb) * np.linalg.norm(tgt_emb)
-            )
-            alignment_sims.append(aligned_sim)
+            # Similarity to aligned pair
+            aligned_sim = 1 - cosine(src_emb, tgt_emb)
 
-            # Similarity with random non-aligned entity
-            random_tgt = self._get_random_entity(kg2, exclude=tgt_uri)
-            if random_tgt:
-                random_text = self._entity_to_text(random_tgt)
-                if random_text:
-                    random_emb = self.encoder.encode([random_text], convert_to_tensor=False, show_progress_bar=False)[0]
-                    random_sim = np.dot(src_emb, random_emb) / (
-                        np.linalg.norm(src_emb) * np.linalg.norm(random_emb)
-                    )
-                    random_sims.append(random_sim)
+            # Similarity to random target entity
+            random_tgt_uri = np.random.choice(list(tgt_uris - {str(tgt_uri)}))
+            random_text = self._entity_to_text(tgt_kg, random_tgt_uri)
 
-                    # Check if aligned is more similar than random
-                    if aligned_sim > random_sim:
-                        preserved_count += 1
+            if random_text:
+                random_emb = self.encoder.encode([random_text], convert_to_tensor=False, show_progress_bar=False)[0]
+                random_sim = 1 - cosine(src_emb, random_emb)
+
+                # Check if aligned pair is more similar than random
+                if aligned_sim > random_sim:
+                    preserved_count += 1
+
+                total_pairs += 1
+
+        preservation_score = preserved_count / total_pairs if total_pairs > 0 else 0.0
 
         return {
-            "alignment_preservation_score": preserved_count / len(synthetic_pairs) if synthetic_pairs else 0.0,
-            "avg_alignment_similarity": float(np.mean(alignment_sims)) if alignment_sims else 0.0,
-            "avg_random_similarity": float(np.mean(random_sims)) if random_sims else 0.0,
-            "num_synthetic_pairs": len(synthetic_pairs),
+            "alignment_preservation_score": preservation_score,
+            "preserved_pairs": preserved_count,
+            "total_evaluated_pairs": total_pairs,
         }
 
     def structural_consistency_score(
@@ -192,54 +177,53 @@ class EntityAlignmentMetrics:
         orig_kg: KnowledgeGraph,
         aug_kg: KnowledgeGraph
     ) -> Dict[str, float]:
-        """Check if structural patterns are preserved.
+        """Metric #2: Structural Consistency Score.
 
-        Measures:
-            - Predicate frequency distribution similarity
-            - Average attributes per entity consistency
-            - Predicate set overlap
-
-        Synthetic entities should have similar structural properties to originals.
+        Measures if KG structural patterns (predicates, frequencies) are preserved.
         """
-        # Extract structural statistics
-        orig_stats = self._get_structural_stats(orig_kg, set(orig_kg.entities.keys()))
+        # Get entity URIs
+        orig_uris = self._get_entity_uris(orig_kg)
+        aug_uris = self._get_entity_uris(aug_kg)
+        synth_uris = aug_uris - orig_uris
 
-        # Identify synthetic entities
-        synth_uris = set(aug_kg.entities.keys()) - set(orig_kg.entities.keys())
         if not synth_uris:
-            return {
-                "structural_consistency_score": 0.0,
-                "predicate_overlap": 0.0,
-                "avg_attributes_similarity": 0.0,
-            }
+            return {"structural_consistency_score": 0.0}
 
+        # Get predicate statistics
+        orig_stats = self._get_structural_stats(orig_kg, orig_uris)
         synth_stats = self._get_structural_stats(aug_kg, synth_uris)
 
-        # 1. Predicate frequency distribution (KL divergence)
-        kl_div = self._compute_kl_divergence(
-            orig_stats["predicate_freq"],
-            synth_stats["predicate_freq"]
-        )
-
-        # 2. Predicate set overlap (Jaccard)
+        # 1. Jaccard similarity of predicate sets
         orig_preds = set(orig_stats["predicate_freq"].keys())
         synth_preds = set(synth_stats["predicate_freq"].keys())
-        jaccard = len(orig_preds & synth_preds) / len(orig_preds | synth_preds) if orig_preds | synth_preds else 0
+        jaccard = len(orig_preds & synth_preds) / len(orig_preds | synth_preds) if (orig_preds | synth_preds) else 0.0
 
-        # 3. Average attributes similarity
-        avg_attr_diff = abs(orig_stats["avg_attributes"] - synth_stats["avg_attributes"])
-        avg_attr_sim = 1.0 / (1.0 + avg_attr_diff)  # Normalize to [0, 1]
+        # 2. KL divergence of predicate frequencies
+        all_preds = orig_preds | synth_preds
+        orig_freq = np.array([orig_stats["predicate_freq"].get(p, 0) for p in all_preds])
+        synth_freq = np.array([synth_stats["predicate_freq"].get(p, 0) for p in all_preds])
 
-        # Overall score (lower KL = better, higher Jaccard = better)
-        overall_score = (jaccard + avg_attr_sim) / 2
+        # Add smoothing
+        orig_freq = orig_freq + 1e-10
+        synth_freq = synth_freq + 1e-10
+
+        # Normalize
+        orig_freq = orig_freq / orig_freq.sum()
+        synth_freq = synth_freq / synth_freq.sum()
+
+        kl_div = entropy(orig_freq, synth_freq)
+
+        # 3. Average attributes per entity
+        attr_diff = abs(orig_stats["avg_attributes"] - synth_stats["avg_attributes"])
+
+        # Combine into score (higher = better)
+        structural_score = (jaccard + (1 / (1 + kl_div)) + (1 / (1 + attr_diff))) / 3
 
         return {
-            "structural_consistency_score": float(overall_score),
-            "predicate_overlap_jaccard": float(jaccard),
-            "avg_attributes_similarity": float(avg_attr_sim),
-            "kl_divergence": float(kl_div),
-            "orig_avg_attributes": orig_stats["avg_attributes"],
-            "synth_avg_attributes": synth_stats["avg_attributes"],
+            "structural_consistency_score": structural_score,
+            "predicate_overlap_jaccard": jaccard,
+            "kl_divergence": kl_div,
+            "avg_attributes_diff": attr_diff,
         }
 
     def predicate_cooccurrence_preservation(
@@ -247,131 +231,113 @@ class EntityAlignmentMetrics:
         orig_kg: KnowledgeGraph,
         aug_kg: KnowledgeGraph
     ) -> Dict[str, float]:
-        """Measure predicate co-occurrence pattern consistency.
+        """Metric #3: Predicate Co-occurrence Preservation.
 
-        If in original KG, predicates P1 and P2 co-occur in X% of entities,
-        they should co-occur similarly in synthetic entities.
+        Measures if patterns of co-occurring predicates are maintained.
         """
-        # Get co-occurrence patterns
-        orig_uris = set(orig_kg.entities.keys())
-        synth_uris = set(aug_kg.entities.keys()) - orig_uris
+        orig_uris = self._get_entity_uris(orig_kg)
+        aug_uris = self._get_entity_uris(aug_kg)
+        synth_uris = aug_uris - orig_uris
 
         if not synth_uris:
-            return {
-                "cooccurrence_preservation_score": 0.0,
-                "cooccurrence_similarity": 0.0,
-            }
+            return {"cooccurrence_preservation_score": 0.0}
 
-        orig_cooccur = self._get_cooccurrence_matrix(orig_kg, orig_uris)
-        synth_cooccur = self._get_cooccurrence_matrix(aug_kg, synth_uris)
+        # Build co-occurrence matrices
+        orig_cooccur = self._build_cooccurrence_matrix(orig_kg, orig_uris)
+        synth_cooccur = self._build_cooccurrence_matrix(aug_kg, synth_uris)
 
-        # Compute similarity (cosine similarity of flattened matrices)
+        # Get all predicates
         all_preds = set(orig_cooccur.keys()) | set(synth_cooccur.keys())
 
         if not all_preds:
-            return {
-                "cooccurrence_preservation_score": 0.0,
-                "cooccurrence_similarity": 0.0,
-            }
+            return {"cooccurrence_preservation_score": 0.0}
 
-        # Build vectors
+        # Create vectors
         orig_vec = []
         synth_vec = []
-        for p1 in sorted(all_preds):
-            for p2 in sorted(all_preds):
-                if p1 >= p2:  # Avoid duplicates
-                    continue
-                orig_vec.append(orig_cooccur.get(p1, {}).get(p2, 0))
-                synth_vec.append(synth_cooccur.get(p1, {}).get(p2, 0))
 
-        if not orig_vec:
-            return {
-                "cooccurrence_preservation_score": 0.0,
-                "cooccurrence_similarity": 0.0,
-            }
+        for p1 in all_preds:
+            for p2 in all_preds:
+                if p1 < p2:  # Avoid duplicates
+                    orig_vec.append(orig_cooccur.get((p1, p2), 0))
+                    synth_vec.append(synth_cooccur.get((p1, p2), 0))
 
-        # Cosine similarity
-        similarity = np.dot(orig_vec, synth_vec) / (
-            np.linalg.norm(orig_vec) * np.linalg.norm(synth_vec) + 1e-10
-        )
+        # Compute cosine similarity
+        if len(orig_vec) == 0 or sum(orig_vec) == 0 or sum(synth_vec) == 0:
+            similarity = 0.0
+        else:
+            similarity = 1 - cosine(np.array(orig_vec), np.array(synth_vec))
 
         return {
-            "cooccurrence_preservation_score": float(similarity),
-            "cooccurrence_similarity": float(similarity),
+            "cooccurrence_preservation_score": similarity,
         }
 
     def cross_kg_style_consistency(
         self,
         dataset: Dataset,
-        stage: str = "augmentation"
+        stage: str
     ) -> Dict[str, float]:
-        """Verify KG-specific styles are maintained.
+        """Metric #4: Cross-KG Style Consistency.
 
-        Each KG has a distinct "style" (e.g., DBpedia: "Paris, France" vs
-        Wikidata: "Paris (city in France)"). Check if synthetic entities
-        maintain these style differences.
-
-        Measures:
-            - Within-KG similarity (should be high)
-            - Cross-KG similarity (should be lower)
-            - Style separation score
+        Measures if each KG maintains its distinct style.
+        within-KG similarity should be higher than cross-KG similarity.
         """
-        # Lazy load encoder
         if self.encoder is None:
             self.encoder = SentenceTransformer(self.embedding_model_name)
 
-        # Get synthetic entities from both KGs
-        if stage == "augmentation":
-            kg1 = dataset.kg1
-            kg2 = dataset.kg2
-        else:
-            kg1 = dataset.kg2
-            kg2 = dataset.kg1
+        src_kg = dataset.knowledge_graph_source
+        tgt_kg = dataset.knowledge_graph_target
 
-        # Sample synthetic entities
-        synth_kg1_uris = list(set(kg1.entities.keys()))[:50]
-        synth_kg2_uris = list(set(kg2.entities.keys()))[:50]
+        src_uris = list(self._get_entity_uris(src_kg))
+        tgt_uris = list(self._get_entity_uris(tgt_kg))
 
-        # Get texts
-        kg1_texts = [self._entity_to_text(kg1.entities[uri]) for uri in synth_kg1_uris
-                     if uri in kg1.entities]
-        kg2_texts = [self._entity_to_text(kg2.entities[uri]) for uri in synth_kg2_uris
-                     if uri in kg2.entities]
+        # Sample for performance
+        src_sample = src_uris[:50] if len(src_uris) <= 50 else list(np.random.choice(src_uris, 50, replace=False))
+        tgt_sample = tgt_uris[:50] if len(tgt_uris) <= 50 else list(np.random.choice(tgt_uris, 50, replace=False))
 
-        kg1_texts = [t for t in kg1_texts if t]
-        kg2_texts = [t for t in kg2_texts if t]
+        # Get embeddings
+        src_texts = [self._entity_to_text(src_kg, uri) for uri in src_sample]
+        tgt_texts = [self._entity_to_text(tgt_kg, uri) for uri in tgt_sample]
 
-        if not kg1_texts or not kg2_texts:
-            return {
-                "style_consistency_score": 0.0,
-                "within_kg_similarity": 0.0,
-                "cross_kg_similarity": 0.0,
-            }
+        src_texts = [t for t in src_texts if t]
+        tgt_texts = [t for t in tgt_texts if t]
 
-        # Encode
-        kg1_embs = self.encoder.encode(kg1_texts, convert_to_tensor=False, show_progress_bar=False)
-        kg2_embs = self.encoder.encode(kg2_texts, convert_to_tensor=False, show_progress_bar=False)
+        if not src_texts or not tgt_texts:
+            return {"style_consistency_score": 0.0}
 
-        # Within-KG similarity
-        within_kg1 = self._avg_pairwise_similarity(kg1_embs)
-        within_kg2 = self._avg_pairwise_similarity(kg2_embs)
-        within_kg_sim = (within_kg1 + within_kg2) / 2
+        src_embs = self.encoder.encode(src_texts, convert_to_tensor=False, show_progress_bar=False)
+        tgt_embs = self.encoder.encode(tgt_texts, convert_to_tensor=False, show_progress_bar=False)
 
-        # Cross-KG similarity
+        # Within-KG similarities
+        within_src_sims = []
+        for i in range(len(src_embs)):
+            for j in range(i + 1, min(i + 10, len(src_embs))):  # Limit for performance
+                sim = 1 - cosine(src_embs[i], src_embs[j])
+                within_src_sims.append(sim)
+
+        within_tgt_sims = []
+        for i in range(len(tgt_embs)):
+            for j in range(i + 1, min(i + 10, len(tgt_embs))):
+                sim = 1 - cosine(tgt_embs[i], tgt_embs[j])
+                within_tgt_sims.append(sim)
+
+        # Cross-KG similarities
         cross_sims = []
-        for emb1 in kg1_embs[:20]:  # Sample for efficiency
-            for emb2 in kg2_embs[:20]:
-                sim = np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
+        for i in range(min(len(src_embs), 20)):
+            for j in range(min(len(tgt_embs), 20)):
+                sim = 1 - cosine(src_embs[i], tgt_embs[j])
                 cross_sims.append(sim)
-        cross_kg_sim = np.mean(cross_sims)
 
-        # Style separation: within-KG should be > cross-KG
-        style_score = max(0, within_kg_sim - cross_kg_sim)
+        within_sim = np.mean(within_src_sims + within_tgt_sims)
+        cross_sim = np.mean(cross_sims)
+
+        # Style score: within should be higher than cross
+        style_score = within_sim - cross_sim
 
         return {
-            "style_consistency_score": float(style_score),
-            "within_kg_similarity": float(within_kg_sim),
-            "cross_kg_similarity": float(cross_kg_sim),
+            "style_consistency_score": style_score,
+            "within_kg_similarity": within_sim,
+            "cross_kg_similarity": cross_sim,
         }
 
     def nearest_neighbor_distance_ratio(
@@ -379,101 +345,80 @@ class EntityAlignmentMetrics:
         orig_kg: KnowledgeGraph,
         aug_kg: KnowledgeGraph
     ) -> Dict[str, float]:
-        """NNDR: Nearest Neighbor Distance Ratio.
+        """Metric #5: Nearest Neighbor Distance Ratio (NNDR).
 
-        Measures the ratio between:
-            - Distance to closest original entity
-            - Distance to closest synthetic entity
-
-        Ideal: synthetic entities are "between" originals
-        Too low ratio = too similar to originals (low diversity)
-        Too high ratio = too far from originals (possible hallucination)
+        Measures balance between diversity and realism.
+        Ratio of distance to nearest original vs nearest synthetic.
+        Target: 0.8-1.2 (synthetic entities are "between" originals).
         """
-        # Lazy load encoder
         if self.encoder is None:
             self.encoder = SentenceTransformer(self.embedding_model_name)
 
-        # Identify synthetic entities
-        orig_uris = set(orig_kg.entities.keys())
-        synth_uris = list(set(aug_kg.entities.keys()) - orig_uris)
+        orig_uris = list(self._get_entity_uris(orig_kg))
+        aug_uris = list(self._get_entity_uris(aug_kg))
+        synth_uris = list(set(aug_uris) - set(orig_uris))
 
-        if not synth_uris:
-            return {
-                "nndr_mean": 0.0,
-                "nndr_std": 0.0,
-            }
+        if not synth_uris or not orig_uris:
+            return {"nndr_mean": 0.0}
 
-        # Sample for efficiency
-        if len(synth_uris) > 50:
-            synth_uris = [synth_uris[i] for i in np.random.choice(len(synth_uris), 50, replace=False)]
-
-        orig_uris_list = list(orig_uris)
-        if len(orig_uris_list) > 200:
-            orig_uris_list = [orig_uris_list[i] for i in np.random.choice(len(orig_uris_list), 200, replace=False)]
+        # Sample for performance
+        synth_sample = synth_uris[:50] if len(synth_uris) <= 50 else list(np.random.choice(synth_uris, 50, replace=False))
+        orig_sample = orig_uris[:200] if len(orig_uris) <= 200 else list(np.random.choice(orig_uris, 200, replace=False))
 
         # Get embeddings
-        synth_texts = [self._entity_to_text(aug_kg.entities[uri]) for uri in synth_uris]
-        orig_texts = [self._entity_to_text(orig_kg.entities[uri]) for uri in orig_uris_list if uri in orig_kg.entities]
-
+        synth_texts = [self._entity_to_text(aug_kg, uri) for uri in synth_sample]
         synth_texts = [t for t in synth_texts if t]
+
+        orig_texts = [self._entity_to_text(orig_kg, uri) for uri in orig_sample]
         orig_texts = [t for t in orig_texts if t]
 
         if not synth_texts or not orig_texts:
-            return {
-                "nndr_mean": 0.0,
-                "nndr_std": 0.0,
-            }
+            return {"nndr_mean": 0.0}
 
         synth_embs = self.encoder.encode(synth_texts, convert_to_tensor=False, show_progress_bar=False)
         orig_embs = self.encoder.encode(orig_texts, convert_to_tensor=False, show_progress_bar=False)
 
-        # For each synthetic, compute NNDR
-        nndrs = []
+        # Compute NNDR for each synthetic entity
+        nndr_values = []
         for synth_emb in synth_embs:
-            # Distance to closest original
-            dists_to_orig = [
-                1 - np.dot(synth_emb, orig_emb) / (np.linalg.norm(synth_emb) * np.linalg.norm(orig_emb))
-                for orig_emb in orig_embs
-            ]
-            nearest_orig_dist = min(dists_to_orig)
+            # Distance to nearest original
+            orig_dists = [cosine(synth_emb, orig_emb) for orig_emb in orig_embs]
+            nearest_orig_dist = min(orig_dists)
 
-            # Distance to closest other synthetic
-            dists_to_synth = [
-                1 - np.dot(synth_emb, other_emb) / (np.linalg.norm(synth_emb) * np.linalg.norm(other_emb))
-                for other_emb in synth_embs
-            ]
-            dists_to_synth = [d for d in dists_to_synth if d > 0]  # Exclude self
+            # Distance to nearest other synthetic
+            synth_dists = [cosine(synth_emb, other_emb) for other_emb in synth_embs]
+            synth_dists = [d for d in synth_dists if d > 0]  # Exclude self
+            if synth_dists:
+                nearest_synth_dist = min(synth_dists)
 
-            if dists_to_synth:
-                nearest_synth_dist = min(dists_to_synth)
-
-                # NNDR
+                # NNDR = dist_to_orig / dist_to_synth
                 if nearest_synth_dist > 0:
                     nndr = nearest_orig_dist / nearest_synth_dist
-                    nndrs.append(nndr)
+                    nndr_values.append(nndr)
 
         return {
-            "nndr_mean": float(np.mean(nndrs)) if nndrs else 0.0,
-            "nndr_std": float(np.std(nndrs)) if nndrs else 0.0,
-            "nndr_samples": len(nndrs),
+            "nndr_mean": float(np.mean(nndr_values)) if nndr_values else 0.0,
+            "nndr_std": float(np.std(nndr_values)) if nndr_values else 0.0,
         }
 
     # Helper methods
 
-    def _entity_to_text(self, entity: Entity) -> str:
-        """Convert entity to text representation."""
-        if not entity:
-            return ""
-        texts = [str(attr.value) for attr in entity.attributes if attr.value]
-        return " ".join(texts)
+    def _get_entity_uris(self, kg: KnowledgeGraph) -> Set[str]:
+        """Extract all entity URIs from knowledge graph."""
+        entities = set()
+        for s, p, o in kg.triples((None, None, None)):
+            if isinstance(s, URIRef):
+                entities.add(str(s))
+        return entities
 
-    def _get_random_entity(self, kg: KnowledgeGraph, exclude: str = None) -> Entity:
-        """Get random entity from KG."""
-        uris = [uri for uri in kg.entities.keys() if uri != exclude]
-        if not uris:
-            return None
-        random_uri = np.random.choice(uris)
-        return kg.entities.get(random_uri)
+    def _entity_to_text(self, kg: KnowledgeGraph, uri: str) -> str:
+        """Convert entity to text representation."""
+        texts = []
+        for s, p, o in kg.triples((URIRef(uri), None, None)):
+            if isinstance(o, Literal):
+                texts.append(str(o))
+
+        return " ".join(texts[:10]) if texts else ""
 
     def _get_structural_stats(self, kg: KnowledgeGraph, entity_uris: Set[str]) -> Dict:
         """Get structural statistics for entities."""
@@ -482,21 +427,20 @@ class EntityAlignmentMetrics:
         num_entities = 0
 
         for uri in entity_uris:
-            entity = kg.entities.get(uri)
-            if not entity:
-                continue
+            entity_attrs = 0
+            for s, p, o in kg.triples((URIRef(uri), None, None)):
+                if isinstance(o, Literal):
+                    predicate_counts[str(p)] += 1
+                    entity_attrs += 1
 
-            num_entities += 1
-            total_attributes += len(entity.attributes)
-
-            for attr in entity.attributes:
-                predicate_counts[str(attr.predicate)] += 1
+            if entity_attrs > 0:
+                num_entities += 1
+                total_attributes += entity_attrs
 
         # Normalize to frequencies
         total = sum(predicate_counts.values())
         predicate_freq = {
-            pred: count / total
-            for pred, count in predicate_counts.items()
+            pred: count / total for pred, count in predicate_counts.items()
         } if total > 0 else {}
 
         return {
@@ -504,63 +448,24 @@ class EntityAlignmentMetrics:
             "avg_attributes": total_attributes / num_entities if num_entities > 0 else 0,
         }
 
-    def _compute_kl_divergence(self, p: Dict[str, float], q: Dict[str, float]) -> float:
-        """Compute KL divergence between two distributions."""
-        all_keys = set(p.keys()) | set(q.keys())
-        if not all_keys:
-            return 0.0
-
-        kl = 0.0
-        for key in all_keys:
-            p_val = p.get(key, 1e-10)
-            q_val = q.get(key, 1e-10)
-            kl += p_val * np.log(p_val / q_val)
-
-        return max(0, kl)  # Ensure non-negative
-
-    def _get_cooccurrence_matrix(
-        self,
-        kg: KnowledgeGraph,
-        entity_uris: Set[str]
-    ) -> Dict[str, Dict[str, float]]:
-        """Get predicate co-occurrence matrix."""
-        cooccur = defaultdict(lambda: defaultdict(int))
+    def _build_cooccurrence_matrix(self, kg: KnowledgeGraph, entity_uris: Set[str]) -> Dict[Tuple[str, str], int]:
+        """Build predicate co-occurrence matrix."""
+        cooccur = defaultdict(int)
 
         for uri in entity_uris:
-            entity = kg.entities.get(uri)
-            if not entity:
-                continue
-
-            predicates = [str(attr.predicate) for attr in entity.attributes]
+            # Get all predicates for this entity
+            preds = set()
+            for s, p, o in kg.triples((URIRef(uri), None, None)):
+                if isinstance(o, Literal):
+                    preds.add(str(p))
 
             # Count co-occurrences
-            for i, p1 in enumerate(predicates):
-                for p2 in predicates[i+1:]:
-                    if p1 != p2:
-                        cooccur[p1][p2] += 1
-                        cooccur[p2][p1] += 1
+            pred_list = sorted(preds)
+            for i, p1 in enumerate(pred_list):
+                for p2 in pred_list[i + 1:]:
+                    cooccur[(p1, p2)] += 1
 
-        # Normalize
-        total_entities = len(entity_uris)
-        normalized = {}
-        for p1, p2_dict in cooccur.items():
-            normalized[p1] = {
-                p2: count / total_entities
-                for p2, count in p2_dict.items()
-            }
-
-        return normalized
-
-    def _avg_pairwise_similarity(self, embeddings: np.ndarray) -> float:
-        """Compute average pairwise cosine similarity."""
-        sims = []
-        for i in range(len(embeddings)):
-            for j in range(i + 1, min(i + 20, len(embeddings))):  # Sample for efficiency
-                sim = np.dot(embeddings[i], embeddings[j]) / (
-                    np.linalg.norm(embeddings[i]) * np.linalg.norm(embeddings[j])
-                )
-                sims.append(sim)
-        return float(np.mean(sims)) if sims else 0.0
+        return dict(cooccur)
 
 
 def analyze_ea_metrics(
@@ -569,22 +474,23 @@ def analyze_ea_metrics(
     output_path: Path = None,
     stage: str = "augmentation"
 ) -> Dict[str, float]:
-    """Analyze EA-specific metrics of augmented dataset.
+    """Analyze EA-specific metrics for augmented dataset.
 
     Args:
         original_path: Path to original dataset
         augmented_path: Path to augmented dataset
         output_path: Optional path to save metrics JSON
-        stage: Stage name ('reduction' or 'augmentation')
+        stage: Stage name
 
     Returns:
-        Dictionary of EA-specific metrics
+        Dictionary of EA metrics
     """
-    from src.core.data_io import load_dataset
+    from src.core import DatasetReaderFactory
 
     # Load datasets
-    orig_dataset = load_dataset(original_path)
-    aug_dataset = load_dataset(augmented_path)
+    reader = DatasetReaderFactory.create_reader("openea")
+    orig_dataset = reader.read(original_path)
+    aug_dataset = reader.read(augmented_path)
 
     # Analyze
     analyzer = EntityAlignmentMetrics()
@@ -603,11 +509,11 @@ def analyze_ea_metrics(
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Analyze EA-specific metrics")
-    parser.add_argument("--original", type=str, required=True, help="Path to original dataset")
-    parser.add_argument("--augmented", type=str, required=True, help="Path to augmented dataset")
-    parser.add_argument("--output", type=str, help="Path to save metrics JSON")
-    parser.add_argument("--stage", type=str, default="augmentation", choices=["reduction", "augmentation"])
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--original", type=str, required=True)
+    parser.add_argument("--augmented", type=str, required=True)
+    parser.add_argument("--output", type=str)
+    parser.add_argument("--stage", type=str, default="augmentation")
 
     args = parser.parse_args()
 
@@ -621,6 +527,8 @@ if __name__ == "__main__":
     print("\n=== Entity Alignment-Specific Metrics ===")
     for key, value in sorted(metrics.items()):
         if isinstance(value, float):
-            print(f"{key:50s}: {value:.4f}")
+            print(f"{key:40s}: {value:.4f}")
+        elif value is None:
+            print(f"{key:40s}: N/A")
         else:
-            print(f"{key:50s}: {value}")
+            print(f"{key:40s}: {value}")
