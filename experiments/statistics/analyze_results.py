@@ -33,6 +33,8 @@ from experiments.statistics.visualizations import (
     plot_radar_chart,
     plot_ridge,
     plot_performance_matrix,
+    plot_surface_3d,
+    plot_interactive_surface_3d,
 )
 from experiments.statistics.console_output import (
     create_console,
@@ -50,6 +52,8 @@ from experiments.statistics.tracking import (
     get_top_n_experiments,
     calculate_improvement_rankings,
 )
+from experiments.statistics.latex_document import create_results_document
+from experiments.statistics.exporters import write_dataset_summary_latex
 from src.logger import get_logger
 
 # Load configuration
@@ -167,9 +171,9 @@ def parse_args(default_plots_dir: Path, default_results_dir: Path) -> argparse.N
     parser.add_argument(
         "--export-formats",
         nargs="+",
-        choices=["tsv"],
+        choices=["tsv", "latex", "latex-doc"],
         default=["tsv"],
-        help="Export formats to generate (default: %(default)s). Only TSV is supported.",
+        help="Export formats to generate (default: %(default)s). Options: tsv, latex (tables only), latex-doc (complete document).",
     )
     parser.add_argument(
         "--enable-advanced-plots",
@@ -1057,11 +1061,35 @@ def main() -> None:
     else:
         export_dir = export_dir.resolve()
 
-    # Export only TSV format (as configured)
+    # Export results in requested formats
     if "tsv" in args.export_formats:
         write_dataset_summary_tsv(export_dir / "dataset_summary.tsv", dataset_stage_stats, args.metrics)
         write_ratio_summary_tsv(export_dir / "ratio_summary.tsv", ratio_entries, args.metrics)
         logger.info("TSV summaries saved under %s", export_dir.resolve())
+
+    if "latex" in args.export_formats or "latex-doc" in args.export_formats:
+        latex_dir = export_dir / "latex"
+        latex_dir.mkdir(parents=True, exist_ok=True)
+
+        # Export LaTeX table
+        write_dataset_summary_latex(
+            latex_dir / "dataset_summary.tex",
+            dataset_stage_stats,
+            args.metrics,
+            colored=True,
+        )
+        logger.info("LaTeX table saved to %s", latex_dir / "dataset_summary.tex")
+
+        # Generate complete LaTeX document if requested
+        if "latex-doc" in args.export_formats:
+            create_results_document(
+                dataset_stage_stats,
+                args.metrics,
+                plots_base,
+                latex_dir / "results_document.tex",
+                include_figures=True,
+            )
+            logger.info("Complete LaTeX document saved to %s", latex_dir / "results_document.tex")
 
     # Generate plots for each metric group (ranking, classification, etc.)
     for group_name, group_metrics in PLOT_METRICS.items():
@@ -1186,6 +1214,40 @@ def main() -> None:
 
                 if heatmap_data:
                     plot_heatmap(dataset, heatmap_data, metric, plots_base, dpi=args.dpi)
+
+        # Generate 3D surface plots for both stages
+        logger.info("Generating 3D surface plots...")
+        for dataset, ratio_group in ratio_plot_groups.items():
+            for metric in args.metrics:
+                # Surface plot for reduction stage
+                plot_surface_3d(
+                    dataset,
+                    ratio_group,
+                    metric,
+                    "reduction",
+                    plots_base,
+                    stage_colors,
+                    dpi=args.dpi,
+                )
+                # Surface plot for augmentation stage
+                plot_surface_3d(
+                    dataset,
+                    ratio_group,
+                    metric,
+                    "augmentation",
+                    plots_base,
+                    stage_colors,
+                    dpi=args.dpi,
+                )
+                # Try interactive plots if plotly is available
+                plot_interactive_surface_3d(
+                    dataset,
+                    ratio_group,
+                    metric,
+                    "augmentation",
+                    plots_base,
+                    dpi=args.dpi,
+                )
 
         # Generate performance matrices (dataset x experiment heatmaps)
         for metric in args.metrics:

@@ -13,6 +13,31 @@ def ensure_dir(path: Path) -> None:
     path.mkdir(parents=True, exist_ok=True)
 
 
+def save_figure(fig, path: Path, dpi: int = 200, formats: list[str] = None) -> list[Path]:
+    """Save figure in multiple formats.
+
+    Args:
+        fig: Matplotlib figure object
+        path: Base output path (without extension)
+        dpi: Resolution for raster formats
+        formats: List of formats to save ('png', 'pdf', 'svg'). Default: ['png']
+
+    Returns:
+        List of paths where figure was saved
+    """
+    if formats is None:
+        formats = ['png']
+
+    saved_paths = []
+    for fmt in formats:
+        output_path = path.with_suffix(f".{fmt}")
+        fig.savefig(output_path, dpi=dpi if fmt == 'png' else None,
+                   bbox_inches='tight', format=fmt)
+        saved_paths.append(output_path)
+
+    return saved_paths
+
+
 def plot_heatmap(
     dataset: str,
     data: Dict[float, Dict[float, float]],
@@ -506,6 +531,165 @@ def plot_performance_matrix(
     plt.close(fig)
 
 
+def plot_surface_3d(
+    dataset: str,
+    ratio_plot_data: Dict[float, Dict[float, Dict[str, Dict[str, float]]]],
+    metric: str,
+    stage: str,
+    plots_dir: Path,
+    stage_colors: Dict[str, Dict[str, str]],
+    dpi: int = 200,
+) -> None:
+    """Create 3D surface plot showing metric variation across reduction and augmentation ratios.
+
+    Args:
+        dataset: Dataset name
+        ratio_plot_data: Dict[red_ratio -> aug_ratio -> stage -> metric -> value]
+        metric: Metric to plot
+        stage: Stage name ("reduction" or "augmentation")
+        plots_dir: Output directory
+        stage_colors: Color configuration
+        dpi: Resolution
+    """
+    if not ratio_plot_data:
+        return
+
+    ensure_dir(plots_dir / "surface_3d")
+
+    # Extract data for 3D surface
+    reduction_ratios = sorted(ratio_plot_data.keys())
+    augmentation_ratios = set()
+    for aug_dict in ratio_plot_data.values():
+        augmentation_ratios.update(aug_dict.keys())
+    augmentation_ratios = sorted(augmentation_ratios)
+
+    if not reduction_ratios or not augmentation_ratios:
+        return
+
+    # Create meshgrid
+    X, Y = np.meshgrid(reduction_ratios, augmentation_ratios)
+    Z = np.zeros_like(X)
+
+    # Fill Z values
+    for i, aug_ratio in enumerate(augmentation_ratios):
+        for j, red_ratio in enumerate(reduction_ratios):
+            value = ratio_plot_data.get(red_ratio, {}).get(aug_ratio, {}).get(stage, {}).get(metric)
+            Z[i, j] = value if value is not None else np.nan
+
+    # Create 3D plot
+    from mpl_toolkits.mplot3d import Axes3D
+
+    fig = plt.figure(figsize=(12, 9))
+    ax = fig.add_subplot(111, projection='3d')
+
+    # Color based on stage
+    color = stage_colors.get(stage, {}).get("primary", "#264653")
+
+    # Create surface plot
+    surf = ax.plot_surface(X, Y, Z, cmap='viridis', alpha=0.8,
+                           linewidth=0, antialiased=True,
+                           edgecolor='none')
+
+    # Add contour lines on the bottom
+    ax.contour(X, Y, Z, zdir='z', offset=np.nanmin(Z) - 0.05,
+               cmap='viridis', alpha=0.4, linewidths=1)
+
+    # Labels and title
+    ax.set_xlabel('Reduction Ratio', fontsize=11, labelpad=10)
+    ax.set_ylabel('Augmentation Ratio', fontsize=11, labelpad=10)
+    ax.set_zlabel(metric, fontsize=11, labelpad=10)
+    ax.set_title(f'{dataset} - {metric} ({stage.capitalize()})',
+                 fontsize=14, fontweight='bold', pad=20)
+
+    # Add colorbar
+    cbar = fig.colorbar(surf, ax=ax, shrink=0.5, aspect=10, pad=0.1)
+    cbar.set_label(metric, rotation=270, labelpad=20)
+
+    # Adjust viewing angle for better visualization
+    ax.view_init(elev=25, azim=45)
+
+    # Grid
+    ax.grid(True, linestyle='--', alpha=0.3)
+
+    plt.tight_layout()
+    outfile = plots_dir / "surface_3d" / f"{dataset}_{metric.replace('@', 'at')}_{stage}_surface3d.png"
+    plt.savefig(outfile, dpi=dpi, bbox_inches='tight')
+    plt.close(fig)
+
+
+def plot_interactive_surface_3d(
+    dataset: str,
+    ratio_plot_data: Dict[float, Dict[float, Dict[str, Dict[str, float]]]],
+    metric: str,
+    stage: str,
+    plots_dir: Path,
+    dpi: int = 200,
+) -> None:
+    """Create interactive 3D surface plot using plotly (if available).
+
+    Args:
+        dataset: Dataset name
+        ratio_plot_data: Dict[red_ratio -> aug_ratio -> stage -> metric -> value]
+        metric: Metric to plot
+        stage: Stage name
+        plots_dir: Output directory
+        dpi: Resolution (not used for plotly, kept for compatibility)
+    """
+    try:
+        import plotly.graph_objects as go
+    except ImportError:
+        # Fall back to matplotlib if plotly not available
+        return
+
+    if not ratio_plot_data:
+        return
+
+    ensure_dir(plots_dir / "surface_3d_interactive")
+
+    # Extract data
+    reduction_ratios = sorted(ratio_plot_data.keys())
+    augmentation_ratios = set()
+    for aug_dict in ratio_plot_data.values():
+        augmentation_ratios.update(aug_dict.keys())
+    augmentation_ratios = sorted(augmentation_ratios)
+
+    if not reduction_ratios or not augmentation_ratios:
+        return
+
+    # Create meshgrid
+    X, Y = np.meshgrid(reduction_ratios, augmentation_ratios)
+    Z = np.zeros_like(X)
+
+    # Fill Z values
+    for i, aug_ratio in enumerate(augmentation_ratios):
+        for j, red_ratio in enumerate(reduction_ratios):
+            value = ratio_plot_data.get(red_ratio, {}).get(aug_ratio, {}).get(stage, {}).get(metric)
+            Z[i, j] = value if value is not None else np.nan
+
+    # Create interactive surface
+    fig = go.Figure(data=[go.Surface(
+        x=reduction_ratios,
+        y=augmentation_ratios,
+        z=Z,
+        colorscale='Viridis',
+        colorbar=dict(title=metric),
+    )])
+
+    fig.update_layout(
+        title=f'{dataset} - {metric} ({stage.capitalize()})',
+        scene=dict(
+            xaxis_title='Reduction Ratio',
+            yaxis_title='Augmentation Ratio',
+            zaxis_title=metric,
+        ),
+        width=1000,
+        height=800,
+    )
+
+    outfile = plots_dir / "surface_3d_interactive" / f"{dataset}_{metric.replace('@', 'at')}_{stage}_surface3d.html"
+    fig.write_html(str(outfile))
+
+
 __all__ = [
     "plot_heatmap",
     "plot_boxplot",
@@ -515,4 +699,7 @@ __all__ = [
     "plot_radar_chart",
     "plot_ridge",
     "plot_performance_matrix",
+    "plot_surface_3d",
+    "plot_interactive_surface_3d",
+    "save_figure",
 ]

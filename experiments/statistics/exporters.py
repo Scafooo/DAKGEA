@@ -167,37 +167,155 @@ def write_dataset_summary_markdown(
     write_markdown_table(path, headers, rows, alignments)
 
 
+def escape_latex(text: str) -> str:
+    """Escape special LaTeX characters."""
+    replacements = {
+        "_": "\\_",
+        "%": "\\%",
+        "$": "\\$",
+        "&": "\\&",
+        "#": "\\#",
+        "{": "\\{",
+        "}": "\\}",
+        "~": "\\textasciitilde{}",
+        "^": "\\textasciicircum{}",
+    }
+    result = str(text)
+    for char, escaped in replacements.items():
+        result = result.replace(char, escaped)
+    return result
+
+
 def write_latex_table(
     path: Path,
     headers: List[str],
     rows: List[List[str]],
     caption: str = "",
     label: str = "",
+    col_spec: str | None = None,
+    position: str = "htbp",
+    small: bool = False,
 ) -> None:
-    """Write LaTeX table."""
+    """Write LaTeX table with booktabs style.
+
+    Args:
+        path: Output file path
+        headers: Column headers
+        rows: Data rows
+        caption: Table caption
+        label: Table label for referencing
+        col_spec: Column specification (e.g., "lrrr"). If None, auto-generates (left + right-aligned)
+        position: Table float position (default: htbp)
+        small: Use small font size
+    """
     ensure_dir(path.parent)
 
     n_cols = len(headers)
-    col_spec = "l" + "r" * (n_cols - 1)  # First column left, rest right-aligned
+    if col_spec is None:
+        col_spec = "l" + "r" * (n_cols - 1)  # First column left, rest right-aligned
 
     with path.open("w", encoding="utf-8") as f:
-        f.write("\\begin{table}[htbp]\n")
+        f.write(f"\\begin{{table}}[{position}]\n")
         f.write("\\centering\n")
+        if small:
+            f.write("\\small\n")
         if caption:
-            f.write(f"\\caption{{{caption}}}\n")
+            f.write(f"\\caption{{{escape_latex(caption)}}}\n")
         if label:
             f.write(f"\\label{{{label}}}\n")
         f.write(f"\\begin{{tabular}}{{{col_spec}}}\n")
         f.write("\\toprule\n")
 
         # Header
-        f.write(" & ".join(headers) + " \\\\\n")
+        escaped_headers = [escape_latex(h) for h in headers]
+        f.write(" & ".join(escaped_headers) + " \\\\\n")
         f.write("\\midrule\n")
 
         # Data rows
         for row in rows:
-            escaped_row = [str(cell).replace("_", "\\_").replace("%", "\\%") for cell in row]
+            escaped_row = [escape_latex(cell) for cell in row]
             f.write(" & ".join(escaped_row) + " \\\\\n")
+
+        f.write("\\bottomrule\n")
+        f.write("\\end{tabular}\n")
+        f.write("\\end{table}\n")
+
+
+def write_latex_table_colored(
+    path: Path,
+    headers: List[str],
+    rows: List[List[str]],
+    highlight_cols: List[int] | None = None,
+    caption: str = "",
+    label: str = "",
+    col_spec: str | None = None,
+    position: str = "htbp",
+    small: bool = False,
+) -> None:
+    """Write LaTeX table with conditional coloring for delta columns.
+
+    Args:
+        path: Output file path
+        headers: Column headers
+        rows: Data rows - each row can be str or tuple (value, color_type) where color_type in ['positive', 'negative', 'neutral']
+        highlight_cols: Column indices to apply conditional coloring (None = auto-detect delta columns)
+        caption: Table caption
+        label: Table label
+        col_spec: Column specification
+        position: Table float position
+        small: Use small font size
+    """
+    ensure_dir(path.parent)
+
+    n_cols = len(headers)
+    if col_spec is None:
+        col_spec = "l" + "r" * (n_cols - 1)
+
+    # Auto-detect delta columns if not specified
+    if highlight_cols is None:
+        highlight_cols = [i for i, h in enumerate(headers) if "delta" in h.lower() or "Δ" in h]
+
+    with path.open("w", encoding="utf-8") as f:
+        # Write table header with xcolor package requirement
+        f.write(f"% Requires: \\usepackage{{xcolor}}\n")
+        f.write(f"\\begin{{table}}[{position}]\n")
+        f.write("\\centering\n")
+        if small:
+            f.write("\\small\n")
+        if caption:
+            f.write(f"\\caption{{{escape_latex(caption)}}}\n")
+        if label:
+            f.write(f"\\label{{{label}}}\n")
+        f.write(f"\\begin{{tabular}}{{{col_spec}}}\n")
+        f.write("\\toprule\n")
+
+        # Header
+        escaped_headers = [escape_latex(h) for h in headers]
+        f.write(" & ".join(escaped_headers) + " \\\\\n")
+        f.write("\\midrule\n")
+
+        # Data rows
+        for row in rows:
+            formatted_cells = []
+            for col_idx, cell in enumerate(row):
+                cell_str = escape_latex(str(cell))
+
+                # Apply coloring to delta columns if cell contains +/- and is numeric
+                if col_idx in highlight_cols and cell_str and cell_str not in ["—", ""]:
+                    try:
+                        # Extract numeric value
+                        value_str = cell_str.replace("+", "").replace("\\%", "").strip()
+                        value = float(value_str)
+                        if value > 0:
+                            cell_str = f"\\textcolor{{green!70!black}}{{{cell_str}}}"
+                        elif value < 0:
+                            cell_str = f"\\textcolor{{red!70!black}}{{{cell_str}}}"
+                    except (ValueError, AttributeError):
+                        pass
+
+                formatted_cells.append(cell_str)
+
+            f.write(" & ".join(formatted_cells) + " \\\\\n")
 
         f.write("\\bottomrule\n")
         f.write("\\end{tabular}\n")
@@ -208,8 +326,16 @@ def write_dataset_summary_latex(
     path: Path,
     dataset_stage_stats: Dict[str, Dict[str, Dict[str, Dict[str, float]]]],
     metrics: List[str],
+    colored: bool = True,
 ) -> None:
-    """Export dataset summary as LaTeX table."""
+    """Export dataset summary as LaTeX table with optional conditional coloring.
+
+    Args:
+        path: Output file path
+        dataset_stage_stats: Nested dict with dataset -> stage -> metric -> statistics
+        metrics: List of metrics to include
+        colored: Apply conditional coloring to delta values
+    """
     headers = [
         "Dataset",
         "Metric",
@@ -218,6 +344,7 @@ def write_dataset_summary_latex(
         "Aug Mean",
         "Aug Std",
         "Delta",
+        "Δ\\%",
     ]
 
     rows = []
@@ -229,8 +356,11 @@ def write_dataset_summary_latex(
                 continue
 
             delta = None
+            delta_pct = None
             if red_stats and aug_stats:
                 delta = aug_stats["mean"] - red_stats["mean"]
+                if red_stats["mean"] != 0:
+                    delta_pct = (delta / red_stats["mean"]) * 100
 
             row = [
                 dataset,
@@ -240,16 +370,28 @@ def write_dataset_summary_latex(
                 f"{aug_stats['mean']:.4f}" if aug_stats else "—",
                 f"$\\pm${aug_stats['std']:.4f}" if aug_stats else "—",
                 f"+{delta:.4f}" if delta and delta > 0 else f"{delta:.4f}" if delta else "—",
+                f"+{delta_pct:.2f}\\%" if delta_pct and delta_pct > 0 else f"{delta_pct:.2f}\\%" if delta_pct else "—",
             ]
             rows.append(row)
 
-    write_latex_table(
-        path,
-        headers,
-        rows,
-        caption="Reduction vs Augmentation Performance Comparison",
-        label="tab:reduction_augmentation_comparison",
-    )
+    if colored:
+        write_latex_table_colored(
+            path,
+            headers,
+            rows,
+            caption="Reduction vs Augmentation Performance Comparison",
+            label="tab:reduction_augmentation_comparison",
+            small=True,
+        )
+    else:
+        write_latex_table(
+            path,
+            headers,
+            rows,
+            caption="Reduction vs Augmentation Performance Comparison",
+            label="tab:reduction_augmentation_comparison",
+            small=True,
+        )
 
 
 def try_write_excel(
@@ -354,6 +496,9 @@ __all__ = [
     "write_dataset_summary_csv",
     "write_dataset_summary_markdown",
     "write_dataset_summary_latex",
+    "write_latex_table",
+    "write_latex_table_colored",
+    "escape_latex",
     "try_write_excel",
     "ensure_dir",
 ]
