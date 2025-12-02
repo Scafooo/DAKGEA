@@ -32,7 +32,6 @@ OPTIONS:
     --dry-run               Show what would be executed without running
     --pattern PATTERN       Glob pattern for YAML files (default: "*.yaml")
     --gpu-id ID             GPU device ID to use (default: 0)
-    --no-skip               Disable pre-check, run all experiments even if complete
     --help                  Show this help message
 
 EXAMPLES:
@@ -61,7 +60,6 @@ RESUME=false
 DRY_RUN=false
 PATTERN="*.yaml"
 GPU_ID=0
-NO_SKIP=false
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -96,10 +94,6 @@ while [[ $# -gt 0 ]]; do
         --gpu-id)
             GPU_ID="$2"
             shift 2
-            ;;
-        --no-skip)
-            NO_SKIP=true
-            shift
             ;;
         --help|-h)
             usage
@@ -174,36 +168,10 @@ if [[ ${#ALL_CONFIG_FILES[@]} -eq 0 ]]; then
     exit 1
 fi
 
-# Filter out already-completed experiments (fast pre-check)
-CONFIG_FILES=()
-SKIPPED_FILES=()
-
-if [[ "$NO_SKIP" == "false" ]]; then
-    echo "Checking for already-completed experiments..."
-    for cfg in "${ALL_CONFIG_FILES[@]}"; do
-        # Use Python pre-check script (very fast, no dataset loading)
-        if python "${PROJECT_ROOT}/scripts/check_experiment_complete.py" "$cfg" 2>/dev/null; then
-            SKIPPED_FILES+=("$cfg")
-        else
-            CONFIG_FILES+=("$cfg")
-        fi
-    done
-
-    if [[ ${#SKIPPED_FILES[@]} -gt 0 ]]; then
-        echo "✓ Skipping ${#SKIPPED_FILES[@]} already-completed experiments"
-    fi
-
-    if [[ ${#CONFIG_FILES[@]} -eq 0 ]]; then
-        echo ""
-        echo "All experiments already completed! Nothing to run."
-        echo "Total found: ${#ALL_CONFIG_FILES[@]}"
-        echo "Already done: ${#SKIPPED_FILES[@]}"
-        exit 0
-    fi
-else
-    echo "Pre-check disabled (--no-skip), will run all experiments"
-    CONFIG_FILES=("${ALL_CONFIG_FILES[@]}")
-fi
+# Note: The runner now does early completion checks internally
+# Each experiment will exit immediately if already complete (when overwrite_existing=false)
+# This is much faster than pre-checking because it happens in parallel
+CONFIG_FILES=("${ALL_CONFIG_FILES[@]}")
 
 # Setup log directory
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
@@ -233,11 +201,7 @@ full_line '='
 echo ""
 echo "Configuration:"
 echo "  Experiment dir    : ${TARGET_DIR}"
-echo "  Total found       : ${#ALL_CONFIG_FILES[@]}"
-if [[ ${#SKIPPED_FILES[@]} -gt 0 ]]; then
-    echo "  Already completed : ${#SKIPPED_FILES[@]}"
-fi
-echo "  To run            : ${#CONFIG_FILES[@]}"
+echo "  Total configs     : ${#CONFIG_FILES[@]}"
 echo "  Parallel jobs     : ${JOBS}"
 echo "  Retry attempts    : ${RETRY}"
 echo "  Timeout per job   : ${TIMEOUT}s"

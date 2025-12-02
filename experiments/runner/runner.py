@@ -211,6 +211,11 @@ class ExperimentRunner:
 
     def run(self) -> None:
         """Execute the experiment suite over the configured datasets and ratios."""
+        # EARLY EXIT: Check if experiment is already complete before loading anything
+        if self._check_early_completion():
+            logger.info("✅ Experiment already completed, skipping execution (set overwrite_existing=true to re-run)")
+            return
+
         # Check if we're in direct path mode (no ratios = direct dataset access)
         direct_mode = self.normalized_cfg.direct_mode
 
@@ -218,7 +223,7 @@ class ExperimentRunner:
             self._run_direct_mode()
         else:
             self._run_standard_mode()
-        
+
         # Clean up intermediate files if requested
         if self.clear_intermediate:
             self._cleanup_intermediate_files()
@@ -699,6 +704,97 @@ class ExperimentRunner:
             "✅ Experiment fully completed for ratio=%s — skipping execution",
             ratio_tag
         )
+        return True
+
+    def _check_early_completion(self) -> bool:
+        """
+        Fast check if entire experiment is already complete BEFORE loading anything.
+        This is called at the very start of run() to avoid unnecessary dataset/model loading.
+
+        Returns True if experiment should be skipped (already complete).
+        """
+        # Only skip if resume mode (i.e., not overwriting)
+        if not self.resume:
+            return False
+
+        # Check if workspace exists at all
+        if not self.base_workspace.exists():
+            return False
+
+        # For standard mode: check all ratios
+        if not self.normalized_cfg.direct_mode:
+            if not self.ratios:
+                return False
+
+            for ratio in self.ratios:
+                ratio_tag = f"ratio_{ratio:.3f}".replace(".", "_")
+                ratio_root = self.base_workspace / ratio_tag
+
+                if not ratio_root.exists():
+                    return False
+
+                # Check each dataset in this ratio
+                for dataset_dir in ratio_root.iterdir():
+                    if not dataset_dir.is_dir():
+                        continue
+
+                    artifact_root = dataset_dir / "artifacts"
+                    if not artifact_root.exists():
+                        return False
+
+                    # Use existing completion check logic
+                    if not self._is_experiment_complete_early(dataset_dir, artifact_root):
+                        return False
+        else:
+            # Direct mode: check single dataset workspace
+            dataset_workspace = self.base_workspace
+            artifact_root = dataset_workspace / "artifacts"
+
+            if not artifact_root.exists():
+                return False
+
+            if not self._is_experiment_complete_early(dataset_workspace, artifact_root):
+                return False
+
+        return True
+
+    def _is_experiment_complete_early(
+        self,
+        dataset_workspace: Path,
+        artifact_root: Path,
+    ) -> bool:
+        """
+        Early completion check (used before loading datasets).
+        Similar to _is_experiment_complete but doesn't need ratio_tag.
+        """
+        # Check reduction results
+        if self.reduction_eval:
+            reduction_results = dataset_workspace / "reduction" / "results.json"
+            if not reduction_results.exists():
+                return False
+
+        # Check augmentation results
+        if self.augmentations and self.augmentation_eval:
+            augmentation_results = dataset_workspace / "augmentation" / "results.json"
+            if not augmentation_results.exists():
+                return False
+
+        # Check evaluation results for all models
+        evaluation_root = artifact_root / "evaluation"
+        for model_name in self.models:
+            # Check baseline evaluation
+            if self.reduction_eval:
+                baseline_result = evaluation_root / "baseline" / f"{model_name}.json"
+                if not baseline_result.exists():
+                    return False
+
+            # Check augmentation evaluations
+            if self.augmentations:
+                for aug_name in self.augmentations:
+                    aug_result = evaluation_root / aug_name / f"{model_name}.json"
+                    if not aug_result.exists():
+                        return False
+
         return True
 
     def _build_stage_config(

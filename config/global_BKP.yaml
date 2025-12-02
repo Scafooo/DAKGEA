@@ -1,0 +1,24 @@
+paths:
+  raw_data: data/raw
+  external_data: data/external
+  results: results
+  statistics: results/statistics
+  log_file: results/logs/log.txt
+
+logging:
+  level: DEBUG
+
+# Reproducibility settings
+reproducibility:
+  deterministic: true  # Enable deterministic mode for reproducible results
+                       # Note: Enabling this may reduce performance by ~10-20%
+                       # but ensures identical results across runs with same seed
+
+# Auto-retry augmentation until improvement (hidden feature)
+# Repeats augmentation if results don't improve over reduction baseline
+auto_retry_until_improvement:
+  enabled: false              # Enable auto-retry mechanism (default: false)
+  max_attempts: 5             # Maximum retry attempts
+  metric: "hits@1"            # Metric to compare: hits@1, hits@5, mrr, f-measure, precision, recall
+  min_improvement: 0.01       # Minimum improvement threshold (e.g., 0.01 = 1%)
+  save_all_attempts: true     # Save results from all attempts to results_attempt_N.json
