@@ -32,6 +32,7 @@ OPTIONS:
     --dry-run               Show what would be executed without running
     --pattern PATTERN       Glob pattern for YAML files (default: "*.yaml")
     --gpu-id ID             GPU device ID to use (default: 0)
+    --no-skip               Disable pre-check, run all experiments even if complete
     --help                  Show this help message
 
 EXAMPLES:
@@ -60,6 +61,7 @@ RESUME=false
 DRY_RUN=false
 PATTERN="*.yaml"
 GPU_ID=0
+NO_SKIP=false
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -95,6 +97,10 @@ while [[ $# -gt 0 ]]; do
             GPU_ID="$2"
             shift 2
             ;;
+        --no-skip)
+            NO_SKIP=true
+            shift
+            ;;
         --help|-h)
             usage
             ;;
@@ -119,10 +125,22 @@ export PYTHONPATH="${PROJECT_ROOT}"
 export PYTHONHASHSEED=0
 export CUDA_VISIBLE_DEVICES="${GPU_ID}"
 
-# Check if GNU Parallel is installed
-if ! command -v parallel &> /dev/null; then
+# Check if GNU Parallel is installed (local first, then system)
+PARALLEL_BIN=""
+if [ -f "${PROJECT_ROOT}/.local/bin/parallel" ]; then
+    PARALLEL_BIN="${PROJECT_ROOT}/.local/bin/parallel"
+    echo "Using local GNU Parallel: ${PARALLEL_BIN}"
+elif command -v parallel &> /dev/null; then
+    PARALLEL_BIN="parallel"
+    echo "Using system GNU Parallel"
+else
     echo "Error: GNU Parallel is not installed"
-    echo "Install it with: sudo dnf install parallel"
+    echo ""
+    echo "Install locally (no sudo required):"
+    echo "  bash scripts/install_parallel_local.sh"
+    echo ""
+    echo "Or install system-wide:"
+    echo "  sudo dnf install parallel"
     exit 1
 fi
 
@@ -149,11 +167,42 @@ if ! TARGET_DIR="$(resolve_target_path "$DIR")"; then
 fi
 
 # Find all YAML files
-mapfile -t CONFIG_FILES < <(find "$TARGET_DIR" -maxdepth 1 -type f -name "${PATTERN}" | sort)
+mapfile -t ALL_CONFIG_FILES < <(find "$TARGET_DIR" -maxdepth 1 -type f -name "${PATTERN}" | sort)
 
-if [[ ${#CONFIG_FILES[@]} -eq 0 ]]; then
+if [[ ${#ALL_CONFIG_FILES[@]} -eq 0 ]]; then
     echo "Error: No YAML files found in ${TARGET_DIR} matching pattern '${PATTERN}'"
     exit 1
+fi
+
+# Filter out already-completed experiments (fast pre-check)
+CONFIG_FILES=()
+SKIPPED_FILES=()
+
+if [[ "$NO_SKIP" == "false" ]]; then
+    echo "Checking for already-completed experiments..."
+    for cfg in "${ALL_CONFIG_FILES[@]}"; do
+        # Use Python pre-check script (very fast, no dataset loading)
+        if python "${PROJECT_ROOT}/scripts/check_experiment_complete.py" "$cfg" 2>/dev/null; then
+            SKIPPED_FILES+=("$cfg")
+        else
+            CONFIG_FILES+=("$cfg")
+        fi
+    done
+
+    if [[ ${#SKIPPED_FILES[@]} -gt 0 ]]; then
+        echo "✓ Skipping ${#SKIPPED_FILES[@]} already-completed experiments"
+    fi
+
+    if [[ ${#CONFIG_FILES[@]} -eq 0 ]]; then
+        echo ""
+        echo "All experiments already completed! Nothing to run."
+        echo "Total found: ${#ALL_CONFIG_FILES[@]}"
+        echo "Already done: ${#SKIPPED_FILES[@]}"
+        exit 0
+    fi
+else
+    echo "Pre-check disabled (--no-skip), will run all experiments"
+    CONFIG_FILES=("${ALL_CONFIG_FILES[@]}")
 fi
 
 # Setup log directory
@@ -184,7 +233,11 @@ full_line '='
 echo ""
 echo "Configuration:"
 echo "  Experiment dir    : ${TARGET_DIR}"
-echo "  Total configs     : ${#CONFIG_FILES[@]}"
+echo "  Total found       : ${#ALL_CONFIG_FILES[@]}"
+if [[ ${#SKIPPED_FILES[@]} -gt 0 ]]; then
+    echo "  Already completed : ${#SKIPPED_FILES[@]}"
+fi
+echo "  To run            : ${#CONFIG_FILES[@]}"
 echo "  Parallel jobs     : ${JOBS}"
 echo "  Retry attempts    : ${RETRY}"
 echo "  Timeout per job   : ${TIMEOUT}s"
@@ -217,7 +270,7 @@ if [[ "$DRY_RUN" == "true" ]]; then
     done
     echo ""
     echo "Command that would be executed:"
-    echo "  parallel --jobs ${JOBS} --bar --joblog ${JOBLOG_FILE} --retry ${RETRY} --timeout ${TIMEOUT} \\"
+    echo "  ${PARALLEL_BIN} --jobs ${JOBS} --bar --joblog ${JOBLOG_FILE} --retry ${RETRY} --timeout ${TIMEOUT} \\"
     echo "    'CUDA_VISIBLE_DEVICES=${GPU_ID} python ${PROJECT_ROOT}/experiments/runner/run.py {}' \\"
     echo "    ::: <config_files>"
     echo ""
@@ -250,8 +303,8 @@ echo ""
 START_TIME=$(date +%s)
 
 # Build parallel command
-PARALLEL_CMD=(
-    parallel
+PARALLEL_ARGS=(
+    "${PARALLEL_BIN}"
     --jobs "${JOBS}"
     --bar
     --joblog "${JOBLOG_FILE}"
@@ -261,7 +314,7 @@ PARALLEL_CMD=(
 )
 
 if [[ "$RESUME" == "true" ]]; then
-    PARALLEL_CMD+=(--resume)
+    PARALLEL_ARGS+=(--resume)
 fi
 
 # Export required variables for parallel
@@ -271,7 +324,7 @@ export CUDA_VISIBLE_DEVICES
 export PYTHONHASHSEED
 
 # Run parallel execution
-printf '%s\n' "${CONFIG_FILES[@]}" | "${PARALLEL_CMD[@]}" \
+printf '%s\n' "${CONFIG_FILES[@]}" | "${PARALLEL_ARGS[@]}" \
     "CUDA_VISIBLE_DEVICES=${GPU_ID} python ${PROJECT_ROOT}/experiments/runner/run.py {}"
 
 EXIT_CODE=$?
