@@ -240,9 +240,11 @@ if [[ "$DRY_RUN" == "true" ]]; then
     done
     echo ""
     echo "Parallel command:"
-    echo "  ${PARALLEL_BIN} --will-cite --jobs ${JOBS} --bar --joblog ${JOBLOG_FILE} \\"
-    echo "    --retry ${RETRY} --timeout ${TIMEOUT} --results ${LOG_DIR} \\"
-    echo "    scripts/_run_single_experiment.sh {} ::: <config_files>"
+    echo "  ${PARALLEL_BIN} --will-cite --jobs ${JOBS} --progress --joblog ${JOBLOG_FILE} \\"
+    echo "    --timeout ${TIMEOUT} --results ${LOG_DIR} \\"
+    echo "    bash scripts/_run_single_experiment.sh {} ::: <config_files>"
+    echo ""
+    echo "Monitor in another terminal with: bash scripts/monitor_parallel.sh"
     echo ""
     exit 0
 fi
@@ -283,10 +285,17 @@ PARALLEL_ARGS=(
 # Note: --retry is not used due to compatibility issues with recent parallel versions
 # Retries can be handled by re-running with --resume instead
 
-# Add progress bar only if not verbose
+# Add progress tracking only if not verbose
 if [[ "$VERBOSE" == "false" ]]; then
-    PARALLEL_ARGS+=(--bar)
+    # Use --progress instead of --bar (more reliable, shows stats)
+    # --bar often stays at 0% due to terminal/buffering issues
+    PARALLEL_ARGS+=(--progress)
     PARALLEL_ARGS+=(--results "${LOG_DIR}")
+
+    echo ""
+    echo "💡 TIP: Monitor progress in another terminal with:"
+    echo "   bash scripts/monitor_parallel.sh"
+    echo ""
 else
     echo "Note: Verbose mode enabled - output will be shown directly"
 fi

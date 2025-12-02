@@ -125,6 +125,11 @@ echo ""
 
 trap 'echo ""; echo "Monitoring stopped."; exit 0' INT TERM
 
+# State management
+VIEW_MODE="overview"  # "overview" or "detail"
+SELECTED_JOB=""
+DETAIL_SCROLL=0
+
 while true; do
     clear
 
@@ -137,7 +142,88 @@ while true; do
     echo "Timestamp: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
 
-    # Parse joblog
+    # Check if we're in detail view
+    if [[ "$VIEW_MODE" == "detail" && -n "$SELECTED_JOB" ]]; then
+        # DETAIL VIEW - Show log of specific job
+        full_line '-'
+
+        # Find job info from joblog
+        JOB_INFO=$(tail -n +2 "$JOBLOG_FILE" | awk -v seq="$SELECTED_JOB" '$1 == seq')
+
+        if [[ -z "$JOB_INFO" ]]; then
+            echo "❌ Job #${SELECTED_JOB} not found in joblog"
+            echo ""
+            echo "Press 'b' to go back to overview"
+        else
+            JOB_SEQ=$(echo "$JOB_INFO" | awk '{print $1}')
+            JOB_EXIT=$(echo "$JOB_INFO" | awk '{print $7}')
+            JOB_CONFIG=$(echo "$JOB_INFO" | awk '{print $10}')
+
+            echo "Job #${JOB_SEQ}: $(basename "$JOB_CONFIG")"
+
+            if [[ "$JOB_EXIT" == "" ]]; then
+                echo "Status: ⏳ RUNNING"
+            elif [[ "$JOB_EXIT" == "0" ]]; then
+                echo "Status: ✅ COMPLETED"
+            else
+                echo "Status: ❌ FAILED (exit code: $JOB_EXIT)"
+            fi
+            echo ""
+
+            # Show stdout
+            STDOUT_FILE="${LOG_DIR}/${JOB_SEQ}/stdout"
+            STDERR_FILE="${LOG_DIR}/${JOB_SEQ}/stderr"
+
+            if [[ -f "$STDERR_FILE" && -s "$STDERR_FILE" ]]; then
+                full_line '-'
+                echo "📛 STDERR (last 30 lines):"
+                echo ""
+                tail -30 "$STDERR_FILE"
+                echo ""
+            fi
+
+            if [[ -f "$STDOUT_FILE" ]]; then
+                full_line '-'
+                echo "📄 STDOUT (last 30 lines):"
+                echo ""
+                tail -30 "$STDOUT_FILE"
+                echo ""
+            else
+                echo "No stdout file found for job #${JOB_SEQ}"
+            fi
+        fi
+
+        # Skip the rest of the overview display
+        full_line '='
+
+        # Interactive controls
+        echo "Commands: [b] Back to overview | [r] Refresh | [Ctrl+C] Exit"
+        echo "Viewing job #${SELECTED_JOB}"
+
+        # Non-blocking read with timeout
+        read -t "$REFRESH" -n 10 USER_INPUT || USER_INPUT=""
+
+        # Process user input
+        if [[ -n "$USER_INPUT" ]]; then
+            case "$USER_INPUT" in
+                b|B)
+                    VIEW_MODE="overview"
+                    SELECTED_JOB=""
+                    ;;
+                r|R)
+                    # Just refresh (continue loop)
+                    ;;
+                [0-9]*)
+                    # User entered a different job number
+                    SELECTED_JOB="$USER_INPUT"
+                    ;;
+            esac
+        fi
+
+        continue  # Skip to next iteration
+    fi
+
+    # OVERVIEW MODE - Parse joblog
     if [[ -f "$JOBLOG_FILE" ]] && [[ $(wc -l < "$JOBLOG_FILE") -gt 1 ]]; then
         TOTAL=$(tail -n +2 "$JOBLOG_FILE" | wc -l)
         COMPLETED=$(tail -n +2 "$JOBLOG_FILE" | awk '$7 != "" && $7 == 0' | wc -l)
@@ -193,19 +279,27 @@ while true; do
         fi
         echo ""
 
-        # Currently running jobs
+        # Currently running jobs (with job numbers)
         if [[ $RUNNING -gt 0 ]]; then
             full_line '-'
-            echo "Currently running experiments:"
-            tail -n +2 "$JOBLOG_FILE" | awk '$7 == "" {print "  - " $10}' | tail -10
+            echo "Currently running experiments (type number to view log):"
+            tail -n +2 "$JOBLOG_FILE" | awk '$7 == "" {printf "  [%s] %s\n", $1, $10}' | tail -10
             echo ""
         fi
 
-        # Recent failures
+        # Recent failures (with job numbers)
         if [[ $FAILED -gt 0 ]]; then
             full_line '-'
-            echo "Recently failed experiments (last 5):"
-            tail -n +2 "$JOBLOG_FILE" | awk '$7 != "" && $7 != 0 {print "  - " $10 " (exit: " $7 ")"}' | tail -5
+            echo "Recently failed experiments (type number to view log):"
+            tail -n +2 "$JOBLOG_FILE" | awk '$7 != "" && $7 != 0 {printf "  [%s] %s (exit: %s)\n", $1, $10, $7}' | tail -5
+            echo ""
+        fi
+
+        # Recent completions (with job numbers)
+        if [[ $COMPLETED -gt 0 ]]; then
+            full_line '-'
+            echo "Recently completed experiments (last 5, type number to view log):"
+            tail -n +2 "$JOBLOG_FILE" | awk '$7 != "" && $7 == 0 {printf "  [%s] %s\n", $1, $10}' | tail -5
             echo ""
         fi
     else
@@ -243,7 +337,38 @@ while true; do
     fi
 
     full_line '='
-    echo "Refreshing every ${REFRESH}s... (Ctrl+C to exit)"
 
-    sleep "$REFRESH"
+    # Interactive controls based on mode
+    if [[ "$VIEW_MODE" == "overview" ]]; then
+        echo "Commands: [1-999] View job log | [r] Refresh now | [Ctrl+C] Exit"
+        echo "Refreshing every ${REFRESH}s..."
+    else
+        echo "Commands: [b] Back to overview | [↑↓] Scroll | [r] Refresh | [Ctrl+C] Exit"
+        echo "Viewing job #${SELECTED_JOB}"
+    fi
+
+    # Non-blocking read with timeout
+    read -t "$REFRESH" -n 10 USER_INPUT || USER_INPUT=""
+
+    # Process user input
+    if [[ -n "$USER_INPUT" ]]; then
+        case "$USER_INPUT" in
+            b|B)
+                VIEW_MODE="overview"
+                SELECTED_JOB=""
+                ;;
+            r|R)
+                # Just refresh (continue loop)
+                ;;
+            [0-9]*)
+                # User entered a job number
+                VIEW_MODE="detail"
+                SELECTED_JOB="$USER_INPUT"
+                DETAIL_SCROLL=0
+                ;;
+            *)
+                # Ignore other input
+                ;;
+        esac
+    fi
 done
