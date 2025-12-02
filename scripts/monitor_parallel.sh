@@ -197,11 +197,13 @@ while true; do
         full_line '='
 
         # Interactive controls
-        echo "Commands: [b] Back to overview | [r] Refresh | [Ctrl+C] Exit"
-        echo "Viewing job #${SELECTED_JOB}"
+        echo ""
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "💡 Press 'b' + Enter to go back | Type another number | 'r' refresh | Ctrl+C exit"
+        echo -n "⏱️  Auto-refresh in ${REFRESH}s (viewing job #${SELECTED_JOB}) > "
 
-        # Non-blocking read with timeout
-        read -t "$REFRESH" -n 10 USER_INPUT || USER_INPUT=""
+        # Non-blocking read with timeout - read full line
+        read -t "$REFRESH" USER_INPUT || USER_INPUT=""
 
         # Process user input
         if [[ -n "$USER_INPUT" ]]; then
@@ -340,15 +342,19 @@ while true; do
 
     # Interactive controls based on mode
     if [[ "$VIEW_MODE" == "overview" ]]; then
-        echo "Commands: [1-999] View job log | [r] Refresh now | [Ctrl+C] Exit"
-        echo "Refreshing every ${REFRESH}s..."
+        echo ""
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "💡 Type job number to view log (e.g., '51' + Enter) | 'r' refresh | Ctrl+C exit"
+        echo -n "⏱️  Auto-refresh in ${REFRESH}s > "
     else
-        echo "Commands: [b] Back to overview | [↑↓] Scroll | [r] Refresh | [Ctrl+C] Exit"
-        echo "Viewing job #${SELECTED_JOB}"
+        echo ""
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "💡 Press 'b' + Enter to go back | 'r' to refresh | Ctrl+C to exit"
+        echo -n "⏱️  Auto-refresh in ${REFRESH}s > "
     fi
 
-    # Non-blocking read with timeout
-    read -t "$REFRESH" -n 10 USER_INPUT || USER_INPUT=""
+    # Non-blocking read with timeout - read full line
+    read -t "$REFRESH" USER_INPUT || USER_INPUT=""
 
     # Process user input
     if [[ -n "$USER_INPUT" ]]; then
