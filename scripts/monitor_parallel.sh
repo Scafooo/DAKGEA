@@ -323,20 +323,8 @@ while true; do
         echo ""
     fi
 
-    # Recent log entries (if available)
-    RECENT_LOGS=$(find "$LOG_DIR" -type f -name "stderr" -newermt "-30 seconds" 2>/dev/null | head -3)
-    if [[ -n "$RECENT_LOGS" ]]; then
-        full_line '-'
-        echo "Recent errors (last 30 seconds):"
-        echo "$RECENT_LOGS" | while read -r logfile; do
-            expname=$(basename "$(dirname "$logfile")")
-            if [[ -s "$logfile" ]]; then
-                echo "  From: ${expname}"
-                tail -3 "$logfile" | sed 's/^/    /'
-            fi
-        done | head -15
-        echo ""
-    fi
+    # Recent errors section removed - logs only shown when user selects a job number
+    # This prevents automatic log display that could be confusing
 
     full_line '='
 

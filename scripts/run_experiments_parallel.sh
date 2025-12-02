@@ -13,7 +13,6 @@ set -euo pipefail
 # ============================================================
 DEFAULT_EXPERIMENT_DIR="${EXPERIMENT_DIR:-config/experiments/massive/bert_int_aug_red}"
 DEFAULT_JOBS=4          # Number of parallel jobs (good for RTX 4090)
-DEFAULT_RETRY=1         # Number of retries for failed jobs
 DEFAULT_TIMEOUT=7200    # Timeout per job in seconds (2 hours)
 DEFAULT_GPU_LIST="0"    # Default GPU ID to use, or a comma-separated list for round-robin
 
@@ -29,7 +28,6 @@ Run multiple DAKGEA experiments in parallel using GNU Parallel.
 OPTIONS:
     --dir DIR               Directory containing YAML experiment configs (default: ${DEFAULT_EXPERIMENT_DIR})
     --jobs N                Number of parallel jobs (default: ${DEFAULT_JOBS})
-    --retry N               Number of retries for failed jobs (default: ${DEFAULT_RETRY})
     --timeout SECONDS       Timeout per job in seconds (default: ${DEFAULT_TIMEOUT})
     --resume                Resume from previous interrupted run
     --dry-run               Show what would be executed without running
@@ -58,7 +56,6 @@ EOF
 # Parse arguments
 DIR="${DEFAULT_EXPERIMENT_DIR}"  # Use default, can be overridden with --dir
 JOBS="${DEFAULT_JOBS}"
-RETRY="${DEFAULT_RETRY}"
 TIMEOUT="${DEFAULT_TIMEOUT}"
 RESUME=false
 DRY_RUN=false
@@ -74,10 +71,6 @@ while [[ $# -gt 0 ]]; do
             ;;
         --jobs)
             JOBS="$2"
-            shift 2
-            ;;
-        --retry)
-            RETRY="$2"
             shift 2
             ;;
         --timeout)
