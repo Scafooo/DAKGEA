@@ -243,9 +243,9 @@ if [[ "$DRY_RUN" == "true" ]]; then
     echo "Parallel command structure:"
     echo "  ${PARALLEL_BIN} --will-cite --jobs ${JOBS} --bar --joblog ${JOBLOG_FILE} \\"
     echo "    --retry ${RETRY} --timeout ${TIMEOUT} --results ${LOG_DIR} \\"
-    echo "    run_experiment {} ::: <config_files>"
+    echo "    scripts/_run_single_experiment.sh {} ::: <config_files>"
     echo ""
-    echo "Where run_experiment executes:"
+    echo "Where _run_single_experiment.sh executes:"
     echo "  CUDA_VISIBLE_DEVICES=${GPU_ID} python experiments/runner/run.py <config_file>"
     echo ""
     exit 0
@@ -305,15 +305,16 @@ export CUDA_VISIBLE_DEVICES
 export PYTHONHASHSEED
 export GPU_ID
 
-# Define function to run experiment (will be called by parallel)
-run_experiment() {
-    local config_file="$1"
-    CUDA_VISIBLE_DEVICES="${GPU_ID}" python "${PROJECT_ROOT}/experiments/runner/run.py" "${config_file}"
-}
-export -f run_experiment
+# Path to helper script
+HELPER_SCRIPT="${SCRIPT_DIR}/_run_single_experiment.sh"
 
-# Run parallel execution
-printf '%s\n' "${CONFIG_FILES[@]}" | "${PARALLEL_BIN}" "${PARALLEL_ARGS[@]}" run_experiment {}
+if [[ ! -f "$HELPER_SCRIPT" ]]; then
+    echo "ERROR: Helper script not found: ${HELPER_SCRIPT}"
+    exit 1
+fi
+
+# Run parallel execution using helper script
+printf '%s\n' "${CONFIG_FILES[@]}" | "${PARALLEL_BIN}" "${PARALLEL_ARGS[@]}" "${HELPER_SCRIPT}" {}
 
 EXIT_CODE=$?
 END_TIME=$(date +%s)
