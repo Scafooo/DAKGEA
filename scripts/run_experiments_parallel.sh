@@ -7,21 +7,22 @@
 
 set -euo pipefail
 
-# ============================================================
+# ============================================================ 
 #  DEFAULT CONFIGURATION
-# ============================================================
+# ============================================================ 
 DEFAULT_JOBS=4          # Number of parallel jobs (good for RTX 4090)
 DEFAULT_RETRY=1         # Number of retries for failed jobs
 DEFAULT_TIMEOUT=7200    # Timeout per job in seconds (2 hours)
+DEFAULT_GPU_LIST="0"    # Default GPU ID to use, or a comma-separated list for round-robin
 
-# ============================================================
+# ============================================================ 
 #  ARGUMENT PARSING
-# ============================================================
+# ============================================================ 
 usage() {
     cat <<EOF
 Usage: $0 [OPTIONS] --dir EXPERIMENT_DIR
 
-Run multiple DAKGEA experiments in parallel using GNU Parallel.
+Run multiple DAKGEA experiments in parallel using xargs.
 
 OPTIONS:
     --dir DIR               Directory containing YAML experiment configs (required)
@@ -32,7 +33,7 @@ OPTIONS:
     --dry-run               Show what would be executed without running
     --pattern PATTERN       Glob pattern for YAML files (default: "*.yaml")
     --gpu-id ID             GPU device ID to use (default: 0)
-    --verbose               Show live output from experiments (disables --results logging)
+    --verbose               Show live output from experiments
     --help                  Show this help message
 
 EXAMPLES:
@@ -44,9 +45,6 @@ EXAMPLES:
 
     # Resume interrupted run
     $0 --dir config/experiments/massive/bert_int_aug_red --resume
-
-    # Run with 6 parallel jobs on GPU 0
-    $0 --dir config/experiments/massive/bert_int_aug_red --jobs 6 --gpu-id 0
 
 EOF
     exit 0
@@ -176,8 +174,14 @@ fi
 
 # Note: The runner now does early completion checks internally
 # Each experiment will exit immediately if already complete (when overwrite_existing=false)
-# This is much faster than pre-checking because it happens in parallel
 CONFIG_FILES=("${ALL_CONFIG_FILES[@]}")
+
+# Activate virtual environment
+if [ -f "${PROJECT_ROOT}/.venv/bin/activate" ]; then
+    source "${PROJECT_ROOT}/.venv/bin/activate"
+elif [ -f "${PROJECT_ROOT}/.venv/Scripts/activate" ]; then
+    source "${PROJECT_ROOT}/.venv/Scripts/activate"
+fi
 
 # Setup log directory
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
@@ -186,13 +190,6 @@ mkdir -p "${LOG_DIR}"
 
 JOBLOG_FILE="${LOG_DIR}/joblog.txt"
 SUMMARY_FILE="${LOG_DIR}/summary.txt"
-
-# Activate virtual environment
-if [ -f "${PROJECT_ROOT}/.venv/bin/activate" ]; then
-    source "${PROJECT_ROOT}/.venv/bin/activate"
-elif [ -f "${PROJECT_ROOT}/.venv/Scripts/activate" ]; then
-    source "${PROJECT_ROOT}/.venv/Scripts/activate"
-fi
 
 # ============================================================
 #  BANNER
@@ -240,13 +237,10 @@ if [[ "$DRY_RUN" == "true" ]]; then
         echo "  - $(basename "$cfg")"
     done
     echo ""
-    echo "Parallel command structure:"
+    echo "Parallel command:"
     echo "  ${PARALLEL_BIN} --will-cite --jobs ${JOBS} --bar --joblog ${JOBLOG_FILE} \\"
     echo "    --retry ${RETRY} --timeout ${TIMEOUT} --results ${LOG_DIR} \\"
     echo "    scripts/_run_single_experiment.sh {} ::: <config_files>"
-    echo ""
-    echo "Where _run_single_experiment.sh executes:"
-    echo "  CUDA_VISIBLE_DEVICES=${GPU_ID} python experiments/runner/run.py <config_file>"
     echo ""
     exit 0
 fi
@@ -276,22 +270,23 @@ echo ""
 # ============================================================
 START_TIME=$(date +%s)
 
-# Build parallel command arguments (without the binary itself)
+# Build parallel command arguments
 PARALLEL_ARGS=(
     --will-cite
     --jobs "${JOBS}"
     --joblog "${JOBLOG_FILE}"
-    --retry "${RETRY}"
     --timeout "${TIMEOUT}"
 )
+
+# Note: --retry is not used due to compatibility issues with recent parallel versions
+# Retries can be handled by re-running with --resume instead
 
 # Add progress bar only if not verbose
 if [[ "$VERBOSE" == "false" ]]; then
     PARALLEL_ARGS+=(--bar)
     PARALLEL_ARGS+=(--results "${LOG_DIR}")
 else
-    # In verbose mode, show output directly
-    echo "Note: Verbose mode enabled - output will be shown directly (not saved to --results)"
+    echo "Note: Verbose mode enabled - output will be shown directly"
 fi
 
 if [[ "$RESUME" == "true" ]]; then
@@ -314,7 +309,7 @@ if [[ ! -f "$HELPER_SCRIPT" ]]; then
 fi
 
 # Run parallel execution using helper script
-printf '%s\n' "${CONFIG_FILES[@]}" | "${PARALLEL_BIN}" "${PARALLEL_ARGS[@]}" "${HELPER_SCRIPT}" {}
+"${PARALLEL_BIN}" "${PARALLEL_ARGS[@]}" bash "${HELPER_SCRIPT}" ::: "${CONFIG_FILES[@]}"
 
 EXIT_CODE=$?
 END_TIME=$(date +%s)

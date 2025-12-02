@@ -46,6 +46,10 @@ class NodeExpander:
         self.bart_interpolator = bart_interpolator
         self._id_counter = 0
 
+        # Progress tracking
+        self._expanded_count = 0
+        self._total_nodes = None
+
         # Initialize predicate matcher (lazy loading, used only if no cache)
         self.predicate_matcher = None
         self.predicate_matcher_config = predicate_matcher_config or {}
@@ -92,6 +96,25 @@ class NodeExpander:
         if self.inter_node_cache is not None:
             self.inter_node_cache.clear()
 
+    def set_total_nodes(self, total: int):
+        """Set the total number of nodes to expand for progress tracking.
+
+        Args:
+            total: Total number of nodes that will be expanded
+        """
+        self._total_nodes = total
+        self._expanded_count = 0
+        logger.info("[PROGRESS] Starting expansion of %d nodes", total)
+
+    def get_progress(self) -> Tuple[int, int, int]:
+        """Get current expansion progress.
+
+        Returns:
+            Tuple of (expanded_count, remaining_count, total_count)
+        """
+        remaining = self._total_nodes - self._expanded_count if self._total_nodes else 0
+        return self._expanded_count, remaining, self._total_nodes or 0
+
     def expand_set_node(
         self,
         dataset: Dataset,
@@ -129,7 +152,18 @@ class NodeExpander:
         alignments.append((str(src_aug), str(tgt_aug)))
         dataset.aligned_entities = tuple(alignments)
 
-        logger.info("[PLM] Expanding set node: %s", set_node)
+        # Update progress counter
+        self._expanded_count += 1
+
+        # Log with progress information
+        if self._total_nodes is not None:
+            remaining = self._total_nodes - self._expanded_count
+            progress_pct = (self._expanded_count / self._total_nodes) * 100
+            logger.info("[PLM] Expanding set node: %s [%d/%d = %.1f%% | %d remaining]",
+                       set_node, self._expanded_count, self._total_nodes, progress_pct, remaining)
+        else:
+            logger.info("[PLM] Expanding set node: %s [count: %d]", set_node, self._expanded_count)
+
         logger.info("  Original → Source: %s | Target: %s", src_component or "None", tgt_component or "None")
         logger.info("  Augmented → Source: %s | Target: %s", src_aug, tgt_aug)
 

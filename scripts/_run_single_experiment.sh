@@ -2,11 +2,7 @@
 # Helper script called by parallel to run a single experiment
 # Usage: _run_single_experiment.sh CONFIG_FILE
 
-echo "Checkpoint: script started"
-echo "CONFIG_FILE=$CONFIG_FILE, GPU_ID=$GPU_ID"
-CUDA_VISIBLE_DEVICES="${GPU_ID}" python "${PROJECT_ROOT}/experiments/runner/run.py" "${CONFIG_FILE}"
-echo "Checkpoint: script finished"
-
+set -euo pipefail
 
 CONFIG_FILE="$1"
 
@@ -26,6 +22,10 @@ if [[ -z "$PROJECT_ROOT" ]]; then
     exit 1
 fi
 
+# Activate virtual environment if available
+if [ -f "${PROJECT_ROOT}/.venv/bin/activate" ]; then
+    source "${PROJECT_ROOT}/.venv/bin/activate"
+fi
+
 # Run the experiment
-echo "Running experiment with config: $CONFIG_FILE on GPU: $GPU_ID"
 CUDA_VISIBLE_DEVICES="${GPU_ID}" python "${PROJECT_ROOT}/experiments/runner/run.py" "${CONFIG_FILE}"

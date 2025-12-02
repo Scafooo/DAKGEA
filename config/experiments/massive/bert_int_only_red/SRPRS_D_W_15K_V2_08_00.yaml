@@ -1,7 +1,7 @@
 experiment:
   name: SRPRS_D_W_15K_V2_08_00
   dataset:
-    name: hybea/SRPRS_D_W_15K_V2
+    name: openea/SRPRS_D_W_15K_V2
     writer: bert_int
   reduction:
     method: random_entities

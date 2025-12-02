@@ -409,6 +409,10 @@ class PLMAugmenter(AugmentationMethod):
         Returns:
             Number of pairs actually expanded
         """
+        # Set progress tracking for node expander
+        total_to_expand = pair_budget if pair_budget is not None else len(set_nodes)
+        self.node_expander.set_total_nodes(total_to_expand)
+
         visited: set[URIRef] = set()
         expansion_chain: List[str] = []
         queue: Deque[ExpansionNode] = deque()

@@ -1,7 +1,7 @@
 experiment:
   name: ja_en_04_00
   dataset:
-    name: hybea/ja_en
+    name: openea/ja_en
     writer: bert_int
   reduction:
     method: random_entities
