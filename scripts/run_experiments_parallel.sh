@@ -32,6 +32,7 @@ OPTIONS:
     --dry-run               Show what would be executed without running
     --pattern PATTERN       Glob pattern for YAML files (default: "*.yaml")
     --gpu-id ID             GPU device ID to use (default: 0)
+    --verbose               Show live output from experiments (disables --results logging)
     --help                  Show this help message
 
 EXAMPLES:
@@ -60,6 +61,7 @@ RESUME=false
 DRY_RUN=false
 PATTERN="*.yaml"
 GPU_ID=0
+VERBOSE=false
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -94,6 +96,10 @@ while [[ $# -gt 0 ]]; do
         --gpu-id)
             GPU_ID="$2"
             shift 2
+            ;;
+        --verbose)
+            VERBOSE=true
+            shift
             ;;
         --help|-h)
             usage
@@ -208,6 +214,7 @@ echo "  Timeout per job   : ${TIMEOUT}s"
 echo "  GPU device        : ${GPU_ID}"
 echo "  Log directory     : ${LOG_DIR}"
 echo "  Resume mode       : ${RESUME}"
+echo "  Verbose output    : ${VERBOSE}"
 echo "  Dry run           : ${DRY_RUN}"
 echo ""
 
@@ -273,12 +280,19 @@ START_TIME=$(date +%s)
 PARALLEL_ARGS=(
     --will-cite
     --jobs "${JOBS}"
-    --bar
     --joblog "${JOBLOG_FILE}"
     --retry "${RETRY}"
     --timeout "${TIMEOUT}"
-    --results "${LOG_DIR}"
 )
+
+# Add progress bar only if not verbose
+if [[ "$VERBOSE" == "false" ]]; then
+    PARALLEL_ARGS+=(--bar)
+    PARALLEL_ARGS+=(--results "${LOG_DIR}")
+else
+    # In verbose mode, show output directly
+    echo "Note: Verbose mode enabled - output will be shown directly (not saved to --results)"
+fi
 
 if [[ "$RESUME" == "true" ]]; then
     PARALLEL_ARGS+=(--resume)
