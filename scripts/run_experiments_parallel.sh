@@ -233,10 +233,13 @@ if [[ "$DRY_RUN" == "true" ]]; then
         echo "  - $(basename "$cfg")"
     done
     echo ""
-    echo "Command that would be executed:"
-    echo "  ${PARALLEL_BIN} --jobs ${JOBS} --bar --joblog ${JOBLOG_FILE} --retry ${RETRY} --timeout ${TIMEOUT} \\"
-    echo "    'CUDA_VISIBLE_DEVICES=${GPU_ID} python ${PROJECT_ROOT}/experiments/runner/run.py {}' \\"
-    echo "    ::: <config_files>"
+    echo "Parallel command structure:"
+    echo "  ${PARALLEL_BIN} --will-cite --jobs ${JOBS} --bar --joblog ${JOBLOG_FILE} \\"
+    echo "    --retry ${RETRY} --timeout ${TIMEOUT} --results ${LOG_DIR} \\"
+    echo "    run_experiment {} ::: <config_files>"
+    echo ""
+    echo "Where run_experiment executes:"
+    echo "  CUDA_VISIBLE_DEVICES=${GPU_ID} python experiments/runner/run.py <config_file>"
     echo ""
     exit 0
 fi
@@ -268,6 +271,7 @@ START_TIME=$(date +%s)
 
 # Build parallel command arguments (without the binary itself)
 PARALLEL_ARGS=(
+    --will-cite
     --jobs "${JOBS}"
     --bar
     --joblog "${JOBLOG_FILE}"
@@ -285,10 +289,17 @@ export PROJECT_ROOT
 export PYTHONPATH
 export CUDA_VISIBLE_DEVICES
 export PYTHONHASHSEED
+export GPU_ID
+
+# Define function to run experiment (will be called by parallel)
+run_experiment() {
+    local config_file="$1"
+    CUDA_VISIBLE_DEVICES="${GPU_ID}" python "${PROJECT_ROOT}/experiments/runner/run.py" "${config_file}"
+}
+export -f run_experiment
 
 # Run parallel execution
-printf '%s\n' "${CONFIG_FILES[@]}" | "${PARALLEL_BIN}" "${PARALLEL_ARGS[@]}" \
-    "CUDA_VISIBLE_DEVICES=${GPU_ID} python ${PROJECT_ROOT}/experiments/runner/run.py {}"
+printf '%s\n' "${CONFIG_FILES[@]}" | "${PARALLEL_BIN}" "${PARALLEL_ARGS[@]}" run_experiment {}
 
 EXIT_CODE=$?
 END_TIME=$(date +%s)

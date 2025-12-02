@@ -41,18 +41,18 @@ echo ""
 
 # Test simple parallel execution
 echo "=== Test 1: Simple echo ==="
-echo "${TEST_CONFIG}" | "${PARALLEL_BIN}" --jobs 1 echo "Config: {}"
+echo "${TEST_CONFIG}" | "${PARALLEL_BIN}" --will-cite --jobs 1 echo "Config: {}"
 echo ""
 
 # Test with python --version (quick)
 echo "=== Test 2: Python version ==="
-echo "${TEST_CONFIG}" | "${PARALLEL_BIN}" --jobs 1 \
+echo "${TEST_CONFIG}" | "${PARALLEL_BIN}" --will-cite --jobs 1 \
     "python3 --version && echo 'Config: {}'"
 echo ""
 
 # Test with actual run.py help
 echo "=== Test 3: Run.py help ==="
-echo "${TEST_CONFIG}" | "${PARALLEL_BIN}" --jobs 1 \
+echo "${TEST_CONFIG}" | "${PARALLEL_BIN}" --will-cite --jobs 1 \
     "python3 ${PROJECT_ROOT}/experiments/runner/run.py --help | head -5"
 echo ""
 
@@ -61,7 +61,7 @@ echo "=== Test 4: Actual command (file existence check) ==="
 export PYTHONPATH="${PROJECT_ROOT}"
 export CUDA_VISIBLE_DEVICES=0
 
-echo "${TEST_CONFIG}" | "${PARALLEL_BIN}" --jobs 1 \
+echo "${TEST_CONFIG}" | "${PARALLEL_BIN}" --will-cite --jobs 1 \
     "test -f {} && echo 'Config exists: {}' || echo 'Config missing: {}'"
 echo ""
 

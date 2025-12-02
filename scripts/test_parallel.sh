@@ -25,12 +25,12 @@ echo "Test 1: Version check"
 # Test 2: Simple echo test
 echo ""
 echo "Test 2: Simple command test"
-echo -e "test1\ntest2\ntest3" | "${PARALLEL_BIN}" --jobs 2 echo "Processing: {}"
+echo -e "test1\ntest2\ntest3" | "${PARALLEL_BIN}" --will-cite --jobs 2 echo "Processing: {}"
 
 # Test 3: Test with actual Python command (dry-run style)
 echo ""
 echo "Test 3: Python command test (dry)"
-echo -e "file1.yaml\nfile2.yaml" | "${PARALLEL_BIN}" --jobs 2 --dry-run \
+echo -e "file1.yaml\nfile2.yaml" | "${PARALLEL_BIN}" --will-cite --jobs 2 --dry-run \
     "python -c 'print(\"Processing: {}\")'"
 
 # Test 4: Test with variables
@@ -38,7 +38,7 @@ echo ""
 echo "Test 4: Variable expansion test"
 TEST_VAR="test_value"
 export TEST_VAR
-echo -e "item1\nitem2" | "${PARALLEL_BIN}" --jobs 2 \
+echo -e "item1\nitem2" | "${PARALLEL_BIN}" --will-cite --jobs 2 \
     "echo 'Item: {} - Var: ${TEST_VAR}'"
 
 echo ""
