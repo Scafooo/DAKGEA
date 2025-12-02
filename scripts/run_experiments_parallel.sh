@@ -266,9 +266,8 @@ echo ""
 # ============================================================
 START_TIME=$(date +%s)
 
-# Build parallel command
+# Build parallel command arguments (without the binary itself)
 PARALLEL_ARGS=(
-    "${PARALLEL_BIN}"
     --jobs "${JOBS}"
     --bar
     --joblog "${JOBLOG_FILE}"
@@ -288,7 +287,7 @@ export CUDA_VISIBLE_DEVICES
 export PYTHONHASHSEED
 
 # Run parallel execution
-printf '%s\n' "${CONFIG_FILES[@]}" | "${PARALLEL_ARGS[@]}" \
+printf '%s\n' "${CONFIG_FILES[@]}" | "${PARALLEL_BIN}" "${PARALLEL_ARGS[@]}" \
     "CUDA_VISIBLE_DEVICES=${GPU_ID} python ${PROJECT_ROOT}/experiments/runner/run.py {}"
 
 EXIT_CODE=$?
