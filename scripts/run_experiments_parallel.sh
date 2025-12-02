@@ -7,9 +7,11 @@
 
 set -euo pipefail
 
-# ============================================================ 
+# ============================================================
 #  DEFAULT CONFIGURATION
-# ============================================================ 
+#  Modify DEFAULT_EXPERIMENT_DIR to change the default directory
+# ============================================================
+DEFAULT_EXPERIMENT_DIR="${EXPERIMENT_DIR:-config/experiments/massive/bert_int_aug_red}"
 DEFAULT_JOBS=4          # Number of parallel jobs (good for RTX 4090)
 DEFAULT_RETRY=1         # Number of retries for failed jobs
 DEFAULT_TIMEOUT=7200    # Timeout per job in seconds (2 hours)
@@ -20,12 +22,12 @@ DEFAULT_GPU_LIST="0"    # Default GPU ID to use, or a comma-separated list for r
 # ============================================================ 
 usage() {
     cat <<EOF
-Usage: $0 [OPTIONS] --dir EXPERIMENT_DIR
+Usage: $0 [OPTIONS]
 
-Run multiple DAKGEA experiments in parallel using xargs.
+Run multiple DAKGEA experiments in parallel using GNU Parallel.
 
 OPTIONS:
-    --dir DIR               Directory containing YAML experiment configs (required)
+    --dir DIR               Directory containing YAML experiment configs (default: ${DEFAULT_EXPERIMENT_DIR})
     --jobs N                Number of parallel jobs (default: ${DEFAULT_JOBS})
     --retry N               Number of retries for failed jobs (default: ${DEFAULT_RETRY})
     --timeout SECONDS       Timeout per job in seconds (default: ${DEFAULT_TIMEOUT})
@@ -37,21 +39,24 @@ OPTIONS:
     --help                  Show this help message
 
 EXAMPLES:
-    # Run all experiments in a directory with 4 parallel jobs
-    $0 --dir config/experiments/massive/bert_int_aug_red --jobs 4
+    # Run all experiments in default directory with 4 parallel jobs
+    $0 --jobs 4
 
-    # Dry run to see what will be executed
-    $0 --dir config/experiments/massive/bert_int_aug_red --dry-run
+    # Run experiments in a specific directory
+    $0 --dir config/experiments/massive/bert_int_only_red --jobs 4
+
+    # Dry run to see what will be executed (uses default directory)
+    $0 --dry-run
 
     # Resume interrupted run
-    $0 --dir config/experiments/massive/bert_int_aug_red --resume
+    $0 --resume
 
 EOF
     exit 0
 }
 
 # Parse arguments
-DIR=""
+DIR="${DEFAULT_EXPERIMENT_DIR}"  # Use default, can be overridden with --dir
 JOBS="${DEFAULT_JOBS}"
 RETRY="${DEFAULT_RETRY}"
 TIMEOUT="${DEFAULT_TIMEOUT}"
@@ -109,10 +114,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-if [[ -z "$DIR" ]]; then
-    echo "Error: --dir is required"
-    usage
-fi
+# DIR is no longer required - it has a default value
 
 # ============================================================
 #  SETUP
