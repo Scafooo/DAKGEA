@@ -159,7 +159,7 @@ class NodeExpander:
         if self._total_nodes is not None:
             remaining = self._total_nodes - self._expanded_count
             progress_pct = (self._expanded_count / self._total_nodes) * 100
-            logger.info("[PLM] Expanding set node: %s [%d/%d = %.1f%% | %d remaining]",
+            logger.info("[PROGRESS] PLM Expanding set node: %s [%d/%d = %.1f%% | %d remaining]",
                        set_node, self._expanded_count, self._total_nodes, progress_pct, remaining)
         else:
             logger.info("[PLM] Expanding set node: %s [count: %d]", set_node, self._expanded_count)

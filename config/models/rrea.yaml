@@ -1,0 +1,61 @@
+model:
+  device: cuda
+
+  paths:
+    cache_dir: results/cache/rrea
+    model_save_dir: results/rrea/checkpoints
+    model_save_prefix: rrea
+
+  # ============================================================================
+  # Graph Attention Network Architecture
+  # ============================================================================
+  embedding_dim: 100              # Dimension of entity and relation embeddings
+  depth: 2                        # Number of GAT layers
+  attn_heads: 1                   # Number of attention heads per layer
+  attn_heads_reduction: concat    # How to combine heads: 'concat' or 'average'
+  dropout_rate: 0.3               # Dropout rate for regularization
+  activation: relu                # Activation function: 'relu', 'leaky_relu', 'tanh'
+  use_bias: false                 # Use bias in attention layers
+  use_w: false                    # Use weight transformation after attention
+
+  # ============================================================================
+  # Training Parameters
+  # ============================================================================
+  epochs: 1200                    # Number of training epochs
+  batch_size: 2500                # Training batch size (original RREA value)
+  learning_rate: 0.001            # Learning rate for Adam optimizer
+  optimizer: adam                 # Optimizer type
+  gamma: 3.0                      # Margin for ranking loss
+  neg_num: 5                      # Number of negative samples per positive
+  train_ratio: 0.3                # Ratio of alignments used for training (0.7 for testing)
+
+  # ============================================================================
+  # Regularization
+  # ============================================================================
+  weight_decay: 0.0               # L2 regularization weight
+  max_grad_norm: 5.0              # Gradient clipping threshold
+
+  # ============================================================================
+  # CSLS (Cross-domain Similarity Local Scaling) Parameters
+  # ============================================================================
+  csls_k: 10                      # K nearest neighbors for CSLS
+  use_csls: true                  # Use CSLS vs simple cosine similarity
+  num_threads: 16                 # Number of threads for evaluation (legacy)
+
+  # ============================================================================
+  # Evaluation Parameters
+  # ============================================================================
+  eval_frequency: 100             # Evaluate every N epochs
+  eval_top_k: [1, 5, 10, 50]      # Top-K values for Hits@K metrics
+  early_stop: true                # Enable early stopping
+  early_stop_patience: 50         # Stop if no improvement for N evaluations
+
+  # ============================================================================
+  # Advanced Options
+  # ============================================================================
+  normalize_embeddings: true      # L2 normalize embeddings before evaluation
+  relational_reflection: true     # Use relational reflection mechanism
+
+  # Global seed
+  seed:
+    global: 42

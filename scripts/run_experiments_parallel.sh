@@ -12,7 +12,7 @@ set -euo pipefail
 #  Modify DEFAULT_EXPERIMENT_DIR to change the default directory
 # ============================================================
 DEFAULT_EXPERIMENT_DIR="${EXPERIMENT_DIR:-config/experiments/massive/bert_int_aug_red}"
-DEFAULT_JOBS=4          # Number of parallel jobs (good for RTX 4090)
+DEFAULT_JOBS=2          # Number of parallel jobs (2 for single GPU with CPU/IO phases)
 DEFAULT_TIMEOUT=7200    # Timeout per job in seconds (2 hours)
 DEFAULT_GPU_LIST="0"    # Default GPU ID to use, or a comma-separated list for round-robin
 

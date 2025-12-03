@@ -12,6 +12,7 @@ _MODEL_MODULES: Dict[str, str] = {
     "stub": "src.alignment_models.methods.stub",
     "hybea": "src.alignment_models.methods.hybea.model",
     "bert_int": "src.alignment_models.methods.bert_int.model",
+    "rrea": "src.alignment_models.methods.RREA.model",
 }
 
 
@@ -32,5 +33,5 @@ def get_alignment_model(model_name: str):
 
 def load_builtin_models() -> None:
     """Import bundled alignment models except optional heavy integrations."""
-    for name in ("stub", "hybea", "bert_int"):
+    for name in ("stub", "hybea", "bert_int", "rrea"):
         _ensure_registered(name)

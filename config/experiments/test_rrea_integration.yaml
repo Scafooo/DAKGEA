@@ -1,0 +1,19 @@
+experiment:
+  name: test_rrea_integration
+  dataset:
+    name: openea/BBC_DB
+    writer: openea
+  reduction:
+    method: random_entities
+    ratio: 0.05  # Small dataset for quick testing
+    writer: openea
+    save: false
+    eval: true
+  augmentation:
+    method: plm
+    writer: openea
+    eval: true  # Test RREA on augmented dataset too
+  model: rrea
+  seed: 42
+  clear: true
+  overwrite_existing: true

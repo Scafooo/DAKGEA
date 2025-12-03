@@ -51,6 +51,7 @@ class ColorFormatter(logging.Formatter):
         "[STEP]": "\033[95m",      # Magenta
         "[SUCCESS]": "\033[32m",   # Green
         "[IMPORTANT]": "\033[96m", # Bright cyan
+        "[PROGRESS]": "\033[93m",  # Bright yellow
     }
 
     RESET = "\033[0m"
