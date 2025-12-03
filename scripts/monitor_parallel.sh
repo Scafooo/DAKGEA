@@ -157,7 +157,7 @@ while true; do
         else
             JOB_SEQ=$(echo "$JOB_INFO" | awk '{print $1}')
             JOB_EXIT=$(echo "$JOB_INFO" | awk '{print $7}')
-            JOB_CONFIG=$(echo "$JOB_INFO" | awk '{print $10}')
+            JOB_CONFIG=$(echo "$JOB_INFO" | awk '{print $NF}')
 
             echo "Job #${JOB_SEQ}: $(basename "$JOB_CONFIG")"
 
@@ -227,10 +227,15 @@ while true; do
 
     # OVERVIEW MODE - Parse joblog
     if [[ -f "$JOBLOG_FILE" ]] && [[ $(wc -l < "$JOBLOG_FILE") -gt 1 ]]; then
-        TOTAL=$(tail -n +2 "$JOBLOG_FILE" | wc -l)
+        # Count completed/failed from joblog (parallel only writes to joblog when jobs finish)
         COMPLETED=$(tail -n +2 "$JOBLOG_FILE" | awk '$7 != "" && $7 == 0' | wc -l)
         FAILED=$(tail -n +2 "$JOBLOG_FILE" | awk '$7 != "" && $7 != 0' | wc -l)
-        RUNNING=$((TOTAL - COMPLETED - FAILED))
+
+        # Count running jobs by checking result directories that don't have joblog entries yet
+        # GNU Parallel creates numbered directories (1/, 2/, 3/) when jobs start
+        RESULT_DIRS=$(find "$LOG_DIR" -maxdepth 1 -type d -name '[0-9]*' 2>/dev/null | wc -l)
+        RUNNING=$((RESULT_DIRS - COMPLETED - FAILED))
+        TOTAL=$RESULT_DIRS
 
         # Calculate progress percentage
         if [[ $TOTAL -gt 0 ]]; then
@@ -285,7 +290,17 @@ while true; do
         if [[ $RUNNING -gt 0 ]]; then
             full_line '-'
             echo "Currently running experiments (type number to view log):"
-            tail -n +2 "$JOBLOG_FILE" | awk '$7 == "" {printf "  [%s] %s\n", $1, $10}' | tail -10
+            # Find job numbers that have result directories but no joblog entry
+            for dir in "$LOG_DIR"/[0-9]*; do
+                if [[ -d "$dir" ]]; then
+                    JOB_NUM=$(basename "$dir")
+                    # Check if this job is in joblog
+                    if ! tail -n +2 "$JOBLOG_FILE" 2>/dev/null | awk -v jn="$JOB_NUM" '$1 == jn' | grep -q .; then
+                        # Job is running - try to extract experiment name from command or stdout
+                        echo "  [${JOB_NUM}] (running...)"
+                    fi
+                fi
+            done | head -10
             echo ""
         fi
 
@@ -293,7 +308,7 @@ while true; do
         if [[ $FAILED -gt 0 ]]; then
             full_line '-'
             echo "Recently failed experiments (type number to view log):"
-            tail -n +2 "$JOBLOG_FILE" | awk '$7 != "" && $7 != 0 {printf "  [%s] %s (exit: %s)\n", $1, $10, $7}' | tail -5
+            tail -n +2 "$JOBLOG_FILE" | awk '$7 != "" && $7 != 0 {printf "  [%s] %s (exit: %s)\n", $1, $NF, $7}' | tail -5
             echo ""
         fi
 
@@ -301,12 +316,36 @@ while true; do
         if [[ $COMPLETED -gt 0 ]]; then
             full_line '-'
             echo "Recently completed experiments (last 5, type number to view log):"
-            tail -n +2 "$JOBLOG_FILE" | awk '$7 != "" && $7 == 0 {printf "  [%s] %s\n", $1, $10}' | tail -5
+            tail -n +2 "$JOBLOG_FILE" | awk '$7 != "" && $7 == 0 {printf "  [%s] %s\n", $1, $NF}' | tail -5
             echo ""
         fi
     else
-        echo "Waiting for job log data..."
-        echo ""
+        # Joblog doesn't exist yet, but check if there are running jobs in result directories
+        RESULT_DIRS=$(find "$LOG_DIR" -maxdepth 1 -type d -name '[0-9]*' 2>/dev/null | wc -l)
+        if [[ $RESULT_DIRS -gt 0 ]]; then
+            full_line '-'
+            echo "Progress:"
+            echo "  [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 0%"
+            echo ""
+            echo "  Total experiments : $RESULT_DIRS"
+            echo "  Completed         : 0"
+            echo "  Running           : $RESULT_DIRS"
+            echo "  Failed            : 0"
+            echo ""
+
+            full_line '-'
+            echo "Currently running experiments (type number to view log):"
+            for dir in "$LOG_DIR"/[0-9]*; do
+                if [[ -d "$dir" ]]; then
+                    JOB_NUM=$(basename "$dir")
+                    echo "  [${JOB_NUM}] (running...)"
+                fi
+            done | head -10
+            echo ""
+        else
+            echo "Waiting for jobs to start..."
+            echo ""
+        fi
     fi
 
     # GPU information
