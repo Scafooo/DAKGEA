@@ -167,6 +167,7 @@ while true; do
             JOB_INFO=$(tail -n +2 "$JOBLOG_FILE" 2>/dev/null | awk -v seq="$SELECTED_JOB" '$1 == seq')
 
             echo "Job #${SELECTED_JOB}: ${JOB_NAME}"
+            echo "📁 Log directory: ${JOB_DIR}"
 
             if [[ -z "$JOB_INFO" ]]; then
                 # Job is still running (not in joblog yet)
