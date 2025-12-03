@@ -170,26 +170,39 @@ while true; do
             fi
             echo ""
 
-            # Show stdout
-            STDOUT_FILE="${LOG_DIR}/${JOB_SEQ}/stdout"
-            STDERR_FILE="${LOG_DIR}/${JOB_SEQ}/stderr"
+            # Find stdout/stderr using the seq file
+            # GNU Parallel --results structure: LOG_DIR/slot/experiment/seq
+            JOB_DIR=""
+            for seq_file in $(find "$LOG_DIR" -type f -name 'seq' 2>/dev/null); do
+                if [[ "$(cat "$seq_file" 2>/dev/null)" == "$JOB_SEQ" ]]; then
+                    JOB_DIR=$(dirname "$seq_file")
+                    break
+                fi
+            done
 
-            if [[ -f "$STDERR_FILE" && -s "$STDERR_FILE" ]]; then
-                full_line '-'
-                echo "📛 STDERR (last 30 lines):"
-                echo ""
-                tail -30 "$STDERR_FILE"
-                echo ""
-            fi
+            if [[ -n "$JOB_DIR" ]]; then
+                STDOUT_FILE="${JOB_DIR}/stdout"
+                STDERR_FILE="${JOB_DIR}/stderr"
 
-            if [[ -f "$STDOUT_FILE" ]]; then
-                full_line '-'
-                echo "📄 STDOUT (last 30 lines):"
-                echo ""
-                tail -30 "$STDOUT_FILE"
-                echo ""
+                if [[ -f "$STDERR_FILE" && -s "$STDERR_FILE" ]]; then
+                    full_line '-'
+                    echo "📛 STDERR (last 30 lines):"
+                    echo ""
+                    tail -30 "$STDERR_FILE"
+                    echo ""
+                fi
+
+                if [[ -f "$STDOUT_FILE" ]]; then
+                    full_line '-'
+                    echo "📄 STDOUT (last 30 lines):"
+                    echo ""
+                    tail -30 "$STDOUT_FILE"
+                    echo ""
+                else
+                    echo "No stdout yet for job #${JOB_SEQ}"
+                fi
             else
-                echo "No stdout file found for job #${JOB_SEQ}"
+                echo "Job directory not found for job #${JOB_SEQ}"
             fi
         fi
 
@@ -231,11 +244,12 @@ while true; do
         COMPLETED=$(tail -n +2 "$JOBLOG_FILE" | awk '$7 != "" && $7 == 0' | wc -l)
         FAILED=$(tail -n +2 "$JOBLOG_FILE" | awk '$7 != "" && $7 != 0' | wc -l)
 
-        # Count running jobs by checking result directories that don't have joblog entries yet
-        # GNU Parallel creates numbered directories (1/, 2/, 3/) when jobs start
-        RESULT_DIRS=$(find "$LOG_DIR" -maxdepth 1 -type d -name '[0-9]*' 2>/dev/null | wc -l)
-        RUNNING=$((RESULT_DIRS - COMPLETED - FAILED))
-        TOTAL=$RESULT_DIRS
+        # Count running jobs by checking result directories
+        # GNU Parallel --results creates: slot_dir/argument_dir/seq
+        # The 'seq' file contains the actual job sequence number
+        TOTAL_JOBS=$(find "$LOG_DIR" -type f -name 'seq' 2>/dev/null | wc -l)
+        RUNNING=$((TOTAL_JOBS - COMPLETED - FAILED))
+        TOTAL=$TOTAL_JOBS
 
         # Calculate progress percentage
         if [[ $TOTAL -gt 0 ]]; then
@@ -290,17 +304,19 @@ while true; do
         if [[ $RUNNING -gt 0 ]]; then
             full_line '-'
             echo "Currently running experiments (type number to view log):"
-            # Find job numbers that have result directories but no joblog entry
-            for dir in "$LOG_DIR"/[0-9]*; do
-                if [[ -d "$dir" ]]; then
-                    JOB_NUM=$(basename "$dir")
+            # Find job numbers from 'seq' files that aren't in joblog yet
+            find "$LOG_DIR" -type f -name 'seq' 2>/dev/null | while read -r seq_file; do
+                JOB_NUM=$(cat "$seq_file" 2>/dev/null)
+                if [[ -n "$JOB_NUM" ]]; then
                     # Check if this job is in joblog
                     if ! tail -n +2 "$JOBLOG_FILE" 2>/dev/null | awk -v jn="$JOB_NUM" '$1 == jn' | grep -q .; then
-                        # Job is running - try to extract experiment name from command or stdout
-                        echo "  [${JOB_NUM}] (running...)"
+                        # Job is running - extract experiment name from parent directory
+                        EXPERIMENT_DIR=$(dirname "$seq_file")
+                        EXPERIMENT_NAME=$(basename "$EXPERIMENT_DIR")
+                        echo "  [${JOB_NUM}] ${EXPERIMENT_NAME}"
                     fi
                 fi
-            done | head -10
+            done | sort -n | head -10
             echo ""
         fi
 
@@ -321,26 +337,28 @@ while true; do
         fi
     else
         # Joblog doesn't exist yet, but check if there are running jobs in result directories
-        RESULT_DIRS=$(find "$LOG_DIR" -maxdepth 1 -type d -name '[0-9]*' 2>/dev/null | wc -l)
-        if [[ $RESULT_DIRS -gt 0 ]]; then
+        RUNNING_COUNT=$(find "$LOG_DIR" -type f -name 'seq' 2>/dev/null | wc -l)
+        if [[ $RUNNING_COUNT -gt 0 ]]; then
             full_line '-'
             echo "Progress:"
             echo "  [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 0%"
             echo ""
-            echo "  Total experiments : $RESULT_DIRS"
+            echo "  Total experiments : $RUNNING_COUNT"
             echo "  Completed         : 0"
-            echo "  Running           : $RESULT_DIRS"
+            echo "  Running           : $RUNNING_COUNT"
             echo "  Failed            : 0"
             echo ""
 
             full_line '-'
             echo "Currently running experiments (type number to view log):"
-            for dir in "$LOG_DIR"/[0-9]*; do
-                if [[ -d "$dir" ]]; then
-                    JOB_NUM=$(basename "$dir")
-                    echo "  [${JOB_NUM}] (running...)"
+            find "$LOG_DIR" -type f -name 'seq' 2>/dev/null | while read -r seq_file; do
+                JOB_NUM=$(cat "$seq_file" 2>/dev/null)
+                if [[ -n "$JOB_NUM" ]]; then
+                    EXPERIMENT_DIR=$(dirname "$seq_file")
+                    EXPERIMENT_NAME=$(basename "$EXPERIMENT_DIR")
+                    echo "  [${JOB_NUM}] ${EXPERIMENT_NAME}"
                 fi
-            done | head -10
+            done | sort -n | head -10
             echo ""
         else
             echo "Waiting for jobs to start..."
