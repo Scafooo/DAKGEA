@@ -147,62 +147,61 @@ while true; do
         # DETAIL VIEW - Show log of specific job
         full_line '-'
 
-        # Find job info from joblog
-        JOB_INFO=$(tail -n +2 "$JOBLOG_FILE" | awk -v seq="$SELECTED_JOB" '$1 == seq')
+        # First, find the job directory by looking for seq file
+        JOB_DIR=""
+        JOB_NAME=""
+        for seq_file in $(find "$LOG_DIR" -type f -name 'seq' 2>/dev/null); do
+            if [[ "$(cat "$seq_file" 2>/dev/null)" == "$SELECTED_JOB" ]]; then
+                JOB_DIR=$(dirname "$seq_file")
+                JOB_NAME=$(basename "$JOB_DIR")
+                break
+            fi
+        done
 
-        if [[ -z "$JOB_INFO" ]]; then
-            echo "❌ Job #${SELECTED_JOB} not found in joblog"
+        if [[ -z "$JOB_DIR" ]]; then
+            echo "❌ Job #${SELECTED_JOB} not found"
             echo ""
             echo "Press 'b' to go back to overview"
         else
-            JOB_SEQ=$(echo "$JOB_INFO" | awk '{print $1}')
-            JOB_EXIT=$(echo "$JOB_INFO" | awk '{print $7}')
-            JOB_CONFIG=$(echo "$JOB_INFO" | awk '{print $NF}')
+            # Check if job is in joblog (completed/failed) or still running
+            JOB_INFO=$(tail -n +2 "$JOBLOG_FILE" 2>/dev/null | awk -v seq="$SELECTED_JOB" '$1 == seq')
 
-            echo "Job #${JOB_SEQ}: $(basename "$JOB_CONFIG")"
+            echo "Job #${SELECTED_JOB}: ${JOB_NAME}"
 
-            if [[ "$JOB_EXIT" == "" ]]; then
+            if [[ -z "$JOB_INFO" ]]; then
+                # Job is still running (not in joblog yet)
                 echo "Status: ⏳ RUNNING"
-            elif [[ "$JOB_EXIT" == "0" ]]; then
-                echo "Status: ✅ COMPLETED"
             else
-                echo "Status: ❌ FAILED (exit code: $JOB_EXIT)"
+                # Job is complete, get exit code
+                JOB_EXIT=$(echo "$JOB_INFO" | awk '{print $7}')
+                if [[ "$JOB_EXIT" == "0" ]]; then
+                    echo "Status: ✅ COMPLETED"
+                else
+                    echo "Status: ❌ FAILED (exit code: $JOB_EXIT)"
+                fi
             fi
             echo ""
 
-            # Find stdout/stderr using the seq file
-            # GNU Parallel --results structure: LOG_DIR/slot/experiment/seq
-            JOB_DIR=""
-            for seq_file in $(find "$LOG_DIR" -type f -name 'seq' 2>/dev/null); do
-                if [[ "$(cat "$seq_file" 2>/dev/null)" == "$JOB_SEQ" ]]; then
-                    JOB_DIR=$(dirname "$seq_file")
-                    break
-                fi
-            done
+            # Show stdout and stderr
+            STDOUT_FILE="${JOB_DIR}/stdout"
+            STDERR_FILE="${JOB_DIR}/stderr"
 
-            if [[ -n "$JOB_DIR" ]]; then
-                STDOUT_FILE="${JOB_DIR}/stdout"
-                STDERR_FILE="${JOB_DIR}/stderr"
+            if [[ -f "$STDERR_FILE" && -s "$STDERR_FILE" ]]; then
+                full_line '-'
+                echo "📛 STDERR (last 30 lines):"
+                echo ""
+                tail -30 "$STDERR_FILE"
+                echo ""
+            fi
 
-                if [[ -f "$STDERR_FILE" && -s "$STDERR_FILE" ]]; then
-                    full_line '-'
-                    echo "📛 STDERR (last 30 lines):"
-                    echo ""
-                    tail -30 "$STDERR_FILE"
-                    echo ""
-                fi
-
-                if [[ -f "$STDOUT_FILE" ]]; then
-                    full_line '-'
-                    echo "📄 STDOUT (last 30 lines):"
-                    echo ""
-                    tail -30 "$STDOUT_FILE"
-                    echo ""
-                else
-                    echo "No stdout yet for job #${JOB_SEQ}"
-                fi
+            if [[ -f "$STDOUT_FILE" ]]; then
+                full_line '-'
+                echo "📄 STDOUT (last 30 lines):"
+                echo ""
+                tail -30 "$STDOUT_FILE"
+                echo ""
             else
-                echo "Job directory not found for job #${JOB_SEQ}"
+                echo "No stdout yet for job #${SELECTED_JOB}"
             fi
         fi
 
