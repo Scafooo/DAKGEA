@@ -863,8 +863,10 @@ class ExperimentRunner:
         Execute reduction stage if ratio < threshold, otherwise use raw dataset.
 
         When ratio is less than RATIO_THRESHOLD (0.999999), this method executes
-        the reduction stage to create a reduced dataset. Otherwise, it clones
-        the original dataset and uses it as-is.
+        the reduction stage to create a reduced dataset. When ratio >= RATIO_THRESHOLD,
+        it still executes the reduction stage to write the dataset workspace if a
+        writer is configured (needed by models like bert_int and rrea), but without
+        actually reducing the dataset.
 
         Args:
             ratio: Reduction ratio (0.0 to 1.0)
@@ -882,26 +884,20 @@ class ExperimentRunner:
         Returns:
             Dataset: Reduced or cloned dataset
         """
-        if ratio < RATIO_THRESHOLD:  # perform reduction only when ratio < 1
-            dataset_reduced = reduction_stage.execute(
-                stage_cfg,
-                dataset,
-                reader,
-                ratio,
-                ratio_tag,
-                lineage,
-                ratio_root,
-                ratio_meta,
-                spec.subtype,
-            )
-        else:
-            # No reduction needed - use full dataset
-            dataset_reduced = dataset.clone()
-            reduction_meta = ratio_meta.setdefault(
-                "reduction",
-                {"method": "none", "paths": {}},
-            )
-            reduction_meta["method"] = "none"
+        # Always execute reduction stage to ensure dataset workspace is written
+        # (required by models like bert_int and rrea even when ratio=1.0)
+        # The reduction stage will handle ratio >= 1.0 by not reducing the dataset
+        dataset_reduced = reduction_stage.execute(
+            stage_cfg,
+            dataset,
+            reader,
+            ratio,
+            ratio_tag,
+            lineage,
+            ratio_root,
+            ratio_meta,
+            spec.subtype,
+        )
 
         return dataset_reduced
 
