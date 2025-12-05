@@ -219,14 +219,15 @@ class ExperimentRunner:
         # Check if we're in direct path mode (no ratios = direct dataset access)
         direct_mode = self.normalized_cfg.direct_mode
 
-        if direct_mode:
-            self._run_direct_mode()
-        else:
-            self._run_standard_mode()
-
-        # Clean up intermediate files if requested
-        if self.clear_intermediate:
-            self._cleanup_intermediate_files()
+        try:
+            if direct_mode:
+                self._run_direct_mode()
+            else:
+                self._run_standard_mode()
+        finally:
+            # Clean up intermediate files if requested (always execute, even on error)
+            if self.clear_intermediate:
+                self._cleanup_intermediate_files()
 
     def _run_direct_mode(self) -> None:
         """Run experiments in direct path mode: read datasets directly, skip reduction/writer."""
@@ -1393,6 +1394,7 @@ class ExperimentRunner:
         target_dirs = self._collect_intermediate_dirs(metadata)
 
         removed = 0
+        failed = 0
         reclaimed_bytes = 0
         for path in sorted(target_dirs):
             dir_path = Path(path)
@@ -1401,9 +1403,21 @@ class ExperimentRunner:
             if not self._is_within_workspace(dir_path):
                 logger.debug("Skipping cleanup for path outside workspace: %s", dir_path)
                 continue
-            reclaimed_bytes += self._directory_size(dir_path)
-            shutil.rmtree(dir_path, ignore_errors=True)
-            removed += 1
+
+            dir_size = self._directory_size(dir_path)
+            try:
+                shutil.rmtree(dir_path, ignore_errors=False)
+                # Verify directory was actually removed
+                if not dir_path.exists():
+                    reclaimed_bytes += dir_size
+                    removed += 1
+                    logger.debug("✓ Removed: %s", dir_path)
+                else:
+                    logger.warning("⚠ Failed to remove (still exists): %s", dir_path)
+                    failed += 1
+            except Exception as e:
+                logger.warning("⚠ Failed to remove %s: %s", dir_path, e)
+                failed += 1
 
         if removed:
             logger.info(
@@ -1411,7 +1425,12 @@ class ExperimentRunner:
                 removed,
                 reclaimed_bytes / (1024 * 1024),
             )
-        else:
+        if failed:
+            logger.warning(
+                "⚠ Failed to remove %d directories (check permissions or open files)",
+                failed,
+            )
+        if not removed and not failed:
             logger.info("🧹 No intermediate artefacts detected for cleanup.")
 
     def _load_metadata_snapshot(self) -> Dict[str, Any]:
