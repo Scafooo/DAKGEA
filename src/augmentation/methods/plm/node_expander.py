@@ -602,7 +602,7 @@ class NodeExpander:
         pred_map = {}
         for _, predicate, obj in graph.triples((entity, None, None)):
             if isinstance(obj, Literal):
-                local_name = _clean_pred(str(predicate))
+                local_name = _clean_pred(predicate, graph)  # Pass graph to use attr_to_name mapping
                 if local_name not in pred_map:
                     pred_map[local_name] = (predicate, [])
                 pred_map[local_name][1].append(obj)

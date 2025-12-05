@@ -100,13 +100,38 @@ def _noise_str(x: str) -> str:
     return re.sub(r"\s+", " ", x).strip(" .-")
 
 
-def _clean_pred(p: str) -> str:
-    # Tiene solo il “local name” del predicato
-    # es: http://xmlns.com/foaf/0.1/name -> name ; dbo:birthPlace -> birthPlace
+def _clean_pred(p, kg=None) -> str:
+    """Extract readable predicate name, preferring attr_to_name mapping when available.
+
+    Args:
+        p: Predicate URI (as URIRef or string)
+        kg: Optional KnowledgeGraph with attr_to_name mapping
+
+    Returns:
+        Semantic predicate name if available (e.g., "date of birth"),
+        otherwise local name (e.g., "P569")
+
+    Examples:
+        With attr_to_name: "http://www.wikidata.org/entity/P569" -> "date of birth"
+        Without attr_to_name: "http://www.wikidata.org/entity/P569" -> "P569"
+    """
     if p is None:
         return ""
-    m = re.split(r"[#/]", str(p))
-    tail = m[-1] if m else str(p)
+
+    # Convert to string for lookup
+    p_str = str(p)
+
+    # Try attr_to_name mapping first (semantic names)
+    if kg is not None and hasattr(kg, 'attr_to_name'):
+        # Check if predicate URI is in the mapping
+        if p_str in kg.attr_to_name:
+            semantic_name = kg.attr_to_name[p_str]
+            if semantic_name:
+                return semantic_name
+
+    # Fallback: extract local name (e.g., P569, birthPlace)
+    m = re.split(r"[#/]", p_str)
+    tail = m[-1] if m else p_str
     return tail.split(":")[-1]
 
 
@@ -667,7 +692,7 @@ class BartInterpolatorPLM:
             pred_to_literals = defaultdict(list)
             for s, p, o in kg.triples((None, None, None)):
                 if isinstance(o, Literal):
-                    lname = _clean_pred(p)
+                    lname = _clean_pred(p, kg)  # Pass kg to use attr_to_name mapping
                     pred_to_literals[lname].append(str(o))
             return pred_to_literals
 
@@ -779,7 +804,7 @@ class BartInterpolatorPLM:
             attrs = {}
             for s, p, o in kg.triples((entity_uri, None, None)):
                 if isinstance(o, Literal):
-                    lname = _clean_pred(p)
+                    lname = _clean_pred(p, kg)  # Pass kg to use attr_to_name mapping
                     attrs[lname] = str(o)
             return attrs
 
