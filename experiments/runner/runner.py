@@ -1447,69 +1447,88 @@ class ExperimentRunner:
 
         Respects save_dataset and save_model flags - only deletes artifacts
         that are not explicitly saved.
+
+        Searches directly in the filesystem to find artifacts, making this robust
+        to incomplete or stale metadata.
         """
         targets: List[str] = []
-        dataset_iterable = []
-        datasets_section = metadata.get("datasets")
-        if isinstance(datasets_section, dict):
-            dataset_iterable = datasets_section.values()
-        elif datasets_section is None:
-            dataset_iterable = [metadata]
-        else:
-            dataset_iterable = datasets_section
 
-        for dataset_meta in dataset_iterable:
-            # Add artifact_root to targets if neither dataset nor model should be saved
-            artifact_root = dataset_meta.get("artifact_root")
-            if artifact_root:
-                artifact_path = Path(artifact_root)
-                # Only add artifact_root if both save flags are false
-                if not self.reduction_save_dataset and not self.reduction_save_model:
-                    if not self.augmentation_save_dataset and not self.augmentation_save_model:
-                        if artifact_path.exists():
-                            targets.append(str(artifact_path))
-                            # If we're removing the entire artifact_root, skip collecting individual paths
-                            continue
+        # Search directly in the workspace directory
+        workspace = self.base_workspace
 
-            # Instead of removing the entire artifact_root, collect specific
-            # stage directories based on save flags
-            for ratio_meta in dataset_meta.get("ratios", {}).values():
-                # Collect reduction artifacts to delete
-                reduction_meta = ratio_meta.get("reduction")
-                if reduction_meta:
-                    paths_dict = reduction_meta.get("paths", {})
-                    for key, path_str in paths_dict.items():
-                        path = Path(path_str)
-                        # Delete dataset artifacts if save_dataset=false
-                        if "dataset" in key.lower() and not self.reduction_save_dataset:
-                            if path.exists():
-                                targets.append(str(path))
-                        # Delete model artifacts if save_model=false
-                        elif "model" in key.lower() and not self.reduction_save_model:
-                            if path.exists():
-                                targets.append(str(path))
-                        # Delete other artifacts if both flags are false
-                        elif not self.reduction_save_dataset and not self.reduction_save_model:
-                            if path.exists():
-                                targets.append(str(path))
+        # If all flags are false, mark all stage directories for removal
+        all_flags_false = (
+            not self.reduction_save_dataset
+            and not self.reduction_save_model
+            and not self.augmentation_save_dataset
+            and not self.augmentation_save_model
+        )
 
-                # Collect augmentation artifacts to delete
-                for augmentation_meta in ratio_meta.get("augmentations", {}).values():
-                    paths_dict = augmentation_meta.get("paths", {})
-                    for key, path_str in paths_dict.items():
-                        path = Path(path_str)
-                        # Delete dataset artifacts if save_dataset=false
-                        if "dataset" in key.lower() and not self.augmentation_save_dataset:
-                            if path.exists():
-                                targets.append(str(path))
-                        # Delete model artifacts if save_model=false
-                        elif "model" in key.lower() and not self.augmentation_save_model:
-                            if path.exists():
-                                targets.append(str(path))
-                        # Delete other artifacts if both flags are false
-                        elif not self.augmentation_save_dataset and not self.augmentation_save_model:
-                            if path.exists():
-                                targets.append(str(path))
+        if all_flags_false:
+            # Remove artifact root
+            artifact_root = workspace / "artifact"
+            if artifact_root.exists():
+                targets.append(str(artifact_root))
+                logger.debug("Marked for cleanup: %s (all save flags=false)", artifact_root)
+
+            # Remove reduction datasets and models (but keep reduction/ directory itself)
+            # IMPORTANT: We only remove subdirectories (dataset/, model/)
+            # The reduction/ directory must remain to preserve summary.json and results.json
+            reduction_dir = workspace / "reduction"
+            if reduction_dir.exists():
+                for subdir in ["dataset", "model"]:
+                    path = reduction_dir / subdir
+                    if path.exists():
+                        targets.append(str(path))
+                        logger.debug("Marked for cleanup: %s (all save flags=false)", path)
+
+            # Remove augmentation datasets and models (but keep augmentation/ directory itself)
+            # IMPORTANT: We only remove subdirectories (dataset/, model/)
+            # The augmentation/ directory must remain to preserve summary.json and results.json
+            augmentation_dir = workspace / "augmentation"
+            if augmentation_dir.exists():
+                for subdir in ["dataset", "model"]:
+                    path = augmentation_dir / subdir
+                    if path.exists():
+                        targets.append(str(path))
+                        logger.debug("Marked for cleanup: %s (all save flags=false)", path)
+
+            return targets
+
+        # Otherwise, collect specific subdirectories based on flags
+        # IMPORTANT: We only remove subdirectories (dataset/, model/), never the stage
+        # directories themselves (reduction/, augmentation/) because they contain
+        # summary.json and results.json which must be preserved.
+
+        # Check reduction artifacts
+        reduction_dir = workspace / "reduction"
+        if reduction_dir.exists():
+            # Check for dataset subdirectory
+            dataset_dir = reduction_dir / "dataset"
+            if dataset_dir.exists() and not self.reduction_save_dataset:
+                targets.append(str(dataset_dir))
+                logger.debug("Marked for cleanup: %s (save_dataset=false)", dataset_dir)
+
+            # Check for model subdirectory
+            model_dir = reduction_dir / "model"
+            if model_dir.exists() and not self.reduction_save_model:
+                targets.append(str(model_dir))
+                logger.debug("Marked for cleanup: %s (save_model=false)", model_dir)
+
+        # Check augmentation artifacts
+        augmentation_dir = workspace / "augmentation"
+        if augmentation_dir.exists():
+            # Check for dataset subdirectory
+            dataset_dir = augmentation_dir / "dataset"
+            if dataset_dir.exists() and not self.augmentation_save_dataset:
+                targets.append(str(dataset_dir))
+                logger.debug("Marked for cleanup: %s (save_dataset=false)", dataset_dir)
+
+            # Check for model subdirectory
+            model_dir = augmentation_dir / "model"
+            if model_dir.exists() and not self.augmentation_save_model:
+                targets.append(str(model_dir))
+                logger.debug("Marked for cleanup: %s (save_model=false)", model_dir)
 
         return targets
 
