@@ -28,7 +28,7 @@ config["experiment"] = {"seed": 11037}
 # 2. Dataset loading
 # ----------------------------------------------------------------------------
 reader = DatasetReaderFactory.create_reader("bert_int")
-dataset = reader.read("/home/federico/Programming/Python/DAKGEA/data/raw/openea/BBC_DB/attribute_data")
+dataset = reader.read("/home/federico/Programming/Python/DAKGEA/data/raw/openea/D_W_15K_V1/attribute_data")
 
 # ----------------------------------------------------------------------------
 # 3. Reduction (optional)

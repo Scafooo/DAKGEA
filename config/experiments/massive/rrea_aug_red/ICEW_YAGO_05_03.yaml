@@ -1,0 +1,23 @@
+experiment:
+  name: ICEW_YAGO_05_03
+  dataset:
+    name: openea/ICEW_YAGO
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.5
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 0.5
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: rrea
+  seed: 11057
+  clear: true
+  overwrite_existing: false

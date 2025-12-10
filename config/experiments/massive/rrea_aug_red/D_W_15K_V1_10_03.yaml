@@ -1,0 +1,23 @@
+experiment:
+  name: D_W_15K_V1_10_03
+  dataset:
+    name: openea/D_W_15K_V1
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 1.0
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 1.0
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: rrea
+  seed: 11057
+  clear: true
+  overwrite_existing: false
