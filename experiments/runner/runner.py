@@ -699,23 +699,23 @@ class ExperimentRunner:
                 logger.debug(f"Experiment incomplete: augmentation results missing at {augmentation_results}")
                 return False
 
-        # Check evaluation results for all models
+        # Check evaluation results - use unified results.json format
         evaluation_root = artifact_root / "evaluation"
-        for model_name in self.models:
-            # Check baseline (reduction) evaluation
-            if self.reduction_eval:
-                baseline_result = evaluation_root / "baseline" / f"{model_name}.json"
-                if not baseline_result.exists():
-                    logger.debug(f"Experiment incomplete: baseline evaluation missing for {model_name} at {baseline_result}")
-                    return False
 
-            # Check augmentation evaluations
-            if self.augmentations:
-                for aug_name in self.augmentations:
-                    aug_result = evaluation_root / aug_name / f"{model_name}.json"
-                    if not aug_result.exists():
-                        logger.debug(f"Experiment incomplete: augmentation evaluation missing for {model_name}/{aug_name} at {aug_result}")
-                        return False
+        # Check baseline (reduction) evaluation
+        if self.reduction_eval:
+            baseline_results = evaluation_root / "baseline" / "results.json"
+            if not baseline_results.exists():
+                logger.debug(f"Experiment incomplete: baseline evaluation missing at {baseline_results}")
+                return False
+
+        # Check augmentation evaluations
+        if self.augmentations:
+            for aug_name in self.augmentations:
+                aug_results = evaluation_root / aug_name / "results.json"
+                if not aug_results.exists():
+                    logger.debug(f"Experiment incomplete: augmentation evaluation missing for {aug_name} at {aug_results}")
+                    return False
 
         logger.info(
             "✅ Experiment fully completed for ratio=%s — skipping execution",
@@ -796,21 +796,21 @@ class ExperimentRunner:
             if not augmentation_results.exists():
                 return False
 
-        # Check evaluation results for all models
+        # Check evaluation results - use unified results.json format
         evaluation_root = artifact_root / "evaluation"
-        for model_name in self.models:
-            # Check baseline evaluation
-            if self.reduction_eval:
-                baseline_result = evaluation_root / "baseline" / f"{model_name}.json"
-                if not baseline_result.exists():
-                    return False
 
-            # Check augmentation evaluations
-            if self.augmentations:
-                for aug_name in self.augmentations:
-                    aug_result = evaluation_root / aug_name / f"{model_name}.json"
-                    if not aug_result.exists():
-                        return False
+        # Check baseline evaluation (unified results.json for all models)
+        if self.reduction_eval:
+            baseline_results = evaluation_root / "baseline" / "results.json"
+            if not baseline_results.exists():
+                return False
+
+        # Check augmentation evaluations (unified results.json for all models)
+        if self.augmentations:
+            for aug_name in self.augmentations:
+                aug_results = evaluation_root / aug_name / "results.json"
+                if not aug_results.exists():
+                    return False
 
         return True
 

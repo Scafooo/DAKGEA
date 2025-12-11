@@ -53,7 +53,10 @@ from experiments.statistics.tracking import (
     calculate_improvement_rankings,
 )
 from experiments.statistics.latex_document import create_results_document
-from experiments.statistics.exporters import write_dataset_summary_latex
+from experiments.statistics.exporters import (
+    write_dataset_summary_latex,
+    write_comparison_tables_latex,
+)
 from src.logger import get_logger
 
 # Load configuration
@@ -1079,6 +1082,17 @@ def main() -> None:
             colored=True,
         )
         logger.info("LaTeX table saved to %s", latex_dir / "dataset_summary.tex")
+
+        # Generate comparison tables (one per dataset)
+        comparison_tables_dir = latex_dir / "comparison_tables"
+        num_tables = write_comparison_tables_latex(
+            comparison_tables_dir,
+            ratio_entries,
+            args.metrics,
+        )
+        if num_tables > 0:
+            logger.info("Generated %d comparison tables in %s", num_tables, comparison_tables_dir)
+            logger.info("To include in LaTeX: \\input{%s/<dataset>.tex}", comparison_tables_dir)
 
         # Generate complete LaTeX document if requested
         if "latex-doc" in args.export_formats:
