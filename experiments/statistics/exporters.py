@@ -595,8 +595,8 @@ def write_comparison_tables_latex(
         latex.append(r"\caption{Results for " + escape_latex(dataset) + r". Values shown as mean$\pm$std across multiple seeds.}")
         latex.append(r"\label{tab:" + dataset.lower() + r"}")
 
-        # Add resizebox to fit table to text width
-        latex.append(r"\resizebox{\textwidth}{!}{%")
+        # Add resizebox to fit table to text width (slightly wider to improve readability)
+        latex.append(r"\resizebox{1.1\textwidth}{!}{%")
 
         # Column spec: Ratio | pairs of (Base/Aug) for each metric
         num_metrics = len(metrics)
