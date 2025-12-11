@@ -120,6 +120,11 @@ class BertIntWriter(DatasetWriter):
                 else:
                     original_pairs.append((e1, e2))
 
+            logger.debug(
+                f"[augmented_only_train] Separated {len(original_pairs)} original + "
+                f"{len(augmented_pairs)} augmented from {len(list_aligned_entities)} total pairs"
+            )
+
             logger.info(
                 f"Aligned entities: {len(list_aligned_entities)} total "
                 f"({len(original_pairs)} original, {len(augmented_pairs)} augmented)"

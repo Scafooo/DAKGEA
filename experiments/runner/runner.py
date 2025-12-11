@@ -628,11 +628,19 @@ class ExperimentRunner:
             writer_kwargs = {}
 
             # Pass augmented_only_train to writers that support it (e.g., bert_int)
-            if "augmented_only_train" in settings:
+            if "augmented_only_train" in settings and writer_type.lower() == "bert_int":
                 writer_kwargs["augmented_only_train"] = settings["augmented_only_train"]
 
             # Create writer with parameters
-            writer = DatasetWriterFactory.create_writer(writer_type, **writer_kwargs)
+            try:
+                writer = DatasetWriterFactory.create_writer(writer_type, **writer_kwargs)
+            except TypeError as e:
+                # Fallback: some writers don't accept kwargs, create without them
+                if writer_kwargs:
+                    logger.warning(f"Writer {writer_type} doesn't support kwargs {writer_kwargs}, creating without them")
+                    writer = DatasetWriterFactory.create_writer(writer_type)
+                else:
+                    raise
 
             write_reduced = settings.get("write_reduced")
             if write_reduced is None:

@@ -369,6 +369,14 @@ class AugmentationStage(_WriterStage):
                 "statistics": stats,
             },
         )
+
+        # Validate that dataset is not None before returning
+        if dataset_augmented is None:
+            raise ValueError(
+                f"Augmentation stage returned None dataset for '{augmentation_name}'. "
+                f"This should never happen. Check augmenter implementation."
+            )
+
         return dataset_augmented
 
 
@@ -436,6 +444,18 @@ class EvaluationStage:
             for key in ["evaluation_root", "ratio_root", "raw_source"]:
                 if key in lineage_cfg:
                     lineage[key] = lineage_cfg[key]
+
+            # Validate datasets before evaluation
+            if dataset_reduced is None:
+                raise ValueError(
+                    f"dataset_reduced is None in evaluation for model '{model_name}'. "
+                    f"This indicates a problem in the reduction stage."
+                )
+            if dataset_augmented is None:
+                raise ValueError(
+                    f"dataset_augmented is None in evaluation for model '{model_name}' "
+                    f"(augmentation='{augmentation_name}'). This indicates a problem in the augmentation stage."
+                )
 
             model_cls = get_alignment_model(model_name)
             logger.info("[STEP] → Evaluating model '%s' (augmentation=%s)", model_name, augmentation_name)
