@@ -579,18 +579,24 @@ def write_comparison_tables_latex(
 
     # Generate tables
     tables_generated = 0
+    # All possible reduction ratios from 0.1 to 1.0
+    all_ratios = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+
     for dataset, ratios_data in sorted(aggregated.items()):
         output_file = output_dir / f"{dataset}.tex"
 
-        sorted_ratios = sorted(ratios_data.keys())
-
         # Build LaTeX table
         latex = []
+        latex.append(r"% Required packages: \usepackage{multirow,xcolor,colortbl,graphicx}")
+        latex.append(r"% Values shown as: mean±std (standard deviation)")
         latex.append(r"\begin{table}[htbp]")
         latex.append(r"\centering")
         latex.append(r"\scriptsize")
-        latex.append(r"\caption{Results for " + escape_latex(dataset) + r"}")
+        latex.append(r"\caption{Results for " + escape_latex(dataset) + r". Values shown as mean$\pm$std across multiple seeds.}")
         latex.append(r"\label{tab:" + dataset.lower() + r"}")
+
+        # Add resizebox to fit table to text width
+        latex.append(r"\resizebox{\textwidth}{!}{%")
 
         # Column spec: Ratio | pairs of (Base/Aug) for each metric
         num_metrics = len(metrics)
@@ -613,12 +619,18 @@ def write_comparison_tables_latex(
         latex.append(header2)
         latex.append(r"\hline")
 
-        # Data rows
-        for ratio in sorted_ratios:
-            data = ratios_data[ratio]
+        # Data rows - always show all ratios from 0.1 to 1.0
+        for ratio in all_ratios:
+            data = ratios_data.get(ratio)  # May be None if no data for this ratio
             row = f"\\textbf{{{ratio:.1f}}}"
 
             for metric_key, _, is_percentage, decimals, higher_is_better in metrics:
+                # If no data for this ratio, show N/A for both baseline and augmented
+                if data is None:
+                    row += r" & \textcolor{gray}{N/A}"  # Baseline
+                    row += r" & \textcolor{gray}{N/A}"  # Augmented
+                    continue
+
                 # Compute statistics
                 baseline_values = data['baseline'].get(metric_key, [])
                 augmented_values = data['augmented'].get(metric_key, [])
@@ -666,6 +678,7 @@ def write_comparison_tables_latex(
 
         latex.append(r"\hline")
         latex.append(r"\end{tabular}")
+        latex.append(r"}% End resizebox")
         latex.append(r"\end{table}")
 
         # Write file
@@ -677,11 +690,200 @@ def write_comparison_tables_latex(
     return tables_generated
 
 
+def write_detailed_comparison_tables_latex(
+    output_dir: Path,
+    ratio_entries: Dict[str, List[Dict]],
+    metrics: List[str] | None = None,
+) -> int:
+    """Generate detailed LaTeX tables showing individual experiment values (not aggregated).
+
+    Creates one table per dataset per reduction ratio, showing all individual seeds
+    with their baseline vs augmented values side-by-side.
+
+    Args:
+        output_dir: Directory to write .tex files
+        ratio_entries: Dict[dataset -> List[experiment entries]]
+        metrics: List of metrics to include. If None, uses default set.
+
+    Returns:
+        Number of tables generated
+    """
+    from statistics import mean, pstdev
+
+    if metrics is None:
+        metrics = [
+            ('hits@1', 'H@1', True, 2, True),
+            ('hits@5', 'H@5', True, 2, True),
+            ('hits@10', 'H@10', True, 2, True),
+            ('mrr', 'MRR', False, 4, True),
+            ('mr', 'MR', False, 1, False),
+            ('precision', 'P', True, 2, True),
+            ('recall', 'R', True, 2, True),
+            ('f-measure', 'F1', True, 2, True),
+        ]
+    else:
+        # Convert simple metric names to tuple format
+        metric_configs = {
+            'hits@1': ('hits@1', 'H@1', True, 2, True),
+            'hits@5': ('hits@5', 'H@5', True, 2, True),
+            'hits@10': ('hits@10', 'H@10', True, 2, True),
+            'mrr': ('mrr', 'MRR', False, 4, True),
+            'mr': ('mr', 'MR', False, 1, False),
+            'precision': ('precision', 'P', True, 2, True),
+            'recall': ('recall', 'R', True, 2, True),
+            'f-measure': ('f-measure', 'F1', True, 2, True),
+        }
+        metrics = [metric_configs.get(m, (m, m.upper(), False, 3, True)) for m in metrics]
+
+    ensure_dir(output_dir)
+
+    # Organize by dataset and reduction ratio
+    organized = {}
+    for dataset, entries in ratio_entries.items():
+        dataset_ratios = {}
+        for entry in entries:
+            red_data = entry.get("reduction")
+            aug_data = entry.get("augmentation") or entry.get("plm")
+
+            if not red_data or not aug_data:
+                continue
+
+            # Get reduction ratio and experiment name
+            try:
+                red_ratio = round(float(red_data.get("ratio")), 6)
+            except (TypeError, ValueError):
+                continue
+
+            exp_name = entry.get("experiment", "unknown")
+
+            # Initialize ratio entry
+            if red_ratio not in dataset_ratios:
+                dataset_ratios[red_ratio] = []
+
+            # Store individual experiment data
+            dataset_ratios[red_ratio].append({
+                'experiment': exp_name,
+                'baseline_metrics': red_data.get("metrics", {}),
+                'augmented_metrics': aug_data.get("metrics", {}),
+            })
+
+        if dataset_ratios:
+            organized[dataset] = dataset_ratios
+
+    # Generate tables
+    tables_generated = 0
+
+    for dataset, ratios_data in sorted(organized.items()):
+        for ratio, experiments in sorted(ratios_data.items()):
+            if not experiments:
+                continue
+
+            # Sort experiments by name
+            experiments = sorted(experiments, key=lambda x: x['experiment'])
+
+            output_file = output_dir / f"{dataset}_ratio{ratio:.1f}_detailed.tex"
+
+            # Build LaTeX table
+            latex = []
+            latex.append(r"% Required packages: \usepackage{multirow,xcolor,colortbl,graphicx}")
+            latex.append(r"% Individual experiment values (not aggregated)")
+            latex.append(r"\begin{table}[htbp]")
+            latex.append(r"\centering")
+            latex.append(r"\scriptsize")
+            latex.append(r"\caption{Detailed results for " + escape_latex(dataset) +
+                        f" at reduction ratio {ratio:.1f}. Individual experiment values.}}")
+            latex.append(r"\label{tab:" + dataset.lower() + f"_ratio{ratio:.1f}_detailed" + r"}")
+
+            # Add resizebox to fit table to text width
+            latex.append(r"\resizebox{\textwidth}{!}{%")
+
+            # Column spec: Experiment | pairs of (Base/Aug) for each metric
+            num_metrics = len(metrics)
+            col_spec = "l|" + "cc|" * num_metrics
+            latex.append(r"\begin{tabular}{" + col_spec + r"}")
+            latex.append(r"\hline")
+
+            # Header row 1: Metric names spanning 2 columns
+            header1 = r"\multirow{2}{*}{\textbf{Experiment}}"
+            for _, metric_name, _, _, _ in metrics:
+                header1 += f" & \\multicolumn{{2}}{{c|}}{{{escape_latex(metric_name)}}}"
+            header1 += r" \\"
+            latex.append(header1)
+
+            # Header row 2: Base/Aug for each metric
+            header2 = " "
+            for _ in metrics:
+                header2 += r" & \textit{Base} & \textit{Aug}"
+            header2 += r" \\"
+            latex.append(header2)
+            latex.append(r"\hline")
+
+            # Data rows - one per experiment
+            for exp_data in experiments:
+                exp_name = exp_data['experiment']
+                baseline_metrics = exp_data['baseline_metrics']
+                augmented_metrics = exp_data['augmented_metrics']
+
+                row = f"\\texttt{{{escape_latex(exp_name)}}}"
+
+                for metric_key, _, is_percentage, decimals, higher_is_better in metrics:
+                    # Get individual values
+                    baseline_value = baseline_metrics.get(metric_key)
+                    augmented_value = augmented_metrics.get(metric_key)
+
+                    # Baseline column
+                    if baseline_value is None:
+                        row += r" & \textcolor{gray}{N/A}"
+                    else:
+                        if is_percentage:
+                            baseline_value *= 100
+                        row += f" & {baseline_value:.{decimals}f}"
+
+                    # Augmented column with color
+                    if augmented_value is None:
+                        row += r" & \textcolor{gray}{N/A}"
+                    else:
+                        if is_percentage:
+                            augmented_value *= 100
+
+                        # Determine color
+                        color_cmd = ""
+                        if baseline_value is not None:
+                            if higher_is_better:
+                                is_improvement = augmented_value > baseline_value
+                            else:
+                                is_improvement = augmented_value < baseline_value
+
+                            if is_improvement:
+                                color_cmd = r"\cellcolor{green!15}"
+                            else:
+                                color_cmd = r"\cellcolor{red!15}"
+
+                        row += f" & {color_cmd}{augmented_value:.{decimals}f}"
+
+                row += r" \\"
+                latex.append(row)
+
+            latex.append(r"\hline")
+            latex.append(r"\end{tabular}")
+            latex.append(r"}% End resizebox")
+            latex.append(r"\end{table}")
+
+            # Write file
+            with open(output_file, 'w') as f:
+                f.write('\n'.join(latex))
+
+            tables_generated += 1
+
+    return tables_generated
+
+
 __all__ = [
     "write_dataset_summary_csv",
     "write_dataset_summary_markdown",
     "write_dataset_summary_latex",
     "write_comparison_tables_latex",
+    "write_detailed_comparison_tables_latex",
     "write_latex_table",
     "write_latex_table_colored",
     "escape_latex",

@@ -56,6 +56,7 @@ from experiments.statistics.latex_document import create_results_document
 from experiments.statistics.exporters import (
     write_dataset_summary_latex,
     write_comparison_tables_latex,
+    write_detailed_comparison_tables_latex,
 )
 from src.logger import get_logger
 
@@ -1088,7 +1089,7 @@ def main() -> None:
         )
         logger.info("✓ LaTeX summary table: %s", latex_dir / "dataset_summary.tex")
 
-        # Generate comparison tables (one per dataset)
+        # Generate comparison tables (one per dataset, aggregated)
         comparison_tables_dir = latex_dir / "comparison_tables"
         num_tables = write_comparison_tables_latex(
             comparison_tables_dir,
@@ -1096,11 +1097,26 @@ def main() -> None:
             args.metrics,
         )
         if num_tables > 0:
-            logger.info("✓ Generated %d comparison tables in:", num_tables)
+            logger.info("✓ Generated %d aggregated comparison tables:", num_tables)
             logger.info("  📁 %s", comparison_tables_dir)
             logger.info("  Include in LaTeX: \\input{%s/<dataset>.tex}", comparison_tables_dir.relative_to(PROJECT_ROOT))
         else:
             logger.warning("⚠ No comparison tables generated (no ratio data available)")
+
+        # Generate detailed comparison tables (one per dataset per ratio, individual values)
+        detailed_tables_dir = latex_dir / "comparison_tables_detailed"
+        num_detailed_tables = write_detailed_comparison_tables_latex(
+            detailed_tables_dir,
+            ratio_entries,
+            args.metrics,
+        )
+        if num_detailed_tables > 0:
+            logger.info("✓ Generated %d detailed tables (individual experiment values):", num_detailed_tables)
+            logger.info("  📁 %s", detailed_tables_dir)
+            logger.info("  Include in LaTeX: \\input{%s/<dataset>_ratio<X.X>_detailed.tex}", detailed_tables_dir.relative_to(PROJECT_ROOT))
+        else:
+            logger.warning("⚠ No detailed tables generated")
+
         logger.info("=" * 80)
 
         # Generate complete LaTeX document if requested
@@ -1330,7 +1346,13 @@ def main() -> None:
         logger.info("  📄 LaTeX exports:")
         logger.info("     - latex/dataset_summary.tex")
         if ratio_entries:
-            logger.info("     - latex/comparison_tables/ (%d datasets)", len(ratio_entries))
+            logger.info("     - latex/comparison_tables/ (%d aggregated tables)", len(ratio_entries))
+            # Count detailed tables
+            num_detailed = sum(len(ratios) for ratios in
+                             [{ratio for entry in entries if (red := entry.get("reduction")) and red.get("ratio") for ratio in [round(float(red.get("ratio")), 6)]}
+                              for dataset, entries in ratio_entries.items()])
+            if num_detailed > 0:
+                logger.info("     - latex/comparison_tables_detailed/ (individual experiment values)")
         if "latex-doc" in args.export_formats:
             logger.info("     - latex/results_document.tex")
 
