@@ -1074,6 +1074,11 @@ def main() -> None:
         latex_dir = export_dir / "latex"
         latex_dir.mkdir(parents=True, exist_ok=True)
 
+        logger.info("")
+        logger.info("=" * 80)
+        logger.info("Generating LaTeX exports...")
+        logger.info("=" * 80)
+
         # Export LaTeX table
         write_dataset_summary_latex(
             latex_dir / "dataset_summary.tex",
@@ -1081,7 +1086,7 @@ def main() -> None:
             args.metrics,
             colored=True,
         )
-        logger.info("LaTeX table saved to %s", latex_dir / "dataset_summary.tex")
+        logger.info("✓ LaTeX summary table: %s", latex_dir / "dataset_summary.tex")
 
         # Generate comparison tables (one per dataset)
         comparison_tables_dir = latex_dir / "comparison_tables"
@@ -1091,8 +1096,12 @@ def main() -> None:
             args.metrics,
         )
         if num_tables > 0:
-            logger.info("Generated %d comparison tables in %s", num_tables, comparison_tables_dir)
-            logger.info("To include in LaTeX: \\input{%s/<dataset>.tex}", comparison_tables_dir)
+            logger.info("✓ Generated %d comparison tables in:", num_tables)
+            logger.info("  📁 %s", comparison_tables_dir)
+            logger.info("  Include in LaTeX: \\input{%s/<dataset>.tex}", comparison_tables_dir.relative_to(PROJECT_ROOT))
+        else:
+            logger.warning("⚠ No comparison tables generated (no ratio data available)")
+        logger.info("=" * 80)
 
         # Generate complete LaTeX document if requested
         if "latex-doc" in args.export_formats:
@@ -1303,8 +1312,30 @@ def main() -> None:
         out_path.write_text(json.dumps(aggregated_output, indent=2), encoding="utf-8")
         logger.info("Aggregated data saved to %s", out_path.resolve())
 
-    logger.info("Plots (if produced) are stored under %s", Path(args.plots_dir).resolve())
-    logger.info("Export formats generated: %s", ", ".join(args.export_formats))
+    # Final summary
+    logger.info("")
+    logger.info("=" * 80)
+    logger.info("✅ Analysis complete!")
+    logger.info("=" * 80)
+    logger.info("Output directory: %s", export_dir.resolve())
+    logger.info("")
+    logger.info("Generated files:")
+
+    if "tsv" in args.export_formats:
+        logger.info("  📄 TSV exports:")
+        logger.info("     - dataset_summary.tsv")
+        logger.info("     - ratio_summary.tsv")
+
+    if "latex" in args.export_formats or "latex-doc" in args.export_formats:
+        logger.info("  📄 LaTeX exports:")
+        logger.info("     - latex/dataset_summary.tex")
+        if ratio_entries:
+            logger.info("     - latex/comparison_tables/ (%d datasets)", len(ratio_entries))
+        if "latex-doc" in args.export_formats:
+            logger.info("     - latex/results_document.tex")
+
+    logger.info("  📊 Plots: %s", Path(args.plots_dir).resolve())
+    logger.info("=" * 80)
 
 
 if __name__ == "__main__":

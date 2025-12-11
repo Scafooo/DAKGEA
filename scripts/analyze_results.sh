@@ -30,7 +30,7 @@ DEFAULT_STATS_DIR="${_STAT_PATHS[1]}"
 # All advanced features are enabled by default for comprehensive analysis
 ENABLE_ADVANCED_PLOTS=true
 ENABLE_ADVANCED_STATS=true
-EXPORT_FORMATS="tsv"  # Only TSV export supported
+EXPORT_FORMATS="tsv latex"  # TSV and LaTeX exports by default
 
 # Parse options
 while [[ $# -gt 0 ]]; do
@@ -48,17 +48,17 @@ while [[ $# -gt 0 ]]; do
             shift 2
             ;;
         --basic)
-            # Basic mode: no advanced features
+            # Basic mode: no advanced features, TSV only
             ENABLE_ADVANCED_PLOTS=false
             ENABLE_ADVANCED_STATS=false
             EXPORT_FORMATS="tsv"
             shift
             ;;
         --full)
-            # Full mode: all advanced features (only TSV export available)
+            # Full mode: all advanced features including LaTeX documents
             ENABLE_ADVANCED_PLOTS=true
             ENABLE_ADVANCED_STATS=true
-            EXPORT_FORMATS="tsv"
+            EXPORT_FORMATS="tsv latex latex-doc"
             shift
             ;;
         *)
