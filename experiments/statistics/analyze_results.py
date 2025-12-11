@@ -1347,12 +1347,7 @@ def main() -> None:
         logger.info("     - latex/dataset_summary.tex")
         if ratio_entries:
             logger.info("     - latex/comparison_tables/ (%d aggregated tables)", len(ratio_entries))
-            # Count detailed tables
-            num_detailed = sum(len(ratios) for ratios in
-                             [{ratio for entry in entries if (red := entry.get("reduction")) and red.get("ratio") for ratio in [round(float(red.get("ratio")), 6)]}
-                              for dataset, entries in ratio_entries.items()])
-            if num_detailed > 0:
-                logger.info("     - latex/comparison_tables_detailed/ (individual experiment values)")
+            logger.info("     - latex/comparison_tables_detailed/ (individual experiment values)")
         if "latex-doc" in args.export_formats:
             logger.info("     - latex/results_document.tex")
 
