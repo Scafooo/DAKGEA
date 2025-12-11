@@ -624,7 +624,15 @@ class ExperimentRunner:
             else:
                 raise ValueError(f"Unsupported writer configuration: {entry!r}")
 
-            writer = DatasetWriterFactory.create_writer(writer_type)
+            # Extract writer-specific parameters
+            writer_kwargs = {}
+
+            # Pass augmented_only_train to writers that support it (e.g., bert_int)
+            if "augmented_only_train" in settings:
+                writer_kwargs["augmented_only_train"] = settings["augmented_only_train"]
+
+            # Create writer with parameters
+            writer = DatasetWriterFactory.create_writer(writer_type, **writer_kwargs)
 
             write_reduced = settings.get("write_reduced")
             if write_reduced is None:

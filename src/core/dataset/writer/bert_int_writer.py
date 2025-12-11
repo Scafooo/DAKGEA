@@ -22,6 +22,19 @@ class BertIntWriter(DatasetWriter):
 
     file_type = "bert_int"
 
+    def __init__(self, augmented_only_train: bool = False):
+        """Initialize BERT-INT writer.
+
+        Args:
+            augmented_only_train: If True, put all augmented entities in training set,
+                                  and split only original entities across train/test/valid.
+                                  Default False maintains backward compatibility.
+        """
+        self.augmented_only_train = augmented_only_train
+        if augmented_only_train:
+            logger.info("[BERT-INT Writer] Augmented-only-train mode enabled: "
+                       "augmented entities will be added to training set only")
+
     def write(self, dataset: Dataset, output_dir: str) -> None:
         """Write dataset to BERT-INT format files.
 
@@ -97,20 +110,57 @@ class BertIntWriter(DatasetWriter):
                 f"Sample: {sample}"
             )
 
-        # Split: 20% sup (train), 70% ref (test), 10% valid
-        n = len(list_aligned_entities)
-        n1 = int(n * 0.2)  # 20% for training
-        n2 = int(n * 0.9)  # 20% + 70% = 90% (cumulative: train + test)
+        if self.augmented_only_train:
+            original_pairs = []
+            augmented_pairs = []
 
-        logger.info(
-            f"Aligned entities: {n} total, {n1} sup (train), "
-            f"{n2-n1} ref (test), {n-n2} valid"
-        )
+            for e1, e2 in list_aligned_entities:
+                if "_aug" in e1 or "_aug" in e2:
+                    augmented_pairs.append((e1, e2))
+                else:
+                    original_pairs.append((e1, e2))
 
-        # Convert to indices (using combined index space with offset for target)
-        sup_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[:n1]]
-        ref_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[n1:n2]]
-        valid_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[n2:]]
+            logger.info(
+                f"Aligned entities: {len(list_aligned_entities)} total "
+                f"({len(original_pairs)} original, {len(augmented_pairs)} augmented)"
+            )
+
+            # Split only original entities: 20% train, 70% test, 10% valid
+            n = len(original_pairs)
+            n1 = int(n * 0.2)  # 20% for training
+            n2 = int(n * 0.9)  # 20% + 70% = 90% (cumulative: train + test)
+
+            logger.info(
+                f"Original entities split: {n1} train, {n2-n1} test, {n-n2} valid"
+            )
+            logger.info(
+                f"Augmented entities: {len(augmented_pairs)} (all added to train)"
+            )
+
+            # Create splits: original split + all augmented in train
+            sup_pairs_original = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in original_pairs[:n1]]
+            sup_pairs_augmented = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in augmented_pairs]
+            sup_pairs = sup_pairs_original + sup_pairs_augmented
+
+            ref_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in original_pairs[n1:n2]]
+            valid_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in original_pairs[n2:]]
+
+        else:
+            # Default mode: split all entities uniformly
+            # Split: 20% sup (train), 70% ref (test), 10% valid
+            n = len(list_aligned_entities)
+            n1 = int(n * 0.2)  # 20% for training
+            n2 = int(n * 0.9)  # 20% + 70% = 90% (cumulative: train + test)
+
+            logger.info(
+                f"Aligned entities: {n} total, {n1} sup (train), "
+                f"{n2-n1} ref (test), {n-n2} valid"
+            )
+
+            # Convert to indices (using combined index space with offset for target)
+            sup_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[:n1]]
+            ref_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[n1:n2]]
+            valid_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in list_aligned_entities[n2:]]
 
         # Write files
         write_tsv(os.path.join(dir_path, "sup_pairs"), sup_pairs)
