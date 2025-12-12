@@ -587,9 +587,9 @@ def write_comparison_tables_latex(
 
         # Build LaTeX table
         latex = []
-        latex.append(r"% Required packages: \usepackage{multirow,xcolor,colortbl,graphicx}")
+        latex.append(r"% Required packages: \usepackage{multirow,xcolor,colortbl,graphicx,float}")
         latex.append(r"% Values shown as: mean±std (standard deviation)")
-        latex.append(r"\begin{table}[htbp]")
+        latex.append(r"\begin{table}[H]")
         latex.append(r"\centering")
         latex.append(r"\scriptsize")
         latex.append(r"\caption{Results for " + escape_latex(dataset) + r". Values shown as mean$\pm$std across multiple seeds.}")
@@ -641,6 +641,22 @@ def write_comparison_tables_latex(
                 augmented_mean = mean(augmented_values) if augmented_values else None
                 augmented_std = pstdev(augmented_values) if len(augmented_values) > 1 else (0.0 if augmented_values else None)
 
+                # Determine which value is better (for bold formatting)
+                baseline_is_better = False
+                augmented_is_better = False
+
+                if baseline_mean is not None and augmented_mean is not None:
+                    if higher_is_better:
+                        if baseline_mean > augmented_mean:
+                            baseline_is_better = True
+                        else:
+                            augmented_is_better = True
+                    else:  # Lower is better (e.g., MR)
+                        if baseline_mean < augmented_mean:
+                            baseline_is_better = True
+                        else:
+                            augmented_is_better = True
+
                 # Baseline column
                 if baseline_mean is None:
                     row += r" & \textcolor{gray}{N/A}"
@@ -648,7 +664,11 @@ def write_comparison_tables_latex(
                     if is_percentage:
                         baseline_mean *= 100
                         baseline_std *= 100
-                    row += f" & {baseline_mean:.{decimals}f}$\\pm${baseline_std:.{decimals}f}"
+                    # Bold if this is the better value
+                    if baseline_is_better:
+                        row += f" & \\textbf{{{baseline_mean:.{decimals}f}$\\pm${baseline_std:.{decimals}f}}}"
+                    else:
+                        row += f" & {baseline_mean:.{decimals}f}$\\pm${baseline_std:.{decimals}f}"
 
                 # Augmented column with color
                 if augmented_mean is None:
@@ -671,7 +691,11 @@ def write_comparison_tables_latex(
                         else:
                             color_cmd = r"\cellcolor{red!15}"
 
-                    row += f" & {color_cmd}{augmented_mean:.{decimals}f}$\\pm${augmented_std:.{decimals}f}"
+                    # Bold if this is the better value
+                    if augmented_is_better:
+                        row += f" & {color_cmd}\\textbf{{{augmented_mean:.{decimals}f}$\\pm${augmented_std:.{decimals}f}}}"
+                    else:
+                        row += f" & {color_cmd}{augmented_mean:.{decimals}f}$\\pm${augmented_std:.{decimals}f}"
 
             row += r" \\"
             latex.append(row)
@@ -772,22 +796,24 @@ def write_detailed_comparison_tables_latex(
 
     # Generate tables
     tables_generated = 0
+    # All possible reduction ratios from 0.1 to 1.0
+    all_ratios = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 
     for dataset, ratios_data in sorted(organized.items()):
-        for ratio, experiments in sorted(ratios_data.items()):
-            if not experiments:
-                continue
+        for ratio in all_ratios:  # Generate table for ALL ratios 0.1-1.0
+            experiments = ratios_data.get(ratio, [])  # Get experiments or empty list
 
-            # Sort experiments by name
-            experiments = sorted(experiments, key=lambda x: x['experiment'])
+            # Sort experiments by name if present
+            if experiments:
+                experiments = sorted(experiments, key=lambda x: x['experiment'])
 
             output_file = output_dir / f"{dataset}_ratio{ratio:.1f}_detailed.tex"
 
             # Build LaTeX table
             latex = []
-            latex.append(r"% Required packages: \usepackage{multirow,xcolor,colortbl,graphicx}")
+            latex.append(r"% Required packages: \usepackage{multirow,xcolor,colortbl,graphicx,float}")
             latex.append(r"% Individual experiment values (not aggregated)")
-            latex.append(r"\begin{table}[htbp]")
+            latex.append(r"\begin{table}[H]")
             latex.append(r"\centering")
             latex.append(r"\scriptsize")
             latex.append(r"\caption{Detailed results for " + escape_latex(dataset) +
@@ -797,72 +823,125 @@ def write_detailed_comparison_tables_latex(
             # Add resizebox to fit table to text width
             latex.append(r"\resizebox{\textwidth}{!}{%")
 
-            # Column spec: Experiment | pairs of (Base/Aug) for each metric
+            # Column spec: Experiment | triplets of (Base/Aug/Gap) for each metric
             num_metrics = len(metrics)
-            col_spec = "l|" + "cc|" * num_metrics
+            col_spec = "l|" + "ccc|" * num_metrics
             latex.append(r"\begin{tabular}{" + col_spec + r"}")
             latex.append(r"\hline")
 
-            # Header row 1: Metric names spanning 2 columns
+            # Header row 1: Metric names spanning 3 columns (Base, Aug, Gap)
             header1 = r"\multirow{2}{*}{\textbf{Experiment}}"
             for _, metric_name, _, _, _ in metrics:
-                header1 += f" & \\multicolumn{{2}}{{c|}}{{{escape_latex(metric_name)}}}"
+                header1 += f" & \\multicolumn{{3}}{{c|}}{{{escape_latex(metric_name)}}}"
             header1 += r" \\"
             latex.append(header1)
 
-            # Header row 2: Base/Aug for each metric
+            # Header row 2: Base/Aug/Δ for each metric
             header2 = " "
             for _ in metrics:
-                header2 += r" & \textit{Base} & \textit{Aug}"
+                header2 += r" & \textit{Base} & \textit{Aug} & \textit{$\Delta$}"
             header2 += r" \\"
             latex.append(header2)
             latex.append(r"\hline")
 
             # Data rows - one per experiment
-            for exp_data in experiments:
-                exp_name = exp_data['experiment']
-                baseline_metrics = exp_data['baseline_metrics']
-                augmented_metrics = exp_data['augmented_metrics']
-
-                row = f"\\texttt{{{escape_latex(exp_name)}}}"
-
-                for metric_key, _, is_percentage, decimals, higher_is_better in metrics:
-                    # Get individual values
-                    baseline_value = baseline_metrics.get(metric_key)
-                    augmented_value = augmented_metrics.get(metric_key)
-
-                    # Baseline column
-                    if baseline_value is None:
-                        row += r" & \textcolor{gray}{N/A}"
-                    else:
-                        if is_percentage:
-                            baseline_value *= 100
-                        row += f" & {baseline_value:.{decimals}f}"
-
-                    # Augmented column with color
-                    if augmented_value is None:
-                        row += r" & \textcolor{gray}{N/A}"
-                    else:
-                        if is_percentage:
-                            augmented_value *= 100
-
-                        # Determine color
-                        color_cmd = ""
-                        if baseline_value is not None:
-                            if higher_is_better:
-                                is_improvement = augmented_value > baseline_value
-                            else:
-                                is_improvement = augmented_value < baseline_value
-
-                            if is_improvement:
-                                color_cmd = r"\cellcolor{green!15}"
-                            else:
-                                color_cmd = r"\cellcolor{red!15}"
-
-                        row += f" & {color_cmd}{augmented_value:.{decimals}f}"
-
+            if not experiments:
+                # No data for this ratio - show empty row
+                row = r"\textit{No experiments for this ratio}"
+                for _ in metrics:
+                    row += r" & \textcolor{gray}{N/A} & \textcolor{gray}{N/A} & \textcolor{gray}{N/A}"
                 row += r" \\"
                 latex.append(row)
+            else:
+                for exp_data in experiments:
+                    exp_name = exp_data['experiment']
+                    baseline_metrics = exp_data['baseline_metrics']
+                    augmented_metrics = exp_data['augmented_metrics']
+
+                    row = f"\\texttt{{{escape_latex(exp_name)}}}"
+
+                    for metric_key, _, is_percentage, decimals, higher_is_better in metrics:
+                        # Get individual values
+                        baseline_value = baseline_metrics.get(metric_key)
+                        augmented_value = augmented_metrics.get(metric_key)
+
+                        # Determine which value is better (for bold formatting)
+                        baseline_is_better = False
+                        augmented_is_better = False
+
+                        if baseline_value is not None and augmented_value is not None:
+                            if higher_is_better:
+                                if baseline_value > augmented_value:
+                                    baseline_is_better = True
+                                else:
+                                    augmented_is_better = True
+                            else:  # Lower is better (e.g., MR)
+                                if baseline_value < augmented_value:
+                                    baseline_is_better = True
+                                else:
+                                    augmented_is_better = True
+
+                        # Calculate gap (before percentage conversion for correct calculation)
+                        gap = None
+                        if baseline_value is not None and augmented_value is not None:
+                            gap = augmented_value - baseline_value
+
+                        # Baseline column
+                        if baseline_value is None:
+                            row += r" & \textcolor{gray}{N/A}"
+                        else:
+                            if is_percentage:
+                                baseline_value *= 100
+                            # Bold if this is the better value
+                            if baseline_is_better:
+                                row += f" & \\textbf{{{baseline_value:.{decimals}f}}}"
+                            else:
+                                row += f" & {baseline_value:.{decimals}f}"
+
+                        # Augmented column with color
+                        if augmented_value is None:
+                            row += r" & \textcolor{gray}{N/A}"
+                        else:
+                            if is_percentage:
+                                augmented_value *= 100
+
+                            # Determine color
+                            color_cmd = ""
+                            if baseline_value is not None:
+                                if higher_is_better:
+                                    is_improvement = augmented_value > baseline_value
+                                else:
+                                    is_improvement = augmented_value < baseline_value
+
+                                if is_improvement:
+                                    color_cmd = r"\cellcolor{green!15}"
+                                else:
+                                    color_cmd = r"\cellcolor{red!15}"
+
+                            # Bold if this is the better value
+                            if augmented_is_better:
+                                row += f" & {color_cmd}\\textbf{{{augmented_value:.{decimals}f}}}"
+                            else:
+                                row += f" & {color_cmd}{augmented_value:.{decimals}f}"
+
+                        # Gap column (Δ)
+                        if gap is None:
+                            row += r" & \textcolor{gray}{N/A}"
+                        else:
+                            if is_percentage:
+                                gap *= 100
+                            # Color based on whether it's an improvement
+                            if higher_is_better:
+                                gap_color = "green!70!black" if gap > 0 else "red!70!black"
+                            else:  # Lower is better (e.g., MR)
+                                gap_color = "green!70!black" if gap < 0 else "red!70!black"
+
+                            # Format with sign
+                            gap_str = f"{gap:+.{decimals}f}"
+                            row += f" & \\textcolor{{{gap_color}}}{{{gap_str}}}"
+
+                    row += r" \\"
+                    latex.append(row)
 
             latex.append(r"\hline")
             latex.append(r"\end{tabular}")
@@ -874,6 +953,27 @@ def write_detailed_comparison_tables_latex(
                 f.write('\n'.join(latex))
 
             tables_generated += 1
+
+    # Generate combined file for each dataset (includes all ratios)
+    for dataset in sorted(organized.keys()):
+        combined_file = output_dir / f"{dataset}_all_detailed.tex"
+
+        combined_latex = []
+        combined_latex.append(r"% Combined detailed tables for " + escape_latex(dataset))
+        combined_latex.append(r"% Includes all reduction ratios 0.1-1.0")
+        combined_latex.append(r"% Required packages: \usepackage{multirow,xcolor,colortbl,graphicx,float}")
+        combined_latex.append("")
+
+        for ratio in all_ratios:
+            # Input individual table file (use relative path since files are in same directory)
+            individual_file = f"{dataset}_ratio{ratio:.1f}_detailed.tex"
+            combined_latex.append(f"% Ratio {ratio:.1f}")
+            combined_latex.append(f"\\input{{{individual_file}}}")
+            combined_latex.append("")
+
+        # Write combined file
+        with open(combined_file, 'w') as f:
+            f.write('\n'.join(combined_latex))
 
     return tables_generated
 
