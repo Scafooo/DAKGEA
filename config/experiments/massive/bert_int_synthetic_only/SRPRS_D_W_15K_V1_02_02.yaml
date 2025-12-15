@@ -1,4 +1,5 @@
 experiment:
+  suite: massive_synthetic_only_bert_int
   name: SRPRS_D_W_15K_V1_02_02
   dataset:
     name: openea/SRPRS_D_W_15K_V1

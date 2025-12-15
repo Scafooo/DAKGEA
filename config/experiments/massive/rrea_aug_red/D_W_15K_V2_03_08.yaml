@@ -1,18 +1,19 @@
 experiment:
+  suite: massive_aug_red_rrea
   name: D_W_15K_V2_03_08
   dataset:
     name: openea/D_W_15K_V2
     writer: bert_int
   reduction:
     method: random_entities
-    ratio: 0.3
+    ratio: 0.30000000000000004
     writer: bert_int
     eval: true
     save_dataset: false
     save_model: false
   augmentation:
     method: plm
-    ratio: 0.3
+    ratio: 0.8
     writer:
       type: bert_int
       augmented_only_train: true
@@ -20,6 +21,6 @@ experiment:
     save_dataset: false
     save_model: false
   model: rrea
-  seed: 11107
+  seed: 11037
   clear: true
   overwrite_existing: false

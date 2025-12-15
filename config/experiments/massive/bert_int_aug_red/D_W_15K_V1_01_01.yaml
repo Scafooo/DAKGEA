@@ -1,4 +1,5 @@
 experiment:
+  suite: massive_aug_red_bert_int
   name: D_W_15K_V1_01_01
   dataset:
     name: openea/D_W_15K_V1

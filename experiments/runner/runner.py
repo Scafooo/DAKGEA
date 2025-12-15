@@ -97,13 +97,18 @@ class ExperimentRunner:
             self.paths.get("external_data", self.base_data.parent / "external")
         )
 
-        workspace_root = Path(self.paths.get("results", "results")) / self.name
+        # Build workspace path: results/[suite/]name
+        workspace_root = Path(self.paths.get("results", "results"))
+        if self.normalized_cfg.suite:
+            workspace_root = workspace_root / self.normalized_cfg.suite
+        workspace_root = workspace_root / self.name
         self.base_workspace: Path = workspace_root
         self.metadata_file: Path = self.base_workspace / "metadata.json"
         self.base_workspace.mkdir(parents=True, exist_ok=True)
 
         self.metadata: Dict[str, Any] = {
             "name": self.name,
+            "suite": self.normalized_cfg.suite,
             "reduction_method": self.reduction_method,
             "ratios": self.ratios,
             "augmentations": self.augmentations,

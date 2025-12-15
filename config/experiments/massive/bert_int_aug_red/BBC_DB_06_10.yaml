@@ -1,11 +1,12 @@
 experiment:
+  suite: massive_aug_red_bert_int
   name: BBC_DB_06_10
   dataset:
     name: openea/BBC_DB
     writer: bert_int
   reduction:
     method: random_entities
-    ratio: 0.6
+    ratio: 0.6000000000000001
     writer: bert_int
     eval: true
     save_dataset: false

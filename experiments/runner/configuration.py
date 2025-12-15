@@ -19,6 +19,7 @@ class ExperimentConfig:
     """Normalized experiment configuration derived from the raw YAML payload."""
 
     name: str
+    suite: Optional[str]  # Optional suite name for grouping experiments
     dataset: Any
     ratio: Optional[float]
     augmentation: Optional[str]
@@ -52,6 +53,7 @@ class ExperimentConfig:
         default_overwrite: bool,
     ) -> "ExperimentConfig":
         name = cls._extract_name(payload)
+        suite = cls._extract_suite(payload)
         datasets = cls._extract_datasets(payload)
         if len(datasets) != 1:
             raise ValueError(
@@ -97,6 +99,7 @@ class ExperimentConfig:
 
         return cls(
             name=name,
+            suite=suite,
             dataset=dataset_entry,
             ratio=ratio_value,
             augmentation=augmentation_entry,
@@ -123,6 +126,16 @@ class ExperimentConfig:
                 f"Missing required experiment configuration key: 'name'. "
                 f"Available keys: {list(payload.keys())}"
             ) from exc
+
+    @staticmethod
+    def _extract_suite(payload: Dict[str, Any]) -> Optional[str]:
+        """Extract optional suite name for grouping experiments.
+
+        Suite allows organizing related experiments into a common directory.
+        For example: suite="quality_evaluation_bert_int" groups all quality
+        evaluation experiments for bert_int model together.
+        """
+        return payload.get("suite", None)
 
     @staticmethod
     def _extract_datasets(payload: Dict[str, Any]) -> List[Any]:

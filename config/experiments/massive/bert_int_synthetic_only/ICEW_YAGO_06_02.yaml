@@ -1,4 +1,5 @@
 experiment:
+  suite: massive_synthetic_only_bert_int
   name: ICEW_YAGO_06_02
   dataset:
     name: openea/ICEW_YAGO

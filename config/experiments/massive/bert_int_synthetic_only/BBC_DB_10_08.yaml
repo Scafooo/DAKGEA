@@ -1,4 +1,5 @@
 experiment:
+  suite: massive_synthetic_only_bert_int
   name: BBC_DB_10_08
   dataset:
     name: openea/BBC_DB

@@ -1,4 +1,5 @@
 experiment:
+  suite: massive_aug_red_bert_int
   name: ICEW_WIKI_09_05
   dataset:
     name: openea/ICEW_WIKI

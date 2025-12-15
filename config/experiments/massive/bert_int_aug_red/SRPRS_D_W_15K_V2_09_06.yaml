@@ -1,4 +1,5 @@
 experiment:
+  suite: massive_aug_red_bert_int
   name: SRPRS_D_W_15K_V2_09_06
   dataset:
     name: openea/SRPRS_D_W_15K_V2
@@ -12,7 +13,7 @@ experiment:
     save_model: false
   augmentation:
     method: plm
-    ratio: 0.6
+    ratio: 0.6000000000000001
     writer:
       type: bert_int
       augmented_only_train: true

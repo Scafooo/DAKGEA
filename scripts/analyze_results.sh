@@ -31,6 +31,7 @@ DEFAULT_STATS_DIR="${_STAT_PATHS[1]}"
 ENABLE_ADVANCED_PLOTS=true
 ENABLE_ADVANCED_STATS=true
 EXPORT_FORMATS="tsv latex"  # TSV and LaTeX exports by default
+SUITE=""
 
 # Parse options
 while [[ $# -gt 0 ]]; do
@@ -45,6 +46,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --export-formats)
             EXPORT_FORMATS="$2"
+            shift 2
+            ;;
+        --suite)
+            SUITE="$2"
             shift 2
             ;;
         --basic)
@@ -82,7 +87,17 @@ echo "🕓 Started at   : $(date '+%Y-%m-%d %H:%M:%S %Z')"
 full_line '='
 
 TARGET_PATH=""
-if [[ $# -gt 0 && -e "$1" ]]; then
+if [[ -n "$SUITE" ]]; then
+    # Suite specified: analyze results/suite_name/
+    TARGET_PATH="${RESULTS_ROOT}/${SUITE}"
+    if [[ ! -d "$TARGET_PATH" ]]; then
+        echo "❌ Error: Suite directory not found: ${TARGET_PATH}"
+        exit 1
+    fi
+    echo "🎯 Suite        : ${SUITE}"
+    echo "🎯 Target path  : ${TARGET_PATH}"
+    full_line '='
+elif [[ $# -gt 0 && -e "$1" ]]; then
     TARGET_PATH="$1"
     shift
     echo "🎯 Target path  : ${TARGET_PATH}"

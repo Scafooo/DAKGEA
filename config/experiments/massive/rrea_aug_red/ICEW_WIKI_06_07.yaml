@@ -1,18 +1,19 @@
 experiment:
+  suite: massive_aug_red_rrea
   name: ICEW_WIKI_06_07
   dataset:
     name: openea/ICEW_WIKI
     writer: bert_int
   reduction:
     method: random_entities
-    ratio: 0.6
+    ratio: 0.6000000000000001
     writer: bert_int
     eval: true
     save_dataset: false
     save_model: false
   augmentation:
     method: plm
-    ratio: 0.6
+    ratio: 0.7000000000000001
     writer:
       type: bert_int
       augmented_only_train: true
@@ -20,6 +21,6 @@ experiment:
     save_dataset: false
     save_model: false
   model: rrea
-  seed: 11097
+  seed: 11037
   clear: true
   overwrite_existing: false

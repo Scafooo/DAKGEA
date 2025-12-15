@@ -1,4 +1,5 @@
 experiment:
+  suite: massive_aug_red_rrea
   name: D_W_15K_V1_09_04
   dataset:
     name: openea/D_W_15K_V1
@@ -12,7 +13,7 @@ experiment:
     save_model: false
   augmentation:
     method: plm
-    ratio: 0.9
+    ratio: 0.4
     writer:
       type: bert_int
       augmented_only_train: true
@@ -20,6 +21,6 @@ experiment:
     save_dataset: false
     save_model: false
   model: rrea
-  seed: 11067
+  seed: 11037
   clear: true
   overwrite_existing: false

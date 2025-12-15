@@ -1,4 +1,5 @@
 experiment:
+  suite: massive_baseline_bert_int
   name: ICEW_YAGO_02_10
   dataset:
     name: openea/ICEW_YAGO

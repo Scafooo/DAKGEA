@@ -1,4 +1,5 @@
 experiment:
+  suite: massive_baseline_bert_int
   name: SRPRS_D_W_15K_V1_07_04
   dataset:
     name: openea/SRPRS_D_W_15K_V1

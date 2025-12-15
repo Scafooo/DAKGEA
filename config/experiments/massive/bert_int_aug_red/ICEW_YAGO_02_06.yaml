@@ -1,4 +1,5 @@
 experiment:
+  suite: massive_aug_red_bert_int
   name: ICEW_YAGO_02_06
   dataset:
     name: openea/ICEW_YAGO
@@ -12,7 +13,7 @@ experiment:
     save_model: false
   augmentation:
     method: plm
-    ratio: 0.6
+    ratio: 0.6000000000000001
     writer:
       type: bert_int
       augmented_only_train: true

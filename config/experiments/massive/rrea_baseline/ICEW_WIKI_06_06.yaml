@@ -1,4 +1,5 @@
 experiment:
+  suite: massive_baseline_rrea
   name: ICEW_WIKI_06_06
   dataset:
     name: openea/ICEW_WIKI

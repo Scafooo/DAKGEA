@@ -1,4 +1,5 @@
 experiment:
+  suite: massive_synthetic_only_bert_int
   name: ICEW_WIKI_07_10
   dataset:
     name: openea/ICEW_WIKI

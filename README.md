@@ -6,6 +6,17 @@
 
 DAKGEA is a modular Python 3.11 pipeline for dataset reduction, augmentation, and evaluation in Entity Alignment tasks.
 
+## 📚 Documentation
+
+**Complete documentation is available in the [Documentation Wiki](docs/index.md)**
+
+Quick links:
+- 🚀 [Getting Started Guide](docs/guides/getting-started.md)
+- 🏗️ [Architecture](docs/architecture/overview.md)
+- ⚙️ [Configuration](docs/configuration/overview.md)
+- 🧪 [Experiments & Metrics](docs/experiments/overview.md)
+- 🤖 [Models](docs/models/overview.md)
+
 ## Quickstart
 
 ```bash
@@ -34,8 +45,6 @@ scripts/
 install/
   requirements.txt    # Development + runtime dependencies
 ```
-
-Additional notes live in `docs/`.
 
 ## Running an experiment
 

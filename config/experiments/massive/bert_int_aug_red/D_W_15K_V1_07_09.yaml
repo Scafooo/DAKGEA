@@ -1,11 +1,12 @@
 experiment:
+  suite: massive_aug_red_bert_int
   name: D_W_15K_V1_07_09
   dataset:
     name: openea/D_W_15K_V1
     writer: bert_int
   reduction:
     method: random_entities
-    ratio: 0.7
+    ratio: 0.7000000000000001
     writer: bert_int
     eval: true
     save_dataset: false
