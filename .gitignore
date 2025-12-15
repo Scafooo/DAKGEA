@@ -36,6 +36,7 @@ results/
 # Logs
 *.log
 logs/
+*.txt.gz
 
 # Jupyter notebooks checkpoints
 .ipynb_checkpoints/
@@ -52,6 +53,9 @@ src/hybea/**/*.h5
 # Temporary experiment files
 *.tmp
 *.bak
+*.old
+*~
+*.backup
 
 # BART fine-tuned models
 bart_plm_model/

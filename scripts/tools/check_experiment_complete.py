@@ -46,8 +46,12 @@ def check_experiment_complete(config_path: Path, results_base: Path) -> bool:
     model = exp_cfg.get("model")
     models = [model] if model else []
 
-    # Workspace path
-    workspace = results_base / exp_name
+    # Workspace path (support suite grouping)
+    suite = exp_cfg.get("suite")
+    if suite:
+        workspace = results_base / suite / exp_name
+    else:
+        workspace = results_base / exp_name
     if not workspace.exists():
         return False
 
