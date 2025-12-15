@@ -36,6 +36,7 @@ from .stages import (
     VARIANT_REDUCED,
     AugmentationStage,
     EvaluationStage,
+    FilteringStage,
     ReductionStage,
     StageSummaryWriter,
 )
@@ -1069,6 +1070,12 @@ class ExperimentRunner:
                     ratio_meta,
                     spec.subtype,
                 )
+
+                # Apply filtering based on training_mode
+                training_mode = stage_cfg.get("augmentation", {}).get("training_mode", "augmented")
+                filtering_stage = FilteringStage(training_mode)
+                dataset_filtered = filtering_stage.execute(dataset_reduced, dataset_augmented)
+
                 if not self.augmentation_eval:
                     logger.info(
                         "⏭️  Skipping evaluation for augmentation '%s' (augmentation.eval=false)",
@@ -1079,7 +1086,7 @@ class ExperimentRunner:
                 evaluation_stage.execute(
                     aug_name,
                     dataset_reduced,
-                    dataset_augmented,
+                    dataset_filtered,
                     stage_cfg,
                     lineage,
                     ratio_root,
@@ -1224,12 +1231,17 @@ class ExperimentRunner:
                 skip_dataset_write=skip_write_aug,
             )
 
+            # Apply filtering based on training_mode
+            training_mode = stage_cfg.get("augmentation", {}).get("training_mode", "augmented")
+            filtering_stage = FilteringStage(training_mode)
+            dataset_filtered = filtering_stage.execute(dataset_reduced, dataset_augmented)
+
             # Step 4: Evaluate augmentation
             logger.info(f"📊 Evaluating augmentation...")
             evaluation_stage.execute(
                 aug_name,
                 dataset_reduced,
-                dataset_augmented,
+                dataset_filtered,
                 stage_cfg,
                 lineage,
                 ratio_root,

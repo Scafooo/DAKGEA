@@ -380,6 +380,92 @@ class AugmentationStage(_WriterStage):
         return dataset_augmented
 
 
+class FilteringStage:
+    """Encapsulate filtering logic for training mode selection.
+
+    This stage filters datasets based on training mode:
+    - "baseline": Returns original dataset (no synthetic data)
+    - "synthetic_only": Returns only synthetic pairs (removes originals)
+    - "augmented": Returns all pairs (original + synthetic)
+    """
+
+    def __init__(self, training_mode: str) -> None:
+        """Initialize the filtering stage.
+
+        Args:
+            training_mode: One of "baseline", "synthetic_only", or "augmented"
+        """
+        self.training_mode = training_mode
+
+        if training_mode not in ("baseline", "synthetic_only", "augmented"):
+            logger.warning(
+                f"Invalid training_mode '{training_mode}'. Defaulting to 'augmented'."
+            )
+            self.training_mode = "augmented"
+
+    def execute(
+        self,
+        dataset_original: Dataset,
+        dataset_augmented: Dataset,
+    ) -> Dataset:
+        """Filter dataset based on training mode.
+
+        Args:
+            dataset_original: Original dataset before augmentation
+            dataset_augmented: Augmented dataset with original + synthetic pairs
+
+        Returns:
+            Filtered dataset based on training mode
+        """
+        if self.training_mode == "baseline":
+            # Baseline mode: use only original pairs (no augmentation)
+            logger.info(
+                f"[FilteringStage] Using 'baseline' mode: {len(dataset_original.aligned_entities)} original pairs"
+            )
+            return dataset_original
+
+        elif self.training_mode == "augmented":
+            # Augmented mode: use all pairs (original + synthetic)
+            logger.info(
+                f"[FilteringStage] Using 'augmented' mode: {len(dataset_augmented.aligned_entities)} total pairs"
+            )
+            return dataset_augmented
+
+        elif self.training_mode == "synthetic_only":
+            # Synthetic-only mode: use ONLY synthetic pairs (remove originals)
+            original_pairs = set(dataset_original.aligned_entities)
+            augmented_pairs = set(dataset_augmented.aligned_entities)
+            synthetic_pairs = augmented_pairs - original_pairs
+
+            logger.info(f"[FilteringStage] Using 'synthetic_only' mode:")
+            logger.info(f"  Original pairs: {len(original_pairs)}")
+            logger.info(f"  Total augmented pairs: {len(augmented_pairs)}")
+            logger.info(f"  Synthetic-only pairs: {len(synthetic_pairs)}")
+
+            if not synthetic_pairs:
+                logger.warning(
+                    "[FilteringStage] No synthetic pairs found! Augmentation may have failed. "
+                    "Returning augmented dataset as fallback."
+                )
+                return dataset_augmented
+
+            # Create filtered dataset with only synthetic pairs
+            dataset_filtered = dataset_augmented.clone()
+            dataset_filtered.aligned_entities = tuple(sorted(synthetic_pairs))
+
+            logger.info(
+                f"[FilteringStage] Final training set: {len(dataset_filtered.aligned_entities)} synthetic pairs"
+            )
+            return dataset_filtered
+
+        else:
+            # Should never happen due to validation in __init__
+            logger.error(
+                f"[FilteringStage] Unknown training mode '{self.training_mode}'. Falling back to 'augmented'."
+            )
+            return dataset_augmented
+
+
 class EvaluationStage:
     """Encapsulate evaluation logic and result handling."""
 

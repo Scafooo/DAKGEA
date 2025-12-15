@@ -193,11 +193,16 @@ class PLMAugmenter(AugmentationMethod):
     def augment(self, dataset: Dataset) -> Dataset:
         """Augment a dataset by spawning aligned synthetic entities.
 
+        This method ALWAYS performs augmentation and returns ALL pairs (original + synthetic).
+
+        For baseline mode (no augmentation), omit the "augmentation" section from your config.
+        For filtering (e.g., synthetic_only), use FilteringStage after augmentation.
+
         Args:
             dataset: Input dataset to augment
 
         Returns:
-            Augmented dataset with new aligned entity pairs
+            Augmented dataset with ALL aligned entity pairs (original + synthetic)
         """
         initial_pairs = len(dataset.aligned_entities)
         dataset_augmented = dataset.clone()

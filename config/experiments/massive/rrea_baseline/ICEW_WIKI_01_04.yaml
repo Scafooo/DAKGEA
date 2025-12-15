@@ -1,0 +1,16 @@
+experiment:
+  name: ICEW_WIKI_01_04
+  dataset:
+    name: openea/ICEW_WIKI
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.1
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: rrea
+  seed: 11037
+  clear: true
+  overwrite_existing: false

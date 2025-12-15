@@ -1,0 +1,16 @@
+experiment:
+  name: BBC_DB_07_04
+  dataset:
+    name: openea/BBC_DB
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.7000000000000001
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: rrea
+  seed: 11037
+  clear: true
+  overwrite_existing: false

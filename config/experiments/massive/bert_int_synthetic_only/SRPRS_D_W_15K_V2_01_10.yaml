@@ -1,0 +1,26 @@
+experiment:
+  name: SRPRS_D_W_15K_V2_01_10
+  dataset:
+    name: openea/SRPRS_D_W_15K_V2
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.1
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 1.0
+    training_mode: synthetic_only
+    writer:
+      type: bert_int
+      augmented_only_train: true
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: false
