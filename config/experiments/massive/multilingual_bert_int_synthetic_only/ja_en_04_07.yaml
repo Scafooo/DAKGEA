@@ -1,5 +1,5 @@
 experiment:
-  suite: massive_synthetic_only_bert_int
+  suite: massive_multilingual_synthetic_only_bert_int
   name: ja_en_04_07
   dataset:
     name: openea/ja_en

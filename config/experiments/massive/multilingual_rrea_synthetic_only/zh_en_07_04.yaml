@@ -1,5 +1,5 @@
 experiment:
-  suite: massive_synthetic_only_rrea
+  suite: massive_multilingual_synthetic_only_rrea
   name: zh_en_07_04
   dataset:
     name: openea/zh_en

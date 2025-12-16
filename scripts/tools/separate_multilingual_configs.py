@@ -15,7 +15,7 @@ def create_baseline_config(original_config, model_name, dataset_name):
     """Create baseline config (reduction only, no augmentation)"""
     config = {
         "experiment": {
-            "suite": f"massive_baseline_{model_name}",
+            "suite": f"massive_multilingual_baseline_{model_name}",
             "name": original_config["experiment"]["name"],
             "dataset": {
                 "name": dataset_name,
@@ -35,7 +35,7 @@ def create_aug_red_config(original_config, model_name, dataset_name):
     """Create aug_red config (reduction + augmentation with both original and synthetic)"""
     config = {
         "experiment": {
-            "suite": f"massive_aug_red_{model_name}",
+            "suite": f"massive_multilingual_aug_red_{model_name}",
             "name": original_config["experiment"]["name"],
             "dataset": {
                 "name": dataset_name,
@@ -65,7 +65,7 @@ def create_synthetic_only_config(original_config, model_name, dataset_name):
     """Create synthetic_only config (reduction + augmentation with only synthetic data)"""
     config = {
         "experiment": {
-            "suite": f"massive_synthetic_only_{model_name}",
+            "suite": f"massive_multilingual_synthetic_only_{model_name}",
             "name": original_config["experiment"]["name"],
             "dataset": {
                 "name": dataset_name,
@@ -112,19 +112,19 @@ def process_multilingual_config(config_path: Path):
         if aug_method == "stub":
             # This is a baseline config - only create baseline
             config = create_baseline_config(original_config, model_name, dataset_name)
-            target_dir = PROJECT_ROOT / "config" / "experiments" / "massive" / f"{model_name}_baseline"
+            target_dir = PROJECT_ROOT / "config" / "experiments" / "massive" / f"multilingual_{model_name}_baseline"
             results.append((config, target_dir / f"{config_name}.yaml"))
         elif aug_method == "plm":
             # This is an augmented config - create both aug_red and synthetic_only
 
             # Aug_red version
             aug_red_config = create_aug_red_config(original_config, model_name, dataset_name)
-            target_dir_aug = PROJECT_ROOT / "config" / "experiments" / "massive" / f"{model_name}_aug_red"
+            target_dir_aug = PROJECT_ROOT / "config" / "experiments" / "massive" / f"multilingual_{model_name}_aug_red"
             results.append((aug_red_config, target_dir_aug / f"{config_name}.yaml"))
 
             # Synthetic_only version
             synth_config = create_synthetic_only_config(original_config, model_name, dataset_name)
-            target_dir_synth = PROJECT_ROOT / "config" / "experiments" / "massive" / f"{model_name}_synthetic_only"
+            target_dir_synth = PROJECT_ROOT / "config" / "experiments" / "massive" / f"multilingual_{model_name}_synthetic_only"
             results.append((synth_config, target_dir_synth / f"{config_name}.yaml"))
 
     return results
@@ -138,10 +138,10 @@ def main():
 
     print(f"Found {len(config_files)} multilingual configs")
 
-    # Create target directories if they don't exist
+    # Create target directories if they don't exist (separate multilingual directories)
     for model in ["bert_int", "rrea"]:
         for variant in ["baseline", "aug_red", "synthetic_only"]:
-            target_dir = PROJECT_ROOT / "config" / "experiments" / "massive" / f"{model}_{variant}"
+            target_dir = PROJECT_ROOT / "config" / "experiments" / "massive" / f"multilingual_{model}_{variant}"
             target_dir.mkdir(parents=True, exist_ok=True)
 
     processed = 0
@@ -174,9 +174,9 @@ def main():
     print(f"\nBreakdown:")
     for model in ["bert_int", "rrea"]:
         for variant in ["baseline", "aug_red", "synthetic_only"]:
-            target_dir = PROJECT_ROOT / "config" / "experiments" / "massive" / f"{model}_{variant}"
+            target_dir = PROJECT_ROOT / "config" / "experiments" / "massive" / f"multilingual_{model}_{variant}"
             count = len(list(target_dir.glob("*_en_*.yaml")))
-            print(f"  {model}_{variant}: {count} configs")
+            print(f"  multilingual_{model}_{variant}: {count} configs")
 
 
 if __name__ == "__main__":

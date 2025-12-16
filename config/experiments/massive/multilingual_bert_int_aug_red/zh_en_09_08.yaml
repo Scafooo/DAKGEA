@@ -1,5 +1,5 @@
 experiment:
-  suite: massive_aug_red_bert_int
+  suite: massive_multilingual_aug_red_bert_int
   name: zh_en_09_08
   dataset:
     name: openea/zh_en

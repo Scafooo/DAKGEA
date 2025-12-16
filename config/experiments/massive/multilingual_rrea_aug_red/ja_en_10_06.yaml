@@ -1,5 +1,5 @@
 experiment:
-  suite: massive_aug_red_rrea
+  suite: massive_multilingual_aug_red_rrea
   name: ja_en_10_06
   dataset:
     name: openea/ja_en

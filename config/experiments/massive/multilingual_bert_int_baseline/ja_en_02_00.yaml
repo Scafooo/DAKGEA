@@ -1,5 +1,5 @@
 experiment:
-  suite: massive_baseline_bert_int
+  suite: massive_multilingual_baseline_bert_int
   name: ja_en_02_00
   dataset:
     name: openea/ja_en
