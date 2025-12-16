@@ -17,5 +17,5 @@ experiment:
     eval: true
   model: bert_int
   seed: 11037
-  clear: true  # TEST: should preserve artifact/evaluation/
+  clear: true
   overwrite_existing: true

@@ -5,6 +5,13 @@
 # ============================================================
 set -euo pipefail
 
+# ============================================================
+#  SUITE SELECTION
+#  Modify this line to select a default suite to analyze
+#  Can be overridden by --suite command line argument
+# ============================================================
+DEFAULT_SUITE="${DEFAULT_SUITE:-}"
+
 term_width() { tput cols 2>/dev/null || echo 80; }
 full_line() { printf '%*s\n' "$(term_width)" '' | tr ' ' "$1"; }
 
@@ -31,7 +38,7 @@ DEFAULT_STATS_DIR="${_STAT_PATHS[1]}"
 ENABLE_ADVANCED_PLOTS=true
 ENABLE_ADVANCED_STATS=true
 EXPORT_FORMATS="tsv latex"  # TSV and LaTeX exports by default
-SUITE=""
+SUITE="$DEFAULT_SUITE"
 
 # Parse options
 while [[ $# -gt 0 ]]; do

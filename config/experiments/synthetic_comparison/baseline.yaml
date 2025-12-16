@@ -1,25 +1,18 @@
-# Baseline: Only original (real) aligned pairs
-# No augmentation applied
-
 experiment:
-  name: "baseline_real_only"
-  description: "Training with only original aligned pairs (no augmentation)"
+  name: baseline_real_only
+  description: Training with only original aligned pairs (no augmentation)
   seed: 42
-  dataset: "D_W_15K_V1"
-  reduction_ratio: 0.5  # Use 50% of training data
-
+  dataset: D_W_15K_V1
+  reduction_ratio: 0.5
 dataset:
-  name: "D_W_15K_V1"
-  path: "data/DBP15K/zh_en"
-
+  name: D_W_15K_V1
+  path: data/DBP15K/zh_en
 augmentation:
-  enabled: false  # No augmentation for baseline
-
+  enabled: false
 training:
   epochs: 100
   batch_size: 256
   learning_rate: 0.001
-
 evaluation:
   save_results: true
-  results_dir: "results/synthetic_comparison/baseline"
+  results_dir: results/synthetic_comparison/baseline

@@ -1,22 +1,16 @@
 name: test_granular_save
-
 dataset: D_W_15K_V1
-
 reduction:
   ratio: 0.3
   method: random_entities
-  save_dataset: true    # Save reduced dataset
-  save_model: false     # Don't save reduction model
+  save_dataset: true
+  save_model: false
   eval: false
-
 augmentation:
   method: llm_conceptnet
-  save_dataset: false   # Don't save augmented dataset
-  save_model: true      # Save augmentation model
+  save_dataset: false
+  save_model: true
   eval: false
-
 model: bert_int
-
-clear: true  # Test that clear respects the save flags
-
+clear: true
 overwrite_existing: true

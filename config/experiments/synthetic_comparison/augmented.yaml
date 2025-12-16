@@ -1,41 +1,29 @@
-# Augmented: Original + Synthetic aligned pairs
-# Standard augmentation (current default behavior)
-
 experiment:
-  name: "augmented_real_plus_synthetic"
-  description: "Training with original + synthetic aligned pairs (standard augmentation)"
+  name: augmented_real_plus_synthetic
+  description: Training with original + synthetic aligned pairs (standard augmentation)
   seed: 42
-  dataset: "D_W_15K_V1"
+  dataset: D_W_15K_V1
   reduction_ratio: 0.5
-
 dataset:
-  name: "D_W_15K_V1"
-  path: "data/DBP15K/zh_en"
-
+  name: D_W_15K_V1
+  path: data/DBP15K/zh_en
 augmentation:
   enabled: true
-  method: "plm"
-
-  # Training mode: use original + synthetic
-  training_mode: "augmented"  # ← Default mode (original + synthetic)
-
-  # PLM augmentation parameters
+  method: plm
+  training_mode: augmented
   max_depth: 1
-  ratio: 1.0  # Generate same number as original
-
+  ratio: 1.0
   bart:
     enable_finetuning: true
-    model_name: "facebook/bart-base"
+    model_name: facebook/bart-base
     epochs: 10
     batch_size: 16
     base_alpha: 0.35
     alpha_spread: 0.25
-
 training:
   epochs: 100
   batch_size: 256
   learning_rate: 0.001
-
 evaluation:
   save_results: true
-  results_dir: "results/synthetic_comparison/augmented"
+  results_dir: results/synthetic_comparison/augmented

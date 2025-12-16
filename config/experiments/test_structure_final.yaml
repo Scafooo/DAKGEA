@@ -8,15 +8,15 @@ experiment:
     ratio: 0.1
     writer: bert_int
     save: false
-    eval: false  # Skip baseline for speed
+    eval: false
   augmentation:
     method: plm
     ratio: 0.1
     writer: bert_int
     save: false
     eval: true
-    config: plm_no_finetune  # Use config without BART training
+    config: plm_no_finetune
   model: bert_int
   seed: 11037
-  clear: true  # TEST: should remove artifact/ but keep augmentation/evaluation/
+  clear: true
   overwrite_existing: true

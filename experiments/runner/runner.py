@@ -104,6 +104,17 @@ class ExperimentRunner:
         workspace_root = workspace_root / self.name
         self.base_workspace: Path = workspace_root
         self.metadata_file: Path = self.base_workspace / "metadata.json"
+
+        # EARLY EXIT: Skip initialization if experiment already complete and overwrite not requested
+        if not self.overwrite_existing and self._check_early_completion_before_init():
+            logger.info("✅ Experiment already completed, skipping (set overwrite_existing=true to re-run)")
+            # Set minimal state for early exit
+            self.metadata = {}
+            self.datasets = []
+            self._early_exit = True
+            return
+
+        self._early_exit = False
         self.base_workspace.mkdir(parents=True, exist_ok=True)
 
         self.metadata: Dict[str, Any] = {
@@ -217,7 +228,11 @@ class ExperimentRunner:
 
     def run(self) -> None:
         """Execute the experiment suite over the configured datasets and ratios."""
-        # EARLY EXIT: Check if experiment is already complete before loading anything
+        # EARLY EXIT: Already checked in __init__, just return if flagged
+        if hasattr(self, '_early_exit') and self._early_exit:
+            return
+
+        # EARLY EXIT: Additional runtime check (in case of programmatic usage)
         if self._check_early_completion():
             logger.info("✅ Experiment already completed, skipping execution (set overwrite_existing=true to re-run)")
             return
@@ -778,6 +793,65 @@ class ExperimentRunner:
 
             if not self._is_experiment_complete_early(dataset_workspace, artifact_root):
                 return False
+
+        return True
+
+    def _check_early_completion_before_init(self) -> bool:
+        """
+        Ultra-fast check if experiment is already complete BEFORE initialization.
+        Called in __init__ before creating workspace or loading datasets.
+
+        Returns True if experiment should be skipped (already complete).
+        """
+        # Check if workspace exists at all
+        if not self.base_workspace.exists():
+            return False
+
+        # Check if metadata file exists (basic indicator of previous run)
+        if not self.metadata_file.exists():
+            return False
+
+        # For standard mode with ratios: quick check if ratio directories exist with results
+        if self.ratios:
+            for ratio in self.ratios:
+                ratio_tag = f"ratio_{ratio:.3f}".replace(".", "_")
+                ratio_root = self.base_workspace / ratio_tag
+
+                if not ratio_root.exists():
+                    return False
+
+                # Look for any dataset directory with results
+                has_complete_dataset = False
+                for dataset_dir in ratio_root.iterdir():
+                    if not dataset_dir.is_dir():
+                        continue
+
+                    # Quick check: look for results.json in expected locations
+                    reduction_results = dataset_dir / "reduction" / "results.json"
+                    if self.reduction_eval and not reduction_results.exists():
+                        continue
+
+                    if self.augmentations:
+                        augmentation_results = dataset_dir / "augmentation" / "results.json"
+                        if self.augmentation_eval and not augmentation_results.exists():
+                            continue
+
+                    # At least one complete dataset found
+                    has_complete_dataset = True
+                    break
+
+                if not has_complete_dataset:
+                    return False
+        else:
+            # Direct mode or no ratios: check main workspace
+            reduction_results = self.base_workspace / "reduction" / "results.json"
+            if self.reduction_eval and not reduction_results.exists():
+                return False
+
+            if self.augmentations:
+                augmentation_results = self.base_workspace / "augmentation" / "results.json"
+                if self.augmentation_eval and not augmentation_results.exists():
+                    return False
 
         return True
 

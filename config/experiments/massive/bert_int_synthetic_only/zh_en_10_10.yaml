@@ -1,0 +1,26 @@
+experiment:
+  suite: massive_synthetic_only_bert_int
+  name: zh_en_10_10
+  dataset:
+    name: openea/zh_en
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 1.0
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 1.0
+    training_mode: synthetic_only
+    writer:
+      type: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: false

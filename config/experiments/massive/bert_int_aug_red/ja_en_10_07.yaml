@@ -13,10 +13,9 @@ experiment:
     save_model: false
   augmentation:
     method: plm
-    ratio: 0.7000000000000001
+    ratio: 0.7
     writer:
       type: bert_int
-      augmented_only_train: true
     eval: true
     save_dataset: false
     save_model: false

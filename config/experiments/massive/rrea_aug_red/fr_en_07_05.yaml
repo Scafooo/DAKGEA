@@ -6,7 +6,7 @@ experiment:
     writer: bert_int
   reduction:
     method: random_entities
-    ratio: 0.7000000000000001
+    ratio: 0.7
     writer: bert_int
     eval: true
     save_dataset: false
@@ -16,7 +16,6 @@ experiment:
     ratio: 0.5
     writer:
       type: bert_int
-      augmented_only_train: true
     eval: true
     save_dataset: false
     save_model: false

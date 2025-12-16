@@ -1,133 +1,133 @@
 # DAKGEA Tutorial Notebooks
 
-Questa directory contiene notebook Jupyter interattivi per imparare ad usare DAKGEA.
+This directory contains interactive Jupyter notebooks for learning how to use DAKGEA.
 
-## 📚 Notebooks Disponibili
+## 📚 Available Notebooks
 
 ### 1. Introduction (`01_introduction.ipynb`)
-- Introduzione a DAKGEA
-- Setup e verifica installazione
-- Panoramica del framework
-- Struttura del progetto
+- Introduction to DAKGEA
+- Setup and installation verification
+- Framework overview
+- Project structure
 
-**Tempo stimato**: 5 minuti
+**Estimated time**: 5 minutes
 
 ### 2. Simple Experiment (`02_simple_experiment.ipynb`)
-- Primo esperimento baseline
-- Configurazione YAML
-- Esecuzione e analisi risultati
-- Comprensione delle metriche
+- First baseline experiment
+- YAML configuration
+- Execution and results analysis
+- Understanding metrics
 
-**Tempo stimato**: 10-15 minuti (+ tempo esecuzione)
+**Estimated time**: 10-15 minutes (+ execution time)
 
 ### 3. Data Augmentation (`03_data_augmentation.ipynb`)
-- Aggiungere augmentation con PLM
-- Confronto baseline vs augmented
-- Interpretazione dei miglioramenti
-- Tuning dei parametri
+- Adding PLM augmentation
+- Baseline vs augmented comparison
+- Interpreting improvements
+- Parameter tuning
 
-**Tempo stimato**: 15-20 minuti (+ tempo esecuzione)
+**Estimated time**: 15-20 minutes (+ execution time)
 
 ### 4. Analyze Results (`04_analyze_results.ipynb`) [TODO]
-- Analisi dettagliata dei risultati
-- Generazione grafici
-- Statistiche avanzate
-- Confronto multi-configurazione
+- Detailed results analysis
+- Generating plots
+- Advanced statistics
+- Multi-configuration comparison
 
 ### 5. Advanced Configuration (`05_advanced_configuration.ipynb`) [TODO]
-- Suite di esperimenti
-- Configurazioni massive
-- Esecuzione parallela
+- Experiment suites
+- Massive configurations
+- Parallel execution
 - Best practices
 
-## 🚀 Come Iniziare
+## 🚀 Getting Started
 
-### Prerequisiti
+### Prerequisites
 
-1. **Installare Jupyter**:
+1. **Install Jupyter**:
 ```bash
 pip install jupyter notebook
-# oppure
+# or
 pip install jupyterlab
 ```
 
-2. **Verificare installazione DAKGEA**:
+2. **Verify DAKGEA installation**:
 ```bash
 python -c "from experiments.runner.runner import ExperimentRunner; print('✓ OK')"
 ```
 
-### Avviare i Notebook
+### Starting the Notebooks
 
-#### Opzione A: Jupyter Notebook
+#### Option A: Jupyter Notebook
 ```bash
 cd notebooks
 jupyter notebook
 ```
 
-#### Opzione B: JupyterLab
+#### Option B: JupyterLab
 ```bash
 cd notebooks
 jupyter lab
 ```
 
-#### Opzione C: VSCode
-1. Installa l'estensione "Jupyter" in VSCode
-2. Apri un file `.ipynb`
-3. Seleziona il kernel Python del virtualenv
+#### Option C: VSCode
+1. Install the "Jupyter" extension in VSCode
+2. Open a `.ipynb` file
+3. Select the Python kernel from DAKGEA's virtualenv
 
-### Kernel Python
+### Python Kernel
 
-Assicurati di usare il Python del virtualenv di DAKGEA:
+Make sure to use Python from DAKGEA's virtualenv:
 
 ```bash
-# Attiva il virtualenv
+# Activate virtualenv
 source ../.venv/bin/activate  # Linux/Mac
-# oppure
+# or
 ..\.venv\Scripts\activate     # Windows
 
-# Avvia Jupyter dal virtualenv
+# Start Jupyter from virtualenv
 jupyter notebook
 ```
 
-## 📖 Ordine Consigliato
+## 📖 Recommended Order
 
-Segui i notebook in ordine numerato:
+Follow the notebooks in numerical order:
 
 ```
-01_introduction.ipynb         ← Inizia qui
+01_introduction.ipynb         ← Start here
     ↓
-02_simple_experiment.ipynb    ← Primo esperimento
+02_simple_experiment.ipynb    ← First experiment
     ↓
-03_data_augmentation.ipynb    ← Aggiungi augmentation
+03_data_augmentation.ipynb    ← Add augmentation
     ↓
-04_analyze_results.ipynb      ← Analisi avanzata [TODO]
+04_analyze_results.ipynb      ← Advanced analysis [TODO]
     ↓
-05_advanced_configuration.ipynb  ← Configurazioni massive [TODO]
+05_advanced_configuration.ipynb  ← Massive configurations [TODO]
 ```
 
 ## 💡 Tips
 
-### Esecuzione più Veloce
+### Faster Execution
 
-Per ridurre i tempi di esecuzione durante il tutorial:
+To reduce execution time during tutorials:
 
-1. **Usa dataset piccoli**: `D_W_15K_V1` è una buona scelta
-2. **Riduci ratio**: Usa `reduction.ratio: 0.1` invece di 0.3
-3. **GPU**: Assicurati di avere CUDA disponibile per BERT-INT
+1. **Use small datasets**: `D_W_15K_V1` is a good choice
+2. **Reduce ratio**: Use `reduction.ratio: 0.1` instead of 0.3
+3. **GPU**: Make sure CUDA is available for BERT-INT
 
-### Modificare i Notebook
+### Modifying Notebooks
 
-I notebook sono interattivi - sentiti libero di:
-- Modificare i parametri di configurazione
-- Sperimentare con dataset diversi
-- Aggiungere celle per analisi personalizzate
-- Salvare le tue versioni modificate
+The notebooks are interactive - feel free to:
+- Modify configuration parameters
+- Experiment with different datasets
+- Add cells for custom analysis
+- Save your modified versions
 
-### Problemi Comuni
+### Common Issues
 
 #### "Module not found"
 ```python
-# Aggiungi questa cella all'inizio del notebook
+# Add this cell at the beginning of the notebook
 import sys
 from pathlib import Path
 PROJECT_ROOT = Path.cwd().parent
@@ -136,41 +136,41 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 #### "CUDA out of memory"
 ```yaml
-# Riduci il batch size nel config del modello
-# o usa CPU (più lento)
+# Reduce batch size in model config
+# or use CPU (slower)
 ```
 
-#### Esperimento già esiste
+#### Experiment already exists
 ```yaml
-# Nel config, cambia:
+# In config, change:
 overwrite_existing: true
-# oppure cambia il nome dell'esperimento
+# or change the experiment name
 ```
 
-## 📚 Risorse Aggiuntive
+## 📚 Additional Resources
 
-- **Documentazione**: `../docs/index.md`
+- **Documentation**: `../docs/index.md`
 - **Getting Started Guide**: `../docs/guides/getting-started.md`
 - **Config Examples**: `../config/experiments/`
 - **Scripts**: `../scripts/`
 
-## 🆘 Supporto
+## 🆘 Support
 
-Se hai problemi:
+If you have problems:
 
-1. Verifica i prerequisiti (Python 3.11+, dipendenze installate)
-2. Consulta la documentazione in `../docs/`
-3. Controlla gli esempi in `../config/experiments/`
-4. Apri un issue su GitHub
+1. Verify prerequisites (Python 3.11+, dependencies installed)
+2. Consult documentation in `../docs/`
+3. Check examples in `../config/experiments/`
+4. Open an issue on GitHub
 
-## ✅ Completamento
+## ✅ Completion
 
-Dopo aver completato i notebook, sarai in grado di:
+After completing the notebooks, you will be able to:
 
-- ✓ Configurare ed eseguire esperimenti DAKGEA
-- ✓ Usare data reduction e augmentation
-- ✓ Analizzare e interpretare i risultati
-- ✓ Ottimizzare i parametri per il tuo caso d'uso
-- ✓ Eseguire esperimenti massive in parallelo
+- ✓ Configure and run DAKGEA experiments
+- ✓ Use data reduction and augmentation
+- ✓ Analyze and interpret results
+- ✓ Optimize parameters for your use case
+- ✓ Run massive experiments in parallel
 
-Buon apprendimento! 🚀
+Happy learning! 🚀

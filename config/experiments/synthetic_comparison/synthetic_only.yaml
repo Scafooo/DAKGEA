@@ -1,41 +1,29 @@
-# Synthetic-only: Only augmented (synthetic) aligned pairs
-# Remove all original pairs, train ONLY on generated data
-
 experiment:
-  name: "synthetic_only"
-  description: "Training with ONLY synthetic aligned pairs (no original data)"
+  name: synthetic_only
+  description: Training with ONLY synthetic aligned pairs (no original data)
   seed: 42
-  dataset: "D_W_15K_V1"
-  reduction_ratio: 0.5  # Use 50% for augmentation base
-
+  dataset: D_W_15K_V1
+  reduction_ratio: 0.5
 dataset:
-  name: "D_W_15K_V1"
-  path: "data/DBP15K/zh_en"
-
+  name: D_W_15K_V1
+  path: data/DBP15K/zh_en
 augmentation:
   enabled: true
-  method: "plm"
-
-  # Training mode: use only synthetic pairs
-  training_mode: "synthetic_only"  # ← KEY DIFFERENCE
-
-  # PLM augmentation parameters
+  method: plm
+  training_mode: synthetic_only
   max_depth: 1
-  ratio: 1.0  # Generate same number as original (100% augmentation)
-
+  ratio: 1.0
   bart:
     enable_finetuning: true
-    model_name: "facebook/bart-base"
+    model_name: facebook/bart-base
     epochs: 10
     batch_size: 16
     base_alpha: 0.35
     alpha_spread: 0.25
-
 training:
   epochs: 100
   batch_size: 256
   learning_rate: 0.001
-
 evaluation:
   save_results: true
-  results_dir: "results/synthetic_comparison/synthetic_only"
+  results_dir: results/synthetic_comparison/synthetic_only

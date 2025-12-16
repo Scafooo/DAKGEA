@@ -17,7 +17,6 @@ experiment:
     training_mode: synthetic_only
     writer:
       type: bert_int
-      augmented_only_train: true
     eval: true
     save_dataset: false
     save_model: false

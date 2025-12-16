@@ -5,14 +5,14 @@ experiment:
     writer: openea
   reduction:
     method: random_entities
-    ratio: 0.05  # Small dataset for quick testing
+    ratio: 0.05
     writer: openea
     save: false
     eval: true
   augmentation:
     method: plm
     writer: openea
-    eval: true  # Test RREA on augmented dataset too
+    eval: true
   model: rrea
   seed: 42
   clear: true

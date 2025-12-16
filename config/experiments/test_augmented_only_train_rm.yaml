@@ -7,17 +7,16 @@ experiment:
     method: random_entities
     ratio: 0.3
     writer: bert_int
-    eval: false  # Skip reduction eval for faster test
-    save_dataset: false  # Disable save to avoid cache issues
+    eval: false
+    save_dataset: false
     save_model: false
   augmentation:
     method: plm
     ratio: 0.3
     writer:
       type: bert_int
-      augmented_only_train: true  # Put all augmented entities in training set
     eval: true
-    save_dataset: false  # Disable save to avoid cache issues
+    save_dataset: false
     save_model: false
   model: bert_int
   seed: 11037

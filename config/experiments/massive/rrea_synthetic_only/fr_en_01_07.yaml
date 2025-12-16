@@ -1,0 +1,26 @@
+experiment:
+  suite: massive_synthetic_only_rrea
+  name: fr_en_01_07
+  dataset:
+    name: openea/fr_en
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.1
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 0.7
+    training_mode: synthetic_only
+    writer:
+      type: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: rrea
+  seed: 11037
+  clear: true
+  overwrite_existing: false
