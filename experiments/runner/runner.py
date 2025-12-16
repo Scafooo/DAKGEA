@@ -485,6 +485,52 @@ class ExperimentRunner:
             ratio_meta.setdefault("augmentations", {})
             ratio_meta.setdefault("evaluations", {})
 
+            # EARLY SKIP: Check if all results already exist and meet threshold BEFORE any execution
+            retry_config = self.global_cfg.get("auto_retry_until_improvement", {})
+            retry_enabled = retry_config.get("enabled", False)
+
+            if retry_enabled and self.resume and not self.overwrite_existing:
+                reduction_results = dataset_workspace / "reduction" / "results.json"
+                augmentation_results = dataset_workspace / "augmentation" / "results.json"
+
+                if reduction_results.exists() and augmentation_results.exists():
+                    try:
+                        metric = retry_config.get("metric", "hits@1")
+                        min_improvement = retry_config.get("min_improvement", 0.01)
+
+                        with reduction_results.open("r") as f:
+                            red_res = json.load(f)
+                        with augmentation_results.open("r") as f:
+                            aug_res = json.load(f)
+
+                        baseline_val = None
+                        for m, mr in red_res.items():
+                            if isinstance(mr, dict) and metric in mr:
+                                baseline_val = mr[metric]
+                                break
+
+                        current_val = None
+                        for m, mr in aug_res.items():
+                            if isinstance(mr, dict) and metric in mr:
+                                current_val = mr[metric]
+                                break
+
+                        if baseline_val is not None and current_val is not None:
+                            improvement = current_val - baseline_val
+                            if improvement >= min_improvement:
+                                logger.info("⚡ SKIPPING ENTIRE RATIO (%.2f): Results exist and meet threshold (%.4f >= %.4f)",
+                                          ratio, improvement, min_improvement)
+                                # Register results in metadata
+                                reduction_meta["results"] = str(reduction_results)
+                                for aug_name in self.augmentations:
+                                    augmentation_meta = ratio_meta["augmentations"].setdefault(aug_name, {})
+                                    augmentation_meta["results"] = str(augmentation_results)
+                                    augmentation_meta["skipped"] = True
+                                    augmentation_meta["skipped_reason"] = "complete_skip_on_resume"
+                                continue  # Skip this entire ratio
+                    except (json.JSONDecodeError, OSError, KeyError):
+                        pass  # Continue with normal execution
+
             dataset_reduced = self._execute_reduction_if_needed(
                 ratio,
                 dataset,
@@ -1041,54 +1087,7 @@ class ExperimentRunner:
         reduction_meta = ratio_meta.get("reduction", {})
         reduction_results = Path(dataset_workspace / "reduction" / "results.json")
 
-        # EARLY CHECK: If we're resuming and augmentation results exist AND meet threshold, skip everything
-        for aug_name in self.augmentations:
-            retry_config = self.global_cfg.get("auto_retry_until_improvement", {})
-            retry_enabled = retry_config.get("enabled", False)
-
-            if retry_enabled and self.resume and not self.overwrite_existing:
-                results_path = dataset_workspace / "augmentation" / "results.json"
-                if results_path.exists() and reduction_results.exists():
-                    try:
-                        # Check if improvement threshold is met
-                        metric = retry_config.get("metric", "hits@1")
-                        min_improvement = retry_config.get("min_improvement", 0.01)
-
-                        with reduction_results.open("r") as f:
-                            red_results = json.load(f)
-                        with results_path.open("r") as f:
-                            aug_results = json.load(f)
-
-                        baseline_value = None
-                        for model_name, model_results in red_results.items():
-                            if isinstance(model_results, dict) and metric in model_results:
-                                baseline_value = model_results[metric]
-                                break
-
-                        current_value = None
-                        for model_name, model_results in aug_results.items():
-                            if isinstance(model_results, dict) and metric in model_results:
-                                current_value = model_results[metric]
-                                break
-
-                        if baseline_value is not None and current_value is not None:
-                            improvement = current_value - baseline_value
-                            if improvement >= min_improvement:
-                                logger.info("⏭️  Results exist and meet threshold (improvement: %.4f >= %.4f)", improvement, min_improvement)
-                                # Register paths in metadata
-                                reduction_meta["results"] = str(reduction_results)
-                                augmentation_meta = ratio_meta.setdefault("augmentations", {}).setdefault(aug_name, {})
-                                augmentation_meta["results"] = str(results_path)
-                                augmentation_meta["skipped"] = True
-                                augmentation_meta["skipped_reason"] = "results_meet_threshold"
-                                logger.info("⏭️  Skipping all evaluation stages (using existing results)")
-                                return  # Skip all evaluation for this ratio
-                            else:
-                                logger.info("🔁 Results exist but insufficient (improvement: %.4f < %.4f), will re-evaluate", improvement, min_improvement)
-                    except (json.JSONDecodeError, OSError, KeyError) as e:
-                        logger.warning(f"⚠️  Could not validate existing results: {e}, will re-evaluate")
-
-        # Now proceed with normal evaluation
+        # Proceed with normal evaluation (early skip is handled at ratio level)
         if self.reduction_eval:
             evaluation_stage.execute(
                 VARIANT_BASELINE,
@@ -1285,40 +1284,6 @@ class ExperimentRunner:
             logger.info(f"\n{'='*80}")
             logger.info(f"🔄 ATTEMPT {attempt}/{max_attempts}")
             logger.info(f"{'='*80}")
-
-            # Early exit check: if results already exist and we're resuming, skip this attempt
-            results_path = dataset_workspace / "augmentation" / "results.json"
-            if attempt == 1 and original_resume and results_path.exists():
-                logger.info("⏭️  Results already exist and resume=true, checking if valid...")
-                try:
-                    with results_path.open("r") as f:
-                        existing_results = json.load(f)
-
-                    # Check if we can extract the metric
-                    found_metric = False
-                    for model_name, model_results in existing_results.items():
-                        if isinstance(model_results, dict) and metric in model_results:
-                            existing_value = model_results[metric]
-                            found_metric = True
-                            logger.info(f"✅ Found existing results: {metric}={existing_value:.4f}")
-
-                            # Register results in metadata (skipped case)
-                            augmentation_meta = ratio_meta.setdefault("augmentations", {}).setdefault(aug_name, {})
-                            augmentation_meta["results"] = str(results_path.resolve())
-                            augmentation_meta["skipped"] = True
-                            augmentation_meta["skipped_reason"] = "results_already_exist"
-
-                            # Restore resume flags
-                            reduction_stage.resume = original_resume
-                            augmentation_stage.resume = original_resume
-
-                            logger.info("⏭️  Skipping all retry attempts (using existing results)")
-                            return
-
-                    if not found_metric:
-                        logger.warning(f"⚠️  Metric '{metric}' not found in existing results, will retry")
-                except (json.JSONDecodeError, OSError) as e:
-                    logger.warning(f"⚠️  Could not read existing results: {e}, will retry")
 
             # Step 1: Create NEW reduction for this attempt
             # Skip writing datasets ONLY if we don't need to save them later
