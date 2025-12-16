@@ -518,8 +518,8 @@ class ExperimentRunner:
                         if baseline_val is not None and current_val is not None:
                             improvement = current_val - baseline_val
                             if improvement >= min_improvement:
-                                logger.info("⚡ SKIPPING ENTIRE RATIO (%.2f): Results exist and meet threshold (%.4f >= %.4f)",
-                                          ratio, improvement, min_improvement)
+                                logger.info("⚡ SKIPPING ENTIRE EXPERIMENT: Results exist and meet threshold (%.4f >= %.4f)",
+                                          improvement, min_improvement)
                                 # Register results in metadata
                                 reduction_meta["results"] = str(reduction_results)
                                 for aug_name in self.augmentations:
@@ -527,7 +527,8 @@ class ExperimentRunner:
                                     augmentation_meta["results"] = str(augmentation_results)
                                     augmentation_meta["skipped"] = True
                                     augmentation_meta["skipped_reason"] = "complete_skip_on_resume"
-                                continue  # Skip this entire ratio
+                                progress.step()
+                                return  # Skip entire experiment execution
                     except (json.JSONDecodeError, OSError, KeyError):
                         pass  # Continue with normal execution
 
