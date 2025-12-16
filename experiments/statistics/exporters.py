@@ -366,11 +366,11 @@ def write_dataset_summary_latex(
                 dataset,
                 metric,
                 f"{red_stats['mean']:.4f}" if red_stats else "—",
-                f"$\\pm${red_stats['std']:.4f}" if red_stats else "—",
+                f"±{red_stats['std']:.4f}" if red_stats else "—",
                 f"{aug_stats['mean']:.4f}" if aug_stats else "—",
-                f"$\\pm${aug_stats['std']:.4f}" if aug_stats else "—",
+                f"±{aug_stats['std']:.4f}" if aug_stats else "—",
                 f"+{delta:.4f}" if delta and delta > 0 else f"{delta:.4f}" if delta else "—",
-                f"+{delta_pct:.2f}\\%" if delta_pct and delta_pct > 0 else f"{delta_pct:.2f}\\%" if delta_pct else "—",
+                f"+{delta_pct:.2f}%" if delta_pct and delta_pct > 0 else f"{delta_pct:.2f}%" if delta_pct else "—",
             ]
             rows.append(row)
 
