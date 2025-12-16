@@ -233,7 +233,7 @@ def write_latex_table(
 
         # Data rows
         for row in rows:
-            escaped_row = [escape_latex(cell) for cell in row]
+            escaped_row = [escape_latex(cell).replace("[[PM]]", "$\\pm$") for cell in row]
             f.write(" & ".join(escaped_row) + " \\\\\n")
 
         f.write("\\bottomrule\n")
@@ -299,6 +299,9 @@ def write_latex_table_colored(
             formatted_cells = []
             for col_idx, cell in enumerate(row):
                 cell_str = escape_latex(str(cell))
+
+                # Replace [[PM]] marker with $\pm$ after escaping
+                cell_str = cell_str.replace("[[PM]]", "$\\pm$")
 
                 # Apply coloring to delta columns if cell contains +/- and is numeric
                 if col_idx in highlight_cols and cell_str and cell_str not in ["—", ""]:
