@@ -193,18 +193,50 @@ def parse_args(default_plots_dir: Path, default_results_dir: Path) -> argparse.N
 
 
 def discover_experiments(candidate_paths: Iterable[str], results_root: Path) -> List[Path]:
+    """Discover experiment directories.
+
+    Handles both individual experiment paths and suite directories.
+    If a path is a suite directory (contains only subdirectories, no experiment files),
+    it will scan the subdirectories for experiments.
+    """
+    def is_experiment_dir(path: Path) -> bool:
+        """Check if a directory is an experiment (has metadata.json or stage directories)."""
+        if not path.is_dir():
+            return False
+        has_metadata = (path / METADATA_FILENAME).exists()
+        has_stages = any((path / stage).exists() for stage in STAGES)
+        return has_metadata or has_stages
+
+    def scan_for_experiments(root: Path) -> List[Path]:
+        """Scan a directory for experiment subdirectories."""
+        skip = set(stats_config.skip_directories)
+        return sorted(
+            p.resolve()
+            for p in root.iterdir()
+            if p.is_dir() and p.name not in skip and is_experiment_dir(p)
+        )
+
     if candidate_paths:
-        paths = [Path(p) for p in candidate_paths]
-        return [p.resolve() for p in paths if p.exists()]
+        experiments = []
+        for candidate in candidate_paths:
+            path = Path(candidate)
+            if not path.exists():
+                continue
+
+            if is_experiment_dir(path):
+                # Direct experiment directory
+                experiments.append(path.resolve())
+            elif path.is_dir():
+                # Suite directory - scan for experiments inside
+                experiments.extend(scan_for_experiments(path))
+
+        return experiments
+
+    # No paths provided - scan results_root
     root = results_root
     if not root.exists():
         raise FileNotFoundError("No experiment directories found and no explicit paths provided.")
-    skip = set(stats_config.skip_directories)
-    return sorted(
-        p.resolve()
-        for p in root.iterdir()
-        if p.is_dir() and p.name not in skip
-    )
+    return scan_for_experiments(root)
 
 
 def load_json(path: Path) -> Dict:
