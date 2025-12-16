@@ -184,9 +184,19 @@ class RREAAlignment:
             kg2_offset=kg2_offset,
         )
 
+        # Load best model for final evaluation
+        best_checkpoint_path = self.checkpoint_dir / "rrea_best.pt"
+        if best_checkpoint_path.exists():
+            logger.info(f"[RREA] Loading best model from {best_checkpoint_path}")
+            checkpoint = torch.load(best_checkpoint_path, map_location=self.device)
+            self.model.load_state_dict(checkpoint["model_state_dict"])
+            logger.info(f"[RREA] Best model loaded (epoch {checkpoint['epoch']})")
+        else:
+            logger.warning("[RREA] Best model checkpoint not found, using final model")
+
         # Final evaluation
         logger.info("=" * 80)
-        logger.info("[STEP] Final evaluation on test set...")
+        logger.info("[STEP] Final evaluation on test set with best model...")
         final_results = eval_alignment_batched(
             model=self.model,
             test_pairs=test_pairs,

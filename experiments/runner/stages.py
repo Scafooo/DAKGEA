@@ -554,6 +554,9 @@ class EvaluationStage:
         # Write all results to a single file
         if all_results:
             self._write_results(out_file, all_results)
+
+        # Register results path if file exists (either from skip or new evaluation)
+        if out_file.exists():
             evaluation_paths["results"] = str(out_file.resolve())
 
         # Merge evaluation metadata with existing summary if present

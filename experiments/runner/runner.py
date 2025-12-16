@@ -1238,6 +1238,40 @@ class ExperimentRunner:
             logger.info(f"🔄 ATTEMPT {attempt}/{max_attempts}")
             logger.info(f"{'='*80}")
 
+            # Early exit check: if results already exist and we're resuming, skip this attempt
+            results_path = dataset_workspace / "augmentation" / "results.json"
+            if attempt == 1 and original_resume and results_path.exists():
+                logger.info("⏭️  Results already exist and resume=true, checking if valid...")
+                try:
+                    with results_path.open("r") as f:
+                        existing_results = json.load(f)
+
+                    # Check if we can extract the metric
+                    found_metric = False
+                    for model_name, model_results in existing_results.items():
+                        if isinstance(model_results, dict) and metric in model_results:
+                            existing_value = model_results[metric]
+                            found_metric = True
+                            logger.info(f"✅ Found existing results: {metric}={existing_value:.4f}")
+
+                            # Register results in metadata (skipped case)
+                            augmentation_meta = ratio_meta.setdefault("augmentations", {}).setdefault(aug_name, {})
+                            augmentation_meta["results"] = str(results_path.resolve())
+                            augmentation_meta["skipped"] = True
+                            augmentation_meta["skipped_reason"] = "results_already_exist"
+
+                            # Restore resume flags
+                            reduction_stage.resume = original_resume
+                            augmentation_stage.resume = original_resume
+
+                            logger.info("⏭️  Skipping all retry attempts (using existing results)")
+                            return
+
+                    if not found_metric:
+                        logger.warning(f"⚠️  Metric '{metric}' not found in existing results, will retry")
+                except (json.JSONDecodeError, OSError) as e:
+                    logger.warning(f"⚠️  Could not read existing results: {e}, will retry")
+
             # Step 1: Create NEW reduction for this attempt
             # Skip writing datasets ONLY if we don't need to save them later
             skip_write = not self.reduction_save_dataset and not self.reduction_save_model
