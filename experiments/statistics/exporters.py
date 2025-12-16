@@ -227,7 +227,7 @@ def write_latex_table(
         f.write("\\toprule\n")
 
         # Header
-        escaped_headers = [escape_latex(h) for h in headers]
+        escaped_headers = [escape_latex(h).replace("[[DELTA]]", "$\\Delta$").replace("[[PM]]", "$\\pm$") for h in headers]
         f.write(" & ".join(escaped_headers) + " \\\\\n")
         f.write("\\midrule\n")
 
@@ -290,7 +290,7 @@ def write_latex_table_colored(
         f.write("\\toprule\n")
 
         # Header
-        escaped_headers = [escape_latex(h) for h in headers]
+        escaped_headers = [escape_latex(h).replace("[[DELTA]]", "$\\Delta$").replace("[[PM]]", "$\\pm$") for h in headers]
         f.write(" & ".join(escaped_headers) + " \\\\\n")
         f.write("\\midrule\n")
 
