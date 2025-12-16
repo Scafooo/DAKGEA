@@ -10,7 +10,7 @@
 #  Modify this line to select a different experiment
 #  can be also a directory containing multiple experiments
 # ============================================================
-EXPERIMENT="${EXPERIMENT:-/test_augmented_only_train.yaml}"
+EXPERIMENT="${EXPERIMENT:-/massive/rrea_aug_red/}"
 
 # ---------- Helpers ----------
 term_width() { tput cols 2>/dev/null || echo 80; }

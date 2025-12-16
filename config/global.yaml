@@ -6,7 +6,7 @@ paths:
   log_file: results/logs/log.txt
 
 logging:
-  level: DEBUG
+  level: INFO
 
 # Reproducibility settings
 reproducibility:
