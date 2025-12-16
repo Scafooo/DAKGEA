@@ -236,10 +236,6 @@ class BartInterpolatorPLM:
         self.sentence_chunk_max_tokens = int(gen_cfg.get("sentence_chunk_max_tokens", 80))
         self.sentence_min_length_for_chunking = int(gen_cfg.get("sentence_min_length_for_chunking", 60))
 
-        # Alpha caching for value consistency
-        self.enable_alpha_caching = bool(gen_cfg.get("enable_alpha_caching", True))
-        self._alpha_cache: Dict[Tuple[str, str, str], float] = {}
-
         os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
         # Initialize advanced training modules

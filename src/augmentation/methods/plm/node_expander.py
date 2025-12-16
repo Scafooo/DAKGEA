@@ -68,7 +68,7 @@ class NodeExpander:
         # Value consistency configuration
         self.value_consistency_config = value_consistency_config or {}
         intra_node_cfg = self.value_consistency_config.get("intra_node", {})
-        self.intra_node_consistency_enabled = intra_node_cfg.get("enabled", False)
+        self.intra_node_consistency_enabled = intra_node_cfg.get("enabled", True)  # Changed default to True
         self.consistency_selection = intra_node_cfg.get("selection", "first")
 
         inter_node_cfg = self.value_consistency_config.get("inter_node", {})
@@ -370,54 +370,36 @@ class NodeExpander:
 
                 return ' '.join(reordered) if reordered else output_text
 
+            # Create normalized cache keys for individual values
             src_cache_key = normalize_cache_key(src_val_str)
             tgt_cache_key = normalize_cache_key(tgt_val_str)
 
             if self.intra_node_consistency_enabled and value_cache is not None:
-                # Check if we already generated a variation for these values
-                if src_cache_key in value_cache:
+                # Check if BOTH individual values are already cached
+                src_cached = src_cache_key in value_cache
+                tgt_cached = tgt_cache_key in value_cache
+
+                if src_cached and tgt_cached:
+                    # Both values already cached - reuse them
                     aug_src_val_cached = value_cache[src_cache_key]
-                    # Reorder output to match input order (structural consistency)
-                    aug_src_val = reorder_output_to_match_input(src_val_str, src_cache_key, aug_src_val_cached)
-                    logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s' (reordered from '%s')",
-                               src_val_str[:30], aug_src_val[:30], aug_src_val_cached[:30])
-                else:
-                    aug_src_val = None
-
-                if tgt_cache_key in value_cache:
                     aug_tgt_val_cached = value_cache[tgt_cache_key]
-                    # Reorder output to match input order (structural consistency)
+                    # Reorder outputs to match input order (structural consistency)
+                    aug_src_val = reorder_output_to_match_input(src_val_str, src_cache_key, aug_src_val_cached)
                     aug_tgt_val = reorder_output_to_match_input(tgt_val_str, tgt_cache_key, aug_tgt_val_cached)
-                    logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s' (reordered from '%s')",
-                               tgt_val_str[:30], aug_tgt_val[:30], aug_tgt_val_cached[:30])
+                    logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s' | '%s' → '%s'",
+                               src_val_str[:30], aug_src_val[:30], tgt_val_str[:30], aug_tgt_val[:30])
                 else:
-                    aug_tgt_val = None
-
-                # If both are cached, use them; otherwise generate
-                if aug_src_val is not None and aug_tgt_val is not None:
-                    # Both cached - use them
-                    pass
-                elif aug_src_val is None and aug_tgt_val is None:
-                    # Neither cached - generate new and cache with normalized keys
+                    # At least one value not cached - generate new interpolation
                     aug_src_val, aug_tgt_val = self.bart_interpolator.interpolate_pair(
                         src_val_str, tgt_val_str, predicate=match.src_predicate
                     )
+                    # Cache INDIVIDUAL values (not the pair)
                     value_cache[src_cache_key] = aug_src_val
                     value_cache[tgt_cache_key] = aug_tgt_val
-                else:
-                    # One cached, one not - generate both but prefer consistency
-                    # For "first" strategy: if one exists, generate the other to match context
-                    aug_src_val_new, aug_tgt_val_new = self.bart_interpolator.interpolate_pair(
-                        src_val_str, tgt_val_str, predicate=match.src_predicate
-                    )
-                    if aug_src_val is None:
-                        aug_src_val = aug_src_val_new
-                        value_cache[src_cache_key] = aug_src_val
-                    if aug_tgt_val is None:
-                        aug_tgt_val = aug_tgt_val_new
-                        value_cache[tgt_cache_key] = aug_tgt_val
+                    logger.debug("[VALUE_CONSISTENCY] Cached: '%s' → '%s' | '%s' → '%s'",
+                                src_val_str[:30], aug_src_val[:30], tgt_val_str[:30], aug_tgt_val[:30])
             else:
-                # No consistency - generate normally
+                # No consistency - generate normally without caching
                 aug_src_val, aug_tgt_val = self.bart_interpolator.interpolate_pair(
                     src_val_str, tgt_val_str, predicate=match.src_predicate
                 )
@@ -494,6 +476,38 @@ class NodeExpander:
         """
         import random
 
+        # Define helper functions for cache key normalization and output reordering
+        def normalize_cache_key(text: str) -> str:
+            """Normalize text for cache key by sorting tokens alphabetically."""
+            tokens = text.lower().strip().split()
+            return ' '.join(sorted(tokens))
+
+        def reorder_output_to_match_input(input_text: str, normalized_input: str, output_text: str) -> str:
+            """Reorder output tokens to match the order of input tokens."""
+            input_tokens = input_text.lower().strip().split()
+            normalized_tokens = normalized_input.lower().strip().split()
+            output_tokens = output_text.strip().split()
+
+            # Create mapping: normalized position -> output token
+            token_map = {i: output_tokens[i] for i in range(min(len(output_tokens), len(normalized_tokens)))}
+
+            # Create list of (input_position, output_token) for tokens that match
+            position_token_pairs = []
+
+            for i, input_token in enumerate(input_tokens):
+                # Find this token in normalized
+                for j, norm_token in enumerate(normalized_tokens):
+                    if input_token == norm_token and j in token_map:
+                        # This token has a corresponding output token
+                        position_token_pairs.append((i, token_map[j]))
+                        break
+
+            # Sort by input position and extract tokens
+            position_token_pairs.sort(key=lambda x: x[0])
+            reordered = [token for _, token in position_token_pairs]
+
+            return ' '.join(reordered) if reordered else output_text
+
         # Get matched predicate names
         matched_src = {m.src_predicate for m in matches}
         matched_tgt = {m.tgt_predicate for m in matches}
@@ -534,16 +548,20 @@ class NodeExpander:
             val = str(values[0])
 
             try:
+                # Create normalized cache key for individual value
+                val_normalized = normalize_cache_key(val)
+
                 # Check cache first (VALUE CONSISTENCY)
-                if value_cache is not None and val in value_cache:
-                    aug_val = value_cache[val]
+                if value_cache is not None and val_normalized in value_cache:
+                    aug_val_cached = value_cache[val_normalized]
+                    aug_val = reorder_output_to_match_input(val, val_normalized, aug_val_cached)
                     logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s'", val[:30], aug_val[:30])
                 else:
-                    # Generate new value
+                    # Generate new value (self-interpolation)
                     aug_val, _ = self.bart_interpolator.interpolate_pair(val, val, predicate=pred_name)
-                    # Save to cache
+                    # Save to cache as individual value
                     if value_cache is not None:
-                        value_cache[val] = aug_val
+                        value_cache[val_normalized] = aug_val
 
                 dataset.knowledge_graph_source.add((src_aug, pred_uri, Literal(aug_val)))
                 generated_count += 1
@@ -564,16 +582,20 @@ class NodeExpander:
             val = str(values[0])
 
             try:
+                # Create normalized cache key for individual value
+                val_normalized = normalize_cache_key(val)
+
                 # Check cache first (VALUE CONSISTENCY)
-                if value_cache is not None and val in value_cache:
-                    aug_val = value_cache[val]
+                if value_cache is not None and val_normalized in value_cache:
+                    aug_val_cached = value_cache[val_normalized]
+                    aug_val = reorder_output_to_match_input(val, val_normalized, aug_val_cached)
                     logger.info("[VALUE_CONSISTENCY] ✓ Reusing cached: '%s' → '%s'", val[:30], aug_val[:30])
                 else:
-                    # Generate new value
+                    # Generate new value (self-interpolation)
                     aug_val, _ = self.bart_interpolator.interpolate_pair(val, val, predicate=pred_name)
-                    # Save to cache
+                    # Save to cache as individual value
                     if value_cache is not None:
-                        value_cache[val] = aug_val
+                        value_cache[val_normalized] = aug_val
 
                 dataset.knowledge_graph_target.add((tgt_aug, pred_uri, Literal(aug_val)))
                 generated_count += 1
