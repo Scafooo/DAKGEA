@@ -347,7 +347,7 @@ def write_dataset_summary_latex(
         "Aug Mean",
         "Aug Std",
         "Delta",
-        "$\\Delta$\\%",
+        "[[DELTA]]%",
     ]
 
     rows = []
