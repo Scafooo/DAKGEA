@@ -1,0 +1,25 @@
+experiment:
+  suite: massive_aug_red_bert_int
+  name: fr_en_09_04
+  dataset:
+    name: openea/fr_en
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.9
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 0.4
+    writer:
+      type: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: false

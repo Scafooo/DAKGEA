@@ -1,0 +1,17 @@
+experiment:
+  suite: massive_baseline_rrea
+  name: fr_en_10_00
+  dataset:
+    name: openea/fr_en
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 1.0
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: rrea
+  seed: 11037
+  clear: true
+  overwrite_existing: false
