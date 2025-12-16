@@ -485,52 +485,69 @@ class ExperimentRunner:
             ratio_meta.setdefault("augmentations", {})
             ratio_meta.setdefault("evaluations", {})
 
-            # EARLY SKIP: Check if all results already exist and meet threshold BEFORE any execution
-            retry_config = self.global_cfg.get("auto_retry_until_improvement", {})
-            retry_enabled = retry_config.get("enabled", False)
-
-            if retry_enabled and self.resume and not self.overwrite_existing:
+            # EARLY SKIP: Check if all results already exist BEFORE any execution
+            if self.resume and not self.overwrite_existing:
                 reduction_results = dataset_workspace / "reduction" / "results.json"
                 augmentation_results = dataset_workspace / "augmentation" / "results.json"
 
                 if reduction_results.exists() and augmentation_results.exists():
-                    try:
-                        metric = retry_config.get("metric", "hits@1")
-                        min_improvement = retry_config.get("min_improvement", 0.01)
+                    # Check if retry is enabled - if so, verify improvement threshold
+                    retry_config = self.global_cfg.get("auto_retry_until_improvement", {})
+                    retry_enabled = retry_config.get("enabled", False)
 
-                        with reduction_results.open("r") as f:
-                            red_res = json.load(f)
-                        with augmentation_results.open("r") as f:
-                            aug_res = json.load(f)
+                    should_skip = False
+                    skip_reason = "results_exist_on_resume"
 
-                        baseline_val = None
-                        for m, mr in red_res.items():
-                            if isinstance(mr, dict) and metric in mr:
-                                baseline_val = mr[metric]
-                                break
+                    if retry_enabled:
+                        # Retry enabled: only skip if improvement meets threshold
+                        try:
+                            metric = retry_config.get("metric", "hits@1")
+                            min_improvement = retry_config.get("min_improvement", 0.01)
 
-                        current_val = None
-                        for m, mr in aug_res.items():
-                            if isinstance(mr, dict) and metric in mr:
-                                current_val = mr[metric]
-                                break
+                            with reduction_results.open("r") as f:
+                                red_res = json.load(f)
+                            with augmentation_results.open("r") as f:
+                                aug_res = json.load(f)
 
-                        if baseline_val is not None and current_val is not None:
-                            improvement = current_val - baseline_val
-                            if improvement >= min_improvement:
-                                logger.info("⚡ SKIPPING ENTIRE EXPERIMENT: Results exist and meet threshold (%.4f >= %.4f)",
-                                          improvement, min_improvement)
-                                # Register results in metadata
-                                reduction_meta["results"] = str(reduction_results)
-                                for aug_name in self.augmentations:
-                                    augmentation_meta = ratio_meta["augmentations"].setdefault(aug_name, {})
-                                    augmentation_meta["results"] = str(augmentation_results)
-                                    augmentation_meta["skipped"] = True
-                                    augmentation_meta["skipped_reason"] = "complete_skip_on_resume"
-                                progress.step()
-                                return  # Skip entire experiment execution
-                    except (json.JSONDecodeError, OSError, KeyError):
-                        pass  # Continue with normal execution
+                            baseline_val = None
+                            for m, mr in red_res.items():
+                                if isinstance(mr, dict) and metric in mr:
+                                    baseline_val = mr[metric]
+                                    break
+
+                            current_val = None
+                            for m, mr in aug_res.items():
+                                if isinstance(mr, dict) and metric in mr:
+                                    current_val = mr[metric]
+                                    break
+
+                            if baseline_val is not None and current_val is not None:
+                                improvement = current_val - baseline_val
+                                if improvement >= min_improvement:
+                                    should_skip = True
+                                    skip_reason = "results_meet_threshold"
+                                    logger.info("⚡ SKIPPING: Results exist and meet threshold (%.4f >= %.4f)",
+                                              improvement, min_improvement)
+                                else:
+                                    logger.info("🔁 Results exist but insufficient (%.4f < %.4f), re-running",
+                                              improvement, min_improvement)
+                        except (json.JSONDecodeError, OSError, KeyError) as e:
+                            logger.warning("⚠️  Could not validate results: %s", e)
+                    else:
+                        # Retry NOT enabled: skip if results exist (standard resume behavior)
+                        should_skip = True
+                        logger.info("⚡ SKIPPING: Results already exist (resume=true)")
+
+                    if should_skip:
+                        # Register results in metadata
+                        reduction_meta["results"] = str(reduction_results)
+                        for aug_name in self.augmentations:
+                            augmentation_meta = ratio_meta["augmentations"].setdefault(aug_name, {})
+                            augmentation_meta["results"] = str(augmentation_results)
+                            augmentation_meta["skipped"] = True
+                            augmentation_meta["skipped_reason"] = skip_reason
+                        progress.step()
+                        return  # Skip entire experiment execution
 
             dataset_reduced = self._execute_reduction_if_needed(
                 ratio,
