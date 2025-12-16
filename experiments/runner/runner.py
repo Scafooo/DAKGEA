@@ -1041,6 +1041,54 @@ class ExperimentRunner:
         reduction_meta = ratio_meta.get("reduction", {})
         reduction_results = Path(dataset_workspace / "reduction" / "results.json")
 
+        # EARLY CHECK: If we're resuming and augmentation results exist AND meet threshold, skip everything
+        for aug_name in self.augmentations:
+            retry_config = self.global_cfg.get("auto_retry_until_improvement", {})
+            retry_enabled = retry_config.get("enabled", False)
+
+            if retry_enabled and self.resume and not self.overwrite_existing:
+                results_path = dataset_workspace / "augmentation" / "results.json"
+                if results_path.exists() and reduction_results.exists():
+                    try:
+                        # Check if improvement threshold is met
+                        metric = retry_config.get("metric", "hits@1")
+                        min_improvement = retry_config.get("min_improvement", 0.01)
+
+                        with reduction_results.open("r") as f:
+                            red_results = json.load(f)
+                        with results_path.open("r") as f:
+                            aug_results = json.load(f)
+
+                        baseline_value = None
+                        for model_name, model_results in red_results.items():
+                            if isinstance(model_results, dict) and metric in model_results:
+                                baseline_value = model_results[metric]
+                                break
+
+                        current_value = None
+                        for model_name, model_results in aug_results.items():
+                            if isinstance(model_results, dict) and metric in model_results:
+                                current_value = model_results[metric]
+                                break
+
+                        if baseline_value is not None and current_value is not None:
+                            improvement = current_value - baseline_value
+                            if improvement >= min_improvement:
+                                logger.info("⏭️  Results exist and meet threshold (improvement: %.4f >= %.4f)", improvement, min_improvement)
+                                # Register paths in metadata
+                                reduction_meta["results"] = str(reduction_results)
+                                augmentation_meta = ratio_meta.setdefault("augmentations", {}).setdefault(aug_name, {})
+                                augmentation_meta["results"] = str(results_path)
+                                augmentation_meta["skipped"] = True
+                                augmentation_meta["skipped_reason"] = "results_meet_threshold"
+                                logger.info("⏭️  Skipping all evaluation stages (using existing results)")
+                                return  # Skip all evaluation for this ratio
+                            else:
+                                logger.info("🔁 Results exist but insufficient (improvement: %.4f < %.4f), will re-evaluate", improvement, min_improvement)
+                    except (json.JSONDecodeError, OSError, KeyError) as e:
+                        logger.warning(f"⚠️  Could not validate existing results: {e}, will re-evaluate")
+
+        # Now proceed with normal evaluation
         if self.reduction_eval:
             evaluation_stage.execute(
                 VARIANT_BASELINE,
