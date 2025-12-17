@@ -346,8 +346,10 @@ class AugmentationStage(_WriterStage):
                 plan.writer.write(dataset_augmented, str(plan_root))
                 logger.info("📝 [%s] Saved augmented dataset → %s", plan.name, plan_root)
                 augmentation_paths[plan.name] = str(plan_root.resolve())
+                lineage["dataset_workspace"] = str(plan_root.resolve())
             elif plan_root.exists():
                 augmentation_paths[plan.name] = str(plan_root.resolve())
+                lineage["dataset_workspace"] = str(plan_root.resolve())
 
         # Get the writer name (single writer per stage)
         writer_name = None
@@ -527,7 +529,7 @@ class EvaluationStage:
             lineage["variant"] = variant_key
 
             # Copy essential paths from lineage_cfg that models might need
-            for key in ["evaluation_root", "ratio_root", "raw_source"]:
+            for key in ["evaluation_root", "ratio_root", "raw_source", "dataset_workspace"]:
                 if key in lineage_cfg:
                     lineage[key] = lineage_cfg[key]
 

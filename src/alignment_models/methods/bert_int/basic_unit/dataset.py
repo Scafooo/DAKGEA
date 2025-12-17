@@ -599,6 +599,10 @@ def _get_preferred_attributes(path: Path, dataset_label: str) -> Dict[str, str]:
             }
         else:
             priority = {"prop:title": 0}
+    elif "icew_wiki" in dataset_label_lower or "icew_yago" in dataset_label_lower:
+        priority = {
+            "has_name": 0,
+        }
 
     attributes: Dict[str, Tuple[str, str]] = {}
     if path.exists():
