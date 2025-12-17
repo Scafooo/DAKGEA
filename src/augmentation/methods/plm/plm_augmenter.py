@@ -693,9 +693,9 @@ class PLMAugmenter(AugmentationMethod):
             direct_enqueued.add(neighbor)
 
             self.logger.verbose("[PLM][Queue] Direct set neighbor enqueued")
-            self.logger.info("    • current → %s", current_node)
-            self.logger.info("    • neighbor → %s", neighbor)
-            self.logger.info("    • depth → %d", next_depth)
+            self.logger.debug("    • current → %s", current_node)
+            self.logger.debug("    • neighbor → %s", neighbor)
+            self.logger.debug("    • depth → %d", next_depth)
 
     def _create_set_to_set_relations(
         self,
@@ -1108,9 +1108,9 @@ class PLMAugmenter(AugmentationMethod):
             bridged_enqueued.add(bridged_node)
 
             self.logger.verbose("[PLM][Queue] Bridged set node (new seed, depth=0)")
-            self.logger.info("    • from set node → %s", current_node)
-            self.logger.info("    • via non-set → %s", non_set_node)
-            self.logger.info("    • to set node → %s (depth restarted)", bridged_node)
+            self.logger.debug("    • from set node → %s", current_node)
+            self.logger.debug("    • via non-set → %s", non_set_node)
+            self.logger.debug("    • to set node → %s (depth restarted)", bridged_node)
 
     # ------------------------------------------------------------------
     # Budget Calculation
