@@ -1295,8 +1295,10 @@ class ExperimentRunner:
 
         # Save original resume flag and disable caching during retry
         original_resume = reduction_stage.resume
+        original_evaluation_resume = evaluation_stage.resume
         reduction_stage.resume = False
         augmentation_stage.resume = False
+        evaluation_stage.resume = False  # CRITICAL: Force re-training on each attempt
 
         for attempt in range(1, max_attempts + 1):
             logger.info(f"\n{'='*80}")
@@ -1436,6 +1438,7 @@ class ExperimentRunner:
                         # Restore resume flags
                         reduction_stage.resume = original_resume
                         augmentation_stage.resume = original_resume
+                        evaluation_stage.resume = original_evaluation_resume
 
                         augmentation_meta["results"] = str(persisted)
                         augmentation_meta["retry_attempts"] = attempt
@@ -1456,6 +1459,7 @@ class ExperimentRunner:
         # Restore resume flags
         reduction_stage.resume = original_resume
         augmentation_stage.resume = original_resume
+        evaluation_stage.resume = original_evaluation_resume
 
         # Max attempts reached without sufficient improvement
         logger.warning(f"⚠️  Max attempts ({max_attempts}) reached without sufficient improvement")
