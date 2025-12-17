@@ -71,7 +71,7 @@ class OpeneaKnowledgeGraphReader(KnowledgeGraphReader):
         for label, _, summary in summaries[1:]:
             if summary != base_summary:
                 logger.warning(
-                    "HybEA KG '%s' (kg=%s): mismatch between variants. baseline=%s, %s=%s",
+                    "OpenEA KG '%s' (kg=%s): mismatch between variants. baseline=%s, %s=%s",
                     dataset_name,
                     kg_number,
                     base_summary,
@@ -83,7 +83,7 @@ class OpeneaKnowledgeGraphReader(KnowledgeGraphReader):
             summaries, key=lambda item: item[2]["triples"]
         )
         logger.info(
-            "HybEA KG '%s' (kg=%s): selected variant '%s' with %s",
+            "OpenEA KG '%s' (kg=%s): selected variant '%s' with %s",
             dataset_name,
             kg_number,
             chosen_label,
