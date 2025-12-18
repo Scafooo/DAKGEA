@@ -21,6 +21,7 @@ experiment:
     eval: true
     save_dataset: false
     save_model: false
+    eval_on_reduction: true
   model: bert_int
   seed: 11037
   clear: true

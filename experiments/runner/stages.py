@@ -237,9 +237,11 @@ class ReductionStage(_WriterStage):
                 logger.info("📝 [%s] Saved reduced dataset → %s", plan.name, plan_root)
                 reduction_paths[plan.name] = str(plan_root.resolve())
                 lineage["dataset_workspace"] = str(plan_root.resolve())
+                lineage["dataset_workspace_reduction"] = str(plan_root.resolve())  # Save reduction path
             elif plan_root.exists():
                 reduction_paths[plan.name] = str(plan_root.resolve())
                 lineage["dataset_workspace"] = str(plan_root.resolve())
+                lineage["dataset_workspace_reduction"] = str(plan_root.resolve())  # Save reduction path
 
         # Get the writer name (single writer per stage)
         writer_name = None
@@ -529,9 +531,19 @@ class EvaluationStage:
             lineage["variant"] = variant_key
 
             # Copy essential paths from lineage_cfg that models might need
-            for key in ["evaluation_root", "ratio_root", "raw_source", "dataset_workspace"]:
+            for key in ["evaluation_root", "ratio_root", "raw_source", "dataset_workspace", "dataset_workspace_reduction"]:
                 if key in lineage_cfg:
                     lineage[key] = lineage_cfg[key]
+
+            # If eval_on_reduction flag is set, use reduction dataset for evaluation
+            augmentation_cfg = stage_cfg.get("experiment", {}).get("augmentation", {})
+            if augmentation_cfg.get("eval_on_reduction", False):
+                if "dataset_workspace_reduction" in lineage_cfg:
+                    lineage["dataset_workspace"] = lineage_cfg["dataset_workspace_reduction"]
+                    logger.info(
+                        "[EVALUATION] eval_on_reduction=true → Using reduction dataset for evaluation: %s",
+                        lineage["dataset_workspace"]
+                    )
 
             # Validate datasets before evaluation
             if dataset_reduced is None:
