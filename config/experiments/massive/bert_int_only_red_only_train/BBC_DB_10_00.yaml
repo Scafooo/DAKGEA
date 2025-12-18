@@ -1,0 +1,24 @@
+experiment:
+  name: BBC_DB_10_00
+  dataset:
+    name: openea/BBC_DB
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 1.0
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: stub
+    writer:
+      type: bert_int
+      augmented_only_train: true
+    eval: false
+    save_dataset: false
+    save_model: false
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: false

@@ -1,0 +1,27 @@
+experiment:
+  suite: massive_multilingual_synthetic_only_rrea_only_train
+  name: zh_en_08_04
+  dataset:
+    name: openea/zh_en
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.8
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 0.4
+    training_mode: synthetic_only
+    writer:
+      type: bert_int
+      augmented_only_train: true
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: rrea
+  seed: 11037
+  clear: true
+  overwrite_existing: false
