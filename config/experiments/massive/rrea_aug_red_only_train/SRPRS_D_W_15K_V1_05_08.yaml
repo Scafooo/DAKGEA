@@ -1,0 +1,26 @@
+experiment:
+  suite: massive_aug_red_rrea_only_train
+  name: SRPRS_D_W_15K_V1_05_08
+  dataset:
+    name: openea/SRPRS_D_W_15K_V1
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.5
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 0.8
+    writer:
+      type: bert_int
+      augmented_only_train: true
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: rrea
+  seed: 11037
+  clear: true
+  overwrite_existing: false

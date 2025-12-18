@@ -1,0 +1,26 @@
+experiment:
+  suite: massive_multilingual_aug_red_rrea_only_train
+  name: ja_en_01_07
+  dataset:
+    name: openea/ja_en
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.1
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 0.7
+    writer:
+      type: bert_int
+      augmented_only_train: true
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: rrea
+  seed: 11037
+  clear: true
+  overwrite_existing: false
