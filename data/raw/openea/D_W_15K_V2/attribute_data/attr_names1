@@ -37,7 +37,7 @@ http://dbpedia.org/ontology/budget 	 budget
 http://dbpedia.org/ontology/ethnicGroupsInYear 	 ethnic groups in year
 http://dbpedia.org/ontology/meshId 	 mesh id
 http://dbpedia.org/ontology/populationMetro 	 population metro
-http://xmlns.com/foaf/0.1/nick 	 http xmlns com foaf nick
+http://xmlns.com/foaf/0.1/nick 	 nickname
 http://dbpedia.org/ontology/populationTotal 	 population total
 http://dbpedia.org/ontology/trackNumber 	 track number
 http://dbpedia.org/ontology/serviceStartYear 	 service start year
@@ -57,7 +57,7 @@ http://dbpedia.org/ontology/shoots 	 shoots
 http://dbpedia.org/ontology/height 	 height
 http://dbpedia.org/ontology/salary 	 salary
 http://dbpedia.org/ontology/lccnId 	 lccn id
-http://xmlns.com/foaf/0.1/givenName 	 http xmlns com foaf given name
+http://xmlns.com/foaf/0.1/givenName 	 given name
 http://dbpedia.org/ontology/numberOfEmployees 	 number of employees
 http://dbpedia.org/ontology/fate 	 fate
 http://dbpedia.org/ontology/office 	 office
@@ -169,7 +169,7 @@ http://dbpedia.org/ontology/areaLand 	 area land
 http://dbpedia.org/ontology/gridReference 	 grid reference
 http://dbpedia.org/ontology/distanceToEdinburgh 	 distance to edinburgh
 http://dbpedia.org/ontology/numberOfStudents 	 number of students
-http://xmlns.com/foaf/0.1/name 	 http xmlns com foaf name
+http://xmlns.com/foaf/0.1/name 	 name
 http://dbpedia.org/ontology/numberOfWineries 	 number of wineries
 http://dbpedia.org/ontology/weight 	 weight
 http://dbpedia.org/ontology/colourName 	 colour name

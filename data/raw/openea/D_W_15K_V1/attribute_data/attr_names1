@@ -1,7 +1,7 @@
 http://dbpedia.org/ontology/iso6391Code 	 iso code
 http://dbpedia.org/ontology/acquirementDate 	 acquirement date
 http://dbpedia.org/ontology/numberOfGraduateStudents 	 number of graduate students
-http://xmlns.com/foaf/0.1/givenName 	 http xmlns com foaf given name
+http://xmlns.com/foaf/0.1/givenName 	 given name
 http://dbpedia.org/ontology/serviceStartYear 	 service start year
 http://dbpedia.org/ontology/motto 	 motto
 http://dbpedia.org/ontology/numberOfDoctoralStudents 	 number of doctoral students
@@ -79,7 +79,7 @@ http://dbpedia.org/ontology/teamSize 	 team size
 http://dbpedia.org/ontology/managementElevation 	 management elevation
 http://dbpedia.org/ontology/publiclyAccessible 	 publicly accessible
 http://dbpedia.org/ontology/modelStartYear 	 model start year
-http://xmlns.com/foaf/0.1/nick 	 http xmlns com foaf nick
+http://xmlns.com/foaf/0.1/nick 	 nickname
 http://dbpedia.org/ontology/lowest 	 lowest
 http://dbpedia.org/ontology/publicationDate 	 publication date
 http://dbpedia.org/ontology/trackNumber 	 track number
@@ -216,7 +216,7 @@ http://dbpedia.org/ontology/epoch 	 epoch
 http://dbpedia.org/ontology/formerCallsign 	 former callsign
 http://dbpedia.org/ontology/rgbCoordinateRed 	 rgb coordinate red
 http://dbpedia.org/ontology/shipBeam 	 ship beam
-http://xmlns.com/foaf/0.1/name 	 http xmlns com foaf name
+http://xmlns.com/foaf/0.1/name 	 name
 http://dbpedia.org/ontology/shoreLength 	 shore length
 http://dbpedia.org/ontology/otherServingLines 	 other serving lines
 http://dbpedia.org/ontology/collection 	 collection
