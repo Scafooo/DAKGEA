@@ -353,8 +353,8 @@ class PredicateAlignmentCache:
                     seen_entities.add(subject)
                     entity_count += 1
 
-                # Extract local name
-                local_name = _clean_pred(str(predicate))
+                # Extract local name (pass graph to resolve attr_to_name for semantic names)
+                local_name = _clean_pred(str(predicate), graph)
 
                 # Initialize if needed
                 if local_name not in predicate_samples:

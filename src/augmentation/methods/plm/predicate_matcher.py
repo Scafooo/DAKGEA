@@ -127,6 +127,59 @@ class PredicateMatcher:
         except Exception as e:
             logger.warning(f"[PredicateMatcher] Failed to save cache: {e}")
 
+    # Wikidata Property ID to semantic name mapping
+    # Used to resolve opaque property IDs like P569 to "date of birth"
+    WIKIDATA_PROPERTY_LABELS = {
+        # Core properties
+        "P18": "image", "P21": "sex or gender", "P27": "country of citizenship",
+        "P31": "instance of", "P39": "position held", "P50": "author",
+        "P57": "director", "P86": "composer", "P106": "occupation",
+        "P131": "located in administrative entity", "P136": "genre",
+        "P154": "logo image", "P161": "cast member", "P162": "producer",
+        "P170": "creator", "P175": "performer", "P176": "manufacturer",
+        "P178": "developer", "P179": "part of series", "P195": "collection",
+        # Identifiers
+        "P213": "ISNI identifier", "P214": "VIAF identifier", "P227": "GND identifier",
+        "P244": "Library of Congress identifier", "P268": "BnF identifier",
+        "P269": "IdRef identifier", "P345": "IMDb identifier", "P373": "Commons category",
+        "P402": "OpenStreetMap relation", "P646": "Freebase identifier",
+        # Dates
+        "P569": "date of birth", "P570": "date of death", "P571": "inception date",
+        "P574": "first flight", "P575": "discovery date", "P576": "dissolved date",
+        "P577": "publication date", "P580": "start time", "P582": "end time",
+        "P585": "point in time", "P619": "launch date", "P620": "landing date",
+        "P621": "first broadcast", "P622": "last broadcast",
+        # Numeric and measurements
+        "P1113": "number of episodes", "P1120": "number of deaths",
+        "P1128": "number of employees", "P1215": "apparent magnitude",
+        "P1339": "number of injured", "P1350": "number of matches",
+        "P1352": "number of wins", "P1353": "number of losses",
+        "P1410": "number of households", "P1436": "collection size",
+        "P2043": "length", "P2044": "elevation", "P2046": "area",
+        "P2047": "duration", "P2048": "height", "P2049": "width",
+        "P2067": "mass", "P2076": "perimeter", "P2077": "volume",
+        "P2142": "box office", "P2218": "net worth", "P2250": "life expectancy",
+        "P2437": "number of seasons", "P2769": "budget",
+        # Text and name properties
+        "P1448": "official name", "P1449": "nickname", "P1476": "title",
+        "P1477": "birth name", "P1549": "demonym", "P1559": "name in native language",
+        "P1635": "religious name", "P1638": "codename", "P1705": "native label",
+        "P1813": "short name", "P1843": "taxon common name",
+        # Geographic
+        "P281": "postal code", "P395": "licence plate code", "P421": "timezone",
+        "P473": "local dialing code", "P625": "coordinate location", "P742": "pseudonym",
+        "P856": "official website",
+        # External IDs (common ones)
+        "P1258": "Rotten Tomatoes identifier", "P1265": "AlloCine film identifier",
+        "P1266": "AlloCine person identifier", "P1562": "AllMusic artist identifier",
+        "P1566": "GeoNames identifier", "P1874": "Netflix identifier",
+        "P2002": "Twitter username", "P2003": "Instagram username",
+        "P2013": "Facebook identifier", "P2604": "Kinopoisk identifier",
+        "P2605": "CSFD identifier",
+        # schema.org (not Wikidata but used in datasets)
+        "description": "description", "name": "name", "alternateName": "alternate name",
+    }
+
     @staticmethod
     def _expand_predicate_name(pred_name: str) -> str:
         """
@@ -137,6 +190,7 @@ class PredicateMatcher:
             "date_of_birth" → "date of birth"
             "dbo:Person/name" → "person name"
             "foaf:knows" → "knows"
+            "P569" → "date of birth"  (Wikidata Property ID resolution)
 
         Args:
             pred_name: Predicate local name
@@ -149,6 +203,13 @@ class PredicateMatcher:
             pred_name = pred_name.split(":")[-1]
         if "/" in pred_name:
             pred_name = pred_name.split("/")[-1]
+
+        # Check if this is a Wikidata Property ID (P followed by digits)
+        if re.match(r'^P\d+$', pred_name):
+            # Resolve to semantic name if known
+            if pred_name in PredicateMatcher.WIKIDATA_PROPERTY_LABELS:
+                pred_name = PredicateMatcher.WIKIDATA_PROPERTY_LABELS[pred_name]
+            # else: keep as P569 etc. (will have low similarity, which is correct)
 
         # Convert camelCase to spaces
         # birthDate → birth Date
