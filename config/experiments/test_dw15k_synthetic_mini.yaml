@@ -1,0 +1,22 @@
+experiment:
+  name: test_dw15k_synthetic_mini
+  dataset:
+    name: openea/D_W_15K_V2
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.3
+    writer: bert_int
+    save: false
+    eval: false
+  augmentation:
+    method: plm
+    ratio: 0.3
+    max_pairs: 20
+    writer: bert_int
+    save: false
+    eval: true
+  model: bert_int
+  seed: 42
+  clear: true
+  overwrite_existing: true

@@ -1,0 +1,28 @@
+experiment:
+  suite: test_icew_aug
+  name: ICEW_WIKI_TEST
+  dataset:
+    name: openea/ICEW_WIKI
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.05
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 0.1
+    writer:
+      type: bert_int
+    bart:
+      epochs: 1
+      max_train_samples: 100
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: bert_int
+  seed: 42
+  clear: true
+  overwrite_existing: true

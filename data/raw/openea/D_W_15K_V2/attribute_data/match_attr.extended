@@ -1,0 +1,37 @@
+# Extended attribute matches for D_W_15K_V2
+# Format: attr1 [,attr1.2,...] <TAB> attr2 [,attr2.2,...]
+# Generated with Wikidata property ID resolution
+
+# HIGH CONFIDENCE MATCHES (existing + extended)
+http://dbpedia.org/ontology/activeYearsEndYear	http://www.wikidata.org/entity/P582
+http://dbpedia.org/ontology/activeYearsStartYear	http://www.wikidata.org/entity/P580
+http://dbpedia.org/ontology/birthYear	http://www.wikidata.org/entity/P569
+http://dbpedia.org/ontology/deathYear	http://www.wikidata.org/entity/P570
+http://dbpedia.org/ontology/foundingYear	http://www.wikidata.org/entity/P571
+http://dbpedia.org/ontology/gross	http://www.wikidata.org/entity/P2142
+http://dbpedia.org/ontology/numberOfEpisodes	http://www.wikidata.org/entity/P1113
+http://dbpedia.org/ontology/numberOfSeasons	http://www.wikidata.org/entity/P2437
+http://dbpedia.org/ontology/runtime	http://www.wikidata.org/entity/P2047
+http://dbpedia.org/ontology/weight	http://www.wikidata.org/entity/P2067
+http://purl.org/dc/elements/1.1/description	http://schema.org/description
+http://xmlns.com/foaf/0.1/givenName	http://www.wikidata.org/entity/P1477
+http://xmlns.com/foaf/0.1/name	http://www.wikidata.org/entity/P1476
+
+# Original match_attr entries
+http://dbpedia.org/ontology/alias	http://www.wikidata.org/entity/P1449,http://www.wikidata.org/entity/P742
+http://dbpedia.org/ontology/area	http://www.wikidata.org/entity/P2046
+http://dbpedia.org/ontology/birthDate	http://www.wikidata.org/entity/P569
+http://dbpedia.org/ontology/birthName	http://www.wikidata.org/entity/P1477
+http://dbpedia.org/ontology/budget	http://www.wikidata.org/entity/P2769
+http://dbpedia.org/ontology/deathDate	http://www.wikidata.org/entity/P570
+http://dbpedia.org/ontology/demonym	http://www.wikidata.org/entity/P1549
+http://dbpedia.org/ontology/height	http://www.wikidata.org/entity/P2048
+http://dbpedia.org/ontology/imdbId	http://www.wikidata.org/entity/P345
+http://dbpedia.org/ontology/length	http://www.wikidata.org/entity/P2043
+http://dbpedia.org/ontology/numberOfEpisodes	http://www.wikidata.org/entity/P1113
+http://dbpedia.org/ontology/numberOfSeasons	http://www.wikidata.org/entity/P2437
+http://dbpedia.org/ontology/postalCode	http://www.wikidata.org/entity/P281
+http://dbpedia.org/ontology/pseudonym	http://www.wikidata.org/entity/P1449,http://www.wikidata.org/entity/P742
+http://dbpedia.org/ontology/publicationDate	http://www.wikidata.org/entity/P577
+http://dbpedia.org/ontology/releaseDate	http://www.wikidata.org/entity/P577
+http://dbpedia.org/ontology/title	http://www.wikidata.org/entity/P1476
