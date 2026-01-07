@@ -133,8 +133,26 @@ CMD_ARGS+=("$@")
 
 python "$PROJECT_ROOT/experiments/statistics/analyze_results.py" "${CMD_ARGS[@]}"
 
+# ============================================================
+#  TIMING ANALYSIS
+#  Compute execution times for reduction & augmentation stages
+# ============================================================
+echo ""
+full_line '-'
+printf "%*s\n" $((($(term_width) + 24) / 2)) "⏱️  Timing Analysis"
+full_line '-'
+
+TIMING_ARGS=(
+    ${TARGET_PATH:+ "$TARGET_PATH"}
+    --all-exports "${DEFAULT_STATS_DIR}/timing"
+)
+
+echo "📊 Computing execution times..."
+python "$PROJECT_ROOT/experiments/statistics/timing_analysis.py" "${TIMING_ARGS[@]}"
+
 echo ""
 full_line '='
 echo "✅ Statistics analysis completed!"
 echo "📊 Output directory: ${DEFAULT_STATS_DIR}"
+echo "⏱️  Timing reports  : ${DEFAULT_STATS_DIR}/timing/"
 full_line '='
