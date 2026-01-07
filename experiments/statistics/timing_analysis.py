@@ -442,6 +442,7 @@ def export_latex_summary_table(
     config = get_statistics_config()
 
     lines = []
+    lines.append(r"% Requires: \usepackage{xcolor,colortbl}")
     lines.append(r"\begin{table}[t]")
     lines.append(r"\centering")
     lines.append(f"\\caption{{{caption}}}")
@@ -456,8 +457,10 @@ def export_latex_summary_table(
     for stage in config.stages:
         if stage in summary.get("stages", {}):
             stats = summary["stages"][stage]
+            # Add green background if std is 0 (perfect stability)
+            row_color = r"\rowcolor{green!15} " if stats['std_seconds'] < 0.01 else ""
             lines.append(
-                f"{stage.capitalize()} & "
+                f"{row_color}{stage.capitalize()} & "
                 f"{stats['mean_formatted']} & "
                 f"{_format_duration(stats['std_seconds'])} & "
                 f"{_format_duration(stats['min_seconds'])} & "
@@ -469,8 +472,10 @@ def export_latex_summary_table(
     # Total row
     if summary.get("total"):
         total = summary["total"]
+        # Add green background if std is 0 (perfect stability)
+        row_color = r"\rowcolor{green!15} " if total['std_seconds'] < 0.01 else ""
         lines.append(
-            f"\\textbf{{Total}} & "
+            f"{row_color}\\textbf{{Total}} & "
             f"\\textbf{{{total['mean_formatted']}}} & "
             f"{_format_duration(total['std_seconds'])} & "
             f"{_format_duration(total['min_seconds'])} & "

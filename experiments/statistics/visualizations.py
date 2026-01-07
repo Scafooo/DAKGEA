@@ -661,6 +661,10 @@ def plot_interactive_surface_3d(
     if not reduction_ratios or not augmentation_ratios:
         return
 
+    # Need at least 2x2 grid for meaningful 3D surface plot
+    if len(reduction_ratios) < 2 or len(augmentation_ratios) < 2:
+        return
+
     # Create meshgrid
     X, Y = np.meshgrid(reduction_ratios, augmentation_ratios)
     Z = np.zeros_like(X)
