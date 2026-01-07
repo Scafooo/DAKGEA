@@ -202,23 +202,17 @@ def generate_latex_table(dataset: str, ratios_data: Dict, output_file: Path) -> 
                 # Determine if augmented is better than baseline
                 # Only apply color if both baseline and augmented are available
                 if baseline_mean is not None:
-                    # Calculate relative difference
-                    if baseline_mean != 0:
-                        rel_diff = abs(plm_mean - baseline_mean) / abs(baseline_mean)
+                    # Values are equal: green
+                    # Improvement: green
+                    # Degradation: red
+                    if plm_mean == baseline_mean:
+                        color_cmd = r"\cellcolor{green!15}"  # Green for equal values
                     else:
-                        rel_diff = abs(plm_mean - baseline_mean)
-
-                    # If values are essentially equal (< 0.5% relative difference), use green (stability)
-                    if rel_diff < 0.005:
-                        color_cmd = r"\cellcolor{green!15}"  # Green for stability/consistency
-                    else:
-                        # Values differ significantly, check for improvement/degradation
                         if higher_is_better:
                             is_improvement = plm_mean > baseline_mean
                         else:  # For MR, lower is better
                             is_improvement = plm_mean < baseline_mean
 
-                        # Choose color: green for improvement, red for degradation
                         if is_improvement:
                             color_cmd = r"\cellcolor{green!15}"  # Green for improvement
                         else:

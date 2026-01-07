@@ -684,17 +684,12 @@ def write_comparison_tables_latex(
                     # Determine color
                     color_cmd = ""
                     if baseline_mean is not None:
-                        # Calculate relative difference
-                        if baseline_mean != 0:
-                            rel_diff = abs(augmented_mean - baseline_mean) / abs(baseline_mean)
-                        else:
-                            rel_diff = abs(augmented_mean - baseline_mean)
-
-                        # If values are essentially equal (< 0.5% relative difference), use green (stability)
-                        if rel_diff < 0.005:
+                        # Values are equal: green
+                        # Improvement: green
+                        # Degradation: red
+                        if augmented_mean == baseline_mean:
                             color_cmd = r"\cellcolor{green!15}"
                         else:
-                            # Values differ significantly, check for improvement/degradation
                             if higher_is_better:
                                 is_improvement = augmented_mean > baseline_mean
                             else:
@@ -922,17 +917,12 @@ def write_detailed_comparison_tables_latex(
                             # Determine color
                             color_cmd = ""
                             if baseline_value is not None:
-                                # Calculate relative difference
-                                if baseline_value != 0:
-                                    rel_diff = abs(augmented_value - baseline_value) / abs(baseline_value)
-                                else:
-                                    rel_diff = abs(augmented_value - baseline_value)
-
-                                # If values are essentially equal (< 0.5% relative difference), use green (stability)
-                                if rel_diff < 0.005:
+                                # Values are equal: green
+                                # Improvement: green
+                                # Degradation: red
+                                if augmented_value == baseline_value:
                                     color_cmd = r"\cellcolor{green!15}"
                                 else:
-                                    # Values differ significantly, check for improvement/degradation
                                     if higher_is_better:
                                         is_improvement = augmented_value > baseline_value
                                     else:
