@@ -566,6 +566,10 @@ def plot_surface_3d(
     if not reduction_ratios or not augmentation_ratios:
         return
 
+    # Need at least 2x2 grid for meaningful 3D surface plot
+    if len(reduction_ratios) < 2 or len(augmentation_ratios) < 2:
+        return
+
     # Create meshgrid
     X, Y = np.meshgrid(reduction_ratios, augmentation_ratios)
     Z = np.zeros_like(X)
@@ -590,9 +594,10 @@ def plot_surface_3d(
                            linewidth=0, antialiased=True,
                            edgecolor='none')
 
-    # Add contour lines on the bottom
-    ax.contour(X, Y, Z, zdir='z', offset=np.nanmin(Z) - 0.05,
-               cmap='viridis', alpha=0.4, linewidths=1)
+    # Add contour lines on the bottom (only if we have enough data points)
+    if Z.shape[0] >= 2 and Z.shape[1] >= 2:
+        ax.contour(X, Y, Z, zdir='z', offset=np.nanmin(Z) - 0.05,
+                   cmap='viridis', alpha=0.4, linewidths=1)
 
     # Labels and title
     ax.set_xlabel('Reduction Ratio', fontsize=11, labelpad=10)
