@@ -183,9 +183,26 @@ def get_folder_timestamps(folder_path: Path) -> Tuple[Optional[datetime], Option
         start_time = earliest_time
 
     # Safety check: ensure start_time <= end_time
+    # If start > end, it means we have copied data (birth time is newer than modification time)
+    # In this case, use earliest file modification time as start_time
     if start_time and end_time and start_time > end_time:
-        # If start > end, swap them or use end as both
-        start_time = end_time
+        earliest_mtime = None
+        try:
+            for item in folder_path.iterdir():
+                if item.is_file():
+                    item_stat = item.stat()
+                    item_mtime = datetime.fromtimestamp(item_stat.st_mtime)
+                    if earliest_mtime is None or item_mtime < earliest_mtime:
+                        earliest_mtime = item_mtime
+        except Exception:
+            pass
+
+        # Use earliest file mtime if found and it's before end_time
+        if earliest_mtime and earliest_mtime <= end_time:
+            start_time = earliest_mtime
+        else:
+            # Last resort: set start = end (0 duration)
+            start_time = end_time
 
     return start_time, end_time
 
@@ -209,7 +226,9 @@ def analyze_experiment_timing(experiment_path: Path) -> ExperimentTiming:
 
     earliest_start = None
     latest_end = None
+    previous_stage_end = None
 
+    # First pass: collect all stage timings without sequential inference
     for stage in stages:
         stage_path = experiment_path / stage
         if not stage_path.exists():
@@ -235,6 +254,45 @@ def analyze_experiment_timing(experiment_path: Path) -> ExperimentTiming:
     # Calculate total duration
     if earliest_start and latest_end:
         timing.total_duration_seconds = (latest_end - earliest_start).total_seconds()
+
+    # Handle copied data where all stages have 0 duration (start_time == end_time)
+    # Use end time differences to infer stage durations
+    zero_duration_stages = [
+        (name, st) for name, st in timing.stages.items()
+        if st.duration_seconds == 0 and st.start_time and st.end_time and st.start_time == st.end_time
+    ]
+
+    if len(zero_duration_stages) > 0 and timing.total_duration_seconds and timing.total_duration_seconds > 1:
+        # Sort stages by end time
+        sorted_stages = sorted(zero_duration_stages, key=lambda x: x[1].end_time)
+
+        # Infer durations based on time between stage completions
+        for i in range(len(sorted_stages)):
+            stage_name, stage_timing = sorted_stages[i]
+
+            if i < len(sorted_stages) - 1:
+                # Not the last stage: duration = time to next stage's end
+                next_stage_timing = sorted_stages[i + 1][1]
+                duration_seconds = (next_stage_timing.end_time - stage_timing.end_time).total_seconds()
+                # Adjust start time to be just after previous stage (or at earliest_start for first stage)
+                if i == 0:
+                    stage_timing.start_time = earliest_start
+                else:
+                    prev_stage = sorted_stages[i - 1][1]
+                    stage_timing.start_time = prev_stage.end_time
+                # Keep end time as-is
+                stage_timing.duration_seconds = (stage_timing.end_time - stage_timing.start_time).total_seconds()
+            else:
+                # Last stage: gets remaining time to latest_end
+                if i == 0:
+                    # Only one stage: gets full duration
+                    stage_timing.start_time = earliest_start
+                else:
+                    # Use previous stage's end as start
+                    prev_stage = sorted_stages[i - 1][1]
+                    stage_timing.start_time = prev_stage.end_time
+                stage_timing.end_time = latest_end
+                stage_timing.duration_seconds = (stage_timing.end_time - stage_timing.start_time).total_seconds()
 
     return timing
 
