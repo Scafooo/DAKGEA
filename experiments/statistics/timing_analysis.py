@@ -182,6 +182,11 @@ def get_folder_timestamps(folder_path: Path) -> Tuple[Optional[datetime], Option
             pass
         start_time = earliest_time
 
+    # Safety check: ensure start_time <= end_time
+    if start_time and end_time and start_time > end_time:
+        # If start > end, swap them or use end as both
+        start_time = end_time
+
     return start_time, end_time
 
 
@@ -624,11 +629,14 @@ def generate_timing_plots(
 
         for stage in stages:
             if stage in summary["stages"]:
-                pie_data.append(summary["stages"][stage]["mean_seconds"])
-                pie_labels.append(f"{stage.capitalize()}\n({summary['stages'][stage]['mean_formatted']})")
-                pie_colors.append(colors.get(stage, "#888888"))
+                mean_sec = summary["stages"][stage]["mean_seconds"]
+                # Only include positive values (skip zero or negative durations)
+                if mean_sec > 0:
+                    pie_data.append(mean_sec)
+                    pie_labels.append(f"{stage.capitalize()}\n({summary['stages'][stage]['mean_formatted']})")
+                    pie_colors.append(colors.get(stage, "#888888"))
 
-        if pie_data:
+        if pie_data and len(pie_data) > 0:
             wedges, texts, autotexts = ax.pie(
                 pie_data,
                 labels=pie_labels,
@@ -695,6 +703,265 @@ def generate_timing_plots(
             plt.savefig(plot_path, dpi=dpi, bbox_inches="tight")
             plt.close()
             generated_files.append(plot_path)
+
+    # =========================================================================
+    # TREND CHARTS
+    # =========================================================================
+
+    # Helper: Extract reduction ratio from experiment name or metadata
+    def extract_ratio(exp_name: str) -> float | None:
+        """Extract reduction ratio from experiment name (e.g., dataset_01_03 -> 0.1)"""
+        import re
+        # Pattern: dataset_XX_YY where XX is ratio (01=0.1, 02=0.2, etc.)
+        match = re.search(r'_(\d{2})_\d{2}$', exp_name)
+        if match:
+            ratio_int = int(match.group(1))
+            return ratio_int / 10.0
+        return None
+
+    # =========================================================================
+    # Plot 5: Reduction Ratio Trend
+    # =========================================================================
+    ratio_data = {}
+    for exp_name, exp_timing in timings.items():
+        ratio = extract_ratio(exp_name)
+        if ratio is not None:
+            if ratio not in ratio_data:
+                ratio_data[ratio] = {stage: [] for stage in stages}
+                ratio_data[ratio]['total'] = []
+
+            for stage in stages:
+                st = exp_timing.stages.get(stage)
+                if st and st.duration_seconds:
+                    ratio_data[ratio][stage].append(st.duration_seconds / 60)
+
+            if exp_timing.total_duration_seconds:
+                ratio_data[ratio]['total'].append(exp_timing.total_duration_seconds / 60)
+
+    if ratio_data:
+        fig, ax = plt.subplots(figsize=(10, 6))
+
+        ratios_sorted = sorted(ratio_data.keys())
+
+        # Plot line for each stage
+        for stage in stages:
+            means = [mean(ratio_data[r][stage]) if ratio_data[r][stage] else 0
+                    for r in ratios_sorted]
+            if any(m > 0 for m in means):
+                ax.plot(ratios_sorted, means, marker='o', linewidth=2,
+                       label=stage.capitalize(), color=colors.get(stage, "#888888"))
+
+        # Plot total line
+        totals = [mean(ratio_data[r]['total']) if ratio_data[r]['total'] else 0
+                 for r in ratios_sorted]
+        if any(t > 0 for t in totals):
+            ax.plot(ratios_sorted, totals, marker='s', linewidth=2.5,
+                   label='Total', color=colors.get('total', '#2a9d8f'),
+                   linestyle='--')
+
+        ax.set_xlabel("Reduction Ratio", fontsize=11)
+        ax.set_ylabel("Duration (minutes)", fontsize=11)
+        ax.set_title("Execution Time vs Reduction Ratio", fontsize=13, fontweight='bold')
+        ax.legend()
+        ax.grid(alpha=0.3)
+
+        plt.tight_layout()
+        plot_path = output_dir / "timing_trend_ratio.png"
+        plt.savefig(plot_path, dpi=dpi, bbox_inches="tight")
+        plt.close()
+        generated_files.append(plot_path)
+
+    # =========================================================================
+    # Plot 6: Stage Duration Trend by Experiment
+    # =========================================================================
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    exp_names_sorted = sorted(timings.keys())
+    x = range(len(exp_names_sorted))
+
+    for stage in stages:
+        durations = []
+        for exp_name in exp_names_sorted:
+            st = timings[exp_name].stages.get(stage)
+            if st and st.duration_seconds:
+                durations.append(st.duration_seconds / 60)
+            else:
+                durations.append(0)
+
+        if any(d > 0 for d in durations):
+            ax.plot(x, durations, marker='o', linewidth=2,
+                   label=stage.capitalize(), color=colors.get(stage, "#888888"))
+
+    ax.set_xlabel("Experiment", fontsize=11)
+    ax.set_ylabel("Duration (minutes)", fontsize=11)
+    ax.set_title("Stage Duration Trend Across Experiments", fontsize=13, fontweight='bold')
+    ax.set_xticks(x)
+    ax.set_xticklabels([n[:20] for n in exp_names_sorted], rotation=45, ha="right", fontsize=8)
+    ax.legend()
+    ax.grid(alpha=0.3)
+
+    plt.tight_layout()
+    plot_path = output_dir / "timing_trend_experiments.png"
+    plt.savefig(plot_path, dpi=dpi, bbox_inches="tight")
+    plt.close()
+    generated_files.append(plot_path)
+
+    # =========================================================================
+    # Plot 7: Cumulative Time Trend
+    # =========================================================================
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    cumulative = 0
+    cumulative_times = []
+
+    for exp_name in exp_names_sorted:
+        if timings[exp_name].total_duration_seconds:
+            cumulative += timings[exp_name].total_duration_seconds / 3600  # hours
+        cumulative_times.append(cumulative)
+
+    ax.plot(x, cumulative_times, marker='o', linewidth=2.5,
+           color='#2a9d8f', markersize=6)
+    ax.fill_between(x, cumulative_times, alpha=0.3, color='#2a9d8f')
+
+    ax.set_xlabel("Experiment", fontsize=11)
+    ax.set_ylabel("Cumulative Time (hours)", fontsize=11)
+    ax.set_title("Cumulative Execution Time", fontsize=13, fontweight='bold')
+    ax.set_xticks(x)
+    ax.set_xticklabels([n[:20] for n in exp_names_sorted], rotation=45, ha="right", fontsize=8)
+    ax.grid(alpha=0.3)
+
+    # Add final total annotation
+    if cumulative_times:
+        ax.annotate(f'Total: {cumulative_times[-1]:.1f}h',
+                   xy=(len(cumulative_times)-1, cumulative_times[-1]),
+                   xytext=(10, 10), textcoords='offset points',
+                   bbox=dict(boxstyle='round,pad=0.5', facecolor='yellow', alpha=0.7),
+                   fontsize=10, fontweight='bold')
+
+    plt.tight_layout()
+    plot_path = output_dir / "timing_trend_cumulative.png"
+    plt.savefig(plot_path, dpi=dpi, bbox_inches="tight")
+    plt.close()
+    generated_files.append(plot_path)
+
+    # =========================================================================
+    # Plot 8: Efficiency Trend (Time per 1000 entities)
+    # =========================================================================
+    # Try to load metadata to get entity counts
+    efficiency_data = {}
+
+    for exp_name, exp_timing in timings.items():
+        ratio = extract_ratio(exp_name)
+        if ratio is None:
+            continue
+
+        # Try to load metadata to get entity count
+        metadata_path = exp_timing.experiment_path / "metadata.json"
+        if not metadata_path.exists():
+            continue
+
+        try:
+            import json
+            with open(metadata_path) as f:
+                metadata = json.load(f)
+
+            # Get target entities from metadata
+            target_entities = metadata.get("target_entities")
+            if not target_entities:
+                continue
+
+            # Calculate efficiency for each stage
+            for stage in stages:
+                st = exp_timing.stages.get(stage)
+                if st and st.duration_seconds and st.duration_seconds > 0:
+                    # Seconds per 1000 entities
+                    efficiency = (st.duration_seconds / target_entities) * 1000
+
+                    if ratio not in efficiency_data:
+                        efficiency_data[ratio] = {s: [] for s in stages}
+                    efficiency_data[ratio][stage].append(efficiency)
+        except Exception:
+            continue
+
+    if efficiency_data:
+        fig, ax = plt.subplots(figsize=(10, 6))
+
+        ratios_sorted = sorted(efficiency_data.keys())
+
+        for stage in stages:
+            efficiencies = []
+            for r in ratios_sorted:
+                stage_effs = efficiency_data[r].get(stage, [])
+                if stage_effs:
+                    efficiencies.append(mean(stage_effs))
+                else:
+                    efficiencies.append(None)
+
+            # Filter None values
+            valid_ratios = [r for r, e in zip(ratios_sorted, efficiencies) if e is not None]
+            valid_effs = [e for e in efficiencies if e is not None]
+
+            if valid_effs:
+                ax.plot(valid_ratios, valid_effs, marker='o', linewidth=2,
+                       label=stage.capitalize(), color=colors.get(stage, "#888888"))
+
+        ax.set_xlabel("Reduction Ratio", fontsize=11)
+        ax.set_ylabel("Seconds per 1000 entities", fontsize=11)
+        ax.set_title("Computational Efficiency Trend", fontsize=13, fontweight='bold')
+        ax.legend()
+        ax.grid(alpha=0.3)
+
+        plt.tight_layout()
+        plot_path = output_dir / "timing_trend_efficiency.png"
+        plt.savefig(plot_path, dpi=dpi, bbox_inches="tight")
+        plt.close()
+        generated_files.append(plot_path)
+
+    # =========================================================================
+    # Plot 9: Stage Proportion Trend (Stacked Area)
+    # =========================================================================
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    # Calculate proportions
+    proportions = {stage: [] for stage in stages}
+
+    for exp_name in exp_names_sorted:
+        exp_timing = timings[exp_name]
+        total = exp_timing.total_duration_seconds or 0
+
+        if total > 0:
+            for stage in stages:
+                st = exp_timing.stages.get(stage)
+                if st and st.duration_seconds:
+                    prop = (st.duration_seconds / total) * 100
+                    proportions[stage].append(prop)
+                else:
+                    proportions[stage].append(0)
+        else:
+            for stage in stages:
+                proportions[stage].append(0)
+
+    # Create stacked area
+    ax.stackplot(x,
+                [proportions[s] for s in stages],
+                labels=[s.capitalize() for s in stages],
+                colors=[colors.get(s, "#888888") for s in stages],
+                alpha=0.7)
+
+    ax.set_xlabel("Experiment", fontsize=11)
+    ax.set_ylabel("Time Distribution (%)", fontsize=11)
+    ax.set_title("Stage Time Proportion Trend", fontsize=13, fontweight='bold')
+    ax.set_xticks(x)
+    ax.set_xticklabels([n[:20] for n in exp_names_sorted], rotation=45, ha="right", fontsize=8)
+    ax.set_ylim(0, 100)
+    ax.legend(loc='upper left')
+    ax.grid(alpha=0.3)
+
+    plt.tight_layout()
+    plot_path = output_dir / "timing_trend_proportion.png"
+    plt.savefig(plot_path, dpi=dpi, bbox_inches="tight")
+    plt.close()
+    generated_files.append(plot_path)
 
     print(f"Generated {len(generated_files)} plots in {output_dir}")
     return generated_files
