@@ -116,31 +116,38 @@ class ExperimentTiming:
 
 
 def get_folder_timestamps(folder_path: Path) -> Tuple[Optional[datetime], Optional[datetime]]:
-    """Get birth and modification timestamps for a folder.
+    """Get start and end timestamps for a stage folder.
 
-    Uses the 'stat' command on Linux to get birth time (btime) which is more
-    reliable than Python's os.stat for filesystems that support it.
+    Uses results.json modification time as end time (more reliable than folder mtime).
+    Uses folder birth time or earliest file as start time.
 
     Args:
-        folder_path: Path to the folder
+        folder_path: Path to the stage folder
 
     Returns:
-        Tuple of (birth_time, modification_time)
+        Tuple of (start_time, end_time)
     """
     if not folder_path.exists():
         return None, None
 
+    # End time: Use results.json modification time (most reliable)
+    results_file = folder_path / "results.json"
+    end_time = None
+    if results_file.exists():
+        results_stat = results_file.stat()
+        end_time = datetime.fromtimestamp(results_stat.st_mtime)
+    else:
+        # Fallback: use folder modification time if results.json doesn't exist
+        stat_result = folder_path.stat()
+        end_time = datetime.fromtimestamp(stat_result.st_mtime)
+
+    # Start time: Try to get folder birth time (creation time)
+    start_time = None
     stat_result = folder_path.stat()
-
-    # Get modification time (always available)
-    mtime = datetime.fromtimestamp(stat_result.st_mtime)
-
-    # Try to get birth time (creation time)
-    btime = None
 
     # Try st_birthtime first (macOS)
     if hasattr(stat_result, 'st_birthtime'):
-        btime = datetime.fromtimestamp(stat_result.st_birthtime)
+        start_time = datetime.fromtimestamp(stat_result.st_birthtime)
     else:
         # On Linux, use the stat command to get birth time
         import subprocess
@@ -157,24 +164,25 @@ def get_folder_timestamps(folder_path: Path) -> Tuple[Optional[datetime], Option
                 if btime_str and btime_str not in ('-', '0'):
                     btime_float = float(btime_str)
                     if btime_float > 0:
-                        btime = datetime.fromtimestamp(btime_float)
+                        start_time = datetime.fromtimestamp(btime_float)
         except Exception:
             pass
 
-    # If we couldn't get birth time, try to infer from folder contents
-    if btime is None:
-        earliest_time = mtime
+    # If we couldn't get birth time, find earliest file in folder
+    if start_time is None:
+        earliest_time = end_time
         try:
             for item in folder_path.iterdir():
-                item_stat = item.stat()
-                item_mtime = datetime.fromtimestamp(item_stat.st_mtime)
-                if item_mtime < earliest_time:
-                    earliest_time = item_mtime
+                if item.is_file():  # Only check files
+                    item_stat = item.stat()
+                    item_mtime = datetime.fromtimestamp(item_stat.st_mtime)
+                    if earliest_time is None or item_mtime < earliest_time:
+                        earliest_time = item_mtime
         except Exception:
             pass
-        btime = earliest_time
+        start_time = earliest_time
 
-    return btime, mtime
+    return start_time, end_time
 
 
 def analyze_experiment_timing(experiment_path: Path) -> ExperimentTiming:
