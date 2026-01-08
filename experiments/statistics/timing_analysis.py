@@ -297,6 +297,102 @@ def analyze_experiment_timing(experiment_path: Path) -> ExperimentTiming:
     return timing
 
 
+def apply_sequential_timing_inference(timings: Dict[str, ExperimentTiming]) -> None:
+    """Apply sequential timing inference for experiments run in sequence.
+
+    For experiments of the same dataset/ratio with consecutive seeds,
+    use the end time of experiment N-1 as the start time of experiment N.
+    This helps recover timing information for copied data.
+
+    Args:
+        timings: Dictionary of experiment timings (modified in place)
+    """
+    from collections import defaultdict
+    import re
+
+    # Group experiments by dataset and ratio
+    # Expected format: DATASET_RATIO_SEED (e.g., BBC_DB_05_03, ICEW_YAGO_04_05)
+    groups = defaultdict(list)
+
+    for exp_name, exp_timing in timings.items():
+        # Extract dataset, ratio, and seed from experiment name
+        # Match patterns like: BBC_DB_05_03, D_W_15K_V1_04_05, ICEW_YAGO_04_05
+        match = re.match(r'^(.+?)_(\d{2})_(\d{2})$', exp_name)
+        if match:
+            dataset = match.group(1)
+            ratio = match.group(2)
+            seed = match.group(3)
+            group_key = f"{dataset}_{ratio}"
+            groups[group_key].append((int(seed), exp_name, exp_timing))
+
+    config = get_statistics_config()
+    stages = config.stages
+
+    # Process each group
+    for group_key, experiments in groups.items():
+        # Sort by seed
+        experiments.sort(key=lambda x: x[0])
+
+        # Apply sequential inference
+        for i in range(len(experiments)):
+            seed, exp_name, exp_timing = experiments[i]
+
+            # Check if this experiment has zero-duration stages
+            has_zero_duration = any(
+                st.duration_seconds == 0
+                for st in exp_timing.stages.values()
+            )
+
+            if not has_zero_duration:
+                continue
+
+            # Use previous experiment's end time as this experiment's start
+            if i > 0:
+                prev_seed, prev_name, prev_timing = experiments[i - 1]
+
+                # Get the end time of the previous experiment (last stage)
+                prev_end_time = None
+                for stage in reversed(stages):
+                    if stage in prev_timing.stages:
+                        prev_stage = prev_timing.stages[stage]
+                        if prev_stage.end_time:
+                            prev_end_time = prev_stage.end_time
+                            break
+
+                if prev_end_time:
+                    # Set start time of first stage to previous experiment's end
+                    first_stage_name = stages[0] if stages else None
+                    if first_stage_name and first_stage_name in exp_timing.stages:
+                        first_stage = exp_timing.stages[first_stage_name]
+
+                        # Calculate new duration for first stage
+                        if first_stage.end_time:
+                            first_stage.start_time = prev_end_time
+                            first_stage.duration_seconds = (
+                                first_stage.end_time - first_stage.start_time
+                            ).total_seconds()
+
+                            # Update subsequent stages based on sequential execution
+                            prev_stage_end = first_stage.end_time
+                            for stage_name in stages[1:]:
+                                if stage_name in exp_timing.stages:
+                                    stage = exp_timing.stages[stage_name]
+                                    if stage.end_time:
+                                        stage.start_time = prev_stage_end
+                                        stage.duration_seconds = (
+                                            stage.end_time - stage.start_time
+                                        ).total_seconds()
+                                        prev_stage_end = stage.end_time
+
+                            # Recalculate total duration
+                            earliest = first_stage.start_time
+                            latest = prev_stage_end
+                            if earliest and latest:
+                                exp_timing.total_duration_seconds = (
+                                    latest - earliest
+                                ).total_seconds()
+
+
 def analyze_suite_timing(suite_path: Path) -> Dict[str, ExperimentTiming]:
     """Analyze timing for all experiments in a suite.
 
@@ -319,6 +415,9 @@ def analyze_suite_timing(suite_path: Path) -> Dict[str, ExperimentTiming]:
         if any((item / stage).exists() for stage in config.stages):
             timing = analyze_experiment_timing(item)
             results[item.name] = timing
+
+    # Apply sequential timing inference for copied data
+    apply_sequential_timing_inference(results)
 
     return results
 
