@@ -188,3 +188,17 @@ filtering:
     - "hits@25"
     - "hits@50"
     - "mrr"
+
+# Timing analysis
+timing:
+  # Fix timing anomalies (outliers, mathematical inconsistencies, etc.)
+  fix_anomalies: true               # Enable automatic anomaly correction
+
+  # Sequential timing inference for copied data
+  sequential_inference: true        # Use previous experiment's end time as next start time
+
+  # Outlier detection thresholds
+  outlier_detection:
+    max_reduction_hours: 24         # Maximum reasonable reduction time (hours)
+    max_augmentation_hours: 24      # Maximum reasonable augmentation time (hours)
+    median_multiplier: 10           # Flag values > median * multiplier as outliers

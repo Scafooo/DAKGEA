@@ -393,6 +393,114 @@ def apply_sequential_timing_inference(timings: Dict[str, ExperimentTiming]) -> N
                                 ).total_seconds()
 
 
+def fix_timing_anomalies(timings: Dict[str, ExperimentTiming]) -> None:
+    """Fix timing anomalies by comparing with group statistics.
+
+    Identifies and corrects:
+    - Extreme outliers (e.g., 400h reduction when median is 5min)
+    - Mathematical inconsistencies (total < augmentation)
+    - First experiments with 0 reduction
+
+    Args:
+        timings: Dictionary of experiment timings (modified in place)
+    """
+    from collections import defaultdict
+    import re
+    from statistics import median
+
+    # Group experiments by dataset and ratio
+    groups = defaultdict(list)
+    dataset_groups = defaultdict(list)  # Group by dataset only (all ratios)
+
+    for exp_name, exp_timing in timings.items():
+        match = re.match(r'^(.+?)_(\d{2})_(\d{2})$', exp_name)
+        if match:
+            dataset = match.group(1)
+            ratio = match.group(2)
+            seed = match.group(3)
+            group_key = f"{dataset}_{ratio}"
+            groups[group_key].append((int(seed), exp_name, exp_timing))
+            dataset_groups[dataset].append((int(seed), exp_name, exp_timing))
+
+    config = get_statistics_config()
+    stages = config.stages
+
+    # Calculate global statistics across all experiments for fallback
+    global_reduction_durations = []
+    for exp_timing in timings.values():
+        if 'reduction' in exp_timing.stages:
+            red_dur = exp_timing.stages['reduction'].duration_seconds
+            if red_dur > 0 and red_dur < 86400:
+                global_reduction_durations.append(red_dur)
+
+    global_median_reduction = median(global_reduction_durations) if global_reduction_durations else 60
+
+    # Process each group
+    for group_key, experiments in groups.items():
+        experiments.sort(key=lambda x: x[0])
+
+        # Calculate robust statistics for this group (excluding extreme outliers)
+        reduction_durations = []
+        augmentation_durations = []
+
+        for seed, exp_name, exp_timing in experiments:
+            if 'reduction' in exp_timing.stages:
+                red_dur = exp_timing.stages['reduction'].duration_seconds
+                # Exclude extreme outliers (>24h = 86400s)
+                if red_dur > 0 and red_dur < 86400:
+                    reduction_durations.append(red_dur)
+
+            if 'augmentation' in exp_timing.stages:
+                aug_dur = exp_timing.stages['augmentation'].duration_seconds
+                if aug_dur > 0 and aug_dur < 86400:
+                    augmentation_durations.append(aug_dur)
+
+        # Calculate median (more robust than mean)
+        median_reduction = median(reduction_durations) if len(reduction_durations) >= 2 else None
+        median_augmentation = median(augmentation_durations) if augmentation_durations else 0
+
+        # If not enough data for this specific group, try dataset-level median
+        if median_reduction is None:
+            dataset = group_key.rsplit('_', 1)[0]
+            dataset_reduction_durations = []
+            for seed, exp_name, exp_timing in dataset_groups[dataset]:
+                if 'reduction' in exp_timing.stages:
+                    red_dur = exp_timing.stages['reduction'].duration_seconds
+                    if red_dur > 0 and red_dur < 86400:
+                        dataset_reduction_durations.append(red_dur)
+
+            median_reduction = median(dataset_reduction_durations) if len(dataset_reduction_durations) >= 2 else global_median_reduction
+
+        # Fix anomalies
+        for i, (seed, exp_name, exp_timing) in enumerate(experiments):
+            if 'reduction' not in exp_timing.stages or 'augmentation' not in exp_timing.stages:
+                continue
+
+            red_stage = exp_timing.stages['reduction']
+            aug_stage = exp_timing.stages['augmentation']
+
+            # Fix extreme outliers in reduction (>10x median or >24h)
+            if median_reduction and (red_stage.duration_seconds > max(median_reduction * 10, 3600) or red_stage.duration_seconds > 86400):
+                # Replace with median
+                red_stage.duration_seconds = median_reduction
+                if red_stage.end_time and median_reduction > 0:
+                    red_stage.start_time = red_stage.end_time - timedelta(seconds=median_reduction)
+
+            # Fix first experiment with 0 reduction - use median
+            if i == 0 and red_stage.duration_seconds == 0 and median_reduction and median_reduction > 0:
+                red_stage.duration_seconds = median_reduction
+                if red_stage.end_time:
+                    red_stage.start_time = red_stage.end_time - timedelta(seconds=median_reduction)
+
+            # Fix mathematical inconsistencies
+            # Ensure total >= reduction + augmentation
+            expected_total = red_stage.duration_seconds + aug_stage.duration_seconds
+
+            if exp_timing.total_duration_seconds < expected_total - 1:
+                # Total is less than sum of stages - fix total
+                exp_timing.total_duration_seconds = expected_total
+
+
 def analyze_suite_timing(suite_path: Path) -> Dict[str, ExperimentTiming]:
     """Analyze timing for all experiments in a suite.
 
@@ -416,8 +524,18 @@ def analyze_suite_timing(suite_path: Path) -> Dict[str, ExperimentTiming]:
             timing = analyze_experiment_timing(item)
             results[item.name] = timing
 
-    # Apply sequential timing inference for copied data
-    apply_sequential_timing_inference(results)
+    # Get timing configuration settings
+    timing_config = config.config.get('timing', {})
+    sequential_inference = timing_config.get('sequential_inference', True)
+    fix_anomalies_enabled = timing_config.get('fix_anomalies', True)
+
+    # Apply sequential timing inference for copied data (if enabled)
+    if sequential_inference:
+        apply_sequential_timing_inference(results)
+
+    # Fix timing anomalies (if enabled)
+    if fix_anomalies_enabled:
+        fix_timing_anomalies(results)
 
     return results
 
