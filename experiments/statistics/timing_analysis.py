@@ -486,11 +486,29 @@ def fix_timing_anomalies(timings: Dict[str, ExperimentTiming]) -> None:
                 if red_stage.end_time and median_reduction > 0:
                     red_stage.start_time = red_stage.end_time - timedelta(seconds=median_reduction)
 
+            # Fix extreme outliers in augmentation (>10x median or >24h)
+            if median_augmentation and (aug_stage.duration_seconds > max(median_augmentation * 10, 3600) or aug_stage.duration_seconds > 86400):
+                # Replace with median
+                aug_stage.duration_seconds = median_augmentation
+                if aug_stage.end_time and median_augmentation > 0:
+                    aug_stage.start_time = aug_stage.end_time - timedelta(seconds=median_augmentation)
+
             # Fix first experiment with 0 reduction - use median
             if i == 0 and red_stage.duration_seconds == 0 and median_reduction and median_reduction > 0:
                 red_stage.duration_seconds = median_reduction
                 if red_stage.end_time:
                     red_stage.start_time = red_stage.end_time - timedelta(seconds=median_reduction)
+
+            # Fix experiments where both stages are 0 (completely missing timing)
+            if red_stage.duration_seconds == 0 and aug_stage.duration_seconds == 0 and exp_timing.total_duration_seconds > 0:
+                # Estimate based on total and typical ratio
+                if median_reduction and median_augmentation:
+                    total_median = median_reduction + median_augmentation
+                    if total_median > 0:
+                        red_ratio = median_reduction / total_median
+                        aug_ratio = median_augmentation / total_median
+                        red_stage.duration_seconds = exp_timing.total_duration_seconds * red_ratio
+                        aug_stage.duration_seconds = exp_timing.total_duration_seconds * aug_ratio
 
             # Fix mathematical inconsistencies
             # Ensure total >= reduction + augmentation
@@ -498,6 +516,9 @@ def fix_timing_anomalies(timings: Dict[str, ExperimentTiming]) -> None:
 
             if exp_timing.total_duration_seconds < expected_total - 1:
                 # Total is less than sum of stages - fix total
+                exp_timing.total_duration_seconds = expected_total
+            elif exp_timing.total_duration_seconds > expected_total * 2 and expected_total > 0:
+                # Total is more than double the sum - likely wrong, recalculate
                 exp_timing.total_duration_seconds = expected_total
 
 
@@ -525,7 +546,7 @@ def analyze_suite_timing(suite_path: Path) -> Dict[str, ExperimentTiming]:
             results[item.name] = timing
 
     # Get timing configuration settings
-    timing_config = config.config.get('timing', {})
+    timing_config = config._config.get('timing', {})
     sequential_inference = timing_config.get('sequential_inference', True)
     fix_anomalies_enabled = timing_config.get('fix_anomalies', True)
 
