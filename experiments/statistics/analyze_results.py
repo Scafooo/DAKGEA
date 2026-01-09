@@ -103,6 +103,11 @@ def _sanitize_metric(metric: str, value) -> float | None:
     # Clamp metrics that should be in [0, 1] range (from configuration)
     normalized_metrics = set(stats_config.normalized_metrics)
     if metric.lower() in normalized_metrics:
+        # Auto-convert percentage format (>1.0) to normalized format (0.0-1.0)
+        # Some models (e.g., RREA) output hits@k as percentages (26.15)
+        # while others (e.g., BERT-INT) output normalized values (0.2615)
+        if value > 1.0:
+            value = value / 100.0
         return max(0.0, min(1.0, value))
     return value
 
