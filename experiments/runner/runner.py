@@ -987,6 +987,10 @@ class ExperimentRunner:
         if "seed" in self.exp_cfg:
             cfg["seed"] = self.exp_cfg["seed"]
 
+        # Copy augmentation config if present (includes bart settings like enable_finetuning)
+        if "augmentation" in self.exp_cfg and isinstance(self.exp_cfg["augmentation"], dict):
+            cfg["augmentation"] = dict(self.exp_cfg["augmentation"])
+
         # Lineage: essential metadata for models to determine context and paths
         lineage = cfg.setdefault("lineage", {})
         lineage["evaluation_root"] = str((ratio_root / "evaluation").resolve())
