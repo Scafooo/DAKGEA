@@ -1,0 +1,28 @@
+experiment:
+  suite: ablation_no_finetune
+  name: ICEW_WIKI_01_10
+  dataset:
+    name: hybea/ICEW_WIKI
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.1
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 1.0
+    writer:
+      type: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+    config:
+      bart:
+        enable_finetuning: false
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: false

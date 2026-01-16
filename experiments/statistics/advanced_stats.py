@@ -148,10 +148,51 @@ def summarize_with_advanced_stats(values: List[float]) -> Dict[str, float]:
     return stats
 
 
+def calculate_lear(ratios: List[float], baseline_scores: List[float], augmented_scores: List[float]) -> float | None:
+    """
+    Calculate LEAR (Low-resource Effectiveness of Augmentation Ratio).
+    
+    Formula: Sum(w(r) * delta(r)) / Sum(w(r))
+    where:
+      - r is the reduction ratio (0 < r <= 1)
+      - w(r) = 1/r (higher weight for lower resources)
+      - delta(r) = augmented_score - baseline_score
+      
+    Args:
+        ratios: List of reduction ratios (e.g., 0.1, 0.2, ...)
+        baseline_scores: List of scores without augmentation
+        augmented_scores: List of scores with augmentation
+        
+    Returns:
+        Weighted improvement score or None if inputs are invalid.
+    """
+    if not ratios or len(ratios) != len(baseline_scores) or len(ratios) != len(augmented_scores):
+        return None
+        
+    numerator = 0.0
+    denominator = 0.0
+    
+    for r, base, aug in zip(ratios, baseline_scores, augmented_scores):
+        if r <= 0:
+            continue
+            
+        weight = 1.0 / r
+        delta = aug - base
+        
+        numerator += weight * delta
+        denominator += weight
+        
+    if denominator == 0:
+        return None
+        
+    return numerator / denominator
+
+
 __all__ = [
     "confidence_interval",
     "cohens_d",
     "paired_t_test",
     "percentiles",
     "summarize_with_advanced_stats",
+    "calculate_lear",
 ]

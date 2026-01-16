@@ -521,7 +521,9 @@ def write_comparison_tables_latex(
             ('hits@1', 'H@1', True, 2, True),
             ('hits@5', 'H@5', True, 2, True),
             ('hits@10', 'H@10', True, 2, True),
-            ('mrr', 'MRR', False, 4, True),
+            ('hits@25', 'H@25', True, 2, True),
+            ('hits@50', 'H@50', True, 2, True),
+            ('mrr', 'MRR', True, 2, True),
             ('mr', 'MR', False, 1, False),
             ('precision', 'P', True, 2, True),
             ('recall', 'R', True, 2, True),
@@ -529,17 +531,20 @@ def write_comparison_tables_latex(
         ]
     else:
         # Convert simple metric names to tuple format
+        # All hits@k and P/R/F1 shown as percentages (×100) for consistency
         metric_configs = {
             'hits@1': ('hits@1', 'H@1', True, 2, True),
             'hits@5': ('hits@5', 'H@5', True, 2, True),
             'hits@10': ('hits@10', 'H@10', True, 2, True),
+            'hits@25': ('hits@25', 'H@25', True, 2, True),
+            'hits@50': ('hits@50', 'H@50', True, 2, True),
             'mrr': ('mrr', 'MRR', False, 4, True),
             'mr': ('mr', 'MR', False, 1, False),
             'precision': ('precision', 'P', True, 2, True),
             'recall': ('recall', 'R', True, 2, True),
             'f-measure': ('f-measure', 'F1', True, 2, True),
         }
-        metrics = [metric_configs.get(m, (m, m.upper(), False, 3, True)) for m in metrics]
+        metrics = [metric_configs.get(m, (m, m.upper(), True, 2, True)) for m in metrics]
 
     ensure_dir(output_dir)
 
@@ -748,7 +753,9 @@ def write_detailed_comparison_tables_latex(
             ('hits@1', 'H@1', True, 2, True),
             ('hits@5', 'H@5', True, 2, True),
             ('hits@10', 'H@10', True, 2, True),
-            ('mrr', 'MRR', False, 4, True),
+            ('hits@25', 'H@25', True, 2, True),
+            ('hits@50', 'H@50', True, 2, True),
+            ('mrr', 'MRR', True, 2, True),
             ('mr', 'MR', False, 1, False),
             ('precision', 'P', True, 2, True),
             ('recall', 'R', True, 2, True),
@@ -756,17 +763,20 @@ def write_detailed_comparison_tables_latex(
         ]
     else:
         # Convert simple metric names to tuple format
+        # All hits@k and P/R/F1 shown as percentages (×100) for consistency
         metric_configs = {
             'hits@1': ('hits@1', 'H@1', True, 2, True),
             'hits@5': ('hits@5', 'H@5', True, 2, True),
             'hits@10': ('hits@10', 'H@10', True, 2, True),
+            'hits@25': ('hits@25', 'H@25', True, 2, True),
+            'hits@50': ('hits@50', 'H@50', True, 2, True),
             'mrr': ('mrr', 'MRR', False, 4, True),
             'mr': ('mr', 'MR', False, 1, False),
             'precision': ('precision', 'P', True, 2, True),
             'recall': ('recall', 'R', True, 2, True),
             'f-measure': ('f-measure', 'F1', True, 2, True),
         }
-        metrics = [metric_configs.get(m, (m, m.upper(), False, 3, True)) for m in metrics]
+        metrics = [metric_configs.get(m, (m, m.upper(), True, 2, True)) for m in metrics]
 
     ensure_dir(output_dir)
 
@@ -993,12 +1003,101 @@ def write_detailed_comparison_tables_latex(
     return tables_generated
 
 
+def write_lear_summary_latex(
+    path: Path,
+    lear_data: Dict[str, Dict[str, float]],
+    metrics: List[str] | None = None,
+) -> None:
+    """Generate LaTeX table for LEAR scores.
+
+    Args:
+        path: Output file path
+        lear_data: Dict[dataset -> Dict[metric -> score]]
+        metrics: List of metrics to include
+    """
+    if not lear_data:
+        return
+
+    # Use default metrics if not provided, but filter to those present in data
+    available_metrics = set()
+    for ds_data in lear_data.values():
+        available_metrics.update(ds_data.keys())
+
+    if metrics is None:
+        metrics = sorted(list(available_metrics))
+    else:
+        # Filter metrics to those actually available to avoid empty columns
+        metrics = [m for m in metrics if m in available_metrics]
+
+    if not metrics:
+        return
+
+    ensure_dir(path.parent)
+
+    # Map metric names to display names
+    metric_display = {
+        'hits@1': 'H@1', 'hits@5': 'H@5', 'hits@10': 'H@10',
+        'mrr': 'MRR', 'mr': 'MR',
+        'precision': 'P', 'recall': 'R', 'f-measure': 'F1'
+    }
+
+    headers = ["Dataset"] + [metric_display.get(m, m.upper()) for m in metrics]
+    n_cols = len(headers)
+    col_spec = "l" + "r" * (n_cols - 1)
+
+    with path.open("w", encoding="utf-8") as f:
+        f.write("% Requires: \\usepackage{xcolor}\n")
+        f.write("\\begin{table}[htbp]\n")
+        f.write("\\centering\n")
+        f.write("\\small\n")
+        f.write("\\caption{Low-resource Effectiveness Analysis (LEAR) Scores. Weighted improvement across all reduction ratios.}\n")
+        f.write("\\label{tab:lear_summary}\n")
+        f.write(f"\\begin{{tabular}}{{{col_spec}}}\n")
+        f.write("\\toprule\n")
+
+        # Header row
+        escaped_headers = [escape_latex(h) for h in headers]
+        f.write(" & ".join(escaped_headers) + " \\\\\n")
+        f.write("\\midrule\n")
+
+        # Data rows
+        for dataset in sorted(lear_data.keys()):
+            scores = lear_data[dataset]
+            row_cells = [escape_latex(dataset)]
+
+            for metric in metrics:
+                score = scores.get(metric)
+                if score is None:
+                    row_cells.append("—")
+                else:
+                    # Color coding for LEAR:
+                    # - For most metrics: Positive is good (Green), Negative is bad (Red)
+                    # - For MR (Mean Rank): Lower is better, so negative delta is good
+                    is_mr = metric.lower() == 'mr'
+
+                    if score > 0:
+                        color = "red!70!black" if is_mr else "green!70!black"
+                        row_cells.append(f"\\textcolor{{{color}}}{{+{score:.4f}}}")
+                    elif score < 0:
+                        color = "green!70!black" if is_mr else "red!70!black"
+                        row_cells.append(f"\\textcolor{{{color}}}{{{score:.4f}}}")
+                    else:
+                        row_cells.append(f"{score:.4f}")
+
+            f.write(" & ".join(row_cells) + " \\\\\n")
+
+        f.write("\\bottomrule\n")
+        f.write("\\end{tabular}\n")
+        f.write("\\end{table}\n")
+
+
 __all__ = [
     "write_dataset_summary_csv",
     "write_dataset_summary_markdown",
     "write_dataset_summary_latex",
     "write_comparison_tables_latex",
     "write_detailed_comparison_tables_latex",
+    "write_lear_summary_latex",
     "write_latex_table",
     "write_latex_table_colored",
     "escape_latex",

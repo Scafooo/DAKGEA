@@ -23,6 +23,7 @@ from experiments.statistics.advanced_stats import (
     summarize_with_advanced_stats,
     cohens_d,
     paired_t_test,
+    calculate_lear,
 )
 from experiments.statistics.visualizations import (
     plot_heatmap,
@@ -57,6 +58,7 @@ from experiments.statistics.exporters import (
     write_dataset_summary_latex,
     write_comparison_tables_latex,
     write_detailed_comparison_tables_latex,
+    write_lear_summary_latex,
 )
 from src.logger import get_logger
 
@@ -982,6 +984,49 @@ def main() -> None:
     if not datasets:
         raise SystemExit("No metrics found in the specified experiments.")
 
+    # Calculate LEAR (Low-resource Effectiveness of Augmentation Ratio) scores
+    all_lear_data = {}
+    for dataset, entries in ratio_entries.items():
+        dataset_lear = {}
+        # Use build_ratio_plot_data logic to get aggregated means per ratio
+        # We pass only the current dataset to the builder
+        ratio_data = build_ratio_plot_data({dataset: entries}, args.metrics).get(dataset, {})
+        
+        if not ratio_data:
+            continue
+            
+        for metric in args.metrics:
+            ratios = []
+            base_scores = []
+            aug_scores = []
+            
+            # Sorted by reduction ratio to ensure consistency
+            for r in sorted(ratio_data.keys()):
+                # For each reduction ratio, find the corresponding augmentation performance
+                aug_group = ratio_data[r]
+                if not aug_group:
+                    continue
+                    
+                # Prefer exact match (aug_ratio == red_ratio), otherwise use best/first
+                target_aug_ratio = r if r in aug_group else next(iter(sorted(aug_group.keys())))
+                
+                scores = aug_group[target_aug_ratio]
+                base_val = scores["reduction"].get(metric)
+                aug_val = scores["augmentation"].get(metric)
+                
+                if base_val is not None and aug_val is not None:
+                    ratios.append(float(r))
+                    base_scores.append(base_val)
+                    aug_scores.append(aug_val)
+            
+            if ratios:
+                score = calculate_lear(ratios, base_scores, aug_scores)
+                if score is not None:
+                    dataset_lear[metric] = score
+        
+        if dataset_lear:
+            all_lear_data[dataset] = dataset_lear
+
     aggregated_output = {}
     dataset_stage_stats: Dict[str, Dict[str, Dict[str, Dict[str, float]]]] = {}
     plots_base = Path(args.plots_dir)
@@ -1125,6 +1170,15 @@ def main() -> None:
             colored=True,
         )
         logger.info("✓ LaTeX summary table: %s", latex_dir / "dataset_summary.tex")
+
+        # Generate LEAR summary table
+        if all_lear_data:
+            write_lear_summary_latex(
+                latex_dir / "lear_summary.tex",
+                all_lear_data,
+                args.metrics,
+            )
+            logger.info("✓ LaTeX LEAR summary table: %s", latex_dir / "lear_summary.tex")
 
         # Generate comparison tables (one per dataset, aggregated)
         comparison_tables_dir = latex_dir / "comparison_tables"

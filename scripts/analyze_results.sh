@@ -10,7 +10,7 @@ set -euo pipefail
 #  Modify this line to select a default suite to analyze
 #  Can be overridden by --suite command line argument
 # ============================================================
-DEFAULT_SUITE="${DEFAULT_SUITE:-}"
+DEFAULT_SUITE="massive_aug_red_bert_int"
 
 term_width() { tput cols 2>/dev/null || echo 80; }
 full_line() { printf '%*s\n' "$(term_width)" '' | tr ' ' "$1"; }
