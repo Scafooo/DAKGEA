@@ -19,9 +19,8 @@ experiment:
     eval: true
     save_dataset: false
     save_model: false
-    config:
-      bart:
-        enable_finetuning: false
+    bart:
+      enable_finetuning: false
   model: bert_int
   seed: 11037
   clear: true
