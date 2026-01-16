@@ -2,7 +2,7 @@ experiment:
   suite: ablation_no_finetune
   name: ICEW_YAGO_01_10
   dataset:
-    name: hybea/ICEW_YAGO
+    name: openea/ICEW_YAGO
     writer: bert_int
   reduction:
     method: random_entities
