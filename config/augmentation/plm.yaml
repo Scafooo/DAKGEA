@@ -10,7 +10,7 @@ augmentation:
 
   # BFS expansion parameters
   max_depth: 2                    # Maximum BFS depth for expansion
-  ratio: 0.5                      # Augmentation ratio (0.5 = 50% more entities)
+  ratio: 0.5                      # Augmentation ratio (default 0.5 = 50% more entities)
   max_pairs: null                 # Absolute maximum pairs (null = use ratio)
 
   # Provenance tracking
@@ -99,7 +99,7 @@ augmentation:
     generate_unmatched: true       # Generate variations for non-matching attributes
     unmatched_sample_rate: 1.0     # Sample 100% of unmatched attrs (0.0-1.0, 1.0=all)
 
-    # Advanced training techniques (modular - can be toggled on/off)
+    # Advanced training techniques (modular - can be toggled on/off. Off by default)
     advanced_training:
       # Stratified sampling: balance predicate distribution
       stratified_sampling:

@@ -1,0 +1,27 @@
+experiment:
+  suite: ablation_no_finetune
+  name: BBC_DB_08_10
+  dataset:
+    name: openea/BBC_DB
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.8
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 1.0
+    writer:
+      type: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+    bart:
+      enable_finetuning: false
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: false
