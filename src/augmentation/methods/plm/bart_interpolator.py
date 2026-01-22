@@ -487,7 +487,7 @@ class BartInterpolatorPLM:
         epochs: int = 20,
         batch_size: int = 16,
         lr: float = 5e-5,
-        max_train_samples: Optional[int] = 4000,
+        max_train_samples: Optional[int] = None, # Changed default from 4000 to None (unlimited)
         val_split: float = 0.1,
         force_retrain: bool = False,
         num_proc: int = 2,
@@ -515,8 +515,9 @@ class BartInterpolatorPLM:
             return
 
         # Optional: subsample if too large (before advanced preprocessing)
-        if max_train_samples and len(pairs) > max_train_samples:
+        if max_train_samples is not None and len(pairs) > max_train_samples:
             pairs = random.sample(pairs, max_train_samples)
+            logger.info(f"[BART-PLM] Subsampled to {max_train_samples} examples.")
 
         logger.info(f"[BART-PLM] Preparing fine-tuning dataset with {len(pairs)} examples...")
 
@@ -724,9 +725,10 @@ class BartInterpolatorPLM:
             vals_src = preds_src[lname]
             vals_tgt = preds_tgt[lname]
 
-            # Campiona casualmente coppie per evitare esplosione combinatoria
-            # Se ci sono troppi valori, campiona un sottoinsieme
-            max_vals = 100  # Limita il numero di valori per predicato
+            # Use a much higher limit for sampling to allow more training data
+            # Was previously 100, which severely limited training data
+            max_vals = 1000 
+            
             if len(vals_src) > max_vals:
                 vals_src = random.sample(vals_src, max_vals)
             if len(vals_tgt) > max_vals:

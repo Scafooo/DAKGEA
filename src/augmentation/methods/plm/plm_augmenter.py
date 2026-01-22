@@ -167,6 +167,10 @@ class PLMAugmenter(AugmentationMethod):
         self.bart_epochs = int(bart_cfg.get("epochs", 10))
         self.bart_batch_size = int(bart_cfg.get("batch_size", 16))
         self.bart_force_retrain = bool(bart_cfg.get("force_retrain", False))
+        
+        # Get max_train_samples from config (allow None/null for unlimited)
+        max_train_samples = bart_cfg.get("max_train_samples")
+        self.bart_max_train_samples = int(max_train_samples) if max_train_samples is not None else None
 
         # BART interpolation parameters
         self.bart_base_alpha = float(bart_cfg.get("base_alpha", 0.35))
@@ -388,6 +392,7 @@ class PLMAugmenter(AugmentationMethod):
                 epochs=self.bart_epochs,
                 batch_size=self.bart_batch_size,
                 force_retrain=self.bart_force_retrain,
+                max_train_samples=self.bart_max_train_samples,
             )
             self.logger.info("[BART] Fine-tuning complete.")
         else:
