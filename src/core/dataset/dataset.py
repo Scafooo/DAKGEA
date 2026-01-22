@@ -31,6 +31,7 @@ class Dataset:
         self.knowledge_graph_target = knowledge_graph_target
         self.aligned_entities = tuple(aligned_entities)
         self.attribute_matches = attribute_matches or {}
+        self.fixed_test_pairs: Optional[Iterable[Tuple[str, str]]] = None
 
     def clone(self) -> "Dataset":
         """Return a deep copy of the dataset components."""
@@ -41,4 +42,7 @@ class Dataset:
         # Deep copy of attribute matches
         attr_matches_copy = {k: list(v) for k, v in self.attribute_matches.items()}
 
-        return Dataset(source_copy, target_copy, aligned_copy, attr_matches_copy)
+        ds = Dataset(source_copy, target_copy, aligned_copy, attr_matches_copy)
+        if self.fixed_test_pairs is not None:
+            ds.fixed_test_pairs = tuple(self.fixed_test_pairs)
+        return ds

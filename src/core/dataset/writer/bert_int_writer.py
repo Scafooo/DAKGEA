@@ -75,8 +75,10 @@ class BertIntWriter(DatasetWriter):
             If a fixed_test_pairs.json file exists in the parent directory (from
             supervision mode reducer), it will be used as the fixed test set.
         """
-        # Check for fixed test set from supervision mode
-        fixed_test_pairs = self._load_fixed_test_pairs(dir_path)
+        # Check for fixed test set: first from dataset attribute, then from file
+        fixed_test_pairs = getattr(dataset, 'fixed_test_pairs', None)
+        if fixed_test_pairs is None:
+            fixed_test_pairs = self._load_fixed_test_pairs(dir_path)
 
         # Read entity ID mappings created by KG writer
         ent_ids_1 = read_tsv(os.path.join(dir_path, "ent_ids_1"))
@@ -234,12 +236,14 @@ class BertIntWriter(DatasetWriter):
         Returns:
             Set of (source_uri, target_uri) tuples, or None if not found
         """
-        # Check parent directory for fixed_test_pairs.json
+        # Check parent directories for fixed_test_pairs.json
+        # dir_path is typically: results/{suite}/{name}/{stage}/dataset/bert_int/
         parent = Path(dir_path).parent
         candidates = [
             parent / "fixed_test_pairs.json",
             parent.parent / "fixed_test_pairs.json",
-            parent.parent / "reduction" / "fixed_test_pairs.json",
+            # Look in sibling reduction/ directory (when called from augmentation stage)
+            parent.parent.parent / "reduction" / "fixed_test_pairs.json",
         ]
 
         for test_file in candidates:

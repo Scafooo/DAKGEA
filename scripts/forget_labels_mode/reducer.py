@@ -1,9 +1,7 @@
 import logging
 import random
-import json
-import os
 from pathlib import Path
-from typing import Set, Tuple, Dict
+from typing import Set, Tuple
 from rdflib import URIRef
 
 from src.core.dataset import Dataset
@@ -17,33 +15,24 @@ logger = logging.getLogger(__name__)
 class ForgetLabelsReducer(RandomEntitiesReducer):
     def __init__(self, config):
         super().__init__(config)
-        # Debug: logger.info(f"DEBUG REDUCER CONFIG: {config}")
-        
-        # Try to find 'experiment' section
-        exp_cfg = config.get("experiment", config) # fallback to root
+
+        exp_cfg = config.get("experiment", config)
         reduction_cfg = exp_cfg.get("reduction", config.get("reduction", {}))
-        
+
         self.ratio = reduction_cfg.get("ratio")
-        
-        # Extract dataset name correctly
+
+        # Extract dataset name
         ds_info = exp_cfg.get("dataset", config.get("dataset", {}))
         if isinstance(ds_info, dict):
             self.dataset_name = ds_info.get("name", "")
         else:
             self.dataset_name = str(ds_info)
-        
-        # Extract experiment info for path construction
-        self.suite_name = exp_cfg.get("suite", "")
-        self.exp_name = exp_cfg.get("name", "")
-        
-        if not self.suite_name:
-             self.suite_name = "forget_labels_bert_int" # default
-        
-        logger.info(f"[ForgetLabels] Initialized with dataset='{self.dataset_name}', suite='{self.suite_name}', exp='{self.exp_name}', ratio={self.ratio}")
-        
-        self.raw_data_root = Path("data/raw") 
+
+        logger.info(f"[ForgetLabels] Initialized: dataset='{self.dataset_name}', ratio={self.ratio}")
+
+        self.raw_data_root = Path("data/raw")
         if not self.raw_data_root.exists():
-             self.raw_data_root = Path(".")
+            self.raw_data_root = Path(".")
 
     def _load_split_pairs(self, dataset_name: str) -> Tuple[Set, Set]:
         # Clean dataset name (remove openea/ prefix if present for search)
@@ -137,41 +126,18 @@ class ForgetLabelsReducer(RandomEntitiesReducer):
         rng = random.Random(self.seed)
         train_retained = set(rng.sample(train_list, keep_count))
         
-        # 3. Save Test Pool to fixed_test_pairs.json in RESULTS DIR
-        # Construct path based on experiment naming convention
-        # Expected: results/{suite}/{name}/reduction/fixed_test_pairs.json
-        # Writer looks in parent.parent of its output.
-        # Writer output is: results/{suite}/{name}/reduction/dataset/bert_int
-        # Parent: .../dataset
-        # Parent.Parent: .../reduction
-        
-        if self.suite_name and self.exp_name:
-            output_dir = Path(f"results/{self.suite_name}/{self.exp_name}/reduction")
-            output_path = output_dir / "fixed_test_pairs.json"
-            
-            output_path.parent.mkdir(parents=True, exist_ok=True)
-            
-            test_pairs_list = [[str(s), str(t)] for s, t in test_pool]
-            data = {"pairs": test_pairs_list}
-            
-            with open(output_path, "w") as f:
-                json.dump(data, f)
-            
-            logger.info(f"Saved {len(test_pool)} test pairs to '{output_path}' for Writer consumption.")
-        else:
-            logger.warning("Could not determine experiment output path. Test set splitting might fail in Writer!")
+        # 3. Store test pool in dataset for writer to use
+        dataset.fixed_test_pairs = test_pool
+        logger.info(f"Stored {len(test_pool)} test pairs in dataset.fixed_test_pairs for Writer.")
 
-        # 4. Update Dataset
-        # ONLY include the reduced training set.
-        # The Test Set is safely stored in fixed_test_pairs.json and the Writer
-        # will load it from there without needing it in dataset.aligned_entities.
+        # 4. Update Dataset - only training pairs in aligned_entities
         dataset.aligned_entities = train_retained
-        
+
         logger.info(
-            "Reduction complete. \n"
+            "Reduction complete.\n"
             f"  - Original Total Aligned: {total_original}\n"
-            f"  - Train Pool: {len(train_pool)} -> Reduced to: {len(train_retained)} (Sent to pipeline)\n"
-            f"  - Test Pool (Protected): {len(test_pool)} (Saved to JSON)\n"
+            f"  - Train Pool: {len(train_pool)} -> Reduced to: {len(train_retained)}\n"
+            f"  - Test Pool (Fixed): {len(test_pool)}"
         )
         logger.info("[SUCCESS] ForgetLabels reduction finished")
 
