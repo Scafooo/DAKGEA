@@ -40,13 +40,15 @@ def create_config(
     dataset_path: str,
     retention_ratio: float,
     aug_ratio: float,
+    red_idx: str,
+    aug_idx: str,
 ) -> Dict:
     writer = "bert_int"
 
     config = {
         "experiment": {
             "suite": f"forget_labels_{MODEL}",
-            "name": f"{dataset_name}_forget_{retention_ratio:.1f}_{aug_ratio:.1f}",
+            "name": f"{dataset_name}_{red_idx}_{aug_idx}",
             "dataset": {
                 "name": dataset_path,
                 "writer": writer,
@@ -88,16 +90,10 @@ def main():
     for dataset_name, dataset_path in DATASETS:
         for red_idx, red_ratio in RATIOS:
             for aug_idx, aug_ratio in AUG_RATIOS:
-                # We typically match reduction and augmentation ratios in massive experiments
-                # e.g. 10% labels + 10% synth, 20% + 20%, etc.
-                # But generating cross-product is fine too.
-                # Let's generate diagonal (same ratios) and maybe some fixed ones if needed.
-                # For now, let's do full cross product like massive script.
-                
                 filename = f"{dataset_name}_{red_idx}_{aug_idx}.yaml"
                 filepath = output_dir / filename
                 
-                config = create_config(dataset_name, dataset_path, red_ratio, aug_ratio)
+                config = create_config(dataset_name, dataset_path, red_ratio, aug_ratio, red_idx, aug_idx)
                 
                 with open(filepath, "w") as f:
                     yaml.dump(config, f, sort_keys=False)

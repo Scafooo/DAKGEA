@@ -16,7 +16,16 @@ class ForgetLabelsReducer(RandomEntitiesReducer):
     Used for 'Forget Labels' experiments where we test label efficiency.
     
     This implementation overrides RandomEntitiesReducer to skip the _prune_graphs step.
+    It also correctly handles 'ratio' from configuration if 'target_entities' is not specified.
     """
+
+    def __init__(self, config):
+        super().__init__(config)
+        reduction_cfg = self.config.get("reduction", {})
+        self.ratio = reduction_cfg.get("ratio")
+        
+        # If target_entities is default (1) but ratio is provided, we will calculate target later
+        # We store ratio to use it in reduce()
 
     def reduce(self, dataset: Dataset) -> Dataset:
         logger.info("[STEP] ForgetLabels (No-Prune) reduction started")
@@ -28,7 +37,13 @@ class ForgetLabelsReducer(RandomEntitiesReducer):
             dataset.aligned_entities = aligned_set
             return dataset
 
-        target_pairs = min(self.target_entities, total_pairs)
+        # Calculate target pairs based on ratio if available, otherwise use target_entities
+        if self.ratio is not None:
+            target_pairs = max(1, int(total_pairs * float(self.ratio)))
+            logger.info(f"Calculated target pairs from ratio {self.ratio}: {target_pairs}")
+        else:
+            target_pairs = min(self.target_entities, total_pairs)
+
         remove_count = total_pairs - target_pairs
 
         logger.info(
@@ -60,9 +75,6 @@ class ForgetLabelsReducer(RandomEntitiesReducer):
         dataset.aligned_entities = remaining
         
         # We also skip _filter_alignment because we want to keep the graph intact.
-        # If we filtered, we might accidentally remove pairs if the graph was somehow inconsistent,
-        # but since we didn't prune, the graph should support all original pairs.
-        # However, checking consistency is fine.
         # if self.filter_alignment:
         #     dataset.aligned_entities = self._filter_alignment(dataset)
 

@@ -1,6 +1,6 @@
 experiment:
   suite: forget_labels_bert_int
-  name: ICEW_YAGO_forget_0.7_0.7
+  name: ICEW_YAGO_07_07
   dataset:
     name: openea/ICEW_YAGO
     writer: bert_int

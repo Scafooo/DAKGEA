@@ -1,6 +1,6 @@
 experiment:
   suite: forget_labels_bert_int
-  name: ICEW_WIKI_forget_1.0_0.7
+  name: ICEW_WIKI_10_07
   dataset:
     name: openea/ICEW_WIKI
     writer: bert_int

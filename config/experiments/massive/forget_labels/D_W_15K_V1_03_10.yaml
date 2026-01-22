@@ -1,6 +1,6 @@
 experiment:
   suite: forget_labels_bert_int
-  name: D_W_15K_V1_forget_0.3_1.0
+  name: D_W_15K_V1_03_10
   dataset:
     name: openea/D_W_15K_V1
     writer: bert_int

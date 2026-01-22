@@ -1,6 +1,6 @@
 experiment:
   suite: forget_labels_bert_int
-  name: BBC_DB_forget_1.0_0.7
+  name: BBC_DB_10_07
   dataset:
     name: openea/BBC_DB
     writer: bert_int
