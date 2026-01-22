@@ -1,37 +1,41 @@
 #!/usr/bin/env bash
 # ============================================================
-#  Forget Labels Experiment Launcher
-#  Mirror behavior of scripts/run_experiment.sh but for custom mode
+#  Forget Labels Experiment Runner
+#  Runs an experiment with the custom Forget Labels runner
 # ============================================================
 
-set -euo pipefail
-
-# ---------- Configuration ----------
-DEFAULT_JOBS=2
-DEFAULT_GPU_ID=0
-TIMEOUT=7200
+# ============================================================ 
+#  EXPERIMENT SELECTION
+#  Modify this line to select a different experiment
+#  can be also a directory containing multiple experiments
+# ============================================================
+EXPERIMENT="${EXPERIMENT:-config/experiments/massive/forget_labels}"
 
 # ---------- Helpers ----------
 term_width() { tput cols 2>/dev/null || echo 80; }
 full_line() { printf '%*s\n' "$(term_width)" '' | tr ' ' "$1"; }
 
+# ---------- Clear screen + banner ----------
+clear
+full_line '-'
+printf "%*s\n" $((($(term_width) + 40) / 2)) "Forget Labels Experiment Runner"
+full_line '-'
+
 # ---------- Setup paths ----------
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_ROOT="$( cd "${SCRIPT_DIR}/../.." && pwd )"
-export PROJECT_ROOT
 export PYTHONPATH="${PROJECT_ROOT}"
-
-# Default experiment target if none provided
-FORGET_LABELS_ROOT="config/experiments/massive/forget_labels"
-FILE_NAME="${1:-${FORGET_LABELS_ROOT}}"
+export PYTHONHASHSEED=0
+FILE_NAME="${1:-${RUN_CONFIG:-${EXPERIMENT}}}"
 
 # ---------- Resolve configuration target (file or directory) ----------
 resolve_target_path() {
     local candidate="$1"
     local search_paths=(
         "$candidate"
-        "${PROJECT_ROOT}/${candidate}"
+        "${PROJECT_ROOT}/config/experiments/${candidate}"
         "${PROJECT_ROOT}/config/experiments/massive/${candidate}"
+        "${PROJECT_ROOT}/${candidate}"
     )
     for p in "${search_paths[@]}"; do
         if [[ -f "$p" || -d "$p" ]]; then
@@ -40,6 +44,10 @@ resolve_target_path() {
         fi
         if [[ -f "$p.yaml" ]]; then
             echo "$p.yaml"
+            return 0
+        fi
+        if [[ -f "$p.yml" ]]; then
+            echo "$p.yml"
             return 0
         fi
     done
@@ -58,67 +66,92 @@ if [[ -d "$TARGET_PATH" ]]; then
         echo "❌ No YAML configuration files found in directory: ${TARGET_PATH}"
         exit 1
     fi
+    echo "Found the following configurations in ${TARGET_PATH}:"
+    for cfg in "${CONFIG_SET[@]}"; do
+        echo "  - ${cfg}"
+    done
+    echo ""
+    read -r -p "Run all ${#CONFIG_SET[@]} configurations? [y/N] " CONFIRM
+    case "${CONFIRM,,}" in
+        y|yes)
+            ;;
+        *)
+            echo "ℹ️  Aborted by user."
+            exit 0
+            ;;
+    esac
 else
     MODE="single"
     CONFIG_SET=("$TARGET_PATH")
 fi
 
-# ---------- Banner ----------
-clear
-full_line '-'
-printf "%*s\n" $((($(term_width) + 40) / 2)) "Forget Labels Experiment Runner"
+# ---------- Activate virtual environment ----------
+if [ -f "${PROJECT_ROOT}/.venv/bin/activate" ]; then
+    source "${PROJECT_ROOT}/.venv/bin/activate"
+elif [ -f "${PROJECT_ROOT}/.venv/Scripts/activate" ]; then  # Windows
+    source "${PROJECT_ROOT}/.venv/Scripts/activate"
+fi
+
+# ---------- Runtime info ----------
+BRANCH=$(git -C "$PROJECT_ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "no-git")
+if command -v nvidia-smi >/dev/null 2>&1; then
+    GPU=$(nvidia-smi --query-gpu=name --format=csv,noheader 2>/dev/null | head -n 1)
+    if [[ -z "$GPU" || "$GPU" == ERROR* ]]; then
+        GPU=$(nvidia-smi -L 2>/dev/null | head -n 1 | sed 's/^GPU [0-9]\+: //')
+    fi
+    [[ -z "$GPU" ]] && GPU="Unknown GPU"
+else
+    GPU="CPU only"
+fi
+
 full_line '-'
 echo "📂 Project root : ${PROJECT_ROOT}"
+echo "🐍 Python path  : ${PYTHONPATH}"
+echo "🔢 Hash seed    : ${PYTHONHASHSEED} (deterministic) ⚠️ NOT WORKING"
+echo "💼 Environment  : ${VIRTUAL_ENV:-system Python}"
 if [[ "$MODE" == "single" ]]; then
     echo "📘 Config file  : ${CONFIG_SET[0]}"
 else
     echo "📁 Config dir   : ${TARGET_PATH}"
     echo "🧪 Config count : ${#CONFIG_SET[@]}"
 fi
+echo "🌿 Git branch   : ${BRANCH}"
+echo "💻 Hardware     : ${GPU}"
+echo "🕓 Started at   : $(date '+%Y-%m-%d %H:%M:%S %Z')"
 full_line '-'
 
-# ---------- Confirmation ----------
-if [[ "$MODE" == "batch" ]]; then
-    read -r -p "Run all ${#CONFIG_SET[@]} configurations in parallel? [y/N] " CONFIRM
-    case "${CONFIRM,,}" in
-        y|yes) ;; 
-        *) echo "ℹ️ Aborted."; exit 0 ;; 
-    esac
-fi
+# ---------- Run experiment(s) ----------
+OVERALL_EXIT=0
+FAILED_RUNS=()
 
-# ---------- Parallel Setup ----------
-if command -v parallel &> /dev/null; then
-    PARALLEL_BIN="parallel"
-elif [ -f "${PROJECT_ROOT}/.local/bin/parallel" ]; then
-    PARALLEL_BIN="${PROJECT_ROOT}/.local/bin/parallel"
+# CUSTOM RUNNER SCRIPT
+CUSTOM_RUNNER="${SCRIPT_DIR}/run.py"
+
+for CONFIG_FILE in "${CONFIG_SET[@]}"; do
+    echo ""
+    full_line '=' 
+    echo "▶️  Running configuration: ${CONFIG_FILE}"
+    python "${CUSTOM_RUNNER}" "${CONFIG_FILE}"
+    RUN_EXIT=$?
+    if [[ $RUN_EXIT -eq 0 ]]; then
+        echo "✅ Completed: ${CONFIG_FILE}"
+    else
+        echo "❌ Failed (${RUN_EXIT}): ${CONFIG_FILE}"
+        FAILED_RUNS+=("${CONFIG_FILE} [exit ${RUN_EXIT}]")
+        OVERALL_EXIT=$RUN_EXIT
+    fi
+    full_line '='
+done
+
+echo ""
+if [[ ${#FAILED_RUNS[@]} -eq 0 ]]; then
+    echo "✅ All experiments completed successfully!"
 else
-    echo "⚠️ GNU Parallel not found. Running sequentially."
-    PARALLEL_BIN=""
-fi
-
-export GPU_ID="${DEFAULT_GPU_ID}"
-LOG_DIR="${PROJECT_ROOT}/results/logs/forget_labels_run_$(date +%Y%m%d_%H%M%S)"
-mkdir -p "${LOG_DIR}"
-JOBLOG="${LOG_DIR}/joblog.txt"
-
-# ---------- Run ----------
-if [[ -n "${PARALLEL_BIN}" && "$MODE" == "batch" ]]; then
-    echo "▶️ Starting parallel execution (Jobs: ${DEFAULT_JOBS}, GPU: ${DEFAULT_GPU_ID})..."
-    "${PARALLEL_BIN}" --will-cite --jobs "${DEFAULT_JOBS}" \
-        --joblog "${JOBLOG}" --timeout "${TIMEOUT}" --progress \
-        --results "${LOG_DIR}" \
-        bash "${SCRIPT_DIR}/_run_single_experiment.sh" ::: "${CONFIG_SET[@]}"
-else
-    for CONFIG_FILE in "${CONFIG_SET[@]}"; do
-        echo ""
-        full_line '='
-        echo "▶️ Running configuration: ${CONFIG_FILE}"
-        bash "${SCRIPT_DIR}/_run_single_experiment.sh" "${CONFIG_FILE}"
-        full_line '='
+    echo "❌ ${#FAILED_RUNS[@]} experiment(s) failed:"
+    for entry in "${FAILED_RUNS[@]}"; do
+        echo "   - ${entry}"
     done
 fi
 
-echo ""
 full_line '-'
-echo "✅ Done! Logs available in: ${LOG_DIR}"
-full_line '-'
+exit $OVERALL_EXIT
