@@ -17,14 +17,17 @@ CONFIG_DIR = PROJECT_ROOT / "config" / "experiments" / "massive" / "forget_label
 DATASETS = [
     ("BBC_DB", "openea/BBC_DB"),
     ("D_W_15K_V1", "openea/D_W_15K_V1"),
+    ("D_W_15K_V2", "openea/D_W_15K_V2"),
+    ("ICEW_WIKI", "openea/ICEW_WIKI"),
+    ("ICEW_YAGO", "openea/ICEW_YAGO"),
 ]
 
 # Ratios (Retention ratios): 0.1 to 1.0
 # 0.1 means we KEEP 10% of labels and FORGET 90%
-RATIOS = [(f"{i:02d}", i * 0.1) for i in range(1, 11)]
+RATIOS = [(f"{i:02d}", round(i * 0.1, 1)) for i in range(1, 11)]
 
 # Augmentation Ratios: Same as retention ratios usually
-AUG_RATIOS = [(f"{i:02d}", i * 0.1) for i in range(1, 11)]
+AUG_RATIOS = [(f"{i:02d}", round(i * 0.1, 1)) for i in range(1, 11)]
 
 # Model
 MODEL = "bert_int"

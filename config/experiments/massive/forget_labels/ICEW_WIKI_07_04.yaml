@@ -1,0 +1,26 @@
+experiment:
+  suite: forget_labels_bert_int
+  name: ICEW_WIKI_forget_0.7_0.4
+  dataset:
+    name: openea/ICEW_WIKI
+    writer: bert_int
+  reduction:
+    method: forget_labels
+    ratio: 0.7
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm
+    ratio: 0.4
+    writer:
+      type: bert_int
+      augmented_only_train: true
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: false
