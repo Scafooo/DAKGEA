@@ -1,94 +1,165 @@
 import logging
 import random
-from typing import Set, Tuple
+import json
+import os
+from pathlib import Path
+from typing import Set, Tuple, Dict
 from rdflib import URIRef
 
 from src.core.dataset import Dataset
 from src.reduction.methods.random_entities.reducer_random_entities import RandomEntitiesReducer
 from src.reduction.registry import REDUCTION_REGISTRY
+from src.utils.reader import read_tsv
 
 logger = logging.getLogger(__name__)
 
 @REDUCTION_REGISTRY.register("forget_labels")
 class ForgetLabelsReducer(RandomEntitiesReducer):
-    """
-    Randomly reduces alignment labels but KEEPS the graph structure intact (prune_graphs=False).
-    Used for 'Forget Labels' experiments where we test label efficiency.
-    
-    This implementation overrides RandomEntitiesReducer to skip the _prune_graphs step.
-    It also correctly handles 'ratio' from configuration if 'target_entities' is not specified.
-    """
-
     def __init__(self, config):
         super().__init__(config)
         reduction_cfg = self.config.get("reduction", {})
         self.ratio = reduction_cfg.get("ratio")
         
-        # If target_entities is default (1) but ratio is provided, we will calculate target later
-        # We store ratio to use it in reduce()
+        # Extract dataset name correctly
+        # Try multiple paths in config structure
+        ds_cfg = self.config.get("dataset", {})
+        self.dataset_name = ds_cfg.get("name", "")
+        
+        # Extract experiment info for path construction
+        exp_cfg = self.config.get("experiment", {})
+        self.suite_name = exp_cfg.get("suite", "")
+        self.exp_name = exp_cfg.get("name", "")
+        
+        self.raw_data_root = Path("data/raw") 
+        if not self.raw_data_root.exists():
+             self.raw_data_root = Path(".")
+
+    def _load_split_pairs(self, dataset_name: str) -> Tuple[Set, Set]:
+        # Clean dataset name (remove openea/ prefix if present for search)
+        clean_name = dataset_name.replace("openea/", "")
+        
+        candidates = [
+            self.raw_data_root / "openea" / clean_name,
+            self.raw_data_root / clean_name,
+            Path(dataset_name)
+        ]
+        
+        found_dir = None
+        for p in candidates:
+            # Check for attribute_data subdir which usually contains the splits
+            if p.exists():
+                if (p / "attribute_data" / "ent_ids_1").exists():
+                    found_dir = p / "attribute_data"
+                    break
+                if (p / "ent_ids_1").exists():
+                    found_dir = p
+                    break
+        
+        if not found_dir:
+            logger.warning(f"Could not locate raw files for '{dataset_name}' (cleaned: '{clean_name}'). Checked: {[str(c) for c in candidates]}. Performing random 20/80 split.")
+            return None, None
+
+        logger.info(f"Loading original splits from {found_dir}")
+        
+        # Load ID mapping
+        ent_ids = {}
+        for fname in ["ent_ids_1", "ent_ids_2"]:
+            fpath = found_dir / fname
+            if fpath.exists():
+                for src, dst in read_tsv(fpath):
+                    ent_ids[src] = dst
+        
+        def load_pairs(fname) -> Set[Tuple[URIRef, URIRef]]:
+            pairs = set()
+            fpath = found_dir / fname
+            if fpath.exists():
+                for left, right in read_tsv(fpath):
+                    if left in ent_ids and right in ent_ids:
+                        pairs.add((URIRef(ent_ids[left]), URIRef(ent_ids[right])))
+            return pairs
+
+        train_pairs = load_pairs("sup_pairs")
+        test_pairs = load_pairs("ref_pairs")
+        valid_pairs = load_pairs("valid_pairs")
+        
+        final_test = test_pairs.union(valid_pairs)
+        return train_pairs, final_test
 
     def reduce(self, dataset: Dataset) -> Dataset:
-        logger.info("[STEP] ForgetLabels (No-Prune) reduction started")
-        aligned_set = self._normalise_alignment(dataset.aligned_entities)
-        total_pairs = len(aligned_set)
-
-        if total_pairs == 0:
-            logger.warning("Dataset has no aligned entities; skipping reduction.")
-            dataset.aligned_entities = aligned_set
-            return dataset
-
-        # Calculate target pairs based on ratio if available, otherwise use target_entities
-        if self.ratio is not None:
-            target_pairs = max(1, int(total_pairs * float(self.ratio)))
-            logger.info(f"Calculated target pairs from ratio {self.ratio}: {target_pairs}")
-        else:
-            target_pairs = min(self.target_entities, total_pairs)
-
-        remove_count = total_pairs - target_pairs
-
-        logger.info(
-            "Reducing dataset to %d aligned entity pairs (from %d) using random sampling. Graphs will remain UNCHANGED.",
-            target_pairs,
-            total_pairs,
-        )
-        logger.debug("Random reduction seed: %s", self.seed)
-
-        source_size_before = len(dataset.knowledge_graph_source)
-        target_size_before = len(dataset.knowledge_graph_target)
-
-        if remove_count > 0:
-            to_remove = self._sample_pairs_to_remove(aligned_set, remove_count, self.seed)
-            logger.debug("Selected %d alignment pairs for removal (forgetting).", len(to_remove))
-            
-            # CRITICAL CHANGE: We do NOT call _prune_graphs here.
-            # self._prune_graphs(dataset, to_remove) 
-            
-            remaining = aligned_set - to_remove
-        else:
-            logger.info(
-                "Target pair count (%d) >= available pairs (%d); nothing to remove.",
-                target_pairs,
-                total_pairs,
-            )
-            remaining = aligned_set
-
-        dataset.aligned_entities = remaining
+        logger.info(f"[STEP] ForgetLabels (Split-Aware) reduction started for {self.dataset_name}")
         
-        # We also skip _filter_alignment because we want to keep the graph intact.
-        # if self.filter_alignment:
-        #     dataset.aligned_entities = self._filter_alignment(dataset)
+        all_aligned = self._normalise_alignment(dataset.aligned_entities)
+        total_original = len(all_aligned)
+        
+        # 1. Identify Splits
+        train_pool, test_pool = self._load_split_pairs(self.dataset_name)
+        
+        if train_pool is None:
+            # Fallback: Random 20/80 split
+            all_list = list(all_aligned)
+            random.seed(self.seed)
+            random.shuffle(all_list)
+            split_idx = int(len(all_list) * 0.2)
+            train_pool = set(all_list[:split_idx])
+            test_pool = set(all_list[split_idx:])
+        else:
+            # Filter loaded pools
+            train_pool = train_pool.intersection(all_aligned)
+            test_pool = test_pool.intersection(all_aligned)
+            
+            remaining = all_aligned - train_pool - test_pool
+            if remaining:
+                logger.info(f"Found {len(remaining)} pairs not in standard splits. Adding to Test pool.")
+                test_pool.update(remaining)
 
-        source_size_after = len(dataset.knowledge_graph_source)
-        target_size_after = len(dataset.knowledge_graph_target)
+        logger.info(f"Split Layout: Training Pool: {len(train_pool)}, Test Pool: {len(test_pool)}")
 
+        # 2. Apply Reduction ONLY to Training Pool
+        if self.ratio is not None:
+            keep_count = max(1, int(len(train_pool) * float(self.ratio)))
+        else:
+            keep_count = min(self.target_entities, len(train_pool))
+            
+        logger.info(f"Applying Retention Ratio {self.ratio}: Keeping {keep_count} of {len(train_pool)} training pairs.")
+        
+        train_list = sorted(list(train_pool), key=lambda p: (str(p[0]), str(p[1])))
+        rng = random.Random(self.seed)
+        train_retained = set(rng.sample(train_list, keep_count))
+        
+        # 3. Save Test Pool to fixed_test_pairs.json in RESULTS DIR
+        # Construct path based on experiment naming convention
+        # Expected: results/{suite}/{name}/reduction/fixed_test_pairs.json
+        # Writer looks in parent.parent of its output.
+        # Writer output is: results/{suite}/{name}/reduction/dataset/bert_int
+        # Parent: .../dataset
+        # Parent.Parent: .../reduction
+        
+        if self.suite_name and self.exp_name:
+            output_dir = Path(f"results/{self.suite_name}/{self.exp_name}/reduction")
+            output_path = output_dir / "fixed_test_pairs.json"
+            
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            test_pairs_list = [[str(s), str(t)] for s, t in test_pool]
+            data = {"pairs": test_pairs_list}
+            
+            with open(output_path, "w") as f:
+                json.dump(data, f)
+            
+            logger.info(f"Saved {len(test_pool)} test pairs to '{output_path}' for Writer consumption.")
+        else:
+            logger.warning("Could not determine experiment output path. Test set splitting might fail in Writer!")
+
+        # 4. Update Dataset
+        final_alignment = train_retained.union(test_pool)
+        dataset.aligned_entities = final_alignment
+        
         logger.info(
-            "Reduction complete. Source triples: %d → %d; target triples: %d → %d; aligned pairs: %d → %d.",
-            source_size_before,
-            source_size_after,
-            target_size_before,
-            target_size_after,
-            total_pairs,
-            len(dataset.aligned_entities),
+            "Reduction complete. \n"
+            f"  - Original Total: {total_original}\n"
+            f"  - Train Pool: {len(train_pool)} -> Reduced to: {len(train_retained)}\n"
+            f"  - Test Pool (Protected): {len(test_pool)}\n"
+            f"  - Final Aligned Entities passed to pipeline: {len(dataset.aligned_entities)}\n"
         )
         logger.info("[SUCCESS] ForgetLabels reduction finished")
 

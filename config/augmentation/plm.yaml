@@ -35,7 +35,7 @@ augmentation:
     batch_size: 8                 # Training batch size (8 for bart-base)
     learning_rate: 5.0e-5         # Learning rate
     force_retrain: false          # Force retraining even if model exists
-    max_train_samples: 4000       # Maximum training samples (null = unlimited)
+    max_train_samples: null       # Maximum training samples (null = unlimited)
     val_split: 0.1                # Validation split ratio
     patience: 3                   # Early stopping patience (stop if no improvement)
     max_per_predicate: 5000       # Max examples per predicate
