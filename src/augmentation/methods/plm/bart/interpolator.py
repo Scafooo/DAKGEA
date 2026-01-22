@@ -16,6 +16,17 @@ def _simple_clean(x: str) -> str:
     """Simple text cleaning function."""
     if not x:
         return x
+    
+    # Fix broken unicode escapes (e.g. "Mu00e9nchen" -> "München")
+    # This happens when unicode characters are blindly stringified without proper encoding
+    try:
+        if "u00" in x:
+            # Replace literal uXXXX with \uXXXX and decode
+            x_escaped = re.sub(r'(?<!\\)u([0-9a-fA-F]{4})', r'\\u\1', x)
+            x = x_escaped.encode('utf-8').decode('unicode_escape')
+    except Exception:
+        pass
+
     x = re.sub(r"http\S+", "", x)
     x = re.sub(r"\s+", " ", x)
     x = re.sub(r"[^\w\s\.\-']", " ", x)

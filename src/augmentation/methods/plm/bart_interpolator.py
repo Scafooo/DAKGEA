@@ -139,6 +139,15 @@ def _clean_pred(p, kg=None) -> str:
 def _simple_clean(x: str) -> str:
     if not x:
         return x
+    
+    # Fix broken unicode escapes (e.g. "Mu00e9nchen" -> "München")
+    try:
+        if "u00" in x:
+            x_escaped = re.sub(r'(?<!\\)u([0-9a-fA-F]{4})', r'\\u\1', x)
+            x = x_escaped.encode('utf-8').decode('unicode_escape')
+    except Exception:
+        pass
+
     x = re.sub(r"http\S+", "", x)
     x = re.sub(r"\s+", " ", x)
     x = re.sub(r"[^\w\s\.\-']", " ", x)
