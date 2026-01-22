@@ -1,0 +1,40 @@
+# Supervision Level Experiment Configuration - BBC_DB Dataset
+# BBC-DB is a smaller dataset, good for initial testing
+
+supervision_experiment:
+  name: supervision_bbc_db
+
+  # BBC_DB dataset
+  dataset_name: openea/BBC_DB
+
+  # Pool/Test split ratio
+  pool_ratio: 0.2  # 20% pool, 80% test
+
+  # Supervision levels to test
+  levels:
+    - 0.1   # 10%
+    - 0.2   # 20%
+    - 0.3   # 30%
+    - 0.5   # 50%
+    - 0.7   # 70%
+    - 1.0   # 100%
+
+  # Augmentation configuration
+  augmentation_method: plm
+  augmentation_ratio: 0.5
+
+  augmentation_config:
+    max_depth: 2
+    bart:
+      enable_finetuning: true
+      force_retrain: false
+      epochs: 10
+      batch_size: 8
+
+  models:
+    - bert_int
+
+  seed: 42
+  output_dir: results/supervision/bbc_db
+  writer: bert_int
+  resume: true

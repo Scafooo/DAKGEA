@@ -1,0 +1,62 @@
+# Supervision Level Experiment Configuration
+# Tests data augmentation effectiveness at various training data sizes
+#
+# Experimental Setup:
+# 1. Split M_gold into M_pool (20%) and M_test (80%)
+# 2. For each r% in levels: sample r% of M_pool as M_train
+# 3. Compare: Baseline (M_train only) vs Augmented (M_train + M_aug)
+# 4. Evaluate on FIXED M_test (same for all r levels)
+
+supervision_experiment:
+  # Experiment name (used for output directory)
+  name: supervision_dw15k_v1
+
+  # Dataset to use (path relative to data/raw/)
+  dataset_name: openea/D_W_15K_V1
+
+  # Pool/Test split ratio (pool is used for training, test is held out)
+  pool_ratio: 0.2  # 20% pool, 80% test
+
+  # Supervision levels to test (fraction of pool used for training)
+  # 0.1 = 10% of pool (= 2% of total data)
+  # 1.0 = 100% of pool (= 20% of total data)
+  levels:
+    - 0.1   # 10%
+    - 0.2   # 20%
+    - 0.3   # 30%
+    - 0.4   # 40%
+    - 0.5   # 50%
+    - 0.6   # 60%
+    - 0.7   # 70%
+    - 0.8   # 80%
+    - 0.9   # 90%
+    - 1.0   # 100%
+
+  # Augmentation configuration
+  augmentation_method: plm
+  augmentation_ratio: 0.5  # Generate 50% more aligned pairs
+
+  # Additional augmentation config (merged with defaults from plm.yaml)
+  augmentation_config:
+    max_depth: 2  # BFS depth for expansion
+    bart:
+      enable_finetuning: true
+      force_retrain: false  # Reuse fine-tuned model if available
+      epochs: 10
+      batch_size: 8
+
+  # Alignment models to evaluate
+  models:
+    - bert_int
+
+  # Random seed for reproducibility
+  seed: 42
+
+  # Output directory (relative to project root)
+  output_dir: results/supervision/dw15k_v1
+
+  # Dataset writer format
+  writer: bert_int
+
+  # Resume from cached results if available
+  resume: true

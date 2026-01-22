@@ -4,13 +4,17 @@ This module provides tools for running experiments at various supervision levels
 measuring how augmentation helps when training data is limited.
 
 Usage:
-    python -m experiments.supervision.runner config/experiments/supervision_example.yaml
+    # Using bash script (recommended)
+    ./scripts/run_supervision_experiment.sh supervision_dw15k
+
+    # Or directly with Python
+    python -m experiments.supervision.run_supervision config/experiments/supervision_dw15k.yaml
 """
 
 from .splitter import SupervisionExperimentSplitter, SupervisionSplit, SupervisionLevelData
 from .config import SupervisionExperimentConfig
 from .writer import SupervisionExperimentWriter
-from .runner import SupervisionExperimentRunner
+from .run_supervision import SupervisionExperimentOrchestrator
 
 __all__ = [
     "SupervisionExperimentSplitter",
@@ -18,5 +22,5 @@ __all__ = [
     "SupervisionLevelData",
     "SupervisionExperimentConfig",
     "SupervisionExperimentWriter",
-    "SupervisionExperimentRunner",
+    "SupervisionExperimentOrchestrator",
 ]

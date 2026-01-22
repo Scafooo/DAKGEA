@@ -3,9 +3,11 @@
 Writes datasets in the format expected by the original BERT-INT implementation.
 """
 
+import json
 import os
 import unicodedata
 from pathlib import Path
+from typing import Optional, Set, Tuple
 
 from src.core.dataset.dataset import Dataset
 from src.core.dataset.writer.dataset_writer_base import DatasetWriter
@@ -68,7 +70,14 @@ class BertIntWriter(DatasetWriter):
         Args:
             dataset: Dataset containing aligned entities
             dir_path: Directory path where files will be written
+
+        Note:
+            If a fixed_test_pairs.json file exists in the parent directory (from
+            supervision mode reducer), it will be used as the fixed test set.
         """
+        # Check for fixed test set from supervision mode
+        fixed_test_pairs = self._load_fixed_test_pairs(dir_path)
+
         # Read entity ID mappings created by KG writer
         ent_ids_1 = read_tsv(os.path.join(dir_path, "ent_ids_1"))
         ent_ids_2 = read_tsv(os.path.join(dir_path, "ent_ids_2"))
@@ -110,7 +119,47 @@ class BertIntWriter(DatasetWriter):
                 f"Sample: {sample}"
             )
 
-        if self.augmented_only_train:
+        # SUPERVISION MODE: Use fixed test set if available
+        if fixed_test_pairs is not None:
+            # Dataset aligned_entities = training pairs
+            # Fixed test pairs from file = test set
+            train_pairs = list_aligned_entities
+
+            # Separate augmented from original in training
+            original_train = []
+            augmented_train = []
+            for e1, e2 in train_pairs:
+                if "_aug" in e1 or "_aug" in e2:
+                    augmented_train.append((e1, e2))
+                else:
+                    original_train.append((e1, e2))
+
+            # Filter fixed test pairs to valid entities
+            test_pairs = []
+            for e1, e2 in fixed_test_pairs:
+                e1_norm = norm_entity(e1)
+                e2_norm = norm_entity(e2)
+                if e1_norm in ent_ids and e2_norm in ent_ids:
+                    test_pairs.append((e1_norm, e2_norm))
+
+            # Validation: 10% from original training
+            n_valid = max(1, int(len(original_train) * 0.1))
+            valid_list = original_train[:n_valid]
+            train_list = original_train[n_valid:] + augmented_train
+
+            logger.info(
+                f"[SUPERVISION MODE] Fixed test set: {len(test_pairs)} pairs"
+            )
+            logger.info(
+                f"Training: {len(train_list)} ({len(original_train)-n_valid} original + "
+                f"{len(augmented_train)} augmented), Valid: {len(valid_list)}"
+            )
+
+            sup_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in train_list]
+            ref_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in test_pairs]
+            valid_pairs = [[ent_ids[e1], ent_ids[e2]] for e1, e2 in valid_list]
+
+        elif self.augmented_only_train:
             original_pairs = []
             augmented_pairs = []
 
@@ -176,3 +225,34 @@ class BertIntWriter(DatasetWriter):
             f"Wrote alignment files: sup_pairs ({len(sup_pairs)}), "
             f"ref_pairs ({len(ref_pairs)}), valid_pairs ({len(valid_pairs)})"
         )
+
+    def _load_fixed_test_pairs(self, dir_path: str) -> Optional[Set[Tuple[str, str]]]:
+        """Load fixed test pairs from supervision mode reducer if available.
+
+        Looks for fixed_test_pairs.json in parent directory (reduction root).
+
+        Returns:
+            Set of (source_uri, target_uri) tuples, or None if not found
+        """
+        # Check parent directory for fixed_test_pairs.json
+        parent = Path(dir_path).parent
+        candidates = [
+            parent / "fixed_test_pairs.json",
+            parent.parent / "fixed_test_pairs.json",
+            parent.parent / "reduction" / "fixed_test_pairs.json",
+        ]
+
+        for test_file in candidates:
+            if test_file.exists():
+                try:
+                    with test_file.open("r") as f:
+                        data = json.load(f)
+                    pairs = set((e1, e2) for e1, e2 in data.get("pairs", []))
+                    logger.info(
+                        f"Loaded fixed test set from {test_file}: {len(pairs)} pairs"
+                    )
+                    return pairs
+                except (json.JSONDecodeError, KeyError) as e:
+                    logger.warning(f"Failed to load fixed test pairs from {test_file}: {e}")
+
+        return None

@@ -1,0 +1,35 @@
+# Quick test config for supervision experiment (2 levels only)
+# Use this to verify the pipeline works before running full experiments
+
+supervision_experiment:
+  name: supervision_test_quick
+
+  # Use BBC_DB for quick testing (smaller dataset)
+  dataset_name: openea/BBC_DB
+
+  pool_ratio: 0.2
+
+  # Only test 2 levels for quick validation
+  levels:
+    - 0.5   # 50%
+    - 1.0   # 100%
+
+  augmentation_method: plm
+  augmentation_ratio: 0.3  # Lower ratio for faster testing
+
+  augmentation_config:
+    max_depth: 1  # Shallower for speed
+    bart:
+      enable_finetuning: true
+      force_retrain: false
+      epochs: 3  # Fewer epochs for testing
+      batch_size: 16
+      max_train_samples: 500  # Limit samples for speed
+
+  models:
+    - bert_int
+
+  seed: 42
+  output_dir: results/supervision/test_quick
+  writer: bert_int
+  resume: true
