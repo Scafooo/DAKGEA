@@ -9,6 +9,7 @@ REDUCTION_REGISTRY: Registry[type] = Registry("Reduction method")
 
 _BUILTIN_REDUCTION_MODULES: Iterable[str] = (
     "src.reduction.methods.random_entities",  # module registering RandomEntitiesReducer
+    "src.reduction.methods.alignment_only",   # module registering AlignmentOnlyReducer
     "src.reduction.methods.stub",              # stub reducer
 )
 
