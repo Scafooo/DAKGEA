@@ -30,4 +30,4 @@ fi
 
 # Run the experiment using the CUSTOM runner
 # Use GPU_ID if set, otherwise default to 0
-CUDA_VISIBLE_DEVICES="${GPU_ID:-0}" python "${PROJECT_ROOT}/scripts/forget_labels_mode/run.py" "${CONFIG_FILE}"
+CUDA_VISIBLE_DEVICES="${GPU_ID:-0}" python "${PROJECT_ROOT}/scripts/forget_labels_mode/run.py" "${CONFIG_FILE}" --overwrite-existing
