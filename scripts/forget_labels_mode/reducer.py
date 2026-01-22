@@ -17,18 +17,29 @@ logger = logging.getLogger(__name__)
 class ForgetLabelsReducer(RandomEntitiesReducer):
     def __init__(self, config):
         super().__init__(config)
-        reduction_cfg = self.config.get("reduction", {})
+        # Debug: logger.info(f"DEBUG REDUCER CONFIG: {config}")
+        
+        # Try to find 'experiment' section
+        exp_cfg = config.get("experiment", config) # fallback to root
+        reduction_cfg = exp_cfg.get("reduction", config.get("reduction", {}))
+        
         self.ratio = reduction_cfg.get("ratio")
         
         # Extract dataset name correctly
-        # Try multiple paths in config structure
-        ds_cfg = self.config.get("dataset", {})
-        self.dataset_name = ds_cfg.get("name", "")
+        ds_info = exp_cfg.get("dataset", config.get("dataset", {}))
+        if isinstance(ds_info, dict):
+            self.dataset_name = ds_info.get("name", "")
+        else:
+            self.dataset_name = str(ds_info)
         
         # Extract experiment info for path construction
-        exp_cfg = self.config.get("experiment", {})
         self.suite_name = exp_cfg.get("suite", "")
         self.exp_name = exp_cfg.get("name", "")
+        
+        if not self.suite_name:
+             self.suite_name = "forget_labels_bert_int" # default
+        
+        logger.info(f"[ForgetLabels] Initialized with dataset='{self.dataset_name}', suite='{self.suite_name}', exp='{self.exp_name}', ratio={self.ratio}")
         
         self.raw_data_root = Path("data/raw") 
         if not self.raw_data_root.exists():
@@ -151,15 +162,16 @@ class ForgetLabelsReducer(RandomEntitiesReducer):
             logger.warning("Could not determine experiment output path. Test set splitting might fail in Writer!")
 
         # 4. Update Dataset
-        final_alignment = train_retained.union(test_pool)
-        dataset.aligned_entities = final_alignment
+        # ONLY include the reduced training set.
+        # The Test Set is safely stored in fixed_test_pairs.json and the Writer
+        # will load it from there without needing it in dataset.aligned_entities.
+        dataset.aligned_entities = train_retained
         
         logger.info(
             "Reduction complete. \n"
-            f"  - Original Total: {total_original}\n"
-            f"  - Train Pool: {len(train_pool)} -> Reduced to: {len(train_retained)}\n"
-            f"  - Test Pool (Protected): {len(test_pool)}\n"
-            f"  - Final Aligned Entities passed to pipeline: {len(dataset.aligned_entities)}\n"
+            f"  - Original Total Aligned: {total_original}\n"
+            f"  - Train Pool: {len(train_pool)} -> Reduced to: {len(train_retained)} (Sent to pipeline)\n"
+            f"  - Test Pool (Protected): {len(test_pool)} (Saved to JSON)\n"
         )
         logger.info("[SUCCESS] ForgetLabels reduction finished")
 

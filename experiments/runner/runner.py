@@ -970,16 +970,23 @@ class ExperimentRunner:
     ) -> Dict[str, Any]:
         """Create a configuration payload passed to reducers, augmenters, and models."""
         cfg = dict(self.exp_cfg.get("parameters", {}))
+
+        # Copy reduction config if present (includes ratio, random_seed, etc.)
+        if "reduction" in self.exp_cfg and isinstance(self.exp_cfg["reduction"], dict):
+            cfg["reduction"] = dict(self.exp_cfg["reduction"])
+
         reduction_cfg = cfg.setdefault("reduction", {})
         reduction_cfg["target_entities"] = max(1, int(total_entities * ratio))
         experiment_meta = cfg.setdefault("experiment", {})
         experiment_meta.update(
             {
                 "name": self.name,
+                "suite": self.normalized_cfg.suite,
                 "dataset": dataset_name,
                 "ratio": ratio,
                 "ratio_tag": ratio_tag,
                 "reduction_method": self.reduction_method,
+                "seed": self.exp_cfg.get("seed"),
             }
         )
 
