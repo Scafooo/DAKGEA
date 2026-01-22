@@ -1,6 +1,6 @@
 # Attribute matches for D_W_15K_V1
 # Format: attr1 [,attr1.2,...] <TAB> attr2 [,attr2.2,...]
-# Generated with smart_attr_matcher.py - REVIEW MANUALLY!
+# Updated with verified matches
 
 # HIGH CONFIDENCE MATCHES (>= 0.95)
 http://dbpedia.org/ontology/alias	http://www.wikidata.org/entity/P1449,http://www.wikidata.org/entity/P742
@@ -27,11 +27,35 @@ http://dbpedia.org/ontology/releaseDate	http://www.wikidata.org/entity/P577
 http://dbpedia.org/ontology/timeInSpace	http://www.wikidata.org/entity/P2873
 http://dbpedia.org/ontology/title	http://www.wikidata.org/entity/P1476
 
-# MEDIUM CONFIDENCE MATCHES (0.80-0.95) - VERIFY MANUALLY
-# http://dbpedia.org/ontology/gridReference	http://www.wikidata.org/entity/P613
-# http://dbpedia.org/ontology/icdo	http://www.wikidata.org/entity/P563
-# http://dbpedia.org/ontology/inseeCode	http://www.wikidata.org/entity/P772
-# http://dbpedia.org/ontology/lastPublicationDate	http://www.wikidata.org/entity/P577
-# http://dbpedia.org/ontology/municipalityCode	http://www.wikidata.org/entity/P382,http://www.wikidata.org/entity/P1653,http://www.wikidata.org/entity/P374
-# http://dbpedia.org/ontology/networth	http://www.wikidata.org/entity/P2218
-# http://dbpedia.org/ontology/numberOfStations	http://www.wikidata.org/entity/P2437
+# ADDED - Verified semantic matches
+http://dbpedia.org/ontology/inseeCode	http://www.wikidata.org/entity/P374
+http://dbpedia.org/ontology/iso6391Code	http://www.wikidata.org/entity/P218
+http://dbpedia.org/ontology/iso6392Code	http://www.wikidata.org/entity/P219,http://www.wikidata.org/entity/P220
+http://dbpedia.org/ontology/iso6393Code	http://www.wikidata.org/entity/P219,http://www.wikidata.org/entity/P220
+http://dbpedia.org/ontology/meshId	http://www.wikidata.org/entity/P486
+http://dbpedia.org/ontology/municipalityCode	http://www.wikidata.org/entity/P771
+http://dbpedia.org/ontology/gridReference	http://www.wikidata.org/entity/P613
+http://dbpedia.org/ontology/icaoAirlineCode	http://www.wikidata.org/entity/P230,http://www.wikidata.org/entity/P239
+http://dbpedia.org/ontology/iataAirlineCode	http://www.wikidata.org/entity/P229,http://www.wikidata.org/entity/P238
+http://dbpedia.org/ontology/capacity	http://www.wikidata.org/entity/P1083
+http://dbpedia.org/ontology/nick	http://www.wikidata.org/entity/P1449
+http://dbpedia.org/ontology/openingDate	http://www.wikidata.org/entity/P1619
+http://dbpedia.org/ontology/openingYear	http://www.wikidata.org/entity/P1619
+http://dbpedia.org/ontology/deathYear	http://www.wikidata.org/entity/P570
+http://dbpedia.org/ontology/birthYear	http://www.wikidata.org/entity/P569
+http://dbpedia.org/ontology/oclc	http://www.wikidata.org/entity/P243
+http://dbpedia.org/ontology/isbn	http://www.wikidata.org/entity/P212,http://www.wikidata.org/entity/P957
+http://dbpedia.org/ontology/populationTotal	http://www.wikidata.org/entity/P1082
+http://dbpedia.org/ontology/icd9	http://www.wikidata.org/entity/P493,http://www.wikidata.org/entity/P563
+http://dbpedia.org/ontology/icd10	http://www.wikidata.org/entity/P494,http://www.wikidata.org/entity/P563
+http://dbpedia.org/ontology/percentageOfAreaWater	http://www.wikidata.org/entity/P2927
+http://dbpedia.org/ontology/numberOfVisitors	http://www.wikidata.org/entity/P1174
+http://dbpedia.org/ontology/firstPublicationDate	http://www.wikidata.org/entity/P577
+http://dbpedia.org/ontology/lastPublicationDate	http://www.wikidata.org/entity/P577
+http://dbpedia.org/ontology/commissioningDate	http://www.wikidata.org/entity/P577
+http://dbpedia.org/ontology/utcOffset	http://www.wikidata.org/entity/P2907
+http://dbpedia.org/ontology/elevation	http://www.wikidata.org/entity/P2044
+http://dbpedia.org/ontology/omim	http://www.wikidata.org/entity/P492
+http://dbpedia.org/ontology/numberOfTracks	http://www.wikidata.org/entity/P1103
+http://dbpedia.org/ontology/whaDraft	http://www.wikidata.org/entity/P2262
+http://dbpedia.org/ontology/motto	http://www.wikidata.org/entity/P1451

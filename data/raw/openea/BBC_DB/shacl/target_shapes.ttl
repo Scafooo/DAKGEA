@@ -1,0 +1,337 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dbp: <http://dbpedia.org/property/> .
+@prefix prop: <http://dbpedia.org/property/> .
+@prefix : <http://example.org/shapes/dbpedia#> .
+
+#
+# SHACL Shapes for DBpedia Knowledge Graph (Target)
+# Dataset: BBC_DB
+#
+
+# =============================================================================
+# Entity Shape - General constraints for DBpedia entities
+# =============================================================================
+
+:DBpediaEntityShape a sh:NodeShape ;
+    sh:targetSubjectsOf foaf:name, foaf:givenname, foaf:surname, dbo:birthdate, dbo:deathdate ;
+    sh:message "DBpedia entity validation" ;
+
+    # Each entity should have at least one name-related attribute
+    sh:or (
+        [ sh:path foaf:name ; sh:minCount 1 ]
+        [ sh:path foaf:givenname ; sh:minCount 1 ]
+        [ sh:path prop:name ; sh:minCount 1 ]
+    ) .
+
+# =============================================================================
+# Name-related Property Shapes
+# =============================================================================
+
+:FoafNameShape a sh:PropertyShape ;
+    sh:path foaf:name ;
+    sh:datatype xsd:string ;
+    sh:minLength 1 ;
+    sh:maxLength 500 ;
+    sh:severity sh:Warning ;
+    sh:message "foaf:name must be 1-500 characters" .
+
+:GivenNameShape a sh:PropertyShape ;
+    sh:path foaf:givenname ;
+    sh:datatype xsd:string ;
+    sh:minLength 1 ;
+    sh:maxLength 200 ;
+    sh:severity sh:Warning ;
+    sh:message "foaf:givenname must be 1-200 characters" .
+
+:SurnameShape a sh:PropertyShape ;
+    sh:path foaf:surname ;
+    sh:datatype xsd:string ;
+    sh:minLength 1 ;
+    sh:maxLength 200 ;
+    sh:severity sh:Warning ;
+    sh:message "foaf:surname must be 1-200 characters" .
+
+:BirthNameShape a sh:PropertyShape ;
+    sh:path dbo:birthname ;
+    sh:datatype xsd:string ;
+    sh:minLength 1 ;
+    sh:maxLength 500 ;
+    sh:severity sh:Warning ;
+    sh:message "dbo:birthname must be 1-500 characters" .
+
+# =============================================================================
+# Date-related Property Shapes
+# =============================================================================
+
+# Note: In BBC_DB, dates appear in format "DD YYYY MM" (non-standard)
+# We use lenient string validation rather than strict xsd:date
+
+:BirthDateShape a sh:PropertyShape ;
+    sh:path dbo:birthdate ;
+    sh:datatype xsd:string ;
+    sh:minLength 4 ;   # At least a year
+    sh:maxLength 50 ;
+    sh:severity sh:Warning ;
+    sh:message "dbo:birthdate should be 4-50 characters (date format)" .
+
+:DeathDateShape a sh:PropertyShape ;
+    sh:path dbo:deathdate ;
+    sh:datatype xsd:string ;
+    sh:minLength 4 ;   # At least a year
+    sh:maxLength 50 ;
+    sh:severity sh:Warning ;
+    sh:message "dbo:deathdate should be 4-50 characters (date format)" .
+
+# =============================================================================
+# Music-related Property Shapes
+# =============================================================================
+
+:YearsActiveShape a sh:PropertyShape ;
+    sh:path prop:yearsactive ;
+    sh:datatype xsd:string ;
+    sh:maxLength 200 ;
+    sh:severity sh:Info ;
+    sh:message "prop:yearsactive should be max 200 characters" .
+
+:DebutShape a sh:PropertyShape ;
+    sh:path prop:debut ;
+    sh:datatype xsd:string ;
+    sh:maxLength 500 ;
+    sh:severity sh:Info ;
+    sh:message "prop:debut should be max 500 characters" .
+
+:FormerMembersShape a sh:PropertyShape ;
+    sh:path prop:formermembers ;
+    sh:datatype xsd:string ;
+    sh:maxLength 2000 ;
+    sh:severity sh:Info ;
+    sh:message "prop:formermembers should be max 2000 characters" .
+
+:AlbumLengthShape a sh:PropertyShape ;
+    sh:path prop:albumlength ;
+    sh:datatype xsd:string ;
+    sh:maxLength 100 ;
+    sh:severity sh:Info ;
+    sh:message "prop:albumlength should be max 100 characters" .
+
+# =============================================================================
+# Combined Entity Shape with all property constraints
+# =============================================================================
+
+:DBpediaEntityWithAttributesShape a sh:NodeShape ;
+    sh:targetSubjectsOf foaf:name, dbo:birthdate, dbo:deathdate ;
+
+    # Name constraints
+    sh:property [
+        sh:path foaf:name ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:maxLength 500 ;
+        sh:severity sh:Warning ;
+        sh:message "Name should be 1-500 characters"
+    ] ;
+
+    sh:property [
+        sh:path foaf:givenname ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:maxLength 200 ;
+        sh:severity sh:Warning ;
+        sh:message "Given name should be 1-200 characters"
+    ] ;
+
+    sh:property [
+        sh:path foaf:surname ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:maxLength 200 ;
+        sh:severity sh:Warning ;
+        sh:message "Surname should be 1-200 characters"
+    ] ;
+
+    # Date constraints
+    sh:property [
+        sh:path dbo:birthdate ;
+        sh:minLength 4 ;
+        sh:maxLength 50 ;
+        sh:severity sh:Warning ;
+        sh:message "Birth date should be 4-50 characters"
+    ] ;
+
+    sh:property [
+        sh:path dbo:deathdate ;
+        sh:minLength 4 ;
+        sh:maxLength 50 ;
+        sh:severity sh:Warning ;
+        sh:message "Death date should be 4-50 characters"
+    ] ;
+
+    # Music-specific constraints
+    sh:property [
+        sh:path prop:yearsactive ;
+        sh:maxLength 200 ;
+        sh:severity sh:Info ;
+        sh:message "Years active should be max 200 characters"
+    ] .
+
+# =============================================================================
+# ADVANCED SEMANTIC CONSTRAINTS (SPARQL-based)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Constraint 1: yearsactive >= birth year
+# An artist cannot be active before they were born
+# -----------------------------------------------------------------------------
+:YearsActiveAfterBirthShape a sh:NodeShape ;
+    sh:targetSubjectsOf prop:yearsactive ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Years active ({?yearsactive}) cannot be before birth year ({?birthyear})" ;
+        sh:severity sh:Violation ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "prop" ; sh:namespace "http://dbpedia.org/property/"^^xsd:anyURI ] ;
+            sh:declare [ sh:prefix "dbo" ; sh:namespace "http://dbpedia.org/ontology/"^^xsd:anyURI ] ;
+            sh:declare [ sh:prefix "xsd" ; sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ]
+        ] ;
+        sh:select """
+            SELECT $this ?yearsactive ?birthyear
+            WHERE {
+                $this prop:yearsactive ?yearsactiveRaw .
+                $this dbo:birthdate ?birthdateRaw .
+
+                # Extract first 4-digit year from yearsactive (handles "1962", "1962-present", etc.)
+                BIND(xsd:integer(REPLACE(STR(?yearsactiveRaw), "^.*?(\\\\d{4}).*$", "$1")) AS ?yearsactive)
+
+                # Extract 4-digit year from birthdate (handles various formats)
+                BIND(xsd:integer(REPLACE(STR(?birthdateRaw), "^.*?(\\\\d{4}).*$", "$1")) AS ?birthyear)
+
+                # Check if yearsactive is before birth year
+                FILTER(BOUND(?yearsactive) && BOUND(?birthyear) && ?yearsactive < ?birthyear)
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# Constraint 2: death date > birth date
+# A person cannot die before they were born
+# -----------------------------------------------------------------------------
+:DeathAfterBirthShape a sh:NodeShape ;
+    sh:targetSubjectsOf dbo:deathdate ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Death year ({?deathyear}) cannot be before birth year ({?birthyear})" ;
+        sh:severity sh:Violation ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "dbo" ; sh:namespace "http://dbpedia.org/ontology/"^^xsd:anyURI ] ;
+            sh:declare [ sh:prefix "xsd" ; sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ]
+        ] ;
+        sh:select """
+            SELECT $this ?deathyear ?birthyear
+            WHERE {
+                $this dbo:deathdate ?deathdateRaw .
+                $this dbo:birthdate ?birthdateRaw .
+
+                # Extract 4-digit year from dates
+                BIND(xsd:integer(REPLACE(STR(?deathdateRaw), "^.*?(\\\\d{4}).*$", "$1")) AS ?deathyear)
+                BIND(xsd:integer(REPLACE(STR(?birthdateRaw), "^.*?(\\\\d{4}).*$", "$1")) AS ?birthyear)
+
+                # Check if death is before birth
+                FILTER(BOUND(?deathyear) && BOUND(?birthyear) && ?deathyear < ?birthyear)
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# Constraint 3: name should contain givenname OR surname
+# If both givenname and name exist, name should include givenname
+# -----------------------------------------------------------------------------
+:NameContainsGivenNameShape a sh:NodeShape ;
+    sh:targetSubjectsOf foaf:givenname ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Name '{?name}' does not contain given name '{?givenname}'" ;
+        sh:severity sh:Warning ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "foaf" ; sh:namespace "http://xmlns.com/foaf/0.1/"^^xsd:anyURI ]
+        ] ;
+        sh:select """
+            SELECT $this ?name ?givenname
+            WHERE {
+                $this foaf:givenname ?givenname .
+                $this foaf:name ?name .
+
+                # Normalize to lowercase for comparison
+                BIND(LCASE(STR(?name)) AS ?nameLower)
+                BIND(LCASE(STR(?givenname)) AS ?givenLower)
+
+                # Check if name does NOT contain givenname
+                FILTER(!CONTAINS(?nameLower, ?givenLower))
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# Constraint 4: name should contain surname (if both exist)
+# -----------------------------------------------------------------------------
+:NameContainsSurnameShape a sh:NodeShape ;
+    sh:targetSubjectsOf foaf:surname ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Name '{?name}' does not contain surname '{?surname}'" ;
+        sh:severity sh:Warning ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "foaf" ; sh:namespace "http://xmlns.com/foaf/0.1/"^^xsd:anyURI ]
+        ] ;
+        sh:select """
+            SELECT $this ?name ?surname
+            WHERE {
+                $this foaf:surname ?surname .
+                $this foaf:name ?name .
+
+                # Normalize to lowercase for comparison
+                BIND(LCASE(STR(?name)) AS ?nameLower)
+                BIND(LCASE(STR(?surname)) AS ?surnameLower)
+
+                # Check if name does NOT contain surname
+                FILTER(!CONTAINS(?nameLower, ?surnameLower))
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# Constraint 5: Reasonable age at career start
+# yearsactive - birthyear should be >= 5 (reasonable minimum age to start career)
+# -----------------------------------------------------------------------------
+:ReasonableCareerStartAgeShape a sh:NodeShape ;
+    sh:targetSubjectsOf prop:yearsactive ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Career started at age {?age} (yearsactive={?yearsactive}, born={?birthyear}) - unusually young" ;
+        sh:severity sh:Warning ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "prop" ; sh:namespace "http://dbpedia.org/property/"^^xsd:anyURI ] ;
+            sh:declare [ sh:prefix "dbo" ; sh:namespace "http://dbpedia.org/ontology/"^^xsd:anyURI ] ;
+            sh:declare [ sh:prefix "xsd" ; sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ]
+        ] ;
+        sh:select """
+            SELECT $this ?yearsactive ?birthyear ?age
+            WHERE {
+                $this prop:yearsactive ?yearsactiveRaw .
+                $this dbo:birthdate ?birthdateRaw .
+
+                # Extract years
+                BIND(xsd:integer(REPLACE(STR(?yearsactiveRaw), "^.*?(\\\\d{4}).*$", "$1")) AS ?yearsactive)
+                BIND(xsd:integer(REPLACE(STR(?birthdateRaw), "^.*?(\\\\d{4}).*$", "$1")) AS ?birthyear)
+
+                # Calculate age at career start
+                BIND(?yearsactive - ?birthyear AS ?age)
+
+                # Flag if career started before age 5 (likely data error)
+                FILTER(BOUND(?age) && ?age >= 0 && ?age < 5)
+            }
+        """
+    ] .

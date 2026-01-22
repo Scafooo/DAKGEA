@@ -253,7 +253,7 @@ class PredicateMatcher:
 
     def _get_embedding_with_attr_names(
         self,
-        predicate_local_name: str,
+        predicate_key: str,
         predicate_uri: URIRef,
         attr_names: Optional[Dict[str, str]] = None,
     ) -> np.ndarray:
@@ -265,13 +265,23 @@ class PredicateMatcher:
         2. Fallback to automatic expansion of local name
 
         Args:
-            predicate_local_name: Local name (e.g., "birthDate")
+            predicate_key: Either local name (e.g., "birthDate") or full URI string
             predicate_uri: Full URI (e.g., URIRef("dbo:birthDate"))
             attr_names: Optional mapping of URI -> natural name
 
         Returns:
             Embedding vector
         """
+        # Extract local name if predicate_key is a full URI
+        if predicate_key.startswith("http://") or predicate_key.startswith("https://"):
+            # Extract local name from URI
+            if "#" in predicate_key:
+                local_name = predicate_key.split("#")[-1]
+            else:
+                local_name = predicate_key.split("/")[-1]
+        else:
+            local_name = predicate_key
+
         # Try to find natural name in attr_names
         natural_name = None
         if attr_names:
@@ -279,10 +289,10 @@ class PredicateMatcher:
             natural_name = attr_names.get(uri_str)
 
         # Use natural name if found, otherwise use local name with expansion
-        text_to_embed = natural_name if natural_name else predicate_local_name
+        text_to_embed = natural_name if natural_name else local_name
 
         # Create cache key that includes source (attr_names vs expansion)
-        cache_key = f"attr:{text_to_embed}" if natural_name else f"exp:{predicate_local_name}"
+        cache_key = f"attr:{text_to_embed}" if natural_name else f"exp:{local_name}"
 
         # Check cache
         if cache_key in self._embedding_cache:

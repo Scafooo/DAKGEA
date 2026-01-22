@@ -1,0 +1,97 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix bbc: <http://data.kasabi.com/dataset/bbc-music/> .
+@prefix : <http://example.org/shapes/bbc#> .
+
+#
+# SHACL Shapes for BBC Music Knowledge Graph (Source)
+# Dataset: BBC_DB
+#
+
+# =============================================================================
+# Entity Shape - General constraints for all BBC entities
+# =============================================================================
+
+:BBCEntityShape a sh:NodeShape ;
+    sh:targetSubjectsOf foaf:name, dc:title, rdfs:comment, ov:sortlabel ;
+    sh:message "BBC entity validation" ;
+
+    # Each entity should have at least one identifying attribute
+    sh:or (
+        [ sh:path foaf:name ; sh:minCount 1 ]
+        [ sh:path dc:title ; sh:minCount 1 ]
+    ) .
+
+# =============================================================================
+# Property Shapes - Constraints for specific predicates
+# =============================================================================
+
+# foaf:name - Artist/entity name
+:NameShape a sh:PropertyShape ;
+    sh:path foaf:name ;
+    sh:datatype xsd:string ;
+    sh:minLength 1 ;
+    sh:maxLength 500 ;
+    sh:message "Name must be a non-empty string (max 500 chars)" .
+
+# dc:title - Track/album title
+:TitleShape a sh:PropertyShape ;
+    sh:path dc:title ;
+    sh:datatype xsd:string ;
+    sh:minLength 1 ;
+    sh:maxLength 500 ;
+    sh:message "Title must be a non-empty string (max 500 chars)" .
+
+# rdfs:comment - Description/comment
+:CommentShape a sh:PropertyShape ;
+    sh:path rdfs:comment ;
+    sh:datatype xsd:string ;
+    sh:maxLength 5000 ;
+    sh:message "Comment must be a string (max 5000 chars)" .
+
+# ov:sortlabel - Sort label for ordering
+:SortLabelShape a sh:PropertyShape ;
+    sh:path ov:sortlabel ;
+    sh:datatype xsd:string ;
+    sh:minLength 1 ;
+    sh:maxLength 200 ;
+    sh:message "Sort label must be a non-empty string (max 200 chars)" .
+
+# =============================================================================
+# Combined Entity Shape with all property constraints
+# =============================================================================
+
+:BBCEntityWithAttributesShape a sh:NodeShape ;
+    sh:targetSubjectsOf foaf:name, dc:title ;
+
+    # Name constraints
+    sh:property [
+        sh:path foaf:name ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:maxLength 500 ;
+        sh:severity sh:Warning ;
+        sh:message "foaf:name should be 1-500 characters"
+    ] ;
+
+    # Title constraints
+    sh:property [
+        sh:path dc:title ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:maxLength 500 ;
+        sh:severity sh:Warning ;
+        sh:message "dc:title should be 1-500 characters"
+    ] ;
+
+    # Comment constraints (optional but if present, validate)
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:maxLength 5000 ;
+        sh:severity sh:Info ;
+        sh:message "rdfs:comment should be max 5000 characters"
+    ] .

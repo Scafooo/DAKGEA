@@ -13,6 +13,7 @@ from src.augmentation.registry import AUGMENTATION_REGISTRY
 from src.core.dataset import Dataset
 from src.logger import get_logger
 from src.reduction.registry import REDUCTION_REGISTRY
+from src.validation.shacl_validator import SHACLValidator, SHACLValidationConfig
 
 from .specs import WriterPlan
 
@@ -335,6 +336,29 @@ class AugmentationStage(_WriterStage):
             augmentation_name,
             len(dataset_augmented.aligned_entities),
         )
+
+        # SHACL validation (optional, disabled by default)
+        shacl_cfg = stage_cfg.get("augmentation", {}).get("shacl_validation", {})
+        if shacl_cfg.get("enabled", False):
+            logger.info("[SHACL] Running post-augmentation validation...")
+            # Resolve dataset path for auto-detecting shapes
+            dataset_name = stage_cfg.get("experiment", {}).get("dataset", {}).get("name", "")
+            dataset_path = None
+            if dataset_name:
+                from src.config.loader import PROJECT_ROOT
+                dataset_path = PROJECT_ROOT / "data" / "raw" / dataset_name
+
+            shacl_config = SHACLValidationConfig(
+                enabled=True,
+                shapes_dir=shacl_cfg.get("shapes_dir"),
+                on_violation=shacl_cfg.get("on_violation", "ignore"),
+                strict_mode=shacl_cfg.get("strict_mode", False),
+                validate_source=shacl_cfg.get("validate_source", True),
+                validate_target=shacl_cfg.get("validate_target", True),
+            )
+            validator = SHACLValidator.from_config(shacl_config, dataset_path)
+            dataset_augmented = validator.validate_dataset(dataset_augmented)
+            logger.info("[SHACL] Validation complete")
 
         # Track model directory for cleanup if needed (e.g., BART fine-tuned model)
         model_dir = stage_root / "model"

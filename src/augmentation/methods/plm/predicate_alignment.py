@@ -338,10 +338,10 @@ class PredicateAlignmentCache:
             max_entities: Maximum entities to sample
 
         Returns:
-            Dict mapping predicate_local_name -> (uri, [literal_values])
+            Dict mapping predicate_uri_str -> (uri, [literal_values])
+            Note: Uses full URI as key to avoid collisions between predicates
+            with the same local name (e.g., prop:description vs dc:description)
         """
-        from .bart_interpolator import _clean_pred
-
         predicate_samples = {}
         entity_count = 0
         seen_entities = set()
@@ -353,16 +353,16 @@ class PredicateAlignmentCache:
                     seen_entities.add(subject)
                     entity_count += 1
 
-                # Extract local name (pass graph to resolve attr_to_name for semantic names)
-                local_name = _clean_pred(str(predicate), graph)
+                # Use full URI as key to avoid collisions
+                pred_key = str(predicate)
 
                 # Initialize if needed
-                if local_name not in predicate_samples:
-                    predicate_samples[local_name] = (predicate, [])
+                if pred_key not in predicate_samples:
+                    predicate_samples[pred_key] = (predicate, [])
 
                 # Add sample value (limit per predicate to avoid memory issues)
-                if len(predicate_samples[local_name][1]) < self.sample_size:
-                    predicate_samples[local_name][1].append(obj)
+                if len(predicate_samples[pred_key][1]) < self.sample_size:
+                    predicate_samples[pred_key][1].append(obj)
 
                 # Early exit if all predicates have enough samples
                 if entity_count > max_entities:
