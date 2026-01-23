@@ -20,6 +20,15 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 # Import the custom reducer to register it
 from scripts.forget_labels_mode.reducer import ForgetLabelsReducer
+from scripts.forget_labels_mode.bart_mixup_interpolator import BartMixupInterpolator
+
+# MONKEY PATCH: Sostituiamo l'interpolatore standard con quello Mix-up richiesto
+import src.augmentation.methods.plm.plm_augmenter as plm_mod
+import src.augmentation.methods.plm.bart_interpolator as bart_mod
+
+# Override the class reference used in PLMAugmenter
+bart_mod.BartInterpolatorPLM = BartMixupInterpolator
+plm_mod.BartInterpolatorPLM = BartMixupInterpolator
 
 from experiments.runner import (
     ExperimentRunner,
