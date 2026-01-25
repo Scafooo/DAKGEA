@@ -51,7 +51,7 @@ class MixupDataBuilder:
 
             for corr in correspondences:
                 sp, tp = str(corr.src_uri), str(corr.tgt_uri)
-                if sp in s_lits and tp in t_lits:
+                if sp in s_lits and tp in t_lits and t_lits[tp]:
                     p_tok = canonical_map[sp]
                     if pred_counts[p_tok] >= max_pairs_per_pred: continue
                     
