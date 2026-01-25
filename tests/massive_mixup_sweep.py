@@ -222,6 +222,10 @@ def run_massive_sweep():
                     valid_variants = 0
                     for row in orphan_subset:
                         val = row['target']
+                        # Estrai valore pulito se contiene il predicato
+                        if ' ' in val and val.startswith('<'):
+                            val = val.split(' ', 1)[1]
+                            
                         parts = row['input'].split(' ', 1)
                         pred = parts[0]
                         # Usa alpha basso per orphan (non vogliamo mixare con il nulla)
@@ -288,18 +292,23 @@ def run_massive_sweep():
     
     for i, row in enumerate(eval_subset):
         inp = row['input']
-        parts = inp.split('>', 1)
-        pred = parts[0] + '>'
-        vals = parts[1].strip().split(' </s> ')
-        v1, v2 = vals[0], vals[1]
+        tgt = row['target']
+        
+        # Split sicuro
+        parts_inp = inp.split(' ', 1)
+        parts_tgt = tgt.split(' ', 1)
+        
+        pred = parts_inp[0]
+        v1 = parts_inp[1] if len(parts_inp) > 1 else ""
+        v2 = parts_tgt[1] if len(parts_tgt) > 1 else ""
         
         aug, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=best_alpha)
         
         # Check if new
-        is_new = aug != v1 and aug != v2
+        is_new = aug.lower() != v1.lower() and aug.lower() != v2.lower()
         tag = "[✨ NEW]" if is_new else "[⚠️ COPY]"
         
-        report_data.append([i+1, pred, v1[:20], v2[:20], f"{aug[:30]} {tag}"])
+        report_data.append([i+1, pred, v1[:25], v2[:25], f"{aug[:35]} {tag}"])
 
     print("\n" + "="*100)
     print(" QUALITATIVE REPORT (BBC_DB) ".center(100))
