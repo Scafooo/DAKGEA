@@ -214,6 +214,8 @@ def run_massive_sweep():
                     res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=alpha)
                     gen_aligned.append(res)
                 
+                div_score = calculate_diversity_score(orig_aligned, gen_aligned)
+                
                 # --- TEST 2: ORPHAN VARIATION ---
                 oal_score = 0
                 if orphan_subset:
