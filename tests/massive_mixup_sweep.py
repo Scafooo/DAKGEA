@@ -1,5 +1,6 @@
 import sys
 import torch
+import logging
 import random
 import time
 import numpy as np
@@ -15,6 +16,7 @@ from datasets import Dataset as HFDataset
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from src.logger import get_logger
 from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
@@ -27,8 +29,7 @@ GRAD_ACCUMULATION = 8
 EPOCHS = 30 # Massima profondità di apprendimento
 
 torch.backends.cudnn.benchmark = True
-logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(message)s')
-logger = logging.getLogger("MassiveSweep")
+logger = get_logger("MassiveSweep")
 
 def clean_val(text):
     return re.sub(r'<[^>]+>\s*', '', text).strip()
