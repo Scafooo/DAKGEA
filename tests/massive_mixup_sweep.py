@@ -18,13 +18,13 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE 4090 (OPTIMIZED - OOM SAFE) ---
-BATCH_SIZE = 64        # Ridotto per stare in VRAM
-GRAD_ACCUMULATION = 4  # 64 * 4 = 256 (Batch size effettivo mantenuto alto)
-FP16 = True            # Mixed precision per velocità
+# --- CONFIGURAZIONE 4090 (BART-LARGE POWER) ---
+BATCH_SIZE = 32        # Ridotto per BART-Large (più pesante in VRAM)
+GRAD_ACCUMULATION = 8  # 32 * 8 = 256 (Batch size effettivo invariato)
+FP16 = True            # Mixed precision obbligatorio per velocità
 EPOCHS = 10            # Training profondo
-MAX_SAMPLES = None     # Nessun limite, dataset completo
-SWEEP_SAMPLES = 200    # Campioni per testare ogni config nello sweep
+MAX_SAMPLES = None     # Nessun limite
+SWEEP_SAMPLES = 200    # Campioni per testare ogni config
 
 # ATTIVAZIONE BOOST HARDWARE
 torch.backends.cudnn.benchmark = True
@@ -81,12 +81,12 @@ def run_massive_sweep():
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"    Device: {device} ({torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'})")
 
-    out_dir = "./results/sweep_model"
+    out_dir = "./results/sweep_model_large"
     interpolator = MixupBartInterpolator(
-        model_name="facebook/bart-base", 
+        model_name="facebook/bart-large", 
         out_dir=out_dir,
         device=device,
-        reuse_if_available=True  # Usa True se vuoi saltare il training se esiste già
+        reuse_if_available=True
     )
     interpolator.set_predicate_mapping(canonical_map)
 
@@ -101,7 +101,7 @@ def run_massive_sweep():
         per_device_train_batch_size=BATCH_SIZE,
         gradient_accumulation_steps=GRAD_ACCUMULATION, # Accumula gradienti
         num_train_epochs=EPOCHS,
-        learning_rate=5e-5,
+        learning_rate=3e-5,    # LR leggermente più basso per Large
         save_strategy="no", 
         logging_steps=50,      
         report_to="none",
