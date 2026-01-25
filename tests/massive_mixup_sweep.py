@@ -48,8 +48,26 @@ def run_massive_sweep():
     # ---------------------------------------------------------
     print("\n>>> PHASE 1: FULL DATASET FINE-TUNING")
     
+    # Costruisci path assoluto
+    data_path = PROJECT_ROOT / "data" / "raw" / "openea" / "BBC_DB"
+    if not data_path.exists():
+        logger.error(f"Dataset not found at {data_path}")
+        # Tentativo fallback comune
+        alt_path = PROJECT_ROOT.parent / "data" / "raw" / "openea" / "BBC_DB"
+        if alt_path.exists():
+            data_path = alt_path
+            logger.info(f"Found dataset at alternate path: {data_path}")
+        else:
+            raise FileNotFoundError(f"Could not find BBC_DB at {data_path}")
+
+    # Verifica preliminare struttura
+    if not (data_path / "knowformer_data").exists() and not (data_path / "attribute_data").exists():
+        logger.warning(f"Warning: Standard subfolders not found in {data_path}. Reader might fail.")
+        logger.info(f"Contents of {data_path}: {[p.name for p in data_path.iterdir()]}")
+
     reader = OpeneaDatasetReader()
-    dataset = reader.read("data/raw/openea/BBC_DB")
+    # Passiamo stringa assoluta
+    dataset = reader.read(str(data_path))
     
     # Builder senza limiti
     builder = MixupDataBuilder(confidence_threshold=0.6)
