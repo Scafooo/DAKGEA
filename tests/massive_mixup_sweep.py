@@ -18,16 +18,18 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE 4090 (OPTIMIZED) ---
-BATCH_SIZE = 256       # Spinto al massimo per saturare la 4090 (era 64)
-FP16 = True            # Mixed precision per velocità
-EPOCHS = 10            # Training profondo
-MAX_SAMPLES = None     # Nessun limite, dataset completo
-SWEEP_SAMPLES = 200    # Campioni per testare ogni config nello sweep
+    # --- CONFIGURAZIONE 4090 (OPTIMIZED) ---
+    BATCH_SIZE = 256       # Spinto al massimo per saturare la 4090
+    FP16 = True            # Mixed precision per velocità
+    EPOCHS = 10            # Training profondo
+    MAX_SAMPLES = None     # Nessun limite, dataset completo
+    SWEEP_SAMPLES = 200    # Campioni per testare ogni config nello sweep
+    
+    # ATTIVAZIONE BOOST HARDWARE
+    torch.backends.cudnn.benchmark = True
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(message)s')
-logger = logging.getLogger("MassiveSweep")
-
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(message)s')
+    logger = logging.getLogger("MassiveSweep")
 def calculate_diversity_score(original_list, generated_list):
     """Calcola quanto sono nuove le stringhe generate rispetto alle originali."""
     originals = set(original_list)
@@ -99,12 +101,14 @@ def run_massive_sweep():
         num_train_epochs=EPOCHS,
         learning_rate=5e-5,
         save_strategy="no", 
-        logging_steps=500,
+        logging_steps=50,      # Log più frequente
         report_to="none",
         fp16=FP16,
-        dataloader_num_workers=4
-    )
-    
+        dataloader_num_workers=8,
+        dataloader_pin_memory=True,  # Veloce transfer CPU->GPU
+        dataloader_persistent_workers=True, # Mantiene i worker vivi tra le epoche
+        gradient_accumulation_steps=1,
+    )    
     trainer = Seq2SeqTrainer(
         model=interpolator.model,
         args=training_args,
