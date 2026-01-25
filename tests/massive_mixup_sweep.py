@@ -179,16 +179,43 @@ def run_massive_sweep():
                 # --- TEST 1: ALIGNED MIXUP ---
                 gen_aligned = []
                 orig_aligned = []
+                
+                debug_first = True # Flag per debuggare solo il primo
+                
                 for row in aligned_subset:
-                    parts = row['input'].split('>', 1)
-                    if len(parts) < 2: continue
-                    pred = parts[0] + '>'
-                    vals = parts[1].strip().split(' </s> ')
-                    if len(vals) < 2: continue
-                    v1, v2 = vals[0], vals[1]
-                    orig_aligned.extend([v1, v2])
-                    res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=alpha)
-                    gen_aligned.append(res)
+                    # Parsing Robustezza
+                    inp = row['input']
+                    if ' </s> ' not in inp:
+                        if debug_first: logger.warning(f"SKIP invalid format: {inp}")
+                        continue
+                        
+                    try:
+                        # Estrazione Predicato e Valori
+                        # Assumiamo formato: <PRED> val1 </s> val2
+                        pred_end = inp.find(' ')
+                        pred = inp[:pred_end+1] # Include spazio
+                        vals_part = inp[pred_end+1:]
+                        vals = vals_part.split(' </s> ')
+                        
+                        if len(vals) < 2: 
+                            if debug_first: logger.warning(f"SKIP not enough vals: {vals}")
+                            continue
+                            
+                        v1, v2 = vals[0], vals[1]
+                        
+                        orig_aligned.extend([v1, v2])
+                        res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred.strip(), alpha=alpha)
+                        gen_aligned.append(res)
+                        
+                        if debug_first and curr == 1:
+                            logger.info(f"[DEBUG PARSE] In: {inp}")
+                            logger.info(f"[DEBUG SPLIT] Pred: '{pred}', V1: '{v1}', V2: '{v2}'")
+                            logger.info(f"[DEBUG GEN]   Out: '{res}'")
+                            debug_first = False
+                            
+                    except Exception as e:
+                        logger.error(f"Error parsing row: {inp} -> {e}")
+                        continue
                 
                 div_score = calculate_diversity_score(orig_aligned, gen_aligned)
                 
