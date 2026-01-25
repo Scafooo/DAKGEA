@@ -125,12 +125,12 @@ def run_massive_sweep():
     # Check if model already trained
     if (Path(out_dir) / "pytorch_model.bin").exists() or (Path(out_dir) / "model.safetensors").exists():
         print(f"    [RESUME] Found existing model in {out_dir}. Skipping training phase.")
-        # Load the trained model into interpolator
         interpolator = MixupBartInterpolator(
-            model_name=out_dir, # Load from local path
+            model_name=out_dir, 
             out_dir=out_dir,
             device=device
         )
+        # CRITICAL: Re-register tokens from the new canonical_map
         interpolator.set_predicate_mapping(canonical_map)
     else:
         print(f"    Starting Training ({EPOCHS} epochs)...")
@@ -152,20 +152,23 @@ def run_massive_sweep():
     
     results = []
     
-    # Preparazione set di test (presi dal training)
-    # Separiamo in aligned (traduzione) e orphan (denoising) se possibile
+    # Preparazione set di test (Scansione più profonda per trovare abbastanza allineati)
     aligned_subset = []
     orphan_subset = []
     
-    for row in train_rows[:SWEEP_SAMPLES*2]: # Scansioniamo un po' di più per trovarli
+    for row in train_rows: 
         inp = row['input']
         tgt = row['target']
-        is_orphan = (tgt in inp or len(set(inp) & set(tgt)) / len(set(tgt)) > 0.8) and len(tgt) > 4
+        # Se contiene il separatore di coppia, è un task di allineamento
+        is_aligned = ' </s> ' in inp
         
-        if is_orphan and len(orphan_subset) < SWEEP_SAMPLES // 2:
-            orphan_subset.append(row)
-        elif not is_orphan and len(aligned_subset) < SWEEP_SAMPLES:
+        if is_aligned and len(aligned_subset) < SWEEP_SAMPLES:
             aligned_subset.append(row)
+        elif not is_aligned and len(orphan_subset) < SWEEP_SAMPLES // 2:
+            orphan_subset.append(row)
+            
+        if len(aligned_subset) >= SWEEP_SAMPLES and len(orphan_subset) >= SWEEP_SAMPLES // 2:
+            break
             
     total_configs = len(alphas) * len(noises) * len(temps)
     curr = 0
