@@ -18,8 +18,8 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE 4090 ---
-BATCH_SIZE = 64        # Alto per sfruttare i 24GB VRAM
+# --- CONFIGURAZIONE 4090 (OPTIMIZED) ---
+BATCH_SIZE = 256       # Spinto al massimo per saturare la 4090 (era 64)
 FP16 = True            # Mixed precision per velocità
 EPOCHS = 10            # Training profondo
 MAX_SAMPLES = None     # Nessun limite, dataset completo
