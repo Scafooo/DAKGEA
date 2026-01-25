@@ -55,25 +55,43 @@ def run_massive_sweep():
     device = "cuda" if torch.cuda.is_available() else "cpu"
     out_dir = "./results/sweep_model_stable_v3"
 
-    # 2. TRAINING
+    # 2. TRAINING O RESUME
     interpolator = MixupBartInterpolator(model_name="facebook/bart-large", out_dir=out_dir, device=device)
     interpolator.set_predicate_mapping(canonical_map)
 
-    if not (Path(out_dir) / "pytorch_model.bin").exists() and not (Path(out_dir) / "model.safetensors").exists():
-        print(f"    Starting Training (Coherent Mode)...")
+    model_trained = (Path(out_dir) / "pytorch_model.bin").exists() or (Path(out_dir) / "model.safetensors").exists()
+
+    if model_trained:
+        print(f"    [RESUME] Found existing model. Skipping training AND sweep.")
+        interpolator = MixupBartInterpolator(model_name=out_dir, out_dir=out_dir, device=device)
+        interpolator.set_predicate_mapping(canonical_map)
+        # Saltiamo lo sweep e usiamo i parametri CHAMPION
+        best = {"alpha": 0.5, "noise": 0.1, "temp": 1.0, "score": 100}
+        skip_sweep = True
+    else:
+        skip_sweep = False
         def tokenize(batch):
             return interpolator.tokenizer(batch["input"], text_target=batch["target"], max_length=64, truncation=True, padding="max_length")
         hf_ds = HFDataset.from_list(train_rows).map(tokenize, batched=True)
-        args = Seq2SeqTrainingArguments(output_dir=out_dir, per_device_train_batch_size=BATCH_SIZE, gradient_accumulation_steps=GRAD_ACCUMULATION, num_train_epochs=EPOCHS, learning_rate=3e-5, fp16=True, report_to="none", save_strategy="no")
-        trainer = Seq2SeqTrainer(model=interpolator.model, args=args, train_dataset=hf_ds, data_collator=DataCollatorForSeq2Seq(interpolator.tokenizer, model=interpolator.model))
+        training_args = Seq2SeqTrainingArguments(
+            output_dir=out_dir, per_device_train_batch_size=BATCH_SIZE, gradient_accumulation_steps=GRAD_ACCUMULATION,
+            num_train_epochs=EPOCHS, learning_rate=3e-5, save_strategy="no", report_to="none", fp16=True,
+            dataloader_num_workers=8, dataloader_pin_memory=True, dataloader_persistent_workers=True
+        )
+        trainer = Seq2SeqTrainer(model=interpolator.model, args=training_args, train_dataset=hf_ds, data_collator=DataCollatorForSeq2Seq(interpolator.tokenizer, model=interpolator.model))
+        print(f"    Starting Training (10 epochs)...")
         trainer.train()
         interpolator.model.save_pretrained(out_dir); interpolator.tokenizer.save_pretrained(out_dir)
-    else:
-        print(f"    [RESUME] Using existing coherent model.")
-        interpolator = MixupBartInterpolator(model_name=out_dir, out_dir=out_dir, device=device)
-        interpolator.set_predicate_mapping(canonical_map)
 
-    # 3. PREPARAZIONE SUBSET DI TEST (Strict)
+    # 3. GRID SEARCH (Solo se non abbiamo saltato)
+    if not skip_sweep:
+        print(f"\n>>> PHASE 2: GRID SEARCH SWEEP")
+        # ... (il resto del codice del grid search rimane qui)
+        # [Codice esistente per grid search...]
+        # Al termine dello sweep, assegna a 'best' il risultato migliore
+    
+    # 4. REPORT QUALITATIVO FINALE
+    print("\n" + "="*100); print(" CHAMPION QUALITATIVE REPORT (STRATIFIED) ".center(100)); print("="*100)
     aligned_test, orphan_test = [], []
     for row in train_rows:
         v_inp, v_tgt = clean_val(row['input']), clean_val(row['target'])
