@@ -152,19 +152,29 @@ def run_massive_sweep():
     
     results = []
     
-    # Preparazione set di test (Scansione più profonda per trovare abbastanza allineati)
+    # Preparazione set di test
     aligned_subset = []
     orphan_subset = []
     
     for row in train_rows: 
         inp = row['input']
         tgt = row['target']
-        # Se contiene il separatore di coppia, è un task di allineamento
-        is_aligned = ' </s> ' in inp
         
-        if is_aligned and len(aligned_subset) < SWEEP_SAMPLES:
+        # Estraiamo il valore pulito (togliamo il predicato iniziale)
+        # Formato: <PRED> Valore
+        v_inp = inp.split(' ', 1)[1] if ' ' in inp else inp
+        v_tgt = tgt.split(' ', 1)[1] if ' ' in tgt else tgt
+        
+        # Un task è di ALLINEAMENTO se i valori base sono diversi (Translation A -> B)
+        # Un task è ORFANO/DENOISING se il valore base è lo stesso (A -> A)
+        
+        # Per capire se il valore base è lo stesso, puliamo il noise dall'input
+        # Ma è più facile: se v_tgt non è in v_inp in modo stretto, è probabilmente traduzione
+        is_translation = v_tgt.lower() not in v_inp.lower() or len(v_tgt) != len(v_inp)
+
+        if is_translation and len(aligned_subset) < SWEEP_SAMPLES:
             aligned_subset.append(row)
-        elif not is_aligned and len(orphan_subset) < SWEEP_SAMPLES // 2:
+        elif not is_translation and len(orphan_subset) < SWEEP_SAMPLES // 2:
             orphan_subset.append(row)
             
         if len(aligned_subset) >= SWEEP_SAMPLES and len(orphan_subset) >= SWEEP_SAMPLES // 2:
@@ -182,50 +192,25 @@ def run_massive_sweep():
                 interpolator.latent_noise_std = noise
                 interpolator.gen_temperature = temp
                 
-                start_gen = time.time()  # <--- FIX: Added timestamp
+                start_gen = time.time()
                 
                 # --- TEST 1: ALIGNED MIXUP ---
                 gen_aligned = []
                 orig_aligned = []
                 
-                debug_first = True # Flag per debuggare solo il primo
-                
                 for row in aligned_subset:
-                    # Parsing Robustezza
+                    # In questo formato, interpolate_pair riceve v1 e v2
+                    # Ma dato che il modello è un Translator, interpolate_pair(v1, v2)
+                    # farà il mix nello spazio latente di v1 e v2.
                     inp = row['input']
-                    if ' </s> ' not in inp:
-                        if debug_first: logger.warning(f"SKIP invalid format: {inp}")
-                        continue
-                        
-                    try:
-                        # Estrazione Predicato e Valori
-                        # Assumiamo formato: <PRED> val1 </s> val2
-                        pred_end = inp.find(' ')
-                        pred = inp[:pred_end+1] # Include spazio
-                        vals_part = inp[pred_end+1:]
-                        vals = vals_part.split(' </s> ')
-                        
-                        if len(vals) < 2: 
-                            if debug_first: logger.warning(f"SKIP not enough vals: {vals}")
-                            continue
-                            
-                        v1, v2 = vals[0], vals[1]
-                        
-                        orig_aligned.extend([v1, v2])
-                        res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred.strip(), alpha=alpha)
-                        gen_aligned.append(res)
-                        
-                        if debug_first and curr == 1:
-                            logger.info(f"[DEBUG PARSE] In: {inp}")
-                            logger.info(f"[DEBUG SPLIT] Pred: '{pred}', V1: '{v1}', V2: '{v2}'")
-                            logger.info(f"[DEBUG GEN]   Out: '{res}'")
-                            debug_first = False
-                            
-                    except Exception as e:
-                        logger.error(f"Error parsing row: {inp} -> {e}")
-                        continue
-                
-                div_score = calculate_diversity_score(orig_aligned, gen_aligned)
+                    tgt = row['target']
+                    pred = inp.split(' ')[0]
+                    v1 = inp.split(' ', 1)[1]
+                    v2 = tgt.split(' ', 1)[1]
+                    
+                    orig_aligned.extend([v1, v2])
+                    res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=alpha)
+                    gen_aligned.append(res)
                 
                 # --- TEST 2: ORPHAN VARIATION ---
                 oal_score = 0
