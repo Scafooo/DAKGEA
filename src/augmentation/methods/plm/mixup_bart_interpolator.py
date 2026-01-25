@@ -144,7 +144,8 @@ class MixupBartInterpolator:
         p_tok = self._get_pred_token(predicate)
         text_a, text_b = f"{p_tok} {val_src}", f"{p_tok} {val_tgt}"
 
-        inputs = self.tokenizer([text_a, text_b], return_tensors="pt", padding="max_length", truncation=True, max_length=self.max_len_in).to(self.device)
+        # Dynamic padding to ensure better alignment in latent space
+        inputs = self.tokenizer([text_a, text_b], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
 
         self.model.eval()
         with torch.no_grad():

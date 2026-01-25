@@ -4,9 +4,9 @@ import logging
 import random
 import time
 import numpy as np
+import re
 from pathlib import Path
 from tabulate import tabulate
-from collections import defaultdict
 from transformers import Seq2SeqTrainingArguments, Seq2SeqTrainer, DataCollatorForSeq2Seq
 from datasets import Dataset as HFDataset
 
@@ -18,143 +18,124 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE 4090 (BART-LARGE POWER) ---
-BATCH_SIZE = 32        # Per BART-Large
-GRAD_ACCUMULATION = 8  # Effettivo 256
-FP16 = True            
-EPOCHS = 10            
-MAX_SAMPLES = None     
-SWEEP_SAMPLES = 200    
+# --- CONFIGURAZIONE PRODUZIONE 4090 ---
+BATCH_SIZE = 32
+GRAD_ACCUMULATION = 8
+EPOCHS = 10
+SWEEP_SAMPLES = 100
 
 torch.backends.cudnn.benchmark = True
-logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(message)s')
 logger = logging.getLogger("MassiveSweep")
 
-# Parametri Sweep (Range espanso per Massima Diversità)
-alphas = [0.3, 0.5, 0.7]
-noises = [0.1, 0.2, 0.3, 0.4, 0.5]
-temps  = [1.0, 1.3, 1.6, 1.8]
+def clean_val(text):
+    """Estrae il valore rimuovendo il predicato <PRED>."""
+    return re.sub(r'<[^>]+>\s*', '', text).strip()
 
 def calculate_diversity_score(original_list, generated_list):
     originals = set(s.lower().strip() for s in original_list)
-    new_count = 0
-    for gen in generated_list:
-        if gen.lower().strip() not in originals and len(gen) > 3:
-            new_count += 1
+    new_count = sum(1 for gen in generated_list if gen.lower().strip() not in originals and len(gen) > 3)
     return new_count / len(generated_list) if generated_list else 0
 
 def run_massive_sweep():
     print("\n" + "█"*100)
-    print("█" + " RTX 4090: MASSIVE MIXUP SWEEP & OPTIMIZATION (BART-LARGE) ".center(98) + "█")
+    print("█" + " RTX 4090: ULTIMATE COHERENT MIXUP SWEEP (BART-LARGE) ".center(98) + "█")
+    print("█" + " (Strict Pairing + Orphan Attribute Learning) ".center(98) + "█")
     print("█"*100)
 
-    # 1. CARICAMENTO DATI
+    # 1. CARICAMENTO DATI (Con Coherent Pairing)
     data_path = PROJECT_ROOT / "data" / "raw" / "openea" / "BBC_DB"
     reader = OpeneaDatasetReader()
     dataset = reader.read(str(data_path))
-    builder = MixupDataBuilder(confidence_threshold=0.6)
-    train_rows, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=5000)
+    # Threshold 0.3 per evitare "Nomi + Date"
+    builder = MixupDataBuilder(confidence_threshold=0.6, value_match_threshold=0.3)
+    train_rows, canonical_map = builder.build_training_data(dataset)
     
     print(f"    Dataset Size: {len(train_rows)} samples")
-    print(f"    Canonical Map size: {len(canonical_map)}")
-    
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    out_dir = "./results/sweep_model_large"
+    out_dir = "./results/sweep_model_stable_v3"
 
-    # 2. TRAINING O RESUME
+    # 2. TRAINING
     interpolator = MixupBartInterpolator(model_name="facebook/bart-large", out_dir=out_dir, device=device)
     interpolator.set_predicate_mapping(canonical_map)
 
-    if (Path(out_dir) / "pytorch_model.bin").exists() or (Path(out_dir) / "model.safetensors").exists():
-        print(f"    [RESUME] Found existing model. Skipping training.")
-        interpolator = MixupBartInterpolator(model_name=out_dir, out_dir=out_dir, device=device)
-        interpolator.set_predicate_mapping(canonical_map)
-    else:
+    if not (Path(out_dir) / "pytorch_model.bin").exists() and not (Path(out_dir) / "model.safetensors").exists():
+        print(f"    Starting Training (Coherent Mode)...")
         def tokenize(batch):
             return interpolator.tokenizer(batch["input"], text_target=batch["target"], max_length=64, truncation=True, padding="max_length")
         hf_ds = HFDataset.from_list(train_rows).map(tokenize, batched=True)
-        training_args = Seq2SeqTrainingArguments(
-            output_dir=out_dir, per_device_train_batch_size=BATCH_SIZE, gradient_accumulation_steps=GRAD_ACCUMULATION,
-            num_train_epochs=EPOCHS, learning_rate=3e-5, save_strategy="no", report_to="none", fp16=FP16,
-            dataloader_num_workers=8, dataloader_pin_memory=True, dataloader_persistent_workers=True
-        )
-        trainer = Seq2SeqTrainer(model=interpolator.model, args=training_args, train_dataset=hf_ds, data_collator=DataCollatorForSeq2Seq(interpolator.tokenizer, model=interpolator.model))
-        print(f"    Starting Training ({EPOCHS} epochs)...")
+        args = Seq2SeqTrainingArguments(output_dir=out_dir, per_device_train_batch_size=BATCH_SIZE, gradient_accumulation_steps=GRAD_ACCUMULATION, num_train_epochs=EPOCHS, learning_rate=3e-5, fp16=True, report_to="none", save_strategy="no")
+        trainer = Seq2SeqTrainer(model=interpolator.model, args=args, train_dataset=hf_ds, data_collator=DataCollatorForSeq2Seq(interpolator.tokenizer, model=interpolator.model))
         trainer.train()
         interpolator.model.save_pretrained(out_dir); interpolator.tokenizer.save_pretrained(out_dir)
+    else:
+        print(f"    [RESUME] Using existing coherent model.")
+        interpolator = MixupBartInterpolator(model_name=out_dir, out_dir=out_dir, device=device)
+        interpolator.set_predicate_mapping(canonical_map)
 
-    # 3. GRID SEARCH
-    aligned_subset, orphan_subset = [], []
+    # 3. PREPARAZIONE SUBSET DI TEST (Strict)
+    aligned_test, orphan_test = [], []
     for row in train_rows:
-        v_inp = row['input'].split(' ', 1)[1] if ' ' in row['input'] else row['input']
-        v_tgt = row['target'].split(' ', 1)[1] if ' ' in row['target'] else row['target']
-        if v_tgt.lower().strip() not in v_inp.lower().strip() and len(aligned_subset) < SWEEP_SAMPLES:
-            aligned_subset.append(row)
-        elif v_tgt.lower().strip() in v_inp.lower().strip() and len(orphan_subset) < SWEEP_SAMPLES // 2:
-            orphan_subset.append(row)
-        if len(aligned_subset) >= SWEEP_SAMPLES and len(orphan_subset) >= SWEEP_SAMPLES // 2: break
+        v_inp, v_tgt = clean_val(row['input']), clean_val(row['target'])
+        pred = row['input'].split(' ')[0]
+        if v_inp.lower() != v_tgt.lower() and len(v_inp) > 3 and len(v_tgt) > 3:
+            if len(aligned_test) < SWEEP_SAMPLES: aligned_test.append((pred, v_inp, v_tgt))
+        else:
+            if len(orphan_test) < SWEEP_SAMPLES // 2: orphan_test.append((pred, v_tgt))
+        if len(aligned_test) >= SWEEP_SAMPLES and len(orphan_test) >= SWEEP_SAMPLES // 2: break
 
-    print(f"\n>>> PHASE 2: GRID SEARCH SWEEP")
-    print(f"    Testing {len(alphas)*len(noises)*len(temps)} configs on {len(aligned_subset)} aligned + {len(orphan_subset)} orphan samples...")
+    # 4. GRID SEARCH (70/30 Score)
+    alphas = [0.3, 0.5]
+    noises = [0.0, 0.1, 0.2]
+    temps  = [1.0, 1.3]
     
+    print(f"\n>>> PHASE 2: GRID SEARCH SWEEP")
     results = []
-    for alpha in alphas:
-        for noise in noises:
-            for temp in temps:
-                interpolator.latent_noise_std, interpolator.gen_temperature = noise, temp
-                start_gen = time.time()
+    for a in alphas:
+        for n in noises:
+            for t in temps:
+                interpolator.latent_noise_std, interpolator.gen_temperature = n, t
+                # Test Aligned
+                gen_a, orig_a = [], []
+                for p, v1, v2 in aligned_test:
+                    res, _ = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=a)
+                    gen_a.append(res); orig_a.extend([v1, v2])
+                div_score = calculate_diversity_score(orig_a, gen_a)
+                # Test Orphan
+                oal_v = 0
+                for p, v in orphan_test:
+                    res, _ = interpolator.interpolate_pair(v, v, predicate=p, alpha=0.1)
+                    if res.lower() != v.lower() and abs(len(res)-len(v)) < 8: oal_v += 1
+                oal_score = oal_v / len(orphan_test) if orphan_test else 0
                 
-                # Aligned
-                gen_aligned, orig_aligned = [], []
-                for row in aligned_subset:
-                    parts_inp = row['input'].split(' ', 1)
-                    parts_tgt = row['target'].split(' ', 1)
-                    p = parts_inp[0]
-                    v1 = parts_inp[1] if len(parts_inp) > 1 else ""
-                    v2 = parts_tgt[1] if len(parts_tgt) > 1 else ""
-                    orig_aligned.extend([v1, v2])
-                    res, _ = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=alpha)
-                    gen_aligned.append(res)
-                div_score = calculate_diversity_score(orig_aligned, gen_aligned)
-                
-                # Orphan
-                oal_score = 0
-                if orphan_subset:
-                    v_vars = 0
-                    for row in orphan_subset:
-                        parts_tgt = row['target'].split(' ', 1)
-                        v = parts_tgt[1] if len(parts_tgt) > 1 else row['target']
-                        p = row['input'].split(' ', 1)[0]
-                        res, _ = interpolator.interpolate_pair(v, v, predicate=p, alpha=0.1)
-                        if res.lower().strip() != v.lower().strip() and abs(len(res)-len(v)) < 8: v_vars += 1
-                    oal_score = v_vars / len(orphan_subset)
-                
-                t_score = (div_score * 70) + (oal_score * 30)
-                if noise > 0.25: t_score *= 0.95
-                results.append({"alpha": alpha, "noise": noise, "temp": temp, "div_aligned": div_score, "div_orphan": oal_score, "score": t_score, "time": time.time()-start_gen})
-                print(f"    - A={alpha} N={noise} T={temp} -> Align={div_score:.2%} OAL={oal_score:.2%} Score={t_score:.2f}")
+                total = (div_score * 70) + (oal_score * 30)
+                results.append({"alpha": a, "noise": n, "temp": t, "align": div_score, "oal": oal_score, "score": total})
+                print(f"    A={a} N={n} T={t} -> Score: {total:.2f} (Align: {div_score:.1%}, OAL: {oal_score:.1%})")
 
     results.sort(key=lambda x: x['score'], reverse=True)
-    best_config = results[0]
-    print("\n    TOP 5 CONFIGURATIONS:"); print(tabulate(results[:5], headers="keys"))
+    best = results[0]
 
-    # 4. QUALITATIVE REPORT
-    print("\n>>> PHASE 3: CHAMPION REPORT (Best Config)")
-    interpolator.latent_noise_std, interpolator.gen_temperature = best_config['noise'], best_config['temp']
-    report_data = []
-    for i, row in enumerate(random.sample(train_rows, 50)):
-        parts_inp = row['input'].split(' ', 1)
-        parts_tgt = row['target'].split(' ', 1)
-        p, v1 = parts_inp[0], parts_inp[1] if len(parts_inp)>1 else ""
-        v2 = parts_tgt[1] if len(parts_tgt)>1 else ""
-        aug, _ = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=best_config['alpha'])
-        tag = "[✨ NEW]" if aug.lower().strip() not in [v1.lower().strip(), v2.lower().strip()] else "[⚠️ COPY]"
-        report_data.append([i+1, p, v1[:25], v2[:25], f"{aug[:35]} {tag}"])
+    # 5. REPORT QUALITATIVO FINALE (COERENTE)
+    print("\n" + "="*100); print(" CHAMPION QUALITATIVE REPORT (BBC_DB) ".center(100)); print("="*100)
+    interpolator.latent_noise_std, interpolator.gen_temperature = best['noise'], best['temp']
     
-    print("\n" + "="*100)
-    print(" QUALITATIVE REPORT (BBC_DB) ".center(100))
-    print("="*100)
-    print(tabulate(report_data, headers=["#", "PRED", "VAL A", "VAL B", "AUGMENTED"], tablefmt="grid"))
+    # Sezione 1: ALIGNED MIXUP
+    print("\n[SECTION 1: ALIGNED ATTRIBUTE MIX-UP]")
+    report_a = []
+    for i, (p, v1, v2) in enumerate(aligned_test[:25]):
+        aug, _ = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=best['alpha'])
+        tag = "[✨]" if aug.lower() not in [v1.lower(), v2.lower()] else ""
+        report_a.append([i+1, p, v1[:25], v2[:25], f"{aug[:35]} {tag}"])
+    print(tabulate(report_a, headers=["#", "PRED", "VAL A", "VAL B", "AUGMENTED"], tablefmt="grid"))
+
+    # Sezione 2: ORPHAN VARIATION
+    print("\n[SECTION 2: ORPHAN ATTRIBUTE VARIATION]")
+    report_o = []
+    for i, (p, v) in enumerate(orphan_test[:15]):
+        aug, _ = interpolator.interpolate_pair(v, v, predicate=p, alpha=0.1)
+        tag = "[✨]" if aug.lower() != v.lower() else ""
+        report_o.append([i+1, p, v[:50], f"{aug[:50]} {tag}"])
+    print(tabulate(report_o, headers=["#", "PRED", "ORIGINAL VALUE", "GENERATED VARIANT"], tablefmt="grid"))
 
 if __name__ == "__main__":
     random.seed(42); np.random.seed(42); torch.manual_seed(42)
