@@ -75,6 +75,10 @@ class MixupDataBuilder:
         pred_counts = defaultdict(int)
 
         for s_uri, t_uri in aligned_pairs:
+            # Track which predicates are used for alignment
+            used_s_preds = set()
+            used_t_preds = set()
+
             s_lits = defaultdict(list)
             for _, p, o in kg_src.triples((s_uri, None, None)):
                 if isinstance(o, Literal): s_lits[str(p)].append(str(o))
@@ -103,8 +107,36 @@ class MixupDataBuilder:
                             self._add_balanced_tasks(rows, p_tok, vs, vt, noise_fn)
                     
                     pred_counts[p_tok] += 1
+                    
+                    # Track used predicates for this pair
+                    used_s_preds.add(s_p)
+                    used_t_preds.add(t_p)
+
+            # --- PHASE 2: ORPHAN ATTRIBUTES (Self-Supervised Learning) ---
+            # Learn from attributes that exist only in one KG (e.g., 'years_active', 'budget')
+            # This teaches the model domain semantics even without a translation pair.
             
-            # REMOVED HARD LIMIT: if len(rows) > 120000: break
+            for s_p, vals in s_lits.items():
+                if s_p not in used_s_preds:
+                    p_tok = canonical_map.get(s_p, f"<{_local_name(s_p).upper()}>")
+                    if pred_counts[p_tok] < max_pairs_per_pred:
+                        for v in vals:
+                            # Add pure Denoising task
+                            noisy_v = noise_fn(v)
+                            input_str = f"{p_tok} {noisy_v}"
+                            rows.append({"input": input_str, "target": v})
+                        pred_counts[p_tok] += 1
+
+            for t_p, vals in t_lits.items():
+                if t_p not in used_t_preds:
+                    p_tok = canonical_map.get(t_p, f"<{_local_name(t_p).upper()}>")
+                    if pred_counts[p_tok] < max_pairs_per_pred:
+                        for v in vals:
+                            # Add pure Denoising task
+                            noisy_v = noise_fn(v)
+                            input_str = f"{p_tok} {noisy_v}"
+                            rows.append({"input": input_str, "target": v})
+                        pred_counts[p_tok] += 1
 
         return rows, canonical_map
 

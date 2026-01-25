@@ -117,32 +117,55 @@ def run_massive_sweep():
         data_collator=DataCollatorForSeq2Seq(interpolator.tokenizer, model=interpolator.model)
     )
     
-    print(f"    Starting Training ({EPOCHS} epochs)...")
-    t0 = time.time()
-    trainer.train()
-    print(f"    Training Complete in {time.time()-t0:.1f}s")
-    interpolator.model.save_pretrained(out_dir)
-    interpolator.tokenizer.save_pretrained(out_dir)
+    # Check if model already trained
+    if (Path(out_dir) / "pytorch_model.bin").exists() or (Path(out_dir) / "model.safetensors").exists():
+        print(f"    [RESUME] Found existing model in {out_dir}. Skipping training phase.")
+        # Load the trained model into interpolator
+        interpolator = MixupBartInterpolator(
+            model_name=out_dir, # Load from local path
+            out_dir=out_dir,
+            device=device
+        )
+        interpolator.set_predicate_mapping(canonical_map)
+    else:
+        print(f"    Starting Training ({EPOCHS} epochs)...")
+        t0 = time.time()
+        trainer.train()
+        print(f"    Training Complete in {time.time()-t0:.1f}s")
+        interpolator.model.save_pretrained(out_dir)
+        interpolator.tokenizer.save_pretrained(out_dir)
 
     # ---------------------------------------------------------
     # FASE 2: HYPERPARAMETER SWEEP
     # ---------------------------------------------------------
     print("\n>>> PHASE 2: GRID SEARCH SWEEP")
     
-    # Parametri da testare
-    alphas = [0.1, 0.3, 0.5]
-    noises = [0.0, 0.1, 0.2, 0.3]
-    temps  = [1.0, 1.2, 1.4]
+    # Parametri da testare (RANGE ESPANSO PER DIVERSITÀ ESTREMA)
+    alphas = [0.3, 0.5, 0.7]           # Testiamo diverse inclinazioni del mix
+    noises = [0.1, 0.2, 0.3, 0.4, 0.5] # Noise spinto al limite per BART-Large
+    temps  = [1.0, 1.3, 1.6, 1.8]      # Temperature elevate per creatività massima
     
     results = []
     
-    # Preparazione set di test (presi dal training per velocità ma rappresentativi)
-    test_subset = train_rows[:SWEEP_SAMPLES]
+    # Preparazione set di test (presi dal training)
+    # Separiamo in aligned (traduzione) e orphan (denoising) se possibile
+    aligned_subset = []
+    orphan_subset = []
     
+    for row in train_rows[:SWEEP_SAMPLES*2]: # Scansioniamo un po' di più per trovarli
+        inp = row['input']
+        tgt = row['target']
+        is_orphan = (tgt in inp or len(set(inp) & set(tgt)) / len(set(tgt)) > 0.8) and len(tgt) > 4
+        
+        if is_orphan and len(orphan_subset) < SWEEP_SAMPLES // 2:
+            orphan_subset.append(row)
+        elif not is_orphan and len(aligned_subset) < SWEEP_SAMPLES:
+            aligned_subset.append(row)
+            
     total_configs = len(alphas) * len(noises) * len(temps)
     curr = 0
     
-    print(f"    Testing {total_configs} configurations on {SWEEP_SAMPLES} samples each...")
+    print(f"    Testing {total_configs} configs on {len(aligned_subset)} aligned + {len(orphan_subset)} orphan samples...")
     
     for alpha in alphas:
         for noise in noises:
@@ -151,51 +174,72 @@ def run_massive_sweep():
                 interpolator.latent_noise_std = noise
                 interpolator.gen_temperature = temp
                 
-                generated = []
-                originals = []
-                
-                start_gen = time.time()
-                for row in test_subset:
-                    # Estrai input
-                    inp = row['input'] # Formato: <PRED> <VAL1> <VAL2>
-                    parts = inp.split('>', 1)
+                # --- TEST 1: ALIGNED MIXUP ---
+                gen_aligned = []
+                orig_aligned = []
+                for row in aligned_subset:
+                    parts = row['input'].split('>', 1)
                     if len(parts) < 2: continue
                     pred = parts[0] + '>'
                     vals = parts[1].strip().split(' </s> ')
                     if len(vals) < 2: continue
                     v1, v2 = vals[0], vals[1]
-                    
-                    originals.append(v1)
-                    originals.append(v2)
-                    
-                    # Genera
+                    orig_aligned.extend([v1, v2])
                     res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=alpha)
-                    generated.append(res)
+                    gen_aligned.append(res)
                 
-                # Calcola metriche
-                diversity = calculate_diversity_score(originals, generated)
+                div_score = calculate_diversity_score(orig_aligned, gen_aligned)
                 
-                # Score euristico: Vogliamo Alta Diversità ma non Garbage.
-                # Assumiamo che se diversity > 90% forse è garbage, se < 10% è copia.
-                # Target ideale: 60-80% diversity con noise controllato.
+                # --- TEST 2: ORPHAN VARIATION ---
+                oal_score = 0
+                if orphan_subset:
+                    valid_variants = 0
+                    for row in orphan_subset:
+                        val = row['target']
+                        parts = row['input'].split(' ', 1)
+                        pred = parts[0]
+                        # Usa alpha basso per orphan (non vogliamo mixare con il nulla)
+                        # Ma sufficiente noise per generare varianti
+                        res, _ = interpolator.interpolate_pair(val, val, predicate=pred, alpha=0.1)
+                        
+                        v_clean = val.strip().lower()
+                        r_clean = res.strip().lower()
+                        
+                        # Premia se diverso ma simile (Variante)
+                        if v_clean != r_clean and abs(len(v_clean) - len(r_clean)) < 8:
+                            valid_variants += 1
+                    
+                    oal_score = valid_variants / len(orphan_subset)
                 
-                score = diversity * 100 
-                # Penalizza noise troppo alto se non porta benefici
-                if noise > 0.25: score *= 0.95 
+                # --- GLOBAL SCORE ---
+                # 70% peso su Alignment Diversity, 30% su Orphan Variation
+                total_score = (div_score * 70) + (oal_score * 30)
+                
+                # Penalizza noise eccessivo
+                if noise > 0.25: total_score *= 0.95
                 
                 res_dict = {
                     "alpha": alpha,
                     "noise": noise,
                     "temp": temp,
-                    "diversity": f"{diversity:.2%}",
-                    "score": score,
+                    "div_aligned": f"{div_score:.2%}",
+                    "div_orphan": f"{oal_score:.2%}",
+                    "score": total_score,
                     "time": f"{time.time()-start_gen:.1f}s"
                 }
                 results.append(res_dict)
-                print(f"    [{curr}/{total_configs}] A={alpha} N={noise} T={temp} -> Div={diversity:.2%} Score={score:.2f}")
+                print(f"    [{curr}/{total_configs}] A={alpha} N={noise} T={temp} -> Align={div_score:.2%} OAL={oal_score:.2%} Score={total_score:.2f}")
 
     # Ordina per Score
     results.sort(key=lambda x: x['score'], reverse=True)
+    
+    if not results:
+        logger.error("NO VALID RESULTS COLLECTED during sweep!")
+        logger.error(f"Debug Info: aligned_subset={len(aligned_subset)}, orphan_subset={len(orphan_subset)}")
+        if aligned_subset:
+            logger.error(f"Sample Aligned Input: {aligned_subset[0]['input']}")
+        return
+
     best_config = results[0]
     
     print("\n    TOP 5 CONFIGURATIONS:")
@@ -241,6 +285,60 @@ def run_massive_sweep():
     print(f"  latent_noise_std: {best_config['noise']}")
     print(f"  temperature: {best_config['temp']}")
     print(f"  base_alpha: {best_config['alpha']}")
+
+    # ---------------------------------------------------------
+    # FASE 4: ORPHAN ATTRIBUTE TEST (OAL Verification)
+    # ---------------------------------------------------------
+    print("\n>>> PHASE 4: ORPHAN ATTRIBUTE LEARNING TEST")
+    print("    Verifying if model learned to reconstruct unmatched attributes...")
+
+    # Identifica task che sono puro denoising (input simile a target ma con noise)
+    # e che non sono task di traduzione (v1 != v2). 
+    # Negli orfani, input e target derivano dallo stesso valore base.
+    orphan_candidates = []
+    for row in train_rows:
+        inp = row['input']
+        tgt = row['target']
+        # Euristica: se input contiene target (o viceversa) e target è lungo abbastanza
+        if (tgt in inp or len(set(inp) & set(tgt)) / len(set(tgt)) > 0.8) and len(tgt) > 5:
+             orphan_candidates.append(row)
+
+    if orphan_candidates:
+        print(f"    Found {len(orphan_candidates)} potential orphan/denoising tasks.")
+        orphan_sample = random.sample(orphan_candidates, min(20, len(orphan_candidates)))
+        
+        oal_report = []
+        for i, row in enumerate(orphan_sample):
+            # Simula input rumoroso
+            raw_input = row['input'] # Già contiene il token <PRED> e valore noise
+            parts = raw_input.split(' ', 1)
+            pred = parts[0]
+            val = row['target']
+            
+            # Rigenera con il modello
+            # Usiamo un po' di noise (0.1) per stimolare la variazione anche su orfani
+            rec, _ = interpolator.interpolate_pair(val, val, predicate=pred, alpha=0.1)
+            
+            # Valutazione Sofisticata
+            val_clean = val.strip().lower()
+            rec_clean = rec.strip().lower()
+            
+            if val_clean == rec_clean:
+                status = "🆗 COPY"  # Ha ricostruito bene, ma zero novità
+            elif len(rec_clean) > 3 and abs(len(rec_clean) - len(val_clean)) < 10:
+                # Diverso ma lunghezza simile: probabile variante valida
+                status = "✅ VARIANT"
+            else:
+                status = "❓ CHECK" # Troppo diverso, sospetto
+            
+            oal_report.append([i+1, pred, val[:30], rec[:30], status])
+            
+        print("\n" + "="*100)
+        print(" ORPHAN ATTRIBUTE VARIATION REPORT ".center(100))
+        print("="*100)
+        print(tabulate(oal_report, headers=["#", "PRED", "ORIGINAL", "GENERATED (OAL)", "STATUS"], tablefmt="grid"))
+    else:
+        print("    No orphan tasks found in sample (maybe OAL was not active in this run).")
 
 if __name__ == "__main__":
     # Ensure reproducibility
