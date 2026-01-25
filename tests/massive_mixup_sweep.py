@@ -174,6 +174,8 @@ def run_massive_sweep():
                 interpolator.latent_noise_std = noise
                 interpolator.gen_temperature = temp
                 
+                start_gen = time.time()  # <--- FIX: Added timestamp
+                
                 # --- TEST 1: ALIGNED MIXUP ---
                 gen_aligned = []
                 orig_aligned = []
