@@ -18,17 +18,22 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE 4090 (BART-LARGE POWER) ---
-BATCH_SIZE = 32        # Per BART-Large
-GRAD_ACCUMULATION = 8  # Effettivo 256
-FP16 = True            
-EPOCHS = 10            
-MAX_SAMPLES = None     
-SWEEP_SAMPLES = 200    
+# --- CONFIGURAZIONE PER TEST LOCALE (VELOCE) ---
+BATCH_SIZE = 8
+GRAD_ACCUMULATION = 1
+FP16 = False           
+EPOCHS = 1            
+MAX_SAMPLES = 50
+SWEEP_SAMPLES = 5    
 
 torch.backends.cudnn.benchmark = True
 logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(message)s')
 logger = logging.getLogger("MassiveSweep")
+
+# Parametri Sweep ridotti
+alphas = [0.5]
+noises = [0.2]
+temps  = [1.2]
 
 def calculate_diversity_score(original_list, generated_list):
     originals = set(s.lower().strip() for s in original_list)
@@ -56,49 +61,16 @@ def run_massive_sweep():
 
     # 2. TRAINING O RESUME
     print(f"    Canonical Map size: {len(canonical_map)}")
-    if len(canonical_map) == 0:
-        logger.error("CANONICAL MAP IS EMPTY! Predicate matching failed.")
-        return
-
-    out_dir = "./results/sweep_model_large"
     
-    if (Path(out_dir) / "pytorch_model.bin").exists() or (Path(out_dir) / "model.safetensors").exists():
-        print(f"    [RESUME] Found existing model in {out_dir}. Skipping training phase.")
-        # Carichiamo il modello esistente
-        interpolator = MixupBartInterpolator(
-            model_name=out_dir, 
-            out_dir=out_dir,
-            device=device
-        )
-        # Riapplichiamo la mappa per registrare i token e aggiornare l'interpolatore
-        interpolator.set_predicate_mapping(canonical_map)
-    else:
-        # Inizializziamo nuovo modello
-        interpolator = MixupBartInterpolator(
-            model_name="facebook/bart-large", 
-            out_dir=out_dir,
-            device=device
-        )
-        interpolator.set_predicate_mapping(canonical_map)
-        
-        def tokenize(batch):
-            return interpolator.tokenizer(batch["input"], text_target=batch["target"], 
-                                        max_length=64, truncation=True, padding="max_length")
-        hf_ds = HFDataset.from_list(train_rows).map(tokenize, batched=True)
-        training_args = Seq2SeqTrainingArguments(
-            output_dir=out_dir, per_device_train_batch_size=BATCH_SIZE, gradient_accumulation_steps=GRAD_ACCUMULATION,
-            num_train_epochs=EPOCHS, learning_rate=3e-5, save_strategy="no", report_to="none", fp16=FP16,
-            dataloader_num_workers=8, dataloader_pin_memory=True, dataloader_persistent_workers=True
-        )
-        trainer = Seq2SeqTrainer(model=interpolator.model, args=training_args, train_dataset=hf_ds, data_collator=DataCollatorForSeq2Seq(interpolator.tokenizer, model=interpolator.model))
-        trainer.train()
-        interpolator.model.save_pretrained(out_dir); interpolator.tokenizer.save_pretrained(out_dir)
+    # FORZIAMO BART-BASE PER IL TEST LOCALE E SALTIAMO IL TRAINING
+    interpolator = MixupBartInterpolator(model_name="facebook/bart-base", out_dir=out_dir, device=device)
+    interpolator.set_predicate_mapping(canonical_map)
+    
+    # Simuliamo il training caricando il modello base direttamente
+    print("    [DEBUG] Skipping training for local logic verification...")
+
 
     # 3. GRID SEARCH
-    alphas = [0.3, 0.5, 0.7]
-    noises = [0.1, 0.2, 0.3, 0.4, 0.5]
-    temps  = [1.0, 1.3, 1.6, 1.8]
-    
     aligned_subset, orphan_subset = [], []
     for row in train_rows:
         v_inp = row['input'].split(' ', 1)[1] if ' ' in row['input'] else row['input']
@@ -119,28 +91,39 @@ def run_massive_sweep():
                 
                 # Aligned
                 gen_aligned, orig_aligned = [], []
-                for row in aligned_subset:
+                print(f"    - Testing Config: A={alpha} N={noise} T={temp}")
+                for idx, row in enumerate(aligned_subset):
                     parts_inp = row['input'].split(' ', 1)
                     parts_tgt = row['target'].split(' ', 1)
                     p = parts_inp[0]
                     v1 = parts_inp[1] if len(parts_inp) > 1 else ""
                     v2 = parts_tgt[1] if len(parts_tgt) > 1 else ""
                     orig_aligned.extend([v1, v2])
+                    
+                    if idx % 50 == 0:
+                        print(f"      [Progress] Aligned: {idx}/{len(aligned_subset)}", end='\r')
+                    
                     res, _ = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=alpha)
                     gen_aligned.append(res)
+                print(f"      [Progress] Aligned: Done")
                 div_score = calculate_diversity_score(orig_aligned, gen_aligned)
                 
                 # Orphan
                 oal_score = 0
                 if orphan_subset:
                     v_vars = 0
-                    for row in orphan_subset:
+                    for idx, row in enumerate(orphan_subset):
                         parts_tgt = row['target'].split(' ', 1)
                         v = parts_tgt[1] if len(parts_tgt) > 1 else row['target']
                         p = row['input'].split(' ', 1)[0]
+                        
+                        if idx % 25 == 0:
+                            print(f"      [Progress] Orphan: {idx}/{len(orphan_subset)}", end='\r')
+                            
                         res, _ = interpolator.interpolate_pair(v, v, predicate=p, alpha=0.1)
                         if res.lower().strip() != v.lower().strip() and abs(len(res)-len(v)) < 8: 
                             v_vars += 1
+                    print(f"      [Progress] Orphan: Done")
                     oal_score = v_vars / len(orphan_subset)
                 
                 t_score = (div_score * 70) + (oal_score * 30)
