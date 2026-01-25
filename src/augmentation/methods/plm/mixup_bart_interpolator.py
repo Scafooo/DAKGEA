@@ -130,8 +130,19 @@ class MixupBartInterpolator:
             return model_inputs
 
         hf_dataset = HFDataset.from_list(training_rows).map(tokenize_fn, batched=True, remove_columns=["input", "target"])
-        args = Seq2SeqTrainingArguments(output_dir=self.out_dir, per_device_train_batch_size=batch_size, num_train_epochs=epochs, 
-                                        learning_rate=lr, weight_decay=0.01, fp16=torch.cuda.is_available(), save_strategy="no", report_to="none")
+        args = Seq2SeqTrainingArguments(
+            output_dir=self.out_dir, 
+            per_device_train_batch_size=batch_size, 
+            num_train_epochs=epochs, 
+            learning_rate=lr, 
+            weight_decay=0.05,        # Aumentato per regolarizzazione
+            label_smoothing_factor=0.1, # Evita overfitting e aiuta la creatività
+            lr_scheduler_type="cosine", # Discesa dolce
+            warmup_ratio=0.1,          # Inizio graduale
+            fp16=torch.cuda.is_available(), 
+            save_strategy="no", 
+            report_to="none"
+        )
         trainer = Seq2SeqTrainer(model=self.model, args=args, train_dataset=hf_dataset, data_collator=DataCollatorForSeq2Seq(self.tokenizer, model=self.model))
         trainer.train()
         self.model.save_pretrained(self.out_dir); self.tokenizer.save_pretrained(self.out_dir)
