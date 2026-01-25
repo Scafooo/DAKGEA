@@ -77,6 +77,11 @@ def run_massive_sweep():
     train_rows, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=5000)
     
     print(f"    Dataset Size: {len(train_rows)} samples")
+    if len(train_rows) > 0:
+        print(f"    Sample Row: {train_rows[0]}")
+    else:
+        logger.error("DATASET IS EMPTY! Check path or builder.")
+        return
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"    Device: {device} ({torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'})")
