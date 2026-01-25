@@ -199,14 +199,16 @@ def run_massive_sweep():
                 orig_aligned = []
                 
                 for row in aligned_subset:
-                    # In questo formato, interpolate_pair riceve v1 e v2
-                    # Ma dato che il modello è un Translator, interpolate_pair(v1, v2)
-                    # farà il mix nello spazio latente di v1 e v2.
                     inp = row['input']
                     tgt = row['target']
-                    pred = inp.split(' ')[0]
-                    v1 = inp.split(' ', 1)[1]
-                    v2 = tgt.split(' ', 1)[1]
+                    
+                    # Split sicuro: se non c'è spazio, il valore è stringa vuota
+                    parts_inp = inp.split(' ', 1)
+                    parts_tgt = tgt.split(' ', 1)
+                    
+                    pred = parts_inp[0]
+                    v1 = parts_inp[1] if len(parts_inp) > 1 else ""
+                    v2 = parts_tgt[1] if len(parts_tgt) > 1 else ""
                     
                     orig_aligned.extend([v1, v2])
                     res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=alpha)
@@ -332,10 +334,13 @@ def run_massive_sweep():
         oal_report = []
         for i, row in enumerate(orphan_sample):
             # Simula input rumoroso
-            raw_input = row['input'] # Già contiene il token <PRED> e valore noise
+            raw_input = row['input'] 
             parts = raw_input.split(' ', 1)
             pred = parts[0]
             val = row['target']
+            # Estrai valore pulito dal target se contiene ancora il predicato
+            if ' ' in val and val.startswith('<'):
+                val = val.split(' ', 1)[1]
             
             # Rigenera con il modello
             # Usiamo un po' di noise (0.1) per stimolare la variazione anche su orfani
