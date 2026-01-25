@@ -18,18 +18,18 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-    # --- CONFIGURAZIONE 4090 (OPTIMIZED) ---
-    BATCH_SIZE = 256       # Spinto al massimo per saturare la 4090
-    FP16 = True            # Mixed precision per velocità
-    EPOCHS = 10            # Training profondo
-    MAX_SAMPLES = None     # Nessun limite, dataset completo
-    SWEEP_SAMPLES = 200    # Campioni per testare ogni config nello sweep
-    
-    # ATTIVAZIONE BOOST HARDWARE
-    torch.backends.cudnn.benchmark = True
+# --- CONFIGURAZIONE 4090 (OPTIMIZED) ---
+BATCH_SIZE = 256       # Spinto al massimo per saturare la 4090
+FP16 = True            # Mixed precision per velocità
+EPOCHS = 10            # Training profondo
+MAX_SAMPLES = None     # Nessun limite, dataset completo
+SWEEP_SAMPLES = 200    # Campioni per testare ogni config nello sweep
 
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(message)s')
-    logger = logging.getLogger("MassiveSweep")
+# ATTIVAZIONE BOOST HARDWARE
+torch.backends.cudnn.benchmark = True
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(message)s')
+logger = logging.getLogger("MassiveSweep")
 def calculate_diversity_score(original_list, generated_list):
     """Calcola quanto sono nuove le stringhe generate rispetto alle originali."""
     originals = set(original_list)
