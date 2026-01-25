@@ -9,6 +9,7 @@ AUGMENTATION_REGISTRY: Registry[type] = Registry("Augmentation")
 
 _BUILTIN_AUGMENTATION_MODULES: Iterable[str] = (
     "src.augmentation.methods.plm.augmenter",
+    "src.augmentation.methods.plm_mixup.augmenter",
     "src.augmentation.methods.stub.augmenter",
 )
 
