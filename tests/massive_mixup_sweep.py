@@ -18,8 +18,9 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE 4090 (OPTIMIZED) ---
-BATCH_SIZE = 256       # Spinto al massimo per saturare la 4090
+# --- CONFIGURAZIONE 4090 (OPTIMIZED - OOM SAFE) ---
+BATCH_SIZE = 64        # Ridotto per stare in VRAM
+GRAD_ACCUMULATION = 4  # 64 * 4 = 256 (Batch size effettivo mantenuto alto)
 FP16 = True            # Mixed precision per velocità
 EPOCHS = 10            # Training profondo
 MAX_SAMPLES = None     # Nessun limite, dataset completo
@@ -98,16 +99,16 @@ def run_massive_sweep():
     training_args = Seq2SeqTrainingArguments(
         output_dir=out_dir,
         per_device_train_batch_size=BATCH_SIZE,
+        gradient_accumulation_steps=GRAD_ACCUMULATION, # Accumula gradienti
         num_train_epochs=EPOCHS,
         learning_rate=5e-5,
         save_strategy="no", 
-        logging_steps=50,      # Log più frequente
+        logging_steps=50,      
         report_to="none",
         fp16=FP16,
         dataloader_num_workers=8,
-        dataloader_pin_memory=True,  # Veloce transfer CPU->GPU
-        dataloader_persistent_workers=True, # Mantiene i worker vivi tra le epoche
-        gradient_accumulation_steps=1,
+        dataloader_pin_memory=True, 
+        dataloader_persistent_workers=True, 
     )    
     trainer = Seq2SeqTrainer(
         model=interpolator.model,
