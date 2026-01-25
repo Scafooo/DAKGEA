@@ -55,16 +55,35 @@ def run_massive_sweep():
     out_dir = "./results/sweep_model_large"
 
     # 2. TRAINING O RESUME
-    interpolator = MixupBartInterpolator(model_name="facebook/bart-large", out_dir=out_dir, device=device)
-    interpolator.set_predicate_mapping(canonical_map)
+    print(f"    Canonical Map size: {len(canonical_map)}")
+    if len(canonical_map) == 0:
+        logger.error("CANONICAL MAP IS EMPTY! Predicate matching failed.")
+        return
 
+    out_dir = "./results/sweep_model_large"
+    
     if (Path(out_dir) / "pytorch_model.bin").exists() or (Path(out_dir) / "model.safetensors").exists():
-        print(f"    [RESUME] Found existing model. Skipping training.")
-        interpolator = MixupBartInterpolator(model_name=out_dir, out_dir=out_dir, device=device)
+        print(f"    [RESUME] Found existing model in {out_dir}. Skipping training phase.")
+        # Carichiamo il modello esistente
+        interpolator = MixupBartInterpolator(
+            model_name=out_dir, 
+            out_dir=out_dir,
+            device=device
+        )
+        # Riapplichiamo la mappa per registrare i token e aggiornare l'interpolatore
         interpolator.set_predicate_mapping(canonical_map)
     else:
+        # Inizializziamo nuovo modello
+        interpolator = MixupBartInterpolator(
+            model_name="facebook/bart-large", 
+            out_dir=out_dir,
+            device=device
+        )
+        interpolator.set_predicate_mapping(canonical_map)
+        
         def tokenize(batch):
-            return interpolator.tokenizer(batch["input"], text_target=batch["target"], max_length=64, truncation=True, padding="max_length")
+            return interpolator.tokenizer(batch["input"], text_target=batch["target"], 
+                                        max_length=64, truncation=True, padding="max_length")
         hf_ds = HFDataset.from_list(train_rows).map(tokenize, batched=True)
         training_args = Seq2SeqTrainingArguments(
             output_dir=out_dir, per_device_train_batch_size=BATCH_SIZE, gradient_accumulation_steps=GRAD_ACCUMULATION,
