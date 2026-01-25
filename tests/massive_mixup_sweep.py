@@ -115,26 +115,58 @@ def run_massive_sweep():
     results.sort(key=lambda x: x['score'], reverse=True)
     best = results[0]
 
-    # 5. REPORT QUALITATIVO FINALE (COERENTE)
-    print("\n" + "="*100); print(" CHAMPION QUALITATIVE REPORT (BBC_DB) ".center(100)); print("="*100)
+    # 5. REPORT QUALITATIVO FINALE (DIVERSIFICATO & STRATIFICATO)
+    print("\n" + "="*100); print(" CHAMPION QUALITATIVE REPORT (BBC_DB) - DIVERSIFIED ".center(100)); print("="*100)
     interpolator.latent_noise_std, interpolator.gen_temperature = best['noise'], best['temp']
     
-    # Sezione 1: ALIGNED MIXUP
-    print("\n[SECTION 1: ALIGNED ATTRIBUTE MIX-UP]")
+    # Raggruppiamo gli allineamenti per predicato per campionamento stratificato
+    from collections import defaultdict
+    aligned_by_pred = defaultdict(list)
+    for p, v1, v2 in aligned_test:
+        # Preferiamo esempi NON banali (v1 != v2 sostanzialmente)
+        if len(set(v1.split()) ^ set(v2.split())) > 0:
+            aligned_by_pred[p].append((p, v1, v2))
+    
+    # Sezione 1: ALIGNED MIXUP (75 esempi stratificati)
+    print("\n[SECTION 1: STRATIFIED ALIGNED MIX-UP (N=75)]")
     report_a = []
-    for i, (p, v1, v2) in enumerate(aligned_test[:25]):
-        aug, _ = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=best['alpha'])
-        tag = "[✨]" if aug.lower() not in [v1.lower(), v2.lower()] else ""
-        report_a.append([i+1, p, v1[:25], v2[:25], f"{aug[:35]} {tag}"])
+    preds = list(aligned_by_pred.keys())
+    count = 0
+    while count < 75 and preds:
+        for p in preds[:]: # Iteriamo sui predicati
+            if aligned_by_pred[p]:
+                p_uri, v1, v2 = aligned_by_pred[p].pop(0)
+                aug, _ = interpolator.interpolate_pair(v1, v2, predicate=p_uri, alpha=best['alpha'])
+                tag = "[✨]" if aug.lower() not in [v1.lower(), v2.lower()] else ""
+                report_a.append([count+1, p_uri, v1[:25], v2[:25], f"{aug[:35]} {tag}"])
+                count += 1
+            else:
+                preds.remove(p)
+            if count >= 75: break
+
     print(tabulate(report_a, headers=["#", "PRED", "VAL A", "VAL B", "AUGMENTED"], tablefmt="grid"))
 
-    # Sezione 2: ORPHAN VARIATION
-    print("\n[SECTION 2: ORPHAN ATTRIBUTE VARIATION]")
+    # Sezione 2: ORPHAN VARIATION (25 esempi stratificati, incluse date)
+    print("\n[SECTION 2: STRATIFIED ORPHAN VARIATION (N=25)]")
+    orphan_by_pred = defaultdict(list)
+    for p, v in orphan_test:
+        orphan_by_pred[p].append((p, v))
+        
     report_o = []
-    for i, (p, v) in enumerate(orphan_test[:15]):
-        aug, _ = interpolator.interpolate_pair(v, v, predicate=p, alpha=0.1)
-        tag = "[✨]" if aug.lower() != v.lower() else ""
-        report_o.append([i+1, p, v[:50], f"{aug[:50]} {tag}"])
+    o_preds = list(orphan_by_pred.keys())
+    o_count = 0
+    while o_count < 25 and o_preds:
+        for p in o_preds[:]:
+            if orphan_by_pred[p]:
+                p_uri, v = orphan_by_pred[p].pop(0)
+                aug, _ = interpolator.interpolate_pair(v, v, predicate=p_uri, alpha=0.1)
+                tag = "[✨]" if aug.lower() != v.lower() else ""
+                report_o.append([o_count+1, p_uri, v[:50], f"{aug[:50]} {tag}"])
+                o_count += 1
+            else:
+                o_preds.remove(p)
+            if o_count >= 25: break
+            
     print(tabulate(report_o, headers=["#", "PRED", "ORIGINAL VALUE", "GENERATED VARIANT"], tablefmt="grid"))
 
 if __name__ == "__main__":
