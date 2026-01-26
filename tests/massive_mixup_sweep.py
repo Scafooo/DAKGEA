@@ -22,7 +22,7 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE STABILE (RTX 4090) ---
+# --- CONFIGURAZIONE RTX 4090 ---
 MODEL_NAME = "facebook/bart-base"
 BATCH_SIZE = 128
 GRAD_ACCUMULATION = 4
@@ -37,6 +37,8 @@ def clean_val(text):
     return re.sub(r'<[^>]+>\s*', '', text).strip()
 
 class PredicateFormatAnalyzer:
+    """Analizza le statistiche di formato per ogni predicato dal training data."""
+
     def __init__(self, training_rows):
         self.stats = defaultdict(lambda: {"token_counts": [], "char_lengths": [], "has_digits": [], "samples": set()})
         self._analyze(training_rows)
@@ -58,58 +60,124 @@ class PredicateFormatAnalyzer:
                 s["expected_tokens"] = (np.percentile(s["token_counts"], 5), np.percentile(s["token_counts"], 95))
                 s["expected_length"] = (np.percentile(s["char_lengths"], 5), np.percentile(s["char_lengths"], 95))
                 s["digit_ratio"] = np.mean(s["has_digits"])
+                s["median_tokens"] = np.median(s["token_counts"])
 
     def format_score(self, pred, gen):
+        """Calcola score di compliance al formato atteso (0-1)."""
         s = self.stats.get(pred)
-        if not s or not gen.strip(): return 0.0
+        if not s or not gen.strip():
+            return 0.0
         score, tokens, length = 1.0, len(gen.split()), len(gen)
-        if not (s["expected_tokens"][0] <= tokens <= s["expected_tokens"][1]): score *= 0.7
-        if not (s["expected_length"][0] <= length <= s["expected_length"][1]): score *= 0.7
+        if not (s["expected_tokens"][0] <= tokens <= s["expected_tokens"][1]):
+            score *= 0.7
+        if not (s["expected_length"][0] <= length <= s["expected_length"][1]):
+            score *= 0.7
         return score
 
-    def is_novel(self, pred, gen):
+    def is_short_value_predicate(self, pred):
+        """Determina se il predicato ha tipicamente valori corti (es. nomi)."""
         s = self.stats.get(pred)
-        return gen.lower().strip() not in s["samples"] if s else True
+        if not s:
+            return False
+        return s.get("median_tokens", 10) <= 4
 
-def calculate_creative_score(orig, gen, pred, analyzer, other=None):
-    gen_c, orig_c = gen.strip(), orig.strip()
+
+def calculate_diversity_score(orig, gen, pred, analyzer, other=None):
+    """
+    Nuova metrica di scoring che premia QUALSIASI diversità.
+
+    Filosofia: per i nomi brevi, anche "John Smith" -> "J. Smith" è buono.
+    Non pretendiamo semantic leap, basta che sia DIVERSO e ben formato.
+
+    Returns:
+        dict con:
+        - total: score finale (0-1)
+        - diversity: quanto è diverso dall'originale (0-1)
+        - format: compliance al formato (0-1)
+        - transform: tipo di trasformazione
+    """
+    gen_c = gen.strip()
+    orig_c = orig.strip()
     other_c = other.strip() if other else ""
-    if len(gen_c) < 3: return {"total": 0, "transform": "garbage"}
-    
-    # 1. FORMAT COMPLIANCE
+
+    # Garbage detection
+    if len(gen_c) < 2:
+        return {"total": 0, "diversity": 0, "format": 0, "transform": "garbage_empty"}
+
+    # 1. FORMAT COMPLIANCE (0-1)
     f_score = analyzer.format_score(pred, gen_c)
-    
-    # 2. LEXICAL NOVELTY (Molto più severo)
+
+    # 2. DIVERSITY SCORE basato su edit distance (0-1)
+    # Usiamo 1 - similarity come misura di diversità
+    sim_orig = SequenceMatcher(None, orig_c.lower(), gen_c.lower()).ratio()
+    sim_other = SequenceMatcher(None, other_c.lower(), gen_c.lower()).ratio() if other_c else 1.0
+
+    # La diversità è quanto siamo lontani da ENTRAMBI gli input
+    diversity_from_orig = 1.0 - sim_orig
+    diversity_from_other = 1.0 - sim_other
+
+    # Prendiamo la diversità minima (deve essere diverso da entrambi)
+    min_diversity = min(diversity_from_orig, diversity_from_other)
+
+    # Classifica il tipo di trasformazione
+    if sim_orig > 0.98:
+        ttype = "identity"
+        d_score = 0.0  # Copia esatta = 0 punti
+    elif sim_orig > 0.90:
+        ttype = "near_copy"
+        d_score = 0.2  # Quasi copia
+    elif sim_orig > 0.70:
+        ttype = "minor_variation"
+        d_score = 0.5  # Variazione minore ma OK
+    elif sim_orig > 0.50:
+        ttype = "good_variation"
+        d_score = 0.8  # Buona variazione
+    elif sim_orig > 0.30:
+        ttype = "strong_transform"
+        d_score = 1.0  # Trasformazione significativa
+    else:
+        # Troppo diverso potrebbe essere garbage
+        # Verifichiamo che abbia almeno qualche parola in comune
+        gen_words = set(re.findall(r'\w+', gen_c.lower()))
+        orig_words = set(re.findall(r'\w+', orig_c.lower()))
+        other_words = set(re.findall(r'\w+', other_c.lower()))
+        source_words = orig_words | other_words
+
+        common = gen_words & source_words
+        if len(common) > 0 or f_score > 0.5:
+            ttype = "creative_transform"
+            d_score = 0.9  # Creativo ma mantiene qualche connessione
+        else:
+            ttype = "garbage_unrelated"
+            d_score = 0.1  # Probabilmente garbage
+
+    # Bonus per parole nuove (semantic novelty)
     gen_words = set(re.findall(r'\w+', gen_c.lower()))
     orig_words = set(re.findall(r'\w+', orig_c.lower()))
     other_words = set(re.findall(r'\w+', other_c.lower()))
     source_words = orig_words | other_words
-    
-    # Parole nuove reali (lunghe almeno 3 caratteri per evitare rumore)
     new_words = [w for w in (gen_words - source_words) if len(w) > 2]
-    
-    # 3. CREATIVITY SCORE (Puniamo le permutazioni pigre)
-    sim_orig = SequenceMatcher(None, orig_c.lower(), gen_c.lower()).ratio()
-    
-    if sim_orig > 0.95:
-        c_score = 0.05 # Copia quasi esatta
-        ttype = "identity"
-    elif gen_words == source_words or gen_words.issubset(source_words):
-        c_score = 0.1 # Semplice reordering/permutazione pigra
-        ttype = "lazy_permutation"
-    elif new_words:
-        c_score = 1.0 # VERA CREATIVITÀ: ha aggiunto roba nuova
-        ttype = "semantic_leap"
-    elif 0.5 <= sim_orig <= 0.85:
-        c_score = 0.7 # Buon mix/fusione
-        ttype = "partial_merge"
-    else:
-        c_score = 0.2
-        ttype = "garbage"
-    
-    # Score finale: Novità e Creatività pesano di più della Format ora
-    total = (f_score * 0.3) + (c_score * 0.7)
-    return {"total": total, "transform": ttype}
+
+    novelty_bonus = min(0.2, len(new_words) * 0.05)  # Max +0.2 bonus
+
+    # Score finale: Format (30%) + Diversity (70%) + bonus
+    total = (f_score * 0.3) + (d_score * 0.7) + novelty_bonus
+    total = min(1.0, total)  # Cap a 1.0
+
+    return {
+        "total": total,
+        "diversity": d_score,
+        "format": f_score,
+        "transform": ttype,
+        "sim_orig": sim_orig,
+        "new_words": len(new_words)
+    }
+
+
+# Alias per backward compatibility
+def calculate_creative_score(orig, gen, pred, analyzer, other=None):
+    """Alias per la nuova funzione di scoring."""
+    return calculate_diversity_score(orig, gen, pred, analyzer, other)
 
 def run_massive_sweep():
     print("\n" + "█"*100); print(f"█ RTX 4090: STABLE EVALUATION (POST-FEEDBACK) ".center(98) + "█"); print("█"*100)
