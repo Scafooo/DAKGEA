@@ -22,11 +22,14 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE MICRO-CHIRURGIA (RTX 4090) ---
+# --- CONFIGURAZIONE BART-BASE (BESTIA 4090) ---
+MODEL_NAME = "facebook/bart-base"
+BATCH_SIZE = 512       # Satura i 24GB della 4090
+GRAD_ACCUMULATION = 1  # Nessun bisogno di accumulare con questo batch size
+EPOCHS = 15            
 SAMPLES_ALIGNED = 400
-BATCH_SIZE = 32
-GRAD_ACCUMULATION = 8
-SWEEP_SAMPLES = 30 # Ridotto leggermente per gestire 450 config in tempi umani
+SAMPLES_ORPHAN = 100
+SWEEP_SAMPLES = 50
 
 torch.backends.cudnn.benchmark = True
 logger = get_logger("MassiveSweep")
@@ -35,52 +38,59 @@ def clean_val(text):
     return re.sub(r'<[^>]+>\s*', '', text).strip()
 
 def calculate_precision_score(orig, gen, originals_set):
-    """
-    Score per Precisione Estrema:
-    - Premia novità (non in originals_set)
-    - Premia somiglianza strutturale (SequenceMatcher > 0.7)
-    - Penalizza distorsioni (sim < 0.5)
-    - Penalizza copie identiche (sim > 0.98)
-    """
     gen_clean = gen.lower().strip()
     if len(gen_clean) < 3: return 0.0
-    
     sim = SequenceMatcher(None, orig.lower().strip(), gen_clean).ratio()
-    
-    # 1. Copia Identica (Inutile)
     if sim > 0.98: return 0.05
-    
-    # 2. Sweet Spot (Nuovo ma strutturalmente coerente)
-    if 0.65 <= sim <= 0.92:
-        score = sim * 1.5
-        if gen_clean not in originals_set:
-            score += 1.0 # Forte premio per novità valida
+    if 0.6 <= sim <= 0.92:
+        score = sim * 1.2
+        if gen_clean not in originals_set: score += 0.8
         return score
-        
-    # 3. Allucinazione (Troppo diverso)
     return 0.0
 
 def run_massive_sweep():
     print("\n" + "█"*100)
-    print("█" + " RTX 4090: MICRO-PRECISION PARAMETER OPTIMIZER ".center(98) + "█")
-    print("█" + " (450 Combinations: Alpha x Noise x Beams x Penalty) ".center(98) + "█")
+    print(f"█ {f'RTX 4090: OPTIMIZING {MODEL_NAME.upper()}'.center(96)} █")
+    print("█" + " (Back to Base: Fast, Fluid, Coherent) ".center(98) + "█")
     print("█"*100)
 
-    # 1. DATI
+    # 1. CARICAMENTO DATI
     data_path = PROJECT_ROOT / "data" / "raw" / "openea" / "BBC_DB"
     reader = OpeneaDatasetReader()
     dataset = reader.read(str(data_path))
     builder = MixupDataBuilder(confidence_threshold=0.6, value_match_threshold=0.3)
     train_rows, canonical_map = builder.build_training_data(dataset)
     
+    print(f"    Dataset Size: {len(train_rows)} samples")
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    out_dir = "./results/sweep_model_ultimate_v5"
+    out_dir = "./results/sweep_model_base_v1"
 
-    # 2. MODELLO
-    interpolator = MixupBartInterpolator(model_name=out_dir, out_dir=out_dir, device=device)
+    # 2. TRAINING O RESUME
+    model_trained = (Path(out_dir) / "pytorch_model.bin").exists() or (Path(out_dir) / "model.safetensors").exists()
+    interpolator = MixupBartInterpolator(model_name=MODEL_NAME if not model_trained else out_dir, out_dir=out_dir, device=device)
     interpolator.set_predicate_mapping(canonical_map)
 
-    # 3. TEST SUBSET
+    if not model_trained:
+        print(f"    Starting Training ({EPOCHS} epochs)...")
+        def tokenize(batch):
+            return interpolator.tokenizer(batch["input"], text_target=batch["target"], max_length=64, truncation=True, padding="max_length")
+        args = Seq2SeqTrainingArguments(
+            output_dir=out_dir, 
+            per_device_train_batch_size=BATCH_SIZE, 
+            num_train_epochs=EPOCHS, 
+            learning_rate=5e-5, 
+            fp16=True, 
+            report_to="none", 
+            save_strategy="no",
+            dataloader_num_workers=16,
+            dataloader_pin_memory=True
+        )
+        trainer = Seq2SeqTrainer(model=interpolator.model, args=args, train_dataset=hf_ds, data_collator=DataCollatorForSeq2Seq(interpolator.tokenizer, model=interpolator.model))
+        print(f"    Starting Training (BESTIA MODE - 4090)...")
+    else:
+        print(f"    [RESUME] Found existing Base model.")
+
+    # 3. TEST SUBSET CLEAN
     aligned_test = []
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
     for s_uri, t_uri in list(dataset.aligned_entities)[:SWEEP_SAMPLES*20]:
@@ -92,54 +102,38 @@ def run_massive_sweep():
                     aligned_test.append((canonical_map[ps], vs, vt))
         if len(aligned_test) >= SWEEP_SAMPLES: break
 
-    # 4. MICRO-GRID SEARCH
-    alphas = [0.05, 0.1, 0.15, 0.2, 0.3]
-    noises = [0.01, 0.02, 0.03, 0.04, 0.05]
-    beams  = [3, 4, 5, 6, 7, 8]
-    penalties = [1.5, 1.8, 2.0]
+    # 4. SWEEP CHIRURGICO PER BASE
+    print(f"\n>>> PHASE 2: PARAMETER OPTIMIZATION")
+    alphas = [0.1, 0.2, 0.3]
+    noises = [0.02, 0.05, 0.1]
+    beams  = [3, 5]
     
     results = []
-    total = len(alphas) * len(noises) * len(beams) * len(penalties)
-    curr = 0
-    
     originals_set = set(clean_val(r['target']).lower() for r in train_rows)
 
-    print(f"\n>>> SCANNING {total} CONFIGURATIONS...")
-    
     for a in alphas:
         for n in noises:
             for b in beams:
-                for p in penalties:
-                    curr += 1
-                    interpolator.latent_noise_std = n
-                    interpolator.gen_num_beams = b
-                    interpolator.gen_repetition_penalty = p
-                    
-                    scores = []
-                    for pred, v1, v2 in aligned_test:
-                        res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=a)
-                        scores.append(calculate_precision_score(v1, res, originals_set))
-                    
-                    avg_score = sum(scores) / len(scores) if scores else 0
-                    results.append({"a": a, "n": n, "b": b, "p": p, "score": avg_score})
-                    
-                    if curr % 10 == 0:
-                        print(f"    [{curr}/{total}] A={a} N={n} B={b} P={p} -> Score: {avg_score:.3f}", end='\r')
+                interpolator.latent_noise_std, interpolator.gen_num_beams = n, b
+                scores = []
+                for pred, v1, v2 in aligned_test:
+                    res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=a)
+                    scores.append(calculate_precision_score(v1, res, originals_set))
+                avg_score = sum(scores) / len(scores) if scores else 0
+                results.append({"a": a, "n": n, "b": b, "score": avg_score})
+                print(f"    A={a} N={n} B={b} -> Score: {avg_score:.3f}")
 
     results.sort(key=lambda x: x['score'], reverse=True)
     best = results[0]
-    print(f"\n\n    WINNING CONFIGURATION FOUND after {total} trials:")
-    print(tabulate([best], headers="keys"))
+    print("\n    WINNING CONFIGURATION:"); print(tabulate([best], headers="keys"))
 
     # 5. REPORT FINALE
-    print("\n" + "="*100); print(" ULTIMATE SOTA PRECISION REPORT ".center(100)); print("="*100)
-    interpolator.latent_noise_std, interpolator.gen_num_beams, interpolator.gen_repetition_penalty = best['n'], best['b'], best['p']
+    print("\n" + "="*100); print(f" ULTIMATE {MODEL_NAME.upper()} REPORT ".center(100)); print("="*100)
+    interpolator.latent_noise_std, interpolator.gen_num_beams = best['n'], best['b']
     
-    output_file = "massive_precision_optimized_report.txt"
+    output_file = "massive_base_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write(f"DAKGEA PRECISION OPTIMIZED | Best Config: {best}\n\n")
-        
-        # Generazione Report Stratificato (utilizzando la logica precedente di successo)
+        f.write(f"DAKGEA {MODEL_NAME} REPORT | Best Config: {best}\n\n")
         aligned_by_pred = defaultdict(list)
         for s_uri, t_uri in dataset.aligned_entities:
             s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
@@ -149,20 +143,20 @@ def run_massive_sweep():
                     if vs.lower() != vt.lower() and len(vs) > 3 and canonical_map.get(ps) == canonical_map.get(pt):
                         aligned_by_pred[canonical_map[ps]].append((canonical_map[ps], vs, vt))
 
-        report_a, count, a_preds = [], 0, list(aligned_by_pred.keys())
+        report_data, count, a_preds = [], 0, list(aligned_by_pred.keys())
         while count < SAMPLES_ALIGNED and a_preds:
             for p_tok in a_preds[:]:
                 if aligned_by_pred[p_tok]:
                     p_uri, v1, v2 = aligned_by_pred[p_tok].pop(random.randrange(len(aligned_by_pred[p_tok])))
                     aug, _ = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=best['a'])
                     f.write(f"{count+1:03d} | {p_tok:25} | {v1[:30]:30} | {v2[:30]:30} | {aug}\n")
-                    if count < 20: report_a.append([count+1, p_tok, v1[:20], v2[:20], aug[:30]])
+                    if count < 20: report_data.append([count+1, p_tok, v1[:20], v2[:20], aug[:30]])
                     count += 1
                 else: a_preds.remove(p_tok)
                 if count >= SAMPLES_ALIGNED: break
                 
-    print(f"\n>>> SUCCESS: Report saved to {output_file}")
-    print(tabulate(report_a, headers=["#", "PRED", "VAL A", "VAL B", "AUGMENTED"], tablefmt="grid"))
+    print(f"\n>>> SUCCESS: Base Report saved to {output_file}")
+    print(tabulate(report_data, headers=["#", "PRED", "VAL A", "VAL B", "AUGMENTED"], tablefmt="grid"))
 
 if __name__ == "__main__":
     random.seed(42); np.random.seed(42); torch.manual_seed(42)
