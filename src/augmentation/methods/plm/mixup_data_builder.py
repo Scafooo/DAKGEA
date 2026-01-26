@@ -55,14 +55,17 @@ class MixupDataBuilder:
                     for vs in s_lits[sp]:
                         best_vt = max(t_lits[tp], key=lambda x: self._string_similarity(vs, x))
                         if self._string_similarity(vs, best_vt) >= self.value_match_threshold:
-                            # ALLINEAMENTO
-                            self._add_balanced_tasks(rows, p_tok, vs, best_vt)
+                            # ALLINEAMENTO SIMMETRICO (A <-> B)
+                            # Insegniamo al modello che A e B sono la stessa cosa bidirezionalmente
+                            rows.append({"input": f"{p_tok} {self.noise_gen.apply(vs)}", "target": f"{p_tok} {best_vt}"})
+                            rows.append({"input": f"{p_tok} {self.noise_gen.apply(best_vt)}", "target": f"{p_tok} {vs}"})
+                            
+                            # IDENTITY (Ancoraggio)
+                            rows.append({"input": f"{p_tok} {vs}", "target": f"{p_tok} {vs}"})
+                            rows.append({"input": f"{p_tok} {best_vt}", "target": f"{p_tok} {best_vt}"})
+                            
                             used_s.add(sp); used_t.add(tp)
                             pred_counts[p_tok] += 1
-                        else:
-                            # ORFANI
-                            rows.append({"input": f"{p_tok} {_basic_noise(vs)}", "target": f"{p_tok} {vs}"})
-                            rows.append({"input": f"{canonical_map[tp]} {_basic_noise(best_vt)}", "target": f"{canonical_map[tp]} {best_vt}"})
 
             # ORFANI PURI
             for p, vals in s_lits.items():
