@@ -37,7 +37,7 @@ def clean_val(text):
     return re.sub(r'<[^>]+>\s*', '', text).strip()
 
 def calculate_sota_score(original_list, generated_list):
-    """Calcola la qualità totale: Coerenza (70%) + Diversità (30%)."""
+    """Calcola la qualità totale: Bilanciamento tra Coerenza (50%) e Diversità (50%)."""
     originals = set(s.lower().strip() for s in original_list)
     valid_variants = 0
     garbage = 0
@@ -49,12 +49,15 @@ def calculate_sota_score(original_list, generated_list):
             garbage += 1; continue
         if any(clean.count(w) > 3 for w in clean.split() if len(w) > 2):
             garbage += 1; continue
-        # Check Novelty
-        if clean not in originals: valid_variants += 1
+        # Check Novelty (Creatività)
+        if clean not in originals: 
+            valid_variants += 1
             
     diversity = valid_variants / len(generated_list) if generated_list else 0
     purity = 1.0 - (garbage / len(generated_list))
-    return (purity * 0.7) + (diversity * 0.3)
+    
+    # Rapporto 50/50 per premiare di più la creatività
+    return (purity * 0.5) + (diversity * 0.5)
 
 def run_massive_sweep():
     print("\n" + "█"*100)
