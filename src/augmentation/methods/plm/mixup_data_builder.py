@@ -1,4 +1,4 @@
-"""Training data builder for Mix-up BART with Coherent Value Pairing."""
+"""Training data builder for Mix-up BART with Coherent Value Pairing and Anti-Lazy Noise."""
 
 import random
 import logging
@@ -14,10 +14,26 @@ logger = logging.getLogger(__name__)
 def _local_name(uri: str) -> str:
     return str(uri).split("/")[-1].split("#")[-1]
 
-def _basic_noise(text: str) -> str:
-    if not text or len(text) < 5: return text
+def _aggressive_noise(text: str) -> str:
+    """Rumore che forza la creatività eliminando parole intere."""
+    if not text or len(text) < 4: return text
+    words = text.split()
+    strategy = random.random()
+    
+    # 1. Word Deletion (40% chance) - Forza BART a completare le informazioni
+    if strategy < 0.4 and len(words) >= 2:
+        num_to_del = 1 if len(words) < 4 else 2
+        for _ in range(num_to_del):
+            if words: words.pop(random.randint(0, len(words)-1))
+        return " ".join(words) if words else text
+        
+    # 2. Word Shuffle (20% chance)
+    if strategy < 0.6 and len(words) >= 2:
+        random.shuffle(words); return " ".join(words)
+        
+    # 3. Classic Typo (40% chance)
     chars = list(text)
-    if random.random() < 0.15:
+    if len(chars) > 3:
         i = random.randint(0, len(chars) - 2)
         chars[i], chars[i + 1] = chars[i + 1], chars[i]
     return "".join(chars)
@@ -55,14 +71,14 @@ class MixupDataBuilder:
                     for vs in s_lits[sp]:
                         best_vt = max(t_lits[tp], key=lambda x: self._string_similarity(vs, x))
                         if self._string_similarity(vs, best_vt) >= self.value_match_threshold:
-                            # ALLINEAMENTO SIMMETRICO (A <-> B)
-                            # Insegniamo al modello che A e B sono la stessa cosa bidirezionalmente
-                            rows.append({"input": f"{p_tok} {self.noise_gen.apply(vs)}", "target": f"{p_tok} {best_vt}"})
-                            rows.append({"input": f"{p_tok} {self.noise_gen.apply(best_vt)}", "target": f"{p_tok} {vs}"})
+                            # TRAINING CROSS-GRAPH SIMMETRICO
+                            # noise(A) -> B e noise(B) -> A
+                            rows.append({"input": f"{p_tok} {_aggressive_noise(vs)}", "target": f"{p_tok} {best_vt}"})
+                            rows.append({"input": f"{p_tok} {_aggressive_noise(best_vt)}", "target": f"{p_tok} {vs}"})
                             
-                            # IDENTITY (Ancoraggio)
-                            rows.append({"input": f"{p_tok} {vs}", "target": f"{p_tok} {vs}"})
-                            rows.append({"input": f"{p_tok} {best_vt}", "target": f"{p_tok} {best_vt}"})
+                            # IDENTITY LIMITATA (Solo 1 riga a caso invece di 2)
+                            v_id = vs if random.random() < 0.5 else best_vt
+                            rows.append({"input": f"{p_tok} {v_id}", "target": f"{p_tok} {v_id}"})
                             
                             used_s.add(sp); used_t.add(tp)
                             pred_counts[p_tok] += 1
@@ -70,22 +86,10 @@ class MixupDataBuilder:
             # ORFANI PURI
             for p, vals in s_lits.items():
                 if p not in used_s:
-                    for v in vals: rows.append({"input": f"{canonical_map[p]} {_basic_noise(v)}", "target": f"{canonical_map[p]} {v}"})
+                    for v in vals: rows.append({"input": f"{canonical_map[p]} {_aggressive_noise(v)}", "target": f"{canonical_map[p]} {v}"})
             for p, vals in t_lits.items():
                 if p not in used_t:
-                    for v in vals: rows.append({"input": f"{canonical_map[p]} {_basic_noise(v)}", "target": f"{canonical_map[p]} {v}"})
+                    for v in vals: rows.append({"input": f"{canonical_map[p]} {_aggressive_noise(v)}", "target": f"{canonical_map[p]} {v}"})
 
         logger.info(f"[MixupBuilder] Built {len(rows)} training samples")
         return rows, canonical_map
-
-    def _add_balanced_tasks(self, rows, p_tok, vs, vt):
-        # 1-2. Identity
-        rows.append({"input": f"{p_tok} {vs}", "target": f"{p_tok} {vs}"})
-        rows.append({"input": f"{p_tok} {vt}", "target": f"{p_tok} {vt}"})
-        # 3-4. DAE
-        rows.append({"input": f"{p_tok} {_basic_noise(vs)}", "target": f"{p_tok} {vs}"})
-        rows.append({"input": f"{p_tok} {_basic_noise(vt)}", "target": f"{p_tok} {vt}"})
-        # 5-6. Cross
-        if vs.lower().strip() != vt.lower().strip():
-            rows.append({"input": f"{p_tok} {vs}", "target": f"{p_tok} {vt}"})
-            rows.append({"input": f"{p_tok} {vt}", "target": f"{p_tok} {vs}"})
