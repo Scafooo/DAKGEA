@@ -232,10 +232,10 @@ def run_massive_sweep():
     print("    Testing extreme temperature/noise to force diversity...")
 
     # RANGE BILANCIATI per BART-base (evitare troppo garbage)
-    alphas = [0.3, 0.5, 0.7]              # Mixing
-    noises = [0.02, 0.05, 0.08, 0.1]      # Noise contenuto (max 0.1)
-    beams = [1, 3, 5]                      # 1=sampling, 3=moderato, 5=conservativo
-    temps = [0.8, 1.0, 1.2, 1.5]          # Temperature moderate (max 1.5)
+    alphas = np.arange(0.1, 0.3, 0.05)              # Mixing
+    noises = np.arange(0.01, 0.1, 0.05)     # Noise contenuto (max 0.1)
+    beams = [2, 3]                      # 1=sampling, 3=moderato, 5=conservativo
+    temps = np.arange(0.8, 1.1, 0.05)          # Temperature moderate (max 1.5)
 
     results = []
     total_configs = len(alphas) * len(noises) * len(beams) * len(temps)
