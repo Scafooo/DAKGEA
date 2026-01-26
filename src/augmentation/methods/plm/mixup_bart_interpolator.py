@@ -189,7 +189,7 @@ class MixupBartInterpolator:
                 encoder_outputs=BaseModelOutput(last_hidden_state=H_final),
                 attention_mask=mask_final,
                 max_new_tokens=self.gen_max_new_tokens,
-                do_sample=self.gen_do_sample if self.gen_num_beams == 1 else False,
+                do_sample=self.gen_do_sample,  # Rispetta sempre la config (permette temperature con beam search)
                 top_p=self.gen_top_p,
                 top_k=self.gen_top_k,
                 temperature=self.gen_temperature,

@@ -22,11 +22,11 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE BART-BASE (OTTIMIZZATA OOM - SAFE) ---
+# --- CONFIGURAZIONE BART-BASE (OTTIMIZZATA PER RTX 4090 - 24GB VRAM) ---
 MODEL_NAME = "facebook/bart-base"
-BATCH_SIZE = 96        # Ridotto per margine sicurezza
-GRAD_ACCUMULATION = 6  # Compensato per mantenere throughput
-EPOCHS = 15            
+BATCH_SIZE = 128       # RTX 4090 può gestire batch grandi
+GRAD_ACCUMULATION = 4  # Effective batch = 512
+EPOCHS = 15
 SAMPLES_ALIGNED = 400
 SAMPLES_ORPHAN = 100
 SWEEP_SAMPLES = 50
@@ -37,16 +37,156 @@ logger = get_logger("MassiveSweep")
 def clean_val(text):
     return re.sub(r'<[^>]+>\s*', '', text).strip()
 
-def calculate_precision_score(orig, gen, originals_set):
-    gen_clean = gen.lower().strip()
-    if len(gen_clean) < 3: return 0.0
-    sim = SequenceMatcher(None, orig.lower().strip(), gen_clean).ratio()
-    if sim > 0.98: return 0.05
-    if 0.6 <= sim <= 0.92:
-        score = sim * 1.2
-        if gen_clean not in originals_set: score += 0.8
+
+class PredicateFormatAnalyzer:
+    """Impara il formato atteso da ogni predicato analizzando i dati di training."""
+
+    def __init__(self, training_rows):
+        self.stats = defaultdict(lambda: {
+            "token_counts": [],
+            "char_lengths": [],
+            "has_digits": [],
+            "uppercase_ratio": [],
+            "samples": set()
+        })
+        self._analyze(training_rows)
+        self._compute_stats()
+
+    def _analyze(self, rows):
+        for row in rows:
+            # Estrai predicato e valore dal target "<PRED> value"
+            match = re.match(r'(<[^>]+>)\s*(.+)', row['target'])
+            if match:
+                pred, val = match.groups()
+                s = self.stats[pred]
+                s["token_counts"].append(len(val.split()))
+                s["char_lengths"].append(len(val))
+                s["has_digits"].append(1.0 if re.search(r'\d', val) else 0.0)
+                # Uppercase ratio (quante lettere sono maiuscole)
+                letters = [c for c in val if c.isalpha()]
+                if letters:
+                    s["uppercase_ratio"].append(sum(1 for c in letters if c.isupper()) / len(letters))
+                s["samples"].add(val.lower().strip())
+
+    def _compute_stats(self):
+        """Calcola statistiche aggregate per ogni predicato."""
+        for pred, s in self.stats.items():
+            if s["token_counts"]:
+                s["expected_tokens"] = (
+                    np.percentile(s["token_counts"], 5),
+                    np.percentile(s["token_counts"], 95)
+                )
+                s["median_tokens"] = np.median(s["token_counts"])
+            else:
+                s["expected_tokens"] = (1, 10)
+                s["median_tokens"] = 2
+
+            if s["char_lengths"]:
+                s["expected_length"] = (
+                    np.percentile(s["char_lengths"], 5),
+                    np.percentile(s["char_lengths"], 95)
+                )
+                s["median_length"] = np.median(s["char_lengths"])
+            else:
+                s["expected_length"] = (1, 100)
+                s["median_length"] = 20
+
+            s["digit_ratio"] = np.mean(s["has_digits"]) if s["has_digits"] else 0.5
+            s["avg_uppercase"] = np.mean(s["uppercase_ratio"]) if s["uppercase_ratio"] else 0.5
+
+        # Log statistiche
+        print("\n    [FormatAnalyzer] Learned formats:")
+        for pred, s in sorted(self.stats.items()):
+            print(f"      {pred:20} | tokens: {s['expected_tokens'][0]:.0f}-{s['expected_tokens'][1]:.0f} "
+                  f"| len: {s['expected_length'][0]:.0f}-{s['expected_length'][1]:.0f} "
+                  f"| digits: {s['digit_ratio']:.0%} | samples: {len(s['samples'])}")
+
+    def format_score(self, predicate: str, generated: str) -> float:
+        """Score 0-1 basato su quanto il generato rispetta il formato appreso."""
+        s = self.stats.get(predicate)
+        if not s or not generated.strip():
+            return 0.0
+
+        score = 1.0
+        tokens = len(generated.split())
+        length = len(generated)
+        has_digit = bool(re.search(r'\d', generated))
+
+        # 1. Token count compliance (peso alto)
+        min_t, max_t = s["expected_tokens"]
+        if tokens < min_t * 0.5 or tokens > max_t * 2:
+            score *= 0.3  # Fuori range drasticamente
+        elif not (min_t <= tokens <= max_t):
+            score *= 0.7  # Fuori range moderatamente
+
+        # 2. Length compliance
+        min_l, max_l = s["expected_length"]
+        if length < min_l * 0.3 or length > max_l * 2:
+            score *= 0.4  # Troppo corto o lungo
+        elif not (min_l * 0.7 <= length <= max_l * 1.3):
+            score *= 0.8
+
+        # 3. Digit pattern compliance
+        if s["digit_ratio"] > 0.8 and not has_digit:
+            score *= 0.5  # Ci aspettiamo cifre ma non ce ne sono
+        elif s["digit_ratio"] < 0.2 and has_digit:
+            score *= 0.7  # Non ci aspettiamo cifre ma ce ne sono
+
         return score
-    return 0.0
+
+    def is_novel(self, predicate: str, generated: str) -> bool:
+        """Verifica se il valore generato è nuovo (non nel training set)."""
+        s = self.stats.get(predicate)
+        if not s:
+            return True
+        return generated.lower().strip() not in s["samples"]
+
+
+def calculate_creative_score(orig: str, gen: str, predicate: str,
+                             analyzer: PredicateFormatAnalyzer) -> dict:
+    """
+    Score multi-dimensionale per valutare creatività e format compliance.
+
+    Returns dict con:
+    - format_score: rispetto del formato (0-1)
+    - novelty_score: è un valore nuovo? (0 o 1)
+    - creativity_score: non è una copia? (0-1)
+    - total_score: score combinato
+    """
+    gen_clean = gen.strip()
+    orig_clean = orig.strip()
+
+    if len(gen_clean) < 2:
+        return {"format": 0, "novelty": 0, "creativity": 0, "total": 0}
+
+    # 1. Format compliance (40% del peso)
+    format_score = analyzer.format_score(predicate, gen_clean)
+
+    # 2. Novelty - è un valore mai visto? (30% del peso)
+    novelty_score = 1.0 if analyzer.is_novel(predicate, gen_clean) else 0.3
+
+    # 3. Creativity - non è una copia esatta? (30% del peso)
+    sim = SequenceMatcher(None, orig_clean.lower(), gen_clean.lower()).ratio()
+    if sim > 0.95:
+        creativity_score = 0.1  # Quasi identico = non creativo
+    elif sim > 0.85:
+        creativity_score = 0.5  # Molto simile
+    elif sim > 0.5:
+        creativity_score = 1.0  # Sweet spot: simile ma diverso
+    elif sim > 0.3:
+        creativity_score = 0.8  # Abbastanza diverso
+    else:
+        creativity_score = 0.4  # Troppo diverso, potrebbe essere garbage
+
+    # Score totale pesato
+    total = (format_score * 0.4) + (novelty_score * 0.3) + (creativity_score * 0.3)
+
+    return {
+        "format": format_score,
+        "novelty": novelty_score,
+        "creativity": creativity_score,
+        "total": total
+    }
 
 def run_massive_sweep():
     print("\n" + "█"*100)
@@ -64,6 +204,9 @@ def run_massive_sweep():
     print(f"    Dataset Size: {len(train_rows)} samples")
     device = "cuda" if torch.cuda.is_available() else "cpu"
     out_dir = "./results/sweep_model_base_v1"
+
+    # Analizza formati dai dati di training
+    format_analyzer = PredicateFormatAnalyzer(train_rows)
 
     # 2. TRAINING O RESUME
     model_trained = (Path(out_dir) / "pytorch_model.bin").exists() or (Path(out_dir) / "model.safetensors").exists()
@@ -109,34 +252,58 @@ def run_massive_sweep():
                     aligned_test.append((canonical_map[ps], vs, vt))
         if len(aligned_test) >= SWEEP_SAMPLES: break
 
-    # 4. SWEEP CHIRURGICO PER BASE
-    print(f"\n>>> PHASE 2: PARAMETER OPTIMIZATION")
+    # 4. SWEEP CHIRURGICO PER BASE (con Temperature e Format-Aware Scoring)
+    print(f"\n>>> PHASE 2: PARAMETER OPTIMIZATION (Format-Aware + Temperature)")
     alphas = [0.1, 0.2, 0.3]
     noises = [0.02, 0.05, 0.1]
-    beams  = [3, 5]
-    
+    beams  = [1, 3, 5]
+    temperatures = [0.7, 1.0, 1.3]
+
     results = []
-    originals_set = set(clean_val(r['target']).lower() for r in train_rows)
+    total_configs = len(alphas) * len(noises) * len(beams) * len(temperatures)
+    config_idx = 0
 
     for a in alphas:
         for n in noises:
             for b in beams:
-                interpolator.latent_noise_std, interpolator.gen_num_beams = n, b
-                scores = []
-                for pred, v1, v2 in aligned_test:
-                    res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=a)
-                    scores.append(calculate_precision_score(v1, res, originals_set))
-                avg_score = sum(scores) / len(scores) if scores else 0
-                results.append({"a": a, "n": n, "b": b, "score": avg_score})
-                print(f"    A={a} N={n} B={b} -> Score: {avg_score:.3f}")
+                for t in temperatures:
+                    config_idx += 1
+                    interpolator.latent_noise_std = n
+                    interpolator.gen_num_beams = b
+                    interpolator.gen_temperature = t
+                    interpolator.gen_do_sample = True  # Abilita sampling per usare temperature
 
-    results.sort(key=lambda x: x['score'], reverse=True)
+                    scores = {"format": [], "novelty": [], "creativity": [], "total": []}
+                    for pred, v1, v2 in aligned_test:
+                        res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=a)
+                        s = calculate_creative_score(v1, res, pred, format_analyzer)
+                        for k in scores:
+                            scores[k].append(s[k])
+
+                    avg_scores = {k: np.mean(v) if v else 0 for k, v in scores.items()}
+                    results.append({
+                        "a": a, "n": n, "b": b, "t": t,
+                        "format": avg_scores["format"],
+                        "novelty": avg_scores["novelty"],
+                        "creativity": avg_scores["creativity"],
+                        "total": avg_scores["total"]
+                    })
+                    print(f"    [{config_idx}/{total_configs}] A={a} N={n} B={b} T={t} -> "
+                          f"F={avg_scores['format']:.2f} N={avg_scores['novelty']:.2f} "
+                          f"C={avg_scores['creativity']:.2f} | Total={avg_scores['total']:.3f}")
+
+    results.sort(key=lambda x: x['total'], reverse=True)
     best = results[0]
-    print("\n    WINNING CONFIGURATION:"); print(tabulate([best], headers="keys"))
+    print("\n    TOP 5 CONFIGURATIONS:")
+    print(tabulate(results[:5], headers="keys", floatfmt=".3f"))
+    print(f"\n    WINNING CONFIG: A={best['a']} N={best['n']} B={best['b']} T={best['t']}")
 
     # 5. REPORT FINALE
     print("\n" + "="*100); print(f" ULTIMATE {MODEL_NAME.upper()} REPORT ".center(100)); print("="*100)
-    interpolator.latent_noise_std, interpolator.gen_num_beams = best['n'], best['b']
+    interpolator.latent_noise_std = best['n']
+    interpolator.gen_num_beams = best['b']
+    interpolator.gen_temperature = best['t']
+    interpolator.gen_do_sample = True
     
     output_file = "massive_base_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
