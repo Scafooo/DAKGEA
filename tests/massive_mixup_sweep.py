@@ -22,10 +22,10 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE BART-BASE (BESTIA 4090) ---
+# --- CONFIGURAZIONE BART-BASE (OTTIMIZZATA OOM - SAFE) ---
 MODEL_NAME = "facebook/bart-base"
-BATCH_SIZE = 512       # Satura i 24GB della 4090
-GRAD_ACCUMULATION = 1  # Nessun bisogno di accumulare con questo batch size
+BATCH_SIZE = 96        # Ridotto per margine sicurezza
+GRAD_ACCUMULATION = 6  # Compensato per mantenere throughput
 EPOCHS = 15            
 SAMPLES_ALIGNED = 400
 SAMPLES_ORPHAN = 100
@@ -79,13 +79,14 @@ def run_massive_sweep():
         
         args = Seq2SeqTrainingArguments(
             output_dir=out_dir, 
-            per_device_train_batch_size=BATCH_SIZE, 
+            per_device_train_batch_size=BATCH_SIZE,
+            gradient_accumulation_steps=GRAD_ACCUMULATION,
             num_train_epochs=EPOCHS, 
             learning_rate=5e-5, 
             fp16=True, 
             report_to="none", 
             save_strategy="no",
-            dataloader_num_workers=16,
+            dataloader_num_workers=8,
             dataloader_pin_memory=True
         )
         trainer = Seq2SeqTrainer(model=interpolator.model, args=args, train_dataset=hf_ds, data_collator=DataCollatorForSeq2Seq(interpolator.tokenizer, model=interpolator.model))
