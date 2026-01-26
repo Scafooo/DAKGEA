@@ -84,83 +84,95 @@ class PredicateFormatAnalyzer:
 
 def calculate_diversity_score(orig, gen, pred, analyzer, other=None):
     """
-    Nuova metrica di scoring che premia QUALSIASI diversità.
+    Metrica di scoring che premia output DIVERSI DA ENTRAMBI gli input.
 
-    Filosofia: per i nomi brevi, anche "John Smith" -> "J. Smith" è buono.
-    Non pretendiamo semantic leap, basta che sia DIVERSO e ben formato.
+    Logica:
+    1. L'output deve essere diverso da ORIG e da OTHER (entrambi!)
+    2. Usiamo max_sim = max(sim_A, sim_B) → quanto è simile al più vicino
+    3. Se max_sim alto → è una copia di uno dei due → male
+    4. Se max_sim basso → è diverso da entrambi → bene
+    5. Ma se troppo diverso e garbage → male
 
     Returns:
-        dict con:
-        - total: score finale (0-1)
-        - diversity: quanto è diverso dall'originale (0-1)
-        - format: compliance al formato (0-1)
-        - transform: tipo di trasformazione
+        dict con total, diversity, format, transform, etc.
     """
     gen_c = gen.strip()
     orig_c = orig.strip()
     other_c = other.strip() if other else ""
 
-    # Garbage detection
+    # Garbage detection: troppo corto
     if len(gen_c) < 2:
         return {"total": 0, "diversity": 0, "format": 0, "transform": "garbage_empty"}
 
     # 1. FORMAT COMPLIANCE (0-1)
     f_score = analyzer.format_score(pred, gen_c)
 
-    # 2. DIVERSITY SCORE basato su edit distance (0-1)
-    # Usiamo 1 - similarity come misura di diversità
-    sim_orig = SequenceMatcher(None, orig_c.lower(), gen_c.lower()).ratio()
-    sim_other = SequenceMatcher(None, other_c.lower(), gen_c.lower()).ratio() if other_c else 1.0
+    # 2. SIMILARITY a entrambi gli input
+    sim_to_orig = SequenceMatcher(None, orig_c.lower(), gen_c.lower()).ratio()
+    sim_to_other = SequenceMatcher(None, other_c.lower(), gen_c.lower()).ratio() if other_c else 0.0
 
-    # La diversità è quanto siamo lontani da ENTRAMBI gli input
-    diversity_from_orig = 1.0 - sim_orig
-    diversity_from_other = 1.0 - sim_other
+    # Quanto è simile al PIÙ VICINO dei due input?
+    # Se è copia di uno qualsiasi → male
+    max_sim = max(sim_to_orig, sim_to_other)
 
-    # Prendiamo la diversità minima (deve essere diverso da entrambi)
-    min_diversity = min(diversity_from_orig, diversity_from_other)
-
-    # Classifica il tipo di trasformazione
-    if sim_orig > 0.98:
+    # 3. DIVERSITY SCORE basato su max_sim
+    # Deve essere diverso da ENTRAMBI, quindi guardiamo il max
+    if max_sim > 0.95:
         ttype = "identity"
-        d_score = 0.0  # Copia esatta = 0 punti
-    elif sim_orig > 0.90:
+        d_score = 0.0  # Copia esatta di A o B
+    elif max_sim > 0.85:
         ttype = "near_copy"
-        d_score = 0.2  # Quasi copia
-    elif sim_orig > 0.70:
+        d_score = 0.2  # Quasi copia di uno dei due
+    elif max_sim > 0.70:
         ttype = "minor_variation"
-        d_score = 0.5  # Variazione minore ma OK
-    elif sim_orig > 0.50:
+        d_score = 0.5  # Variazione minore
+    elif max_sim > 0.50:
         ttype = "good_variation"
-        d_score = 0.8  # Buona variazione
-    elif sim_orig > 0.30:
+        d_score = 0.8  # Buona diversità da entrambi
+    elif max_sim > 0.30:
         ttype = "strong_transform"
-        d_score = 1.0  # Trasformazione significativa
+        d_score = 1.0  # Molto diverso da entrambi
     else:
-        # Troppo diverso potrebbe essere garbage
-        # Verifichiamo che abbia almeno qualche parola in comune
+        # Troppo diverso - verifichiamo non sia garbage
+        # Usiamo similarità FUZZY tra parole (John ~ Jonathan)
         gen_words = set(re.findall(r'\w+', gen_c.lower()))
         orig_words = set(re.findall(r'\w+', orig_c.lower()))
         other_words = set(re.findall(r'\w+', other_c.lower()))
         source_words = orig_words | other_words
 
-        common = gen_words & source_words
-        if len(common) > 0 or f_score > 0.5:
+        # Check: almeno una parola generata è SIMILE a una parola source?
+        has_similar_word = False
+        for gw in gen_words:
+            if len(gw) < 3:
+                continue
+            for sw in source_words:
+                if len(sw) < 3:
+                    continue
+                word_sim = SequenceMatcher(None, gw, sw).ratio()
+                if word_sim > 0.6:  # John~Jonathan, Smith~Smithson
+                    has_similar_word = True
+                    break
+            if has_similar_word:
+                break
+
+        if has_similar_word or f_score > 0.5:
             ttype = "creative_transform"
-            d_score = 0.9  # Creativo ma mantiene qualche connessione
+            d_score = 0.9  # Creativo ma ha connessione semantica
         else:
             ttype = "garbage_unrelated"
             d_score = 0.1  # Probabilmente garbage
 
-    # Bonus per parole nuove (semantic novelty)
+    # 4. BONUS per parole nuove (ma non troppe)
     gen_words = set(re.findall(r'\w+', gen_c.lower()))
     orig_words = set(re.findall(r'\w+', orig_c.lower()))
     other_words = set(re.findall(r'\w+', other_c.lower()))
     source_words = orig_words | other_words
     new_words = [w for w in (gen_words - source_words) if len(w) > 2]
 
-    novelty_bonus = min(0.2, len(new_words) * 0.05)  # Max +0.2 bonus
+    # Bonus moderato per novità (max +0.15)
+    novelty_bonus = min(0.15, len(new_words) * 0.05)
 
-    # Score finale: Format (30%) + Diversity (70%) + bonus
+    # 5. SCORE FINALE: Format (30%) + Diversity (70%) + bonus
     total = (f_score * 0.3) + (d_score * 0.7) + novelty_bonus
     total = min(1.0, total)  # Cap a 1.0
 
@@ -169,7 +181,9 @@ def calculate_diversity_score(orig, gen, pred, analyzer, other=None):
         "diversity": d_score,
         "format": f_score,
         "transform": ttype,
-        "sim_orig": sim_orig,
+        "sim_to_orig": sim_to_orig,
+        "sim_to_other": sim_to_other,
+        "max_sim": max_sim,
         "new_words": len(new_words)
     }
 
@@ -220,7 +234,7 @@ def run_massive_sweep():
     # NUOVI RANGE PIÙ AGGRESSIVI
     alphas = [0.3, 0.5, 0.7]              # Più mixing (era 0.1, 0.3, 0.5)
     noises = [0.05, 0.1, 0.15, 0.2]       # Più perturbazione (era 0.02, 0.05, 0.1)
-    beams = [1, 3]                         # Beam search (1=sampling puro, 3=un po' di beam)
+    beams = [1, 3, 5]                      # 1=sampling libero, 3=moderato, 5=conservativo
     temps = [1.0, 1.5, 2.0, 2.5]          # Molto più alte (era 0.7, 1.0, 1.3)
 
     results = []
