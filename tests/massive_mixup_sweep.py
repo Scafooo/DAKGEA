@@ -37,27 +37,41 @@ def clean_val(text):
     return re.sub(r'<[^>]+>\s*', '', text).strip()
 
 def calculate_sota_score(original_list, generated_list):
-    """Calcola la qualità totale: Bilanciamento tra Coerenza (50%) e Diversità (50%)."""
+    """Calcola la qualità totale: Creatività Verosimile (70% Diversità, 30% Coerenza)."""
     originals = set(s.lower().strip() for s in original_list)
-    valid_variants = 0
+    valid_creative = 0
     garbage = 0
     
-    for gen in generated_list:
-        clean = gen.lower().strip()
-        # Check Garbage (simboli, lunghezza, loop)
-        if len(clean) < 2 or len(re.findall(r'[^a-zA-Z0-9\s]', clean)) / (len(clean)+1) > 0.3:
+    for i in range(0, len(generated_list)):
+        gen = generated_list[i].lower().strip()
+        # Per il confronto di plausibilità, prendiamo l'originale corrispondente
+        # (original_list ha [v1, v2, v1, v2...], generated_list ha [gen1, gen2...])
+        orig = original_list[i*2] 
+        
+        # 1. Check Garbage Severo
+        if len(gen) < 3 or len(re.findall(r'[^a-z0-9\s]', gen)) / (len(gen)+1) > 0.25:
             garbage += 1; continue
-        if any(clean.count(w) > 3 for w in clean.split() if len(w) > 2):
-            garbage += 1; continue
-        # Check Novelty (Creatività)
-        if clean not in originals: 
-            valid_variants += 1
             
-    diversity = valid_variants / len(generated_list) if generated_list else 0
+        # 2. Check Plausibilità (Lunghezza non assurda rispetto all'originale)
+        if abs(len(gen) - len(orig)) > 20:
+            garbage += 0.5; continue # Penalità parziale per eccessiva verbosità
+            
+        # 3. Premio Creatività (Novità Reale)
+        if gen not in originals:
+            # BONUS: Se ha cambiato parole ma mantenuto il senso (Lexical Shift)
+            # Verifichiamo se almeno una parola è nuova
+            orig_words = set(orig.lower().split())
+            gen_words = set(gen.split())
+            if gen_words - orig_words:
+                valid_creative += 1.2 # Bonus per parole nuove
+            else:
+                valid_creative += 1.0 # Solo typo o reordering
+            
+    diversity = valid_creative / len(generated_list) if generated_list else 0
     purity = 1.0 - (garbage / len(generated_list))
     
-    # Rapporto 50/50 per premiare di più la creatività
-    return (purity * 0.5) + (diversity * 0.5)
+    # 70% Diversità, 30% Coerenza
+    return (diversity * 0.7) + (purity * 0.3)
 
 def run_massive_sweep():
     print("\n" + "█"*100)
