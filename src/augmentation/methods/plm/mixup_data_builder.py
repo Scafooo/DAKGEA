@@ -1,4 +1,4 @@
-"""Training data builder for Mix-up BART - Simplified and Balanced."""
+"""Training data builder for Mix-up BART with Coherent Value Pairing."""
 
 import random
 import logging
@@ -15,10 +15,9 @@ def _local_name(uri: str) -> str:
     return str(uri).split("/")[-1].split("#")[-1]
 
 def _basic_noise(text: str) -> str:
-    """Rumore minimo: solo un piccolo typo per non distorcere troppo."""
     if not text or len(text) < 5: return text
     chars = list(text)
-    if random.random() < 0.2:
+    if random.random() < 0.15:
         i = random.randint(0, len(chars) - 2)
         chars[i], chars[i + 1] = chars[i + 1], chars[i]
     return "".join(chars)
@@ -33,7 +32,7 @@ class MixupDataBuilder:
         return SequenceMatcher(None, a.lower(), b.lower()).ratio()
 
     def build_training_data(self, dataset: Dataset, max_pairs_per_pred: int = 5000) -> Tuple[List[Dict[str, str]], Dict[str, str]]:
-        logger.info("[MixupBuilder] Building simple training data...")
+        logger.info("[MixupBuilder] Computing coherent correspondences...")
         correspondences = self.matcher_service.compute_correspondences(dataset)
         
         canonical_map = {str(p): f"<{_local_name(p).upper()}>" for p in (set(dataset.knowledge_graph_source.predicates()) | set(dataset.knowledge_graph_target.predicates()))}
@@ -56,17 +55,16 @@ class MixupDataBuilder:
                     for vs in s_lits[sp]:
                         best_vt = max(t_lits[tp], key=lambda x: self._string_similarity(vs, x))
                         if self._string_similarity(vs, best_vt) >= self.value_match_threshold:
-                            # Task 1-2: Translation (A -> B, B -> A)
-                            rows.append({"input": f"{p_tok} {_basic_noise(vs)}", "target": f"{p_tok} {best_vt}"})
-                            rows.append({"input": f"{p_tok} {_basic_noise(best_vt)}", "target": f"{p_tok} {vs}"})
-                            # Task 3: Identity (50% chance per non essere pigri)
-                            if random.random() < 0.5:
-                                rows.append({"input": f"{p_tok} {vs}", "target": f"{p_tok} {vs}"})
-                            
+                            # ALLINEAMENTO
+                            self._add_balanced_tasks(rows, p_tok, vs, best_vt)
                             used_s.add(sp); used_t.add(tp)
                             pred_counts[p_tok] += 1
+                        else:
+                            # ORFANI
+                            rows.append({"input": f"{p_tok} {_basic_noise(vs)}", "target": f"{p_tok} {vs}"})
+                            rows.append({"input": f"{canonical_map[tp]} {_basic_noise(best_vt)}", "target": f"{canonical_map[tp]} {best_vt}"})
 
-            # ORFANI
+            # ORFANI PURI
             for p, vals in s_lits.items():
                 if p not in used_s:
                     for v in vals: rows.append({"input": f"{canonical_map[p]} {_basic_noise(v)}", "target": f"{canonical_map[p]} {v}"})
@@ -75,3 +73,15 @@ class MixupDataBuilder:
                     for v in vals: rows.append({"input": f"{canonical_map[p]} {_basic_noise(v)}", "target": f"{canonical_map[p]} {v}"})
 
         return rows, canonical_map
+
+    def _add_balanced_tasks(self, rows, p_tok, vs, vt):
+        # 1-2. Identity
+        rows.append({"input": f"{p_tok} {vs}", "target": f"{p_tok} {vs}"})
+        rows.append({"input": f"{p_tok} {vt}", "target": f"{p_tok} {vt}"})
+        # 3-4. DAE
+        rows.append({"input": f"{p_tok} {_basic_noise(vs)}", "target": f"{p_tok} {vs}"})
+        rows.append({"input": f"{p_tok} {_basic_noise(vt)}", "target": f"{p_tok} {vt}"})
+        # 5-6. Cross
+        if vs.lower().strip() != vt.lower().strip():
+            rows.append({"input": f"{p_tok} {vs}", "target": f"{p_tok} {vt}"})
+            rows.append({"input": f"{p_tok} {vt}", "target": f"{p_tok} {vs}"})
