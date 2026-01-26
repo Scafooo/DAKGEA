@@ -58,10 +58,14 @@ class MixupBartInterpolator:
         gen_cfg = generation_config or {}
         self.gen_max_new_tokens = int(gen_cfg.get("max_new_tokens", 32))
         self.gen_do_sample = bool(gen_cfg.get("do_sample", True))
-        self.gen_top_p = float(gen_cfg.get("top_p", 0.95))
-        self.gen_temperature = float(gen_cfg.get("temperature", 1.3))
-        self.gen_repetition_penalty = float(gen_cfg.get("repetition_penalty", 1.2))
-        self.latent_noise_std = float(gen_cfg.get("latent_noise_std", 0.4)) # Spinto per alta diversity
+        self.gen_top_p = float(gen_cfg.get("top_p", 0.9))
+        self.gen_top_k = int(gen_cfg.get("top_k", 50)) # Filtro anti-garbage
+        self.gen_temperature = float(gen_cfg.get("temperature", 1.0))
+        self.gen_repetition_penalty = float(gen_cfg.get("repetition_penalty", 1.5))
+        self.gen_length_penalty = float(gen_cfg.get("length_penalty", 1.0))
+        self.gen_num_beams = int(gen_cfg.get("num_beams", 5)) 
+        self.gen_no_repeat_ngram_size = int(gen_cfg.get("no_repeat_ngram_size", 3)) 
+        self.latent_noise_std = float(gen_cfg.get("latent_noise_std", 0.05)) # Molto basso per integrità
 
         os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
@@ -168,10 +172,20 @@ class MixupBartInterpolator:
                 noise[:, 0, :] = 0 # Anchoring pos 0
                 H_mix = H_mix + noise
 
-            out_ids = self.model.generate(encoder_outputs=BaseModelOutput(last_hidden_state=H_mix),
-                                        attention_mask=inputs.attention_mask[0:1], max_new_tokens=self.gen_max_new_tokens,
-                                        do_sample=self.gen_do_sample, top_p=self.gen_top_p, temperature=self.gen_temperature,
-                                        repetition_penalty=self.gen_repetition_penalty)
+            out_ids = self.model.generate(
+                encoder_outputs=BaseModelOutput(last_hidden_state=H_mix),
+                attention_mask=inputs.attention_mask[0:1],
+                max_new_tokens=self.gen_max_new_tokens,
+                do_sample=self.gen_do_sample if self.gen_num_beams == 1 else False,
+                top_p=self.gen_top_p,
+                top_k=self.gen_top_k,
+                temperature=self.gen_temperature,
+                num_beams=self.gen_num_beams,
+                no_repeat_ngram_size=self.gen_no_repeat_ngram_size,
+                repetition_penalty=self.gen_repetition_penalty,
+                length_penalty=self.gen_length_penalty,
+                early_stopping=True if self.gen_num_beams > 1 else False
+            )
 
         decoded = self.tokenizer.decode(out_ids[0], skip_special_tokens=True)
         res = self._clean_output(decoded)
