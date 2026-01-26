@@ -141,7 +141,7 @@ def run_massive_sweep():
                     scs = []
                     for pred, v1, v2 in aligned_test:
                         a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=a)
-                        scs.append((calculate_creative_score(v1, a1, pred, format_analyzer, v2)("total") + calculate_creative_score(v2, a2, pred, format_analyzer, v1)("total"))/2)
+                        scs.append((calculate_creative_score(v1, a1, pred, format_analyzer, v2)["total"] + calculate_creative_score(v2, a2, pred, format_analyzer, v1)["total"])/2)
                     results.append({"a": a, "n": n, "b": b, "t": t, "score": np.mean(scs)})
                     print(f"    A={a} N={n} B={b} T={t} -> Score: {np.mean(scs):.3f}")
 
