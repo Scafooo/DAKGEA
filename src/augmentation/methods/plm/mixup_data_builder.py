@@ -87,24 +87,43 @@ class MixupDataBuilder:
                             used_s.add(sp); used_t.add(tp)
                             pred_counts[p_tok] += 1
                         else:
-                            # ORFANI DA DIVERSE SEMANTICS
+                            # ORFANI DA DIVERSE SEMANTICS (Identity + DAE, no cross-mapping)
+                            # Source: Identity + DAE
+                            rows.append({"input": f"{p_tok} {vs}", "target": f"{p_tok} {vs}"})
                             rows.append({"input": f"{p_tok} {self.noise_gen.apply(vs)}", "target": f"{p_tok} {vs}"})
+                            # Target: Identity + DAE
+                            rows.append({"input": f"{canonical_map[tp]} {best_vt}", "target": f"{canonical_map[tp]} {best_vt}"})
                             rows.append({"input": f"{canonical_map[tp]} {self.noise_gen.apply(best_vt)}", "target": f"{canonical_map[tp]} {best_vt}"})
 
-            # ORFANI PURI
+            # ORFANI PURI (Identity + DAE, no cross-mapping)
             for p, vals in s_lits.items():
                 if p not in used_s:
-                    for v in vals: rows.append({"input": f"{canonical_map[p]} {self.noise_gen.apply(v)}", "target": f"{canonical_map[p]} {v}"})
+                    for v in vals:
+                        rows.append({"input": f"{canonical_map[p]} {v}", "target": f"{canonical_map[p]} {v}"})  # Identity
+                        rows.append({"input": f"{canonical_map[p]} {self.noise_gen.apply(v)}", "target": f"{canonical_map[p]} {v}"})  # DAE
             for p, vals in t_lits.items():
                 if p not in used_t:
-                    for v in vals: rows.append({"input": f"{canonical_map[p]} {self.noise_gen.apply(v)}", "target": f"{canonical_map[p]} {v}"})
+                    for v in vals:
+                        rows.append({"input": f"{canonical_map[p]} {v}", "target": f"{canonical_map[p]} {v}"})  # Identity
+                        rows.append({"input": f"{canonical_map[p]} {self.noise_gen.apply(v)}", "target": f"{canonical_map[p]} {v}"})  # DAE
 
         return rows, canonical_map
 
     def _add_balanced_tasks(self, rows, p_tok, vs, vt):
-        # noise(A) -> B, noise(B) -> A, A -> A, B -> B
-        # Usiamo il noise generator robusto per stimolare parafrasi
-        rows.append({"input": f"{p_tok} {self.noise_gen.apply(vs)}", "target": f"{p_tok} {vt}"})
-        rows.append({"input": f"{p_tok} {self.noise_gen.apply(vt)}", "target": f"{p_tok} {vs}"})
+        """Genera task bilanciati per coppie allineate.
+
+        Task separati per responsabilità chiare:
+        - Identity: ancora il latent space (sempre)
+        - DAE: robustezza al rumore (sempre)
+        - Cross-mapping: mapping semantico pulito (solo se A ≠ B)
+        """
+        # 1-2. Identity: ancora il latent space
         rows.append({"input": f"{p_tok} {vs}", "target": f"{p_tok} {vs}"})
         rows.append({"input": f"{p_tok} {vt}", "target": f"{p_tok} {vt}"})
+        # 3-4. DAE: robustezza al rumore
+        rows.append({"input": f"{p_tok} {self.noise_gen.apply(vs)}", "target": f"{p_tok} {vs}"})
+        rows.append({"input": f"{p_tok} {self.noise_gen.apply(vt)}", "target": f"{p_tok} {vt}"})
+        # 5-6. Cross-mapping pulito: mapping semantico (SOLO se A ≠ B)
+        if vs.lower().strip() != vt.lower().strip():
+            rows.append({"input": f"{p_tok} {vs}", "target": f"{p_tok} {vt}"})
+            rows.append({"input": f"{p_tok} {vt}", "target": f"{p_tok} {vs}"})
