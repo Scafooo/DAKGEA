@@ -213,32 +213,85 @@ def run_massive_sweep():
                     aligned_test.append((canonical_map[ps], vs, vt))
         if len(aligned_test) >= SWEEP_SAMPLES: break
 
-    # GRID SEARCH
-    print(f"\n>>> PHASE 2: PARAMETER OPTIMIZATION")
-    alphas, noises, beams, temps = [0.1, 0.3, 0.5], [0.02, 0.05, 0.1], [1, 5], [0.7, 1.0, 1.3]
+    # GRID SEARCH con range ESTREMI per forzare creatività
+    print(f"\n>>> PHASE 2: PARAMETER OPTIMIZATION (AGGRESSIVE RANGES)")
+    print("    Testing extreme temperature/noise to force diversity...")
+
+    # NUOVI RANGE PIÙ AGGRESSIVI
+    alphas = [0.3, 0.5, 0.7]              # Più mixing (era 0.1, 0.3, 0.5)
+    noises = [0.05, 0.1, 0.15, 0.2]       # Più perturbazione (era 0.02, 0.05, 0.1)
+    beams = [1, 3]                         # Beam search (1=sampling puro, 3=un po' di beam)
+    temps = [1.0, 1.5, 2.0, 2.5]          # Molto più alte (era 0.7, 1.0, 1.3)
+
     results = []
+    total_configs = len(alphas) * len(noises) * len(beams) * len(temps)
+    config_idx = 0
+
     for a in alphas:
         for n in noises:
             for b in beams:
                 for t in temps:
-                    interpolator.latent_noise_std, interpolator.gen_num_beams, interpolator.gen_temperature = n, b, t
-                    scs = []
+                    config_idx += 1
+                    interpolator.latent_noise_std = n
+                    interpolator.gen_num_beams = b
+                    interpolator.gen_temperature = t
+
+                    scores_detail = []
+                    transform_counts = defaultdict(int)
+
                     for pred, v1, v2 in aligned_test:
                         a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=a)
-                        scs.append((calculate_creative_score(v1, a1, pred, format_analyzer, v2)["total"] + calculate_creative_score(v2, a2, pred, format_analyzer, v1)["total"])/2)
-                    results.append({"a": a, "n": n, "b": b, "t": t, "score": np.mean(scs)})
-                    print(f"    Config: A={a} N={n} B={b} T={t} -> Score: {np.mean(scs):.3f}")
 
+                        sc1 = calculate_diversity_score(v1, a1, pred, format_analyzer, v2)
+                        sc2 = calculate_diversity_score(v2, a2, pred, format_analyzer, v1)
+
+                        scores_detail.append((sc1["total"] + sc2["total"]) / 2)
+                        transform_counts[sc1["transform"]] += 1
+                        transform_counts[sc2["transform"]] += 1
+
+                    avg_score = np.mean(scores_detail)
+                    identity_pct = transform_counts.get("identity", 0) / (len(aligned_test) * 2) * 100
+
+                    results.append({
+                        "a": a, "n": n, "b": b, "t": t,
+                        "score": avg_score,
+                        "identity_pct": identity_pct,
+                        "transforms": dict(transform_counts)
+                    })
+
+                    print(f"    [{config_idx:3d}/{total_configs}] A={a:.1f} N={n:.2f} B={b} T={t:.1f} -> "
+                          f"Score: {avg_score:.3f} | Identity: {identity_pct:.0f}%")
+
+    # Sort by score (higher is better) and show top configs
     results.sort(key=lambda x: x['score'], reverse=True)
     best = results[0]
 
+    print("\n" + "="*100)
+    print(" TOP 5 CONFIGURATIONS ".center(100))
+    print("="*100)
+    for i, r in enumerate(results[:5]):
+        print(f"  #{i+1}: A={r['a']:.1f} N={r['n']:.2f} B={r['b']} T={r['t']:.1f} -> "
+              f"Score={r['score']:.3f} | Identity={r['identity_pct']:.0f}%")
+
     # REPORT FINALE MASSIVO
-    print("\n" + "="*100); print(" ULTIMATE STABLE REPORT (CLEAN DATA) ".center(100)); print("="*100)
-    interpolator.latent_noise_std, interpolator.gen_num_beams, interpolator.gen_temperature = best['n'], best['b'], best['t']
-    
-    output_file = "massive_base_report_v3.txt"
+    print("\n" + "="*100)
+    print(" GENERATING FINAL REPORT WITH BEST CONFIG ".center(100))
+    print("="*100)
+
+    interpolator.latent_noise_std = best['n']
+    interpolator.gen_num_beams = best['b']
+    interpolator.gen_temperature = best['t']
+
+    output_file = "massive_diversity_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write(f"DAKGEA v3 REPORT | Best Config: {best}\n\n")
+        f.write("=" * 110 + "\n")
+        f.write(" DAKGEA DIVERSITY REPORT - AGGRESSIVE PARAMETER SWEEP \n")
+        f.write("=" * 110 + "\n\n")
+        f.write(f"Best Config: alpha={best['a']}, noise={best['n']}, beams={best['b']}, temp={best['t']}\n")
+        f.write(f"Score: {best['score']:.3f} | Identity Rate: {best['identity_pct']:.1f}%\n")
+        f.write(f"Transform Distribution: {best['transforms']}\n\n")
+        f.write("-" * 110 + "\n\n")
+
         aligned_by_pred = defaultdict(list)
         for s_uri, t_uri in dataset.aligned_entities:
             s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
@@ -249,20 +302,49 @@ def run_massive_sweep():
                         aligned_by_pred[canonical_map[ps]].append((canonical_map[ps], vs, vt))
 
         count = 0
+        pred_stats = defaultdict(lambda: {"total": 0, "identity": 0, "scores": []})
         a_preds = list(aligned_by_pred.keys())
+
         while count < SAMPLES_ALIGNED and a_preds:
             for p_tok in a_preds[:]:
                 if aligned_by_pred[p_tok]:
                     p_uri, v1, v2 = aligned_by_pred[p_tok].pop(random.randrange(len(aligned_by_pred[p_tok])))
                     aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=best['a'])
-                    f.write(f"{count+1:03d} | {p_tok:15} | VAL A: {v1[:20]:20} -> AUG A': {aa[:25]:25}\n")
-                    f.write(f"    | {' ':15} | VAL B: {v2[:20]:20} -> AUG B': {ab[:25]:25} | Voto:[ ]/5\n")
+
+                    # Calcola score per questa coppia
+                    sc1 = calculate_diversity_score(v1, aa, p_tok, format_analyzer, v2)
+                    sc2 = calculate_diversity_score(v2, ab, p_tok, format_analyzer, v1)
+                    avg_sc = (sc1["total"] + sc2["total"]) / 2
+
+                    # Aggiorna statistiche per predicato
+                    pred_stats[p_tok]["total"] += 2
+                    pred_stats[p_tok]["scores"].append(avg_sc)
+                    if sc1["transform"] == "identity":
+                        pred_stats[p_tok]["identity"] += 1
+                    if sc2["transform"] == "identity":
+                        pred_stats[p_tok]["identity"] += 1
+
+                    # Scrivi nel report
+                    f.write(f"{count+1:03d} | {p_tok:15} | VAL A: {v1[:25]:25} -> AUG A': {aa[:30]:30}\n")
+                    f.write(f"    | {' ':15} | VAL B: {v2[:25]:25} -> AUG B': {ab[:30]:30}\n")
+                    f.write(f"    | {' ':15} | Score: {avg_sc:.2f} | Type: {sc1['transform']}/{sc2['transform']} | Voto:[ ]/5\n")
                     f.write(f"    | {' ':15} | Note: [__________________________________________________]\n")
                     f.write("-" * 110 + "\n")
                     count += 1
-                else: a_preds.remove(p_tok)
-                if count >= SAMPLES_ALIGNED: break
-                
+                else:
+                    a_preds.remove(p_tok)
+                if count >= SAMPLES_ALIGNED:
+                    break
+
+        # Scrivi riepilogo per predicato
+        f.write("\n" + "=" * 110 + "\n")
+        f.write(" RIEPILOGO PER PREDICATO \n")
+        f.write("=" * 110 + "\n\n")
+        for p_tok, stats in sorted(pred_stats.items()):
+            identity_rate = stats["identity"] / stats["total"] * 100 if stats["total"] > 0 else 0
+            avg_score = np.mean(stats["scores"]) if stats["scores"] else 0
+            f.write(f"{p_tok:20} | Samples: {stats['total']:3d} | Avg Score: {avg_score:.2f} | Identity: {identity_rate:5.1f}%\n")
+
     print(f">>> SUCCESS: Report saved to {output_file}")
 
 if __name__ == "__main__":
