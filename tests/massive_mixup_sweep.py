@@ -5,10 +5,10 @@ import random
 import time
 import numpy as np
 import re
-import os
 from pathlib import Path
 from tabulate import tabulate
 from collections import defaultdict
+from difflib import SequenceMatcher
 from rdflib import Literal
 from transformers import Seq2SeqTrainingArguments, Seq2SeqTrainer, DataCollatorForSeq2Seq
 from datasets import Dataset as HFDataset
@@ -22,13 +22,11 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE OPTIMIZER TOTALE (RTX 4090) ---
+# --- CONFIGURAZIONE MICRO-CHIRURGIA (RTX 4090) ---
 SAMPLES_ALIGNED = 400
-SAMPLES_ORPHAN = 100
 BATCH_SIZE = 32
 GRAD_ACCUMULATION = 8
-EPOCHS = 30
-SWEEP_SAMPLES = 40
+SWEEP_SAMPLES = 30 # Ridotto leggermente per gestire 450 config in tempi umani
 
 torch.backends.cudnn.benchmark = True
 logger = get_logger("MassiveSweep")
@@ -36,50 +34,39 @@ logger = get_logger("MassiveSweep")
 def clean_val(text):
     return re.sub(r'<[^>]+>\s*', '', text).strip()
 
-def calculate_sota_score(original_list, generated_list):
-    """Calcola la qualità totale: Creatività Verosimile (70% Diversità, 30% Coerenza)."""
-    originals = set(s.lower().strip() for s in original_list)
-    valid_creative = 0
-    garbage = 0
+def calculate_precision_score(orig, gen, originals_set):
+    """
+    Score per Precisione Estrema:
+    - Premia novità (non in originals_set)
+    - Premia somiglianza strutturale (SequenceMatcher > 0.7)
+    - Penalizza distorsioni (sim < 0.5)
+    - Penalizza copie identiche (sim > 0.98)
+    """
+    gen_clean = gen.lower().strip()
+    if len(gen_clean) < 3: return 0.0
     
-    for i in range(0, len(generated_list)):
-        gen = generated_list[i].lower().strip()
-        # Per il confronto di plausibilità, prendiamo l'originale corrispondente
-        # (original_list ha [v1, v2, v1, v2...], generated_list ha [gen1, gen2...])
-        orig = original_list[i*2] 
+    sim = SequenceMatcher(None, orig.lower().strip(), gen_clean).ratio()
+    
+    # 1. Copia Identica (Inutile)
+    if sim > 0.98: return 0.05
+    
+    # 2. Sweet Spot (Nuovo ma strutturalmente coerente)
+    if 0.65 <= sim <= 0.92:
+        score = sim * 1.5
+        if gen_clean not in originals_set:
+            score += 1.0 # Forte premio per novità valida
+        return score
         
-        # 1. Check Garbage Severo
-        if len(gen) < 3 or len(re.findall(r'[^a-z0-9\s]', gen)) / (len(gen)+1) > 0.25:
-            garbage += 1; continue
-            
-        # 2. Check Plausibilità (Lunghezza non assurda rispetto all'originale)
-        if abs(len(gen) - len(orig)) > 20:
-            garbage += 0.5; continue # Penalità parziale per eccessiva verbosità
-            
-        # 3. Premio Creatività (Novità Reale)
-        if gen not in originals:
-            # BONUS: Se ha cambiato parole ma mantenuto il senso (Lexical Shift)
-            # Verifichiamo se almeno una parola è nuova
-            orig_words = set(orig.lower().split())
-            gen_words = set(gen.split())
-            if gen_words - orig_words:
-                valid_creative += 1.2 # Bonus per parole nuove
-            else:
-                valid_creative += 1.0 # Solo typo o reordering
-            
-    diversity = valid_creative / len(generated_list) if generated_list else 0
-    purity = 1.0 - (garbage / len(generated_list))
-    
-    # 70% Diversità, 30% Coerenza
-    return (diversity * 0.7) + (purity * 0.3)
+    # 3. Allucinazione (Troppo diverso)
+    return 0.0
 
 def run_massive_sweep():
     print("\n" + "█"*100)
-    print("█" + " RTX 4090: FULL COMBINATORIAL PARAMETER OPTIMIZER ".center(98) + "█")
-    print("█" + " (Alpha x Noise x Beams x Temp x Penalty) ".center(98) + "█")
+    print("█" + " RTX 4090: MICRO-PRECISION PARAMETER OPTIMIZER ".center(98) + "█")
+    print("█" + " (450 Combinations: Alpha x Noise x Beams x Penalty) ".center(98) + "█")
     print("█"*100)
 
-    # 1. CARICAMENTO DATI
+    # 1. DATI
     data_path = PROJECT_ROOT / "data" / "raw" / "openea" / "BBC_DB"
     reader = OpeneaDatasetReader()
     dataset = reader.read(str(data_path))
@@ -89,141 +76,92 @@ def run_massive_sweep():
     device = "cuda" if torch.cuda.is_available() else "cpu"
     out_dir = "./results/sweep_model_ultimate_v5"
 
-    # 2. TRAINING O RESUME
-    model_trained = (Path(out_dir) / "pytorch_model.bin").exists() or (Path(out_dir) / "model.safetensors").exists()
-    interpolator = MixupBartInterpolator(model_name="facebook/bart-large" if not model_trained else out_dir, out_dir=out_dir, device=device)
+    # 2. MODELLO
+    interpolator = MixupBartInterpolator(model_name=out_dir, out_dir=out_dir, device=device)
     interpolator.set_predicate_mapping(canonical_map)
 
-    if not model_trained:
-        print(f"    [TRAIN] Model v5 not found. Training...")
-        interpolator.fine_tune(train_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=3e-5, force_retrain=True)
-
-    # 3. PREPARAZIONE TEST SUBSET (Solo valori PULITI)
-    aligned_test = []
-    # Usiamo un set per evitare duplicati causati dalle diverse varianti di noise nel training
-    seen_pairs = set()
-    
-    for row in train_rows:
-        # Nel nostro builder, il target contiene sempre il valore PULITO <PRED> Valore
-        # L'input invece contiene il rumore. Noi vogliamo testare con il PULITO.
-        # Troviamo le coppie di traduzione guardando i target di righe correlate
-        pass 
-
-    # Approccio più semplice: Estraiamo i valori puliti dai target delle righe di training
-    # che rappresentano una traduzione (v_inp_clean != v_tgt_clean)
-    for row in train_rows:
-        # v_tgt è sempre pulito. 
-        v_tgt = clean_val(row['target'])
-        pred = row['target'].split(' ')[0]
-        
-        # Per ricostruire la coppia (A, B) pulita, cerchiamo nel dataset 
-        # una riga dove quel v_tgt era l'input (ma il builder mette noise nell'input...)
-        # Quindi facciamo così: usiamo il target della riga corrente come VAL B
-        # e cerchiamo un VAL A plausibile.
-        
-        # In realtà, il modo più corretto è rigenerare le coppie pulite dal dataset originale
-        # ma per lo sweep possiamo semplicemente simulare: VAL A = VAL B (Denoising)
-        # o VAL A = VAL B_variante.
-        
-    # CORREZIONE DEFINITIVA: Usiamo direttamente il dataset originale per il test
-    print("    Extracting clean evaluation pairs from dataset...")
+    # 3. TEST SUBSET
     aligned_test = []
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
-    for s_uri, t_uri in list(dataset.aligned_entities)[:SWEEP_SAMPLES*5]:
+    for s_uri, t_uri in list(dataset.aligned_entities)[:SWEEP_SAMPLES*20]:
         s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
         t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
-        
-        for p_src, v_src in s_lits.items():
-            for p_tgt, v_tgt in t_lits.items():
-                if v_src.lower() != v_tgt.lower() and len(v_src) > 3:
-                    # Se i predicati sono mappati nello stesso token, è una coppia valida
-                    if canonical_map.get(p_src) == canonical_map.get(p_tgt):
-                        pred_tok = canonical_map[p_src]
-                        aligned_test.append((pred_tok, v_src, v_tgt))
+        for ps, vs in s_lits.items():
+            for pt, vt in t_lits.items():
+                if vs.lower() != vt.lower() and len(vs) > 4 and canonical_map.get(ps) == canonical_map.get(pt):
+                    aligned_test.append((canonical_map[ps], vs, vt))
         if len(aligned_test) >= SWEEP_SAMPLES: break
 
-    # 4. FULL GRID SEARCH
-    print(f"\n>>> PHASE 2: FULL GRID SEARCH (32 CONFIGS)")
-    
-    alphas = [0.3, 0.5]
-    noises = [0.05, 0.1]
-    beams = [1, 3, 5]
-    temps = [1.0, 1.3]
-    penalties = [1.2, 1.6]
+    # 4. MICRO-GRID SEARCH
+    alphas = [0.05, 0.1, 0.15, 0.2, 0.3]
+    noises = [0.01, 0.02, 0.03, 0.04, 0.05]
+    beams  = [3, 4, 5, 6, 7, 8]
+    penalties = [1.5, 1.8, 2.0]
     
     results = []
-    total = len(alphas) * len(noises) * len(beams) * len(temps) * len(penalties)
+    total = len(alphas) * len(noises) * len(beams) * len(penalties)
     curr = 0
+    
+    originals_set = set(clean_val(r['target']).lower() for r in train_rows)
+
+    print(f"\n>>> SCANNING {total} CONFIGURATIONS...")
     
     for a in alphas:
         for n in noises:
             for b in beams:
-                for t in temps:
-                    for p in penalties:
-                        curr += 1
-                        # Configurazione al volo
-                        interpolator.latent_noise_std = n
-                        interpolator.gen_num_beams = b
-                        interpolator.gen_temperature = t
-                        interpolator.gen_repetition_penalty = p
-                        interpolator.gen_top_k = 50
-                        
-                        gen_list, orig_list = [], []
-                        for pred, v1, v2 in aligned_test:
-                            res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=a)
-                            gen_list.append(res); orig_list.extend([v1, v2])
-                        
-                        score = calculate_sota_score(orig_list, gen_list)
-                        results.append({"a": a, "n": n, "b": b, "t": t, "p": p, "score": score})
-                        print(f"    [{curr}/{total}] A={a} N={n} B={b} T={t} P={p} -> Score: {score:.2f}")
+                for p in penalties:
+                    curr += 1
+                    interpolator.latent_noise_std = n
+                    interpolator.gen_num_beams = b
+                    interpolator.gen_repetition_penalty = p
+                    
+                    scores = []
+                    for pred, v1, v2 in aligned_test:
+                        res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=a)
+                        scores.append(calculate_precision_score(v1, res, originals_set))
+                    
+                    avg_score = sum(scores) / len(scores) if scores else 0
+                    results.append({"a": a, "n": n, "b": b, "p": p, "score": avg_score})
+                    
+                    if curr % 10 == 0:
+                        print(f"    [{curr}/{total}] A={a} N={n} B={b} P={p} -> Score: {avg_score:.3f}", end='\r')
 
     results.sort(key=lambda x: x['score'], reverse=True)
     best = results[0]
-    print("\n    WINNING CONFIGURATION:"); print(tabulate([best], headers="keys"))
+    print(f"\n\n    WINNING CONFIGURATION FOUND after {total} trials:")
+    print(tabulate([best], headers="keys"))
 
-    # 5. REPORT FINALE MASSIVO (Solo valori PULITI dal dataset originale)
-    print("\n" + "="*100); print(" ULTIMATE SOTA REPORT (STRATIFIED - CLEAN DATA) ".center(100)); print("="*100)
-    interpolator.latent_noise_std = best['n']
-    interpolator.gen_num_beams = best['b']
-    interpolator.gen_temperature = best['t']
-    interpolator.gen_repetition_penalty = best['p']
+    # 5. REPORT FINALE
+    print("\n" + "="*100); print(" ULTIMATE SOTA PRECISION REPORT ".center(100)); print("="*100)
+    interpolator.latent_noise_std, interpolator.gen_num_beams, interpolator.gen_repetition_penalty = best['n'], best['b'], best['p']
     
-    # Estraiamo TUTTE le coppie pulite possibili dal dataset per il report massivo
-    aligned_by_pred = defaultdict(list)
-    kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
-    
-    print("    Collecting all clean pairs for the final report...")
-    for s_uri, t_uri in dataset.aligned_entities:
-        s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
-        t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
-        
-        for p_src, v_src in s_lits.items():
-            for p_tgt, v_tgt in t_lits.items():
-                if v_src.lower() != v_tgt.lower() and len(v_src) > 3:
-                    if canonical_map.get(p_src) == canonical_map.get(p_tgt):
-                        p_tok = canonical_map[p_src]
-                        aligned_by_pred[p_tok].append((p_tok, v_src, v_tgt))
-
-    output_file = "massive_ultimate_report_v2.txt"
+    output_file = "massive_precision_optimized_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write(f"DAKGEA ULTIMATE REPORT | Best Config: {best}\n")
-        f.write("Note: ALL inputs are clean values from the original KGs.\n\n")
+        f.write(f"DAKGEA PRECISION OPTIMIZED | Best Config: {best}\n\n")
         
+        # Generazione Report Stratificato (utilizzando la logica precedente di successo)
+        aligned_by_pred = defaultdict(list)
+        for s_uri, t_uri in dataset.aligned_entities:
+            s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
+            t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
+            for ps, vs in s_lits.items():
+                for pt, vt in t_lits.items():
+                    if vs.lower() != vt.lower() and len(vs) > 3 and canonical_map.get(ps) == canonical_map.get(pt):
+                        aligned_by_pred[canonical_map[ps]].append((canonical_map[ps], vs, vt))
+
         report_a, count, a_preds = [], 0, list(aligned_by_pred.keys())
         while count < SAMPLES_ALIGNED and a_preds:
             for p_tok in a_preds[:]:
                 if aligned_by_pred[p_tok]:
-                    # Prendi una coppia a caso per quel predicato
                     p_uri, v1, v2 = aligned_by_pred[p_tok].pop(random.randrange(len(aligned_by_pred[p_tok])))
                     aug, _ = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=best['a'])
-                    
                     f.write(f"{count+1:03d} | {p_tok:25} | {v1[:30]:30} | {v2[:30]:30} | {aug}\n")
                     if count < 20: report_a.append([count+1, p_tok, v1[:20], v2[:20], aug[:30]])
                     count += 1
                 else: a_preds.remove(p_tok)
                 if count >= SAMPLES_ALIGNED: break
                 
-    print(f"\n>>> SUCCESS: Ultimate v2 Report saved to {output_file}")
+    print(f"\n>>> SUCCESS: Report saved to {output_file}")
     print(tabulate(report_a, headers=["#", "PRED", "VAL A", "VAL B", "AUGMENTED"], tablefmt="grid"))
 
 if __name__ == "__main__":
