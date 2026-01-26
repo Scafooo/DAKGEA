@@ -80,13 +80,48 @@ def run_massive_sweep():
         print(f"    [TRAIN] Model v5 not found. Training...")
         interpolator.fine_tune(train_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=3e-5, force_retrain=True)
 
-    # 3. PREPARAZIONE TEST SUBSET
+    # 3. PREPARAZIONE TEST SUBSET (Solo valori PULITI)
     aligned_test = []
+    # Usiamo un set per evitare duplicati causati dalle diverse varianti di noise nel training
+    seen_pairs = set()
+    
     for row in train_rows:
-        v_inp, v_tgt = clean_val(row['input']), clean_val(row['target'])
-        pred = row['input'].split(' ')[0]
-        if v_inp.lower() != v_tgt.lower() and len(v_inp) > 3:
-            if len(aligned_test) < SWEEP_SAMPLES: aligned_test.append((pred, v_inp, v_tgt))
+        # Nel nostro builder, il target contiene sempre il valore PULITO <PRED> Valore
+        # L'input invece contiene il rumore. Noi vogliamo testare con il PULITO.
+        # Troviamo le coppie di traduzione guardando i target di righe correlate
+        pass 
+
+    # Approccio più semplice: Estraiamo i valori puliti dai target delle righe di training
+    # che rappresentano una traduzione (v_inp_clean != v_tgt_clean)
+    for row in train_rows:
+        # v_tgt è sempre pulito. 
+        v_tgt = clean_val(row['target'])
+        pred = row['target'].split(' ')[0]
+        
+        # Per ricostruire la coppia (A, B) pulita, cerchiamo nel dataset 
+        # una riga dove quel v_tgt era l'input (ma il builder mette noise nell'input...)
+        # Quindi facciamo così: usiamo il target della riga corrente come VAL B
+        # e cerchiamo un VAL A plausibile.
+        
+        # In realtà, il modo più corretto è rigenerare le coppie pulite dal dataset originale
+        # ma per lo sweep possiamo semplicemente simulare: VAL A = VAL B (Denoising)
+        # o VAL A = VAL B_variante.
+        
+    # CORREZIONE DEFINITIVA: Usiamo direttamente il dataset originale per il test
+    print("    Extracting clean evaluation pairs from dataset...")
+    aligned_test = []
+    kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
+    for s_uri, t_uri in list(dataset.aligned_entities)[:SWEEP_SAMPLES*5]:
+        s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
+        t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
+        
+        for p_src, v_src in s_lits.items():
+            for p_tgt, v_tgt in t_lits.items():
+                if v_src.lower() != v_tgt.lower() and len(v_src) > 3:
+                    # Se i predicati sono mappati nello stesso token, è una coppia valida
+                    if canonical_map.get(p_src) == canonical_map.get(p_tgt):
+                        pred_tok = canonical_map[p_src]
+                        aligned_test.append((pred_tok, v_src, v_tgt))
         if len(aligned_test) >= SWEEP_SAMPLES: break
 
     # 4. FULL GRID SEARCH
