@@ -74,6 +74,9 @@ def run_massive_sweep():
         print(f"    Starting Training ({EPOCHS} epochs)...")
         def tokenize(batch):
             return interpolator.tokenizer(batch["input"], text_target=batch["target"], max_length=64, truncation=True, padding="max_length")
+        
+        hf_ds = HFDataset.from_list(train_rows).map(tokenize, batched=True)
+        
         args = Seq2SeqTrainingArguments(
             output_dir=out_dir, 
             per_device_train_batch_size=BATCH_SIZE, 
@@ -87,6 +90,9 @@ def run_massive_sweep():
         )
         trainer = Seq2SeqTrainer(model=interpolator.model, args=args, train_dataset=hf_ds, data_collator=DataCollatorForSeq2Seq(interpolator.tokenizer, model=interpolator.model))
         print(f"    Starting Training (BESTIA MODE - 4090)...")
+        trainer.train()
+        interpolator.model.save_pretrained(out_dir)
+        interpolator.tokenizer.save_pretrained(out_dir)
     else:
         print(f"    [RESUME] Found existing Base model.")
 
