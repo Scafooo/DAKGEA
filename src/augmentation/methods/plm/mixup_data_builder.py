@@ -1,8 +1,7 @@
-"""Training data builder for Mix-up BART with Dataset-Agnostic Structural Noise."""
+"""Training data builder for Mix-up BART - Simplified and Balanced."""
 
 import random
 import logging
-import re
 from collections import defaultdict
 from typing import Callable, Dict, List, Tuple
 from difflib import SequenceMatcher
@@ -15,47 +14,26 @@ logger = logging.getLogger(__name__)
 def _local_name(uri: str) -> str:
     return str(uri).split("/")[-1].split("#")[-1]
 
-class AgnosticStructuralNoise:
-    """Generatore di rumore indipendente dal dominio (strutturale)."""
-    
-    @staticmethod
-    def apply(text: str) -> str:
-        if not text or len(text) < 4: return text
-        words = text.split()
-        
-        strategy = random.random()
-        
-        # 1. Word Shuffling Totale (30% chance)
-        if strategy < 0.3 and len(words) >= 2:
-            random.shuffle(words)
-            return " ".join(words)
-            
-        # 2. Random Span Deletion (30% chance) - Toglie parole a caso
-        if strategy < 0.6 and len(words) >= 3:
-            # Toglie da 1 a 2 parole
-            num_to_del = random.randint(1, min(2, len(words)-1))
-            for _ in range(num_to_del):
-                words.pop(random.randint(0, len(words)-1))
-            return " ".join(words)
-
-        # 3. Classic Typo / Character Noise (Fallback)
-        chars = list(text)
+def _basic_noise(text: str) -> str:
+    """Rumore minimo: solo un piccolo typo per non distorcere troppo."""
+    if not text or len(text) < 5: return text
+    chars = list(text)
+    if random.random() < 0.2:
         i = random.randint(0, len(chars) - 2)
         chars[i], chars[i + 1] = chars[i + 1], chars[i]
-        return "".join(chars)
+    return "".join(chars)
 
 class MixupDataBuilder:
     def __init__(self, confidence_threshold: float = 0.6, value_match_threshold: float = 0.3):
         self.matcher_service = AttributeMatchingService({"predicate_matching": {"similarity_threshold": confidence_threshold}})
         self.value_match_threshold = value_match_threshold
-        self.noise_gen = AgnosticStructuralNoise()
 
     @staticmethod
     def _string_similarity(a: str, b: str) -> float:
         return SequenceMatcher(None, a.lower(), b.lower()).ratio()
 
     def build_training_data(self, dataset: Dataset, max_pairs_per_pred: int = 5000) -> Tuple[List[Dict[str, str]], Dict[str, str]]:
-        logger.info("[MixupBuilder] Building AGNOSTIC training data...")
+        logger.info("[MixupBuilder] Building simple training data...")
         correspondences = self.matcher_service.compute_correspondences(dataset)
         
         canonical_map = {str(p): f"<{_local_name(p).upper()}>" for p in (set(dataset.knowledge_graph_source.predicates()) | set(dataset.knowledge_graph_target.predicates()))}
@@ -78,12 +56,10 @@ class MixupDataBuilder:
                     for vs in s_lits[sp]:
                         best_vt = max(t_lits[tp], key=lambda x: self._string_similarity(vs, x))
                         if self._string_similarity(vs, best_vt) >= self.value_match_threshold:
-                            # ALLINEAMENTO CROSS-GRAPH (A -> B, B -> A)
-                            # Insegniamo la traduzione anche partendo da input parziali (noise)
-                            rows.append({"input": f"{p_tok} {self.noise_gen.apply(vs)}", "target": f"{p_tok} {best_vt}"})
-                            rows.append({"input": f"{p_tok} {self.noise_gen.apply(best_vt)}", "target": f"{p_tok} {vs}"})
-                            
-                            # IDENTITY LIMITATA (50% di probabilità)
+                            # Task 1-2: Translation (A -> B, B -> A)
+                            rows.append({"input": f"{p_tok} {_basic_noise(vs)}", "target": f"{p_tok} {best_vt}"})
+                            rows.append({"input": f"{p_tok} {_basic_noise(best_vt)}", "target": f"{p_tok} {vs}"})
+                            # Task 3: Identity (50% chance per non essere pigri)
                             if random.random() < 0.5:
                                 rows.append({"input": f"{p_tok} {vs}", "target": f"{p_tok} {vs}"})
                             
@@ -93,9 +69,9 @@ class MixupDataBuilder:
             # ORFANI
             for p, vals in s_lits.items():
                 if p not in used_s:
-                    for v in vals: rows.append({"input": f"{canonical_map[p]} {self.noise_gen.apply(v)}", "target": f"{canonical_map[p]} {v}"})
+                    for v in vals: rows.append({"input": f"{canonical_map[p]} {_basic_noise(v)}", "target": f"{canonical_map[p]} {v}"})
             for p, vals in t_lits.items():
                 if p not in used_t:
-                    for v in vals: rows.append({"input": f"{canonical_map[p]} {self.noise_gen.apply(v)}", "target": f"{canonical_map[p]} {v}"})
+                    for v in vals: rows.append({"input": f"{canonical_map[p]} {_basic_noise(v)}", "target": f"{canonical_map[p]} {v}"})
 
         return rows, canonical_map
