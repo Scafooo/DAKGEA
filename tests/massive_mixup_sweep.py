@@ -130,7 +130,7 @@ def run_massive_sweep():
     
     alphas = [0.3, 0.5]
     noises = [0.05, 0.1]
-    beams = [1, 5]
+    beams = [1, 3, 5]
     temps = [1.0, 1.3]
     penalties = [1.2, 1.6]
     
@@ -164,34 +164,46 @@ def run_massive_sweep():
     best = results[0]
     print("\n    WINNING CONFIGURATION:"); print(tabulate([best], headers="keys"))
 
-    # 5. REPORT FINALE MASSIVO
-    print("\n" + "="*100); print(" ULTIMATE SOTA REPORT (STRATIFIED) ".center(100)); print("="*100)
+    # 5. REPORT FINALE MASSIVO (Solo valori PULITI dal dataset originale)
+    print("\n" + "="*100); print(" ULTIMATE SOTA REPORT (STRATIFIED - CLEAN DATA) ".center(100)); print("="*100)
     interpolator.latent_noise_std = best['n']
     interpolator.gen_num_beams = best['b']
     interpolator.gen_temperature = best['t']
     interpolator.gen_repetition_penalty = best['p']
     
-    # Generazione report come richiesto (stratificato)
+    # Estraiamo TUTTE le coppie pulite possibili dal dataset per il report massivo
     aligned_by_pred = defaultdict(list)
-    for row in train_rows:
-        v_inp, v_tgt = clean_val(row['input']), clean_val(row['target'])
-        pred = row['input'].split(' ')[0]
-        if v_inp.lower() != v_tgt.lower() and len(v_inp) > 3:
-            aligned_by_pred[pred].append((pred, v_inp, v_tgt))
+    kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
+    
+    print("    Collecting all clean pairs for the final report...")
+    for s_uri, t_uri in dataset.aligned_entities:
+        s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
+        t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
+        
+        for p_src, v_src in s_lits.items():
+            for p_tgt, v_tgt in t_lits.items():
+                if v_src.lower() != v_tgt.lower() and len(v_src) > 3:
+                    if canonical_map.get(p_src) == canonical_map.get(p_tgt):
+                        p_tok = canonical_map[p_src]
+                        aligned_by_pred[p_tok].append((p_tok, v_src, v_tgt))
 
     output_file = "massive_ultimate_report_v2.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write(f"DAKGEA ULTIMATE REPORT | Best Config: {best}\n\n")
+        f.write(f"DAKGEA ULTIMATE REPORT | Best Config: {best}\n")
+        f.write("Note: ALL inputs are clean values from the original KGs.\n\n")
+        
         report_a, count, a_preds = [], 0, list(aligned_by_pred.keys())
         while count < SAMPLES_ALIGNED and a_preds:
-            for pred in a_preds[:]:
-                if aligned_by_pred[pred]:
-                    p_uri, v1, v2 = aligned_by_pred[pred].pop(random.randrange(len(aligned_by_pred[pred])))
-                    aug, _ = interpolator.interpolate_pair(v1, v2, predicate=p_uri, alpha=best['a'])
-                    f.write(f"{count+1:03d} | {p_uri:25} | {v1[:30]:30} | {v2[:30]:30} | {aug}\n")
-                    if count < 20: report_a.append([count+1, p_uri, v1[:20], v2[:20], aug[:30]])
+            for p_tok in a_preds[:]:
+                if aligned_by_pred[p_tok]:
+                    # Prendi una coppia a caso per quel predicato
+                    p_uri, v1, v2 = aligned_by_pred[p_tok].pop(random.randrange(len(aligned_by_pred[p_tok])))
+                    aug, _ = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=best['a'])
+                    
+                    f.write(f"{count+1:03d} | {p_tok:25} | {v1[:30]:30} | {v2[:30]:30} | {aug}\n")
+                    if count < 20: report_a.append([count+1, p_tok, v1[:20], v2[:20], aug[:30]])
                     count += 1
-                else: a_preds.remove(pred)
+                else: a_preds.remove(p_tok)
                 if count >= SAMPLES_ALIGNED: break
                 
     print(f"\n>>> SUCCESS: Ultimate v2 Report saved to {output_file}")
