@@ -440,32 +440,32 @@ def run_massive_sweep():
             for p_tok in a_preds[:]:
                 if aligned_by_pred[p_tok]:
                     p_uri, v1, v2 = aligned_by_pred[p_tok].pop(random.randrange(len(aligned_by_pred[p_tok])))
-                    aug, _ = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=best['a'])
+                    aug_a, aug_b = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=best['a'])
 
-                    # Calcola score per questo sample
-                    s = calculate_creative_score(v1, aug, p_tok, format_analyzer, other=v2)
+                    # Calcola score per entrambi
+                    s_a = calculate_creative_score(v1, aug_a, p_tok, format_analyzer, other=v2)
+                    s_b = calculate_creative_score(v2, aug_b, p_tok, format_analyzer, other=v1)
+                    
+                    # Media per le statistiche
                     for k in ["format", "novelty", "creativity", "total"]:
-                        total_scores[k].append(s[k])
-                        pred_scores[p_tok][k].append(s[k])
+                        val = (s_a[k] + s_b[k]) / 2
+                        total_scores[k].append(val)
+                        pred_scores[p_tok][k].append(val)
 
-                    total_transforms[s["transform"]] += 1
-                    pred_scores[p_tok]["transforms"][s["transform"]] += 1
+                    total_transforms[s_a["transform"]] += 1
+                    total_transforms[s_b["transform"]] += 1
                     pred_scores[p_tok]["count"] += 1
 
-                    # Icona e tipo trasformazione
-                    t_icon = {"identity": "≡", "identity_other": "≡", "token_swap": "⇄",
-                              "partial_merge": "◐", "creative": "★", "garbage": "✗"}.get(s["transform"], "?")
+                    # Scrittura su file con AUG A' e AUG B'
+                    f.write(f"{count+1:03d} | {p_tok:15} | VAL A: {v1[:20]:20} -> AUG A': {aug_a[:25]:25} | Q:{s_a['total']*100:2.0f}% | {s_a['transform']:10}\n")
+                    f.write(f"    | {' ':15} | VAL B: {v2[:20]:20} -> AUG B': {aug_b[:25]:25} | Q:{s_b['total']*100:2.0f}% | {s_b['transform']:10} | Voto:[ ]/5\n")
+                    f.write(f"    | {' ':15} | Note: [__________________________________________________]\n")
+                    f.write("-" * 130 + "\n")
 
-                    # Scrittura su file con Voto e Note
-                    f.write(f"{count+1:03d} | {p_tok:20} | {v1[:22]:22} | {v2[:22]:22} | {aug[:28]:28} | "
-                            f"F={s['format']:.2f} N={s['novelty']:.2f} C={s['creativity']:.2f} | "
-                            f"{t_icon} {s['transform']:13} | Voto: [ ]/5 | Note: [____________________]\n")
-
-                    if count < 50:
+                    if count < 30:
                         report_data.append([
-                            count+1, p_tok[:12], v1[:15], v2[:15], aug[:22],
-                            f"{s['format']:.1f}", f"{s['novelty']:.1f}", f"{s['creativity']:.1f}", 
-                            s["transform"][:8], "[ ]/5", "..."
+                            count+1, p_tok[:10], v1[:12], aug_a[:15], v2[:12], aug_b[:15],
+                            f"{(s_a['total']+s_b['total'])*50:.0f}%", "[ ]/5"
                         ])
                     count += 1
                 else:
