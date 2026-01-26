@@ -231,11 +231,11 @@ def run_massive_sweep():
     print(f"\n>>> PHASE 2: PARAMETER OPTIMIZATION (AGGRESSIVE RANGES)")
     print("    Testing extreme temperature/noise to force diversity...")
 
-    # NUOVI RANGE PIÙ AGGRESSIVI
-    alphas = [0.3, 0.5, 0.7]              # Più mixing (era 0.1, 0.3, 0.5)
-    noises = [0.05, 0.1, 0.15, 0.2]       # Più perturbazione (era 0.02, 0.05, 0.1)
-    beams = [1, 3, 5]                      # 1=sampling libero, 3=moderato, 5=conservativo
-    temps = [1.0, 1.5, 2.0, 2.5]          # Molto più alte (era 0.7, 1.0, 1.3)
+    # RANGE BILANCIATI per BART-base (evitare troppo garbage)
+    alphas = [0.3, 0.5, 0.7]              # Mixing
+    noises = [0.02, 0.05, 0.08, 0.1]      # Noise contenuto (max 0.1)
+    beams = [1, 3, 5]                      # 1=sampling, 3=moderato, 5=conservativo
+    temps = [0.8, 1.0, 1.2, 1.5]          # Temperature moderate (max 1.5)
 
     results = []
     total_configs = len(alphas) * len(noises) * len(beams) * len(temps)
