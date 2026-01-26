@@ -298,16 +298,23 @@ def run_massive_sweep():
     print(tabulate(results[:5], headers="keys", floatfmt=".3f"))
     print(f"\n    WINNING CONFIG: A={best['a']} N={best['n']} B={best['b']} T={best['t']}")
 
-    # 5. REPORT FINALE
-    print("\n" + "="*100); print(f" ULTIMATE {MODEL_NAME.upper()} REPORT ".center(100)); print("="*100)
+    # 5. REPORT FINALE CON SCORING DETTAGLIATO
+    print("\n" + "="*100)
+    print(f" ULTIMATE {MODEL_NAME.upper()} REPORT (Format-Aware) ".center(100))
+    print("="*100)
     interpolator.latent_noise_std = best['n']
     interpolator.gen_num_beams = best['b']
     interpolator.gen_temperature = best['t']
     interpolator.gen_do_sample = True
-    
+
     output_file = "massive_base_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write(f"DAKGEA {MODEL_NAME} REPORT | Best Config: {best}\n\n")
+        f.write(f"DAKGEA {MODEL_NAME} REPORT\n")
+        f.write(f"Best Config: alpha={best['a']}, noise={best['n']}, beams={best['b']}, temp={best['t']}\n")
+        f.write(f"Scores: Format={best['format']:.3f}, Novelty={best['novelty']:.3f}, "
+                f"Creativity={best['creativity']:.3f}, Total={best['total']:.3f}\n\n")
+        f.write("-"*120 + "\n")
+
         aligned_by_pred = defaultdict(list)
         for s_uri, t_uri in dataset.aligned_entities:
             s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
@@ -318,19 +325,45 @@ def run_massive_sweep():
                         aligned_by_pred[canonical_map[ps]].append((canonical_map[ps], vs, vt))
 
         report_data, count, a_preds = [], 0, list(aligned_by_pred.keys())
+        total_scores = {"format": [], "novelty": [], "creativity": [], "total": []}
+
         while count < SAMPLES_ALIGNED and a_preds:
             for p_tok in a_preds[:]:
                 if aligned_by_pred[p_tok]:
                     p_uri, v1, v2 = aligned_by_pred[p_tok].pop(random.randrange(len(aligned_by_pred[p_tok])))
                     aug, _ = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=best['a'])
-                    f.write(f"{count+1:03d} | {p_tok:25} | {v1[:30]:30} | {v2[:30]:30} | {aug}\n")
-                    if count < 20: report_data.append([count+1, p_tok, v1[:20], v2[:20], aug[:30]])
+
+                    # Calcola score per questo sample
+                    s = calculate_creative_score(v1, aug, p_tok, format_analyzer)
+                    for k in total_scores:
+                        total_scores[k].append(s[k])
+
+                    f.write(f"{count+1:03d} | {p_tok:20} | {v1[:25]:25} | {v2[:25]:25} | {aug[:30]:30} | "
+                            f"F={s['format']:.2f} N={s['novelty']:.2f} C={s['creativity']:.2f}\n")
+
+                    if count < 20:
+                        report_data.append([
+                            count+1, p_tok[:15], v1[:18], v2[:18], aug[:25],
+                            f"{s['format']:.1f}", f"{s['novelty']:.1f}", f"{s['creativity']:.1f}"
+                        ])
                     count += 1
-                else: a_preds.remove(p_tok)
-                if count >= SAMPLES_ALIGNED: break
-                
-    print(f"\n>>> SUCCESS: Base Report saved to {output_file}")
-    print(tabulate(report_data, headers=["#", "PRED", "VAL A", "VAL B", "AUGMENTED"], tablefmt="grid"))
+                else:
+                    a_preds.remove(p_tok)
+                if count >= SAMPLES_ALIGNED:
+                    break
+
+        # Summary finale
+        f.write("-"*120 + "\n")
+        f.write(f"AVERAGE SCORES: Format={np.mean(total_scores['format']):.3f}, "
+                f"Novelty={np.mean(total_scores['novelty']):.3f}, "
+                f"Creativity={np.mean(total_scores['creativity']):.3f}, "
+                f"Total={np.mean(total_scores['total']):.3f}\n")
+
+    print(f"\n>>> SUCCESS: Report saved to {output_file}")
+    print(f"    Final Averages: F={np.mean(total_scores['format']):.3f} "
+          f"N={np.mean(total_scores['novelty']):.3f} C={np.mean(total_scores['creativity']):.3f}")
+    print("\n    SAMPLE OUTPUTS:")
+    print(tabulate(report_data, headers=["#", "PRED", "VAL A", "VAL B", "AUGMENTED", "F", "N", "C"], tablefmt="grid"))
 
 if __name__ == "__main__":
     random.seed(42); np.random.seed(42); torch.manual_seed(42)
