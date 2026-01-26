@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 from tabulate import tabulate
 from collections import defaultdict
+from rdflib import Literal
 from transformers import Seq2SeqTrainingArguments, Seq2SeqTrainer, DataCollatorForSeq2Seq
 from datasets import Dataset as HFDataset
 
