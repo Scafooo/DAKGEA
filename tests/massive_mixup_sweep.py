@@ -288,17 +288,28 @@ def run_massive_sweep():
     else:
         print(f"    [RESUME] Found existing Base model.")
 
-    # 3. TEST SUBSET CLEAN
+    # 3. PREPARAZIONE TEST SUBSET (SOLO DATI REALI PULITI)
+    print("    Extracting clean evaluation pairs directly from KGs...")
     aligned_test = []
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
-    for s_uri, t_uri in list(dataset.aligned_entities)[:SWEEP_SAMPLES*20]:
+    
+    # Iteriamo sulle entità allineate ufficiali del dataset
+    for s_uri, t_uri in list(dataset.aligned_entities):
+        # Estraiamo tutti i letterali puliti per questa coppia di entità
         s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
         t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
+        
         for ps, vs in s_lits.items():
             for pt, vt in t_lits.items():
-                if vs.lower() != vt.lower() and len(vs) > 4 and canonical_map.get(ps) == canonical_map.get(pt):
-                    aligned_test.append((canonical_map[ps], vs, vt))
+                # Se i predicati sono semanticamente accoppiati
+                if canonical_map.get(ps) == canonical_map.get(pt):
+                    # Se i valori sono diversi (per testare la traduzione/mixup)
+                    if vs.lower().strip() != vt.lower().strip() and len(vs) > 3:
+                        aligned_test.append((canonical_map[ps], vs, vt))
+        
         if len(aligned_test) >= SWEEP_SAMPLES: break
+    
+    print(f"    Clean Test Set size: {len(aligned_test)}")
 
     # 4. SWEEP CHIRURGICO PER BASE (con Temperature e Format-Aware Scoring)
     print(f"\n>>> PHASE 2: PARAMETER OPTIMIZATION (Format-Aware + Temperature)")
@@ -421,13 +432,16 @@ def run_massive_sweep():
         f.write("-"*130 + "\n")
 
         aligned_by_pred = defaultdict(list)
+        # Estraiamo TUTTE le coppie clean dal dataset originale
         for s_uri, t_uri in dataset.aligned_entities:
             s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
             t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
             for ps, vs in s_lits.items():
                 for pt, vt in t_lits.items():
-                    if vs.lower() != vt.lower() and len(vs) > 3 and canonical_map.get(ps) == canonical_map.get(pt):
-                        aligned_by_pred[canonical_map[ps]].append((canonical_map[ps], vs, vt))
+                    if vs.lower().strip() != vt.lower().strip() and len(vs) > 3:
+                        if canonical_map.get(ps) == canonical_map.get(pt):
+                            p_tok = canonical_map[ps]
+                            aligned_by_pred[p_tok].append((p_tok, vs, vt))
 
         report_data, count, a_preds = [], 0, list(aligned_by_pred.keys())
         total_scores = {"format": [], "novelty": [], "creativity": [], "total": []}
