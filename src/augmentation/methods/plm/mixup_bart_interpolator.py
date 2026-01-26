@@ -115,8 +115,9 @@ class MixupBartInterpolator:
         # 2. Rimuove i token canonici
         for tok in self.canonical_tokens:
             text = text.replace(tok, "")
-        # 3. Rimuove qualsiasi residuo di tag XML/Special es: <>, <NAME>, <0x...>
+        # 3. Rimuove qualsiasi residuo di tag o frammenti di parentesi angolari
         text = re.sub(r'<[^>]*>', '', text)
+        text = text.replace("<", "").replace(">", "")
         # 4. Rimuove spazi multipli
         text = re.sub(r'\s+', ' ', text).strip()
         # 5. Fallback se l'output è troppo corto o solo punteggiatura
