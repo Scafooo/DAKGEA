@@ -452,17 +452,20 @@ def run_massive_sweep():
                     pred_scores[p_tok]["transforms"][s["transform"]] += 1
                     pred_scores[p_tok]["count"] += 1
 
-                    # Icona per tipo trasformazione
+                    # Icona e tipo trasformazione
                     t_icon = {"identity": "≡", "identity_other": "≡", "token_swap": "⇄",
                               "partial_merge": "◐", "creative": "★", "garbage": "✗"}.get(s["transform"], "?")
 
+                    # Scrittura su file con Voto e Note
                     f.write(f"{count+1:03d} | {p_tok:20} | {v1[:22]:22} | {v2[:22]:22} | {aug[:28]:28} | "
-                            f"F={s['format']:.2f} N={s['novelty']:.2f} C={s['creativity']:.2f} | {t_icon} {s['transform']}\n")
+                            f"F={s['format']:.2f} N={s['novelty']:.2f} C={s['creativity']:.2f} | "
+                            f"{t_icon} {s['transform']:13} | Voto: [ ]/5 | Note: [____________________]\n")
 
-                    if count < 25:
+                    if count < 50:
                         report_data.append([
                             count+1, p_tok[:12], v1[:15], v2[:15], aug[:22],
-                            f"{s['format']:.1f}", f"{s['novelty']:.1f}", f"{s['creativity']:.1f}", s["transform"][:8]
+                            f"{s['format']:.1f}", f"{s['novelty']:.1f}", f"{s['creativity']:.1f}", 
+                            s["transform"][:8], "[ ]/5", "..."
                         ])
                     count += 1
                 else:
