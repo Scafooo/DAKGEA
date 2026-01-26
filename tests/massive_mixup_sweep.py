@@ -142,8 +142,50 @@ class PredicateFormatAnalyzer:
         return generated.lower().strip() not in s["samples"]
 
 
+def classify_transformation(orig: str, other: str, gen: str) -> str:
+    """
+    Classifica il tipo di trasformazione effettuata.
+
+    Returns: 'identity', 'token_swap', 'partial_merge', 'creative', 'garbage'
+    """
+    orig_l, other_l, gen_l = orig.lower().strip(), other.lower().strip(), gen.lower().strip()
+    orig_tokens = set(orig_l.split())
+    other_tokens = set(other_l.split())
+    gen_tokens = set(gen_l.split())
+
+    # Similarity scores
+    sim_orig = SequenceMatcher(None, orig_l, gen_l).ratio()
+    sim_other = SequenceMatcher(None, other_l, gen_l).ratio()
+
+    # Identity: quasi identico all'originale
+    if sim_orig > 0.95:
+        return "identity"
+
+    # Identity con l'altro valore
+    if sim_other > 0.95:
+        return "identity_other"
+
+    # Token swap: contiene token da entrambi
+    orig_in_gen = len(orig_tokens & gen_tokens)
+    other_in_gen = len(other_tokens & gen_tokens)
+    if orig_in_gen > 0 and other_in_gen > 0:
+        return "token_swap"
+
+    # Partial merge: molto simile ma con modifiche
+    if 0.6 <= sim_orig <= 0.95 or 0.6 <= sim_other <= 0.95:
+        return "partial_merge"
+
+    # Creative: abbastanza diverso ma sensato (lunghezza ragionevole)
+    if 0.3 <= sim_orig <= 0.6 and len(gen_l) >= 3:
+        return "creative"
+
+    # Garbage: troppo diverso o troppo corto
+    return "garbage"
+
+
 def calculate_creative_score(orig: str, gen: str, predicate: str,
-                             analyzer: PredicateFormatAnalyzer) -> dict:
+                             analyzer: PredicateFormatAnalyzer,
+                             other: str = None) -> dict:
     """
     Score multi-dimensionale per valutare creatività e format compliance.
 
@@ -152,12 +194,14 @@ def calculate_creative_score(orig: str, gen: str, predicate: str,
     - novelty_score: è un valore nuovo? (0 o 1)
     - creativity_score: non è una copia? (0-1)
     - total_score: score combinato
+    - transform_type: tipo di trasformazione
     """
     gen_clean = gen.strip()
     orig_clean = orig.strip()
+    other_clean = other.strip() if other else ""
 
     if len(gen_clean) < 2:
-        return {"format": 0, "novelty": 0, "creativity": 0, "total": 0}
+        return {"format": 0, "novelty": 0, "creativity": 0, "total": 0, "transform": "garbage"}
 
     # 1. Format compliance (40% del peso)
     format_score = analyzer.format_score(predicate, gen_clean)
@@ -178,6 +222,9 @@ def calculate_creative_score(orig: str, gen: str, predicate: str,
     else:
         creativity_score = 0.4  # Troppo diverso, potrebbe essere garbage
 
+    # 4. Classifica trasformazione
+    transform_type = classify_transformation(orig_clean, other_clean, gen_clean)
+
     # Score totale pesato
     total = (format_score * 0.4) + (novelty_score * 0.3) + (creativity_score * 0.3)
 
@@ -185,7 +232,8 @@ def calculate_creative_score(orig: str, gen: str, predicate: str,
         "format": format_score,
         "novelty": novelty_score,
         "creativity": creativity_score,
-        "total": total
+        "total": total,
+        "transform": transform_type
     }
 
 def run_massive_sweep():
@@ -254,6 +302,7 @@ def run_massive_sweep():
 
     # 4. SWEEP CHIRURGICO PER BASE (con Temperature e Format-Aware Scoring)
     print(f"\n>>> PHASE 2: PARAMETER OPTIMIZATION (Format-Aware + Temperature)")
+    print(f"    Testing {SWEEP_SAMPLES} samples per configuration\n")
     alphas = [0.1, 0.2, 0.3]
     noises = [0.02, 0.05, 0.1]
     beams  = [1, 3, 5]
@@ -262,6 +311,7 @@ def run_massive_sweep():
     results = []
     total_configs = len(alphas) * len(noises) * len(beams) * len(temperatures)
     config_idx = 0
+    NUM_EXAMPLES = 3  # Esempi da mostrare per configurazione
 
     for a in alphas:
         for n in noises:
@@ -271,34 +321,89 @@ def run_massive_sweep():
                     interpolator.latent_noise_std = n
                     interpolator.gen_num_beams = b
                     interpolator.gen_temperature = t
-                    interpolator.gen_do_sample = True  # Abilita sampling per usare temperature
+                    interpolator.gen_do_sample = True
 
                     scores = {"format": [], "novelty": [], "creativity": [], "total": []}
+                    transforms = defaultdict(int)
+                    examples = []
+
                     for pred, v1, v2 in aligned_test:
                         res, _ = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=a)
-                        s = calculate_creative_score(v1, res, pred, format_analyzer)
-                        for k in scores:
+                        s = calculate_creative_score(v1, res, pred, format_analyzer, other=v2)
+                        for k in ["format", "novelty", "creativity", "total"]:
                             scores[k].append(s[k])
+                        transforms[s["transform"]] += 1
+
+                        # Salva primi esempi
+                        if len(examples) < NUM_EXAMPLES:
+                            examples.append({
+                                "pred": pred, "v1": v1, "v2": v2,
+                                "gen": res, "transform": s["transform"],
+                                "score": s["total"]
+                            })
 
                     avg_scores = {k: np.mean(v) if v else 0 for k, v in scores.items()}
+                    total_samples = sum(transforms.values())
+                    transform_pcts = {k: v/total_samples*100 for k, v in transforms.items()}
+
                     results.append({
                         "a": a, "n": n, "b": b, "t": t,
                         "format": avg_scores["format"],
                         "novelty": avg_scores["novelty"],
                         "creativity": avg_scores["creativity"],
-                        "total": avg_scores["total"]
+                        "total": avg_scores["total"],
+                        "transforms": dict(transforms),
+                        "examples": examples
                     })
-                    print(f"    [{config_idx}/{total_configs}] A={a} N={n} B={b} T={t} -> "
-                          f"F={avg_scores['format']:.2f} N={avg_scores['novelty']:.2f} "
-                          f"C={avg_scores['creativity']:.2f} | Total={avg_scores['total']:.3f}")
+
+                    # Output dettagliato
+                    print(f"{'─'*90}")
+                    print(f"[{config_idx}/{total_configs}] Alpha={a} Noise={n} Beams={b} Temp={t}")
+                    print(f"    Scores: Format={avg_scores['format']:.2f} Novelty={avg_scores['novelty']:.2f} "
+                          f"Creativity={avg_scores['creativity']:.2f} → Total={avg_scores['total']:.3f}")
+
+                    # Transform breakdown
+                    transform_str = " | ".join([f"{k}:{v:.0f}%" for k, v in sorted(transform_pcts.items())])
+                    print(f"    Transforms: {transform_str}")
+
+                    # Esempi
+                    print(f"    Examples:")
+                    for ex in examples:
+                        icon = "✓" if ex["transform"] in ["token_swap", "partial_merge", "creative"] else "✗"
+                        print(f"      {icon} {ex['pred'][:12]:12} \"{ex['v1'][:15]}\" + \"{ex['v2'][:15]}\" → \"{ex['gen'][:20]}\" [{ex['transform']}]")
 
     results.sort(key=lambda x: x['total'], reverse=True)
     best = results[0]
-    print("\n    TOP 5 CONFIGURATIONS:")
-    print(tabulate(results[:5], headers="keys", floatfmt=".3f"))
-    print(f"\n    WINNING CONFIG: A={best['a']} N={best['n']} B={best['b']} T={best['t']}")
 
-    # 5. REPORT FINALE CON SCORING DETTAGLIATO
+    print(f"\n{'═'*90}")
+    print(" TOP 5 CONFIGURATIONS ".center(90, "═"))
+    print(f"{'═'*90}")
+    top5_display = [{k: v for k, v in r.items() if k not in ["transforms", "examples"]} for r in results[:5]]
+    print(tabulate(top5_display, headers="keys", floatfmt=".3f"))
+
+    print(f"\n{'═'*90}")
+    print(f" WINNING CONFIG: Alpha={best['a']} Noise={best['n']} Beams={best['b']} Temp={best['t']} ".center(90, "═"))
+    print(f"{'═'*90}")
+
+    # Mostra transform distribution della configurazione vincente
+    best_transforms = best.get("transforms", {})
+    total_t = sum(best_transforms.values()) or 1
+    print("\n    Transform Distribution (Best Config):")
+    for ttype in ["identity", "identity_other", "token_swap", "partial_merge", "creative", "garbage"]:
+        count = best_transforms.get(ttype, 0)
+        pct = count / total_t * 100
+        bar = "█" * int(pct / 2) + "░" * (50 - int(pct / 2))
+        icon = "✓" if ttype in ["token_swap", "partial_merge", "creative"] else "✗"
+        print(f"      {icon} {ttype:15} {bar} {pct:5.1f}% ({count})")
+
+    # Mostra esempi della configurazione vincente
+    print("\n    Best Config Examples:")
+    for ex in best.get("examples", []):
+        icon = "✓" if ex["transform"] in ["token_swap", "partial_merge", "creative"] else "✗"
+        print(f"      {icon} {ex['pred'][:15]:15} \"{ex['v1'][:20]}\" + \"{ex['v2'][:20]}\"")
+        print(f"        → \"{ex['gen']}\" [{ex['transform']}, score={ex['score']:.2f}]")
+
+    # 5. REPORT FINALE CON SCORING DETTAGLIATO E ANALISI PER PREDICATO
     print("\n" + "="*100)
     print(f" ULTIMATE {MODEL_NAME.upper()} REPORT (Format-Aware) ".center(100))
     print("="*100)
@@ -313,7 +418,7 @@ def run_massive_sweep():
         f.write(f"Best Config: alpha={best['a']}, noise={best['n']}, beams={best['b']}, temp={best['t']}\n")
         f.write(f"Scores: Format={best['format']:.3f}, Novelty={best['novelty']:.3f}, "
                 f"Creativity={best['creativity']:.3f}, Total={best['total']:.3f}\n\n")
-        f.write("-"*120 + "\n")
+        f.write("-"*130 + "\n")
 
         aligned_by_pred = defaultdict(list)
         for s_uri, t_uri in dataset.aligned_entities:
@@ -326,6 +431,10 @@ def run_massive_sweep():
 
         report_data, count, a_preds = [], 0, list(aligned_by_pred.keys())
         total_scores = {"format": [], "novelty": [], "creativity": [], "total": []}
+        total_transforms = defaultdict(int)
+
+        # Per-predicate tracking
+        pred_scores = defaultdict(lambda: {"format": [], "novelty": [], "creativity": [], "total": [], "transforms": defaultdict(int), "count": 0})
 
         while count < SAMPLES_ALIGNED and a_preds:
             for p_tok in a_preds[:]:
@@ -334,17 +443,26 @@ def run_massive_sweep():
                     aug, _ = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=best['a'])
 
                     # Calcola score per questo sample
-                    s = calculate_creative_score(v1, aug, p_tok, format_analyzer)
-                    for k in total_scores:
+                    s = calculate_creative_score(v1, aug, p_tok, format_analyzer, other=v2)
+                    for k in ["format", "novelty", "creativity", "total"]:
                         total_scores[k].append(s[k])
+                        pred_scores[p_tok][k].append(s[k])
 
-                    f.write(f"{count+1:03d} | {p_tok:20} | {v1[:25]:25} | {v2[:25]:25} | {aug[:30]:30} | "
-                            f"F={s['format']:.2f} N={s['novelty']:.2f} C={s['creativity']:.2f}\n")
+                    total_transforms[s["transform"]] += 1
+                    pred_scores[p_tok]["transforms"][s["transform"]] += 1
+                    pred_scores[p_tok]["count"] += 1
 
-                    if count < 20:
+                    # Icona per tipo trasformazione
+                    t_icon = {"identity": "≡", "identity_other": "≡", "token_swap": "⇄",
+                              "partial_merge": "◐", "creative": "★", "garbage": "✗"}.get(s["transform"], "?")
+
+                    f.write(f"{count+1:03d} | {p_tok:20} | {v1[:22]:22} | {v2[:22]:22} | {aug[:28]:28} | "
+                            f"F={s['format']:.2f} N={s['novelty']:.2f} C={s['creativity']:.2f} | {t_icon} {s['transform']}\n")
+
+                    if count < 25:
                         report_data.append([
-                            count+1, p_tok[:15], v1[:18], v2[:18], aug[:25],
-                            f"{s['format']:.1f}", f"{s['novelty']:.1f}", f"{s['creativity']:.1f}"
+                            count+1, p_tok[:12], v1[:15], v2[:15], aug[:22],
+                            f"{s['format']:.1f}", f"{s['novelty']:.1f}", f"{s['creativity']:.1f}", s["transform"][:8]
                         ])
                     count += 1
                 else:
@@ -352,18 +470,94 @@ def run_massive_sweep():
                 if count >= SAMPLES_ALIGNED:
                     break
 
-        # Summary finale
-        f.write("-"*120 + "\n")
+        # Summary finale nel file
+        f.write("\n" + "="*130 + "\n")
+        f.write("SUMMARY\n")
+        f.write("="*130 + "\n\n")
+
         f.write(f"AVERAGE SCORES: Format={np.mean(total_scores['format']):.3f}, "
                 f"Novelty={np.mean(total_scores['novelty']):.3f}, "
                 f"Creativity={np.mean(total_scores['creativity']):.3f}, "
-                f"Total={np.mean(total_scores['total']):.3f}\n")
+                f"Total={np.mean(total_scores['total']):.3f}\n\n")
 
+        # Transform distribution nel file
+        f.write("TRANSFORM DISTRIBUTION:\n")
+        total_t = sum(total_transforms.values()) or 1
+        for ttype in ["identity", "identity_other", "token_swap", "partial_merge", "creative", "garbage"]:
+            cnt = total_transforms.get(ttype, 0)
+            pct = cnt / total_t * 100
+            bar = "█" * int(pct / 2)
+            f.write(f"  {ttype:15} {bar:50} {pct:5.1f}% ({cnt})\n")
+
+        # Per-predicate analysis nel file
+        f.write("\nPER-PREDICATE ANALYSIS:\n")
+        f.write("-"*100 + "\n")
+        f.write(f"{'Predicate':20} {'Format':>8} {'Novelty':>8} {'Creativity':>8} {'Total':>8} {'Samples':>8} {'Best Transform':>20}\n")
+        f.write("-"*100 + "\n")
+
+        for pred in sorted(pred_scores.keys()):
+            ps = pred_scores[pred]
+            if ps["count"] > 0:
+                avg_f = np.mean(ps["format"])
+                avg_n = np.mean(ps["novelty"])
+                avg_c = np.mean(ps["creativity"])
+                avg_t = np.mean(ps["total"])
+                best_transform = max(ps["transforms"].items(), key=lambda x: x[1])[0] if ps["transforms"] else "N/A"
+                f.write(f"{pred:20} {avg_f:8.3f} {avg_n:8.3f} {avg_c:8.3f} {avg_t:8.3f} {ps['count']:8d} {best_transform:>20}\n")
+
+    # Console output
     print(f"\n>>> SUCCESS: Report saved to {output_file}")
-    print(f"    Final Averages: F={np.mean(total_scores['format']):.3f} "
-          f"N={np.mean(total_scores['novelty']):.3f} C={np.mean(total_scores['creativity']):.3f}")
-    print("\n    SAMPLE OUTPUTS:")
-    print(tabulate(report_data, headers=["#", "PRED", "VAL A", "VAL B", "AUGMENTED", "F", "N", "C"], tablefmt="grid"))
+    print(f"\n{'─'*90}")
+    print(" FINAL AVERAGES ".center(90, "─"))
+    print(f"{'─'*90}")
+    print(f"    Format:     {np.mean(total_scores['format']):.3f}")
+    print(f"    Novelty:    {np.mean(total_scores['novelty']):.3f}")
+    print(f"    Creativity: {np.mean(total_scores['creativity']):.3f}")
+    print(f"    TOTAL:      {np.mean(total_scores['total']):.3f}")
+
+    # Transform distribution console
+    print(f"\n{'─'*90}")
+    print(" TRANSFORM DISTRIBUTION ".center(90, "─"))
+    print(f"{'─'*90}")
+    total_t = sum(total_transforms.values()) or 1
+    good_transforms = total_transforms.get("token_swap", 0) + total_transforms.get("partial_merge", 0) + total_transforms.get("creative", 0)
+    bad_transforms = total_transforms.get("identity", 0) + total_transforms.get("identity_other", 0) + total_transforms.get("garbage", 0)
+
+    for ttype in ["identity", "identity_other", "token_swap", "partial_merge", "creative", "garbage"]:
+        cnt = total_transforms.get(ttype, 0)
+        pct = cnt / total_t * 100
+        bar = "█" * int(pct / 2) + "░" * (25 - int(pct / 2))
+        icon = "✓" if ttype in ["token_swap", "partial_merge", "creative"] else "✗"
+        print(f"    {icon} {ttype:15} {bar} {pct:5.1f}% ({cnt})")
+
+    print(f"\n    Good transforms: {good_transforms/total_t*100:.1f}% | Bad transforms: {bad_transforms/total_t*100:.1f}%")
+
+    # Per-predicate summary console
+    print(f"\n{'─'*90}")
+    print(" PER-PREDICATE ANALYSIS ".center(90, "─"))
+    print(f"{'─'*90}")
+    pred_summary = []
+    for pred in sorted(pred_scores.keys()):
+        ps = pred_scores[pred]
+        if ps["count"] > 0:
+            good = ps["transforms"].get("token_swap", 0) + ps["transforms"].get("partial_merge", 0) + ps["transforms"].get("creative", 0)
+            bad = ps["transforms"].get("identity", 0) + ps["transforms"].get("identity_other", 0) + ps["transforms"].get("garbage", 0)
+            pred_summary.append([
+                pred[:15],
+                f"{np.mean(ps['format']):.2f}",
+                f"{np.mean(ps['novelty']):.2f}",
+                f"{np.mean(ps['creativity']):.2f}",
+                f"{np.mean(ps['total']):.2f}",
+                ps["count"],
+                f"{good}/{bad}"
+            ])
+    print(tabulate(pred_summary, headers=["Predicate", "Format", "Novelty", "Creat.", "Total", "N", "Good/Bad"], tablefmt="simple"))
+
+    # Sample outputs
+    print(f"\n{'─'*90}")
+    print(" SAMPLE OUTPUTS ".center(90, "─"))
+    print(f"{'─'*90}")
+    print(tabulate(report_data[:20], headers=["#", "PRED", "VAL A", "VAL B", "AUGMENTED", "F", "N", "C", "Type"], tablefmt="grid"))
 
 if __name__ == "__main__":
     random.seed(42); np.random.seed(42); torch.manual_seed(42)
