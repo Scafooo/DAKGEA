@@ -165,16 +165,29 @@ class MixupBartInterpolator:
         self.model.eval()
         with torch.no_grad():
             enc_out = self.model.get_encoder()(input_ids=inputs.input_ids, attention_mask=inputs.attention_mask)
-            H_mix = alpha * enc_out.last_hidden_state[0:1] + (1.0 - alpha) * enc_out.last_hidden_state[1:2]
+            H_A = enc_out.last_hidden_state[0:1]
+            H_B = enc_out.last_hidden_state[1:2]
             
+            # Generiamo due punti distinti nello spazio latente
+            # H_mix_A è vicino ad A, H_mix_B è vicino a B
+            H_mix_A = (1.0 - alpha) * H_A + alpha * H_B
+            H_mix_B = alpha * H_A + (1.0 - alpha) * H_B
+            
+            # Aggiungiamo rumore ad entrambi se richiesto
             if self.latent_noise_std > 0:
-                noise = torch.randn_like(H_mix) * self.latent_noise_std
-                noise[:, 0, :] = 0 # Anchoring pos 0
-                H_mix = H_mix + noise
+                noise_a = torch.randn_like(H_mix_A) * self.latent_noise_std
+                noise_b = torch.randn_like(H_mix_B) * self.latent_noise_std
+                noise_a[:, 0, :], noise_b[:, 0, :] = 0, 0 # Anchoring
+                H_mix_A += noise_a
+                H_mix_B += noise_b
 
+            # Doppia generazione (Batch size = 2 per efficienza)
+            H_final = torch.cat([H_mix_A, H_mix_B], dim=0)
+            mask_final = torch.cat([inputs.attention_mask[0:1], inputs.attention_mask[1:2]], dim=0)
+            
             out_ids = self.model.generate(
-                encoder_outputs=BaseModelOutput(last_hidden_state=H_mix),
-                attention_mask=inputs.attention_mask[0:1],
+                encoder_outputs=BaseModelOutput(last_hidden_state=H_final),
+                attention_mask=mask_final,
                 max_new_tokens=self.gen_max_new_tokens,
                 do_sample=self.gen_do_sample if self.gen_num_beams == 1 else False,
                 top_p=self.gen_top_p,
@@ -187,11 +200,10 @@ class MixupBartInterpolator:
                 early_stopping=True if self.gen_num_beams > 1 else False
             )
 
-        decoded = self.tokenizer.decode(out_ids[0], skip_special_tokens=True)
-        res = self._clean_output(decoded)
-        # Se il cleanup ha rimosso tutto, restituiamo un input come fallback sicuro
-        if not res: res = val_src
-        return res, res
+        res_a = self._clean_output(self.tokenizer.decode(out_ids[0], skip_special_tokens=True))
+        res_b = self._clean_output(self.tokenizer.decode(out_ids[1], skip_special_tokens=True))
+        
+        return (res_a or val_src), (res_b or val_tgt)
 
     def _model_exists(self) -> bool:
         return os.path.isdir(self.out_dir) and os.path.exists(os.path.join(self.out_dir, "config.json"))

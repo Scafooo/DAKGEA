@@ -20,38 +20,6 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 # Import the custom reducer to register it
 from scripts.forget_labels_mode.reducer import ForgetLabelsReducer
-from scripts.forget_labels_mode.bart_mixup_interpolator import BartMixupInterpolator
-
-# MONKEY PATCH: Sostituiamo l'interpolatore standard con quello Mix-up richiesto
-import src.augmentation.methods.plm.plm_augmenter as plm_mod
-import src.augmentation.methods.plm.bart_interpolator as bart_mod
-
-# Mapping Canonico per stabilizzare il Mix-up (Semantic Anchoring)
-OPENEA_CANONICAL_MAP = {
-    # BBC_DB / Music
-    "http://purl.org/ontology/mo/name": "<NAME>",
-    "http://purl.org/dc/elements/1.1/title": "<NAME>",
-    "http://xmlns.com/foaf/0.1/name": "<NAME>",
-    "http://purl.org/dc/terms/date": "<DATE>",
-    "http://purl.org/ontology/mo/genre": "<GENRE>",
-    "http://xmlns.com/foaf/0.1/based_near": "<LOCATION>",
-    # D_W_15K
-    "http://www.wikidata.org/entity/P569": "<DATE>",
-    "http://dbpedia.org/ontology/birthDate": "<DATE>",
-    "http://www.wikidata.org/entity/P19": "<LOCATION>",
-    "http://dbpedia.org/ontology/birthPlace": "<LOCATION>"
-}
-
-# Override the class and inject mapping
-bart_mod.BartInterpolatorPLM = BartMixupInterpolator
-plm_mod.BartInterpolatorPLM = BartMixupInterpolator
-
-# Intercettiamo l'inizializzazione per passare il mapping
-old_init = BartMixupInterpolator.__init__
-def new_init(self, *args, **kwargs):
-    old_init(self, *args, **kwargs)
-    self.set_predicate_mapping(OPENEA_CANONICAL_MAP)
-BartMixupInterpolator.__init__ = new_init
 
 from experiments.runner import (
     ExperimentRunner,
