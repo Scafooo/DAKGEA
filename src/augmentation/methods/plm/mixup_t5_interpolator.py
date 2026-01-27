@@ -45,8 +45,8 @@ class NoisySeq2SeqTrainer(Seq2SeqTrainer):
         super().__init__(*args, **kwargs)
         self.global_step_count = 0
 
-    def training_step(self, model: nn.Module, inputs: Dict[str, Union[torch.Tensor, Any]]) -> torch.Tensor:
-        loss = super().training_step(model, inputs)
+    def training_step(self, model: nn.Module, inputs: Dict[str, Union[torch.Tensor, Any]], *args, **kwargs) -> torch.Tensor:
+        loss = super().training_step(model, inputs, *args, **kwargs)
         
         # Dopo il backward (eseguito da super().training_step), ma prima dell'optimizer step
         self.global_step_count += 1
