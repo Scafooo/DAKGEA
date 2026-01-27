@@ -23,10 +23,10 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_t5_interpolator import MixupT5Interpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE T5 (RTX 4090) ---
-MODEL_NAME = "google/t5-v1_1-base" # Più potente del T5 standard
-BATCH_SIZE = 64        # T5-Base è leggero
-GRAD_ACCUMULATION = 4  # Effettivo 256
+# --- CONFIGURAZIONE T5 (RTX 4090 - OOM SAFE) ---
+MODEL_NAME = "google/t5-v1_1-base"
+BATCH_SIZE = 32        # Dimezzato per sicurezza
+GRAD_ACCUMULATION = 8  # Raddoppiato per compensare
 EPOCHS = 15
 SAMPLES_ALIGNED = 400
 SAMPLES_ORPHAN = 100
