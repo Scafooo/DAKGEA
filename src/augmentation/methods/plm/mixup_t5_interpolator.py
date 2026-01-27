@@ -7,13 +7,13 @@ import random
 import logging
 import re
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Dict, List, Optional, Tuple, Union, Any
 
 import torch
 import torch.nn as nn
 from transformers import (
-    T5ForConditionalGeneration,
-    T5Tokenizer,
+    AutoModelForSeq2SeqLM,
+    AutoTokenizer,
     DataCollatorForSeq2Seq,
     Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
@@ -27,7 +27,7 @@ def add_gradient_noise(
     model: torch.nn.Module,
     iteration: int,
     duration: float = 100,
-    eta: float = 0.3, # Valore bilanciato per T5
+    eta: float = 0.3, 
     scale_factor: float = 0.55,
 ):
     """Adds noise from a standard normal distribution to the gradients."""
@@ -47,11 +47,8 @@ class NoisySeq2SeqTrainer(Seq2SeqTrainer):
 
     def training_step(self, model: nn.Module, inputs: Dict[str, Union[torch.Tensor, Any]], *args, **kwargs) -> torch.Tensor:
         loss = super().training_step(model, inputs, *args, **kwargs)
-        
-        # Dopo il backward (eseguito da super().training_step), ma prima dell'optimizer step
         self.global_step_count += 1
         add_gradient_noise(model, self.global_step_count)
-        
         return loss
 
 class MixupT5Interpolator:
@@ -59,7 +56,7 @@ class MixupT5Interpolator:
 
     def __init__(
         self,
-        model_name: str = "google/t5-v1_1-base",
+        model_name: str = "google/flan-t5-base",
         out_dir: str = "./t5_mixup_model",
         device: Optional[str] = None,
         max_len_in: int = 128,
@@ -87,14 +84,12 @@ class MixupT5Interpolator:
         self.model, self.tokenizer = self._load_or_init_model()
 
     def _load_or_init_model(self):
-        if self.reuse_if_available and os.path.isdir(self.out_dir) and os.path.exists(os.path.join(self.out_dir, "config.json")):
-            logger.info(f"[MIXUP-T5] Loading fine-tuned model from {self.out_dir}")
-            tok = T5Tokenizer.from_pretrained(self.out_dir)
-            mdl = T5ForConditionalGeneration.from_pretrained(self.out_dir).to(self.device)
-        else:
-            logger.info(f"[MIXUP-T5] Initializing from pretrained {self.model_name}")
-            tok = T5Tokenizer.from_pretrained(self.model_name)
-            mdl = T5ForConditionalGeneration.from_pretrained(self.model_name).to(self.device)
+        # Usa AutoModel/AutoTokenizer per maggiore robustezza
+        load_path = self.out_dir if (self.reuse_if_available and os.path.isdir(self.out_dir) and os.path.exists(os.path.join(self.out_dir, "config.json"))) else self.model_name
+        
+        logger.info(f"[MIXUP-T5] Loading model/tokenizer from {load_path}")
+        tok = AutoTokenizer.from_pretrained(load_path, use_fast=False) # use_fast=False è più stabile per T5/SentencePiece
+        mdl = AutoModelForSeq2SeqLM.from_pretrained(load_path).to(self.device)
         return mdl, tok
 
     def _clean_output(self, text: str) -> str:
@@ -106,7 +101,14 @@ class MixupT5Interpolator:
         def tokenize_fn(batch):
             mi = self.tokenizer(batch["input"], max_length=self.max_len_in, truncation=True, padding="max_length")
             lb = self.tokenizer(text_target=batch["target"], max_length=self.max_len_in, truncation=True, padding="max_length")
-            mi["labels"] = lb["input_ids"]; return mi
+            
+            # FIX: Sostituisci pad_token_id con -100 per ignorare il padding nel calcolo della loss
+            labels = [
+                [(l if l != self.tokenizer.pad_token_id else -100) for l in label_seq]
+                for label_seq in lb["input_ids"]
+            ]
+            mi["labels"] = labels
+            return mi
             
         hf_dataset = HFDataset.from_list(training_rows).map(tokenize_fn, batched=True, remove_columns=["input", "target"])
         
@@ -123,7 +125,6 @@ class MixupT5Interpolator:
             logging_steps=50
         )
         
-        # Usiamo il Noisy Trainer
         trainer = NoisySeq2SeqTrainer(
             model=self.model, 
             args=args, 
