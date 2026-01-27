@@ -148,35 +148,79 @@ def run_massive_sweep():
     results.sort(key=lambda x: x['score'], reverse=True)
     best = results[0]
 
-    # REPORT FINALE MASSIVO
-    print("\n" + "="*100); print(f" ULTIMATE {MODEL_NAME.upper()} REPORT ".center(100)); print("="*100)
-    interpolator.latent_noise_std, interpolator.gen_num_beams, interpolator.gen_temperature = best['n'], best['b'], best['t']
-    output_file = "massive_large_report_v3.txt"
-    with open(output_file, "w", encoding="utf-8") as f:
-        f.write(f"DAKGEA {MODEL_NAME} REPORT | Best Config: {best}\n\n")
-        aligned_by_pred = defaultdict(list)
-        for s_uri, t_uri in dataset.aligned_entities:
-            s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
-            t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
-            for ps, vs in s_lits.items():
-                for pt, vt in t_lits.items():
-                    if vs.lower().strip() != vt.lower().strip() and len(vs) > 3 and canonical_map.get(ps) == canonical_map.get(pt):
+    # 5. REPORT FINALE MASSIVO (STRATIFICATO COMPLETO)
+    print("\n" + "="*100); print(" ULTIMATE SOTA REPORT (ALL ATTRIBUTES - CLEAN) ".center(100)); print("="*100)
+    interpolator.latent_noise_std = best['n']
+    interpolator.gen_num_beams = best['b']
+    interpolator.gen_temperature = best['t']
+    interpolator.gen_repetition_penalty = best['p']
+    
+    # 1. RACCOLTA DATI ALLINEATI
+    aligned_by_pred = defaultdict(list)
+    kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
+    for s_uri, t_uri in dataset.aligned_entities:
+        s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
+        t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
+        for ps, vs in s_lits.items():
+            for pt, vt in t_lits.items():
+                if vs.lower().strip() != vt.lower().strip() and len(vs) > 3:
+                    if canonical_map.get(ps) == canonical_map.get(pt):
                         aligned_by_pred[canonical_map[ps]].append((canonical_map[ps], vs, vt))
 
+    # 2. RACCOLTA DATI ORFANI (Date, ID, etc.)
+    orphan_by_pred = defaultdict(list)
+    all_entities = set(kg_src.subjects()) | set(kg_tgt.subjects())
+    for ent in list(all_entities)[:2000]: # Campiona entità per trovare orfani
+        lits = {str(p): str(o) for _, p, o in kg_src.triples((ent, None, None)) if isinstance(o, Literal)}
+        lits.update({str(p): str(o) for _, p, o in kg_tgt.triples((ent, None, None)) if isinstance(o, Literal)})
+        for p, v in lits.items():
+            p_tok = canonical_map.get(p)
+            if p_tok and len(v) > 2:
+                # Se questo predicato non appare spesso negli allineamenti, è un buon candidato orfano
+                orphan_by_pred[p_tok].append((p_tok, v))
+
+    output_file = "massive_base_report_v4.txt"
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write(f"DAKGEA v4 ULTIMATE REPORT | Best Config: {best}\n\n")
+        
+        # --- SEZIONE 1: MIX-UP ALLINEATO (300 campioni) ---
+        f.write("SECTION 1: ALIGNED MIX-UP\n" + "-"*100 + "\n")
         count = 0
-        a_preds = list(aligned_by_pred.keys())
-        while count < SAMPLES_ALIGNED and a_preds:
+        a_preds = sorted(list(aligned_by_pred.keys()))
+        while count < 300 and a_preds:
             for p_tok in a_preds[:]:
                 if aligned_by_pred[p_tok]:
                     p_uri, v1, v2 = aligned_by_pred[p_tok].pop(random.randrange(len(aligned_by_pred[p_tok])))
                     aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=best['a'])
-                    f.write(f"{count+1:03d} | {p_tok:15} | VAL A: {v1[:20]:20} -> AUG A': {aa[:25]:25}\n")
-                    f.write(f"    | {' ':15} | VAL B: {v2[:20]:20} -> AUG B': {ab[:25]:25} | Voto:[ ]/5\n")
-                    f.write(f"    | {' ':15} | Note: [__________________________________________________]\n")
-                    f.write("-" * 110 + "\n")
+                    
+                    # FORMATO FULL: Niente tagli, tutto su righe dedicate
+                    f.write(f"SAMPLE {count+1:03d} | PRED: {p_tok}\n")
+                    f.write(f"  ORIG A: {v1}\n")
+                    f.write(f"  AUG A': {aa}\n")
+                    f.write(f"  ORIG B: {v2}\n")
+                    f.write(f"  AUG B': {ab}\n")
+                    f.write(f"  VOTO: [ ]/5 | NOTE: [__________________________________________________]\n")
+                    f.write("-" * 100 + "\n")
                     count += 1
                 else: a_preds.remove(p_tok)
-                if count >= SAMPLES_ALIGNED: break
+
+        # --- SEZIONE 2: ORPHAN AUGMENTATION (100 campioni) ---
+        f.write("\n\nSECTION 2: ORPHAN ATTRIBUTE AUGMENTATION\n" + "-"*100 + "\n")
+        o_count = 0
+        o_preds = sorted(list(orphan_by_pred.keys()))
+        while o_count < 100 and o_preds:
+            for p_tok in o_preds[:]:
+                if orphan_by_pred[p_tok]:
+                    p_uri, v = orphan_by_pred[p_tok].pop(random.randrange(len(orphan_by_pred[p_tok])))
+                    aa, _ = interpolator.interpolate_pair(v, v, predicate=p_tok, alpha=0.0)
+                    
+                    f.write(f"ORPHAN {o_count+1:03d} | PRED: {p_tok}\n")
+                    f.write(f"  ORIG: {v}\n")
+                    f.write(f"  AUG : {aa}\n")
+                    f.write(f"  VOTO: [ ]/5 | NOTE: [__________________________________________________]\n")
+                    f.write("-" * 100 + "\n")
+                    o_count += 1
+                else: o_preds.remove(p_tok)
     print(f">>> SUCCESS: Large Report saved to {output_file}")
 
 if __name__ == "__main__":
