@@ -134,7 +134,7 @@ class MixupT5Interpolator:
 
     def interpolate_pair(self, val_src: str, val_tgt: str, predicate: str = "", alpha: float = 0.5) -> Tuple[str, str]:
         p_name = predicate.replace("<", "").replace(">", "").lower()
-        inputs = self.tokenizer([f"rewrite {p_name}: {val_src}", f"rewrite {p_name}: {val_tgt}"], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
+        inputs = self.tokenizer([f"paraphrase {p_name}: {val_src}", f"paraphrase {p_name}: {val_tgt}"], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
 
         w1, w2 = set(val_src.lower().split()), set(val_tgt.lower().split())
         jaccard = len(w1 & w2) / len(w1 | w2) if (w1 | w2) else 1.0
