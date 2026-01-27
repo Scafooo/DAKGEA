@@ -14,6 +14,7 @@ import torch.nn as nn
 from transformers import (
     AutoModelForSeq2SeqLM,
     AutoTokenizer,
+    T5Tokenizer,
     DataCollatorForSeq2Seq,
     Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
@@ -84,13 +85,18 @@ class MixupT5Interpolator:
         self.model, self.tokenizer = self._load_or_init_model()
 
     def _load_or_init_model(self):
-        # Usa AutoModel/AutoTokenizer per maggiore robustezza
         load_path = self.out_dir if (self.reuse_if_available and os.path.isdir(self.out_dir) and os.path.exists(os.path.join(self.out_dir, "config.json"))) else self.model_name
         
         logger.info(f"[MIXUP-T5] Loading model/tokenizer from {load_path}")
-        tok = AutoTokenizer.from_pretrained(load_path, use_fast=False) # use_fast=False è più stabile per T5/SentencePiece
-        mdl = AutoModelForSeq2SeqLM.from_pretrained(load_path).to(self.device)
-        return mdl, tok
+        
+        # Forza legacy=False per evitare IndexError con SentencePiece
+        tokenizer = AutoTokenizer.from_pretrained(load_path, use_fast=False, legacy=False)
+        model = AutoModelForSeq2SeqLM.from_pretrained(load_path).to(self.device)
+        
+        # Fondamentale: allinea la dimensione degli embedding al vocabolario del tokenizer
+        model.resize_token_embeddings(len(tokenizer))
+        
+        return model, tokenizer
 
     def _clean_output(self, text: str) -> str:
         text = re.sub(r'<extra_id_\d+>', '', text)
@@ -102,7 +108,7 @@ class MixupT5Interpolator:
             mi = self.tokenizer(batch["input"], max_length=self.max_len_in, truncation=True, padding="max_length")
             lb = self.tokenizer(text_target=batch["target"], max_length=self.max_len_in, truncation=True, padding="max_length")
             
-            # FIX: Sostituisci pad_token_id con -100 per ignorare il padding nel calcolo della loss
+            # Etichette con -100 per ignorare il padding
             labels = [
                 [(l if l != self.tokenizer.pad_token_id else -100) for l in label_seq]
                 for label_seq in lb["input_ids"]
