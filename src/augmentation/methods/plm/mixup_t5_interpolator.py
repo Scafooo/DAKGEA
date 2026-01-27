@@ -14,7 +14,6 @@ import torch.nn as nn
 from transformers import (
     AutoModelForSeq2SeqLM,
     AutoTokenizer,
-    T5Tokenizer,
     DataCollatorForSeq2Seq,
     Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
@@ -28,7 +27,7 @@ def add_gradient_noise(
     model: torch.nn.Module,
     iteration: int,
     duration: float = 100,
-    eta: float = 0.3, 
+    eta: float = 0.1, # Ridotto leggermente per stabilità con clipping alto
     scale_factor: float = 0.55,
 ):
     """Adds noise from a standard normal distribution to the gradients."""
@@ -37,7 +36,8 @@ def add_gradient_noise(
     for param in model.parameters():
         if param.grad is not None:
             _shape = param.grad.size()
-            noise = sigma * torch.randn(_shape).to(param.device)
+            # Assicuriamoci che il rumore sia nello stesso tipo di dato del gradiente (es. bf16)
+            noise = sigma * torch.randn(_shape, device=param.device, dtype=param.grad.dtype)
             param.grad += noise
 
 class NoisySeq2SeqTrainer(Seq2SeqTrainer):
@@ -48,8 +48,11 @@ class NoisySeq2SeqTrainer(Seq2SeqTrainer):
 
     def training_step(self, model: nn.Module, inputs: Dict[str, Union[torch.Tensor, Any]], *args, **kwargs) -> torch.Tensor:
         loss = super().training_step(model, inputs, *args, **kwargs)
+        
         self.global_step_count += 1
+        # Iniezione rumore
         add_gradient_noise(model, self.global_step_count)
+        
         return loss
 
 class MixupT5Interpolator:
@@ -74,8 +77,6 @@ class MixupT5Interpolator:
         self.gen_temperature = 1.0
         self.gen_num_beams = 5
         self.gen_repetition_penalty = 1.5
-        self.gen_top_k = 50
-        self.gen_top_p = 0.95
         
         # Creative Mode params
         self.creative_temp = 1.5
@@ -86,16 +87,10 @@ class MixupT5Interpolator:
 
     def _load_or_init_model(self):
         load_path = self.out_dir if (self.reuse_if_available and os.path.isdir(self.out_dir) and os.path.exists(os.path.join(self.out_dir, "config.json"))) else self.model_name
-        
         logger.info(f"[MIXUP-T5] Loading model/tokenizer from {load_path}")
-        
-        # Forza legacy=False per evitare IndexError con SentencePiece
         tokenizer = AutoTokenizer.from_pretrained(load_path, use_fast=False, legacy=False)
         model = AutoModelForSeq2SeqLM.from_pretrained(load_path).to(self.device)
-        
-        # Fondamentale: allinea la dimensione degli embedding al vocabolario del tokenizer
         model.resize_token_embeddings(len(tokenizer))
-        
         return model, tokenizer
 
     def _clean_output(self, text: str) -> str:
@@ -107,12 +102,7 @@ class MixupT5Interpolator:
         def tokenize_fn(batch):
             mi = self.tokenizer(batch["input"], max_length=self.max_len_in, truncation=True, padding="max_length")
             lb = self.tokenizer(text_target=batch["target"], max_length=self.max_len_in, truncation=True, padding="max_length")
-            
-            # Etichette con -100 per ignorare il padding
-            labels = [
-                [(l if l != self.tokenizer.pad_token_id else -100) for l in label_seq]
-                for label_seq in lb["input_ids"]
-            ]
+            labels = [[(l if l != self.tokenizer.pad_token_id else -100) for l in label_seq] for label_seq in lb["input_ids"]]
             mi["labels"] = labels
             return mi
             
@@ -126,6 +116,7 @@ class MixupT5Interpolator:
             weight_decay=0.01, 
             bf16=torch.cuda.is_available(),
             gradient_checkpointing=True, 
+            max_grad_norm=5000.0, # ALZATO PER IL RUMORE: permette al rumore di passare senza essere castrato
             save_strategy="no", 
             report_to="none",
             logging_steps=50
@@ -174,10 +165,8 @@ class MixupT5Interpolator:
                 max_new_tokens=64,
                 do_sample=True,
                 temperature=curr_temp,
-                top_p=self.gen_top_p,
-                top_k=self.gen_top_k,
-                num_beams=self.gen_num_beams,
-                repetition_penalty=self.gen_repetition_penalty
+                num_beams=5,
+                repetition_penalty=1.5
             )
 
         res_a = self._clean_output(self.tokenizer.decode(out_ids[0], skip_special_tokens=True)) or val_src
