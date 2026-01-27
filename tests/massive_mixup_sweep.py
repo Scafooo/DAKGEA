@@ -30,6 +30,8 @@ BATCH_SIZE = 32
 GRAD_ACCUMULATION = 8
 EPOCHS = 10 
 SWEEP_SAMPLES = 40
+SAMPLES_ALIGNED = 400
+SAMPLES_ORPHAN = 100
 
 torch.backends.cudnn.benchmark = True
 logger = get_logger("MassiveSweep")
@@ -56,11 +58,7 @@ def calculate_semantic_score(orig, gen, originals_set):
     emb_gen = semantic_model.encode(gen_l, convert_to_tensor=True)
     sem_sim = util.cos_sim(emb_orig, emb_gen).item()
     
-    # Logica di punteggio:
-    # - Sim < 0.6: Probabile allucinazione o cambio di significato (Bocciato)
-    # - Sim > 0.98: Copia quasi esatta (Bocciato)
-    # - 0.6 < Sim < 0.95: Sweet Spot (Variazione coerente)
-    
+    # Logica di punteggio
     if sem_sim < 0.6: return -1.0 # Troppo diverso (Garbage o Allucinazione)
     if sem_sim > 0.98: return 0.1 # Troppo uguale (Noioso)
     
@@ -124,7 +122,7 @@ def run_massive_sweep():
     print("    Optimizing Standard Profile...")
     results_std = []
     for n in [0.01, 0.03, 0.05]:
-        for t in [1.0, 1.2]: # Temperature più sobrie
+        for t in [1.0, 1.2]: 
             for b in [5, 8]:
                 interpolator.latent_noise_std, interpolator.gen_temperature, interpolator.gen_num_beams = n, t, b
                 interpolator.similarity_threshold = 1.1 
@@ -140,7 +138,6 @@ def run_massive_sweep():
     # 2. Creative (Similar)
     print("\n    Optimizing Creative Profile...")
     results_crea = []
-    # Riduciamo il range della temperatura per evitare allucinazioni
     for n in [0.05, 0.1]:
         for t in [1.3, 1.5]: 
             interpolator.creative_noise, interpolator.creative_temp = n, t
@@ -154,7 +151,7 @@ def run_massive_sweep():
             print(f"      - N={n} T={t} -> SemScore: {avg:.3f}")
     best_crea = sorted(results_crea, key=lambda x: x['score'], reverse=True)[0]
 
-    # 5. FINAL REPORT
+    # 5. REPORT
     print("\n" + "="*100); print(" FINAL SEMANTIC REPORT ".center(100)); print("="*100)
     interpolator.latent_noise_std, interpolator.gen_temperature, interpolator.gen_num_beams = best_std['n'], best_std['t'], best_std['b']
     interpolator.creative_noise, interpolator.creative_temp = best_crea['n'], best_crea['t']
