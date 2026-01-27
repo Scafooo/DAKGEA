@@ -113,7 +113,7 @@ def run_t5_sweep():
             if not found and len(v) > 4: orphan_by_pred[canonical_map.get(p, p)].append(v)
             
     # Orphans (entità non allineate)
-    for s_uri, p, o in kg_src.triples():
+    for s_uri, p, o in kg_src.triples((None, None, None)):
         if s_uri not in aligned_src and isinstance(o, Literal):
             v = str(o)
             if len(v) > 4: orphan_by_pred[canonical_map.get(p, p)].append(v)
