@@ -6,7 +6,7 @@ import time
 import numpy as np
 import re
 from pathlib import Path
-from collections import defaultdict
+from collections import defaultdict, deque
 from rdflib import Literal
 from sentence_transformers import SentenceTransformer, util
 
@@ -21,62 +21,88 @@ from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
 # --- CONFIGURAZIONE ---
 MODEL_NAME = "google/flan-t5-base"
-SAMPLES_ALIGNED = 200 # Quante coppie mixup
-SAMPLES_ORPHAN = 200  # Quanti orfani rewrite
+BATCH_SIZE = 32
+EPOCHS = 10
+SAMPLES_ALIGNED = 200 
+SAMPLES_ORPHAN = 200  
 torch.backends.cudnn.benchmark = True
 logger = get_logger("FlanT5Diverse")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 def run_t5_full_report():
-    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 REWRITE - FULL DIVERSE REPORT ".center(98) + "█"); print("█"*100)
+    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 REWRITE - TRAINING + DIVERSE REPORT ".center(98) + "█"); print("█"*100)
 
     # 1. CARICAMENTO DATI
+    print("    [1/4] Loading BBC_DB and building training pairs...")
     reader = OpeneaDatasetReader()
     dataset = reader.read(str(PROJECT_ROOT / "data/raw/openea/BBC_DB"))
     builder = MixupDataBuilder(confidence_threshold=0.6, value_match_threshold=0.3)
-    _, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=1000)
+    train_rows, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=50000)
+    
+    # Preparazione righe per Flan-T5
+    t5_rows = []
+    for r in train_rows:
+        p_tok = r['input'].split(' ')[0]
+        p_name = p_tok.replace("<", "").replace(">", "").lower()
+        inp_val = r['input'].replace(p_tok, "").strip()
+        tgt_val = r['target'].replace(p_tok, "").strip()
+        t5_rows.append({"input": f"rewrite {p_name}: {inp_val}", "target": tgt_val})
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
     out_dir = "./results/sweep_model_flan_t5_v1"
     interpolator = MixupT5Interpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
-    # 2. SCANSIONE PER PREDICATI (ALIGNED & ORPHANS)
-    print("    Organizing attributes by predicate for random sampling...")
+    # 2. TRAINING (Se necessario)
+    if not (Path(out_dir) / "pytorch_model.bin").exists() and not (Path(out_dir) / "model.safetensors").exists():
+        print(f"    [2/4] Starting Flan-T5 Fine-tuning (REWRITE prompt, {len(t5_rows)}} rows)...")
+        interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=1e-4, force_retrain=True)
+    else:
+        print(f"    [2/4] Found existing Flan-T5 model, skipping training.")
+
+    # 3. EXTRAZIONE ATTRIBUTI (Ottimizzata con pre-indexing)
+    print("    [3/4] Organizing attributes for report (Pre-indexing literals)...")
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
-    aligned_entities = dataset.aligned_entities
     
+    # Pre-indicizziamo i letterali per velocità
+    src_lits_map = defaultdict(list)
+    for s, p, o in kg_src.triples((None, None, None)):
+        if isinstance(o, Literal): src_lits_map[s].append((str(p), str(o)))
+    
+    tgt_lits_map = defaultdict(list)
+    for s, p, o in kg_tgt.triples((None, None, None)):
+        if isinstance(o, Literal): tgt_lits_map[s].append((str(p), str(o)))
+
     aligned_pairs_by_pred = defaultdict(list)
     orphans_by_pred = defaultdict(list)
     
-    # Processo entità allineate
-    for s_uri, t_uri in aligned_entities:
-        s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
-        t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
+    for s_uri, t_uri in dataset.aligned_entities:
+        s_lits = src_lits_map.get(s_uri, [])
+        t_lits = tgt_lits_map.get(t_uri, [])
         
-        # Coppie Allineate (Mix-up)
         matched_preds_s = set()
-        for ps, vs in s_lits.items():
+        for ps, vs in s_lits:
             p_can = canonical_map.get(ps, ps).split('/')[-1].split('#')[-1]
-            for pt, vt in t_lits.items():
+            for pt, vt in t_lits:
                 if canonical_map.get(ps) == canonical_map.get(pt):
                     aligned_pairs_by_pred[p_can].append((vs, vt))
                     matched_preds_s.add(ps)
                     break
         
-        # Orfani (Attributi in entità allineate che non hanno partner)
-        for ps, vs in s_lits.items():
+        # Orfani
+        for ps, vs in s_lits:
             if ps not in matched_preds_s:
                 p_can = canonical_map.get(ps, ps).split('/')[-1].split('#')[-1]
                 orphans_by_pred[p_can].append(vs)
 
-    # 3. GENERAZIONE REPORT
+    # 4. GENERAZIONE REPORT
+    print(f"    [4/4] Generating balanced report (randomized predicates)...")
     interpolator.latent_noise_std = 0.05
     interpolator.gen_temperature = 1.2
     
     output_file = "massive_t5_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA T5 FULL DIVERSE REPORT (ALIGNED + ORPHANS)\n")
-        f.write("Selezione Random per garantire visibilità a Date, ID e predicati rari.\n")
+        f.write("DAKGEA FLAN-T5 FULL DIVERSE REPORT (ALIGNED + ORPHANS)\n")
+        f.write("Selection: Random Predicates (Ensures Date/ID visibility)\n")
         f.write("="*120 + "\n\n")
         
         # --- SEZIONE 1: ALIGNED ---
@@ -87,10 +113,7 @@ def run_t5_full_report():
             p = random.choice(all_p_aligned)
             if not aligned_pairs_by_pred[p]:
                 all_p_aligned.remove(p); continue
-            
             v1, v2 = random.choice(aligned_pairs_by_pred[p])
-            aligned_pairs_by_pred[p].remove((v1, v2))
-            
             aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=0.5)
             f.write(f"PAIR {gen_count+1:03d} | {p:20} | V1: {v1[:35]:35} -> AUG: {aa[:35]:35}\n")
             f.write(f"         | {' ':20} | V2: {v2[:35]:35} -> AUG: {ab[:35]:35}\n")
@@ -106,19 +129,15 @@ def run_t5_full_report():
             p = random.choice(all_p_orphan)
             if not orphans_by_pred[p]:
                 all_p_orphan.remove(p); continue
-            
             val = random.choice(orphans_by_pred[p])
-            orphans_by_pred[p].remove(val)
-            
             aa, _ = interpolator.interpolate_pair(val, val, predicate=p, alpha=0.5)
             sim = util.cos_sim(semantic_model.encode(val), semantic_model.encode(aa)).item()
-            
             f.write(f"ORPHAN {o_count+1:03d} | {p:20} | ORIG: {val[:40]:40} -> REWRITE: {aa[:40]:40} (Sim: {sim:.2f})\n")
             f.write("-" * 120 + "\n")
             o_count += 1
             if o_count % 10 == 0: f.flush()
 
-    print(f"\n>>> SUCCESS: Full Diverse Report saved to {output_file}")
+    print(f"\n>>> SUCCESS: Flan-T5 Diverse Report saved to {output_file}")
 
 if __name__ == "__main__":
     random.seed(time.time())
