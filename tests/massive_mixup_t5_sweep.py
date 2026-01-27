@@ -17,93 +17,109 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from src.logger import get_logger
 from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_t5_interpolator import MixupT5Interpolator
+from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
 # --- CONFIGURAZIONE ---
 MODEL_NAME = "t5-base"
-TOTAL_SAMPLES = 400 
+SAMPLES_ALIGNED = 200 # Quante coppie mixup
+SAMPLES_ORPHAN = 200  # Quanti orfani rewrite
 torch.backends.cudnn.benchmark = True
-logger = get_logger("T5RandomOrphan")
+logger = get_logger("T5FullReport")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
 
-def run_t5_random_report():
-    print("\n" + "█"*100); print(f"█ RTX 4090: T5 REWRITE - RANDOM DIVERSE ORPHANS ".center(98) + "█"); print("█"*100)
+def run_t5_full_report():
+    print("\n" + "█"*100); print(f"█ RTX 4090: T5 REWRITE - FULL DIVERSE REPORT (ALIGNED + ORPHANS) ".center(98) + "█"); print("█"*100)
 
     # 1. CARICAMENTO DATI
     reader = OpeneaDatasetReader()
     dataset = reader.read(str(PROJECT_ROOT / "data/raw/openea/BBC_DB"))
+    builder = MixupDataBuilder(confidence_threshold=0.6, value_match_threshold=0.3)
+    _, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=1000)
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
     out_dir = "./results/sweep_model_t5_original_v1"
     interpolator = MixupT5Interpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
-    # 2. SCANSIONE TUTTE LE TRIPLE (ORPHANS/GENERAL)
-    print("    Collecting all predicates and values...")
-    kg_src = dataset.knowledge_graph_source
-    kg_tgt = dataset.knowledge_graph_target
+    # 2. SCANSIONE PER PREDICATI (ALIGNED & ORPHANS)
+    print("    Organizing attributes by predicate for random sampling...")
+    kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
+    aligned_entities = dataset.aligned_entities
     
-    # Mappa: nome_predicato -> lista di valori unici
-    predicate_map = defaultdict(set)
+    aligned_pairs_by_pred = defaultdict(list)
+    orphans_by_pred = defaultdict(list)
     
-    all_triples = list(kg_src.triples((None, None, None))) + list(kg_tgt.triples((None, None, None)))
-    for s, p, o in all_triples:
-        if not isinstance(o, Literal): continue
-        val = str(o).strip()
-        if not val: continue
-        p_name = str(p).split('/')[-1].split('#')[-1]
-        predicate_map[p_name].add(val)
+    # Processo entità allineate
+    for s_uri, t_uri in aligned_entities:
+        s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
+        t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
+        
+        # Coppie Allineate (Mix-up)
+        matched_preds_s = set()
+        for ps, vs in s_lits.items():
+            p_can = canonical_map.get(ps, ps).split('/')[-1].split('#')[-1]
+            for pt, vt in t_lits.items():
+                if canonical_map.get(ps) == canonical_map.get(pt):
+                    aligned_pairs_by_pred[p_can].append((vs, vt))
+                    matched_preds_s.add(ps)
+                    break
+        
+        # Orfani (Attributi in entità allineate che non hanno partner)
+        for ps, vs in s_lits.items():
+            if ps not in matched_preds_s:
+                p_can = canonical_map.get(ps, ps).split('/')[-1].split('#')[-1]
+                orphans_by_pred[p_can].append(vs)
 
-    # Convertiamo set in liste per il campionamento random
-    all_preds = list(predicate_map.keys())
-    for p in all_preds:
-        predicate_map[p] = list(predicate_map[p])
-
-    # 3. GENERAZIONE RANDOMIZZATA
+    # 3. GENERAZIONE REPORT
     interpolator.latent_noise_std = 0.05
     interpolator.gen_temperature = 1.2
     
     output_file = "massive_t5_report.txt"
-    print(f"    Total unique predicates available: {len(all_preds)}")
-    
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA T5 RANDOM ORPHAN REPORT (REWRITE MODE)\n")
-        f.write("Selezione Random: scelgo un predicato a caso, poi un suo valore a caso.\n")
-        f.write("Garantisce che ID, Date e attributi rari appaiano quanto i nomi.\n")
+        f.write("DAKGEA T5 FULL DIVERSE REPORT (ALIGNED + ORPHANS)\n")
+        f.write("Selezione Random per garantire visibilità a Date, ID e predicati rari.\n")
         f.write("="*120 + "\n\n")
         
+        # --- SEZIONE 1: ALIGNED ---
+        f.write("SECTION 1: ALIGNED PAIRS (MIX-UP INTERPOLATION)\n" + "-"*80 + "\n")
         gen_count = 0
-        while gen_count < TOTAL_SAMPLES:
-            # 1. Scegli un predicato a caso
-            p_name = random.choice(all_preds)
+        all_p_aligned = list(aligned_pairs_by_pred.keys())
+        while gen_count < SAMPLES_ALIGNED and all_p_aligned:
+            p = random.choice(all_p_aligned)
+            if not aligned_pairs_by_pred[p]:
+                all_p_aligned.remove(p); continue
             
-            # 2. Scegli un valore a caso per quel predicato
-            if not predicate_map[p_name]:
-                all_preds.remove(p_name)
-                if not all_preds: break
-                continue
-                
-            val = random.choice(predicate_map[p_name])
-            # Rimuoviamo il valore per non ripeterlo
-            predicate_map[p_name].remove(val)
+            v1, v2 = random.choice(aligned_pairs_by_pred[p])
+            aligned_pairs_by_pred[p].remove((v1, v2))
             
-            # 3. Generazione Rewrite
-            aa, _ = interpolator.interpolate_pair(val, val, predicate=p_name, alpha=0.5)
+            aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=0.5)
+            f.write(f"PAIR {gen_count+1:03d} | {p:20} | V1: {v1[:35]:35} -> AUG: {aa[:35]:35}\n")
+            f.write(f"         | {' ':20} | V2: {v2[:35]:35} -> AUG: {ab[:35]:35}\n")
+            f.write("-" * 120 + "\n")
+            gen_count += 1
+            if gen_count % 10 == 0: f.flush()
+
+        # --- SEZIONE 2: ORPHANS ---
+        f.write("\n\nSECTION 2: ORPHAN ATTRIBUTES (REWRITE MODE)\n" + "-"*80 + "\n")
+        o_count = 0
+        all_p_orphan = list(orphans_by_pred.keys())
+        while o_count < SAMPLES_ORPHAN and all_p_orphan:
+            p = random.choice(all_p_orphan)
+            if not orphans_by_pred[p]:
+                all_p_orphan.remove(p); continue
             
-            # 4. Feedback e Scrittura
+            val = random.choice(orphans_by_pred[p])
+            orphans_by_pred[p].remove(val)
+            
+            aa, _ = interpolator.interpolate_pair(val, val, predicate=p, alpha=0.5)
             sim = util.cos_sim(semantic_model.encode(val), semantic_model.encode(aa)).item()
             
-            v_disp = (val[:50] + '..') if len(val) > 50 else val
-            aa_disp = (aa[:50] + '..') if len(aa) > 50 else aa
-            
-            f.write(f"ORPHAN {gen_count+1:03d} | {p_name:20} | ORIG: {v_disp:52} -> REWRITE: {aa_disp:52} (Sim: {sim:.2f})\n")
-            
-            gen_count += 1
-            if gen_count % 10 == 0: 
-                f.flush()
-                print(f"      Generated {gen_count}/{TOTAL_SAMPLES} samples...")
+            f.write(f"ORPHAN {o_count+1:03d} | {p:20} | ORIG: {val[:40]:40} -> REWRITE: {aa[:40]:40} (Sim: {sim:.2f})\n")
+            f.write("-" * 120 + "\n")
+            o_count += 1
+            if o_count % 10 == 0: f.flush()
 
-    print(f"\n>>> SUCCESS: Random Orphan Report saved to {output_file}")
+    print(f"\n>>> SUCCESS: Full Diverse Report saved to {output_file}")
 
 if __name__ == "__main__":
-    # Random puro basato sul tempo
     random.seed(time.time())
-    run_t5_random_report()
+    run_t5_full_report()
