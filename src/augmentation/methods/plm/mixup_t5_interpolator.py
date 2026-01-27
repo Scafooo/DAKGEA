@@ -23,38 +23,6 @@ from datasets import Dataset as HFDataset
 
 logger = logging.getLogger(__name__)
 
-def add_gradient_noise(
-    model: torch.nn.Module,
-    iteration: int,
-    duration: float = 100,
-    eta: float = 0.1, # Ridotto leggermente per stabilità con clipping alto
-    scale_factor: float = 0.55,
-):
-    """Adds noise from a standard normal distribution to the gradients."""
-    interval = (iteration // duration) + 1
-    sigma = eta / interval**scale_factor
-    for param in model.parameters():
-        if param.grad is not None:
-            _shape = param.grad.size()
-            # Assicuriamoci che il rumore sia nello stesso tipo di dato del gradiente (es. bf16)
-            noise = sigma * torch.randn(_shape, device=param.device, dtype=param.grad.dtype)
-            param.grad += noise
-
-class NoisySeq2SeqTrainer(Seq2SeqTrainer):
-    """Trainer personalizzato che inietta rumore nei gradienti per migliorare la generalizzazione."""
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.global_step_count = 0
-
-    def training_step(self, model: nn.Module, inputs: Dict[str, Union[torch.Tensor, Any]], *args, **kwargs) -> torch.Tensor:
-        loss = super().training_step(model, inputs, *args, **kwargs)
-        
-        self.global_step_count += 1
-        # Iniezione rumore
-        add_gradient_noise(model, self.global_step_count)
-        
-        return loss
-
 class MixupT5Interpolator:
     """T5 Interpolator con Mix-up nello spazio latente dell'Encoder."""
 
@@ -72,15 +40,15 @@ class MixupT5Interpolator:
         self.max_len_in = max_len_in
         self.reuse_if_available = reuse_if_available
 
-        # Parametri di default
-        self.latent_noise_std = 0.05
-        self.gen_temperature = 1.0
+        # Parametri di default STABILI
+        self.latent_noise_std = 0.02
+        self.gen_temperature = 0.7
         self.gen_num_beams = 5
-        self.gen_repetition_penalty = 1.5
+        self.gen_repetition_penalty = 1.2
         
         # Creative Mode params
-        self.creative_temp = 1.5
-        self.creative_noise = 0.15
+        self.creative_temp = 1.2
+        self.creative_noise = 0.1
         self.similarity_threshold = 0.85
 
         self.model, self.tokenizer = self._load_or_init_model()
@@ -88,9 +56,9 @@ class MixupT5Interpolator:
     def _load_or_init_model(self):
         load_path = self.out_dir if (self.reuse_if_available and os.path.isdir(self.out_dir) and os.path.exists(os.path.join(self.out_dir, "config.json"))) else self.model_name
         logger.info(f"[MIXUP-T5] Loading model/tokenizer from {load_path}")
-        tokenizer = AutoTokenizer.from_pretrained(load_path, use_fast=False, legacy=False)
+        
+        tokenizer = AutoTokenizer.from_pretrained(load_path, use_fast=False)
         model = AutoModelForSeq2SeqLM.from_pretrained(load_path).to(self.device)
-        model.resize_token_embeddings(len(tokenizer))
         return model, tokenizer
 
     def _clean_output(self, text: str) -> str:
@@ -98,10 +66,11 @@ class MixupT5Interpolator:
         text = re.sub(r'<[^>]*>', '', text)
         return re.sub(r'\s+', ' ', text).strip()
 
-    def fine_tune(self, training_rows: List[Dict[str, str]], epochs: int = 5, batch_size: int = 16, lr: float = 1e-4, force_retrain: bool = False):
+    def fine_tune(self, training_rows: List[Dict[str, str]], epochs: int = 5, batch_size: int = 16, lr: float = 5e-5, force_retrain: bool = False):
         def tokenize_fn(batch):
             mi = self.tokenizer(batch["input"], max_length=self.max_len_in, truncation=True, padding="max_length")
             lb = self.tokenizer(text_target=batch["target"], max_length=self.max_len_in, truncation=True, padding="max_length")
+            # Padding con -100 per T5
             labels = [[(l if l != self.tokenizer.pad_token_id else -100) for l in label_seq] for label_seq in lb["input_ids"]]
             mi["labels"] = labels
             return mi
@@ -116,13 +85,13 @@ class MixupT5Interpolator:
             weight_decay=0.01, 
             bf16=torch.cuda.is_available(),
             gradient_checkpointing=True, 
-            max_grad_norm=5000.0, # ALZATO PER IL RUMORE: permette al rumore di passare senza essere castrato
+            max_grad_norm=1.0, # Torniamo al clipping standard
             save_strategy="no", 
             report_to="none",
-            logging_steps=50
+            logging_steps=100
         )
         
-        trainer = NoisySeq2SeqTrainer(
+        trainer = Seq2SeqTrainer(
             model=self.model, 
             args=args, 
             train_dataset=hf_dataset, 
@@ -136,6 +105,7 @@ class MixupT5Interpolator:
         p_name = predicate.replace("<", "").replace(">", "").lower()
         inputs = self.tokenizer([f"paraphrase {p_name}: {val_src}", f"paraphrase {p_name}: {val_tgt}"], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
 
+        # Selezione parametri in base alla similarità
         w1, w2 = set(val_src.lower().split()), set(val_tgt.lower().split())
         jaccard = len(w1 & w2) / len(w1 | w2) if (w1 | w2) else 1.0
         use_creative = (jaccard > self.similarity_threshold)
@@ -163,10 +133,10 @@ class MixupT5Interpolator:
                 encoder_outputs=BaseModelOutput(last_hidden_state=H_f), 
                 attention_mask=m_f, 
                 max_new_tokens=64,
-                do_sample=True,
+                do_sample=(curr_temp > 0),
                 temperature=curr_temp,
-                num_beams=5,
-                repetition_penalty=1.5
+                num_beams=self.gen_num_beams,
+                repetition_penalty=self.gen_repetition_penalty
             )
 
         res_a = self._clean_output(self.tokenizer.decode(out_ids[0], skip_special_tokens=True)) or val_src
