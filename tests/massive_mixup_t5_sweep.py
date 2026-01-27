@@ -20,15 +20,15 @@ from src.augmentation.methods.plm.mixup_t5_interpolator import MixupT5Interpolat
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
 # --- CONFIGURAZIONE ---
-MODEL_NAME = "t5-base"
+MODEL_NAME = "google/flan-t5-base"
 SAMPLES_ALIGNED = 200 # Quante coppie mixup
 SAMPLES_ORPHAN = 200  # Quanti orfani rewrite
 torch.backends.cudnn.benchmark = True
-logger = get_logger("T5FullReport")
+logger = get_logger("FlanT5Diverse")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 def run_t5_full_report():
-    print("\n" + "█"*100); print(f"█ RTX 4090: T5 REWRITE - FULL DIVERSE REPORT (ALIGNED + ORPHANS) ".center(98) + "█"); print("█"*100)
+    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 REWRITE - FULL DIVERSE REPORT ".center(98) + "█"); print("█"*100)
 
     # 1. CARICAMENTO DATI
     reader = OpeneaDatasetReader()
@@ -37,7 +37,7 @@ def run_t5_full_report():
     _, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=1000)
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    out_dir = "./results/sweep_model_t5_original_v1"
+    out_dir = "./results/sweep_model_flan_t5_v1"
     interpolator = MixupT5Interpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 2. SCANSIONE PER PREDICATI (ALIGNED & ORPHANS)
