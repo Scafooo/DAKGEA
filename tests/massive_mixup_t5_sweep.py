@@ -41,14 +41,14 @@ def clean_val(text):
     return re.sub(r'^<[^>]+>\s*', '', text).strip()
 
 def calculate_score(orig, gen):
-    gen_l, gen.lower().strip(), orig.lower().strip()
+    gen_l, orig_l = gen.lower().strip(), orig.lower().strip()
     if len(gen_l) < 3: return -1.0
     
     # Check T5 artifacts
     if "extra_id" in gen_l: return -2.0
     
     # Check Shuffling
-    if set(gen_l.split()) == set(orig.lower().split()) and len(gen_l.split()) > 1: return -3.0
+    if set(gen_l.split()) == set(orig_l.split()) and len(gen_l.split()) > 1: return -3.0
     
     # Semantic Sim
     emb_orig = semantic_model.encode(orig, convert_to_tensor=True)
