@@ -131,19 +131,35 @@ def run_massive_sweep():
 
     # GRID SEARCH CHIRURGICO PER LARGE
     print(f"\n>>> PHASE 2: PARAMETER OPTIMIZATION")
-    alphas, noises, beams, temps = [0.1, 0.3, 0.5], [0.01, 0.03, 0.05], [5, 8], [0.7, 1.0, 1.3]
+    alphas = [0.1, 0.3, 0.5]
+    noises = [0.01, 0.03, 0.05]
+    beams = [3, 5, 8]
+    temps = [0.7, 1.0, 1.3]
+    penalties = [1.2, 1.5, 2.0] # Aggiunta la ricerca della penalty
+    
     results = []
     for a in alphas:
         for n in noises:
             for b in beams:
                 for t in temps:
-                    interpolator.latent_noise_std, interpolator.gen_num_beams, interpolator.gen_temperature = n, b, t
-                    scs = []
-                    for pred, v1, v2 in aligned_test:
-                        a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=a)
-                        scs.append((calculate_creative_score(v1, a1, pred, format_analyzer, v2)["total"] + calculate_creative_score(v2, a2, pred, format_analyzer, v1)["total"])/2)
-                    results.append({"a": a, "n": n, "b": b, "t": t, "score": np.mean(scs)})
-                    print(f"    A={a} N={n} B={b} T={t} -> Score: {np.mean(scs):.3f}")
+                    for p in penalties:
+                        interpolator.latent_noise_std = n
+                        interpolator.gen_num_beams = b
+                        interpolator.gen_temperature = t
+                        interpolator.gen_repetition_penalty = p
+                        
+                        scs = []
+                        for pred, v1, v2 in aligned_test:
+                            a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=a)
+                            scs.append((calculate_creative_score(v1, a1, pred, format_analyzer, v2)["total"] + 
+                                        calculate_creative_score(v2, a2, pred, format_analyzer, v1)["total"])/2)
+                        
+                        avg_sc = np.mean(scs)
+                        results.append({"a": a, "n": n, "b": b, "t": t, "p": p, "score": avg_sc})
+                        
+                        # Log ogni tanto per non intasare
+                        if len(results) % 10 == 0:
+                            print(f"    Trial {len(results)}: A={a} N={n} B={b} T={t} P={p} -> Score: {avg_sc:.3f}")
 
     results.sort(key=lambda x: x['score'], reverse=True)
     best = results[0]
