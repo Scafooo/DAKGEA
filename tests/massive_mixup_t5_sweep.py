@@ -23,14 +23,15 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_t5_interpolator import MixupT5Interpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE T5 (RTX 4090 - OOM SAFE) ---
-MODEL_NAME = "google/t5-v1_1-base"
-BATCH_SIZE = 32        # Dimezzato per sicurezza
-GRAD_ACCUMULATION = 8  # Raddoppiato per compensare
-EPOCHS = 15
+# --- CONFIGURAZIONE FLAN-T5 (RTX 4090) ---
+MODEL_NAME = "google/flan-t5-base" # Instruction-tuned: molto più smart
+BATCH_SIZE = 32        # Flan-base è gestibile
+GRAD_ACCUMULATION = 8
+EPOCHS = 10            # Converge velocemente
 SAMPLES_ALIGNED = 400
 SAMPLES_ORPHAN = 100
 SWEEP_SAMPLES = 40
+
 
 torch.backends.cudnn.benchmark = True
 logger = get_logger("T5Sweep")
