@@ -22,12 +22,11 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE BART-LARGE (POTENZA MASSIMA) ---
-MODEL_NAME = "facebook/bart-large"
-BATCH_SIZE = 32        # VRAM Safe per Large
-GRAD_ACCUMULATION = 8  # Effettivo 256
-EPOCHS = 10            # Il Large converge prima
-SAMPLES_ALIGNED = 400
+# --- CONFIGURAZIONE DUAL OPTIMIZER (RTX 4090) ---
+MODEL_NAME = "facebook/bart-base"
+BATCH_SIZE = 96
+GRAD_ACCUMULATION = 6
+EPOCHS = 15
 SWEEP_SAMPLES = 40
 
 torch.backends.cudnn.benchmark = True
@@ -36,208 +35,119 @@ logger = get_logger("MassiveSweep")
 def clean_val(text):
     return re.sub(r'<[^>]+>\s*', '', text).strip()
 
-class PredicateFormatAnalyzer:
-    def __init__(self, training_rows):
-        self.stats = defaultdict(lambda: {"token_counts": [], "char_lengths": [], "has_digits": [], "samples": set()})
-        self._analyze(training_rows)
-        self._compute_stats()
-
-    def _analyze(self, rows):
-        for row in rows:
-            match = re.match(r'(<[^>]+>)\s*(.+)', row['target'])
-            if match:
-                pred, val = match.groups()
-                self.stats[pred]["token_counts"].append(len(val.split()))
-                self.stats[pred]["char_lengths"].append(len(val))
-                self.stats[pred]["has_digits"].append(1.0 if re.search(r'\d', val) else 0.0)
-                self.stats[pred]["samples"].add(val.lower().strip())
-
-    def _compute_stats(self):
-        for pred, s in self.stats.items():
-            if s["token_counts"]:
-                s["expected_tokens"] = (np.percentile(s["token_counts"], 5), np.percentile(s["token_counts"], 95))
-                s["expected_length"] = (np.percentile(s["char_lengths"], 5), np.percentile(s["char_lengths"], 95))
-                s["digit_ratio"] = np.mean(s["has_digits"])
-
-    def format_score(self, pred, gen):
-        s = self.stats.get(pred)
-        if not s or not gen.strip(): return 0.0
-        score, tokens, length = 1.0, len(gen.split()), len(gen)
-        if not (s["expected_tokens"][0] <= tokens <= s["expected_tokens"][1]): score *= 0.7
-        if not (s["expected_length"][0] <= length <= s["expected_length"][1]): score *= 0.7
+def calculate_precision_score(orig, gen, originals_set):
+    """Score severo: punisce shuffling e premia novità semantica."""
+    gen_l, orig_l = gen.lower().strip(), orig.lower().strip()
+    if len(gen_l) < 3: return -1.0
+    
+    orig_words, gen_words = set(orig_l.split()), set(gen_l.split())
+    if gen_words == orig_words and len(gen_words) > 1: return -3.0 # Molto severo con lo shuffle
+    
+    sim = SequenceMatcher(None, orig_l, gen_l).ratio()
+    if sim > 0.98: return 0.01 # Quasi copia
+    
+    if 0.4 <= sim <= 0.9:
+        score = sim * 2.0
+        if gen_words - orig_words: score += 2.0 # Bonus parola nuova
         return score
-
-def calculate_creative_score(orig, gen, pred, analyzer, other=None):
-    gen_c, orig_c = gen.strip(), orig.strip()
-    other_c = other.strip() if other else ""
-    if len(gen_c) < 3: return {"total": 0, "transform": "garbage"}
-    
-    f_score = analyzer.format_score(pred, gen_c)
-    
-    # LEXICAL NOVELTY SEVERA
-    gen_words = set(re.findall(r'\w+', gen_c.lower()))
-    orig_words = set(re.findall(r'\w+', orig_c.lower()))
-    other_words = set(re.findall(r'\w+', other_c.lower()))
-    source_words = orig_words | other_words
-    new_words = [w for w in (gen_words - source_words) if len(w) > 2]
-    
-    sim_orig = SequenceMatcher(None, orig_c.lower(), gen_c.lower()).ratio()
-    
-    if sim_orig > 0.95:
-        c_score, ttype = 0.05, "identity"
-    elif gen_words == source_words or gen_words.issubset(source_words):
-        c_score, ttype = -5.0, "lazy_permutation" # PUNIZIONE NUCLEARE CONTRO LO SHUFFLING
-    elif new_words:
-        c_score, ttype = 1.5, "semantic_leap" # PREMIO MAGGIORE PER VERA NOVITÀ
-    elif 0.5 <= sim_orig <= 0.85:
-        c_score, ttype = 0.7, "partial_merge"
-    else:
-        c_score, ttype = 0.2, "garbage"
-    
-    return {"total": (f_score * 0.3) + (c_score * 0.7), "transform": ttype}
+    return -0.5
 
 def run_massive_sweep():
-    print("\n" + "█"*100); print(f"█ RTX 4090: BART-LARGE ULTIMATE PRECISION ".center(98) + "█"); print("█"*100)
+    print("\n" + "█"*100); print(f"█ RTX 4090: DUAL-MODE PARAMETER OPTIMIZER ".center(98) + "█"); print("█"*100)
 
     reader = OpeneaDatasetReader()
     dataset = reader.read(str(PROJECT_ROOT / "data/raw/openea/BBC_DB"))
     builder = MixupDataBuilder()
     train_rows, canonical_map = builder.build_training_data(dataset)
-    format_analyzer = PredicateFormatAnalyzer(train_rows)
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    out_dir = "./results/sweep_model_large_v3" # Nuova cartella per non mischiare i pesi
+    out_dir = "./results/sweep_model_base_v2"
 
     interpolator = MixupBartInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
     interpolator.set_predicate_mapping(canonical_map)
 
+    # TRAINING SE NECESSARIO
     if not (Path(out_dir) / "pytorch_model.bin").exists() and not (Path(out_dir) / "model.safetensors").exists():
-        print(f"    Starting Training ({MODEL_NAME})..."); hf_ds = HFDataset.from_list(train_rows).map(lambda b: interpolator.tokenizer(b["input"], text_target=b["target"], max_length=64, truncation=True, padding="max_length"), batched=True)
-        args = Seq2SeqTrainingArguments(output_dir=out_dir, per_device_train_batch_size=BATCH_SIZE, gradient_accumulation_steps=GRAD_ACCUMULATION, num_train_epochs=EPOCHS, learning_rate=2e-5, fp16=True, report_to="none", save_strategy="no")
+        print("    Training..."); hf_ds = HFDataset.from_list(train_rows).map(lambda b: interpolator.tokenizer(b["input"], text_target=b["target"], max_length=64, truncation=True, padding="max_length"), batched=True)
+        args = Seq2SeqTrainingArguments(output_dir=out_dir, per_device_train_batch_size=BATCH_SIZE, gradient_accumulation_steps=GRAD_ACCUMULATION, num_train_epochs=EPOCHS, learning_rate=5e-5, fp16=True, report_to="none", save_strategy="no")
         trainer = Seq2SeqTrainer(model=interpolator.model, args=args, train_dataset=hf_ds, data_collator=DataCollatorForSeq2Seq(interpolator.tokenizer, model=interpolator.model))
         trainer.train(); interpolator.model.save_pretrained(out_dir); interpolator.tokenizer.save_pretrained(out_dir)
 
-    print("    Extracting clean evaluation pairs...")
-    aligned_test = []
-    kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
-    for s_uri, t_uri in list(dataset.aligned_entities):
-        s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
-        t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
-        for ps, vs in s_lits.items():
-            for pt, vt in t_lits.items():
-                if vs.lower().strip() != vt.lower().strip() and len(vs) > 3 and canonical_map.get(ps) == canonical_map.get(pt):
-                    aligned_test.append((canonical_map[ps], vs, vt))
-        if len(aligned_test) >= SWEEP_SAMPLES: break
-
-    # GRID SEARCH CHIRURGICO PER LARGE
-    print(f"\n>>> PHASE 2: PARAMETER OPTIMIZATION")
-    alphas = [0.1, 0.3, 0.5]
-    noises = [0.01, 0.03, 0.05]
-    beams = [3, 5, 8]
-    temps = [0.7, 1.0, 1.3]
-    penalties = [1.2, 1.5, 2.0] # Aggiunta la ricerca della penalty
-    
-    results = []
-    for a in alphas:
-        for n in noises:
-            for b in beams:
-                for t in temps:
-                    for p in penalties:
-                        interpolator.latent_noise_std = n
-                        interpolator.gen_num_beams = b
-                        interpolator.gen_temperature = t
-                        interpolator.gen_repetition_penalty = p
-                        
-                        scs = []
-                        for pred, v1, v2 in aligned_test:
-                            a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=pred, alpha=a)
-                            scs.append((calculate_creative_score(v1, a1, pred, format_analyzer, v2)["total"] + 
-                                        calculate_creative_score(v2, a2, pred, format_analyzer, v1)["total"])/2)
-                        
-                        avg_sc = np.mean(scs)
-                        results.append({"a": a, "n": n, "b": b, "t": t, "p": p, "score": avg_sc})
-                        
-                        # Log ogni tanto per non intasare
-                        if len(results) % 10 == 0:
-                            print(f"    Trial {len(results)}: A={a} N={n} B={b} T={t} P={p} -> Score: {avg_sc:.3f}")
-
-    results.sort(key=lambda x: x['score'], reverse=True)
-    best = results[0]
-
-    # 5. REPORT FINALE MASSIVO (STRATIFICATO COMPLETO)
-    print("\n" + "="*100); print(" ULTIMATE SOTA REPORT (ALL ATTRIBUTES - CLEAN) ".center(100)); print("="*100)
-    interpolator.latent_noise_std = best['n']
-    interpolator.gen_num_beams = best['b']
-    interpolator.gen_temperature = best['t']
-    interpolator.gen_repetition_penalty = best['p']
-    
-    # 1. RACCOLTA DATI ALLINEATI
-    aligned_by_pred = defaultdict(list)
+    # PREPARAZIONE TEST (DIVERSI vs IDENTICI)
+    test_diverse, test_similar = [], []
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
     for s_uri, t_uri in dataset.aligned_entities:
         s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
         t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
         for ps, vs in s_lits.items():
             for pt, vt in t_lits.items():
-                if vs.lower().strip() != vt.lower().strip() and len(vs) > 3:
-                    if canonical_map.get(ps) == canonical_map.get(pt):
-                        aligned_by_pred[canonical_map[ps]].append((canonical_map[ps], vs, vt))
+                if canonical_map.get(ps) == canonical_map.get(pt):
+                    if vs.lower().strip() == vt.lower().strip():
+                        if len(test_similar) < SWEEP_SAMPLES: test_similar.append((canonical_map[ps], vs, vt))
+                    elif len(vs) > 4:
+                        if len(test_diverse) < SWEEP_SAMPLES: test_diverse.append((canonical_map[ps], vs, vt))
+        if len(test_diverse) >= SWEEP_SAMPLES and len(test_similar) >= SWEEP_SAMPLES: break
 
-    # 2. RACCOLTA DATI ORFANI (Date, ID, etc.)
-    orphan_by_pred = defaultdict(list)
-    all_entities = set(kg_src.subjects()) | set(kg_tgt.subjects())
-    for ent in list(all_entities)[:2000]: # Campiona entità per trovare orfani
-        lits = {str(p): str(o) for _, p, o in kg_src.triples((ent, None, None)) if isinstance(o, Literal)}
-        lits.update({str(p): str(o) for _, p, o in kg_tgt.triples((ent, None, None)) if isinstance(o, Literal)})
-        for p, v in lits.items():
-            p_tok = canonical_map.get(p)
-            if p_tok and len(v) > 2:
-                # Se questo predicato non appare spesso negli allineamenti, è un buon candidato orfano
-                orphan_by_pred[p_tok].append((p_tok, v))
+    originals_set = set(clean_val(r['target']).lower() for r in train_rows)
 
-    output_file = "massive_base_report_v4.txt"
+    # --- PHASE 2: DUAL OPTIMIZATION ---
+    print(f"\n>>> PHASE 2: DUAL OPTIMIZATION")
+    
+    # 1. Ottimizza Profilo Standard (per coppie diverse)
+    print("    Optimizing Standard Profile...")
+    std_results = []
+    for n in [0.01, 0.03, 0.05]:
+        for t in [1.0, 1.2, 1.4]:
+            for b in [3, 5, 8]:
+                interpolator.latent_noise_std, interpolator.gen_temperature, interpolator.gen_num_beams = n, t, b
+                interpolator.similarity_threshold = 1.1 # Forza Standard mode
+                scs = []
+                for p, v1, v2 in test_diverse:
+                    a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=0.5)
+                    scs.append((calculate_precision_score(v1, a1, originals_set) + calculate_precision_score(v2, a2, originals_set))/2)
+                std_results.append({"n": n, "t": t, "b": b, "score": np.mean(scs)})
+    
+    best_std = sorted(std_results, key=lambda x: x['score'], reverse=True)[0]
+    print(f"    BEST STANDARD: N={best_std['n']} T={best_std['t']} B={best_std['b']} (Score: {best_std['score']:.3f})")
+
+    # 2. Ottimizza Profilo Creative (per coppie identiche)
+    print("\n    Optimizing Creative Profile (Identical Pairs)...")
+    crea_results = []
+    # RANGE AGGRESSIVO per forzare la diversità
+    for n in [0.1, 0.2, 0.3, 0.4]: # Noise molto alto
+        for t in [1.5, 1.8, 2.2]: # Temperature estreme
+            for p_pen in [2.5, 3.5, 4.5]: # Penalità durissima
+                interpolator.creative_noise, interpolator.creative_temp, interpolator.creative_penalty = n, t, p_pen
+                interpolator.similarity_threshold = -0.1 # Forza creative
+                scs = []
+                for p, v1, v2 in test_similar:
+                    a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=0.5)
+                    # Score che premia SOLO se ha cambiato qualcosa (novità semantica)
+                    scs.append((calculate_precision_score(v1, a1, originals_set) + calculate_precision_score(v2, a2, originals_set))/2)
+                crea_results.append({"n": n, "t": t, "p": p_pen, "score": np.mean(scs)})
+    
+    best_crea = sorted(crea_results, key=lambda x: x['score'], reverse=True)[0]
+    print(f"    BEST CREATIVE: N={best_crea['n']} T={best_crea['t']} P={best_crea['p']} (Score: {best_crea['score']:.3f})")
+
+    # --- PHASE 3: FINAL REPORT ---
+    print("\n" + "="*100); print(" ULTIMATE DUAL-MODE SOTA REPORT ".center(100)); print("="*100)
+    
+    interpolator.latent_noise_std, interpolator.gen_temperature, interpolator.gen_num_beams = best_std['n'], best_std['t'], best_std['b']
+    interpolator.creative_noise, interpolator.creative_temp, interpolator.creative_penalty = best_crea['n'], best_crea['t'], best_crea['p']
+    interpolator.similarity_threshold = 0.85
+
+    output_file = "massive_base_report_v5.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write(f"DAKGEA v4 ULTIMATE REPORT | Best Config: {best}\n\n")
-        
-        # --- SEZIONE 1: MIX-UP ALLINEATO (300 campioni) ---
-        f.write("SECTION 1: ALIGNED MIX-UP\n" + "-"*100 + "\n")
-        count = 0
-        a_preds = sorted(list(aligned_by_pred.keys()))
-        while count < 300 and a_preds:
-            for p_tok in a_preds[:]:
-                if aligned_by_pred[p_tok]:
-                    p_uri, v1, v2 = aligned_by_pred[p_tok].pop(random.randrange(len(aligned_by_pred[p_tok])))
-                    aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=best['a'])
-                    
-                    # FORMATO FULL: Niente tagli, tutto su righe dedicate
-                    f.write(f"SAMPLE {count+1:03d} | PRED: {p_tok}\n")
-                    f.write(f"  ORIG A: {v1}\n")
-                    f.write(f"  AUG A': {aa}\n")
-                    f.write(f"  ORIG B: {v2}\n")
-                    f.write(f"  AUG B': {ab}\n")
-                    f.write(f"  VOTO: [ ]/5 | NOTE: [__________________________________________________]\n")
-                    f.write("-" * 100 + "\n")
-                    count += 1
-                else: a_preds.remove(p_tok)
-
-        # --- SEZIONE 2: ORPHAN AUGMENTATION (100 campioni) ---
-        f.write("\n\nSECTION 2: ORPHAN ATTRIBUTE AUGMENTATION\n" + "-"*100 + "\n")
-        o_count = 0
-        o_preds = sorted(list(orphan_by_pred.keys()))
-        while o_count < 100 and o_preds:
-            for p_tok in o_preds[:]:
-                if orphan_by_pred[p_tok]:
-                    p_uri, v = orphan_by_pred[p_tok].pop(random.randrange(len(orphan_by_pred[p_tok])))
-                    aa, _ = interpolator.interpolate_pair(v, v, predicate=p_tok, alpha=0.0)
-                    
-                    f.write(f"ORPHAN {o_count+1:03d} | PRED: {p_tok}\n")
-                    f.write(f"  ORIG: {v}\n")
-                    f.write(f"  AUG : {aa}\n")
-                    f.write(f"  VOTO: [ ]/5 | NOTE: [__________________________________________________]\n")
-                    f.write("-" * 100 + "\n")
-                    o_count += 1
-                else: o_preds.remove(p_tok)
-    print(f">>> SUCCESS: Large Report saved to {output_file}")
+        f.write(f"DAKGEA v5 DUAL-MODE REPORT\nSTD: {best_std} | CREA: {best_crea}\n\n")
+        aligned_test_full = test_diverse[:25] + test_similar[:25]
+        for i, (p, v1, v2) in enumerate(aligned_test_full):
+            aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=0.5)
+            f.write(f"{i+1:03d} | {p:15} | VAL A: {v1}\n    | {" ":15} | VAL B: {v2}\n")
+            f.write(f"    | {" ":15} | AUG A': {aa}\n    | {" ":15} | AUG B': {ab}\n")
+            f.write(f"    | {" ":15} | Voto:[ ]/5 | Note: [________________________________]\n")
+            f.write("-" * 100 + "\n")
+            
+    print(f">>> SUCCESS: Dual Report saved to {output_file}")
 
 if __name__ == "__main__":
     random.seed(42); np.random.seed(42); torch.manual_seed(42)
