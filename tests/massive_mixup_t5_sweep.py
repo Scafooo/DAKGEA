@@ -54,7 +54,7 @@ def run_t5_full_report():
 
     # 2. TRAINING (Se necessario)
     if not (Path(out_dir) / "pytorch_model.bin").exists() and not (Path(out_dir) / "model.safetensors").exists():
-        print(f"    [2/4] Starting Flan-T5 Fine-tuning (REWRITE prompt, {len(t5_rows)}} rows)...")
+        print(f"    [2/4] Starting Flan-T5 Fine-tuning (REWRITE prompt, {len(t5_rows)} rows)...")
         interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=1e-4, force_retrain=True)
     else:
         print(f"    [2/4] Found existing Flan-T5 model, skipping training.")
