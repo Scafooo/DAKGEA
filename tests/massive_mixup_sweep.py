@@ -86,9 +86,9 @@ def calculate_creative_score(orig, gen, pred, analyzer, other=None):
     if sim_orig > 0.95:
         c_score, ttype = 0.05, "identity"
     elif gen_words == source_words or gen_words.issubset(source_words):
-        c_score, ttype = 0.01, "lazy_permutation" # PUNIZIONE SEVERA
+        c_score, ttype = -5.0, "lazy_permutation" # PUNIZIONE NUCLEARE CONTRO LO SHUFFLING
     elif new_words:
-        c_score, ttype = 1.2, "semantic_leap" # PREMIO MAGGIORE
+        c_score, ttype = 1.5, "semantic_leap" # PREMIO MAGGIORE PER VERA NOVITÀ
     elif 0.5 <= sim_orig <= 0.85:
         c_score, ttype = 0.7, "partial_merge"
     else:

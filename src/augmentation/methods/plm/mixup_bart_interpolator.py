@@ -175,9 +175,10 @@ class MixupBartInterpolator:
             H_mix_B = alpha * H_A + (1.0 - alpha) * H_B
             
             # --- DYNAMIC JITTER PER VALORI IDENTICI ---
-            # Se A e B sono uguali, l'interpolazione non fa nulla.
-            # Forziamo il rumore per scuotere il modello.
             is_identical = (val_src.lower().strip() == val_tgt.lower().strip())
+            
+            # Se identici, forziamo una forte penalità di ripetizione per evitare lo shuffling
+            current_penalty = 3.5 if is_identical else self.gen_repetition_penalty
             effective_noise = self.latent_noise_std * (2.5 if is_identical else 1.0)
             
             # Aggiungiamo rumore ad entrambi
@@ -188,7 +189,7 @@ class MixupBartInterpolator:
                 H_mix_A += noise_a
                 H_mix_B += noise_b
 
-            # Doppia generazione (Batch size = 2 per efficienza)
+            # Doppia generazione
             H_final = torch.cat([H_mix_A, H_mix_B], dim=0)
             mask_final = torch.cat([inputs.attention_mask[0:1], inputs.attention_mask[1:2]], dim=0)
             
@@ -202,7 +203,7 @@ class MixupBartInterpolator:
                 temperature=self.gen_temperature,
                 num_beams=self.gen_num_beams,
                 no_repeat_ngram_size=self.gen_no_repeat_ngram_size,
-                repetition_penalty=self.gen_repetition_penalty,
+                repetition_penalty=current_penalty, # Penalità dinamica
                 length_penalty=self.gen_length_penalty,
                 early_stopping=True if self.gen_num_beams > 1 else False
             )
