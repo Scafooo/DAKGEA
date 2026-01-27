@@ -84,10 +84,11 @@ class MixupT5Interpolator:
             num_train_epochs=epochs, 
             learning_rate=lr, 
             weight_decay=0.01, 
-            fp16=torch.cuda.is_available(), 
-            gradient_checkpointing=True, # SALVA-VRAM
+            bf16=torch.cuda.is_available(), # RTX 4090 ama bf16
+            gradient_checkpointing=True, 
             save_strategy="no", 
-            report_to="none"
+            report_to="none",
+            logging_steps=50
         )
         trainer = Seq2SeqTrainer(model=self.model, args=args, train_dataset=hf_dataset, data_collator=DataCollatorForSeq2Seq(self.tokenizer, model=self.model))
         trainer.train(); self.model.save_pretrained(self.out_dir); self.tokenizer.save_pretrained(self.out_dir)
