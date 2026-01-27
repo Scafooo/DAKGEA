@@ -26,6 +26,7 @@ BATCH_SIZE = 16
 EPOCHS = 3 
 TOTAL_REPORT_SAMPLES = 400 
 MAX_ORPHANS_PER_PRED = 500
+SWEEP_SAMPLES = 50
 
 torch.backends.cudnn.benchmark = True
 logger = get_logger("FlanT5Quality")
