@@ -28,7 +28,7 @@ MODEL_NAME = "t5-base" # Il modello classico, robusto
 BATCH_SIZE = 32
 GRAD_ACCUMULATION = 8
 EPOCHS = 10 
-SAMPLES_ALIGNED = 400
+SAMPLES_ALIGNED = 200
 SAMPLES_ORPHAN = 100
 SWEEP_SAMPLES = 40
 
@@ -64,68 +64,70 @@ def run_t5_sweep():
     builder = MixupDataBuilder(confidence_threshold=0.6, value_match_threshold=0.3)
     train_rows, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=50000)
     
-    # Converti rows per T5: "<NAME> val" -> "paraphrase: val"
-    # T5 capisce 'paraphrase', 'rewrite', 'summarize'
+    # Pre-process rows for T5
     t5_rows = []
     for r in train_rows:
         p_tok = r['input'].split(' ')[0]
-        # Converti rows per T5: "<NAME> val" -> "paraphrase name: val"
         p_name = p_tok.replace("<", "").replace(">", "").lower()
         inp_val = r['input'].replace(p_tok, "").strip()
         tgt_val = r['target'].replace(p_tok, "").strip()
-        
-        t5_rows.append({
-            "input": f"paraphrase {p_name}: {inp_val}",
-            "target": tgt_val
-        })
+        t5_rows.append({"input": f"paraphrase {p_name}: {inp_val}", "target": tgt_val})
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
     out_dir = "./results/sweep_model_t5_original_v1"
 
     # 2. TRAINING
     interpolator = MixupT5Interpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
-    
     if not (Path(out_dir) / "pytorch_model.bin").exists() and not (Path(out_dir) / "model.safetensors").exists():
         print(f"    Starting T5 Training...")
         interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=1e-4, force_retrain=True)
     else:
         print(f"    [RESUME] Found existing T5 model.")
 
-    # 3. TEST SETS
-    print("    Extracting clean evaluation pairs...")
+    # 3. EXTRAZIONE ORPHANS & TEST SET
+    print("    Extracting evaluation sets...")
     test_set = []
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
-    for s_uri, t_uri in dataset.aligned_entities:
+    aligned_entities = dataset.aligned_entities
+    aligned_src = {s for s, t in aligned_entities}
+    aligned_tgt = {t for s, t in aligned_entities}
+    
+    orphan_by_pred = defaultdict(list)
+    
+    # Pairs (Aligned)
+    for s_uri, t_uri in aligned_entities:
         s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
         t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
+        
+        # Aligned attributes
         for ps, vs in s_lits.items():
             for pt, vt in t_lits.items():
                 if canonical_map.get(ps) == canonical_map.get(pt):
-                    if len(vs) > 4:
-                        test_set.append((canonical_map[ps], vs, vt))
-        if len(test_set) >= SWEEP_SAMPLES * 2: break
+                    if len(vs) > 4: test_set.append((canonical_map.get(ps, ps), vs, vt))
+        
+        # Orphans (attr non allineati in entità allineate)
+        for p, v in s_lits.items():
+            found = False
+            for pt in t_lits:
+                if canonical_map.get(p) == canonical_map.get(pt): found = True; break
+            if not found and len(v) > 4: orphan_by_pred[canonical_map.get(p, p)].append(v)
+            
+    # Orphans (entità non allineate)
+    for s_uri, p, o in kg_src.triples():
+        if s_uri not in aligned_src and isinstance(o, Literal):
+            v = str(o)
+            if len(v) > 4: orphan_by_pred[canonical_map.get(p, p)].append(v)
 
     # 4. SWEEP
     print(f"\n>>> PHASE 2: T5 PARAMETER SWEEP")
     results = []
-    # T5 risponde diversamente a noise/temp, usiamo range più ampi
     for a in [0.3, 0.5]:
-        for n in [0.0, 0.05]: # Noise molto basso o nullo per T5
-            for t in [1.0, 1.5]:
+        for n in [0.0, 0.05]:
+            for t in [1.0, 1.3]: # Range più stretto per T5
                 for b in [1, 5]:
                     interpolator.latent_noise_std, interpolator.gen_temperature, interpolator.gen_num_beams = n, t, b
                     scs = []
                     for p, v1, v2 in test_set[:SWEEP_SAMPLES]:
-                        # Nota: interpolate_pair usa 'augment' nel codice precedente,
-                        # dobbiamo aggiornare anche interpolator se vogliamo 'paraphrase'
-                        # MA per ora usiamo il metodo standard che usa 'augment name:' se non modificato
-                        # Possiamo forzare il prompt 'paraphrase:' modificando MixupT5Interpolator
-                        # O fidarci del fine-tuning.
-                        # Per coerenza con il training sopra, modifichiamo al volo qui:
-                        # (Trick: passiamo predicate="paraphrase" e alpha)
-                        # Ma interpolate_pair fa f"augment {p}:". 
-                        # Dobbiamo aggiornare MixupT5Interpolator per essere allineato.
-                        # Per ora testiamo lo standard.
                         a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=a)
                         scs.append((calculate_score(v1, a1) + calculate_score(v2, a2))/2)
                     avg = np.mean(scs)
@@ -134,24 +136,46 @@ def run_t5_sweep():
     
     best = sorted(results, key=lambda x: x['score'], reverse=True)[0]
 
-    # 5. REPORT
-    print("\n" + "="*100); print(" FINAL T5 REPORT ".center(100)); print("="*100)
+    # 5. GENERATION & REPORT
+    print("\n" + "="*100); print(" GENERATING FINAL T5 REPORT ".center(100)); print("="*100)
     interpolator.latent_noise_std = best['n']
     interpolator.gen_num_beams = best['b']
     interpolator.gen_temperature = best['t']
     
     output_file = "massive_t5_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write(f"DAKGEA T5 REPORT | Best: {best}\n\n")
+        f.write(f"DAKGEA T5 REPORT | Best Config: {best}\n")
+        f.write("="*120 + "\n\n")
+        
+        # SECTION 1: ALIGNED
+        f.write("SECTION 1: ALIGNED INTERPOLATIONS\n" + "-"*80 + "\n")
         count = 0
-        for p_tok, v1, v2 in test_set:
+        for p, v1, v2 in test_set:
             if count >= SAMPLES_ALIGNED: break
-            aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=best['a'])
+            aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=best['a'])
             sim_a = util.cos_sim(semantic_model.encode(v1), semantic_model.encode(aa)).item()
-            f.write(f"{count+1:03d} | {p_tok:15} | VAL A: {v1[:30]:30} -> AUG A': {aa[:35]:35} (Sim: {sim_a:.2f})\n")
-            f.write(f"    | {' ':15} | VAL B: {v2[:30]:30} -> AUG B': {ab[:35]:35} | Voto:[ ]/5\n")
-            f.write("-" * 110 + "\n")
+            f.write(f"PAIR {count+1:03d} | {p:15} | VAL A: {v1[:40]:40} -> AUG: {aa[:40]:40} (Sim: {sim_a:.2f}) | Voto:[ ]/5\n")
+            f.write(f"         | {' ':15} | VAL B: {v2[:40]:40} -> AUG: {ab[:40]:40} | Voto:[ ]/5\n")
+            f.write("-" * 120 + "\n")
             count += 1
+            
+        # SECTION 2: ORPHANS
+        f.write("\n\nSECTION 2: ORPHAN ATTRIBUTES\n" + "-"*80 + "\n")
+        o_count = 0
+        o_preds = sorted(list(orphan_by_pred.keys()))
+        while o_count < SAMPLES_ORPHAN and o_preds:
+            p = random.choice(o_preds)
+            if not orphan_by_pred[p]: 
+                o_preds.remove(p); continue
+            v = orphan_by_pred[p].pop(random.randrange(len(orphan_by_pred[p])))
+            
+            # Per gli orfani, facciamo una parafrasi (alpha non conta o usiamo un metodo di parafrasi singola)
+            # MixupT5Interpolator.interpolate_pair con v1=v2=v fa parafrasi
+            aa, _ = interpolator.interpolate_pair(v, v, predicate=p, alpha=0.5)
+            sim = util.cos_sim(semantic_model.encode(v), semantic_model.encode(aa)).item()
+            f.write(f"ORPHAN {o_count+1:03d} | {p:15} | ORIG: {v[:40]:40} -> AUG: {aa[:40]:40} (Sim: {sim:.2f}) | Voto:[ ]/5\n")
+            f.write("-" * 120 + "\n")
+            o_count += 1
 
     print(f">>> SUCCESS: T5 Report saved to {output_file}")
 
