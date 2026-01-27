@@ -115,17 +115,18 @@ def run_t5_sweep():
     print(f"\n>>> PHASE 2: T5 PARAMETER SWEEP")
     results = []
     # T5 risponde diversamente a noise/temp, usiamo range più ampi
-    for n in [0.05, 0.1, 0.2]:
-        for t in [1.0, 1.5]:
-            for b in [3, 5]:
-                interpolator.latent_noise_std, interpolator.gen_temperature, interpolator.gen_num_beams = n, t, b
-                scs = []
-                for p, v1, v2 in test_set[:SWEEP_SAMPLES]:
-                    a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=0.5)
-                    scs.append((calculate_score(v1, a1) + calculate_score(v2, a2))/2)
-                avg = np.mean(scs)
-                results.append({"n": n, "t": t, "b": b, "score": avg})
-                print(f"      - N={n} T={t} B={b} -> Score: {avg:.3f}")
+    for a in [0.3, 0.5]: # Aggiunto sweep su Alpha
+        for n in [0.05, 0.1, 0.2]:
+            for t in [1.0, 1.5]:
+                for b in [3, 5]:
+                    interpolator.latent_noise_std, interpolator.gen_temperature, interpolator.gen_num_beams = n, t, b
+                    scs = []
+                    for p, v1, v2 in test_set[:SWEEP_SAMPLES]:
+                        a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=a)
+                        scs.append((calculate_score(v1, a1) + calculate_score(v2, a2))/2)
+                    avg = np.mean(scs)
+                    results.append({"a": a, "n": n, "t": t, "b": b, "score": avg})
+                    print(f"      - A={a} N={n} T={t} B={b} -> Score: {avg:.3f}")
     
     best = sorted(results, key=lambda x: x['score'], reverse=True)[0]
 
@@ -141,7 +142,7 @@ def run_t5_sweep():
         count = 0
         for p_tok, v1, v2 in test_set:
             if count >= SAMPLES_ALIGNED: break
-            aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=0.5)
+            aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=best['a'])
             sim_a = util.cos_sim(semantic_model.encode(v1), semantic_model.encode(aa)).item()
             f.write(f"{count+1:03d} | {p_tok:15} | VAL A: {v1[:30]:30} -> AUG A': {aa[:35]:35} (Sim: {sim_a:.2f})\n")
             f.write(f"    | {' ':15} | VAL B: {v2[:30]:30} -> AUG B': {ab[:35]:35} | Voto:[ ]/5\n")
