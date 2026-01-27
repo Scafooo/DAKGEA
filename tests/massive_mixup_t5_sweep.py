@@ -56,7 +56,7 @@ def calculate_score(orig, gen):
     return score
 
 def run_t5_sweep():
-    print("\n" + "█"*100); print(f"█ RTX 4090: T5-BASE PARAPHRASE OPTIMIZER ".center(98) + "█"); print("█"*100)
+    print("\n" + "█"*100); print(f"█ RTX 4090: T5-BASE REWRITE OPTIMIZER ".center(98) + "█"); print("█"*100)
 
     # 1. DATI
     reader = OpeneaDatasetReader()
@@ -71,7 +71,7 @@ def run_t5_sweep():
         p_name = p_tok.replace("<", "").replace(">", "").lower()
         inp_val = r['input'].replace(p_tok, "").strip()
         tgt_val = r['target'].replace(p_tok, "").strip()
-        t5_rows.append({"input": f"paraphrase {p_name}: {inp_val}", "target": tgt_val})
+        t5_rows.append({"input": f"rewrite {p_name}: {inp_val}", "target": tgt_val})
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
     out_dir = "./results/sweep_model_t5_original_v1"
