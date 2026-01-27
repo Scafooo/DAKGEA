@@ -174,10 +174,16 @@ class MixupBartInterpolator:
             H_mix_A = (1.0 - alpha) * H_A + alpha * H_B
             H_mix_B = alpha * H_A + (1.0 - alpha) * H_B
             
-            # Aggiungiamo rumore ad entrambi se richiesto
-            if self.latent_noise_std > 0:
-                noise_a = torch.randn_like(H_mix_A) * self.latent_noise_std
-                noise_b = torch.randn_like(H_mix_B) * self.latent_noise_std
+            # --- DYNAMIC JITTER PER VALORI IDENTICI ---
+            # Se A e B sono uguali, l'interpolazione non fa nulla.
+            # Forziamo il rumore per scuotere il modello.
+            is_identical = (val_src.lower().strip() == val_tgt.lower().strip())
+            effective_noise = self.latent_noise_std * (2.5 if is_identical else 1.0)
+            
+            # Aggiungiamo rumore ad entrambi
+            if effective_noise > 0:
+                noise_a = torch.randn_like(H_mix_A) * effective_noise
+                noise_b = torch.randn_like(H_mix_B) * effective_noise
                 noise_a[:, 0, :], noise_b[:, 0, :] = 0, 0 # Anchoring
                 H_mix_A += noise_a
                 H_mix_B += noise_b
