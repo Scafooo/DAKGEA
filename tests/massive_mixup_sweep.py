@@ -23,8 +23,9 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_bart_interpolator import MixupBartInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE BART-LARGE (SPECIAL TOKEN POWER) ---
-MODEL_NAME = "facebook/bart-large"
+# --- CONFIGURAZIONE REPORT FINALE (MASSIVO) ---
+SAMPLES_ALIGNED = 400
+SAMPLES_ORPHAN = 100
 BATCH_SIZE = 32
 GRAD_ACCUMULATION = 8
 EPOCHS = 10 
@@ -34,7 +35,6 @@ torch.backends.cudnn.benchmark = True
 logger = get_logger("MassiveSweep")
 
 def clean_val(text):
-    """Rimuove il token <PRED> iniziale."""
     return re.sub(r'^<[^>]+>\s*', '', text).strip()
 
 def calculate_precision_score(orig, gen, originals_set):
@@ -52,26 +52,24 @@ def calculate_precision_score(orig, gen, originals_set):
     return -0.5
 
 def run_massive_sweep():
-    print("\n" + "█"*100); print(f"█ RTX 4090: BART-LARGE SPECIAL-TOKEN OPTIMIZER ".center(98) + "█"); print("█"*100)
+    print("\n" + "█"*100); print(f"█ RTX 4090: DUAL-MODE OPTIMIZER (500 SAMPLES) ".center(98) + "█"); print("█"*100)
 
     # 1. CARICAMENTO DATI
     reader = OpeneaDatasetReader()
     dataset = reader.read(str(PROJECT_ROOT / "data/raw/openea/BBC_DB"))
-    builder = MixupDataBuilder()
-    train_rows, canonical_map = builder.build_training_data(dataset)
+    builder = MixupDataBuilder(confidence_threshold=0.6, value_match_threshold=0.3)
+    train_rows, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=50000)
     
     print(f"    Dataset Size: {len(train_rows)} samples")
-    print(f"    Registered Tokens: {len(set(canonical_map.values()))}")
-    
     device = "cuda" if torch.cuda.is_available() else "cpu"
     out_dir = "./results/sweep_model_large_special_v1"
 
-    # 2. TRAINING
-    interpolator = MixupBartInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
+    # 2. TRAINING O RESUME
+    interpolator = MixupBartInterpolator(model_name="facebook/bart-large", out_dir=out_dir, device=device)
     interpolator.set_predicate_mapping(canonical_map)
 
     if not (Path(out_dir) / "pytorch_model.bin").exists() and not (Path(out_dir) / "model.safetensors").exists():
-        print(f"    Starting Special-Token Training (BART-Large)...")
+        print(f"    Starting Training (Full Dataset)...")
         def tokenize(batch):
             return interpolator.tokenizer(batch["input"], text_target=batch["target"], max_length=64, truncation=True, padding="max_length")
         hf_ds = HFDataset.from_list(train_rows).map(tokenize, batched=True)
@@ -79,13 +77,16 @@ def run_massive_sweep():
         trainer = Seq2SeqTrainer(model=interpolator.model, args=args, train_dataset=hf_ds, data_collator=DataCollatorForSeq2Seq(interpolator.tokenizer, model=interpolator.model))
         trainer.train(); interpolator.model.save_pretrained(out_dir); interpolator.tokenizer.save_pretrained(out_dir)
     else:
-        print(f"    [RESUME] Found existing Special-Token model.")
+        print(f"    [RESUME] Found existing model.")
         interpolator = MixupBartInterpolator(model_name=out_dir, out_dir=out_dir, device=device)
         interpolator.set_predicate_mapping(canonical_map)
 
-    # 3. PREPARAZIONE TEST CLEAN
+    # 3. PREPARAZIONE TEST SETS
+    print("    Extracting clean evaluation pairs...")
     test_diverse, test_similar = [], []
+    aligned_by_pred = defaultdict(list)
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
+    
     for s_uri, t_uri in dataset.aligned_entities:
         s_lits = {str(p): str(o) for _, p, o in kg_src.triples((s_uri, None, None)) if isinstance(o, Literal)}
         t_lits = {str(p): str(o) for _, p, o in kg_tgt.triples((t_uri, None, None)) if isinstance(o, Literal)}
@@ -97,53 +98,92 @@ def run_massive_sweep():
                         if len(test_similar) < SWEEP_SAMPLES: test_similar.append((p_tok, v_src, v_tgt))
                     elif len(v_src) > 4:
                         if len(test_diverse) < SWEEP_SAMPLES: test_diverse.append((p_tok, v_src, v_tgt))
-        if len(test_diverse) >= SWEEP_SAMPLES and len(test_similar) >= SWEEP_SAMPLES: break
+                    # Popolamento per il report finale
+                    aligned_by_pred[p_tok].append((p_tok, v_src, v_tgt))
+
+    # Raccolta orfani per report
+    orphan_by_pred = defaultdict(list)
+    for ent in list(set(kg_src.subjects()) | set(kg_tgt.subjects()))[:2000]:
+        lits = {str(p): str(o) for _, p, o in kg_src.triples((ent, None, None)) if isinstance(o, Literal)}
+        lits.update({str(p): str(o) for _, p, o in kg_tgt.triples((ent, None, None)) if isinstance(o, Literal)})
+        for p, v in lits.items():
+            p_tok = canonical_map.get(p)
+            if p_tok and len(v) > 2: orphan_by_pred[p_tok].append((p_tok, v))
 
     originals_set = set(clean_val(r['target']).lower() for r in train_rows)
 
-    # 4. DUAL OPTIMIZATION
-    print(f"\n>>> PHASE 2: PARAMETER OPTIMIZATION")
+    # 4. PHASE 2: OPTIMIZATION (VERBOSE)
+    print(f"\n>>> PHASE 2: DUAL OPTIMIZATION")
+    
     results_std = []
+    print("    Optimizing Standard Profile...")
     for n in [0.01, 0.03, 0.05]:
         for t in [1.0, 1.3]:
             for b in [5, 8]:
                 interpolator.latent_noise_std, interpolator.gen_temperature, interpolator.gen_num_beams = n, t, b
-                interpolator.similarity_threshold = 1.1 # Standard mode
+                interpolator.similarity_threshold = 1.1 
                 scs = []
                 for p, v1, v2 in test_diverse:
                     a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=0.5)
                     scs.append((calculate_precision_score(v1, a1, originals_set) + calculate_precision_score(v2, a2, originals_set))/2)
-                results_std.append({"n": n, "t": t, "b": b, "score": np.mean(scs)})
+                avg = np.mean(scs)
+                results_std.append({"n": n, "t": t, "b": b, "score": avg})
+                print(f"      - N={n} T={t} B={b} -> Score: {avg:.3f}")
     best_std = sorted(results_std, key=lambda x: x['score'], reverse=True)[0]
 
     results_crea = []
+    print("\n    Optimizing Creative Profile...")
     for n in [0.1, 0.2, 0.3]:
         for t in [1.5, 1.8, 2.2]:
             interpolator.creative_noise, interpolator.creative_temp = n, t
-            interpolator.similarity_threshold = -0.1 # Creative mode
+            interpolator.similarity_threshold = -0.1
             scs = []
             for p, v1, v2 in test_similar:
                 a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=0.5)
                 scs.append((calculate_precision_score(v1, a1, originals_set) + calculate_precision_score(v2, a2, originals_set))/2)
-            results_crea.append({"n": n, "t": t, "score": np.mean(scs)})
+            avg = np.mean(scs)
+            results_crea.append({"n": n, "t": t, "score": avg})
+            print(f"      - N={n} T={t} -> Score: {avg:.3f}")
     best_crea = sorted(results_crea, key=lambda x: x['score'], reverse=True)[0]
 
-    # 5. FINAL REPORT
+    # 5. FINAL REPORT (MASSIVO)
+    print("\n" + "="*100); print(" FINAL DUAL-MODE REPORT (500 SAMPLES) ".center(100)); print("="*100)
     interpolator.latent_noise_std, interpolator.gen_temperature, interpolator.gen_num_beams = best_std['n'], best_std['t'], best_std['b']
     interpolator.creative_noise, interpolator.creative_temp = best_crea['n'], best_crea['t']
     interpolator.similarity_threshold = 0.85
 
-    print("\n" + "="*100); print(" FINAL DUAL-MODE REPORT (SPECIAL TOKENS) ".center(100)); print("="*100)
-    output_file = "massive_large_special_report_v1.txt"
+    output_file = "massive_ultimate_report_v2.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write(f"DAKGEA v1 SPECIAL-TOKEN REPORT | STD: {best_std} | CREA: {best_crea}\n\n")
-        aligned_test_full = test_diverse[:25] + test_similar[:25]
-        for i, (p, v1, v2) in enumerate(aligned_test_full):
-            aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=0.5)
-            f.write(f"{i+1:03d} | {p:15} | VAL A: {v1}\n    | {' ':15} | VAL B: {v2}\n")
-            f.write(f"    | {' ':15} | AUG A': {aa}\n    | {' ':15} | AUG B': {ab}\n")
-            f.write(f"    | {' ':15} | Voto:[ ]/5 | Note: [________________________________]\n")
-            f.write("-" * 100 + "\n")
+        f.write(f"DAKGEA ULTIMATE REPORT | Best STD: {best_std} | Best CREA: {best_crea}\n\n")
+        
+        # --- SECTION 1: ALIGNED (400 SAMPLES) ---
+        f.write("SECTION 1: ALIGNED MIX-UP\n" + "-"*80 + "\n")
+        count = 0
+        a_preds = sorted(list(aligned_by_pred.keys()))
+        while count < SAMPLES_ALIGNED and a_preds:
+            for p_tok in a_preds[:]:
+                if aligned_by_pred[p_tok]:
+                    p_uri, v1, v2 = aligned_by_pred[p_tok].pop(random.randrange(len(aligned_by_pred[p_tok])))
+                    aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p_tok, alpha=0.5)
+                    f.write(f"SAMPLE {count+1:03d} | PRED: {p_tok}\n  ORIG A: {v1}\n  AUG A': {aa}\n  ORIG B: {v2}\n  AUG B': {ab}\n")
+                    f.write(f"  VOTO: [ ]/5 | NOTE: [________________________________]\n" + "-"*80 + "\n")
+                    count += 1
+                else: a_preds.remove(p_tok)
+
+        # --- SECTION 2: ORPHAN (100 SAMPLES) ---
+        f.write("\n\nSECTION 2: ORPHAN ATTRIBUTES\n" + "-"*80 + "\n")
+        o_count = 0
+        o_preds = sorted(list(orphan_by_pred.keys()))
+        while o_count < SAMPLES_ORPHAN and o_preds:
+            for p_tok in o_preds[:]:
+                if orphan_by_pred[p_tok]:
+                    p_uri, v = orphan_by_pred[p_tok].pop(random.randrange(len(orphan_by_pred[p_tok])))
+                    aa, _ = interpolator.interpolate_pair(v, v, predicate=p_tok, alpha=0.0)
+                    f.write(f"ORPHAN {o_count+1:03d} | PRED: {p_tok}\n  ORIG: {v}\n  AUG : {aa}\n")
+                    f.write(f"  VOTO: [ ]/5 | NOTE: [________________________________]\n" + "-"*80 + "\n")
+                    o_count += 1
+                else: o_preds.remove(p_tok)
+
     print(f">>> SUCCESS: Report saved to {output_file}")
 
 if __name__ == "__main__":
