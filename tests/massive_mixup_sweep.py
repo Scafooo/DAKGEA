@@ -142,9 +142,9 @@ def run_massive_sweep():
         aligned_test_full = test_diverse[:25] + test_similar[:25]
         for i, (p, v1, v2) in enumerate(aligned_test_full):
             aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=0.5)
-            f.write(f"{i+1:03d} | {p:15} | VAL A: {v1}\n    | {" ":15} | VAL B: {v2}\n")
-            f.write(f"    | {" ":15} | AUG A': {aa}\n    | {" ":15} | AUG B': {ab}\n")
-            f.write(f"    | {" ":15} | Voto:[ ]/5 | Note: [________________________________]\n")
+            f.write(f"{i+1:03d} | {p:15} | VAL A: {v1}\n    | {' ':15} | VAL B: {v2}\n")
+            f.write(f"    | {' ':15} | AUG A': {aa}\n    | {' ':15} | AUG B': {ab}\n")
+            f.write(f"    | {' ':15} | Voto:[ ]/5 | Note: [________________________________]\n")
             f.write("-" * 100 + "\n")
             
     print(f">>> SUCCESS: Dual Report saved to {output_file}")
