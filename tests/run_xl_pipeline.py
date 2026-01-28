@@ -188,7 +188,7 @@ def run_xl_pipeline():
                 res = calculate_pair_score(v1, v2, aa, ab)
                 
                 f.write(f"PAIR {count+1:03d} | {p:20} | V1: {v1[:35]:35} -> AUG: {aa[:35]:35}\n")
-                f.write(f"         | Score: {res['score']:.2f}        | V2: {v2[:35]:35} -> AUG: {ab[:35]:35}\n")
+                f.write(f"         | Score: {res['score']:.2f}        | V2: {v2[:35]:35} -> AUG: {ab[:35]:35} | Voto:[ ]/5\n")
                 f.write("-" * 120 + "\n")
                 count += 1
                 if count >= TOTAL_REPORT_SAMPLES // 2: break
@@ -204,7 +204,7 @@ def run_xl_pipeline():
                 aa, _ = interpolator.interpolate_pair(val, val, predicate=p, alpha=0.5)
                 
                 score = calculate_score(val, aa)
-                f.write(f"ORPHAN {count+1:03d} | {p:20} | ORIG: {val[:45]:45} -> VAR: {aa[:45]:45} (Score: {score:.2f})\n")
+                f.write(f"ORPHAN {count+1:03d} | {p:20} | ORIG: {val[:45]:45} -> VAR: {aa[:45]:45} (Score: {score:.2f}) | Voto:[ ]/5\n")
                 count += 1
                 if count >= TOTAL_REPORT_SAMPLES // 2: break
 
