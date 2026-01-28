@@ -34,6 +34,57 @@ logger = get_logger("FlanT5XL_Creative")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
 creative_gen = CreativeVariationGenerator()
 
+# --- FILTRI QUALITÀ TRAINING DATA ---
+UNICODE_GARBAGE_PATTERN = re.compile(r'u00[a-f0-9]{2}', re.IGNORECASE)
+
+def has_unicode_garbage(text: str) -> bool:
+    """Rileva caratteri unicode corrotti come u00e9, u00f3, etc."""
+    return bool(UNICODE_GARBAGE_PATTERN.search(text))
+
+def is_token_swap(input_text: str, target_text: str) -> bool:
+    """Rileva se target è solo uno swap di token dell'input (stesso set di parole)."""
+    # Estrai il valore dopo ": " nel prompt
+    if ": " in input_text:
+        input_val = input_text.split(": ", 1)[1].strip()
+    else:
+        input_val = input_text.strip()
+
+    target_val = target_text.strip()
+
+    # Normalizza e tokenizza
+    input_tokens = set(input_val.lower().split())
+    target_tokens = set(target_val.lower().split())
+
+    # Se hanno esattamente gli stessi token ma in ordine diverso → swap
+    if input_tokens == target_tokens and input_val.lower() != target_val.lower():
+        return True
+    return False
+
+def filter_training_data(rows: list) -> list:
+    """Filtra righe con unicode garbage o token swap."""
+    filtered = []
+    unicode_removed = 0
+    swap_removed = 0
+
+    for row in rows:
+        inp, tgt = row['input'], row['target']
+
+        # Fix 1: Rimuovi unicode garbage
+        if has_unicode_garbage(inp) or has_unicode_garbage(tgt):
+            unicode_removed += 1
+            continue
+
+        # Fix 2: Rimuovi token swap puri
+        if is_token_swap(inp, tgt):
+            swap_removed += 1
+            continue
+
+        filtered.append(row)
+
+    print(f"    [FILTER] Removed: {unicode_removed} unicode garbage, {swap_removed} token swaps")
+    print(f"    [FILTER] Kept: {len(filtered)}/{len(rows)} ({100*len(filtered)/len(rows):.1f}%)")
+    return filtered
+
 def load_attr_names(dataset_path):
     attr_map = {}
     for i in [1, 2]:
@@ -124,12 +175,16 @@ def run_xl_pipeline():
                 if v_creative2 != v and v_creative2 != v_creative:
                     t5_rows.append({"input": f"generate variation <{p_name}>: {v}", "target": v_creative2})
 
+    # FILTRI QUALITÀ: rimuovi unicode garbage e token swap
+    print(f"    Pre-filter samples: {len(t5_rows)}")
+    t5_rows = filter_training_data(t5_rows)
+
     random.shuffle(t5_rows)
-    print(f"    Total training samples: {len(t5_rows)} (Creative Variation paradigm)")
+    print(f"    Total training samples: {len(t5_rows)} (Creative Variation paradigm, filtered)")
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_creative_v1"
+    out_dir = "./results/t5_xl_creative_v2"  # v2: filtered (no unicode garbage, no swap)
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING (Forza retraining per nuovo paradigma)
@@ -167,10 +222,10 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_report.txt"
+    output_file = "massive_t5_xl_creative_v2_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: Creative Variation Training (NOT Denoising)\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v2\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: Creative Variation (FILTERED: no unicode garbage, no swap)\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
