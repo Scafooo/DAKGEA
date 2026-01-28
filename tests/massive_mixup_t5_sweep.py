@@ -20,7 +20,7 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_t5_interpolator import MixupT5Interpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE QUALITÀ ---
+# --- CONFIGURAZIONE --- 
 MODEL_NAME = "google/flan-t5-large"
 BATCH_SIZE = 16 
 EPOCHS = 3 
@@ -29,7 +29,7 @@ MAX_ORPHANS_PER_PRED = 500
 SWEEP_SAMPLES = 50
 
 torch.backends.cudnn.benchmark = True
-logger = get_logger("FlanT5Quality")
+logger = get_logger("FlanT5HighQuality")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 def load_attr_names(dataset_path):
@@ -51,25 +51,25 @@ def clean_p(uri, attr_map):
 def calculate_score(orig, gen):
     gen_l, orig_l = gen.lower().strip(), orig.lower().strip()
     if len(gen_l) < 1: return -1.0
-    
-    # Se il modello ripete il prompt o genera garbage (troppo corto o ripetitivo)
-    if any(x in gen_l for x in ["paraphrase", "rewrite", ":"]): return -1.0
+    if any(x in gen_l for x in ["paraphrase", "the attribute", ":"]): return -1.0
     
     emb_orig = semantic_model.encode(orig_l, convert_to_tensor=True)
     emb_gen = semantic_model.encode(gen_l, convert_to_tensor=True)
     sim = util.cos_sim(emb_orig, emb_gen).item()
     
-    if sim < 0.6: return -1.0 # Penalità severa per bassa coerenza
+    if sim < 0.7: return -1.0
     
+    # Incoraggiamo la diversità: se è identico, lo score è basso
+    if gen_l == orig_l: return 0.5 
+    
+    # Score basato su sim + bonus per il cambiamento
     score = sim * 2.0
-    # Bonus se cambia parole ma mantiene sim alta
-    if set(gen_l.split()) != set(orig_l.split()): score += 1.0
     return score
 
-def run_t5_quality_flow():
-    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 LARGE - HIGH QUALITY PIPELINE ".center(98) + "█"); print("█"*100)
+def run_ultimate_quality_flow():
+    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 LARGE - HIGH QUALITY V2 (LABEL SMOOTHING) ".center(98) + "█"); print("█"*100)
 
-    # 1. CARICAMENTO E PREPARAZIONE
+    # 1. CARICAMENTO
     dataset_path = str(PROJECT_ROOT / "data/raw/openea/BBC_DB")
     reader = OpeneaDatasetReader()
     dataset = reader.read(dataset_path)
@@ -77,10 +77,9 @@ def run_t5_quality_flow():
     
     builder = MixupDataBuilder()
     _, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=10)
-    
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
 
-    print("    [1/4] Building clean training set...")
+    print("    [1/4] Building exhaustive training set...")
     t5_rows = []
     src_lits = defaultdict(list)
     for s, p, o in kg_src.triples((None, None, None)):
@@ -89,49 +88,47 @@ def run_t5_quality_flow():
     for s, p, o in kg_tgt.triples((None, None, None)):
         if isinstance(o, Literal): tgt_lits[s].append((p, str(o)))
 
-    # A. Aligned data (Bidirezionale)
     aligned_test_pool = defaultdict(list)
     for s_uri, t_uri in dataset.aligned_entities:
         s_attrs = src_lits.get(s_uri, [])
         t_attrs = tgt_lits.get(t_uri, [])
         for ps, vs in s_attrs:
-            p_name = clean_p(ps, attr_map)
+            p_name = clean_p(ps, attr_map).replace('_', ' ')
             for pt, vt in t_attrs:
                 if canonical_map.get(str(ps)) == canonical_map.get(str(pt)):
-                    t5_rows.append({"input": f"paraphrase {p_name}: {vs}", "target": vt})
-                    t5_rows.append({"input": f"paraphrase {p_name}: {vt}", "target": vs})
+                    # Formato Prompt: "paraphrase the [p]: [v]"
+                    t5_rows.append({"input": f"paraphrase the {p_name}: {vs}", "target": vt})
+                    t5_rows.append({"input": f"paraphrase the {p_name}: {vt}", "target": vs})
                     aligned_test_pool[p_name].append((vs, vt))
                     break
     
-    # B. Stratified Orphans
     orphans_by_pred = defaultdict(list)
     for s, p, o in list(kg_src.triples((None, None, None))) + list(kg_tgt.triples((None, None, None))):
         if isinstance(o, Literal):
             val = str(o).strip()
             if val:
-                p_name = clean_p(p, attr_map)
+                p_name = clean_p(p, attr_map).replace('_', ' ')
                 orphans_by_pred[p_name].append(val)
     
     for p_name, vals in orphans_by_pred.items():
         unique_vals = list(set(vals))
         selected = random.sample(unique_vals, min(len(unique_vals), MAX_ORPHANS_PER_PRED))
         for v in selected:
-            t5_rows.append({"input": f"paraphrase {p_name}: {v}", "target": v})
+            t5_rows.append({"input": f"paraphrase the {p_name}: {v}", "target": v})
 
     random.shuffle(t5_rows)
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    out_dir = "./results/sweep_model_flan_t5_large_quality_v1"
+    out_dir = "./results/sweep_model_flan_t5_large_v2"
     interpolator = MixupT5Interpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
-    # 2. TRAINING (Pulito, No Noise)
+    # 2. TRAINING
     if not (Path(out_dir) / "pytorch_model.bin").exists() and not (Path(out_dir) / "model.safetensors").exists():
-        print(f"    [2/4] Starting Fine-tuning ({len(t5_rows)} samples, LR=5e-5)...")
+        print(f"    [2/4] Fine-tuning with Label Smoothing...")
         interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=5e-5, force_retrain=True)
-    else:
-        print(f"    [2/4] Quality model found.")
+    else: print(f"    [2/4] Model ready.")
 
-    # 3. SWEEP (Conservativo)
-    print(f"\n>>> PHASE 3: SWEEP FOR OPTIMAL HYPERPARAMETERS")
+    # 3. SWEEP (Ricerca della diversità)
+    print(f"\n>>> PHASE 3: SWEEPING FOR DIVERSITY")
     sweep_pool = []
     all_test_preds = list(aligned_test_pool.keys())
     for _ in range(SWEEP_SAMPLES):
@@ -140,10 +137,9 @@ def run_t5_quality_flow():
         sweep_pool.append((p, v1, v2))
 
     sweep_results = []
-    # Testiamo parametri più stabili
     for a in [0.3, 0.5]:
-        for n in [0.0, 0.02]: # Rumore quasi assente o minimo
-            for t in [0.0, 0.7]: # 0.0 = greedy search (massima stabilità)
+        for n in [0.02, 0.05]: # Sempre un po' di rumore
+            for t in [0.7, 1.0]: # Temperatura moderata
                 interpolator.latent_noise_std, interpolator.gen_temperature = n, t
                 scs = []
                 for p, v1, v2 in sweep_pool:
@@ -151,7 +147,7 @@ def run_t5_quality_flow():
                     scs.append((calculate_score(v1, a1) + calculate_score(v2, a2))/2)
                 avg = np.mean(scs)
                 sweep_results.append({"a": a, "n": n, "t": t, "score": avg})
-                print(f"      - Alpha={a} Noise={n} Temp={t} -> Score: {avg:.3f}")
+                print(f"      - A={a} N={n} T={t} -> Score: {avg:.3f}")
     
     best = sorted(sweep_results, key=lambda x: x['score'], reverse=True)[0]
     print(f"    BEST CONFIG: {best}")
@@ -163,15 +159,14 @@ def run_t5_quality_flow():
     
     output_file = "massive_t5_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5 HIGH QUALITY REPORT\n")
-        f.write(f"Config: {best} | Model: Large | Mode: Paraphrase\n")
+        f.write("DAKGEA FLAN-T5 HIGH QUALITY REPORT V2\n")
+        f.write(f"Best Config: {best} | Label Smoothing: 0.1\n")
         f.write("="*120 + "\n\n")
         
-        # SECTION 1: ALIGNED
         f.write("SECTION 1: ALIGNED PAIRS (STRATIFIED MIX-UP)\n" + "-"*80 + "\n")
         gen_count = 0
         p_names = sorted(list(aligned_test_pool.keys()))
-        while gen_count < TOTAL_REPORT_SAMPLES and p_names:
+        while gen_count < SAMPLES_ALIGNED_REPORT and p_names:
             for p in p_names[:]:
                 if not aligned_test_pool[p]: p_names.remove(p); continue
                 v1, v2 = aligned_test_pool[p].pop(random.randrange(len(aligned_test_pool[p])))
@@ -180,13 +175,12 @@ def run_t5_quality_flow():
                 f.write(f"         | {' ':20} | V2: {v2[:35]:35} -> AUG: {ab[:35]:35}\n")
                 f.write("-" * 120 + "\n")
                 gen_count += 1
-                if gen_count >= TOTAL_REPORT_SAMPLES: break
+                if gen_count >= SAMPLES_ALIGNED_REPORT: break
 
-        # SECTION 2: ORPHANS
         f.write("\n\nSECTION 2: ORPHAN ATTRIBUTES (STRATIFIED PARAPHRASE)\n" + "-"*80 + "\n")
         o_count = 0
         o_p_names = sorted(list(orphans_by_pred.keys()))
-        while o_count < MAX_ORPHANS_PER_PRED and o_p_names:
+        while o_count < SAMPLES_ORPHAN_REPORT and o_p_names:
             for p in o_p_names[:]:
                 if not orphans_by_pred[p]: o_p_names.remove(p); continue
                 val = orphans_by_pred[p].pop(random.randrange(len(orphans_by_pred[p])))
@@ -194,10 +188,9 @@ def run_t5_quality_flow():
                 sim = util.cos_sim(semantic_model.encode(val), semantic_model.encode(aa)).item()
                 f.write(f"ORPHAN {o_count+1:03d} | {p:20} | ORIG: {val[:45]:45} -> PARAPHRASE: {aa[:45]:45} (Sim: {sim:.2f})\n")
                 o_count += 1
-                if o_count >= MAX_ORPHANS_PER_PRED: break
+                if o_count >= SAMPLES_ORPHAN_REPORT: break
             
-    print(f"\n>>> SUCCESS: Quality Report saved to {output_file}")
+    print(f"\n>>> SUCCESS: Report saved to {output_file}")
 
 if __name__ == "__main__":
-    random.seed(42); np.random.seed(42)
-    run_t5_quality_flow()
+    run_ultimate_quality_flow()

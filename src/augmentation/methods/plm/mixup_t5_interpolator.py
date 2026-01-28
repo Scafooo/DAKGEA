@@ -40,15 +40,12 @@ class MixupT5Interpolator:
         self.max_len_in = max_len_in
         self.reuse_if_available = reuse_if_available
 
-        # Parametri di default STABILI
-        self.latent_noise_std = 0.02
-        self.gen_temperature = 0.7
+        # Parametri di default equilibrati
+        self.latent_noise_std = 0.05
+        self.gen_temperature = 0.8
         self.gen_num_beams = 5
-        self.gen_repetition_penalty = 1.2
+        self.gen_repetition_penalty = 1.5 # Aumentato per evitare loop
         
-        # Creative Mode params
-        self.creative_temp = 1.2
-        self.creative_noise = 0.1
         self.similarity_threshold = 0.85
 
         self.model, self.tokenizer = self._load_or_init_model()
@@ -62,15 +59,15 @@ class MixupT5Interpolator:
         return model, tokenizer
 
     def _clean_output(self, text: str) -> str:
+        # Pulizia aggressiva per T5
         text = re.sub(r'<extra_id_\d+>', '', text)
-        text = re.sub(r'<[^>]*>', '', text)
+        text = re.sub(r'paraphrase.*:', '', text, flags=re.IGNORECASE)
         return re.sub(r'\s+', ' ', text).strip()
 
     def fine_tune(self, training_rows: List[Dict[str, str]], epochs: int = 5, batch_size: int = 16, lr: float = 5e-5, force_retrain: bool = False):
         def tokenize_fn(batch):
             mi = self.tokenizer(batch["input"], max_length=self.max_len_in, truncation=True, padding="max_length")
             lb = self.tokenizer(text_target=batch["target"], max_length=self.max_len_in, truncation=True, padding="max_length")
-            # Padding con -100 per T5
             labels = [[(l if l != self.tokenizer.pad_token_id else -100) for l in label_seq] for label_seq in lb["input_ids"]]
             mi["labels"] = labels
             return mi
@@ -85,10 +82,11 @@ class MixupT5Interpolator:
             weight_decay=0.01, 
             bf16=torch.cuda.is_available(),
             gradient_checkpointing=True, 
-            max_grad_norm=1.0, # Torniamo al clipping standard
+            label_smoothing_factor=0.1, # FONDAMENTALE: evita l'overfitting sulla copia identica
+            max_grad_norm=1.0,
             save_strategy="no", 
             report_to="none",
-            logging_steps=100
+            logging_steps=50
         )
         
         trainer = Seq2SeqTrainer(
@@ -102,16 +100,12 @@ class MixupT5Interpolator:
         self.tokenizer.save_pretrained(self.out_dir)
 
     def interpolate_pair(self, val_src: str, val_tgt: str, predicate: str = "", alpha: float = 0.5) -> Tuple[str, str]:
-        p_name = predicate.replace("<", "").replace(">", "").lower()
-        inputs = self.tokenizer([f"paraphrase {p_name}: {val_src}", f"paraphrase {p_name}: {val_tgt}"], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
-
-        # Selezione parametri in base alla similarità
-        w1, w2 = set(val_src.lower().split()), set(val_tgt.lower().split())
-        jaccard = len(w1 & w2) / len(w1 | w2) if (w1 | w2) else 1.0
-        use_creative = (jaccard > self.similarity_threshold)
+        # Prompt più esplicito per guidare il modello Large
+        p_name = predicate.replace("<", "").replace(">", "").lower().replace('_', ' ')
+        prompt_src = f"paraphrase the {p_name}: {val_src}"
+        prompt_tgt = f"paraphrase the {p_name}: {val_tgt}"
         
-        curr_noise = self.creative_noise if use_creative else self.latent_noise_std
-        curr_temp = self.creative_temp if use_creative else self.gen_temperature
+        inputs = self.tokenizer([prompt_src, prompt_tgt], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
 
         self.model.eval()
         with torch.no_grad():
@@ -121,10 +115,10 @@ class MixupT5Interpolator:
             H_mix_A = (1.0 - alpha) * H_A + alpha * H_B
             H_mix_B = alpha * H_A + (1.0 - alpha) * H_B
             
-            if curr_noise > 0:
-                n_a = torch.randn_like(H_mix_A) * curr_noise
-                n_b = torch.randn_like(H_mix_B) * curr_noise
-                H_mix_A += n_a; H_mix_B += n_b
+            # Aggiungiamo sempre un minimo di rumore per garantire diversità
+            curr_noise = max(self.latent_noise_std, 0.01)
+            H_mix_A += torch.randn_like(H_mix_A) * curr_noise
+            H_mix_B += torch.randn_like(H_mix_B) * curr_noise
 
             H_f = torch.cat([H_mix_A, H_mix_B], dim=0)
             m_f = torch.cat([inputs.attention_mask[0:1], inputs.attention_mask[1:2]], dim=0)
@@ -133,8 +127,8 @@ class MixupT5Interpolator:
                 encoder_outputs=BaseModelOutput(last_hidden_state=H_f), 
                 attention_mask=m_f, 
                 max_new_tokens=64,
-                do_sample=(curr_temp > 0),
-                temperature=curr_temp,
+                do_sample=True,
+                temperature=max(self.gen_temperature, 0.5), # Mai sotto 0.5
                 num_beams=self.gen_num_beams,
                 repetition_penalty=self.gen_repetition_penalty
             )
