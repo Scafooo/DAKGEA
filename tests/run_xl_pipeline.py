@@ -22,15 +22,15 @@ from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 from src.augmentation.methods.plm.scoring import calculate_pair_score, calculate_score
 from src.augmentation.methods.plm.noise_generator import VariationGenerator
 
-# --- CONFIGURAZIONE XL ---
+# --- CONFIGURAZIONE XL BF16 (ALTA QUALITÀ) ---
 MODEL_NAME = "google/flan-t5-xl"
-BATCH_SIZE = 4 
+BATCH_SIZE = 16 # Sfruttiamo i 24GB della 4090
 EPOCHS = 3
 TOTAL_REPORT_SAMPLES = 200 
 MAX_ORPHANS_PER_PRED = 300
 SWEEP_SAMPLES = 50
 
-logger = get_logger("FlanT5XL_SmartAug")
+logger = get_logger("FlanT5XL_Production")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
 variation_gen = VariationGenerator()
 
@@ -51,7 +51,7 @@ def clean_p(uri, attr_map):
     return uri_str.split('/')[-1].split('#')[-1].replace('>', '').replace('<', '').lower()
 
 def run_xl_pipeline():
-    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 XL (3B) - SMART HYBRID AUGMENTATION ".center(98) + "█"); print("█"*100)
+    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 XL (3B) - PRODUCTION BF16 PIPELINE ".center(98) + "█"); print("█"*100)
 
     # 1. DATA
     dataset_path = str(PROJECT_ROOT / "data/raw/openea/BBC_DB")
@@ -62,7 +62,7 @@ def run_xl_pipeline():
     _, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=10)
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
 
-    print("    [1/4] Building Training Data (Hybrid Strategy)...")
+    print("    [1/4] Building Training Data (Hybrid Production Strategy)...")
     t5_rows = []
     src_lits = defaultdict(list)
     for s, p, o in kg_src.triples((None, None, None)):
@@ -71,7 +71,7 @@ def run_xl_pipeline():
     for s, p, o in kg_tgt.triples((None, None, None)):
         if isinstance(o, Literal): tgt_lits[s].append((p, str(o)))
 
-    # A. Aligned Data (Filtro identità e swap)
+    # A. Aligned
     aligned_test_pool = defaultdict(list)
     for s_uri, t_uri in dataset.aligned_entities:
         s_attrs = src_lits.get(s_uri, [])
@@ -103,16 +103,15 @@ def run_xl_pipeline():
         unique_vals = list(set(vals))
         selected = random.sample(unique_vals, min(len(unique_vals), MAX_ORPHANS_PER_PRED))
         for v in selected:
-            # DETERMINIAMO LA STRATEGIA IN BASE AL TIPO
-            is_name = not any(c.isdigit() for c in v) and 2 <= len(v.split()) <= 3
+            word_count = len(v.split())
+            is_name = not any(c.isdigit() for c in v) and 2 <= word_count <= 3
             
             if is_name:
-                # STRATEGIA NOMI: Variazione Attiva (Target è diverso)
                 v_target = variation_gen.generate(v, predicate=p_name)
                 if v_target != v:
                     t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {v}", "target": v_target})
             else:
-                # STRATEGIA ID/DATE: Denoising (Target è originale pulito)
+                # Per ID/Date facciamo denoising: sporchiamo l'input
                 v_noisy = variation_gen.generate(v, predicate=p_name)
                 if v_noisy != v:
                     t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {v_noisy}", "target": v})
@@ -120,17 +119,17 @@ def run_xl_pipeline():
     random.shuffle(t5_rows)
     print(f"    Total training samples: {len(t5_rows)}")
 
-    # 2. MODEL XL (BF16 + LoRA)
+    # 2. MODEL XL (BF16 + LoRA - NO QUANTIZATION)
     device = "cuda"
-    out_dir = "./results/t5_xl_lora_hybrid_v1"
+    out_dir = "./results/t5_xl_bf16_production_v1"
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING
     if not (Path(out_dir) / "adapter_model.bin").exists() and not (Path(out_dir) / "adapter_model.safetensors").exists():
-        interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=1e-3)
-    else: print("    [2/4] XL Adapters ready.")
+        interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=5e-4) # LR bilanciato per BF16 LoRA
+    else: print("    [2/4] Adapters ready.")
 
-    # 3. SWEEP (Ricerca parametri ottimali)
+    # 3. SWEEP
     print(f"\n>>> PHASE 3: SWEEPING")
     sweep_pool = []
     all_test_preds = list(aligned_test_pool.keys())
@@ -141,28 +140,28 @@ def run_xl_pipeline():
 
     sweep_results = []
     for a in [0.3, 0.5]:
-        for n in [0.05, 0.1]:
-            for t in [0.9, 1.2]:
+        for n in [0.03, 0.06]:
+            for t in [0.8, 1.1]:
                 interpolator.latent_noise_std, interpolator.gen_temperature = n, t
-                scs = []
+                scs, base_scs, bonuses = [], [], []
                 for p, v1, v2 in sweep_pool:
                     aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=a)
                     res = calculate_pair_score(v1, v2, aa, ab)
-                    scs.append(res['score'])
-                avg = np.mean(scs)
+                    scs.append(res['score']); base_scs.append(res['base_score']); bonuses.append(res['coherence_bonus'])
+                avg, avg_b, avg_bn = np.mean(scs), np.mean(base_scs), np.mean(bonuses)
                 sweep_results.append({"a": a, "n": n, "t": t, "score": avg})
-                print(f"      - Alpha={a} Noise={n} Temp={t} -> Score: {avg:.3f}")
+                print(f"      - Alpha={a} Noise={n} Temp={t} -> TOTAL: {avg:.3f} (Base: {avg_b:.3f}, Bonus: {avg_bn:.3f})")
     
     best = sorted(sweep_results, key=lambda x: x['score'], reverse=True)[0]
     print(f"    BEST CONFIG: {best}")
 
     # 4. REPORT
-    print(f"    [4/4] Generating Hybrid Augmentation Report...")
+    print(f"    [4/4] Generating Production Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
     output_file = "massive_t5_xl_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) HYBRID REPORT\n")
-        f.write(f"Strategy: Aligned + [Nomi: Variation Training] + [ID/Date: Denoising Training]\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) PRODUCTION BF16 REPORT\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: Hybrid Augmentation\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -182,7 +181,7 @@ def run_xl_pipeline():
                 if count >= TOTAL_REPORT_SAMPLES // 2: break
 
         # Orphans
-        f.write("\nSECTION 2: ORPHAN HYBRID VARIATIONS (XL)\n" + "-"*80 + "\n")
+        f.write("\nSECTION 2: ORPHAN VARIATIONS (XL)\n" + "-"*80 + "\n")
         o_names = sorted(list(orphans_by_pred.keys()))
         o_count = 0
         while o_count < TOTAL_REPORT_SAMPLES // 2 and o_names:
@@ -195,7 +194,7 @@ def run_xl_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
-    print(f"\n>>> SUCCESS: XL Report saved to {output_file}")
+    print(f"\n>>> SUCCESS: XL Production Report saved to {output_file}")
 
 if __name__ == "__main__":
     run_xl_pipeline()
