@@ -24,7 +24,7 @@ from datasets import Dataset as HFDataset
 logger = logging.getLogger(__name__)
 
 class MixupT5Interpolator:
-    """T5 Interpolator ottimizzato per la diversità semantica."""
+    """T5 Interpolator standard per Denoising e Mixup."""
 
     def __init__(
         self,
@@ -40,12 +40,11 @@ class MixupT5Interpolator:
         self.max_len_in = max_len_in
         self.reuse_if_available = reuse_if_available
 
-        # Parametri di generazione per DIVERSITÀ
-        self.latent_noise_std = 0.05
+        # Parametri di generazione standard
         self.gen_temperature = 0.7
         self.gen_num_beams = 5
-        self.gen_repetition_penalty = 3.0 # Molto alto per uccidere i loop
-        self.gen_top_p = 0.85
+        self.gen_repetition_penalty = 2.5
+        self.gen_top_p = 0.9
         
         self.model, self.tokenizer = self._load_or_init_model()
 
@@ -57,9 +56,8 @@ class MixupT5Interpolator:
         return model, tokenizer
 
     def _clean_output(self, text: str) -> str:
-        # Rimuove rimasugli del prompt o tag
         text = re.sub(r'<extra_id_\d+>', '', text)
-        text = re.sub(r'^.*[|:]\s*', '', text) # Rimuove tutto ciò che precede | o :
+        text = re.sub(r'^.*[|:]\s*', '', text) 
         return re.sub(r'\s+', ' ', text).strip()
 
     def fine_tune(self, training_rows: List[Dict[str, str]], epochs: int = 5, batch_size: int = 16, lr: float = 3e-5, force_retrain: bool = False):
@@ -80,7 +78,6 @@ class MixupT5Interpolator:
             weight_decay=0.01, 
             bf16=torch.cuda.is_available(),
             gradient_checkpointing=True, 
-            label_smoothing_factor=0.15, # Aumentato per rompere il bias di identità
             save_strategy="no", 
             report_to="none",
             logging_steps=50
@@ -92,10 +89,9 @@ class MixupT5Interpolator:
         self.tokenizer.save_pretrained(self.out_dir)
 
     def interpolate_pair(self, val_src: str, val_tgt: str, predicate: str = "", alpha: float = 0.5) -> Tuple[str, str]:
-        # Formato prompt asciutto e chiaro
         p_name = predicate.replace("<", "").replace(">", "").lower().replace('_', ' ')
-        prompt_src = f"{p_name} | {val_src}"
-        prompt_tgt = f"{p_name} | {val_tgt}"
+        prompt_src = f"paraphrase the {p_name}: {val_src}"
+        prompt_tgt = f"paraphrase the {p_name}: {val_tgt}"
         
         inputs = self.tokenizer([prompt_src, prompt_tgt], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
 
@@ -104,14 +100,10 @@ class MixupT5Interpolator:
             enc_out = self.model.encoder(input_ids=inputs.input_ids, attention_mask=inputs.attention_mask)
             H_A, H_B = enc_out.last_hidden_state[0:1], enc_out.last_hidden_state[1:2]
             
+            # Mixup semplice senza rumore gaussiano (per ora)
             H_mix_A = (1.0 - alpha) * H_A + alpha * H_B
             H_mix_B = alpha * H_A + (1.0 - alpha) * H_B
             
-            if self.latent_noise_std > 0:
-                H_mix_A += torch.randn_like(H_mix_A) * self.latent_noise_std
-                H_mix_B += torch.randn_like(H_mix_B) * self.latent_noise_std
-
-            # Unione maschere per non perdere dettagli
             m_f = (inputs.attention_mask[0:1] | inputs.attention_mask[1:2]).repeat(2, 1)
             H_f = torch.cat([H_mix_A, H_mix_B], dim=0)
             
