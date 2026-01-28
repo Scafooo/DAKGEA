@@ -1,0 +1,798 @@
+"""
+Creative Variation Generator per Training Mix-up.
+
+NUOVO PARADIGMA: Input → Variazione Creativa
+(Invece di Denoising: Corrupted → Original)
+
+CLASSIFICAZIONE PER CONTENUTO (non predicato!):
+1. NUMERICO/DATA/ID → pattern detection → trattamento speciale
+2. TESTO CORTO (≤3 parole) → VARIAZIONI FORTI (nomi, titoli)
+3. TESTO LUNGO (>3 parole) → riformulazione, shuffle
+
+OSIAMO DI PIÙ: Lo scoring filtra il garbage!
+"""
+
+import random
+import re
+from typing import Optional, List, Tuple
+from difflib import SequenceMatcher
+
+
+# Soglia parole per distinguere corto/lungo
+SHORT_TEXT_THRESHOLD = 3
+
+# Vocali per validazione
+VOWELS = set('aeiouAEIOU')
+
+# Cluster di consonanti impossibili all'inizio
+IMPOSSIBLE_STARTS = {'sn', 'sr', 'sb', 'sd', 'sf', 'sg', 'sv', 'sz',
+                     'nm', 'ng', 'nr', 'nl', 'nb', 'nd',
+                     'mr', 'ml', 'mn', 'mt', 'md',
+                     'lr', 'lm', 'ln', 'lt', 'ld', 'lk',
+                     'tn', 'tm', 'tk', 'tp', 'tb', 'td',
+                     'pn', 'pm', 'pk', 'pb', 'pd',
+                     'bn', 'bm', 'bk', 'bp', 'bd',
+                     'dn', 'dm', 'dk', 'dp', 'db'}
+
+
+def _is_plausible_name(text: str) -> bool:
+    """
+    Verifica se un testo "suona" come un nome plausibile.
+
+    Regole:
+    1. Deve avere almeno una vocale
+    2. Non più di 3 consonanti consecutive
+    3. Non iniziare con cluster impossibili
+    """
+    text_lower = text.lower().strip()
+
+    if len(text_lower) < 2:
+        return True  # Troppo corto per giudicare
+
+    # 1. Almeno una vocale
+    if not any(c in VOWELS for c in text_lower):
+        return False
+
+    # 2. Max 3 consonanti consecutive
+    consonant_count = 0
+    for c in text_lower:
+        if c.isalpha() and c not in VOWELS:
+            consonant_count += 1
+            if consonant_count > 3:
+                return False
+        else:
+            consonant_count = 0
+
+    # 3. Check inizio
+    if len(text_lower) >= 2:
+        start = text_lower[:2]
+        if start in IMPOSSIBLE_STARTS:
+            return False
+
+    return True
+
+
+class CreativeVariationGenerator:
+    """Genera variazioni creative per il training."""
+
+    # Suffissi comuni per nomi
+    NAME_SUFFIXES = ["son", "sen", "s", "ez", "ski", "ov", "ini"]
+
+    # Mappatura vocali per variazioni ortografiche
+    VOWEL_VARIANTS = {
+        'a': ['a', 'ae', 'ah'],
+        'e': ['e', 'ee', 'ea'],
+        'i': ['i', 'y', 'ie'],
+        'o': ['o', 'oh', 'ou'],
+        'u': ['u', 'oo', 'ou'],
+    }
+
+    def __init__(
+        self,
+        abbrev_prob: float = 0.20,
+        ortho_prob: float = 0.20,
+        mix_prob: float = 0.20,
+        swap_prob: float = 0.15,
+        combo_prob: float = 0.25,  # NUOVO: combinazione di strategie
+    ):
+        """
+        Args:
+            abbrev_prob: Probabilità di abbreviazione
+            ortho_prob: Probabilità di variazione ortografica
+            mix_prob: Probabilità di mix (richiede other_text)
+            swap_prob: Probabilità di swap + variazione
+            combo_prob: Probabilità di combo (2 strategie insieme)
+        """
+        self.abbrev_prob = abbrev_prob
+        self.ortho_prob = ortho_prob
+        self.mix_prob = mix_prob
+        self.swap_prob = swap_prob
+        self.combo_prob = combo_prob
+
+    def _detect_type(self, text: str) -> str:
+        """
+        Rileva il tipo basandosi SOLO sul contenuto (non predicato!).
+
+        Returns: 'numeric', 'short', 'long'
+        """
+        text_clean = text.strip()
+
+        # 1. NUMERICO: date, numeri, ID, codici
+        # Pattern data (2023-01-15, 15/01/2023, etc)
+        if re.match(r'^\d{4}[-/]\d{2}[-/]\d{2}', text_clean) or \
+           re.match(r'^\d{2}[-/]\d{2}[-/]\d{4}', text_clean):
+            return 'numeric'
+
+        # Solo numeri
+        if re.match(r'^[\d\s\-/:.]+$', text_clean):
+            return 'numeric'
+
+        # Codici alfanumerici: DEVE contenere numeri, non solo lettere!
+        # "ABC123XYZ" → numeric, "supertramp" → short
+        if re.match(r'^[A-Za-z0-9\-_]{5,}$', text_clean) and ' ' not in text_clean:
+            # Solo se contiene ALMENO un numero
+            if any(c.isdigit() for c in text_clean):
+                return 'numeric'
+
+        # URL, email
+        if re.match(r'^https?://', text_clean) or '@' in text_clean:
+            return 'numeric'
+
+        # 2. BASATO SU LUNGHEZZA
+        words = [w for w in text_clean.split() if len(w) > 0]
+
+        if len(words) <= SHORT_TEXT_THRESHOLD:
+            return 'short'  # Nomi, titoli → VARIAZIONI FORTI
+        return 'long'  # Descrizioni → riformulazione
+
+    def generate(self, text: str, other_text: Optional[str] = None, predicate: Optional[str] = None) -> str:
+        """
+        Genera una variazione creativa del testo.
+
+        Classificazione per CONTENUTO (non predicato!):
+        - numeric: date, numeri, ID → trattamento speciale
+        - short (≤3 parole): nomi, titoli → VARIAZIONI FORTI
+        - long (>3 parole): descrizioni → riformulazione
+
+        Args:
+            text: Testo originale
+            other_text: Testo opzionale per mix
+            predicate: Ignorato (kept for compatibility)
+
+        Returns:
+            Variazione creativa del testo
+        """
+        if not text or len(text.strip()) < 2:
+            return text
+
+        # Rileva tipo basato su CONTENUTO
+        data_type = self._detect_type(text)
+
+        # === NUMERICO: date, numeri, ID ===
+        if data_type == 'numeric':
+            return self._vary_numeric(text)
+
+        # === TESTO LUNGO (>3 parole): riformulazione ===
+        if data_type == 'long':
+            return self._vary_long_text(text)
+
+        # === TESTO CORTO (≤3 parole): VARIAZIONI FORTI! ===
+        words = text.strip().split()
+        if not words:
+            return text
+
+        # PAROLA SINGOLA LUNGA (>6 char): strategie conservative per evitare garbage
+        if len(words) == 1 and len(words[0]) > 6:
+            return self._vary_single_long_word(words[0])
+
+        # MULTI-PAROLA o PAROLA CORTA: variazioni aggressive
+        r = random.random()
+
+        # 25% COMBO (2-3 strategie insieme!)
+        if r < 0.25:
+            return self._combo_variation_aggressive(words, other_text)
+
+        # 25% MIX (se disponibile other_text)
+        if r < 0.50 and other_text:
+            return self._mix_texts_aggressive(words, other_text)
+
+        # 20% ABBREVIAZIONE (solo se multi-parola)
+        if r < 0.70 and len(words) >= 2:
+            return self._abbreviate(words)
+
+        # 20% ORTOGRAFICA
+        if r < 0.90:
+            return self._orthographic_variation_strong(words)
+
+        # 10% SWAP (solo se multi-parola)
+        if len(words) >= 2:
+            return self._swap_and_vary(words)
+
+        return self._orthographic_variation_strong(words)
+
+    def _vary_numeric(self, text: str) -> str:
+        """
+        Variazione FORTE per contenuti numerici!
+        - Numeri: swap cifre, nuovi numeri (stessa lunghezza)
+        - Date: cambio formato
+        - Codici: shuffle caratteri
+        """
+        text = text.strip()
+
+        # Pattern data YYYY-MM-DD → cambio formato
+        match = re.match(r'^(\d{4})[-/](\d{2})[-/](\d{2})', text)
+        if match:
+            y, m, d = match.groups()
+            months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            m_idx = int(m) - 1
+            if 0 <= m_idx < 12:
+                formats = [
+                    f"{int(d)} {months[m_idx]} {y}",
+                    f"{d}/{m}/{y}",
+                    f"{m}/{d}/{y}",
+                    f"{y}{m}{d}",  # Compatto
+                ]
+                return random.choice(formats)
+
+        # Pattern solo anno → variazione +/- qualche anno
+        if re.match(r'^\d{4}$', text):
+            year = int(text)
+            delta = random.choice([-2, -1, 1, 2])
+            return str(year + delta)
+
+        # NUMERI PURI → variazione FORTE!
+        if re.match(r'^\d+$', text):
+            strategy = random.choice(['shuffle', 'new', 'reverse', 'partial'])
+
+            if strategy == 'shuffle':
+                # Shuffle delle cifre
+                digits = list(text)
+                random.shuffle(digits)
+                return ''.join(digits)
+
+            elif strategy == 'new':
+                # Nuovi numeri casuali, stessa lunghezza
+                return ''.join(random.choices('0123456789', k=len(text)))
+
+            elif strategy == 'reverse':
+                # Reverse
+                return text[::-1]
+
+            else:  # partial
+                # Cambia alcune cifre
+                digits = list(text)
+                n_change = max(1, len(digits) // 3)
+                for _ in range(n_change):
+                    idx = random.randint(0, len(digits) - 1)
+                    digits[idx] = random.choice('0123456789')
+                return ''.join(digits)
+
+        # CODICI ALFANUMERICI → shuffle o partial change
+        if re.match(r'^[A-Za-z0-9\-_]+$', text) and ' ' not in text:
+            chars = list(text)
+            if random.random() < 0.5:
+                # Shuffle
+                random.shuffle(chars)
+            else:
+                # Cambia alcuni caratteri
+                n_change = max(1, len(chars) // 4)
+                for _ in range(n_change):
+                    idx = random.randint(0, len(chars) - 1)
+                    if chars[idx].isdigit():
+                        chars[idx] = random.choice('0123456789')
+                    elif chars[idx].isupper():
+                        chars[idx] = random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+                    elif chars[idx].islower():
+                        chars[idx] = random.choice('abcdefghijklmnopqrstuvwxyz')
+            return ''.join(chars)
+
+        # URL/email: invariato (troppo rischioso)
+        if 'http' in text.lower() or '@' in text:
+            return text
+
+        return text
+
+    def _vary_single_long_word(self, word: str) -> str:
+        """
+        Variazione SICURA per parole singole lunghe (>6 caratteri).
+        NO shuffle completo che produce garbage!
+
+        "supertramp" → "Supertrampson", "SuperTramp", "supertramps"
+        """
+        strategy = random.choice([
+            'suffix', 'prefix', 'camel', 'typo_safe', 'double_letter'
+        ])
+
+        if strategy == 'suffix':
+            return word + random.choice(self.NAME_SUFFIXES)
+
+        elif strategy == 'prefix':
+            prefixes = ['The ', 'Super', 'New', 'Neo', 'Ultra']
+            return random.choice(prefixes) + word
+
+        elif strategy == 'camel':
+            # CamelCase: supertramp → SuperTramp
+            mid = len(word) // 2
+            return word[:mid].title() + word[mid:].title()
+
+        elif strategy == 'typo_safe':
+            # Singolo typo sicuro (non distruttivo)
+            chars = list(word)
+            # Cambia UNA vocale o raddoppia UNA consonante
+            vowel_idx = [i for i, c in enumerate(chars) if c.lower() in VOWELS]
+            if vowel_idx and random.random() < 0.5:
+                idx = random.choice(vowel_idx)
+                # Cambia vocale
+                vowels = 'aeiou'
+                current = chars[idx].lower()
+                new_vowel = random.choice([v for v in vowels if v != current])
+                chars[idx] = new_vowel if chars[idx].islower() else new_vowel.upper()
+            else:
+                # Raddoppia una lettera
+                idx = random.randint(1, len(chars) - 2)
+                chars.insert(idx, chars[idx])
+            return ''.join(chars)
+
+        else:  # double_letter
+            idx = random.randint(1, len(word) - 2)
+            return word[:idx] + word[idx] + word[idx:]
+
+    def _vary_long_text(self, text: str) -> str:
+        """
+        Variazione per testi lunghi: riordino, taglio, sinonimi base.
+        """
+        words = text.split()
+
+        strategy = random.choice(['shuffle_part', 'truncate', 'reorder'])
+
+        if strategy == 'shuffle_part':
+            # Mescola una porzione
+            start = random.randint(0, len(words) // 2)
+            end = start + random.randint(2, 4)
+            portion = words[start:end]
+            random.shuffle(portion)
+            words[start:end] = portion
+
+        elif strategy == 'truncate':
+            # Taglia (summarization)
+            keep = int(len(words) * random.uniform(0.5, 0.8))
+            words = words[:keep]
+
+        elif strategy == 'reorder':
+            # Sposta una frase
+            if len(words) > 6:
+                mid = len(words) // 2
+                words = words[mid:] + words[:mid]
+
+        return " ".join(words)
+
+    def _abbreviate(self, words: List[str]) -> str:
+        """
+        Abbrevia una o più parole.
+        "John Smith" → "J. Smith" o "John S." o "J. S."
+        """
+        if len(words) < 1:
+            return " ".join(words)
+
+        result = words.copy()
+        # Scegli quante parole abbreviare (1 o più)
+        n_abbrev = random.randint(1, min(2, len(words)))
+        indices = random.sample(range(len(words)), n_abbrev)
+
+        for idx in indices:
+            word = result[idx]
+            if len(word) > 1 and word[0].isalpha():
+                result[idx] = word[0].upper() + "."
+
+        return " ".join(result)
+
+    def _orthographic_variation(self, words: List[str]) -> str:
+        """
+        Crea variazione ortografica.
+        "Smith" → "Smyth", "Smithson", "Smiths"
+        """
+        if not words:
+            return ""
+
+        result = words.copy()
+        idx = random.randint(0, len(words) - 1)
+        word = result[idx]
+
+        if len(word) < 3:
+            return " ".join(result)
+
+        variation_type = random.choice(['suffix', 'vowel', 'double', 'case'])
+
+        if variation_type == 'suffix':
+            # Aggiungi suffisso
+            suffix = random.choice(self.NAME_SUFFIXES)
+            result[idx] = word + suffix
+
+        elif variation_type == 'vowel':
+            # Cambia una vocale
+            for i, c in enumerate(word.lower()):
+                if c in self.VOWEL_VARIANTS:
+                    variants = [v for v in self.VOWEL_VARIANTS[c] if v != c]
+                    if variants:
+                        new_char = random.choice(variants)
+                        # Preserva case
+                        if word[i].isupper():
+                            new_char = new_char.upper()
+                        result[idx] = word[:i] + new_char + word[i+1:]
+                        break
+
+        elif variation_type == 'double':
+            # Raddoppia una consonante
+            consonants = [i for i, c in enumerate(word) if c.lower() not in 'aeiou' and c.isalpha()]
+            if consonants:
+                i = random.choice(consonants)
+                result[idx] = word[:i+1] + word[i] + word[i+1:]
+
+        elif variation_type == 'case':
+            # Cambia case pattern
+            result[idx] = word.title() if word.islower() else word.lower()
+
+        return " ".join(result)
+
+    def _mix_texts(self, words: List[str], other_text: str) -> str:
+        """
+        Crea mix tra due testi.
+        "John Smith" + "Mary Johnson" → "J. Marith" o "Mohn Johnsmith"
+        """
+        other_words = other_text.strip().split()
+        if not other_words:
+            return " ".join(words)
+
+        result = []
+        max_len = max(len(words), len(other_words))
+
+        for i in range(max_len):
+            w1 = words[i] if i < len(words) else ""
+            w2 = other_words[i] if i < len(other_words) else ""
+
+            if not w1:
+                result.append(w2)
+            elif not w2:
+                result.append(w1)
+            else:
+                # Mix delle due parole
+                mix_type = random.choice(['initial', 'blend', 'choose'])
+
+                if mix_type == 'initial':
+                    # Iniziale di una + resto dell'altra
+                    if random.random() < 0.5:
+                        result.append(w1[0].upper() + ".")
+                    else:
+                        result.append(w1[0] + w2[1:] if len(w2) > 1 else w1)
+
+                elif mix_type == 'blend':
+                    # Blend: prima metà di una + seconda metà dell'altra
+                    mid1, mid2 = len(w1) // 2, len(w2) // 2
+                    blended = w1[:mid1] + w2[mid2:]
+                    result.append(blended)
+
+                else:
+                    # Scegli una delle due
+                    result.append(random.choice([w1, w2]))
+
+        return " ".join(result)
+
+    def _swap_and_vary(self, words: List[str]) -> str:
+        """
+        Swap ordine + variazione leggera.
+        "John Smith" → "Smith J." o "Smithson John"
+        """
+        if len(words) < 2:
+            return " ".join(words)
+
+        result = words[::-1]  # Reverse
+
+        # Aggiungi variazione a una parola
+        if random.random() < 0.5:
+            idx = random.randint(0, len(result) - 1)
+            word = result[idx]
+            if len(word) > 2:
+                # Abbrevia o aggiungi suffisso
+                if random.random() < 0.5:
+                    result[idx] = word[0].upper() + "."
+                else:
+                    result[idx] = word + random.choice(self.NAME_SUFFIXES)
+
+        return " ".join(result)
+
+    def _light_variation(self, words: List[str]) -> str:
+        """Variazione leggera: case o punteggiatura."""
+        result = words.copy()
+        if result:
+            # Cambia case della prima parola
+            result[0] = result[0].title()
+        return " ".join(result)
+
+    def _combo_variation(self, words: List[str], other_text: Optional[str] = None) -> str:
+        """COMBO base: 2 strategie."""
+        return self._combo_variation_aggressive(words, other_text)
+
+    def _combo_variation_aggressive(self, words: List[str], other_text: Optional[str] = None) -> str:
+        """
+        COMBO AGGRESSIVO: Applica 2-3 strategie insieme!
+
+        Esempi:
+        - "John Smith" → abbrev + suffix + swap → "Smithson J."
+        - "Mary Johnson" → blend + abbrev → "M. Johnary"
+        """
+        if not words:
+            return ""
+
+        result = words.copy()
+
+        # Scegli 2-3 strategie
+        n_strategies = random.choice([2, 2, 3])  # Più spesso 2
+        strategies = ['abbrev', 'ortho_strong', 'swap', 'blend']
+        if other_text:
+            strategies.append('mix')
+
+        selected = random.sample(strategies, min(n_strategies, len(strategies)))
+
+        for strat in selected:
+            if strat == 'abbrev':
+                result = self._abbreviate(result).split()
+            elif strat == 'ortho_strong':
+                result = self._orthographic_variation_strong(result).split()
+            elif strat == 'swap' and len(result) >= 2:
+                result = result[::-1]
+            elif strat == 'blend' and len(result) >= 2:
+                # Blend parole adiacenti
+                idx = random.randint(0, len(result) - 2)
+                w1, w2 = result[idx], result[idx + 1]
+                blended = w1[:len(w1)//2] + w2[len(w2)//2:]
+                result = result[:idx] + [blended] + result[idx+2:]
+            elif strat == 'mix' and other_text:
+                result = self._mix_texts_aggressive(result, other_text).split()
+
+        return " ".join(result)
+
+    def _find_vowel_cut(self, word: str, prefer_after: bool = True) -> int:
+        """Trova un punto di taglio naturale (dopo una vocale)."""
+        vowel_positions = [i for i, c in enumerate(word) if c.lower() in VOWELS]
+
+        if not vowel_positions:
+            return len(word) // 2  # Fallback: metà
+
+        if prefer_after:
+            # Taglia DOPO una vocale (più naturale)
+            # Preferisci posizioni nel mezzo
+            mid = len(word) // 2
+            best = min(vowel_positions, key=lambda x: abs(x - mid))
+            return best + 1  # +1 per tagliare DOPO la vocale
+        else:
+            # Taglia PRIMA di una vocale
+            mid = len(word) // 2
+            best = min(vowel_positions, key=lambda x: abs(x - mid))
+            return best
+
+    def _mix_texts_aggressive(self, words: List[str], other_text: str) -> str:
+        """
+        MIX SMART: Blend che produce nomi PLAUSIBILI.
+
+        "John Smith" + "Mary Johnson" → "Jary Smithson" o "Mohn Johnsmith"
+        """
+        other_words = other_text.strip().split()
+        if not other_words:
+            return " ".join(words)
+
+        result = []
+        max_len = max(len(words), len(other_words))
+
+        for i in range(max_len):
+            w1 = words[i] if i < len(words) else ""
+            w2 = other_words[i] if i < len(other_words) else ""
+
+            if not w1:
+                result.append(w2)
+            elif not w2:
+                result.append(w1)
+            else:
+                # MIX SMART - con validazione
+                mix_type = random.choice(['blend_smart', 'initial_suffix', 'swap_parts'])
+
+                if mix_type == 'blend_smart':
+                    # Blend intelligente: taglia dopo vocale
+                    cut1 = self._find_vowel_cut(w1, prefer_after=True)
+                    cut2 = self._find_vowel_cut(w2, prefer_after=False)
+
+                    # Prova diverse combinazioni
+                    candidates = [
+                        w1[:cut1] + w2[cut2:],  # Prima parte w1 + seconda parte w2
+                        w2[:cut2] + w1[cut1:],  # Prima parte w2 + seconda parte w1
+                        w1[:2] + w2[2:],        # Iniziali w1 + resto w2
+                        w2[:2] + w1[2:],        # Iniziali w2 + resto w1
+                    ]
+
+                    # Scegli il primo plausibile
+                    for cand in candidates:
+                        if _is_plausible_name(cand):
+                            result.append(cand)
+                            break
+                    else:
+                        # Nessuno plausibile, usa il più sicuro
+                        result.append(w1[:2] + w2[2:] if len(w2) > 2 else w1)
+
+                elif mix_type == 'initial_suffix':
+                    # Iniziale + nome + suffisso
+                    if random.random() < 0.5:
+                        blended = w2 + random.choice(self.NAME_SUFFIXES)
+                    else:
+                        blended = w1 + random.choice(self.NAME_SUFFIXES)
+                    result.append(blended)
+
+                else:  # swap_parts
+                    # Scambia parti: cognome1 + nome2
+                    if i == 0:
+                        result.append(w2)  # Usa il nome dell'altro
+                    else:
+                        result.append(w1 + w2[-3:] if len(w2) > 3 else w1)
+
+        # Validazione finale
+        final = " ".join(result)
+        if all(_is_plausible_name(w) for w in final.split()):
+            return final
+        else:
+            # Fallback sicuro
+            return words[0] + other_words[-1] if other_words else " ".join(words)
+
+    def _orthographic_variation_strong(self, words: List[str]) -> str:
+        """
+        Variazione ortografica FORTE.
+
+        "Smith" → "Schmitt", "Smythe", "Smithsson"
+        """
+        if not words:
+            return ""
+
+        result = words.copy()
+        # Varia più parole se possibile
+        n_vary = min(len(words), random.randint(1, 2))
+        indices = random.sample(range(len(words)), n_vary)
+
+        for idx in indices:
+            word = result[idx]
+            if len(word) < 2:
+                continue
+
+            variation = random.choice([
+                'double_suffix', 'prefix', 'vowel_shift', 'consonant_double', 'creative_spelling'
+            ])
+
+            if variation == 'double_suffix':
+                # Doppio suffisso
+                suffix1 = random.choice(self.NAME_SUFFIXES)
+                suffix2 = random.choice(['', 'i', 'y', 'e'])
+                result[idx] = word + suffix1 + suffix2
+
+            elif variation == 'prefix':
+                # Aggiungi prefisso
+                prefixes = ['Mc', 'Mac', 'O\'', 'Van ', 'Von ', 'De ', 'La ']
+                result[idx] = random.choice(prefixes) + word
+
+            elif variation == 'vowel_shift':
+                # Shift di tutte le vocali
+                shifts = {'a': 'e', 'e': 'i', 'i': 'y', 'o': 'u', 'u': 'a',
+                          'A': 'E', 'E': 'I', 'I': 'Y', 'O': 'U', 'U': 'A'}
+                result[idx] = ''.join(shifts.get(c, c) for c in word)
+
+            elif variation == 'consonant_double':
+                # Raddoppia una consonante
+                consonants = [i for i, c in enumerate(word) if c.lower() not in 'aeiou' and c.isalpha()]
+                if consonants:
+                    i = random.choice(consonants)
+                    result[idx] = word[:i+1] + word[i] + word[i+1:]
+
+            else:  # creative_spelling
+                # Spelling creativo
+                replacements = [
+                    ('ph', 'f'), ('f', 'ph'),
+                    ('ck', 'k'), ('k', 'ck'),
+                    ('tion', 'shun'), ('sion', 'tion'),
+                    ('y', 'ie'), ('ie', 'y'),
+                    ('ee', 'ea'), ('ea', 'ee'),
+                ]
+                new_word = word
+                for old, new in replacements:
+                    if old in word.lower():
+                        new_word = word.replace(old, new).replace(old.upper(), new.upper())
+                        break
+                result[idx] = new_word
+
+        return " ".join(result)
+
+    def generate_multiple(
+        self,
+        text: str,
+        other_text: Optional[str] = None,
+        predicate: Optional[str] = None,
+        n: int = 3,
+        validate: bool = True
+    ) -> List[str]:
+        """
+        Genera multiple variazioni diverse e PLAUSIBILI.
+
+        Args:
+            text: Testo originale
+            other_text: Testo opzionale per mix
+            predicate: Nome del predicato (ignorato, per compatibilità)
+            n: Numero di variazioni
+            validate: Se True, filtra variazioni non plausibili
+
+        Returns:
+            Lista di variazioni uniche e plausibili
+        """
+        variations = set()
+        attempts = 0
+        max_attempts = n * 10  # Più tentativi per trovare variazioni plausibili
+
+        while len(variations) < n and attempts < max_attempts:
+            var = self.generate(text, other_text, predicate)
+
+            # Escludi originale
+            if var == text:
+                attempts += 1
+                continue
+
+            # Validazione plausibilità (solo per testi corti)
+            if validate and self._detect_type(text) == 'short':
+                words = var.split()
+                if all(_is_plausible_name(w) for w in words):
+                    variations.add(var)
+            else:
+                variations.add(var)
+
+            attempts += 1
+
+        return list(variations)
+
+
+# === TEST ===
+if __name__ == "__main__":
+    gen = CreativeVariationGenerator()
+
+    print("=== TEST CREATIVE VARIATION - AGGRESSIVE ===\n")
+
+    # TESTI CORTI (≤3 parole) - VARIAZIONI FORTI
+    print("--- TESTI CORTI (nomi) - VARIAZIONI FORTI ---")
+    short_tests = [
+        ("John Smith", None),
+        ("Mary Johnson", None),
+        ("John Smith", "Mary Johnson"),  # Con mix
+        ("supertramp", None),
+    ]
+    for text, other in short_tests:
+        print(f"Input: '{text}'" + (f" + '{other}'" if other else ""))
+        variations = gen.generate_multiple(text, other, n=6)
+        for i, var in enumerate(variations, 1):
+            print(f"  {i}. {var}")
+        print()
+
+    # NUMERI - VARIAZIONI FORTI!
+    print("--- NUMERI - VARIAZIONI FORTI ---")
+    num_tests = [
+        "12345678",
+        "1985",
+        "2023-01-15",
+        "ABC123XYZ",
+    ]
+    for text in num_tests:
+        print(f"Input: '{text}'")
+        variations = gen.generate_multiple(text, n=4)
+        for i, var in enumerate(variations, 1):
+            status = "✓ diverso" if var != text else "✗ uguale"
+            print(f"  {i}. {var} ({status})")
+        print()
+
+    # TESTO LUNGO (>3 parole) - Riformulazione
+    print("--- TESTO LUNGO - Riformulazione ---")
+    long_text = "British rock band formed in London in 1970"
+    print(f"Input: '{long_text}'")
+    variations = gen.generate_multiple(long_text, n=3)
+    for i, var in enumerate(variations, 1):
+        print(f"  {i}. {var}")
