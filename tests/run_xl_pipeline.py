@@ -5,6 +5,7 @@ import random
 import time
 import numpy as np
 import re
+import os
 from pathlib import Path
 from collections import defaultdict
 from rdflib import Literal
@@ -21,16 +22,18 @@ from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 from src.augmentation.methods.plm.scoring import calculate_pair_score, calculate_score
 from src.augmentation.methods.plm.noise_generator import NoiseGenerator
 
-# --- CONFIGURAZIONE XL BF16 ---
+# --- CONFIGURAZIONE XL ---
 MODEL_NAME = "google/flan-t5-xl"
-BATCH_SIZE = 4 # Con Gradient Accumulation simuliamo 16
+BATCH_SIZE = 4 
 EPOCHS = 3
 TOTAL_REPORT_SAMPLES = 200 
 MAX_ORPHANS_PER_PRED = 200
-SWEEP_SAMPLES = 50 # Aggiunto
+SWEEP_SAMPLES = 50
 
 logger = get_logger("FlanT5XL")
-noise_gen = NoiseGenerator(char_prob=0.15, word_prob=0.05)
+semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
+# Generatore di rumore potenziato
+noise_gen = NoiseGenerator(char_prob=0.15, word_drop_prob=0.2)
 
 def load_attr_names(dataset_path):
     attr_map = {}
@@ -49,7 +52,7 @@ def clean_p(uri, attr_map):
     return uri_str.split('/')[-1].split('#')[-1].replace('>', '').replace('<', '').lower()
 
 def run_xl_pipeline():
-    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 XL (3B) BF16 LoRA PIPELINE (NO IDENTITY) ".center(98) + "█"); print("█"*100)
+    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 XL (3B) - NOISE-ENHANCED PIPELINE ".center(98) + "█"); print("█"*100)
 
     # 1. DATA
     dataset_path = str(PROJECT_ROOT / "data/raw/openea/BBC_DB")
@@ -60,9 +63,8 @@ def run_xl_pipeline():
     _, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=10)
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
 
-    print("    [1/4] Building Training Data (STRRICT VARIATION ONLY)...")
+    print("    [1/4] Building Training Data (Anti-Bias + Specialized Noise)...")
     t5_rows = []
-    
     src_lits = defaultdict(list)
     for s, p, o in kg_src.triples((None, None, None)):
         if isinstance(o, Literal): src_lits[s].append((p, str(o)))
@@ -70,7 +72,7 @@ def run_xl_pipeline():
     for s, p, o in kg_tgt.triples((None, None, None)):
         if isinstance(o, Literal): tgt_lits[s].append((p, str(o)))
 
-    # A. Aligned (Solo se diversi e NON semplici swap)
+    # A. Aligned (Filtro Identità e Token Swap)
     aligned_test_pool = defaultdict(list)
     for s_uri, t_uri in dataset.aligned_entities:
         s_attrs = src_lits.get(s_uri, [])
@@ -79,26 +81,23 @@ def run_xl_pipeline():
             p_name = clean_p(ps, attr_map).replace('_', ' ')
             for pt, vt in t_attrs:
                 if canonical_map.get(str(ps)) == canonical_map.get(str(pt)):
-                    v1_clean = vs.strip().lower()
-                    v2_clean = vt.strip().lower()
+                    v1_c, v2_c = vs.strip().lower(), vt.strip().lower()
                     
-                    # FILTRAGGIO AVANZATO
-                    is_identical = v1_clean == v2_clean
+                    # Filtriamo identità
+                    if v1_c == v2_c: continue
                     
-                    # Token Swap Check: stesse parole, ordine diverso
-                    v1_tokens = set(re.findall(r'\w+', v1_clean))
-                    v2_tokens = set(re.findall(r'\w+', v2_clean))
-                    is_token_swap = (v1_tokens == v2_tokens) and not is_identical
+                    # Filtriamo Token Swap (stesse parole, ordine diverso)
+                    v1_toks = set(re.findall(r'\w+', v1_c))
+                    v2_toks = set(re.findall(r'\w+', v2_c))
+                    if v1_toks == v2_toks: continue
                     
-                    if not is_identical and not is_token_swap:
-                        # TRAINING SOLO SU VARIAZIONI COMPLESSE
-                        t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {vs}", "target": vt})
-                        t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {vt}", "target": vs})
-                    
+                    # Se passa i filtri, è una variazione di qualità per il training
+                    t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {vs}", "target": vt})
+                    t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {vt}", "target": vs})
                     aligned_test_pool[p_name].append((vs, vt))
                     break
     
-    # B. Orphans (Denoising)
+    # B. Orphans (Denoising con la nuova classe NoiseGenerator)
     orphans_by_pred = defaultdict(list)
     for s, p, o in list(kg_src.triples((None, None, None))) + list(kg_tgt.triples((None, None, None))):
         if isinstance(o, Literal):
@@ -111,29 +110,40 @@ def run_xl_pipeline():
         unique_vals = list(set(vals))
         selected = random.sample(unique_vals, min(len(unique_vals), MAX_ORPHANS_PER_PRED))
         for v in selected:
-            # Denoising: insegna a ricostruire da input sporco, ma non lo usiamo nel report
-            v_noisy = noise_gen.apply(v, predicate=p_name)
-            t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {v_noisy}", "target": v})
+            # DISTINZIONE ESPLICITA CORTO VS LUNGO
+            word_count = len(re.findall(r'\w+', v))
+            
+            if word_count <= 5:
+                # STRATEGIA CORTO: Caratteri, Abbreviazioni, Numeri
+                # Usiamo NoiseGenerator ma con probabilità più alta di abbreviare o cambiare cifre
+                v_noisy = noise_gen.apply(v, predicate=p_name)
+            else:
+                # STRATEGIA LUNGO: Dropping di parole/token
+                # Forza il modello a imparare la summarization/rephrasing
+                v_noisy = noise_gen.apply(v, predicate=p_name)
+            
+            if v_noisy != v:
+                t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {v_noisy}", "target": v})
 
     random.shuffle(t5_rows)
     print(f"    Training samples: {len(t5_rows)}")
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_bf16_lora_v1"
+    out_dir = "./results/t5_xl_lora_final_v1"
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING
     if not (Path(out_dir) / "adapter_model.bin").exists() and not (Path(out_dir) / "adapter_model.safetensors").exists():
-        interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=1e-3) # LR alto per LoRA
+        interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=1e-3)
     else:
-        print("    [2/4] XL Adapters ready.")
+        print("    [2/4] XL Adapters found.")
 
     # 3. SWEEP (Ricerca parametri ottimali)
     print(f"\n>>> PHASE 3: SWEEPING FOR BEST HYPERPARAMETERS (Scoring PLM)")
     sweep_pool = []
     all_test_preds = list(aligned_test_pool.keys())
-    for _ in range(SWEEP_SAMPLES):
+    for _ in range(min(SWEEP_SAMPLES, len(all_test_preds))):
         p = random.choice(all_test_preds)
         v1, v2 = random.choice(aligned_test_pool[p])
         sweep_pool.append((p, v1, v2))
@@ -163,15 +173,14 @@ def run_xl_pipeline():
     print(f"    BEST CONFIG: {best}")
 
     # 4. REPORT
-    print(f"    [4/4] Generating High Quality XL Report...")
+    print(f"    [4/4] Generating Final XL Report...")
     interpolator.latent_noise_std = best['n']
     interpolator.gen_temperature = best['t']
     
     output_file = "massive_t5_xl_report.txt"
-    
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) BF16 REPORT\n")
-        f.write("Strategy: Variations Only Training | Precision: BF16 (No Quantization)\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) PRODUCTION REPORT\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: Specialized Noise & Swap Filtering\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -182,12 +191,8 @@ def run_xl_pipeline():
             for p in p_names[:]:
                 if not aligned_test_pool[p]: p_names.remove(p); continue
                 v1, v2 = aligned_test_pool[p].pop(random.randrange(len(aligned_test_pool[p])))
-                
-                aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=0.5)
-                
-                # Scoring PLM che penalizza l'identità
+                aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=best['a'])
                 res = calculate_pair_score(v1, v2, aa, ab)
-                
                 f.write(f"PAIR {count+1:03d} | {p:20} | V1: {v1[:35]:35} -> AUG: {aa[:35]:35}\n")
                 f.write(f"         | Score: {res['score']:.2f}        | V2: {v2[:35]:35} -> AUG: {ab[:35]:35} | Voto:[ ]/5\n")
                 f.write("-" * 120 + "\n")
@@ -197,17 +202,16 @@ def run_xl_pipeline():
         # Orphans
         f.write("\nSECTION 2: ORPHAN VARIATIONS (XL)\n" + "-"*80 + "\n")
         o_names = sorted(list(orphans_by_pred.keys()))
-        count = 0
-        while count < TOTAL_REPORT_SAMPLES // 2 and o_names:
+        o_count = 0
+        while o_count < TOTAL_REPORT_SAMPLES // 2 and o_names:
             for p in o_names[:]:
                 if not orphans_by_pred[p]: o_names.remove(p); continue
                 val = orphans_by_pred[p].pop(random.randrange(len(orphans_by_pred[p])))
                 aa, _ = interpolator.interpolate_pair(val, val, predicate=p, alpha=0.5)
-                
                 score = calculate_score(val, aa)
-                f.write(f"ORPHAN {count+1:03d} | {p:20} | ORIG: {val[:45]:45} -> VAR: {aa[:45]:45} (Score: {score:.2f}) | Voto:[ ]/5\n")
-                count += 1
-                if count >= TOTAL_REPORT_SAMPLES // 2: break
+                f.write(f"ORPHAN {o_count+1:03d} | {p:20} | ORIG: {val[:45]:45} -> VAR: {aa[:45]:45} (Score: {score:.2f}) | Voto:[ ]/5\n")
+                o_count += 1
+                if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
     print(f"\n>>> SUCCESS: XL Report saved to {output_file}")
 
