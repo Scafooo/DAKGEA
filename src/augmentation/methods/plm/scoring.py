@@ -269,6 +269,124 @@ def _score_long_text(orig: str, gen: str, other: str) -> Dict:
     }
 
 
+def _find_shared_tokens(text1: str, text2: str) -> Set[str]:
+    """Trova token condivisi (o simili) tra due testi."""
+    words1 = set(re.findall(r'\w+', text1.lower()))
+    words2 = set(re.findall(r'\w+', text2.lower()))
+
+    shared = words1 & words2  # Esatti
+
+    # Aggiungi anche parole simili (>0.7)
+    for w1 in words1 - shared:
+        for w2 in words2 - shared:
+            if _word_sim(w1, w2) > 0.7:
+                shared.add(w1)
+                break
+
+    return shared
+
+
+def _coherence_bonus(input_A: str, input_B: str, output_A: str, output_B: str) -> Tuple[float, Dict]:
+    """
+    Calcola bonus di coerenza cross-output.
+
+    Premia quando:
+    - Input A e B condividono un token (es: "Smith")
+    - Output A' e B' condividono una VARIAZIONE di quel token (es: "Smithsonn")
+
+    Returns:
+        (bonus, details)
+    """
+    # Token condivisi negli input
+    shared_input = _find_shared_tokens(input_A, input_B)
+    if not shared_input:
+        return 0.0, {"reason": "no_shared_input_tokens"}
+
+    # Token condivisi negli output
+    shared_output = _find_shared_tokens(output_A, output_B)
+    if not shared_output:
+        return 0.0, {"reason": "no_shared_output_tokens"}
+
+    # Cerca variazioni creative: token output simili a token input
+    creative_variations = []
+    for out_tok in shared_output:
+        for in_tok in shared_input:
+            sim = _word_sim(out_tok, in_tok)
+            # Variazione creativa: simile ma non identico (0.5 < sim < 0.95)
+            if 0.5 < sim < 0.95:
+                creative_variations.append({
+                    "input_token": in_tok,
+                    "output_token": out_tok,
+                    "similarity": sim
+                })
+
+    if creative_variations:
+        # Bonus proporzionale al numero di variazioni creative
+        bonus = min(0.3, 0.15 * len(creative_variations))
+        return bonus, {
+            "reason": "coherent_creative_variation",
+            "variations": creative_variations
+        }
+
+    # Se condividono token identici (non variati), piccolo bonus
+    exact_shared = shared_input & shared_output
+    if exact_shared:
+        return 0.1, {
+            "reason": "coherent_preserved_tokens",
+            "tokens": list(exact_shared)
+        }
+
+    return 0.0, {"reason": "no_coherent_variation"}
+
+
+def calculate_pair_score(input_A: str, input_B: str, output_A: str, output_B: str) -> Dict:
+    """
+    Calcola score per una COPPIA di output, includendo bonus di coerenza.
+
+    Esempio eccellente:
+        Input:  "Mary Smith" + "John Smith"
+        Output: "M. Smithsonn" + "J. Smithsonn"
+
+        - Score individuale alto (mix di elementi)
+        - BONUS: "Smithsonn" è variazione coerente di "Smith" condiviso
+
+    Returns:
+        {
+            "score": float,  # Score finale (0-1.3 con bonus)
+            "score_A": float,
+            "score_B": float,
+            "coherence_bonus": float,
+            "details": {...}
+        }
+    """
+    # Score individuali
+    result_A = calculate_score_detailed(input_A, output_A, input_B)
+    result_B = calculate_score_detailed(input_B, output_B, input_A)
+
+    score_A = max(0, result_A["score"])  # Ignora -1 (empty/prompt_leak)
+    score_B = max(0, result_B["score"])
+
+    # Bonus coerenza cross-output
+    coherence_bonus, coherence_details = _coherence_bonus(
+        input_A, input_B, output_A, output_B
+    )
+
+    # Score finale
+    base_score = (score_A + score_B) / 2
+    final_score = min(1.3, base_score + coherence_bonus)  # Cap a 1.3
+
+    return {
+        "score": final_score,
+        "base_score": base_score,
+        "score_A": score_A,
+        "score_B": score_B,
+        "reason_A": result_A.get("reason"),
+        "reason_B": result_B.get("reason"),
+        "coherence_bonus": coherence_bonus,
+        "coherence_details": coherence_details,
+    }
+
+
 def calculate_score(orig: str, gen: str, other: str = None) -> float:
     """Calcola lo score (0-1) per un output generato."""
     result = calculate_score_detailed(orig, gen, other)
@@ -299,6 +417,33 @@ def calculate_score_detailed(orig: str, gen: str, other: str = None) -> Dict:
 
 # === TEST ===
 if __name__ == "__main__":
+    print("=== TEST PAIR SCORING (COERENZA CROSS-OUTPUT) ===\n")
+
+    pair_tests = [
+        # (input_A, input_B, output_A, output_B, description)
+        ("Mary Smith", "John Smith", "M. Smithsonn", "J. Smithsonn",
+         "ECCELLENTE: variazione coerente di Smith"),
+        ("Mary Smith", "John Smith", "M. Smith", "J. Smith",
+         "BUONO: abbreviazione coerente, Smith preservato"),
+        ("Mary Smith", "John Smith", "Maria", "Giovanni",
+         "OK: traduzione ma perde coerenza"),
+        ("Mary Smith", "John Smith", "xyz", "abc",
+         "GARBAGE: nessuna connessione"),
+        ("Alice Johnson", "Bob Williams", "A. Johnsonn", "B. Williamson",
+         "BUONO: variazioni individuali ma non coerenti tra loro"),
+    ]
+
+    for inA, inB, outA, outB, desc in pair_tests:
+        result = calculate_pair_score(inA, inB, outA, outB)
+        print(f"[{result['score']:.2f}] {desc}")
+        print(f"    Input:  '{inA}' + '{inB}'")
+        print(f"    Output: '{outA}' + '{outB}'")
+        print(f"    Base: {result['base_score']:.2f} | Bonus: +{result['coherence_bonus']:.2f}")
+        if result['coherence_details'].get('variations'):
+            for v in result['coherence_details']['variations']:
+                print(f"    → '{v['input_token']}' → '{v['output_token']}' (sim: {v['similarity']:.2f})")
+        print()
+
     print("=== TEST SCORING - TESTI CORTI ===\n")
 
     short_tests = [

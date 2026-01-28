@@ -19,7 +19,7 @@ from src.logger import get_logger
 from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_t5_interpolator import MixupT5Interpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
-from src.augmentation.methods.plm.scoring import calculate_score, calculate_score_detailed
+from src.augmentation.methods.plm.scoring import calculate_score, calculate_score_detailed, calculate_pair_score
 
 # --- CONFIGURAZIONE ---
 MODEL_NAME = "google/flan-t5-large"
@@ -131,8 +131,9 @@ def run_antibias_t5_pipeline():
                 scs = []
                 for p, v1, v2 in sweep_pool:
                     a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=a)
-                    # Score considera entrambi gli input: a1 deve essere diverso da v1 E v2
-                    scs.append((calculate_score(v1, a1, v2) + calculate_score(v2, a2, v1))/2)
+                    # Score con bonus coerenza cross-output
+                    pair_result = calculate_pair_score(v1, v2, a1, a2)
+                    scs.append(pair_result["score"])
                 avg = np.mean(scs)
                 sweep_results.append({"a": a, "n": n, "t": t, "score": avg})
                 print(f"      - Alpha={a} Noise={n} Temp={t} -> Score: {avg:.3f}")
