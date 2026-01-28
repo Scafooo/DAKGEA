@@ -43,7 +43,7 @@ class MixupT5XLInterpolator:
         self.out_dir = out_dir
         self.device = device
         self.max_len_in = max_len_in
-        
+
         # Configurazione Generazione
         self.gen_temperature = 0.8
         self.gen_num_beams = 5
@@ -57,21 +57,21 @@ class MixupT5XLInterpolator:
     def _load_model(self):
         """Carica il modello in BF16 e prepara LoRA."""
         logger.info(f"[T5-XL] Loading {self.model_name} in BF16 Precision...")
-        
+
         # Carichiamo il modello direttamente in BF16 (senza quantizzazione 8-bit)
         model = AutoModelForSeq2SeqLM.from_pretrained(
             self.model_name,
             torch_dtype=torch.bfloat16,
             device_map="auto"
         )
-        
+
         # Ridimensiona per sicurezza
         model.resize_token_embeddings(len(self.tokenizer))
-        
+
         # FIX CRITICO per Gradient Checkpointing in BF16/FP32
         model.enable_input_require_grads()
-        model.config.use_cache = False 
-        
+        model.config.use_cache = False
+
         # Configura LoRA
         peft_config = LoraConfig(
             task_type=TaskType.SEQ_2_SEQ_LM,
@@ -79,9 +79,9 @@ class MixupT5XLInterpolator:
             r=16,
             lora_alpha=32,
             lora_dropout=0.1,
-            target_modules=["q", "v"] 
+            target_modules=["q", "v"]
         )
-        
+
         model = get_peft_model(model, peft_config)
         model.print_trainable_parameters()
         return model
@@ -98,9 +98,9 @@ class MixupT5XLInterpolator:
             labels = [[(l if l != self.tokenizer.pad_token_id else -100) for l in label_seq] for label_seq in lb["input_ids"]]
             mi["labels"] = labels
             return mi
-            
+
         hf_dataset = HFDataset.from_list(training_rows).map(tokenize_fn, batched=True, remove_columns=["input", "target"])
-        
+
         args = Seq2SeqTrainingArguments(
             output_dir=self.out_dir,
             per_device_train_batch_size=batch_size,
@@ -114,14 +114,14 @@ class MixupT5XLInterpolator:
             label_smoothing_factor=0.1,
             gradient_checkpointing=True
         )
-        
+
         trainer = Seq2SeqTrainer(
             model=self.model,
             args=args,
             train_dataset=hf_dataset,
             data_collator=DataCollatorForSeq2Seq(self.tokenizer, model=self.model)
         )
-        
+
         logger.info("[T5-XL] Starting BF16 LoRA Fine-tuning...")
         trainer.train()
         self.model.save_pretrained(self.out_dir)
@@ -131,20 +131,20 @@ class MixupT5XLInterpolator:
         p_name = predicate.replace("<", "").replace(">", "").lower().replace('_', ' ')
         prompt_src = f"generate synthetic variation <{p_name}>: {val_src}"
         prompt_tgt = f"generate synthetic variation <{p_name}>: {val_tgt}"
-        
+
         inputs = self.tokenizer([prompt_src, prompt_tgt], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
 
         self.model.eval()
         with torch.no_grad():
             # In PEFT, il modello base è accessibile via model.base_model.model
             encoder = self.model.base_model.model.get_encoder()
-            
+
             enc_out = encoder(input_ids=inputs.input_ids, attention_mask=inputs.attention_mask)
             H_A, H_B = enc_out.last_hidden_state[0:1], enc_out.last_hidden_state[1:2]
-            
+
             H_mix_A = (1.0 - alpha) * H_A + alpha * H_B
             H_mix_B = alpha * H_A + (1.0 - alpha) * H_B
-            
+
             if self.latent_noise_std > 0:
                 H_mix_A += torch.randn_like(H_mix_A) * self.latent_noise_std
                 H_mix_B += torch.randn_like(H_mix_B) * self.latent_noise_std
@@ -153,7 +153,7 @@ class MixupT5XLInterpolator:
             combined_mask = (inputs.attention_mask[0:1] | inputs.attention_mask[1:2])
             H_f = torch.cat([H_mix_A, H_mix_B], dim=0)
             m_f = torch.cat([combined_mask, combined_mask], dim=0)
-            
+
             out_ids = self.model.generate(
                 encoder_outputs=BaseModelOutput(last_hidden_state=H_f),
                 attention_mask=m_f,
