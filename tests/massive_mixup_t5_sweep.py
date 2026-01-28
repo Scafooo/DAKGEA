@@ -31,7 +31,6 @@ SWEEP_SAMPLES = 50
 
 torch.backends.cudnn.benchmark = True
 logger = get_logger("FlanT5AntiBias")
-semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 def load_attr_names(dataset_path):
     attr_map = {}
