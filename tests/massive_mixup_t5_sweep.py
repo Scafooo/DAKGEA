@@ -165,6 +165,7 @@ def run_antibias_t5_pipeline():
                 gen_count += 1
                 if gen_count >= TOTAL_REPORT_SAMPLES//2: break
 
+        # SECTION 2: ORPHAN ATTRIBUTES (DIVERSE REWRITE)
         f.write("\n\nSECTION 2: ORPHAN ATTRIBUTES (DIVERSE REWRITE)\n" + "-"*80 + "\n")
         o_count = 0
         o_p_names = sorted(list(orphans_by_pred.keys()))
@@ -173,8 +174,11 @@ def run_antibias_t5_pipeline():
                 if not orphans_by_pred[p]: o_p_names.remove(p); continue
                 val = orphans_by_pred[p].pop(random.randrange(len(orphans_by_pred[p])))
                 aa, _ = interpolator.interpolate_pair(val, val, predicate=p, alpha=0.5)
-                sim = util.cos_sim(semantic_model.encode(val), semantic_model.encode(aa)).item()
-                f.write(f"ORPHAN {o_count+1:03d} | {p:20} | ORIG: {val[:45]:45} -> REWRITE: {aa[:45]:45} (Sim: {sim:.2f})\n")
+                
+                # Usa il nuovo scoring centralizzato anche qui
+                score = calculate_score(val, aa)
+                
+                f.write(f"ORPHAN {o_count+1:03d} | {p:20} | ORIG: {val[:45]:45} -> REWRITE: {aa[:45]:45} (Score: {score:.2f})\n")
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES//2: break
             
