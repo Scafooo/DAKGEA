@@ -9,7 +9,6 @@ import os
 from pathlib import Path
 from collections import defaultdict, deque
 from rdflib import Literal
-from difflib import SequenceMatcher
 from sentence_transformers import SentenceTransformer, util
 
 # Add project root to path
@@ -20,6 +19,7 @@ from src.logger import get_logger
 from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_t5_interpolator import MixupT5Interpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
+from src.augmentation.methods.plm.scoring import calculate_score, calculate_score_detailed
 
 # --- CONFIGURAZIONE ---
 MODEL_NAME = "google/flan-t5-large"
@@ -49,56 +49,7 @@ def clean_p(uri, attr_map):
     if uri_str in attr_map: return attr_map[uri_str].replace(' ', '_').lower()
     return uri_str.split('/')[-1].split('#')[-1].replace('>', '').replace('<', '').lower()
 
-def _has_similar_word(gen_words: set, source_words: set, threshold: float = 0.6) -> bool:
-    """Verifica se almeno una parola generata è SIMILE a una source (John ~ Jonathan)."""
-    for gw in gen_words:
-        if len(gw) < 3: continue
-        for sw in source_words:
-            if len(sw) < 3: continue
-            if SequenceMatcher(None, gw, sw).ratio() > threshold:
-                return True
-    return False
-
-
-def calculate_score(orig, gen, other=None):
-    """
-    Score che premia output DIVERSI da entrambi gli input ma SENSATI.
-
-    Logica:
-    - Deve essere diverso da A e da B (non copia)
-    - Deve avere connessione semantica (non garbage)
-    - max_sim = quanto è simile al più vicino dei due input
-    """
-    gen_c = gen.strip()
-    orig_c = orig.strip()
-    other_c = other.strip() if other else ""
-
-    # Filtri base
-    if len(gen_c) < 2: return -1.0
-    if any(x in gen_c.lower() for x in ["|", ":", "rewrite"]): return -1.0
-
-    # Similarità con entrambi gli input
-    sim_to_A = SequenceMatcher(None, orig_c.lower(), gen_c.lower()).ratio()
-    sim_to_B = SequenceMatcher(None, other_c.lower(), gen_c.lower()).ratio() if other_c else 0.0
-    max_sim = max(sim_to_A, sim_to_B)
-
-    # Analisi parole
-    gen_words = set(re.findall(r'\w+', gen_c.lower()))
-    orig_words = set(re.findall(r'\w+', orig_c.lower()))
-    other_words = set(re.findall(r'\w+', other_c.lower())) if other_c else set()
-    source_words = orig_words | other_words
-    common_words = gen_words & source_words
-
-    # Logica di scoring
-    if max_sim > 0.95: return 0.0   # identity
-    if max_sim > 0.85: return 0.2   # near_copy
-    if max_sim > 0.50:
-        return 0.8 if common_words else 0.5  # good_variation
-
-    # Molto diverso - creativo o garbage?
-    if _has_similar_word(gen_words, source_words) or common_words:
-        return 0.9  # creative
-    return 0.1  # garbage
+# Scoring importato da src.augmentation.methods.plm.scoring
 
 def run_antibias_t5_pipeline():
     print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 LARGE - ANTI-BIAS TRAINING ".center(98) + "█"); print("█"*100)
@@ -180,7 +131,8 @@ def run_antibias_t5_pipeline():
                 scs = []
                 for p, v1, v2 in sweep_pool:
                     a1, a2 = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=a)
-                    scs.append((calculate_score(v1, a1) + calculate_score(v2, a2))/2)
+                    # Score considera entrambi gli input: a1 deve essere diverso da v1 E v2
+                    scs.append((calculate_score(v1, a1, v2) + calculate_score(v2, a2, v1))/2)
                 avg = np.mean(scs)
                 sweep_results.append({"a": a, "n": n, "t": t, "score": avg})
                 print(f"      - Alpha={a} Noise={n} Temp={t} -> Score: {avg:.3f}")
