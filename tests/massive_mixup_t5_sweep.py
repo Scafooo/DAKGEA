@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 from collections import defaultdict, deque
 from rdflib import Literal
+from difflib import SequenceMatcher
 from sentence_transformers import SentenceTransformer, util
 
 # Add project root to path
@@ -20,44 +21,99 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_t5_interpolator import MixupT5Interpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE DEFINITIVA ---
+# --- CONFIGURAZIONE ---
 MODEL_NAME = "google/flan-t5-large"
 BATCH_SIZE = 16 
-EPOCHS = 5 # Più epoche per stabilità su Large
+EPOCHS = 5 # Più epoche per forzare il distacco dall'identità
 TOTAL_REPORT_SAMPLES = 400 
-MAX_ORPHANS_PER_PRED = 500
+MAX_ORPHANS_PER_PRED = 300
 SWEEP_SAMPLES = 50
 
 torch.backends.cudnn.benchmark = True
-logger = get_logger("FlanT5Final")
+logger = get_logger("FlanT5AntiBias")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
 
-def calculate_score(orig, gen):
-    gen_l, orig_l = gen.lower().strip(), orig.lower().strip()
-    if len(gen_l) < 1: return -1.0
-    if any(x in gen_l for x in ["rewrite", "paraphrase", ":"]): return -1.0
-    
-    emb_orig = semantic_model.encode(orig_l, convert_to_tensor=True)
-    emb_gen = semantic_model.encode(gen_l, convert_to_tensor=True)
-    sim = util.cos_sim(emb_orig, emb_gen).item()
-    
-    if sim < 0.75: return -1.0 # Più severo sulla qualità semantica
-    if gen_l == orig_l: return 0.5 # Penalità per identità
-    return sim * 2.0
+def load_attr_names(dataset_path):
+    attr_map = {}
+    for i in [1, 2]:
+        path = Path(dataset_path) / f"attribute_data/attr_names{i}"
+        if path.exists():
+            with open(path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    parts = line.strip().split('\t')
+                    if len(parts) >= 2: attr_map[parts[0].strip()] = parts[1].strip()
+    return attr_map
 
-def run_final_t5_pipeline():
-    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 LARGE - FINAL STABLE PIPELINE ".center(98) + "█"); print("█"*100)
+def clean_p(uri, attr_map):
+    uri_str = str(uri)
+    if uri_str in attr_map: return attr_map[uri_str].replace(' ', '_').lower()
+    return uri_str.split('/')[-1].split('#')[-1].replace('>', '').replace('<', '').lower()
+
+def _has_similar_word(gen_words: set, source_words: set, threshold: float = 0.6) -> bool:
+    """Verifica se almeno una parola generata è SIMILE a una source (John ~ Jonathan)."""
+    for gw in gen_words:
+        if len(gw) < 3: continue
+        for sw in source_words:
+            if len(sw) < 3: continue
+            if SequenceMatcher(None, gw, sw).ratio() > threshold:
+                return True
+    return False
+
+
+def calculate_score(orig, gen, other=None):
+    """
+    Score che premia output DIVERSI da entrambi gli input ma SENSATI.
+
+    Logica:
+    - Deve essere diverso da A e da B (non copia)
+    - Deve avere connessione semantica (non garbage)
+    - max_sim = quanto è simile al più vicino dei due input
+    """
+    gen_c = gen.strip()
+    orig_c = orig.strip()
+    other_c = other.strip() if other else ""
+
+    # Filtri base
+    if len(gen_c) < 2: return -1.0
+    if any(x in gen_c.lower() for x in ["|", ":", "rewrite"]): return -1.0
+
+    # Similarità con entrambi gli input
+    sim_to_A = SequenceMatcher(None, orig_c.lower(), gen_c.lower()).ratio()
+    sim_to_B = SequenceMatcher(None, other_c.lower(), gen_c.lower()).ratio() if other_c else 0.0
+    max_sim = max(sim_to_A, sim_to_B)
+
+    # Analisi parole
+    gen_words = set(re.findall(r'\w+', gen_c.lower()))
+    orig_words = set(re.findall(r'\w+', orig_c.lower()))
+    other_words = set(re.findall(r'\w+', other_c.lower())) if other_c else set()
+    source_words = orig_words | other_words
+    common_words = gen_words & source_words
+
+    # Logica di scoring
+    if max_sim > 0.95: return 0.0   # identity
+    if max_sim > 0.85: return 0.2   # near_copy
+    if max_sim > 0.50:
+        return 0.8 if common_words else 0.5  # good_variation
+
+    # Molto diverso - creativo o garbage?
+    if _has_similar_word(gen_words, source_words) or common_words:
+        return 0.9  # creative
+    return 0.1  # garbage
+
+def run_antibias_t5_pipeline():
+    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 LARGE - ANTI-BIAS TRAINING ".center(98) + "█"); print("█"*100)
 
     # 1. CARICAMENTO
     dataset_path = str(PROJECT_ROOT / "data/raw/openea/BBC_DB")
     reader = OpeneaDatasetReader()
     dataset = reader.read(dataset_path)
+    attr_map = load_attr_names(dataset_path)
     
     builder = MixupDataBuilder()
     _, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=10)
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
 
-    print("    [1/4] Preparing training data (Balanced Aligned + Orphans)...")
+    print("    [1/4] Building Anti-Bias training set (Changes Only)...")
     t5_rows = []
     src_lits = defaultdict(list)
     for s, p, o in kg_src.triples((None, None, None)):
@@ -71,12 +127,13 @@ def run_final_t5_pipeline():
         s_attrs = src_lits.get(s_uri, [])
         t_attrs = tgt_lits.get(t_uri, [])
         for ps, vs in s_attrs:
-            p_name = str(ps).split('/')[-1].split('#')[-1].lower()
+            p_name = clean_p(ps, attr_map).replace('_', ' ')
             for pt, vt in t_attrs:
                 if canonical_map.get(str(ps)) == canonical_map.get(str(pt)):
-                    # Formato Prompt Semplificato: "rewrite: [v]"
-                    t5_rows.append({"input": f"rewrite: {vs}", "target": vt})
-                    t5_rows.append({"input": f"rewrite: {vt}", "target": vs})
+                    # AGGIUNGIAMO SOLO SE DIVERSI (Anti-Bias)
+                    if vs.lower().strip() != vt.lower().strip():
+                        t5_rows.append({"input": f"{p_name} | {vs}", "target": vt})
+                        t5_rows.append({"input": f"{p_name} | {vt}", "target": vs})
                     aligned_test_pool[p_name].append((vs, vt))
                     break
     
@@ -85,27 +142,29 @@ def run_final_t5_pipeline():
         if isinstance(o, Literal):
             val = str(o).strip()
             if val:
-                p_name = str(p).split('/')[-1].split('#')[-1].lower()
+                p_name = clean_p(p, attr_map).replace('_', ' ')
                 orphans_by_pred[p_name].append(val)
     
     for p_name, vals in orphans_by_pred.items():
-        selected = random.sample(list(set(vals)), min(len(set(vals)), MAX_ORPHANS_PER_PRED))
+        unique_vals = list(set(vals))
+        selected = random.sample(unique_vals, min(len(unique_vals), MAX_ORPHANS_PER_PRED))
         for v in selected:
-            t5_rows.append({"input": f"rewrite: {v}", "target": v})
+            # Per gli orfani, alleniamo con identità ma anche con un po' di noise per generalizzare
+            t5_rows.append({"input": f"{p_name} | {v}", "target": v})
 
     random.shuffle(t5_rows)
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    out_dir = "./results/sweep_model_flan_t5_large_final"
+    out_dir = "./results/sweep_model_flan_t5_large_antibias_v1"
     interpolator = MixupT5Interpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 2. TRAINING
     if not (Path(out_dir) / "pytorch_model.bin").exists() and not (Path(out_dir) / "model.safetensors").exists():
-        print(f"    [2/4] Fine-tuning (5 Epochs, LR=3e-5)...")
+        print(f"    [2/4] Fine-tuning (Anti-Bias, {len(t5_rows)} samples)...")
         interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=3e-5, force_retrain=True)
-    else: print(f"    [2/4] Model ready.")
+    else: print(f"    [2/4] Anti-bias model ready.")
 
-    # 3. SWEEP (Ricerca stabilità)
-    print(f"\n>>> PHASE 3: SWEEPING FOR STABILITY")
+    # 3. SWEEP
+    print(f"\n>>> PHASE 3: SWEEPING FOR MAXIMUM DIVERSITY")
     sweep_pool = []
     all_test_preds = list(aligned_test_pool.keys())
     for _ in range(SWEEP_SAMPLES):
@@ -115,8 +174,8 @@ def run_final_t5_pipeline():
 
     sweep_results = []
     for a in [0.3, 0.5]:
-        for n in [0.0, 0.02]:
-            for t in [0.7, 1.0]:
+        for n in [0.05, 0.1]: # Alziamo il rumore per stanare l'identità
+            for t in [0.8, 1.2]: # Alziamo la temperatura
                 interpolator.latent_noise_std, interpolator.gen_temperature = n, t
                 scs = []
                 for p, v1, v2 in sweep_pool:
@@ -130,14 +189,14 @@ def run_final_t5_pipeline():
     print(f"    BEST CONFIG: {best}")
 
     # 4. FINAL REPORT
-    print(f"    [4/4] Generating high-quality report...")
+    print(f"    [4/4] Generating anti-bias report...")
     interpolator.latent_noise_std = best['n']
     interpolator.gen_temperature = best['t']
     
     output_file = "massive_t5_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5 FINAL STABLE REPORT\n")
-        f.write(f"Config: {best} | Model: Large | Masking: Combined\n")
+        f.write("DAKGEA FLAN-T5 ANTI-BIAS REPORT\n")
+        f.write(f"Config: {best} | Model: Large | Strategy: Filtered Identical Pairs\n")
         f.write("="*120 + "\n\n")
         
         f.write("SECTION 1: ALIGNED PAIRS (DIVERSE MIX-UP)\n" + "-"*80 + "\n")
@@ -167,7 +226,7 @@ def run_final_t5_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES//2: break
             
-    print(f"\n>>> SUCCESS: Report saved to {output_file}")
+    print(f"\n>>> SUCCESS: Anti-bias Report saved to {output_file}")
 
 if __name__ == "__main__":
-    run_final_t5_pipeline()
+    run_antibias_t5_pipeline()

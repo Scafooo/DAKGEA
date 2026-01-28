@@ -24,7 +24,7 @@ from datasets import Dataset as HFDataset
 logger = logging.getLogger(__name__)
 
 class MixupT5Interpolator:
-    """T5 Interpolator con Mix-up nello spazio latente dell'Encoder."""
+    """T5 Interpolator ottimizzato per la diversità semantica."""
 
     def __init__(
         self,
@@ -40,25 +40,26 @@ class MixupT5Interpolator:
         self.max_len_in = max_len_in
         self.reuse_if_available = reuse_if_available
 
-        # Parametri di generazione ROBUSTI
-        self.latent_noise_std = 0.02
+        # Parametri di generazione per DIVERSITÀ
+        self.latent_noise_std = 0.05
         self.gen_temperature = 0.7
         self.gen_num_beams = 5
-        self.gen_repetition_penalty = 2.5 # Evita i loop come "at at at at"
-        self.gen_top_p = 0.9
+        self.gen_repetition_penalty = 3.0 # Molto alto per uccidere i loop
+        self.gen_top_p = 0.85
         
         self.model, self.tokenizer = self._load_or_init_model()
 
     def _load_or_init_model(self):
         load_path = self.out_dir if (self.reuse_if_available and os.path.isdir(self.out_dir) and os.path.exists(os.path.join(self.out_dir, "config.json"))) else self.model_name
-        logger.info(f"[MIXUP-T5] Loading model/tokenizer from {load_path}")
+        logger.info(f"[MIXUP-T5] Loading model from {load_path}")
         tokenizer = AutoTokenizer.from_pretrained(load_path, use_fast=False)
         model = AutoModelForSeq2SeqLM.from_pretrained(load_path).to(self.device)
         return model, tokenizer
 
     def _clean_output(self, text: str) -> str:
+        # Rimuove rimasugli del prompt o tag
         text = re.sub(r'<extra_id_\d+>', '', text)
-        text = re.sub(r'^rewrite:?\s*', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'^.*[|:]\s*', '', text) # Rimuove tutto ciò che precede | o :
         return re.sub(r'\s+', ' ', text).strip()
 
     def fine_tune(self, training_rows: List[Dict[str, str]], epochs: int = 5, batch_size: int = 16, lr: float = 3e-5, force_retrain: bool = False):
@@ -79,7 +80,7 @@ class MixupT5Interpolator:
             weight_decay=0.01, 
             bf16=torch.cuda.is_available(),
             gradient_checkpointing=True, 
-            label_smoothing_factor=0.05,
+            label_smoothing_factor=0.15, # Aumentato per rompere il bias di identità
             save_strategy="no", 
             report_to="none",
             logging_steps=50
@@ -91,10 +92,10 @@ class MixupT5Interpolator:
         self.tokenizer.save_pretrained(self.out_dir)
 
     def interpolate_pair(self, val_src: str, val_tgt: str, predicate: str = "", alpha: float = 0.5) -> Tuple[str, str]:
-        # Usiamo un prompt che include il predicato per guidare la semantica
+        # Formato prompt asciutto e chiaro
         p_name = predicate.replace("<", "").replace(">", "").lower().replace('_', ' ')
-        prompt_src = f"rewrite {p_name}: {val_src}"
-        prompt_tgt = f"rewrite {p_name}: {val_tgt}"
+        prompt_src = f"{p_name} | {val_src}"
+        prompt_tgt = f"{p_name} | {val_tgt}"
         
         inputs = self.tokenizer([prompt_src, prompt_tgt], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
 
@@ -103,7 +104,6 @@ class MixupT5Interpolator:
             enc_out = self.model.encoder(input_ids=inputs.input_ids, attention_mask=inputs.attention_mask)
             H_A, H_B = enc_out.last_hidden_state[0:1], enc_out.last_hidden_state[1:2]
             
-            # Mixup nello spazio latente
             H_mix_A = (1.0 - alpha) * H_A + alpha * H_B
             H_mix_B = alpha * H_A + (1.0 - alpha) * H_B
             
@@ -111,12 +111,9 @@ class MixupT5Interpolator:
                 H_mix_A += torch.randn_like(H_mix_A) * self.latent_noise_std
                 H_mix_B += torch.randn_like(H_mix_B) * self.latent_noise_std
 
-            # FIX CRITICO: Uniamo le maschere di attenzione. 
-            # Se un token era visibile in A o in B, deve essere visibile nel mix.
-            combined_mask = (inputs.attention_mask[0:1] | inputs.attention_mask[1:2])
-            
+            # Unione maschere per non perdere dettagli
+            m_f = (inputs.attention_mask[0:1] | inputs.attention_mask[1:2]).repeat(2, 1)
             H_f = torch.cat([H_mix_A, H_mix_B], dim=0)
-            m_f = torch.cat([combined_mask, combined_mask], dim=0)
             
             out_ids = self.model.generate(
                 encoder_outputs=BaseModelOutput(last_hidden_state=H_f), 
