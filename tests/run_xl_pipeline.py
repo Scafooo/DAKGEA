@@ -20,19 +20,90 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_t5_xl_interpolator import MixupT5XLInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 from src.augmentation.methods.plm.scoring import calculate_pair_score, calculate_score
-from src.augmentation.methods.plm.noise_generator import NoiseGenerator
 
-# --- CONFIGURAZIONE STABILE XL BF16 ---
+# --- CONFIGURAZIONE CREATIVE VARIATION ---
 MODEL_NAME = "google/flan-t5-xl"
-BATCH_SIZE = 8 
+BATCH_SIZE = 8
 EPOCHS = 3
-TOTAL_REPORT_SAMPLES = 200 
+TOTAL_REPORT_SAMPLES = 200
 MAX_ORPHANS_PER_PRED = 200
 SWEEP_SAMPLES = 50
 
-logger = get_logger("FlanT5XL_Stable")
+logger = get_logger("FlanT5XL_Creative")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
-noise_gen = NoiseGenerator()
+
+
+# === GENERATORE DI VARIAZIONI CREATIVE ===
+def generate_creative_variation(text: str, other_text: str = None) -> str:
+    """
+    Genera una variazione CREATIVA del testo.
+
+    Invece di corrompere (denoising), creiamo variazioni che il modello
+    dovrebbe imparare a generare:
+    - Abbreviazioni: "John" → "J."
+    - Variazioni ortografiche: "Smith" → "Smyth"
+    - Mix con other_text se disponibile
+    """
+    import random
+    import re
+
+    words = text.split()
+    if not words:
+        return text
+
+    # Scegli strategia
+    strategy = random.random()
+
+    # 1. ABBREVIAZIONE (30%) - "John Smith" → "J. Smith"
+    if strategy < 0.3 and len(words) >= 2:
+        idx = random.randint(0, len(words) - 1)
+        word = words[idx]
+        if len(word) > 2 and word[0].isalpha():
+            words[idx] = word[0].upper() + "."
+        return " ".join(words)
+
+    # 2. VARIAZIONE ORTOGRAFICA (30%) - "Smith" → "Smyth"
+    if strategy < 0.6:
+        idx = random.randint(0, len(words) - 1)
+        word = words[idx]
+        if len(word) > 3:
+            # Aggiungi/cambia una lettera
+            variations = [
+                word + "son",  # Smith → Smithson
+                word + "s",    # Smith → Smiths
+                word[:-1] + word[-1] + word[-1],  # Smith → Smithh
+                word[:2] + word[2:].replace('i', 'y'),  # Smith → Smyth
+            ]
+            words[idx] = random.choice(variations)
+        return " ".join(words)
+
+    # 3. MIX CON OTHER (25%) - Se abbiamo un altro testo, mischiamo
+    if strategy < 0.85 and other_text:
+        other_words = other_text.split()
+        if other_words and words:
+            # Prendi iniziale da uno, resto dall'altro
+            result_words = []
+            for i, w in enumerate(words):
+                if i < len(other_words) and random.random() < 0.5:
+                    # Mix: iniziale di w + parte di other
+                    ow = other_words[i]
+                    if len(w) > 1 and len(ow) > 1:
+                        mixed = w[0] + ow[1:]
+                        result_words.append(mixed)
+                    else:
+                        result_words.append(w)
+                else:
+                    result_words.append(w)
+            return " ".join(result_words)
+
+    # 4. SWAP + VARIAZIONE (15%) - "John Smith" → "Smith John" con variazione
+    if len(words) >= 2:
+        words = words[::-1]  # Reverse
+        # Aggiungi piccola variazione
+        if len(words[0]) > 2:
+            words[0] = words[0][0].upper() + words[0][1:].lower()
+
+    return " ".join(words)
 
 def load_attr_names(dataset_path):
     attr_map = {}
@@ -51,7 +122,7 @@ def clean_p(uri, attr_map):
     return uri_str.split('/')[-1].split('#')[-1].replace('>', '').replace('<', '').lower()
 
 def run_xl_pipeline():
-    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 XL (3B) - STABLE DENOISING PIPELINE ".center(98) + "█"); print("█"*100)
+    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 XL (3B) - CREATIVE VARIATION PIPELINE ".center(98) + "█"); print("█"*100)
 
     # 1. DATA
     dataset_path = str(PROJECT_ROOT / "data/raw/openea/BBC_DB")
@@ -62,7 +133,7 @@ def run_xl_pipeline():
     _, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=10)
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
 
-    print("    [1/4] Building Training Data (Denoising Focus)...")
+    print("    [1/4] Building Training Data (CREATIVE VARIATION Focus)...")
     t5_rows = []
     src_lits = defaultdict(list)
     for s, p, o in kg_src.triples((None, None, None)):
@@ -71,7 +142,8 @@ def run_xl_pipeline():
     for s, p, o in kg_tgt.triples((None, None, None)):
         if isinstance(o, Literal): tgt_lits[s].append((p, str(o)))
 
-    # A. Aligned
+    # A. ALIGNED - Le coppie allineate sono GIÀ variazioni naturali!
+    # Input: valore originale → Target: variazione reale cross-KG
     aligned_test_pool = defaultdict(list)
     for s_uri, t_uri in dataset.aligned_entities:
         s_attrs = src_lits.get(s_uri, [])
@@ -82,13 +154,24 @@ def run_xl_pipeline():
                 if canonical_map.get(str(ps)) == canonical_map.get(str(pt)):
                     v1_c, v2_c = vs.strip().lower(), vt.strip().lower()
                     if v1_c != v2_c:
-                        # TRAINING: Impara trasformazioni reali cross-KG
-                        t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {vs}", "target": vt})
-                        t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {vt}", "target": vs})
+                        # BIDIREZIONALE: entrambe le direzioni come variazioni
+                        t5_rows.append({"input": f"generate variation <{p_name}>: {vs}", "target": vt})
+                        t5_rows.append({"input": f"generate variation <{p_name}>: {vt}", "target": vs})
+
+                        # EXTRA: Aggiungi anche variazioni sintetiche
+                        # Input → Variazione creativa (non originale!)
+                        var_vs = generate_creative_variation(vs, vt)
+                        var_vt = generate_creative_variation(vt, vs)
+                        if var_vs != vs:
+                            t5_rows.append({"input": f"generate variation <{p_name}>: {vs}", "target": var_vs})
+                        if var_vt != vt:
+                            t5_rows.append({"input": f"generate variation <{p_name}>: {vt}", "target": var_vt})
+
                     aligned_test_pool[p_name].append((vs, vt))
                     break
-    
-    # B. Orphans (Denoising Puro: Sporco -> Pulito)
+
+    # B. ORPHANS - NUOVO PARADIGMA: Input → Variazione Creativa
+    # NON più denoising (noisy → clean), ma generazione (clean → variation)
     orphans_by_pred = defaultdict(list)
     for s, p, o in list(kg_src.triples((None, None, None))) + list(kg_tgt.triples((None, None, None))):
         if isinstance(o, Literal):
@@ -96,28 +179,35 @@ def run_xl_pipeline():
             if val:
                 p_name = clean_p(p, attr_map).replace('_', ' ')
                 orphans_by_pred[p_name].append(val)
-                
+
     for p_name, vals in orphans_by_pred.items():
         unique_vals = list(set(vals))
         selected = random.sample(unique_vals, min(len(unique_vals), MAX_ORPHANS_PER_PRED))
         for v in selected:
-            # USA LA LOGICA STABILE: Corrompiamo l'input, il target è l'originale
-            v_noisy = noise_gen.apply(v, predicate=p_name)
-            if v_noisy != v:
-                t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {v_noisy}", "target": v})
+            # NUOVO: Input pulito → Target variazione creativa
+            v_creative = generate_creative_variation(v)
+            if v_creative != v:
+                t5_rows.append({"input": f"generate variation <{p_name}>: {v}", "target": v_creative})
+
+            # Aggiungi anche variazioni multiple per lo stesso input
+            if random.random() < 0.3:
+                v_creative2 = generate_creative_variation(v)
+                if v_creative2 != v and v_creative2 != v_creative:
+                    t5_rows.append({"input": f"generate variation <{p_name}>: {v}", "target": v_creative2})
 
     random.shuffle(t5_rows)
-    print(f"    Total training samples: {len(t5_rows)}")
+    print(f"    Total training samples: {len(t5_rows)} (Creative Variation paradigm)")
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_bf16_stable_v1"
+    out_dir = "./results/t5_xl_creative_v1"
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
-    # 3. TRAINING
+    # 3. TRAINING (Forza retraining per nuovo paradigma)
     if not (Path(out_dir) / "adapter_model.bin").exists() and not (Path(out_dir) / "adapter_model.safetensors").exists():
+        print(f"    [2/4] Fine-tuning with CREATIVE VARIATION paradigm...")
         interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=1e-3)
-    else: print("    [2/4] XL Adapters found.")
+    else: print("    [2/4] XL Creative Adapters found.")
 
     # 3. SWEEP (Range ridotti e stabili)
     print(f"\n>>> PHASE 3: SWEEPING")
@@ -146,12 +236,12 @@ def run_xl_pipeline():
     print(f"    BEST CONFIG: {best}")
 
     # 4. REPORT
-    print(f"    [4/4] Generating Stable XL Report...")
+    print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_report.txt"
+    output_file = "massive_t5_xl_creative_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) STABLE BF16 REPORT\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: Denoising Structural Training\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: Creative Variation Training (NOT Denoising)\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -186,7 +276,7 @@ def run_xl_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
-    print(f"\n>>> SUCCESS: XL Stable Report saved to {output_file}")
+    print(f"\n>>> SUCCESS: XL Creative Variation Report saved to {output_file}")
 
 if __name__ == "__main__":
     run_xl_pipeline()
