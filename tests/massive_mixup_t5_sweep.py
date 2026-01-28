@@ -20,11 +20,13 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_t5_interpolator import MixupT5Interpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 
-# --- CONFIGURAZIONE --- 
+# --- CONFIGURAZIONE QUALITÀ ---
 MODEL_NAME = "google/flan-t5-large"
 BATCH_SIZE = 16 
 EPOCHS = 3 
 TOTAL_REPORT_SAMPLES = 400 
+SAMPLES_ALIGNED_REPORT = 200 # Aggiunto
+SAMPLES_ORPHAN_REPORT = 200  # Aggiunto
 MAX_ORPHANS_PER_PRED = 500
 SWEEP_SAMPLES = 50
 
