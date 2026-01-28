@@ -27,6 +27,7 @@ BATCH_SIZE = 4 # Con Gradient Accumulation simuliamo 16
 EPOCHS = 3
 TOTAL_REPORT_SAMPLES = 200 
 MAX_ORPHANS_PER_PRED = 200
+SWEEP_SAMPLES = 50 # Aggiunto
 
 logger = get_logger("FlanT5XL")
 noise_gen = NoiseGenerator(char_prob=0.15, word_prob=0.05)
