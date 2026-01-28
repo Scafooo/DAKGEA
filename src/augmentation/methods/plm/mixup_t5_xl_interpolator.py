@@ -68,6 +68,10 @@ class MixupT5XLInterpolator:
         # Ridimensiona per sicurezza
         model.resize_token_embeddings(len(self.tokenizer))
         
+        # FIX CRITICO per Gradient Checkpointing in BF16/FP32
+        model.enable_input_require_grads()
+        model.config.use_cache = False 
+        
         # Configura LoRA
         peft_config = LoraConfig(
             task_type=TaskType.SEQ_2_SEQ_LM,
