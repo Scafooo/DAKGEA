@@ -8,7 +8,7 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 cd "$PROJECT_ROOT"
 
 echo "--------------------------------------------------------------------------------"
-echo "  DAKGEA: STARTING T5 MIX-UP SWEEP (OPTIMIZED FOR RTX 4090)"
+echo "  DAKGEA: STARTING T5-XL (3B) QLoRA PIPELINE (RTX 4090)"
 echo "  Project Root: $PROJECT_ROOT"
 echo "  Date: $(date)"
 echo "--------------------------------------------------------------------------------"
@@ -22,16 +22,16 @@ fi
 export PYTHONPATH=$PYTHONPATH:.
 export CUDA_VISIBLE_DEVICES=0 
 
-LOG_FILE="massive_t5_4090_$(date +%Y%m%d_%H%M%S).log"
+LOG_FILE="massive_t5_xl_4090_$(date +%Y%m%d_%H%M%S).log"
 
-echo "Running T5 sweep (Fine-tuning -> Optimization -> Report)..."
+echo "Running T5-XL Pipeline (8-bit + LoRA Fine-tuning -> Report)..."
 echo "Log: $LOG_FILE"
 echo ""
 
-$PYTHON_EXEC -u tests/massive_mixup_t5_sweep.py 2>&1 | tee "$LOG_FILE"
+$PYTHON_EXEC -u tests/run_xl_pipeline.py 2>&1 | tee "$LOG_FILE"
 
 echo ""
 echo "--------------------------------------------------------------------------------"
-echo "  T5 SWEEP COMPLETED."
-echo "  Check massive_t5_report.txt for the final results."
-echo "-----------------------------------------------------d---------------------------"
+echo "  T5-XL PIPELINE COMPLETED."
+echo "  Check massive_t5_xl_report.txt for the final results."
+echo "--------------------------------------------------------------------------------"
