@@ -20,6 +20,7 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_t5_xl_interpolator import MixupT5XLInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 from src.augmentation.methods.plm.scoring import calculate_pair_score, calculate_score
+from src.augmentation.methods.plm.creative_variation_generator import CreativeVariationGenerator
 
 # --- CONFIGURAZIONE CREATIVE VARIATION ---
 MODEL_NAME = "google/flan-t5-xl"
@@ -31,79 +32,7 @@ SWEEP_SAMPLES = 50
 
 logger = get_logger("FlanT5XL_Creative")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
-
-
-# === GENERATORE DI VARIAZIONI CREATIVE ===
-def generate_creative_variation(text: str, other_text: str = None) -> str:
-    """
-    Genera una variazione CREATIVA del testo.
-
-    Invece di corrompere (denoising), creiamo variazioni che il modello
-    dovrebbe imparare a generare:
-    - Abbreviazioni: "John" → "J."
-    - Variazioni ortografiche: "Smith" → "Smyth"
-    - Mix con other_text se disponibile
-    """
-    import random
-    import re
-
-    words = text.split()
-    if not words:
-        return text
-
-    # Scegli strategia
-    strategy = random.random()
-
-    # 1. ABBREVIAZIONE (30%) - "John Smith" → "J. Smith"
-    if strategy < 0.3 and len(words) >= 2:
-        idx = random.randint(0, len(words) - 1)
-        word = words[idx]
-        if len(word) > 2 and word[0].isalpha():
-            words[idx] = word[0].upper() + "."
-        return " ".join(words)
-
-    # 2. VARIAZIONE ORTOGRAFICA (30%) - "Smith" → "Smyth"
-    if strategy < 0.6:
-        idx = random.randint(0, len(words) - 1)
-        word = words[idx]
-        if len(word) > 3:
-            # Aggiungi/cambia una lettera
-            variations = [
-                word + "son",  # Smith → Smithson
-                word + "s",    # Smith → Smiths
-                word[:-1] + word[-1] + word[-1],  # Smith → Smithh
-                word[:2] + word[2:].replace('i', 'y'),  # Smith → Smyth
-            ]
-            words[idx] = random.choice(variations)
-        return " ".join(words)
-
-    # 3. MIX CON OTHER (25%) - Se abbiamo un altro testo, mischiamo
-    if strategy < 0.85 and other_text:
-        other_words = other_text.split()
-        if other_words and words:
-            # Prendi iniziale da uno, resto dall'altro
-            result_words = []
-            for i, w in enumerate(words):
-                if i < len(other_words) and random.random() < 0.5:
-                    # Mix: iniziale di w + parte di other
-                    ow = other_words[i]
-                    if len(w) > 1 and len(ow) > 1:
-                        mixed = w[0] + ow[1:]
-                        result_words.append(mixed)
-                    else:
-                        result_words.append(w)
-                else:
-                    result_words.append(w)
-            return " ".join(result_words)
-
-    # 4. SWAP + VARIAZIONE (15%) - "John Smith" → "Smith John" con variazione
-    if len(words) >= 2:
-        words = words[::-1]  # Reverse
-        # Aggiungi piccola variazione
-        if len(words[0]) > 2:
-            words[0] = words[0][0].upper() + words[0][1:].lower()
-
-    return " ".join(words)
+creative_gen = CreativeVariationGenerator()
 
 def load_attr_names(dataset_path):
     attr_map = {}
@@ -158,10 +87,10 @@ def run_xl_pipeline():
                         t5_rows.append({"input": f"generate variation <{p_name}>: {vs}", "target": vt})
                         t5_rows.append({"input": f"generate variation <{p_name}>: {vt}", "target": vs})
 
-                        # EXTRA: Aggiungi anche variazioni sintetiche
+                        # EXTRA: Aggiungi anche variazioni sintetiche (type-aware!)
                         # Input → Variazione creativa (non originale!)
-                        var_vs = generate_creative_variation(vs, vt)
-                        var_vt = generate_creative_variation(vt, vs)
+                        var_vs = creative_gen.generate(vs, vt, predicate=p_name)
+                        var_vt = creative_gen.generate(vt, vs, predicate=p_name)
                         if var_vs != vs:
                             t5_rows.append({"input": f"generate variation <{p_name}>: {vs}", "target": var_vs})
                         if var_vt != vt:
@@ -184,14 +113,14 @@ def run_xl_pipeline():
         unique_vals = list(set(vals))
         selected = random.sample(unique_vals, min(len(unique_vals), MAX_ORPHANS_PER_PRED))
         for v in selected:
-            # NUOVO: Input pulito → Target variazione creativa
-            v_creative = generate_creative_variation(v)
+            # NUOVO: Input pulito → Target variazione creativa (type-aware!)
+            v_creative = creative_gen.generate(v, predicate=p_name)
             if v_creative != v:
                 t5_rows.append({"input": f"generate variation <{p_name}>: {v}", "target": v_creative})
 
             # Aggiungi anche variazioni multiple per lo stesso input
             if random.random() < 0.3:
-                v_creative2 = generate_creative_variation(v)
+                v_creative2 = creative_gen.generate(v, predicate=p_name)
                 if v_creative2 != v and v_creative2 != v_creative:
                     t5_rows.append({"input": f"generate variation <{p_name}>: {v}", "target": v_creative2})
 
