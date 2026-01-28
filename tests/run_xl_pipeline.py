@@ -7,7 +7,7 @@ import numpy as np
 import re
 import os
 from pathlib import Path
-from collections import defaultdict
+from collections import defaultdict, deque
 from rdflib import Literal
 from sentence_transformers import SentenceTransformer, util
 
@@ -20,20 +20,19 @@ from src.core.dataset.reader.openea_dataset_reader import OpeneaDatasetReader
 from src.augmentation.methods.plm.mixup_t5_xl_interpolator import MixupT5XLInterpolator
 from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
 from src.augmentation.methods.plm.scoring import calculate_pair_score, calculate_score
-from src.augmentation.methods.plm.noise_generator import NoiseGenerator
+from src.augmentation.methods.plm.noise_generator import VariationGenerator
 
 # --- CONFIGURAZIONE XL ---
 MODEL_NAME = "google/flan-t5-xl"
 BATCH_SIZE = 4 
 EPOCHS = 3
 TOTAL_REPORT_SAMPLES = 200 
-MAX_ORPHANS_PER_PRED = 200
+MAX_ORPHANS_PER_PRED = 300
 SWEEP_SAMPLES = 50
 
-logger = get_logger("FlanT5XL")
+logger = get_logger("FlanT5XL_SmartAug")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
-# Generatore di rumore potenziato
-noise_gen = NoiseGenerator(char_prob=0.15, word_drop_prob=0.2)
+variation_gen = VariationGenerator()
 
 def load_attr_names(dataset_path):
     attr_map = {}
@@ -52,7 +51,7 @@ def clean_p(uri, attr_map):
     return uri_str.split('/')[-1].split('#')[-1].replace('>', '').replace('<', '').lower()
 
 def run_xl_pipeline():
-    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 XL (3B) - NOISE-ENHANCED PIPELINE ".center(98) + "█"); print("█"*100)
+    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 XL (3B) - SMART HYBRID AUGMENTATION ".center(98) + "█"); print("█"*100)
 
     # 1. DATA
     dataset_path = str(PROJECT_ROOT / "data/raw/openea/BBC_DB")
@@ -63,7 +62,7 @@ def run_xl_pipeline():
     _, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=10)
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
 
-    print("    [1/4] Building Training Data (Anti-Bias + Specialized Noise)...")
+    print("    [1/4] Building Training Data (Hybrid Strategy)...")
     t5_rows = []
     src_lits = defaultdict(list)
     for s, p, o in kg_src.triples((None, None, None)):
@@ -72,7 +71,7 @@ def run_xl_pipeline():
     for s, p, o in kg_tgt.triples((None, None, None)):
         if isinstance(o, Literal): tgt_lits[s].append((p, str(o)))
 
-    # A. Aligned (Filtro Identità e Token Swap)
+    # A. Aligned Data (Filtro identità e swap)
     aligned_test_pool = defaultdict(list)
     for s_uri, t_uri in dataset.aligned_entities:
         s_attrs = src_lits.get(s_uri, [])
@@ -82,22 +81,16 @@ def run_xl_pipeline():
             for pt, vt in t_attrs:
                 if canonical_map.get(str(ps)) == canonical_map.get(str(pt)):
                     v1_c, v2_c = vs.strip().lower(), vt.strip().lower()
-                    
-                    # Filtriamo identità
-                    if v1_c == v2_c: continue
-                    
-                    # Filtriamo Token Swap (stesse parole, ordine diverso)
-                    v1_toks = set(re.findall(r'\w+', v1_c))
-                    v2_toks = set(re.findall(r'\w+', v2_c))
-                    if v1_toks == v2_toks: continue
-                    
-                    # Se passa i filtri, è una variazione di qualità per il training
-                    t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {vs}", "target": vt})
-                    t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {vt}", "target": vs})
+                    if v1_c != v2_c:
+                        v1_toks = set(re.findall(r'\w+', v1_c))
+                        v2_toks = set(re.findall(r'\w+', v2_c))
+                        if v1_toks != v2_toks:
+                            t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {vs}", "target": vt})
+                            t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {vt}", "target": vs})
                     aligned_test_pool[p_name].append((vs, vt))
                     break
     
-    # B. Orphans (Denoising con la nuova classe NoiseGenerator)
+    # B. Orphans (Logica Ibrida)
     orphans_by_pred = defaultdict(list)
     for s, p, o in list(kg_src.triples((None, None, None))) + list(kg_tgt.triples((None, None, None))):
         if isinstance(o, Literal):
@@ -110,37 +103,35 @@ def run_xl_pipeline():
         unique_vals = list(set(vals))
         selected = random.sample(unique_vals, min(len(unique_vals), MAX_ORPHANS_PER_PRED))
         for v in selected:
-            # DISTINZIONE ESPLICITA CORTO VS LUNGO
-            word_count = len(re.findall(r'\w+', v))
+            # DETERMINIAMO LA STRATEGIA IN BASE AL TIPO
+            is_name = not any(c.isdigit() for c in v) and 2 <= len(v.split()) <= 3
             
-            if word_count <= 5:
-                # STRATEGIA CORTO: Caratteri, Abbreviazioni, Numeri
-                # Usiamo NoiseGenerator ma con probabilità più alta di abbreviare o cambiare cifre
-                v_noisy = noise_gen.apply(v, predicate=p_name)
+            if is_name:
+                # STRATEGIA NOMI: Variazione Attiva (Target è diverso)
+                v_target = variation_gen.generate(v, predicate=p_name)
+                if v_target != v:
+                    t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {v}", "target": v_target})
             else:
-                # STRATEGIA LUNGO: Dropping di parole/token
-                # Forza il modello a imparare la summarization/rephrasing
-                v_noisy = noise_gen.apply(v, predicate=p_name)
-            
-            if v_noisy != v:
-                t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {v_noisy}", "target": v})
+                # STRATEGIA ID/DATE: Denoising (Target è originale pulito)
+                v_noisy = variation_gen.generate(v, predicate=p_name)
+                if v_noisy != v:
+                    t5_rows.append({"input": f"generate synthetic variation <{p_name}>: {v_noisy}", "target": v})
 
     random.shuffle(t5_rows)
-    print(f"    Training samples: {len(t5_rows)}")
+    print(f"    Total training samples: {len(t5_rows)}")
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_lora_final_v1"
+    out_dir = "./results/t5_xl_lora_hybrid_v1"
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING
     if not (Path(out_dir) / "adapter_model.bin").exists() and not (Path(out_dir) / "adapter_model.safetensors").exists():
         interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=1e-3)
-    else:
-        print("    [2/4] XL Adapters found.")
+    else: print("    [2/4] XL Adapters ready.")
 
     # 3. SWEEP (Ricerca parametri ottimali)
-    print(f"\n>>> PHASE 3: SWEEPING FOR BEST HYPERPARAMETERS (Scoring PLM)")
+    print(f"\n>>> PHASE 3: SWEEPING")
     sweep_pool = []
     all_test_preds = list(aligned_test_pool.keys())
     for _ in range(min(SWEEP_SAMPLES, len(all_test_preds))):
@@ -150,37 +141,28 @@ def run_xl_pipeline():
 
     sweep_results = []
     for a in [0.3, 0.5]:
-        for n in [0.0, 0.05]:
-            for t in [0.7, 1.0]:
+        for n in [0.05, 0.1]:
+            for t in [0.9, 1.2]:
                 interpolator.latent_noise_std, interpolator.gen_temperature = n, t
-                scs, base_scs, bonuses = [], [], []
-                
+                scs = []
                 for p, v1, v2 in sweep_pool:
                     aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=a)
                     res = calculate_pair_score(v1, v2, aa, ab)
                     scs.append(res['score'])
-                    base_scs.append(res['base_score'])
-                    bonuses.append(res['coherence_bonus'])
-                
                 avg = np.mean(scs)
-                avg_base = np.mean(base_scs)
-                avg_bonus = np.mean(bonuses)
-                
                 sweep_results.append({"a": a, "n": n, "t": t, "score": avg})
-                print(f"      - Alpha={a} Noise={n} Temp={t} -> TOTAL: {avg:.3f} (Base: {avg_base:.3f}, Bonus: {avg_bonus:.3f})")
+                print(f"      - Alpha={a} Noise={n} Temp={t} -> Score: {avg:.3f}")
     
     best = sorted(sweep_results, key=lambda x: x['score'], reverse=True)[0]
     print(f"    BEST CONFIG: {best}")
 
     # 4. REPORT
-    print(f"    [4/4] Generating Final XL Report...")
-    interpolator.latent_noise_std = best['n']
-    interpolator.gen_temperature = best['t']
-    
+    print(f"    [4/4] Generating Hybrid Augmentation Report...")
+    interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
     output_file = "massive_t5_xl_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) PRODUCTION REPORT\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: Specialized Noise & Swap Filtering\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) HYBRID REPORT\n")
+        f.write(f"Strategy: Aligned + [Nomi: Variation Training] + [ID/Date: Denoising Training]\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -200,7 +182,7 @@ def run_xl_pipeline():
                 if count >= TOTAL_REPORT_SAMPLES // 2: break
 
         # Orphans
-        f.write("\nSECTION 2: ORPHAN VARIATIONS (XL)\n" + "-"*80 + "\n")
+        f.write("\nSECTION 2: ORPHAN HYBRID VARIATIONS (XL)\n" + "-"*80 + "\n")
         o_names = sorted(list(orphans_by_pred.keys()))
         o_count = 0
         while o_count < TOTAL_REPORT_SAMPLES // 2 and o_names:
