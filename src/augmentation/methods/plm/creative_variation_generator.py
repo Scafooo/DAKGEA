@@ -78,6 +78,9 @@ class CreativeVariationGenerator:
     # Suffissi comuni per nomi
     NAME_SUFFIXES = ["son", "sen", "s", "ez", "ski", "ov", "ini"]
 
+    # FILLER WORDS da NON usare nel training (causano pattern "the")
+    FILLER_WORDS = {'the', 'a', 'an', 'and', 'or', 'of', 'to', 'in', 'on', 'at', 'by', 'for'}
+
     # Mappatura vocali per variazioni ortografiche
     VOWEL_VARIANTS = {
         'a': ['a', 'ae', 'ah'],
@@ -188,27 +191,31 @@ class CreativeVariationGenerator:
         # MULTI-PAROLA o PAROLA CORTA: variazioni aggressive
         r = random.random()
 
-        # 25% COMBO (2-3 strategie insieme!)
-        if r < 0.25:
+        # 20% CHAR SWAP (typo-like!) - NUOVO!
+        if r < 0.20:
+            return self._char_swap_word_list(words)
+
+        # 20% COMBO (2-3 strategie insieme!)
+        if r < 0.40:
             return self._combo_variation_aggressive(words, other_text)
 
-        # 25% MIX (se disponibile other_text)
-        if r < 0.50 and other_text:
+        # 20% MIX (se disponibile other_text)
+        if r < 0.60 and other_text:
             return self._mix_texts_aggressive(words, other_text)
 
-        # 20% ABBREVIAZIONE (solo se multi-parola)
-        if r < 0.70 and len(words) >= 2:
+        # 15% ABBREVIAZIONE (solo se multi-parola)
+        if r < 0.75 and len(words) >= 2:
             return self._abbreviate(words)
 
-        # 20% ORTOGRAFICA
+        # 15% ORTOGRAFICA
         if r < 0.90:
             return self._orthographic_variation_strong(words)
 
-        # 10% SWAP (solo se multi-parola)
+        # 10% SWAP ordine (solo se multi-parola)
         if len(words) >= 2:
             return self._swap_and_vary(words)
 
-        return self._orthographic_variation_strong(words)
+        return self._char_swap_word_list(words)  # Fallback: char swap
 
     def _vary_numeric(self, text: str) -> str:
         """
@@ -298,10 +305,10 @@ class CreativeVariationGenerator:
         Variazione SICURA per parole singole lunghe (>6 caratteri).
         NO shuffle completo che produce garbage!
 
-        "supertramp" → "Supertrampson", "SuperTramp", "supertramps"
+        "supertramp" → "Supertrampson", "SuperTramp", "supertramps", "supertarmp"
         """
         strategy = random.choice([
-            'suffix', 'prefix', 'camel', 'typo_safe', 'double_letter'
+            'suffix', 'prefix', 'camel', 'typo_safe', 'double_letter', 'char_swap'
         ])
 
         if strategy == 'suffix':
@@ -334,9 +341,76 @@ class CreativeVariationGenerator:
                 chars.insert(idx, chars[idx])
             return ''.join(chars)
 
-        else:  # double_letter
+        elif strategy == 'double_letter':
             idx = random.randint(1, len(word) - 2)
             return word[:idx] + word[idx] + word[idx:]
+
+        else:  # char_swap
+            return self._char_swap(word)
+
+    def _char_swap(self, word: str) -> str:
+        """
+        Swap di caratteri adiacenti (typo-like).
+
+        "John" → "Jonh", "Jhon"
+        "Smith" → "Smtih", "Simth"
+
+        Produce variazioni naturali tipo errori di battitura.
+        """
+        if len(word) < 3:
+            return word
+
+        chars = list(word)
+
+        # Scegli una posizione per lo swap (non primo/ultimo carattere)
+        # Evita di swappare vocali consecutive (suonerebbe male)
+        valid_positions = []
+        for i in range(1, len(chars) - 1):
+            # Swap chars[i] con chars[i+1]
+            c1, c2 = chars[i].lower(), chars[i+1].lower() if i+1 < len(chars) else ''
+            # Evita swap vocale-vocale
+            if not (c1 in VOWELS and c2 in VOWELS):
+                valid_positions.append(i)
+
+        if not valid_positions:
+            # Fallback: qualsiasi posizione centrale
+            valid_positions = list(range(1, len(chars) - 1))
+
+        if valid_positions:
+            idx = random.choice(valid_positions)
+            if idx + 1 < len(chars):
+                chars[idx], chars[idx + 1] = chars[idx + 1], chars[idx]
+
+        result = ''.join(chars)
+
+        # Valida che sia plausibile
+        if _is_plausible_name(result):
+            return result
+        return word  # Fallback all'originale se garbage
+
+    def _char_swap_word_list(self, words: List[str]) -> str:
+        """
+        Applica char swap a una o più parole della lista.
+
+        "John Smith" → "Jonh Smith" o "John Smtih" o "Jonh Smtih"
+        """
+        if not words:
+            return ""
+
+        result = words.copy()
+
+        # Scegli quante parole swappare (1 o 2)
+        n_swap = random.randint(1, min(2, len(words)))
+        indices = random.sample(range(len(words)), n_swap)
+
+        for idx in indices:
+            word = result[idx]
+            if len(word) >= 3:
+                swapped = self._char_swap(word)
+                if swapped != word:  # Solo se effettivamente cambiato
+                    result[idx] = swapped
+
+        return " ".join(result)
 
     def _vary_long_text(self, text: str) -> str:
         """

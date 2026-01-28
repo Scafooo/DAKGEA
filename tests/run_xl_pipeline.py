@@ -36,10 +36,46 @@ creative_gen = CreativeVariationGenerator()
 
 # --- FILTRI QUALITÀ TRAINING DATA ---
 UNICODE_GARBAGE_PATTERN = re.compile(r'u00[a-f0-9]{2}', re.IGNORECASE)
+FILLER_WORDS = {'the', 'a', 'an', 'and', 'or', 'of', 'to', 'in', 'on', 'at', 'by', 'for'}
 
 def has_unicode_garbage(text: str) -> bool:
     """Rileva caratteri unicode corrotti come u00e9, u00f3, etc."""
     return bool(UNICODE_GARBAGE_PATTERN.search(text))
+
+def is_only_filler_difference(input_text: str, target_text: str) -> bool:
+    """
+    Rileva se l'unica differenza tra input e target è l'aggiunta/rimozione di filler words.
+
+    "kinks" → "kinks the" → True (solo aggiunto "the")
+    "the band" → "band" → True (solo rimosso "the")
+    "john smith" → "john the smith" → True (solo aggiunto "the")
+    "john smith" → "johnny smith" → False (variazione reale)
+    """
+    # Estrai il valore dopo ": " nel prompt
+    if ": " in input_text:
+        input_val = input_text.split(": ", 1)[1].strip().lower()
+    else:
+        input_val = input_text.strip().lower()
+
+    target_val = target_text.strip().lower()
+
+    # Se uguali, non è un problema di filler
+    if input_val == target_val:
+        return False
+
+    # Tokenizza
+    input_tokens = input_val.split()
+    target_tokens = target_val.split()
+
+    # Rimuovi filler da entrambi
+    input_no_filler = [t for t in input_tokens if t not in FILLER_WORDS]
+    target_no_filler = [t for t in target_tokens if t not in FILLER_WORDS]
+
+    # Se senza filler sono uguali → l'unica differenza erano i filler
+    if input_no_filler == target_no_filler:
+        return True
+
+    return False
 
 def is_token_swap(input_text: str, target_text: str) -> bool:
     """Rileva se target è solo uno swap di token dell'input (stesso set di parole)."""
@@ -61,10 +97,11 @@ def is_token_swap(input_text: str, target_text: str) -> bool:
     return False
 
 def filter_training_data(rows: list) -> list:
-    """Filtra righe con unicode garbage o token swap."""
+    """Filtra righe con unicode garbage, token swap, o solo filler difference."""
     filtered = []
     unicode_removed = 0
     swap_removed = 0
+    filler_removed = 0
 
     for row in rows:
         inp, tgt = row['input'], row['target']
@@ -79,9 +116,14 @@ def filter_training_data(rows: list) -> list:
             swap_removed += 1
             continue
 
+        # Fix 3: Rimuovi coppie dove l'unica differenza è "the"/"and"/etc.
+        if is_only_filler_difference(inp, tgt):
+            filler_removed += 1
+            continue
+
         filtered.append(row)
 
-    print(f"    [FILTER] Removed: {unicode_removed} unicode garbage, {swap_removed} token swaps")
+    print(f"    [FILTER] Removed: {unicode_removed} unicode garbage, {swap_removed} token swaps, {filler_removed} filler-only")
     print(f"    [FILTER] Kept: {len(filtered)}/{len(rows)} ({100*len(filtered)/len(rows):.1f}%)")
     return filtered
 
@@ -184,7 +226,7 @@ def run_xl_pipeline():
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_creative_v2"  # v2: filtered (no unicode garbage, no swap)
+    out_dir = "./results/t5_xl_creative_v3"  # v3: +char_swap, +filler filter
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING (Forza retraining per nuovo paradigma)
@@ -222,10 +264,10 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_v2_report.txt"
+    output_file = "massive_t5_xl_creative_v3_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v2\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: Creative Variation (FILTERED: no unicode garbage, no swap)\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v3\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: +CharSwap training, +Filler filter (the/and/etc)\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
