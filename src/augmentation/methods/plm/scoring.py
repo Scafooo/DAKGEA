@@ -26,6 +26,12 @@ from typing import Dict, Tuple, Set
 # Soglia per distinguere testi corti da lunghi
 SHORT_TEXT_THRESHOLD = 5
 
+# Articoli e parole "filler" che non contano come variazione creativa
+FILLER_WORDS = {'the', 'a', 'an', 'and', 'or', 'of', 'to', 'in', 'on', 'at', 'by', 'for'}
+
+# Pattern per rilevare garbage unicode (es: u00e9l, u00f3n)
+UNICODE_GARBAGE_PATTERN = re.compile(r'u00[a-f0-9]{2}', re.IGNORECASE)
+
 # Semantic model per testi lunghi (lazy loading)
 _semantic_model = None
 
@@ -115,6 +121,11 @@ def _score_short_text(orig: str, gen: str, other: str) -> Dict:
     orig_c = orig.strip().lower()
     other_c = other.strip().lower() if other else ""
 
+    # Garbage unicode check (es: u00e9l, u00f3n)
+    unicode_matches = UNICODE_GARBAGE_PATTERN.findall(gen_c)
+    if len(unicode_matches) >= 2:
+        return {"score": 0.05, "reason": "unicode_garbage", "matches": unicode_matches}
+
     # Identity check
     if gen_c == orig_c or gen_c == other_c:
         return {"score": 0.0, "reason": "identity"}
@@ -131,6 +142,21 @@ def _score_short_text(orig: str, gen: str, other: str) -> Dict:
     words_A = set(re.findall(r'\w+', orig_c))
     words_B = set(re.findall(r'\w+', other_c)) if other_c else set()
     all_input_words = words_A | words_B
+
+    # Check "solo aggiunta filler" (the, and, a...)
+    # Se l'unica differenza è un filler aggiunto/rimosso, penalizza
+    diff_added = gen_words - all_input_words
+    diff_removed = all_input_words - gen_words
+
+    # Caso: aggiunto solo filler (es: "rollins band" -> "rollins the band")
+    if diff_added and diff_added <= FILLER_WORDS and not diff_removed:
+        return {"score": 0.15, "reason": "only_filler_added", "filler": list(diff_added)}
+
+    # Caso: rimosso solo contenuto, aggiunto filler (es: "X Y Z" -> "X the")
+    meaningful_added = diff_added - FILLER_WORDS
+    if not meaningful_added and diff_removed:
+        return {"score": 0.15, "reason": "removed_content_added_filler",
+                "removed": list(diff_removed), "filler": list(diff_added & FILLER_WORDS)}
 
     # Shuffle check: output usa SOLO token dagli input (nessuna creatività)
     if len(gen_words) > 1 and gen_words <= all_input_words:
@@ -210,6 +236,11 @@ def _score_long_text(orig: str, gen: str, other: str) -> Dict:
     gen_c = gen.strip()
     orig_c = orig.strip()
     other_c = other.strip() if other else ""
+
+    # Garbage unicode check (es: u00e9l, u00f3n)
+    unicode_matches = UNICODE_GARBAGE_PATTERN.findall(gen_c.lower())
+    if len(unicode_matches) >= 2:
+        return {"score": 0.05, "reason": "unicode_garbage", "matches": unicode_matches}
 
     # Identity check (lessicale)
     lex_sim_A = _word_sim(gen_c.lower(), orig_c.lower())
@@ -449,6 +480,13 @@ if __name__ == "__main__":
          "BUONO: variazioni individuali ma non coerenti tra loro"),
         ("Dohn John", "Dohn Johnatan", "John Dohn", "Johnatan Dohn",
          "SHUFFLE: solo riordino token - penalizzato"),
+        # Nuovi test da report
+        ("rollins band", "rollins band", "rollins the band", "rollins the band",
+         "FILLER: solo aggiunta 'the' - penalizzato"),
+        ("supertramp", "supertramp", "supertramp the", "supertramp the",
+         "FILLER: solo aggiunta 'the' - penalizzato"),
+        ("hollywood actor", "clint clinton", "u00e9l b octavian", "u00e9l stefano",
+         "UNICODE GARBAGE: caratteri corrotti"),
     ]
 
     for inA, inB, outA, outB, desc in pair_tests:
