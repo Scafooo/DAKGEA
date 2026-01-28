@@ -130,6 +130,12 @@ def _score_short_text(orig: str, gen: str, other: str) -> Dict:
     gen_words = set(re.findall(r'\w+', gen_c))
     words_A = set(re.findall(r'\w+', orig_c))
     words_B = set(re.findall(r'\w+', other_c)) if other_c else set()
+    all_input_words = words_A | words_B
+
+    # Shuffle check: output usa SOLO token dagli input (nessuna creatività)
+    if len(gen_words) > 1 and gen_words <= all_input_words:
+        # Output è solo riordino/subset dei token input
+        return {"score": 0.15, "reason": "shuffle", "tokens": list(gen_words)}
 
     # Input identici?
     inputs_identical = orig_c == other_c if other_c else False
@@ -182,7 +188,7 @@ def _score_short_text(orig: str, gen: str, other: str) -> Dict:
                 "connections": connections_A or connections_B,
             }
         return {
-            "score": 0.6,
+            "score": 0.7,  # Alzato da 0.6
             "reason": "partial_connection",
             "connections": connections_A or connections_B,
         }
@@ -342,6 +348,7 @@ def _coherence_bonus(input_A: str, input_B: str, output_A: str, output_B: str) -
 def calculate_pair_score(input_A: str, input_B: str, output_A: str, output_B: str) -> Dict:
     """
     Calcola score per una COPPIA di output, includendo bonus di coerenza.
+    Score normalizzato in [0, 1].
 
     Esempio eccellente:
         Input:  "Mary Smith" + "John Smith"
@@ -352,7 +359,7 @@ def calculate_pair_score(input_A: str, input_B: str, output_A: str, output_B: st
 
     Returns:
         {
-            "score": float,  # Score finale (0-1.3 con bonus)
+            "score": float,  # Score finale normalizzato [0, 1]
             "score_A": float,
             "score_B": float,
             "coherence_bonus": float,
@@ -371,9 +378,17 @@ def calculate_pair_score(input_A: str, input_B: str, output_A: str, output_B: st
         input_A, input_B, output_A, output_B
     )
 
-    # Score finale
+    # Bonus parallel: entrambi gli output sono buone variazioni
+    parallel_bonus = 0.0
+    if score_A >= 0.6 and score_B >= 0.6:
+        parallel_bonus = 0.1
+        coherence_details["parallel_bonus"] = True
+
+    # Score finale normalizzato [0, 1]
+    # I bonus "riempiono" lo spazio rimanente fino a 1.0
     base_score = (score_A + score_B) / 2
-    final_score = min(1.3, base_score + coherence_bonus)  # Cap a 1.3
+    total_bonus = coherence_bonus + parallel_bonus
+    final_score = min(1.0, base_score + total_bonus * (1.0 - base_score))
 
     return {
         "score": final_score,
@@ -383,6 +398,7 @@ def calculate_pair_score(input_A: str, input_B: str, output_A: str, output_B: st
         "reason_A": result_A.get("reason"),
         "reason_B": result_B.get("reason"),
         "coherence_bonus": coherence_bonus,
+        "parallel_bonus": parallel_bonus,
         "coherence_details": coherence_details,
     }
 
@@ -431,6 +447,8 @@ if __name__ == "__main__":
          "GARBAGE: nessuna connessione"),
         ("Alice Johnson", "Bob Williams", "A. Johnsonn", "B. Williamson",
          "BUONO: variazioni individuali ma non coerenti tra loro"),
+        ("Dohn John", "Dohn Johnatan", "John Dohn", "Johnatan Dohn",
+         "SHUFFLE: solo riordino token - penalizzato"),
     ]
 
     for inA, inB, outA, outB, desc in pair_tests:
@@ -438,7 +456,8 @@ if __name__ == "__main__":
         print(f"[{result['score']:.2f}] {desc}")
         print(f"    Input:  '{inA}' + '{inB}'")
         print(f"    Output: '{outA}' + '{outB}'")
-        print(f"    Base: {result['base_score']:.2f} | Bonus: +{result['coherence_bonus']:.2f}")
+        bonus_str = f"coh={result['coherence_bonus']:.2f} par={result['parallel_bonus']:.2f}"
+        print(f"    Base: {result['base_score']:.2f} | Bonus: {bonus_str}")
         if result['coherence_details'].get('variations'):
             for v in result['coherence_details']['variations']:
                 print(f"    → '{v['input_token']}' → '{v['output_token']}' (sim: {v['similarity']:.2f})")
