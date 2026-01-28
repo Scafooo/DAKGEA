@@ -124,12 +124,48 @@ def run_xl_pipeline():
 
     # 3. TRAINING
     if not (Path(out_dir) / "adapter_model.bin").exists() and not (Path(out_dir) / "adapter_model.safetensors").exists():
-        interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=5e-4)
+        interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=1e-3) # LR alto per LoRA
     else:
         print("    [2/4] XL Adapters ready.")
 
+    # 3. SWEEP (Ricerca parametri ottimali)
+    print(f"\n>>> PHASE 3: SWEEPING FOR BEST HYPERPARAMETERS (Scoring PLM)")
+    sweep_pool = []
+    all_test_preds = list(aligned_test_pool.keys())
+    for _ in range(SWEEP_SAMPLES):
+        p = random.choice(all_test_preds)
+        v1, v2 = random.choice(aligned_test_pool[p])
+        sweep_pool.append((p, v1, v2))
+
+    sweep_results = []
+    for a in [0.3, 0.5]:
+        for n in [0.0, 0.05]:
+            for t in [0.7, 1.0]:
+                interpolator.latent_noise_std, interpolator.gen_temperature = n, t
+                scs, base_scs, bonuses = [], [], []
+                
+                for p, v1, v2 in sweep_pool:
+                    aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=a)
+                    res = calculate_pair_score(v1, v2, aa, ab)
+                    scs.append(res['score'])
+                    base_scs.append(res['base_score'])
+                    bonuses.append(res['coherence_bonus'])
+                
+                avg = np.mean(scs)
+                avg_base = np.mean(base_scs)
+                avg_bonus = np.mean(bonuses)
+                
+                sweep_results.append({"a": a, "n": n, "t": t, "score": avg})
+                print(f"      - Alpha={a} Noise={n} Temp={t} -> TOTAL: {avg:.3f} (Base: {avg_base:.3f}, Bonus: {avg_bonus:.3f})")
+    
+    best = sorted(sweep_results, key=lambda x: x['score'], reverse=True)[0]
+    print(f"    BEST CONFIG: {best}")
+
     # 4. REPORT
     print(f"    [4/4] Generating High Quality XL Report...")
+    interpolator.latent_noise_std = best['n']
+    interpolator.gen_temperature = best['t']
+    
     output_file = "massive_t5_xl_report.txt"
     
     with open(output_file, "w", encoding="utf-8") as f:
