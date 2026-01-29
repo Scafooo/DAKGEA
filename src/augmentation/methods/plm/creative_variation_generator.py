@@ -119,14 +119,21 @@ class CreativeVariationGenerator:
         'jan', 'feb', 'mar', 'apr', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'
     }
 
+    # Valori booleani/costanti da NON variare
+    INVARIANT_VALUES = {'yes', 'no', 'true', 'false', 'none', 'null', 'n/a', 'na', 'unknown'}
+
     def _detect_type(self, text: str) -> str:
         """
         Rileva il tipo basandosi SOLO sul contenuto (non predicato!).
 
-        Returns: 'numeric', 'short', 'long'
+        Returns: 'numeric', 'short', 'long', 'invariant'
         """
         text_clean = text.strip()
         text_lower = text_clean.lower()
+
+        # INVARIANT: booleani, costanti - NON variare!
+        if text_lower in self.INVARIANT_VALUES:
+            return 'invariant'
 
         # 1. NUMERICO: date, numeri, ID, codici
         # Pattern data (2023-01-15, 15/01/2023, etc)
@@ -187,6 +194,19 @@ class CreativeVariationGenerator:
         # Rileva tipo basato su CONTENUTO
         data_type = self._detect_type(text)
 
+        # === BOOLEANI: a volte inverti! ===
+        if data_type == 'invariant':
+            text_lower = text.strip().lower()
+            # 50% probabilità di inversione
+            if random.random() < 0.5:
+                bool_flip = {
+                    'yes': 'no', 'no': 'yes',
+                    'true': 'false', 'false': 'true',
+                }
+                if text_lower in bool_flip:
+                    return bool_flip[text_lower]
+            return text  # Altrimenti invariato
+
         # === NUMERICO: date, numeri, ID ===
         if data_type == 'numeric':
             return self._vary_numeric(text)
@@ -204,32 +224,36 @@ class CreativeVariationGenerator:
         if len(words) == 1 and len(words[0]) > 6:
             return self._vary_single_long_word(words[0])
 
-        # MULTI-PAROLA o PAROLA CORTA: variazioni aggressive
+        # MULTI-PAROLA o PAROLA CORTA: variazioni PIÙ AGGRESSIVE!
         r = random.random()
 
-        # 20% CHAR SWAP (typo-like!) - NUOVO!
-        if r < 0.20:
-            return self._char_swap_word_list(words)
-
-        # 20% COMBO (2-3 strategie insieme!)
-        if r < 0.40:
+        # 30% COMBO (2-3 strategie insieme!) - PIÙ FREQUENTE
+        if r < 0.30:
             return self._combo_variation_aggressive(words, other_text)
 
-        # 20% MIX (se disponibile other_text)
-        if r < 0.60 and other_text:
+        # 25% CHAR SWAP + altra variazione
+        if r < 0.55:
+            # Char swap + 50% anche suffix/abbrev
+            result = self._char_swap_word_list(words)
+            if random.random() < 0.5 and len(words) >= 2:
+                result_words = result.split()
+                # Aggiungi suffix a una parola non swappata
+                idx = random.randint(0, len(result_words) - 1)
+                if len(result_words[idx]) >= 3:
+                    result_words[idx] = result_words[idx] + random.choice(self.NAME_SUFFIXES)
+                result = " ".join(result_words)
+            return result
+
+        # 15% MIX (se disponibile other_text)
+        if r < 0.70 and other_text:
             return self._mix_texts_aggressive(words, other_text)
 
         # 15% ABBREVIAZIONE (solo se multi-parola)
-        if r < 0.75 and len(words) >= 2:
+        if r < 0.85 and len(words) >= 2:
             return self._abbreviate(words)
 
-        # 15% ORTOGRAFICA
-        if r < 0.90:
-            return self._orthographic_variation_strong(words)
-
-        # 10% SWAP ordine (solo se multi-parola)
-        if len(words) >= 2:
-            return self._swap_and_vary(words)
+        # 15% ORTOGRAFICA FORTE
+        return self._orthographic_variation_strong(words)
 
         return self._char_swap_word_list(words)  # Fallback: char swap
 
