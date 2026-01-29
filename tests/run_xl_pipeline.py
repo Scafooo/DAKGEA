@@ -96,6 +96,38 @@ def is_token_swap(input_text: str, target_text: str) -> bool:
         return True
     return False
 
+# Coppie di FLIP da insegnare a T5
+FLIP_PAIRS = {
+    'yes': 'no', 'no': 'yes',
+    'true': 'false', 'false': 'true',
+    'left': 'right', 'right': 'left',
+    'up': 'down', 'down': 'up',
+    'top': 'bottom', 'bottom': 'top',
+    'start': 'end', 'end': 'start',
+    'on': 'off', 'off': 'on',
+    'active': 'inactive', 'inactive': 'active',
+    'enabled': 'disabled', 'disabled': 'enabled',
+}
+
+def generate_flip_training_pairs() -> list:
+    """
+    Genera coppie di training per FLIP + IDENTITY.
+
+    T5 impara sia a flippare (yes→no) che a mantenere (yes→yes).
+    Bilanciato 50/50 per evitare che flippi sempre!
+    """
+    pairs = []
+    for val, flipped in FLIP_PAIRS.items():
+        # 50% FLIP: yes → no
+        for _ in range(3):
+            pairs.append({"input": f"generate variation <value>: {val}", "target": flipped})
+
+        # 50% IDENTITY: yes → yes (a volte non cambiare!)
+        for _ in range(3):
+            pairs.append({"input": f"generate variation <value>: {val}", "target": val})
+
+    return pairs
+
 def min_edit_distance(s1: str, s2: str) -> int:
     """Calcola la distanza di Levenshtein tra due stringhe."""
     if len(s1) < len(s2):
@@ -159,7 +191,7 @@ def filter_training_data(rows: list, min_edit_ratio: float = 0.1) -> list:
 
         filtered.append(row)
 
-    print(f"    [FILTER] Removed: {unicode_removed} unicode, {swap_removed} swaps, {filler_removed} filler, {too_similar_removed} too-similar")
+    print(f"    [FILTER] Removed: {unicode_removed} unicode, {swap_removed} swaps, {filler_removed} filler, {too_similar_removed} similar")
     print(f"    [FILTER] Kept: {len(filtered)}/{len(rows)} ({100*len(filtered)/len(rows):.1f}%)")
     return filtered
 
@@ -269,12 +301,17 @@ def run_xl_pipeline():
     print(f"    Pre-filter samples: {len(t5_rows)}")
     t5_rows = filter_training_data(t5_rows)
 
+    # AGGIUNGI FLIP PAIRS: yes↔no, true↔false, left↔right, etc.
+    flip_pairs = generate_flip_training_pairs()
+    t5_rows.extend(flip_pairs)
+    print(f"    [FLIP] Added {len(flip_pairs)} flip training pairs (yes↔no, left↔right, etc.)")
+
     random.shuffle(t5_rows)
-    print(f"    Total training samples: {len(t5_rows)} (Creative Variation paradigm, filtered)")
+    print(f"    Total training samples: {len(t5_rows)} (Creative Variation paradigm, filtered + flips)")
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_creative_v7"  # v7: +vary_all_tokens, +semantic_expansion, +swap_both
+    out_dir = "./results/t5_xl_creative_v8"  # v8: +flip pairs (yes↔no, left↔right, etc.)
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING (Forza retraining per nuovo paradigma)
@@ -312,10 +349,10 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_v7_report.txt"
+    output_file = "massive_t5_xl_creative_v8_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v7\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: +vary_all_tokens, +swap_both, no hardcoded dicts\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v8\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: +flip pairs (yes↔no, left↔right, up↔down, etc.)\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -350,7 +387,7 @@ def run_xl_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
-    print(f"\n>>> SUCCESS: XL Creative v7 Report (multi-token + T5 generalization) saved to {output_file}")
+    print(f"\n>>> SUCCESS: XL Creative v8 Report (flip pairs learned) saved to {output_file}")
 
 if __name__ == "__main__":
     run_xl_pipeline()
