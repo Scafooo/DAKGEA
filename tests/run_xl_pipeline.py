@@ -245,9 +245,9 @@ def run_xl_pipeline():
         sweep_pool.append((p, v1, v2))
 
     sweep_results = []
-    for a in [0.3, 0.5, 0.6, 0.7]:  # Alpha più alti per più mixing
+    for a in [0.5, 0.6, 0.7, 0.8]:  # Alpha alti per mixing aggressivo
         for n in [0.0, 0.02]: # Rumore latente basso
-            for t in [0.7, 1.0, 1.2, 1.5]:  # Temperature più alte per più creatività
+            for t in [0.7, 0.9, 1.0]:  # Temperature conservative (no garbage)
                 interpolator.latent_noise_std, interpolator.gen_temperature = n, t
                 scs = []
                 for p, v1, v2 in sweep_pool:
@@ -264,10 +264,10 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_v4_report.txt"
+    output_file = "massive_t5_xl_creative_v5_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v4\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: Extended sweep (alpha<=0.7, temp<=1.5)\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v5\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: High alpha (<=0.8), conservative temp (<=1.0)\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -302,7 +302,7 @@ def run_xl_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
-    print(f"\n>>> SUCCESS: XL Creative v4 Report (extended sweep) saved to {output_file}")
+    print(f"\n>>> SUCCESS: XL Creative v5 Report (high alpha) saved to {output_file}")
 
 if __name__ == "__main__":
     run_xl_pipeline()
