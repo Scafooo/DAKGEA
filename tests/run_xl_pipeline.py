@@ -96,15 +96,42 @@ def is_token_swap(input_text: str, target_text: str) -> bool:
         return True
     return False
 
-def filter_training_data(rows: list) -> list:
-    """Filtra righe con unicode garbage, token swap, o solo filler difference."""
+def min_edit_distance(s1: str, s2: str) -> int:
+    """Calcola la distanza di Levenshtein tra due stringhe."""
+    if len(s1) < len(s2):
+        return min_edit_distance(s2, s1)
+    if len(s2) == 0:
+        return len(s1)
+    prev_row = range(len(s2) + 1)
+    for i, c1 in enumerate(s1):
+        curr_row = [i + 1]
+        for j, c2 in enumerate(s2):
+            insertions = prev_row[j + 1] + 1
+            deletions = curr_row[j] + 1
+            substitutions = prev_row[j] + (c1 != c2)
+            curr_row.append(min(insertions, deletions, substitutions))
+        prev_row = curr_row
+    return prev_row[-1]
+
+def extract_value_from_prompt(prompt: str) -> str:
+    """Estrae il valore dopo ': ' dal prompt."""
+    if ": " in prompt:
+        return prompt.split(": ", 1)[1].strip()
+    return prompt.strip()
+
+def filter_training_data(rows: list, min_edit_ratio: float = 0.1) -> list:
+    """Filtra righe con unicode garbage, token swap, filler difference, o troppo simili."""
     filtered = []
     unicode_removed = 0
     swap_removed = 0
     filler_removed = 0
+    too_similar_removed = 0
 
     for row in rows:
         inp, tgt = row['input'], row['target']
+
+        # Estrai valore dall'input per confronto
+        inp_val = extract_value_from_prompt(inp)
 
         # Fix 1: Rimuovi unicode garbage
         if has_unicode_garbage(inp) or has_unicode_garbage(tgt):
@@ -121,9 +148,18 @@ def filter_training_data(rows: list) -> list:
             filler_removed += 1
             continue
 
+        # Fix 4: Rimuovi coppie troppo simili (edit distance < 10% della lunghezza)
+        max_len = max(len(inp_val), len(tgt))
+        if max_len > 0:
+            edit_dist = min_edit_distance(inp_val.lower(), tgt.lower())
+            edit_ratio = edit_dist / max_len
+            if edit_ratio < min_edit_ratio and inp_val.lower() != tgt.lower():
+                too_similar_removed += 1
+                continue
+
         filtered.append(row)
 
-    print(f"    [FILTER] Removed: {unicode_removed} unicode garbage, {swap_removed} token swaps, {filler_removed} filler-only")
+    print(f"    [FILTER] Removed: {unicode_removed} unicode, {swap_removed} swaps, {filler_removed} filler, {too_similar_removed} too-similar")
     print(f"    [FILTER] Kept: {len(filtered)}/{len(rows)} ({100*len(filtered)/len(rows):.1f}%)")
     return filtered
 
@@ -166,7 +202,11 @@ def run_xl_pipeline():
 
     # A. ALIGNED - Le coppie allineate sono GIÀ variazioni naturali!
     # Input: valore originale → Target: variazione reale cross-KG
+    # PRIORITÀ: coppie reali valgono 3x (duplicate)
     aligned_test_pool = defaultdict(list)
+    real_pairs_count = 0
+    synthetic_pairs_count = 0
+
     for s_uri, t_uri in dataset.aligned_entities:
         s_attrs = src_lits.get(s_uri, [])
         t_attrs = tgt_lits.get(t_uri, [])
@@ -176,21 +216,28 @@ def run_xl_pipeline():
                 if canonical_map.get(str(ps)) == canonical_map.get(str(pt)):
                     v1_c, v2_c = vs.strip().lower(), vt.strip().lower()
                     if v1_c != v2_c:
-                        # BIDIREZIONALE: entrambe le direzioni come variazioni
-                        t5_rows.append({"input": f"generate variation <{p_name}>: {vs}", "target": vt})
-                        t5_rows.append({"input": f"generate variation <{p_name}>: {vt}", "target": vs})
+                        # BIDIREZIONALE: coppie REALI duplicate 3x per più peso
+                        for _ in range(3):
+                            t5_rows.append({"input": f"generate variation <{p_name}>: {vs}", "target": vt})
+                            t5_rows.append({"input": f"generate variation <{p_name}>: {vt}", "target": vs})
+                        real_pairs_count += 2
 
-                        # EXTRA: Aggiungi anche variazioni sintetiche (type-aware!)
-                        # Input → Variazione creativa (non originale!)
-                        var_vs = creative_gen.generate(vs, vt, predicate=p_name)
-                        var_vt = creative_gen.generate(vt, vs, predicate=p_name)
-                        if var_vs != vs:
-                            t5_rows.append({"input": f"generate variation <{p_name}>: {vs}", "target": var_vs})
-                        if var_vt != vt:
-                            t5_rows.append({"input": f"generate variation <{p_name}>: {vt}", "target": var_vt})
+                        # EXTRA: Variazioni sintetiche (solo 30% probabilità, ridotto)
+                        if random.random() < 0.3:
+                            var_vs = creative_gen.generate(vs, vt, predicate=p_name)
+                            if var_vs != vs and var_vs != vt:
+                                t5_rows.append({"input": f"generate variation <{p_name}>: {vs}", "target": var_vs})
+                                synthetic_pairs_count += 1
+                        if random.random() < 0.3:
+                            var_vt = creative_gen.generate(vt, vs, predicate=p_name)
+                            if var_vt != vt and var_vt != vs:
+                                t5_rows.append({"input": f"generate variation <{p_name}>: {vt}", "target": var_vt})
+                                synthetic_pairs_count += 1
 
                     aligned_test_pool[p_name].append((vs, vt))
                     break
+
+    print(f"    [ALIGNED] Real pairs: {real_pairs_count} (x3 weight), Synthetic: {synthetic_pairs_count}")
 
     # B. ORPHANS - NUOVO PARADIGMA: Input → Variazione Creativa
     # NON più denoising (noisy → clean), ma generazione (clean → variation)
@@ -202,20 +249,21 @@ def run_xl_pipeline():
                 p_name = clean_p(p, attr_map).replace('_', ' ')
                 orphans_by_pred[p_name].append(val)
 
+    orphan_count = 0
     for p_name, vals in orphans_by_pred.items():
         unique_vals = list(set(vals))
-        selected = random.sample(unique_vals, min(len(unique_vals), MAX_ORPHANS_PER_PRED))
+        # Ridotto: max 100 orphans per predicato (era 200)
+        selected = random.sample(unique_vals, min(len(unique_vals), 100))
         for v in selected:
-            # NUOVO: Input pulito → Target variazione creativa (type-aware!)
-            v_creative = creative_gen.generate(v, predicate=p_name)
-            if v_creative != v:
-                t5_rows.append({"input": f"generate variation <{p_name}>: {v}", "target": v_creative})
+            # Solo 50% degli orphans (riduciamo peso sintetico)
+            if random.random() < 0.5:
+                v_creative = creative_gen.generate(v, predicate=p_name)
+                # Verifica che sia sufficientemente diverso
+                if v_creative != v and len(v_creative) > 2:
+                    t5_rows.append({"input": f"generate variation <{p_name}>: {v}", "target": v_creative})
+                    orphan_count += 1
 
-            # Aggiungi anche variazioni multiple per lo stesso input
-            if random.random() < 0.3:
-                v_creative2 = creative_gen.generate(v, predicate=p_name)
-                if v_creative2 != v and v_creative2 != v_creative:
-                    t5_rows.append({"input": f"generate variation <{p_name}>: {v}", "target": v_creative2})
+    print(f"    [ORPHANS] Synthetic variations: {orphan_count}")
 
     # FILTRI QUALITÀ: rimuovi unicode garbage e token swap
     print(f"    Pre-filter samples: {len(t5_rows)}")
@@ -226,7 +274,7 @@ def run_xl_pipeline():
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_creative_v3"  # v4: extended sweep ranges
+    out_dir = "./results/t5_xl_creative_v6"  # v6: più peso a coppie reali, meno sintetiche
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING (Forza retraining per nuovo paradigma)
@@ -245,9 +293,9 @@ def run_xl_pipeline():
         sweep_pool.append((p, v1, v2))
 
     sweep_results = []
-    for a in [0.5, 0.6, 0.7, 0.8]:  # Alpha alti per mixing aggressivo
-        for n in [0.0, 0.02]: # Rumore latente basso
-            for t in [0.7, 0.9, 1.0]:  # Temperature conservative (no garbage)
+    for a in [0.3, 0.4, 0.5]:  # Alpha moderati (v3-style)
+        for n in [0.0, 0.01, 0.02]: # Rumore latente basso
+            for t in [0.7, 0.85, 1.0]:  # Temperature conservative
                 interpolator.latent_noise_std, interpolator.gen_temperature = n, t
                 scs = []
                 for p, v1, v2 in sweep_pool:
@@ -264,10 +312,10 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_v5_report.txt"
+    output_file = "massive_t5_xl_creative_v6_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v5\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: High alpha (<=0.8), conservative temp (<=1.0)\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v6\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: v3-restored (alpha<=0.5, temp<=1.0)\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -302,7 +350,7 @@ def run_xl_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
-    print(f"\n>>> SUCCESS: XL Creative v5 Report (high alpha) saved to {output_file}")
+    print(f"\n>>> SUCCESS: XL Creative v6 Report (v3-restored) saved to {output_file}")
 
 if __name__ == "__main__":
     run_xl_pipeline()
