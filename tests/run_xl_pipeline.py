@@ -226,7 +226,7 @@ def run_xl_pipeline():
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_creative_v3"  # v3: +char_swap, +filler filter
+    out_dir = "./results/t5_xl_creative_v3"  # v4: extended sweep ranges
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING (Forza retraining per nuovo paradigma)
@@ -235,8 +235,8 @@ def run_xl_pipeline():
         interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=1e-3)
     else: print("    [2/4] XL Creative Adapters found.")
 
-    # 3. SWEEP (Range ridotti e stabili)
-    print(f"\n>>> PHASE 3: SWEEPING")
+    # 3. SWEEP (Range espansi per variazioni più creative)
+    print(f"\n>>> PHASE 3: SWEEPING (Extended ranges)")
     sweep_pool = []
     all_test_preds = list(aligned_test_pool.keys())
     for _ in range(min(SWEEP_SAMPLES, len(all_test_preds))):
@@ -245,9 +245,9 @@ def run_xl_pipeline():
         sweep_pool.append((p, v1, v2))
 
     sweep_results = []
-    for a in [0.3, 0.5]:
-        for n in [0.0, 0.02]: # Rumore latente molto basso per evitare garbage
-            for t in [0.7, 1.0]:
+    for a in [0.3, 0.5, 0.6, 0.7]:  # Alpha più alti per più mixing
+        for n in [0.0, 0.02]: # Rumore latente basso
+            for t in [0.7, 1.0, 1.2, 1.5]:  # Temperature più alte per più creatività
                 interpolator.latent_noise_std, interpolator.gen_temperature = n, t
                 scs = []
                 for p, v1, v2 in sweep_pool:
@@ -264,10 +264,10 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_v3_report.txt"
+    output_file = "massive_t5_xl_creative_v4_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v3\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: +CharSwap training, +Filler filter (the/and/etc)\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v4\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: Extended sweep (alpha<=0.7, temp<=1.5)\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -302,7 +302,7 @@ def run_xl_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
-    print(f"\n>>> SUCCESS: XL Creative Variation Report saved to {output_file}")
+    print(f"\n>>> SUCCESS: XL Creative v4 Report (extended sweep) saved to {output_file}")
 
 if __name__ == "__main__":
     run_xl_pipeline()
