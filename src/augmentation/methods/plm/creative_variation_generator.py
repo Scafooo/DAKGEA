@@ -287,34 +287,50 @@ class CreativeVariationGenerator:
 
         if month_found and year_found:
             short_month, num_month = month_found
+            all_months = [
+                ('Jan', '01'), ('Feb', '02'), ('Mar', '03'), ('Apr', '04'),
+                ('May', '05'), ('Jun', '06'), ('Jul', '07'), ('Aug', '08'),
+                ('Sep', '09'), ('Oct', '10'), ('Nov', '11'), ('Dec', '12')
+            ]
 
-            # 50% cambio SOLO formato, 50% cambio anche il MESE
-            if random.random() < 0.5:
-                # Cambio mese! Scegli un mese diverso
-                all_months = [
-                    ('Jan', '01'), ('Feb', '02'), ('Mar', '03'), ('Apr', '04'),
-                    ('May', '05'), ('Jun', '06'), ('Jul', '07'), ('Aug', '08'),
-                    ('Sep', '09'), ('Oct', '10'), ('Nov', '11'), ('Dec', '12')
-                ]
-                # Escludi il mese corrente
+            # COMBINAZIONE DI VARIAZIONI: mese + anno + giorno + formato
+            # 70% cambia mese
+            if random.random() < 0.7:
                 other_months = [(s, n) for s, n in all_months if n != num_month]
                 short_month, num_month = random.choice(other_months)
 
-            # Genera variazioni di formato
-            formats = [
-                f"{short_month} {year_found}",           # "Sep 2010"
-                f"{num_month}/{year_found}",             # "09/2010"
-                f"{year_found}-{num_month}",             # "2010-09"
-                f"{year_found} {short_month}",           # "2010 Sep"
-            ]
+            # 50% shift anno (±1-3 anni)
+            year_int = int(year_found)
+            if random.random() < 0.5:
+                year_int += random.choice([-3, -2, -1, 1, 2, 3])
+            year_str = str(year_int)
+
+            # Genera giorno (se non presente, a volte aggiungilo)
             if day_found:
-                # Varia anche il giorno (±qualche giorno)
-                new_day = str(max(1, min(28, int(day_found) + random.randint(-5, 5))))
-                formats.extend([
-                    f"{new_day} {short_month} {year_found}",  # "15 Sep 2010"
-                    f"{num_month}/{new_day}/{year_found}",    # "09/15/2010"
-                    f"{year_found}-{num_month}-{new_day.zfill(2)}",  # "2010-09-15"
-                ])
+                new_day = str(max(1, min(28, int(day_found) + random.randint(-10, 10))))
+            elif random.random() < 0.3:
+                new_day = str(random.randint(1, 28))
+            else:
+                new_day = None
+
+            # Genera variazioni di formato
+            if new_day:
+                formats = [
+                    f"{new_day} {short_month} {year_str}",      # "15 Sep 2010"
+                    f"{short_month} {new_day}, {year_str}",     # "Sep 15, 2010"
+                    f"{num_month}/{new_day}/{year_str}",        # "09/15/2010"
+                    f"{new_day}/{num_month}/{year_str}",        # "15/09/2010"
+                    f"{year_str}-{num_month}-{new_day.zfill(2)}",  # "2010-09-15"
+                    f"{year_str}{num_month}{new_day.zfill(2)}",    # "20100915"
+                ]
+            else:
+                formats = [
+                    f"{short_month} {year_str}",           # "Sep 2010"
+                    f"{num_month}/{year_str}",             # "09/2010"
+                    f"{year_str}-{num_month}",             # "2010-09"
+                    f"{year_str} {short_month}",           # "2010 Sep"
+                    f"{year_str}/{num_month}",             # "2010/09"
+                ]
             return random.choice(formats)
 
         # Pattern solo anno → variazione +/- qualche anno
@@ -518,21 +534,62 @@ class CreativeVariationGenerator:
 
     def _abbreviate(self, words: List[str]) -> str:
         """
-        Abbrevia una o più parole.
-        "John Smith" → "J. Smith" o "John S." o "J. S."
+        Abbrevia una parola E modifica l'altra.
+
+        "John Smith" → "Jon. Smtih" o "Joh. Smithson" o "Jo. Smiht"
+
+        REGOLE:
+        - Abbreviazioni di 2-3 caratteri (non singolo!)
+        - Quando abbrevia una parola, l'altra viene modificata (char swap, suffix, etc.)
         """
         if len(words) < 1:
             return " ".join(words)
 
         result = words.copy()
-        # Scegli quante parole abbreviare (1 o più)
-        n_abbrev = random.randint(1, min(2, len(words)))
-        indices = random.sample(range(len(words)), n_abbrev)
 
-        for idx in indices:
-            word = result[idx]
-            if len(word) > 1 and word[0].isalpha():
-                result[idx] = word[0].upper() + "."
+        if len(words) == 1:
+            # Parola singola: abbrevia a 2-3 caratteri
+            word = words[0]
+            if len(word) >= 3:
+                abbrev_len = random.randint(2, min(3, len(word) - 1))
+                result[0] = word[:abbrev_len].title() + "."
+            return " ".join(result)
+
+        # Multi-parola: abbrevia UNA parola, modifica l'ALTRA
+        abbrev_idx = random.randint(0, len(words) - 1)
+        other_idx = 1 - abbrev_idx if len(words) == 2 else random.choice([i for i in range(len(words)) if i != abbrev_idx])
+
+        # Abbrevia (2-3 caratteri, non singolo!)
+        word = result[abbrev_idx]
+        if len(word) >= 3:
+            abbrev_len = random.randint(2, min(3, len(word) - 1))
+            result[abbrev_idx] = word[:abbrev_len].title() + "."
+        elif len(word) >= 2:
+            result[abbrev_idx] = word[:2].title() + "."
+
+        # Modifica l'altra parola (char swap, suffix, double letter)
+        other_word = result[other_idx]
+        if len(other_word) >= 3:
+            variation = random.choice(['char_swap', 'suffix', 'double', 'vowel'])
+
+            if variation == 'char_swap':
+                swapped = self._char_swap(other_word)
+                if swapped != other_word:
+                    result[other_idx] = swapped
+            elif variation == 'suffix':
+                result[other_idx] = other_word + random.choice(self.NAME_SUFFIXES)
+            elif variation == 'double':
+                idx = random.randint(1, len(other_word) - 2)
+                result[other_idx] = other_word[:idx+1] + other_word[idx] + other_word[idx+1:]
+            else:  # vowel change
+                chars = list(other_word)
+                vowel_idx = [i for i, c in enumerate(chars) if c.lower() in VOWELS]
+                if vowel_idx:
+                    i = random.choice(vowel_idx)
+                    vowels = 'aeiou'
+                    new_v = random.choice([v for v in vowels if v != chars[i].lower()])
+                    chars[i] = new_v if chars[i].islower() else new_v.upper()
+                    result[other_idx] = ''.join(chars)
 
         return " ".join(result)
 
