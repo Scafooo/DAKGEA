@@ -745,40 +745,74 @@ class CreativeVariationGenerator:
 
     def _combo_variation_aggressive(self, words: List[str], other_text: Optional[str] = None) -> str:
         """
-        COMBO AGGRESSIVO: Applica 2-3 strategie insieme!
+        COMBO MOLTO AGGRESSIVO: Applica 3-4 strategie insieme!
 
         Esempi:
-        - "John Smith" → abbrev + suffix + swap → "Smithson J."
-        - "Mary Johnson" → blend + abbrev → "M. Johnary"
+        - "John Smith" → char_swap + suffix + vowel → "Jhon Smythson"
+        - "Nina Simone" → char_swap + abbrev + double → "Nnia Sim."
+        - "Mary Johnson" → vowel + suffix + swap → "Johnsonez Mery"
         """
         if not words:
             return ""
 
         result = words.copy()
 
-        # Scegli 2-3 strategie
-        n_strategies = random.choice([2, 2, 3])  # Più spesso 2
-        strategies = ['abbrev', 'ortho_strong', 'swap', 'blend']
-        if other_text:
-            strategies.append('mix')
+        # SEMPRE 3-4 strategie per variazioni più creative!
+        n_strategies = random.choice([3, 3, 4])
+        strategies = ['char_swap', 'suffix', 'vowel_change', 'double_letter', 'abbrev', 'swap']
 
         selected = random.sample(strategies, min(n_strategies, len(strategies)))
 
         for strat in selected:
-            if strat == 'abbrev':
-                result = self._abbreviate(result).split()
-            elif strat == 'ortho_strong':
-                result = self._orthographic_variation_strong(result).split()
+            if strat == 'char_swap':
+                # Applica char swap a una parola random
+                if result:
+                    idx = random.randint(0, len(result) - 1)
+                    if len(result[idx]) >= 3:
+                        swapped = self._char_swap(result[idx])
+                        if swapped != result[idx]:
+                            result[idx] = swapped
+
+            elif strat == 'suffix':
+                # Aggiungi suffisso a una parola
+                if result:
+                    idx = random.randint(0, len(result) - 1)
+                    if len(result[idx]) >= 2:
+                        result[idx] = result[idx] + random.choice(self.NAME_SUFFIXES)
+
+            elif strat == 'vowel_change':
+                # Cambia una vocale in una parola
+                if result:
+                    idx = random.randint(0, len(result) - 1)
+                    word = result[idx]
+                    chars = list(word)
+                    vowel_idx = [i for i, c in enumerate(chars) if c.lower() in VOWELS]
+                    if vowel_idx:
+                        i = random.choice(vowel_idx)
+                        vowels = 'aeiou'
+                        new_v = random.choice([v for v in vowels if v != chars[i].lower()])
+                        chars[i] = new_v if chars[i].islower() else new_v.upper()
+                        result[idx] = ''.join(chars)
+
+            elif strat == 'double_letter':
+                # Raddoppia una lettera
+                if result:
+                    idx = random.randint(0, len(result) - 1)
+                    word = result[idx]
+                    if len(word) >= 3:
+                        pos = random.randint(1, len(word) - 2)
+                        result[idx] = word[:pos+1] + word[pos] + word[pos+1:]
+
+            elif strat == 'abbrev' and len(result) >= 2:
+                # Abbrevia una parola (2-3 char)
+                idx = random.randint(0, len(result) - 1)
+                word = result[idx]
+                if len(word) >= 3:
+                    abbrev_len = random.randint(2, min(3, len(word) - 1))
+                    result[idx] = word[:abbrev_len].title() + "."
+
             elif strat == 'swap' and len(result) >= 2:
                 result = result[::-1]
-            elif strat == 'blend' and len(result) >= 2:
-                # Blend parole adiacenti
-                idx = random.randint(0, len(result) - 2)
-                w1, w2 = result[idx], result[idx + 1]
-                blended = w1[:len(w1)//2] + w2[len(w2)//2:]
-                result = result[:idx] + [blended] + result[idx+2:]
-            elif strat == 'mix' and other_text:
-                result = self._mix_texts_aggressive(result, other_text).split()
 
         return " ".join(result)
 
