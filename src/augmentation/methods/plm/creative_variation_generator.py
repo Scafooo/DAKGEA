@@ -227,35 +227,32 @@ class CreativeVariationGenerator:
         # MULTI-PAROLA o PAROLA CORTA: variazioni PIÙ AGGRESSIVE!
         r = random.random()
 
-        # 30% COMBO (2-3 strategie insieme!) - PIÙ FREQUENTE
-        if r < 0.30:
+        # 20% SEMANTIC EXPANSION (nuovo! "gabe witcher" → "gabriel the sorcerer")
+        if r < 0.20 and len(words) >= 2:
+            return self._semantic_expansion(words)
+
+        # 20% VARY ALL TOKENS (nuovo! "glen buxton" → "glenn buxtonn")
+        if r < 0.40:
+            return self._vary_all_tokens(words)
+
+        # 15% SWAP + MODIFY BOTH (nuovo! "john smith" → "smyth jhon")
+        if r < 0.55 and len(words) >= 2:
+            return self._swap_and_vary(words)
+
+        # 15% COMBO (2-3 strategie insieme!)
+        if r < 0.70:
             return self._combo_variation_aggressive(words, other_text)
 
-        # 25% CHAR SWAP + altra variazione
-        if r < 0.55:
-            # Char swap + 50% anche suffix/abbrev
-            result = self._char_swap_word_list(words)
-            if random.random() < 0.5 and len(words) >= 2:
-                result_words = result.split()
-                # Aggiungi suffix a una parola non swappata
-                idx = random.randint(0, len(result_words) - 1)
-                if len(result_words[idx]) >= 3:
-                    result_words[idx] = result_words[idx] + random.choice(self.NAME_SUFFIXES)
-                result = " ".join(result_words)
-            return result
-
-        # 15% MIX (se disponibile other_text)
-        if r < 0.70 and other_text:
+        # 10% MIX (se disponibile other_text)
+        if r < 0.80 and other_text:
             return self._mix_texts_aggressive(words, other_text)
 
-        # 15% ABBREVIAZIONE (solo se multi-parola)
-        if r < 0.85 and len(words) >= 2:
+        # 10% ABBREVIAZIONE + modifica altra parola
+        if r < 0.90 and len(words) >= 2:
             return self._abbreviate(words)
 
-        # 15% ORTOGRAFICA FORTE
+        # 10% ORTOGRAFICA FORTE
         return self._orthographic_variation_strong(words)
-
-        return self._char_swap_word_list(words)  # Fallback: char swap
 
     def _vary_numeric(self, text: str) -> str:
         """
@@ -753,6 +750,110 @@ class CreativeVariationGenerator:
         if result:
             # Cambia case della prima parola
             result[0] = result[0].title()
+        return " ".join(result)
+
+    def _vary_all_tokens(self, words: List[str]) -> str:
+        """
+        Varia TUTTI i token (obbligatorio).
+
+        "glen buxton" → "glenn buxtonn" (entrambi modificati!)
+        "john smith" → "jhon smyth" (entrambi modificati!)
+        """
+        if not words:
+            return ""
+
+        result = []
+        for word in words:
+            if len(word) < 3:
+                result.append(word)
+                continue
+
+            # Scegli variazione per ogni token
+            var_type = random.choice(['char_swap', 'suffix', 'vowel', 'double', 'typo'])
+
+            if var_type == 'char_swap':
+                varied = self._char_swap(word)
+                result.append(varied if varied != word else word + 'n')
+            elif var_type == 'suffix':
+                result.append(word + random.choice(['s', 'n', 'er', 'y']))
+            elif var_type == 'vowel':
+                chars = list(word)
+                vowel_idx = [i for i, c in enumerate(chars) if c.lower() in VOWELS]
+                if vowel_idx:
+                    i = random.choice(vowel_idx)
+                    new_v = random.choice([v for v in 'aeiou' if v != chars[i].lower()])
+                    chars[i] = new_v if chars[i].islower() else new_v.upper()
+                    result.append(''.join(chars))
+                else:
+                    result.append(word + 'e')
+            elif var_type == 'double':
+                pos = random.randint(1, len(word) - 2)
+                result.append(word[:pos+1] + word[pos] + word[pos+1:])
+            else:  # typo - inserisci/rimuovi lettera
+                if random.random() < 0.5 and len(word) > 3:
+                    # Rimuovi una lettera
+                    pos = random.randint(1, len(word) - 2)
+                    result.append(word[:pos] + word[pos+1:])
+                else:
+                    # Inserisci lettera
+                    pos = random.randint(1, len(word) - 1)
+                    result.append(word[:pos] + random.choice('aeiounnst') + word[pos:])
+
+        return " ".join(result)
+
+    def _semantic_expansion(self, words: List[str]) -> str:
+        """
+        Espansione STRUTTURALE leggera (NO dizionari hardcoded!).
+        T5 imparerà le espansioni semantiche dai dati reali allineati.
+
+        Qui facciamo solo modifiche strutturali:
+        - Aggiungere "the" tra nome e cognome
+        - Aggiungere suffissi generici (-son, -man)
+        - Variazioni + struttura
+
+        Le vere espansioni (gabe→gabriel) le impara T5 dai dati!
+        """
+        if not words:
+            return ""
+
+        result = words.copy()
+
+        strategy = random.choice(['add_the', 'suffix_both', 'vary_structure'])
+
+        if strategy == 'add_the' and len(result) >= 2:
+            # "john smith" → "john the smith"
+            # Inserisci "the" + varia entrambi
+            result.insert(1, 'the')
+            # Varia anche i token
+            if len(result[0]) >= 3:
+                result[0] = self._char_swap(result[0])
+            if len(result[-1]) >= 3:
+                result[-1] = self._char_swap(result[-1])
+
+        elif strategy == 'suffix_both' and len(result) >= 2:
+            # Aggiungi suffissi generici a entrambi
+            suffixes = ['son', 'man', 'er', 's', 'y']
+            for i in range(len(result)):
+                if len(result[i]) >= 3:
+                    result[i] = result[i] + random.choice(suffixes)
+
+        else:  # vary_structure
+            # Varia tutti + possibile riordino
+            for i in range(len(result)):
+                if len(result[i]) >= 3:
+                    var_type = random.choice(['swap', 'double', 'suffix'])
+                    if var_type == 'swap':
+                        result[i] = self._char_swap(result[i])
+                    elif var_type == 'double':
+                        pos = random.randint(1, len(result[i]) - 2)
+                        result[i] = result[i][:pos+1] + result[i][pos] + result[i][pos+1:]
+                    else:
+                        result[i] = result[i] + random.choice(['s', 'n', 'y'])
+
+            # 30% riordina
+            if random.random() < 0.3:
+                result = result[::-1]
+
         return " ".join(result)
 
     def _combo_variation(self, words: List[str], other_text: Optional[str] = None) -> str:

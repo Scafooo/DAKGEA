@@ -274,7 +274,7 @@ def run_xl_pipeline():
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_creative_v6"  # v6: più peso a coppie reali, meno sintetiche
+    out_dir = "./results/t5_xl_creative_v7"  # v7: +vary_all_tokens, +semantic_expansion, +swap_both
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING (Forza retraining per nuovo paradigma)
@@ -312,10 +312,10 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_v6_report.txt"
+    output_file = "massive_t5_xl_creative_v7_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v6\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: v3-restored (alpha<=0.5, temp<=1.0)\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v7\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: +vary_all_tokens, +swap_both, no hardcoded dicts\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -350,7 +350,7 @@ def run_xl_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
-    print(f"\n>>> SUCCESS: XL Creative v6 Report (v3-restored) saved to {output_file}")
+    print(f"\n>>> SUCCESS: XL Creative v7 Report (multi-token + T5 generalization) saved to {output_file}")
 
 if __name__ == "__main__":
     run_xl_pipeline()
