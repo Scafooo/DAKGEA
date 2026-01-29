@@ -710,24 +710,40 @@ class CreativeVariationGenerator:
 
     def _swap_and_vary(self, words: List[str]) -> str:
         """
-        Swap ordine + variazione leggera.
-        "John Smith" → "Smith J." o "Smithson John"
+        Swap ordine + variazione ENTRAMBI i token.
+        "John Smith" → "Smyth Jhon" o "Smithson Jonn"
+
+        REGOLA: Se swappiamo, modifichiamo SEMPRE entrambi!
         """
         if len(words) < 2:
             return " ".join(words)
 
         result = words[::-1]  # Reverse
 
-        # Aggiungi variazione a una parola
-        if random.random() < 0.5:
-            idx = random.randint(0, len(result) - 1)
+        # MODIFICA ENTRAMBI (obbligatorio!)
+        for idx in range(len(result)):
             word = result[idx]
-            if len(word) > 2:
-                # Abbrevia o aggiungi suffisso
-                if random.random() < 0.5:
-                    result[idx] = word[0].upper() + "."
-                else:
+            if len(word) >= 3:
+                # Scegli variazione per questo token
+                var_type = random.choice(['char_swap', 'suffix', 'vowel', 'double'])
+
+                if var_type == 'char_swap':
+                    swapped = self._char_swap(word)
+                    if swapped != word:
+                        result[idx] = swapped
+                elif var_type == 'suffix':
                     result[idx] = word + random.choice(self.NAME_SUFFIXES)
+                elif var_type == 'vowel':
+                    chars = list(word)
+                    vowel_idx = [i for i, c in enumerate(chars) if c.lower() in VOWELS]
+                    if vowel_idx:
+                        i = random.choice(vowel_idx)
+                        new_v = random.choice([v for v in 'aeiou' if v != chars[i].lower()])
+                        chars[i] = new_v if chars[i].islower() else new_v.upper()
+                        result[idx] = ''.join(chars)
+                else:  # double
+                    pos = random.randint(1, len(word) - 2)
+                    result[idx] = word[:pos+1] + word[pos] + word[pos+1:]
 
         return " ".join(result)
 
