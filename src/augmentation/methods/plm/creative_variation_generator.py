@@ -112,6 +112,13 @@ class CreativeVariationGenerator:
         self.swap_prob = swap_prob
         self.combo_prob = combo_prob
 
+    # Nomi dei mesi per detection date
+    MONTH_NAMES = {
+        'january', 'february', 'march', 'april', 'may', 'june',
+        'july', 'august', 'september', 'october', 'november', 'december',
+        'jan', 'feb', 'mar', 'apr', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'
+    }
+
     def _detect_type(self, text: str) -> str:
         """
         Rileva il tipo basandosi SOLO sul contenuto (non predicato!).
@@ -119,6 +126,7 @@ class CreativeVariationGenerator:
         Returns: 'numeric', 'short', 'long'
         """
         text_clean = text.strip()
+        text_lower = text_clean.lower()
 
         # 1. NUMERICO: date, numeri, ID, codici
         # Pattern data (2023-01-15, 15/01/2023, etc)
@@ -128,6 +136,14 @@ class CreativeVariationGenerator:
 
         # Solo numeri
         if re.match(r'^[\d\s\-/:.]+$', text_clean):
+            return 'numeric'
+
+        # DATE CON NOMI MESI: "2010 september", "january 2010", "15 march 2020"
+        # Se contiene un mese E un anno (4 cifre), è una data!
+        words_lower = text_lower.split()
+        has_month = any(w in self.MONTH_NAMES for w in words_lower)
+        has_year = any(re.match(r'^\d{4}$', w) for w in words_lower)
+        if has_month and has_year:
             return 'numeric'
 
         # Codici alfanumerici: DEVE contenere numeri, non solo lettere!
@@ -241,6 +257,65 @@ class CreativeVariationGenerator:
                     f"{y}{m}{d}",  # Compatto
                 ]
                 return random.choice(formats)
+
+        # DATE CON NOMI MESI: "2010 september", "january 2010", "15 march 2020"
+        text_lower = text.lower()
+        words = text.split()
+        month_found = None
+        year_found = None
+        day_found = None
+
+        month_map = {
+            'january': ('Jan', '01'), 'february': ('Feb', '02'), 'march': ('Mar', '03'),
+            'april': ('Apr', '04'), 'may': ('May', '05'), 'june': ('Jun', '06'),
+            'july': ('Jul', '07'), 'august': ('Aug', '08'), 'september': ('Sep', '09'),
+            'october': ('Oct', '10'), 'november': ('Nov', '11'), 'december': ('Dec', '12'),
+            'jan': ('Jan', '01'), 'feb': ('Feb', '02'), 'mar': ('Mar', '03'),
+            'apr': ('Apr', '04'), 'jun': ('Jun', '06'), 'jul': ('Jul', '07'),
+            'aug': ('Aug', '08'), 'sep': ('Sep', '09'), 'oct': ('Oct', '10'),
+            'nov': ('Nov', '11'), 'dec': ('Dec', '12')
+        }
+
+        for w in words:
+            w_lower = w.lower()
+            if w_lower in month_map:
+                month_found = month_map[w_lower]
+            elif re.match(r'^\d{4}$', w):
+                year_found = w
+            elif re.match(r'^\d{1,2}$', w):
+                day_found = w
+
+        if month_found and year_found:
+            short_month, num_month = month_found
+
+            # 50% cambio SOLO formato, 50% cambio anche il MESE
+            if random.random() < 0.5:
+                # Cambio mese! Scegli un mese diverso
+                all_months = [
+                    ('Jan', '01'), ('Feb', '02'), ('Mar', '03'), ('Apr', '04'),
+                    ('May', '05'), ('Jun', '06'), ('Jul', '07'), ('Aug', '08'),
+                    ('Sep', '09'), ('Oct', '10'), ('Nov', '11'), ('Dec', '12')
+                ]
+                # Escludi il mese corrente
+                other_months = [(s, n) for s, n in all_months if n != num_month]
+                short_month, num_month = random.choice(other_months)
+
+            # Genera variazioni di formato
+            formats = [
+                f"{short_month} {year_found}",           # "Sep 2010"
+                f"{num_month}/{year_found}",             # "09/2010"
+                f"{year_found}-{num_month}",             # "2010-09"
+                f"{year_found} {short_month}",           # "2010 Sep"
+            ]
+            if day_found:
+                # Varia anche il giorno (±qualche giorno)
+                new_day = str(max(1, min(28, int(day_found) + random.randint(-5, 5))))
+                formats.extend([
+                    f"{new_day} {short_month} {year_found}",  # "15 Sep 2010"
+                    f"{num_month}/{new_day}/{year_found}",    # "09/15/2010"
+                    f"{year_found}-{num_month}-{new_day.zfill(2)}",  # "2010-09-15"
+                ])
+            return random.choice(formats)
 
         # Pattern solo anno → variazione +/- qualche anno
         if re.match(r'^\d{4}$', text):

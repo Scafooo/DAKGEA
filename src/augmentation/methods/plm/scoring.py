@@ -78,6 +78,60 @@ def _is_abbreviation(short: str, full: str) -> bool:
     return False
 
 
+def _is_char_swap(word1: str, word2: str) -> bool:
+    """
+    Rileva se due parole differiscono solo per uno swap di caratteri adiacenti.
+
+    "hidalgo" vs "hdialgo" → True (i e d swappati)
+    "smith" vs "smtih" → True (i e t swappati)
+    "john" vs "johnny" → False (lunghezze diverse)
+    """
+    w1, w2 = word1.lower(), word2.lower()
+
+    # Lunghezze devono essere uguali
+    if len(w1) != len(w2):
+        return False
+
+    # Trova le posizioni diverse
+    diffs = [(i, c1, c2) for i, (c1, c2) in enumerate(zip(w1, w2)) if c1 != c2]
+
+    # Per uno swap, ci aspettiamo esattamente 2 differenze adiacenti con caratteri invertiti
+    if len(diffs) == 2:
+        i1, c1_at_1, c2_at_1 = diffs[0]
+        i2, c1_at_2, c2_at_2 = diffs[1]
+        # Devono essere adiacenti e i caratteri invertiti
+        if abs(i1 - i2) == 1 and c1_at_1 == c2_at_2 and c1_at_2 == c2_at_1:
+            return True
+
+    return False
+
+
+def _count_char_swaps(gen: str, orig: str) -> int:
+    """
+    Conta quante parole nell'output sono char swaps rispetto all'input.
+
+    "david hdialgo" vs "david hidalgo" → 1 (hdialgo è swap di hidalgo)
+    "jhon smtih" vs "john smith" → 2 (entrambe swappate)
+    """
+    gen_words = gen.lower().split()
+    orig_words = orig.lower().split()
+
+    if len(gen_words) != len(orig_words):
+        return 0
+
+    swaps = 0
+    for gw, ow in zip(gen_words, orig_words):
+        if gw == ow:
+            continue  # Identico, non conta
+        if _is_char_swap(gw, ow):
+            swaps += 1
+        elif _word_sim(gw, ow) < 0.7:
+            # Parola completamente diversa, non è un caso di char swap
+            return 0
+
+    return swaps
+
+
 def _find_connection(word: str, word_set: Set[str]) -> Tuple[str, float, str]:
     """
     Trova la migliore connessione tra una parola e un set.
@@ -130,7 +184,32 @@ def _score_short_text(orig: str, gen: str, other: str) -> Dict:
     if gen_c == orig_c or gen_c == other_c:
         return {"score": 0.0, "reason": "identity"}
 
-    # Near-copy check
+    # CHAR SWAP check - PRIMA di near-copy!
+    # "david hdialgo" vs "david hidalgo" → char swap valido, non near-copy!
+    char_swaps_A = _count_char_swaps(gen_c, orig_c)
+    char_swaps_B = _count_char_swaps(gen_c, other_c) if other_c else 0
+
+    if char_swaps_A > 0 or char_swaps_B > 0:
+        total_swaps = max(char_swaps_A, char_swaps_B)
+        # Calcola quante parole ci sono in totale
+        n_words = len(gen_c.split())
+
+        if n_words == 1:
+            # Parola singola con char swap → 0.70
+            score = 0.70
+        elif total_swaps >= n_words:
+            # TUTTE le parole variate → 1.00 (perfetto!)
+            score = 1.00
+        else:
+            # Variazione parziale: 1/2 → 0.40, 2/3 → 0.47, etc.
+            # Formula: 0.20 + (ratio) * 0.40
+            ratio = total_swaps / n_words
+            score = 0.20 + ratio * 0.40
+
+        return {"score": round(score, 2), "reason": "char_swap_variation",
+                "swaps": total_swaps, "total_words": n_words}
+
+    # Near-copy check (solo se NON è un char swap)
     sim_A = _word_sim(gen_c, orig_c)
     sim_B = _word_sim(gen_c, other_c) if other_c else 0.0
 
