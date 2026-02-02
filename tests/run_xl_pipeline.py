@@ -130,61 +130,77 @@ def generate_flip_training_pairs() -> list:
 
 # --- VARIAZIONI MULTI-WORD (ogni parola viene modificata) - SENZA DIZIONARIO ---
 
+def has_vowel(word: str) -> bool:
+    """Controlla se una parola ha almeno una vocale."""
+    return any(c.lower() in 'aeiou' for c in word)
+
 def vary_word_algorithmic(word: str) -> str:
     """
     Varia una parola usando SOLO algoritmi, nessun dizionario.
+    GARANTISCE che il risultato sia pronunciabile (almeno 1 vocale).
 
     Tecniche:
-    1. Typo: raddoppia/scambia/rimuovi lettere
-    2. Suffissi: -y, -ie, -son, -sen, -man
-    3. Troncamento: rimuovi fine parola
-    4. Vocali: sostituisci vocali
+    1. Typo: raddoppia/scambia lettere (NO drop che rimuove vocali!)
+    2. Suffissi: -y, -ie, -son, -sen, -man (NO jr!)
+    3. Troncamento: solo se rimane una vocale
+    4. Vocali: sostituisci (non rimuovere!)
     """
     if len(word) < 2:
         return word
 
-    technique = random.choice(['typo_double', 'typo_swap', 'typo_drop', 'suffix', 'truncate', 'vowel'])
+    # Peso maggiore a tecniche che modificano davvero
+    technique = random.choice([
+        'typo_double', 'typo_double',  # 2x peso
+        'typo_swap', 'typo_swap',      # 2x peso
+        'suffix',
+        'truncate',
+        'vowel', 'vowel'               # 2x peso
+    ])
+
+    result = word  # Default
 
     if technique == 'typo_double' and len(word) >= 3:
         # Raddoppia una lettera: smith → smithh, john → johnn
         idx = random.randint(1, len(word) - 1)
-        return word[:idx] + word[idx-1] + word[idx:]
+        result = word[:idx] + word[idx-1] + word[idx:]
 
     elif technique == 'typo_swap' and len(word) >= 3:
         # Scambia due lettere: smith → smtih
         idx = random.randint(0, len(word) - 2)
-        return word[:idx] + word[idx+1] + word[idx] + word[idx+2:]
-
-    elif technique == 'typo_drop' and len(word) >= 4:
-        # Rimuovi una lettera interna: marriott → marriot
-        idx = random.randint(1, len(word) - 2)
-        return word[:idx] + word[idx+1:]
+        result = word[:idx] + word[idx+1] + word[idx] + word[idx+2:]
 
     elif technique == 'suffix':
-        # Aggiungi suffisso: smith → smithson, john → johnny
-        suffix = random.choice(['y', 'ie', 'son', 'sen', 'man', 'er', 's'])
+        # Aggiungi suffisso (jr OK ma sempre con altre modifiche nel training!)
+        suffix = random.choice(['y', 'ie', 'son', 'sen', 'man', 'er', 'jr'])
         # Evita doppie: smithy non smithyy
         if word.endswith(suffix[0]):
-            return word + suffix[1:] if len(suffix) > 1 else word + suffix
-        return word + suffix
+            result = word + suffix[1:] if len(suffix) > 1 else word + suffix
+        else:
+            result = word + suffix
 
-    elif technique == 'truncate' and len(word) >= 4:
-        # Tronca fine: christopher → chris, william → will
-        cut = random.randint(1, min(3, len(word) - 2))
-        return word[:-cut]
+    elif technique == 'truncate' and len(word) >= 5:
+        # Tronca fine MA solo se rimane una vocale!
+        for cut in range(1, min(3, len(word) - 2)):
+            candidate = word[:-cut]
+            if has_vowel(candidate) and len(candidate) >= 2:
+                result = candidate
+                break
 
     elif technique == 'vowel':
-        # Cambia una vocale: steve → stave, smith → smeth
+        # Cambia (non rimuove!) una vocale: steve → stave
         vowels = 'aeiou'
         vowel_positions = [i for i, c in enumerate(word.lower()) if c in vowels]
         if vowel_positions:
             idx = random.choice(vowel_positions)
             old_vowel = word[idx].lower()
             new_vowel = random.choice([v for v in vowels if v != old_vowel])
-            return word[:idx] + new_vowel + word[idx+1:]
+            result = word[:idx] + new_vowel + word[idx+1:]
 
-    # Fallback: raddoppia ultima lettera
-    return word + word[-1]
+    # SAFETY CHECK: se risultato non ha vocali, usa fallback sicuro
+    if not has_vowel(result):
+        result = word + random.choice(['y', 'a', 'o'])  # Aggiungi vocale
+
+    return result
 
 def vary_all_words(text: str) -> str:
     """Varia OGNI parola in una stringa multi-word usando solo algoritmi."""
@@ -414,7 +430,7 @@ def run_xl_pipeline():
                 multi_word_names.add(val)
 
     # Genera variazioni dove OGNI parola viene modificata
-    multi_word_pairs = generate_multi_word_training_pairs(list(multi_word_names), n_per_name=5)
+    multi_word_pairs = generate_multi_word_training_pairs(list(multi_word_names), n_per_name=10)  # 10x peso!
     t5_rows.extend(multi_word_pairs)
     print(f"    [MULTI-WORD] Added {len(multi_word_pairs)} pairs from {len(multi_word_names)} names (ogni parola varia!)")
 
@@ -423,7 +439,7 @@ def run_xl_pipeline():
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_creative_v9"  # v9: +multi-word variations (ogni parola cambia!)
+    out_dir = "./results/t5_xl_creative_v10"  # v10: 10x multi-word, no jr, vowel-safe
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING (Forza retraining per nuovo paradigma)
@@ -461,10 +477,10 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_v9_report.txt"
+    output_file = "massive_t5_xl_creative_v10_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v9\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: +multi-word variations (ogni parola cambia!)\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v10\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: 10x multi-word, no jr, vowel-safe\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -499,7 +515,7 @@ def run_xl_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
-    print(f"\n>>> SUCCESS: XL Creative v9 Report (multi-word variations) saved to {output_file}")
+    print(f"\n>>> SUCCESS: XL Creative v10 Report (10x multi-word, no jr, vowel-safe) saved to {output_file}")
 
 if __name__ == "__main__":
     run_xl_pipeline()
