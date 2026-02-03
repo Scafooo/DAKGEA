@@ -446,7 +446,7 @@ def run_xl_pipeline():
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_creative_v12"  # v12: jr come PREFISSO, temp=0.7
+    out_dir = "./results/t5_xl_creative_v13"  # v13: PROMPT FIX (rimosso "synthetic" dal prompt inference)
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING (Forza retraining per nuovo paradigma)
@@ -484,10 +484,10 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_v12_report.txt"
+    output_file = "massive_t5_xl_creative_v13_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v12\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: v12 - jr=PREFIX, temp=0.7\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v13\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: v13 - PROMPT FIX (no synthetic)\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -522,7 +522,7 @@ def run_xl_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
-    print(f"\n>>> SUCCESS: XL Creative v12 Report (jr=PREFIX, temp=0.7) saved to {output_file}")
+    print(f"\n>>> SUCCESS: XL Creative v13 Report (PROMPT FIX) saved to {output_file}")
 
 if __name__ == "__main__":
     run_xl_pipeline()

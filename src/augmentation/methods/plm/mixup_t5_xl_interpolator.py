@@ -108,8 +108,9 @@ class MixupT5XLInterpolator:
 
     def interpolate_pair(self, val_src: str, val_tgt: str, predicate: str = "", alpha: float = 0.5) -> Tuple[str, str]:
         p_name = predicate.replace("<", "").replace(">", "").lower().replace('_', ' ')
-        prompt_src = f"generate synthetic variation <{p_name}>: {val_src}"
-        prompt_tgt = f"generate synthetic variation <{p_name}>: {val_tgt}"
+        # IMPORTANTE: prompt deve matchare ESATTAMENTE il training (NO "synthetic"!)
+        prompt_src = f"generate variation <{p_name}>: {val_src}"
+        prompt_tgt = f"generate variation <{p_name}>: {val_tgt}"
         
         inputs = self.tokenizer([prompt_src, prompt_tgt], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
 
