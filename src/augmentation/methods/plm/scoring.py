@@ -131,14 +131,38 @@ def _count_modified_words(orig: str, gen: str) -> tuple:
     Conta quante parole sono state modificate.
 
     Returns: (modified_count, total_words, all_modified)
+
+    IMPORTANTE: "all_modified" è True solo se:
+    - Stesso numero di parole E tutte modificate
+    - OPPURE parole aggiunte E tutte quelle originali modificate
+
+    NON è True se:
+    - Solo rimosse parole (non è creativo!)
     """
     orig_words = orig.lower().split()
     gen_words = gen.lower().split()
 
-    # Se numero parole diverso, conta come "tutte modificate"
-    if len(orig_words) != len(gen_words):
-        return len(gen_words), len(gen_words), True
+    # Caso: RIMOSSE parole (output più corto) → NON è "all modified"!
+    if len(gen_words) < len(orig_words):
+        # Conta quante parole dell'output sono diverse dalle prime N dell'input
+        modified = 0
+        for i, gw in enumerate(gen_words):
+            if i < len(orig_words) and gw != orig_words[i]:
+                modified += 1
+        return modified, len(gen_words), False  # MAI "all modified" per rimozione
 
+    # Caso: AGGIUNTE parole (output più lungo)
+    if len(gen_words) > len(orig_words):
+        # Verifica se le parole originali sono state modificate
+        modified_orig = 0
+        for i, ow in enumerate(orig_words):
+            if i < len(gen_words) and gen_words[i] != ow:
+                modified_orig += 1
+        # "all modified" solo se TUTTE le parole originali sono cambiate
+        all_orig_modified = modified_orig == len(orig_words)
+        return len(gen_words), len(gen_words), all_orig_modified
+
+    # Caso: stesso numero di parole
     modified = 0
     for ow, gw in zip(orig_words, gen_words):
         if ow != gw:
@@ -274,6 +298,20 @@ def _score_short_text(orig: str, gen: str, other: str) -> Dict:
     if _is_only_lazy_suffix(orig_c, gen_c):
         return {"score": 0.1, "reason": "only_lazy_suffix",
                 "suffix": gen_c.split()[-1], "note": "jr/sr alone is not creative"}
+
+    # === v13: SOLO RIMOZIONE PAROLE = penalizzato ===
+    # "sprocket toad wet" → "sprocket toad" NON è creativo!
+    orig_words_list = orig_c.split()
+    gen_words_list = gen_c.split()
+    if len(gen_words_list) < len(orig_words_list):
+        # Output più corto: verifica se è solo un sottoinsieme
+        gen_words_set = set(gen_words_list)
+        orig_words_set = set(orig_words_list)
+        if gen_words_set <= orig_words_set:
+            # Output è solo subset dell'input (rimozione pura)
+            removed = orig_words_set - gen_words_set
+            return {"score": 0.15, "reason": "only_removed_words",
+                    "removed": list(removed), "note": "removal alone is not creative"}
 
     # === BONUS: Multi-word con TUTTE le parole modificate (check PRIMA di char_swap) ===
     modified_A, total_A, all_modified_A = _count_modified_words(orig_c, gen_c)
