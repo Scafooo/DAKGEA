@@ -29,6 +29,9 @@ SHORT_TEXT_THRESHOLD = 5
 # Articoli e parole "filler" che non contano come variazione creativa
 FILLER_WORDS = {'the', 'a', 'an', 'and', 'or', 'of', 'to', 'in', 'on', 'at', 'by', 'for'}
 
+# Suffissi pigri che da soli non contano come variazione creativa
+LAZY_SUFFIXES = {'jr', 'jr.', 'sr', 'sr.', 'ii', 'iii', 'iv'}
+
 # Pattern per rilevare garbage unicode (es: u00e9l, u00f3n)
 UNICODE_GARBAGE_PATTERN = re.compile(r'u00[a-f0-9]{2}', re.IGNORECASE)
 
@@ -67,6 +70,81 @@ def _semantic_similarity(text1: str, text2: str) -> float:
 def _word_sim(w1: str, w2: str) -> float:
     """Similarità tra due parole."""
     return SequenceMatcher(None, w1.lower(), w2.lower()).ratio()
+
+
+def _has_vowel(word: str) -> bool:
+    """Controlla se una parola ha almeno una vocale (pronunciabile)."""
+    # Include 'y' che spesso funge da vocale (Smyth, Lynn, etc.)
+    return any(c.lower() in 'aeiouy' for c in word)
+
+
+def _is_only_lazy_suffix(orig: str, gen: str) -> bool:
+    """
+    Controlla se l'unica modifica è l'aggiunta di un suffisso pigro (jr, sr, etc).
+
+    "john smith" → "john smith jr" = True (SOLO jr aggiunto)
+    "john smith" → "jhon smith jr" = False (anche typo!)
+    """
+    orig_words = orig.lower().split()
+    gen_words = gen.lower().split()
+
+    # Deve avere esattamente 1 parola in più
+    if len(gen_words) != len(orig_words) + 1:
+        return False
+
+    # L'ultima parola deve essere un suffisso pigro
+    if gen_words[-1] not in LAZY_SUFFIXES:
+        return False
+
+    # Le altre parole devono essere IDENTICHE
+    for ow, gw in zip(orig_words, gen_words[:-1]):
+        if ow != gw:
+            return False  # C'è anche un'altra modifica, OK!
+
+    return True  # Solo suffisso pigro, penalizza!
+
+
+def _count_unpronounceable_words(text: str) -> int:
+    """
+    Conta parole senza vocali (impronunciabili).
+
+    Esclude:
+    - Parole corte (<=2 chars): spesso abbreviazioni (jr, mr, dr)
+    - Abbreviazioni comuni note
+    """
+    # Abbreviazioni comuni senza vocali
+    COMMON_ABBREVS = {'jr', 'sr', 'mr', 'dr', 'st', 'nd', 'rd', 'th'}
+
+    words = re.findall(r'\w+', text.lower())
+    count = 0
+    for w in words:
+        # Salta parole corte e abbreviazioni
+        if len(w) <= 2 or w in COMMON_ABBREVS:
+            continue
+        if not _has_vowel(w):
+            count += 1
+    return count
+
+
+def _count_modified_words(orig: str, gen: str) -> tuple:
+    """
+    Conta quante parole sono state modificate.
+
+    Returns: (modified_count, total_words, all_modified)
+    """
+    orig_words = orig.lower().split()
+    gen_words = gen.lower().split()
+
+    # Se numero parole diverso, conta come "tutte modificate"
+    if len(orig_words) != len(gen_words):
+        return len(gen_words), len(gen_words), True
+
+    modified = 0
+    for ow, gw in zip(orig_words, gen_words):
+        if ow != gw:
+            modified += 1
+
+    return modified, len(orig_words), modified == len(orig_words)
 
 
 def _is_abbreviation(short: str, full: str) -> bool:
@@ -175,16 +253,37 @@ def _score_short_text(orig: str, gen: str, other: str) -> Dict:
     orig_c = orig.strip().lower()
     other_c = other.strip().lower() if other else ""
 
+    # === PENALITÀ FORTI (prima di tutto) ===
+
     # Garbage unicode check (es: u00e9l, u00f3n)
     unicode_matches = UNICODE_GARBAGE_PATTERN.findall(gen_c)
     if len(unicode_matches) >= 2:
         return {"score": 0.05, "reason": "unicode_garbage", "matches": unicode_matches}
 
+    # PAROLE IMPRONUNCIABILI (senza vocali) = penalità forte (-3 equivale a score 0.0)
+    unpronounceable = _count_unpronounceable_words(gen_c)
+    if unpronounceable > 0:
+        return {"score": 0.0, "reason": "unpronounceable",
+                "unpronounceable_count": unpronounceable, "text": gen_c}
+
     # Identity check
     if gen_c == orig_c or gen_c == other_c:
         return {"score": 0.0, "reason": "identity"}
 
-    # CHAR SWAP check - PRIMA di near-copy!
+    # SOLO SUFFISSO PIGRO (jr, sr) senza altre modifiche = penalità (-2 equivale a score 0.1)
+    if _is_only_lazy_suffix(orig_c, gen_c):
+        return {"score": 0.1, "reason": "only_lazy_suffix",
+                "suffix": gen_c.split()[-1], "note": "jr/sr alone is not creative"}
+
+    # === BONUS: Multi-word con TUTTE le parole modificate (check PRIMA di char_swap) ===
+    modified_A, total_A, all_modified_A = _count_modified_words(orig_c, gen_c)
+    if total_A >= 2 and all_modified_A:
+        # TUTTE le parole modificate in un multi-word = ECCELLENTE!
+        return {"score": 1.0, "reason": "all_words_modified",
+                "modified": modified_A, "total": total_A,
+                "note": "every word changed - excellent variation!"}
+
+    # CHAR SWAP check - DOPO all_words_modified!
     # "david hdialgo" vs "david hidalgo" → char swap valido, non near-copy!
     char_swaps_A = _count_char_swaps(gen_c, orig_c)
     char_swaps_B = _count_char_swaps(gen_c, other_c) if other_c else 0
@@ -591,6 +690,18 @@ if __name__ == "__main__":
         ("John Smith", "John Smith", "John Smith", "identity"),
         ("John Smith", "Mary Johnson", "Jonathan", "partial_connection"),
         ("John Smith", "Mary Johnson", "xyzabc", "garbage"),
+        # === NUOVI TEST v10 ===
+        # Solo jr (penalizzato)
+        ("John Smith", "Mary Johnson", "John Smith jr", "only_lazy_suffix"),
+        ("Scott Dominic", "Scott Dominic", "Scott Dominic jr", "only_lazy_suffix"),
+        # jr CON altre modifiche (OK!)
+        ("John Smith", "Mary Johnson", "Jhon Smith jr", "all_words_modified"),
+        # Parole impronunciabili (penalizzato forte)
+        ("John Smith", "Mary Johnson", "Jhn Smth", "unpronounceable"),
+        ("Freddi Scott", "Freddi Scott", "Frd Sctt", "unpronounceable"),
+        # Multi-word tutte modificate (bonus!)
+        ("Scott Dominic", "Scott Dominic", "Scot Dominicson", "all_words_modified"),
+        ("John William Smith", "John William Smith", "Jhon Willam Smyth", "all_words_modified"),
     ]
 
     for A, B, gen, expected in short_tests:
