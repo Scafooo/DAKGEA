@@ -141,9 +141,10 @@ def vary_word_algorithmic(word: str) -> str:
 
     Tecniche:
     1. Typo: raddoppia/scambia lettere (NO drop che rimuove vocali!)
-    2. Suffissi: -y, -ie, -son, -sen, -man (NO jr!)
-    3. Troncamento: solo se rimane una vocale
-    4. Vocali: sostituisci (non rimuovere!)
+    2. Suffissi: -y, -ie, -son, -sen, -man, -er
+    3. Prefissi: jr-, mr-, dr-, st- (v12: jr è PREFISSO non suffisso!)
+    4. Troncamento: solo se rimane una vocale
+    5. Vocali: sostituisci (non rimuovere!)
     """
     if len(word) < 2:
         return word
@@ -153,6 +154,7 @@ def vary_word_algorithmic(word: str) -> str:
         'typo_double', 'typo_double',  # 2x peso
         'typo_swap', 'typo_swap',      # 2x peso
         'suffix',
+        'prefix',  # v12: jr come PREFISSO!
         'truncate',
         'vowel', 'vowel'               # 2x peso
     ])
@@ -170,13 +172,18 @@ def vary_word_algorithmic(word: str) -> str:
         result = word[:idx] + word[idx+1] + word[idx] + word[idx+2:]
 
     elif technique == 'suffix':
-        # Aggiungi suffisso (jr OK ma sempre con altre modifiche nel training!)
-        suffix = random.choice(['y', 'ie', 'son', 'sen', 'man', 'er', 'jr'])
+        # Aggiungi suffisso (NO jr - quello è prefisso!)
+        suffix = random.choice(['y', 'ie', 'son', 'sen', 'man', 'er'])
         # Evita doppie: smithy non smithyy
         if word.endswith(suffix[0]):
             result = word + suffix[1:] if len(suffix) > 1 else word + suffix
         else:
             result = word + suffix
+
+    elif technique == 'prefix':
+        # v12: jr/mr/dr come PREFISSO (realistico nei database)
+        prefix = random.choice(['jr', 'mr', 'dr', 'st'])
+        result = prefix + word
 
     elif technique == 'truncate' and len(word) >= 5:
         # Tronca fine MA solo se rimane una vocale!
@@ -439,7 +446,7 @@ def run_xl_pipeline():
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_creative_v11"  # v11: temp=0.7 FIXED, 10x multi-word, improved scoring
+    out_dir = "./results/t5_xl_creative_v12"  # v12: jr come PREFISSO, temp=0.7
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING (Forza retraining per nuovo paradigma)
@@ -477,10 +484,10 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_v11_report.txt"
+    output_file = "massive_t5_xl_creative_v12_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v11\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: v11 - temp=0.7 fixed, 10x multi-word, improved scoring\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v12\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: v12 - jr=PREFIX, temp=0.7\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -515,7 +522,7 @@ def run_xl_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
-    print(f"\n>>> SUCCESS: XL Creative v11 Report (temp=0.7, 10x multi-word, improved scoring) saved to {output_file}")
+    print(f"\n>>> SUCCESS: XL Creative v12 Report (jr=PREFIX, temp=0.7) saved to {output_file}")
 
 if __name__ == "__main__":
     run_xl_pipeline()
