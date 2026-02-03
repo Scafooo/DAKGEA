@@ -439,7 +439,7 @@ def run_xl_pipeline():
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_creative_v10"  # v10: 10x multi-word, no jr, vowel-safe
+    out_dir = "./results/t5_xl_creative_v11"  # v11: temp=0.7 FIXED, 10x multi-word, improved scoring
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING (Forza retraining per nuovo paradigma)
@@ -460,7 +460,7 @@ def run_xl_pipeline():
     sweep_results = []
     for a in [0.3, 0.4, 0.5]:  # Alpha moderati (v3-style)
         for n in [0.0, 0.01, 0.02]: # Rumore latente basso
-            for t in [0.7, 0.85, 1.0]:  # Temperature conservative
+            for t in [0.7]:  # v11: FISSO a 0.7 (v9 funzionava, v10 con 1.0 era garbage)
                 interpolator.latent_noise_std, interpolator.gen_temperature = n, t
                 scs = []
                 for p, v1, v2 in sweep_pool:
@@ -477,10 +477,10 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_v10_report.txt"
+    output_file = "massive_t5_xl_creative_v11_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v10\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: 10x multi-word, no jr, vowel-safe\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v11\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: v11 - temp=0.7 fixed, 10x multi-word, improved scoring\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -515,7 +515,7 @@ def run_xl_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
-    print(f"\n>>> SUCCESS: XL Creative v10 Report (10x multi-word, no jr, vowel-safe) saved to {output_file}")
+    print(f"\n>>> SUCCESS: XL Creative v11 Report (temp=0.7, 10x multi-word, improved scoring) saved to {output_file}")
 
 if __name__ == "__main__":
     run_xl_pipeline()
