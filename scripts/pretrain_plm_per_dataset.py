@@ -77,23 +77,6 @@ def load_dataset(dataset_name: str):
     return dataset
 
 
-def build_canonical_mapping(dataset) -> dict:
-    """Build predicate URI -> special token mapping from attribute_matches."""
-    mapping = {}
-
-    if not dataset.attribute_matches:
-        logger.warning("No attribute_matches available, using empty mapping.")
-        return mapping
-
-    for src_uri, tgt_uris in dataset.attribute_matches.items():
-        local = src_uri.split("/")[-1].split("#")[-1]
-        token = f"<{local}>"
-        mapping[src_uri] = token
-        for tgt_uri in tgt_uris:
-            mapping[tgt_uri] = token
-
-    logger.info(f"Built canonical mapping: {len(mapping)} URIs -> {len(set(mapping.values()))} tokens")
-    return mapping
 
 
 def pretrain_dataset(dataset_name: str, output_dir: Path, config: dict, dry_run: bool = False):
@@ -119,9 +102,6 @@ def pretrain_dataset(dataset_name: str, output_dir: Path, config: dict, dry_run:
         logger.error(str(e))
         return False
 
-    # Build canonical mapping
-    canonical_mapping = build_canonical_mapping(dataset)
-
     # Initialize interpolator
     from src.augmentation.methods.plm.mixup_t5_xl_interpolator import MixupT5XLInterpolator
 
@@ -138,9 +118,8 @@ def pretrain_dataset(dataset_name: str, output_dir: Path, config: dict, dry_run:
 
     logger.info("Building training data...")
     builder = MixupDataBuilder()
-    training_rows = builder.build_training_data(
+    training_rows, canonical_mapping = builder.build_training_data(
         dataset=dataset,
-        canonical_mapping=canonical_mapping,
         max_pairs_per_pred=config["max_pairs_per_pred"],
     )
 
