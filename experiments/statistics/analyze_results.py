@@ -985,45 +985,63 @@ def main() -> None:
         raise SystemExit("No metrics found in the specified experiments.")
 
     # Calculate LEAR (Low-resource Effectiveness of Augmentation Ratio) scores
+    # For each augmentation ratio alpha, compute LEAR across all reduction ratios
     all_lear_data = {}
     for dataset, entries in ratio_entries.items():
-        dataset_lear = {}
         # Use build_ratio_plot_data logic to get aggregated means per ratio
-        # We pass only the current dataset to the builder
         ratio_data = build_ratio_plot_data({dataset: entries}, args.metrics).get(dataset, {})
-        
+
         if not ratio_data:
             continue
-            
+
+        # Collect all unique augmentation ratios across all reduction ratios
+        all_aug_ratios = set()
+        for r in ratio_data:
+            all_aug_ratios.update(ratio_data[r].keys())
+        all_aug_ratios = sorted(all_aug_ratios)
+
+        if not all_aug_ratios:
+            continue
+
+        # Structure: dataset_lear[metric] = {"per_alpha": {alpha: score}, "best_alpha": alpha, "best_score": score}
+        dataset_lear = {}
+
         for metric in args.metrics:
-            ratios = []
-            base_scores = []
-            aug_scores = []
-            
-            # Sorted by reduction ratio to ensure consistency
-            for r in sorted(ratio_data.keys()):
-                # For each reduction ratio, find the corresponding augmentation performance
-                aug_group = ratio_data[r]
-                if not aug_group:
-                    continue
-                    
-                # Prefer exact match (aug_ratio == red_ratio), otherwise use best/first
-                target_aug_ratio = r if r in aug_group else next(iter(sorted(aug_group.keys())))
-                
-                scores = aug_group[target_aug_ratio]
-                base_val = scores["reduction"].get(metric)
-                aug_val = scores["augmentation"].get(metric)
-                
-                if base_val is not None and aug_val is not None:
-                    ratios.append(float(r))
-                    base_scores.append(base_val)
-                    aug_scores.append(aug_val)
-            
-            if ratios:
-                score = calculate_lear(ratios, base_scores, aug_scores)
-                if score is not None:
-                    dataset_lear[metric] = score
-        
+            lear_per_alpha = {}
+
+            for alpha in all_aug_ratios:
+                ratios = []
+                base_scores = []
+                aug_scores = []
+
+                # For this alpha, collect scores across all reduction ratios
+                for r in sorted(ratio_data.keys()):
+                    aug_group = ratio_data[r]
+                    if alpha not in aug_group:
+                        continue
+
+                    scores = aug_group[alpha]
+                    base_val = scores["reduction"].get(metric)
+                    aug_val = scores["augmentation"].get(metric)
+
+                    if base_val is not None and aug_val is not None:
+                        ratios.append(float(r))
+                        base_scores.append(base_val)
+                        aug_scores.append(aug_val)
+
+                if ratios:
+                    score = calculate_lear(ratios, base_scores, aug_scores)
+                    if score is not None:
+                        lear_per_alpha[alpha] = score
+
+            if lear_per_alpha:
+                best_alpha = max(lear_per_alpha, key=lear_per_alpha.get)
+                dataset_lear[metric] = {
+                    "per_alpha": lear_per_alpha,
+                    "best_alpha": best_alpha,
+                    "best_score": lear_per_alpha[best_alpha],
+                }
+
         if dataset_lear:
             all_lear_data[dataset] = dataset_lear
 

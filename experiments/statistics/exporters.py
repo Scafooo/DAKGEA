@@ -1005,15 +1005,19 @@ def write_detailed_comparison_tables_latex(
 
 def write_lear_summary_latex(
     path: Path,
-    lear_data: Dict[str, Dict[str, float]],
+    lear_data: Dict[str, Dict[str, Dict]],
     metrics: List[str] | None = None,
 ) -> None:
-    """Generate LaTeX table for LEAR scores.
+    """Generate LaTeX tables for LEAR scores.
 
     Args:
         path: Output file path
-        lear_data: Dict[dataset -> Dict[metric -> score]]
+        lear_data: Dict[dataset -> Dict[metric -> {"per_alpha": {alpha: score}, "best_alpha": alpha, "best_score": score}]]
         metrics: List of metrics to include
+
+    Generates two tables:
+    1. Summary table with best LEAR and optimal alpha per dataset
+    2. Detailed table with LEAR for each alpha (optional, in separate file)
     """
     if not lear_data:
         return
@@ -1041,54 +1045,132 @@ def write_lear_summary_latex(
         'precision': 'P', 'recall': 'R', 'f-measure': 'F1'
     }
 
-    headers = ["Dataset"] + [metric_display.get(m, m.upper()) for m in metrics]
+    # Table 1: Summary with best LEAR and optimal alpha
+    # Headers: Dataset | Metric1 (α*) | Metric2 (α*) | ...
+    headers = ["Dataset"] + [f"{metric_display.get(m, m.upper())} ($\\alpha^*$)" for m in metrics]
     n_cols = len(headers)
-    col_spec = "l" + "r" * (n_cols - 1)
+    col_spec = "l" + "c" * (n_cols - 1)
 
     with path.open("w", encoding="utf-8") as f:
         f.write("% Requires: \\usepackage{xcolor}\n")
         f.write("\\begin{table}[htbp]\n")
         f.write("\\centering\n")
         f.write("\\small\n")
-        f.write("\\caption{Low-resource Effectiveness Analysis (LEAR) Scores. Weighted improvement across all reduction ratios.}\n")
+        f.write("\\caption{LEAR scores at optimal augmentation ratio $\\alpha^*$. Values show LEAR($\\alpha^*$) with optimal $\\alpha^*$ in parentheses.}\n")
         f.write("\\label{tab:lear_summary}\n")
         f.write(f"\\begin{{tabular}}{{{col_spec}}}\n")
         f.write("\\toprule\n")
 
         # Header row
-        escaped_headers = [escape_latex(h) for h in headers]
-        f.write(" & ".join(escaped_headers) + " \\\\\n")
+        f.write(" & ".join(headers) + " \\\\\n")
         f.write("\\midrule\n")
 
         # Data rows
         for dataset in sorted(lear_data.keys()):
-            scores = lear_data[dataset]
+            metric_data = lear_data[dataset]
             row_cells = [escape_latex(dataset)]
 
             for metric in metrics:
-                score = scores.get(metric)
-                if score is None:
+                data = metric_data.get(metric)
+                if data is None:
                     row_cells.append("—")
                 else:
-                    # Color coding for LEAR:
-                    # - For most metrics: Positive is good (Green), Negative is bad (Red)
-                    # - For MR (Mean Rank): Lower is better, so negative delta is good
+                    best_score = data["best_score"]
+                    best_alpha = data["best_alpha"]
                     is_mr = metric.lower() == 'mr'
 
-                    if score > 0:
+                    # Format: score (α=X.X)
+                    if best_score > 0:
                         color = "red!70!black" if is_mr else "green!70!black"
-                        row_cells.append(f"\\textcolor{{{color}}}{{+{score:.4f}}}")
-                    elif score < 0:
+                        cell = f"\\textcolor{{{color}}}{{+{best_score:.4f}}} ({best_alpha:.1f})"
+                    elif best_score < 0:
                         color = "green!70!black" if is_mr else "red!70!black"
-                        row_cells.append(f"\\textcolor{{{color}}}{{{score:.4f}}}")
+                        cell = f"\\textcolor{{{color}}}{{{best_score:.4f}}} ({best_alpha:.1f})"
                     else:
-                        row_cells.append(f"{score:.4f}")
+                        cell = f"{best_score:.4f} ({best_alpha:.1f})"
+                    row_cells.append(cell)
 
             f.write(" & ".join(row_cells) + " \\\\\n")
 
         f.write("\\bottomrule\n")
         f.write("\\end{tabular}\n")
         f.write("\\end{table}\n")
+
+    # Table 2: Detailed LEAR per alpha (write to separate file)
+    detailed_path = path.parent / "lear_detailed.tex"
+    _write_lear_detailed_latex(detailed_path, lear_data, metrics, metric_display)
+
+
+def _write_lear_detailed_latex(
+    path: Path,
+    lear_data: Dict[str, Dict[str, Dict]],
+    metrics: List[str],
+    metric_display: Dict[str, str],
+) -> None:
+    """Generate detailed LEAR table showing scores for each alpha."""
+    # Collect all unique alphas across all datasets
+    all_alphas = set()
+    for ds_data in lear_data.values():
+        for metric_data in ds_data.values():
+            all_alphas.update(metric_data.get("per_alpha", {}).keys())
+    all_alphas = sorted(all_alphas)
+
+    if not all_alphas:
+        return
+
+    # Generate one table per metric
+    with path.open("w", encoding="utf-8") as f:
+        f.write("% Detailed LEAR scores per augmentation ratio\n")
+        f.write("% Requires: \\usepackage{xcolor}\n\n")
+
+        for metric in metrics:
+            display_name = metric_display.get(metric, metric.upper())
+            is_mr = metric.lower() == 'mr'
+
+            # Headers: Dataset | α=0.1 | α=0.2 | ... | α=1.0
+            headers = ["Dataset"] + [f"$\\alpha$={a:.1f}" for a in all_alphas]
+            col_spec = "l" + "r" * len(all_alphas)
+
+            f.write(f"\\begin{{table}}[htbp]\n")
+            f.write("\\centering\n")
+            f.write("\\scriptsize\n")
+            f.write(f"\\caption{{LEAR scores for {display_name} across augmentation ratios.}}\n")
+            f.write(f"\\label{{tab:lear_detailed_{metric.replace('@', '')}}}\n")
+            f.write(f"\\begin{{tabular}}{{{col_spec}}}\n")
+            f.write("\\toprule\n")
+            f.write(" & ".join(headers) + " \\\\\n")
+            f.write("\\midrule\n")
+
+            for dataset in sorted(lear_data.keys()):
+                metric_data = lear_data[dataset].get(metric, {})
+                per_alpha = metric_data.get("per_alpha", {})
+                best_alpha = metric_data.get("best_alpha")
+
+                row_cells = [escape_latex(dataset)]
+                for alpha in all_alphas:
+                    score = per_alpha.get(alpha)
+                    if score is None:
+                        row_cells.append("—")
+                    else:
+                        is_best = (alpha == best_alpha)
+                        if score > 0:
+                            color = "red!70!black" if is_mr else "green!70!black"
+                            cell = f"\\textcolor{{{color}}}{{+{score:.3f}}}"
+                        elif score < 0:
+                            color = "green!70!black" if is_mr else "red!70!black"
+                            cell = f"\\textcolor{{{color}}}{{{score:.3f}}}"
+                        else:
+                            cell = f"{score:.3f}"
+                        # Bold the best alpha
+                        if is_best:
+                            cell = f"\\textbf{{{cell}}}"
+                        row_cells.append(cell)
+
+                f.write(" & ".join(row_cells) + " \\\\\n")
+
+            f.write("\\bottomrule\n")
+            f.write("\\end{tabular}\n")
+            f.write("\\end{table}\n\n")
 
 
 __all__ = [
