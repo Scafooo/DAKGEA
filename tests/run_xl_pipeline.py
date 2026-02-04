@@ -32,7 +32,7 @@ MAX_ORPHANS_PER_PRED = 200
 SWEEP_SAMPLES = 50
 
 # Available datasets
-AVAILABLE_DATASETS = ["BBC_DB", "D_W_15K_V1", "D_W_15K_V2", "D_Y_15K_V1", "D_Y_15K_V2"]
+AVAILABLE_DATASETS = ["BBC_DB", "D_W_15K_V1", "D_W_15K_V2", "ICEW_WIKI", "ICEW_YAGO"]
 
 logger = get_logger("FlanT5XL_Creative")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')

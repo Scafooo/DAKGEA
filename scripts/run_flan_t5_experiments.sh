@@ -23,7 +23,7 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 cd "$PROJECT_ROOT"
 
 # Configuration
-DATASETS=("BBC_DB" "D_W_15K_V1" "D_W_15K_V2" "ICEWS_WIKI" "ICEWS_YAGO")
+DATASETS=("BBC_DB" "D_W_15K_V1" "D_W_15K_V2" "ICEW_WIKI" "ICEW_YAGO")
 CONFIG_DIR="config/experiments/massive/flan_t5_bert_int"
 RESULTS_DIR="results/flan_t5_bert_int"
 LOG_DIR="results/logs/flan_t5"

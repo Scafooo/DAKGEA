@@ -48,8 +48,8 @@ AVAILABLE_DATASETS = [
     "BBC_DB",
     "D_W_15K_V1",
     "D_W_15K_V2",
-    "ICEWS_WIKI",
-    "ICEWS_YAGO",
+    "ICEW_WIKI",
+    "ICEW_YAGO",
 ]
 
 # Default configuration
