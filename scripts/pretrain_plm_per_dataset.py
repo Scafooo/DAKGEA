@@ -56,7 +56,7 @@ AVAILABLE_DATASETS = [
 DEFAULT_CONFIG = {
     "model_name": "google/flan-t5-xl",
     "epochs": 3,
-    "batch_size": 16,  # Increased for RTX 4090 (no gradient checkpointing)
+    "batch_size": 12,  # Safe for RTX 4090 without gradient checkpointing
     "learning_rate": 1e-3,
     "max_len_in": 128,
     "max_pairs_per_pred": 2000,
