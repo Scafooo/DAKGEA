@@ -129,6 +129,11 @@ class ExperimentRunner:
             "workspace_root": str(self.base_workspace.resolve()),
         }
 
+        # Baseline evaluation cache directory
+        results_root = Path(self.paths.get("results", "results"))
+        self.baseline_cache_dir = results_root / ".cache" / "baseline_eval"
+        self.baseline_cache_enabled = self.global_cfg.get("baseline_cache", {}).get("enabled", True)
+
         self.datasets: List[DatasetSpec] = self._build_dataset_specs()
 
     def _infer_reader(self, dataset_name: str) -> Tuple[str, str]:
@@ -1116,25 +1121,74 @@ class ExperimentRunner:
         reduction_meta = ratio_meta.get("reduction", {})
         reduction_results = Path(dataset_workspace / "reduction" / "results.json")
 
-        # Proceed with normal evaluation (early skip is handled at ratio level)
+        # Proceed with baseline evaluation (with caching optimization)
         if self.reduction_eval:
-            evaluation_stage.execute(
-                VARIANT_BASELINE,
-                dataset_reduced,
-                dataset_reduced,
-                stage_cfg,
-                lineage,
-                ratio_root,
-                ratio_tag,
-                ratio_meta,
+            # Extract dataset name from spec
+            dataset_name = spec.name.split("/")[-1] if "/" in spec.name else spec.name
+
+            # Check if we have cached baseline results
+            has_cache = all(
+                self._has_cached_baseline(dataset_name, self.reduction_method, ratio, model)
+                for model in self.models
             )
-            persisted = self._persist_stage_results(
-                ratio_meta,
-                VARIANT_BASELINE,
-                reduction_results,
-            )
-            if persisted:
-                reduction_meta["results"] = str(persisted)
+
+            if has_cache and not self.overwrite_existing:
+                # Use cached results
+                logger.info("📦 Using cached baseline evaluation (ratio=%s)", ratio_tag)
+                copied = self._copy_cached_baseline_to_workspace(
+                    dataset_name,
+                    self.reduction_method,
+                    ratio,
+                    reduction_results,
+                )
+                if copied:
+                    reduction_meta["results"] = str(reduction_results.resolve())
+                    reduction_meta["cached"] = True
+                    # Still need to update ratio_meta with evaluation info
+                    ratio_meta.setdefault("evaluations", {})["baseline"] = {
+                        "variant": "baseline",
+                        "paths": {"results": str(reduction_results.resolve())},
+                        "cached": True,
+                    }
+                else:
+                    # Cache copy failed, fall back to running evaluation
+                    logger.warning("Cache copy failed, running evaluation...")
+                    has_cache = False
+
+            if not has_cache or self.overwrite_existing:
+                # Run evaluation
+                evaluation_stage.execute(
+                    VARIANT_BASELINE,
+                    dataset_reduced,
+                    dataset_reduced,
+                    stage_cfg,
+                    lineage,
+                    ratio_root,
+                    ratio_tag,
+                    ratio_meta,
+                )
+                persisted = self._persist_stage_results(
+                    ratio_meta,
+                    VARIANT_BASELINE,
+                    reduction_results,
+                )
+                if persisted:
+                    reduction_meta["results"] = str(persisted)
+
+                    # Save results to cache for future reuse
+                    if persisted.exists():
+                        with persisted.open("r", encoding="utf-8") as f:
+                            results_data = json.load(f)
+                        # Save per-model results to cache
+                        for model in self.models:
+                            if model in results_data:
+                                self._save_baseline_to_cache(
+                                    dataset_name,
+                                    self.reduction_method,
+                                    ratio,
+                                    model,
+                                    {model: results_data[model]},
+                                )
         else:
             logger.info("⏭️  Skipping baseline evaluation (reduction.eval=false)")
 
@@ -1517,6 +1571,145 @@ class ExperimentRunner:
             return Path(results_path)
 
         return None
+
+    # ------------------------------------------------------------------
+    # Baseline Evaluation Cache Methods
+    # ------------------------------------------------------------------
+    def _get_baseline_cache_key(
+        self,
+        dataset_name: str,
+        reduction_method: str,
+        ratio: float,
+        model: str,
+    ) -> str:
+        """Generate a unique cache key for baseline evaluation results.
+
+        Args:
+            dataset_name: Name of the dataset (e.g., "BBC_DB")
+            reduction_method: Reduction method (e.g., "forget_labels")
+            ratio: Reduction ratio (e.g., 0.5)
+            model: Model name (e.g., "bert_int")
+
+        Returns:
+            Cache key string
+        """
+        # Normalize ratio to avoid floating point issues
+        ratio_str = f"{ratio:.2f}".replace(".", "_")
+        return f"{dataset_name}__{reduction_method}__{ratio_str}__{model}"
+
+    def _get_baseline_cache_path(self, cache_key: str) -> Path:
+        """Get the full path to a cached baseline result."""
+        return self.baseline_cache_dir / cache_key / "results.json"
+
+    def _has_cached_baseline(
+        self,
+        dataset_name: str,
+        reduction_method: str,
+        ratio: float,
+        model: str,
+    ) -> bool:
+        """Check if cached baseline results exist."""
+        if not self.baseline_cache_enabled:
+            return False
+        cache_key = self._get_baseline_cache_key(dataset_name, reduction_method, ratio, model)
+        cache_path = self._get_baseline_cache_path(cache_key)
+        return cache_path.exists()
+
+    def _load_cached_baseline(
+        self,
+        dataset_name: str,
+        reduction_method: str,
+        ratio: float,
+        model: str,
+    ) -> Optional[Dict[str, Any]]:
+        """Load cached baseline results if available.
+
+        Returns:
+            Cached results dict or None if not available
+        """
+        if not self.baseline_cache_enabled:
+            return None
+        cache_key = self._get_baseline_cache_key(dataset_name, reduction_method, ratio, model)
+        cache_path = self._get_baseline_cache_path(cache_key)
+
+        if not cache_path.exists():
+            return None
+
+        try:
+            with cache_path.open("r", encoding="utf-8") as f:
+                results = json.load(f)
+            logger.info("📦 Loaded baseline from cache: %s", cache_key)
+            return results
+        except (json.JSONDecodeError, IOError) as e:
+            logger.warning("Failed to load cached baseline %s: %s", cache_key, e)
+            return None
+
+    def _save_baseline_to_cache(
+        self,
+        dataset_name: str,
+        reduction_method: str,
+        ratio: float,
+        model: str,
+        results: Dict[str, Any],
+    ) -> None:
+        """Save baseline results to cache for reuse."""
+        if not self.baseline_cache_enabled:
+            return
+        cache_key = self._get_baseline_cache_key(dataset_name, reduction_method, ratio, model)
+        cache_path = self._get_baseline_cache_path(cache_key)
+
+        try:
+            cache_path.parent.mkdir(parents=True, exist_ok=True)
+            with cache_path.open("w", encoding="utf-8") as f:
+                json.dump(results, f, indent=2)
+            logger.info("📦 Saved baseline to cache: %s", cache_key)
+        except IOError as e:
+            logger.warning("Failed to save baseline to cache %s: %s", cache_key, e)
+
+    def _copy_cached_baseline_to_workspace(
+        self,
+        dataset_name: str,
+        reduction_method: str,
+        ratio: float,
+        target_path: Path,
+    ) -> bool:
+        """Copy cached baseline results to the experiment workspace.
+
+        Copies results for all models that have cached results.
+
+        Args:
+            dataset_name: Dataset name
+            reduction_method: Reduction method
+            ratio: Reduction ratio
+            target_path: Target path for results.json
+
+        Returns:
+            True if cached results were copied, False otherwise
+        """
+        if not self.baseline_cache_enabled:
+            return False
+
+        # Try to load cached results for each model
+        all_results = {}
+        for model in self.models:
+            cached = self._load_cached_baseline(dataset_name, reduction_method, ratio, model)
+            if cached:
+                # Merge model results
+                all_results.update(cached)
+
+        if not all_results:
+            return False
+
+        # Write merged results to target path
+        try:
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            with target_path.open("w", encoding="utf-8") as f:
+                json.dump(all_results, f, indent=2)
+            logger.info("📦 Copied cached baseline to workspace: %s", target_path)
+            return True
+        except IOError as e:
+            logger.warning("Failed to copy cached baseline: %s", e)
+            return False
 
     def _collect_model_results(self, evaluation_meta: Dict[str, Any]) -> Dict[str, Any]:
         """Return a dictionary with model scores loaded from their JSON files."""

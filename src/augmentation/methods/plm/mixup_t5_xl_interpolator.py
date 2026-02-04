@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 import re
 import logging
+from pathlib import Path
 from typing import Dict, List, Tuple, Any, Union
 
 import torch
@@ -33,21 +34,31 @@ class MixupT5XLInterpolator:
         out_dir: str = "./t5_xl_lora_model",
         device: str = "cuda",
         max_len_in: int = 128,
+        pretrained_path: str | None = None,
+        generation_config: dict | None = None,
     ):
         self.model_name = model_name
         self.out_dir = out_dir
         self.device = device
         self.max_len_in = max_len_in
-        
-        # PARAMETRI RIPRISTINATI DAL REPORT "INTERESSANTE"
-        self.gen_temperature = 1.0
-        self.gen_num_beams = 4
-        self.gen_repetition_penalty = 2.0
-        self.gen_top_p = 0.9
-        self.latent_noise_std = 0.05
+        self.pretrained_path = pretrained_path
 
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
-        self.model = self._load_model()
+        # Generation parameters (from config or defaults)
+        gen_cfg = generation_config or {}
+        self.gen_temperature = float(gen_cfg.get("temperature", 1.0))
+        self.gen_num_beams = int(gen_cfg.get("num_beams", 4))
+        self.gen_repetition_penalty = float(gen_cfg.get("repetition_penalty", 2.0))
+        self.gen_top_p = float(gen_cfg.get("top_p", 0.9))
+        self.latent_noise_std = float(gen_cfg.get("latent_noise_std", 0.05))
+
+        # Load tokenizer and model
+        if pretrained_path and Path(pretrained_path).exists():
+            logger.info(f"[T5-XL] Loading pre-trained model from {pretrained_path}")
+            self.tokenizer = AutoTokenizer.from_pretrained(pretrained_path, use_fast=False)
+            self.model = self._load_pretrained_model(pretrained_path)
+        else:
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
+            self.model = self._load_model()
 
     def _load_model(self):
         logger.info(f"[T5-XL] Loading {self.model_name} in BF16 Precision...")
@@ -68,9 +79,28 @@ class MixupT5XLInterpolator:
             r=16,
             lora_alpha=32,
             lora_dropout=0.05,
-            target_modules=["q", "v"] 
+            target_modules=["q", "v"]
         )
         model = get_peft_model(model, peft_config)
+        return model
+
+    def _load_pretrained_model(self, pretrained_path: str):
+        """Load a pre-trained LoRA model from disk."""
+        from peft import PeftModel
+
+        logger.info(f"[T5-XL] Loading base model {self.model_name} in BF16...")
+        base_model = AutoModelForSeq2SeqLM.from_pretrained(
+            self.model_name,
+            torch_dtype=torch.bfloat16,
+            device_map="auto"
+        )
+        base_model.resize_token_embeddings(len(self.tokenizer))
+
+        logger.info(f"[T5-XL] Loading LoRA adapters from {pretrained_path}...")
+        model = PeftModel.from_pretrained(base_model, pretrained_path)
+        model.config.use_cache = False
+
+        logger.info("[T5-XL] Pre-trained model loaded successfully.")
         return model
 
     def _clean_output(self, text: str) -> str:

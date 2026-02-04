@@ -14,3 +14,9 @@ reproducibility:
                        # Note: Enabling this may reduce performance by ~10-20%
                        # but ensures identical results across runs with same seed
 
+# Baseline evaluation cache
+# Caches baseline (reduction-only) evaluation results to avoid redundant computation
+# when running multiple augmentation experiments with the same reduction ratio.
+baseline_cache:
+  enabled: true  # Set to false to disable caching
+
