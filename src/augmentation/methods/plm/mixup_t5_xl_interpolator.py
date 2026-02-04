@@ -134,14 +134,14 @@ class MixupT5XLInterpolator:
         args = Seq2SeqTrainingArguments(
             output_dir=self.out_dir,
             per_device_train_batch_size=batch_size,
-            gradient_accumulation_steps=4,
+            gradient_accumulation_steps=2,  # Effective batch = batch_size × 2
             num_train_epochs=epochs,
             learning_rate=lr,
             bf16=True,
             logging_steps=20,
             save_strategy="no",
             report_to="none",
-            gradient_checkpointing=True
+            gradient_checkpointing=False,  # Disabled for RTX 4090 24GB - faster training
         )
         
         trainer = Seq2SeqTrainer(model=self.model, args=args, train_dataset=hf_dataset, data_collator=DataCollatorForSeq2Seq(self.tokenizer, model=self.model))

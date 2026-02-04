@@ -52,11 +52,11 @@ AVAILABLE_DATASETS = [
     "ICEW_YAGO",
 ]
 
-# Default configuration
+# Default configuration (optimized for RTX 4090 24GB)
 DEFAULT_CONFIG = {
     "model_name": "google/flan-t5-xl",
     "epochs": 3,
-    "batch_size": 8,
+    "batch_size": 16,  # Increased for RTX 4090 (no gradient checkpointing)
     "learning_rate": 1e-3,
     "max_len_in": 128,
     "max_pairs_per_pred": 2000,
