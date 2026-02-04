@@ -76,7 +76,18 @@ class MixupT5XLInterpolator:
     def _clean_output(self, text: str) -> str:
         text = re.sub(r'<extra_id_\d+>', '', text)
         text = re.sub(r'^.*:\s*', '', text)
-        return re.sub(r'\s+', ' ', text).strip()
+        text = re.sub(r'\s+', ' ', text).strip()
+
+        # v14: Fix unicode escapes (u00e9 → é, u00f3 → ó)
+        def replace_u00(match):
+            try:
+                hex_val = match.group(0)[1:]  # rimuovi 'u'
+                return chr(int(hex_val, 16))
+            except:
+                return match.group(0)
+        text = re.sub(r'u00[a-f0-9]{2}', replace_u00, text, flags=re.IGNORECASE)
+
+        return text
 
     def fine_tune(self, training_rows: List[Dict[str, str]], epochs: int = 3, batch_size: int = 8, lr: float = 1e-3):
         def tokenize_fn(batch):

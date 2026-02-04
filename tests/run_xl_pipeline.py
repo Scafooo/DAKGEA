@@ -35,12 +35,46 @@ semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
 creative_gen = CreativeVariationGenerator()
 
 # --- FILTRI QUALITÀ TRAINING DATA ---
-UNICODE_GARBAGE_PATTERN = re.compile(r'u00[a-f0-9]{2}', re.IGNORECASE)
+# Pattern più ampi per catturare vari formati di escape unicode
+UNICODE_GARBAGE_PATTERNS = [
+    re.compile(r'u00[a-f0-9]{2}', re.IGNORECASE),      # u00e9, u00f3
+    re.compile(r'\\u00[a-f0-9]{2}', re.IGNORECASE),   # \u00e9
+    re.compile(r'&#x[a-f0-9]{2,4};', re.IGNORECASE),  # &#xe9;
+    re.compile(r'&#\d{2,4};'),                         # &#233;
+    re.compile(r'%[a-f0-9]{2}', re.IGNORECASE),       # %e9 (URL encoding)
+]
 FILLER_WORDS = {'the', 'a', 'an', 'and', 'or', 'of', 'to', 'in', 'on', 'at', 'by', 'for'}
+
+def fix_unicode_escapes(text: str) -> str:
+    """
+    Prova a decodificare escape unicode comuni.
+    u00e9 → é, u00f3 → ó, etc.
+    """
+    import codecs
+
+    result = text
+
+    # Pattern: u00XX (senza backslash)
+    def replace_u00(match):
+        try:
+            hex_val = match.group(0)[1:]  # rimuovi 'u'
+            return chr(int(hex_val, 16))
+        except:
+            return match.group(0)
+
+    result = re.sub(r'u00[a-f0-9]{2}', replace_u00, result, flags=re.IGNORECASE)
+
+    # Pattern: \uXXXX (con backslash)
+    try:
+        result = codecs.decode(result, 'unicode_escape')
+    except:
+        pass
+
+    return result
 
 def has_unicode_garbage(text: str) -> bool:
     """Rileva caratteri unicode corrotti come u00e9, u00f3, etc."""
-    return bool(UNICODE_GARBAGE_PATTERN.search(text))
+    return any(p.search(text) for p in UNICODE_GARBAGE_PATTERNS)
 
 def is_only_filler_difference(input_text: str, target_text: str) -> bool:
     """
@@ -380,10 +414,16 @@ def filter_training_data(rows: list, min_edit_ratio: float = 0.1) -> list:
     for row in rows:
         inp, tgt = row['input'], row['target']
 
+        # v14: Prima prova a DECODIFICARE unicode escapes
+        tgt_fixed = fix_unicode_escapes(tgt)
+        if tgt_fixed != tgt:
+            tgt = tgt_fixed
+            row['target'] = tgt_fixed  # Aggiorna anche il row
+
         # Estrai valore dall'input per confronto
         inp_val = extract_value_from_prompt(inp)
 
-        # Fix 1: Rimuovi unicode garbage
+        # Fix 1: Rimuovi unicode garbage (dopo tentativo di fix)
         if has_unicode_garbage(inp) or has_unicode_garbage(tgt):
             unicode_removed += 1
             continue
