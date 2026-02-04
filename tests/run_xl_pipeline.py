@@ -128,7 +128,7 @@ def generate_flip_training_pairs() -> list:
 
     return pairs
 
-# --- VARIAZIONI MULTI-WORD (ogni parola viene modificata) - SENZA DIZIONARIO ---
+# --- VARIAZIONI MULTI-WORD (puramente algoritmiche, scalabili) ---
 
 def has_vowel(word: str) -> bool:
     """Controlla se una parola ha almeno una vocale."""
@@ -136,44 +136,35 @@ def has_vowel(word: str) -> bool:
 
 def vary_word_algorithmic(word: str) -> str:
     """
-    Varia una parola usando SOLO algoritmi, nessun dizionario.
+    Varia una parola usando SOLO algoritmi scalabili (NO dizionari!).
     GARANTISCE che il risultato sia pronunciabile (almeno 1 vocale).
 
-    Tecniche:
-    1. Typo: raddoppia/scambia lettere (NO drop che rimuove vocali!)
-    2. Suffissi: -y, -ie, -son, -sen, -man, -er
-    3. Prefissi: jr-, mr-, dr-, st- (v12: jr è PREFISSO non suffisso!)
-    4. Troncamento: solo se rimane una vocale
-    5. Vocali: sostituisci (non rimuovere!)
+    Tecniche v14 (scalabili su qualsiasi dataset):
+    1. Suffissi universali: -y, -ie, -son, -sen, -man, -er, -ini, -elli
+    2. Prefissi titoli: jr-, mr-, dr-, st-
+    3. Troncamento intelligente: prime 3-4 lettere (Alex da Alexander)
+    4. Abbreviazione iniziale: J. Smith, R. Johnson
+    5. Espansione vocale: steve → steeve (raddoppio vocale, non consonante!)
+    6. Swap vocali: a↔e, i↔o (più naturale di consonanti)
     """
     if len(word) < 2:
         return word
 
-    # Peso maggiore a tecniche che modificano davvero
+    # v14: Tecniche scalabili, NO dizionario
     technique = random.choice([
-        'typo_double', 'typo_double',  # 2x peso
-        'typo_swap', 'typo_swap',      # 2x peso
-        'suffix',
-        'prefix',  # v12: jr come PREFISSO!
-        'truncate',
-        'vowel', 'vowel'               # 2x peso
+        'suffix', 'suffix', 'suffix',    # 3x peso - molto naturale
+        'prefix',                         # 1x
+        'truncate', 'truncate',          # 2x peso - crea diminutivi naturali
+        'initial',                        # 1x - abbreviazioni (J., R.)
+        'vowel_double',                   # 1x - più naturale di consonante
+        'vowel_swap'                      # 1x - scambio vocali
     ])
 
     result = word  # Default
 
-    if technique == 'typo_double' and len(word) >= 3:
-        # Raddoppia una lettera: smith → smithh, john → johnn
-        idx = random.randint(1, len(word) - 1)
-        result = word[:idx] + word[idx-1] + word[idx:]
-
-    elif technique == 'typo_swap' and len(word) >= 3:
-        # Scambia due lettere: smith → smtih
-        idx = random.randint(0, len(word) - 2)
-        result = word[:idx] + word[idx+1] + word[idx] + word[idx+2:]
-
-    elif technique == 'suffix':
-        # Aggiungi suffisso (NO jr - quello è prefisso!)
-        suffix = random.choice(['y', 'ie', 'son', 'sen', 'man', 'er'])
+    if technique == 'suffix':
+        # Suffissi universali (funzionano in molte lingue)
+        suffix = random.choice(['y', 'ie', 'son', 'sen', 'man', 'er', 'ini', 'elli', 'ski', 'ov'])
         # Evita doppie: smithy non smithyy
         if word.endswith(suffix[0]):
             result = word + suffix[1:] if len(suffix) > 1 else word + suffix
@@ -181,20 +172,46 @@ def vary_word_algorithmic(word: str) -> str:
             result = word + suffix
 
     elif technique == 'prefix':
-        # v12: jr/mr/dr come PREFISSO (realistico nei database)
-        prefix = random.choice(['jr', 'mr', 'dr', 'st'])
+        # Prefissi titolo (universali)
+        prefix = random.choice(['jr', 'mr', 'dr', 'st', 'von', 'de', 'van'])
         result = prefix + word
 
-    elif technique == 'truncate' and len(word) >= 5:
-        # Tronca fine MA solo se rimane una vocale!
-        for cut in range(1, min(3, len(word) - 2)):
-            candidate = word[:-cut]
-            if has_vowel(candidate) and len(candidate) >= 2:
-                result = candidate
-                break
+    elif technique == 'truncate' and len(word) >= 4:
+        # Troncamento intelligente: crea diminutivi naturali
+        # alexander → alex, elizabeth → eliz, robert → rob
+        # Prendi le prime 3-4 lettere se contengono almeno una vocale
+        for length in [4, 3]:
+            if len(word) > length:
+                candidate = word[:length]
+                if has_vowel(candidate):
+                    result = candidate
+                    break
+        # Fallback: tronca 1-2 caratteri dalla fine
+        if result == word:
+            for cut in range(1, min(3, len(word) - 2)):
+                candidate = word[:-cut]
+                if has_vowel(candidate) and len(candidate) >= 2:
+                    result = candidate
+                    break
 
-    elif technique == 'vowel':
-        # Cambia (non rimuove!) una vocale: steve → stave
+    elif technique == 'initial':
+        # Abbreviazione iniziale: Robert → R., John Smith → J. Smith
+        # Solo per parole lunghe (>3 caratteri)
+        if len(word) > 3:
+            result = word[0].upper() + '.'
+
+    elif technique == 'vowel_double':
+        # Raddoppia una VOCALE (più naturale di consonante)
+        # steve → steeve, john → joohn
+        vowels = 'aeiou'
+        vowel_positions = [i for i, c in enumerate(word.lower()) if c in vowels]
+        if vowel_positions:
+            idx = random.choice(vowel_positions)
+            result = word[:idx] + word[idx] + word[idx:]
+
+    elif technique == 'vowel_swap':
+        # Scambia una vocale con un'altra vicina (più naturale)
+        # steve → stave, john → jahn
         vowels = 'aeiou'
         vowel_positions = [i for i, c in enumerate(word.lower()) if c in vowels]
         if vowel_positions:
@@ -209,28 +226,109 @@ def vary_word_algorithmic(word: str) -> str:
 
     return result
 
-def vary_all_words(text: str) -> str:
-    """Varia OGNI parola in una stringa multi-word usando solo algoritmi."""
+# v14: LEARNED VARIATIONS - estratte direttamente dalle coppie allineate!
+LEARNED_VARIATIONS = {}  # Popolato da learn_variations_from_pairs()
+
+def learn_variations_from_pairs(aligned_pairs: list) -> dict:
+    """
+    Impara variazioni di parole direttamente dalle coppie allineate.
+
+    Input: [("Bob Smith", "Robert Smith"), ("Mike Johnson", "Michael Johnson"), ...]
+    Output: {"bob": ["robert"], "robert": ["bob"], "mike": ["michael"], ...}
+
+    Questo è SCALABILE perché:
+    - Non richiede dizionari manuali
+    - Impara dal dataset stesso
+    - Cattura variazioni domain-specific
+    """
+    from difflib import SequenceMatcher
+
+    variations = {}
+
+    for val_src, val_tgt in aligned_pairs:
+        words_src = val_src.lower().split()
+        words_tgt = val_tgt.lower().split()
+
+        # Solo se stesso numero di parole (allineamento 1:1)
+        if len(words_src) != len(words_tgt):
+            continue
+
+        # Trova parole diverse nella stessa posizione
+        for ws, wt in zip(words_src, words_tgt):
+            if ws == wt:
+                continue  # Stessa parola, skip
+
+            # Verifica che siano "simili" (non completamente diverse)
+            # Similarità > 0.4 significa che condividono qualche carattere
+            sim = SequenceMatcher(None, ws, wt).ratio()
+            if sim < 0.3 or sim > 0.95:
+                continue  # Troppo diverse o troppo simili
+
+            # Aggiungi la variazione bidirezionale
+            if ws not in variations:
+                variations[ws] = set()
+            if wt not in variations:
+                variations[wt] = set()
+
+            variations[ws].add(wt)
+            variations[wt].add(ws)
+
+    # Converti set in liste
+    return {k: list(v) for k, v in variations.items() if v}
+
+def vary_word_with_learned(word: str, learned: dict) -> str:
+    """
+    Varia una parola usando prima le variazioni APPRESE, poi algoritmi.
+
+    Priorità:
+    1. Se la parola è nel dizionario appreso → usa variazione appresa (70%)
+    2. Altrimenti → usa algoritmo
+    """
+    word_lower = word.lower()
+
+    # v14: Prima prova variazioni apprese dal dataset
+    if word_lower in learned and learned[word_lower]:
+        if random.random() < 0.7:  # 70% usa variazione appresa
+            variant = random.choice(learned[word_lower])
+            # Mantieni capitalizzazione
+            if word[0].isupper():
+                variant = variant.capitalize()
+            return variant
+
+    # Fallback: usa algoritmo
+    return vary_word_algorithmic(word)
+
+def vary_all_words(text: str, learned: dict = None) -> str:
+    """Varia OGNI parola usando variazioni apprese + algoritmi."""
+    if learned is None:
+        learned = LEARNED_VARIATIONS
+
     words = text.split()
     if len(words) < 2:
-        return vary_word_algorithmic(text)
+        return vary_word_with_learned(text, learned) if learned else vary_word_algorithmic(text)
 
     # Varia OGNI parola!
-    varied_words = [vary_word_algorithmic(w) for w in words]
+    if learned:
+        varied_words = [vary_word_with_learned(w, learned) for w in words]
+    else:
+        varied_words = [vary_word_algorithmic(w) for w in words]
     return ' '.join(varied_words)
 
-def generate_multi_word_training_pairs(names: list, n_per_name: int = 3) -> list:
+def generate_multi_word_training_pairs(names: list, n_per_name: int = 3, learned: dict = None) -> list:
     """
-    Genera coppie di training dove OGNI parola viene modificata (ALGORITMICO, no dizionario).
+    Genera coppie di training dove OGNI parola viene modificata.
+    v14: Usa variazioni APPRESE dal dataset + algoritmi come fallback.
 
     Input: ["john smith", "steve marriott", ...]
     Output: [
-        {"input": "generate variation <name>: john smith", "target": "johnn smithh"},
-        {"input": "generate variation <name>: john smith", "target": "jonh smtih"},
-        {"input": "generate variation <name>: steve marriott", "target": "stave marriot"},
+        {"input": "generate variation <name>: john smith", "target": "jonathan smithson"},
+        {"input": "generate variation <name>: steve marriott", "target": "steven marriot"},
         ...
     ]
     """
+    if learned is None:
+        learned = LEARNED_VARIATIONS
+
     pairs = []
     for name in names:
         words = name.split()
@@ -238,7 +336,7 @@ def generate_multi_word_training_pairs(names: list, n_per_name: int = 3) -> list
             continue  # Skip single-word names
 
         for _ in range(n_per_name):
-            varied = vary_all_words(name)
+            varied = vary_all_words(name, learned)  # v14: usa variazioni apprese!
             # Assicurati che sia effettivamente diverso
             if varied.lower() != name.lower():
                 pairs.append({
@@ -391,6 +489,21 @@ def run_xl_pipeline():
 
     print(f"    [ALIGNED] Real pairs: {real_pairs_count} (x3 weight), Synthetic: {synthetic_pairs_count}")
 
+    # v14: IMPARA VARIAZIONI dalle coppie allineate!
+    all_aligned_pairs = []
+    for pairs_list in aligned_test_pool.values():
+        all_aligned_pairs.extend(pairs_list)
+
+    global LEARNED_VARIATIONS
+    LEARNED_VARIATIONS = learn_variations_from_pairs(all_aligned_pairs)
+    print(f"    [LEARNED] Extracted {len(LEARNED_VARIATIONS)} word variations from aligned pairs")
+
+    # Mostra alcuni esempi di variazioni apprese
+    if LEARNED_VARIATIONS:
+        examples = list(LEARNED_VARIATIONS.items())[:5]
+        for word, variants in examples:
+            print(f"      - {word} ↔ {variants}")
+
     # B. ORPHANS - NUOVO PARADIGMA: Input → Variazione Creativa
     # NON più denoising (noisy → clean), ma generazione (clean → variation)
     orphans_by_pred = defaultdict(list)
@@ -446,7 +559,7 @@ def run_xl_pipeline():
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_creative_v13"  # v13: PROMPT FIX (rimosso "synthetic" dal prompt inference)
+    out_dir = "./results/t5_xl_creative_v14"  # v14: NAME VARIANTS dizionario, meno typo
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING (Forza retraining per nuovo paradigma)
@@ -484,10 +597,10 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_v13_report.txt"
+    output_file = "massive_t5_xl_creative_v14_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v13\n")
-        f.write(f"Config: {best} | Model: XL | Strategy: v13 - PROMPT FIX (no synthetic)\n")
+        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v14\n")
+        f.write(f"Config: {best} | Model: XL | Strategy: v14 - NAME VARIANTS + less typos\n")
         f.write("="*120 + "\n\n")
         
         # Aligned
@@ -522,7 +635,7 @@ def run_xl_pipeline():
                 o_count += 1
                 if o_count >= TOTAL_REPORT_SAMPLES // 2: break
 
-    print(f"\n>>> SUCCESS: XL Creative v13 Report (PROMPT FIX) saved to {output_file}")
+    print(f"\n>>> SUCCESS: XL Creative v14 Report (NAME VARIANTS + less typos) saved to {output_file}")
 
 if __name__ == "__main__":
     run_xl_pipeline()
