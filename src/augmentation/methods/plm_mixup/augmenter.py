@@ -167,17 +167,37 @@ class PLMMixupAugmenter(PLMAugmenter):
     def _initialize_t5_backend(self, dataset: Dataset, device: str, canonical_mapping: Dict[str, str]) -> None:
         """Initialize FLAN-T5-XL backend with LoRA."""
         from src.augmentation.methods.plm.mixup_t5_xl_interpolator import MixupT5XLInterpolator
+        import json
 
         # Check if using pre-trained model
         if self.pretrained_model_dir and Path(self.pretrained_model_dir).exists():
             self.logger.info(f"[PLM-MIXUP] Loading pre-trained T5 from {self.pretrained_model_dir}")
+
+            # Load best config from validation sweep (if available)
+            best_config_path = Path(self.pretrained_model_dir) / "best_config.json"
+            generation_config = self.t5_generation_config.copy() if self.t5_generation_config else {}
+
+            if best_config_path.exists():
+                with open(best_config_path) as f:
+                    best_config = json.load(f)
+                self.logger.info(f"[PLM-MIXUP] Loaded best config from sweep: {best_config}")
+                # Apply best params to generation config
+                if "temp" in best_config:
+                    generation_config["temperature"] = best_config["temp"]
+                if "noise" in best_config:
+                    generation_config["latent_noise_std"] = best_config["noise"]
+                if "alpha" in best_config:
+                    generation_config["alpha"] = best_config["alpha"]
+            else:
+                self.logger.warning("[PLM-MIXUP] No best_config.json found, using default params")
+
             self.bart_interpolator = MixupT5XLInterpolator(
                 model_name=self.t5_model_name,
                 out_dir=self.t5_out_dir,
                 device=device,
                 max_len_in=self.t5_cfg.get("max_len_in", 128),
                 pretrained_path=self.pretrained_model_dir,
-                generation_config=self.t5_generation_config,
+                generation_config=generation_config,
             )
             self.logger.info("[PLM-MIXUP] Pre-trained T5 model loaded.")
             return

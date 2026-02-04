@@ -282,6 +282,14 @@ def validate_model(interpolator, dataset, canonical_map, report_path: Path, data
         f.write("=" * 100 + "\n")
 
     logger.info(f"Validation report saved to {report_path}")
+
+    # Save best config to JSON for reuse by augmenter
+    best_config_path = report_path.parent / "best_config.json"
+    import json
+    with open(best_config_path, "w") as f:
+        json.dump(best, f, indent=2)
+    logger.info(f"Best config saved to {best_config_path}")
+
     return best
 
 

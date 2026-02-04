@@ -50,6 +50,8 @@ class MixupT5XLInterpolator:
         self.gen_repetition_penalty = float(gen_cfg.get("repetition_penalty", 2.0))
         self.gen_top_p = float(gen_cfg.get("top_p", 0.9))
         self.latent_noise_std = float(gen_cfg.get("latent_noise_std", 0.05))
+        # Default alpha for interpolation (can be overridden from best_config.json)
+        self.default_alpha = float(gen_cfg.get("alpha", 0.5))
 
         # Load tokenizer and model
         if pretrained_path and Path(pretrained_path).exists():
@@ -147,7 +149,10 @@ class MixupT5XLInterpolator:
         self.model.save_pretrained(self.out_dir)
         self.tokenizer.save_pretrained(self.out_dir)
 
-    def interpolate_pair(self, val_src: str, val_tgt: str, predicate: str = "", alpha: float = 0.5) -> Tuple[str, str]:
+    def interpolate_pair(self, val_src: str, val_tgt: str, predicate: str = "", alpha: float = None) -> Tuple[str, str]:
+        # Use default_alpha if not specified (loaded from best_config.json)
+        if alpha is None:
+            alpha = self.default_alpha
         p_name = predicate.replace("<", "").replace(">", "").lower().replace('_', ' ')
         # IMPORTANTE: prompt deve matchare ESATTAMENTE il training (NO "synthetic"!)
         prompt_src = f"generate variation <{p_name}>: {val_src}"
