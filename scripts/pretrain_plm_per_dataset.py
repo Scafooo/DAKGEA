@@ -415,6 +415,11 @@ def main():
         default=DEFAULT_CONFIG["learning_rate"],
         help="Learning rate",
     )
+    parser.add_argument(
+        "--skip-validation",
+        action="store_true",
+        help="Skip post-training validation and report generation",
+    )
 
     args = parser.parse_args()
 
@@ -450,6 +455,7 @@ def main():
             output_dir=args.output_dir,
             config=config,
             dry_run=args.dry_run,
+            skip_validation=args.skip_validation,
         )
         results[dataset_name] = "OK" if success else "FAILED"
 
