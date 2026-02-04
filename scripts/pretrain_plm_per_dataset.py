@@ -14,14 +14,20 @@ Output:
         ├── adapter_model.safetensors
         ├── adapter_config.json
         ├── tokenizer.json
+        ├── validation_report.txt  <- NEW: Score report
         └── ...
 """
 
 from __future__ import annotations
 
 import argparse
+import random
 import sys
+from collections import defaultdict
 from pathlib import Path
+
+import numpy as np
+from rdflib import Literal
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -32,6 +38,10 @@ from src.core.dataset.reader import DatasetReaderFactory
 from src.logger import get_logger
 
 logger = get_logger(__name__)
+
+# Validation config
+SWEEP_SAMPLES = 50
+REPORT_SAMPLES = 100
 
 # Available datasets for pre-training
 AVAILABLE_DATASETS = [
@@ -77,9 +87,195 @@ def load_dataset(dataset_name: str):
     return dataset
 
 
+def _local_name(uri: str) -> str:
+    """Extract local name from URI."""
+    return str(uri).split("/")[-1].split("#")[-1].lower().replace("_", " ")
 
 
-def pretrain_dataset(dataset_name: str, output_dir: Path, config: dict, dry_run: bool = False):
+def collect_aligned_test_data(dataset, canonical_map):
+    """Collect aligned pairs for testing, grouped by predicate."""
+    kg_src = dataset.knowledge_graph_source
+    kg_tgt = dataset.knowledge_graph_target
+
+    # Collect literals per entity
+    src_lits = defaultdict(list)
+    for s, p, o in kg_src.triples((None, None, None)):
+        if isinstance(o, Literal):
+            src_lits[s].append((p, str(o)))
+
+    tgt_lits = defaultdict(list)
+    for s, p, o in kg_tgt.triples((None, None, None)):
+        if isinstance(o, Literal):
+            tgt_lits[s].append((p, str(o)))
+
+    # Collect aligned pairs by predicate
+    aligned_pool = defaultdict(list)
+    for s_uri, t_uri in dataset.aligned_entities:
+        s_attrs = src_lits.get(s_uri, [])
+        t_attrs = tgt_lits.get(t_uri, [])
+
+        for ps, vs in s_attrs:
+            p_name = _local_name(ps)
+            for pt, vt in t_attrs:
+                if canonical_map.get(str(ps)) == canonical_map.get(str(pt)):
+                    vs_c, vt_c = vs.strip().lower(), vt.strip().lower()
+                    if vs_c != vt_c:
+                        aligned_pool[p_name].append((vs.strip(), vt.strip()))
+                        break
+
+    return aligned_pool
+
+
+def collect_orphan_data(dataset):
+    """Collect orphan values grouped by predicate."""
+    kg_src = dataset.knowledge_graph_source
+    kg_tgt = dataset.knowledge_graph_target
+
+    orphans_by_pred = defaultdict(list)
+    for s, p, o in list(kg_src.triples((None, None, None))) + list(kg_tgt.triples((None, None, None))):
+        if isinstance(o, Literal):
+            val = str(o).strip()
+            if val:
+                p_name = _local_name(p)
+                orphans_by_pred[p_name].append(val)
+
+    # Deduplicate
+    return {p: list(set(vals)) for p, vals in orphans_by_pred.items()}
+
+
+def validate_model(interpolator, dataset, canonical_map, report_path: Path):
+    """Run validation sweep and generate report with scores."""
+    from src.augmentation.methods.plm.scoring import calculate_pair_score, calculate_score
+
+    logger.info("Collecting test data for validation...")
+    aligned_pool = collect_aligned_test_data(dataset, canonical_map)
+    orphans_by_pred = collect_orphan_data(dataset)
+
+    # Build sweep pool
+    sweep_pool = []
+    all_preds = list(aligned_pool.keys())
+    if all_preds:
+        for _ in range(min(SWEEP_SAMPLES, sum(len(v) for v in aligned_pool.values()))):
+            p = random.choice(all_preds)
+            if aligned_pool[p]:
+                v1, v2 = random.choice(aligned_pool[p])
+                sweep_pool.append((p, v1, v2))
+
+    if not sweep_pool:
+        logger.warning("No aligned pairs available for validation")
+        return None
+
+    # Parameter sweep
+    logger.info(f"Running parameter sweep on {len(sweep_pool)} samples...")
+    sweep_results = []
+    for alpha in [0.3, 0.4, 0.5]:
+        for noise in [0.0, 0.01, 0.02]:
+            for temp in [0.7]:
+                interpolator.latent_noise_std = noise
+                interpolator.gen_temperature = temp
+                scores = []
+                for p, v1, v2 in sweep_pool:
+                    try:
+                        aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=alpha)
+                        res = calculate_pair_score(v1, v2, aa, ab)
+                        scores.append(res["score"])
+                    except Exception as e:
+                        logger.warning(f"Interpolation error: {e}")
+                        continue
+
+                if scores:
+                    avg = np.mean(scores)
+                    sweep_results.append({"alpha": alpha, "noise": noise, "temp": temp, "score": avg})
+                    logger.info(f"  Alpha={alpha} Noise={noise} Temp={temp} -> Score: {avg:.3f}")
+
+    if not sweep_results:
+        logger.warning("No valid sweep results")
+        return None
+
+    best = max(sweep_results, key=lambda x: x["score"])
+    logger.info(f"BEST CONFIG: {best}")
+
+    # Generate report
+    logger.info("Generating validation report...")
+    interpolator.latent_noise_std = best["noise"]
+    interpolator.gen_temperature = best["temp"]
+
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write("=" * 100 + "\n")
+        f.write("FLAN-T5-XL VALIDATION REPORT\n")
+        f.write(f"Best config: alpha={best['alpha']}, noise={best['noise']}, temp={best['temp']}\n")
+        f.write(f"Best score: {best['score']:.4f}\n")
+        f.write("=" * 100 + "\n\n")
+
+        # Section 1: Aligned pairs
+        f.write("SECTION 1: ALIGNED PAIRS MIXUP\n")
+        f.write("-" * 80 + "\n\n")
+
+        p_names = list(aligned_pool.keys())
+        count = 0
+        while count < REPORT_SAMPLES // 2 and p_names:
+            for p in list(p_names):
+                if not aligned_pool[p]:
+                    p_names.remove(p)
+                    continue
+                v1, v2 = aligned_pool[p].pop(random.randrange(len(aligned_pool[p])))
+                try:
+                    aa, ab = interpolator.interpolate_pair(v1, v2, predicate=p, alpha=best["alpha"])
+                    res = calculate_pair_score(v1, v2, aa, ab)
+                    f.write(f"PAIR {count+1:03d} | {p[:20]:20}\n")
+                    f.write(f"  V1: {v1[:50]:50} -> AUG: {aa[:50]:50}\n")
+                    f.write(f"  V2: {v2[:50]:50} -> AUG: {ab[:50]:50}\n")
+                    f.write(f"  Score: {res['score']:.2f}\n")
+                    f.write("-" * 80 + "\n")
+                    count += 1
+                except Exception as e:
+                    f.write(f"PAIR {count+1:03d} | {p[:20]:20} | ERROR: {e}\n")
+                    count += 1
+                if count >= REPORT_SAMPLES // 2:
+                    break
+
+        # Section 2: Orphan variations
+        f.write("\nSECTION 2: ORPHAN VARIATIONS\n")
+        f.write("-" * 80 + "\n\n")
+
+        o_names = list(orphans_by_pred.keys())
+        o_count = 0
+        while o_count < REPORT_SAMPLES // 2 and o_names:
+            for p in list(o_names):
+                if not orphans_by_pred[p]:
+                    o_names.remove(p)
+                    continue
+                val = orphans_by_pred[p].pop(random.randrange(len(orphans_by_pred[p])))
+                try:
+                    aa, _ = interpolator.interpolate_pair(val, val, predicate=p, alpha=0.5)
+                    score = calculate_score(val, aa)
+                    f.write(f"ORPHAN {o_count+1:03d} | {p[:20]:20}\n")
+                    f.write(f"  ORIG: {val[:50]:50} -> VAR: {aa[:50]:50}\n")
+                    f.write(f"  Score: {score:.2f}\n")
+                    f.write("-" * 80 + "\n")
+                    o_count += 1
+                except Exception as e:
+                    f.write(f"ORPHAN {o_count+1:03d} | {p[:20]:20} | ERROR: {e}\n")
+                    o_count += 1
+                if o_count >= REPORT_SAMPLES // 2:
+                    break
+
+        # Summary
+        f.write("\n" + "=" * 100 + "\n")
+        f.write("SWEEP RESULTS SUMMARY\n")
+        f.write("-" * 80 + "\n")
+        for res in sorted(sweep_results, key=lambda x: x["score"], reverse=True):
+            marker = " <- BEST" if res == best else ""
+            f.write(f"  alpha={res['alpha']:.1f}, noise={res['noise']:.2f}, temp={res['temp']:.1f} -> {res['score']:.4f}{marker}\n")
+        f.write("=" * 100 + "\n")
+
+    logger.info(f"Validation report saved to {report_path}")
+    return best
+
+
+
+
+def pretrain_dataset(dataset_name: str, output_dir: Path, config: dict, dry_run: bool = False, skip_validation: bool = False):
     """Pre-train FLAN-T5-XL on a single dataset."""
     logger.info("=" * 60)
     logger.info(f"PRE-TRAINING: {dataset_name}")
@@ -87,7 +283,27 @@ def pretrain_dataset(dataset_name: str, output_dir: Path, config: dict, dry_run:
 
     model_dir = output_dir / dataset_name
     if model_dir.exists() and (model_dir / "adapter_config.json").exists():
-        logger.info(f"Model already exists at {model_dir}, skipping.")
+        logger.info(f"Model already exists at {model_dir}, skipping training.")
+        # Still run validation if report doesn't exist
+        if not skip_validation and not (model_dir / "validation_report.txt").exists():
+            logger.info("Running validation for existing model...")
+            try:
+                dataset = load_dataset(dataset_name)
+                from src.augmentation.methods.plm.mixup_t5_xl_interpolator import MixupT5XLInterpolator
+                from src.augmentation.methods.plm.mixup_data_builder import MixupDataBuilder
+
+                interpolator = MixupT5XLInterpolator(
+                    model_name=config["model_name"],
+                    out_dir=str(model_dir),
+                    device="cuda",
+                    max_len_in=config["max_len_in"],
+                    pretrained_path=str(model_dir),
+                )
+                builder = MixupDataBuilder()
+                _, canonical_mapping = builder.build_training_data(dataset, max_pairs_per_pred=10)
+                validate_model(interpolator, dataset, canonical_mapping, model_dir / "validation_report.txt")
+            except Exception as e:
+                logger.warning(f"Validation failed: {e}")
         return True
 
     if dry_run:
@@ -139,6 +355,19 @@ def pretrain_dataset(dataset_name: str, output_dir: Path, config: dict, dry_run:
     )
 
     logger.info(f"Model saved to {model_dir}")
+
+    # Post-training validation
+    if not skip_validation:
+        logger.info("Running post-training validation...")
+        try:
+            best_config = validate_model(
+                interpolator, dataset, canonical_mapping, model_dir / "validation_report.txt"
+            )
+            if best_config:
+                logger.info(f"Best generation config: {best_config}")
+        except Exception as e:
+            logger.warning(f"Validation failed: {e}")
+
     return True
 
 
