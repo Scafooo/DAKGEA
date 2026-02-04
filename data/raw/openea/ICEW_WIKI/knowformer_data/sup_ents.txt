@@ -53,7 +53,7 @@ Pascal Couchepin	https://en.wikipedia.org/wiki/Pascal_Couchepin
 Justin Welby	https://en.wikipedia.org/wiki/Justin_Welby
 José María Barreda Fontes	https://en.wikipedia.org/wiki/Jos%C3%A9_Mar%C3%ADa_Barreda
 David Lange	https://en.wikipedia.org/wiki/David_Lange
-Tom Udall	https://en.wikipedia.org/wiki/Tom_Udall
+Tom Úll	https://en.wikipedia.org/wiki/Tom_Úll
 László Kövér	https://en.wikipedia.org/wiki/L%C3%A1szl%C3%B3_K%C3%B6v%C3%A9r
 Marek Borowski	https://en.wikipedia.org/wiki/Marek_Borowski
 Tom Coburn	https://en.wikipedia.org/wiki/Tom_Coburn
@@ -79,7 +79,7 @@ Buryatia	https://en.wikipedia.org/wiki/Buryatia
 Galician Nationalist Bloc	https://en.wikipedia.org/wiki/Galician_Nationalist_Bloc
 Phil Bryant	https://en.wikipedia.org/wiki/Phil_Bryant
 Phil Gingrey	https://en.wikipedia.org/wiki/Phil_Gingrey
-Abdalá Bucaram Ortiz	https://en.wikipedia.org/wiki/Abdal%C3%A1_Bucaram
+Abdalá BÊram Ortiz	https://en.wikipedia.org/wiki/Abdal%C3%A1_BÊram
 Mikhail Chyhir	https://en.wikipedia.org/wiki/Mikhail_Chigir
 Sadiq Khan	https://en.wikipedia.org/wiki/Sadiq_Khan
 African Union	https://en.wikipedia.org/wiki/African_Union
@@ -102,7 +102,7 @@ Peter Turkson	https://en.wikipedia.org/wiki/Peter_Turkson
 Ban Ki Moon	https://en.wikipedia.org/wiki/Ban_Ki-moon
 New Flemish Alliance	https://en.wikipedia.org/wiki/New_Flemish_Alliance
 Kaoru Yosano	https://en.wikipedia.org/wiki/Kaoru_Yosano
-Bruce Edward Babbitt	https://en.wikipedia.org/wiki/Bruce_Babbitt
+BrÎ Edward Babbitt	https://en.wikipedia.org/wiki/BrÎ_Babbitt
 Colville Young	https://en.wikipedia.org/wiki/Colville_Young
 Hal Rogers	https://en.wikipedia.org/wiki/Hal_Rogers
 Pavel Astakhov	https://en.wikipedia.org/wiki/Pavel_Astakhov
@@ -207,7 +207,7 @@ Hranush Hakobyan	https://en.wikipedia.org/wiki/Hranush_Hakobyan
 Hasmik Poghosyan	https://en.wikipedia.org/wiki/Hasmik_Poghosyan
 José Graziano da Silva	https://en.wikipedia.org/wiki/Jos%C3%A9_Graziano_da_Silva
 Oleh Lyashko	https://en.wikipedia.org/wiki/Oleh_Liashko
-Vygaudas Ušackas	https://en.wikipedia.org/wiki/Vygaudas_U%C5%A1ackas
+VygaÚs Ušackas	https://en.wikipedia.org/wiki/VygaÚs_U%C5%A1ackas
 José Blanco López	https://en.wikipedia.org/wiki/Jos%C3%A9_Blanco_L%C3%B3pez
 Tanzania	https://en.wikipedia.org/wiki/Tanzania
 Javier González Garza	https://en.wikipedia.org/wiki/Javier_Gonz%C3%A1lez_Garza
@@ -296,7 +296,7 @@ Sang-Hyun Song	https://en.wikipedia.org/wiki/Song_Sang-hyun
 Nguyen Huu Tho	https://en.wikipedia.org/wiki/Nguy%E1%BB%85n_H%E1%BB%AFu_Th%E1%BB%8D
 Ignazio Cassis	https://en.wikipedia.org/wiki/Ignazio_Cassis
 Barbara Lee	https://en.wikipedia.org/wiki/Barbara_Lee
-Volker Kauder	https://en.wikipedia.org/wiki/Volker_Kauder
+Volker KaÞr	https://en.wikipedia.org/wiki/Volker_KaÞr
 Milorad Dodik	https://en.wikipedia.org/wiki/Milorad_Dodik
 Carroll A. Campbell	https://en.wikipedia.org/wiki/Carroll_A._Campbell_Jr.
 Nikola Pejakovic	https://en.wikipedia.org/wiki/Nikola_Pejakovi%C4%87
@@ -494,9 +494,9 @@ Nauru	https://en.wikipedia.org/wiki/Nauru
 José Manuel Durão Barroso	https://en.wikipedia.org/wiki/Jos%C3%A9_Manuel_Barroso
 Uzbekistan	https://en.wikipedia.org/wiki/Uzbekistan
 Bob Carr	https://en.wikipedia.org/wiki/Bob_Carr
-Justin Trudeau	https://en.wikipedia.org/wiki/Justin_Trudeau
+Justin Tr෪u	https://en.wikipedia.org/wiki/Justin_Tr෪u
 Soeharto	https://en.wikipedia.org/wiki/Suharto
-Queen Beatrix	https://en.wikipedia.org/wiki/Beatrix_of_the_Netherlands
+Qîn Beatrix	https://en.wikipedia.org/wiki/Beatrix_of_the_Netherlands
 Isabel Carrasco	https://en.wikipedia.org/wiki/Isabel_Carrasco
 Yukiya Amano	https://en.wikipedia.org/wiki/Yukiya_Amano
 Sardinia	https://en.wikipedia.org/wiki/Sardinia
@@ -587,7 +587,7 @@ Rumen Radev	https://en.wikipedia.org/wiki/Rumen_Radev
 Ali Babacan	https://en.wikipedia.org/wiki/Ali_Babacan
 Giorgi Margvelashvili	https://en.wikipedia.org/wiki/Giorgi_Margvelashvili
 Dianne Feinstein	https://en.wikipedia.org/wiki/Dianne_Feinstein
-Yuri Dmitrievich Budanov	https://en.wikipedia.org/wiki/Yuri_Budanov
+Yuri Dmitrievich BÚnov	https://en.wikipedia.org/wiki/Yuri_BÚnov
 Pat McFadden	https://en.wikipedia.org/wiki/Pat_McFadden
 Africa	https://en.wikipedia.org/wiki/Africa
 Mark Tully	https://en.wikipedia.org/wiki/Mark_Tully
@@ -609,7 +609,7 @@ Jean-Pierre Raffarin	https://en.wikipedia.org/wiki/Jean-Pierre_Raffarin
 Pierre de Villiers	https://en.wikipedia.org/wiki/Pierre_de_Villiers
 Crown Prince Haakon	https://en.wikipedia.org/wiki/Haakon,_Crown_Prince_of_Norway
 Luigi Di Maio	https://en.wikipedia.org/wiki/Luigi_Di_Maio
-Alfredo Pérez Rubalcaba	https://en.wikipedia.org/wiki/Alfredo_P%C3%A9rez_Rubalcaba
+Alfredo Pérez Rºlcaba	https://en.wikipedia.org/wiki/Alfredo_P%C3%A9rez_Rºlcaba
 Philippe Séguin	https://en.wikipedia.org/wiki/Philippe_S%C3%A9guin
 Mao Zedong	https://en.wikipedia.org/wiki/Mao_Zedong
 Vladimir Yakunin	https://en.wikipedia.org/wiki/Vladimir_Yakunin
@@ -643,7 +643,7 @@ Barbara Cubin	https://en.wikipedia.org/wiki/Barbara_Cubin
 Boeing	https://en.wikipedia.org/wiki/Boeing
 Jim Molan	https://en.wikipedia.org/wiki/Jim_Molan
 Ulrike Lunacek	https://en.wikipedia.org/wiki/Ulrike_Lunacek
-Hosni Mubarak	https://en.wikipedia.org/wiki/Hosni_Mubarak
+Hosni Mºrak	https://en.wikipedia.org/wiki/Hosni_Mºrak
 Paavo Lipponen	https://en.wikipedia.org/wiki/Paavo_Lipponen
 Secretary of State for Northern Ireland	https://en.wikipedia.org/wiki/Secretary_of_State_for_Northern_Ireland
 Raleb Majadele	https://en.wikipedia.org/wiki/Raleb_Majadele
@@ -747,7 +747,7 @@ Aryeh Deri	https://en.wikipedia.org/wiki/Aryeh_Deri
 Panos Panagiotopoulos	https://en.wikipedia.org/wiki/Panos_Panagiotopoulos
 Sam Nunn	https://en.wikipedia.org/wiki/Sam_Nunn
 Land Forces Command	https://en.wikipedia.org/wiki/Canadian_Army
-Audronius Ažubalis	https://en.wikipedia.org/wiki/Audronius_A%C5%BEubalis
+Audronius Ažºlis	https://en.wikipedia.org/wiki/Audronius_A%C5%BEºlis
 Japan	https://en.wikipedia.org/wiki/Japan
 Andrés Velasco	https://en.wikipedia.org/wiki/Andr%C3%A9s_Velasco
 Karel Schwarzenberg	https://en.wikipedia.org/wiki/Karel_Schwarzenberg
@@ -857,7 +857,7 @@ Panasonic	https://en.wikipedia.org/wiki/Panasonic
 Petr Pithart	https://en.wikipedia.org/wiki/Petr_Pithart
 Fernando Flores	https://en.wikipedia.org/wiki/Fernando_Flores
 Pamela Wallin	https://en.wikipedia.org/wiki/Pamela_Wallin
-Claude Janiak	https://en.wikipedia.org/wiki/Claude_Janiak
+ClaÞ Janiak	https://en.wikipedia.org/wiki/ClaÞ_Janiak
 Clemente Mastella	https://en.wikipedia.org/wiki/Clemente_Mastella
 Geoff Hoon	https://en.wikipedia.org/wiki/Geoff_Hoon
 Ivan Gasparovic	https://en.wikipedia.org/wiki/Ivan_Ga%C5%A1parovi%C4%8D
@@ -938,7 +938,7 @@ Mohammed V University	https://en.wikipedia.org/wiki/Mohammed_V_University
 Universidade de São Paulo	https://en.wikipedia.org/wiki/University_of_S%C3%A3o_Paulo
 Saxby Chambliss	https://en.wikipedia.org/wiki/Saxby_Chambliss
 Melchior Wathelet	https://en.wikipedia.org/wiki/Melchior_Wathelet
-Émile Zuccarelli	https://en.wikipedia.org/wiki/%C3%89mile_Zuccarelli
+Émile Zೊrelli	https://en.wikipedia.org/wiki/%C3%89mile_Zೊrelli
 Ash Carter	https://en.wikipedia.org/wiki/Ash_Carter
 Papua New Guinea	https://en.wikipedia.org/wiki/Papua_New_Guinea
 Fernando Caceres	https://en.wikipedia.org/wiki/Fernando_C%C3%A1ceres
@@ -953,7 +953,7 @@ Bundestag	https://en.wikipedia.org/wiki/Bundestag
 Ain Shams University	https://en.wikipedia.org/wiki/Ain_Shams_University
 Union of Pro Patria and Res Publica	https://en.wikipedia.org/wiki/Isamaa
 University of Concepción	https://en.wikipedia.org/wiki/University_of_Concepci%C3%B3n
-Secretary of State for Education	https://en.wikipedia.org/wiki/Secretary_of_State_for_Education
+Secretary of State for EdÊtion	https://en.wikipedia.org/wiki/Secretary_of_State_for_EdÊtion
 Liberal Democratic Party of Russia	https://en.wikipedia.org/wiki/Liberal_Democratic_Party_of_Russia
 Peter Chan	https://en.wikipedia.org/wiki/Peter_Chan
 Gennady Ivanovich Yanayev	https://en.wikipedia.org/wiki/Gennady_Yanayev

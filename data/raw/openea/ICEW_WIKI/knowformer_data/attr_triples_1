@@ -128,7 +128,7 @@
 127	has_name	Royal Administration (Saudi Arabia)
 128	has_name	Foreign Affairs (North Korea)
 129	has_name	Defense / Security Ministry (United States)
-130	has_name	Government (Sudan)
+130	has_name	Government (SÚn)
 131	has_name	Citizen (International)
 132	has_name	Military (Afghanistan)
 133	has_name	Foreign Affairs (India)
@@ -247,12 +247,12 @@
 246	has_name	World Food Program
 247	has_name	G7
 248	has_name	Armed Gang (Palestinian Territory, Occupied)
-249	has_name	Head of Government (Sudan)
+249	has_name	Head of Government (SÚn)
 250	has_name	Xinhua
 251	has_name	Mohammad Najib Abdul Razak
 252	has_name	Government (Philippines)
 253	has_name	Business (Russia)
-254	has_name	Citizen (Sudan)
+254	has_name	Citizen (SÚn)
 255	has_name	Ministry (Australia)
 256	has_name	Jia Qinglin
 257	has_name	Government (Thailand)
@@ -269,7 +269,7 @@
 268	has_name	Democratic Progressive Party
 269	has_name	Y. Sinha
 270	has_name	Police (Indonesia)
-271	has_name	Citizen (Cuba)
+271	has_name	Citizen (Cº)
 272	has_name	Head of Government (Afghanistan)
 273	has_name	Party Member (India)
 274	has_name	Iyad Allawi
@@ -290,7 +290,7 @@
 289	has_name	Laurent Kabila
 290	has_name	Citizen (Somalia)
 291	has_name	Police (Israel)
-292	has_name	Fouad Siniora
+292	has_name	Fo­ Siniora
 293	has_name	Other Authorities / Officials (United States)
 294	has_name	Haider Al-Abadi
 295	has_name	Citizen (Ireland)
@@ -398,7 +398,7 @@
 397	has_name	Media Personnel (International)
 398	has_name	Legislature (Russia)
 399	has_name	Hoshyar Zebari
-400	has_name	Student (India)
+400	has_name	StÞnt (India)
 401	has_name	Government (Greece)
 402	has_name	Foreign Affairs (Afghanistan)
 403	has_name	Farm Worker (India)
@@ -417,7 +417,7 @@
 416	has_name	Daniel Arap Moi
 417	has_name	Citizen (Algeria)
 418	has_name	Head of Government (Portugal)
-419	has_name	Foreign Affairs (Sudan)
+419	has_name	Foreign Affairs (SÚn)
 420	has_name	Head of Government (Croatia)
 421	has_name	Citizen (Bosnia and Herzegovina)
 422	has_name	Kim Kye Gwan
@@ -460,7 +460,7 @@
 459	has_name	Ministry (Canada)
 460	has_name	Head of Government (Latvia)
 461	has_name	Mwai Kibaki
-462	has_name	Foreign Affairs (Cuba)
+462	has_name	Foreign Affairs (Cº)
 463	has_name	Governor (Russia)
 464	has_name	Citizen (Liberia)
 465	has_name	Media (Russia)
@@ -470,7 +470,7 @@
 469	has_name	Wu Yi
 470	has_name	Police (Palestinian Territory, Occupied)
 471	has_name	William Perry
-472	has_name	Sudanese Armed Forces
+472	has_name	SÚnese Armed Forces
 473	has_name	Police (South Africa)
 474	has_name	Ministry (Israel)
 475	has_name	Sartaj Aziz
@@ -609,7 +609,7 @@
 608	has_name	Women (India)
 609	has_name	Militant (Iraq)
 610	has_name	Houthis
-611	has_name	Education (India)
+611	has_name	EdÊtion (India)
 612	has_name	Head of Government (Czech Republic)
 613	has_name	Alassane Ouattara
 614	has_name	Boris Trajkovski
@@ -640,7 +640,7 @@
 639	has_name	Chandrika Kumaratunga
 640	has_name	Valentina Ivanovna Matviyenko
 641	has_name	Domestic Affairs (India)
-642	has_name	Government (Cuba)
+642	has_name	Government (Cº)
 643	has_name	Women (Australia)
 644	has_name	Citizen (Morocco)
 645	has_name	Nitish Kumar
@@ -719,7 +719,7 @@
 718	has_name	Prime Minister bin Ibrahim
 719	has_name	Police (Egypt)
 720	has_name	Central Bureau of Investigation
-721	has_name	Jiri Paroubek
+721	has_name	Jiri Paro¾k
 722	has_name	Party Member (United States)
 723	has_name	Businessperson (Russia)
 724	has_name	Media Personnel (Turkey)
@@ -741,7 +741,7 @@
 740	has_name	Representatives (United States)
 741	has_name	Governor (Nigeria)
 742	has_name	Insurgent (Afghanistan)
-743	has_name	Sher Bahadur Deuba
+743	has_name	Sher Bahadur Deº
 744	has_name	Citizen (Bolivia)
 745	has_name	Ali Osman Taha
 746	has_name	Macky Sall
@@ -751,11 +751,11 @@
 750	has_name	Surakiart Sathirathai
 751	has_name	George Yeo
 752	has_name	Political Parties (India)
-753	has_name	Armed Rebel (Sudan)
+753	has_name	Armed Rebel (SÚn)
 754	has_name	Men (China)
 755	has_name	Citizen (Chad)
 756	has_name	The Liberal Democratic Party of Japan
-757	has_name	Uddhav Thackeray
+757	has_name	Ýhav Thackeray
 758	has_name	Polisario Front
 759	has_name	Benjamin William Mkapa
 760	has_name	Citizen (Tajikistan)
@@ -780,7 +780,7 @@
 779	has_name	Business (South Korea)
 780	has_name	Defense / Security Ministry (China)
 781	has_name	Head of Government (Africa)
-782	has_name	Ministry (Sudan)
+782	has_name	Ministry (SÚn)
 783	has_name	Lee Hoi Chang
 784	has_name	Lawyer/Attorney (France)
 785	has_name	Ministry (Palestinian Territory, Occupied)
@@ -839,22 +839,22 @@
 838	has_name	Media Personnel (Afghanistan)
 839	has_name	United Nations Development Programme
 840	has_name	Edward Nalbandyan
-841	has_name	Philip Ruddock
+841	has_name	Philip RÝock
 842	has_name	Sam Nujoma
 843	has_name	Government (Hong Kong)
 844	has_name	Lim Dong Won
 845	has_name	Government (North Korea)
 846	has_name	Police (Iran)
-847	has_name	Burhanuddin Rabbani
+847	has_name	BurhanÝin Rabbani
 848	has_name	Media Personnel (South Africa)
 849	has_name	Ali Shamkhani
 850	has_name	Militant (Al Qaeda)
 851	has_name	Zhang Dejiang
 852	has_name	Ilya Iosifovich Klebanov
-853	has_name	Citizen (Ecuador)
+853	has_name	Citizen (Ec­or)
 854	has_name	Police (South Korea)
 855	has_name	Saulius Skvernelis
-856	has_name	Head of Government (Cuba)
+856	has_name	Head of Government (Cº)
 857	has_name	Combatant (Syria)
 858	has_name	David Levy
 859	has_name	A.K. Antony
@@ -888,7 +888,7 @@
 887	has_name	Citizen (Sri Lanka)
 888	has_name	Prachanda
 889	has_name	Children (Australia)
-890	has_name	Nasser Judeh
+890	has_name	Nasser JÞh
 891	has_name	Media Personnel (Iraq)
 892	has_name	Guerrilla (Revolutionary Armed Forces of Colombia)
 893	has_name	Uri Party
@@ -962,11 +962,11 @@
 961	has_name	Police (Czech Republic)
 962	has_name	Other Authorities / Officials (Iran)
 963	has_name	Aigars Kalvitis
-964	has_name	Adel al-Jubeir
+964	has_name	Adel al-J¾ir
 965	has_name	László Kovács
 966	has_name	Foreign Affairs (Kuwait)
 967	has_name	Other Authorities / Officials (Georgia)
-968	has_name	Frederick Chiluba
+968	has_name	Frederick Chilº
 969	has_name	Government (Nepal)
 970	has_name	Devlet Bahçeli
 971	has_name	Lawyer/Attorney (Australia)
@@ -985,7 +985,7 @@
 984	has_name	Royal Administration (Bahrain)
 985	has_name	Foreign Affairs (Taiwan)
 986	has_name	Citizen (Haiti)
-987	has_name	Bacharuddin Habibie
+987	has_name	BacharÝin Habibie
 988	has_name	Head of Government (Chile)
 989	has_name	Maris Kucinskis
 990	has_name	Media Personnel (Japan)
@@ -1023,7 +1023,7 @@
 1022	has_name	Ján Kubis
 1023	has_name	Government (Hungary)
 1024	has_name	Intergovernmental Authority on Development
-1025	has_name	Armed Separatist (Sudan)
+1025	has_name	Armed Separatist (SÚn)
 1026	has_name	Head of Government (Kosovo)
 1027	has_name	Newspaper (United Kingdom)
 1028	has_name	Wayne Swan
@@ -1060,7 +1060,7 @@
 1059	has_name	Media Personnel (South Korea)
 1060	has_name	Jacinda Ardern
 1061	has_name	Palestinian Legislative Council
-1062	has_name	Armando Guebuza
+1062	has_name	Armando Gëuza
 1063	has_name	Foreign Affairs (United Arab Emirates)
 1064	has_name	Conservative Party (United Kingdom)
 1065	has_name	United Progressive Alliance
@@ -1074,7 +1074,7 @@
 1073	has_name	Jorge Enrique Taiana
 1074	has_name	Priyanka Gandhi
 1075	has_name	Men (France)
-1076	has_name	Head of Government (Ecuador)
+1076	has_name	Head of Government (Ec­or)
 1077	has_name	Party Member (Argentina)
 1078	has_name	Wang Jin Pyng
 1079	has_name	Treasury/Finance Ministry (Greece)
@@ -1086,7 +1086,7 @@
 1085	has_name	Hina Rabbani Khar
 1086	has_name	Criminal (Australia)
 1087	has_name	Combatant (International)
-1088	has_name	Nabil Abu-Rudaynah
+1088	has_name	Nabil Abu-RÚynah
 1089	has_name	Ministry (Syria)
 1090	has_name	Men (Germany)
 1091	has_name	Governor (United States)
@@ -1156,7 +1156,7 @@
 1155	has_name	Spanish Armed Forces
 1156	has_name	Military (Palestinian Territory, Occupied)
 1157	has_name	Iraqi Governing Council
-1158	has_name	Student (China)
+1158	has_name	StÞnt (China)
 1159	has_name	Leonel Fernández
 1160	has_name	Government (Singapore)
 1161	has_name	Ilir Meta
@@ -1180,7 +1180,7 @@
 1179	has_name	Police (Greece)
 1180	has_name	Head of Government (Ireland)
 1181	has_name	Dimitrios Avramopoulos
-1182	has_name	Dissident (Cuba)
+1182	has_name	Dissident (Cº)
 1183	has_name	Akhmad Zavgayev
 1184	has_name	Head of Government (Moldova)
 1185	has_name	Cabinet / Council of Ministers / Advisors (Ukraine)
@@ -1384,7 +1384,7 @@
 1383	has_name	Representatives (Slovakia)
 1384	has_name	Immigrants (Africa)
 1385	has_name	Police (Uganda)
-1386	has_name	Foreign Affairs (Ecuador)
+1386	has_name	Foreign Affairs (Ec­or)
 1387	has_name	House of Representatives (Japan)
 1388	has_name	Reporters Without Borders
 1389	has_name	Muslim (India)
@@ -1424,11 +1424,11 @@
 1423	has_name	Economic Cooperation Organization
 1424	has_name	Court Judge (United Kingdom)
 1425	has_name	Free Aceh Movement
-1426	has_name	Student (United States)
+1426	has_name	StÞnt (United States)
 1427	has_name	Government (Lithuania)
 1428	has_name	Anayibe Rojas Valderrama
 1429	has_name	Legislature (Italy)
-1430	has_name	Hassan Wirayuda
+1430	has_name	Hassan WirayÚ
 1431	has_name	Vasundhara Raje
 1432	has_name	Shivraj Singh Chouhan
 1433	has_name	Manohar Lal Khattar
@@ -1445,7 +1445,7 @@
 1444	has_name	Citizen (Namibia)
 1445	has_name	Presidential Press Service (Russia)
 1446	has_name	John Reid
-1447	has_name	Education Ministry (India)
+1447	has_name	EdÊtion Ministry (India)
 1448	has_name	Financial Times
 1449	has_name	Government (Bolivia)
 1450	has_name	Governor (Thailand)
@@ -1527,12 +1527,12 @@
 1526	has_name	Combatant (Iraq)
 1527	has_name	Sean McCormack
 1528	has_name	Enrique Bolaños
-1529	has_name	Education (Australia)
+1529	has_name	EdÊtion (Australia)
 1530	has_name	Bo Xilai
 1531	has_name	Governor (Turkey)
 1532	has_name	Yasushi Akashi
 1533	has_name	Mohamed Ould Abdel Aziz
-1534	has_name	Student (Russia)
+1534	has_name	StÞnt (Russia)
 1535	has_name	Scotland Yard
 1536	has_name	Head of Government (Nepal)
 1537	has_name	Alberto Romulo
@@ -1543,7 +1543,7 @@
 1542	has_name	Armed Forces of the Democratic Republic of Congo
 1543	has_name	Media Personnel (Ukraine)
 1544	has_name	European Investment Bank
-1545	has_name	Government (Ecuador)
+1545	has_name	Government (Ec­or)
 1546	has_name	Air Force (Israel)
 1547	has_name	Hilmi Özkök
 1548	has_name	Media Personnel (Egypt)
@@ -1569,11 +1569,11 @@
 1568	has_name	Activist (Russia)
 1569	has_name	Businessperson (United Kingdom)
 1570	has_name	Pandeli Majko
-1571	has_name	Ibrahim Boubacar Keïta
+1571	has_name	Ibrahim Bo뫊r Keïta
 1572	has_name	Ministry (Latvia)
 1573	has_name	Media (Turkey)
 1574	has_name	Men (Iraq)
-1575	has_name	Student (Indonesia)
+1575	has_name	StÞnt (Indonesia)
 1576	has_name	Government (Democratic Republic of Congo)
 1577	has_name	Government (Rwanda)
 1578	has_name	Militant (Hezbollah)
@@ -1593,7 +1593,7 @@
 1592	has_name	Ricardo Martinelli
 1593	has_name	Mehdi Karrubi
 1594	has_name	Head of Government (Denmark)
-1595	has_name	Student (Iran)
+1595	has_name	StÞnt (Iran)
 1596	has_name	Lawyer/Attorney (Japan)
 1597	has_name	Other Authorities / Officials (Germany)
 1598	has_name	Department of the Treasury
@@ -1645,7 +1645,7 @@
 1644	has_name	Air Force (United States)
 1645	has_name	Le Kha Phieu
 1646	has_name	Military Personnel - Special (Egypt)
-1647	has_name	Other Authorities / Officials (Sudan)
+1647	has_name	Other Authorities / Officials (SÚn)
 1648	has_name	Lawyer/Attorney (Serbia)
 1649	has_name	Guerrilla (Lebanon)
 1650	has_name	Police (Belgium)
@@ -1676,7 +1676,7 @@
 1675	has_name	Zhang Gaoli
 1676	has_name	Finance / Economy / Commerce / Trade Ministry (South Korea)
 1677	has_name	Shyam Saran
-1678	has_name	Rebel Group (Sudan)
+1678	has_name	Rebel Group (SÚn)
 1679	has_name	Foreign Affairs (Ethiopia)
 1680	has_name	Government (Armenia)
 1681	has_name	James Michel
@@ -1695,7 +1695,7 @@
 1694	has_name	Head of Government (Tanzania)
 1695	has_name	Head of Government (Sweden)
 1696	has_name	Armed Rebel (Turkish Kurds)
-1697	has_name	Sudan Liberation Movement
+1697	has_name	SÚn Liberation Movement
 1698	has_name	Government (Kuwait)
 1699	has_name	Other Authorities / Officials (Spain)
 1700	has_name	Cui Tiankai
@@ -1780,9 +1780,9 @@
 1779	has_name	Tehrik-i-Taliban Pakistan
 1780	has_name	Protester (Australia)
 1781	has_name	Party Member (South Korea)
-1782	has_name	Education (Russia)
+1782	has_name	EdÊtion (Russia)
 1783	has_name	Rupiah Banda
-1784	has_name	Education (China)
+1784	has_name	EdÊtion (China)
 1785	has_name	Manish Sisodia
 1786	has_name	Legislature (Palestinian Territory, Occupied)
 1787	has_name	Foreign Affairs (Oman)
@@ -1804,7 +1804,7 @@
 1803	has_name	Media Personnel (Belgium)
 1804	has_name	Momcilo Krajisnik
 1805	has_name	Lawyer/Attorney (Indonesia)
-1806	has_name	Sudan People's Liberation Movement
+1806	has_name	SÚn People's Liberation Movement
 1807	has_name	Bank (China)
 1808	has_name	Other Authorities / Officials (Taiwan)
 1809	has_name	Head of Government (Macedonia)
@@ -1851,7 +1851,7 @@
 1850	has_name	Businessperson (Germany)
 1851	has_name	Refugee (Iraq)
 1852	has_name	Party Member (Lebanon)
-1853	has_name	Other Authorities / Officials (Cuba)
+1853	has_name	Other Authorities / Officials (Cº)
 1854	has_name	Men (Saudi Arabia)
 1855	has_name	John Dramani Mahama
 1856	has_name	Anthony James Leon
@@ -1929,7 +1929,7 @@
 1928	has_name	Media Personnel (Canada)
 1929	has_name	Joint Chiefs of Staff (United States)
 1930	has_name	Representatives (Czech Republic)
-1931	has_name	Refugee (Sudan)
+1931	has_name	Refugee (SÚn)
 1932	has_name	Jason C. Hu
 1933	has_name	Ministry (Venezuela)
 1934	has_name	Alfonso Portillo Cabrera
@@ -1961,10 +1961,10 @@
 1960	has_name	Lawyer/Attorney (South Africa)
 1961	has_name	Protester (Iraq)
 1962	has_name	Government Official (Greece)
-1963	has_name	Deputy Prime Minister Suthep Thaugsuban
+1963	has_name	Deputy Prime Minister Suthep Thaugsºn
 1964	has_name	Eric Solheim
 1965	has_name	L.P. Yadav
-1966	has_name	Government (South Sudan)
+1966	has_name	Government (South SÚn)
 1967	has_name	Citizen (Costa Rica)
 1968	has_name	Foreign Affairs (Slovenia)
 1969	has_name	Cabinet / Council of Ministers / Advisors (Germany)
@@ -2166,11 +2166,11 @@
 2165	has_name	Legislature (Mexico)
 2166	has_name	Pál Csáky
 2167	has_name	Head of Government (Norway)
-2168	has_name	Dr. Iajuddin Ahmed
+2168	has_name	Dr. IajÝin Ahmed
 2169	has_name	Abdelmadjid Tebboune
 2170	has_name	National League for Democracy
 2171	has_name	Men (Lebanon)
-2172	has_name	Detainee (Cuba)
+2172	has_name	Detainee (Cº)
 2173	has_name	Head of Government (Bahrain)
 2174	has_name	Royal Administration (Malaysia)
 2175	has_name	Anton Rop
@@ -2206,10 +2206,10 @@
 2205	has_name	Ministry (United Arab Emirates)
 2206	has_name	Head of Government (Bosnia and Herzegovina)
 2207	has_name	Ricardo Maduro
-2208	has_name	Ljubco Georgievski
+2208	has_name	Lj¼o Georgievski
 2209	has_name	Insurgent (Thailand)
 2210	has_name	Head of Government (Montenegro)
-2211	has_name	Fatou Bensouda
+2211	has_name	Fatou BensoÚ
 2212	has_name	Federal Electoral Institute
 2213	has_name	Robert James Brown
 2214	has_name	Other Authorities / Officials (Lebanon)
@@ -2233,7 +2233,7 @@
 2232	has_name	Villager (India)
 2233	has_name	NTV
 2234	has_name	Activist (United States)
-2235	has_name	Citizen (South Sudan)
+2235	has_name	Citizen (South SÚn)
 2236	has_name	Han Myung Sook
 2237	has_name	Activist (Syria)
 2238	has_name	Samir Geagea
@@ -2272,7 +2272,7 @@
 2271	has_name	Government (Austria)
 2272	has_name	Social Democratic Party (Romania)
 2273	has_name	Congress (Peru)
-2274	has_name	Sudan People's Liberation Army
+2274	has_name	SÚn People's Liberation Army
 2275	has_name	Citizen (El Salvador)
 2276	has_name	Criminal (Spain)
 2277	has_name	Government (Algeria)
@@ -2280,7 +2280,7 @@
 2279	has_name	Military Personnel (Bosnia and Herzegovina)
 2280	has_name	Militant (Somalia)
 2281	has_name	Protester (China)
-2282	has_name	Militia (Sudan)
+2282	has_name	Militia (SÚn)
 2283	has_name	Media (Australia)
 2284	has_name	Chen Chien-Jen
 2285	has_name	Military Personnel (North Korea)
@@ -2324,7 +2324,7 @@
 2323	has_name	Government (Cote d'Ivoire)
 2324	has_name	Other Authorities / Officials (Argentina)
 2325	has_name	Zlatko Lagumdzija
-2326	has_name	Education (United States)
+2326	has_name	EdÊtion (United States)
 2327	has_name	The Rio Group
 2328	has_name	Citizen (Gambia)
 2329	has_name	Carlos Miguel Gutiérrez
@@ -2333,7 +2333,7 @@
 2332	has_name	Head of Government (Guatemala)
 2333	has_name	Employee (Philippines)
 2334	has_name	Defense / Security Ministry (Poland)
-2335	has_name	Atiku Abubakar
+2335	has_name	Atiku Abºkar
 2336	has_name	Representatives (Germany)
 2337	has_name	East African Community
 2338	has_name	Luís Filipe Marques Amado
@@ -2342,11 +2342,11 @@
 2341	has_name	Aircraft Carrier (United States)
 2342	has_name	Lawyer/Attorney (China)
 2343	has_name	Member of the Judiciary (Russia)
-2344	has_name	Student (Australia)
+2344	has_name	StÞnt (Australia)
 2345	has_name	Media Personnel (New Zealand)
 2346	has_name	Randeep Surjewala
 2347	has_name	Pramod Mahajan
-2348	has_name	Jamil Mahuad
+2348	has_name	Jamil Mah­
 2349	has_name	Scholar (China)
 2350	has_name	Association for Relations Across the Taiwan Straits
 2351	has_name	Legislature (Canada)
@@ -2361,7 +2361,7 @@
 2360	has_name	Soe Win
 2361	has_name	Militia (Afghanistan)
 2362	has_name	Abel Pacheco De La Espriella
-2363	has_name	Kanat Saudabayev
+2363	has_name	Kanat Sayev
 2364	has_name	Armed Gang (Syria)
 2365	has_name	Barry O'Farrell
 2366	has_name	Baron Ashdown
@@ -2372,10 +2372,10 @@
 2371	has_name	Military Personnel (Serbia)
 2372	has_name	Zoran Zivkovic
 2373	has_name	Robert S. Gelbard
-2374	has_name	Paulo Guedes
+2374	has_name	Paulo Gໞs
 2375	has_name	Government (Tajikistan)
 2376	has_name	Military Personnel (Syria)
-2377	has_name	Education (United Kingdom)
+2377	has_name	EdÊtion (United Kingdom)
 2378	has_name	John Anderson
 2379	has_name	Tourist (United States)
 2380	has_name	Dragan Covic
@@ -2421,7 +2421,7 @@
 2420	has_name	Protester (Lebanon)
 2421	has_name	Mehdi Jomaa
 2422	has_name	Nasser Bourita
-2423	has_name	Military (South Sudan)
+2423	has_name	Military (South SÚn)
 2424	has_name	Banharn Silpa-archa
 2425	has_name	Annastacia Palaszczuk
 2426	has_name	Chen Zhili
@@ -2430,7 +2430,7 @@
 2429	has_name	Government Official (Afghanistan)
 2430	has_name	Lawyer/Attorney (Canada)
 2431	has_name	Cristian Diaconescu
-2432	has_name	Medical Personnel (Cuba)
+2432	has_name	Medical Personnel (Cº)
 2433	has_name	Indigenous People (Iran)
 2434	has_name	Envoy (Pakistan)
 2435	has_name	Presidential Aide (Russia)
@@ -2448,7 +2448,7 @@
 2447	has_name	Member of Legislative (Govt) (Turkey)
 2448	has_name	Protester (Indonesia)
 2449	has_name	Sharif Sheikh Ahmed
-2450	has_name	Hishamuddin Hussein
+2450	has_name	HishamÝin Hussein
 2451	has_name	Senate (Italy)
 2452	has_name	Court Judge (Australia)
 2453	has_name	City Mayor (Israel)
@@ -2480,7 +2480,7 @@
 2479	has_name	Defense / Security Ministry (Australia)
 2480	has_name	Police (Latvia)
 2481	has_name	Shotaro Yachi
-2482	has_name	Ministry (Cuba)
+2482	has_name	Ministry (Cº)
 2483	has_name	Other Authorities / Officials (Switzerland)
 2484	has_name	Health Ministry (Palestinian Territory, Occupied)
 2485	has_name	Tourist (Japan)
@@ -2497,7 +2497,7 @@
 2496	has_name	Foreign Affairs (Somalia)
 2497	has_name	Roberto Micheletti
 2498	has_name	Member of Legislative (Govt) (South Korea)
-2499	has_name	Police (Sudan)
+2499	has_name	Police (SÚn)
 2500	has_name	Media (Ukraine)
 2501	has_name	Military (Latvia)
 2502	has_name	Other Authorities / Officials (Croatia)
@@ -2521,7 +2521,7 @@
 2520	has_name	Mick Keelty
 2521	has_name	Mohamed Ghannouchi
 2522	has_name	Foreign Affairs (Zimbabwe)
-2523	has_name	Gulbuddin Hekmatyar
+2523	has_name	GulbÝin Hekmatyar
 2524	has_name	Thief (India)
 2525	has_name	Government (Zambia)
 2526	has_name	Citizen (Guinea)
@@ -2538,14 +2538,14 @@
 2537	has_name	Other Authorities / Officials (Azerbaijan)
 2538	has_name	Women (Japan)
 2539	has_name	Oqil Oqilov
-2540	has_name	Media Personnel (Sudan)
+2540	has_name	Media Personnel (SÚn)
 2541	has_name	Muhammad Dahlan
 2542	has_name	Abdul Hamid
 2543	has_name	Government (Nicaragua)
 2544	has_name	Representatives (Japan)
 2545	has_name	Lawyer/Attorney (Taiwan)
 2546	has_name	Domestic Affairs (Egypt)
-2547	has_name	UAE Armed Forces
+2547	has_name	® Armed Forces
 2548	has_name	Criminal (Japan)
 2549	has_name	Lower House of Parliament (Russia)
 2550	has_name	James Morris
@@ -2628,7 +2628,7 @@
 2627	has_name	Main Opposition (Pakistan)
 2628	has_name	Moaz al-Khatib
 2629	has_name	Jan Fischer
-2630	has_name	Government Official (Sudan)
+2630	has_name	Government Official (SÚn)
 2631	has_name	Attorney General (Indonesia)
 2632	has_name	Royal Administration (Denmark)
 2633	has_name	Foreign Affairs (Macedonia)
@@ -2802,7 +2802,7 @@
 2801	has_name	Prakash Javadekar
 2802	has_name	Reserve Personnel (Japan)
 2803	has_name	Pheu Thai Party
-2804	has_name	Student (South Korea)
+2804	has_name	StÞnt (South Korea)
 2805	has_name	Hipolito Mejia
 2806	has_name	Michael Cullen
 2807	has_name	Kenneth Kaunda
@@ -2903,7 +2903,7 @@
 2902	has_name	Main Opposition (Canada)
 2903	has_name	Khmer Rouge
 2904	has_name	Men (Bangladesh)
-2905	has_name	Student (Egypt)
+2905	has_name	StÞnt (Egypt)
 2906	has_name	Han Ducksoo
 2907	has_name	Military Personnel (Ukraine)
 2908	has_name	Ministry (Colombia)
@@ -2912,7 +2912,7 @@
 2911	has_name	Domestic Affairs (Turkey)
 2912	has_name	Congress (Colombia)
 2913	has_name	Citizen (Mongolia)
-2914	has_name	Salahuddin Rabbani
+2914	has_name	SalahÝin Rabbani
 2915	has_name	Newspaper (Iran)
 2916	has_name	Military Personnel - Special (Lebanon)
 2917	has_name	Police (Romania)
@@ -2922,7 +2922,7 @@
 2921	has_name	Businessperson (Italy)
 2922	has_name	Professor (India)
 2923	has_name	Cleric (Iraq)
-2924	has_name	Governor (Sudan)
+2924	has_name	Governor (SÚn)
 2925	has_name	Iraqi National Congress
 2926	has_name	Armed Band (Afghanistan)
 2927	has_name	Wu Den-yih
@@ -2935,7 +2935,7 @@
 2934	has_name	Cabinet / Council of Ministers / Advisors (Latvia)
 2935	has_name	Citizen (Slovenia)
 2936	has_name	Criminal (Bangladesh)
-2937	has_name	Police (Ecuador)
+2937	has_name	Police (Ec­or)
 2938	has_name	Military Personnel (Nigeria)
 2939	has_name	Indigenous People (Turkey)
 2940	has_name	Labor Union (South Africa)
@@ -3100,7 +3100,7 @@
 3099	has_name	Head of Government (Costa Rica)
 3100	has_name	Police (Austria)
 3101	has_name	Head of Government (Latin America)
-3102	has_name	Student (Japan)
+3102	has_name	StÞnt (Japan)
 3103	has_name	Ruling Party (South Korea)
 3104	has_name	Employee (North Korea)
 3105	has_name	Labor Union (Turkey)
@@ -3150,7 +3150,7 @@
 3149	has_name	Media Personnel (Azerbaijan)
 3150	has_name	Peter Reith
 3151	has_name	Tedros Adhanom
-3152	has_name	Raghubar Das
+3152	has_name	Raghºr Das
 3153	has_name	Ömer Izgi
 3154	has_name	National Front (France)
 3155	has_name	Other Authorities / Officials (North Korea)
@@ -3159,8 +3159,8 @@
 3158	has_name	Member of Legislative (Govt) (India)
 3159	has_name	Air Self-Defence Force
 3160	has_name	Roberto Victor de Almeida
-3161	has_name	Immigrants (Cuba)
-3162	has_name	Abdulsalami Alhaji Abubakar
+3161	has_name	Immigrants (Cº)
+3162	has_name	Abdulsalami Alhaji Abºkar
 3163	has_name	Governor General Hollingworth
 3164	has_name	Zacarias Moussaoui
 3165	has_name	Phumzile Mlambo-Ngcuka
@@ -3224,7 +3224,7 @@
 3223	has_name	Hani Al-Mulqi
 3224	has_name	Government (Finland)
 3225	has_name	Main Opposition (Taiwan)
-3226	has_name	Iranian Students News Agency
+3226	has_name	Iranian StÞnts News Agency
 3227	has_name	Zabihollah Mojahed
 3228	has_name	Civic Group (South Korea)
 3229	has_name	Armed Gang (France)
@@ -3323,7 +3323,7 @@
 3322	has_name	Bank (Japan)
 3323	has_name	Military (Vietnam)
 3324	has_name	Military Personnel (Egypt)
-3325	has_name	Protester (Sudan)
+3325	has_name	Protester (SÚn)
 3326	has_name	Government Affiliated Bank (Russia)
 3327	has_name	Michael Chertoff
 3328	has_name	Communist Party (Greece)
@@ -3335,7 +3335,7 @@
 3334	has_name	Tourist (Germany)
 3335	has_name	Miroslav Grebeníček
 3336	has_name	Refugee (Rwanda)
-3337	has_name	Military (Ecuador)
+3337	has_name	Military (Ec­or)
 3338	has_name	Businessperson (Israel)
 3339	has_name	Industrial / Textiles / Mining Ministry (Japan)
 3340	has_name	United Liberation Force of Assam
@@ -3345,7 +3345,7 @@
 3344	has_name	Russian Federal Space Service
 3345	has_name	Head of Government (Sierra Leone)
 3346	has_name	Kemal Kilicdaroglu
-3347	has_name	Moinuddin Haider
+3347	has_name	MoinÝin Haider
 3348	has_name	Qamar Javed Bajwa
 3349	has_name	Activist (Egypt)
 3350	has_name	Assemblies (Pakistan)
@@ -3383,7 +3383,7 @@
 3382	has_name	State Media (Syria)
 3383	has_name	Arab Israelis
 3384	has_name	Austria Press Agency
-3385	has_name	Student (United Kingdom)
+3385	has_name	StÞnt (United Kingdom)
 3386	has_name	Member of the Judiciary (South Africa)
 3387	has_name	Muslim (Thailand)
 3388	has_name	City Mayor (Germany)
@@ -3402,7 +3402,7 @@
 3401	has_name	Scholar (Afghanistan)
 3402	has_name	Agustín Carstens
 3403	has_name	Citizen (Madagascar)
-3404	has_name	Exiles (Cuba)
+3404	has_name	Exiles (Cº)
 3405	has_name	Scientist (United States)
 3406	has_name	Other Authorities / Officials (Canada)
 3407	has_name	Envoy (Norway)
@@ -3416,7 +3416,7 @@
 3415	has_name	City Mayor (Croatia)
 3416	has_name	Ernesto Araújo
 3417	has_name	Commando (United States)
-3418	has_name	Education Ministry (Australia)
+3418	has_name	EdÊtion Ministry (Australia)
 3419	has_name	Men (Taiwan)
 3420	has_name	Legislature (Belgium)
 3421	has_name	Asylum Seeker (North Korea)
@@ -3529,8 +3529,8 @@
 3528	has_name	Protester (South Africa)
 3529	has_name	Business (Croatia)
 3530	has_name	Company - Owner or Operator (Argentina)
-3531	has_name	Student (Palestinian Territory, Occupied)
-3532	has_name	Fakhruddin Ahmed
+3531	has_name	StÞnt (Palestinian Territory, Occupied)
+3532	has_name	FakhrÝin Ahmed
 3533	has_name	Zakir Hasanov
 3534	has_name	Governor (Angola)
 3535	has_name	Party Member (Hungary)
@@ -3538,7 +3538,7 @@
 3537	has_name	Armed Rebel (Lord's Resistance Army)
 3538	has_name	Lulzim Basha
 3539	has_name	Ministry (Portugal)
-3540	has_name	Education (Japan)
+3540	has_name	EdÊtion (Japan)
 3541	has_name	Industry (Russia)
 3542	has_name	Armed Rebel (Cote d'Ivoire)
 3543	has_name	Criminal (Bosnia and Herzegovina)
@@ -3572,7 +3572,7 @@
 3571	has_name	Congress of South African Trade Unions
 3572	has_name	Armed Rebel (Chad)
 3573	has_name	Militia (Yemen)
-3574	has_name	Queen Ranya
+3574	has_name	Qîn Ranya
 3575	has_name	Military Ruler (Pakistan)
 3576	has_name	Nikos Christodoulides
 3577	has_name	Other Authorities / Officials (Tunisia)
@@ -3585,7 +3585,7 @@
 3584	has_name	Criminal (Egypt)
 3585	has_name	Armed Band (Palestinian Territory, Occupied)
 3586	has_name	Businessperson (Canada)
-3587	has_name	Stan Mudenge
+3587	has_name	Stan MÞnge
 3588	has_name	Martín Vizcarra
 3589	has_name	First Nations
 3590	has_name	Justice Department/Ministery (Brazil)
@@ -3620,7 +3620,7 @@
 3619	has_name	Refugee (Serbia)
 3620	has_name	People Associated with the Opposition (United Kingdom)
 3621	has_name	Do Muoi
-3622	has_name	Shahabuddin Ahmed
+3622	has_name	ShahabÝin Ahmed
 3623	has_name	Vladimír Vetchý
 3624	has_name	Defense / Security Ministry (Czech Republic)
 3625	has_name	Criminal (Italy)
@@ -3709,7 +3709,7 @@
 3708	has_name	Men (Yemen)
 3709	has_name	Head of Government (Djibouti)
 3710	has_name	Presidential Candidate (United States)
-3711	has_name	Kresimir Zubak
+3711	has_name	Kresimir Zºk
 3712	has_name	Fawzi Salloukh
 3713	has_name	Head of Government (Saudi Arabia)
 3714	has_name	Government Official (Mexico)
@@ -3733,7 +3733,7 @@
 3732	has_name	Media (Egypt)
 3733	has_name	Thief (Argentina)
 3734	has_name	Militant (Boko Haram)
-3735	has_name	Ministry (Ecuador)
+3735	has_name	Ministry (Ec­or)
 3736	has_name	Government (Papua New Guinea)
 3737	has_name	Jung Hong-won
 3738	has_name	Drug Gang (Colombia)
@@ -3787,7 +3787,7 @@
 3786	has_name	Information / Communication / Transparency Ministry (Australia)
 3787	has_name	Government (Malawi)
 3788	has_name	Armed Rebel (Mali)
-3789	has_name	Student (Israel)
+3789	has_name	StÞnt (Israel)
 3790	has_name	Newspaper (Italy)
 3791	has_name	High Ranking Military Personnel (Afghanistan)
 3792	has_name	Tien Hung Mao
@@ -3844,7 +3844,7 @@
 3843	has_name	Militant (Ukraine)
 3844	has_name	City Mayor (South Africa)
 3845	has_name	Armed Band (Libya)
-3846	has_name	Refugee (South Sudan)
+3846	has_name	Refugee (South SÚn)
 3847	has_name	Domestic Affairs (Thailand)
 3848	has_name	Deng Alor Kuol
 3849	has_name	Swiss Federal Council
@@ -3879,7 +3879,7 @@
 3878	has_name	Anthony Garotinho
 3879	has_name	Francisco de Narvaez Steuer
 3880	has_name	Broad Front
-3881	has_name	Student (Canada)
+3881	has_name	StÞnt (Canada)
 3882	has_name	Political Parties (United Kingdom)
 3883	has_name	National Security Advisor (Russia)
 3884	has_name	Environment Department/Ministry (India)
@@ -3932,7 +3932,7 @@
 3931	has_name	Head of Government (Namibia)
 3932	has_name	Health Ministry (Turkey)
 3933	has_name	Hambali
-3934	has_name	Congress (Ecuador)
+3934	has_name	Congress (Ec­or)
 3935	has_name	Abdul Mannan Bhuiyan
 3936	has_name	Karel Kühnl
 3937	has_name	Guillermo Lasso
@@ -3965,7 +3965,7 @@
 3964	has_name	Chris Evans
 3965	has_name	Alejandro Encinas Rodríguez
 3966	has_name	Protester (Greece)
-3967	has_name	Student (France)
+3967	has_name	StÞnt (France)
 3968	has_name	Senate (Thailand)
 3969	has_name	Opposition Supporter (Pakistan)
 3970	has_name	Ruling Party (Zimbabwe)
@@ -4015,7 +4015,7 @@
 4014	has_name	House of Representatives (Nigeria)
 4015	has_name	Detainee (United States)
 4016	has_name	Protester (Argentina)
-4017	has_name	Student (Thailand)
+4017	has_name	StÞnt (Thailand)
 4018	has_name	Hindustan Times
 4019	has_name	Medical Personnel (Germany)
 4020	has_name	Ministry (Rwanda)
@@ -4034,7 +4034,7 @@
 4033	has_name	Indigenous People (Thailand)
 4034	has_name	Lawyer/Attorney (Switzerland)
 4035	has_name	Main Opposition (Greece)
-4036	has_name	Student (South Africa)
+4036	has_name	StÞnt (South Africa)
 4037	has_name	Businessperson (Philippines)
 4038	has_name	Mukhtar Altynbayev
 4039	has_name	Atis Slakteris
@@ -4058,7 +4058,7 @@
 4057	has_name	Hwang Joon-kook
 4058	has_name	Marija Pejcinovic Buric
 4059	has_name	Ludovic Orban
-4060	has_name	Head of Government (South Sudan)
+4060	has_name	Head of Government (South SÚn)
 4061	has_name	Criminal (Uganda)
 4062	has_name	Special Court (India)
 4063	has_name	Business (Egypt)
@@ -4112,7 +4112,7 @@
 4111	has_name	Joshua Wong
 4112	has_name	Ante Jelavic
 4113	has_name	Albin Kurti
-4114	has_name	Student (Brazil)
+4114	has_name	StÞnt (Brazil)
 4115	has_name	Employee (Japan)
 4116	has_name	British Airways
 4117	has_name	Ministry (Cyprus)
@@ -4171,20 +4171,20 @@
 4170	has_name	Activist (Pakistan)
 4171	has_name	Domestic Affairs (Saudi Arabia)
 4172	has_name	Media (Afghanistan)
-4173	has_name	Armed Rebel (South Sudan)
+4173	has_name	Armed Rebel (South SÚn)
 4174	has_name	Turkish Industrialists' and Businessmen's Association
 4175	has_name	Armed Rebel (Tamil Tigers)
 4176	has_name	Party of the Democratic Left
 4177	has_name	Percival J. Patterson
 4178	has_name	Lino César Oviedo Silva
-4179	has_name	Jan Bubenik
+4179	has_name	Jan B¾nik
 4180	has_name	Indigenous People (Saudi Arabia)
 4181	has_name	Cabinet / Council of Ministers / Advisors (China)
 4182	has_name	Attacker (Nigeria)
 4183	has_name	Party President (Russia)
 4184	has_name	Fighter Bomber (Turkey)
 4185	has_name	Ministry (Ghana)
-4186	has_name	Student (Mexico)
+4186	has_name	StÞnt (Mexico)
 4187	has_name	Justice Department/Ministery (Israel)
 4188	has_name	Juan Gabriel Valdés
 4189	has_name	Tunca Toskay
@@ -4229,7 +4229,7 @@
 4228	has_name	Ján Carnogurský
 4229	has_name	Ajit Singh
 4230	has_name	Public Courts (Croatia)
-4231	has_name	Subcomandante Marcos
+4231	has_name	S¼omandante Marcos
 4232	has_name	Sisavat Keobounphan
 4233	has_name	Nayib Bukele
 4234	has_name	Legislature (Syria)
@@ -4254,7 +4254,7 @@
 4253	has_name	Government Official (Syria)
 4254	has_name	Criminal (Lebanon)
 4255	has_name	Political Parties (Mexico)
-4256	has_name	Representatives (Sudan)
+4256	has_name	Representatives (SÚn)
 4257	has_name	Opposition Activist (Russia)
 4258	has_name	Bank (United States)
 4259	has_name	Representatives (Australia)
@@ -4304,7 +4304,7 @@
 4303	has_name	Selahattin Demirtas
 4304	has_name	Tihomir Oreskovic
 4305	has_name	Military (Denmark)
-4306	has_name	Envoy (Sudan)
+4306	has_name	Envoy (SÚn)
 4307	has_name	Foreign Affairs (Ghana)
 4308	has_name	Business (Poland)
 4309	has_name	Militant (International)
@@ -4317,7 +4317,7 @@
 4316	has_name	D. Sharma
 4317	has_name	Berislav Rončević
 4318	has_name	Joao Bernardo Vieira
-4319	has_name	Defense / Security Ministry (Sudan)
+4319	has_name	Defense / Security Ministry (SÚn)
 4320	has_name	Barnaba Marial Benjamin
 4321	has_name	Military (Central African Republic)
 4322	has_name	Supreme Council (Iraq)
@@ -4331,9 +4331,9 @@
 4330	has_name	Sanj Bayar
 4331	has_name	Socialist Party
 4332	has_name	Military (Albania)
-4333	has_name	Cabinet / Council of Ministers / Advisors (Sudan)
+4333	has_name	Cabinet / Council of Ministers / Advisors (SÚn)
 4334	has_name	Other Authorities / Officials (Democratic Republic of Congo)
-4335	has_name	Welshman Ncube
+4335	has_name	Welshman Nc¾
 4336	has_name	Government (Maldives)
 4337	has_name	Ministry (Belarus)
 4338	has_name	Ansar al-Islam
@@ -4348,16 +4348,16 @@
 4347	has_name	Indian Navy
 4348	has_name	Mahmoud Vaezi
 4349	has_name	Jadranko Prlić
-4350	has_name	Fuad Hussein
+4350	has_name	F­ Hussein
 4351	has_name	Representatives (Albania)
 4352	has_name	Other Authorities / Officials (Haiti)
 4353	has_name	Lawmaker (Afghanistan)
 4354	has_name	Julio Cobos
-4355	has_name	Faustin Archange Touadera
+4355	has_name	Faustin Archange To૞ra
 4356	has_name	Daniel Fernando Filmus
 4357	has_name	Court Judge (Indonesia)
 4358	has_name	Court Judge (Peru)
-4359	has_name	Student (Venezuela)
+4359	has_name	StÞnt (Venezuela)
 4360	has_name	Andrew Scheer
 4361	has_name	Hong Soonyoung
 4362	has_name	Oleksandr Tkachenko
@@ -4377,7 +4377,7 @@
 4376	has_name	Government Official (Somalia)
 4377	has_name	Armed Rebel (Somalia)
 4378	has_name	Carter Center
-4379	has_name	Education (Pakistan)
+4379	has_name	EdÊtion (Pakistan)
 4380	has_name	Bukola Saraki
 4381	has_name	Shalva Natelashvili
 4382	has_name	Carlos Salinas De Gortari
@@ -4413,9 +4413,9 @@
 4412	has_name	Navy Seals
 4413	has_name	Muslim (Iran)
 4414	has_name	Foreign Affairs (Paraguay)
-4415	has_name	Student (Turkey)
+4415	has_name	StÞnt (Turkey)
 4416	has_name	Governor (Palestinian Territory, Occupied)
-4417	has_name	Communist Party (Cuba)
+4417	has_name	Communist Party (Cº)
 4418	has_name	Lawmaker (Lebanon)
 4419	has_name	Labor Union (Brazil)
 4420	has_name	World Tourism Organization
@@ -4435,7 +4435,7 @@
 4434	has_name	Constitutional Court (Turkey)
 4435	has_name	Indigenous People (Indonesia)
 4436	has_name	Constitutional Court (South Africa)
-4437	has_name	Student (Hong Kong)
+4437	has_name	StÞnt (Hong Kong)
 4438	has_name	Member of Parliament (Uganda)
 4439	has_name	Indigenous People (Iraq)
 4440	has_name	Militant (Chechen)
@@ -4473,7 +4473,7 @@
 4472	has_name	Rabbie Namaliu
 4473	has_name	Silvia Cartwright
 4474	has_name	Hussein Mohammed Farrah
-4475	has_name	Mowaffak Baqer al-Rubaie
+4475	has_name	Mowaffak Baqer al-Rºie
 4476	has_name	David Granger
 4477	has_name	Reinaldo Gargano
 4478	has_name	Legislative Yuan
@@ -4481,7 +4481,7 @@
 4480	has_name	Women (Argentina)
 4481	has_name	Armed Gang (Philippines)
 4482	has_name	Admiral (Russia)
-4483	has_name	Education (France)
+4483	has_name	EdÊtion (France)
 4484	has_name	Regional Governor (Russia)
 4485	has_name	Richard Prosper Pierre
 4486	has_name	Hossein Salami
@@ -4498,7 +4498,7 @@
 4497	has_name	Constitutional Court (Russia)
 4498	has_name	Consultative Assembly (Indonesia)
 4499	has_name	Treasury/Finance Ministry (Poland)
-4500	has_name	Student (Taiwan)
+4500	has_name	StÞnt (Taiwan)
 4501	has_name	Legislature (Portugal)
 4502	has_name	Armed Gang (Kenya)
 4503	has_name	House of Representatives (Philippines)
@@ -4585,7 +4585,7 @@
 4584	has_name	Member of Parliament (Turkey)
 4585	has_name	Oversight Court (Ukraine)
 4586	has_name	Legislature (Slovenia)
-4587	has_name	Police (Cuba)
+4587	has_name	Police (Cº)
 4588	has_name	Domestic Affairs (Syria)
 4589	has_name	Naval (France)
 4590	has_name	Khalid Sheikh Mohammed
@@ -4630,7 +4630,7 @@
 4629	has_name	Military (Honduras)
 4630	has_name	Medical Personnel (Brazil)
 4631	has_name	Lebanese Forces
-4632	has_name	Education (Indonesia)
+4632	has_name	EdÊtion (Indonesia)
 4633	has_name	Donald J. Johnston
 4634	has_name	Member of Parliament (Germany)
 4635	has_name	Democratic Left
@@ -4639,14 +4639,14 @@
 4638	has_name	Main Opposition (Mexico)
 4639	has_name	Afonso Dhlakama
 4640	has_name	Hezbul Mujahedeen
-4641	has_name	Sékouba Konaté
+4641	has_name	Sékoº Konaté
 4642	has_name	Political Parties (South Africa)
 4643	has_name	Finance / Economy / Commerce / Trade Ministry (United Kingdom)
 4644	has_name	Military (Macedonia)
 4645	has_name	Xiao Yang
 4646	has_name	Extremist (Albania)
 4647	has_name	Andrew Robb
-4648	has_name	Fuad Masum
+4648	has_name	F­ Masum
 4649	has_name	Armando Calderón Sol
 4650	has_name	Member of Parliament (Somalia)
 4651	has_name	Patricia de Lille
@@ -4706,7 +4706,7 @@
 4705	has_name	Damir Krsticevic
 4706	has_name	Ben Wallace
 4707	has_name	Khemaies Jhinaoui
-4708	has_name	Military Personnel - Special (Sudan)
+4708	has_name	Military Personnel - Special (SÚn)
 4709	has_name	Kundy Pahiama
 4710	has_name	Political Parties (Bangladesh)
 4711	has_name	Other Authorities / Officials (Kosovo)
@@ -4739,12 +4739,12 @@
 4738	has_name	Xiang Huaicheng
 4739	has_name	Roosevelt Skerrit
 4740	has_name	Envoy (Libya)
-4741	has_name	High Ranking Military Personnel (Sudan)
+4741	has_name	High Ranking Military Personnel (SÚn)
 4742	has_name	Other Authorities / Officials (Kazakhstan)
 4743	has_name	Healthcare Facility (Russia)
 4744	has_name	Sergei Ivanovich Shmatkó
 4745	has_name	Government Affiliated Bank (Australia)
-4746	has_name	Student (Chile)
+4746	has_name	StÞnt (Chile)
 4747	has_name	Other Authorities / Officials (South Africa)
 4748	has_name	Scholar (India)
 4749	has_name	High Ranking Military Personnel (South Korea)
@@ -4753,7 +4753,7 @@
 4752	has_name	Election Commission (Georgia)
 4753	has_name	Royal Administration (Bhutan)
 4754	has_name	Naval (Israel)
-4755	has_name	Education (Turkey)
+4755	has_name	EdÊtion (Turkey)
 4756	has_name	Citizen (Solomon Islands)
 4757	has_name	Military Personnel - Special (Nepal)
 4758	has_name	Unified Energy System
@@ -4768,7 +4768,7 @@
 4767	has_name	Cabinet / Council of Ministers / Advisors (Bulgaria)
 4768	has_name	Lawyer/Attorney (Lebanon)
 4769	has_name	Military Personnel (Mexico)
-4770	has_name	Other Authorities / Officials (Ecuador)
+4770	has_name	Other Authorities / Officials (Ec­or)
 4771	has_name	Member of Legislative (Govt) (Indonesia)
 4772	has_name	Businessperson (Hong Kong)
 4773	has_name	Secret Agent (India)
@@ -4792,7 +4792,7 @@
 4791	has_name	Businessperson (Switzerland)
 4792	has_name	Voltaire Gazmin
 4793	has_name	Member of Legislative (Govt) (Croatia)
-4794	has_name	Men (Sudan)
+4794	has_name	Men (SÚn)
 4795	has_name	Military of Hungary
 4796	has_name	Member of Parliament (Bangladesh)
 4797	has_name	Truth and Reconciliation Commission
@@ -4802,7 +4802,7 @@
 4801	has_name	Government Official (Poland)
 4802	has_name	Khalil Ibrahim
 4803	has_name	Industry (China)
-4804	has_name	Student (Nigeria)
+4804	has_name	StÞnt (Nigeria)
 4805	has_name	Ministry (Myanmar)
 4806	has_name	Employee (Turkey)
 4807	has_name	Member of the Judiciary (Mexico)
@@ -4810,7 +4810,7 @@
 4809	has_name	Head of Government (Guyana)
 4810	has_name	Media Personnel (Ireland)
 4811	has_name	Treasury/Finance Ministry (Brazil)
-4812	has_name	Student (Pakistan)
+4812	has_name	StÞnt (Pakistan)
 4813	has_name	Election Commission (Indonesia)
 4814	has_name	Health Ministry (Japan)
 4815	has_name	Armed Rebel (Indonesia)
@@ -4868,7 +4868,7 @@
 4867	has_name	Other Authorities / Officials (Cambodia)
 4868	has_name	Media (Thailand)
 4869	has_name	Industrial / Textiles / Mining Ministry (Russia)
-4870	has_name	Education (Palestinian Territory, Occupied)
+4870	has_name	EdÊtion (Palestinian Territory, Occupied)
 4871	has_name	Department of Geologic Survey and its Mineral Exploration (India)
 4872	has_name	Protester (Canada)
 4873	has_name	Muslim (United States)
@@ -4932,13 +4932,13 @@
 4931	has_name	Detainee (Afghanistan)
 4932	has_name	Democratic League of Kosovo
 4933	has_name	Senate (Japan)
-4934	has_name	Armed Band (Sudan)
+4934	has_name	Armed Band (SÚn)
 4935	has_name	Legislature (Ireland)
 4936	has_name	Naval (Indonesia)
 4937	has_name	Ali Benflis
 4938	has_name	Bernama
 4939	has_name	Businessperson (Colombia)
-4940	has_name	Gyude Bryant
+4940	has_name	GyÞ Bryant
 4941	has_name	Special Court (Pakistan)
 4942	has_name	Samia Suluhu Hassan
 4943	has_name	Ferenc Somogyi
@@ -4990,10 +4990,10 @@
 4989	has_name	Presidential Candidate (Russia)
 4990	has_name	Peter Obi
 4991	has_name	Raymond Burghardt
-4992	has_name	Education (Israel)
+4992	has_name	EdÊtion (Israel)
 4993	has_name	Party Member (Bangladesh)
 4994	has_name	United Iraqi Alliance
-4995	has_name	Military Personnel (Sudan)
+4995	has_name	Military Personnel (SÚn)
 4996	has_name	Company - Owner or Operator (South Korea)
 4997	has_name	Elvira Sakhipzadovna Nabiullina
 4998	has_name	Heng Samrin
@@ -5020,7 +5020,7 @@
 5019	has_name	Government Official (Ukraine)
 5020	has_name	National Democratic Front
 5021	has_name	Media Personnel (Uganda)
-5022	has_name	Education Ministry (Japan)
+5022	has_name	EdÊtion Ministry (Japan)
 5023	has_name	Central American Integration System
 5024	has_name	Ahmad Zahid Hamidi
 5025	has_name	Ion Diaconescu
@@ -5033,7 +5033,7 @@
 5032	has_name	People Associated with the Opposition (Armenia)
 5033	has_name	Media Personnel (Netherlands)
 5034	has_name	Commonwealth Secretariat
-5035	has_name	Rebel Commander (Sudan)
+5035	has_name	Rebel Commander (SÚn)
 5036	has_name	People Associated with the Opposition (Thailand)
 5037	has_name	Immigrants (Indonesia)
 5038	has_name	Mahmoud Jibril
@@ -5060,7 +5060,7 @@
 5059	has_name	Ombudsman (Philippines)
 5060	has_name	Grand Coalition
 5061	has_name	Media (Taiwan)
-5062	has_name	Education (South Africa)
+5062	has_name	EdÊtion (South Africa)
 5063	has_name	Vladimír Palko
 5064	has_name	Opposition Supporter (Zimbabwe)
 5065	has_name	Norwegian Nobel Committee
@@ -5131,7 +5131,7 @@
 5130	has_name	Immigrants (Bangladesh)
 5131	has_name	Activist (Turkey)
 5132	has_name	Minister Maran
-5133	has_name	Surapong Suebwonglee
+5133	has_name	Surapong Sëwonglee
 5134	has_name	High Commissioner Dixit
 5135	has_name	Alan Carpenter
 5136	has_name	Stef Blok
@@ -5155,13 +5155,13 @@
 5154	has_name	Immigrants (Russia)
 5155	has_name	Armed Band (Somalia)
 5156	has_name	Media Personnel (Latvia)
-5157	has_name	Criminal (Sudan)
+5157	has_name	Criminal (SÚn)
 5158	has_name	Lai Changxing
 5159	has_name	Government Official (Zimbabwe)
 5160	has_name	Conservative Party (Canada)
 5161	has_name	Resistance Movement (Uganda)
 5162	has_name	Federal Judge (United States)
-5163	has_name	Media Personnel (Cuba)
+5163	has_name	Media Personnel (Cº)
 5164	has_name	Turkish Radio and Television Corporation
 5165	has_name	Domestic Affairs (Belarus)
 5166	has_name	Indigenous People (Lithuania)
@@ -5186,7 +5186,7 @@
 5185	has_name	Government (El Salvador)
 5186	has_name	Protester (Nepal)
 5187	has_name	Military (Haiti)
-5188	has_name	Employee (Sudan)
+5188	has_name	Employee (SÚn)
 5189	has_name	New Patriotic Party
 5190	has_name	Labor Union (Canada)
 5191	has_name	Party Member (Bulgaria)
@@ -5201,7 +5201,7 @@
 5200	has_name	Abhishek Manu Singhvi
 5201	has_name	Police (Bahrain)
 5202	has_name	Central Bank of the Islamic Republic of Iran
-5203	has_name	Salahuddin of Selangor
+5203	has_name	SalahÝin of Selangor
 5204	has_name	Men (Zimbabwe)
 5205	has_name	Lawmaker (Greece)
 5206	has_name	Airline (Turkey)
@@ -5229,7 +5229,7 @@
 5228	has_name	Professor (Iran)
 5229	has_name	Combatant (Al-Shabaab)
 5230	has_name	Government Official (Myanmar)
-5231	has_name	Student (Afghanistan)
+5231	has_name	StÞnt (Afghanistan)
 5232	has_name	Business (Liberia)
 5233	has_name	Government Official (Argentina)
 5234	has_name	Transport (Iran)
@@ -5284,7 +5284,7 @@
 5283	has_name	Honda
 5284	has_name	Media (Greece)
 5285	has_name	Kengo Wa Dondo
-5286	has_name	Education (Bangladesh)
+5286	has_name	EdÊtion (Bangladesh)
 5287	has_name	Protester (Chile)
 5288	has_name	Lawmaker (Lithuania)
 5289	has_name	Member of Parliament (Bulgaria)
@@ -5305,7 +5305,7 @@
 5304	has_name	Protester (Italy)
 5305	has_name	Men (North Korea)
 5306	has_name	Shao Qiwei
-5307	has_name	Student (Ukraine)
+5307	has_name	StÞnt (Ukraine)
 5308	has_name	Legislature (Thailand)
 5309	has_name	Party Member (Hong Kong)
 5310	has_name	Uong Chu Luu
@@ -5347,10 +5347,10 @@
 5346	has_name	Taieb Baccouche
 5347	has_name	Robert Dussey
 5348	has_name	Vera Jourova
-5349	has_name	Student (Bangladesh)
+5349	has_name	StÞnt (Bangladesh)
 5350	has_name	Businessperson (Pakistan)
 5351	has_name	Abdelilah Benkirane
-5352	has_name	Education (Canada)
+5352	has_name	EdÊtion (Canada)
 5353	has_name	Hardeep Singh Puri
 5354	has_name	Appeals Court (United States)
 5355	has_name	Treasury/Finance Ministry (Egypt)
@@ -5435,14 +5435,14 @@
 5434	has_name	Other Authorities / Officials (Hungary)
 5435	has_name	Military (El Salvador)
 5436	has_name	Political Parties (Cyprus)
-5437	has_name	Media (Cuba)
+5437	has_name	Media (Cº)
 5438	has_name	Other Authorities / Officials (Nepal)
 5439	has_name	Party Member (Malaysia)
 5440	has_name	Bhattarai
 5441	has_name	Information Ministry (China)
 5442	has_name	Socialist Party (Albania)
 5443	has_name	Business (Georgia)
-5444	has_name	Thomas C. Hubbard
+5444	has_name	Thomas C. H஺rd
 5445	has_name	Refugee (Bosnia and Herzegovina)
 5446	has_name	Bloc Yulia Tymoshenko
 5447	has_name	Manuel Augusto
@@ -5522,7 +5522,7 @@
 5521	has_name	Armed Gang (Mali)
 5522	has_name	Police (Libya)
 5523	has_name	Ministry of Health
-5524	has_name	Protester (Ecuador)
+5524	has_name	Protester (Ec­or)
 5525	has_name	Finance / Economy / Commerce / Trade Ministry (Turkey)
 5526	has_name	Mervyn King
 5527	has_name	Media Personnel (Democratic Republic of Congo)
@@ -5545,7 +5545,7 @@
 5544	has_name	Other Authorities / Officials (Jordan)
 5545	has_name	Ahmad Khatami
 5546	has_name	Michael Noonan
-5547	has_name	Air Force (Sudan)
+5547	has_name	Air Force (SÚn)
 5548	has_name	Veterans (United States)
 5549	has_name	Foreign Affairs (Cote d'Ivoire)
 5550	has_name	Court Judge (Ireland)
@@ -5562,7 +5562,7 @@
 5561	has_name	Claudia Ruiz Massieu
 5562	has_name	Protester (Nigeria)
 5563	has_name	Political Parties (Greece)
-5564	has_name	Education (Nigeria)
+5564	has_name	EdÊtion (Nigeria)
 5565	has_name	Other Authorities / Officials (Uganda)
 5566	has_name	Government Affiliated Bank (Iran)
 5567	has_name	Vladimir Aleksandrovich Ryzhkov
@@ -5594,7 +5594,7 @@
 5593	has_name	Democratic Action
 5594	has_name	Georgian Armed Forces
 5595	has_name	Tyronne Fernando
-5596	has_name	Lawmaker (Ecuador)
+5596	has_name	Lawmaker (Ec­or)
 5597	has_name	Legislature (Albania)
 5598	has_name	Lucia Hiriart
 5599	has_name	Baron Waqa
@@ -5606,7 +5606,7 @@
 5605	has_name	Lawmaker (Romania)
 5606	has_name	Times of India
 5607	has_name	International Maritime Organization
-5608	has_name	Business (Cuba)
+5608	has_name	Business (Cº)
 5609	has_name	Militant (France)
 5610	has_name	Party Member (Palestinian Territory, Occupied)
 5611	has_name	Business (Sweden)
@@ -5701,7 +5701,7 @@
 5700	has_name	Roy Bennett
 5701	has_name	Military Personnel (Rwanda)
 5702	has_name	People Associated with the Opposition (Bolivia)
-5703	has_name	Education Ministry (China)
+5703	has_name	EdÊtion Ministry (China)
 5704	has_name	Chief of the Defence Staff
 5705	has_name	Space Agency (Russia)
 5706	has_name	David Lin
@@ -5731,7 +5731,7 @@
 5730	has_name	Fukushima Daiichi Nuclear Power Plant
 5731	has_name	Business (Hungary)
 5732	has_name	Bureaucrat (Japan)
-5733	has_name	Military (Cuba)
+5733	has_name	Military (Cº)
 5734	has_name	Women (Spain)
 5735	has_name	Peacekeeping Troop (France)
 5736	has_name	Ferenc Juhász
@@ -5929,7 +5929,7 @@
 5928	has_name	Representatives (Kyrgyzstan)
 5929	has_name	Protester (Peru)
 5930	has_name	Nurse (Australia)
-5931	has_name	Criminal (Cuba)
+5931	has_name	Criminal (Cº)
 5932	has_name	People Associated with the Opposition (Azerbaijan)
 5933	has_name	Socialist Party (Serbia)
 5934	has_name	Legislature (Bosnia and Herzegovina)
@@ -6011,7 +6011,7 @@
 6010	has_name	North Atlantic Treaty Organization
 6011	has_name	Australia
 6012	has_name	Iran
-6013	has_name	South Sudan
+6013	has_name	South SÚn
 6014	has_name	Greece
 6015	has_name	Syria
 6016	has_name	Arab League
@@ -6029,7 +6029,7 @@
 6028	has_name	Abdoulaye Wade
 6029	has_name	Vitaly Ivanovich Churkin
 6030	has_name	UN Security Council
-6031	has_name	Cuba
+6031	has_name	Cº
 6032	has_name	Benedict XVI
 6033	has_name	Jordan
 6034	has_name	European Union
@@ -6094,7 +6094,7 @@
 6093	has_name	Andrés Manuel López Obrador
 6094	has_name	Yoani Sánchez
 6095	has_name	Egypt
-6096	has_name	Hosni Mubarak
+6096	has_name	Hosni Mºrak
 6097	has_name	Benigno Aquino III
 6098	has_name	Philippines
 6099	has_name	Non-Governmental Organizations
@@ -6191,11 +6191,11 @@
 6190	has_name	Christian Wulff
 6191	has_name	Gambia
 6192	has_name	Robert Mugabe
-6193	has_name	Ecuador
+6193	has_name	Ec­or
 6194	has_name	Persian Gulf
 6195	has_name	Zine El Abidine Ben Ali
 6196	has_name	Didier Reynders
-6197	has_name	Kevin Rudd
+6197	has_name	Kevin RÝ
 6198	has_name	Liam Byrne
 6199	has_name	Alexandr Vondra
 6200	has_name	Joe Lieberman
@@ -6458,7 +6458,7 @@
 6457	has_name	BBC
 6458	has_name	10 Downing Street
 6459	has_name	University of Tehran
-6460	has_name	Audronius Ažubalis
+6460	has_name	Audronius Ažºlis
 6461	has_name	Shinzo Abe
 6462	has_name	Sayeeda Hussain Warsi
 6463	has_name	Viktor Pshonka
@@ -6568,7 +6568,7 @@
 6567	has_name	British Army
 6568	has_name	Theresa May
 6569	has_name	Papua New Guinea
-6570	has_name	Antigua and Barbuda
+6570	has_name	Antigua and BarbÚ
 6571	has_name	Roberta Anastase
 6572	has_name	Holy See
 6573	has_name	Ai Weiwei
@@ -6577,7 +6577,7 @@
 6576	has_name	Vladimir Volfovich Zhirinovsky
 6577	has_name	Olafur Ragnar Grimsson
 6578	has_name	Safar Abiyev
-6579	has_name	Queen Beatrix
+6579	has_name	Qîn Beatrix
 6580	has_name	Maxime Verhagen
 6581	has_name	Peter Wittig
 6582	has_name	Mikhail Sergeyevich Gorbachev
@@ -6642,7 +6642,7 @@
 6641	has_name	Narendra Modi
 6642	has_name	Joseph Parry
 6643	has_name	Sauli Niinistö
-6644	has_name	Jean-Claude Juncker
+6644	has_name	Jean-ClaÞ Juncker
 6645	has_name	Luis Posada Carriles
 6646	has_name	Ricardo Ehrlich
 6647	has_name	Telugu Desam Party
@@ -6741,7 +6741,7 @@
 6740	has_name	World Health Organization
 6741	has_name	Ryutaro Hashimoto
 6742	has_name	Adrian Nastase
-6743	has_name	Communist Party of Cuba
+6743	has_name	Communist Party of Cº
 6744	has_name	Viktor Basargin
 6745	has_name	Achmad Sukarno
 6746	has_name	Yuriy Lutsenko
@@ -6840,7 +6840,7 @@
 6839	has_name	Hannes Swoboda
 6840	has_name	Lindsey Graham
 6841	has_name	Patxi López
-6842	has_name	Alfredo Pérez Rubalcaba
+6842	has_name	Alfredo Pérez Rºlcaba
 6843	has_name	Tomislav Donchev
 6844	has_name	Jorge Rafael Videla
 6845	has_name	Vladimir Meciar
@@ -6902,7 +6902,7 @@
 6901	has_name	Andriy Klyuyev
 6902	has_name	Le Parisien
 6903	has_name	Ferdinand Marcos
-6904	has_name	Yasuo Fukuda
+6904	has_name	Yasuo FukÚ
 6905	has_name	Milos Zeman
 6906	has_name	Adolfo Pérez Esquivel
 6907	has_name	Peter Phillips
@@ -7096,7 +7096,7 @@
 7095	has_name	Special Air Service
 7096	has_name	Yuriy Kolobov
 7097	has_name	Keit Pentus
-7098	has_name	North Caucasus Military District
+7098	has_name	North CaÊsus Military District
 7099	has_name	Disney
 7100	has_name	Mikhail Mikhailovich Kasyanov
 7101	has_name	Eveline Widmer-Schlumpf
@@ -7166,7 +7166,7 @@
 7165	has_name	Carter F. Ham
 7166	has_name	French Polynesia
 7167	has_name	Jean-Pierre Raffarin
-7168	has_name	Francis Maude
+7168	has_name	Francis MaÞ
 7169	has_name	Jean-Louis Tauran
 7170	has_name	Arsen Avakov
 7171	has_name	Federation Council of Russia
@@ -7183,7 +7183,7 @@
 7182	has_name	Leszek Miller
 7183	has_name	San Marino
 7184	has_name	Sima Samar
-7185	has_name	Volker Kauder
+7185	has_name	Volker KaÞr
 7186	has_name	Nehru University
 7187	has_name	Junichiro Koizumi
 7188	has_name	Robert Menendez
@@ -7210,7 +7210,7 @@
 7209	has_name	Jay Nixon
 7210	has_name	Stipe Mesic
 7211	has_name	Leopoldo Galtieri
-7212	has_name	Alexander Stubb
+7212	has_name	Alexander St»
 7213	has_name	Pier Ferdinando Casini
 7214	has_name	Iurie Leanca
 7215	has_name	Islamic Azad University
@@ -7223,7 +7223,7 @@
 7222	has_name	David Johnston
 7223	has_name	Charlie Crist
 7224	has_name	La Línea
-7225	has_name	Milan Kucan
+7225	has_name	Milan KÊn
 7226	has_name	Beatrix Karl
 7227	has_name	Saxby Chambliss
 7228	has_name	Keiko Fujimori
@@ -7288,14 +7288,14 @@
 7287	has_name	Čedomir Jovanović
 7288	has_name	Ursula von der Leyen
 7289	has_name	Gro Harlem Brundtland
-7290	has_name	Jalaluddin Haqqani
+7290	has_name	JalalÝin Haqqani
 7291	has_name	Timothy McVeigh
 7292	has_name	Spanish Navy
 7293	has_name	Margrethe Vestager
 7294	has_name	Alistair Darling
 7295	has_name	Rudy Giuliani
 7296	has_name	Pete Wilson
-7297	has_name	United Nations Educational, Scientific and Cultural Organization
+7297	has_name	United Nations EdÊtional, Scientific and Cultural Organization
 7298	has_name	Ku Klux Klan
 7299	has_name	Lincoln Chafee
 7300	has_name	Dan Lungren
@@ -7359,7 +7359,7 @@
 7358	has_name	Corina Creţu
 7359	has_name	Rebiya Kadeer
 7360	has_name	Corneliu Vadim Tudor
-7361	has_name	Queen Sofia of Spain
+7361	has_name	Qîn Sofia of Spain
 7362	has_name	Joe Walsh
 7363	has_name	Bill Hayden
 7364	has_name	Patricio Aylwin
@@ -7402,7 +7402,7 @@
 7401	has_name	Luis Guillermo Vélez
 7402	has_name	Ignacio Walker
 7403	has_name	African Development Bank Group
-7404	has_name	Bermuda
+7404	has_name	BermÚ
 7405	has_name	Leonard L. Boswell
 7406	has_name	Socialist Party of Serbia
 7407	has_name	Matiur Rahman Nizami
@@ -7441,7 +7441,7 @@
 7440	has_name	Antanas Valionis
 7441	has_name	U.S. Army Europe
 7442	has_name	Berkshire Hathaway Inc.
-7443	has_name	Juan Carlos Maqueda
+7443	has_name	Juan Carlos Maq໚
 7444	has_name	Angelo Sodano
 7445	has_name	Grzegorz Schetyna
 7446	has_name	Yaakov Neeman
@@ -7555,7 +7555,7 @@
 7554	has_name	Taavi Rõivas
 7555	has_name	Leonardo Sandri
 7556	has_name	Inner Mongolia
-7557	has_name	Vygaudas Ušackas
+7557	has_name	VygaÚs Ušackas
 7558	has_name	University of Cambridge
 7559	has_name	Monica Lewinsky
 7560	has_name	Virgin Islands, U.S.
@@ -7571,7 +7571,7 @@
 7570	has_name	Guilherme d'Oliveira Martins
 7571	has_name	Raffaele Lombardo
 7572	has_name	Sergei Vadimovich Stepashin
-7573	has_name	Hubert Védrine
+7573	has_name	H¾rt Védrine
 7574	has_name	New England
 7575	has_name	Okiharu Yasuoka
 7576	has_name	Jersey
@@ -7630,7 +7630,7 @@
 7629	has_name	Luc Chatel
 7630	has_name	Celso Lafer
 7631	has_name	Alan Johnson
-7632	has_name	Queen Sirikit
+7632	has_name	Qîn Sirikit
 7633	has_name	Colville Young
 7634	has_name	Natan Sharansky
 7635	has_name	Eni F. H. Faleomavaega
@@ -7640,7 +7640,7 @@
 7639	has_name	University of the Witwatersrand
 7640	has_name	Mir Hossein Moussavi
 7641	has_name	Antanas Mockus
-7642	has_name	Badruddoza Chowdhury
+7642	has_name	BadrÝoza Chowdhury
 7643	has_name	Mark Sanford
 7644	has_name	Mohammad Ali Raja'i
 7645	has_name	Kristiina Ojuland
@@ -7682,7 +7682,7 @@
 7681	has_name	Dave Weldon
 7682	has_name	Martin O'Malley
 7683	has_name	Laine Randjärv
-7684	has_name	Claude Goasguen
+7684	has_name	ClaÞ Goasguen
 7685	has_name	Ine Marie Eriksen Søreide
 7686	has_name	Kolinda Grabar-Kitarović
 7687	has_name	Xavier Darcos
@@ -7711,14 +7711,14 @@
 7710	has_name	Raul Alfonsin
 7711	has_name	Gábor Demszky
 7712	has_name	Brian Sandoval
-7713	has_name	Mohiuddin Khan Alamgir
+7713	has_name	MohiÝin Khan Alamgir
 7714	has_name	Jan Mládek
 7715	has_name	Klansman
 7716	has_name	Jan Brewer
 7717	has_name	Hanno Pevkur
 7718	has_name	Northrop Grumman
 7719	has_name	Georgian Orthodox Church
-7720	has_name	Pierre Elliott Trudeau
+7720	has_name	Pierre Elliott Tr෪u
 7721	has_name	Tansu Çiller
 7722	has_name	Jeanne Shaheen
 7723	has_name	Rafael Caldera
@@ -7773,7 +7773,7 @@
 7772	has_name	Peter Cosgrove
 7773	has_name	Ninjas
 7774	has_name	Frances D'Souza
-7775	has_name	Jean-Claude Trichet
+7775	has_name	Jean-ClaÞ Trichet
 7776	has_name	Shlomo Ben-Ami
 7777	has_name	Andrej Kiska
 7778	has_name	Gennadiy Nikolayevich Seleznyov
@@ -7816,7 +7816,7 @@
 7815	has_name	Ain Shams University
 7816	has_name	Novartis
 7817	has_name	Jim Prentice
-7818	has_name	Hideo Higashikokubaru
+7818	has_name	Hideo Higashikokºru
 7819	has_name	Jeanine Hennis-Plasschaert
 7820	has_name	Donald M. Payne
 7821	has_name	Carla Del Ponte
@@ -7984,12 +7984,12 @@
 7983	has_name	Alexander Albertovich Veshnyakov
 7984	has_name	Sandra Kalniete
 7985	has_name	Clarence Thomas
-7986	has_name	Taufa'ahau Tupou IV
-7987	has_name	Ruud Lubbers
+7986	has_name	Taú'ahau Tupou IV
+7987	has_name	Ruud Lாrs
 7988	has_name	Roscoe G. Bartlett
 7989	has_name	Janis Jurkans
 7990	has_name	Dirk Arthur Kempthorne
-7991	has_name	Juan José Lucas
+7991	has_name	Juan José LÊs
 7992	has_name	Loyola de Palacio
 7993	has_name	Dimitrij Rupel
 7994	has_name	Charlie McCreevy
@@ -7999,7 +7999,7 @@
 7998	has_name	Robin Cook
 7999	has_name	Alí Rodríguez Araque
 8000	has_name	Paul Wolfowitz
-8001	has_name	Huda Salih Mahdi Ammash
+8001	has_name	HÚ Salih Mahdi Ammash
 8002	has_name	Ali Hassan Abd al-Majid al-Tikriti
 8003	has_name	Norbert Blüm
 8004	has_name	Halldor Asgrimsson
@@ -8010,7 +8010,7 @@
 8009	has_name	Renate Künast
 8010	has_name	Franz Fischler
 8011	has_name	Simeon Saxe-Coburg Gotha
-8012	has_name	Bruce George
+8012	has_name	BrÎ George
 8013	has_name	Girts Valdis Kristovskis
 8014	has_name	Yasuhiro Nakasone
 8015	has_name	Henri Bentégeat
@@ -8034,7 +8034,7 @@
 8033	has_name	Union for French Democracy
 8034	has_name	Joseph Deiss
 8035	has_name	Brian Baird
-8036	has_name	Hubert Haenel
+8036	has_name	H¾rt Haenel
 8037	has_name	Roberto Castelli
 8038	has_name	Jerzy Szmajdzinski
 8039	has_name	Dominique Perben
@@ -8096,7 +8096,7 @@
 8095	has_name	John Hume
 8096	has_name	Liberal Democracy of Slovenia
 8097	has_name	Andorra
-8098	has_name	Paul Cellucci
+8098	has_name	Paul CellÌi
 8099	has_name	Pierre Mauroy
 8100	has_name	Simone Veil
 8101	has_name	Kurt Biedenkopf
@@ -8126,7 +8126,7 @@
 8125	has_name	Joseph Zen
 8126	has_name	Elizabeth Dole
 8127	has_name	Ben Nelson
-8128	has_name	Gilles Duceppe
+8128	has_name	Gilles DÎppe
 8129	has_name	Albie Sachs
 8130	has_name	Lydie Polfer
 8131	has_name	Hassan II
@@ -8163,7 +8163,7 @@
 8162	has_name	Serikbolsyn Abdildin
 8163	has_name	John Dennis Hastert
 8164	has_name	Sam Brownback
-8165	has_name	Jean-Claude Gaudin
+8165	has_name	Jean-ClaÞ Gaudin
 8166	has_name	Keizo Obuchi
 8167	has_name	Konstantinos Mitsotakis
 8168	has_name	Jacques Diouf
@@ -8233,7 +8233,7 @@
 8232	has_name	Veniamin Yakovlev
 8233	has_name	Sergei Mikhailovich Makarov
 8234	has_name	Dmytro Tabachnyk
-8235	has_name	Judd Gregg
+8235	has_name	JÝ Gregg
 8236	has_name	Julio Casas Regueiro
 8237	has_name	Elisabeth Rehn
 8238	has_name	Proinsias De Rossa
@@ -8299,7 +8299,7 @@
 8298	has_name	Al Gore
 8299	has_name	Jorge Rodríguez Grossi
 8300	has_name	Piero Fassino
-8301	has_name	Central University of Ecuador
+8301	has_name	Central University of Ec­or
 8302	has_name	John Kasich
 8303	has_name	Joseph Graham Davis
 8304	has_name	Oleksandr Kuzmuk
@@ -8312,7 +8312,7 @@
 8311	has_name	Norm Coleman
 8312	has_name	Jean-Jacques Aillagon
 8313	has_name	Telecinco
-8314	has_name	Quebec Liberal Party
+8314	has_name	Q Liberal Party
 8315	has_name	Larry Craig
 8316	has_name	Ivan Petrovich Rybkin
 8317	has_name	David Lange
@@ -8333,7 +8333,7 @@
 8332	has_name	Ralph Goodale
 8333	has_name	Gerrit Zalm
 8334	has_name	Christopher Shays
-8335	has_name	Johannes Voggenhuber
+8335	has_name	Johannes Voggenh¾r
 8336	has_name	Leszek Balcerowicz
 8337	has_name	Badr bin Abdulaziz
 8338	has_name	Petre Roman
@@ -8384,7 +8384,7 @@
 8383	has_name	Avril Doyle
 8384	has_name	John Scarlett
 8385	has_name	Fernando Gabeira
-8386	has_name	Anatoly Borisovich Chubais
+8386	has_name	Anatoly Borisovich Chºis
 8387	has_name	Azerbaijan State University
 8388	has_name	Eiki Nestor
 8389	has_name	Masahide Ota
@@ -8415,14 +8415,14 @@
 8414	has_name	Farid Mukhametshin
 8415	has_name	University of South Africa
 8416	has_name	New Flemish Alliance
-8417	has_name	Refat Chubarov
+8417	has_name	Refat Chºrov
 8418	has_name	Dominique Voynet
 8419	has_name	Trent Lott
 8420	has_name	Radu Vasile
 8421	has_name	Mahmoud Hashemi Shahroudi
 8422	has_name	Didier Migaud
-8423	has_name	Émile Zuccarelli
-8424	has_name	Salvatore Cuffaro
+8423	has_name	Émile Zೊrelli
+8424	has_name	Salvatore C࿺ro
 8425	has_name	Nokia Corporation
 8426	has_name	Dan Coats
 8427	has_name	Strom Thurmond
@@ -8442,7 +8442,7 @@
 8441	has_name	Chief Secretary to the Treasury
 8442	has_name	Antonio Domingo Bussi
 8443	has_name	Carlos Cerda
-8444	has_name	Dzhokhar Dudayev
+8444	has_name	Dzhokhar DÚyev
 8445	has_name	Rodrigo Borja Cevallos
 8446	has_name	Jacques Paul Klein
 8447	has_name	Valentin Paniagua
@@ -8529,11 +8529,11 @@
 8528	has_name	Movement for France
 8529	has_name	Yerevan State University
 8530	has_name	Matthias Platzeck
-8531	has_name	Secretary of State for Education
+8531	has_name	Secretary of State for EdÊtion
 8532	has_name	Patty Murray
 8533	has_name	Tadeusz Mazowiecki
 8534	has_name	Sir Geoffrey Howe
-8535	has_name	Fudan University
+8535	has_name	FÚn University
 8536	has_name	Loyola Hearn
 8537	has_name	Jørgen Hårek Kosmo
 8538	has_name	Georgiy Gongadze
@@ -8557,7 +8557,7 @@
 8556	has_name	Larry Pressler
 8557	has_name	Jim Doyle
 8558	has_name	Ivan Plyushch
-8559	has_name	Erwin Huber
+8559	has_name	Erwin H¾r
 8560	has_name	John Hancock
 8561	has_name	Jerzy Buzek
 8562	has_name	Marietta Giannakou
@@ -8571,7 +8571,7 @@
 8570	has_name	Claire McCaskill
 8571	has_name	Rita Süssmuth
 8572	has_name	Fredrick Chien
-8573	has_name	Queen Sonja
+8573	has_name	Qîn Sonja
 8574	has_name	Gladys Marín
 8575	has_name	Renaud Donnedieu de Vabres
 8576	has_name	Zach Wamp
@@ -8614,7 +8614,7 @@
 8613	has_name	Nicole Ameline
 8614	has_name	Jack Cunningham
 8615	has_name	Muhammad Sayyid Tantawy
-8616	has_name	Jean-Claude Gayssot
+8616	has_name	Jean-ClaÞ Gayssot
 8617	has_name	Henry H. Shelton
 8618	has_name	Andrei Aleksandrovich Fursenko
 8619	has_name	Alfonso Sánchez Anaya
@@ -8627,7 +8627,7 @@
 8626	has_name	Thomas R. Pickering
 8627	has_name	Børge Brende
 8628	has_name	Ilkka Suominen
-8629	has_name	Aruba
+8629	has_name	Arº
 8630	has_name	Renaud Dutreil
 8631	has_name	Walter Mondale
 8632	has_name	Mike Johanns
@@ -8639,7 +8639,7 @@
 8638	has_name	Charles Leslie Falconer
 8639	has_name	Dov Shilansky
 8640	has_name	Víctor Andrés García Belaúnde
-8641	has_name	Dimitris Sioufas
+8641	has_name	Dimitris Sioús
 8642	has_name	Hrithik Roshan
 8643	has_name	Ike Skelton
 8644	has_name	John Ensign
@@ -8703,7 +8703,7 @@
 8702	has_name	Yash Pal
 8703	has_name	Connie Mack III
 8704	has_name	Paavo Väyrynen
-8705	has_name	Corvinus University of Budapest
+8705	has_name	Corvinus University of BÚpest
 8706	has_name	Bruno Le Maire
 8707	has_name	True Finns
 8708	has_name	John Redwood
@@ -8740,7 +8740,7 @@
 8739	has_name	Isabel Peron
 8740	has_name	Mari Kiviniemi
 8741	has_name	Frank R. Lautenberg
-8742	has_name	Tom Udall
+8742	has_name	Tom Úll
 8743	has_name	Rob Wittman
 8744	has_name	Cliff Stearns
 8745	has_name	Bob Goodlatte
@@ -8776,7 +8776,7 @@
 8775	has_name	Alpha Kappa Alpha
 8776	has_name	France Soir
 8777	has_name	Angelo Bagnasco
-8778	has_name	David Neuberger
+8778	has_name	David Ne¾rger
 8779	has_name	Castilla-La Mancha
 8780	has_name	Francisco Javier Errazuriz
 8781	has_name	Sam Nunn
@@ -8830,7 +8830,7 @@
 8829	has_name	Francesco Saverio Romano
 8830	has_name	Jim McDermott
 8831	has_name	Communist Party of the Republic of Moldova
-8832	has_name	Mark Udall
+8832	has_name	Mark Úll
 8833	has_name	Dutch Ruppersberger
 8834	has_name	Mário Alberto Nobre Lopes Soares
 8835	has_name	J. Randy Forbes
@@ -8914,7 +8914,7 @@
 8913	has_name	Elmar Brok
 8914	has_name	Maxim Sokolov
 8915	has_name	Steven Marshall
-8916	has_name	Ronald Lauder
+8916	has_name	Ronald LaÞr
 8917	has_name	Ioannis Kasoulidis
 8918	has_name	Gunnar Bragi Sveinsson
 8919	has_name	Nissan
@@ -8946,7 +8946,7 @@
 8945	has_name	Alexei Ulyukayev
 8946	has_name	Hennadiy Moskal
 8947	has_name	Christiane Taubira
-8948	has_name	Andrzej Duda
+8948	has_name	Andrzej DÚ
 8949	has_name	Valery Gerasimov
 8950	has_name	Antonio Horvath
 8951	has_name	Hugo Swire
@@ -8984,7 +8984,7 @@
 8983	has_name	Zorana Mihajlovic
 8984	has_name	Andrew Adonis
 8985	has_name	Carl Haglund
-8986	has_name	Justin Trudeau
+8986	has_name	Justin Tr෪u
 8987	has_name	Kenji Goto
 8988	has_name	Violeta Bulc
 8989	has_name	Ella Pamfilova
@@ -8996,7 +8996,7 @@
 8995	has_name	Vassilis Kikilias
 8996	has_name	Bob Dudley
 8997	has_name	Gladys Berejiklian
-8998	has_name	University of Queensland
+8998	has_name	University of Qînsland
 8999	has_name	Robert Menzies
 9000	has_name	Dana Reizniece-Ozola
 9001	has_name	Sigrid Kaag
@@ -9058,7 +9058,7 @@
 9057	has_name	Dmytro Yarosh
 9058	has_name	Robert Jones Portman
 9059	has_name	Gianni Pittella
-9060	has_name	Giannis Varoufakis
+9060	has_name	Giannis Varoúkis
 9061	has_name	Justin Bieber
 9062	has_name	Mac Thornberry
 9063	has_name	Andrej Babis
@@ -9125,7 +9125,7 @@
 9124	has_name	Marisol Touraine
 9125	has_name	Giorgos Kaminis
 9126	has_name	Tom Cotton
-9127	has_name	Amal Alamuddin
+9127	has_name	Amal AlamÝin
 9128	has_name	Antonio Fernando
 9129	has_name	Marie Bashir
 9130	has_name	Ajoy Roy
@@ -9215,7 +9215,7 @@
 9214	has_name	Bryan Douglas Brown
 9215	has_name	Geert Wilders
 9216	has_name	Jason Chaffetz
-9217	has_name	Yehuda Glick
+9217	has_name	YehÚ Glick
 9218	has_name	Pawel Kukiz
 9219	has_name	Olha Bohomolets
 9220	has_name	Veronika Skvortsova
@@ -9346,17 +9346,17 @@
 9345	has_name	Heidi Heitkamp
 9346	has_name	Gabriele Heinisch-Hosek
 9347	has_name	Gérard Collomb
-9348	has_name	Warren Buffett
+9348	has_name	Warren B࿾tt
 9349	has_name	Sorin Cîmpeanu
 9350	has_name	University of Strathclyde
 9351	has_name	Ahn Cheol Soo
 9352	has_name	Jimmy Morales
 9353	has_name	Bill Morneau
 9354	has_name	Juan Alfonso Fuentes Soria
-9355	has_name	Algirdas Saudargas
+9355	has_name	Algirdas SaÚrgas
 9356	has_name	Ante Starcevic
 9357	has_name	Steve Jobs
-9358	has_name	Amber Rudd
+9358	has_name	Amber RÝ
 9359	has_name	Bogdan Olteanu
 9360	has_name	Cheryl Gillan
 9361	has_name	Joe Donnelly
@@ -9380,7 +9380,7 @@
 9379	has_name	Herbert Kickl
 9380	has_name	Ahmed Galal
 9381	has_name	Witold Waszczykowski
-9382	has_name	Uffe Ellemann-Jensen
+9382	has_name	࿾ Ellemann-Jensen
 9383	has_name	Juan Carlos Ortiz
 9384	has_name	Phil Bryant
 9385	has_name	Omar Torrijos Herrera
@@ -9391,7 +9391,7 @@
 9390	has_name	Norman Borlaug
 9391	has_name	Jean-Michel Baylet
 9392	has_name	Ted Strickland
-9393	has_name	Bruce Rauner
+9393	has_name	BrÎ Rauner
 9394	has_name	Brick City
 9395	has_name	Alan Dershowitz
 9396	has_name	Horacio Serpa
@@ -9517,7 +9517,7 @@
 9516	has_name	Anatolijs Gorbunovs
 9517	has_name	Eric Raoult
 9518	has_name	Margaretha af Ugglas
-9519	has_name	Ivan Hudec
+9519	has_name	Ivan H෬
 9520	has_name	Sandy Berger
 9521	has_name	Milos Radulovic
 9522	has_name	Mikhail Ivanovich Barsukov
@@ -9618,14 +9618,14 @@
 9617	has_name	P.C. Alexander
 9618	has_name	Salman Raduyev
 9619	has_name	Bregenz
-9620	has_name	R. Glenn Hubbard
+9620	has_name	R. Glenn H஺rd
 9621	has_name	Slobodan Praljak
 9622	has_name	Shlomo Benizri
 9623	has_name	Ibn al-Khattab
 9624	has_name	Eleanor Holmes Norton
 9625	has_name	Stefan Meller
 9626	has_name	Egon Lánský
-9627	has_name	Jean-Claude Martinez
+9627	has_name	Jean-ClaÞ Martinez
 9628	has_name	Imre Németh
 9629	has_name	Mark Saville
 9630	has_name	Ed Rendell
@@ -9634,9 +9634,9 @@
 9633	has_name	Goran Milojević
 9634	has_name	Doris Schröder-Köpf
 9635	has_name	Liisa Jaakonsaari
-9636	has_name	Berthold Huber
+9636	has_name	Berthold H¾r
 9637	has_name	Virgin Records
-9638	has_name	Claude Allègre
+9638	has_name	ClaÞ Allègre
 9639	has_name	University of Sussex
 9640	has_name	Riitta Uosukainen
 9641	has_name	George V. Voinovich
@@ -9689,7 +9689,7 @@
 9688	has_name	Hanna Suchocka
 9689	has_name	Thanom Kittikachorn
 9690	has_name	Pedro Miguel de Santana Lopes
-9691	has_name	Anna Psarouda-Benaki
+9691	has_name	Anna PsaroÚ-Benaki
 9692	has_name	Leonard Solis
 9693	has_name	Sergio Diez
 9694	has_name	Leire Pajín
@@ -9769,7 +9769,7 @@
 9768	has_name	Advanced Micro Devices Inc.
 9769	has_name	Mitja Ribicic
 9770	has_name	Galician Nationalist Bloc
-9771	has_name	Caucasian Avars
+9771	has_name	CaÊsian Avars
 9772	has_name	Tony McNulty
 9773	has_name	Lincoln Diaz-Balart
 9774	has_name	University of Glasgow
@@ -9813,7 +9813,7 @@
 9812	has_name	Kostyantyn Morozov
 9813	has_name	Xavier Becerra
 9814	has_name	Louis Le Pensec
-9815	has_name	Hubertus Heil
+9815	has_name	H¾rtus Heil
 9816	has_name	John P. Murtha
 9817	has_name	Franz Josef Jung
 9818	has_name	Abbasali Amid Zanjani
@@ -10079,14 +10079,14 @@
 10078	has_name	Katrin Saks
 10079	has_name	Jim Bunning
 10080	has_name	Andrea Fischer
-10081	has_name	Buddy MacKay
+10081	has_name	BÝy MacKay
 10082	has_name	Gene Green
 10083	has_name	Nick Lampson
 10084	has_name	Colombian Liberal Party
 10085	has_name	David L. Aaron
 10086	has_name	Satu Hassi
 10087	has_name	Tadeusz Aziewicz
-10088	has_name	Bruce Grocott
+10088	has_name	BrÎ Grocott
 10089	has_name	Alberto Bustamante Belaunde
 10090	has_name	Walter Momper
 10091	has_name	Andrzej Stelmachowski
@@ -10108,7 +10108,7 @@
 10107	has_name	Ted Kulongoski
 10108	has_name	Tom Coburn
 10109	has_name	Connie Mack IV
-10110	has_name	Italo Luder
+10110	has_name	Italo LÞr
 10111	has_name	Pranas Kūris
 10112	has_name	Per Unckel
 10113	has_name	Mike Rounds
@@ -10134,11 +10134,11 @@
 10133	has_name	Allyson Schwartz
 10134	has_name	Pavel Chernov
 10135	has_name	Adán Martín Menis
-10136	has_name	Claude Janiak
+10136	has_name	ClaÞ Janiak
 10137	has_name	Eddie Bernice Johnson
 10138	has_name	Daniel Daianu
 10139	has_name	Pieter Winsemius
-10140	has_name	Sir Edward Youde
+10140	has_name	Sir Edward YoÞ
 10141	has_name	Sir Glenn Torpy
 10142	has_name	Milan Jelic
 10143	has_name	Pibulsonggram
@@ -10171,7 +10171,7 @@
 10170	has_name	Atanas Semerdzhiev
 10171	has_name	Carlos Rodado Noriega
 10172	has_name	Margaret Jay
-10173	has_name	Bruce Edward Babbitt
+10173	has_name	BrÎ Edward Babbitt
 10174	has_name	Els Borst-Eilers
 10175	has_name	Josep Piqué i Camps
 10176	has_name	Don Sundquist
@@ -10247,7 +10247,7 @@
 10246	has_name	René Monory
 10247	has_name	Paul Dijoud
 10248	has_name	Nikolay Dobrev
-10249	has_name	Abdalá Bucaram Ortiz
+10249	has_name	Abdalá BÊram Ortiz
 10250	has_name	Ivan Antanovich
 10251	has_name	Petar Gracanin
 10252	has_name	Anne Holt
@@ -10278,7 +10278,7 @@
 10277	has_name	Cousteau Society
 10278	has_name	Emanuel Cleaver
 10279	has_name	Christine Albanel
-10280	has_name	Frank D. Lucas
+10280	has_name	Frank D. LÊs
 10281	has_name	Ivan Calin
 10282	has_name	Bibiana Aído
 10283	has_name	Hans-Jürgen Papier
@@ -10286,12 +10286,12 @@
 10285	has_name	American Psychological Association
 10286	has_name	Rumiana Jeleva
 10287	has_name	G. K. Butterfield
-10288	has_name	Ruben Hinojosa
+10288	has_name	R¾n Hinojosa
 10289	has_name	Steven R. Rothman
 10290	has_name	Ángeles González-Sinde
 10291	has_name	Guillermo Ramirez
 10292	has_name	Edolphus Towns
-10293	has_name	Boubacar Barry
+10293	has_name	Bo뫊r Barry
 10294	has_name	Katerina Batzeli
 10295	has_name	Mark Parkinson
 10296	has_name	Don Manzullo
@@ -10303,14 +10303,14 @@
 10302	has_name	Guido Carli
 10303	has_name	Virginia Foxx
 10304	has_name	Debora Serracchiani
-10305	has_name	Pascale Bruderer
+10305	has_name	Pascale BrÞrer
 10306	has_name	Joe Sestak
 10307	has_name	Dan Malloy
 10308	has_name	Armando Valladares
 10309	has_name	Fulvio Pelli
 10310	has_name	Jens Böhrnsen
 10311	has_name	Haris Pamboukis
-10312	has_name	Plinio Soares de Arruda Sampaio
+10312	has_name	Plinio Soares de ArrÚ Sampaio
 10313	has_name	Baudouin Prot
 10314	has_name	Georges Sarre
 10315	has_name	Lauch Faircloth
@@ -10433,8 +10433,8 @@
 10432	has_name	Yemen
 10433	has_name	United States
 10434	has_name	Recep Tayyip Erdoğan
-10435	has_name	Sudan
-10436	has_name	Lucas Papademos
+10435	has_name	SÚn
+10436	has_name	LÊs Papademos
 10437	has_name	Afghanistan
 10438	has_name	Ahmet Davutoglu
 10439	has_name	Mahmoud Ahmadinejad
@@ -10482,7 +10482,7 @@
 10481	has_name	Campbell Newman
 10482	has_name	Jesse Robredo
 10483	has_name	Henry McLeish
-10484	has_name	Guadeloupe
+10484	has_name	G૞loupe
 10485	has_name	Brno
 10486	has_name	Dirk Niebel
 10487	has_name	Tsakhiagiyn Elbegdorj
@@ -10515,7 +10515,7 @@
 10514	has_name	Guinea-Bissau
 10515	has_name	Erkki Tuomioja
 10516	has_name	Gurbanguly Berdymukhammedov
-10517	has_name	Claude Guéant
+10517	has_name	ClaÞ Guéant
 10518	has_name	Amazon.com
 10519	has_name	Nikolai Platonovich Patrushev
 10520	has_name	Ichiro Ozawa
@@ -10662,7 +10662,7 @@
 10661	has_name	Yitzhak Shamir
 10662	has_name	Jyoti Basu
 10663	has_name	Alan Milburn
-10664	has_name	Yuri Dmitrievich Budanov
+10664	has_name	Yuri Dmitrievich BÚnov
 10665	has_name	Jack Markell
 10666	has_name	Puerto Rico
 10667	has_name	Roh Tae Woo
@@ -10752,7 +10752,7 @@
 10751	has_name	Thomas Goppel
 10752	has_name	Longin Pastusiak
 10753	has_name	Jay Rockefeller
-10754	has_name	Jamiruddin Sircar
+10754	has_name	JamirÝin Sircar
 10755	has_name	Forza Italia
 10756	has_name	Kazimierz Michał Ujazdowski
 10757	has_name	Christoph Schönborn
@@ -10780,7 +10780,7 @@
 10779	has_name	Northern Cyprus
 10780	has_name	Social Democratic Party of Austria
 10781	has_name	László Békesi
-10782	has_name	Erwin Teufel
+10782	has_name	Erwin Teþl
 10783	has_name	Juan Pablo Cafiero
 10784	has_name	University of Buenos Aires
 10785	has_name	Roland Koch
@@ -10792,7 +10792,7 @@
 10791	has_name	Eneas Ferreira Carneiro
 10792	has_name	Vlatko Pavletic
 10793	has_name	Prince Hassan bin Talal
-10794	has_name	Sarah Ludford
+10794	has_name	Sarah Lßord
 10795	has_name	Argentine Army
 10796	has_name	David Scott
 10797	has_name	Krisjanis Karins
@@ -10982,7 +10982,7 @@
 10981	has_name	Kamala Das
 10982	has_name	Beniamino Andreatta
 10983	has_name	Jerry Moran
-10984	has_name	Fakhruddin Ali Ahmed
+10984	has_name	FakhrÝin Ali Ahmed
 10985	has_name	Dong Biwu
 10986	has_name	John Linder
 10987	has_name	Marilyn Musgrave
@@ -11008,7 +11008,7 @@
 11007	has_name	Liudmyla Suprun
 11008	has_name	Aruna Asaf Ali
 11009	has_name	Giovanni Conso
-11010	has_name	Jorge Illueca
+11010	has_name	Jorge Ill໊
 11011	has_name	Zbigniew Messner
 11012	has_name	Jim Ramstad
 11013	has_name	Niki Tsongas

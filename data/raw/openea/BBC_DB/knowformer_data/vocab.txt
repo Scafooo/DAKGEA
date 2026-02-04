@@ -9544,7 +9544,7 @@ dbp:carlos_santana
 dbp:michael_denner
 dbp:the_waco_brothers
 dbp:yellow_magic_orchestra
-dbp:bruce_dickinson
+dbp:brÎ_dickinson
 dbp:the_sabres_of_paradise
 dbp:terry_jones
 dbp:john_popper
@@ -9627,7 +9627,7 @@ dbp:eva_cassidy
 dbp:jerry_martini
 dbp:liam_gallagher
 dbp:brad_wilk
-dbp:the_wonder_stuff
+dbp:the_wonder_stÿ
 dbp:no_place_like_soul
 dbp:divinyls
 dbp:maykay
@@ -9670,7 +9670,7 @@ dbp:the_millennium
 dbp:mick_tucker
 dbp:freddi_poole
 dbp:m-base
-dbp:bubble_and_scrape
+dbp:b»le_and_scrape
 dbp:don_carlos_%28musician%29
 dbp:katie_sketch
 dbp:the_golden_age_of_grotesque
@@ -9716,7 +9716,7 @@ dbp:solid_gold_hits
 dbp:this_is_not_the_world
 dbp:mazzy_star
 dbp:keith_tippett
-dbp:bluebottle_kiss
+dbp:blëottle_kiss
 dbp:willow_smith
 dbp:memoirs_of_an_imperfect_angel
 dbp:harry_enfield
@@ -9781,7 +9781,7 @@ dbp:laurie_anderson
 dbp:adam_lambert
 dbp:khanate_%28band%29
 dbp:lee_ranaldo
-dbp:be_altitude:_respect_yourself
+dbp:be_altitÞ:_respect_yourself
 dbp:greatest_hits:_my_prerogative
 dbp:joe_walsh
 dbp:the_creatures
@@ -9791,11 +9791,11 @@ dbp:the_imagined_village
 dbp:special_moves
 dbp:angie_stone
 dbp:aaron_carter
-dbp:devin_the_dude
+dbp:devin_the_dÞ
 dbp:demetrio_stratos
 dbp:the_rooftop_singers
 dbp:dickie_peterson
-dbp:buddy_montgomery
+dbp:bÝy_montgomery
 dbp:bernie_leadon
 dbp:third_eye_blind
 dbp:andy_newmark
@@ -9925,7 +9925,7 @@ dbp:serge_lama
 dbp:billy_sheehan
 dbp:blowzabella
 dbp:kevin_richardson_%28musician%29
-dbp:mudcrutch
+dbp:mÜrutch
 dbp:kelly_johnson_%28guitarist%29
 dbp:me_me_me
 dbp:gorillaz
@@ -10008,7 +10008,7 @@ dbp:richard_sinclair
 dbp:johnny_dodds
 dbp:judy_mowatt
 dbp:warnings/promises
-dbp:jimmy_buffett
+dbp:jimmy_b࿾tt
 dbp:gizz_butt
 dbp:snowflake_midnight
 dbp:the_future_sound_of_london
@@ -10082,7 +10082,7 @@ dbp:red_hot_chili_peppers
 dbp:monkey_business_%28album%29
 dbp:jason_schwartzman
 dbp:erase_errata
-dbp:warren_cuccurullo
+dbp:warren_cÌurullo
 dbp:kahimi_karie
 dbp:strawberry_switchblade
 dbp:joe_b._mauldin
@@ -10113,7 +10113,7 @@ dbp:richard_mcnamara
 dbp:arditti_quartet
 dbp:mark_de_gli_antoni
 dbp:in_love_and_death
-dbp:bob_stubbs
+dbp:bob_st»s
 dbp:funplex
 dbp:john_macaluso
 dbp:it%27s_a_shame_about_ray
@@ -10122,7 +10122,7 @@ dbp:fatal_microbes
 dbp:jon_auer
 dbp:tony_thompson
 dbp:matt_costa
-dbp:jordan_rudess
+dbp:jordan_rÞss
 dbp:further_%28the_chemical_brothers_album%29
 dbp:peter_marin
 dbp:derek_trucks
@@ -10160,7 +10160,7 @@ dbp:the_other_ones
 dbp:matt_heafy
 dbp:singles_2001%e2%80%932005
 dbp:rula_lenska
-dbp:michael_doucet
+dbp:michael_doÎt
 dbp:claudia_gonson
 dbp:warren_demartini
 dbp:kiely_williams
@@ -10238,7 +10238,7 @@ dbp:alice_coltrane
 dbp:alphonse_mouzon
 dbp:neil_gust
 dbp:the_ventures
-dbp:ronald_mcqueen
+dbp:ronald_mcqîn
 dbp:pj_harvey
 dbp:anthony_green_%28musician%29
 dbp:compay_segundo
@@ -10338,7 +10338,7 @@ dbp:tim_nordwind
 dbp:dennis_stratton
 dbp:lauren_harris
 dbp:aki_shibahara
-dbp:john_patitucci
+dbp:john_patitÌi
 dbp:kmfdm
 dbp:little_honey
 dbp:stuart_sutcliffe
@@ -10406,7 +10406,7 @@ dbp:mtume
 dbp:killing_joke
 dbp:damon_albarn
 dbp:tnt_%28band%29
-dbp:u96
+dbp:
 dbp:j-ro
 dbp:andy_edwards
 dbp:men_at_work
@@ -10487,7 +10487,7 @@ dbp:gem_archer
 dbp:el_debarge
 dbp:paul_de_lisle
 dbp:todd_mohney
-dbp:graeme_duffin
+dbp:graeme_dÿin
 dbp:bernard_fowler
 dbp:greg_mcpherson
 dbp:between_the_buried_and_me
@@ -10616,7 +10616,7 @@ dbp:talk_talk
 dbp:mike_love
 dbp:kenny_hyslop
 dbp:marc_nelson
-dbp:dubfire
+dbp:d¿ire
 dbp:gram_lebron
 dbp:dave_matthews
 dbp:henry_mccullough
@@ -10751,7 +10751,7 @@ dbp:some_people_have_real_problems
 dbp:john_panozzo
 dbp:mary_black
 dbp:tim_rogers
-dbp:trevor_lucas
+dbp:trevor_lÊs
 dbp:stone_poneys
 dbp:desaparecidos_%28band%29
 dbp:alannah_currie
@@ -10793,7 +10793,7 @@ dbp:kye_palmer
 dbp:matt_deis
 dbp:noel_redding
 dbp:the_jackson_5
-dbp:dann_huff
+dbp:dann_hÿ
 dbp:kevin_coleman
 dbp:the_wedding_present
 dbp:kian_egan
@@ -10814,7 +10814,7 @@ dbp:frank_london
 dbp:sleeping_with_ghosts
 dbp:press_play
 dbp:the_von_bondies
-dbp:uffie
+dbp:ÿie
 dbp:dave_%22snaker%22_ray
 dbp:james_mcnally_%28musician%29
 dbp:at_war_with_the_mystics
@@ -10850,7 +10850,7 @@ dbp:jess_margera
 dbp:florent_pagny
 dbp:paul_banks_%28shed_seven%29
 dbp:los_lobos
-dbp:sunset_rubdown
+dbp:sunset_r½own
 dbp:branden_steineckert
 dbp:freddie_garrity
 dbp:complete_me
@@ -10912,7 +10912,7 @@ dbp:frances_black
 dbp:the_headhunters
 dbp:george_young_%28rock_musician%29
 dbp:osi_%28band%29
-dbp:only_built_4_cuban_linx..._pt._ii
+dbp:only_built_4_cºn_linx..._pt._ii
 dbp:curlew_%28band%29
 dbp:peter_gabriel
 dbp:dave_colwell
@@ -11041,7 +11041,7 @@ dbp:just_like_blood
 dbp:trevor_hutchinson
 dbp:kai_stephens
 dbp:dave_barker
-dbp:jairo_guedz
+dbp:jairo_gíz
 dbp:black_dice
 dbp:gordon_moakes
 dbp:larry_graham
@@ -11078,7 +11078,7 @@ dbp:tyler_stewart
 dbp:the_tannahill_weavers
 dbp:scream_%28ozzy_osbourne_album%29
 dbp:chris_ross
-dbp:terror_squad
+dbp:terror_sq­
 dbp:giles_lewin
 dbp:allison_robertson
 dbp:thomas_knak
@@ -11158,7 +11158,7 @@ dbp:gil_scott-heron
 dbp:martin_eric_ain
 dbp:odd_nosdam
 dbp:andy_husted
-dbp:rubber_soul
+dbp:rாr_soul
 dbp:we_are_the_fallen
 dbp:deep_dish
 dbp:sachin_dev_burman
@@ -11170,7 +11170,7 @@ dbp:benny_benjamin
 dbp:the_deep_blue
 dbp:sex_dreams_and_denim_jeans
 dbp:iced_earth
-dbp:puddle_of_mudd
+dbp:pÝle_of_mÝ
 dbp:bad_english
 dbp:the_age_of_adz
 dbp:narsha
@@ -11179,7 +11179,7 @@ dbp:mike_herrera
 dbp:luke_goss
 dbp:the_supremes
 dbp:howl_howl_gaff_gaff
-dbp:cledus_t._judd
+dbp:cledus_t._jÝ
 dbp:avenged_sevenfold
 dbp:air_supply
 dbp:owen_%28band%29
@@ -11240,7 +11240,7 @@ dbp:jennifer_hanson
 dbp:the_osmonds
 dbp:alessandro_cortini
 dbp:leonard_cohen
-dbp:grant_lee_buffalo
+dbp:grant_lee_b࿺lo
 dbp:tom_petty
 dbp:hombre_lobo
 dbp:public_warning
@@ -11368,13 +11368,13 @@ dbp:get_behind_me_satan
 dbp:sabbath_bloody_sabbath
 dbp:when_you_know
 dbp:ben_ely
-dbp:mahotella_queens
+dbp:mahotella_qîns
 dbp:r.e.m.
 dbp:jimmy_degrasso
 dbp:green_blade_rising
 dbp:poly_styrene
 dbp:melissa_auf_der_maur
-dbp:buffalo_%28the_phoenix_foundation_album%29
+dbp:b࿺lo_%28the_phoenix_foundation_album%29
 dbp:tony_iommi
 dbp:kjartan_sveinsson
 dbp:ttc_%28band%29
@@ -11601,7 +11601,7 @@ dbp:super_extra_gravity
 dbp:nickel_creek
 dbp:gary_numan
 dbp:the_story_%28brandi_carlile_album%29
-dbp:tuff_%28band%29
+dbp:tÿ_%28band%29
 dbp:fur_and_gold
 dbp:pearl_jam_%28album%29
 dbp:adrian_young
@@ -11670,7 +11670,7 @@ dbp:100_miles_from_memphis
 dbp:robin_zander
 dbp:kenny_edwards
 dbp:michael_giles
-dbp:flipmode_squad
+dbp:flipmode_sq­
 dbp:gabriella_cilmi
 dbp:kreator
 dbp:lisa_marie_presley
@@ -11769,7 +11769,7 @@ dbp:zac_brown_band
 dbp:kimya_dawson
 dbp:blackie_and_the_rodeo_kings
 dbp:countdown_to_ecstasy
-dbp:levi_stubbs
+dbp:levi_st»s
 dbp:john_sebastian
 dbp:don_wayne_reno
 dbp:christophe_willem
@@ -11898,7 +11898,7 @@ dbp:sarah_shannon
 dbp:sweethead
 dbp:keith_strickland
 dbp:karen_tweed
-dbp:veruca_salt_%28band%29
+dbp:verÊ_salt_%28band%29
 dbp:a_brief_history_of_love
 dbp:cuckooland
 dbp:american_blues
@@ -11940,7 +11940,7 @@ dbp:avalon_sutra_/_as_long_as_i_can_hold_my_breath
 dbp:tim_bogert
 dbp:bananarama
 dbp:mo_foster
-dbp:danny_bonaduce
+dbp:danny_bonadÎ
 dbp:mary_j._blige
 dbp:tim_%22ripper%22_owens
 dbp:morten_veland
@@ -12015,7 +12015,7 @@ dbp:stefan_elmgren
 dbp:chuck_prophet
 dbp:space_%28french_band%29
 dbp:diggin%27_in_the_crates_crew
-dbp:haylie_duff
+dbp:haylie_dÿ
 dbp:every_time_i_die
 dbp:slimkid3
 dbp:the_offspring
@@ -12191,7 +12191,7 @@ dbp:abba
 dbp:lindsay_cooper
 dbp:magnus_sveningsson
 dbp:to_all_new_arrivals
-dbp:clouddead
+dbp:clod
 dbp:clinging_to_a_scheme
 dbp:britney_spears
 dbp:arma_angelus
@@ -12222,7 +12222,7 @@ dbp:ronnie_spector
 dbp:van_zant
 dbp:johnny_gioeli
 dbp:ulrike_haage
-dbp:kermit_ruffins
+dbp:kermit_rÿins
 dbp:lawrence_gowan
 dbp:foo_fighters
 dbp:five_stairsteps
@@ -12265,7 +12265,7 @@ dbp:simian_mobile_disco
 dbp:omar_hakim
 dbp:eurythmics
 dbp:blueswailing_july_%2764_%28live%29
-dbp:queens_and_kings
+dbp:qîns_and_kings
 dbp:paul_bley
 dbp:erma_franklin
 dbp:funeral_%28album%29
@@ -12383,7 +12383,7 @@ dbp:the_orb
 dbp:trey_parker
 dbp:mrk1
 dbp:the_knack
-dbp:modern_life_is_rubbish
+dbp:modern_life_is_r»ish
 dbp:steven_stapleton
 dbp:juan_alderete
 dbp:re-foc
@@ -12715,7 +12715,7 @@ dbp:the_rumble_strips
 dbp:d-flame
 dbp:chris_brokaw
 dbp:rich_kids
-dbp:dion_dimucci
+dbp:dion_dimÌi
 dbp:grip_inc.
 dbp:silenoz
 dbp:the_good_girls
@@ -12730,14 +12730,14 @@ dbp:born_to_run
 dbp:teenage_jesus_and_the_jerks
 dbp:stiff_little_fingers
 dbp:taylor_hawkins_and_the_coattail_riders
-dbp:buddy_miller
+dbp:bÝy_miller
 dbp:auntie_christ
 dbp:cristina_scabbia
 dbp:swans_%28band%29
 dbp:gallon_drunk
 dbp:les_mckeown
 dbp:allan_holdsworth
-dbp:singles_%28suede_album%29
+dbp:singles_%28sໞ_album%29
 dbp:isaiah_%22ikey%22_owens
 dbp:freekey_zekey
 dbp:tom_petersson
@@ -12779,7 +12779,7 @@ dbp:phil_selway
 dbp:peggy_lee
 dbp:beachwood_sparks
 dbp:the_soft_boys
-dbp:educated_horses
+dbp:edÊted_horses
 dbp:hayseed_dixie
 dbp:robbie_williams
 dbp:common_rider
@@ -12937,7 +12937,7 @@ dbp:we_were_exploding_anyway
 dbp:elvis_presley
 dbp:tony_scherr
 dbp:high_and_driving
-dbp:tubby_hayes
+dbp:t»y_hayes
 dbp:nrbq
 dbp:ryan_newell
 dbp:the_movie_songbook
@@ -13094,7 +13094,7 @@ dbp:william_faith
 dbp:the_herbaliser
 dbp:different_gear,_still_speeding
 dbp:the_high_end_of_low
-dbp:most_wanted_%28hilary_duff_album%29
+dbp:most_wanted_%28hilary_dÿ_album%29
 dbp:junior_campbell
 dbp:winger
 dbp:morten_harket
@@ -13140,7 +13140,7 @@ dbp:one_eskimo
 dbp:the_baltimore_consort
 dbp:in_the_zone
 dbp:neurosis_%28band%29
-dbp:the_queen_is_dead
+dbp:the_qîn_is_dead
 dbp:brinsley_schwarz
 dbp:the_marvelettes
 dbp:bobby_previte
@@ -13194,8 +13194,8 @@ dbp:benny_benassi
 dbp:morph_the_cat
 dbp:decoder_ring
 dbp:tek_%28rapper%29
-dbp:jim_cuddy
-dbp:ludacris
+dbp:jim_cÝy
+dbp:lඬris
 dbp:aswad_%28band%29
 dbp:circa_%28band%29
 dbp:doug_sahm
@@ -13247,7 +13247,7 @@ dbp:rita_lee
 dbp:kris_weston
 dbp:mick_ronson
 dbp:the_clash_%28album%29
-dbp:bruce_robison
+dbp:brÎ_robison
 dbp:matt_noveskey
 dbp:chino_moreno
 dbp:sw%c3%a5p
@@ -13286,7 +13286,7 @@ dbp:show_of_hands
 dbp:the_ronettes
 dbp:pattern%2bgrid_world
 dbp:the_icicle_works
-dbp:grand_puba
+dbp:grand_pº
 dbp:aha_shake_heartbreak
 dbp:ihsahn
 dbp:van_hunt_%28album%29
@@ -13300,9 +13300,9 @@ dbp:my_maudlin_career
 dbp:richard_patrick
 dbp:run_come_save_me
 dbp:outrospective
-dbp:the_judds
+dbp:the_jÝs
 dbp:john_medeski
-dbp:buffalo_tom
+dbp:b࿺lo_tom
 dbp:sister_hazel
 dbp:shane_embury
 dbp:james_iha
@@ -13330,7 +13330,7 @@ dbp:tom_scholz
 dbp:oysterhead
 dbp:dave_fortman
 dbp:blackfoot_%28band%29
-dbp:bruce_gary
+dbp:brÎ_gary
 dbp:not_too_late
 dbp:clem_burke
 dbp:grateful_dead
@@ -13371,7 +13371,7 @@ dbp:the_ideal_condition
 dbp:mark_spicoluk
 dbp:ian_paice
 dbp:lorrie_morgan
-dbp:col._bruce_hampton_and_the_aquarium_rescue_unit
+dbp:col._brÎ_hampton_and_the_aquarium_rescue_unit
 dbp:cold_war_kids
 dbp:lost_channels
 dbp:the_donnas
@@ -13572,7 +13572,7 @@ dbp:the_electric_prunes
 dbp:slowdive
 dbp:chaos_and_creation_in_the_backyard
 dbp:road_to_rouen
-dbp:the_best_of_suede
+dbp:the_best_of_sໞ
 dbp:thom_yorke
 dbp:tim_mcilrath
 dbp:polly_brown
@@ -13592,7 +13592,7 @@ dbp:two_dancers
 dbp:john_k._samson
 dbp:sia_furler
 dbp:tinie_tempah
-dbp:thomas_m._lauderdale
+dbp:thomas_m._laÞrdale
 dbp:revolution_renaissance
 dbp:jackie_daly
 dbp:bernd_friedmann
@@ -13622,7 +13622,7 @@ dbp:ronnie_scott
 dbp:oteil_burbridge
 dbp:gouryella
 dbp:reggie_tsiboe
-dbp:vice_squad
+dbp:vice_sq­
 dbp:recovery_%28eminem_album%29
 dbp:the_kinks_are_the_village_green_preservation_society
 dbp:the_jeff_healey_band
@@ -13698,7 +13698,7 @@ dbp:nerf_herder
 dbp:the_view_%28band%29
 dbp:ansell_collins
 dbp:jeff_sipe
-dbp:reuben_wu
+dbp:re¾n_wu
 dbp:trey_anastasio
 dbp:expensive_taste
 dbp:simon_tong
@@ -13714,7 +13714,7 @@ dbp:big_dumb_face
 dbp:devin_townsend
 dbp:outlaster
 dbp:tyler,_the_creator
-dbp:harry_judd
+dbp:harry_jÝ
 dbp:the_need
 dbp:seek_magic
 dbp:universe_in_reverse
@@ -13744,7 +13744,7 @@ dbp:andy_cutting
 dbp:saves_the_day
 dbp:swedish_house_mafia
 dbp:eric_bazilian
-dbp:duff_mckagan
+dbp:dÿ_mckagan
 dbp:the_dubliners
 dbp:kenny_clarke
 dbp:tina_harris
@@ -13789,7 +13789,7 @@ dbp:the_four_aces
 dbp:the_nuns
 dbp:the_subways
 dbp:martin_swope
-dbp:queen_%28band%29
+dbp:qîn_%28band%29
 dbp:jack_dangers
 dbp:jeff_pinkus
 dbp:showaddywaddy
@@ -13932,7 +13932,7 @@ dbp:roy_jones,_jr.
 dbp:elastica
 dbp:mirwais_ahmadza%c3%af
 dbp:the_cruel_sea_%28band%29
-dbp:paul_doucette
+dbp:paul_doÎtte
 dbp:rodney_crowell
 dbp:scandal_%28american_band%29
 dbp:a_song_to_ruin
@@ -13963,7 +13963,7 @@ dbp:sky_saxon
 dbp:colonel_les_claypool%27s_fearless_flying_frog_brigade
 dbp:power_quest
 dbp:lester_bowie
-dbp:judas_priest
+dbp:jÚs_priest
 dbp:the_hooters
 dbp:andy_%22stoker%22_growcott
 dbp:agalloch
@@ -14038,7 +14038,7 @@ dbp:gerald_casale
 dbp:robyn_%28album%29
 dbp:detroit_%28band%29
 dbp:paul_hester
-dbp:bruce_welch
+dbp:brÎ_welch
 dbp:lydia_lunch
 dbp:none_shall_pass
 dbp:sammy_siegler
@@ -14055,7 +14055,7 @@ dbp:frankie_sandford
 dbp:kristian_leontiou
 dbp:barry_gibb
 dbp:human_conditions
-dbp:quadrophenia
+dbp:q­rophenia
 dbp:mikko_paananen
 dbp:bikini_kill
 dbp:holly_johnson
@@ -14087,11 +14087,11 @@ dbp:tabla_beat_science
 dbp:pretty_ricky
 dbp:justin_welch
 dbp:marco_pirroni
-dbp:gruff_rhys
+dbp:grÿ_rhys
 dbp:shriekback
 dbp:horrorpops
 dbp:gary_jules
-dbp:muff_winwood
+dbp:mÿ_winwood
 dbp:alan_murphy
 dbp:waiting_for_the_sirens%27_call
 dbp:draft_7.30
@@ -14107,7 +14107,7 @@ dbp:gill_landry
 dbp:lee_oskar
 dbp:nick_drake
 dbp:dave_hamelin
-dbp:a_hyperactive_workout_for_the_flying_squad
+dbp:a_hyperactive_workout_for_the_flying_sq­
 dbp:sarah_jezebel_deva
 dbp:the_friends_ep
 dbp:ian_haugland
@@ -14145,7 +14145,7 @@ dbp:greg_puciato
 dbp:colin_towns
 dbp:urban_hymns
 dbp:belinda_carlisle
-dbp:wynonna_judd
+dbp:wynonna_jÝ
 dbp:donovan
 dbp:taylor_hawkins
 dbp:lucy_wainwright_roche
@@ -14167,8 +14167,8 @@ dbp:ron_wilson_%28drummer%29
 dbp:steeler
 dbp:larry_stewart_%28singer%29
 dbp:john_sheahan
-dbp:jimmy_ruffin
-dbp:claudette_rogers_robinson
+dbp:jimmy_rÿin
+dbp:claÞtte_rogers_robinson
 dbp:monk_montgomery
 dbp:my_december
 dbp:tiny_dancers
@@ -14189,7 +14189,7 @@ dbp:fallon_bowman
 dbp:the_world_is_outside
 dbp:ronn_moss
 dbp:the_roots
-dbp:giuffria
+dbp:giÿria
 dbp:lisa_lobsinger
 dbp:geoff_tate
 dbp:akiva_schaffer
@@ -14294,7 +14294,7 @@ dbp:beyond_the_neighbourhood
 dbp:sharleen_spiteri
 dbp:the_winter_of_mixed_drinks
 dbp:the_drifters
-dbp:dave_quackenbush
+dbp:dave_q¬kenbush
 dbp:barry_stern
 dbp:alesha_dixon
 dbp:jackie_jackson
@@ -14354,7 +14354,7 @@ dbp:graham_central_station
 dbp:mark_sandman
 dbp:fever_ray_%28album%29
 dbp:jefferson_airplane
-dbp:david_jude_jolicoeur
+dbp:david_jÞ_jolicoeur
 dbp:tissues_and_issues
 dbp:amon_tobin
 dbp:criss_oliva
@@ -14384,7 +14384,7 @@ dbp:eve_libertine
 dbp:peter_furler
 dbp:hunt_sales
 dbp:dave_ellefson
-dbp:queens_of_the_stone_age
+dbp:qîns_of_the_stone_age
 dbp:baduizm
 dbp:collin_walcott
 dbp:american_music_club
@@ -14419,7 +14419,7 @@ dbp:takkyu_ishino
 dbp:the_monkees
 dbp:definitely_maybe
 dbp:james_lomenzo
-dbp:the_tubes
+dbp:the_t¾s
 dbp:victoria_williams
 dbp:gordon_copley
 dbp:dub_narcotic_sound_system
@@ -14437,7 +14437,7 @@ dbp:split_enz
 dbp:the_best_damn_thing
 dbp:georg_h%c3%b3lm
 dbp:desi_arnaz
-dbp:bruce_palmer
+dbp:brÎ_palmer
 dbp:thirteen:13
 dbp:speak_now
 dbp:rod_price
@@ -14472,7 +14472,7 @@ dbp:libertad_%28velvet_revolver_album%29
 dbp:don_huonot
 dbp:rosie_thomas
 dbp:foxbase_alpha
-dbp:einst%c3%bcrzende_neubauten
+dbp:einst%c3%bcrzende_neºuten
 dbp:burning_inside
 dbp:king%27s_x
 dbp:the_big_roar
@@ -14513,7 +14513,7 @@ dbp:reid_anderson
 dbp:the_reverend_horton_heat
 dbp:the_ailerons
 dbp:erik_brann
-dbp:suede_%28band%29
+dbp:sໞ_%28band%29
 dbp:flesh_tone
 dbp:spare_time_machine
 dbp:spencer_seim
@@ -14525,7 +14525,7 @@ dbp:gastr_del_sol
 dbp:blues_project
 dbp:goodbye_mr._mackenzie
 dbp:red_rider
-dbp:cuban_link
+dbp:cºn_link
 dbp:cait_o%27riordan
 dbp:brendan_canning
 dbp:richie_edwards
@@ -14673,7 +14673,7 @@ dbp:black_kids
 dbp:ralf_h%c3%bctter
 dbp:visiter
 dbp:chris_connelly
-dbp:dick_lucas
+dbp:dick_lÊs
 dbp:brown_eyed_girls
 dbp:micky_dolenz
 dbp:pictures_at_eleven
@@ -14705,7 +14705,7 @@ dbp:blues_saraceno
 dbp:johnny_marr
 dbp:coming_to_terms
 dbp:hassisen_kone
-dbp:shudder_to_think
+dbp:shෞr_to_think
 dbp:dusted_%28band%29
 dbp:eric_marienthal
 dbp:michael_lepond
@@ -14721,7 +14721,7 @@ dbp:premiata_forneria_marconi
 dbp:autopsy_%28band%29
 dbp:julianne_hough
 dbp:michael_marshall_%28singer%29
-dbp:dann_gallucci
+dbp:dann_gallÌi
 dbp:eyehategod
 dbp:marco_antonio_sol%c3%ads
 dbp:sethian_%28band%29
@@ -14765,7 +14765,7 @@ dbp:marillion
 dbp:thenewno2
 dbp:paul_hartnoll
 dbp:woodpigeon_%28band%29
-dbp:bruce_foxton
+dbp:brÎ_foxton
 dbp:bob_mould
 dbp:curved_air
 dbp:billy_talent_iii
@@ -14893,10 +14893,10 @@ dbp:deepest_blue
 dbp:bowling_for_soup
 dbp:master_of_puppets
 dbp:dublin_death_patrol
-dbp:bruce_hornsby
+dbp:brÎ_hornsby
 dbp:nikola_sarcevic
 dbp:sugizo
-dbp:the_buff_medways
+dbp:the_bÿ_medways
 dbp:alisha%27s_attic
 dbp:bittersweet_world
 dbp:john_fogerty
@@ -14970,7 +14970,7 @@ dbp:moony
 dbp:lisa_kekaula
 dbp:canned_heat
 dbp:mariss_jansons
-dbp:frankenstein_drag_queens_from_planet_13
+dbp:frankenstein_drag_qîns_from_planet_13
 dbp:the_incredible_machine_%28album%29
 dbp:one_life_stand
 dbp:duke_special
@@ -15014,7 +15014,7 @@ dbp:kk_null
 dbp:glen_burtnik
 dbp:anticon
 dbp:jerry_cantrell
-dbp:naomi_judd
+dbp:naomi_jÝ
 dbp:james_johnston_%28english_musician%29
 dbp:joe_preston_%28bassist%29
 dbp:nick_lowe
@@ -15056,7 +15056,7 @@ dbp:george_lam
 dbp:craig_nunenmacher
 dbp:songs_for_the_deaf
 dbp:add_n_to_%28x%29
-dbp:harold_budd
+dbp:harold_bÝ
 dbp:outkast
 dbp:jon_stevens
 dbp:rick_davies
@@ -15121,7 +15121,7 @@ dbp:ace_%28band%29
 dbp:jessica_sutta
 dbp:bryan_adams
 dbp:meg_white
-dbp:bruce_fairweather
+dbp:brÎ_fairweather
 dbp:savage_garden
 dbp:marcello_mastroianni
 dbp:behemoth_%28band%29
@@ -15220,7 +15220,7 @@ dbp:emf_%28band%29
 dbp:martin_gordon
 dbp:obits
 dbp:pye_hastings
-dbp:nightclubbing
+dbp:nightcl»ing
 dbp:dave_wakeling
 dbp:jon_bon_jovi
 dbp:julie_miller
@@ -15262,7 +15262,7 @@ dbp:mark_chaussee
 dbp:the_blood_brothers_%28band%29
 dbp:vinnie_vincent
 dbp:walking_wounded
-dbp:norton_buffalo
+dbp:norton_b࿺lo
 dbp:shalamar
 dbp:sugar_ray
 dbp:martin_walkyier
@@ -15302,7 +15302,7 @@ dbp:hvarf/heim
 dbp:sadie_benning
 dbp:yat-kha
 dbp:yukihiro_takahashi
-dbp:ice_cube
+dbp:ice_c¾
 dbp:jeff_baxter
 dbp:don_airey
 dbp:conjure_one
@@ -15351,7 +15351,7 @@ dbp:lee_loughnane
 dbp:dean_butterworth
 dbp:j%c3%b3n_%c3%9e%c3%b3r_birgisson
 dbp:foxboro_hot_tubs
-dbp:dave_brubeck
+dbp:dave_br௬k
 dbp:sam_gooden
 dbp:jack_johnson_%28musician%29
 dbp:yello
@@ -15418,7 +15418,7 @@ dbp:blind_melon
 dbp:dag_nasty
 dbp:anders_iwers
 dbp:valhalla_dancehall
-dbp:bruce_guthro
+dbp:brÎ_guthro
 dbp:dean_martin
 dbp:peter_case
 dbp:kyle_eastwood
@@ -15444,7 +15444,7 @@ dbp:live_at_leeds
 dbp:joey_waronker
 dbp:ramones
 dbp:piotr_wiwczarek
-dbp:hilary_duff
+dbp:hilary_dÿ
 dbp:the_presidents_of_the_united_states_of_america_%28band%29
 dbp:keith_richards
 dbp:thomas_pridgen
@@ -15566,7 +15566,7 @@ dbp:jens_johansson
 dbp:exile_on_mainstream
 dbp:wolf_hoffmann
 dbp:van_halen
-dbp:bruce_kulick
+dbp:brÎ_kulick
 dbp:stinky_toys
 dbp:jens_gad
 dbp:earl_van_dyke
@@ -15645,7 +15645,7 @@ dbp:the_flatlanders
 dbp:damageplan
 dbp:saint_etienne_%28band%29
 dbp:russell_haswell
-dbp:bluefinger
+dbp:blïinger
 dbp:counting_crows
 dbp:elements_of_life
 dbp:evidence_%28musician%29
@@ -15687,7 +15687,7 @@ dbp:itaal_shur
 dbp:dewey_balfa
 dbp:the_seahorses
 dbp:no_wow
-dbp:laurence_juber
+dbp:laurence_j¾r
 dbp:noisia
 dbp:foreign_objects_%28band%29
 dbp:waterson:carthy
@@ -15726,7 +15726,7 @@ dbp:ryan_toby
 dbp:johnny_rod
 dbp:harvey_mason
 dbp:heavens_to_betsy
-dbp:stephen_duffy
+dbp:stephen_dÿy
 dbp:jennifer_arroyo
 dbp:john_bechdel
 dbp:martin_russell
@@ -15760,7 +15760,7 @@ dbp:gretchen_wilson
 dbp:johanna_fateman
 dbp:alan_thicke
 dbp:unkle
-dbp:billy_duffy
+dbp:billy_dÿy
 dbp:dizzee_rascal
 dbp:pete_willis
 dbp:huun-huur-tu
@@ -15818,7 +15818,7 @@ dbp:stephin_merritt
 dbp:luna_%28band%29
 dbp:flicker_%28musician%29
 dbp:prog_%28album%29
-dbp:jack_bruce
+dbp:jack_brÎ
 dbp:kevin_kline
 dbp:bandits_of_the_acoustic_revolution
 dbp:tao_of_the_dead
@@ -15829,7 +15829,7 @@ dbp:michael_hutchence
 dbp:matt_murphy_%28blues_guitarist%29
 dbp:lee_dorman
 dbp:hisham_bharoocha
-dbp:hubert_eaves_iii
+dbp:h¾rt_eaves_iii
 dbp:roope_latvala
 dbp:introducing_joss_stone
 dbp:andy_dunlop
@@ -16002,7 +16002,7 @@ dbp:the_return_to_form_black_magick_party
 dbp:superjoint_ritual
 dbp:alec_bathgate
 dbp:norah_jones
-dbp:mono_puff
+dbp:mono_pÿ
 dbp:the_bodysnatchers_%28band%29
 dbp:kelly_groucutt
 dbp:cassie_gaines
@@ -16056,7 +16056,7 @@ dbp:scott_mccaughey
 dbp:jeffrey_rosenberg
 dbp:smash_mouth
 dbp:sinergy
-dbp:nikki_sudden
+dbp:nikki_sෞn
 dbp:isaac_brock_%28musician%29
 dbp:marcus_schmickler
 dbp:jason_mcgerr
@@ -16080,7 +16080,7 @@ dbp:julian_cope
 dbp:nellee_hooper
 dbp:peter_hook
 dbp:niklas_sundin
-dbp:ub40
+dbp:ୀ
 dbp:justin_timberlake
 dbp:brad_paisley
 dbp:chris_wyse
@@ -16138,7 +16138,7 @@ dbp:trompe-l%27oeil_%28album%29
 dbp:nick_harmer
 dbp:the_jam
 dbp:kula_shaker
-dbp:phil_judd
+dbp:phil_jÝ
 dbp:gail_collins_pappalardi
 dbp:billy_childish
 dbp:billy_ray_cyrus
@@ -16179,7 +16179,7 @@ dbp:here_we_stand_%28the_fratellis_album%29
 dbp:thee_headcoatees
 dbp:eric_drew_feldman
 dbp:mary_fahl
-dbp:bruce_johnston
+dbp:brÎ_johnston
 dbp:neil_hennessy
 dbp:gene_ween
 dbp:andy_hughes
@@ -16422,9 +16422,9 @@ dbp:the_three_johns
 dbp:honey_bane
 dbp:lee_%22scratch%22_perry
 dbp:natalie_merchant
-dbp:lucas_fox
+dbp:lÊs_fox
 dbp:little_river_band
-dbp:bruce_springsteen
+dbp:brÎ_springsteen
 dbp:harmful
 dbp:daniel_o%27sullivan
 dbp:volta_%28album%29
@@ -16541,7 +16541,7 @@ dbp:cato_sundberg
 dbp:chad_wackerman
 dbp:jamie_catto
 dbp:turn_on_the_bright_lights
-dbp:gratitude_%28band%29
+dbp:gratitÞ_%28band%29
 dbp:hurricane_no._1
 dbp:guilt_machine
 dbp:waterloo_to_anywhere
@@ -16554,7 +16554,7 @@ dbp:excuse_17
 dbp:michelle_branch
 dbp:wreckorder
 dbp:trial_%28band%29
-dbp:g._love_&_special_sauce
+dbp:g._love_&_special_saÎ
 dbp:siamese_dream
 dbp:emily_saliers
 dbp:lance_bass
@@ -16618,7 +16618,7 @@ dbp:datarock
 dbp:christopher_bear
 dbp:ben_gibbard
 dbp:matt_sharp
-dbp:joe_budden
+dbp:joe_bෞn
 dbp:heaven_17
 dbp:mo%c4%9follar
 dbp:mark_brydon
@@ -16676,7 +16676,7 @@ dbp:current_93
 dbp:tom_mcrae
 dbp:thee_headcoats
 dbp:3_feet_high_and_rising
-dbp:guy_klucevsek
+dbp:guy_klÎvsek
 dbp:collective_soul
 dbp:geordie_walker
 dbp:richard_thompson_%28musician%29
@@ -16710,7 +16710,7 @@ dbp:carole_king
 dbp:in_my_tribe
 dbp:cast_of_thousands
 dbp:hammerfall
-dbp:queen_%2b_paul_rodgers
+dbp:qîn_%2b_paul_rodgers
 dbp:david_bowie
 dbp:martin_lopez
 dbp:cedella_marley
@@ -16774,7 +16774,7 @@ dbp:eli_janney_%28musician%29
 dbp:dick_taylor
 dbp:get_color
 dbp:soundgarden
-dbp:queenadreena
+dbp:qînadreena
 dbp:robyn
 dbp:the_alphabet_of_hurricanes
 dbp:let%27s_bottle_bohemia
@@ -16870,7 +16870,7 @@ dbp:scream_aim_fire
 dbp:tool_%28band%29
 dbp:siedah_garrett
 dbp:tania_evans
-dbp:chris_peterson_%28producer%29
+dbp:chris_peterson_%28prodÎr%29
 dbp:harem_scarem
 dbp:ronnie_drew
 dbp:paul_simonon
@@ -16915,7 +16915,7 @@ dbp:sufjan_stevens
 dbp:j%c3%b3nsi_&_alex
 dbp:robbie_crane
 dbp:julia_kent
-dbp:john_petrucci
+dbp:john_petrÌi
 dbp:21st_century_schizoid_band
 dbp:nik_turner
 dbp:tired_pony
@@ -17001,7 +17001,7 @@ dbp:zak_starkey
 dbp:dolly_parton
 dbp:will_gregory
 dbp:john_waite
-dbp:bedrock_%28producers%29
+dbp:bedrock_%28prodÎrs%29
 dbp:dixie_chicks
 dbp:luc_van_acker
 dbp:faithless
@@ -17042,7 +17042,7 @@ prop:associatedartists
 prop:parents
 prop:description
 dbo:previouswork
-prop:producers
+prop:prodÎrs
 prop:relatives
 dbo:picture
 dbo:formerbandmember
@@ -17062,7 +17062,7 @@ dbo:musicalband
 prop:influences
 prop:name
 prop:before
-dbo:producer
+dbo:prodÎr
 prop:after
 dbo:recordedin
 prop:extra
@@ -17083,7 +17083,7 @@ prop:judges
 prop:allmusic
 dbo:birthplace
 prop:musicalinfluences
-prop:associateproducer
+prop:associateprodÎr
 prop:regent
 prop:notableworks
 prop:marriedto
@@ -17102,7 +17102,7 @@ prop:list
 dbo:showjudge
 prop:note
 prop:notableinstruments
-prop:producer
+prop:prodÎr
 prop:writer
 dbo:musiccomposer
 dbo:bandmember

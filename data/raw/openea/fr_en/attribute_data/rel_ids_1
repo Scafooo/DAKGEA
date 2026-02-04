@@ -4,9 +4,9 @@
 3	http://fr.dbpedia.org/property/plateForme
 4	http://fr.dbpedia.org/property/piste
 5	http://fr.dbpedia.org/property/sud
-6	http://fr.dbpedia.org/property/lieuDeNaissance
+6	http://fr.dbpedia.org/property/lieÞNaissance
 7	http://fr.dbpedia.org/property/ville
-8	http://fr.dbpedia.org/property/lieuDeDécès
+8	http://fr.dbpedia.org/property/lie෭écès
 9	http://fr.dbpedia.org/property/artiste
 10	http://fr.dbpedia.org/property/titrePrésident
 11	http://fr.dbpedia.org/property/genre
@@ -39,7 +39,7 @@
 38	http://fr.dbpedia.org/property/université
 39	http://fr.dbpedia.org/property/nordEst
 40	http://fr.dbpedia.org/property/équipe
-41	http://fr.dbpedia.org/property/successeur
+41	http://fr.dbpedia.org/property/s೎sseur
 42	http://fr.dbpedia.org/property/religion
 43	http://fr.dbpedia.org/property/villes
 44	http://fr.dbpedia.org/property/originesStylistiques
@@ -56,7 +56,7 @@
 55	http://fr.dbpedia.org/property/monarque
 56	http://fr.dbpedia.org/property/mère
 57	http://fr.dbpedia.org/property/mission
-58	http://fr.dbpedia.org/property/sudEst
+58	http://fr.dbpedia.org/property/sÞst
 59	http://fr.dbpedia.org/property/prix
 60	http://fr.dbpedia.org/property/est
 61	http://fr.dbpedia.org/property/régionales2015SecondNom
@@ -100,11 +100,11 @@
 99	http://fr.dbpedia.org/property/villesMajeures
 100	http://fr.dbpedia.org/property/producteur
 101	http://fr.dbpedia.org/property/équipeEnt
-102	http://fr.dbpedia.org/property/subdivision
+102	http://fr.dbpedia.org/property/s½ivision
 103	http://fr.dbpedia.org/property/albumPrécédent
 104	http://fr.dbpedia.org/property/title
 105	http://fr.dbpedia.org/property/environnement
-106	http://fr.dbpedia.org/property/successeurPape
+106	http://fr.dbpedia.org/property/s೎sseurPape
 107	http://fr.dbpedia.org/property/paysD'origine
 108	http://fr.dbpedia.org/property/genresAssociés
 109	http://fr.dbpedia.org/property/singleSuivant
@@ -161,7 +161,7 @@
 160	http://fr.dbpedia.org/property/chancelier
 161	http://fr.dbpedia.org/property/enregistréLieu
 162	http://fr.dbpedia.org/property/siège(ville)_
-163	http://fr.dbpedia.org/property/ligueEnt
+163	http://fr.dbpedia.org/property/ligînt
 164	http://fr.dbpedia.org/property/origineLocalisation
 165	http://fr.dbpedia.org/property/allegeance
 166	http://fr.dbpedia.org/property/affiInternationale
@@ -175,7 +175,7 @@
 174	http://fr.dbpedia.org/property/services
 175	http://fr.dbpedia.org/property/valeur
 176	http://fr.dbpedia.org/property/scènesRégionales
-177	http://fr.dbpedia.org/property/lieuDeRéunion
+177	http://fr.dbpedia.org/property/lieÞRéunion
 178	http://fr.dbpedia.org/property/mandant
 179	http://fr.dbpedia.org/property/commandant
 180	http://fr.dbpedia.org/property/langue(s)_
@@ -195,7 +195,7 @@
 194	http://fr.dbpedia.org/property/présidentDuGouvernement
 195	http://fr.dbpedia.org/property/européenne
 196	http://fr.dbpedia.org/property/constellationsLimitrophes
-197	http://fr.dbpedia.org/property/clubEntraîneur
+197	http://fr.dbpedia.org/property/cl¾ntraîneur
 198	http://fr.dbpedia.org/property/district
 199	http://fr.dbpedia.org/property/gouverneur
 200	http://fr.dbpedia.org/property/sport
@@ -306,11 +306,11 @@
 305	http://fr.dbpedia.org/property/chefDeL'état
 306	http://fr.dbpedia.org/property/sociétéMère
 307	http://fr.dbpedia.org/property/rég
-308	http://fr.dbpedia.org/property/langueDeFacto
+308	http://fr.dbpedia.org/property/langacto
 309	http://fr.dbpedia.org/property/campus
 310	http://fr.dbpedia.org/property/débitLieu
 311	http://fr.dbpedia.org/property/lieuDécès
-312	http://fr.dbpedia.org/property/lienSubdivision
+312	http://fr.dbpedia.org/property/lienS½ivision
 313	http://fr.dbpedia.org/property/entourage
 314	http://fr.dbpedia.org/property/limitrophes
 315	http://fr.dbpedia.org/property/disparitions
@@ -335,7 +335,7 @@
 334	http://fr.dbpedia.org/property/nomLangue
 335	http://fr.dbpedia.org/property/mrc
 336	http://fr.dbpedia.org/property/département
-337	http://fr.dbpedia.org/property/pays1NomSubdivision
+337	http://fr.dbpedia.org/property/pays1NomS½ivision
 338	http://fr.dbpedia.org/property/ppvPrécédent
 339	http://fr.dbpedia.org/property/branche
 340	http://fr.dbpedia.org/property/exposuiv
@@ -416,7 +416,7 @@
 415	http://fr.dbpedia.org/property/style
 416	http://fr.dbpedia.org/property/événements
 417	http://fr.dbpedia.org/property/nation
-418	http://fr.dbpedia.org/property/subdivisions
+418	http://fr.dbpedia.org/property/s½ivisions
 419	http://fr.dbpedia.org/property/discipline
 420	http://fr.dbpedia.org/property/villeprec
 421	http://fr.dbpedia.org/property/présidentFédéral
@@ -431,7 +431,7 @@
 430	http://fr.dbpedia.org/property/langageDeProgrammation
 431	http://fr.dbpedia.org/property/produits
 432	http://fr.dbpedia.org/property/ligueProspect
-433	http://fr.dbpedia.org/property/langueDePublication
+433	http://fr.dbpedia.org/property/langໞPublication
 434	http://fr.dbpedia.org/property/périodique
 435	http://fr.dbpedia.org/property/manager
 436	http://fr.dbpedia.org/property/film
@@ -454,15 +454,15 @@
 453	http://fr.dbpedia.org/property/scènesLocales
 454	http://fr.dbpedia.org/property/ethnicité
 455	http://fr.dbpedia.org/property/état
-456	http://fr.dbpedia.org/property/lieuDeMort
+456	http://fr.dbpedia.org/property/lieÞMort
 457	http://fr.dbpedia.org/property/compétition%23_
 458	http://fr.dbpedia.org/property/region
 459	http://fr.dbpedia.org/property/dérivés
 460	http://fr.dbpedia.org/property/enregistré
 461	http://fr.dbpedia.org/property/stPatron
-462	http://fr.dbpedia.org/property/nomSubdivisionMère
+462	http://fr.dbpedia.org/property/nomS½ivisionMère
 463	http://fr.dbpedia.org/property/qg
-464	http://fr.dbpedia.org/property/clubEntraineur
+464	http://fr.dbpedia.org/property/cl¾ntraineur
 465	http://fr.dbpedia.org/property/h1E
 466	http://fr.dbpedia.org/property/titreDuMinistre
 467	http://fr.dbpedia.org/property/bourgmestre
@@ -470,7 +470,7 @@
 469	http://fr.dbpedia.org/property/allWriting
 470	http://fr.dbpedia.org/property/adresse
 471	http://fr.dbpedia.org/property/distributeur
-472	http://fr.dbpedia.org/property/lieuDeSignature
+472	http://fr.dbpedia.org/property/lieÞSignature
 473	http://fr.dbpedia.org/property/îleDuPointCulminant
 474	http://fr.dbpedia.org/property/teteliste
 475	http://fr.dbpedia.org/property/confluence
@@ -549,7 +549,7 @@
 548	http://fr.dbpedia.org/property/allumeur
 549	http://fr.dbpedia.org/property/coupeEurope
 550	http://fr.dbpedia.org/property/prédécesseurPape
-551	http://fr.dbpedia.org/property/languefille
+551	http://fr.dbpedia.org/property/langïille
 552	http://fr.dbpedia.org/property/européennes2009PremierParti
 553	http://fr.dbpedia.org/property/q2E
 554	http://fr.dbpedia.org/property/dessin
@@ -589,7 +589,7 @@
 588	http://fr.dbpedia.org/property/fond
 589	http://fr.dbpedia.org/property/comtés
 590	http://fr.dbpedia.org/property/naissance
-591	http://fr.dbpedia.org/property/étendueD'eau
+591	http://fr.dbpedia.org/property/étendí'eau
 592	http://fr.dbpedia.org/property/supports
 593	http://fr.dbpedia.org/property/d1E
 594	http://fr.dbpedia.org/property/agenceMère
@@ -606,7 +606,7 @@
 605	http://fr.dbpedia.org/property/affluenceRecord
 606	http://fr.dbpedia.org/property/régionales2004SecondParti
 607	http://fr.dbpedia.org/property/h8E
-608	http://fr.dbpedia.org/property/partiSuccesseur
+608	http://fr.dbpedia.org/property/partiS೎sseur
 609	http://fr.dbpedia.org/property/municipales2014SecondParti
 610	http://fr.dbpedia.org/property/législatives2002SecondParti
 611	http://fr.dbpedia.org/property/concessionnaireact
@@ -682,7 +682,7 @@
 681	http://fr.dbpedia.org/property/récomp.Civiles
 682	http://fr.dbpedia.org/property/annéePréc
 683	http://fr.dbpedia.org/property/plusLargeDéfaite
-684	http://fr.dbpedia.org/property/subdivisionsTerritoriales
+684	http://fr.dbpedia.org/property/s½ivisionsTerritoriales
 685	http://fr.dbpedia.org/property/écritEn
 686	http://fr.dbpedia.org/property/œuvre
 687	http://fr.dbpedia.org/property/administration
@@ -696,7 +696,7 @@
 695	http://fr.dbpedia.org/property/lyrics
 696	http://fr.dbpedia.org/property/provinces
 697	http://fr.dbpedia.org/property/villeRésidence
-698	http://fr.dbpedia.org/property/suffragants
+698	http://fr.dbpedia.org/property/sÿragants
 699	http://fr.dbpedia.org/property/paysVisités
 700	http://fr.dbpedia.org/property/versionPrécédente
 701	http://fr.dbpedia.org/property/extrémité2Ville
@@ -724,7 +724,7 @@
 723	http://fr.dbpedia.org/property/régionActuelle
 724	http://fr.dbpedia.org/property/municipalité
 725	http://fr.dbpedia.org/property/autreAlbum
-726	http://fr.dbpedia.org/property/pays2NomSubdivision
+726	http://fr.dbpedia.org/property/pays2NomS½ivision
 727	http://fr.dbpedia.org/property/personnageClef
 728	http://fr.dbpedia.org/property/niveau
 729	http://fr.dbpedia.org/property/pointLePlusBas
@@ -762,7 +762,7 @@
 761	http://fr.dbpedia.org/property/typeParlement
 762	http://fr.dbpedia.org/property/premier
 763	http://fr.dbpedia.org/property/collaborations
-764	http://fr.dbpedia.org/property/lieuDeL'annonceCanonisation
+764	http://fr.dbpedia.org/property/lieÞL'annonceCanonisation
 765	http://fr.dbpedia.org/property/simhor
 766	http://fr.dbpedia.org/property/rivières
 767	http://fr.dbpedia.org/property/secrétairepcc
@@ -804,7 +804,7 @@
 803	http://fr.dbpedia.org/property/via
 804	http://fr.dbpedia.org/property/président2Sénat
 805	http://fr.dbpedia.org/property/assemblée4groupe
-806	http://fr.dbpedia.org/property/lieuDeVénération
+806	http://fr.dbpedia.org/property/lieÞVénération
 807	http://fr.dbpedia.org/property/temple
 808	http://fr.dbpedia.org/property/dessinateur
 809	http://fr.dbpedia.org/property/régionales2015PremierNom
@@ -884,13 +884,13 @@
 883	http://fr.dbpedia.org/property/ancienneLigue
 884	http://fr.dbpedia.org/property/auteurOrigine
 885	http://fr.dbpedia.org/property/annéesD'activité
-886	http://fr.dbpedia.org/property/pays3NomSubdivision
+886	http://fr.dbpedia.org/property/pays3NomS½ivision
 887	http://fr.dbpedia.org/property/établi
 888	http://fr.dbpedia.org/property/inférieur
 889	http://fr.dbpedia.org/property/partisAuPouvoir
 890	http://fr.dbpedia.org/property/distreg
 891	http://fr.dbpedia.org/property/occupationActuelle
-892	http://fr.dbpedia.org/property/clubActuel
+892	http://fr.dbpedia.org/property/cl஬tuel
 893	http://fr.dbpedia.org/property/municipales2008PremierNom
 894	http://fr.dbpedia.org/property/enteteTexte
 895	http://fr.dbpedia.org/property/commisRoyal

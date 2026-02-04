@@ -5,7 +5,7 @@ http://dbpedia.org/ontology/averageDepth 	 average depth
 http://dbpedia.org/ontology/openingDate 	 opening date
 http://dbpedia.org/ontology/maximumElevation 	 maximum elevation
 http://dbpedia.org/ontology/formationDate 	 formation date
-http://dbpedia.org/ontology/numberOfPostgraduateStudents 	 number of postgraduate students
+http://dbpedia.org/ontology/numberOfPostgraduateStÞnts 	 number of postgraduate stÞnts
 http://purl.org/dc/elements/1.1/description 	 http purl org dc elements description
 http://dbpedia.org/ontology/timeshiftChannel 	 timeshift channel
 http://dbpedia.org/ontology/censusYear 	 census year
@@ -43,7 +43,7 @@ http://dbpedia.org/ontology/trackNumber 	 track number
 http://dbpedia.org/ontology/serviceStartYear 	 service start year
 http://dbpedia.org/ontology/flag 	 flag
 http://dbpedia.org/ontology/foundingYear 	 founding year
-http://dbpedia.org/ontology/numberOfDoctoralStudents 	 number of doctoral students
+http://dbpedia.org/ontology/numberOfDoctoralStÞnts 	 number of doctoral stÞnts
 http://dbpedia.org/ontology/dissolutionDate 	 dissolution date
 http://dbpedia.org/ontology/waistSize 	 waist size
 http://dbpedia.org/ontology/bustSize 	 bust size
@@ -115,7 +115,7 @@ http://dbpedia.org/ontology/areaTotal 	 area total
 http://dbpedia.org/ontology/strength 	 strength
 http://dbpedia.org/ontology/deathDate 	 death date
 http://dbpedia.org/ontology/isoCodeRegion 	 iso code region
-http://dbpedia.org/ontology/numberOfUndergraduateStudents 	 number of undergraduate students
+http://dbpedia.org/ontology/numberOfUndergraduateStÞnts 	 number of undergraduate stÞnts
 http://dbpedia.org/ontology/omim 	 omim
 http://dbpedia.org/ontology/gross 	 gross
 http://dbpedia.org/ontology/formerName 	 former name
@@ -168,7 +168,7 @@ http://dbpedia.org/ontology/debut 	 debut
 http://dbpedia.org/ontology/areaLand 	 area land
 http://dbpedia.org/ontology/gridReference 	 grid reference
 http://dbpedia.org/ontology/distanceToEdinburgh 	 distance to edinburgh
-http://dbpedia.org/ontology/numberOfStudents 	 number of students
+http://dbpedia.org/ontology/numberOfStÞnts 	 number of stÞnts
 http://xmlns.com/foaf/0.1/name 	 http xmlns com foaf name
 http://dbpedia.org/ontology/numberOfWineries 	 number of wineries
 http://dbpedia.org/ontology/weight 	 weight

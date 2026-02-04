@@ -48,7 +48,7 @@ http://dbpedia.org/resource/Coral_Gables,_Florida	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Anton_Schübirz_von_Chobinin	http://www.wikidata.org/entity/Q4775992
 http://dbpedia.org/resource/John_Morris_(composer)	http://www.wikidata.org/entity/Q203188
 http://dbpedia.org/resource/Charlie_Wilson_(singer)	http://www.wikidata.org/entity/Q1067043
-http://dbpedia.org/resource/CB_Lucentum_Alicante	http://www.wikidata.org/entity/Q643748
+http://dbpedia.org/resource/CB_LÎntum_Alicante	http://www.wikidata.org/entity/Q643748
 http://dbpedia.org/resource/Podlesí_(Ústí_nad_Orlicí_District)	http://www.wikidata.org/entity/Q2521070
 http://dbpedia.org/resource/Kergrist-Moëlou	http://www.wikidata.org/entity/Q863894
 http://dbpedia.org/resource/Philip_Kaufman	http://www.wikidata.org/entity/Q176126
@@ -106,7 +106,7 @@ http://dbpedia.org/resource/Vilnius	http://www.wikidata.org/entity/Q216
 http://dbpedia.org/resource/Belgrade	http://www.wikidata.org/entity/Q3711
 http://dbpedia.org/resource/Naïm_Kattan	http://www.wikidata.org/entity/Q2298711
 http://dbpedia.org/resource/Oldest_McDonald's_restaurant	http://www.wikidata.org/entity/Q7085574
-http://dbpedia.org/resource/Baralaba,_Queensland	http://www.wikidata.org/entity/Q4077657
+http://dbpedia.org/resource/Baralaba,_Qînsland	http://www.wikidata.org/entity/Q4077657
 http://dbpedia.org/resource/Samšín	http://www.wikidata.org/entity/Q1091191
 http://dbpedia.org/resource/Libya	http://www.wikidata.org/entity/Q1016
 http://dbpedia.org/resource/Aristides_Pérez	http://www.wikidata.org/entity/Q4790991
@@ -145,7 +145,7 @@ http://dbpedia.org/resource/Durbans	http://www.wikidata.org/entity/Q615642
 http://dbpedia.org/resource/Einsiedeln	http://www.wikidata.org/entity/Q68950
 http://dbpedia.org/resource/Beistegui_Hermanos	http://www.wikidata.org/entity/Q1100754
 http://dbpedia.org/resource/Křtiny_(Blansko_District)	http://www.wikidata.org/entity/Q1797682
-http://dbpedia.org/resource/Böhler-Uddeholm	http://www.wikidata.org/entity/Q669423
+http://dbpedia.org/resource/Böhler-ෞholm	http://www.wikidata.org/entity/Q669423
 http://dbpedia.org/resource/Verdabbio	http://www.wikidata.org/entity/Q65469
 http://dbpedia.org/resource/San_Francisco	http://www.wikidata.org/entity/Q62
 http://dbpedia.org/resource/Godfrey_Mundy	http://www.wikidata.org/entity/Q5576511
@@ -180,7 +180,7 @@ http://dbpedia.org/resource/Henry_Parkes	http://www.wikidata.org/entity/Q1607143
 http://dbpedia.org/resource/Vanilla_Sky	http://www.wikidata.org/entity/Q110278
 http://dbpedia.org/resource/Samper_(singer)	http://www.wikidata.org/entity/Q20685416
 http://dbpedia.org/resource/David_DeCoteau	http://www.wikidata.org/entity/Q11319
-http://dbpedia.org/resource/Aboubacar_Sankhare	http://www.wikidata.org/entity/Q2821758
+http://dbpedia.org/resource/Abo뫊r_Sankhare	http://www.wikidata.org/entity/Q2821758
 http://dbpedia.org/resource/River_Nore	http://www.wikidata.org/entity/Q1048506
 http://dbpedia.org/resource/Blainville-sur-Orne	http://www.wikidata.org/entity/Q319628
 http://dbpedia.org/resource/James_Ryan_O'Neill	http://www.wikidata.org/entity/Q6142584
@@ -367,7 +367,7 @@ http://dbpedia.org/resource/Once_Upon_a_Time_(Simple_Minds_album)	http://www.wik
 http://dbpedia.org/resource/Jean-Pierre_Dannaud	http://www.wikidata.org/entity/Q8323731
 http://dbpedia.org/resource/Aubrey_Dollar	http://www.wikidata.org/entity/Q454272
 http://dbpedia.org/resource/Grindhouse_(film)	http://www.wikidata.org/entity/Q679023
-http://dbpedia.org/resource/The_Right_Stuff_(film)	http://www.wikidata.org/entity/Q1197185
+http://dbpedia.org/resource/The_Right_Stÿ_(film)	http://www.wikidata.org/entity/Q1197185
 http://dbpedia.org/resource/Philippe_Volter	http://www.wikidata.org/entity/Q726093
 http://dbpedia.org/resource/Dinner_at_Eight_(film)	http://www.wikidata.org/entity/Q722648
 http://dbpedia.org/resource/Steven_Zaillian	http://www.wikidata.org/entity/Q291141
@@ -589,7 +589,7 @@ http://dbpedia.org/resource/One_Front_Street	http://www.wikidata.org/entity/Q349
 http://dbpedia.org/resource/Roy_Conacher	http://www.wikidata.org/entity/Q730883
 http://dbpedia.org/resource/La_Rioja_(Spain)	http://www.wikidata.org/entity/Q5727
 http://dbpedia.org/resource/Cheb_District	http://www.wikidata.org/entity/Q628280
-http://dbpedia.org/resource/Hubert_Reeves	http://www.wikidata.org/entity/Q1356355
+http://dbpedia.org/resource/H¾rt_Reeves	http://www.wikidata.org/entity/Q1356355
 http://dbpedia.org/resource/Northumberland_County,_Pennsylvania	http://www.wikidata.org/entity/Q494164
 http://dbpedia.org/resource/Kenji_Arabori	http://www.wikidata.org/entity/Q6389317
 http://dbpedia.org/resource/Michael_Lonsdale	http://www.wikidata.org/entity/Q346540
@@ -626,7 +626,7 @@ http://dbpedia.org/resource/Laval,_Mayenne	http://www.wikidata.org/entity/Q18415
 http://dbpedia.org/resource/Robert_DeLeo	http://www.wikidata.org/entity/Q924486
 http://dbpedia.org/resource/Carlos_Henrique_Barbosa_Augusto	http://www.wikidata.org/entity/Q5042164
 http://dbpedia.org/resource/Donja_Tramošnica	http://www.wikidata.org/entity/Q3036416
-http://dbpedia.org/resource/Johann_Georg_Stauffer	http://www.wikidata.org/entity/Q90229
+http://dbpedia.org/resource/Johann_Georg_Sta࿾r	http://www.wikidata.org/entity/Q90229
 http://dbpedia.org/resource/Alice_in_Wonderland_(1949_film)	http://www.wikidata.org/entity/Q1137844
 http://dbpedia.org/resource/Guam	http://www.wikidata.org/entity/Q16635
 http://dbpedia.org/resource/James_Bell_Connolly	http://www.wikidata.org/entity/Q16006733
@@ -671,7 +671,7 @@ http://dbpedia.org/resource/AmaZulu_F.C.	http://www.wikidata.org/entity/Q451635
 http://dbpedia.org/resource/Lüterkofen-Ichertswil	http://www.wikidata.org/entity/Q67931
 http://dbpedia.org/resource/Srđan_Srećković	http://www.wikidata.org/entity/Q1261290
 http://dbpedia.org/resource/Princess_Agnes_of_Anhalt-Dessau	http://www.wikidata.org/entity/Q394683
-http://dbpedia.org/resource/War_of_the_Castilian_Succession	http://www.wikidata.org/entity/Q282135
+http://dbpedia.org/resource/War_of_the_Castilian_S೎ssion	http://www.wikidata.org/entity/Q282135
 http://dbpedia.org/resource/StarStruck_(Season_3)	http://www.wikidata.org/entity/Q7600563
 http://dbpedia.org/resource/Hajime_Ohara	http://www.wikidata.org/entity/Q5639983
 http://dbpedia.org/resource/Zina_Zaflow	http://www.wikidata.org/entity/Q8072238
@@ -691,7 +691,7 @@ http://dbpedia.org/resource/Stig_Johanson	http://www.wikidata.org/entity/Q588511
 http://dbpedia.org/resource/Sequoyah_County,_Oklahoma	http://www.wikidata.org/entity/Q495845
 http://dbpedia.org/resource/Love._Angel._Music._Baby.	http://www.wikidata.org/entity/Q750087
 http://dbpedia.org/resource/Rupsi	http://www.wikidata.org/entity/Q3454331
-http://dbpedia.org/resource/Loïc_Dufau	http://www.wikidata.org/entity/Q6694703
+http://dbpedia.org/resource/Loïc_Dúu	http://www.wikidata.org/entity/Q6694703
 http://dbpedia.org/resource/Saint-Martin-sur-la-Chambre	http://www.wikidata.org/entity/Q1222372
 http://dbpedia.org/resource/Garfield_and_Friends	http://www.wikidata.org/entity/Q576501
 http://dbpedia.org/resource/Eddi_Reader_(album)	http://www.wikidata.org/entity/Q5335779
@@ -708,7 +708,7 @@ http://dbpedia.org/resource/Montenegro	http://www.wikidata.org/entity/Q236
 http://dbpedia.org/resource/Devipur,_Siraha	http://www.wikidata.org/entity/Q2223947
 http://dbpedia.org/resource/Harry_Lauter	http://www.wikidata.org/entity/Q3127855
 http://dbpedia.org/resource/Saint_Lucia	http://www.wikidata.org/entity/Q760
-http://dbpedia.org/resource/Queen_Victoria	http://www.wikidata.org/entity/Q9439
+http://dbpedia.org/resource/Qîn_Victoria	http://www.wikidata.org/entity/Q9439
 http://dbpedia.org/resource/Långvik	http://www.wikidata.org/entity/Q596147
 http://dbpedia.org/resource/Antoine_de_la_Mothe_Cadillac	http://www.wikidata.org/entity/Q586595
 http://dbpedia.org/resource/Marc_Shaiman	http://www.wikidata.org/entity/Q979312
@@ -811,7 +811,7 @@ http://dbpedia.org/resource/Aleksandar_Petrović_(film_director)	http://www.wiki
 http://dbpedia.org/resource/Orve	http://www.wikidata.org/entity/Q908504
 http://dbpedia.org/resource/Upper_West_Side	http://www.wikidata.org/entity/Q429687
 http://dbpedia.org/resource/Carolyn_Kent	http://www.wikidata.org/entity/Q5045399
-http://dbpedia.org/resource/Puebla_de_Azaba	http://www.wikidata.org/entity/Q1768270
+http://dbpedia.org/resource/Pëla_de_Azaba	http://www.wikidata.org/entity/Q1768270
 http://dbpedia.org/resource/Valencian_Community	http://www.wikidata.org/entity/Q5720
 http://dbpedia.org/resource/Bloodhounds_of_Broadway_(1989_film)	http://www.wikidata.org/entity/Q2706157
 http://dbpedia.org/resource/Aleksander_Knavs	http://www.wikidata.org/entity/Q696768
@@ -823,7 +823,7 @@ http://dbpedia.org/resource/Maurice_Blieck	http://www.wikidata.org/entity/Q67928
 http://dbpedia.org/resource/Michael_E._Knight	http://www.wikidata.org/entity/Q4538747
 http://dbpedia.org/resource/Karl_Paul_Kristian_Gylche	http://www.wikidata.org/entity/Q20203052
 http://dbpedia.org/resource/Vincennes	http://www.wikidata.org/entity/Q193819
-http://dbpedia.org/resource/Pokémon:_Lucario_and_the_Mystery_of_Mew	http://www.wikidata.org/entity/Q890720
+http://dbpedia.org/resource/Pokémon:_LÊrio_and_the_Mystery_of_Mew	http://www.wikidata.org/entity/Q890720
 http://dbpedia.org/resource/Borgore	http://www.wikidata.org/entity/Q50674
 http://dbpedia.org/resource/Catch_My_Soul	http://www.wikidata.org/entity/Q5051666
 http://dbpedia.org/resource/Cassagnabère-Tournas	http://www.wikidata.org/entity/Q1343851
@@ -864,7 +864,7 @@ http://dbpedia.org/resource/2000_Malibu_Road	http://www.wikidata.org/entity/Q211
 http://dbpedia.org/resource/Hinterrhein,_Switzerland	http://www.wikidata.org/entity/Q64886
 http://dbpedia.org/resource/Heinrich_Freiherr_von_Stackelberg	http://www.wikidata.org/entity/Q66838
 http://dbpedia.org/resource/University_of_Pittsburgh	http://www.wikidata.org/entity/Q235034
-http://dbpedia.org/resource/Michel_Foucault	http://www.wikidata.org/entity/Q44272
+http://dbpedia.org/resource/Michel_FoÊult	http://www.wikidata.org/entity/Q44272
 http://dbpedia.org/resource/Soulosse-sous-Saint-Élophe	http://www.wikidata.org/entity/Q781372
 http://dbpedia.org/resource/Birch_Township,_Beltrami_County,_Minnesota	http://www.wikidata.org/entity/Q1897170
 http://dbpedia.org/resource/Captain_America_(serial)	http://www.wikidata.org/entity/Q1421609
@@ -876,7 +876,7 @@ http://dbpedia.org/resource/Glenn_Close	http://www.wikidata.org/entity/Q372311
 http://dbpedia.org/resource/Maureen_Hingert	http://www.wikidata.org/entity/Q6792694
 http://dbpedia.org/resource/Stansstad	http://www.wikidata.org/entity/Q64285
 http://dbpedia.org/resource/Félix_Goethals	http://www.wikidata.org/entity/Q1383613
-http://dbpedia.org/resource/Atlético_Clube_Goianiense	http://www.wikidata.org/entity/Q198034
+http://dbpedia.org/resource/Atlético_Cl¾_Goianiense	http://www.wikidata.org/entity/Q198034
 http://dbpedia.org/resource/Terrence_Murphy_(Canadian_politician)	http://www.wikidata.org/entity/Q7703497
 http://dbpedia.org/resource/Stefan_Marković	http://www.wikidata.org/entity/Q2662668
 http://dbpedia.org/resource/Octave_Mirbeau	http://www.wikidata.org/entity/Q23441
@@ -1031,7 +1031,7 @@ http://dbpedia.org/resource/Piet_de_Jong	http://www.wikidata.org/entity/Q345481
 http://dbpedia.org/resource/Krhov_(Třebíč_District)	http://www.wikidata.org/entity/Q218209
 http://dbpedia.org/resource/Doc_(film)	http://www.wikidata.org/entity/Q205903
 http://dbpedia.org/resource/Burlington_County,_New_Jersey	http://www.wikidata.org/entity/Q138141
-http://dbpedia.org/resource/Rubercy	http://www.wikidata.org/entity/Q540476
+http://dbpedia.org/resource/R¾rcy	http://www.wikidata.org/entity/Q540476
 http://dbpedia.org/resource/Chezal-Benoît	http://www.wikidata.org/entity/Q1139940
 http://dbpedia.org/resource/Caroline_Kennedy	http://www.wikidata.org/entity/Q230303
 http://dbpedia.org/resource/Make_Poverty_History_Emirates	http://www.wikidata.org/entity/Q6739068
@@ -1049,7 +1049,7 @@ http://dbpedia.org/resource/Halmstad_Municipality	http://www.wikidata.org/entity
 http://dbpedia.org/resource/La_Villette,_Calvados	http://www.wikidata.org/entity/Q636251
 http://dbpedia.org/resource/Caldwell_Township,_Callaway_County,_Missouri	http://www.wikidata.org/entity/Q5019176
 http://dbpedia.org/resource/Dominique_Dussault	http://www.wikidata.org/entity/Q464155
-http://dbpedia.org/resource/Lucas_Venuto	http://www.wikidata.org/entity/Q18915169
+http://dbpedia.org/resource/LÊs_Venuto	http://www.wikidata.org/entity/Q18915169
 http://dbpedia.org/resource/Strange_Days_(film)	http://www.wikidata.org/entity/Q550529
 http://dbpedia.org/resource/Haakon_VII_of_Norway	http://www.wikidata.org/entity/Q154927
 http://dbpedia.org/resource/Scream_3	http://www.wikidata.org/entity/Q391784
@@ -1064,7 +1064,7 @@ http://dbpedia.org/resource/Yar_Hussain	http://www.wikidata.org/entity/Q8049185
 http://dbpedia.org/resource/William_III_of_the_Netherlands	http://www.wikidata.org/entity/Q125649
 http://dbpedia.org/resource/Filip_Benko	http://www.wikidata.org/entity/Q5448459
 http://dbpedia.org/resource/Very_Annie_Mary	http://www.wikidata.org/entity/Q3402990
-http://dbpedia.org/resource/Quebec_City	http://www.wikidata.org/entity/Q2145
+http://dbpedia.org/resource/Q_City	http://www.wikidata.org/entity/Q2145
 http://dbpedia.org/resource/Bharti_Airtel	http://www.wikidata.org/entity/Q854867
 http://dbpedia.org/resource/Red_Nightmare	http://www.wikidata.org/entity/Q5330298
 http://dbpedia.org/resource/Pacific_Sales	http://www.wikidata.org/entity/Q7122671
@@ -1125,7 +1125,7 @@ http://dbpedia.org/resource/Slokostitsa	http://www.wikidata.org/entity/Q1088445
 http://dbpedia.org/resource/Corbie	http://www.wikidata.org/entity/Q71469
 http://dbpedia.org/resource/Hanila_Parish	http://www.wikidata.org/entity/Q1020007
 http://dbpedia.org/resource/American_Mathematical_Society	http://www.wikidata.org/entity/Q465654
-http://dbpedia.org/resource/Florida_Ruffin_Ridley	http://www.wikidata.org/entity/Q22338526
+http://dbpedia.org/resource/Florida_Rÿin_Ridley	http://www.wikidata.org/entity/Q22338526
 http://dbpedia.org/resource/TTM_Customs_F.C.	http://www.wikidata.org/entity/Q1361536
 http://dbpedia.org/resource/Magic_Mike_XXL	http://www.wikidata.org/entity/Q17893055
 http://dbpedia.org/resource/Roberto_Orci	http://www.wikidata.org/entity/Q467500
@@ -1159,7 +1159,7 @@ http://dbpedia.org/resource/Saint-Joachim	http://www.wikidata.org/entity/Q138561
 http://dbpedia.org/resource/Callao	http://www.wikidata.org/entity/Q105037
 http://dbpedia.org/resource/The_Violent_Men	http://www.wikidata.org/entity/Q3227339
 http://dbpedia.org/resource/Bacău_County	http://www.wikidata.org/entity/Q179779
-http://dbpedia.org/resource/Claude_Jarman,_Jr.	http://www.wikidata.org/entity/Q736243
+http://dbpedia.org/resource/ClaÞ_Jarman,_Jr.	http://www.wikidata.org/entity/Q736243
 http://dbpedia.org/resource/Vera_Lewis	http://www.wikidata.org/entity/Q3555709
 http://dbpedia.org/resource/Simón_de_Rojas	http://www.wikidata.org/entity/Q201840
 http://dbpedia.org/resource/Butler_County,_Pennsylvania	http://www.wikidata.org/entity/Q488672
@@ -1261,12 +1261,12 @@ http://dbpedia.org/resource/Prez-vers-Noréaz	http://www.wikidata.org/entity/Q67
 http://dbpedia.org/resource/Zsolt_Érsek	http://www.wikidata.org/entity/Q4024868
 http://dbpedia.org/resource/Bunzaburō_Kawagishi	http://www.wikidata.org/entity/Q4997989
 http://dbpedia.org/resource/Ann_Vickers_(film)	http://www.wikidata.org/entity/Q558812
-http://dbpedia.org/resource/Scudda_Hoo!_Scudda_Hay!	http://www.wikidata.org/entity/Q1755114
+http://dbpedia.org/resource/Scේ_Hoo!_Scේ_Hay!	http://www.wikidata.org/entity/Q1755114
 http://dbpedia.org/resource/Toutens	http://www.wikidata.org/entity/Q1429884
 http://dbpedia.org/resource/Castellane	http://www.wikidata.org/entity/Q207083
 http://dbpedia.org/resource/Margaret_Seddon	http://www.wikidata.org/entity/Q6759883
 http://dbpedia.org/resource/Una_Lucy_Fielding	http://www.wikidata.org/entity/Q2492185
-http://dbpedia.org/resource/Danube	http://www.wikidata.org/entity/Q1653
+http://dbpedia.org/resource/Dan¾	http://www.wikidata.org/entity/Q1653
 http://dbpedia.org/resource/Big_Yellow_Taxi	http://www.wikidata.org/entity/Q2732732
 http://dbpedia.org/resource/Leopold_II,_Grand_Duke_of_Tuscany	http://www.wikidata.org/entity/Q313169
 http://dbpedia.org/resource/Maisons-Alfort	http://www.wikidata.org/entity/Q208314
@@ -1275,7 +1275,7 @@ http://dbpedia.org/resource/Donneloye	http://www.wikidata.org/entity/Q70584
 http://dbpedia.org/resource/Loire	http://www.wikidata.org/entity/Q1469
 http://dbpedia.org/resource/Rafael_Hernández_National_College	http://www.wikidata.org/entity/Q7282173
 http://dbpedia.org/resource/Daejeon_World_Cup_Stadium	http://www.wikidata.org/entity/Q482598
-http://dbpedia.org/resource/Sin_&_Punishment:_Star_Successor	http://www.wikidata.org/entity/Q2732145
+http://dbpedia.org/resource/Sin_&_Punishment:_Star_S೎ssor	http://www.wikidata.org/entity/Q2732145
 http://dbpedia.org/resource/Tordera_(river)	http://www.wikidata.org/entity/Q31456
 http://dbpedia.org/resource/Bronschhofen	http://www.wikidata.org/entity/Q65785
 http://dbpedia.org/resource/Captive_Wild_Woman	http://www.wikidata.org/entity/Q3855908
@@ -1473,7 +1473,7 @@ http://dbpedia.org/resource/Toniu_Fonoti	http://www.wikidata.org/entity/Q7821514
 http://dbpedia.org/resource/Abeokuta	http://www.wikidata.org/entity/Q206484
 http://dbpedia.org/resource/Dresden_Castle	http://www.wikidata.org/entity/Q167314
 http://dbpedia.org/resource/Osredek,_Šentjur	http://www.wikidata.org/entity/Q5348391
-http://dbpedia.org/resource/Lucas_Horenbout	http://www.wikidata.org/entity/Q957847
+http://dbpedia.org/resource/LÊs_Horenbout	http://www.wikidata.org/entity/Q957847
 http://dbpedia.org/resource/Dean_Collins_(actor)	http://www.wikidata.org/entity/Q552962
 http://dbpedia.org/resource/Northeast_Region,_Brazil	http://www.wikidata.org/entity/Q1136194
 http://dbpedia.org/resource/The_Divine_Weapon	http://www.wikidata.org/entity/Q484547
@@ -1673,7 +1673,7 @@ http://dbpedia.org/resource/Quảng_Nam_Province	http://www.wikidata.org/entity/
 http://dbpedia.org/resource/Sony_Music_Entertainment_Japan	http://www.wikidata.org/entity/Q732503
 http://dbpedia.org/resource/On_the_Beach_(1959_film)	http://www.wikidata.org/entity/Q1469774
 http://dbpedia.org/resource/Bruno_Malfacine	http://www.wikidata.org/entity/Q4979295
-http://dbpedia.org/resource/Blackwater,_Queensland	http://www.wikidata.org/entity/Q880963
+http://dbpedia.org/resource/Blackwater,_Qînsland	http://www.wikidata.org/entity/Q880963
 http://dbpedia.org/resource/Fright_Night_(2011_film)	http://www.wikidata.org/entity/Q268824
 http://dbpedia.org/resource/Vince_Guaraldi	http://www.wikidata.org/entity/Q706953
 http://dbpedia.org/resource/Evan_Almighty	http://www.wikidata.org/entity/Q195949
@@ -1709,7 +1709,7 @@ http://dbpedia.org/resource/Stephen_M._White	http://www.wikidata.org/entity/Q234
 http://dbpedia.org/resource/The_Double_(2011_film)	http://www.wikidata.org/entity/Q385036
 http://dbpedia.org/resource/Voulez-Vous_(song)	http://www.wikidata.org/entity/Q2001623
 http://dbpedia.org/resource/Jeremiah_Denton	http://www.wikidata.org/entity/Q731680
-http://dbpedia.org/resource/Lady_Hunter:_Prelude_To_Murder	http://www.wikidata.org/entity/Q19840322
+http://dbpedia.org/resource/Lady_Hunter:_PrelÞ_To_Murder	http://www.wikidata.org/entity/Q19840322
 http://dbpedia.org/resource/Port_Moresby	http://www.wikidata.org/entity/Q36526
 http://dbpedia.org/resource/Mikey_Day	http://www.wikidata.org/entity/Q6849449
 http://dbpedia.org/resource/Pamela_Jelimo	http://www.wikidata.org/entity/Q270684
@@ -1720,7 +1720,7 @@ http://dbpedia.org/resource/Donald_Pleasence	http://www.wikidata.org/entity/Q314
 http://dbpedia.org/resource/Philip_of_Spain_(1712–1719)	http://www.wikidata.org/entity/Q5858359
 http://dbpedia.org/resource/Five_Forks,_South_Carolina	http://www.wikidata.org/entity/Q2178804
 http://dbpedia.org/resource/Adhemar_da_Silva	http://www.wikidata.org/entity/Q199631
-http://dbpedia.org/resource/Too_Loud_a_Solitude	http://www.wikidata.org/entity/Q2461792
+http://dbpedia.org/resource/Too_Loud_a_SolitÞ	http://www.wikidata.org/entity/Q2461792
 http://dbpedia.org/resource/Even_Better_Than_the_Real_Thing	http://www.wikidata.org/entity/Q2557283
 http://dbpedia.org/resource/Free_Like_We_Want_2_B	http://www.wikidata.org/entity/Q5499907
 http://dbpedia.org/resource/Bramevaque	http://www.wikidata.org/entity/Q285355
@@ -1804,7 +1804,7 @@ http://dbpedia.org/resource/Pauline-Marie-Elisa_Thys	http://www.wikidata.org/ent
 http://dbpedia.org/resource/Sister_(Porno_Graffitti_song)	http://www.wikidata.org/entity/Q13725613
 http://dbpedia.org/resource/David_McDonald_(footballer)	http://www.wikidata.org/entity/Q5237324
 http://dbpedia.org/resource/Bob_Ezrin	http://www.wikidata.org/entity/Q316850
-http://dbpedia.org/resource/Jaime_Agudelo	http://www.wikidata.org/entity/Q2272148
+http://dbpedia.org/resource/Jaime_AgÞlo	http://www.wikidata.org/entity/Q2272148
 http://dbpedia.org/resource/%22Weird_Al%22_Yankovic	http://www.wikidata.org/entity/Q8349
 http://dbpedia.org/resource/Molecular_Brain_Research	http://www.wikidata.org/entity/Q6895939
 http://dbpedia.org/resource/The_Collection_(Bad_Manners_album)	http://www.wikidata.org/entity/Q16246347
@@ -1867,7 +1867,7 @@ http://dbpedia.org/resource/Itay_Elkaslasy	http://www.wikidata.org/entity/Q16864
 http://dbpedia.org/resource/Telenor_Serbia	http://www.wikidata.org/entity/Q1780171
 http://dbpedia.org/resource/Croatian_Democratic_Union	http://www.wikidata.org/entity/Q738439
 http://dbpedia.org/resource/Millville,_Delaware	http://www.wikidata.org/entity/Q754417
-http://dbpedia.org/resource/Reuben_Sechele_Nyangweso	http://www.wikidata.org/entity/Q16193772
+http://dbpedia.org/resource/Re¾n_Sechele_Nyangweso	http://www.wikidata.org/entity/Q16193772
 http://dbpedia.org/resource/Cedella_Marley	http://www.wikidata.org/entity/Q243113
 http://dbpedia.org/resource/Norodom_Sihanouk	http://www.wikidata.org/entity/Q160318
 http://dbpedia.org/resource/I-See-You.Com	http://www.wikidata.org/entity/Q1238526
@@ -1886,7 +1886,7 @@ http://dbpedia.org/resource/Ljetovik	http://www.wikidata.org/entity/Q3257424
 http://dbpedia.org/resource/County_Kildare	http://www.wikidata.org/entity/Q173332
 http://dbpedia.org/resource/Cambodia	http://www.wikidata.org/entity/Q424
 http://dbpedia.org/resource/The_Perfect_Storm_(film)	http://www.wikidata.org/entity/Q508349
-http://dbpedia.org/resource/Claude_Rains	http://www.wikidata.org/entity/Q318734
+http://dbpedia.org/resource/ClaÞ_Rains	http://www.wikidata.org/entity/Q318734
 http://dbpedia.org/resource/Stanisław_Dubois	http://www.wikidata.org/entity/Q7599127
 http://dbpedia.org/resource/Rafał_Gliński	http://www.wikidata.org/entity/Q1679523
 http://dbpedia.org/resource/Erebuni_Museum	http://www.wikidata.org/entity/Q3915253
@@ -1983,7 +1983,7 @@ http://dbpedia.org/resource/Blenio	http://www.wikidata.org/entity/Q68789
 http://dbpedia.org/resource/Jim_Coutts	http://www.wikidata.org/entity/Q6194375
 http://dbpedia.org/resource/Twisted_Metal:_Head-On	http://www.wikidata.org/entity/Q652481
 http://dbpedia.org/resource/The_Three_Stooges_in_Orbit	http://www.wikidata.org/entity/Q7769098
-http://dbpedia.org/resource/Clube_Atlético_Penapolense	http://www.wikidata.org/entity/Q5136486
+http://dbpedia.org/resource/Cl¾_Atlético_Penapolense	http://www.wikidata.org/entity/Q5136486
 http://dbpedia.org/resource/Louis_Faurer	http://www.wikidata.org/entity/Q326011
 http://dbpedia.org/resource/Karin_Månsdotter_(film)	http://www.wikidata.org/entity/Q6370899
 http://dbpedia.org/resource/Johan_Nygaardsvold	http://www.wikidata.org/entity/Q317659
@@ -2111,7 +2111,7 @@ http://dbpedia.org/resource/Csertő	http://www.wikidata.org/entity/Q872466
 http://dbpedia.org/resource/Lil_Wayne	http://www.wikidata.org/entity/Q15615
 http://dbpedia.org/resource/Bertrand_Bonello	http://www.wikidata.org/entity/Q703975
 http://dbpedia.org/resource/Land_Between_the_Lakes_National_Recreation_Area	http://www.wikidata.org/entity/Q6483875
-http://dbpedia.org/resource/Claudette_Colbert	http://www.wikidata.org/entity/Q203819
+http://dbpedia.org/resource/ClaÞtte_Colbert	http://www.wikidata.org/entity/Q203819
 http://dbpedia.org/resource/James_Risen	http://www.wikidata.org/entity/Q3161373
 http://dbpedia.org/resource/Kimberly_Williams-Paisley	http://www.wikidata.org/entity/Q234967
 http://dbpedia.org/resource/Roger_Donaldson	http://www.wikidata.org/entity/Q707755
@@ -2127,7 +2127,7 @@ http://dbpedia.org/resource/A_Looking_in_View	http://www.wikidata.org/entity/Q32
 http://dbpedia.org/resource/Sandra_Thalmann	http://www.wikidata.org/entity/Q15788296
 http://dbpedia.org/resource/Athens,_Georgia	http://www.wikidata.org/entity/Q203263
 http://dbpedia.org/resource/Pierre_Bouchet	http://www.wikidata.org/entity/Q3384107
-http://dbpedia.org/resource/Queens	http://www.wikidata.org/entity/Q18424
+http://dbpedia.org/resource/Qîns	http://www.wikidata.org/entity/Q18424
 http://dbpedia.org/resource/Annapolis,_Maryland	http://www.wikidata.org/entity/Q28271
 http://dbpedia.org/resource/Peter_Wright_(tennis)	http://www.wikidata.org/entity/Q13512815
 http://dbpedia.org/resource/Olivet,_Loiret	http://www.wikidata.org/entity/Q243866
@@ -2262,7 +2262,7 @@ http://dbpedia.org/resource/Jeremy_Slate	http://www.wikidata.org/entity/Q3177346
 http://dbpedia.org/resource/Frederick_M._Trapnell	http://www.wikidata.org/entity/Q3087173
 http://dbpedia.org/resource/César_Keiser	http://www.wikidata.org/entity/Q121520
 http://dbpedia.org/resource/Mohan_Bam	http://www.wikidata.org/entity/Q17501906
-http://dbpedia.org/resource/Dapa,_Valle_del_Cauca	http://www.wikidata.org/entity/Q5221556
+http://dbpedia.org/resource/Dapa,_Valle_del_CaÊ	http://www.wikidata.org/entity/Q5221556
 http://dbpedia.org/resource/Johnson_Mlambo	http://www.wikidata.org/entity/Q6268369
 http://dbpedia.org/resource/Eyong_Enoh	http://www.wikidata.org/entity/Q349181
 http://dbpedia.org/resource/Matthew_Weiner	http://www.wikidata.org/entity/Q924283
@@ -2337,7 +2337,7 @@ http://dbpedia.org/resource/Chou_Hsi-wei	http://www.wikidata.org/entity/Q5105427
 http://dbpedia.org/resource/AS_Nancy	http://www.wikidata.org/entity/Q19523
 http://dbpedia.org/resource/Gaspar_Iñíguez	http://www.wikidata.org/entity/Q3758619
 http://dbpedia.org/resource/Manieczki	http://www.wikidata.org/entity/Q2514804
-http://dbpedia.org/resource/Tsukubamirai,_Ibaraki	http://www.wikidata.org/entity/Q877254
+http://dbpedia.org/resource/Tsukºmirai,_Ibaraki	http://www.wikidata.org/entity/Q877254
 http://dbpedia.org/resource/Charles_Allen_(Massachusetts_politician)	http://www.wikidata.org/entity/Q1063539
 http://dbpedia.org/resource/Alena_Özel	http://www.wikidata.org/entity/Q2832658
 http://dbpedia.org/resource/Andrea_Libman	http://www.wikidata.org/entity/Q2061979
@@ -2368,7 +2368,7 @@ http://dbpedia.org/resource/Junior_Spivey	http://www.wikidata.org/entity/Q631346
 http://dbpedia.org/resource/Tangier	http://www.wikidata.org/entity/Q126148
 http://dbpedia.org/resource/Antofagasta	http://www.wikidata.org/entity/Q3612
 http://dbpedia.org/resource/Pepe_Brand	http://www.wikidata.org/entity/Q10507499
-http://dbpedia.org/resource/Bruce_Baird	http://www.wikidata.org/entity/Q4977100
+http://dbpedia.org/resource/BrÎ_Baird	http://www.wikidata.org/entity/Q4977100
 http://dbpedia.org/resource/Fox_FM_(Melbourne)	http://www.wikidata.org/entity/Q4038954
 http://dbpedia.org/resource/Artūras_Masiulis	http://www.wikidata.org/entity/Q4801960
 http://dbpedia.org/resource/Herman_Brusselmans	http://www.wikidata.org/entity/Q14063
@@ -2390,7 +2390,7 @@ http://dbpedia.org/resource/Vlasta_Průchová	http://www.wikidata.org/entity/Q53
 http://dbpedia.org/resource/Katunište	http://www.wikidata.org/entity/Q3194271
 http://dbpedia.org/resource/Rodrigo_Santoro	http://www.wikidata.org/entity/Q294819
 http://dbpedia.org/resource/Pannecé	http://www.wikidata.org/entity/Q54804
-http://dbpedia.org/resource/Claude_Pepper	http://www.wikidata.org/entity/Q331244
+http://dbpedia.org/resource/ClaÞ_Pepper	http://www.wikidata.org/entity/Q331244
 http://dbpedia.org/resource/Honkin'_on_Bobo	http://www.wikidata.org/entity/Q904752
 http://dbpedia.org/resource/Marc_Godelman	http://www.wikidata.org/entity/Q17418726
 http://dbpedia.org/resource/Ejnar_Levison	http://www.wikidata.org/entity/Q5350152
@@ -2445,7 +2445,7 @@ http://dbpedia.org/resource/Robert_McKimson	http://www.wikidata.org/entity/Q1063
 http://dbpedia.org/resource/PetroSA	http://www.wikidata.org/entity/Q7178851
 http://dbpedia.org/resource/Rilly-sur-Vienne	http://www.wikidata.org/entity/Q537043
 http://dbpedia.org/resource/Napoleon_(video_game)	http://www.wikidata.org/entity/Q3201635
-http://dbpedia.org/resource/Tamer_Soubar	http://www.wikidata.org/entity/Q16236558
+http://dbpedia.org/resource/Tamer_Soºr	http://www.wikidata.org/entity/Q16236558
 http://dbpedia.org/resource/Olaus_Henrici	http://www.wikidata.org/entity/Q571690
 http://dbpedia.org/resource/Viktorio_Pavlov	http://www.wikidata.org/entity/Q18746356
 http://dbpedia.org/resource/Kill_Bill:_Volume_2	http://www.wikidata.org/entity/Q928019
@@ -2482,7 +2482,7 @@ http://dbpedia.org/resource/Luis_Salvador_Carmona	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Statenice	http://www.wikidata.org/entity/Q2659673
 http://dbpedia.org/resource/Baba_Canton	http://www.wikidata.org/entity/Q1990086
 http://dbpedia.org/resource/J_Records	http://www.wikidata.org/entity/Q121698
-http://dbpedia.org/resource/Re-Education_(Through_Labor)	http://www.wikidata.org/entity/Q2732534
+http://dbpedia.org/resource/Re-EdÊtion_(Through_Labor)	http://www.wikidata.org/entity/Q2732534
 http://dbpedia.org/resource/Lexington,_Kentucky	http://www.wikidata.org/entity/Q49241
 http://dbpedia.org/resource/Finlayson_Township,_Pine_County,_Minnesota	http://www.wikidata.org/entity/Q1899070
 http://dbpedia.org/resource/Tony_Curtis	http://www.wikidata.org/entity/Q162389
@@ -2500,7 +2500,7 @@ http://dbpedia.org/resource/Frederic_Eggleston	http://www.wikidata.org/entity/Q5
 http://dbpedia.org/resource/J._M._G._Le_Clézio	http://www.wikidata.org/entity/Q42037
 http://dbpedia.org/resource/Kedah	http://www.wikidata.org/entity/Q188947
 http://dbpedia.org/resource/Vladimir_Vujasinović	http://www.wikidata.org/entity/Q2732575
-http://dbpedia.org/resource/Dubai	http://www.wikidata.org/entity/Q612
+http://dbpedia.org/resource/Dºi	http://www.wikidata.org/entity/Q612
 http://dbpedia.org/resource/Robin_Raymond	http://www.wikidata.org/entity/Q7352739
 http://dbpedia.org/resource/Flashman's_Lady	http://www.wikidata.org/entity/Q5457645
 http://dbpedia.org/resource/Technical_University_of_Madrid	http://www.wikidata.org/entity/Q25864
@@ -2522,7 +2522,7 @@ http://dbpedia.org/resource/Tomáš_Necid	http://www.wikidata.org/entity/Q299736
 http://dbpedia.org/resource/Śrem_County	http://www.wikidata.org/entity/Q133282
 http://dbpedia.org/resource/Lesches,_Seine-et-Marne	http://www.wikidata.org/entity/Q1460755
 http://dbpedia.org/resource/Ondřej_Zahustel	http://www.wikidata.org/entity/Q3882469
-http://dbpedia.org/resource/Prudence_Heward	http://www.wikidata.org/entity/Q276416
+http://dbpedia.org/resource/PrÞnce_Heward	http://www.wikidata.org/entity/Q276416
 http://dbpedia.org/resource/Lee_Bass	http://www.wikidata.org/entity/Q6513036
 http://dbpedia.org/resource/Alexander_von_Krobatin	http://www.wikidata.org/entity/Q84882
 http://dbpedia.org/resource/Bransat	http://www.wikidata.org/entity/Q848621
@@ -2627,7 +2627,7 @@ http://dbpedia.org/resource/Mala_Biljanica	http://www.wikidata.org/entity/Q31038
 http://dbpedia.org/resource/Atlantis:_Milo's_Return	http://www.wikidata.org/entity/Q629833
 http://dbpedia.org/resource/Enric_Casals	http://www.wikidata.org/entity/Q11005175
 http://dbpedia.org/resource/Christian_I,_Elector_of_Saxony	http://www.wikidata.org/entity/Q705358
-http://dbpedia.org/resource/May_Queen_(TV_series)	http://www.wikidata.org/entity/Q492258
+http://dbpedia.org/resource/May_Qîn_(TV_series)	http://www.wikidata.org/entity/Q492258
 http://dbpedia.org/resource/Dearborn,_Michigan	http://www.wikidata.org/entity/Q430464
 http://dbpedia.org/resource/Neuvy-Sautour	http://www.wikidata.org/entity/Q1173440
 http://dbpedia.org/resource/Gmina_Tuczna	http://www.wikidata.org/entity/Q614270
@@ -2672,12 +2672,12 @@ http://dbpedia.org/resource/Confessions_of_a_Shopaholic_(film)	http://www.wikida
 http://dbpedia.org/resource/Mineral_County,_West_Virginia	http://www.wikidata.org/entity/Q510407
 http://dbpedia.org/resource/Prince_Charles_of_Prussia	http://www.wikidata.org/entity/Q442587
 http://dbpedia.org/resource/Australian_federal_election,_1949	http://www.wikidata.org/entity/Q3586891
-http://dbpedia.org/resource/Tombense_Futebol_Clube	http://www.wikidata.org/entity/Q1138634
+http://dbpedia.org/resource/Tombense_Futebol_Cl¾	http://www.wikidata.org/entity/Q1138634
 http://dbpedia.org/resource/Robert_Racic	http://www.wikidata.org/entity/Q7349133
 http://dbpedia.org/resource/Be_with_You_(TV_series)	http://www.wikidata.org/entity/Q19852321
 http://dbpedia.org/resource/Gilles_Bernheim	http://www.wikidata.org/entity/Q1230908
 http://dbpedia.org/resource/RuPaul	http://www.wikidata.org/entity/Q705715
-http://dbpedia.org/resource/Joseph_Duffey	http://www.wikidata.org/entity/Q6282729
+http://dbpedia.org/resource/Joseph_D࿾y	http://www.wikidata.org/entity/Q6282729
 http://dbpedia.org/resource/Domingo_Sosa	http://www.wikidata.org/entity/Q5290406
 http://dbpedia.org/resource/Samantha_Riley	http://www.wikidata.org/entity/Q299758
 http://dbpedia.org/resource/Werner_Heisenberg	http://www.wikidata.org/entity/Q40904
@@ -2699,7 +2699,7 @@ http://dbpedia.org/resource/La_Chapelle-sur-Oreuse	http://www.wikidata.org/entit
 http://dbpedia.org/resource/Robert_Sahakyants	http://www.wikidata.org/entity/Q62316
 http://dbpedia.org/resource/Hacallı,_Goranboy	http://www.wikidata.org/entity/Q4591702
 http://dbpedia.org/resource/Tiel	http://www.wikidata.org/entity/Q73221
-http://dbpedia.org/resource/Jaouad_Zairi	http://www.wikidata.org/entity/Q521345
+http://dbpedia.org/resource/Jao­_Zairi	http://www.wikidata.org/entity/Q521345
 http://dbpedia.org/resource/The_Comedians_(1967_film)	http://www.wikidata.org/entity/Q568696
 http://dbpedia.org/resource/Zoltán_Végh	http://www.wikidata.org/entity/Q1412223
 http://dbpedia.org/resource/Oliver_Twist_(1916_film)	http://www.wikidata.org/entity/Q3881809
@@ -2745,7 +2745,7 @@ http://dbpedia.org/resource/Handwritten_(The_Gaslight_Anthem_album)	http://www.w
 http://dbpedia.org/resource/Clara_Bow	http://www.wikidata.org/entity/Q234640
 http://dbpedia.org/resource/Eric_Roberts	http://www.wikidata.org/entity/Q207969
 http://dbpedia.org/resource/Roveredo	http://www.wikidata.org/entity/Q64912
-http://dbpedia.org/resource/Cuddy_Canyon,_California	http://www.wikidata.org/entity/Q5192521
+http://dbpedia.org/resource/CÝy_Canyon,_California	http://www.wikidata.org/entity/Q5192521
 http://dbpedia.org/resource/Here,_My_Dear	http://www.wikidata.org/entity/Q914440
 http://dbpedia.org/resource/Norwalk,_California	http://www.wikidata.org/entity/Q494715
 http://dbpedia.org/resource/Torroella_de_Fluvià	http://www.wikidata.org/entity/Q11902
@@ -2832,7 +2832,7 @@ http://dbpedia.org/resource/Cristian_Menéndez	http://www.wikidata.org/entity/Q5
 http://dbpedia.org/resource/George_Clooney	http://www.wikidata.org/entity/Q23844
 http://dbpedia.org/resource/Calhoun_County,_Alabama	http://www.wikidata.org/entity/Q108856
 http://dbpedia.org/resource/Xbox_One_system_software	http://www.wikidata.org/entity/Q17048762
-http://dbpedia.org/resource/Catherine_of_Austria,_Queen_of_Portugal	http://www.wikidata.org/entity/Q157834
+http://dbpedia.org/resource/Catherine_of_Austria,_Qîn_of_Portugal	http://www.wikidata.org/entity/Q157834
 http://dbpedia.org/resource/Jackson,_Mississippi	http://www.wikidata.org/entity/Q28198
 http://dbpedia.org/resource/Antonio_Neves_Braga	http://www.wikidata.org/entity/Q73797
 http://dbpedia.org/resource/Champaign_County,_Ohio	http://www.wikidata.org/entity/Q389573
@@ -2902,7 +2902,7 @@ http://dbpedia.org/resource/Princess_Alexandra_of_Hanover_(1882–1963)	http://w
 http://dbpedia.org/resource/Thusis	http://www.wikidata.org/entity/Q66171
 http://dbpedia.org/resource/Fatma_Pesend_Hanımefendi	http://www.wikidata.org/entity/Q784583
 http://dbpedia.org/resource/Niharika_Konidela	http://www.wikidata.org/entity/Q21066767
-http://dbpedia.org/resource/Haylie_Duff	http://www.wikidata.org/entity/Q229038
+http://dbpedia.org/resource/Haylie_Dÿ	http://www.wikidata.org/entity/Q229038
 http://dbpedia.org/resource/Arrondissement_of_Bruges	http://www.wikidata.org/entity/Q91045
 http://dbpedia.org/resource/Gina_Pane	http://www.wikidata.org/entity/Q267845
 http://dbpedia.org/resource/Churbek	http://www.wikidata.org/entity/Q2330088
@@ -2910,7 +2910,7 @@ http://dbpedia.org/resource/Parpan	http://www.wikidata.org/entity/Q659960
 http://dbpedia.org/resource/All_I_Need_to_Know_(Emma_Bunton_song)	http://www.wikidata.org/entity/Q602223
 http://dbpedia.org/resource/Ohio_State_University	http://www.wikidata.org/entity/Q309331
 http://dbpedia.org/resource/Kim_Ji-ho	http://www.wikidata.org/entity/Q7204311
-http://dbpedia.org/resource/Bruce_Broughton	http://www.wikidata.org/entity/Q991563
+http://dbpedia.org/resource/BrÎ_Broughton	http://www.wikidata.org/entity/Q991563
 http://dbpedia.org/resource/Quintin_Paredes	http://www.wikidata.org/entity/Q161861
 http://dbpedia.org/resource/Laval_University	http://www.wikidata.org/entity/Q1067935
 http://dbpedia.org/resource/Zinaida_Serebriakova	http://www.wikidata.org/entity/Q161858
@@ -2929,7 +2929,7 @@ http://dbpedia.org/resource/Cameron_Diaz	http://www.wikidata.org/entity/Q44380
 http://dbpedia.org/resource/Ed_Bishop	http://www.wikidata.org/entity/Q706134
 http://dbpedia.org/resource/Eastern_Front_(World_War_II)	http://www.wikidata.org/entity/Q189266
 http://dbpedia.org/resource/Melissa_Sneekes	http://www.wikidata.org/entity/Q2059710
-http://dbpedia.org/resource/Gold_Coast,_Queensland	http://www.wikidata.org/entity/Q140075
+http://dbpedia.org/resource/Gold_Coast,_Qînsland	http://www.wikidata.org/entity/Q140075
 http://dbpedia.org/resource/Sankadiokro	http://www.wikidata.org/entity/Q3472314
 http://dbpedia.org/resource/Lonely_Grill	http://www.wikidata.org/entity/Q6671596
 http://dbpedia.org/resource/Sanjeeva_Ranatunga	http://www.wikidata.org/entity/Q7418522
@@ -2966,7 +2966,7 @@ http://dbpedia.org/resource/Edmond_O'Brien	http://www.wikidata.org/entity/Q11993
 http://dbpedia.org/resource/Tom_Schilling	http://www.wikidata.org/entity/Q26763
 http://dbpedia.org/resource/Basil_Rathbone	http://www.wikidata.org/entity/Q336865
 http://dbpedia.org/resource/Kris_Radish	http://www.wikidata.org/entity/Q16185538
-http://dbpedia.org/resource/Raphael_Douady	http://www.wikidata.org/entity/Q16193084
+http://dbpedia.org/resource/Raphael_Do­y	http://www.wikidata.org/entity/Q16193084
 http://dbpedia.org/resource/Nadia_Wheatley	http://www.wikidata.org/entity/Q6957727
 http://dbpedia.org/resource/Hanna-Barbera	http://www.wikidata.org/entity/Q736464
 http://dbpedia.org/resource/Newbawn	http://www.wikidata.org/entity/Q4328353
@@ -3017,7 +3017,7 @@ http://dbpedia.org/resource/La_Pointe_(town),_Wisconsin	http://www.wikidata.org/
 http://dbpedia.org/resource/Robin_Williams	http://www.wikidata.org/entity/Q83338
 http://dbpedia.org/resource/Malval	http://www.wikidata.org/entity/Q203629
 http://dbpedia.org/resource/Arturzinho	http://www.wikidata.org/entity/Q9160500
-http://dbpedia.org/resource/Roman_Ruins_of_São_Cucufate	http://www.wikidata.org/entity/Q7362163
+http://dbpedia.org/resource/Roman_Ruins_of_São_Cucúte	http://www.wikidata.org/entity/Q7362163
 http://dbpedia.org/resource/Charles_X_of_France	http://www.wikidata.org/entity/Q7758
 http://dbpedia.org/resource/David_Der-wei_Wang	http://www.wikidata.org/entity/Q4817612
 http://dbpedia.org/resource/Stephen_Gately	http://www.wikidata.org/entity/Q215369
@@ -3082,7 +3082,7 @@ http://dbpedia.org/resource/Dongen	http://www.wikidata.org/entity/Q9829
 http://dbpedia.org/resource/Pamplona,_Colombia	http://www.wikidata.org/entity/Q997796
 http://dbpedia.org/resource/Saint-Pierre-Azif	http://www.wikidata.org/entity/Q531683
 http://dbpedia.org/resource/Overheard_(film)	http://www.wikidata.org/entity/Q1055695
-http://dbpedia.org/resource/Juan_José_Maqueda	http://www.wikidata.org/entity/Q9015678
+http://dbpedia.org/resource/Juan_José_Maq໚	http://www.wikidata.org/entity/Q9015678
 http://dbpedia.org/resource/Foissac,_Gard	http://www.wikidata.org/entity/Q269712
 http://dbpedia.org/resource/Baix_Vinalopó	http://www.wikidata.org/entity/Q681222
 http://dbpedia.org/resource/Enno_III,_Count_of_East_Frisia	http://www.wikidata.org/entity/Q639220
@@ -3137,10 +3137,10 @@ http://dbpedia.org/resource/Plovput_(Croatia)	http://www.wikidata.org/entity/Q72
 http://dbpedia.org/resource/Alfredo_Seiferheld	http://www.wikidata.org/entity/Q4723871
 http://dbpedia.org/resource/Miss_Congeniality_(film)	http://www.wikidata.org/entity/Q532372
 http://dbpedia.org/resource/Ride,_Vaquero!	http://www.wikidata.org/entity/Q992813
-http://dbpedia.org/resource/Languedoc-Roussillon	http://www.wikidata.org/entity/Q17005
+http://dbpedia.org/resource/Langíoc-Roussillon	http://www.wikidata.org/entity/Q17005
 http://dbpedia.org/resource/Ernst_Hofmann	http://www.wikidata.org/entity/Q108611
 http://dbpedia.org/resource/Young_Pluto	http://www.wikidata.org/entity/Q8058373
-http://dbpedia.org/resource/John_Davis_(producer)	http://www.wikidata.org/entity/Q931181
+http://dbpedia.org/resource/John_Davis_(prodÎr)	http://www.wikidata.org/entity/Q931181
 http://dbpedia.org/resource/Pike_County,_Kentucky	http://www.wikidata.org/entity/Q496729
 http://dbpedia.org/resource/Ilesfay_Technology_Group	http://www.wikidata.org/entity/Q5997626
 http://dbpedia.org/resource/Třebovle	http://www.wikidata.org/entity/Q2185325
@@ -3317,7 +3317,7 @@ http://dbpedia.org/resource/Katarzyna_Ostrogska_(1560–1579)	http://www.wikidat
 http://dbpedia.org/resource/Capinghem	http://www.wikidata.org/entity/Q677059
 http://dbpedia.org/resource/Blindness_(film)	http://www.wikidata.org/entity/Q838405
 http://dbpedia.org/resource/Somme_(department)	http://www.wikidata.org/entity/Q12770
-http://dbpedia.org/resource/Friburguense_Atlético_Clube	http://www.wikidata.org/entity/Q2663081
+http://dbpedia.org/resource/Friburguense_Atlético_Cl¾	http://www.wikidata.org/entity/Q2663081
 http://dbpedia.org/resource/Jan_Vincentsz_van_der_Vinne	http://www.wikidata.org/entity/Q6150132
 http://dbpedia.org/resource/Paul_Kelly_(actor)	http://www.wikidata.org/entity/Q929838
 http://dbpedia.org/resource/Senseki_Line	http://www.wikidata.org/entity/Q1134623
@@ -3383,7 +3383,7 @@ http://dbpedia.org/resource/Jerry_Rawlings	http://www.wikidata.org/entity/Q51002
 http://dbpedia.org/resource/Białołęka	http://www.wikidata.org/entity/Q855983
 http://dbpedia.org/resource/Barbara_Korun	http://www.wikidata.org/entity/Q542446
 http://dbpedia.org/resource/Charles_Edward,_Duke_of_Saxe-Coburg_and_Gotha	http://www.wikidata.org/entity/Q160467
-http://dbpedia.org/resource/Primeval_(Buffy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q2836562
+http://dbpedia.org/resource/Primeval_(Bÿy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q2836562
 http://dbpedia.org/resource/Blainville-sur-Mer	http://www.wikidata.org/entity/Q667315
 http://dbpedia.org/resource/Charles_Chibitty	http://www.wikidata.org/entity/Q5076226
 http://dbpedia.org/resource/Carl_Stalling	http://www.wikidata.org/entity/Q598185
@@ -3459,7 +3459,7 @@ http://dbpedia.org/resource/Thorvald_Nilsen	http://www.wikidata.org/entity/Q3525
 http://dbpedia.org/resource/Olešná_(Pelhřimov_District)	http://www.wikidata.org/entity/Q1026774
 http://dbpedia.org/resource/Carey_(song)	http://www.wikidata.org/entity/Q3437317
 http://dbpedia.org/resource/Courant_Institute_of_Mathematical_Sciences	http://www.wikidata.org/entity/Q946028
-http://dbpedia.org/resource/Auberives-sur-Varèze	http://www.wikidata.org/entity/Q1008835
+http://dbpedia.org/resource/A¾rives-sur-Varèze	http://www.wikidata.org/entity/Q1008835
 http://dbpedia.org/resource/The_Killing_Fields_(film)	http://www.wikidata.org/entity/Q494582
 http://dbpedia.org/resource/Biville-la-Baignarde	http://www.wikidata.org/entity/Q577406
 http://dbpedia.org/resource/Thalwil	http://www.wikidata.org/entity/Q68959
@@ -3643,9 +3643,9 @@ http://dbpedia.org/resource/Once_Bitten_(Great_White_album)	http://www.wikidata.
 http://dbpedia.org/resource/Mohib_Mirza	http://www.wikidata.org/entity/Q6894150
 http://dbpedia.org/resource/Paul_Wilwertz	http://www.wikidata.org/entity/Q1759935
 http://dbpedia.org/resource/Trelins	http://www.wikidata.org/entity/Q1105956
-http://dbpedia.org/resource/Óscar_López_Águeda	http://www.wikidata.org/entity/Q6174855
+http://dbpedia.org/resource/Óscar_López_Ág໚	http://www.wikidata.org/entity/Q6174855
 http://dbpedia.org/resource/The_Beatles	http://www.wikidata.org/entity/Q1299
-http://dbpedia.org/resource/Budapesti_VSC	http://www.wikidata.org/entity/Q851233
+http://dbpedia.org/resource/BÚpesti_VSC	http://www.wikidata.org/entity/Q851233
 http://dbpedia.org/resource/The_Mad_Adventures_of_Rabbi_Jacob	http://www.wikidata.org/entity/Q1210863
 http://dbpedia.org/resource/Ludolph_Anne_Jan_Wilt_Sloet_van_de_Beele	http://www.wikidata.org/entity/Q2738369
 http://dbpedia.org/resource/Otto_Preminger	http://www.wikidata.org/entity/Q52997
@@ -3711,7 +3711,7 @@ http://dbpedia.org/resource/Teguh_Karya	http://www.wikidata.org/entity/Q7694770
 http://dbpedia.org/resource/Louis_Jean_Heydt	http://www.wikidata.org/entity/Q6687485
 http://dbpedia.org/resource/Annie_Montague_Alexander	http://www.wikidata.org/entity/Q509742
 http://dbpedia.org/resource/Younes_Ali	http://www.wikidata.org/entity/Q4115950
-http://dbpedia.org/resource/Guadalajara,_Castile-La_Mancha	http://www.wikidata.org/entity/Q11953
+http://dbpedia.org/resource/G૚lajara,_Castile-La_Mancha	http://www.wikidata.org/entity/Q11953
 http://dbpedia.org/resource/Frederick_VIII_of_Denmark	http://www.wikidata.org/entity/Q152756
 http://dbpedia.org/resource/Dragon_Ball_Z:_Bardock_–_The_Father_of_Goku	http://www.wikidata.org/entity/Q426650
 http://dbpedia.org/resource/Walk_Right_Now	http://www.wikidata.org/entity/Q2067454
@@ -3887,7 +3887,7 @@ http://dbpedia.org/resource/Segarra	http://www.wikidata.org/entity/Q12733
 http://dbpedia.org/resource/Dargies	http://www.wikidata.org/entity/Q629260
 http://dbpedia.org/resource/Miloš_Forman	http://www.wikidata.org/entity/Q51525
 http://dbpedia.org/resource/Val_(Rychnov_nad_Kněžnou_District)	http://www.wikidata.org/entity/Q1529939
-http://dbpedia.org/resource/S._Shamsuddin	http://www.wikidata.org/entity/Q3459091
+http://dbpedia.org/resource/S._ShamsÝin	http://www.wikidata.org/entity/Q3459091
 http://dbpedia.org/resource/Všestudy_(Chomutov_District)	http://www.wikidata.org/entity/Q2305062
 http://dbpedia.org/resource/Amstetten,_Lower_Austria	http://www.wikidata.org/entity/Q251231
 http://dbpedia.org/resource/Vitray	http://www.wikidata.org/entity/Q260079
@@ -3901,7 +3901,7 @@ http://dbpedia.org/resource/Let's_Get_Blown	http://www.wikidata.org/entity/Q1118
 http://dbpedia.org/resource/Dream_a_Little_Dream	http://www.wikidata.org/entity/Q1256163
 http://dbpedia.org/resource/Francielle	http://www.wikidata.org/entity/Q1913990
 http://dbpedia.org/resource/Emil_Bobu	http://www.wikidata.org/entity/Q1888177
-http://dbpedia.org/resource/Mont-Bellevue,_Quebec	http://www.wikidata.org/entity/Q6902980
+http://dbpedia.org/resource/Mont-Bellevue,_Q	http://www.wikidata.org/entity/Q6902980
 http://dbpedia.org/resource/San_Juan,_Puerto_Rico	http://www.wikidata.org/entity/Q41211
 http://dbpedia.org/resource/Jesús_Marimón	http://www.wikidata.org/entity/Q20994188
 http://dbpedia.org/resource/John_Quincy_Adams	http://www.wikidata.org/entity/Q11816
@@ -3913,7 +3913,7 @@ http://dbpedia.org/resource/Levente_Szántai	http://www.wikidata.org/entity/Q130
 http://dbpedia.org/resource/1985_Australian_Grand_Prix	http://www.wikidata.org/entity/Q15038
 http://dbpedia.org/resource/Marcoing	http://www.wikidata.org/entity/Q626527
 http://dbpedia.org/resource/Elsa_Lanchester	http://www.wikidata.org/entity/Q233009
-http://dbpedia.org/resource/Valjouffrey	http://www.wikidata.org/entity/Q1067704
+http://dbpedia.org/resource/Valjoÿrey	http://www.wikidata.org/entity/Q1067704
 http://dbpedia.org/resource/Mariusz_Czerkawski	http://www.wikidata.org/entity/Q1607588
 http://dbpedia.org/resource/Élisa_(film)	http://www.wikidata.org/entity/Q1329647
 http://dbpedia.org/resource/Le_bar_du_téléphone	http://www.wikidata.org/entity/Q3220289
@@ -4131,7 +4131,7 @@ http://dbpedia.org/resource/Don't_Be_Cruel	http://www.wikidata.org/entity/Q22731
 http://dbpedia.org/resource/Bács-Kiskun_County	http://www.wikidata.org/entity/Q181018
 http://dbpedia.org/resource/Chêne-Arnoult	http://www.wikidata.org/entity/Q1151160
 http://dbpedia.org/resource/Atlantic_Records	http://www.wikidata.org/entity/Q202440
-http://dbpedia.org/resource/Bruce_Donaldson	http://www.wikidata.org/entity/Q4977386
+http://dbpedia.org/resource/BrÎ_Donaldson	http://www.wikidata.org/entity/Q4977386
 http://dbpedia.org/resource/Michel_Demaret	http://www.wikidata.org/entity/Q2507076
 http://dbpedia.org/resource/The_Thin_Red_Line_(1998_film)	http://www.wikidata.org/entity/Q221491
 http://dbpedia.org/resource/Dilwale_Dulhania_Le_Jayenge	http://www.wikidata.org/entity/Q849343
@@ -4166,13 +4166,13 @@ http://dbpedia.org/resource/Jugy	http://www.wikidata.org/entity/Q610298
 http://dbpedia.org/resource/Infanta_Antónia_of_Portugal	http://www.wikidata.org/entity/Q255704
 http://dbpedia.org/resource/Arthur_and_the_Revenge_of_Maltazard	http://www.wikidata.org/entity/Q389466
 http://dbpedia.org/resource/Celle	http://www.wikidata.org/entity/Q3933
-http://dbpedia.org/resource/The_Palladium_(Dubai)	http://www.wikidata.org/entity/Q7755954
+http://dbpedia.org/resource/The_Palladium_(Dºi)	http://www.wikidata.org/entity/Q7755954
 http://dbpedia.org/resource/Abdel_Raouf_Dafri	http://www.wikidata.org/entity/Q2820963
 http://dbpedia.org/resource/Sainte-Croix-Vallée-Française	http://www.wikidata.org/entity/Q378436
 http://dbpedia.org/resource/Julie_Fagerholt	http://www.wikidata.org/entity/Q18921705
 http://dbpedia.org/resource/Some_More_of_Samoa	http://www.wikidata.org/entity/Q7559454
 http://dbpedia.org/resource/Rolde	http://www.wikidata.org/entity/Q2182709
-http://dbpedia.org/resource/Anthony_M._DeLuca	http://www.wikidata.org/entity/Q4772975
+http://dbpedia.org/resource/Anthony_M._DeLÊ	http://www.wikidata.org/entity/Q4772975
 http://dbpedia.org/resource/Im_Se-mi	http://www.wikidata.org/entity/Q16091351
 http://dbpedia.org/resource/Rémi_Gaillard	http://www.wikidata.org/entity/Q299657
 http://dbpedia.org/resource/Dælenenga_idrettspark	http://www.wikidata.org/entity/Q521453
@@ -4312,7 +4312,7 @@ http://dbpedia.org/resource/Cézy	http://www.wikidata.org/entity/Q1371748
 http://dbpedia.org/resource/Faoa_Aitofele_Sunia	http://www.wikidata.org/entity/Q5434440
 http://dbpedia.org/resource/Uğur_İnceman	http://www.wikidata.org/entity/Q71403
 http://dbpedia.org/resource/My_Lovely_Girl	http://www.wikidata.org/entity/Q17481109
-http://dbpedia.org/resource/Bruce_H._Mahan	http://www.wikidata.org/entity/Q4977598
+http://dbpedia.org/resource/BrÎ_H._Mahan	http://www.wikidata.org/entity/Q4977598
 http://dbpedia.org/resource/St._Regis_Park,_Kentucky	http://www.wikidata.org/entity/Q2112695
 http://dbpedia.org/resource/Dark_Blue_World	http://www.wikidata.org/entity/Q538516
 http://dbpedia.org/resource/Herzliya	http://www.wikidata.org/entity/Q152491
@@ -4327,7 +4327,7 @@ http://dbpedia.org/resource/Jane_by_Design	http://www.wikidata.org/entity/Q16826
 http://dbpedia.org/resource/Branislav_Lečić	http://www.wikidata.org/entity/Q1251581
 http://dbpedia.org/resource/Gang_Related	http://www.wikidata.org/entity/Q2619792
 http://dbpedia.org/resource/Katrga	http://www.wikidata.org/entity/Q2723310
-http://dbpedia.org/resource/Coogan's_Bluff_(film)	http://www.wikidata.org/entity/Q45388
+http://dbpedia.org/resource/Coogan's_Blÿ_(film)	http://www.wikidata.org/entity/Q45388
 http://dbpedia.org/resource/Ned_Benson	http://www.wikidata.org/entity/Q18043655
 http://dbpedia.org/resource/Santa_Cruz_County,_Arizona	http://www.wikidata.org/entity/Q58689
 http://dbpedia.org/resource/Rapides_Parish,_Louisiana	http://www.wikidata.org/entity/Q503870
@@ -4340,7 +4340,7 @@ http://dbpedia.org/resource/George_H._W._Bush	http://www.wikidata.org/entity/Q23
 http://dbpedia.org/resource/Shin_Da-eun	http://www.wikidata.org/entity/Q6748764
 http://dbpedia.org/resource/Alsace	http://www.wikidata.org/entity/Q1142
 http://dbpedia.org/resource/Bjurholm	http://www.wikidata.org/entity/Q879471
-http://dbpedia.org/resource/H._Bruce_Humberstone	http://www.wikidata.org/entity/Q2420942
+http://dbpedia.org/resource/H._BrÎ_Humberstone	http://www.wikidata.org/entity/Q2420942
 http://dbpedia.org/resource/Louisiana_State_University	http://www.wikidata.org/entity/Q1521725
 http://dbpedia.org/resource/California_State_University,_Sacramento	http://www.wikidata.org/entity/Q1026941
 http://dbpedia.org/resource/Barhabise,_Seti	http://www.wikidata.org/entity/Q4860639
@@ -4401,14 +4401,14 @@ http://dbpedia.org/resource/Whitfield_Jack	http://www.wikidata.org/entity/Q19840
 http://dbpedia.org/resource/Eastchester_(town),_New_York	http://www.wikidata.org/entity/Q3709365
 http://dbpedia.org/resource/Goričica,_Croatia	http://www.wikidata.org/entity/Q847401
 http://dbpedia.org/resource/Genki_Hitomi	http://www.wikidata.org/entity/Q5533313
-http://dbpedia.org/resource/Ermentrude_of_Orléans	http://www.wikidata.org/entity/Q205359
+http://dbpedia.org/resource/ErmentrÞ_of_Orléans	http://www.wikidata.org/entity/Q205359
 http://dbpedia.org/resource/Piz_Titschal	http://www.wikidata.org/entity/Q7199906
 http://dbpedia.org/resource/Peter_Sherwood	http://www.wikidata.org/entity/Q1233705
 http://dbpedia.org/resource/Aarau	http://www.wikidata.org/entity/Q14274
 http://dbpedia.org/resource/AC/DC	http://www.wikidata.org/entity/Q27593
 http://dbpedia.org/resource/Housséville	http://www.wikidata.org/entity/Q1102156
 http://dbpedia.org/resource/Silvermines	http://www.wikidata.org/entity/Q2670546
-http://dbpedia.org/resource/Lucca	http://www.wikidata.org/entity/Q13373
+http://dbpedia.org/resource/Lೊ	http://www.wikidata.org/entity/Q13373
 http://dbpedia.org/resource/Niederwaldkirchen	http://www.wikidata.org/entity/Q693687
 http://dbpedia.org/resource/Gvidonas_Markevičius	http://www.wikidata.org/entity/Q5623215
 http://dbpedia.org/resource/Charles_Brand_(congressman)	http://www.wikidata.org/entity/Q5075745
@@ -4495,7 +4495,7 @@ http://dbpedia.org/resource/Manicaragua	http://www.wikidata.org/entity/Q2573328
 http://dbpedia.org/resource/Harvard_Business_School	http://www.wikidata.org/entity/Q49126
 http://dbpedia.org/resource/Onogawa_Kisaburō	http://www.wikidata.org/entity/Q2024560
 http://dbpedia.org/resource/George_Anson_(British_Army_officer,_born_1769)	http://www.wikidata.org/entity/Q1506865
-http://dbpedia.org/resource/Ouachita_River	http://www.wikidata.org/entity/Q2041614
+http://dbpedia.org/resource/O¬hita_River	http://www.wikidata.org/entity/Q2041614
 http://dbpedia.org/resource/Sid_Caesar	http://www.wikidata.org/entity/Q555226
 http://dbpedia.org/resource/John_T._Murray	http://www.wikidata.org/entity/Q20684903
 http://dbpedia.org/resource/Dennis_Frederickson	http://www.wikidata.org/entity/Q5258429
@@ -4620,7 +4620,7 @@ http://dbpedia.org/resource/George_Barnes_(boxer)	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Christopher_Judge	http://www.wikidata.org/entity/Q312294
 http://dbpedia.org/resource/Mary_Waldron	http://www.wikidata.org/entity/Q6780904
 http://dbpedia.org/resource/Karl_Skala	http://www.wikidata.org/entity/Q6372261
-http://dbpedia.org/resource/Gaube_Lake	http://www.wikidata.org/entity/Q633293
+http://dbpedia.org/resource/Ga¾_Lake	http://www.wikidata.org/entity/Q633293
 http://dbpedia.org/resource/Maisdon-sur-Sèvre	http://www.wikidata.org/entity/Q1065333
 http://dbpedia.org/resource/John_Leguizamo	http://www.wikidata.org/entity/Q295233
 http://dbpedia.org/resource/Jarlinson_Pantano	http://www.wikidata.org/entity/Q444625
@@ -4651,12 +4651,12 @@ http://dbpedia.org/resource/Aftermath_(Peter_Robinson_novel)	http://www.wikidata
 http://dbpedia.org/resource/Municipality_of_Šentjur	http://www.wikidata.org/entity/Q13378384
 http://dbpedia.org/resource/Quest_(Dutch_magazine)	http://www.wikidata.org/entity/Q2058520
 http://dbpedia.org/resource/A._Richard_Caputo	http://www.wikidata.org/entity/Q4648339
-http://dbpedia.org/resource/Elisabeta_Guzganu-Tufan	http://www.wikidata.org/entity/Q2603280
+http://dbpedia.org/resource/Elisabeta_Guzganu-Tún	http://www.wikidata.org/entity/Q2603280
 http://dbpedia.org/resource/Arafo	http://www.wikidata.org/entity/Q624967
 http://dbpedia.org/resource/June_Mathis	http://www.wikidata.org/entity/Q251303
 http://dbpedia.org/resource/Claudia_Black	http://www.wikidata.org/entity/Q229225
 http://dbpedia.org/resource/Baumgarten_bei_Gnas	http://www.wikidata.org/entity/Q283963
-http://dbpedia.org/resource/The_Judas_Goat	http://www.wikidata.org/entity/Q7743742
+http://dbpedia.org/resource/The_JÚs_Goat	http://www.wikidata.org/entity/Q7743742
 http://dbpedia.org/resource/Bárbara_Garofalo	http://www.wikidata.org/entity/Q5004830
 http://dbpedia.org/resource/Cecil_Heywood	http://www.wikidata.org/entity/Q5056119
 http://dbpedia.org/resource/Teun_van_Dijck	http://www.wikidata.org/entity/Q2797379
@@ -4711,7 +4711,7 @@ http://dbpedia.org/resource/Major_League_Baseball_2K8	http://www.wikidata.org/en
 http://dbpedia.org/resource/Mogeiro	http://www.wikidata.org/entity/Q764440
 http://dbpedia.org/resource/Bergen_County,_New_Jersey	http://www.wikidata.org/entity/Q112915
 http://dbpedia.org/resource/Agustín_del_Castillo	http://www.wikidata.org/entity/Q399529
-http://dbpedia.org/resource/Buffalo,_New_York	http://www.wikidata.org/entity/Q40435
+http://dbpedia.org/resource/B࿺lo,_New_York	http://www.wikidata.org/entity/Q40435
 http://dbpedia.org/resource/Radomsko_County	http://www.wikidata.org/entity/Q1135416
 http://dbpedia.org/resource/Rafael_Barber	http://www.wikidata.org/entity/Q744146
 http://dbpedia.org/resource/Y_Not	http://www.wikidata.org/entity/Q1930395
@@ -4840,7 +4840,7 @@ http://dbpedia.org/resource/El_Shaddai:_Ascension_of_the_Metatron	http://www.wik
 http://dbpedia.org/resource/Danny_(footballer)	http://www.wikidata.org/entity/Q310817
 http://dbpedia.org/resource/François_Lamy_(politician)	http://www.wikidata.org/entity/Q560944
 http://dbpedia.org/resource/6_of_1_Thing	http://www.wikidata.org/entity/Q12470406
-http://dbpedia.org/resource/Keith_Russell_Judd	http://www.wikidata.org/entity/Q6384978
+http://dbpedia.org/resource/Keith_Russell_JÝ	http://www.wikidata.org/entity/Q6384978
 http://dbpedia.org/resource/Xbox_One	http://www.wikidata.org/entity/Q13361286
 http://dbpedia.org/resource/Thulani_Hlatshwayo	http://www.wikidata.org/entity/Q7798739
 http://dbpedia.org/resource/St_Paul's_Grammar_School	http://www.wikidata.org/entity/Q7595165
@@ -4863,7 +4863,7 @@ http://dbpedia.org/resource/Nedašov	http://www.wikidata.org/entity/Q1122277
 http://dbpedia.org/resource/Stephen_Sommers	http://www.wikidata.org/entity/Q363402
 http://dbpedia.org/resource/Karachi	http://www.wikidata.org/entity/Q8660
 http://dbpedia.org/resource/La_Groise	http://www.wikidata.org/entity/Q733382
-http://dbpedia.org/resource/Auffay	http://www.wikidata.org/entity/Q586273
+http://dbpedia.org/resource/A࿺y	http://www.wikidata.org/entity/Q586273
 http://dbpedia.org/resource/County_Wicklow	http://www.wikidata.org/entity/Q182591
 http://dbpedia.org/resource/Norica_Nicolai	http://www.wikidata.org/entity/Q7051233
 http://dbpedia.org/resource/Archduchess_Maria_Anna_Josepha_of_Austria	http://www.wikidata.org/entity/Q112088
@@ -4890,7 +4890,7 @@ http://dbpedia.org/resource/Jacques_Deray	http://www.wikidata.org/entity/Q599020
 http://dbpedia.org/resource/Velká_Hleďsebe	http://www.wikidata.org/entity/Q1411253
 http://dbpedia.org/resource/Fontaine-lès-Vervins	http://www.wikidata.org/entity/Q841394
 http://dbpedia.org/resource/Beinwil_am_See	http://www.wikidata.org/entity/Q65000
-http://dbpedia.org/resource/Emirate_of_Dubai	http://www.wikidata.org/entity/Q613
+http://dbpedia.org/resource/Emirate_of_Dºi	http://www.wikidata.org/entity/Q613
 http://dbpedia.org/resource/Sibusiso_Mahlangu	http://www.wikidata.org/entity/Q10482734
 http://dbpedia.org/resource/Carlos_Muñoz_(racing_driver)	http://www.wikidata.org/entity/Q1043089
 http://dbpedia.org/resource/Columbia_County,_New_York	http://www.wikidata.org/entity/Q115200
@@ -4971,7 +4971,7 @@ http://dbpedia.org/resource/The_Claim	http://www.wikidata.org/entity/Q1170157
 http://dbpedia.org/resource/Kogi	http://www.wikidata.org/entity/Q387745
 http://dbpedia.org/resource/Choa_Chu_Kang	http://www.wikidata.org/entity/Q1069101
 http://dbpedia.org/resource/Love_&_Emotion	http://www.wikidata.org/entity/Q6690205
-http://dbpedia.org/resource/Ricardo_Uceda	http://www.wikidata.org/entity/Q1981350
+http://dbpedia.org/resource/Ricardo_컚	http://www.wikidata.org/entity/Q1981350
 http://dbpedia.org/resource/Joely_Richardson	http://www.wikidata.org/entity/Q234131
 http://dbpedia.org/resource/Triguinho	http://www.wikidata.org/entity/Q2398451
 http://dbpedia.org/resource/Lewis_Milestone	http://www.wikidata.org/entity/Q285928
@@ -5086,7 +5086,7 @@ http://dbpedia.org/resource/Wii	http://www.wikidata.org/entity/Q8079
 http://dbpedia.org/resource/Madagascar	http://www.wikidata.org/entity/Q1019
 http://dbpedia.org/resource/Firmansyah_Aprillianto	http://www.wikidata.org/entity/Q5452117
 http://dbpedia.org/resource/Kamehameha_IV	http://www.wikidata.org/entity/Q470398
-http://dbpedia.org/resource/The_Flying_Deuces	http://www.wikidata.org/entity/Q1167731
+http://dbpedia.org/resource/The_Flying_DeÎs	http://www.wikidata.org/entity/Q1167731
 http://dbpedia.org/resource/Ignas_Staškevičius	http://www.wikidata.org/entity/Q162864
 http://dbpedia.org/resource/Tjörn_Municipality	http://www.wikidata.org/entity/Q501448
 http://dbpedia.org/resource/Croignon	http://www.wikidata.org/entity/Q194710
@@ -5135,7 +5135,7 @@ http://dbpedia.org/resource/Spermezeu	http://www.wikidata.org/entity/Q5065736
 http://dbpedia.org/resource/Saint-Quentin-sur-Indrois	http://www.wikidata.org/entity/Q649197
 http://dbpedia.org/resource/Bromölla_Municipality	http://www.wikidata.org/entity/Q514830
 http://dbpedia.org/resource/Hobšovice	http://www.wikidata.org/entity/Q967026
-http://dbpedia.org/resource/Joseph_M._Tucci	http://www.wikidata.org/entity/Q6285183
+http://dbpedia.org/resource/Joseph_M._TÌi	http://www.wikidata.org/entity/Q6285183
 http://dbpedia.org/resource/Our_Gang_(film)	http://www.wikidata.org/entity/Q7110645
 http://dbpedia.org/resource/Coles_Corner,_Washington	http://www.wikidata.org/entity/Q14713614
 http://dbpedia.org/resource/Postcards_from_the_Edge_(film)	http://www.wikidata.org/entity/Q1427222
@@ -5162,7 +5162,7 @@ http://dbpedia.org/resource/Gavarnie	http://www.wikidata.org/entity/Q917894
 http://dbpedia.org/resource/Velim_(Kolín_District)	http://www.wikidata.org/entity/Q2361360
 http://dbpedia.org/resource/Chevrolet_Trax	http://www.wikidata.org/entity/Q1071315
 http://dbpedia.org/resource/Düsseldorf	http://www.wikidata.org/entity/Q1718
-http://dbpedia.org/resource/Claude_Dauphin_(actor)	http://www.wikidata.org/entity/Q1096611
+http://dbpedia.org/resource/ClaÞ_Dauphin_(actor)	http://www.wikidata.org/entity/Q1096611
 http://dbpedia.org/resource/Fejér_County	http://www.wikidata.org/entity/Q187693
 http://dbpedia.org/resource/San_Fernando,_California	http://www.wikidata.org/entity/Q846406
 http://dbpedia.org/resource/Gruson	http://www.wikidata.org/entity/Q674912
@@ -5220,10 +5220,10 @@ http://dbpedia.org/resource/Frédéric_Cornette	http://www.wikidata.org/entity/Q
 http://dbpedia.org/resource/José_Pedro_Montero	http://www.wikidata.org/entity/Q860997
 http://dbpedia.org/resource/Georgia_State_Route_121	http://www.wikidata.org/entity/Q2428022
 http://dbpedia.org/resource/Giessen	http://www.wikidata.org/entity/Q3874
-http://dbpedia.org/resource/Buddy_Horne	http://www.wikidata.org/entity/Q1001211
+http://dbpedia.org/resource/BÝy_Horne	http://www.wikidata.org/entity/Q1001211
 http://dbpedia.org/resource/Katsuyoshi_Shinto	http://www.wikidata.org/entity/Q601986
 http://dbpedia.org/resource/Madeleine_Giske	http://www.wikidata.org/entity/Q459017
-http://dbpedia.org/resource/Georg_Neuffer	http://www.wikidata.org/entity/Q5535770
+http://dbpedia.org/resource/Georg_Ne࿾r	http://www.wikidata.org/entity/Q5535770
 http://dbpedia.org/resource/5_Days_of_War	http://www.wikidata.org/entity/Q245430
 http://dbpedia.org/resource/A_Midsummer_Night's_Dream_(1999_film)	http://www.wikidata.org/entity/Q1305200
 http://dbpedia.org/resource/National_Taiwan_University	http://www.wikidata.org/entity/Q32746
@@ -5257,7 +5257,7 @@ http://dbpedia.org/resource/Fatmawati	http://www.wikidata.org/entity/Q468519
 http://dbpedia.org/resource/Entrammes	http://www.wikidata.org/entity/Q1003637
 http://dbpedia.org/resource/Eugenio_Morales_Agacino	http://www.wikidata.org/entity/Q5408314
 http://dbpedia.org/resource/Mahaicony	http://www.wikidata.org/entity/Q866074
-http://dbpedia.org/resource/The_Grand_Budapest_Hotel	http://www.wikidata.org/entity/Q3521099
+http://dbpedia.org/resource/The_Grand_BÚpest_Hotel	http://www.wikidata.org/entity/Q3521099
 http://dbpedia.org/resource/Lekeryd	http://www.wikidata.org/entity/Q2693699
 http://dbpedia.org/resource/Montgomery_County,_Texas	http://www.wikidata.org/entity/Q26756
 http://dbpedia.org/resource/Guayaquil	http://www.wikidata.org/entity/Q43509
@@ -5392,7 +5392,7 @@ http://dbpedia.org/resource/Jason_Schwartzman	http://www.wikidata.org/entity/Q31
 http://dbpedia.org/resource/Dorothy_Malone	http://www.wikidata.org/entity/Q230126
 http://dbpedia.org/resource/Johnson_City,_Texas	http://www.wikidata.org/entity/Q868881
 http://dbpedia.org/resource/William_Nelson_Cromwell	http://www.wikidata.org/entity/Q11956777
-http://dbpedia.org/resource/Tsubasa_Yokotake	http://www.wikidata.org/entity/Q595021
+http://dbpedia.org/resource/Tsºsa_Yokotake	http://www.wikidata.org/entity/Q595021
 http://dbpedia.org/resource/William_Browder_(mathematician)	http://www.wikidata.org/entity/Q1398951
 http://dbpedia.org/resource/Neuchâtel-Urtière	http://www.wikidata.org/entity/Q905237
 http://dbpedia.org/resource/Sergey_Mikhaylov_(footballer_born_1978)	http://www.wikidata.org/entity/Q16185737
@@ -5492,7 +5492,7 @@ http://dbpedia.org/resource/The_Power_Station_(band)	http://www.wikidata.org/ent
 http://dbpedia.org/resource/Clarence_Ussher	http://www.wikidata.org/entity/Q5126785
 http://dbpedia.org/resource/Taito_Corporation	http://www.wikidata.org/entity/Q1054844
 http://dbpedia.org/resource/Randhir_Kapoor	http://www.wikidata.org/entity/Q2700318
-http://dbpedia.org/resource/Claude_Renoir	http://www.wikidata.org/entity/Q719916
+http://dbpedia.org/resource/ClaÞ_Renoir	http://www.wikidata.org/entity/Q719916
 http://dbpedia.org/resource/Chad_Everett	http://www.wikidata.org/entity/Q969844
 http://dbpedia.org/resource/Ahmed_Soukouna	http://www.wikidata.org/entity/Q4696036
 http://dbpedia.org/resource/Vinberg	http://www.wikidata.org/entity/Q588873
@@ -5513,13 +5513,13 @@ http://dbpedia.org/resource/Fredrick_Federley	http://www.wikidata.org/entity/Q51
 http://dbpedia.org/resource/The_Rains_Came	http://www.wikidata.org/entity/Q1573661
 http://dbpedia.org/resource/Nandor_Njergeš	http://www.wikidata.org/entity/Q6963377
 http://dbpedia.org/resource/Willie_Nelson	http://www.wikidata.org/entity/Q206112
-http://dbpedia.org/resource/Mark_Johnson_(producer)	http://www.wikidata.org/entity/Q1279758
+http://dbpedia.org/resource/Mark_Johnson_(prodÎr)	http://www.wikidata.org/entity/Q1279758
 http://dbpedia.org/resource/Ashley_Greene	http://www.wikidata.org/entity/Q189992
 http://dbpedia.org/resource/New_Patriotic_Party	http://www.wikidata.org/entity/Q1148441
 http://dbpedia.org/resource/Jerry_Goldsmith	http://www.wikidata.org/entity/Q235077
 http://dbpedia.org/resource/Monroe_County,_West_Virginia	http://www.wikidata.org/entity/Q488769
 http://dbpedia.org/resource/Village_Roadshow	http://www.wikidata.org/entity/Q825291
-http://dbpedia.org/resource/Montclar,_Berguedà	http://www.wikidata.org/entity/Q15521
+http://dbpedia.org/resource/Montclar,_Bergíà	http://www.wikidata.org/entity/Q15521
 http://dbpedia.org/resource/Miguel_Mariano_Gómez	http://www.wikidata.org/entity/Q878835
 http://dbpedia.org/resource/Prince_Antonio,_Count_of_Lecce	http://www.wikidata.org/entity/Q16154236
 http://dbpedia.org/resource/Javor_(Serbia)	http://www.wikidata.org/entity/Q3163181
@@ -5632,7 +5632,7 @@ http://dbpedia.org/resource/Downey,_California	http://www.wikidata.org/entity/Q4
 http://dbpedia.org/resource/Mishaal_bin_Abdulaziz_Al_Saud	http://www.wikidata.org/entity/Q2602302
 http://dbpedia.org/resource/Drums_Along_the_Mohawk	http://www.wikidata.org/entity/Q2038577
 http://dbpedia.org/resource/José_Baptista_Pinheiro_de_Azevedo	http://www.wikidata.org/entity/Q722270
-http://dbpedia.org/resource/Maubeuge	http://www.wikidata.org/entity/Q138648
+http://dbpedia.org/resource/Ma¾uge	http://www.wikidata.org/entity/Q138648
 http://dbpedia.org/resource/Metz-en-Couture	http://www.wikidata.org/entity/Q736965
 http://dbpedia.org/resource/Saumont-la-Poterie	http://www.wikidata.org/entity/Q1164351
 http://dbpedia.org/resource/Kolín_District	http://www.wikidata.org/entity/Q847318
@@ -5682,7 +5682,7 @@ http://dbpedia.org/resource/Space_Cowboys	http://www.wikidata.org/entity/Q502189
 http://dbpedia.org/resource/Tokyo_Metro	http://www.wikidata.org/entity/Q682894
 http://dbpedia.org/resource/Montérégie	http://www.wikidata.org/entity/Q931679
 http://dbpedia.org/resource/Ole_Rømer	http://www.wikidata.org/entity/Q160187
-http://dbpedia.org/resource/Dubai_Beachfront_Hotel	http://www.wikidata.org/entity/Q5310509
+http://dbpedia.org/resource/Dºi_Beachfront_Hotel	http://www.wikidata.org/entity/Q5310509
 http://dbpedia.org/resource/Vijay_Vazirani	http://www.wikidata.org/entity/Q92702
 http://dbpedia.org/resource/Pärnu_County	http://www.wikidata.org/entity/Q185036
 http://dbpedia.org/resource/Vsetín	http://www.wikidata.org/entity/Q513417
@@ -5728,7 +5728,7 @@ http://dbpedia.org/resource/You_Spin_Me_Round_(Like_a_Record)	http://www.wikidat
 http://dbpedia.org/resource/Berlin,_New_Hampshire	http://www.wikidata.org/entity/Q821244
 http://dbpedia.org/resource/Socialist_Party_(Portugal)	http://www.wikidata.org/entity/Q847263
 http://dbpedia.org/resource/Călmățuiu_de_Sus	http://www.wikidata.org/entity/Q12724706
-http://dbpedia.org/resource/Cabudare	http://www.wikidata.org/entity/Q580968
+http://dbpedia.org/resource/CabÚre	http://www.wikidata.org/entity/Q580968
 http://dbpedia.org/resource/Krazy_(song)	http://www.wikidata.org/entity/Q564185
 http://dbpedia.org/resource/Leo_Penn	http://www.wikidata.org/entity/Q1283268
 http://dbpedia.org/resource/Champaign_County,_Illinois	http://www.wikidata.org/entity/Q110187
@@ -5915,7 +5915,7 @@ http://dbpedia.org/resource/Washington_County,_Utah	http://www.wikidata.org/enti
 http://dbpedia.org/resource/Stanley_Kramer	http://www.wikidata.org/entity/Q73136
 http://dbpedia.org/resource/Henry_Waxman	http://www.wikidata.org/entity/Q776941
 http://dbpedia.org/resource/Marisa_Mell	http://www.wikidata.org/entity/Q94721
-http://dbpedia.org/resource/Roquefort,_Gers	http://www.wikidata.org/entity/Q861775
+http://dbpedia.org/resource/Roqïort,_Gers	http://www.wikidata.org/entity/Q861775
 http://dbpedia.org/resource/The_Odd_Life_of_Timothy_Green	http://www.wikidata.org/entity/Q193963
 http://dbpedia.org/resource/Chelan_County,_Washington	http://www.wikidata.org/entity/Q493236
 http://dbpedia.org/resource/Maia_Dunphy	http://www.wikidata.org/entity/Q6735212
@@ -5939,7 +5939,7 @@ http://dbpedia.org/resource/Sven_Nordqvist	http://www.wikidata.org/entity/Q96232
 http://dbpedia.org/resource/All_or_Nothing_(Glee)	http://www.wikidata.org/entity/Q13099923
 http://dbpedia.org/resource/Santiago_de_Compostela	http://www.wikidata.org/entity/Q14314
 http://dbpedia.org/resource/Maximilian_II,_Holy_Roman_Emperor	http://www.wikidata.org/entity/Q150862
-http://dbpedia.org/resource/René_Auberjonois_(painter)	http://www.wikidata.org/entity/Q683105
+http://dbpedia.org/resource/René_A¾rjonois_(painter)	http://www.wikidata.org/entity/Q683105
 http://dbpedia.org/resource/Villers-le-Rond	http://www.wikidata.org/entity/Q228858
 http://dbpedia.org/resource/Standard_Oil_Building_(Baltimore,_Maryland)	http://www.wikidata.org/entity/Q7598274
 http://dbpedia.org/resource/International_School_of_Düsseldorf	http://www.wikidata.org/entity/Q16848159
@@ -5988,7 +5988,7 @@ http://dbpedia.org/resource/Sweet_Hearts_Dance	http://www.wikidata.org/entity/Q6
 http://dbpedia.org/resource/Juneau_County,_Wisconsin	http://www.wikidata.org/entity/Q502222
 http://dbpedia.org/resource/Anna_Hahn_(chess_player)	http://www.wikidata.org/entity/Q465771
 http://dbpedia.org/resource/Philippe_Muller	http://www.wikidata.org/entity/Q3380434
-http://dbpedia.org/resource/Marolles-en-Beauce	http://www.wikidata.org/entity/Q1081861
+http://dbpedia.org/resource/Marolles-en-BeaÎ	http://www.wikidata.org/entity/Q1081861
 http://dbpedia.org/resource/B._R._Ambedkar	http://www.wikidata.org/entity/Q231690
 http://dbpedia.org/resource/Fred_O'Donnell	http://www.wikidata.org/entity/Q1003718
 http://dbpedia.org/resource/Marion_Center,_Pennsylvania	http://www.wikidata.org/entity/Q1183491
@@ -6024,7 +6024,7 @@ http://dbpedia.org/resource/National_Salvation_Front_(Romania)	http://www.wikida
 http://dbpedia.org/resource/The_Twilight_Saga:_Breaking_Dawn_–_Part_2	http://www.wikidata.org/entity/Q60487
 http://dbpedia.org/resource/Salins,_Switzerland	http://www.wikidata.org/entity/Q689668
 http://dbpedia.org/resource/Gironde	http://www.wikidata.org/entity/Q12526
-http://dbpedia.org/resource/Claude_Pronovost	http://www.wikidata.org/entity/Q1097084
+http://dbpedia.org/resource/ClaÞ_Pronovost	http://www.wikidata.org/entity/Q1097084
 http://dbpedia.org/resource/Hamden,_Connecticut	http://www.wikidata.org/entity/Q755271
 http://dbpedia.org/resource/Harve_Presnell	http://www.wikidata.org/entity/Q1395333
 http://dbpedia.org/resource/Vikings_(TV_series)	http://www.wikidata.org/entity/Q2579463
@@ -6043,7 +6043,7 @@ http://dbpedia.org/resource/Karel_Prager	http://www.wikidata.org/entity/Q1202847
 http://dbpedia.org/resource/Universal_Music_Group	http://www.wikidata.org/entity/Q38903
 http://dbpedia.org/resource/Nicklas_Højlund	http://www.wikidata.org/entity/Q1441892
 http://dbpedia.org/resource/Závist_(Blansko_District)	http://www.wikidata.org/entity/Q247061
-http://dbpedia.org/resource/Aguada_de_Pasajeros	http://www.wikidata.org/entity/Q2245953
+http://dbpedia.org/resource/Ag૚_de_Pasajeros	http://www.wikidata.org/entity/Q2245953
 http://dbpedia.org/resource/Caldas_Department	http://www.wikidata.org/entity/Q230607
 http://dbpedia.org/resource/Greater_Los_Angeles_Area	http://www.wikidata.org/entity/Q1050826
 http://dbpedia.org/resource/Alacantí	http://www.wikidata.org/entity/Q2046431
@@ -6143,15 +6143,15 @@ http://dbpedia.org/resource/Say_You_Love_Me_(Fleetwood_Mac_song)	http://www.wiki
 http://dbpedia.org/resource/Silvino_Bracho	http://www.wikidata.org/entity/Q20897565
 http://dbpedia.org/resource/Mauriac,_Cantal	http://www.wikidata.org/entity/Q454125
 http://dbpedia.org/resource/Rocco_Botte	http://www.wikidata.org/entity/Q7353713
-http://dbpedia.org/resource/Esporte_Clube_Novo_Hamburgo	http://www.wikidata.org/entity/Q762353
+http://dbpedia.org/resource/Esporte_Cl¾_Novo_Hamburgo	http://www.wikidata.org/entity/Q762353
 http://dbpedia.org/resource/Batman:_Arkham_City_Lockdown	http://www.wikidata.org/entity/Q559246
-http://dbpedia.org/resource/CD_Guadalajara_(Spain)	http://www.wikidata.org/entity/Q11955
+http://dbpedia.org/resource/CD_G૚lajara_(Spain)	http://www.wikidata.org/entity/Q11955
 http://dbpedia.org/resource/Tony_Rundle	http://www.wikidata.org/entity/Q2442810
 http://dbpedia.org/resource/Di_Bawah_Lindungan_Ka'bah_(novel)	http://www.wikidata.org/entity/Q4016592
 http://dbpedia.org/resource/James_Alexander_Williamson	http://www.wikidata.org/entity/Q6128573
 http://dbpedia.org/resource/County_Clare	http://www.wikidata.org/entity/Q181862
 http://dbpedia.org/resource/Matej_Tóth	http://www.wikidata.org/entity/Q2478771
-http://dbpedia.org/resource/Fort_Lauderdale,_Florida	http://www.wikidata.org/entity/Q165972
+http://dbpedia.org/resource/Fort_LaÞrdale,_Florida	http://www.wikidata.org/entity/Q165972
 http://dbpedia.org/resource/Sahara_Bank	http://www.wikidata.org/entity/Q7399488
 http://dbpedia.org/resource/Max_Oldmeadow	http://www.wikidata.org/entity/Q6795058
 http://dbpedia.org/resource/Paul_Narracott	http://www.wikidata.org/entity/Q16193267
@@ -6169,7 +6169,7 @@ http://dbpedia.org/resource/Active_Member	http://www.wikidata.org/entity/Q282373
 http://dbpedia.org/resource/Cooktown,_Virginia	http://www.wikidata.org/entity/Q5167220
 http://dbpedia.org/resource/Cannelton,_Indiana	http://www.wikidata.org/entity/Q3240418
 http://dbpedia.org/resource/Mari_Elka_Pangestu	http://www.wikidata.org/entity/Q3502322
-http://dbpedia.org/resource/Margaret_Gardiner_(beauty_queen)	http://www.wikidata.org/entity/Q592295
+http://dbpedia.org/resource/Margaret_Gardiner_(beauty_qîn)	http://www.wikidata.org/entity/Q592295
 http://dbpedia.org/resource/Rain_Man	http://www.wikidata.org/entity/Q188845
 http://dbpedia.org/resource/Michal_Klesa	http://www.wikidata.org/entity/Q961686
 http://dbpedia.org/resource/Sins,_Aargau	http://www.wikidata.org/entity/Q64372
@@ -6233,7 +6233,7 @@ http://dbpedia.org/resource/Sainte-Gemmes-d'Andigné	http://www.wikidata.org/ent
 http://dbpedia.org/resource/Luna_Takamura	http://www.wikidata.org/entity/Q7379609
 http://dbpedia.org/resource/Matzingen	http://www.wikidata.org/entity/Q64994
 http://dbpedia.org/resource/Domo_Polideportivo_de_la_CDAG	http://www.wikidata.org/entity/Q5291330
-http://dbpedia.org/resource/Bruce_Smathers	http://www.wikidata.org/entity/Q4978296
+http://dbpedia.org/resource/BrÎ_Smathers	http://www.wikidata.org/entity/Q4978296
 http://dbpedia.org/resource/River_Thames	http://www.wikidata.org/entity/Q19686
 http://dbpedia.org/resource/Murray_Kinnell	http://www.wikidata.org/entity/Q3328197
 http://dbpedia.org/resource/Colonița	http://www.wikidata.org/entity/Q2618988
@@ -6250,9 +6250,9 @@ http://dbpedia.org/resource/Ferdinand_VI_of_Spain	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Archduchess_Karoline_Marie_of_Austria	http://www.wikidata.org/entity/Q261372
 http://dbpedia.org/resource/Tadashi_Kuranari	http://www.wikidata.org/entity/Q5367526
 http://dbpedia.org/resource/Logroño	http://www.wikidata.org/entity/Q14325
-http://dbpedia.org/resource/Schönberg_im_Stubaital	http://www.wikidata.org/entity/Q634428
+http://dbpedia.org/resource/Schönberg_im_Stºital	http://www.wikidata.org/entity/Q634428
 http://dbpedia.org/resource/Mar_del_Plata	http://www.wikidata.org/entity/Q52607
-http://dbpedia.org/resource/Glamorgan_Vale,_Queensland	http://www.wikidata.org/entity/Q5566546
+http://dbpedia.org/resource/Glamorgan_Vale,_Qînsland	http://www.wikidata.org/entity/Q5566546
 http://dbpedia.org/resource/North_Carolina	http://www.wikidata.org/entity/Q1454
 http://dbpedia.org/resource/El_Camino_(Adriana_Evans_album)	http://www.wikidata.org/entity/Q5350874
 http://dbpedia.org/resource/João_Salaviza	http://www.wikidata.org/entity/Q1703064
@@ -6314,7 +6314,7 @@ http://dbpedia.org/resource/Watson_Township,_Lycoming_County,_Pennsylvania	http:
 http://dbpedia.org/resource/Rosina_Galli_(actress)	http://www.wikidata.org/entity/Q3941530
 http://dbpedia.org/resource/Božikovac	http://www.wikidata.org/entity/Q2923173
 http://dbpedia.org/resource/Juliette_Lewis	http://www.wikidata.org/entity/Q230523
-http://dbpedia.org/resource/St._Leonard,_Quebec	http://www.wikidata.org/entity/Q1325316
+http://dbpedia.org/resource/St._Leonard,_Q	http://www.wikidata.org/entity/Q1325316
 http://dbpedia.org/resource/The_Hills_Have_Eyes_(1977_film)	http://www.wikidata.org/entity/Q994724
 http://dbpedia.org/resource/Houston_County,_Texas	http://www.wikidata.org/entity/Q156496
 http://dbpedia.org/resource/Grap_Luva	http://www.wikidata.org/entity/Q1153175
@@ -6405,7 +6405,7 @@ http://dbpedia.org/resource/Villers-Chief	http://www.wikidata.org/entity/Q907276
 http://dbpedia.org/resource/Cora_Taylor_Casselman	http://www.wikidata.org/entity/Q5169411
 http://dbpedia.org/resource/What_Planet_Are_You_From%3F	http://www.wikidata.org/entity/Q1431684
 http://dbpedia.org/resource/Edwin_Kerby	http://www.wikidata.org/entity/Q5346577
-http://dbpedia.org/resource/Nurudeen_Orelesi	http://www.wikidata.org/entity/Q10338282
+http://dbpedia.org/resource/Nur෮n_Orelesi	http://www.wikidata.org/entity/Q10338282
 http://dbpedia.org/resource/Sisters_of_Providence_of_Saint_Mary-of-the-Woods	http://www.wikidata.org/entity/Q3977434
 http://dbpedia.org/resource/Jagodina	http://www.wikidata.org/entity/Q390358
 http://dbpedia.org/resource/Republican_Left_of_the_Valencian_Country	http://www.wikidata.org/entity/Q3322584
@@ -6456,7 +6456,7 @@ http://dbpedia.org/resource/Rolf_Dahlgren	http://www.wikidata.org/entity/Q304957
 http://dbpedia.org/resource/Madlyn_L._Hanes	http://www.wikidata.org/entity/Q6728285
 http://dbpedia.org/resource/Gray_Lady_Down	http://www.wikidata.org/entity/Q1688374
 http://dbpedia.org/resource/Rebecca_Brown_(swimmer)	http://www.wikidata.org/entity/Q7301681
-http://dbpedia.org/resource/Queensland	http://www.wikidata.org/entity/Q36074
+http://dbpedia.org/resource/Qînsland	http://www.wikidata.org/entity/Q36074
 http://dbpedia.org/resource/Puka,_Lääne-Viru_County	http://www.wikidata.org/entity/Q3464711
 http://dbpedia.org/resource/Mamamoo	http://www.wikidata.org/entity/Q17278068
 http://dbpedia.org/resource/Kampot_(city)	http://www.wikidata.org/entity/Q876549
@@ -6478,7 +6478,7 @@ http://dbpedia.org/resource/Andrés_Schneiter	http://www.wikidata.org/entity/Q47
 http://dbpedia.org/resource/Joseph_Cook	http://www.wikidata.org/entity/Q356230
 http://dbpedia.org/resource/Denis_Leary	http://www.wikidata.org/entity/Q310283
 http://dbpedia.org/resource/Stanovice	http://www.wikidata.org/entity/Q427524
-http://dbpedia.org/resource/Judd_Apatow	http://www.wikidata.org/entity/Q325396
+http://dbpedia.org/resource/JÝ_Apatow	http://www.wikidata.org/entity/Q325396
 http://dbpedia.org/resource/Katowice	http://www.wikidata.org/entity/Q588
 http://dbpedia.org/resource/FC_Norma_Tallinn	http://www.wikidata.org/entity/Q1341594
 http://dbpedia.org/resource/A_Lotus_Grows_in_the_Mud	http://www.wikidata.org/entity/Q4657957
@@ -6555,7 +6555,7 @@ http://dbpedia.org/resource/The_Constant_Nymph_(1943_film)	http://www.wikidata.o
 http://dbpedia.org/resource/Wheeler,_Indiana	http://www.wikidata.org/entity/Q9095869
 http://dbpedia.org/resource/Over_the_Top_(film)	http://www.wikidata.org/entity/Q901148
 http://dbpedia.org/resource/Mohamed_ElBaradei	http://www.wikidata.org/entity/Q133308
-http://dbpedia.org/resource/W._H._Auden	http://www.wikidata.org/entity/Q178698
+http://dbpedia.org/resource/W._H._AÞn	http://www.wikidata.org/entity/Q178698
 http://dbpedia.org/resource/James_Ivory_(director)	http://www.wikidata.org/entity/Q51577
 http://dbpedia.org/resource/Hulusi_Behçet	http://www.wikidata.org/entity/Q936634
 http://dbpedia.org/resource/Oakland_County,_Michigan	http://www.wikidata.org/entity/Q498024
@@ -6630,10 +6630,10 @@ http://dbpedia.org/resource/Cinderella_Man	http://www.wikidata.org/entity/Q64754
 http://dbpedia.org/resource/Faubourg_Marigny	http://www.wikidata.org/entity/Q3067307
 http://dbpedia.org/resource/Girls_Like_Robots	http://www.wikidata.org/entity/Q18215891
 http://dbpedia.org/resource/Have_a_Cuppa_Tea	http://www.wikidata.org/entity/Q5683379
-http://dbpedia.org/resource/Duvvuri_Subbarao	http://www.wikidata.org/entity/Q3366099
+http://dbpedia.org/resource/Duvvuri_S஺rao	http://www.wikidata.org/entity/Q3366099
 http://dbpedia.org/resource/Klaus_Goldschlag	http://www.wikidata.org/entity/Q1622124
 http://dbpedia.org/resource/Crawford_County,_Wisconsin	http://www.wikidata.org/entity/Q494899
-http://dbpedia.org/resource/How_to_Stuff_a_Wild_Bikini	http://www.wikidata.org/entity/Q5918770
+http://dbpedia.org/resource/How_to_Stÿ_a_Wild_Bikini	http://www.wikidata.org/entity/Q5918770
 http://dbpedia.org/resource/Paul_Hirsch_(film_editor)	http://www.wikidata.org/entity/Q429973
 http://dbpedia.org/resource/Horta_Nord	http://www.wikidata.org/entity/Q2298465
 http://dbpedia.org/resource/Paysandú_F.C.	http://www.wikidata.org/entity/Q2065449
@@ -6726,7 +6726,7 @@ http://dbpedia.org/resource/Habo_IF	http://www.wikidata.org/entity/Q10515391
 http://dbpedia.org/resource/Kim_Thompson	http://www.wikidata.org/entity/Q6409506
 http://dbpedia.org/resource/Vincent_Price	http://www.wikidata.org/entity/Q219640
 http://dbpedia.org/resource/Ensemble_Studios	http://www.wikidata.org/entity/Q308913
-http://dbpedia.org/resource/Henri_Zuber	http://www.wikidata.org/entity/Q3132193
+http://dbpedia.org/resource/Henri_Z¾r	http://www.wikidata.org/entity/Q3132193
 http://dbpedia.org/resource/Fairweather_Johnson	http://www.wikidata.org/entity/Q3064560
 http://dbpedia.org/resource/Patrick_T._Moore	http://www.wikidata.org/entity/Q7147708
 http://dbpedia.org/resource/Johan_Sundström	http://www.wikidata.org/entity/Q522646
@@ -6751,7 +6751,7 @@ http://dbpedia.org/resource/Ottawa,_Illinois	http://www.wikidata.org/entity/Q576
 http://dbpedia.org/resource/Jules_Favre_(naturalist)	http://www.wikidata.org/entity/Q4480402
 http://dbpedia.org/resource/Vásárosfalu	http://www.wikidata.org/entity/Q1089771
 http://dbpedia.org/resource/Claus_Schilling	http://www.wikidata.org/entity/Q74981
-http://dbpedia.org/resource/Sudan	http://www.wikidata.org/entity/Q1049
+http://dbpedia.org/resource/SÚn	http://www.wikidata.org/entity/Q1049
 http://dbpedia.org/resource/Mount_Buninyong	http://www.wikidata.org/entity/Q1614253
 http://dbpedia.org/resource/A_Doll's_House_(1973_Losey_film)	http://www.wikidata.org/entity/Q3279816
 http://dbpedia.org/resource/Marley_Shelton	http://www.wikidata.org/entity/Q235072
@@ -6770,7 +6770,7 @@ http://dbpedia.org/resource/Timotei_(Seviciu)	http://www.wikidata.org/entity/Q78
 http://dbpedia.org/resource/Mitja_Brulc	http://www.wikidata.org/entity/Q569236
 http://dbpedia.org/resource/Pressy-sous-Dondin	http://www.wikidata.org/entity/Q947178
 http://dbpedia.org/resource/Cherie_Burton	http://www.wikidata.org/entity/Q5091941
-http://dbpedia.org/resource/Ruda_nad_Moravou	http://www.wikidata.org/entity/Q1369160
+http://dbpedia.org/resource/RÚ_nad_Moravou	http://www.wikidata.org/entity/Q1369160
 http://dbpedia.org/resource/Hood_County,_Texas	http://www.wikidata.org/entity/Q485912
 http://dbpedia.org/resource/Hautes-Alpes	http://www.wikidata.org/entity/Q3125
 http://dbpedia.org/resource/Voodoo_Island	http://www.wikidata.org/entity/Q3563090
@@ -6914,7 +6914,7 @@ http://dbpedia.org/resource/Olympiacos_F.C.	http://www.wikidata.org/entity/Q1962
 http://dbpedia.org/resource/Vysočina_Region	http://www.wikidata.org/entity/Q190930
 http://dbpedia.org/resource/Šedina	http://www.wikidata.org/entity/Q2063766
 http://dbpedia.org/resource/Ahmed_Cevdet_Pasha	http://www.wikidata.org/entity/Q401209
-http://dbpedia.org/resource/El_Berrueco	http://www.wikidata.org/entity/Q645201
+http://dbpedia.org/resource/El_Berrìo	http://www.wikidata.org/entity/Q645201
 http://dbpedia.org/resource/Saou	http://www.wikidata.org/entity/Q48901
 http://dbpedia.org/resource/Crépand	http://www.wikidata.org/entity/Q377103
 http://dbpedia.org/resource/Berthe_di_Vito-Delvaux	http://www.wikidata.org/entity/Q4895538
@@ -6945,7 +6945,7 @@ http://dbpedia.org/resource/Albert_Berzeviczy	http://www.wikidata.org/entity/Q79
 http://dbpedia.org/resource/Barnard_College	http://www.wikidata.org/entity/Q167733
 http://dbpedia.org/resource/Fernando_de_la_Rúa	http://www.wikidata.org/entity/Q295007
 http://dbpedia.org/resource/Corona_del_Mar,_Newport_Beach	http://www.wikidata.org/entity/Q947273
-http://dbpedia.org/resource/Pontaubault	http://www.wikidata.org/entity/Q860644
+http://dbpedia.org/resource/Pontaºult	http://www.wikidata.org/entity/Q860644
 http://dbpedia.org/resource/Computer_Blue	http://www.wikidata.org/entity/Q5157418
 http://dbpedia.org/resource/Rørstad	http://www.wikidata.org/entity/Q3458914
 http://dbpedia.org/resource/Biplab_Sarkar	http://www.wikidata.org/entity/Q4915456
@@ -7015,7 +7015,7 @@ http://dbpedia.org/resource/Israel	http://www.wikidata.org/entity/Q801
 http://dbpedia.org/resource/The_Foul_King	http://www.wikidata.org/entity/Q3473448
 http://dbpedia.org/resource/Oakland,_California	http://www.wikidata.org/entity/Q17042
 http://dbpedia.org/resource/South_Kalimantan	http://www.wikidata.org/entity/Q3906
-http://dbpedia.org/resource/Tomoo_Kudaka	http://www.wikidata.org/entity/Q246772
+http://dbpedia.org/resource/Tomoo_KÚka	http://www.wikidata.org/entity/Q246772
 http://dbpedia.org/resource/Malcolm_Bricklin	http://www.wikidata.org/entity/Q4862180
 http://dbpedia.org/resource/Aisne	http://www.wikidata.org/entity/Q3093
 http://dbpedia.org/resource/Exincourt	http://www.wikidata.org/entity/Q753477
@@ -7139,7 +7139,7 @@ http://dbpedia.org/resource/Gustavo_Santaolalla	http://www.wikidata.org/entity/Q
 http://dbpedia.org/resource/Louise_Latimer_(actress)	http://www.wikidata.org/entity/Q6688818
 http://dbpedia.org/resource/Mena_Suvari	http://www.wikidata.org/entity/Q223303
 http://dbpedia.org/resource/Impasse_(1969_film)	http://www.wikidata.org/entity/Q6006087
-http://dbpedia.org/resource/Haruna_Abubakar	http://www.wikidata.org/entity/Q13140666
+http://dbpedia.org/resource/Haruna_Abºkar	http://www.wikidata.org/entity/Q13140666
 http://dbpedia.org/resource/Auterive,_Haute-Garonne	http://www.wikidata.org/entity/Q390964
 http://dbpedia.org/resource/Rhône_(department)	http://www.wikidata.org/entity/Q46130
 http://dbpedia.org/resource/Kamehameha_III	http://www.wikidata.org/entity/Q455795
@@ -7188,7 +7188,7 @@ http://dbpedia.org/resource/Yusuke_Murata	http://www.wikidata.org/entity/Q260237
 http://dbpedia.org/resource/Barwon_Heads,_Victoria	http://www.wikidata.org/entity/Q4865984
 http://dbpedia.org/resource/Dustpan_Recordings	http://www.wikidata.org/entity/Q18352870
 http://dbpedia.org/resource/Grand_Canary_(film)	http://www.wikidata.org/entity/Q3113543
-http://dbpedia.org/resource/Coucy-le-Château-Auffrique	http://www.wikidata.org/entity/Q320260
+http://dbpedia.org/resource/Coucy-le-Château-Aÿrique	http://www.wikidata.org/entity/Q320260
 http://dbpedia.org/resource/Giancarlo_Esposito	http://www.wikidata.org/entity/Q726142
 http://dbpedia.org/resource/Labastide-Beauvoir	http://www.wikidata.org/entity/Q668268
 http://dbpedia.org/resource/Valentin_Stanchev	http://www.wikidata.org/entity/Q7910815
@@ -7341,7 +7341,7 @@ http://dbpedia.org/resource/Gazaupouy	http://www.wikidata.org/entity/Q1006859
 http://dbpedia.org/resource/Chișinău	http://www.wikidata.org/entity/Q21197
 http://dbpedia.org/resource/Intira_Jaroenpura	http://www.wikidata.org/entity/Q2707057
 http://dbpedia.org/resource/CR_Vasco_da_Gama	http://www.wikidata.org/entity/Q5014111
-http://dbpedia.org/resource/Bruce_Pelz	http://www.wikidata.org/entity/Q4978128
+http://dbpedia.org/resource/BrÎ_Pelz	http://www.wikidata.org/entity/Q4978128
 http://dbpedia.org/resource/Pāvels_Mihadjuks	http://www.wikidata.org/entity/Q2425469
 http://dbpedia.org/resource/Dodge_County,_Minnesota	http://www.wikidata.org/entity/Q113056
 http://dbpedia.org/resource/The_Wild_One	http://www.wikidata.org/entity/Q1138349
@@ -7436,7 +7436,7 @@ http://dbpedia.org/resource/Mount_Saint_Peter	http://www.wikidata.org/entity/Q17
 http://dbpedia.org/resource/Affoltern_District	http://www.wikidata.org/entity/Q656635
 http://dbpedia.org/resource/Ted_de_Corsia	http://www.wikidata.org/entity/Q472418
 http://dbpedia.org/resource/University_of_Pennsylvania	http://www.wikidata.org/entity/Q49117
-http://dbpedia.org/resource/Garancières-en-Beauce	http://www.wikidata.org/entity/Q1140041
+http://dbpedia.org/resource/Garancières-en-BeaÎ	http://www.wikidata.org/entity/Q1140041
 http://dbpedia.org/resource/Charlie_Sheen	http://www.wikidata.org/entity/Q103939
 http://dbpedia.org/resource/Vráž_(Beroun_District)	http://www.wikidata.org/entity/Q2705407
 http://dbpedia.org/resource/Paul_Garlick_(Australian_cricketer)	http://www.wikidata.org/entity/Q7150821
@@ -7465,7 +7465,7 @@ http://dbpedia.org/resource/Mount_Pierce_(New_Hampshire)	http://www.wikidata.org
 http://dbpedia.org/resource/Hérépian	http://www.wikidata.org/entity/Q735066
 http://dbpedia.org/resource/Franciscus_Donders	http://www.wikidata.org/entity/Q1347862
 http://dbpedia.org/resource/And_Now_Tomorrow	http://www.wikidata.org/entity/Q1056820
-http://dbpedia.org/resource/Dubai_International_Airport	http://www.wikidata.org/entity/Q193439
+http://dbpedia.org/resource/Dºi_International_Airport	http://www.wikidata.org/entity/Q193439
 http://dbpedia.org/resource/PlayStation_2	http://www.wikidata.org/entity/Q10680
 http://dbpedia.org/resource/Truskovice	http://www.wikidata.org/entity/Q570630
 http://dbpedia.org/resource/Fritz_Kortner	http://www.wikidata.org/entity/Q78919
@@ -7510,12 +7510,12 @@ http://dbpedia.org/resource/Aix-les-Bains	http://www.wikidata.org/entity/Q181955
 http://dbpedia.org/resource/Don_DeFore	http://www.wikidata.org/entity/Q1239082
 http://dbpedia.org/resource/Jhonny_Vidales	http://www.wikidata.org/entity/Q6191154
 http://dbpedia.org/resource/Flying_Fish_(TV_series)	http://www.wikidata.org/entity/Q5463416
-http://dbpedia.org/resource/I_Am_Cuba	http://www.wikidata.org/entity/Q2527730
+http://dbpedia.org/resource/I_Am_Cº	http://www.wikidata.org/entity/Q2527730
 http://dbpedia.org/resource/Scorpion:_Disfigured	http://www.wikidata.org/entity/Q7435386
 http://dbpedia.org/resource/Valentin_Sinescu	http://www.wikidata.org/entity/Q10557395
 http://dbpedia.org/resource/Kenwood_Historic_District_(St._Petersburg,_Florida)	http://www.wikidata.org/entity/Q6392517
 http://dbpedia.org/resource/Mendrisio	http://www.wikidata.org/entity/Q69041
-http://dbpedia.org/resource/Ljubatovica	http://www.wikidata.org/entity/Q2721511
+http://dbpedia.org/resource/Ljºtovica	http://www.wikidata.org/entity/Q2721511
 http://dbpedia.org/resource/Rosanna_Arquette	http://www.wikidata.org/entity/Q109232
 http://dbpedia.org/resource/Elizabeth,_New_Jersey	http://www.wikidata.org/entity/Q138311
 http://dbpedia.org/resource/Ithala_Game_Reserve	http://www.wikidata.org/entity/Q1381580
@@ -7545,7 +7545,7 @@ http://dbpedia.org/resource/James_Hamilton_(British_Army_officer,_born_1777)	htt
 http://dbpedia.org/resource/Abigail_Campbell_Kawānanakoa	http://www.wikidata.org/entity/Q4667670
 http://dbpedia.org/resource/Richard_Chichester_Mason	http://www.wikidata.org/entity/Q7324731
 http://dbpedia.org/resource/U_Got_It_Bad	http://www.wikidata.org/entity/Q2552835
-http://dbpedia.org/resource/Esporte_Clube_Primeiro_Passo_Vitória_da_Conquista	http://www.wikidata.org/entity/Q3058513
+http://dbpedia.org/resource/Esporte_Cl¾_Primeiro_Passo_Vitória_da_Conquista	http://www.wikidata.org/entity/Q3058513
 http://dbpedia.org/resource/Crying_Out_Love_in_the_Center_of_the_World	http://www.wikidata.org/entity/Q8909461
 http://dbpedia.org/resource/Limbo_(album)	http://www.wikidata.org/entity/Q6549028
 http://dbpedia.org/resource/Pinetop_Perkins	http://www.wikidata.org/entity/Q458229
@@ -7637,12 +7637,12 @@ http://dbpedia.org/resource/Zhora_Hovhannisyan	http://www.wikidata.org/entity/Q5
 http://dbpedia.org/resource/Jamaica	http://www.wikidata.org/entity/Q766
 http://dbpedia.org/resource/The_Wild_Bunch	http://www.wikidata.org/entity/Q994481
 http://dbpedia.org/resource/Béchy	http://www.wikidata.org/entity/Q21684
-http://dbpedia.org/resource/Merrill's_Marauders_(film)	http://www.wikidata.org/entity/Q1752724
+http://dbpedia.org/resource/Merrill's_MaraÞrs_(film)	http://www.wikidata.org/entity/Q1752724
 http://dbpedia.org/resource/Limbarska_Gora	http://www.wikidata.org/entity/Q5215931
 http://dbpedia.org/resource/John_Toll	http://www.wikidata.org/entity/Q585668
 http://dbpedia.org/resource/Nermin_Zolotić	http://www.wikidata.org/entity/Q17422146
 http://dbpedia.org/resource/Aki_Takayama	http://www.wikidata.org/entity/Q2680027
-http://dbpedia.org/resource/Saint-Aubert-sur-Orne	http://www.wikidata.org/entity/Q250994
+http://dbpedia.org/resource/Saint-A¾rt-sur-Orne	http://www.wikidata.org/entity/Q250994
 http://dbpedia.org/resource/Kenny_Burrell	http://www.wikidata.org/entity/Q255355
 http://dbpedia.org/resource/Harold_Lloyd	http://www.wikidata.org/entity/Q104340
 http://dbpedia.org/resource/Berg,_Thurgau	http://www.wikidata.org/entity/Q67165
@@ -7703,7 +7703,7 @@ http://dbpedia.org/resource/Zeuthen	http://www.wikidata.org/entity/Q180898
 http://dbpedia.org/resource/Renée_Zellweger	http://www.wikidata.org/entity/Q122614
 http://dbpedia.org/resource/Hudson_County,_New_Jersey	http://www.wikidata.org/entity/Q490505
 http://dbpedia.org/resource/Grind_(song)	http://www.wikidata.org/entity/Q3329115
-http://dbpedia.org/resource/Robert_Cavallucci	http://www.wikidata.org/entity/Q7342831
+http://dbpedia.org/resource/Robert_CavallÌi	http://www.wikidata.org/entity/Q7342831
 http://dbpedia.org/resource/Return_to_Forever	http://www.wikidata.org/entity/Q1065887
 http://dbpedia.org/resource/Svein_Nyhus	http://www.wikidata.org/entity/Q1303374
 http://dbpedia.org/resource/Ferdinand_III,_Grand_Duke_of_Tuscany	http://www.wikidata.org/entity/Q309605
@@ -7883,7 +7883,7 @@ http://dbpedia.org/resource/Douglas_County,_Kansas	http://www.wikidata.org/entit
 http://dbpedia.org/resource/Mary_Kornman	http://www.wikidata.org/entity/Q2059559
 http://dbpedia.org/resource/Lilyan_Tashman	http://www.wikidata.org/entity/Q1755508
 http://dbpedia.org/resource/Ghostbusters_II	http://www.wikidata.org/entity/Q492214
-http://dbpedia.org/resource/Dorothea,_Abbess_of_Quedlinburg	http://www.wikidata.org/entity/Q526474
+http://dbpedia.org/resource/Dorothea,_Abbess_of_Qílinburg	http://www.wikidata.org/entity/Q526474
 http://dbpedia.org/resource/Danville,_Virginia	http://www.wikidata.org/entity/Q511922
 http://dbpedia.org/resource/Lynnhaven,_Virginia	http://www.wikidata.org/entity/Q6709456
 http://dbpedia.org/resource/Düdingen	http://www.wikidata.org/entity/Q70108
@@ -7914,7 +7914,7 @@ http://dbpedia.org/resource/Dramane_Coulibaly	http://www.wikidata.org/entity/Q30
 http://dbpedia.org/resource/Långsjön_(Skälsätra-Tutviken)	http://www.wikidata.org/entity/Q3361458
 http://dbpedia.org/resource/Tõhela	http://www.wikidata.org/entity/Q2026568
 http://dbpedia.org/resource/Riverside,_California	http://www.wikidata.org/entity/Q49243
-http://dbpedia.org/resource/University_at_Buffalo	http://www.wikidata.org/entity/Q681025
+http://dbpedia.org/resource/University_at_B࿺lo	http://www.wikidata.org/entity/Q681025
 http://dbpedia.org/resource/White_Nile	http://www.wikidata.org/entity/Q4814791
 http://dbpedia.org/resource/Jerry_Weintraub	http://www.wikidata.org/entity/Q365844
 http://dbpedia.org/resource/Duel_at_Diablo	http://www.wikidata.org/entity/Q1263899
@@ -7978,7 +7978,7 @@ http://dbpedia.org/resource/Jan_Fridegård	http://www.wikidata.org/entity/Q46476
 http://dbpedia.org/resource/Eddie_Chow	http://www.wikidata.org/entity/Q5335928
 http://dbpedia.org/resource/Underworld:_Evolution	http://www.wikidata.org/entity/Q646025
 http://dbpedia.org/resource/Jeffrey_de_Graaf	http://www.wikidata.org/entity/Q6176366
-http://dbpedia.org/resource/Castelnaudary	http://www.wikidata.org/entity/Q193861
+http://dbpedia.org/resource/CastelnaÚry	http://www.wikidata.org/entity/Q193861
 http://dbpedia.org/resource/Émilie_du_Châtelet	http://www.wikidata.org/entity/Q7286
 http://dbpedia.org/resource/You_Got_Me_(The_Roots_song)	http://www.wikidata.org/entity/Q8057247
 http://dbpedia.org/resource/Silence_(2016_film)	http://www.wikidata.org/entity/Q18811634
@@ -8014,7 +8014,7 @@ http://dbpedia.org/resource/Dalpe	http://www.wikidata.org/entity/Q67756
 http://dbpedia.org/resource/Our_Relations	http://www.wikidata.org/entity/Q1211978
 http://dbpedia.org/resource/Butterfly_on_the_Shoulder	http://www.wikidata.org/entity/Q3548892
 http://dbpedia.org/resource/Paul_Jean_Clays	http://www.wikidata.org/entity/Q2959082
-http://dbpedia.org/resource/Gouda,_South_Holland	http://www.wikidata.org/entity/Q84125
+http://dbpedia.org/resource/GoÚ,_South_Holland	http://www.wikidata.org/entity/Q84125
 http://dbpedia.org/resource/Ciro_Rodriguez	http://www.wikidata.org/entity/Q546932
 http://dbpedia.org/resource/Senad_Tiganj	http://www.wikidata.org/entity/Q1348474
 http://dbpedia.org/resource/Mikkel_Beckmann	http://www.wikidata.org/entity/Q439974
@@ -8121,7 +8121,7 @@ http://dbpedia.org/resource/Hillsborough_County,_Florida	http://www.wikidata.org
 http://dbpedia.org/resource/Ahmad_Elias	http://www.wikidata.org/entity/Q4695796
 http://dbpedia.org/resource/Adrian_Nikçi	http://www.wikidata.org/entity/Q373742
 http://dbpedia.org/resource/Poncin	http://www.wikidata.org/entity/Q665272
-http://dbpedia.org/resource/Puebla	http://www.wikidata.org/entity/Q79923
+http://dbpedia.org/resource/Pëla	http://www.wikidata.org/entity/Q79923
 http://dbpedia.org/resource/Ernst_I,_Duke_of_Saxe-Altenburg	http://www.wikidata.org/entity/Q61208
 http://dbpedia.org/resource/Dreamcast_Collection	http://www.wikidata.org/entity/Q5306537
 http://dbpedia.org/resource/Reda_El_Amrani	http://www.wikidata.org/entity/Q1770757
@@ -8237,7 +8237,7 @@ http://dbpedia.org/resource/John_Van_Denburgh	http://www.wikidata.org/entity/Q71
 http://dbpedia.org/resource/Ravenswood_School_for_Girls	http://www.wikidata.org/entity/Q7296581
 http://dbpedia.org/resource/Gwacheon	http://www.wikidata.org/entity/Q42064
 http://dbpedia.org/resource/Arthur_Shirley	http://www.wikidata.org/entity/Q4800277
-http://dbpedia.org/resource/Uccle	http://www.wikidata.org/entity/Q203312
+http://dbpedia.org/resource/Ìle	http://www.wikidata.org/entity/Q203312
 http://dbpedia.org/resource/Willard_Franklyn_Searle	http://www.wikidata.org/entity/Q8003407
 http://dbpedia.org/resource/Shadow_of_a_Doubt	http://www.wikidata.org/entity/Q465979
 http://dbpedia.org/resource/Joseph_Schildkraut	http://www.wikidata.org/entity/Q93632
@@ -8249,7 +8249,7 @@ http://dbpedia.org/resource/Frank_Lloyd_Wright	http://www.wikidata.org/entity/Q5
 http://dbpedia.org/resource/Herman_op_den_Graeff	http://www.wikidata.org/entity/Q1613168
 http://dbpedia.org/resource/Sainte-Honorine-des-Pertes	http://www.wikidata.org/entity/Q521775
 http://dbpedia.org/resource/Andrea_Modica	http://www.wikidata.org/entity/Q4755193
-http://dbpedia.org/resource/Peter_Guber	http://www.wikidata.org/entity/Q970867
+http://dbpedia.org/resource/Peter_G¾r	http://www.wikidata.org/entity/Q970867
 http://dbpedia.org/resource/Seven_Network	http://www.wikidata.org/entity/Q908659
 http://dbpedia.org/resource/Michel-Ange_–_Molitor_(Paris_Métro)	http://www.wikidata.org/entity/Q1228836
 http://dbpedia.org/resource/Robert_H._Quinn	http://www.wikidata.org/entity/Q7345095
@@ -8269,7 +8269,7 @@ http://dbpedia.org/resource/Love_to_Hate_You	http://www.wikidata.org/entity/Q669
 http://dbpedia.org/resource/Gmina_Terespol	http://www.wikidata.org/entity/Q614282
 http://dbpedia.org/resource/Kane_County,_Utah	http://www.wikidata.org/entity/Q26628
 http://dbpedia.org/resource/James_II_of_Aragon	http://www.wikidata.org/entity/Q312735
-http://dbpedia.org/resource/Roubaix	http://www.wikidata.org/entity/Q34001
+http://dbpedia.org/resource/Roºix	http://www.wikidata.org/entity/Q34001
 http://dbpedia.org/resource/Haute-Marne	http://www.wikidata.org/entity/Q12607
 http://dbpedia.org/resource/Edison,_the_Man	http://www.wikidata.org/entity/Q928791
 http://dbpedia.org/resource/University_of_California,_Los_Angeles	http://www.wikidata.org/entity/Q174710
@@ -8410,7 +8410,7 @@ http://dbpedia.org/resource/Voulez-Vous	http://www.wikidata.org/entity/Q755085
 http://dbpedia.org/resource/New_Orleans	http://www.wikidata.org/entity/Q34404
 http://dbpedia.org/resource/Lungern	http://www.wikidata.org/entity/Q64292
 http://dbpedia.org/resource/Danger_Close_Games	http://www.wikidata.org/entity/Q597020
-http://dbpedia.org/resource/Maubec,_Isère	http://www.wikidata.org/entity/Q1069167
+http://dbpedia.org/resource/Ma௬,_Isère	http://www.wikidata.org/entity/Q1069167
 http://dbpedia.org/resource/Briar_Creek_Township,_Columbia_County,_Pennsylvania	http://www.wikidata.org/entity/Q4965770
 http://dbpedia.org/resource/Rozsochatec	http://www.wikidata.org/entity/Q2635307
 http://dbpedia.org/resource/Katherine_DeMille	http://www.wikidata.org/entity/Q454944
@@ -8500,7 +8500,7 @@ http://dbpedia.org/resource/Pinal_County,_Arizona	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Raymond_Bailey	http://www.wikidata.org/entity/Q433493
 http://dbpedia.org/resource/Éric_Doligé	http://www.wikidata.org/entity/Q3591088
 http://dbpedia.org/resource/Shemp_Howard	http://www.wikidata.org/entity/Q1287517
-http://dbpedia.org/resource/Claude_Piéplu	http://www.wikidata.org/entity/Q722333
+http://dbpedia.org/resource/ClaÞ_Piéplu	http://www.wikidata.org/entity/Q722333
 http://dbpedia.org/resource/Fandango_(1985_film)	http://www.wikidata.org/entity/Q1395484
 http://dbpedia.org/resource/7th_Symphony_(album)	http://www.wikidata.org/entity/Q597931
 http://dbpedia.org/resource/Archduke_Karl_Ludwig_of_Austria	http://www.wikidata.org/entity/Q78519
@@ -8571,7 +8571,7 @@ http://dbpedia.org/resource/Guinevere_(film)	http://www.wikidata.org/entity/Q579
 http://dbpedia.org/resource/Aaron_Olsen	http://www.wikidata.org/entity/Q302450
 http://dbpedia.org/resource/Jan-Chris_de_Koeijer	http://www.wikidata.org/entity/Q4944229
 http://dbpedia.org/resource/Markus_Egger_(footballer)	http://www.wikidata.org/entity/Q1621052
-http://dbpedia.org/resource/Kathleen_Kennedy_(producer)	http://www.wikidata.org/entity/Q237207
+http://dbpedia.org/resource/Kathleen_Kennedy_(prodÎr)	http://www.wikidata.org/entity/Q237207
 http://dbpedia.org/resource/Fondation_Université_Française_en_Arménie	http://www.wikidata.org/entity/Q1450693
 http://dbpedia.org/resource/Nemat_Shafik	http://www.wikidata.org/entity/Q6869403
 http://dbpedia.org/resource/Maxwell_Shane	http://www.wikidata.org/entity/Q3853145
@@ -8588,7 +8588,7 @@ http://dbpedia.org/resource/Banská_Bystrica	http://www.wikidata.org/entity/Q144
 http://dbpedia.org/resource/Voždovac	http://www.wikidata.org/entity/Q1813743
 http://dbpedia.org/resource/University_of_Amsterdam	http://www.wikidata.org/entity/Q214341
 http://dbpedia.org/resource/Tom_Lehrer	http://www.wikidata.org/entity/Q369724
-http://dbpedia.org/resource/Bruce_Dern	http://www.wikidata.org/entity/Q357001
+http://dbpedia.org/resource/BrÎ_Dern	http://www.wikidata.org/entity/Q357001
 http://dbpedia.org/resource/Varbla_Parish	http://www.wikidata.org/entity/Q1753145
 http://dbpedia.org/resource/European_Journal_of_Pharmaceutics_and_Biopharmaceutics	http://www.wikidata.org/entity/Q5412740
 http://dbpedia.org/resource/Hi-Tek	http://www.wikidata.org/entity/Q718856
@@ -8716,7 +8716,7 @@ http://dbpedia.org/resource/FC_Seoul	http://www.wikidata.org/entity/Q482406
 http://dbpedia.org/resource/Stephan_Fürstner	http://www.wikidata.org/entity/Q705264
 http://dbpedia.org/resource/Alan_Alda	http://www.wikidata.org/entity/Q310394
 http://dbpedia.org/resource/Yeo_Sung-hye	http://www.wikidata.org/entity/Q491877
-http://dbpedia.org/resource/Brompton,_Quebec	http://www.wikidata.org/entity/Q2926025
+http://dbpedia.org/resource/Brompton,_Q	http://www.wikidata.org/entity/Q2926025
 http://dbpedia.org/resource/Kerkafalva	http://www.wikidata.org/entity/Q223478
 http://dbpedia.org/resource/Haruhiko_Kuroda	http://www.wikidata.org/entity/Q5244721
 http://dbpedia.org/resource/South_Moravian_Region	http://www.wikidata.org/entity/Q192697
@@ -8775,7 +8775,7 @@ http://dbpedia.org/resource/Mukdahan_Province	http://www.wikidata.org/entity/Q33
 http://dbpedia.org/resource/Poursac	http://www.wikidata.org/entity/Q1440472
 http://dbpedia.org/resource/John_Newman_(singer)	http://www.wikidata.org/entity/Q12433089
 http://dbpedia.org/resource/Animorphs:_Know_the_Secret	http://www.wikidata.org/entity/Q4765198
-http://dbpedia.org/resource/Pío_García-Escudero	http://www.wikidata.org/entity/Q3412142
+http://dbpedia.org/resource/Pío_García-EscÞro	http://www.wikidata.org/entity/Q3412142
 http://dbpedia.org/resource/Oaxaca_City	http://www.wikidata.org/entity/Q131429
 http://dbpedia.org/resource/Gmina_Starogard_Gdański	http://www.wikidata.org/entity/Q550740
 http://dbpedia.org/resource/Laila_Freivalds	http://www.wikidata.org/entity/Q291648
@@ -8813,7 +8813,7 @@ http://dbpedia.org/resource/John_Swayne	http://www.wikidata.org/entity/Q6259779
 http://dbpedia.org/resource/Vida_Anim	http://www.wikidata.org/entity/Q433750
 http://dbpedia.org/resource/Emmanuel_Todd	http://www.wikidata.org/entity/Q713775
 http://dbpedia.org/resource/Kjelsås_Line	http://www.wikidata.org/entity/Q6419449
-http://dbpedia.org/resource/UEFA_Euro_1980_Final	http://www.wikidata.org/entity/Q1192934
+http://dbpedia.org/resource/໺_Euro_1980_Final	http://www.wikidata.org/entity/Q1192934
 http://dbpedia.org/resource/Forest_Hill,_Louisiana	http://www.wikidata.org/entity/Q2331045
 http://dbpedia.org/resource/Kumasi	http://www.wikidata.org/entity/Q182059
 http://dbpedia.org/resource/Star_Trek:_The_Original_Series	http://www.wikidata.org/entity/Q1077
@@ -8892,7 +8892,7 @@ http://dbpedia.org/resource/Cornelis_Lely	http://www.wikidata.org/entity/Q983342
 http://dbpedia.org/resource/Dulce_of_Aragon	http://www.wikidata.org/entity/Q283312
 http://dbpedia.org/resource/Ralston_Hill	http://www.wikidata.org/entity/Q7288365
 http://dbpedia.org/resource/Tisno	http://www.wikidata.org/entity/Q930516
-http://dbpedia.org/resource/Clube_Náutico_Marcílio_Dias	http://www.wikidata.org/entity/Q2980357
+http://dbpedia.org/resource/Cl¾_Náutico_Marcílio_Dias	http://www.wikidata.org/entity/Q2980357
 http://dbpedia.org/resource/Neuilly-sur-Seine	http://www.wikidata.org/entity/Q48958
 http://dbpedia.org/resource/The_Godfather_Saga	http://www.wikidata.org/entity/Q1196157
 http://dbpedia.org/resource/Viktoria_Schnaderbeck	http://www.wikidata.org/entity/Q615134
@@ -8904,7 +8904,7 @@ http://dbpedia.org/resource/Antonio_Moreno_(footballer)	http://www.wikidata.org/
 http://dbpedia.org/resource/Alameda_County,_California	http://www.wikidata.org/entity/Q107146
 http://dbpedia.org/resource/Princess_Helena_Adelaide_of_Schleswig-Holstein-Sonderburg-Glücksburg	http://www.wikidata.org/entity/Q2047391
 http://dbpedia.org/resource/Christian_August_Selmer	http://www.wikidata.org/entity/Q1078837
-http://dbpedia.org/resource/América_Futebol_Clube_(MG)	http://www.wikidata.org/entity/Q338285
+http://dbpedia.org/resource/América_Futebol_Cl¾_(MG)	http://www.wikidata.org/entity/Q338285
 http://dbpedia.org/resource/Kigali	http://www.wikidata.org/entity/Q3859
 http://dbpedia.org/resource/Mheer	http://www.wikidata.org/entity/Q100034
 http://dbpedia.org/resource/HollyFrontier	http://www.wikidata.org/entity/Q5881864
@@ -8958,7 +8958,7 @@ http://dbpedia.org/resource/Muotathal	http://www.wikidata.org/entity/Q66069
 http://dbpedia.org/resource/Jack_Jacobs	http://www.wikidata.org/entity/Q6113326
 http://dbpedia.org/resource/Goranboy_District	http://www.wikidata.org/entity/Q330843
 http://dbpedia.org/resource/Burgdorf,_Switzerland	http://www.wikidata.org/entity/Q68311
-http://dbpedia.org/resource/Zakon_ljubavi	http://www.wikidata.org/entity/Q1249245
+http://dbpedia.org/resource/Zakon_ljºvi	http://www.wikidata.org/entity/Q1249245
 http://dbpedia.org/resource/Juan_Carlos_Stauskas	http://www.wikidata.org/entity/Q794483
 http://dbpedia.org/resource/Martin_Sheen	http://www.wikidata.org/entity/Q184572
 http://dbpedia.org/resource/Vosges_(department)	http://www.wikidata.org/entity/Q3105
@@ -8983,7 +8983,7 @@ http://dbpedia.org/resource/Wild_Child_(film)	http://www.wikidata.org/entity/Q59
 http://dbpedia.org/resource/Kraków_County	http://www.wikidata.org/entity/Q1164890
 http://dbpedia.org/resource/The_Kite_Runner_(film)	http://www.wikidata.org/entity/Q1057045
 http://dbpedia.org/resource/Delta_County,_Michigan	http://www.wikidata.org/entity/Q491857
-http://dbpedia.org/resource/Lucey,_Savoie	http://www.wikidata.org/entity/Q742061
+http://dbpedia.org/resource/LÎy,_Savoie	http://www.wikidata.org/entity/Q742061
 http://dbpedia.org/resource/Pacov	http://www.wikidata.org/entity/Q746111
 http://dbpedia.org/resource/Oprah_Winfrey	http://www.wikidata.org/entity/Q55800
 http://dbpedia.org/resource/Muri_District	http://www.wikidata.org/entity/Q656740
@@ -9011,7 +9011,7 @@ http://dbpedia.org/resource/Razvanje	http://www.wikidata.org/entity/Q2195203
 http://dbpedia.org/resource/The_Beginning_or_the_End	http://www.wikidata.org/entity/Q2870327
 http://dbpedia.org/resource/Wilson_Brown_(admiral)	http://www.wikidata.org/entity/Q8022993
 http://dbpedia.org/resource/Agustín_Díaz_Yanes	http://www.wikidata.org/entity/Q399182
-http://dbpedia.org/resource/Seymour_Lubetzky	http://www.wikidata.org/entity/Q7459205
+http://dbpedia.org/resource/Seymour_L¾tzky	http://www.wikidata.org/entity/Q7459205
 http://dbpedia.org/resource/Santa_Barbara,_California	http://www.wikidata.org/entity/Q159288
 http://dbpedia.org/resource/Le_Châtelet-sur-Meuse	http://www.wikidata.org/entity/Q42014
 http://dbpedia.org/resource/Riga	http://www.wikidata.org/entity/Q1773
@@ -9039,7 +9039,7 @@ http://dbpedia.org/resource/Troguéry	http://www.wikidata.org/entity/Q617689
 http://dbpedia.org/resource/Faith_Evans	http://www.wikidata.org/entity/Q236318
 http://dbpedia.org/resource/Frausseilles	http://www.wikidata.org/entity/Q1341828
 http://dbpedia.org/resource/Chaudhry_Muhammad_Ali	http://www.wikidata.org/entity/Q284443
-http://dbpedia.org/resource/Akira_Masuda	http://www.wikidata.org/entity/Q4701154
+http://dbpedia.org/resource/Akira_MasÚ	http://www.wikidata.org/entity/Q4701154
 http://dbpedia.org/resource/Bradley_Nowell	http://www.wikidata.org/entity/Q2631800
 http://dbpedia.org/resource/Asahikawa_Air_Field	http://www.wikidata.org/entity/Q2902428
 http://dbpedia.org/resource/Ibrahima_Passy_Camara	http://www.wikidata.org/entity/Q19463442
@@ -9049,7 +9049,7 @@ http://dbpedia.org/resource/Kodiossou	http://www.wikidata.org/entity/Q3198218
 http://dbpedia.org/resource/Eh,_Eh_(Nothing_Else_I_Can_Say)	http://www.wikidata.org/entity/Q191070
 http://dbpedia.org/resource/Austin_Powers:_The_Spy_Who_Shagged_Me	http://www.wikidata.org/entity/Q487978
 http://dbpedia.org/resource/Shūsui_Kōtoku	http://www.wikidata.org/entity/Q558267
-http://dbpedia.org/resource/UEFA_Euro_1984_Final	http://www.wikidata.org/entity/Q64179
+http://dbpedia.org/resource/໺_Euro_1984_Final	http://www.wikidata.org/entity/Q64179
 http://dbpedia.org/resource/Aquitaine	http://www.wikidata.org/entity/Q1179
 http://dbpedia.org/resource/Nintendo_DS	http://www.wikidata.org/entity/Q170323
 http://dbpedia.org/resource/Dyro	http://www.wikidata.org/entity/Q16298903
@@ -9137,7 +9137,7 @@ http://dbpedia.org/resource/Clayton_High_School_(Missouri)	http://www.wikidata.o
 http://dbpedia.org/resource/Barrington,_New_Jersey	http://www.wikidata.org/entity/Q1086411
 http://dbpedia.org/resource/Córdoba,_Argentina	http://www.wikidata.org/entity/Q44210
 http://dbpedia.org/resource/Compton,_California	http://www.wikidata.org/entity/Q487119
-http://dbpedia.org/resource/Zoo_in_Budapest	http://www.wikidata.org/entity/Q220126
+http://dbpedia.org/resource/Zoo_in_BÚpest	http://www.wikidata.org/entity/Q220126
 http://dbpedia.org/resource/Nájera	http://www.wikidata.org/entity/Q776113
 http://dbpedia.org/resource/Šumadija_District	http://www.wikidata.org/entity/Q544118
 http://dbpedia.org/resource/Indonesia	http://www.wikidata.org/entity/Q252
@@ -9149,7 +9149,7 @@ http://dbpedia.org/resource/Jet_(band)	http://www.wikidata.org/entity/Q750460
 http://dbpedia.org/resource/Strueth	http://www.wikidata.org/entity/Q627592
 http://dbpedia.org/resource/Napalm_Records	http://www.wikidata.org/entity/Q693194
 http://dbpedia.org/resource/Alexandra_of_Denmark	http://www.wikidata.org/entity/Q152260
-http://dbpedia.org/resource/Peter_Tufano	http://www.wikidata.org/entity/Q7177407
+http://dbpedia.org/resource/Peter_Túno	http://www.wikidata.org/entity/Q7177407
 http://dbpedia.org/resource/Bee_Gees'_1st	http://www.wikidata.org/entity/Q768601
 http://dbpedia.org/resource/Nicholas_Alexandrovich,_Tsesarevich_of_Russia	http://www.wikidata.org/entity/Q445399
 http://dbpedia.org/resource/Eduard_Franz	http://www.wikidata.org/entity/Q281048
@@ -9250,7 +9250,7 @@ http://dbpedia.org/resource/The_F.B.I._(TV_series)	http://www.wikidata.org/entit
 http://dbpedia.org/resource/LMFAO	http://www.wikidata.org/entity/Q48978
 http://dbpedia.org/resource/Donald_Glover	http://www.wikidata.org/entity/Q1239933
 http://dbpedia.org/resource/Five_in_the_Black	http://www.wikidata.org/entity/Q1934878
-http://dbpedia.org/resource/Chaudefonds-sur-Layon	http://www.wikidata.org/entity/Q1103074
+http://dbpedia.org/resource/Cha෯onds-sur-Layon	http://www.wikidata.org/entity/Q1103074
 http://dbpedia.org/resource/Marey-lès-Fussey	http://www.wikidata.org/entity/Q16620
 http://dbpedia.org/resource/Peter_Finch	http://www.wikidata.org/entity/Q294454
 http://dbpedia.org/resource/Endemol	http://www.wikidata.org/entity/Q851184
@@ -9311,7 +9311,7 @@ http://dbpedia.org/resource/George_Cram_Cook	http://www.wikidata.org/entity/Q553
 http://dbpedia.org/resource/Ambridge,_Pennsylvania	http://www.wikidata.org/entity/Q1130536
 http://dbpedia.org/resource/Matt_Hassett	http://www.wikidata.org/entity/Q6788771
 http://dbpedia.org/resource/Michael_Ignatieff	http://www.wikidata.org/entity/Q311684
-http://dbpedia.org/resource/Salman_Khan_(educator)	http://www.wikidata.org/entity/Q471472
+http://dbpedia.org/resource/Salman_Khan_(edÊtor)	http://www.wikidata.org/entity/Q471472
 http://dbpedia.org/resource/André_Bikey	http://www.wikidata.org/entity/Q517113
 http://dbpedia.org/resource/Fran_Hosken	http://www.wikidata.org/entity/Q16017428
 http://dbpedia.org/resource/Small_Soldiers	http://www.wikidata.org/entity/Q1332263
@@ -9403,7 +9403,7 @@ http://dbpedia.org/resource/Nine_Inch_Nails	http://www.wikidata.org/entity/Q1164
 http://dbpedia.org/resource/Ferdinand_II_of_Aragon	http://www.wikidata.org/entity/Q12860
 http://dbpedia.org/resource/Lake_Erie	http://www.wikidata.org/entity/Q5492
 http://dbpedia.org/resource/Candor,_Oise	http://www.wikidata.org/entity/Q592207
-http://dbpedia.org/resource/Daniel_Ducarme	http://www.wikidata.org/entity/Q964403
+http://dbpedia.org/resource/Daniel_DÊrme	http://www.wikidata.org/entity/Q964403
 http://dbpedia.org/resource/Milly-la-Forêt	http://www.wikidata.org/entity/Q549750
 http://dbpedia.org/resource/Kokoro_Kikuchi	http://www.wikidata.org/entity/Q6426809
 http://dbpedia.org/resource/League_Park_(Cincinnati)	http://www.wikidata.org/entity/Q6508941
@@ -9423,7 +9423,7 @@ http://dbpedia.org/resource/Maynor_Dávila	http://www.wikidata.org/entity/Q10509
 http://dbpedia.org/resource/Chen_Yuh-chang	http://www.wikidata.org/entity/Q8279850
 http://dbpedia.org/resource/Pat_M._Baskin	http://www.wikidata.org/entity/Q17478987
 http://dbpedia.org/resource/Washington_University_in_St._Louis	http://www.wikidata.org/entity/Q777403
-http://dbpedia.org/resource/Loudet	http://www.wikidata.org/entity/Q976263
+http://dbpedia.org/resource/LoÞt	http://www.wikidata.org/entity/Q976263
 http://dbpedia.org/resource/Auguste-Hyacinthe_Debay	http://www.wikidata.org/entity/Q2870992
 http://dbpedia.org/resource/Armenia	http://www.wikidata.org/entity/Q399
 http://dbpedia.org/resource/Meurthe-et-Moselle	http://www.wikidata.org/entity/Q12626
@@ -9445,7 +9445,7 @@ http://dbpedia.org/resource/Marko_Mugoša	http://www.wikidata.org/entity/Q677120
 http://dbpedia.org/resource/Timothy_Olyphant	http://www.wikidata.org/entity/Q309835
 http://dbpedia.org/resource/Train_of_Life	http://www.wikidata.org/entity/Q228293
 http://dbpedia.org/resource/Helmut_Weiss	http://www.wikidata.org/entity/Q120149
-http://dbpedia.org/resource/Saint-Amand-Jartoudeix	http://www.wikidata.org/entity/Q193376
+http://dbpedia.org/resource/Saint-Amand-JartoÞix	http://www.wikidata.org/entity/Q193376
 http://dbpedia.org/resource/Seton_Hall_Preparatory_School	http://www.wikidata.org/entity/Q7456786
 http://dbpedia.org/resource/Rendy_Siregar	http://www.wikidata.org/entity/Q7312868
 http://dbpedia.org/resource/Sombrita	http://www.wikidata.org/entity/Q21932380
@@ -9501,7 +9501,7 @@ http://dbpedia.org/resource/Glasgow_Village,_Missouri	http://www.wikidata.org/en
 http://dbpedia.org/resource/Labastide-Esparbairenque	http://www.wikidata.org/entity/Q189126
 http://dbpedia.org/resource/Go_Naked_in_the_World	http://www.wikidata.org/entity/Q4007124
 http://dbpedia.org/resource/King_of_Kings_(1961_film)	http://www.wikidata.org/entity/Q762927
-http://dbpedia.org/resource/Khawaja_Reazuddin_Atash	http://www.wikidata.org/entity/Q16015078
+http://dbpedia.org/resource/Khawaja_ReazÝin_Atash	http://www.wikidata.org/entity/Q16015078
 http://dbpedia.org/resource/Murray_Chotiner	http://www.wikidata.org/entity/Q6939163
 http://dbpedia.org/resource/Lago_da_Pedra	http://www.wikidata.org/entity/Q1008300
 http://dbpedia.org/resource/Flevoland	http://www.wikidata.org/entity/Q707
@@ -9514,7 +9514,7 @@ http://dbpedia.org/resource/Žďár_nad_Sázavou_District	http://www.wikidata.or
 http://dbpedia.org/resource/Haavapää	http://www.wikidata.org/entity/Q3470087
 http://dbpedia.org/resource/Aerodynamic_(instrumental)	http://www.wikidata.org/entity/Q2698216
 http://dbpedia.org/resource/Mark_Duplass	http://www.wikidata.org/entity/Q3273787
-http://dbpedia.org/resource/Londrina_Esporte_Clube	http://www.wikidata.org/entity/Q1633430
+http://dbpedia.org/resource/Londrina_Esporte_Cl¾	http://www.wikidata.org/entity/Q1633430
 http://dbpedia.org/resource/Tim_Bevan	http://www.wikidata.org/entity/Q1473065
 http://dbpedia.org/resource/Castello_Cavalcanti	http://www.wikidata.org/entity/Q16249121
 http://dbpedia.org/resource/Botany_Bay	http://www.wikidata.org/entity/Q894682
@@ -9539,7 +9539,7 @@ http://dbpedia.org/resource/Carroll_County,_Indiana	http://www.wikidata.org/enti
 http://dbpedia.org/resource/Cyrus_Derman	http://www.wikidata.org/entity/Q5201082
 http://dbpedia.org/resource/Nine_(2009_live-action_film)	http://www.wikidata.org/entity/Q752989
 http://dbpedia.org/resource/Halo_Wars	http://www.wikidata.org/entity/Q747836
-http://dbpedia.org/resource/Berguedà	http://www.wikidata.org/entity/Q15345
+http://dbpedia.org/resource/Bergíà	http://www.wikidata.org/entity/Q15345
 http://dbpedia.org/resource/Leninsky_District,_Belarus	http://www.wikidata.org/entity/Q2044762
 http://dbpedia.org/resource/Anne_Rice	http://www.wikidata.org/entity/Q184785
 http://dbpedia.org/resource/Lauren_Iungerich	http://www.wikidata.org/entity/Q19880640
@@ -9553,7 +9553,7 @@ http://dbpedia.org/resource/Greitspitz	http://www.wikidata.org/entity/Q5607327
 http://dbpedia.org/resource/Varennes-sur-Amance	http://www.wikidata.org/entity/Q1615680
 http://dbpedia.org/resource/Carolco_Pictures	http://www.wikidata.org/entity/Q1044291
 http://dbpedia.org/resource/Zelda_II:_The_Adventure_of_Link	http://www.wikidata.org/entity/Q187339
-http://dbpedia.org/resource/Halloween_(Buffy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q3126172
+http://dbpedia.org/resource/Halloween_(Bÿy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q3126172
 http://dbpedia.org/resource/Charles_Drake_(actor)	http://www.wikidata.org/entity/Q957063
 http://dbpedia.org/resource/Alkmaar	http://www.wikidata.org/entity/Q972
 http://dbpedia.org/resource/Madalena_Felix	http://www.wikidata.org/entity/Q654440
@@ -9617,7 +9617,7 @@ http://dbpedia.org/resource/Witt_Township,_Montgomery_County,_Illinois	http://ww
 http://dbpedia.org/resource/Meet_the_Parents_(film_series)	http://www.wikidata.org/entity/Q6807857
 http://dbpedia.org/resource/Federation_of_Bosnia_and_Herzegovina	http://www.wikidata.org/entity/Q11198
 http://dbpedia.org/resource/Vagney	http://www.wikidata.org/entity/Q922686
-http://dbpedia.org/resource/Duff_McKagan	http://www.wikidata.org/entity/Q251865
+http://dbpedia.org/resource/Dÿ_McKagan	http://www.wikidata.org/entity/Q251865
 http://dbpedia.org/resource/Erie_County,_New_York	http://www.wikidata.org/entity/Q114843
 http://dbpedia.org/resource/Saint-Jean-Pierre-Fixte	http://www.wikidata.org/entity/Q1138874
 http://dbpedia.org/resource/Győr-Moson-Sopron_County	http://www.wikidata.org/entity/Q187753
@@ -9774,7 +9774,7 @@ http://dbpedia.org/resource/Pumari_Chhish	http://www.wikidata.org/entity/Q185775
 http://dbpedia.org/resource/Teedra_Moses	http://www.wikidata.org/entity/Q3492802
 http://dbpedia.org/resource/Palm_Desert,_California	http://www.wikidata.org/entity/Q399976
 http://dbpedia.org/resource/Dorchester,_Boston	http://www.wikidata.org/entity/Q1024037
-http://dbpedia.org/resource/Marie-Guite_Dufay	http://www.wikidata.org/entity/Q446672
+http://dbpedia.org/resource/Marie-Guite_Dúy	http://www.wikidata.org/entity/Q446672
 http://dbpedia.org/resource/Bean_(film)	http://www.wikidata.org/entity/Q752103
 http://dbpedia.org/resource/Jonas_Gomes_de_Sousa	http://www.wikidata.org/entity/Q19968638
 http://dbpedia.org/resource/William_Baldwin	http://www.wikidata.org/entity/Q313546
@@ -9883,7 +9883,7 @@ http://dbpedia.org/resource/Pedro_Cea	http://www.wikidata.org/entity/Q191471
 http://dbpedia.org/resource/Helmut_Aris	http://www.wikidata.org/entity/Q1603348
 http://dbpedia.org/resource/Saint-Hilaire-d'Estissac	http://www.wikidata.org/entity/Q199270
 http://dbpedia.org/resource/Lucian_Piane	http://www.wikidata.org/entity/Q6696719
-http://dbpedia.org/resource/Jiří_Paroubek	http://www.wikidata.org/entity/Q161671
+http://dbpedia.org/resource/Jiří_Paro¾k	http://www.wikidata.org/entity/Q161671
 http://dbpedia.org/resource/Indy_Rahmawati	http://www.wikidata.org/entity/Q6028298
 http://dbpedia.org/resource/Joe_Timmons_(Gaelic_footballer)	http://www.wikidata.org/entity/Q16018612
 http://dbpedia.org/resource/Manuel_Críspulo_González_y_Soto	http://www.wikidata.org/entity/Q16839635
@@ -10011,7 +10011,7 @@ http://dbpedia.org/resource/Warm_Bodies_(film)	http://www.wikidata.org/entity/Q2
 http://dbpedia.org/resource/Ronny_Abraham	http://www.wikidata.org/entity/Q382775
 http://dbpedia.org/resource/Norman_Panama	http://www.wikidata.org/entity/Q544016
 http://dbpedia.org/resource/Keith_Henson	http://www.wikidata.org/entity/Q3194740
-http://dbpedia.org/resource/Reuben_Droughns	http://www.wikidata.org/entity/Q4993724
+http://dbpedia.org/resource/Re¾n_Droughns	http://www.wikidata.org/entity/Q4993724
 http://dbpedia.org/resource/Blythe_Danner	http://www.wikidata.org/entity/Q40064
 http://dbpedia.org/resource/Peter_Clack	http://www.wikidata.org/entity/Q1369038
 http://dbpedia.org/resource/Julian_Feoli-Gudino	http://www.wikidata.org/entity/Q6307157
@@ -10033,7 +10033,7 @@ http://dbpedia.org/resource/John_Pope_Hennessy	http://www.wikidata.org/entity/Q2
 http://dbpedia.org/resource/Alba_Roversi	http://www.wikidata.org/entity/Q385868
 http://dbpedia.org/resource/Corinne_Lepage	http://www.wikidata.org/entity/Q291341
 http://dbpedia.org/resource/Edvard_Hagerup_Bull_(composer)	http://www.wikidata.org/entity/Q1783562
-http://dbpedia.org/resource/Nick_Nuccio	http://www.wikidata.org/entity/Q7027625
+http://dbpedia.org/resource/Nick_NÌio	http://www.wikidata.org/entity/Q7027625
 http://dbpedia.org/resource/BNA_Records	http://www.wikidata.org/entity/Q4836116
 http://dbpedia.org/resource/Toby_Scheckter	http://www.wikidata.org/entity/Q2438245
 http://dbpedia.org/resource/Luxembourg	http://www.wikidata.org/entity/Q32
@@ -10129,7 +10129,7 @@ http://dbpedia.org/resource/Apple_Records	http://www.wikidata.org/entity/Q213710
 http://dbpedia.org/resource/Beatrice_Tinsley	http://www.wikidata.org/entity/Q451660
 http://dbpedia.org/resource/Gibraltar	http://www.wikidata.org/entity/Q1410
 http://dbpedia.org/resource/All_Alone_on_Christmas	http://www.wikidata.org/entity/Q4728553
-http://dbpedia.org/resource/Tubefilter	http://www.wikidata.org/entity/Q15995548
+http://dbpedia.org/resource/T௯ilter	http://www.wikidata.org/entity/Q15995548
 http://dbpedia.org/resource/Oh_Lonesome_Me	http://www.wikidata.org/entity/Q2053971
 http://dbpedia.org/resource/Chaudhry_Ijaz_Ahmed	http://www.wikidata.org/entity/Q5088100
 http://dbpedia.org/resource/Szomor	http://www.wikidata.org/entity/Q785365
@@ -10191,7 +10191,7 @@ http://dbpedia.org/resource/Bogotá	http://www.wikidata.org/entity/Q2841
 http://dbpedia.org/resource/Cesar_Department	http://www.wikidata.org/entity/Q234916
 http://dbpedia.org/resource/Corin_Redgrave	http://www.wikidata.org/entity/Q380884
 http://dbpedia.org/resource/Jon_Voight	http://www.wikidata.org/entity/Q167520
-http://dbpedia.org/resource/Suder_Greens,_Edmonton	http://www.wikidata.org/entity/Q7633696
+http://dbpedia.org/resource/SÞr_Greens,_Edmonton	http://www.wikidata.org/entity/Q7633696
 http://dbpedia.org/resource/Bogue_Chitto,_Mississippi	http://www.wikidata.org/entity/Q2565412
 http://dbpedia.org/resource/Universal_Records_(defunct_record_label)	http://www.wikidata.org/entity/Q2482872
 http://dbpedia.org/resource/The_Boat_on_the_Grass	http://www.wikidata.org/entity/Q629181
@@ -10206,7 +10206,7 @@ http://dbpedia.org/resource/Benahadux	http://www.wikidata.org/entity/Q1157968
 http://dbpedia.org/resource/Boston	http://www.wikidata.org/entity/Q100
 http://dbpedia.org/resource/Jean_de_Florette	http://www.wikidata.org/entity/Q1315577
 http://dbpedia.org/resource/DeVonte_Holloman	http://www.wikidata.org/entity/Q5244141
-http://dbpedia.org/resource/Takeshi_Ueda	http://www.wikidata.org/entity/Q7678157
+http://dbpedia.org/resource/Takeshi_໚	http://www.wikidata.org/entity/Q7678157
 http://dbpedia.org/resource/Erasmus_University_Rotterdam	http://www.wikidata.org/entity/Q633529
 http://dbpedia.org/resource/Kiryat_Eliezer_Stadium	http://www.wikidata.org/entity/Q1550645
 http://dbpedia.org/resource/Dr._Dolittle_2	http://www.wikidata.org/entity/Q1253887
@@ -10265,7 +10265,7 @@ http://dbpedia.org/resource/Granges-Paccot	http://www.wikidata.org/entity/Q67060
 http://dbpedia.org/resource/Edgardo_Massa	http://www.wikidata.org/entity/Q2879046
 http://dbpedia.org/resource/T-Pain	http://www.wikidata.org/entity/Q221155
 http://dbpedia.org/resource/Mrsać	http://www.wikidata.org/entity/Q745860
-http://dbpedia.org/resource/Buffy_the_Vampire_Slayer	http://www.wikidata.org/entity/Q183513
+http://dbpedia.org/resource/Bÿy_the_Vampire_Slayer	http://www.wikidata.org/entity/Q183513
 http://dbpedia.org/resource/Ibrahim_El-Masry	http://www.wikidata.org/entity/Q3147495
 http://dbpedia.org/resource/Isone	http://www.wikidata.org/entity/Q69804
 http://dbpedia.org/resource/Passanant_i_Belltall	http://www.wikidata.org/entity/Q1248489
@@ -10444,7 +10444,7 @@ http://dbpedia.org/resource/Pokémon:_The_First_Movie	http://www.wikidata.org/en
 http://dbpedia.org/resource/Hünenberg	http://www.wikidata.org/entity/Q66256
 http://dbpedia.org/resource/Deborah_Wong	http://www.wikidata.org/entity/Q17118907
 http://dbpedia.org/resource/Wally_Albright	http://www.wikidata.org/entity/Q739663
-http://dbpedia.org/resource/Kolubara_District	http://www.wikidata.org/entity/Q1048139
+http://dbpedia.org/resource/Kolºra_District	http://www.wikidata.org/entity/Q1048139
 http://dbpedia.org/resource/Eleonora_Gonzaga_(1630–1686)	http://www.wikidata.org/entity/Q237463
 http://dbpedia.org/resource/Vatel_(film)	http://www.wikidata.org/entity/Q1516553
 http://dbpedia.org/resource/Afikpo	http://www.wikidata.org/entity/Q4689247
@@ -10459,8 +10459,8 @@ http://dbpedia.org/resource/Sam_Marx	http://www.wikidata.org/entity/Q7108924
 http://dbpedia.org/resource/California_Institute_of_Technology	http://www.wikidata.org/entity/Q161562
 http://dbpedia.org/resource/Collina_d'Oro	http://www.wikidata.org/entity/Q69062
 http://dbpedia.org/resource/Jeffrey_Hunter	http://www.wikidata.org/entity/Q176361
-http://dbpedia.org/resource/Charoen_Mueang	http://www.wikidata.org/entity/Q5086598
-http://dbpedia.org/resource/Wachthubel	http://www.wikidata.org/entity/Q2538509
+http://dbpedia.org/resource/Charoen_Mêng	http://www.wikidata.org/entity/Q5086598
+http://dbpedia.org/resource/Wachth¾l	http://www.wikidata.org/entity/Q2538509
 http://dbpedia.org/resource/Mychael_Danna	http://www.wikidata.org/entity/Q1336515
 http://dbpedia.org/resource/Kim_Sa-nee	http://www.wikidata.org/entity/Q483742
 http://dbpedia.org/resource/Humay_District	http://www.wikidata.org/entity/Q3824374

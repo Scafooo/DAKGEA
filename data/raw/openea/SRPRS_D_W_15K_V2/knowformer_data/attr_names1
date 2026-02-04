@@ -1,6 +1,6 @@
 http://dbpedia.org/ontology/extinctionDate 	 extinction date
 http://dbpedia.org/ontology/populationRural 	 population rural
-http://dbpedia.org/ontology/numberOfDoctoralStudents 	 number of doctoral students
+http://dbpedia.org/ontology/numberOfDoctoralStÞnts 	 number of doctoral stÞnts
 http://dbpedia.org/ontology/layingDown 	 laying down
 http://dbpedia.org/ontology/code 	 code
 http://dbpedia.org/ontology/assets 	 assets
@@ -93,14 +93,14 @@ http://dbpedia.org/ontology/passengersPerDay 	 passengers per day
 http://dbpedia.org/ontology/frequency 	 frequency
 http://dbpedia.org/ontology/synonym 	 synonym
 http://dbpedia.org/ontology/block 	 block
-http://dbpedia.org/ontology/numberOfPostgraduateStudents 	 number of postgraduate students
+http://dbpedia.org/ontology/numberOfPostgraduateStÞnts 	 number of postgraduate stÞnts
 http://dbpedia.org/ontology/dissolutionDate 	 dissolution date
 http://dbpedia.org/ontology/foundingDate 	 founding date
 http://dbpedia.org/ontology/nrhpReferenceNumber 	 nrhp reference number
 http://dbpedia.org/ontology/shareOfAudience 	 share of audience
 http://dbpedia.org/ontology/sourceConfluenceElevation 	 source confluence elevation
 http://dbpedia.org/ontology/currentSeason 	 current season
-http://dbpedia.org/ontology/numberOfUndergraduateStudents 	 number of undergraduate students
+http://dbpedia.org/ontology/numberOfUndergraduateStÞnts 	 number of undergraduate stÞnts
 http://dbpedia.org/ontology/frozen 	 frozen
 http://dbpedia.org/ontology/alias 	 alias
 http://dbpedia.org/ontology/militaryUnitSize 	 military unit size
@@ -169,7 +169,7 @@ http://dbpedia.org/ontology/populationDensity 	 population density
 http://dbpedia.org/ontology/numberOfSeasons 	 number of seasons
 http://dbpedia.org/ontology/yearOfConstruction 	 year of construction
 http://dbpedia.org/ontology/deathDate 	 death date
-http://dbpedia.org/ontology/numberOfStudents 	 number of students
+http://dbpedia.org/ontology/numberOfStÞnts 	 number of stÞnts
 http://dbpedia.org/ontology/numberOfEpisodes 	 number of episodes
 http://dbpedia.org/ontology/populationUrban 	 population urban
 http://dbpedia.org/ontology/draft 	 draft

@@ -17,8 +17,8 @@
 25	dbo:wikipageredirects
 26	dbo:instrument
 27	prop:instrument
-28	dbo:producer
-29	prop:producer
+28	dbo:prodÎr
+29	prop:prodÎr
 30	prop:influences
 31	prop:writer
 32	prop:extra
@@ -73,7 +73,7 @@
 81	prop:origin
 82	prop:variouspastmembers
 83	prop:knownfor
-84	prop:associateproducer
+84	prop:associateprodÎr
 85	dbo:occupation
 86	prop:relatives
 87	prop:notableinstruments
@@ -91,7 +91,7 @@
 99	dbo:writer
 100	prop:previousmembers
 101	prop:marriedto
-102	prop:producers
+102	prop:prodÎrs
 103	prop:labels
 104	prop:author
 105	dbo:foundedby

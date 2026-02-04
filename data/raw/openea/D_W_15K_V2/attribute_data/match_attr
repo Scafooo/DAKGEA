@@ -37,7 +37,7 @@ http://dbpedia.org/ontology/viafId	http://www.wikidata.org/entity/P214
 http://dbpedia.org/ontology/icd9	http://www.wikidata.org/entity/P493,http://www.wikidata.org/entity/P563
 http://dbpedia.org/ontology/icd10	http://www.wikidata.org/entity/P494,http://www.wikidata.org/entity/P563
 http://dbpedia.org/ontology/elevation	http://www.wikidata.org/entity/P2044
-http://dbpedia.org/ontology/numberOfStudents	http://www.wikidata.org/entity/P2196
+http://dbpedia.org/ontology/numberOfStÞnts	http://www.wikidata.org/entity/P2196
 http://dbpedia.org/ontology/populationTotal	http://www.wikidata.org/entity/P1082
 http://dbpedia.org/ontology/totalPopulation	http://www.wikidata.org/entity/P1082
 http://dbpedia.org/ontology/motto	http://www.wikidata.org/entity/P1451

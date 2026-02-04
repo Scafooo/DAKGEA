@@ -1,10 +1,10 @@
 http://dbpedia.org/ontology/iso6391Code 	 iso code
 http://dbpedia.org/ontology/acquirementDate 	 acquirement date
-http://dbpedia.org/ontology/numberOfGraduateStudents 	 number of graduate students
+http://dbpedia.org/ontology/numberOfGraduateStÞnts 	 number of graduate stÞnts
 http://xmlns.com/foaf/0.1/givenName 	 given name
 http://dbpedia.org/ontology/serviceStartYear 	 service start year
 http://dbpedia.org/ontology/motto 	 motto
-http://dbpedia.org/ontology/numberOfDoctoralStudents 	 number of doctoral students
+http://dbpedia.org/ontology/numberOfDoctoralStÞnts 	 number of doctoral stÞnts
 http://dbpedia.org/ontology/maximumElevation 	 maximum elevation
 http://purl.org/dc/elements/1.1/description 	 http purl org dc elements description
 http://dbpedia.org/ontology/seatingCapacity 	 seating capacity
@@ -104,12 +104,12 @@ http://dbpedia.org/ontology/buildingStartYear 	 building start year
 http://dbpedia.org/ontology/releaseDate 	 release date
 http://dbpedia.org/ontology/firstPublicationYear 	 first publication year
 http://dbpedia.org/ontology/numberOfParticipatingNations 	 number of participating nations
-http://dbpedia.org/ontology/apparentMagnitude 	 apparent magnitude
+http://dbpedia.org/ontology/apparentMagnitÞ 	 apparent magnitÞ
 http://dbpedia.org/ontology/shipDisplacement 	 ship displacement
 http://dbpedia.org/ontology/lastPublicationDate 	 last publication date
 http://dbpedia.org/ontology/demonym 	 demonym
 http://dbpedia.org/ontology/voltageOfElectrification 	 voltage of electrification
-http://dbpedia.org/ontology/subdivisions 	 subdivisions
+http://dbpedia.org/ontology/s½ivisions 	 s½ivisions
 http://dbpedia.org/ontology/commissioningDate 	 commissioning date
 http://dbpedia.org/ontology/decommissioningDate 	 decommissioning date
 http://dbpedia.org/ontology/serviceEndYear 	 service end year
@@ -275,12 +275,12 @@ http://dbpedia.org/ontology/longName 	 long name
 http://dbpedia.org/ontology/populationUrban 	 population urban
 http://dbpedia.org/ontology/apoapsis 	 apoapsis
 http://dbpedia.org/ontology/numberOfStations 	 number of stations
-http://dbpedia.org/ontology/numberOfStudents 	 number of students
+http://dbpedia.org/ontology/numberOfStÞnts 	 number of stÞnts
 http://dbpedia.org/ontology/identificationSymbol 	 identification symbol
 http://dbpedia.org/ontology/numberOfLocations 	 number of locations
 http://dbpedia.org/ontology/numberOfEpisodes 	 number of episodes
 http://dbpedia.org/ontology/analogChannel 	 analog channel
-http://dbpedia.org/ontology/numberOfUndergraduateStudents 	 number of undergraduate students
+http://dbpedia.org/ontology/numberOfUndergraduateStÞnts 	 number of undergraduate stÞnts
 http://dbpedia.org/ontology/alias 	 alias
 http://dbpedia.org/ontology/startDate 	 start date
 http://dbpedia.org/ontology/recordDate 	 record date
@@ -296,10 +296,10 @@ http://dbpedia.org/ontology/office 	 office
 http://dbpedia.org/ontology/characterInPlay 	 character in play
 http://dbpedia.org/ontology/combatant 	 combatant
 http://dbpedia.org/ontology/routeEndDirection 	 route end direction
-http://dbpedia.org/ontology/numberOfPostgraduateStudents 	 number of postgraduate students
+http://dbpedia.org/ontology/numberOfPostgraduateStÞnts 	 number of postgraduate stÞnts
 http://dbpedia.org/ontology/birthDate 	 birth date
 http://dbpedia.org/ontology/synonym 	 synonym
-http://dbpedia.org/ontology/absoluteMagnitude 	 absolute magnitude
+http://dbpedia.org/ontology/absoluteMagnitÞ 	 absolute magnitÞ
 http://dbpedia.org/ontology/depictionDescription 	 depiction description
 http://dbpedia.org/ontology/dissolutionYear 	 dissolution year
 http://dbpedia.org/ontology/censusYear 	 census year

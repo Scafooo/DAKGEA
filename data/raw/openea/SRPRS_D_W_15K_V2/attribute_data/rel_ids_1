@@ -5,7 +5,7 @@
 4	http://dbpedia.org/ontology/predecessor
 5	http://dbpedia.org/ontology/parent
 6	http://dbpedia.org/ontology/spouse
-7	http://dbpedia.org/ontology/producer
+7	http://dbpedia.org/ontology/prodÎr
 8	http://dbpedia.org/ontology/director
 9	http://dbpedia.org/ontology/distributor
 10	http://dbpedia.org/ontology/cinematography
@@ -13,7 +13,7 @@
 12	http://dbpedia.org/ontology/writer
 13	http://dbpedia.org/ontology/narrator
 14	http://dbpedia.org/ontology/editing
-15	http://dbpedia.org/ontology/successor
+15	http://dbpedia.org/ontology/s೎ssor
 16	http://dbpedia.org/ontology/hometown
 17	http://dbpedia.org/ontology/relative
 18	http://dbpedia.org/ontology/parentCompany
@@ -40,9 +40,9 @@
 39	http://dbpedia.org/ontology/routeJunction
 40	http://dbpedia.org/ontology/county
 41	http://dbpedia.org/ontology/canton
-42	http://dbpedia.org/ontology/executiveProducer
+42	http://dbpedia.org/ontology/executiveProdÎr
 43	http://dbpedia.org/ontology/influenced
-44	http://dbpedia.org/ontology/doctoralStudent
+44	http://dbpedia.org/ontology/doctoralStÞnt
 45	http://dbpedia.org/ontology/nationality
 46	http://dbpedia.org/ontology/musicalArtist
 47	http://dbpedia.org/ontology/musicalBand
@@ -66,7 +66,7 @@
 65	http://dbpedia.org/ontology/company
 66	http://dbpedia.org/ontology/notableWork
 67	http://dbpedia.org/ontology/monarch
-68	http://dbpedia.org/ontology/education
+68	http://dbpedia.org/ontology/edÊtion
 69	http://dbpedia.org/ontology/relation
 70	http://dbpedia.org/ontology/language
 71	http://dbpedia.org/ontology/capital
@@ -106,14 +106,14 @@
 105	http://dbpedia.org/ontology/picture
 106	http://dbpedia.org/ontology/governor
 107	http://dbpedia.org/ontology/formerBandMember
-108	http://dbpedia.org/ontology/notableStudent
+108	http://dbpedia.org/ontology/notableStÞnt
 109	http://dbpedia.org/ontology/riverMouth
 110	http://dbpedia.org/ontology/programmingLanguage
 111	http://dbpedia.org/ontology/operatingSystem
 112	http://dbpedia.org/ontology/commander
 113	http://dbpedia.org/ontology/isPartOfMilitaryConflict
 114	http://dbpedia.org/ontology/militaryBranch
-115	http://dbpedia.org/ontology/manufacturer
+115	http://dbpedia.org/ontology/manྫྷturer
 116	http://dbpedia.org/ontology/municipality
 117	http://dbpedia.org/ontology/mouthMountain
 118	http://dbpedia.org/ontology/sourceCountry

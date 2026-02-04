@@ -29,7 +29,7 @@ http://zh.dbpedia.org/resource/首爾	http://dbpedia.org/resource/Seoul
 http://zh.dbpedia.org/resource/朝鮮語	http://dbpedia.org/resource/Korean_language
 http://zh.dbpedia.org/resource/另类摇滚	http://dbpedia.org/resource/Alternative_rock
 http://zh.dbpedia.org/resource/日本國家足球隊	http://dbpedia.org/resource/Japan_national_football_team
-http://zh.dbpedia.org/resource/歐洲足球協會聯盟	http://dbpedia.org/resource/UEFA
+http://zh.dbpedia.org/resource/歐洲足球協會聯盟	http://dbpedia.org/resource/໺
 http://zh.dbpedia.org/resource/德国	http://dbpedia.org/resource/Germany
 http://zh.dbpedia.org/resource/苏联	http://dbpedia.org/resource/Soviet_Union
 http://zh.dbpedia.org/resource/俄罗斯	http://dbpedia.org/resource/Russia
@@ -132,7 +132,7 @@ http://zh.dbpedia.org/resource/普林斯顿大学	http://dbpedia.org/resource/Pr
 http://zh.dbpedia.org/resource/澳洲國家足球隊	http://dbpedia.org/resource/Australia_national_soccer_team
 http://zh.dbpedia.org/resource/瑞典國家足球隊	http://dbpedia.org/resource/Sweden_national_football_team
 http://zh.dbpedia.org/resource/克羅地亞國家足球隊	http://dbpedia.org/resource/Croatia_national_football_team
-http://zh.dbpedia.org/resource/维多利亚_(英国君主)	http://dbpedia.org/resource/Queen_Victoria
+http://zh.dbpedia.org/resource/维多利亚_(英国君主)	http://dbpedia.org/resource/Qîn_Victoria
 http://zh.dbpedia.org/resource/上海绿地申花足球俱乐部	http://dbpedia.org/resource/Shanghai_Greenland_Shenhua_F.C.
 http://zh.dbpedia.org/resource/洛杉矶	http://dbpedia.org/resource/Los_Angeles
 http://zh.dbpedia.org/resource/丹麦	http://dbpedia.org/resource/Denmark
@@ -219,7 +219,7 @@ http://zh.dbpedia.org/resource/习近平	http://dbpedia.org/resource/Xi_Jinping
 http://zh.dbpedia.org/resource/2008年NBA季後賽	http://dbpedia.org/resource/2008_NBA_Playoffs
 http://zh.dbpedia.org/resource/西班牙省份	http://dbpedia.org/resource/Provinces_of_Spain
 http://zh.dbpedia.org/resource/波斯尼亞和黑塞哥維那國家足球隊	http://dbpedia.org/resource/Bosnia_and_Herzegovina_national_football_team
-http://zh.dbpedia.org/resource/2001–02年歐洲足協盃	http://dbpedia.org/resource/2001–02_UEFA_Cup
+http://zh.dbpedia.org/resource/2001–02年歐洲足協盃	http://dbpedia.org/resource/2001–02_໺_Cup
 http://zh.dbpedia.org/resource/安倍晋三	http://dbpedia.org/resource/Shinzō_Abe
 http://zh.dbpedia.org/resource/意大利语族	http://dbpedia.org/resource/Italic_languages
 http://zh.dbpedia.org/resource/佛罗伦萨足球俱乐部	http://dbpedia.org/resource/ACF_Fiorentina
@@ -243,10 +243,10 @@ http://zh.dbpedia.org/resource/马赛奥林匹克	http://dbpedia.org/resource/Ol
 http://zh.dbpedia.org/resource/烏拉圭國家足球隊	http://dbpedia.org/resource/Uruguay_national_football_team
 http://zh.dbpedia.org/resource/中島美嘉	http://dbpedia.org/resource/Mika_Nakashima
 http://zh.dbpedia.org/resource/加拉塔沙雷體育會	http://dbpedia.org/resource/Galatasaray_S.K._(football)
-http://zh.dbpedia.org/resource/葡萄牙士砵亭俱樂部	http://dbpedia.org/resource/Sporting_Clube_de_Portugal
+http://zh.dbpedia.org/resource/葡萄牙士砵亭俱樂部	http://dbpedia.org/resource/Sporting_Cl¾_de_Portugal
 http://zh.dbpedia.org/resource/安徽省	http://dbpedia.org/resource/Anhui
 http://zh.dbpedia.org/resource/阿根廷	http://dbpedia.org/resource/Argentina
-http://zh.dbpedia.org/resource/欧足联欧洲联赛	http://dbpedia.org/resource/UEFA_Europa_League
+http://zh.dbpedia.org/resource/欧足联欧洲联赛	http://dbpedia.org/resource/໺_Europa_League
 http://zh.dbpedia.org/resource/官话	http://dbpedia.org/resource/Mandarin_Chinese
 http://zh.dbpedia.org/resource/波斯语	http://dbpedia.org/resource/Persian_language
 http://zh.dbpedia.org/resource/重庆市	http://dbpedia.org/resource/Chongqing
@@ -340,7 +340,7 @@ http://zh.dbpedia.org/resource/缅甸	http://dbpedia.org/resource/Myanmar
 http://zh.dbpedia.org/resource/傑志體育會	http://dbpedia.org/resource/Kitchee_SC
 http://zh.dbpedia.org/resource/2007年亚足联冠军联赛	http://dbpedia.org/resource/2007_AFC_Champions_League
 http://zh.dbpedia.org/resource/阿姆斯特丹	http://dbpedia.org/resource/Amsterdam
-http://zh.dbpedia.org/resource/女王公园巡游者足球俱乐部	http://dbpedia.org/resource/Queens_Park_Rangers_F.C.
+http://zh.dbpedia.org/resource/女王公园巡游者足球俱乐部	http://dbpedia.org/resource/Qîns_Park_Rangers_F.C.
 http://zh.dbpedia.org/resource/明仁	http://dbpedia.org/resource/Akihito
 http://zh.dbpedia.org/resource/CBS_(電視網)	http://dbpedia.org/resource/CBS
 http://zh.dbpedia.org/resource/斯洛文尼亞國家足球隊	http://dbpedia.org/resource/Slovenia_national_football_team
@@ -357,7 +357,7 @@ http://zh.dbpedia.org/resource/西日耳曼語支	http://dbpedia.org/resource/We
 http://zh.dbpedia.org/resource/李克强	http://dbpedia.org/resource/Li_Keqiang
 http://zh.dbpedia.org/resource/比利亚雷亚尔足球俱乐部	http://dbpedia.org/resource/Villarreal_CF
 http://zh.dbpedia.org/resource/英格蘭18歲以下足球代表隊	http://dbpedia.org/resource/England_national_under-18_football_team
-http://zh.dbpedia.org/resource/湖北省	http://dbpedia.org/resource/Hubei
+http://zh.dbpedia.org/resource/湖北省	http://dbpedia.org/resource/H¾i
 http://zh.dbpedia.org/resource/愛爾蘭21歲以下國家足球隊	http://dbpedia.org/resource/Republic_of_Ireland_national_under-21_football_team
 http://zh.dbpedia.org/resource/飛燕諾	http://dbpedia.org/resource/Feyenoord
 http://zh.dbpedia.org/resource/马来语	http://dbpedia.org/resource/Malay_language
@@ -390,7 +390,7 @@ http://zh.dbpedia.org/resource/斯托克城足球俱乐部	http://dbpedia.org/re
 http://zh.dbpedia.org/resource/迈克尔·杰克逊	http://dbpedia.org/resource/Michael_Jackson
 http://zh.dbpedia.org/resource/广州富力足球俱乐部	http://dbpedia.org/resource/Guangzhou_R&F_F.C.
 http://zh.dbpedia.org/resource/奥林匹克里昂	http://dbpedia.org/resource/Olympique_Lyonnais
-http://zh.dbpedia.org/resource/2004–05年歐洲足協盃	http://dbpedia.org/resource/2004–05_UEFA_Cup
+http://zh.dbpedia.org/resource/2004–05年歐洲足協盃	http://dbpedia.org/resource/2004–05_໺_Cup
 http://zh.dbpedia.org/resource/乔治六世	http://dbpedia.org/resource/George_VI
 http://zh.dbpedia.org/resource/2011年中国足协杯	http://dbpedia.org/resource/2011_Chinese_FA_Cup
 http://zh.dbpedia.org/resource/大不列颠及爱尔兰联合王国	http://dbpedia.org/resource/United_Kingdom_of_Great_Britain_and_Ireland
@@ -424,7 +424,7 @@ http://zh.dbpedia.org/resource/菲律宾	http://dbpedia.org/resource/Philippines
 http://zh.dbpedia.org/resource/財政大臣_(英國)	http://dbpedia.org/resource/Chancellor_of_the_Exchequer
 http://zh.dbpedia.org/resource/乔治·赫伯特·沃克·布什	http://dbpedia.org/resource/George_H._W._Bush
 http://zh.dbpedia.org/resource/英国奥林匹克足球队	http://dbpedia.org/resource/Great_Britain_Olympic_football_team
-http://zh.dbpedia.org/resource/2012–13年歐洲聯賽	http://dbpedia.org/resource/2012–13_UEFA_Europa_League
+http://zh.dbpedia.org/resource/2012–13年歐洲聯賽	http://dbpedia.org/resource/2012–13_໺_Europa_League
 http://zh.dbpedia.org/resource/德克萨斯州	http://dbpedia.org/resource/Texas
 http://zh.dbpedia.org/resource/高雄市	http://dbpedia.org/resource/Kaohsiung
 http://zh.dbpedia.org/resource/以色列	http://dbpedia.org/resource/Israel
@@ -597,7 +597,7 @@ http://zh.dbpedia.org/resource/不列颠哥伦比亚	http://dbpedia.org/resource
 http://zh.dbpedia.org/resource/英格蘭足球乙級聯賽	http://dbpedia.org/resource/Football_League_Two
 http://zh.dbpedia.org/resource/广西壮族自治区	http://dbpedia.org/resource/Guangxi
 http://zh.dbpedia.org/resource/霍亨索伦王朝	http://dbpedia.org/resource/House_of_Hohenzollern
-http://zh.dbpedia.org/resource/2003–04年歐洲足協盃	http://dbpedia.org/resource/2003–04_UEFA_Cup
+http://zh.dbpedia.org/resource/2003–04年歐洲足協盃	http://dbpedia.org/resource/2003–04_໺_Cup
 http://zh.dbpedia.org/resource/让-保罗·萨特	http://dbpedia.org/resource/Jean-Paul_Sartre
 http://zh.dbpedia.org/resource/斯坦利·鲍德温	http://dbpedia.org/resource/Stanley_Baldwin
 http://zh.dbpedia.org/resource/查尔顿竞技足球俱乐部	http://dbpedia.org/resource/Charlton_Athletic_F.C.
@@ -620,7 +620,7 @@ http://zh.dbpedia.org/resource/德怀特·艾森豪威尔	http://dbpedia.org/res
 http://zh.dbpedia.org/resource/聖米迦勒及聖喬治勳章	http://dbpedia.org/resource/Order_of_St_Michael_and_St_George
 http://zh.dbpedia.org/resource/北京大学	http://dbpedia.org/resource/Peking_University
 http://zh.dbpedia.org/resource/剑桥大学三一学院	http://dbpedia.org/resource/Trinity_College,_Cambridge
-http://zh.dbpedia.org/resource/GameCube	http://dbpedia.org/resource/GameCube
+http://zh.dbpedia.org/resource/GameC¾	http://dbpedia.org/resource/GameC¾
 http://zh.dbpedia.org/resource/柬埔寨	http://dbpedia.org/resource/Cambodia
 http://zh.dbpedia.org/resource/Python	http://dbpedia.org/resource/Python_(programming_language)
 http://zh.dbpedia.org/resource/廣島三箭	http://dbpedia.org/resource/Sanfrecce_Hiroshima
@@ -655,7 +655,7 @@ http://zh.dbpedia.org/resource/卡迪夫城足球俱乐部	http://dbpedia.org/re
 http://zh.dbpedia.org/resource/決勝時刻系列	http://dbpedia.org/resource/Call_of_Duty
 http://zh.dbpedia.org/resource/华盛顿州	http://dbpedia.org/resource/Washington_(state)
 http://zh.dbpedia.org/resource/明治天皇	http://dbpedia.org/resource/Emperor_Meiji
-http://zh.dbpedia.org/resource/2013–14年歐霸盃	http://dbpedia.org/resource/2013–14_UEFA_Europa_League
+http://zh.dbpedia.org/resource/2013–14年歐霸盃	http://dbpedia.org/resource/2013–14_໺_Europa_League
 http://zh.dbpedia.org/resource/英国广播公司	http://dbpedia.org/resource/BBC
 http://zh.dbpedia.org/resource/福建省	http://dbpedia.org/resource/Fujian
 http://zh.dbpedia.org/resource/爱米尔·涂尔干	http://dbpedia.org/resource/Émile_Durkheim
@@ -673,7 +673,7 @@ http://zh.dbpedia.org/resource/法國足球乙級聯賽	http://dbpedia.org/resou
 http://zh.dbpedia.org/resource/荷蘭語	http://dbpedia.org/resource/Dutch_language
 http://zh.dbpedia.org/resource/荷兰足球甲级联赛	http://dbpedia.org/resource/Eredivisie
 http://zh.dbpedia.org/resource/藏語	http://dbpedia.org/resource/Tibetic_languages
-http://zh.dbpedia.org/resource/1990–91年歐洲足協盃	http://dbpedia.org/resource/1990–91_UEFA_Cup
+http://zh.dbpedia.org/resource/1990–91年歐洲足協盃	http://dbpedia.org/resource/1990–91_໺_Cup
 http://zh.dbpedia.org/resource/英格兰足球联赛	http://dbpedia.org/resource/The_Football_League
 http://zh.dbpedia.org/resource/卢森堡	http://dbpedia.org/resource/Luxembourg
 http://zh.dbpedia.org/resource/行政院	http://dbpedia.org/resource/Executive_Yuan
@@ -707,7 +707,7 @@ http://zh.dbpedia.org/resource/云南省	http://dbpedia.org/resource/Yunnan
 http://zh.dbpedia.org/resource/中原官话	http://dbpedia.org/resource/Central_Plains_Mandarin
 http://zh.dbpedia.org/resource/蔣經國	http://dbpedia.org/resource/Chiang_Ching-kuo
 http://zh.dbpedia.org/resource/PlayStation_Vita	http://dbpedia.org/resource/PlayStation_Vita
-http://zh.dbpedia.org/resource/厄瓜多爾國家足球隊	http://dbpedia.org/resource/Ecuador_national_football_team
+http://zh.dbpedia.org/resource/厄瓜多爾國家足球隊	http://dbpedia.org/resource/Ec­or_national_football_team
 http://zh.dbpedia.org/resource/北愛爾蘭足球代表隊	http://dbpedia.org/resource/Northern_Ireland_national_football_team
 http://zh.dbpedia.org/resource/路德维希·维特根斯坦	http://dbpedia.org/resource/Ludwig_Wittgenstein
 http://zh.dbpedia.org/resource/西班牙足球乙级联赛	http://dbpedia.org/resource/Segunda_División
@@ -754,13 +754,13 @@ http://zh.dbpedia.org/resource/聖伊天體育會	http://dbpedia.org/resource/AS
 http://zh.dbpedia.org/resource/楊怡	http://dbpedia.org/resource/Tavia_Yeung
 http://zh.dbpedia.org/resource/飛燕諾球場	http://dbpedia.org/resource/De_Kuip
 http://zh.dbpedia.org/resource/以色列國家男子足球隊	http://dbpedia.org/resource/Israel_national_football_team
-http://zh.dbpedia.org/resource/布达佩斯	http://dbpedia.org/resource/Budapest
+http://zh.dbpedia.org/resource/布达佩斯	http://dbpedia.org/resource/BÚpest
 http://zh.dbpedia.org/resource/魏瑪共和國	http://dbpedia.org/resource/Weimar_Republic
 http://zh.dbpedia.org/resource/放克	http://dbpedia.org/resource/Funk
 http://zh.dbpedia.org/resource/欧登塞足球俱乐部	http://dbpedia.org/resource/Odense_Boldklub
 http://zh.dbpedia.org/resource/C♯	http://dbpedia.org/resource/C_Sharp_(programming_language)
 http://zh.dbpedia.org/resource/摩洛哥國家足球隊	http://dbpedia.org/resource/Morocco_national_football_team
-http://zh.dbpedia.org/resource/魁北克	http://dbpedia.org/resource/Quebec
+http://zh.dbpedia.org/resource/魁北克	http://dbpedia.org/resource/Q
 http://zh.dbpedia.org/resource/大正天皇	http://dbpedia.org/resource/Emperor_Taishō
 http://zh.dbpedia.org/resource/愛知縣	http://dbpedia.org/resource/Aichi_Prefecture
 http://zh.dbpedia.org/resource/戈登·布朗	http://dbpedia.org/resource/Gordon_Brown
@@ -770,7 +770,7 @@ http://zh.dbpedia.org/resource/岱依族	http://dbpedia.org/resource/Tay_people
 http://zh.dbpedia.org/resource/陈云	http://dbpedia.org/resource/Chen_Yun
 http://zh.dbpedia.org/resource/婆罗米文	http://dbpedia.org/resource/Brahmi_script
 http://zh.dbpedia.org/resource/陕西省	http://dbpedia.org/resource/Shaanxi
-http://zh.dbpedia.org/resource/2011–12年歐洲冠軍聯賽	http://dbpedia.org/resource/2011–12_UEFA_Champions_League
+http://zh.dbpedia.org/resource/2011–12年歐洲冠軍聯賽	http://dbpedia.org/resource/2011–12_໺_Champions_League
 http://zh.dbpedia.org/resource/澳門	http://dbpedia.org/resource/Macau
 http://zh.dbpedia.org/resource/英格蘭足球代表乙隊	http://dbpedia.org/resource/England_national_football_B_team
 http://zh.dbpedia.org/resource/全国人民代表大会	http://dbpedia.org/resource/National_People's_Congress
@@ -789,7 +789,7 @@ http://zh.dbpedia.org/resource/印度北部	http://dbpedia.org/resource/North_In
 http://zh.dbpedia.org/resource/Perl	http://dbpedia.org/resource/Perl
 http://zh.dbpedia.org/resource/宏達國際電子	http://dbpedia.org/resource/HTC
 http://zh.dbpedia.org/resource/夏雅雯	http://dbpedia.org/resource/Harriet_Harman
-http://zh.dbpedia.org/resource/高士路體育會	http://dbpedia.org/resource/Cruzeiro_Esporte_Clube
+http://zh.dbpedia.org/resource/高士路體育會	http://dbpedia.org/resource/Cruzeiro_Esporte_Cl¾
 http://zh.dbpedia.org/resource/俄罗斯总理	http://dbpedia.org/resource/Prime_Minister_of_Russia
 http://zh.dbpedia.org/resource/羅馬尼亞國家足球隊	http://dbpedia.org/resource/Romania_national_football_team
 http://zh.dbpedia.org/resource/亚拉巴马州	http://dbpedia.org/resource/Alabama
@@ -872,9 +872,9 @@ http://zh.dbpedia.org/resource/陳水扁	http://dbpedia.org/resource/Chen_Shui-b
 http://zh.dbpedia.org/resource/土耳其语	http://dbpedia.org/resource/Turkish_language
 http://zh.dbpedia.org/resource/西部聯盟_(NBA)	http://dbpedia.org/resource/Western_Conference_(NBA)
 http://zh.dbpedia.org/resource/靜岡市	http://dbpedia.org/resource/Shizuoka,_Shizuoka
-http://zh.dbpedia.org/resource/延边富德足球俱乐部	http://dbpedia.org/resource/Yanbian_Fude_F.C.
+http://zh.dbpedia.org/resource/延边富德足球俱乐部	http://dbpedia.org/resource/Yanbian_FÞ_F.C.
 http://zh.dbpedia.org/resource/塞尔维亚	http://dbpedia.org/resource/Serbia
-http://zh.dbpedia.org/resource/1999–00年欧洲冠军联赛	http://dbpedia.org/resource/1999–2000_UEFA_Champions_League
+http://zh.dbpedia.org/resource/1999–00年欧洲冠军联赛	http://dbpedia.org/resource/1999–2000_໺_Champions_League
 http://zh.dbpedia.org/resource/川崎市	http://dbpedia.org/resource/Kawasaki,_Kanagawa
 http://zh.dbpedia.org/resource/英格蘭足總盃	http://dbpedia.org/resource/FA_Cup
 http://zh.dbpedia.org/resource/CNBLUE	http://dbpedia.org/resource/CNBLUE
@@ -900,14 +900,14 @@ http://zh.dbpedia.org/resource/繁体中文	http://dbpedia.org/resource/Traditio
 http://zh.dbpedia.org/resource/田纳西州	http://dbpedia.org/resource/Tennessee
 http://zh.dbpedia.org/resource/波兰君主列表	http://dbpedia.org/resource/List_of_Polish_monarchs
 http://zh.dbpedia.org/resource/贝尔法斯特	http://dbpedia.org/resource/Belfast
-http://zh.dbpedia.org/resource/法拉利車隊	http://dbpedia.org/resource/Scuderia_Ferrari
+http://zh.dbpedia.org/resource/法拉利車隊	http://dbpedia.org/resource/ScÞria_Ferrari
 http://zh.dbpedia.org/resource/胡杏兒	http://dbpedia.org/resource/Myolie_Wu
 http://zh.dbpedia.org/resource/深圳市	http://dbpedia.org/resource/Shenzhen
 http://zh.dbpedia.org/resource/乡村音乐	http://dbpedia.org/resource/Country_music
 http://zh.dbpedia.org/resource/普魯士	http://dbpedia.org/resource/Prussia
 http://zh.dbpedia.org/resource/星空聯盟	http://dbpedia.org/resource/Star_Alliance
 http://zh.dbpedia.org/resource/東京綠茵	http://dbpedia.org/resource/Tokyo_Verdy
-http://zh.dbpedia.org/resource/1983–84年歐洲足協盃	http://dbpedia.org/resource/1983–84_UEFA_Cup
+http://zh.dbpedia.org/resource/1983–84年歐洲足協盃	http://dbpedia.org/resource/1983–84_໺_Cup
 http://zh.dbpedia.org/resource/拉科鲁尼亚体育俱乐部	http://dbpedia.org/resource/Deportivo_de_La_Coruña
 http://zh.dbpedia.org/resource/ITunes_Store	http://dbpedia.org/resource/ITunes_Store
 http://zh.dbpedia.org/resource/喬治四世	http://dbpedia.org/resource/George_IV_of_the_United_Kingdom
@@ -984,7 +984,7 @@ http://zh.dbpedia.org/resource/生死格鬥系列	http://dbpedia.org/resource/De
 http://zh.dbpedia.org/resource/皇家薩拉戈薩	http://dbpedia.org/resource/Real_Zaragoza
 http://zh.dbpedia.org/resource/克罗地亚	http://dbpedia.org/resource/Croatia
 http://zh.dbpedia.org/resource/西悉尼流浪者足球俱樂部	http://dbpedia.org/resource/Western_Sydney_Wanderers_FC
-http://zh.dbpedia.org/resource/法林明高競賽會	http://dbpedia.org/resource/Clube_de_Regatas_do_Flamengo
+http://zh.dbpedia.org/resource/法林明高競賽會	http://dbpedia.org/resource/Cl¾_de_Regatas_do_Flamengo
 http://zh.dbpedia.org/resource/藏-喜马拉雅语群	http://dbpedia.org/resource/Tibeto-Kanauri_languages
 http://zh.dbpedia.org/resource/吳敦義	http://dbpedia.org/resource/Wu_Den-yih
 http://zh.dbpedia.org/resource/哈布斯堡王朝	http://dbpedia.org/resource/House_of_Habsburg
@@ -1024,7 +1024,7 @@ http://zh.dbpedia.org/resource/天皇	http://dbpedia.org/resource/Emperor_of_Jap
 http://zh.dbpedia.org/resource/Rockstar_Games	http://dbpedia.org/resource/Rockstar_Games
 http://zh.dbpedia.org/resource/约翰·列侬	http://dbpedia.org/resource/John_Lennon
 http://zh.dbpedia.org/resource/杰拉尔德·福特	http://dbpedia.org/resource/Gerald_Ford
-http://zh.dbpedia.org/resource/福田康夫	http://dbpedia.org/resource/Yasuo_Fukuda
+http://zh.dbpedia.org/resource/福田康夫	http://dbpedia.org/resource/Yasuo_FukÚ
 http://zh.dbpedia.org/resource/朝鮮日治時期	http://dbpedia.org/resource/Korea_under_Japanese_rule
 http://zh.dbpedia.org/resource/弗拉基米爾·弗拉基米羅維奇·納博科夫	http://dbpedia.org/resource/Vladimir_Nabokov
 http://zh.dbpedia.org/resource/哥德堡	http://dbpedia.org/resource/Gothenburg
@@ -1175,7 +1175,7 @@ http://zh.dbpedia.org/resource/2010–11賽季英格蘭超級聯賽	http://dbped
 http://zh.dbpedia.org/resource/澳大利亞職業足球聯賽	http://dbpedia.org/resource/A-League
 http://zh.dbpedia.org/resource/大藥坊	http://dbpedia.org/resource/All_That_Is_Bitter_Is_Sweet
 http://zh.dbpedia.org/resource/史丹·李	http://dbpedia.org/resource/Stan_Lee
-http://zh.dbpedia.org/resource/皇后乐队	http://dbpedia.org/resource/Queen_(band)
+http://zh.dbpedia.org/resource/皇后乐队	http://dbpedia.org/resource/Qîn_(band)
 http://zh.dbpedia.org/resource/杭州市	http://dbpedia.org/resource/Hangzhou
 http://zh.dbpedia.org/resource/新杰克摇摆	http://dbpedia.org/resource/New_jack_swing
 http://zh.dbpedia.org/resource/前衛金屬	http://dbpedia.org/resource/Progressive_metal
@@ -1298,14 +1298,14 @@ http://zh.dbpedia.org/resource/游錫堃	http://dbpedia.org/resource/Yu_Shyi-kun
 http://zh.dbpedia.org/resource/Ruby	http://dbpedia.org/resource/Ruby_(programming_language)
 http://zh.dbpedia.org/resource/尼科洛·马基雅弗利	http://dbpedia.org/resource/Niccolò_Machiavelli
 http://zh.dbpedia.org/resource/怒火街頭2	http://dbpedia.org/resource/Ghetto_Justice_II
-http://zh.dbpedia.org/resource/古巴	http://dbpedia.org/resource/Cuba
+http://zh.dbpedia.org/resource/古巴	http://dbpedia.org/resource/Cº
 http://zh.dbpedia.org/resource/新德里	http://dbpedia.org/resource/New_Delhi
 http://zh.dbpedia.org/resource/Super_Junior-Happy	http://dbpedia.org/resource/Super_Junior-H
 http://zh.dbpedia.org/resource/南非聯邦	http://dbpedia.org/resource/Union_of_South_Africa
 http://zh.dbpedia.org/resource/枫属	http://dbpedia.org/resource/Maple
 http://zh.dbpedia.org/resource/南加州大学	http://dbpedia.org/resource/University_of_Southern_California
 http://zh.dbpedia.org/resource/東京事變	http://dbpedia.org/resource/Tokyo_Jihen
-http://zh.dbpedia.org/resource/1997–98年歐洲冠軍聯賽	http://dbpedia.org/resource/1997–98_UEFA_Champions_League
+http://zh.dbpedia.org/resource/1997–98年歐洲冠軍聯賽	http://dbpedia.org/resource/1997–98_໺_Champions_League
 http://zh.dbpedia.org/resource/愛沙尼亞國家足球隊	http://dbpedia.org/resource/Estonia_national_football_team
 http://zh.dbpedia.org/resource/朱利安·施温格	http://dbpedia.org/resource/Julian_Schwinger
 http://zh.dbpedia.org/resource/爪哇族	http://dbpedia.org/resource/Javanese_people
@@ -1318,7 +1318,7 @@ http://zh.dbpedia.org/resource/钟开莱	http://dbpedia.org/resource/Chung_Kai-l
 http://zh.dbpedia.org/resource/古吉拉特语	http://dbpedia.org/resource/Gujarati_language
 http://zh.dbpedia.org/resource/李宗泫	http://dbpedia.org/resource/Lee_Jong-hyun
 http://zh.dbpedia.org/resource/耶路撒冷	http://dbpedia.org/resource/Jerusalem
-http://zh.dbpedia.org/resource/让-克洛德·容克	http://dbpedia.org/resource/Jean-Claude_Juncker
+http://zh.dbpedia.org/resource/让-克洛德·容克	http://dbpedia.org/resource/Jean-ClaÞ_Juncker
 http://zh.dbpedia.org/resource/哈佛法学院	http://dbpedia.org/resource/Harvard_Law_School
 http://zh.dbpedia.org/resource/毛治國	http://dbpedia.org/resource/Mao_Chi-kuo
 http://zh.dbpedia.org/resource/圣乔治礼拜堂_(温莎城堡)	http://dbpedia.org/resource/St_George's_Chapel,_Windsor_Castle
@@ -1326,7 +1326,7 @@ http://zh.dbpedia.org/resource/爱丁堡公爵菲利普亲王	http://dbpedia.org
 http://zh.dbpedia.org/resource/ECMAScript	http://dbpedia.org/resource/ECMAScript
 http://zh.dbpedia.org/resource/夢想駿其足球會	http://dbpedia.org/resource/Dreams_Metro_Gallery_FC
 http://zh.dbpedia.org/resource/南美解放者杯	http://dbpedia.org/resource/Copa_Libertadores
-http://zh.dbpedia.org/resource/天佑女王	http://dbpedia.org/resource/God_Save_the_Queen
+http://zh.dbpedia.org/resource/天佑女王	http://dbpedia.org/resource/God_Save_the_Qîn
 http://zh.dbpedia.org/resource/尼古拉一世_(俄国)	http://dbpedia.org/resource/Nicholas_I_of_Russia
 http://zh.dbpedia.org/resource/克罗地亚语	http://dbpedia.org/resource/Croatian_language
 http://zh.dbpedia.org/resource/2012年至2013年德國足球甲級聯賽	http://dbpedia.org/resource/2012–13_Bundesliga
@@ -1378,11 +1378,11 @@ http://zh.dbpedia.org/resource/伊朗语支	http://dbpedia.org/resource/Iranian_
 http://zh.dbpedia.org/resource/山茶花	http://dbpedia.org/resource/Camellia_japonica
 http://zh.dbpedia.org/resource/波斯尼亚和黑塞哥维那	http://dbpedia.org/resource/Bosnia_and_Herzegovina
 http://zh.dbpedia.org/resource/巴不得媽媽...	http://dbpedia.org/resource/Divas_in_Distress
-http://zh.dbpedia.org/resource/亨利王子_(格洛斯特公爵)	http://dbpedia.org/resource/Prince_Henry,_Duke_of_Gloucester
+http://zh.dbpedia.org/resource/亨利王子_(格洛斯特公爵)	http://dbpedia.org/resource/Prince_Henry,_Duke_of_GloÎster
 http://zh.dbpedia.org/resource/阿瑟王子_(康诺特和斯特拉森公爵)	http://dbpedia.org/resource/Prince_Arthur,_Duke_of_Connaught_and_Strathearn
 http://zh.dbpedia.org/resource/費利佩六世	http://dbpedia.org/resource/Felipe_VI_of_Spain
 http://zh.dbpedia.org/resource/黃宗澤	http://dbpedia.org/resource/Bosco_Wong
-http://zh.dbpedia.org/resource/1991–92年歐洲足協盃	http://dbpedia.org/resource/1991–92_UEFA_Cup
+http://zh.dbpedia.org/resource/1991–92年歐洲足協盃	http://dbpedia.org/resource/1991–92_໺_Cup
 http://zh.dbpedia.org/resource/俄羅斯21歲以下國家足球隊	http://dbpedia.org/resource/Russia_national_under-21_football_team
 http://zh.dbpedia.org/resource/Windows_8	http://dbpedia.org/resource/Windows_8
 http://zh.dbpedia.org/resource/亚非语系	http://dbpedia.org/resource/Afroasiatic_languages
@@ -1395,11 +1395,11 @@ http://zh.dbpedia.org/resource/歐洲聯合左派/北歐綠色左派	http://dbpe
 http://zh.dbpedia.org/resource/衝呀！瘦薪兵團	http://dbpedia.org/resource/No_Good_Either_Way
 http://zh.dbpedia.org/resource/Google_Nexus	http://dbpedia.org/resource/Google_Nexus
 http://zh.dbpedia.org/resource/Pascal_(程式語言)	http://dbpedia.org/resource/Pascal_(programming_language)
-http://zh.dbpedia.org/resource/哈德斯菲尔德足球俱乐部	http://dbpedia.org/resource/Huddersfield_Town_A.F.C.
+http://zh.dbpedia.org/resource/哈德斯菲尔德足球俱乐部	http://dbpedia.org/resource/Hෞrsfield_Town_A.F.C.
 http://zh.dbpedia.org/resource/威廉四世_(英國)	http://dbpedia.org/resource/William_IV_of_the_United_Kingdom
 http://zh.dbpedia.org/resource/内阁官房长官	http://dbpedia.org/resource/Chief_Cabinet_Secretary
 http://zh.dbpedia.org/resource/Super_Junior_Donghae_&_Eunhyuk	http://dbpedia.org/resource/Donghae_&_Eunhyuk
-http://zh.dbpedia.org/resource/米歇尔·福柯	http://dbpedia.org/resource/Michel_Foucault
+http://zh.dbpedia.org/resource/米歇尔·福柯	http://dbpedia.org/resource/Michel_FoÊult
 http://zh.dbpedia.org/resource/人民運動聯盟	http://dbpedia.org/resource/Union_for_a_Popular_Movement
 http://zh.dbpedia.org/resource/沃依切赫·雅鲁泽尔斯基	http://dbpedia.org/resource/Wojciech_Jaruzelski
 http://zh.dbpedia.org/resource/中山市	http://dbpedia.org/resource/Zhongshan
@@ -1435,9 +1435,9 @@ http://zh.dbpedia.org/resource/布拉迪斯拉发	http://dbpedia.org/resource/Br
 http://zh.dbpedia.org/resource/伊万·谢尔盖耶维奇·屠格涅夫	http://dbpedia.org/resource/Ivan_Turgenev
 http://zh.dbpedia.org/resource/X_Japan	http://dbpedia.org/resource/X_Japan
 http://zh.dbpedia.org/resource/爪哇語	http://dbpedia.org/resource/Javanese_language
-http://zh.dbpedia.org/resource/1996–97年歐洲盃賽冠軍盃	http://dbpedia.org/resource/1996–97_UEFA_Cup_Winners'_Cup
+http://zh.dbpedia.org/resource/1996–97年歐洲盃賽冠軍盃	http://dbpedia.org/resource/1996–97_໺_Cup_Winners'_Cup
 http://zh.dbpedia.org/resource/皇家真特體育會	http://dbpedia.org/resource/K.A.A._Gent
-http://zh.dbpedia.org/resource/古斯塔夫·福樓拜	http://dbpedia.org/resource/Gustave_Flaubert
+http://zh.dbpedia.org/resource/古斯塔夫·福樓拜	http://dbpedia.org/resource/Gustave_Fla¾rt
 http://zh.dbpedia.org/resource/尼基塔·謝爾蓋耶維奇·赫魯曉夫	http://dbpedia.org/resource/Nikita_Khrushchev
 http://zh.dbpedia.org/resource/布兰妮_(专辑)	http://dbpedia.org/resource/Britney_(album)
 http://zh.dbpedia.org/resource/貓屎媽媽	http://dbpedia.org/resource/Coffee_Cat_Mama
@@ -1462,7 +1462,7 @@ http://zh.dbpedia.org/resource/詹姆斯·诺克斯·波尔克	http://dbpedia.or
 http://zh.dbpedia.org/resource/安東尼·艾登	http://dbpedia.org/resource/Anthony_Eden
 http://zh.dbpedia.org/resource/夏德施普列特足球會	http://dbpedia.org/resource/HNK_Hajduk_Split
 http://zh.dbpedia.org/resource/亞特蘭大足球俱樂部	http://dbpedia.org/resource/Atalanta_B.C.
-http://zh.dbpedia.org/resource/克勞德·李維-史陀	http://dbpedia.org/resource/Claude_Lévi-Strauss
+http://zh.dbpedia.org/resource/克勞德·李維-史陀	http://dbpedia.org/resource/ClaÞ_Lévi-Strauss
 http://zh.dbpedia.org/resource/芬兰语	http://dbpedia.org/resource/Finnish_language
 http://zh.dbpedia.org/resource/罗宾·范佩西	http://dbpedia.org/resource/Robin_van_Persie
 http://zh.dbpedia.org/resource/中日德兰足球俱乐部	http://dbpedia.org/resource/FC_Midtjylland
@@ -1579,7 +1579,7 @@ http://zh.dbpedia.org/resource/博維斯塔足球會	http://dbpedia.org/resource
 http://zh.dbpedia.org/resource/民主建港協進聯盟	http://dbpedia.org/resource/Democratic_Alliance_for_the_Betterment_and_Progress_of_Hong_Kong
 http://zh.dbpedia.org/resource/香港大球場	http://dbpedia.org/resource/Hong_Kong_Stadium
 http://zh.dbpedia.org/resource/喜马偕尔邦	http://dbpedia.org/resource/Himachal_Pradesh
-http://zh.dbpedia.org/resource/賈斯汀·杜魯多	http://dbpedia.org/resource/Justin_Trudeau
+http://zh.dbpedia.org/resource/賈斯汀·杜魯多	http://dbpedia.org/resource/Justin_Tr෪u
 http://zh.dbpedia.org/resource/罗伯特·普罗辛内茨基	http://dbpedia.org/resource/Robert_Prosinečki
 http://zh.dbpedia.org/resource/英國廣播公司第一台	http://dbpedia.org/resource/BBC_One
 http://zh.dbpedia.org/resource/諾士郡足球會	http://dbpedia.org/resource/Notts_County_F.C.
@@ -1591,7 +1591,7 @@ http://zh.dbpedia.org/resource/多倫多大學	http://dbpedia.org/resource/Unive
 http://zh.dbpedia.org/resource/馬爾科·迪瓦約	http://dbpedia.org/resource/Marco_Di_Vaio
 http://zh.dbpedia.org/resource/仁心解碼	http://dbpedia.org/resource/A_Great_Way_to_Care
 http://zh.dbpedia.org/resource/穆罕默德二世_(奥斯曼帝国)	http://dbpedia.org/resource/Mehmed_the_Conqueror
-http://zh.dbpedia.org/resource/1992–93年歐洲足協盃	http://dbpedia.org/resource/1992–93_UEFA_Cup
+http://zh.dbpedia.org/resource/1992–93年歐洲足協盃	http://dbpedia.org/resource/1992–93_໺_Cup
 http://zh.dbpedia.org/resource/爱德华·希思	http://dbpedia.org/resource/Edward_Heath
 http://zh.dbpedia.org/resource/嘉德勋章	http://dbpedia.org/resource/Order_of_the_Garter
 http://zh.dbpedia.org/resource/大無限樂團	http://dbpedia.org/resource/Do_As_Infinity
@@ -1708,7 +1708,7 @@ http://zh.dbpedia.org/resource/俠盜獵車手III	http://dbpedia.org/resource/Gr
 http://zh.dbpedia.org/resource/名古屋市	http://dbpedia.org/resource/Nagoya
 http://zh.dbpedia.org/resource/林吉祥	http://dbpedia.org/resource/Lim_Kit_Siang
 http://zh.dbpedia.org/resource/密苏里州各县列表	http://dbpedia.org/resource/List_of_counties_in_Missouri
-http://zh.dbpedia.org/resource/阿爾阿里足球會	http://dbpedia.org/resource/Al-Ahli_Dubai_F.C.
+http://zh.dbpedia.org/resource/阿爾阿里足球會	http://dbpedia.org/resource/Al-Ahli_Dºi_F.C.
 http://zh.dbpedia.org/resource/藍尼·克羅維茲	http://dbpedia.org/resource/Lenny_Kravitz
 http://zh.dbpedia.org/resource/阿卜杜勒-阿齐兹·本·阿卜杜拉赫曼·本·费萨尔·阿勒沙特	http://dbpedia.org/resource/Ibn_Saud
 http://zh.dbpedia.org/resource/孟德斯鸠	http://dbpedia.org/resource/Montesquieu
@@ -1753,7 +1753,7 @@ http://zh.dbpedia.org/resource/美国第一夫人	http://dbpedia.org/resource/Fi
 http://zh.dbpedia.org/resource/印度东北部	http://dbpedia.org/resource/Northeast_India
 http://zh.dbpedia.org/resource/大卫·干路尼	http://dbpedia.org/resource/David_Connolly
 http://zh.dbpedia.org/resource/Windows_10	http://dbpedia.org/resource/Windows_10
-http://zh.dbpedia.org/resource/卢卡斯影业	http://dbpedia.org/resource/Lucasfilm
+http://zh.dbpedia.org/resource/卢卡斯影业	http://dbpedia.org/resource/LÊsfilm
 http://zh.dbpedia.org/resource/文立彬	http://dbpedia.org/resource/Ed_Miliband
 http://zh.dbpedia.org/resource/小威廉·皮特	http://dbpedia.org/resource/William_Pitt_the_Younger
 http://zh.dbpedia.org/resource/沙特希拉爾足球俱樂部	http://dbpedia.org/resource/Al-Hilal_FC
@@ -1785,7 +1785,7 @@ http://zh.dbpedia.org/resource/塔吉克斯坦	http://dbpedia.org/resource/Tajik
 http://zh.dbpedia.org/resource/土耳其足球超级联赛	http://dbpedia.org/resource/Süper_Lig
 http://zh.dbpedia.org/resource/扬·伊利埃斯库	http://dbpedia.org/resource/Ion_Iliescu
 http://zh.dbpedia.org/resource/汪東城	http://dbpedia.org/resource/Jiro_Wang
-http://zh.dbpedia.org/resource/歌劇之夜_(專輯)	http://dbpedia.org/resource/A_Night_at_the_Opera_(Queen_album)
+http://zh.dbpedia.org/resource/歌劇之夜_(專輯)	http://dbpedia.org/resource/A_Night_at_the_Opera_(Qîn_album)
 http://zh.dbpedia.org/resource/This_Is_It_(迈克尔·杰克逊专辑)	http://dbpedia.org/resource/Michael_Jackson's_This_Is_It_(album)
 http://zh.dbpedia.org/resource/威廉·伦奎斯特	http://dbpedia.org/resource/William_Rehnquist
 http://zh.dbpedia.org/resource/1984–85年歐洲盃賽冠軍盃	http://dbpedia.org/resource/1984–85_European_Cup_Winners'_Cup
@@ -1897,7 +1897,7 @@ http://zh.dbpedia.org/resource/IPad_Air	http://dbpedia.org/resource/IPad_Air
 http://zh.dbpedia.org/resource/本傑明·迪斯雷利	http://dbpedia.org/resource/Benjamin_Disraeli
 http://zh.dbpedia.org/resource/古斯塔夫六世·阿道夫	http://dbpedia.org/resource/Gustaf_VI_Adolf_of_Sweden
 http://zh.dbpedia.org/resource/德比郡足球俱乐部	http://dbpedia.org/resource/Derby_County_F.C.
-http://zh.dbpedia.org/resource/1998–99年歐洲盃賽冠軍盃	http://dbpedia.org/resource/1998–99_UEFA_Cup_Winners'_Cup
+http://zh.dbpedia.org/resource/1998–99年歐洲盃賽冠軍盃	http://dbpedia.org/resource/1998–99_໺_Cup_Winners'_Cup
 http://zh.dbpedia.org/resource/印度斯坦语	http://dbpedia.org/resource/Hindustani_language
 http://zh.dbpedia.org/resource/希洪體育	http://dbpedia.org/resource/Sporting_de_Gijón
 http://zh.dbpedia.org/resource/亚美尼亚语	http://dbpedia.org/resource/Armenian_language
@@ -1948,7 +1948,7 @@ http://zh.dbpedia.org/resource/大韓民國國務總理	http://dbpedia.org/resou
 http://zh.dbpedia.org/resource/愛上巧克力	http://dbpedia.org/resource/Ti_Amo_Chocolate
 http://zh.dbpedia.org/resource/宫泽喜一	http://dbpedia.org/resource/Kiichi_Miyazawa
 http://zh.dbpedia.org/resource/马凯_(官员)	http://dbpedia.org/resource/Ma_Kai
-http://zh.dbpedia.org/resource/希山慕丁·胡先	http://dbpedia.org/resource/Hishammuddin_Hussein
+http://zh.dbpedia.org/resource/希山慕丁·胡先	http://dbpedia.org/resource/HishammÝin_Hussein
 http://zh.dbpedia.org/resource/法比奥·卡纳瓦罗	http://dbpedia.org/resource/Fabio_Cannavaro
 http://zh.dbpedia.org/resource/穆斯圖菲·瑪瑪雷克	http://dbpedia.org/resource/Mostowfi_ol-Mamalek
 http://zh.dbpedia.org/resource/李明博	http://dbpedia.org/resource/Lee_Myung-bak
@@ -2014,7 +2014,7 @@ http://zh.dbpedia.org/resource/加的夫	http://dbpedia.org/resource/Cardiff
 http://zh.dbpedia.org/resource/烈火雄心II	http://dbpedia.org/resource/Burning_Flame_II
 http://zh.dbpedia.org/resource/卡罗洛斯·帕普利亚斯	http://dbpedia.org/resource/Karolos_Papoulias
 http://zh.dbpedia.org/resource/哥倫比亞足球甲級聯賽	http://dbpedia.org/resource/Categoría_Primera_A
-http://zh.dbpedia.org/resource/勃杜安·岑登	http://dbpedia.org/resource/Boudewijn_Zenden
+http://zh.dbpedia.org/resource/勃杜安·岑登	http://dbpedia.org/resource/BoÞwijn_Zenden
 http://zh.dbpedia.org/resource/加那利群岛	http://dbpedia.org/resource/Canary_Islands
 http://zh.dbpedia.org/resource/墨西哥湾	http://dbpedia.org/resource/Gulf_of_Mexico
 http://zh.dbpedia.org/resource/法蘭西第二帝國	http://dbpedia.org/resource/Second_French_Empire
@@ -2023,7 +2023,7 @@ http://zh.dbpedia.org/resource/基督教民主黨_(荷蘭)	http://dbpedia.org/re
 http://zh.dbpedia.org/resource/Dejavu_(倖田來未專輯)	http://dbpedia.org/resource/Dejavu_(Kumi_Koda_album)
 http://zh.dbpedia.org/resource/統一俄羅斯	http://dbpedia.org/resource/United_Russia
 http://zh.dbpedia.org/resource/明朝	http://dbpedia.org/resource/Ming_dynasty
-http://zh.dbpedia.org/resource/杜拜	http://dbpedia.org/resource/Dubai
+http://zh.dbpedia.org/resource/杜拜	http://dbpedia.org/resource/Dºi
 http://zh.dbpedia.org/resource/布赖恩·梅	http://dbpedia.org/resource/Brian_May
 http://zh.dbpedia.org/resource/朱咪咪	http://dbpedia.org/resource/Mimi_Chu
 http://zh.dbpedia.org/resource/ICloud	http://dbpedia.org/resource/ICloud
@@ -2051,7 +2051,7 @@ http://zh.dbpedia.org/resource/丹尼尔·帕特里克·莫伊尼汉	http://dbpe
 http://zh.dbpedia.org/resource/斯图尔特·皮尔斯	http://dbpedia.org/resource/Stuart_Pearce
 http://zh.dbpedia.org/resource/GEM_TV_ASIA	http://dbpedia.org/resource/GEM_TV_ASIA
 http://zh.dbpedia.org/resource/奇雲·戴維斯	http://dbpedia.org/resource/Kevin_Davies
-http://zh.dbpedia.org/resource/東西宮略	http://dbpedia.org/resource/Queens_of_Diamonds_and_Hearts
+http://zh.dbpedia.org/resource/東西宮略	http://dbpedia.org/resource/Qîns_of_Diamonds_and_Hearts
 http://zh.dbpedia.org/resource/斯洛伐克语	http://dbpedia.org/resource/Slovak_language
 http://zh.dbpedia.org/resource/艾哈邁德·蓋瓦姆	http://dbpedia.org/resource/Ahmad_Qavam
 http://zh.dbpedia.org/resource/CBeebies	http://dbpedia.org/resource/CBeebies
@@ -2187,7 +2187,7 @@ http://zh.dbpedia.org/resource/龜田誠治	http://dbpedia.org/resource/Seiji_Ka
 http://zh.dbpedia.org/resource/愛我請留言	http://dbpedia.org/resource/Swipe_Tap_Love
 http://zh.dbpedia.org/resource/蒙古国总统	http://dbpedia.org/resource/President_of_Mongolia
 http://zh.dbpedia.org/resource/極速快感：進化世代	http://dbpedia.org/resource/Need_for_Speed:_Shift
-http://zh.dbpedia.org/resource/拉迪諾語	http://dbpedia.org/resource/Judaeo-Spanish
+http://zh.dbpedia.org/resource/拉迪諾語	http://dbpedia.org/resource/Jථo-Spanish
 http://zh.dbpedia.org/resource/悉尼市	http://dbpedia.org/resource/City_of_Sydney
 http://zh.dbpedia.org/resource/瑪格麗特二世_(丹麥)	http://dbpedia.org/resource/Margrethe_II_of_Denmark
 http://zh.dbpedia.org/resource/米奇·麥康諾	http://dbpedia.org/resource/Mitch_McConnell
@@ -2196,7 +2196,7 @@ http://zh.dbpedia.org/resource/孝慎成皇后	http://dbpedia.org/resource/Empre
 http://zh.dbpedia.org/resource/约瑟夫·维萨里奥诺维奇·斯大林	http://dbpedia.org/resource/Joseph_Stalin
 http://zh.dbpedia.org/resource/IPad_Pro	http://dbpedia.org/resource/IPad_Pro
 http://zh.dbpedia.org/resource/荷蘭_(地區)	http://dbpedia.org/resource/Holland
-http://zh.dbpedia.org/resource/克洛德·马克莱莱	http://dbpedia.org/resource/Claude_Makélélé
+http://zh.dbpedia.org/resource/克洛德·马克莱莱	http://dbpedia.org/resource/ClaÞ_Makélélé
 http://zh.dbpedia.org/resource/唐英年	http://dbpedia.org/resource/Henry_Tang
 http://zh.dbpedia.org/resource/黄菊	http://dbpedia.org/resource/Huang_Ju
 http://zh.dbpedia.org/resource/约翰·舍曼	http://dbpedia.org/resource/John_Sherman
@@ -2474,7 +2474,7 @@ http://zh.dbpedia.org/resource/夏威夷王國	http://dbpedia.org/resource/Kingd
 http://zh.dbpedia.org/resource/爱丽丝公主_(英国)	http://dbpedia.org/resource/Princess_Alice_of_the_United_Kingdom
 http://zh.dbpedia.org/resource/花樣少年少女_(2006年電視劇)	http://dbpedia.org/resource/Hanazakarino_Kimitachihe
 http://zh.dbpedia.org/resource/塑胶小野乐队	http://dbpedia.org/resource/Plastic_Ono_Band
-http://zh.dbpedia.org/resource/新抱喜相逢	http://dbpedia.org/resource/Queen_Divas
+http://zh.dbpedia.org/resource/新抱喜相逢	http://dbpedia.org/resource/Qîn_Divas
 http://zh.dbpedia.org/resource/尼祖·李奧-曲加	http://dbpedia.org/resource/Nigel_Reo-Coker
 http://zh.dbpedia.org/resource/华盛顿奇才	http://dbpedia.org/resource/Washington_Wizards
 http://zh.dbpedia.org/resource/安德烈·安东诺维奇·格列奇科	http://dbpedia.org/resource/Andrei_Grechko
@@ -2507,9 +2507,9 @@ http://zh.dbpedia.org/resource/IW引擎	http://dbpedia.org/resource/IW_engine
 http://zh.dbpedia.org/resource/莫里斯·顾夫·德姆维尔	http://dbpedia.org/resource/Maurice_Couve_de_Murville
 http://zh.dbpedia.org/resource/Def_Jam唱片公司	http://dbpedia.org/resource/Def_Jam_Recordings
 http://zh.dbpedia.org/resource/加拉法体育俱乐部	http://dbpedia.org/resource/Al-Gharafa_Sports_Club
-http://zh.dbpedia.org/resource/陆克文	http://dbpedia.org/resource/Kevin_Rudd
+http://zh.dbpedia.org/resource/陆克文	http://dbpedia.org/resource/Kevin_RÝ
 http://zh.dbpedia.org/resource/What_turns_you_on%3F	http://dbpedia.org/resource/What_Turns_You_On%3F
-http://zh.dbpedia.org/resource/吕德·吕贝尔斯	http://dbpedia.org/resource/Ruud_Lubbers
+http://zh.dbpedia.org/resource/吕德·吕贝尔斯	http://dbpedia.org/resource/Ruud_Lாrs
 http://zh.dbpedia.org/resource/1990–91年歐洲盃賽冠軍盃	http://dbpedia.org/resource/1990–91_European_Cup_Winners'_Cup
 http://zh.dbpedia.org/resource/瑪麗亞·亞歷山德羅芙娜_(黑森-萊茵的郡主)	http://dbpedia.org/resource/Maria_Alexandrovna_(Marie_of_Hesse_and_by_Rhine)
 http://zh.dbpedia.org/resource/亨利八世	http://dbpedia.org/resource/Henry_VIII_of_England
@@ -2527,7 +2527,7 @@ http://zh.dbpedia.org/resource/上海外国语大学	http://dbpedia.org/resource
 http://zh.dbpedia.org/resource/威廉·霍华德·塔夫脱	http://dbpedia.org/resource/William_Howard_Taft
 http://zh.dbpedia.org/resource/土库曼斯坦	http://dbpedia.org/resource/Turkmenistan
 http://zh.dbpedia.org/resource/弗朗茨·约瑟夫一世	http://dbpedia.org/resource/Franz_Joseph_I_of_Austria
-http://zh.dbpedia.org/resource/阿歷士·布魯士	http://dbpedia.org/resource/Alex_Bruce_(footballer,_born_1984)
+http://zh.dbpedia.org/resource/阿歷士·布魯士	http://dbpedia.org/resource/Alex_BrÎ_(footballer,_born_1984)
 http://zh.dbpedia.org/resource/希腊议会	http://dbpedia.org/resource/Hellenic_Parliament
 http://zh.dbpedia.org/resource/中国铁路总公司	http://dbpedia.org/resource/China_Railway
 http://zh.dbpedia.org/resource/诺丁汉	http://dbpedia.org/resource/Nottingham
@@ -2548,7 +2548,7 @@ http://zh.dbpedia.org/resource/爱伦·坡	http://dbpedia.org/resource/Edgar_All
 http://zh.dbpedia.org/resource/Here_(公司)	http://dbpedia.org/resource/Here_(company)
 http://zh.dbpedia.org/resource/派特·羅伯茲	http://dbpedia.org/resource/Pat_Roberts
 http://zh.dbpedia.org/resource/奥古斯特·孔德	http://dbpedia.org/resource/Auguste_Comte
-http://zh.dbpedia.org/resource/米内罗竞技俱乐部	http://dbpedia.org/resource/Clube_Atlético_Mineiro
+http://zh.dbpedia.org/resource/米内罗竞技俱乐部	http://dbpedia.org/resource/Cl¾_Atlético_Mineiro
 http://zh.dbpedia.org/resource/MT_Framework	http://dbpedia.org/resource/MT_Framework
 http://zh.dbpedia.org/resource/富明尼斯足球會	http://dbpedia.org/resource/Fluminense_FC
 http://zh.dbpedia.org/resource/學警狙擊	http://dbpedia.org/resource/E.U._(TV_series)
@@ -2585,11 +2585,11 @@ http://zh.dbpedia.org/resource/Mozilla基金會	http://dbpedia.org/resource/Mozi
 http://zh.dbpedia.org/resource/盐湖城	http://dbpedia.org/resource/Salt_Lake_City
 http://zh.dbpedia.org/resource/米哈伊尔·叶菲莫维奇·弗拉德科夫	http://dbpedia.org/resource/Mikhail_Fradkov
 http://zh.dbpedia.org/resource/埃因霍温	http://dbpedia.org/resource/Eindhoven
-http://zh.dbpedia.org/resource/帕拉尼恩斯體育會	http://dbpedia.org/resource/Clube_Atlético_Paranaense
+http://zh.dbpedia.org/resource/帕拉尼恩斯體育會	http://dbpedia.org/resource/Cl¾_Atlético_Paranaense
 http://zh.dbpedia.org/resource/迈阿密热火	http://dbpedia.org/resource/Miami_Heat
 http://zh.dbpedia.org/resource/第十二届全国人民代表大会	http://dbpedia.org/resource/12th_National_People's_Congress
 http://zh.dbpedia.org/resource/Windows_PowerShell	http://dbpedia.org/resource/Windows_PowerShell
-http://zh.dbpedia.org/resource/厄瓜多尔	http://dbpedia.org/resource/Ecuador
+http://zh.dbpedia.org/resource/厄瓜多尔	http://dbpedia.org/resource/Ec­or
 http://zh.dbpedia.org/resource/谷垣祯一	http://dbpedia.org/resource/Sadakazu_Tanigaki
 http://zh.dbpedia.org/resource/谢尔盖·绍伊古	http://dbpedia.org/resource/Sergey_Shoygu
 http://zh.dbpedia.org/resource/達拉斯	http://dbpedia.org/resource/Dallas
@@ -2696,7 +2696,7 @@ http://zh.dbpedia.org/resource/埃斯比约联合足球俱乐部	http://dbpedia.
 http://zh.dbpedia.org/resource/港區_(東京都)	http://dbpedia.org/resource/Minato,_Tokyo
 http://zh.dbpedia.org/resource/民族竞技	http://dbpedia.org/resource/Atlético_Nacional
 http://zh.dbpedia.org/resource/巴拉圭	http://dbpedia.org/resource/Paraguay
-http://zh.dbpedia.org/resource/穆罕默德·胡斯尼·穆巴拉克	http://dbpedia.org/resource/Hosni_Mubarak
+http://zh.dbpedia.org/resource/穆罕默德·胡斯尼·穆巴拉克	http://dbpedia.org/resource/Hosni_Mºrak
 http://zh.dbpedia.org/resource/約翰·巴拉索	http://dbpedia.org/resource/John_Barrasso
 http://zh.dbpedia.org/resource/贝娜齐尔·布托	http://dbpedia.org/resource/Benazir_Bhutto
 http://zh.dbpedia.org/resource/卡塔爾星級足球聯賽	http://dbpedia.org/resource/Qatar_Stars_League
@@ -2757,7 +2757,7 @@ http://zh.dbpedia.org/resource/換換愛	http://dbpedia.org/resource/Why_Why_Lov
 http://zh.dbpedia.org/resource/罗马尼亚社会主义共和国	http://dbpedia.org/resource/Socialist_Republic_of_Romania
 http://zh.dbpedia.org/resource/阿兰·朱佩	http://dbpedia.org/resource/Alain_Juppé
 http://zh.dbpedia.org/resource/伊壁鸠鲁	http://dbpedia.org/resource/Epicurus
-http://zh.dbpedia.org/resource/Cube娛樂	http://dbpedia.org/resource/Cube_Entertainment
+http://zh.dbpedia.org/resource/C¾娛樂	http://dbpedia.org/resource/C¾_Entertainment
 http://zh.dbpedia.org/resource/Utada_Hikaru_SINGLE_COLLECTION_VOL.2	http://dbpedia.org/resource/Utada_Hikaru_Single_Collection_Vol._2
 http://zh.dbpedia.org/resource/亚历山大大帝	http://dbpedia.org/resource/Alexander_the_Great
 http://zh.dbpedia.org/resource/洛辛堡足球會	http://dbpedia.org/resource/Rosenborg_BK
@@ -2804,19 +2804,19 @@ http://zh.dbpedia.org/resource/李司棋	http://dbpedia.org/resource/Louise_Lee
 http://zh.dbpedia.org/resource/奥利维尔·达科特	http://dbpedia.org/resource/Olivier_Dacourt
 http://zh.dbpedia.org/resource/拿破崙戰爭	http://dbpedia.org/resource/Napoleonic_Wars
 http://zh.dbpedia.org/resource/劉江華	http://dbpedia.org/resource/Lau_Kong-wah
-http://zh.dbpedia.org/resource/伊麗莎白·鮑斯-萊昂	http://dbpedia.org/resource/Queen_Elizabeth_The_Queen_Mother
+http://zh.dbpedia.org/resource/伊麗莎白·鮑斯-萊昂	http://dbpedia.org/resource/Qîn_Elizabeth_The_Qîn_Mother
 http://zh.dbpedia.org/resource/雪乐山	http://dbpedia.org/resource/Sierra_Entertainment
 http://zh.dbpedia.org/resource/吳尊	http://dbpedia.org/resource/Wu_Chun
 http://zh.dbpedia.org/resource/山梨县	http://dbpedia.org/resource/Yamanashi_Prefecture
 http://zh.dbpedia.org/resource/菲爾·杜特	http://dbpedia.org/resource/Phil_Dowd
 http://zh.dbpedia.org/resource/山本權兵衛	http://dbpedia.org/resource/Yamamoto_Gonnohyōe
-http://zh.dbpedia.org/resource/瓜達拉哈拉體育會	http://dbpedia.org/resource/C.D._Guadalajara
+http://zh.dbpedia.org/resource/瓜達拉哈拉體育會	http://dbpedia.org/resource/C.D._G૚lajara
 http://zh.dbpedia.org/resource/香港特別行政區行政長官	http://dbpedia.org/resource/Chief_Executive_of_Hong_Kong
 http://zh.dbpedia.org/resource/亨巴利圖·巴路基斯·泰西拿	http://dbpedia.org/resource/Humberlito_Borges
 http://zh.dbpedia.org/resource/赞比亚	http://dbpedia.org/resource/Zambia
 http://zh.dbpedia.org/resource/俄國臨時政府	http://dbpedia.org/resource/Russian_Provisional_Government
 http://zh.dbpedia.org/resource/马其顿语	http://dbpedia.org/resource/Macedonian_language
-http://zh.dbpedia.org/resource/克丘亞語	http://dbpedia.org/resource/Quechuan_languages
+http://zh.dbpedia.org/resource/克丘亞語	http://dbpedia.org/resource/Qìhuan_languages
 http://zh.dbpedia.org/resource/普魯士邦	http://dbpedia.org/resource/Free_State_of_Prussia
 http://zh.dbpedia.org/resource/安德魯·曉士	http://dbpedia.org/resource/Andrew_Hughes_(footballer,_born_1978)
 http://zh.dbpedia.org/resource/维吉尔	http://dbpedia.org/resource/Virgil
@@ -2965,7 +2965,7 @@ http://zh.dbpedia.org/resource/榮·懷登	http://dbpedia.org/resource/Ron_Wyden
 http://zh.dbpedia.org/resource/夏洛特王后	http://dbpedia.org/resource/Charlotte_of_Mecklenburg-Strelitz
 http://zh.dbpedia.org/resource/三浦泰年	http://dbpedia.org/resource/Yasutoshi_Miura
 http://zh.dbpedia.org/resource/哈伦·菲斯克·斯通	http://dbpedia.org/resource/Harlan_F._Stone
-http://zh.dbpedia.org/resource/Party_Queen_(濱崎步專輯)	http://dbpedia.org/resource/Party_Queen
+http://zh.dbpedia.org/resource/Party_Qîn_(濱崎步專輯)	http://dbpedia.org/resource/Party_Qîn
 http://zh.dbpedia.org/resource/阎锡山	http://dbpedia.org/resource/Yan_Xishan
 http://zh.dbpedia.org/resource/國民革命軍	http://dbpedia.org/resource/National_Revolutionary_Army
 http://zh.dbpedia.org/resource/湯姆·沃特森	http://dbpedia.org/resource/Tom_Watson_(Labour_politician)
@@ -2978,7 +2978,7 @@ http://zh.dbpedia.org/resource/老挝人民革命党	http://dbpedia.org/resource
 http://zh.dbpedia.org/resource/巴利亚多利德	http://dbpedia.org/resource/Valladolid
 http://zh.dbpedia.org/resource/长征_(政治人物)	http://dbpedia.org/resource/Trường_Chinh
 http://zh.dbpedia.org/resource/After_School	http://dbpedia.org/resource/After_School_(band)
-http://zh.dbpedia.org/resource/傑克·凱魯亞克	http://dbpedia.org/resource/Jack_Kerouac
+http://zh.dbpedia.org/resource/傑克·凱魯亞克	http://dbpedia.org/resource/Jack_Kero¬
 http://zh.dbpedia.org/resource/Steam	http://dbpedia.org/resource/Steam_(software)
 http://zh.dbpedia.org/resource/尼泊尔语	http://dbpedia.org/resource/Nepali_language
 http://zh.dbpedia.org/resource/蘭希·佩洛西	http://dbpedia.org/resource/Nancy_Pelosi
@@ -3116,11 +3116,11 @@ http://zh.dbpedia.org/resource/阿尔本·W·巴克利	http://dbpedia.org/resour
 http://zh.dbpedia.org/resource/费城76人	http://dbpedia.org/resource/Philadelphia_76ers
 http://zh.dbpedia.org/resource/共和黨_(法國)	http://dbpedia.org/resource/The_Republicans_(France)
 http://zh.dbpedia.org/resource/艾納斯足球會	http://dbpedia.org/resource/Al-Nassr_FC
-http://zh.dbpedia.org/resource/尤德	http://dbpedia.org/resource/Edward_Youde
+http://zh.dbpedia.org/resource/尤德	http://dbpedia.org/resource/Edward_YoÞ
 http://zh.dbpedia.org/resource/陳錦鴻	http://dbpedia.org/resource/Sunny_Chan
 http://zh.dbpedia.org/resource/托马斯·尤因	http://dbpedia.org/resource/Thomas_Ewing
 http://zh.dbpedia.org/resource/月刊Comic電擊大王	http://dbpedia.org/resource/Dengeki_Daioh
-http://zh.dbpedia.org/resource/路思·伊瑞葛來	http://dbpedia.org/resource/Luce_Irigaray
+http://zh.dbpedia.org/resource/路思·伊瑞葛來	http://dbpedia.org/resource/LÎ_Irigaray
 http://zh.dbpedia.org/resource/IPad_(第三代)	http://dbpedia.org/resource/IPad_(3rd_generation)
 http://zh.dbpedia.org/resource/保加利亞足球甲級聯賽	http://dbpedia.org/resource/Bulgarian_A_Football_Group
 http://zh.dbpedia.org/resource/ADO海牙	http://dbpedia.org/resource/ADO_Den_Haag
@@ -3149,7 +3149,7 @@ http://zh.dbpedia.org/resource/北马里亚纳群岛	http://dbpedia.org/resource
 http://zh.dbpedia.org/resource/古英语	http://dbpedia.org/resource/Old_English
 http://zh.dbpedia.org/resource/大衛·維特	http://dbpedia.org/resource/David_Vitter
 http://zh.dbpedia.org/resource/拉斯帕尔马斯体育联盟	http://dbpedia.org/resource/UD_Las_Palmas
-http://zh.dbpedia.org/resource/卢卡·托尼	http://dbpedia.org/resource/Luca_Toni
+http://zh.dbpedia.org/resource/卢卡·托尼	http://dbpedia.org/resource/LÊ_Toni
 http://zh.dbpedia.org/resource/黄色潜水艇	http://dbpedia.org/resource/Yellow_Submarine_(album)
 http://zh.dbpedia.org/resource/馬昆賀斯	http://dbpedia.org/resource/Marquinhos_(footballer,_born_1976)
 http://zh.dbpedia.org/resource/英格蘭人	http://dbpedia.org/resource/English_people
@@ -3197,7 +3197,7 @@ http://zh.dbpedia.org/resource/五十鈴Elf	http://dbpedia.org/resource/Isuzu_El
 http://zh.dbpedia.org/resource/刺客教條III：自由使命	http://dbpedia.org/resource/Assassin's_Creed_III:_Liberation
 http://zh.dbpedia.org/resource/孟买	http://dbpedia.org/resource/Mumbai
 http://zh.dbpedia.org/resource/克什米爾語	http://dbpedia.org/resource/Kashmiri_language
-http://zh.dbpedia.org/resource/皇后區	http://dbpedia.org/resource/Queens
+http://zh.dbpedia.org/resource/皇后區	http://dbpedia.org/resource/Qîns
 http://zh.dbpedia.org/resource/北雪梨議會	http://dbpedia.org/resource/North_Sydney_Council
 http://zh.dbpedia.org/resource/艾伯特·加勒廷	http://dbpedia.org/resource/Albert_Gallatin
 http://zh.dbpedia.org/resource/Yellow_(歌曲)	http://dbpedia.org/resource/Yellow_(Coldplay_song)
@@ -3282,7 +3282,7 @@ http://zh.dbpedia.org/resource/澀谷區	http://dbpedia.org/resource/Shibuya
 http://zh.dbpedia.org/resource/喷火战机乐队	http://dbpedia.org/resource/Foo_Fighters
 http://zh.dbpedia.org/resource/勞倫斯·薩默斯	http://dbpedia.org/resource/Lawrence_Summers
 http://zh.dbpedia.org/resource/謝美伊·碧福特	http://dbpedia.org/resource/Jermaine_Beckford
-http://zh.dbpedia.org/resource/安妮_(英国女王)	http://dbpedia.org/resource/Anne,_Queen_of_Great_Britain
+http://zh.dbpedia.org/resource/安妮_(英国女王)	http://dbpedia.org/resource/Anne,_Qîn_of_Great_Britain
 http://zh.dbpedia.org/resource/布拉德福德城足球俱乐部	http://dbpedia.org/resource/Bradford_City_A.F.C.
 http://zh.dbpedia.org/resource/維克多·安德烈耶維奇·尤先科	http://dbpedia.org/resource/Viktor_Yushchenko
 http://zh.dbpedia.org/resource/葡萄牙君主列表	http://dbpedia.org/resource/List_of_Portuguese_monarchs
@@ -3432,7 +3432,7 @@ http://zh.dbpedia.org/resource/教育_(專輯)	http://dbpedia.org/resource/Kyōi
 http://zh.dbpedia.org/resource/杨振宁	http://dbpedia.org/resource/Chen-Ning_Yang
 http://zh.dbpedia.org/resource/夜愿	http://dbpedia.org/resource/Nightwish
 http://zh.dbpedia.org/resource/大卫·比利亚	http://dbpedia.org/resource/David_Villa
-http://zh.dbpedia.org/resource/安田理大	http://dbpedia.org/resource/Michihiro_Yasuda
+http://zh.dbpedia.org/resource/安田理大	http://dbpedia.org/resource/Michihiro_YasÚ
 http://zh.dbpedia.org/resource/克拉伦斯·西多夫	http://dbpedia.org/resource/Clarence_Seedorf
 http://zh.dbpedia.org/resource/馬高·巴碧	http://dbpedia.org/resource/Marko_Babić_(footballer)
 http://zh.dbpedia.org/resource/莊拿芬·杜格拉斯	http://dbpedia.org/resource/Jonathan_Douglas
@@ -3487,7 +3487,7 @@ http://zh.dbpedia.org/resource/科隆日-贝勒里夫	http://dbpedia.org/resourc
 http://zh.dbpedia.org/resource/日本放送協會	http://dbpedia.org/resource/NHK
 http://zh.dbpedia.org/resource/忻峰	http://dbpedia.org/resource/Xin_Feng
 http://zh.dbpedia.org/resource/贝勒维	http://dbpedia.org/resource/Bellevue,_Switzerland
-http://zh.dbpedia.org/resource/中华人民共和国教育部	http://dbpedia.org/resource/Ministry_of_Education_of_the_People's_Republic_of_China
+http://zh.dbpedia.org/resource/中华人民共和国教育部	http://dbpedia.org/resource/Ministry_of_EdÊtion_of_the_People's_Republic_of_China
 http://zh.dbpedia.org/resource/恰蒂斯加尔邦	http://dbpedia.org/resource/Chhattisgarh
 http://zh.dbpedia.org/resource/斯賓塞·珀西瓦爾	http://dbpedia.org/resource/Spencer_Perceval
 http://zh.dbpedia.org/resource/高棉文	http://dbpedia.org/resource/Khmer_alphabet
@@ -3569,8 +3569,8 @@ http://zh.dbpedia.org/resource/赫哲族	http://dbpedia.org/resource/Nanai_peopl
 http://zh.dbpedia.org/resource/梅纳赫姆·贝京	http://dbpedia.org/resource/Menachem_Begin
 http://zh.dbpedia.org/resource/斯柯达野帝	http://dbpedia.org/resource/Škoda_Yeti
 http://zh.dbpedia.org/resource/列卡度·哥利斯馬	http://dbpedia.org/resource/Ricardo_Quaresma
-http://zh.dbpedia.org/resource/昆士蘭州	http://dbpedia.org/resource/Queensland
-http://zh.dbpedia.org/resource/阿米尔·谢里夫丁	http://dbpedia.org/resource/Amir_Sjarifuddin
+http://zh.dbpedia.org/resource/昆士蘭州	http://dbpedia.org/resource/Qînsland
+http://zh.dbpedia.org/resource/阿米尔·谢里夫丁	http://dbpedia.org/resource/Amir_SjarifÝin
 http://zh.dbpedia.org/resource/泰米爾文	http://dbpedia.org/resource/Tamil_script
 http://zh.dbpedia.org/resource/约翰·亚当斯·迪克斯	http://dbpedia.org/resource/John_Adams_Dix
 http://zh.dbpedia.org/resource/格里马尔迪王朝	http://dbpedia.org/resource/House_of_Grimaldi
@@ -3608,7 +3608,7 @@ http://zh.dbpedia.org/resource/让-皮埃尔·拉法兰	http://dbpedia.org/resou
 http://zh.dbpedia.org/resource/太田市	http://dbpedia.org/resource/Ōta,_Gunma
 http://zh.dbpedia.org/resource/沙加緬度_(加利福尼亞州)	http://dbpedia.org/resource/Sacramento,_California
 http://zh.dbpedia.org/resource/蘭科夫自治市	http://dbpedia.org/resource/Municipality_of_Lane_Cove
-http://zh.dbpedia.org/resource/2000年歐洲足球錦標賽	http://dbpedia.org/resource/UEFA_Euro_2000
+http://zh.dbpedia.org/resource/2000年歐洲足球錦標賽	http://dbpedia.org/resource/໺_Euro_2000
 http://zh.dbpedia.org/resource/占族	http://dbpedia.org/resource/Chams
 http://zh.dbpedia.org/resource/刺客教條：兄弟會	http://dbpedia.org/resource/Assassin's_Creed:_Brotherhood
 http://zh.dbpedia.org/resource/立陶宛语	http://dbpedia.org/resource/Lithuanian_language
@@ -3662,7 +3662,7 @@ http://zh.dbpedia.org/resource/质量效应3	http://dbpedia.org/resource/Mass_Ef
 http://zh.dbpedia.org/resource/曾培炎	http://dbpedia.org/resource/Zeng_Peiyan
 http://zh.dbpedia.org/resource/克拉斯诺达尔足球俱乐部	http://dbpedia.org/resource/FC_Krasnodar
 http://zh.dbpedia.org/resource/若泽·博辛瓦	http://dbpedia.org/resource/José_Bosingwa
-http://zh.dbpedia.org/resource/安杰伊·杜达	http://dbpedia.org/resource/Andrzej_Duda
+http://zh.dbpedia.org/resource/安杰伊·杜达	http://dbpedia.org/resource/Andrzej_DÚ
 http://zh.dbpedia.org/resource/奕譞	http://dbpedia.org/resource/Yixuan,_Prince_Chun
 http://zh.dbpedia.org/resource/帕特里斯·麦克马洪	http://dbpedia.org/resource/Patrice_de_MacMahon,_Duke_of_Magenta
 http://zh.dbpedia.org/resource/印度皇帝	http://dbpedia.org/resource/Emperor_of_India
@@ -3737,7 +3737,7 @@ http://zh.dbpedia.org/resource/Astro_AEC	http://dbpedia.org/resource/Astro_AEC
 http://zh.dbpedia.org/resource/蒙彼利埃體育會	http://dbpedia.org/resource/Montpellier_HSC
 http://zh.dbpedia.org/resource/小奥利弗·沃尔科特	http://dbpedia.org/resource/Oliver_Wolcott,_Jr.
 http://zh.dbpedia.org/resource/韓庚_(藝人)	http://dbpedia.org/resource/Han_Geng
-http://zh.dbpedia.org/resource/鲁宾·扎德科维奇	http://dbpedia.org/resource/Ruben_Zadkovich
+http://zh.dbpedia.org/resource/鲁宾·扎德科维奇	http://dbpedia.org/resource/R¾n_Zadkovich
 http://zh.dbpedia.org/resource/韦斯利·斯内德	http://dbpedia.org/resource/Wesley_Sneijder
 http://zh.dbpedia.org/resource/聖約翰勳章	http://dbpedia.org/resource/Order_of_Saint_John_(chartered_1888)
 http://zh.dbpedia.org/resource/阿纳斯塔斯·伊万诺维奇·米高扬	http://dbpedia.org/resource/Anastas_Mikoyan
@@ -3756,7 +3756,7 @@ http://zh.dbpedia.org/resource/Debian	http://dbpedia.org/resource/Debian
 http://zh.dbpedia.org/resource/AIR_(遊戲)	http://dbpedia.org/resource/Air_(visual_novel)
 http://zh.dbpedia.org/resource/文禮彬	http://dbpedia.org/resource/David_Miliband
 http://zh.dbpedia.org/resource/莱斯特·皮尔逊	http://dbpedia.org/resource/Lester_B._Pearson
-http://zh.dbpedia.org/resource/克洛德·巴尔托洛	http://dbpedia.org/resource/Claude_Bartolone
+http://zh.dbpedia.org/resource/克洛德·巴尔托洛	http://dbpedia.org/resource/ClaÞ_Bartolone
 http://zh.dbpedia.org/resource/英國廣播公司第三台	http://dbpedia.org/resource/BBC_Three_(former)
 http://zh.dbpedia.org/resource/沙恩·路尼	http://dbpedia.org/resource/Shane_Lowry_(footballer)
 http://zh.dbpedia.org/resource/阮晉勇	http://dbpedia.org/resource/Nguyễn_Tấn_Dũng
@@ -3787,7 +3787,7 @@ http://zh.dbpedia.org/resource/丹·豪瑟	http://dbpedia.org/resource/Dan_House
 http://zh.dbpedia.org/resource/德国联邦议院	http://dbpedia.org/resource/Bundestag
 http://zh.dbpedia.org/resource/瓦诺·梅拉比什维利	http://dbpedia.org/resource/Vano_Merabishvili
 http://zh.dbpedia.org/resource/贺国强	http://dbpedia.org/resource/He_Guoqiang
-http://zh.dbpedia.org/resource/索菲娅_(西班牙王后)	http://dbpedia.org/resource/Queen_Sofía_of_Spain
+http://zh.dbpedia.org/resource/索菲娅_(西班牙王后)	http://dbpedia.org/resource/Qîn_Sofía_of_Spain
 http://zh.dbpedia.org/resource/罗贝托一世_(帕尔马)	http://dbpedia.org/resource/Robert_I,_Duke_of_Parma
 http://zh.dbpedia.org/resource/SDN48	http://dbpedia.org/resource/SDN48
 http://zh.dbpedia.org/resource/德川庆喜	http://dbpedia.org/resource/Tokugawa_Yoshinobu
@@ -3872,7 +3872,7 @@ http://zh.dbpedia.org/resource/林文龍	http://dbpedia.org/resource/Frankie_Lam
 http://zh.dbpedia.org/resource/挑戰K聯賽	http://dbpedia.org/resource/K_League_Challenge
 http://zh.dbpedia.org/resource/谭延闿	http://dbpedia.org/resource/Tan_Yankai
 http://zh.dbpedia.org/resource/詹姆斯·查德威克	http://dbpedia.org/resource/James_Chadwick
-http://zh.dbpedia.org/resource/维克多·布鲁斯，第九代额尔金伯爵	http://dbpedia.org/resource/Victor_Bruce,_9th_Earl_of_Elgin
+http://zh.dbpedia.org/resource/维克多·布鲁斯，第九代额尔金伯爵	http://dbpedia.org/resource/Victor_BrÎ,_9th_Earl_of_Elgin
 http://zh.dbpedia.org/resource/京沪高速铁路	http://dbpedia.org/resource/Beijing–Shanghai_High-Speed_Railway
 http://zh.dbpedia.org/resource/西丽玛沃·班达拉奈克	http://dbpedia.org/resource/Sirimavo_Bandaranaike
 http://zh.dbpedia.org/resource/李璧琦	http://dbpedia.org/resource/Becky_Lee
@@ -4018,7 +4018,7 @@ http://zh.dbpedia.org/resource/安德雷斯·赫尔佐格	http://dbpedia.org/res
 http://zh.dbpedia.org/resource/瓦尔德马·帕夫拉克	http://dbpedia.org/resource/Waldemar_Pawlak
 http://zh.dbpedia.org/resource/慕克里·马哈迪	http://dbpedia.org/resource/Mukhriz_Mahathir
 http://zh.dbpedia.org/resource/马里奥·蒙蒂	http://dbpedia.org/resource/Mario_Monti
-http://zh.dbpedia.org/resource/卢卡斯·巴里奥斯	http://dbpedia.org/resource/Lucas_Barrios
+http://zh.dbpedia.org/resource/卢卡斯·巴里奥斯	http://dbpedia.org/resource/LÊs_Barrios
 http://zh.dbpedia.org/resource/扬州市	http://dbpedia.org/resource/Yangzhou
 http://zh.dbpedia.org/resource/加泰罗尼亚	http://dbpedia.org/resource/Catalonia
 http://zh.dbpedia.org/resource/熱情仲夏	http://dbpedia.org/resource/Summer_x_Summer
@@ -4038,7 +4038,7 @@ http://zh.dbpedia.org/resource/卡斯柏·舒米高	http://dbpedia.org/resource/
 http://zh.dbpedia.org/resource/延世大學	http://dbpedia.org/resource/Yonsei_University
 http://zh.dbpedia.org/resource/亚历克斯·弗格森	http://dbpedia.org/resource/Alex_Ferguson
 http://zh.dbpedia.org/resource/威廉·亚当斯·理查森	http://dbpedia.org/resource/William_Adams_Richardson
-http://zh.dbpedia.org/resource/维多利亚体育俱乐部	http://dbpedia.org/resource/Esporte_Clube_Vitória
+http://zh.dbpedia.org/resource/维多利亚体育俱乐部	http://dbpedia.org/resource/Esporte_Cl¾_Vitória
 http://zh.dbpedia.org/resource/蘇利南	http://dbpedia.org/resource/Suriname
 http://zh.dbpedia.org/resource/弋腾	http://dbpedia.org/resource/Yi_Teng
 http://zh.dbpedia.org/resource/LØVE_愛無止盡	http://dbpedia.org/resource/Love_(Mika_Nakashima_album)
@@ -4071,7 +4071,7 @@ http://zh.dbpedia.org/resource/托馬斯·佩克哈特	http://dbpedia.org/resour
 http://zh.dbpedia.org/resource/列卡度·哥斯達	http://dbpedia.org/resource/Ricardo_Costa_(Portuguese_footballer)
 http://zh.dbpedia.org/resource/舞力全开系列	http://dbpedia.org/resource/Just_Dance_(video_game_series)
 http://zh.dbpedia.org/resource/伊澤一葉	http://dbpedia.org/resource/Ichiyo_Izawa
-http://zh.dbpedia.org/resource/克里斯蒂安·帕努奇	http://dbpedia.org/resource/Christian_Panucci
+http://zh.dbpedia.org/resource/克里斯蒂安·帕努奇	http://dbpedia.org/resource/Christian_PanÌi
 http://zh.dbpedia.org/resource/筒美京平	http://dbpedia.org/resource/Kyōhei_Tsutsumi
 http://zh.dbpedia.org/resource/MOON/blossom	http://dbpedia.org/resource/Moon/Blossom
 http://zh.dbpedia.org/resource/戰慄時空系列	http://dbpedia.org/resource/Half-Life_(series)
@@ -4083,7 +4083,7 @@ http://zh.dbpedia.org/resource/陳冠希	http://dbpedia.org/resource/Edison_Chen
 http://zh.dbpedia.org/resource/樂瞳	http://dbpedia.org/resource/Cilla_Kung
 http://zh.dbpedia.org/resource/努诺·戈麦斯	http://dbpedia.org/resource/Nuno_Gomes
 http://zh.dbpedia.org/resource/洛斯阿拉莫斯国家实验室	http://dbpedia.org/resource/Los_Alamos_National_Laboratory
-http://zh.dbpedia.org/resource/克拉斯諾達爾庫班足球俱樂部	http://dbpedia.org/resource/FC_Kuban_Krasnodar
+http://zh.dbpedia.org/resource/克拉斯諾達爾庫班足球俱樂部	http://dbpedia.org/resource/FC_Kºn_Krasnodar
 http://zh.dbpedia.org/resource/关震	http://dbpedia.org/resource/Guan_Zhen
 http://zh.dbpedia.org/resource/皇家聖圖爾登足球會	http://dbpedia.org/resource/Sint-Truidense_V.V.
 http://zh.dbpedia.org/resource/瓦茨拉夫·斯维尔科什	http://dbpedia.org/resource/Václav_Svěrkoš
@@ -4093,7 +4093,7 @@ http://zh.dbpedia.org/resource/路易·波拿巴	http://dbpedia.org/resource/Lou
 http://zh.dbpedia.org/resource/琳恩·切尼	http://dbpedia.org/resource/Lynne_Cheney
 http://zh.dbpedia.org/resource/赫根足球會	http://dbpedia.org/resource/BK_Häcken
 http://zh.dbpedia.org/resource/吉達艾阿里體育會	http://dbpedia.org/resource/Al-Ahli_Saudi_FC
-http://zh.dbpedia.org/resource/猶太-摩洛哥語	http://dbpedia.org/resource/Judeo-Moroccan_Arabic
+http://zh.dbpedia.org/resource/猶太-摩洛哥語	http://dbpedia.org/resource/JÞo-Moroccan_Arabic
 http://zh.dbpedia.org/resource/約翰·惠勒	http://dbpedia.org/resource/John_Archibald_Wheeler
 http://zh.dbpedia.org/resource/Jay_Z	http://dbpedia.org/resource/Jay_Z
 http://zh.dbpedia.org/resource/彭里斯市	http://dbpedia.org/resource/City_of_Penrith
@@ -4185,7 +4185,7 @@ http://zh.dbpedia.org/resource/哈利法·本·扎耶德·阿勒纳哈扬	http:/
 http://zh.dbpedia.org/resource/Mozilla_Thunderbird	http://dbpedia.org/resource/Mozilla_Thunderbird
 http://zh.dbpedia.org/resource/欧文·张伯伦	http://dbpedia.org/resource/Owen_Chamberlain
 http://zh.dbpedia.org/resource/金南一	http://dbpedia.org/resource/Kim_Nam-il
-http://zh.dbpedia.org/resource/休伯特·汉弗莱	http://dbpedia.org/resource/Hubert_Humphrey
+http://zh.dbpedia.org/resource/休伯特·汉弗莱	http://dbpedia.org/resource/H¾rt_Humphrey
 http://zh.dbpedia.org/resource/加拿大河	http://dbpedia.org/resource/Canadian_River
 http://zh.dbpedia.org/resource/愉園體育會	http://dbpedia.org/resource/Happy_Valley_AA
 http://zh.dbpedia.org/resource/涅槃乐队	http://dbpedia.org/resource/Nirvana_(band)
@@ -4241,7 +4241,7 @@ http://zh.dbpedia.org/resource/費沙·李察臣	http://dbpedia.org/resource/Fra
 http://zh.dbpedia.org/resource/蘇玉華	http://dbpedia.org/resource/Louisa_So
 http://zh.dbpedia.org/resource/皇家沙勒罗瓦体育俱乐部	http://dbpedia.org/resource/R._Charleroi_S.C.
 http://zh.dbpedia.org/resource/多哥國家足球隊	http://dbpedia.org/resource/Togo_national_football_team
-http://zh.dbpedia.org/resource/魁北克法語	http://dbpedia.org/resource/Quebec_French
+http://zh.dbpedia.org/resource/魁北克法語	http://dbpedia.org/resource/Q_French
 http://zh.dbpedia.org/resource/檀國大學	http://dbpedia.org/resource/Dankook_University
 http://zh.dbpedia.org/resource/贝尔格莱德球馆	http://dbpedia.org/resource/Kombank_Arena
 http://zh.dbpedia.org/resource/强卫	http://dbpedia.org/resource/Qiang_Wei
@@ -4274,8 +4274,8 @@ http://zh.dbpedia.org/resource/玛米·艾森豪威尔	http://dbpedia.org/resour
 http://zh.dbpedia.org/resource/韦康比流浪者足球俱乐部	http://dbpedia.org/resource/Wycombe_Wanderers_F.C.
 http://zh.dbpedia.org/resource/华特迪士尼影片	http://dbpedia.org/resource/Walt_Disney_Pictures
 http://zh.dbpedia.org/resource/贾斯汀·葛林寧	http://dbpedia.org/resource/Justine_Greening
-http://zh.dbpedia.org/resource/帕丘卡足球俱乐部	http://dbpedia.org/resource/C.F._Pachuca
-http://zh.dbpedia.org/resource/伊万·夸德拉多	http://dbpedia.org/resource/Ibán_Cuadrado
+http://zh.dbpedia.org/resource/帕丘卡足球俱乐部	http://dbpedia.org/resource/C.F._PachÊ
+http://zh.dbpedia.org/resource/伊万·夸德拉多	http://dbpedia.org/resource/Ibán_C­rado
 http://zh.dbpedia.org/resource/羅拔圖·蘇達度	http://dbpedia.org/resource/Roberto_Soldado
 http://zh.dbpedia.org/resource/大衛·干沙利斯	http://dbpedia.org/resource/David_González_Giraldo
 http://zh.dbpedia.org/resource/秦升	http://dbpedia.org/resource/Qin_Sheng
@@ -4356,11 +4356,11 @@ http://zh.dbpedia.org/resource/马林_(足球运动员)	http://dbpedia.org/resou
 http://zh.dbpedia.org/resource/TRAX	http://dbpedia.org/resource/TRAX_(band)
 http://zh.dbpedia.org/resource/弗雷德里克·赖因费尔特	http://dbpedia.org/resource/Fredrik_Reinfeldt
 http://zh.dbpedia.org/resource/胡安·德·波旁	http://dbpedia.org/resource/Infante_Juan,_Count_of_Barcelona
-http://zh.dbpedia.org/resource/高加索山脉	http://dbpedia.org/resource/Caucasus_Mountains
+http://zh.dbpedia.org/resource/高加索山脉	http://dbpedia.org/resource/CaÊsus_Mountains
 http://zh.dbpedia.org/resource/林佳龍	http://dbpedia.org/resource/Lin_Chia-lung
 http://zh.dbpedia.org/resource/中部日本放送	http://dbpedia.org/resource/Chubu-Nippon_Broadcasting
 http://zh.dbpedia.org/resource/亚历山德罗·迪亚曼蒂	http://dbpedia.org/resource/Alessandro_Diamanti
-http://zh.dbpedia.org/resource/巴伊亚竞技俱乐部	http://dbpedia.org/resource/Esporte_Clube_Bahia
+http://zh.dbpedia.org/resource/巴伊亚竞技俱乐部	http://dbpedia.org/resource/Esporte_Cl¾_Bahia
 http://zh.dbpedia.org/resource/亨利·克林頓	http://dbpedia.org/resource/Henry_Clinton_(British_Army_officer,_born_1730)
 http://zh.dbpedia.org/resource/于爾基·卡泰寧	http://dbpedia.org/resource/Jyrki_Katainen
 http://zh.dbpedia.org/resource/Lucifer_(Shinee)	http://dbpedia.org/resource/Lucifer_(Shinee_album)
@@ -4425,7 +4425,7 @@ http://zh.dbpedia.org/resource/傑夫·佛雷克	http://dbpedia.org/resource/Jef
 http://zh.dbpedia.org/resource/奥拉维尔·拉格纳·格里姆松	http://dbpedia.org/resource/Ólafur_Ragnar_Grímsson
 http://zh.dbpedia.org/resource/谢讷布日里	http://dbpedia.org/resource/Chêne-Bougeries
 http://zh.dbpedia.org/resource/阿末扎希	http://dbpedia.org/resource/Ahmad_Zahid_Hamidi
-http://zh.dbpedia.org/resource/布魯士·迪捷特	http://dbpedia.org/resource/Bruce_Djite
+http://zh.dbpedia.org/resource/布魯士·迪捷特	http://dbpedia.org/resource/BrÎ_Djite
 http://zh.dbpedia.org/resource/戴夫·格羅爾	http://dbpedia.org/resource/Dave_Grohl
 http://zh.dbpedia.org/resource/根茨·阿尔帕德	http://dbpedia.org/resource/Árpád_Göncz
 http://zh.dbpedia.org/resource/玛丽亚·特蕾西亚	http://dbpedia.org/resource/Maria_Theresa
@@ -4688,12 +4688,12 @@ http://zh.dbpedia.org/resource/鮑比·布朗	http://dbpedia.org/resource/Bobby_
 http://zh.dbpedia.org/resource/海灘男孩	http://dbpedia.org/resource/The_Beach_Boys
 http://zh.dbpedia.org/resource/苏州话	http://dbpedia.org/resource/Suzhou_dialect
 http://zh.dbpedia.org/resource/丹麥-挪威	http://dbpedia.org/resource/Denmark–Norway
-http://zh.dbpedia.org/resource/Queen_of_Hip-Pop	http://dbpedia.org/resource/Queen_of_Hip-Pop
+http://zh.dbpedia.org/resource/Qîn_of_Hip-Pop	http://dbpedia.org/resource/Qîn_of_Hip-Pop
 http://zh.dbpedia.org/resource/马西米连诺一世	http://dbpedia.org/resource/Maximilian_I_of_Mexico
-http://zh.dbpedia.org/resource/朱慧敏	http://dbpedia.org/resource/Queenie_Chu
+http://zh.dbpedia.org/resource/朱慧敏	http://dbpedia.org/resource/Qînie_Chu
 http://zh.dbpedia.org/resource/奥洛夫·帕尔梅	http://dbpedia.org/resource/Olof_Palme
 http://zh.dbpedia.org/resource/GLAMOROUS_SKY	http://dbpedia.org/resource/Glamorous_Sky
-http://zh.dbpedia.org/resource/端姑賽西拉祖丁	http://dbpedia.org/resource/Sirajuddin_of_Perlis
+http://zh.dbpedia.org/resource/端姑賽西拉祖丁	http://dbpedia.org/resource/SirajÝin_of_Perlis
 http://zh.dbpedia.org/resource/常万全	http://dbpedia.org/resource/Chang_Wanquan
 http://zh.dbpedia.org/resource/德赖斯·梅滕斯	http://dbpedia.org/resource/Dries_Mertens
 http://zh.dbpedia.org/resource/丹·科茨	http://dbpedia.org/resource/Dan_Coats
@@ -4726,7 +4726,7 @@ http://zh.dbpedia.org/resource/西蒙尼·佩罗塔	http://dbpedia.org/resource/
 http://zh.dbpedia.org/resource/温斯·凯博	http://dbpedia.org/resource/Vince_Cable
 http://zh.dbpedia.org/resource/特克斯和凯科斯群岛	http://dbpedia.org/resource/Turks_and_Caicos_Islands
 http://zh.dbpedia.org/resource/兰斯_(法国城市)	http://dbpedia.org/resource/Reims
-http://zh.dbpedia.org/resource/马克·尤德尔	http://dbpedia.org/resource/Mark_Udall
+http://zh.dbpedia.org/resource/马克·尤德尔	http://dbpedia.org/resource/Mark_Úll
 http://zh.dbpedia.org/resource/日本－琉球语系	http://dbpedia.org/resource/Japonic_languages
 http://zh.dbpedia.org/resource/白朗寧M2重機槍	http://dbpedia.org/resource/M2_Browning
 http://zh.dbpedia.org/resource/阿方斯·比拉姆·德康多爾	http://dbpedia.org/resource/Alphonse_Pyramus_de_Candolle
@@ -4784,7 +4784,7 @@ http://zh.dbpedia.org/resource/If_I_Believe	http://dbpedia.org/resource/If_I_Bel
 http://zh.dbpedia.org/resource/格拉汉姆·亚历山大	http://dbpedia.org/resource/Graham_Alexander
 http://zh.dbpedia.org/resource/列夫·鲍里索维奇·加米涅夫	http://dbpedia.org/resource/Lev_Kamenev
 http://zh.dbpedia.org/resource/空中客车	http://dbpedia.org/resource/Airbus
-http://zh.dbpedia.org/resource/阿美利加明尼路	http://dbpedia.org/resource/América_Futebol_Clube_(MG)
+http://zh.dbpedia.org/resource/阿美利加明尼路	http://dbpedia.org/resource/América_Futebol_Cl¾_(MG)
 http://zh.dbpedia.org/resource/愛上哥們	http://dbpedia.org/resource/Bromance_(2015_TV_series)
 http://zh.dbpedia.org/resource/清西陵	http://dbpedia.org/resource/Western_Qing_tombs
 http://zh.dbpedia.org/resource/塞斯克·法比加斯	http://dbpedia.org/resource/Cesc_Fàbregas
@@ -5074,15 +5074,15 @@ http://zh.dbpedia.org/resource/大卫·沃尔特·福斯特	http://dbpedia.org/r
 http://zh.dbpedia.org/resource/平定準噶爾	http://dbpedia.org/resource/Dzungar–Qing_War
 http://zh.dbpedia.org/resource/路爾斯·法比安奴	http://dbpedia.org/resource/Luís_Fabiano
 http://zh.dbpedia.org/resource/景颇语	http://dbpedia.org/resource/Jingpho_language
-http://zh.dbpedia.org/resource/猶太-阿拉伯語	http://dbpedia.org/resource/Judeo-Arabic_languages
+http://zh.dbpedia.org/resource/猶太-阿拉伯語	http://dbpedia.org/resource/JÞo-Arabic_languages
 http://zh.dbpedia.org/resource/他看她的第2眼	http://dbpedia.org/resource/When_I_See_You_Again
 http://zh.dbpedia.org/resource/琳达·佩里	http://dbpedia.org/resource/Linda_Perry
 http://zh.dbpedia.org/resource/厄尔·沃伦	http://dbpedia.org/resource/Earl_Warren
 http://zh.dbpedia.org/resource/北𣴓省	http://dbpedia.org/resource/Bắc_Kạn_Province
-http://zh.dbpedia.org/resource/中華民國教育部	http://dbpedia.org/resource/Ministry_of_Education_(Taiwan)
+http://zh.dbpedia.org/resource/中華民國教育部	http://dbpedia.org/resource/Ministry_of_EdÊtion_(Taiwan)
 http://zh.dbpedia.org/resource/諾爾·蓋勒格	http://dbpedia.org/resource/Noel_Gallagher
 http://zh.dbpedia.org/resource/坦桑尼亚	http://dbpedia.org/resource/Tanzania
-http://zh.dbpedia.org/resource/克里斯蒂娜女王	http://dbpedia.org/resource/Christina,_Queen_of_Sweden
+http://zh.dbpedia.org/resource/克里斯蒂娜女王	http://dbpedia.org/resource/Christina,_Qîn_of_Sweden
 http://zh.dbpedia.org/resource/伍佰	http://dbpedia.org/resource/Wu_Bai
 http://zh.dbpedia.org/resource/亨利·威尔逊	http://dbpedia.org/resource/Henry_Wilson
 http://zh.dbpedia.org/resource/披耶帕凤·丰派育哈色纳	http://dbpedia.org/resource/Phraya_Phahonphonphayuhasena
@@ -5292,7 +5292,7 @@ http://zh.dbpedia.org/resource/奧林匹克國家綜合體育場	http://dbpedia.
 http://zh.dbpedia.org/resource/吳美珩	http://dbpedia.org/resource/Melissa_Ng
 http://zh.dbpedia.org/resource/降落傘_(專輯)	http://dbpedia.org/resource/Parachutes_(album)
 http://zh.dbpedia.org/resource/TeX_Live	http://dbpedia.org/resource/TeX_Live
-http://zh.dbpedia.org/resource/猶太祭司	http://dbpedia.org/resource/Judas_Priest
+http://zh.dbpedia.org/resource/猶太祭司	http://dbpedia.org/resource/JÚs_Priest
 http://zh.dbpedia.org/resource/沃特福德郡	http://dbpedia.org/resource/County_Waterford
 http://zh.dbpedia.org/resource/中華民國國軍	http://dbpedia.org/resource/Republic_of_China_Armed_Forces
 http://zh.dbpedia.org/resource/尹光河	http://dbpedia.org/resource/Yoon_Bit-garam
@@ -5325,7 +5325,7 @@ http://zh.dbpedia.org/resource/马来西亚伊斯兰党	http://dbpedia.org/resou
 http://zh.dbpedia.org/resource/宋靄齡	http://dbpedia.org/resource/Soong_Ai-ling
 http://zh.dbpedia.org/resource/布萊恩·夏茲	http://dbpedia.org/resource/Brian_Schatz
 http://zh.dbpedia.org/resource/我的特權	http://dbpedia.org/resource/My_Prerogative
-http://zh.dbpedia.org/resource/Hot_Stuff_feat._KM-MARKIT	http://dbpedia.org/resource/Hot_Stuff_(Kumi_Koda_song)
+http://zh.dbpedia.org/resource/Hot_Stÿ_feat._KM-MARKIT	http://dbpedia.org/resource/Hot_Stÿ_(Kumi_Koda_song)
 http://zh.dbpedia.org/resource/圣马力诺	http://dbpedia.org/resource/San_Marino
 http://zh.dbpedia.org/resource/斯坦尼斯瓦夫·奥古斯特	http://dbpedia.org/resource/Stanisław_August_Poniatowski
 http://zh.dbpedia.org/resource/縱橫諜海：黑名單	http://dbpedia.org/resource/Tom_Clancy's_Splinter_Cell:_Blacklist
@@ -5371,11 +5371,11 @@ http://zh.dbpedia.org/resource/威廉·約瑟夫·伯恩斯	http://dbpedia.org/r
 http://zh.dbpedia.org/resource/廣西平話	http://dbpedia.org/resource/Pinghua
 http://zh.dbpedia.org/resource/利马索尔AEL	http://dbpedia.org/resource/AEL_Limassol
 http://zh.dbpedia.org/resource/约瑟夫·莱昂斯	http://dbpedia.org/resource/Joseph_Lyons
-http://zh.dbpedia.org/resource/圣西门伯爵鲁弗鲁瓦的克劳德·亨利	http://dbpedia.org/resource/Claude_Henri_de_Rouvroy,_comte_de_Saint-Simon
+http://zh.dbpedia.org/resource/圣西门伯爵鲁弗鲁瓦的克劳德·亨利	http://dbpedia.org/resource/ClaÞ_Henri_de_Rouvroy,_comte_de_Saint-Simon
 http://zh.dbpedia.org/resource/汤姆·维尔萨克	http://dbpedia.org/resource/Tom_Vilsack
 http://zh.dbpedia.org/resource/厄尔·佩吉	http://dbpedia.org/resource/Earle_Page
 http://zh.dbpedia.org/resource/斯特拉斯堡競賽會	http://dbpedia.org/resource/RC_Strasbourg_Alsace
-http://zh.dbpedia.org/resource/卢卡斯·帕帕季莫斯	http://dbpedia.org/resource/Lucas_Papademos
+http://zh.dbpedia.org/resource/卢卡斯·帕帕季莫斯	http://dbpedia.org/resource/LÊs_Papademos
 http://zh.dbpedia.org/resource/榮·弗拉爾	http://dbpedia.org/resource/Ron_Vlaar
 http://zh.dbpedia.org/resource/第三次阿都拉内阁	http://dbpedia.org/resource/Third_Abdullah_cabinet
 http://zh.dbpedia.org/resource/The_Secret_Code	http://dbpedia.org/resource/The_Secret_Code_(album)
@@ -5391,7 +5391,7 @@ http://zh.dbpedia.org/resource/聖伯多祿大殿	http://dbpedia.org/resource/St
 http://zh.dbpedia.org/resource/教宗亞歷山大六世	http://dbpedia.org/resource/Pope_Alexander_VI
 http://zh.dbpedia.org/resource/东英吉利亚大学	http://dbpedia.org/resource/University_of_East_Anglia
 http://zh.dbpedia.org/resource/儒勒·凡尔纳	http://dbpedia.org/resource/Jules_Verne
-http://zh.dbpedia.org/resource/贝尔法斯特女王大学	http://dbpedia.org/resource/Queen's_University_Belfast
+http://zh.dbpedia.org/resource/贝尔法斯特女王大学	http://dbpedia.org/resource/Qîn's_University_Belfast
 http://zh.dbpedia.org/resource/許水德	http://dbpedia.org/resource/Hsu_Shui-teh
 http://zh.dbpedia.org/resource/穆罕默德·阿里王朝	http://dbpedia.org/resource/Muhammad_Ali_dynasty
 http://zh.dbpedia.org/resource/美味關係_(台灣電視劇)	http://dbpedia.org/resource/Sweet_Relationship
@@ -5416,7 +5416,7 @@ http://zh.dbpedia.org/resource/崔真理	http://dbpedia.org/resource/Sulli
 http://zh.dbpedia.org/resource/藝聲	http://dbpedia.org/resource/Yesung
 http://zh.dbpedia.org/resource/纪念碑球场	http://dbpedia.org/resource/Estadio_Monumental_Antonio_Vespucio_Liberti
 http://zh.dbpedia.org/resource/法比奧·格羅素	http://dbpedia.org/resource/Fabio_Grosso
-http://zh.dbpedia.org/resource/福田赳夫	http://dbpedia.org/resource/Takeo_Fukuda
+http://zh.dbpedia.org/resource/福田赳夫	http://dbpedia.org/resource/Takeo_FukÚ
 http://zh.dbpedia.org/resource/布拉马普特拉河	http://dbpedia.org/resource/Brahmaputra_River
 http://zh.dbpedia.org/resource/LOVE&HONEY	http://dbpedia.org/resource/Love_&_Honey
 http://zh.dbpedia.org/resource/澳大利亚参议院	http://dbpedia.org/resource/Australian_Senate
@@ -5474,7 +5474,7 @@ http://zh.dbpedia.org/resource/伏見宮博恭王	http://dbpedia.org/resource/Pr
 http://zh.dbpedia.org/resource/Sun_King_(披頭四歌曲)	http://dbpedia.org/resource/Sun_King_(song)
 http://zh.dbpedia.org/resource/盧克·德容	http://dbpedia.org/resource/Luuk_de_Jong
 http://zh.dbpedia.org/resource/克莉丝汀·格雷瓜尔	http://dbpedia.org/resource/Christine_Gregoire
-http://zh.dbpedia.org/resource/吉安路易吉·布冯	http://dbpedia.org/resource/Gianluigi_Buffon
+http://zh.dbpedia.org/resource/吉安路易吉·布冯	http://dbpedia.org/resource/Gianluigi_Bÿon
 http://zh.dbpedia.org/resource/水本裕貴	http://dbpedia.org/resource/Hiroki_Mizumoto
 http://zh.dbpedia.org/resource/孟菲斯_(田納西州)	http://dbpedia.org/resource/Memphis,_Tennessee
 http://zh.dbpedia.org/resource/格鲁吉亚苏维埃社会主义共和国	http://dbpedia.org/resource/Georgian_Soviet_Socialist_Republic
@@ -5513,7 +5513,7 @@ http://zh.dbpedia.org/resource/娛樂時間電視網	http://dbpedia.org/resource
 http://zh.dbpedia.org/resource/ActionScript	http://dbpedia.org/resource/ActionScript
 http://zh.dbpedia.org/resource/马克·米利甘	http://dbpedia.org/resource/Mark_Milligan
 http://zh.dbpedia.org/resource/高平省	http://dbpedia.org/resource/Cao_Bằng_Province
-http://zh.dbpedia.org/resource/仁元王后	http://dbpedia.org/resource/Queen_Inwon
+http://zh.dbpedia.org/resource/仁元王后	http://dbpedia.org/resource/Qîn_Inwon
 http://zh.dbpedia.org/resource/葛拉罕·卡克森	http://dbpedia.org/resource/Graham_Coxon
 http://zh.dbpedia.org/resource/光榮	http://dbpedia.org/resource/Koei
 http://zh.dbpedia.org/resource/马泰奥·伦齐	http://dbpedia.org/resource/Matteo_Renzi
@@ -5673,9 +5673,9 @@ http://zh.dbpedia.org/resource/诺曼·拉姆齐	http://dbpedia.org/resource/Nor
 http://zh.dbpedia.org/resource/克里斯托弗·杜加里	http://dbpedia.org/resource/Christophe_Dugarry
 http://zh.dbpedia.org/resource/揭阳市	http://dbpedia.org/resource/Jieyang
 http://zh.dbpedia.org/resource/马蒂亚·德斯特罗	http://dbpedia.org/resource/Mattia_Destro
-http://zh.dbpedia.org/resource/達夫·麥卡根	http://dbpedia.org/resource/Duff_McKagan
+http://zh.dbpedia.org/resource/達夫·麥卡根	http://dbpedia.org/resource/Dÿ_McKagan
 http://zh.dbpedia.org/resource/西美昂二世·萨克森-科堡-哥达斯基	http://dbpedia.org/resource/Simeon_Saxe-Coburg-Gotha
-http://zh.dbpedia.org/resource/理察王子_(告羅士打公爵)	http://dbpedia.org/resource/Prince_Richard,_Duke_of_Gloucester
+http://zh.dbpedia.org/resource/理察王子_(告羅士打公爵)	http://dbpedia.org/resource/Prince_Richard,_Duke_of_GloÎster
 http://zh.dbpedia.org/resource/許信良	http://dbpedia.org/resource/Hsu_Hsin-liang
 http://zh.dbpedia.org/resource/黃倫碩	http://dbpedia.org/resource/Hwanhee
 http://zh.dbpedia.org/resource/廣島市	http://dbpedia.org/resource/Hiroshima
@@ -5725,7 +5725,7 @@ http://zh.dbpedia.org/resource/英格蘭甲組聯賽	http://dbpedia.org/resource
 http://zh.dbpedia.org/resource/肯尼思·卡翁达	http://dbpedia.org/resource/Kenneth_Kaunda
 http://zh.dbpedia.org/resource/弗朗兹·布伦塔诺	http://dbpedia.org/resource/Franz_Brentano
 http://zh.dbpedia.org/resource/國民政府	http://dbpedia.org/resource/Nationalist_government
-http://zh.dbpedia.org/resource/帕斯卡·蘇巴保拿	http://dbpedia.org/resource/Pascal_Zuberbühler
+http://zh.dbpedia.org/resource/帕斯卡·蘇巴保拿	http://dbpedia.org/resource/Pascal_Z¾rbühler
 http://zh.dbpedia.org/resource/国际奥林匹克委员会	http://dbpedia.org/resource/International_Olympic_Committee
 http://zh.dbpedia.org/resource/博莱斯瓦夫·贝鲁特	http://dbpedia.org/resource/Bolesław_Bierut
 http://zh.dbpedia.org/resource/朱玟奎	http://dbpedia.org/resource/Brian_Joo
@@ -5777,7 +5777,7 @@ http://zh.dbpedia.org/resource/大衛·霍威爾·彼得雷烏斯	http://dbpedia
 http://zh.dbpedia.org/resource/MY_LONELY_TOWN	http://dbpedia.org/resource/My_Lonely_Town
 http://zh.dbpedia.org/resource/詹姆斯·格思里	http://dbpedia.org/resource/James_Guthrie_(Kentucky)
 http://zh.dbpedia.org/resource/古法語	http://dbpedia.org/resource/Old_French
-http://zh.dbpedia.org/resource/蘇丹沙拉胡丁	http://dbpedia.org/resource/Salahuddin_of_Selangor
+http://zh.dbpedia.org/resource/蘇丹沙拉胡丁	http://dbpedia.org/resource/SalahÝin_of_Selangor
 http://zh.dbpedia.org/resource/OS/2	http://dbpedia.org/resource/OS/2
 http://zh.dbpedia.org/resource/若泽·克莱伯森	http://dbpedia.org/resource/José_Kléberson
 http://zh.dbpedia.org/resource/闽南民系	http://dbpedia.org/resource/Hoklo_people
@@ -5818,7 +5818,7 @@ http://zh.dbpedia.org/resource/佐久間左馬太	http://dbpedia.org/resource/Sa
 http://zh.dbpedia.org/resource/VH1	http://dbpedia.org/resource/VH1
 http://zh.dbpedia.org/resource/嵯峨浩	http://dbpedia.org/resource/Hiro_Saga
 http://zh.dbpedia.org/resource/中非法郎	http://dbpedia.org/resource/Central_African_CFA_franc
-http://zh.dbpedia.org/resource/阿尔捷姆·久巴	http://dbpedia.org/resource/Artyom_Dzyuba
+http://zh.dbpedia.org/resource/阿尔捷姆·久巴	http://dbpedia.org/resource/Artyom_Dzyº
 http://zh.dbpedia.org/resource/帛琉	http://dbpedia.org/resource/Palau
 http://zh.dbpedia.org/resource/乔·哈特	http://dbpedia.org/resource/Joe_Hart
 http://zh.dbpedia.org/resource/布匿語	http://dbpedia.org/resource/Punic_language
@@ -5867,7 +5867,7 @@ http://zh.dbpedia.org/resource/安娜_(波兰国王)	http://dbpedia.org/resource
 http://zh.dbpedia.org/resource/梶浦由記	http://dbpedia.org/resource/Yuki_Kajiura
 http://zh.dbpedia.org/resource/幻想世界	http://dbpedia.org/resource/Fantasyland
 http://zh.dbpedia.org/resource/文彼得	http://dbpedia.org/resource/Man_Pei_Tak
-http://zh.dbpedia.org/resource/胡安·吉列尔莫·夸德拉多	http://dbpedia.org/resource/Juan_Cuadrado
+http://zh.dbpedia.org/resource/胡安·吉列尔莫·夸德拉多	http://dbpedia.org/resource/Juan_C­rado
 http://zh.dbpedia.org/resource/约翰·博兹曼	http://dbpedia.org/resource/John_Boozman
 http://zh.dbpedia.org/resource/郭靖	http://dbpedia.org/resource/Guo_Jing
 http://zh.dbpedia.org/resource/另类嘻哈	http://dbpedia.org/resource/Alternative_hip_hop
@@ -5883,7 +5883,7 @@ http://zh.dbpedia.org/resource/賓菲加體育會B隊	http://dbpedia.org/resourc
 http://zh.dbpedia.org/resource/奥尔汗·帕穆克	http://dbpedia.org/resource/Orhan_Pamuk
 http://zh.dbpedia.org/resource/Lady_Gaga	http://dbpedia.org/resource/Lady_Gaga
 http://zh.dbpedia.org/resource/灼眼的夏娜	http://dbpedia.org/resource/Shakugan_no_Shana
-http://zh.dbpedia.org/resource/亚历山大·斯图布	http://dbpedia.org/resource/Alexander_Stubb
+http://zh.dbpedia.org/resource/亚历山大·斯图布	http://dbpedia.org/resource/Alexander_St»
 http://zh.dbpedia.org/resource/伊斯蘭軍	http://dbpedia.org/resource/Jaysh_al-Islam
 http://zh.dbpedia.org/resource/威廉·埃夫里尔·哈里曼	http://dbpedia.org/resource/W._Averell_Harriman
 http://zh.dbpedia.org/resource/让-吕克·德阿纳	http://dbpedia.org/resource/Jean-Luc_Dehaene
@@ -5933,7 +5933,7 @@ http://zh.dbpedia.org/resource/波尔布特	http://dbpedia.org/resource/Pol_Pot
 http://zh.dbpedia.org/resource/罗莎琳·卡特	http://dbpedia.org/resource/Rosalynn_Carter
 http://zh.dbpedia.org/resource/穆萨·德姆贝勒	http://dbpedia.org/resource/Mousa_Dembélé
 http://zh.dbpedia.org/resource/刺客教條：大革命	http://dbpedia.org/resource/Assassin's_Creed_Unity
-http://zh.dbpedia.org/resource/罗杰·泰勒	http://dbpedia.org/resource/Roger_Taylor_(Queen_drummer)
+http://zh.dbpedia.org/resource/罗杰·泰勒	http://dbpedia.org/resource/Roger_Taylor_(Qîn_drummer)
 http://zh.dbpedia.org/resource/馬丁·哈尼克	http://dbpedia.org/resource/Martin_Harnik
 http://zh.dbpedia.org/resource/乔治·莱格	http://dbpedia.org/resource/Georges_Leygues
 http://zh.dbpedia.org/resource/芜湖市	http://dbpedia.org/resource/Wuhu
@@ -6037,7 +6037,7 @@ http://zh.dbpedia.org/resource/保羅·瓦哈格	http://dbpedia.org/resource/Pau
 http://zh.dbpedia.org/resource/列托-羅曼斯語	http://dbpedia.org/resource/Rhaeto-Romance_languages
 http://zh.dbpedia.org/resource/Summer_Trip	http://dbpedia.org/resource/Summer_Trip
 http://zh.dbpedia.org/resource/张纪中	http://dbpedia.org/resource/Zhang_Jizhong
-http://zh.dbpedia.org/resource/雅尼斯·瓦鲁法克斯	http://dbpedia.org/resource/Yanis_Varoufakis
+http://zh.dbpedia.org/resource/雅尼斯·瓦鲁法克斯	http://dbpedia.org/resource/Yanis_Varoúkis
 http://zh.dbpedia.org/resource/卡利克斯特三世	http://dbpedia.org/resource/Pope_Callixtus_III
 http://zh.dbpedia.org/resource/纳伊夫·本·阿卜杜勒－阿齐兹·阿勒沙特	http://dbpedia.org/resource/Nayef_bin_Abdul-Aziz_Al_Saud
 http://zh.dbpedia.org/resource/Astro小太阳	http://dbpedia.org/resource/Astro_Xiao_Tai_Yang
@@ -6201,7 +6201,7 @@ http://zh.dbpedia.org/resource/海梅_(马德里公爵)	http://dbpedia.org/resou
 http://zh.dbpedia.org/resource/胡蓓蔚	http://dbpedia.org/resource/Paisley_Wu
 http://zh.dbpedia.org/resource/温州市	http://dbpedia.org/resource/Wenzhou
 http://zh.dbpedia.org/resource/赛扬	http://dbpedia.org/resource/Celeron
-http://zh.dbpedia.org/resource/仁顯王后	http://dbpedia.org/resource/Queen_Inhyeon
+http://zh.dbpedia.org/resource/仁顯王后	http://dbpedia.org/resource/Qîn_Inhyeon
 http://zh.dbpedia.org/resource/阿麗亞·埃·侯賽因	http://dbpedia.org/resource/Alia_al-Hussein
 http://zh.dbpedia.org/resource/安德雷斯·瓜尔达多	http://dbpedia.org/resource/Andrés_Guardado
 http://zh.dbpedia.org/resource/謝霆鋒	http://dbpedia.org/resource/Nicholas_Tse
@@ -6377,10 +6377,10 @@ http://zh.dbpedia.org/resource/傻朋克	http://dbpedia.org/resource/Daft_Punk
 http://zh.dbpedia.org/resource/神户市	http://dbpedia.org/resource/Kobe
 http://zh.dbpedia.org/resource/胡先翁	http://dbpedia.org/resource/Hussein_Onn
 http://zh.dbpedia.org/resource/.NET框架	http://dbpedia.org/resource/.NET_Framework
-http://zh.dbpedia.org/resource/1971–72年歐洲足協盃	http://dbpedia.org/resource/1971–72_UEFA_Cup
+http://zh.dbpedia.org/resource/1971–72年歐洲足協盃	http://dbpedia.org/resource/1971–72_໺_Cup
 http://zh.dbpedia.org/resource/圣女天团	http://dbpedia.org/resource/Nu_Virgos
 http://zh.dbpedia.org/resource/天堂执法者	http://dbpedia.org/resource/Hawaii_Five-0
-http://zh.dbpedia.org/resource/戈亞斯體育會	http://dbpedia.org/resource/Goiás_Esporte_Clube
+http://zh.dbpedia.org/resource/戈亞斯體育會	http://dbpedia.org/resource/Goiás_Esporte_Cl¾
 http://zh.dbpedia.org/resource/内华达州	http://dbpedia.org/resource/Nevada
 http://zh.dbpedia.org/resource/萨瓦省	http://dbpedia.org/resource/Savoie
 http://zh.dbpedia.org/resource/安德鲁·卡罗尔	http://dbpedia.org/resource/Andy_Carroll
@@ -6402,7 +6402,7 @@ http://zh.dbpedia.org/resource/西班牙足球乙二级联赛	http://dbpedia.org
 http://zh.dbpedia.org/resource/澳大利亞國立大學	http://dbpedia.org/resource/Australian_National_University
 http://zh.dbpedia.org/resource/迷失_(第一季)	http://dbpedia.org/resource/Lost_(season_1)
 http://zh.dbpedia.org/resource/绿洲乐队	http://dbpedia.org/resource/Oasis_(band)
-http://zh.dbpedia.org/resource/阿聯酋阿拉伯海灣聯賽	http://dbpedia.org/resource/UAE_Arabian_Gulf_League
+http://zh.dbpedia.org/resource/阿聯酋阿拉伯海灣聯賽	http://dbpedia.org/resource/®_Arabian_Gulf_League
 http://zh.dbpedia.org/resource/AKS	http://dbpedia.org/resource/AKS_(company)
 http://zh.dbpedia.org/resource/博伊科·鲍里索夫	http://dbpedia.org/resource/Boyko_Borissov
 http://zh.dbpedia.org/resource/江戶川區	http://dbpedia.org/resource/Edogawa,_Tokyo
@@ -6576,7 +6576,7 @@ http://zh.dbpedia.org/resource/盧恩字母	http://dbpedia.org/resource/Runes
 http://zh.dbpedia.org/resource/圣安德鲁斯大学	http://dbpedia.org/resource/University_of_St_Andrews
 http://zh.dbpedia.org/resource/納瓦拉	http://dbpedia.org/resource/Navarre
 http://zh.dbpedia.org/resource/成龍	http://dbpedia.org/resource/Jackie_Chan
-http://zh.dbpedia.org/resource/沙治奧·艾斯古迪路	http://dbpedia.org/resource/Sergio_Escudero_(footballer,_born_1988)
+http://zh.dbpedia.org/resource/沙治奧·艾斯古迪路	http://dbpedia.org/resource/Sergio_EscÞro_(footballer,_born_1988)
 http://zh.dbpedia.org/resource/韩寒	http://dbpedia.org/resource/Han_Han
 http://zh.dbpedia.org/resource/帕爾馬公國	http://dbpedia.org/resource/Duchy_of_Parma
 http://zh.dbpedia.org/resource/德布雷辛尼VSC	http://dbpedia.org/resource/Debreceni_VSC
@@ -6657,8 +6657,8 @@ http://zh.dbpedia.org/resource/何塞·德·拉马尔	http://dbpedia.org/resourc
 http://zh.dbpedia.org/resource/FTIsland	http://dbpedia.org/resource/F.T._Island
 http://zh.dbpedia.org/resource/南芳皇后	http://dbpedia.org/resource/Nam_Phương
 http://zh.dbpedia.org/resource/郭庚茂	http://dbpedia.org/resource/Guo_Gengmao
-http://zh.dbpedia.org/resource/增田誓志	http://dbpedia.org/resource/Chikashi_Masuda
-http://zh.dbpedia.org/resource/李小龙	http://dbpedia.org/resource/Bruce_Lee
+http://zh.dbpedia.org/resource/增田誓志	http://dbpedia.org/resource/Chikashi_MasÚ
+http://zh.dbpedia.org/resource/李小龙	http://dbpedia.org/resource/BrÎ_Lee
 http://zh.dbpedia.org/resource/湯加語	http://dbpedia.org/resource/Tongan_language
 http://zh.dbpedia.org/resource/瓦尔季斯·扎特莱尔斯	http://dbpedia.org/resource/Valdis_Zatlers
 http://zh.dbpedia.org/resource/曹禺	http://dbpedia.org/resource/Cao_Yu
@@ -6791,7 +6791,7 @@ http://zh.dbpedia.org/resource/黑太子爱德华	http://dbpedia.org/resource/Ed
 http://zh.dbpedia.org/resource/阿卜杜勒侯賽因·哈茲爾	http://dbpedia.org/resource/Abdolhossein_Hazhir
 http://zh.dbpedia.org/resource/羅渣·比拿度	http://dbpedia.org/resource/Roger_de_Oliveira_Bernardo
 http://zh.dbpedia.org/resource/维克托三世	http://dbpedia.org/resource/Pope_Victor_III
-http://zh.dbpedia.org/resource/朱德·特鲁姆普	http://dbpedia.org/resource/Judd_Trump
+http://zh.dbpedia.org/resource/朱德·特鲁姆普	http://dbpedia.org/resource/JÝ_Trump
 http://zh.dbpedia.org/resource/國立成功大學	http://dbpedia.org/resource/National_Cheng_Kung_University
 http://zh.dbpedia.org/resource/穆斯塔法·阿卜杜勒·贾利勒	http://dbpedia.org/resource/Mustafa_Abdul_Jalil
 http://zh.dbpedia.org/resource/奇誠庸	http://dbpedia.org/resource/Ki_Sung-yueng
@@ -6821,7 +6821,7 @@ http://zh.dbpedia.org/resource/得農省	http://dbpedia.org/resource/Đắk_Nôn
 http://zh.dbpedia.org/resource/弗耶科斯拉夫·贝万达	http://dbpedia.org/resource/Vjekoslav_Bevanda
 http://zh.dbpedia.org/resource/中华人民共和国外交部	http://dbpedia.org/resource/Ministry_of_Foreign_Affairs_of_the_People's_Republic_of_China
 http://zh.dbpedia.org/resource/法赫德·贾西姆·弗拉杰	http://dbpedia.org/resource/Fahd_Jassem_al-Freij
-http://zh.dbpedia.org/resource/Rubber_Soul	http://dbpedia.org/resource/Rubber_Soul
+http://zh.dbpedia.org/resource/Rாr_Soul	http://dbpedia.org/resource/Rாr_Soul
 http://zh.dbpedia.org/resource/萊昂足球會	http://dbpedia.org/resource/Club_León
 http://zh.dbpedia.org/resource/勞埃德·本特森	http://dbpedia.org/resource/Lloyd_Bentsen
 http://zh.dbpedia.org/resource/男親女愛	http://dbpedia.org/resource/War_of_the_Genders
@@ -6987,9 +6987,9 @@ http://zh.dbpedia.org/resource/米尔顿凯恩斯	http://dbpedia.org/resource/Mi
 http://zh.dbpedia.org/resource/大和市	http://dbpedia.org/resource/Yamato,_Kanagawa
 http://zh.dbpedia.org/resource/特里·布兰斯塔德	http://dbpedia.org/resource/Terry_Branstad
 http://zh.dbpedia.org/resource/阿尔吉尔达斯·布特凯维丘斯	http://dbpedia.org/resource/Algirdas_Butkevičius
-http://zh.dbpedia.org/resource/孝懿王后	http://dbpedia.org/resource/Queen_Hyoui
+http://zh.dbpedia.org/resource/孝懿王后	http://dbpedia.org/resource/Qîn_Hyoui
 http://zh.dbpedia.org/resource/里卡多·阿尔瓦雷斯	http://dbpedia.org/resource/Ricky_Álvarez
-http://zh.dbpedia.org/resource/埃米勒·卢贝	http://dbpedia.org/resource/Émile_Loubet
+http://zh.dbpedia.org/resource/埃米勒·卢贝	http://dbpedia.org/resource/Émile_Lo¾t
 http://zh.dbpedia.org/resource/加斯頓·拉美利斯	http://dbpedia.org/resource/Gastón_Ramírez
 http://zh.dbpedia.org/resource/欧内斯特·卢瑟福	http://dbpedia.org/resource/Ernest_Rutherford
 http://zh.dbpedia.org/resource/康维尔	http://dbpedia.org/resource/Convair
@@ -7100,7 +7100,7 @@ http://zh.dbpedia.org/resource/金奈	http://dbpedia.org/resource/Chennai
 http://zh.dbpedia.org/resource/羅伯特·吉布斯	http://dbpedia.org/resource/Robert_Gibbs
 http://zh.dbpedia.org/resource/基多	http://dbpedia.org/resource/Quito
 http://zh.dbpedia.org/resource/约翰·布兰奇	http://dbpedia.org/resource/John_Branch
-http://zh.dbpedia.org/resource/努爾王后_(約旦)	http://dbpedia.org/resource/Queen_Noor_of_Jordan
+http://zh.dbpedia.org/resource/努爾王后_(約旦)	http://dbpedia.org/resource/Qîn_Noor_of_Jordan
 http://zh.dbpedia.org/resource/Independent_Women_Part_III_(miss_A迷你專輯)	http://dbpedia.org/resource/Independent_Women_Part_III
 http://zh.dbpedia.org/resource/岡崎市	http://dbpedia.org/resource/Okazaki,_Aichi
 http://zh.dbpedia.org/resource/唐迪拉體育會	http://dbpedia.org/resource/C.D._Tondela
@@ -7132,7 +7132,7 @@ http://zh.dbpedia.org/resource/阿克拉	http://dbpedia.org/resource/Accra
 http://zh.dbpedia.org/resource/查理三世_(西法兰克)	http://dbpedia.org/resource/Charles_the_Simple
 http://zh.dbpedia.org/resource/埃蒂尼·卡波埃	http://dbpedia.org/resource/Étienne_Capoue
 http://zh.dbpedia.org/resource/魔法少女小圓	http://dbpedia.org/resource/Puella_Magi_Madoka_Magica
-http://zh.dbpedia.org/resource/福林德斯郡政府	http://dbpedia.org/resource/Shire_of_Flinders_(Queensland)
+http://zh.dbpedia.org/resource/福林德斯郡政府	http://dbpedia.org/resource/Shire_of_Flinders_(Qînsland)
 http://zh.dbpedia.org/resource/卢展工	http://dbpedia.org/resource/Lu_Zhangong
 http://zh.dbpedia.org/resource/安东尼·本内特	http://dbpedia.org/resource/Anthony_Bennett_(basketball)
 http://zh.dbpedia.org/resource/白崇禧	http://dbpedia.org/resource/Bai_Chongxi
@@ -7152,10 +7152,10 @@ http://zh.dbpedia.org/resource/阿卜杜拉布·曼苏尔·哈迪	http://dbpedia
 http://zh.dbpedia.org/resource/雪莉·桑德伯格	http://dbpedia.org/resource/Sheryl_Sandberg
 http://zh.dbpedia.org/resource/莱纳·玛利亚·里尔克	http://dbpedia.org/resource/Rainer_Maria_Rilke
 http://zh.dbpedia.org/resource/遭難	http://dbpedia.org/resource/Sōnan
-http://zh.dbpedia.org/resource/湯姆·尤德爾	http://dbpedia.org/resource/Tom_Udall
+http://zh.dbpedia.org/resource/湯姆·尤德爾	http://dbpedia.org/resource/Tom_Úll
 http://zh.dbpedia.org/resource/摩頓·尼古拉斯·拉梅臣	http://dbpedia.org/resource/Morten_Rasmussen_(footballer,_born_January_1985)
 http://zh.dbpedia.org/resource/塔拉戈纳	http://dbpedia.org/resource/Tarragona
-http://zh.dbpedia.org/resource/女王公园足球俱乐部	http://dbpedia.org/resource/Queen's_Park_F.C.
+http://zh.dbpedia.org/resource/女王公园足球俱乐部	http://dbpedia.org/resource/Qîn's_Park_F.C.
 http://zh.dbpedia.org/resource/亚历山德罗·德尔·皮耶罗	http://dbpedia.org/resource/Alessandro_Del_Piero
 http://zh.dbpedia.org/resource/雪蘭莪	http://dbpedia.org/resource/Selangor
 http://zh.dbpedia.org/resource/花漾年華	http://dbpedia.org/resource/Teenage_Dream_(Katy_Perry_album)
@@ -7281,7 +7281,7 @@ http://zh.dbpedia.org/resource/伊賀市	http://dbpedia.org/resource/Iga,_Mie
 http://zh.dbpedia.org/resource/放浪兄弟	http://dbpedia.org/resource/Exile_(Japanese_band)
 http://zh.dbpedia.org/resource/彼得·阿尔卡季耶维奇·斯托雷平	http://dbpedia.org/resource/Pyotr_Stolypin
 http://zh.dbpedia.org/resource/淘气小亲亲	http://dbpedia.org/resource/Itazura_na_Kiss
-http://zh.dbpedia.org/resource/莱蒂西亚_(西班牙王后)	http://dbpedia.org/resource/Queen_Letizia_of_Spain
+http://zh.dbpedia.org/resource/莱蒂西亚_(西班牙王后)	http://dbpedia.org/resource/Qîn_Letizia_of_Spain
 http://zh.dbpedia.org/resource/No_Regret	http://dbpedia.org/resource/No_Regret_(song)
 http://zh.dbpedia.org/resource/伊朗最高领袖	http://dbpedia.org/resource/Supreme_Leader_of_Iran
 http://zh.dbpedia.org/resource/斯蒂芬·利希施泰納	http://dbpedia.org/resource/Stephan_Lichtsteiner
@@ -7390,12 +7390,12 @@ http://zh.dbpedia.org/resource/奧羅莫語	http://dbpedia.org/resource/Oromo_la
 http://zh.dbpedia.org/resource/裘斯·贊臣	http://dbpedia.org/resource/Claus_Jensen
 http://zh.dbpedia.org/resource/CyanogenMod	http://dbpedia.org/resource/CyanogenMod
 http://zh.dbpedia.org/resource/查理五世_(神圣罗马帝国)	http://dbpedia.org/resource/Charles_V,_Holy_Roman_Emperor
-http://zh.dbpedia.org/resource/克里西乌马竞技俱乐部	http://dbpedia.org/resource/Criciúma_Esporte_Clube
+http://zh.dbpedia.org/resource/克里西乌马竞技俱乐部	http://dbpedia.org/resource/Criciúma_Esporte_Cl¾
 http://zh.dbpedia.org/resource/波希米揚斯1905足球俱樂部	http://dbpedia.org/resource/Bohemians_1905
 http://zh.dbpedia.org/resource/麥克·卡頓保	http://dbpedia.org/resource/Mark_Clattenburg
 http://zh.dbpedia.org/resource/容祖兒	http://dbpedia.org/resource/Joey_Yung
 http://zh.dbpedia.org/resource/盖尔·哈德格里姆松	http://dbpedia.org/resource/Geir_Hallgrímsson
-http://zh.dbpedia.org/resource/麥浩德	http://dbpedia.org/resource/Francis_Maude
+http://zh.dbpedia.org/resource/麥浩德	http://dbpedia.org/resource/Francis_MaÞ
 http://zh.dbpedia.org/resource/吉姆·德敏特	http://dbpedia.org/resource/Jim_DeMint
 http://zh.dbpedia.org/resource/约阿基姆王子_(丹麦)	http://dbpedia.org/resource/Prince_Joachim_of_Denmark
 http://zh.dbpedia.org/resource/元明宗	http://dbpedia.org/resource/Khutughtu_Khan_Kusala
@@ -7424,7 +7424,7 @@ http://zh.dbpedia.org/resource/Anytime	http://dbpedia.org/resource/Anytime_(Kumi
 http://zh.dbpedia.org/resource/射鵰英雄傳	http://dbpedia.org/resource/The_Legend_of_the_Condor_Heroes
 http://zh.dbpedia.org/resource/禾克斯公園球場	http://dbpedia.org/resource/Volksparkstadion
 http://zh.dbpedia.org/resource/威廉·琼斯_(1760年出生)	http://dbpedia.org/resource/William_Jones_(statesman)
-http://zh.dbpedia.org/resource/苏丹共和国	http://dbpedia.org/resource/Sudan
+http://zh.dbpedia.org/resource/苏丹共和国	http://dbpedia.org/resource/SÚn
 http://zh.dbpedia.org/resource/Rockstar_Leeds	http://dbpedia.org/resource/Rockstar_Leeds
 http://zh.dbpedia.org/resource/埃韦顿·里贝罗	http://dbpedia.org/resource/Everton_Ribeiro
 http://zh.dbpedia.org/resource/最终幻想X	http://dbpedia.org/resource/Final_Fantasy_X
@@ -7465,7 +7465,7 @@ http://zh.dbpedia.org/resource/斐迪南一世_(保加利亞)	http://dbpedia.org
 http://zh.dbpedia.org/resource/海南航空	http://dbpedia.org/resource/Hainan_Airlines
 http://zh.dbpedia.org/resource/巴西海軍	http://dbpedia.org/resource/Brazilian_Navy
 http://zh.dbpedia.org/resource/千方百计	http://dbpedia.org/resource/Game_Plan_(TV_series)
-http://zh.dbpedia.org/resource/給索恩_(昆士蘭州)	http://dbpedia.org/resource/Gaythorne,_Queensland
+http://zh.dbpedia.org/resource/給索恩_(昆士蘭州)	http://dbpedia.org/resource/Gaythorne,_Qînsland
 http://zh.dbpedia.org/resource/里奇蒙郡政府	http://dbpedia.org/resource/Shire_of_Richmond
 http://zh.dbpedia.org/resource/馬汀·蓋瑞克斯	http://dbpedia.org/resource/Martin_Garrix
 http://zh.dbpedia.org/resource/乃木希典	http://dbpedia.org/resource/Nogi_Maresuke
@@ -7477,10 +7477,10 @@ http://zh.dbpedia.org/resource/砵甸乍	http://dbpedia.org/resource/Henry_Potti
 http://zh.dbpedia.org/resource/約翰·威廉·史諾	http://dbpedia.org/resource/John_W._Snow
 http://zh.dbpedia.org/resource/吉奥瓦尼·多斯桑托斯	http://dbpedia.org/resource/Giovani_dos_Santos
 http://zh.dbpedia.org/resource/林肯郡	http://dbpedia.org/resource/Lincolnshire
-http://zh.dbpedia.org/resource/玛丽·都铎	http://dbpedia.org/resource/Mary_Tudor,_Queen_of_France
+http://zh.dbpedia.org/resource/玛丽·都铎	http://dbpedia.org/resource/Mary_Tudor,_Qîn_of_France
 http://zh.dbpedia.org/resource/佩特科·卡拉维洛夫	http://dbpedia.org/resource/Petko_Karavelov
 http://zh.dbpedia.org/resource/冰冷的海／Start_in_my_life	http://dbpedia.org/resource/Tsumetai_Umi/Start_in_My_Life
-http://zh.dbpedia.org/resource/卢卡斯·罗德里格斯·莫拉·达席尔瓦	http://dbpedia.org/resource/Lucas_Moura
+http://zh.dbpedia.org/resource/卢卡斯·罗德里格斯·莫拉·达席尔瓦	http://dbpedia.org/resource/LÊs_Moura
 http://zh.dbpedia.org/resource/奥拉维尔·约翰内松	http://dbpedia.org/resource/Ólafur_Jóhannesson
 http://zh.dbpedia.org/resource/艾迪·弗朗西斯	http://dbpedia.org/resource/Eddy_Francis
 http://zh.dbpedia.org/resource/愛新覺羅·慧生	http://dbpedia.org/resource/Huisheng
@@ -7516,7 +7516,7 @@ http://zh.dbpedia.org/resource/庇護十世	http://dbpedia.org/resource/Pope_Piu
 http://zh.dbpedia.org/resource/张玉宁_(1997年出生)	http://dbpedia.org/resource/Zhang_Yuning_(footballer,_born_1997)
 http://zh.dbpedia.org/resource/卡萊爾	http://dbpedia.org/resource/Carlisle,_Cumbria
 http://zh.dbpedia.org/resource/安德拉尼克·泰穆里安	http://dbpedia.org/resource/Andranik_Teymourian
-http://zh.dbpedia.org/resource/威廉王子_(格洛斯特)	http://dbpedia.org/resource/Prince_William_of_Gloucester
+http://zh.dbpedia.org/resource/威廉王子_(格洛斯特)	http://dbpedia.org/resource/Prince_William_of_GloÎster
 http://zh.dbpedia.org/resource/瓦迪斯瓦夫·西科尔斯基	http://dbpedia.org/resource/Władysław_Sikorski
 http://zh.dbpedia.org/resource/中山王国	http://dbpedia.org/resource/Chūzan
 http://zh.dbpedia.org/resource/流星花園_(韓國電視劇)	http://dbpedia.org/resource/Boys_Over_Flowers_(TV_series)
@@ -7597,7 +7597,7 @@ http://zh.dbpedia.org/resource/凱莉·珍娜	http://dbpedia.org/resource/Kylie_
 http://zh.dbpedia.org/resource/Sony_Xperia_Z5	http://dbpedia.org/resource/Sony_Xperia_Z5
 http://zh.dbpedia.org/resource/费尔南多·恩里克·卡多佐	http://dbpedia.org/resource/Fernando_Henrique_Cardoso
 http://zh.dbpedia.org/resource/萨格勒布足球俱乐部	http://dbpedia.org/resource/NK_Zagreb
-http://zh.dbpedia.org/resource/格洛斯特郡	http://dbpedia.org/resource/Gloucestershire
+http://zh.dbpedia.org/resource/格洛斯特郡	http://dbpedia.org/resource/GloÎstershire
 http://zh.dbpedia.org/resource/Engel_(歌曲)	http://dbpedia.org/resource/Engel_(song)
 http://zh.dbpedia.org/resource/涪陵区	http://dbpedia.org/resource/Fuling_District
 http://zh.dbpedia.org/resource/齐塔皇后_(奥匈帝国)	http://dbpedia.org/resource/Zita_of_Bourbon-Parma
@@ -7634,7 +7634,7 @@ http://zh.dbpedia.org/resource/伊拉克國家男子足球隊	http://dbpedia.org
 http://zh.dbpedia.org/resource/劉念溢	http://dbpedia.org/resource/Lau_Nim_Yat
 http://zh.dbpedia.org/resource/卡路士·沙斯度	http://dbpedia.org/resource/Carlos_Salcido
 http://zh.dbpedia.org/resource/英格蘭乙組聯賽	http://dbpedia.org/resource/Football_League_Second_Division
-http://zh.dbpedia.org/resource/司徒拔	http://dbpedia.org/resource/Reginald_Edward_Stubbs
+http://zh.dbpedia.org/resource/司徒拔	http://dbpedia.org/resource/Reginald_Edward_St»s
 http://zh.dbpedia.org/resource/身延町	http://dbpedia.org/resource/Minobu,_Yamanashi
 http://zh.dbpedia.org/resource/特兰基洛·巴内塔	http://dbpedia.org/resource/Tranquillo_Barnetta
 http://zh.dbpedia.org/resource/阿里·穆罕默德·穆贾瓦尔	http://dbpedia.org/resource/Ali_Muhammad_Mujawar
@@ -7807,7 +7807,7 @@ http://zh.dbpedia.org/resource/安沛省	http://dbpedia.org/resource/Yên_Bái_P
 http://zh.dbpedia.org/resource/大衛·阿拉巴	http://dbpedia.org/resource/David_Alaba
 http://zh.dbpedia.org/resource/弗朗切斯科·托尔多	http://dbpedia.org/resource/Francesco_Toldo
 http://zh.dbpedia.org/resource/翁贝托·德·阿伦卡尔·卡斯特略·布朗库	http://dbpedia.org/resource/Humberto_de_Alencar_Castelo_Branco
-http://zh.dbpedia.org/resource/詹姆斯·布魯斯，第八代額爾金伯爵	http://dbpedia.org/resource/James_Bruce,_8th_Earl_of_Elgin
+http://zh.dbpedia.org/resource/詹姆斯·布魯斯，第八代額爾金伯爵	http://dbpedia.org/resource/James_BrÎ,_8th_Earl_of_Elgin
 http://zh.dbpedia.org/resource/扇谷健司	http://dbpedia.org/resource/Kenji_Ogiya
 http://zh.dbpedia.org/resource/IronPython	http://dbpedia.org/resource/IronPython
 http://zh.dbpedia.org/resource/艾達頓·荷西·杜斯·山度士·菲略	http://dbpedia.org/resource/Adaílton_José_dos_Santos_Filho
@@ -7839,7 +7839,7 @@ http://zh.dbpedia.org/resource/柬埔寨国民议会	http://dbpedia.org/resource
 http://zh.dbpedia.org/resource/Mojang	http://dbpedia.org/resource/Mojang
 http://zh.dbpedia.org/resource/路易斯·馮·安	http://dbpedia.org/resource/Luis_von_Ahn
 http://zh.dbpedia.org/resource/傑夫·默克利	http://dbpedia.org/resource/Jeff_Merkley
-http://zh.dbpedia.org/resource/伊諾給拉區_(昆士蘭州)	http://dbpedia.org/resource/Enoggera,_Queensland
+http://zh.dbpedia.org/resource/伊諾給拉區_(昆士蘭州)	http://dbpedia.org/resource/Enoggera,_Qînsland
 http://zh.dbpedia.org/resource/林尚義	http://dbpedia.org/resource/Lam_Sheung_Yee
 http://zh.dbpedia.org/resource/尼古拉·尼古拉耶维奇·克列斯京斯基	http://dbpedia.org/resource/Nikolay_Krestinsky
 http://zh.dbpedia.org/resource/大卫·特雷泽盖	http://dbpedia.org/resource/David_Trezeguet
@@ -7859,7 +7859,7 @@ http://zh.dbpedia.org/resource/苏荣	http://dbpedia.org/resource/Su_Rong
 http://zh.dbpedia.org/resource/迈克尔·马龙	http://dbpedia.org/resource/Michael_Malone_(basketball)
 http://zh.dbpedia.org/resource/阿方索·佩纳	http://dbpedia.org/resource/Afonso_Pena
 http://zh.dbpedia.org/resource/好汉两个半_(第一季)	http://dbpedia.org/resource/Two_and_a_Half_Men_(season_1)
-http://zh.dbpedia.org/resource/布尔汉丁·哈拉哈普	http://dbpedia.org/resource/Burhanuddin_Harahap
+http://zh.dbpedia.org/resource/布尔汉丁·哈拉哈普	http://dbpedia.org/resource/BurhanÝin_Harahap
 http://zh.dbpedia.org/resource/斯劳	http://dbpedia.org/resource/Slough
 http://zh.dbpedia.org/resource/阿恩·邓肯	http://dbpedia.org/resource/Arne_Duncan
 http://zh.dbpedia.org/resource/迈克尔·穆尔	http://dbpedia.org/resource/Mike_Moore_(New_Zealand_politician)
@@ -7974,13 +7974,13 @@ http://zh.dbpedia.org/resource/徐一鴻	http://dbpedia.org/resource/Anthony_Zee
 http://zh.dbpedia.org/resource/扬·安东内斯库	http://dbpedia.org/resource/Ion_Antonescu
 http://zh.dbpedia.org/resource/Jetconnect	http://dbpedia.org/resource/Jetconnect
 http://zh.dbpedia.org/resource/瀨戶市	http://dbpedia.org/resource/Seto,_Aichi
-http://zh.dbpedia.org/resource/廖柏嘉	http://dbpedia.org/resource/David_Neuberger,_Baron_Neuberger_of_Abbotsbury
+http://zh.dbpedia.org/resource/廖柏嘉	http://dbpedia.org/resource/David_Ne¾rger,_Baron_Ne¾rger_of_Abbotsbury
 http://zh.dbpedia.org/resource/肥东县	http://dbpedia.org/resource/Feidong_County
 http://zh.dbpedia.org/resource/范文同	http://dbpedia.org/resource/Phạm_Văn_Đồng
 http://zh.dbpedia.org/resource/維多利亞王儲	http://dbpedia.org/resource/Victoria,_Crown_Princess_of_Sweden
 http://zh.dbpedia.org/resource/弗蘭克·A·巴雷特	http://dbpedia.org/resource/Frank_A._Barrett
 http://zh.dbpedia.org/resource/阿拉貢的凱瑟琳	http://dbpedia.org/resource/Catherine_of_Aragon
-http://zh.dbpedia.org/resource/邬达克	http://dbpedia.org/resource/László_Hudec
+http://zh.dbpedia.org/resource/邬达克	http://dbpedia.org/resource/László_H෬
 http://zh.dbpedia.org/resource/梨本宮守正王	http://dbpedia.org/resource/Prince_Nashimoto_Morimasa
 http://zh.dbpedia.org/resource/马库斯·格赖纳	http://dbpedia.org/resource/Markus_Greiner
 http://zh.dbpedia.org/resource/羅馬尼亞人	http://dbpedia.org/resource/Romanians
@@ -7998,7 +7998,7 @@ http://zh.dbpedia.org/resource/查爾斯·W·費爾班克斯	http://dbpedia.org/
 http://zh.dbpedia.org/resource/姜西	http://dbpedia.org/resource/Chan_Sy
 http://zh.dbpedia.org/resource/迪亞高·哥斯達	http://dbpedia.org/resource/Diego_Costa
 http://zh.dbpedia.org/resource/张耀坤	http://dbpedia.org/resource/Zhang_Yaokun
-http://zh.dbpedia.org/resource/布鲁斯·戈尔丁	http://dbpedia.org/resource/Bruce_Golding
+http://zh.dbpedia.org/resource/布鲁斯·戈尔丁	http://dbpedia.org/resource/BrÎ_Golding
 http://zh.dbpedia.org/resource/同慶帝	http://dbpedia.org/resource/Đồng_Khánh
 http://zh.dbpedia.org/resource/傑曼·傑克森	http://dbpedia.org/resource/Jermaine_Jackson
 http://zh.dbpedia.org/resource/澳大利亚众议院	http://dbpedia.org/resource/Australian_House_of_Representatives
@@ -8115,7 +8115,7 @@ http://zh.dbpedia.org/resource/Imagine_(歌曲)	http://dbpedia.org/resource/Imag
 http://zh.dbpedia.org/resource/弗拉迪斯拉夫·洛克文茨	http://dbpedia.org/resource/Vratislav_Lokvenc
 http://zh.dbpedia.org/resource/旋風管家	http://dbpedia.org/resource/Hayate_the_Combat_Butler
 http://zh.dbpedia.org/resource/良十一世	http://dbpedia.org/resource/Pope_Leo_XI
-http://zh.dbpedia.org/resource/耶日·杜德克	http://dbpedia.org/resource/Jerzy_Dudek
+http://zh.dbpedia.org/resource/耶日·杜德克	http://dbpedia.org/resource/Jerzy_DÞk
 http://zh.dbpedia.org/resource/Inferno	http://dbpedia.org/resource/Inferno_(operating_system)
 http://zh.dbpedia.org/resource/新藤義孝	http://dbpedia.org/resource/Yoshitaka_Shindō
 http://zh.dbpedia.org/resource/阿瑟·米恩	http://dbpedia.org/resource/Arthur_Meighen
@@ -8190,7 +8190,7 @@ http://zh.dbpedia.org/resource/林賽·格雷姆	http://dbpedia.org/resource/Lin
 http://zh.dbpedia.org/resource/约瑟芬·德·博阿尔内	http://dbpedia.org/resource/Joséphine_de_Beauharnais
 http://zh.dbpedia.org/resource/大衞·迪基亞	http://dbpedia.org/resource/David_de_Gea
 http://zh.dbpedia.org/resource/丹尼爾·法拉第	http://dbpedia.org/resource/Daniel_Faraday
-http://zh.dbpedia.org/resource/雅尼奧·奎德羅斯	http://dbpedia.org/resource/Jânio_Quadros
+http://zh.dbpedia.org/resource/雅尼奧·奎德羅斯	http://dbpedia.org/resource/Jânio_Q­ros
 http://zh.dbpedia.org/resource/托米斯拉夫二世	http://dbpedia.org/resource/Prince_Aimone,_Duke_of_Aosta
 http://zh.dbpedia.org/resource/得墨忒耳	http://dbpedia.org/resource/Demeter
 http://zh.dbpedia.org/resource/乍得	http://dbpedia.org/resource/Chad
@@ -8218,7 +8218,7 @@ http://zh.dbpedia.org/resource/東村山市	http://dbpedia.org/resource/Higashim
 http://zh.dbpedia.org/resource/汕尾市	http://dbpedia.org/resource/Shanwei
 http://zh.dbpedia.org/resource/德奧多羅·達·豐塞卡	http://dbpedia.org/resource/Deodoro_da_Fonseca
 http://zh.dbpedia.org/resource/伊格尔·图多尔	http://dbpedia.org/resource/Igor_Tudor
-http://zh.dbpedia.org/resource/奥地利的安娜_(1573年-1598年)	http://dbpedia.org/resource/Anne_of_Austria,_Queen_of_Poland
+http://zh.dbpedia.org/resource/奥地利的安娜_(1573年-1598年)	http://dbpedia.org/resource/Anne_of_Austria,_Qîn_of_Poland
 http://zh.dbpedia.org/resource/杜米·祖歷	http://dbpedia.org/resource/Tomi_Juric
 http://zh.dbpedia.org/resource/麦克·欧菲尔德	http://dbpedia.org/resource/Mike_Oldfield
 http://zh.dbpedia.org/resource/储波	http://dbpedia.org/resource/Chu_Bo
@@ -8466,7 +8466,7 @@ http://zh.dbpedia.org/resource/白語	http://dbpedia.org/resource/Bai_language
 http://zh.dbpedia.org/resource/黄晓明	http://dbpedia.org/resource/Huang_Xiaoming
 http://zh.dbpedia.org/resource/蒙哥马利_(亚拉巴马州)	http://dbpedia.org/resource/Montgomery,_Alabama
 http://zh.dbpedia.org/resource/本地治里市	http://dbpedia.org/resource/Pondicherry
-http://zh.dbpedia.org/resource/1989–90年歐洲足協盃	http://dbpedia.org/resource/1989–90_UEFA_Cup
+http://zh.dbpedia.org/resource/1989–90年歐洲足協盃	http://dbpedia.org/resource/1989–90_໺_Cup
 http://zh.dbpedia.org/resource/娱乐周刊	http://dbpedia.org/resource/Entertainment_Weekly
 http://zh.dbpedia.org/resource/马西莫·安布罗西尼	http://dbpedia.org/resource/Massimo_Ambrosini
 http://zh.dbpedia.org/resource/石川縣	http://dbpedia.org/resource/Ishikawa_Prefecture
@@ -8501,7 +8501,7 @@ http://zh.dbpedia.org/resource/里克·桑托勒姆	http://dbpedia.org/resource/
 http://zh.dbpedia.org/resource/基哥利·雲達偉	http://dbpedia.org/resource/Gregory_van_der_Wiel
 http://zh.dbpedia.org/resource/金昭誾	http://dbpedia.org/resource/Kim_So-eun
 http://zh.dbpedia.org/resource/捷西斯·拿華斯	http://dbpedia.org/resource/Jesús_Navas
-http://zh.dbpedia.org/resource/第一代法夫公爵亚历山大·达夫	http://dbpedia.org/resource/Alexander_Duff,_1st_Duke_of_Fife
+http://zh.dbpedia.org/resource/第一代法夫公爵亚历山大·达夫	http://dbpedia.org/resource/Alexander_Dÿ,_1st_Duke_of_Fife
 http://zh.dbpedia.org/resource/SECRET_AMBITION	http://dbpedia.org/resource/Secret_Ambition
 http://zh.dbpedia.org/resource/意大利裔加拿大人	http://dbpedia.org/resource/Italian_Canadians
 http://zh.dbpedia.org/resource/米高·施巴布亞	http://dbpedia.org/resource/Michael_Silberbauer
@@ -8509,13 +8509,13 @@ http://zh.dbpedia.org/resource/乔杜里·舒贾特·侯赛因	http://dbpedia.or
 http://zh.dbpedia.org/resource/试金石影业	http://dbpedia.org/resource/Touchstone_Pictures
 http://zh.dbpedia.org/resource/理查德·蒙塔古	http://dbpedia.org/resource/Richard_Montague
 http://zh.dbpedia.org/resource/马德琳公主_(瑞典)	http://dbpedia.org/resource/Princess_Madeleine,_Duchess_of_Hälsingland_and_Gästrikland
-http://zh.dbpedia.org/resource/盧卡斯·拉迪比	http://dbpedia.org/resource/Lucas_Radebe
+http://zh.dbpedia.org/resource/盧卡斯·拉迪比	http://dbpedia.org/resource/LÊs_Radebe
 http://zh.dbpedia.org/resource/東亞唱片_(製作)	http://dbpedia.org/resource/Amusic
 http://zh.dbpedia.org/resource/TypeScript	http://dbpedia.org/resource/TypeScript
 http://zh.dbpedia.org/resource/鈴木Cultus	http://dbpedia.org/resource/Suzuki_Cultus
 http://zh.dbpedia.org/resource/扎多敏梭	http://dbpedia.org/resource/Thado_Minsaw
 http://zh.dbpedia.org/resource/紹治帝	http://dbpedia.org/resource/Thiệu_Trị
-http://zh.dbpedia.org/resource/White_Light/Violet_Sauce	http://dbpedia.org/resource/White_Light/Violet_Sauce
+http://zh.dbpedia.org/resource/White_Light/Violet_SaÎ	http://dbpedia.org/resource/White_Light/Violet_SaÎ
 http://zh.dbpedia.org/resource/大衛·庫塔_(賽車手)	http://dbpedia.org/resource/David_Coulthard
 http://zh.dbpedia.org/resource/帕特·图米	http://dbpedia.org/resource/Pat_Toomey
 http://zh.dbpedia.org/resource/罗穆阿尔多·帕切科	http://dbpedia.org/resource/Romualdo_Pacheco
@@ -8530,7 +8530,7 @@ http://zh.dbpedia.org/resource/邦喬飛	http://dbpedia.org/resource/Bon_Jovi
 http://zh.dbpedia.org/resource/費利克斯王子	http://dbpedia.org/resource/Prince_Félix_of_Luxembourg
 http://zh.dbpedia.org/resource/阿列克謝·別列祖茨基	http://dbpedia.org/resource/Aleksei_Berezutski
 http://zh.dbpedia.org/resource/北羅德西亞	http://dbpedia.org/resource/Northern_Rhodesia
-http://zh.dbpedia.org/resource/2011年歐洲超級盃	http://dbpedia.org/resource/2011_UEFA_Super_Cup
+http://zh.dbpedia.org/resource/2011年歐洲超級盃	http://dbpedia.org/resource/2011_໺_Super_Cup
 http://zh.dbpedia.org/resource/聖達菲獨立隊	http://dbpedia.org/resource/Independiente_Santa_Fe
 http://zh.dbpedia.org/resource/MALICE_MIZER	http://dbpedia.org/resource/Malice_Mizer
 http://zh.dbpedia.org/resource/星球大戰：複製人之戰_(電影)	http://dbpedia.org/resource/Star_Wars:_The_Clone_Wars_(film)
@@ -8544,7 +8544,7 @@ http://zh.dbpedia.org/resource/Feel_fine!	http://dbpedia.org/resource/Feel_Fine!
 http://zh.dbpedia.org/resource/李光川	http://dbpedia.org/resource/Ri_Kwang-chon
 http://zh.dbpedia.org/resource/仁荷大學	http://dbpedia.org/resource/Inha_University
 http://zh.dbpedia.org/resource/老爸老妈的浪漫史_(第四季)	http://dbpedia.org/resource/How_I_Met_Your_Mother_(season_4)
-http://zh.dbpedia.org/resource/薩福克郡	http://dbpedia.org/resource/Suffolk
+http://zh.dbpedia.org/resource/薩福克郡	http://dbpedia.org/resource/Sÿolk
 http://zh.dbpedia.org/resource/威廉·惠靈頓·科利特	http://dbpedia.org/resource/William_Wellington_Corlett
 http://zh.dbpedia.org/resource/迈克尔·柯林斯	http://dbpedia.org/resource/Michael_Collins_(Irish_leader)
 http://zh.dbpedia.org/resource/貝蒂爾親王	http://dbpedia.org/resource/Prince_Bertil,_Duke_of_Halland
@@ -8640,7 +8640,7 @@ http://zh.dbpedia.org/resource/卢戈体育俱乐部	http://dbpedia.org/resource
 http://zh.dbpedia.org/resource/马尔科姆四世	http://dbpedia.org/resource/Malcolm_IV_of_Scotland
 http://zh.dbpedia.org/resource/巴金	http://dbpedia.org/resource/Ba_Jin
 http://zh.dbpedia.org/resource/英国疯狂汽车秀	http://dbpedia.org/resource/Top_Gear_(2002_TV_series)
-http://zh.dbpedia.org/resource/希爾維亞王后	http://dbpedia.org/resource/Queen_Silvia_of_Sweden
+http://zh.dbpedia.org/resource/希爾維亞王后	http://dbpedia.org/resource/Qîn_Silvia_of_Sweden
 http://zh.dbpedia.org/resource/索菲亞斯拉維亞足球俱樂部	http://dbpedia.org/resource/PFC_Slavia_Sofia
 http://zh.dbpedia.org/resource/郭建邦	http://dbpedia.org/resource/Kwok_Kin_Pong
 http://zh.dbpedia.org/resource/亨利一世_(英格兰)	http://dbpedia.org/resource/Henry_I_of_England
@@ -8664,7 +8664,7 @@ http://zh.dbpedia.org/resource/IO_Interactive	http://dbpedia.org/resource/IO_Int
 http://zh.dbpedia.org/resource/WILL_(中島美嘉單曲)	http://dbpedia.org/resource/Will_(Mika_Nakashima_song)
 http://zh.dbpedia.org/resource/教宗狄约尼削	http://dbpedia.org/resource/Pope_Dionysius
 http://zh.dbpedia.org/resource/Woollim娛樂	http://dbpedia.org/resource/Woollim_Entertainment
-http://zh.dbpedia.org/resource/福阿德·马苏姆	http://dbpedia.org/resource/Fuad_Masum
+http://zh.dbpedia.org/resource/福阿德·马苏姆	http://dbpedia.org/resource/F­_Masum
 http://zh.dbpedia.org/resource/城市電視	http://dbpedia.org/resource/Talentvision
 http://zh.dbpedia.org/resource/象山县	http://dbpedia.org/resource/Xiangshan_County,_Zhejiang
 http://zh.dbpedia.org/resource/恩斯特·奧古斯特三世_(漢諾威)	http://dbpedia.org/resource/Ernest_Augustus,_Duke_of_Brunswick
@@ -8694,7 +8694,7 @@ http://zh.dbpedia.org/resource/Ich_will	http://dbpedia.org/resource/Ich_will
 http://zh.dbpedia.org/resource/克劳斯·约翰尼斯	http://dbpedia.org/resource/Klaus_Iohannis
 http://zh.dbpedia.org/resource/阿尔韦托·耶拉斯·卡马戈	http://dbpedia.org/resource/Alberto_Lleras_Camargo
 http://zh.dbpedia.org/resource/本傑明·富蘭克林	http://dbpedia.org/resource/Benjamin_Franklin
-http://zh.dbpedia.org/resource/瞿秋白	http://dbpedia.org/resource/Qu_Qiubai
+http://zh.dbpedia.org/resource/瞿秋白	http://dbpedia.org/resource/Qu_Qiºi
 http://zh.dbpedia.org/resource/1979–80年歐洲冠軍盃	http://dbpedia.org/resource/1979–80_European_Cup
 http://zh.dbpedia.org/resource/石板沟长江大桥	http://dbpedia.org/resource/Shiban'gou_Yangtze_River_Bridge
 http://zh.dbpedia.org/resource/黄凤涛	http://dbpedia.org/resource/Huang_Fengtao
@@ -8705,7 +8705,7 @@ http://zh.dbpedia.org/resource/尚慕杰	http://dbpedia.org/resource/Jim_Sasser
 http://zh.dbpedia.org/resource/HEAVEN	http://dbpedia.org/resource/Heaven_(Ayumi_Hamasaki_song)
 http://zh.dbpedia.org/resource/吳寶珠	http://dbpedia.org/resource/Ngô_Bảo_Châu
 http://zh.dbpedia.org/resource/懂我	http://dbpedia.org/resource/Read_My_Mind_(The_Killers_song)
-http://zh.dbpedia.org/resource/普鲁登特·德·莫拉伊斯	http://dbpedia.org/resource/Prudente_de_Morais
+http://zh.dbpedia.org/resource/普鲁登特·德·莫拉伊斯	http://dbpedia.org/resource/PrÞnte_de_Morais
 http://zh.dbpedia.org/resource/卡尔·亚历山大_(萨克森-魏玛-艾森纳赫)	http://dbpedia.org/resource/Charles_Alexander,_Grand_Duke_of_Saxe-Weimar-Eisenach
 http://zh.dbpedia.org/resource/譚百德	http://dbpedia.org/resource/Norman_Tebbit
 http://zh.dbpedia.org/resource/佐兰·米拉诺维奇	http://dbpedia.org/resource/Zoran_Milanović
@@ -8733,7 +8733,7 @@ http://zh.dbpedia.org/resource/中華民國國家發展委員會	http://dbpedia.
 http://zh.dbpedia.org/resource/中国人民解放军艺术学院	http://dbpedia.org/resource/People's_Liberation_Army_Academy_of_Art
 http://zh.dbpedia.org/resource/布罗尼斯拉夫·马林诺夫斯基	http://dbpedia.org/resource/Bronisław_Malinowski
 http://zh.dbpedia.org/resource/INSPIRE	http://dbpedia.org/resource/Inspire_(song)
-http://zh.dbpedia.org/resource/朗格多克-魯西永-南部-庇里牛斯	http://dbpedia.org/resource/Languedoc-Roussillon-Midi-Pyrénées
+http://zh.dbpedia.org/resource/朗格多克-魯西永-南部-庇里牛斯	http://dbpedia.org/resource/Langíoc-Roussillon-Midi-Pyrénées
 http://zh.dbpedia.org/resource/索尼Xperia_L	http://dbpedia.org/resource/Sony_Xperia_L
 http://zh.dbpedia.org/resource/田馥甄	http://dbpedia.org/resource/Hebe_Tien
 http://zh.dbpedia.org/resource/CFM国际	http://dbpedia.org/resource/CFM_International
@@ -8825,7 +8825,7 @@ http://zh.dbpedia.org/resource/文斯·卡特	http://dbpedia.org/resource/Vince_
 http://zh.dbpedia.org/resource/哥迪奧·巴禾	http://dbpedia.org/resource/Claudio_Bravo_(footballer)
 http://zh.dbpedia.org/resource/威廉·尤斯蒂斯	http://dbpedia.org/resource/William_Eustis
 http://zh.dbpedia.org/resource/杨洋_(男演员)	http://dbpedia.org/resource/Yang_Yang_(actor)
-http://zh.dbpedia.org/resource/詹卢卡·赞布罗塔	http://dbpedia.org/resource/Gianluca_Zambrotta
+http://zh.dbpedia.org/resource/詹卢卡·赞布罗塔	http://dbpedia.org/resource/GianlÊ_Zambrotta
 http://zh.dbpedia.org/resource/奧本大學	http://dbpedia.org/resource/Auburn_University
 http://zh.dbpedia.org/resource/阿克巴·沙二世	http://dbpedia.org/resource/Akbar_II
 http://zh.dbpedia.org/resource/模拟人生系列	http://dbpedia.org/resource/The_Sims
@@ -8962,12 +8962,12 @@ http://zh.dbpedia.org/resource/江～公主們的戰國～	http://dbpedia.org/re
 http://zh.dbpedia.org/resource/蘇珊·柯琳絲	http://dbpedia.org/resource/Susan_Collins
 http://zh.dbpedia.org/resource/MTV音樂錄影帶大獎	http://dbpedia.org/resource/MTV_Video_Music_Award
 http://zh.dbpedia.org/resource/薩阿德·達烏拉	http://dbpedia.org/resource/Saad_ad-Daula
-http://zh.dbpedia.org/resource/托卢卡体育足球俱乐部	http://dbpedia.org/resource/Deportivo_Toluca_F.C.
+http://zh.dbpedia.org/resource/托卢卡体育足球俱乐部	http://dbpedia.org/resource/Deportivo_TolÊ_F.C.
 http://zh.dbpedia.org/resource/愛的力量_(珍妮佛·羅許歌曲)	http://dbpedia.org/resource/The_Power_of_Love_(Jennifer_Rush_song)
 http://zh.dbpedia.org/resource/迪沃克·奥里吉	http://dbpedia.org/resource/Divock_Origi
 http://zh.dbpedia.org/resource/迟浩田	http://dbpedia.org/resource/Chi_Haotian
 http://zh.dbpedia.org/resource/陳煚	http://dbpedia.org/resource/Trần_Thái_Tông
-http://zh.dbpedia.org/resource/貞純王后	http://dbpedia.org/resource/Queen_Jeongsun
+http://zh.dbpedia.org/resource/貞純王后	http://dbpedia.org/resource/Qîn_Jeongsun
 http://zh.dbpedia.org/resource/Jet_Coaster_Love	http://dbpedia.org/resource/Jet_Coaster_Love
 http://zh.dbpedia.org/resource/于涛	http://dbpedia.org/resource/Yu_Tao
 http://zh.dbpedia.org/resource/立窝尼亚语	http://dbpedia.org/resource/Livonian_language
@@ -9098,7 +9098,7 @@ http://zh.dbpedia.org/resource/基爾斯滕·吉利布蘭德	http://dbpedia.org/
 http://zh.dbpedia.org/resource/安德斯·弗里斯克	http://dbpedia.org/resource/Anders_Frisk
 http://zh.dbpedia.org/resource/指原莉乃	http://dbpedia.org/resource/Rino_Sashihara
 http://zh.dbpedia.org/resource/阿卜杜勒-法塔赫·塞西	http://dbpedia.org/resource/Abdel_Fattah_el-Sisi
-http://zh.dbpedia.org/resource/巴拉纳俱乐部	http://dbpedia.org/resource/Paraná_Clube
+http://zh.dbpedia.org/resource/巴拉纳俱乐部	http://dbpedia.org/resource/Paraná_Cl¾
 http://zh.dbpedia.org/resource/女浩克	http://dbpedia.org/resource/She-Hulk
 http://zh.dbpedia.org/resource/奧林比亞體育會	http://dbpedia.org/resource/Club_Deportivo_Olimpia
 http://zh.dbpedia.org/resource/金沙江	http://dbpedia.org/resource/Jinsha_River
@@ -9140,7 +9140,7 @@ http://zh.dbpedia.org/resource/漢特語	http://dbpedia.org/resource/Khanty_lang
 http://zh.dbpedia.org/resource/罗伯特·卡根	http://dbpedia.org/resource/Robert_Kagan
 http://zh.dbpedia.org/resource/英迪拉·甘地	http://dbpedia.org/resource/Indira_Gandhi
 http://zh.dbpedia.org/resource/擎天神-半人馬運載火箭	http://dbpedia.org/resource/Atlas-Centaur
-http://zh.dbpedia.org/resource/羅沙度	http://dbpedia.org/resource/Ubay_Luzardo
+http://zh.dbpedia.org/resource/羅沙度	http://dbpedia.org/resource/ºy_Luzardo
 http://zh.dbpedia.org/resource/馬力_(民建聯主席)	http://dbpedia.org/resource/Ma_Lik
 http://zh.dbpedia.org/resource/吉林市	http://dbpedia.org/resource/Jilin_City
 http://zh.dbpedia.org/resource/巴迪斯拉華施洛雲體育會	http://dbpedia.org/resource/ŠK_Slovan_Bratislava
@@ -9219,7 +9219,7 @@ http://zh.dbpedia.org/resource/伊扎克·本-兹维	http://dbpedia.org/resource
 http://zh.dbpedia.org/resource/隆尼·卡洛斯·达·席尔瓦	http://dbpedia.org/resource/Ronny_Carlos_da_Silva
 http://zh.dbpedia.org/resource/ARTPOP	http://dbpedia.org/resource/Artpop
 http://zh.dbpedia.org/resource/印度海軍	http://dbpedia.org/resource/Indian_Navy
-http://zh.dbpedia.org/resource/猶太_(羅馬行省)	http://dbpedia.org/resource/Judea_(Roman_province)
+http://zh.dbpedia.org/resource/猶太_(羅馬行省)	http://dbpedia.org/resource/J෪_(Roman_province)
 http://zh.dbpedia.org/resource/穆罕默德五世_(奥斯曼帝国)	http://dbpedia.org/resource/Mehmed_V
 http://zh.dbpedia.org/resource/王儒林	http://dbpedia.org/resource/Wang_Rulin
 http://zh.dbpedia.org/resource/中華民國國家安全會議	http://dbpedia.org/resource/National_Security_Council_(Republic_of_China)
@@ -9264,7 +9264,7 @@ http://zh.dbpedia.org/resource/多爾袞	http://dbpedia.org/resource/Dorgon
 http://zh.dbpedia.org/resource/塞拉潘·纳丹	http://dbpedia.org/resource/S._R._Nathan
 http://zh.dbpedia.org/resource/姊姊_妳太美了_(Replay)	http://dbpedia.org/resource/Replay_(EP)
 http://zh.dbpedia.org/resource/ABBA	http://dbpedia.org/resource/ABBA
-http://zh.dbpedia.org/resource/2014–15年歐霸盃	http://dbpedia.org/resource/2014–15_UEFA_Europa_League
+http://zh.dbpedia.org/resource/2014–15年歐霸盃	http://dbpedia.org/resource/2014–15_໺_Europa_League
 http://zh.dbpedia.org/resource/法圖拉汗·阿克巴爾	http://dbpedia.org/resource/Fathollah_Khan_Akbar
 http://zh.dbpedia.org/resource/薩摩亞語	http://dbpedia.org/resource/Samoan_language
 http://zh.dbpedia.org/resource/哈迪阿旺	http://dbpedia.org/resource/Abdul_Hadi_Awang
@@ -9294,7 +9294,7 @@ http://zh.dbpedia.org/resource/水手10號	http://dbpedia.org/resource/Mariner_1
 http://zh.dbpedia.org/resource/叶卡捷琳娜二世	http://dbpedia.org/resource/Catherine_the_Great
 http://zh.dbpedia.org/resource/Sing_to_the_Sky	http://dbpedia.org/resource/Sing_to_the_Sky
 http://zh.dbpedia.org/resource/舒畅_(演员)	http://dbpedia.org/resource/Shu_Chang_(actress)
-http://zh.dbpedia.org/resource/貞熹王后	http://dbpedia.org/resource/Queen_Jeonghui
+http://zh.dbpedia.org/resource/貞熹王后	http://dbpedia.org/resource/Qîn_Jeonghui
 http://zh.dbpedia.org/resource/鹿儿岛县	http://dbpedia.org/resource/Kagoshima_Prefecture
 http://zh.dbpedia.org/resource/莎拉·佩林	http://dbpedia.org/resource/Sarah_Palin
 http://zh.dbpedia.org/resource/鲁斯图姆·加扎利	http://dbpedia.org/resource/Rustum_Ghazaleh
@@ -9487,7 +9487,7 @@ http://zh.dbpedia.org/resource/凯文·约翰逊	http://dbpedia.org/resource/Kev
 http://zh.dbpedia.org/resource/挪威足球甲级联赛	http://dbpedia.org/resource/Norwegian_First_Division
 http://zh.dbpedia.org/resource/阿利斯泰爾·卡邁克爾	http://dbpedia.org/resource/Alistair_Carmichael
 http://zh.dbpedia.org/resource/陳妍希	http://dbpedia.org/resource/Michelle_Chen
-http://zh.dbpedia.org/resource/昆士兰大学	http://dbpedia.org/resource/University_of_Queensland
+http://zh.dbpedia.org/resource/昆士兰大学	http://dbpedia.org/resource/University_of_Qînsland
 http://zh.dbpedia.org/resource/OS_X_Mavericks	http://dbpedia.org/resource/OS_X_Mavericks
 http://zh.dbpedia.org/resource/達利奧·施維坦歷治	http://dbpedia.org/resource/Darío_Cvitanich
 http://zh.dbpedia.org/resource/雷纳托·卡贾	http://dbpedia.org/resource/Renato_Cajá
@@ -9525,7 +9525,7 @@ http://zh.dbpedia.org/resource/黃展鴻	http://dbpedia.org/resource/Wong_Chin_H
 http://zh.dbpedia.org/resource/Chakra_(JScript引擎)	http://dbpedia.org/resource/Chakra_(JScript_engine)
 http://zh.dbpedia.org/resource/瓦尔特·谢尔	http://dbpedia.org/resource/Walter_Scheel
 http://zh.dbpedia.org/resource/Ride_Me	http://dbpedia.org/resource/Ride_Me_(album)
-http://zh.dbpedia.org/resource/皮埃尔-埃默里克·奥巴梅扬	http://dbpedia.org/resource/Pierre-Emerick_Aubameyang
+http://zh.dbpedia.org/resource/皮埃尔-埃默里克·奥巴梅扬	http://dbpedia.org/resource/Pierre-Emerick_Aºmeyang
 http://zh.dbpedia.org/resource/经济合作与发展组织	http://dbpedia.org/resource/Organisation_for_Economic_Co-operation_and_Development
 http://zh.dbpedia.org/resource/王尔卓	http://dbpedia.org/resource/Wang_Erzhuo
 http://zh.dbpedia.org/resource/馬塞洛·雷貝洛·德索薩	http://dbpedia.org/resource/Marcelo_Rebelo_de_Sousa
@@ -9619,7 +9619,7 @@ http://zh.dbpedia.org/resource/CNBC	http://dbpedia.org/resource/CNBC
 http://zh.dbpedia.org/resource/安德烈阿斯王子_(希腊)	http://dbpedia.org/resource/Prince_Andrew_of_Greece_and_Denmark
 http://zh.dbpedia.org/resource/TONE	http://dbpedia.org/resource/Tone_(TVXQ_album)
 http://zh.dbpedia.org/resource/Off_the_Wall_(迈克尔·杰克逊专辑)	http://dbpedia.org/resource/Off_the_Wall_(album)
-http://zh.dbpedia.org/resource/复旦大学	http://dbpedia.org/resource/Fudan_University
+http://zh.dbpedia.org/resource/复旦大学	http://dbpedia.org/resource/FÚn_University
 http://zh.dbpedia.org/resource/WB電視網	http://dbpedia.org/resource/The_WB
 http://zh.dbpedia.org/resource/加拿大進步保守黨	http://dbpedia.org/resource/Progressive_Conservative_Party_of_Canada
 http://zh.dbpedia.org/resource/1965–66年歐洲盃賽冠軍盃	http://dbpedia.org/resource/1965–66_European_Cup_Winners'_Cup
@@ -9795,7 +9795,7 @@ http://zh.dbpedia.org/resource/賴布爾	http://dbpedia.org/resource/Raipur
 http://zh.dbpedia.org/resource/希娜·拉巴尼·哈尔	http://dbpedia.org/resource/Hina_Rabbani_Khar
 http://zh.dbpedia.org/resource/新宿區	http://dbpedia.org/resource/Shinjuku
 http://zh.dbpedia.org/resource/延边朝鲜族自治州	http://dbpedia.org/resource/Yanbian_Korean_Autonomous_Prefecture
-http://zh.dbpedia.org/resource/卢卡斯·比格利亚	http://dbpedia.org/resource/Lucas_Biglia
+http://zh.dbpedia.org/resource/卢卡斯·比格利亚	http://dbpedia.org/resource/LÊs_Biglia
 http://zh.dbpedia.org/resource/沙勒尼塔納足球俱樂部	http://dbpedia.org/resource/U.S._Salernitana_1919
 http://zh.dbpedia.org/resource/李亚鹏	http://dbpedia.org/resource/Li_Yapeng
 http://zh.dbpedia.org/resource/安迪·羅賓遜	http://dbpedia.org/resource/Andy_Robinson_(footballer,_born_1979)
@@ -9808,7 +9808,7 @@ http://zh.dbpedia.org/resource/阿加莎·芭芭拉	http://dbpedia.org/resource/
 http://zh.dbpedia.org/resource/陕西国力足球俱乐部	http://dbpedia.org/resource/Shaanxi_Guoli_F.C.
 http://zh.dbpedia.org/resource/卡佩王朝	http://dbpedia.org/resource/Capetian_dynasty
 http://zh.dbpedia.org/resource/格倫·西奧多·西博格	http://dbpedia.org/resource/Glenn_T._Seaborg
-http://zh.dbpedia.org/resource/莱昂纳多·博努奇	http://dbpedia.org/resource/Leonardo_Bonucci
+http://zh.dbpedia.org/resource/莱昂纳多·博努奇	http://dbpedia.org/resource/Leonardo_BonÌi
 http://zh.dbpedia.org/resource/馬尼拉雅典耀大學	http://dbpedia.org/resource/Ateneo_de_Manila_University
 http://zh.dbpedia.org/resource/成亮_(足球运动员)	http://dbpedia.org/resource/Cheng_Liang
 http://zh.dbpedia.org/resource/Dragon_Ash	http://dbpedia.org/resource/Dragon_Ash
@@ -9827,7 +9827,7 @@ http://zh.dbpedia.org/resource/Crunchyroll	http://dbpedia.org/resource/Crunchyro
 http://zh.dbpedia.org/resource/阿尔科伊	http://dbpedia.org/resource/Alcoy,_Spain
 http://zh.dbpedia.org/resource/波斯尼亚和黑塞哥维那部长会议主席	http://dbpedia.org/resource/Chairman_of_the_Council_of_Ministers_of_Bosnia_and_Herzegovina
 http://zh.dbpedia.org/resource/拉维亚纳	http://dbpedia.org/resource/Laviana
-http://zh.dbpedia.org/resource/花都区	http://dbpedia.org/resource/Huadu_District
+http://zh.dbpedia.org/resource/花都区	http://dbpedia.org/resource/H­u_District
 http://zh.dbpedia.org/resource/枚方市	http://dbpedia.org/resource/Hirakata,_Osaka
 http://zh.dbpedia.org/resource/MeeGo	http://dbpedia.org/resource/MeeGo
 http://zh.dbpedia.org/resource/布里奇波特	http://dbpedia.org/resource/Bridgeport,_Connecticut
@@ -9851,7 +9851,7 @@ http://zh.dbpedia.org/resource/鄭南榕	http://dbpedia.org/resource/Cheng_Nan-j
 http://zh.dbpedia.org/resource/灣流G550	http://dbpedia.org/resource/Gulfstream_G550
 http://zh.dbpedia.org/resource/聯邦快遞	http://dbpedia.org/resource/FedEx
 http://zh.dbpedia.org/resource/趙權	http://dbpedia.org/resource/Jo_Kwon
-http://zh.dbpedia.org/resource/Newsqueak	http://dbpedia.org/resource/Newsqueak
+http://zh.dbpedia.org/resource/Newsqêk	http://dbpedia.org/resource/Newsqêk
 http://zh.dbpedia.org/resource/祖利斯·奧高尼	http://dbpedia.org/resource/Jores_Okore
 http://zh.dbpedia.org/resource/弗拉季斯拉夫·阿尔金巴	http://dbpedia.org/resource/Vladislav_Ardzinba
 http://zh.dbpedia.org/resource/阿尔达·图兰	http://dbpedia.org/resource/Arda_Turan
@@ -9924,7 +9924,7 @@ http://zh.dbpedia.org/resource/麥可·貝	http://dbpedia.org/resource/Michael_B
 http://zh.dbpedia.org/resource/姜灏	http://dbpedia.org/resource/Jiang_Hao
 http://zh.dbpedia.org/resource/御殿場市	http://dbpedia.org/resource/Gotemba,_Shizuoka
 http://zh.dbpedia.org/resource/于荣光	http://dbpedia.org/resource/Yu_Rongguang
-http://zh.dbpedia.org/resource/罗伊·格劳伯	http://dbpedia.org/resource/Roy_J._Glauber
+http://zh.dbpedia.org/resource/罗伊·格劳伯	http://dbpedia.org/resource/Roy_J._Gla¾r
 http://zh.dbpedia.org/resource/挪威皇家空军	http://dbpedia.org/resource/Royal_Norwegian_Air_Force
 http://zh.dbpedia.org/resource/上海迪士尼樂園	http://dbpedia.org/resource/Shanghai_Disneyland_Park
 http://zh.dbpedia.org/resource/Passion_(宇多田光單曲)	http://dbpedia.org/resource/Passion_(Utada_Hikaru_song)
@@ -9965,7 +9965,7 @@ http://zh.dbpedia.org/resource/佩特·汉森	http://dbpedia.org/resource/Petter
 http://zh.dbpedia.org/resource/A_COMPLETE_～ALL_SINGLES～	http://dbpedia.org/resource/A_Complete:_All_Singles
 http://zh.dbpedia.org/resource/哈立德·巴哈	http://dbpedia.org/resource/Khaled_Mahfoudh_Bahah
 http://zh.dbpedia.org/resource/聯合航空811號班機事故	http://dbpedia.org/resource/United_Airlines_Flight_811
-http://zh.dbpedia.org/resource/Love_of_My_Life_(皇后乐队歌曲)	http://dbpedia.org/resource/Love_of_My_Life_(Queen_song)
+http://zh.dbpedia.org/resource/Love_of_My_Life_(皇后乐队歌曲)	http://dbpedia.org/resource/Love_of_My_Life_(Qîn_song)
 http://zh.dbpedia.org/resource/Love,_Day_After_Tomorrow	http://dbpedia.org/resource/Love,_Day_After_Tomorrow
 http://zh.dbpedia.org/resource/德里克·罗斯	http://dbpedia.org/resource/Derrick_Rose
 http://zh.dbpedia.org/resource/史蒂夫·斯卡莱斯	http://dbpedia.org/resource/Steve_Scalise
@@ -9993,7 +9993,7 @@ http://zh.dbpedia.org/resource/東京_(越南)	http://dbpedia.org/resource/Tonki
 http://zh.dbpedia.org/resource/曼哈頓金融區	http://dbpedia.org/resource/Financial_District,_Manhattan
 http://zh.dbpedia.org/resource/珍愛_(珍娜·傑克森專輯)	http://dbpedia.org/resource/All_for_You_(Janet_Jackson_album)
 http://zh.dbpedia.org/resource/亨利·D·吉尔平	http://dbpedia.org/resource/Henry_D._Gilpin
-http://zh.dbpedia.org/resource/古巴共产党	http://dbpedia.org/resource/Communist_Party_of_Cuba
+http://zh.dbpedia.org/resource/古巴共产党	http://dbpedia.org/resource/Communist_Party_of_Cº
 http://zh.dbpedia.org/resource/ANGERME	http://dbpedia.org/resource/Angerme
 http://zh.dbpedia.org/resource/MATE	http://dbpedia.org/resource/MATE_(software)
 http://zh.dbpedia.org/resource/雷东多海滩_(加利福尼亚州)	http://dbpedia.org/resource/Redondo_Beach,_California
@@ -10025,7 +10025,7 @@ http://zh.dbpedia.org/resource/中古日語	http://dbpedia.org/resource/Early_Mi
 http://zh.dbpedia.org/resource/尚恩·金斯顿	http://dbpedia.org/resource/Sean_Kingston
 http://zh.dbpedia.org/resource/左營區	http://dbpedia.org/resource/Zuoying_District
 http://zh.dbpedia.org/resource/彼得·比尔·波特	http://dbpedia.org/resource/Peter_Buell_Porter
-http://zh.dbpedia.org/resource/奧卡斯體育會	http://dbpedia.org/resource/Sociedad_Deportiva_Aucas
+http://zh.dbpedia.org/resource/奧卡斯體育會	http://dbpedia.org/resource/Sociedad_Deportiva_AÊs
 http://zh.dbpedia.org/resource/奧特足球會	http://dbpedia.org/resource/Odds_BK
 http://zh.dbpedia.org/resource/Voyage	http://dbpedia.org/resource/Voyage_(Ayumi_Hamasaki_song)
 http://zh.dbpedia.org/resource/三角洲4號運載火箭	http://dbpedia.org/resource/Delta_IV
@@ -10164,7 +10164,7 @@ http://zh.dbpedia.org/resource/米內光政	http://dbpedia.org/resource/Mitsumas
 http://zh.dbpedia.org/resource/景颇族	http://dbpedia.org/resource/Jingpo_people
 http://zh.dbpedia.org/resource/莫里斯·吉布	http://dbpedia.org/resource/Maurice_Gibb
 http://zh.dbpedia.org/resource/古斯塔夫王子	http://dbpedia.org/resource/Prince_Gustav_of_Denmark
-http://zh.dbpedia.org/resource/TSUBASA翼	http://dbpedia.org/resource/Tsubasa:_Reservoir_Chronicle
+http://zh.dbpedia.org/resource/TSºSA翼	http://dbpedia.org/resource/Tsºsa:_Reservoir_Chronicle
 http://zh.dbpedia.org/resource/摩頓·柏達臣	http://dbpedia.org/resource/Morten_Gamst_Pedersen
 http://zh.dbpedia.org/resource/基羅·拿華斯	http://dbpedia.org/resource/Keylor_Navas
 http://zh.dbpedia.org/resource/相隔千里	http://dbpedia.org/resource/Miles_Away_(Madonna_song)
@@ -10185,15 +10185,15 @@ http://zh.dbpedia.org/resource/提贝里乌斯	http://dbpedia.org/resource/Tiber
 http://zh.dbpedia.org/resource/莎伦·丹·阿德尔	http://dbpedia.org/resource/Sharon_den_Adel
 http://zh.dbpedia.org/resource/米切爾·朗格拉克	http://dbpedia.org/resource/Mitchell_Langerak
 http://zh.dbpedia.org/resource/莆仙語	http://dbpedia.org/resource/Pu-Xian_Min
-http://zh.dbpedia.org/resource/雷哥公園	http://dbpedia.org/resource/Rego_Park,_Queens
-http://zh.dbpedia.org/resource/凱斯琳·甘迺迪_(電影監製)	http://dbpedia.org/resource/Kathleen_Kennedy_(producer)
+http://zh.dbpedia.org/resource/雷哥公園	http://dbpedia.org/resource/Rego_Park,_Qîns
+http://zh.dbpedia.org/resource/凱斯琳·甘迺迪_(電影監製)	http://dbpedia.org/resource/Kathleen_Kennedy_(prodÎr)
 http://zh.dbpedia.org/resource/神话_(组合)	http://dbpedia.org/resource/Shinhwa
 http://zh.dbpedia.org/resource/詹姆斯·B·韦弗	http://dbpedia.org/resource/James_B._Weaver
 http://zh.dbpedia.org/resource/准噶尔汗国	http://dbpedia.org/resource/Dzungar_Khanate
-http://zh.dbpedia.org/resource/厄瓜多爾甲組足球聯賽	http://dbpedia.org/resource/Ecuadorian_Serie_A
+http://zh.dbpedia.org/resource/厄瓜多爾甲組足球聯賽	http://dbpedia.org/resource/Ec­orian_Serie_A
 http://zh.dbpedia.org/resource/福克兰群岛	http://dbpedia.org/resource/Falkland_Islands
 http://zh.dbpedia.org/resource/傑拉德·傑伊·薩斯曼	http://dbpedia.org/resource/Gerald_Jay_Sussman
-http://zh.dbpedia.org/resource/愛麗斯王妃_(告羅士打公爵夫人)	http://dbpedia.org/resource/Princess_Alice,_Duchess_of_Gloucester
+http://zh.dbpedia.org/resource/愛麗斯王妃_(告羅士打公爵夫人)	http://dbpedia.org/resource/Princess_Alice,_Duchess_of_GloÎster
 http://zh.dbpedia.org/resource/徐淑敏	http://dbpedia.org/resource/Suki_Chui
 http://zh.dbpedia.org/resource/孙燕姿	http://dbpedia.org/resource/Stefanie_Sun
 http://zh.dbpedia.org/resource/马希连·国柏	http://dbpedia.org/resource/Maximilian_Kolbe
@@ -10244,7 +10244,7 @@ http://zh.dbpedia.org/resource/圣路易斯华盛顿大学	http://dbpedia.org/re
 http://zh.dbpedia.org/resource/看不見的星星	http://dbpedia.org/resource/Mienai_Hoshi
 http://zh.dbpedia.org/resource/鍾欣潼	http://dbpedia.org/resource/Gillian_Chung
 http://zh.dbpedia.org/resource/夏慤	http://dbpedia.org/resource/Cecil_Harcourt
-http://zh.dbpedia.org/resource/拉尼婭王后_(約旦)	http://dbpedia.org/resource/Queen_Rania_of_Jordan
+http://zh.dbpedia.org/resource/拉尼婭王后_(約旦)	http://dbpedia.org/resource/Qîn_Rania_of_Jordan
 http://zh.dbpedia.org/resource/瓦尔特·加尔加诺	http://dbpedia.org/resource/Walter_Gargano
 http://zh.dbpedia.org/resource/陳明宗	http://dbpedia.org/resource/Trần_Minh_Tông
 http://zh.dbpedia.org/resource/黃瀞怡	http://dbpedia.org/resource/Xiao_Xun
@@ -10305,10 +10305,10 @@ http://zh.dbpedia.org/resource/一個人_(中島美嘉單曲)	http://dbpedia.org
 http://zh.dbpedia.org/resource/聂远	http://dbpedia.org/resource/Nie_Yuan
 http://zh.dbpedia.org/resource/鲁伊·科斯塔	http://dbpedia.org/resource/Rui_Costa
 http://zh.dbpedia.org/resource/泰欧·克鲁斯	http://dbpedia.org/resource/Taio_Cruz
-http://zh.dbpedia.org/resource/斯坦利·布鲁斯	http://dbpedia.org/resource/Stanley_Bruce
+http://zh.dbpedia.org/resource/斯坦利·布鲁斯	http://dbpedia.org/resource/Stanley_BrÎ
 http://zh.dbpedia.org/resource/天空體育台	http://dbpedia.org/resource/Sky_Sports
 http://zh.dbpedia.org/resource/塞亞德·克拉西納茨	http://dbpedia.org/resource/Sead_Kolašinac
-http://zh.dbpedia.org/resource/盧卡斯·雷瓦	http://dbpedia.org/resource/Lucas_Leiva
+http://zh.dbpedia.org/resource/盧卡斯·雷瓦	http://dbpedia.org/resource/LÊs_Leiva
 http://zh.dbpedia.org/resource/奧克拉荷馬市	http://dbpedia.org/resource/Oklahoma_City
 http://zh.dbpedia.org/resource/寿安固伦公主	http://dbpedia.org/resource/Gurun_Princess_Shou'an
 http://zh.dbpedia.org/resource/The_Edge	http://dbpedia.org/resource/The_Edge
@@ -10435,7 +10435,7 @@ http://zh.dbpedia.org/resource/渡邊麻友	http://dbpedia.org/resource/Mayu_Wat
 http://zh.dbpedia.org/resource/中华人民共和国国家卫生和计划生育委员会	http://dbpedia.org/resource/National_Health_and_Family_Planning_Commission
 http://zh.dbpedia.org/resource/劉濤_(演員)	http://dbpedia.org/resource/Liu_Tao
 http://zh.dbpedia.org/resource/诺福克岛	http://dbpedia.org/resource/Norfolk_Island
-http://zh.dbpedia.org/resource/布鲁斯·穆雷_(行星科學家)	http://dbpedia.org/resource/Bruce_C._Murray
+http://zh.dbpedia.org/resource/布鲁斯·穆雷_(行星科學家)	http://dbpedia.org/resource/BrÎ_C._Murray
 http://zh.dbpedia.org/resource/黃心穎	http://dbpedia.org/resource/Jacqueline_Wong
 http://zh.dbpedia.org/resource/庇护一世	http://dbpedia.org/resource/Pope_Pius_I
 http://zh.dbpedia.org/resource/吉达·维尔查万	http://dbpedia.org/resource/Gita_Wirjawan
@@ -10599,7 +10599,7 @@ http://zh.dbpedia.org/resource/约翰·图基	http://dbpedia.org/resource/John_T
 http://zh.dbpedia.org/resource/世界卫生组织	http://dbpedia.org/resource/World_Health_Organization
 http://zh.dbpedia.org/resource/戈里察足球俱樂部	http://dbpedia.org/resource/ND_Gorica
 http://zh.dbpedia.org/resource/江渡聰德	http://dbpedia.org/resource/Akinori_Eto
-http://zh.dbpedia.org/resource/外高加索社会主义联邦苏维埃共和国	http://dbpedia.org/resource/Transcaucasian_Socialist_Federative_Soviet_Republic
+http://zh.dbpedia.org/resource/外高加索社会主义联邦苏维埃共和国	http://dbpedia.org/resource/TranscaÊsian_Socialist_Federative_Soviet_Republic
 http://zh.dbpedia.org/resource/高城亞樹	http://dbpedia.org/resource/Aki_Takajo
 http://zh.dbpedia.org/resource/奧托·魏寧格	http://dbpedia.org/resource/Otto_Weininger
 http://zh.dbpedia.org/resource/讚岐釜玉海	http://dbpedia.org/resource/Kamatamare_Sanuki
@@ -10699,7 +10699,7 @@ http://zh.dbpedia.org/resource/基恩·约翰逊	http://dbpedia.org/resource/Kee
 http://zh.dbpedia.org/resource/尊·柏烈·尚尼	http://dbpedia.org/resource/John_Patrick_Shanley
 http://zh.dbpedia.org/resource/怀特岛郡	http://dbpedia.org/resource/Isle_of_Wight
 http://zh.dbpedia.org/resource/莊德利	http://dbpedia.org/resource/John_Tory
-http://zh.dbpedia.org/resource/阿鲁卡斯	http://dbpedia.org/resource/Arucas,_Las_Palmas
+http://zh.dbpedia.org/resource/阿鲁卡斯	http://dbpedia.org/resource/ArÊs,_Las_Palmas
 http://zh.dbpedia.org/resource/安赫塞娜蒙	http://dbpedia.org/resource/Ankhesenamun
 http://zh.dbpedia.org/resource/巩俐	http://dbpedia.org/resource/Gong_Li
 http://zh.dbpedia.org/resource/神奇小子_(歌手)	http://dbpedia.org/resource/Fabolous
@@ -10842,7 +10842,7 @@ http://zh.dbpedia.org/resource/米納爾迪車隊	http://dbpedia.org/resource/Mi
 http://zh.dbpedia.org/resource/李在成	http://dbpedia.org/resource/Lee_Jae-sung_(footballer,_born_1992)
 http://zh.dbpedia.org/resource/奈爾·德葛拉司·泰森	http://dbpedia.org/resource/Neil_deGrasse_Tyson
 http://zh.dbpedia.org/resource/唐嫣	http://dbpedia.org/resource/Tiffany_Tang
-http://zh.dbpedia.org/resource/Cubase	http://dbpedia.org/resource/Steinberg_Cubase
+http://zh.dbpedia.org/resource/Cºse	http://dbpedia.org/resource/Steinberg_Cºse
 http://zh.dbpedia.org/resource/埃米尔·博雷尔	http://dbpedia.org/resource/Émile_Borel
 http://zh.dbpedia.org/resource/卢克·P·布莱克本	http://dbpedia.org/resource/Luke_P._Blackburn
 http://zh.dbpedia.org/resource/联邦储备系统	http://dbpedia.org/resource/Federal_Reserve_System
@@ -10887,7 +10887,7 @@ http://zh.dbpedia.org/resource/徐文	http://dbpedia.org/resource/Xu_Wen_(footba
 http://zh.dbpedia.org/resource/科罗拉多急流	http://dbpedia.org/resource/Colorado_Rapids
 http://zh.dbpedia.org/resource/康乃馨_(椎名林檎單曲)	http://dbpedia.org/resource/Carnation_(Ringo_Sheena_song)
 http://zh.dbpedia.org/resource/太湖	http://dbpedia.org/resource/Lake_Tai
-http://zh.dbpedia.org/resource/小高加索山脈	http://dbpedia.org/resource/Lesser_Caucasus
+http://zh.dbpedia.org/resource/小高加索山脈	http://dbpedia.org/resource/Lesser_CaÊsus
 http://zh.dbpedia.org/resource/佐佐木勇人	http://dbpedia.org/resource/Hayato_Sasaki
 http://zh.dbpedia.org/resource/许其亮	http://dbpedia.org/resource/Xu_Qiliang
 http://zh.dbpedia.org/resource/英國皇家海軍陸戰隊	http://dbpedia.org/resource/Royal_Marines
@@ -10938,7 +10938,7 @@ http://zh.dbpedia.org/resource/小林裕紀	http://dbpedia.org/resource/Yuki_Kob
 http://zh.dbpedia.org/resource/石勒苏益格-荷尔斯泰因	http://dbpedia.org/resource/Schleswig-Holstein
 http://zh.dbpedia.org/resource/桑切斯·瓦特	http://dbpedia.org/resource/Sanchez_Watt
 http://zh.dbpedia.org/resource/冯刚_(足球运动员)	http://dbpedia.org/resource/Feng_Gang
-http://zh.dbpedia.org/resource/紐約州立大學水牛城分校	http://dbpedia.org/resource/University_at_Buffalo
+http://zh.dbpedia.org/resource/紐約州立大學水牛城分校	http://dbpedia.org/resource/University_at_B࿺lo
 http://zh.dbpedia.org/resource/北海市	http://dbpedia.org/resource/Beihai
 http://zh.dbpedia.org/resource/瓦诺莎·卡塔内	http://dbpedia.org/resource/Vannozza_dei_Cattanei
 http://zh.dbpedia.org/resource/柴郡	http://dbpedia.org/resource/Cheshire
@@ -11027,7 +11027,7 @@ http://zh.dbpedia.org/resource/伯利恒_(宾夕法尼亚州)	http://dbpedia.org
 http://zh.dbpedia.org/resource/扇原貴宏	http://dbpedia.org/resource/Takahiro_Ogihara
 http://zh.dbpedia.org/resource/上海虹橋站	http://dbpedia.org/resource/Shanghai_Hongqiao_Railway_Station
 http://zh.dbpedia.org/resource/港北區_(日本)	http://dbpedia.org/resource/Kōhoku-ku,_Yokohama
-http://zh.dbpedia.org/resource/牡丹江市	http://dbpedia.org/resource/Mudanjiang
+http://zh.dbpedia.org/resource/牡丹江市	http://dbpedia.org/resource/MÚnjiang
 http://zh.dbpedia.org/resource/丹尼爾臣·費利拿·泰尼達迪	http://dbpedia.org/resource/Danielson_Ferreira_Trindade
 http://zh.dbpedia.org/resource/怀俄明州行政区划	http://dbpedia.org/resource/List_of_counties_in_Wyoming
 http://zh.dbpedia.org/resource/路易丝公主_(阿盖尔公爵夫人)	http://dbpedia.org/resource/Princess_Louise,_Duchess_of_Argyll
@@ -11043,7 +11043,7 @@ http://zh.dbpedia.org/resource/罗伯特·马尔登	http://dbpedia.org/resource/
 http://zh.dbpedia.org/resource/公民纲领	http://dbpedia.org/resource/Civic_Platform
 http://zh.dbpedia.org/resource/狛江市	http://dbpedia.org/resource/Komae,_Tokyo
 http://zh.dbpedia.org/resource/谢鹏飞	http://dbpedia.org/resource/Xie_Pengfei
-http://zh.dbpedia.org/resource/陸鼎堂	http://dbpedia.org/resource/Donald_Luddington
+http://zh.dbpedia.org/resource/陸鼎堂	http://dbpedia.org/resource/Donald_LÝington
 http://zh.dbpedia.org/resource/國泰航空	http://dbpedia.org/resource/Cathay_Pacific
 http://zh.dbpedia.org/resource/西蒙·波尔森	http://dbpedia.org/resource/Simon_Poulsen
 http://zh.dbpedia.org/resource/Hyde	http://dbpedia.org/resource/Hyde_(musician)
@@ -11070,7 +11070,7 @@ http://zh.dbpedia.org/resource/安娜·伊達戈	http://dbpedia.org/resource/Ann
 http://zh.dbpedia.org/resource/奎松省	http://dbpedia.org/resource/Quezon
 http://zh.dbpedia.org/resource/Showtek	http://dbpedia.org/resource/Showtek
 http://zh.dbpedia.org/resource/曹丕	http://dbpedia.org/resource/Cao_Pi
-http://zh.dbpedia.org/resource/艾佛敦公園區_(昆士蘭州)	http://dbpedia.org/resource/Everton_Park,_Queensland
+http://zh.dbpedia.org/resource/艾佛敦公園區_(昆士蘭州)	http://dbpedia.org/resource/Everton_Park,_Qînsland
 http://zh.dbpedia.org/resource/约翰·伯顿·汤普森	http://dbpedia.org/resource/John_Burton_Thompson
 http://zh.dbpedia.org/resource/羅伯·穆加貝	http://dbpedia.org/resource/Robert_Mugabe
 http://zh.dbpedia.org/resource/阿维济	http://dbpedia.org/resource/Avusy
@@ -11245,7 +11245,7 @@ http://zh.dbpedia.org/resource/多瑙河足球俱乐部	http://dbpedia.org/resou
 http://zh.dbpedia.org/resource/毕齐纳·伊万尼什维利	http://dbpedia.org/resource/Bidzina_Ivanishvili
 http://zh.dbpedia.org/resource/郑成龙	http://dbpedia.org/resource/Jung_Sung-ryong
 http://zh.dbpedia.org/resource/艾伦·纽厄尔	http://dbpedia.org/resource/Allen_Newell
-http://zh.dbpedia.org/resource/艾德礼区_(昆士兰州)	http://dbpedia.org/resource/Alderley,_Queensland
+http://zh.dbpedia.org/resource/艾德礼区_(昆士兰州)	http://dbpedia.org/resource/Alderley,_Qînsland
 http://zh.dbpedia.org/resource/游騎兵9號	http://dbpedia.org/resource/Ranger_9
 http://zh.dbpedia.org/resource/麥可·高福	http://dbpedia.org/resource/Michael_Gough
 http://zh.dbpedia.org/resource/黑塔IV_巫師與水晶球	http://dbpedia.org/resource/The_Dark_Tower_IV:_Wizard_and_Glass
@@ -11259,7 +11259,7 @@ http://zh.dbpedia.org/resource/峯岸南	http://dbpedia.org/resource/Minami_Mine
 http://zh.dbpedia.org/resource/大理市	http://dbpedia.org/resource/Dali_City
 http://zh.dbpedia.org/resource/琉球列島美國民政府	http://dbpedia.org/resource/United_States_Civil_Administration_of_the_Ryukyu_Islands
 http://zh.dbpedia.org/resource/孝昭仁皇后	http://dbpedia.org/resource/Empress_Xiaozhaoren
-http://zh.dbpedia.org/resource/保拉_(比利時王后)	http://dbpedia.org/resource/Queen_Paola_of_Belgium
+http://zh.dbpedia.org/resource/保拉_(比利時王后)	http://dbpedia.org/resource/Qîn_Paola_of_Belgium
 http://zh.dbpedia.org/resource/育空	http://dbpedia.org/resource/Yukon
 http://zh.dbpedia.org/resource/教宗色尔爵一世	http://dbpedia.org/resource/Pope_Sergius_I
 http://zh.dbpedia.org/resource/内马尔	http://dbpedia.org/resource/Neymar
@@ -11437,10 +11437,10 @@ http://zh.dbpedia.org/resource/湘潭市	http://dbpedia.org/resource/Xiangtan
 http://zh.dbpedia.org/resource/馬些路·卡路斯卡	http://dbpedia.org/resource/Marcelo_Carrusca
 http://zh.dbpedia.org/resource/路易斯安那州立大學	http://dbpedia.org/resource/Louisiana_State_University
 http://zh.dbpedia.org/resource/海梅_(巴爾迪伯爵)	http://dbpedia.org/resource/Prince_Jaime,_Count_of_Bardi
-http://zh.dbpedia.org/resource/弗朗西丝·格雷	http://dbpedia.org/resource/Frances_Grey,_Duchess_of_Suffolk
+http://zh.dbpedia.org/resource/弗朗西丝·格雷	http://dbpedia.org/resource/Frances_Grey,_Duchess_of_Sÿolk
 http://zh.dbpedia.org/resource/奧克蘭機場	http://dbpedia.org/resource/Auckland_Airport
 http://zh.dbpedia.org/resource/维克多·奥比纳	http://dbpedia.org/resource/Victor_Obinna
-http://zh.dbpedia.org/resource/皇后大學_(加拿大)	http://dbpedia.org/resource/Queen's_University
+http://zh.dbpedia.org/resource/皇后大學_(加拿大)	http://dbpedia.org/resource/Qîn's_University
 http://zh.dbpedia.org/resource/毛利语	http://dbpedia.org/resource/Māori_language
 http://zh.dbpedia.org/resource/利安·列迪	http://dbpedia.org/resource/Liam_Reddy
 http://zh.dbpedia.org/resource/Korpiklaani	http://dbpedia.org/resource/Korpiklaani
@@ -11565,7 +11565,7 @@ http://zh.dbpedia.org/resource/聖母大學	http://dbpedia.org/resource/Universi
 http://zh.dbpedia.org/resource/LabVIEW	http://dbpedia.org/resource/LabVIEW
 http://zh.dbpedia.org/resource/張致恆	http://dbpedia.org/resource/Steven_Cheung_(actor)
 http://zh.dbpedia.org/resource/MONSTER_(B'z專輯)	http://dbpedia.org/resource/Monster_(B'z_album)
-http://zh.dbpedia.org/resource/本·优素福·本·赫达	http://dbpedia.org/resource/Benyoucef_Benkhedda
+http://zh.dbpedia.org/resource/本·优素福·本·赫达	http://dbpedia.org/resource/Benyo೯_Benkhedda
 http://zh.dbpedia.org/resource/維也納國際機場	http://dbpedia.org/resource/Vienna_International_Airport
 http://zh.dbpedia.org/resource/卡特探員	http://dbpedia.org/resource/Agent_Carter_(TV_series)
 http://zh.dbpedia.org/resource/恩斯特_(萨克森-迈宁根)	http://dbpedia.org/resource/Ernst,_Prince_of_Saxe-Meiningen
@@ -11585,7 +11585,7 @@ http://zh.dbpedia.org/resource/川口市	http://dbpedia.org/resource/Kawaguchi,_
 http://zh.dbpedia.org/resource/高濱市	http://dbpedia.org/resource/Takahama,_Aichi
 http://zh.dbpedia.org/resource/陸英修	http://dbpedia.org/resource/Yuk_Young-soo
 http://zh.dbpedia.org/resource/穆罕默德·沙	http://dbpedia.org/resource/Muhammad_Shah
-http://zh.dbpedia.org/resource/百慕大	http://dbpedia.org/resource/Bermuda
+http://zh.dbpedia.org/resource/百慕大	http://dbpedia.org/resource/BermÚ
 http://zh.dbpedia.org/resource/刈谷市	http://dbpedia.org/resource/Kariya,_Aichi
 http://zh.dbpedia.org/resource/星際大戰四部曲：曙光乍現	http://dbpedia.org/resource/Star_Wars_(film)
 http://zh.dbpedia.org/resource/淑嬪崔氏	http://dbpedia.org/resource/Suk-bin_Choe
@@ -11717,7 +11717,7 @@ http://zh.dbpedia.org/resource/美国司法部	http://dbpedia.org/resource/Unite
 http://zh.dbpedia.org/resource/黃信介	http://dbpedia.org/resource/Huang_Shin-chieh
 http://zh.dbpedia.org/resource/曾少宗	http://dbpedia.org/resource/Figaro_Tseng
 http://zh.dbpedia.org/resource/巴薩爾_(華盛頓州)	http://dbpedia.org/resource/Bothell,_Washington
-http://zh.dbpedia.org/resource/福阿德二世	http://dbpedia.org/resource/Fuad_II_of_Egypt
+http://zh.dbpedia.org/resource/福阿德二世	http://dbpedia.org/resource/F­_II_of_Egypt
 http://zh.dbpedia.org/resource/马里奥·费南迪斯	http://dbpedia.org/resource/Mário_Figueira_Fernandes
 http://zh.dbpedia.org/resource/埃曼纽埃尔·埃布埃	http://dbpedia.org/resource/Emmanuel_Eboué
 http://zh.dbpedia.org/resource/再见单人床	http://dbpedia.org/resource/Pillow_Talk_(TV_series)
@@ -11734,7 +11734,7 @@ http://zh.dbpedia.org/resource/菲利普斯学院	http://dbpedia.org/resource/Ph
 http://zh.dbpedia.org/resource/李察·華尼斯	http://dbpedia.org/resource/Richárd_Vernes
 http://zh.dbpedia.org/resource/圣马丁德尔雷奥雷利奥	http://dbpedia.org/resource/San_Martín_del_Rey_Aurelio
 http://zh.dbpedia.org/resource/黄英贤	http://dbpedia.org/resource/Penny_Wong
-http://zh.dbpedia.org/resource/愛德文·哈勃	http://dbpedia.org/resource/Edwin_Hubble
+http://zh.dbpedia.org/resource/愛德文·哈勃	http://dbpedia.org/resource/Edwin_H»le
 http://zh.dbpedia.org/resource/別告訴我	http://dbpedia.org/resource/Don't_Tell_Me_(Madonna_song)
 http://zh.dbpedia.org/resource/鲍勃·卡尔	http://dbpedia.org/resource/Bob_Carr
 http://zh.dbpedia.org/resource/后晋	http://dbpedia.org/resource/Later_Jin_(Five_Dynasties)
@@ -11752,7 +11752,7 @@ http://zh.dbpedia.org/resource/江绵恒	http://dbpedia.org/resource/Jiang_Mianh
 http://zh.dbpedia.org/resource/古波斯語	http://dbpedia.org/resource/Old_Persian
 http://zh.dbpedia.org/resource/格温妮丝·帕特罗	http://dbpedia.org/resource/Gwyneth_Paltrow
 http://zh.dbpedia.org/resource/卢旺达语	http://dbpedia.org/resource/Kinyarwanda
-http://zh.dbpedia.org/resource/迪拜酋长国	http://dbpedia.org/resource/Emirate_of_Dubai
+http://zh.dbpedia.org/resource/迪拜酋长国	http://dbpedia.org/resource/Emirate_of_Dºi
 http://zh.dbpedia.org/resource/嗆音樂	http://dbpedia.org/resource/Me_Against_the_Music
 http://zh.dbpedia.org/resource/Trust_Your_Love	http://dbpedia.org/resource/Trust_Your_Love
 http://zh.dbpedia.org/resource/諾基亞Lumia_1320	http://dbpedia.org/resource/Nokia_Lumia_1320
@@ -11821,7 +11821,7 @@ http://zh.dbpedia.org/resource/卡洛斯_(蒙特莫林伯爵)	http://dbpedia.org
 http://zh.dbpedia.org/resource/乔·舒马赫	http://dbpedia.org/resource/Joel_Schumacher
 http://zh.dbpedia.org/resource/南圻	http://dbpedia.org/resource/Cochinchina
 http://zh.dbpedia.org/resource/Time_(嵐)	http://dbpedia.org/resource/Time_(Arashi_album)
-http://zh.dbpedia.org/resource/弗雷德里克·齊盧巴	http://dbpedia.org/resource/Frederick_Chiluba
+http://zh.dbpedia.org/resource/弗雷德里克·齊盧巴	http://dbpedia.org/resource/Frederick_Chilº
 http://zh.dbpedia.org/resource/ACTION	http://dbpedia.org/resource/Action_(B'z_album)
 http://zh.dbpedia.org/resource/哈特尔普尔联足球俱乐部	http://dbpedia.org/resource/Hartlepool_United_F.C.
 http://zh.dbpedia.org/resource/艾蘭路球場	http://dbpedia.org/resource/Elland_Road
@@ -11972,7 +11972,7 @@ http://zh.dbpedia.org/resource/PortableApps.com	http://dbpedia.org/resource/Port
 http://zh.dbpedia.org/resource/法國航空	http://dbpedia.org/resource/Air_France
 http://zh.dbpedia.org/resource/朴泰俊	http://dbpedia.org/resource/Park_Tae-joon
 http://zh.dbpedia.org/resource/切奇·马林	http://dbpedia.org/resource/Cheech_Marin
-http://zh.dbpedia.org/resource/亚杰丁·艾哈迈德	http://dbpedia.org/resource/Iajuddin_Ahmed
+http://zh.dbpedia.org/resource/亚杰丁·艾哈迈德	http://dbpedia.org/resource/IajÝin_Ahmed
 http://zh.dbpedia.org/resource/Movin'_on_without_you	http://dbpedia.org/resource/Movin'_On_Without_You
 http://zh.dbpedia.org/resource/科萨语	http://dbpedia.org/resource/Xhosa_language
 http://zh.dbpedia.org/resource/曼彻斯特维多利亚大学	http://dbpedia.org/resource/Victoria_University_of_Manchester
@@ -12066,7 +12066,7 @@ http://zh.dbpedia.org/resource/多姆扎勒足球俱樂部	http://dbpedia.org/re
 http://zh.dbpedia.org/resource/朴孝信	http://dbpedia.org/resource/Park_Hyo-shin
 http://zh.dbpedia.org/resource/曼德勒	http://dbpedia.org/resource/Mandalay
 http://zh.dbpedia.org/resource/戴安娜·罗斯	http://dbpedia.org/resource/Diana_Ross
-http://zh.dbpedia.org/resource/紐迪高體育會	http://dbpedia.org/resource/Clube_Náutico_Capibaribe
+http://zh.dbpedia.org/resource/紐迪高體育會	http://dbpedia.org/resource/Cl¾_Náutico_Capibaribe
 http://zh.dbpedia.org/resource/蘇格蘭首席部長	http://dbpedia.org/resource/First_Minister_of_Scotland
 http://zh.dbpedia.org/resource/Theora	http://dbpedia.org/resource/Theora
 http://zh.dbpedia.org/resource/邁阿密FC	http://dbpedia.org/resource/Miami_FC
@@ -12123,7 +12123,7 @@ http://zh.dbpedia.org/resource/馬高·蘇拿	http://dbpedia.org/resource/Marko_
 http://zh.dbpedia.org/resource/塞斯·哈里斯	http://dbpedia.org/resource/Seth_Harris
 http://zh.dbpedia.org/resource/哈桑·賓·塔拉勒_(約旦王子)	http://dbpedia.org/resource/Prince_Hassan_bin_Talal
 http://zh.dbpedia.org/resource/丹尼·達哥斯達	http://dbpedia.org/resource/Danny_da_Costa
-http://zh.dbpedia.org/resource/莫奇米林體育會	http://dbpedia.org/resource/Mogi_Mirim_Esporte_Clube
+http://zh.dbpedia.org/resource/莫奇米林體育會	http://dbpedia.org/resource/Mogi_Mirim_Esporte_Cl¾
 http://zh.dbpedia.org/resource/儒勒·比安奇	http://dbpedia.org/resource/Jules_Bianchi
 http://zh.dbpedia.org/resource/英國內戰	http://dbpedia.org/resource/English_Civil_War
 http://zh.dbpedia.org/resource/瓦尔特·莫德尔	http://dbpedia.org/resource/Walter_Model
@@ -12401,7 +12401,7 @@ http://zh.dbpedia.org/resource/張博雅	http://dbpedia.org/resource/Chang_Po-ya
 http://zh.dbpedia.org/resource/香港浸會大學	http://dbpedia.org/resource/Hong_Kong_Baptist_University
 http://zh.dbpedia.org/resource/神鬼疑雲	http://dbpedia.org/resource/The_Bourne_Supremacy
 http://zh.dbpedia.org/resource/賈郎達爾縣	http://dbpedia.org/resource/Jalandhar_district
-http://zh.dbpedia.org/resource/大薩德伯里	http://dbpedia.org/resource/Greater_Sudbury
+http://zh.dbpedia.org/resource/大薩德伯里	http://dbpedia.org/resource/Greater_SÛury
 http://zh.dbpedia.org/resource/西北大学野猫队	http://dbpedia.org/resource/Northwestern_Wildcats
 http://zh.dbpedia.org/resource/Shine_more	http://dbpedia.org/resource/Shine_More
 http://zh.dbpedia.org/resource/My_All	http://dbpedia.org/resource/My_All
@@ -12452,7 +12452,7 @@ http://zh.dbpedia.org/resource/斯特法諾斯·卡皮諾	http://dbpedia.org/res
 http://zh.dbpedia.org/resource/JPN_(Perfume專輯)	http://dbpedia.org/resource/JPN_(album)
 http://zh.dbpedia.org/resource/喬治·皮科克	http://dbpedia.org/resource/George_Peacock
 http://zh.dbpedia.org/resource/内务人民委员部	http://dbpedia.org/resource/NKVD
-http://zh.dbpedia.org/resource/郭雪芙	http://dbpedia.org/resource/Puff_Kuo
+http://zh.dbpedia.org/resource/郭雪芙	http://dbpedia.org/resource/Pÿ_Kuo
 http://zh.dbpedia.org/resource/神舟四号	http://dbpedia.org/resource/Shenzhou_4
 http://zh.dbpedia.org/resource/吉安尼纳竞技俱乐部	http://dbpedia.org/resource/PAS_Giannina_F.C.
 http://zh.dbpedia.org/resource/威廉一世_(英格兰)	http://dbpedia.org/resource/William_the_Conqueror
@@ -12529,7 +12529,7 @@ http://zh.dbpedia.org/resource/南港線	http://dbpedia.org/resource/Nangang_Lin
 http://zh.dbpedia.org/resource/薩丁斯柯達體育會	http://dbpedia.org/resource/Skoda_Xanthi_F.C.
 http://zh.dbpedia.org/resource/萨克森-阿尔滕堡	http://dbpedia.org/resource/Duchy_of_Saxe-Altenburg
 http://zh.dbpedia.org/resource/許志安	http://dbpedia.org/resource/Andy_Hui
-http://zh.dbpedia.org/resource/麥西瑪_(荷蘭王后)	http://dbpedia.org/resource/Queen_Máxima_of_the_Netherlands
+http://zh.dbpedia.org/resource/麥西瑪_(荷蘭王后)	http://dbpedia.org/resource/Qîn_Máxima_of_the_Netherlands
 http://zh.dbpedia.org/resource/新幹線E6系電力動車組	http://dbpedia.org/resource/E6_Series_Shinkansen
 http://zh.dbpedia.org/resource/曼努埃尔·埃斯基韦尔	http://dbpedia.org/resource/Manuel_Esquivel
 http://zh.dbpedia.org/resource/TVBS-Asia	http://dbpedia.org/resource/TVBS-Asia
@@ -12607,7 +12607,7 @@ http://zh.dbpedia.org/resource/梁小冰	http://dbpedia.org/resource/Noel_Leung
 http://zh.dbpedia.org/resource/西宮市	http://dbpedia.org/resource/Nishinomiya
 http://zh.dbpedia.org/resource/路爵三世	http://dbpedia.org/resource/Pope_Lucius_III
 http://zh.dbpedia.org/resource/皮埃尔·路易吉·贝尔萨尼	http://dbpedia.org/resource/Pier_Luigi_Bersani
-http://zh.dbpedia.org/resource/索伯車隊	http://dbpedia.org/resource/Sauber
+http://zh.dbpedia.org/resource/索伯車隊	http://dbpedia.org/resource/Sa¾r
 http://zh.dbpedia.org/resource/京津城际铁路	http://dbpedia.org/resource/Beijing–Tianjin_Intercity_Railway
 http://zh.dbpedia.org/resource/朱厚任	http://dbpedia.org/resource/Zhu_Houren
 http://zh.dbpedia.org/resource/曹雪芹	http://dbpedia.org/resource/Cao_Xueqin
@@ -12619,7 +12619,7 @@ http://zh.dbpedia.org/resource/儒勒·昂利·庞加莱	http://dbpedia.org/reso
 http://zh.dbpedia.org/resource/兰尼埃里_(两西西里)	http://dbpedia.org/resource/Prince_Ranieri,_Duke_of_Castro
 http://zh.dbpedia.org/resource/尼洛·佩萨尼亚	http://dbpedia.org/resource/Nilo_Peçanha
 http://zh.dbpedia.org/resource/唐民凱	http://dbpedia.org/resource/Tom_Mulcair
-http://zh.dbpedia.org/resource/瑪蒂爾德_(比利時王后)	http://dbpedia.org/resource/Queen_Mathilde_of_Belgium
+http://zh.dbpedia.org/resource/瑪蒂爾德_(比利時王后)	http://dbpedia.org/resource/Qîn_Mathilde_of_Belgium
 http://zh.dbpedia.org/resource/明仁宗	http://dbpedia.org/resource/Hongxi_Emperor
 http://zh.dbpedia.org/resource/平陽貝卡麥克斯足球俱樂部	http://dbpedia.org/resource/Becamex_Bình_Dương_F.C.
 http://zh.dbpedia.org/resource/黑田長政	http://dbpedia.org/resource/Kuroda_Nagamasa
@@ -12689,7 +12689,7 @@ http://zh.dbpedia.org/resource/日本共產黨	http://dbpedia.org/resource/Japan
 http://zh.dbpedia.org/resource/教宗福禄	http://dbpedia.org/resource/Pope_Telesphorus
 http://zh.dbpedia.org/resource/杜淳	http://dbpedia.org/resource/Du_Chun
 http://zh.dbpedia.org/resource/洛格罗尼奥	http://dbpedia.org/resource/Logroño
-http://zh.dbpedia.org/resource/翼號列車	http://dbpedia.org/resource/Tsubasa_(train)
+http://zh.dbpedia.org/resource/翼號列車	http://dbpedia.org/resource/Tsºsa_(train)
 http://zh.dbpedia.org/resource/權相佑	http://dbpedia.org/resource/Kwon_Sang-woo
 http://zh.dbpedia.org/resource/出崎統	http://dbpedia.org/resource/Osamu_Dezaki
 http://zh.dbpedia.org/resource/香港科技大學	http://dbpedia.org/resource/Hong_Kong_University_of_Science_and_Technology
@@ -12717,7 +12717,7 @@ http://zh.dbpedia.org/resource/刘伯承	http://dbpedia.org/resource/Liu_Bocheng
 http://zh.dbpedia.org/resource/See-Saw	http://dbpedia.org/resource/See-Saw
 http://zh.dbpedia.org/resource/新加坡航空	http://dbpedia.org/resource/Singapore_Airlines
 http://zh.dbpedia.org/resource/玛丽·布莱姬	http://dbpedia.org/resource/Mary_J._Blige
-http://zh.dbpedia.org/resource/瀧與翼	http://dbpedia.org/resource/Tackey_&_Tsubasa
+http://zh.dbpedia.org/resource/瀧與翼	http://dbpedia.org/resource/Tackey_&_Tsºsa
 http://zh.dbpedia.org/resource/奧雷利歐_(阿斯圖里亞斯)	http://dbpedia.org/resource/Aurelius_of_Asturias
 http://zh.dbpedia.org/resource/阿埃西奧·內維斯	http://dbpedia.org/resource/Aécio_Neves
 http://zh.dbpedia.org/resource/小杰西·杰克逊	http://dbpedia.org/resource/Jesse_Jackson,_Jr.
@@ -12802,7 +12802,7 @@ http://zh.dbpedia.org/resource/酒田市	http://dbpedia.org/resource/Sakata,_Yam
 http://zh.dbpedia.org/resource/比什凱克多多伊足球會	http://dbpedia.org/resource/FC_Dordoi_Bishkek
 http://zh.dbpedia.org/resource/最终幻想VII_降临之子	http://dbpedia.org/resource/Final_Fantasy_VII:_Advent_Children
 http://zh.dbpedia.org/resource/夏律第鎮	http://dbpedia.org/resource/Charlottesville,_Virginia
-http://zh.dbpedia.org/resource/勞達航空	http://dbpedia.org/resource/Lauda_Air
+http://zh.dbpedia.org/resource/勞達航空	http://dbpedia.org/resource/LaÚ_Air
 http://zh.dbpedia.org/resource/哈瓦那	http://dbpedia.org/resource/Havana
 http://zh.dbpedia.org/resource/蕭氏通訊	http://dbpedia.org/resource/Shaw_Communications
 http://zh.dbpedia.org/resource/贝恩德·施奈德	http://dbpedia.org/resource/Bernd_Schneider_(footballer)
@@ -12883,7 +12883,7 @@ http://zh.dbpedia.org/resource/如果你找到Amy	http://dbpedia.org/resource/If
 http://zh.dbpedia.org/resource/世紀帝國Online	http://dbpedia.org/resource/Age_of_Empires_Online
 http://zh.dbpedia.org/resource/雍笈牙	http://dbpedia.org/resource/Alaungpaya
 http://zh.dbpedia.org/resource/趙又廷	http://dbpedia.org/resource/Mark_Chao
-http://zh.dbpedia.org/resource/大高加索山脈	http://dbpedia.org/resource/Greater_Caucasus
+http://zh.dbpedia.org/resource/大高加索山脈	http://dbpedia.org/resource/Greater_CaÊsus
 http://zh.dbpedia.org/resource/小小兵	http://dbpedia.org/resource/Minions_(film)
 http://zh.dbpedia.org/resource/伊蘇斯戰役	http://dbpedia.org/resource/Battle_of_Issus
 http://zh.dbpedia.org/resource/教宗斯德望三世	http://dbpedia.org/resource/Pope_Stephen_III
@@ -12897,7 +12897,7 @@ http://zh.dbpedia.org/resource/声声不息	http://dbpedia.org/resource/Continuu
 http://zh.dbpedia.org/resource/中華民國外交部	http://dbpedia.org/resource/Ministry_of_Foreign_Affairs_(Taiwan)
 http://zh.dbpedia.org/resource/氹仔	http://dbpedia.org/resource/Taipa
 http://zh.dbpedia.org/resource/白卜庭	http://dbpedia.org/resource/Palpatine
-http://zh.dbpedia.org/resource/雷阿爾城省	http://dbpedia.org/resource/Province_of_Ciudad_Real
+http://zh.dbpedia.org/resource/雷阿爾城省	http://dbpedia.org/resource/Province_of_Ciත_Real
 http://zh.dbpedia.org/resource/NVIDIA_GeForce_100	http://dbpedia.org/resource/GeForce_100_series
 http://zh.dbpedia.org/resource/拉米罗二世_(莱昂)	http://dbpedia.org/resource/Ramiro_II_of_León
 http://zh.dbpedia.org/resource/WINNER	http://dbpedia.org/resource/Winner_(band)
@@ -12956,7 +12956,7 @@ http://zh.dbpedia.org/resource/吉多·范罗苏姆	http://dbpedia.org/resource/
 http://zh.dbpedia.org/resource/惠比壽_(東京都)	http://dbpedia.org/resource/Ebisu,_Shibuya
 http://zh.dbpedia.org/resource/博義王	http://dbpedia.org/resource/Prince_Fushimi_Hiroyoshi
 http://zh.dbpedia.org/resource/阿爾巴尼亞超級足球聯賽	http://dbpedia.org/resource/Albanian_Superliga
-http://zh.dbpedia.org/resource/劳本路体育场	http://dbpedia.org/resource/Stadion_am_Laubenweg
+http://zh.dbpedia.org/resource/劳本路体育场	http://dbpedia.org/resource/Stadion_am_La¾nweg
 http://zh.dbpedia.org/resource/神曲集	http://dbpedia.org/resource/Kamikyokutachi
 http://zh.dbpedia.org/resource/奉节长江大桥	http://dbpedia.org/resource/Fengjie_Yangtze_River_Bridge
 http://zh.dbpedia.org/resource/奇内杜·奥巴西	http://dbpedia.org/resource/Chinedu_Obasi
@@ -12975,11 +12975,11 @@ http://zh.dbpedia.org/resource/新幾內亞	http://dbpedia.org/resource/New_Guin
 http://zh.dbpedia.org/resource/楚科奇语	http://dbpedia.org/resource/Chukchi_language
 http://zh.dbpedia.org/resource/缅甸总统	http://dbpedia.org/resource/President_of_Myanmar
 http://zh.dbpedia.org/resource/Justice_to_Believe	http://dbpedia.org/resource/Justice_to_Believe_/_Aoi_Iro
-http://zh.dbpedia.org/resource/若因维利竞技俱乐部	http://dbpedia.org/resource/Joinville_Esporte_Clube
+http://zh.dbpedia.org/resource/若因维利竞技俱乐部	http://dbpedia.org/resource/Joinville_Esporte_Cl¾
 http://zh.dbpedia.org/resource/山崎實	http://dbpedia.org/resource/Minoru_Yamasaki
 http://zh.dbpedia.org/resource/尼古拉斯·米哈罗里亚可斯	http://dbpedia.org/resource/Nikolaos_Michaloliakos
 http://zh.dbpedia.org/resource/櫻花莊的寵物女孩	http://dbpedia.org/resource/The_Pet_Girl_of_Sakurasou
-http://zh.dbpedia.org/resource/宇菲·額利貝克	http://dbpedia.org/resource/Uffe_Elbæk
+http://zh.dbpedia.org/resource/宇菲·額利貝克	http://dbpedia.org/resource/࿾_Elbæk
 http://zh.dbpedia.org/resource/貓頭鷹之城	http://dbpedia.org/resource/Owl_City
 http://zh.dbpedia.org/resource/约阿希姆王子_(比利时)	http://dbpedia.org/resource/Prince_Joachim_of_Belgium,_Archduke_of_Austria-Este
 http://zh.dbpedia.org/resource/德国共产党	http://dbpedia.org/resource/Communist_Party_of_Germany
@@ -13107,9 +13107,9 @@ http://zh.dbpedia.org/resource/纳塔纳尔·德索萨·桑托斯·儒尼奥尔	
 http://zh.dbpedia.org/resource/烏爾巴諾三世	http://dbpedia.org/resource/Pope_Urban_III
 http://zh.dbpedia.org/resource/金俊	http://dbpedia.org/resource/Kim_Joon
 http://zh.dbpedia.org/resource/基辅罗斯	http://dbpedia.org/resource/Kievan_Rus'
-http://zh.dbpedia.org/resource/伦敦玛丽王后大学	http://dbpedia.org/resource/Queen_Mary_University_of_London
+http://zh.dbpedia.org/resource/伦敦玛丽王后大学	http://dbpedia.org/resource/Qîn_Mary_University_of_London
 http://zh.dbpedia.org/resource/大嘴巴	http://dbpedia.org/resource/Da_Mouth
-http://zh.dbpedia.org/resource/年度最佳學生	http://dbpedia.org/resource/Student_of_the_Year
+http://zh.dbpedia.org/resource/年度最佳學生	http://dbpedia.org/resource/StÞnt_of_the_Year
 http://zh.dbpedia.org/resource/Namidairo	http://dbpedia.org/resource/Namidairo
 http://zh.dbpedia.org/resource/陶尔·马坦·鲁阿克	http://dbpedia.org/resource/Taur_Matan_Ruak
 http://zh.dbpedia.org/resource/丹尼斯·里奇	http://dbpedia.org/resource/Dennis_Ritchie
@@ -13199,7 +13199,7 @@ http://zh.dbpedia.org/resource/颂猜·旺沙瓦	http://dbpedia.org/resource/Som
 http://zh.dbpedia.org/resource/波音747SP	http://dbpedia.org/resource/Boeing_747SP
 http://zh.dbpedia.org/resource/Victory巡回演唱会	http://dbpedia.org/resource/Victory_Tour_(The_Jacksons_tour)
 http://zh.dbpedia.org/resource/彼得·艾森曼	http://dbpedia.org/resource/Peter_Eisenman
-http://zh.dbpedia.org/resource/吉爾斯·都賽佩	http://dbpedia.org/resource/Gilles_Duceppe
+http://zh.dbpedia.org/resource/吉爾斯·都賽佩	http://dbpedia.org/resource/Gilles_DÎppe
 http://zh.dbpedia.org/resource/HD_72659_b	http://dbpedia.org/resource/HD_72659_b
 http://zh.dbpedia.org/resource/斯坦科·托多罗夫	http://dbpedia.org/resource/Stanko_Todorov
 http://zh.dbpedia.org/resource/金鍾旼	http://dbpedia.org/resource/Kim_Jong-min
@@ -13324,7 +13324,7 @@ http://zh.dbpedia.org/resource/冈比西斯二世	http://dbpedia.org/resource/Ca
 http://zh.dbpedia.org/resource/天主教馬那瓜總教區	http://dbpedia.org/resource/Roman_Catholic_Archdiocese_of_Managua
 http://zh.dbpedia.org/resource/尼保沙·馬連高域	http://dbpedia.org/resource/Nebojša_Marinković
 http://zh.dbpedia.org/resource/大社區	http://dbpedia.org/resource/Dashe_District
-http://zh.dbpedia.org/resource/柳本·贝罗夫	http://dbpedia.org/resource/Lyuben_Berov
+http://zh.dbpedia.org/resource/柳本·贝罗夫	http://dbpedia.org/resource/Ly¾n_Berov
 http://zh.dbpedia.org/resource/小龍女	http://dbpedia.org/resource/Xiaolongnü
 http://zh.dbpedia.org/resource/塞基狄亚努斯	http://dbpedia.org/resource/Sogdianus_of_Persia
 http://zh.dbpedia.org/resource/教宗维吉吕	http://dbpedia.org/resource/Pope_Vigilius
@@ -13368,7 +13368,7 @@ http://zh.dbpedia.org/resource/凱斯西儲大學	http://dbpedia.org/resource/Ca
 http://zh.dbpedia.org/resource/銮探隆·那瓦沙瓦	http://dbpedia.org/resource/Thawan_Thamrongnawasawat
 http://zh.dbpedia.org/resource/考特尼·霍奇斯	http://dbpedia.org/resource/Courtney_Hodges
 http://zh.dbpedia.org/resource/何韻詩	http://dbpedia.org/resource/Denise_Ho
-http://zh.dbpedia.org/resource/汉江_(中国)	http://dbpedia.org/resource/Han_River_(Shaanxi_and_Hubei)
+http://zh.dbpedia.org/resource/汉江_(中国)	http://dbpedia.org/resource/Han_River_(Shaanxi_and_H¾i)
 http://zh.dbpedia.org/resource/班加羅爾足球會	http://dbpedia.org/resource/Bengaluru_FC
 http://zh.dbpedia.org/resource/雷定五世	http://dbpedia.org/resource/Pope_Celestine_V
 http://zh.dbpedia.org/resource/琳達·麥馬漢	http://dbpedia.org/resource/Linda_McMahon
@@ -13421,7 +13421,7 @@ http://zh.dbpedia.org/resource/兰州市	http://dbpedia.org/resource/Lanzhou
 http://zh.dbpedia.org/resource/拉玛四世	http://dbpedia.org/resource/Mongkut
 http://zh.dbpedia.org/resource/阿根廷別為我哭泣_(原聲帶)	http://dbpedia.org/resource/Evita_(soundtrack)
 http://zh.dbpedia.org/resource/RKB每日放送	http://dbpedia.org/resource/RKB_Mainichi_Broadcasting
-http://zh.dbpedia.org/resource/跨灣隧道	http://dbpedia.org/resource/Transbay_Tube
+http://zh.dbpedia.org/resource/跨灣隧道	http://dbpedia.org/resource/Transbay_T¾
 http://zh.dbpedia.org/resource/音樂Gatas	http://dbpedia.org/resource/Ongaku_Gatas
 http://zh.dbpedia.org/resource/CHE.R.RY	http://dbpedia.org/resource/Cherry_(Yui_song)
 http://zh.dbpedia.org/resource/芬蘭語支	http://dbpedia.org/resource/Finnic_languages
@@ -13488,7 +13488,7 @@ http://zh.dbpedia.org/resource/聖塔克魯茲_(加利福尼亞州)	http://dbped
 http://zh.dbpedia.org/resource/穆拉德一世	http://dbpedia.org/resource/Murad_I
 http://zh.dbpedia.org/resource/爱迪生	http://dbpedia.org/resource/Thomas_Edison
 http://zh.dbpedia.org/resource/神舟八号	http://dbpedia.org/resource/Shenzhou_8
-http://zh.dbpedia.org/resource/澀谷昴	http://dbpedia.org/resource/Subaru_Shibutani
+http://zh.dbpedia.org/resource/澀谷昴	http://dbpedia.org/resource/Sºru_Shibutani
 http://zh.dbpedia.org/resource/瓜拉尼語	http://dbpedia.org/resource/Guarani_language
 http://zh.dbpedia.org/resource/Sailfish_OS	http://dbpedia.org/resource/Sailfish_OS
 http://zh.dbpedia.org/resource/印度大奖赛	http://dbpedia.org/resource/Indian_Grand_Prix
@@ -13619,7 +13619,7 @@ http://zh.dbpedia.org/resource/巴音郭楞蒙古自治州	http://dbpedia.org/re
 http://zh.dbpedia.org/resource/國際航空集團	http://dbpedia.org/resource/International_Airlines_Group
 http://zh.dbpedia.org/resource/威廉·道格拉斯	http://dbpedia.org/resource/William_O._Douglas
 http://zh.dbpedia.org/resource/伊拉克库尔德斯坦	http://dbpedia.org/resource/Iraqi_Kurdistan
-http://zh.dbpedia.org/resource/茀絲亞·福特	http://dbpedia.org/resource/Fawzia_Fuad_of_Egypt
+http://zh.dbpedia.org/resource/茀絲亞·福特	http://dbpedia.org/resource/Fawzia_F­_of_Egypt
 http://zh.dbpedia.org/resource/埃曼努埃莱·菲利伯托	http://dbpedia.org/resource/Emanuele_Filiberto_of_Savoy,_Prince_of_Venice
 http://zh.dbpedia.org/resource/克莉絲汀·阿奎萊拉	http://dbpedia.org/resource/Christina_Aguilera
 http://zh.dbpedia.org/resource/以色列國防軍	http://dbpedia.org/resource/Israel_Defense_Forces
@@ -13682,7 +13682,7 @@ http://zh.dbpedia.org/resource/邓迪大学	http://dbpedia.org/resource/Universi
 http://zh.dbpedia.org/resource/罗志军	http://dbpedia.org/resource/Luo_Zhijun
 http://zh.dbpedia.org/resource/VOICE_(Perfume單曲)	http://dbpedia.org/resource/Voice_(Perfume_song)
 http://zh.dbpedia.org/resource/WILD/Dr.	http://dbpedia.org/resource/Wild_(Namie_Amuro_song)
-http://zh.dbpedia.org/resource/DigiCube	http://dbpedia.org/resource/DigiCube
+http://zh.dbpedia.org/resource/DigiC¾	http://dbpedia.org/resource/DigiC¾
 http://zh.dbpedia.org/resource/塞琉古一世	http://dbpedia.org/resource/Seleucus_I_Nicator
 http://zh.dbpedia.org/resource/奥拉夫二世·哈康松	http://dbpedia.org/resource/Olaf_II_of_Denmark
 http://zh.dbpedia.org/resource/RQ-4全球鷹偵察機	http://dbpedia.org/resource/Northrop_Grumman_RQ-4_Global_Hawk
@@ -13855,7 +13855,7 @@ http://zh.dbpedia.org/resource/雅盖沃	http://dbpedia.org/resource/Władysław
 http://zh.dbpedia.org/resource/印度足球甲级联赛	http://dbpedia.org/resource/I-League
 http://zh.dbpedia.org/resource/勞頓·科林斯	http://dbpedia.org/resource/J._Lawton_Collins
 http://zh.dbpedia.org/resource/Spellbound_(專輯)	http://dbpedia.org/resource/Spellbound_(Paula_Abdul_album)
-http://zh.dbpedia.org/resource/布爾漢努丁·拉巴尼	http://dbpedia.org/resource/Burhanuddin_Rabbani
+http://zh.dbpedia.org/resource/布爾漢努丁·拉巴尼	http://dbpedia.org/resource/BurhanÝin_Rabbani
 http://zh.dbpedia.org/resource/团结名单－红绿联盟	http://dbpedia.org/resource/Red-Green_Alliance_(Denmark)
 http://zh.dbpedia.org/resource/哈桑二世_(摩洛哥)	http://dbpedia.org/resource/Hassan_II_of_Morocco
 http://zh.dbpedia.org/resource/I_remember_you	http://dbpedia.org/resource/I_Remember_You_(Yui_song)
@@ -13902,7 +13902,7 @@ http://zh.dbpedia.org/resource/圆石滩	http://dbpedia.org/resource/Pebble_Beac
 http://zh.dbpedia.org/resource/週刊YOUNG_JUMP	http://dbpedia.org/resource/Weekly_Young_Jump
 http://zh.dbpedia.org/resource/電子戰隊電磁人	http://dbpedia.org/resource/Denshi_Sentai_Denziman
 http://zh.dbpedia.org/resource/上海浦东国际机场	http://dbpedia.org/resource/Shanghai_Pudong_International_Airport
-http://zh.dbpedia.org/resource/瓜迪斯	http://dbpedia.org/resource/Guadix
+http://zh.dbpedia.org/resource/瓜迪斯	http://dbpedia.org/resource/G­ix
 http://zh.dbpedia.org/resource/丹波市	http://dbpedia.org/resource/Tamba,_Hyōgo
 http://zh.dbpedia.org/resource/营口市	http://dbpedia.org/resource/Yingkou
 http://zh.dbpedia.org/resource/卡拉卡瓦	http://dbpedia.org/resource/Kalākaua
@@ -13943,7 +13943,7 @@ http://zh.dbpedia.org/resource/祖鲁王国	http://dbpedia.org/resource/Zulu_Kin
 http://zh.dbpedia.org/resource/阮惠	http://dbpedia.org/resource/Nguyễn_Huệ
 http://zh.dbpedia.org/resource/雅库特语	http://dbpedia.org/resource/Yakut_language
 http://zh.dbpedia.org/resource/彼爾姆語支	http://dbpedia.org/resource/Permic_languages
-http://zh.dbpedia.org/resource/艾沙比阿拉比足球會	http://dbpedia.org/resource/Al_Shabab_(Dubai)
+http://zh.dbpedia.org/resource/艾沙比阿拉比足球會	http://dbpedia.org/resource/Al_Shabab_(Dºi)
 http://zh.dbpedia.org/resource/阮生雄	http://dbpedia.org/resource/Nguyễn_Sinh_Hùng
 http://zh.dbpedia.org/resource/東因帕爾縣	http://dbpedia.org/resource/Imphal_East_district
 http://zh.dbpedia.org/resource/制服模特兒	http://dbpedia.org/resource/Seifuku_no_Mannequin
@@ -14019,13 +14019,13 @@ http://zh.dbpedia.org/resource/克卜勒太空望遠鏡	http://dbpedia.org/resou
 http://zh.dbpedia.org/resource/岡谷市	http://dbpedia.org/resource/Okaya,_Nagano
 http://zh.dbpedia.org/resource/男女共學_(音樂團體)	http://dbpedia.org/resource/Coed_School
 http://zh.dbpedia.org/resource/伊莲妮公主_(黑森和莱茵)	http://dbpedia.org/resource/Princess_Irene_of_Hesse_and_by_Rhine
-http://zh.dbpedia.org/resource/巴勃罗·聂鲁达	http://dbpedia.org/resource/Pablo_Neruda
+http://zh.dbpedia.org/resource/巴勃罗·聂鲁达	http://dbpedia.org/resource/Pablo_NerÚ
 http://zh.dbpedia.org/resource/WTA巡迴賽錦標賽	http://dbpedia.org/resource/WTA_Tour_Championships
 http://zh.dbpedia.org/resource/K-ON！輕音部	http://dbpedia.org/resource/K-On!
 http://zh.dbpedia.org/resource/徐才厚	http://dbpedia.org/resource/Xu_Caihou
 http://zh.dbpedia.org/resource/忽冷忽热	http://dbpedia.org/resource/Hot_n_Cold
 http://zh.dbpedia.org/resource/東京小子	http://dbpedia.org/resource/Tokio_(band)
-http://zh.dbpedia.org/resource/IPod_shuffle	http://dbpedia.org/resource/IPod_Shuffle
+http://zh.dbpedia.org/resource/IPod_shÿle	http://dbpedia.org/resource/IPod_Shÿle
 http://zh.dbpedia.org/resource/1973–74年歐洲盃賽冠軍盃	http://dbpedia.org/resource/1973–74_European_Cup_Winners'_Cup
 http://zh.dbpedia.org/resource/秘境探險2：盜亦有道	http://dbpedia.org/resource/Uncharted_2:_Among_Thieves
 http://zh.dbpedia.org/resource/舞力全開3D_(原聲帶)	http://dbpedia.org/resource/Step_Up_3D_(soundtrack)
@@ -14084,7 +14084,7 @@ http://zh.dbpedia.org/resource/根府川站	http://dbpedia.org/resource/Nebukawa
 http://zh.dbpedia.org/resource/尚圓王	http://dbpedia.org/resource/Shō_En
 http://zh.dbpedia.org/resource/国际汽车联合会	http://dbpedia.org/resource/Fédération_Internationale_de_l'Automobile
 http://zh.dbpedia.org/resource/艾茵·兰德	http://dbpedia.org/resource/Ayn_Rand
-http://zh.dbpedia.org/resource/純元王后	http://dbpedia.org/resource/Queen_Sunwon
+http://zh.dbpedia.org/resource/純元王后	http://dbpedia.org/resource/Qîn_Sunwon
 http://zh.dbpedia.org/resource/普宁市	http://dbpedia.org/resource/Puning
 http://zh.dbpedia.org/resource/陈可辛	http://dbpedia.org/resource/Peter_Chan
 http://zh.dbpedia.org/resource/古斯塔夫·施特雷澤曼	http://dbpedia.org/resource/Gustav_Stresemann
@@ -14100,7 +14100,7 @@ http://zh.dbpedia.org/resource/八千代市	http://dbpedia.org/resource/Yachiyo,
 http://zh.dbpedia.org/resource/許茹芸	http://dbpedia.org/resource/Valen_Hsu
 http://zh.dbpedia.org/resource/花邊教主_(電視劇)	http://dbpedia.org/resource/Gossip_Girl
 http://zh.dbpedia.org/resource/察尼斯·察内塔基斯	http://dbpedia.org/resource/Tzannis_Tzannetakis
-http://zh.dbpedia.org/resource/扬·聂鲁达	http://dbpedia.org/resource/Jan_Neruda
+http://zh.dbpedia.org/resource/扬·聂鲁达	http://dbpedia.org/resource/Jan_NerÚ
 http://zh.dbpedia.org/resource/歼-8	http://dbpedia.org/resource/Shenyang_J-8
 http://zh.dbpedia.org/resource/哥德語	http://dbpedia.org/resource/Gothic_language
 http://zh.dbpedia.org/resource/傅恒	http://dbpedia.org/resource/Fuheng
@@ -14177,7 +14177,7 @@ http://zh.dbpedia.org/resource/劳拉·钦奇利亚	http://dbpedia.org/resource/
 http://zh.dbpedia.org/resource/高知县	http://dbpedia.org/resource/Kōchi_Prefecture
 http://zh.dbpedia.org/resource/連環粉紅命案	http://dbpedia.org/resource/A_Study_in_Pink
 http://zh.dbpedia.org/resource/伽利略·伽利莱	http://dbpedia.org/resource/Galileo_Galilei
-http://zh.dbpedia.org/resource/杰弗里·乔叟	http://dbpedia.org/resource/Geoffrey_Chaucer
+http://zh.dbpedia.org/resource/杰弗里·乔叟	http://dbpedia.org/resource/Geoffrey_ChaÎr
 http://zh.dbpedia.org/resource/琵琶湖	http://dbpedia.org/resource/Lake_Biwa
 http://zh.dbpedia.org/resource/金智媛	http://dbpedia.org/resource/Kim_Ji-won_(actress)
 http://zh.dbpedia.org/resource/阿卡德語	http://dbpedia.org/resource/Akkadian_language
@@ -14271,7 +14271,7 @@ http://zh.dbpedia.org/resource/市原市	http://dbpedia.org/resource/Ichihara,_C
 http://zh.dbpedia.org/resource/動物星球頻道	http://dbpedia.org/resource/Animal_Planet
 http://zh.dbpedia.org/resource/三條市	http://dbpedia.org/resource/Sanjō,_Niigata
 http://zh.dbpedia.org/resource/费迪南多二世_(两西西里)	http://dbpedia.org/resource/Ferdinand_II_of_the_Two_Sicilies
-http://zh.dbpedia.org/resource/福阿德·西尼乌拉	http://dbpedia.org/resource/Fouad_Siniora
+http://zh.dbpedia.org/resource/福阿德·西尼乌拉	http://dbpedia.org/resource/Fo­_Siniora
 http://zh.dbpedia.org/resource/乔瓦尼·兰萨	http://dbpedia.org/resource/Giovanni_Lanza
 http://zh.dbpedia.org/resource/Distance	http://dbpedia.org/resource/Distance_(Utada_Hikaru_album)
 http://zh.dbpedia.org/resource/马恩省	http://dbpedia.org/resource/Marne
@@ -14287,7 +14287,7 @@ http://zh.dbpedia.org/resource/拉纳辛哈·普雷马达萨	http://dbpedia.org/
 http://zh.dbpedia.org/resource/萬曆朝鮮之役	http://dbpedia.org/resource/Japanese_invasions_of_Korea_(1592–98)
 http://zh.dbpedia.org/resource/基秦拿	http://dbpedia.org/resource/Kitchener,_Ontario
 http://zh.dbpedia.org/resource/恩里克一世_(帕尔马)	http://dbpedia.org/resource/Henry,_Duke_of_Parma
-http://zh.dbpedia.org/resource/安順王后	http://dbpedia.org/resource/Queen_Ansun
+http://zh.dbpedia.org/resource/安順王后	http://dbpedia.org/resource/Qîn_Ansun
 http://zh.dbpedia.org/resource/广州东站_(地铁)	http://dbpedia.org/resource/Guangzhou_East_Railway_Station_(metro)
 http://zh.dbpedia.org/resource/文森特·尼科尔斯	http://dbpedia.org/resource/Vincent_Nichols
 http://zh.dbpedia.org/resource/文斯·麥馬漢	http://dbpedia.org/resource/Vince_McMahon
@@ -14300,7 +14300,7 @@ http://zh.dbpedia.org/resource/伦敦地铁	http://dbpedia.org/resource/London_U
 http://zh.dbpedia.org/resource/鄧國威	http://dbpedia.org/resource/Paul_Tang
 http://zh.dbpedia.org/resource/Oculus_VR	http://dbpedia.org/resource/Oculus_VR
 http://zh.dbpedia.org/resource/奥黑尔国际机场	http://dbpedia.org/resource/O'Hare_International_Airport
-http://zh.dbpedia.org/resource/黄金海岸_(澳大利亚)	http://dbpedia.org/resource/Gold_Coast,_Queensland
+http://zh.dbpedia.org/resource/黄金海岸_(澳大利亚)	http://dbpedia.org/resource/Gold_Coast,_Qînsland
 http://zh.dbpedia.org/resource/吉格梅·凯萨尔·纳姆耶尔·旺楚克	http://dbpedia.org/resource/Jigme_Khesar_Namgyel_Wangchuck
 http://zh.dbpedia.org/resource/愛黛兒	http://dbpedia.org/resource/Adele
 http://zh.dbpedia.org/resource/葉國謙	http://dbpedia.org/resource/Ip_Kwok-him
@@ -14381,7 +14381,7 @@ http://zh.dbpedia.org/resource/黄浦江	http://dbpedia.org/resource/Huangpu_Riv
 http://zh.dbpedia.org/resource/福岡市地下鐵機場線	http://dbpedia.org/resource/Kūkō_Line_(Fukuoka_City_Subway)
 http://zh.dbpedia.org/resource/曲阜市	http://dbpedia.org/resource/Qufu
 http://zh.dbpedia.org/resource/丰台区	http://dbpedia.org/resource/Fengtai_District
-http://zh.dbpedia.org/resource/今井翼	http://dbpedia.org/resource/Tsubasa_Imai
+http://zh.dbpedia.org/resource/今井翼	http://dbpedia.org/resource/Tsºsa_Imai
 http://zh.dbpedia.org/resource/尼古拉·列维切夫	http://dbpedia.org/resource/Nikolai_Levichev
 http://zh.dbpedia.org/resource/查瓦卡諾語	http://dbpedia.org/resource/Chavacano
 http://zh.dbpedia.org/resource/深愛	http://dbpedia.org/resource/Shin'ai
@@ -14478,7 +14478,7 @@ http://zh.dbpedia.org/resource/Gaining_through_losing	http://dbpedia.org/resourc
 http://zh.dbpedia.org/resource/Monolith_Soft	http://dbpedia.org/resource/Monolith_Soft
 http://zh.dbpedia.org/resource/劳尔·阿方辛	http://dbpedia.org/resource/Raúl_Alfonsín
 http://zh.dbpedia.org/resource/HD_45350_b	http://dbpedia.org/resource/HD_45350_b
-http://zh.dbpedia.org/resource/吸血鬼猎人巴菲_(第四季)	http://dbpedia.org/resource/Buffy_the_Vampire_Slayer_(season_4)
+http://zh.dbpedia.org/resource/吸血鬼猎人巴菲_(第四季)	http://dbpedia.org/resource/Bÿy_the_Vampire_Slayer_(season_4)
 http://zh.dbpedia.org/resource/卢布林	http://dbpedia.org/resource/Lublin
 http://zh.dbpedia.org/resource/安德烈·卢卡诺夫	http://dbpedia.org/resource/Andrey_Lukanov
 http://zh.dbpedia.org/resource/高橋愛	http://dbpedia.org/resource/Ai_Takahashi
@@ -14516,7 +14516,7 @@ http://zh.dbpedia.org/resource/劉俊相	http://dbpedia.org/resource/Yoo_Jun-san
 http://zh.dbpedia.org/resource/马库斯·李锡尼·克拉苏	http://dbpedia.org/resource/Marcus_Licinius_Crassus
 http://zh.dbpedia.org/resource/仙台市	http://dbpedia.org/resource/Sendai
 http://zh.dbpedia.org/resource/老友记_(第七季)	http://dbpedia.org/resource/Friends_(season_7)
-http://zh.dbpedia.org/resource/文定王后	http://dbpedia.org/resource/Queen_Munjeong
+http://zh.dbpedia.org/resource/文定王后	http://dbpedia.org/resource/Qîn_Munjeong
 http://zh.dbpedia.org/resource/波士頓紅襪	http://dbpedia.org/resource/Boston_Red_Sox
 http://zh.dbpedia.org/resource/小港區	http://dbpedia.org/resource/Siaogang_District
 http://zh.dbpedia.org/resource/豪斯医生	http://dbpedia.org/resource/House_(TV_series)
@@ -14531,9 +14531,9 @@ http://zh.dbpedia.org/resource/泛希腊社会主义运动	http://dbpedia.org/re
 http://zh.dbpedia.org/resource/杭州东站	http://dbpedia.org/resource/Hangzhou_East_Railway_Station
 http://zh.dbpedia.org/resource/教宗思伟	http://dbpedia.org/resource/Pope_Severinus
 http://zh.dbpedia.org/resource/英伟达	http://dbpedia.org/resource/Nvidia
-http://zh.dbpedia.org/resource/超電子生化人	http://dbpedia.org/resource/Choudenshi_Bioman
-http://zh.dbpedia.org/resource/格洛斯特	http://dbpedia.org/resource/Gloucester
-http://zh.dbpedia.org/resource/速霸陸360	http://dbpedia.org/resource/Subaru_360
+http://zh.dbpedia.org/resource/超電子生化人	http://dbpedia.org/resource/ChoÞnshi_Bioman
+http://zh.dbpedia.org/resource/格洛斯特	http://dbpedia.org/resource/GloÎster
+http://zh.dbpedia.org/resource/速霸陸360	http://dbpedia.org/resource/Sºru_360
 http://zh.dbpedia.org/resource/超獸戰隊生命人	http://dbpedia.org/resource/Choujuu_Sentai_Liveman
 http://zh.dbpedia.org/resource/圣菲_(新墨西哥州)	http://dbpedia.org/resource/Santa_Fe,_New_Mexico
 http://zh.dbpedia.org/resource/图尼纳	http://dbpedia.org/resource/Truganina,_Victoria
@@ -14549,7 +14549,7 @@ http://zh.dbpedia.org/resource/保守人民党_(丹麦)	http://dbpedia.org/resou
 http://zh.dbpedia.org/resource/秋日童話	http://dbpedia.org/resource/Autumn_in_My_Heart
 http://zh.dbpedia.org/resource/加那利大型望远镜	http://dbpedia.org/resource/Gran_Telescopio_Canarias
 http://zh.dbpedia.org/resource/雅基馬	http://dbpedia.org/resource/Yakima,_Washington
-http://zh.dbpedia.org/resource/第一代萨福克公爵亨利·格雷	http://dbpedia.org/resource/Henry_Grey,_1st_Duke_of_Suffolk
+http://zh.dbpedia.org/resource/第一代萨福克公爵亨利·格雷	http://dbpedia.org/resource/Henry_Grey,_1st_Duke_of_Sÿolk
 http://zh.dbpedia.org/resource/小田原站	http://dbpedia.org/resource/Odawara_Station
 http://zh.dbpedia.org/resource/范寬	http://dbpedia.org/resource/Fan_Kuan
 http://zh.dbpedia.org/resource/安道爾甲組足球聯賽	http://dbpedia.org/resource/Primera_Divisió
@@ -14668,7 +14668,7 @@ http://zh.dbpedia.org/resource/斯沃司	http://dbpedia.org/resource/Swords,_Dub
 http://zh.dbpedia.org/resource/保罗·塞尚	http://dbpedia.org/resource/Paul_Cézanne
 http://zh.dbpedia.org/resource/萬華區	http://dbpedia.org/resource/Wanhua_District
 http://zh.dbpedia.org/resource/钱达尔勒·阿里帕夏	http://dbpedia.org/resource/Çandarlı_Ali_Pasha
-http://zh.dbpedia.org/resource/吸血鬼猎人巴菲_(第三季)	http://dbpedia.org/resource/Buffy_the_Vampire_Slayer_(season_3)
+http://zh.dbpedia.org/resource/吸血鬼猎人巴菲_(第三季)	http://dbpedia.org/resource/Bÿy_the_Vampire_Slayer_(season_3)
 http://zh.dbpedia.org/resource/亞歷山大大帝於巴爾幹的征戰	http://dbpedia.org/resource/Alexander's_Balkan_campaign
 http://zh.dbpedia.org/resource/兰辛_(密歇根州)	http://dbpedia.org/resource/Lansing,_Michigan
 http://zh.dbpedia.org/resource/阿爾巴尼亞民主黨	http://dbpedia.org/resource/Democratic_Party_of_Albania
@@ -14713,9 +14713,9 @@ http://zh.dbpedia.org/resource/阿拉伯足球協會聯會	http://dbpedia.org/re
 http://zh.dbpedia.org/resource/弗雷斯诺	http://dbpedia.org/resource/Fresno,_California
 http://zh.dbpedia.org/resource/艾哈迈德·哈桑·贝克尔	http://dbpedia.org/resource/Ahmed_Hassan_al-Bakr
 http://zh.dbpedia.org/resource/法國海軍	http://dbpedia.org/resource/French_Navy
-http://zh.dbpedia.org/resource/安提瓜和巴布达	http://dbpedia.org/resource/Antigua_and_Barbuda
+http://zh.dbpedia.org/resource/安提瓜和巴布达	http://dbpedia.org/resource/Antigua_and_BarbÚ
 http://zh.dbpedia.org/resource/科爾馬克·墨菲-奧康納	http://dbpedia.org/resource/Cormac_Murphy-O'Connor
-http://zh.dbpedia.org/resource/YouTube	http://dbpedia.org/resource/YouTube
+http://zh.dbpedia.org/resource/YouT¾	http://dbpedia.org/resource/YouT¾
 http://zh.dbpedia.org/resource/山西汾酒猛龙篮球俱乐部	http://dbpedia.org/resource/Shanxi_Brave_Dragons
 http://zh.dbpedia.org/resource/蓮花軟體	http://dbpedia.org/resource/Lotus_Software
 http://zh.dbpedia.org/resource/柯南·奥布莱恩	http://dbpedia.org/resource/Conan_O'Brien
@@ -14742,7 +14742,7 @@ http://zh.dbpedia.org/resource/FAIRY_TAIL	http://dbpedia.org/resource/Fairy_Tail
 http://zh.dbpedia.org/resource/法萨卢斯战役	http://dbpedia.org/resource/Battle_of_Pharsalus
 http://zh.dbpedia.org/resource/復興航空	http://dbpedia.org/resource/TransAsia_Airways
 http://zh.dbpedia.org/resource/全美超級模特兒新秀大賽_(第十季)	http://dbpedia.org/resource/America's_Next_Top_Model_(cycle_10)
-http://zh.dbpedia.org/resource/史蒂夫·麦奎因_(导演)	http://dbpedia.org/resource/Steve_McQueen_(director)
+http://zh.dbpedia.org/resource/史蒂夫·麦奎因_(导演)	http://dbpedia.org/resource/Steve_McQîn_(director)
 http://zh.dbpedia.org/resource/罗斯科·希伦科特	http://dbpedia.org/resource/Roscoe_H._Hillenkoetter
 http://zh.dbpedia.org/resource/米洛·久卡諾維奇	http://dbpedia.org/resource/Milo_Đukanović
 http://zh.dbpedia.org/resource/阿波罗8号	http://dbpedia.org/resource/Apollo_8
@@ -14756,7 +14756,7 @@ http://zh.dbpedia.org/resource/动物	http://dbpedia.org/resource/Animal
 http://zh.dbpedia.org/resource/安托諾夫An-24	http://dbpedia.org/resource/Antonov_An-24
 http://zh.dbpedia.org/resource/亞伯公園賽道	http://dbpedia.org/resource/Melbourne_Grand_Prix_Circuit
 http://zh.dbpedia.org/resource/战斗的爱尔兰人	http://dbpedia.org/resource/The_Fighting_Irish
-http://zh.dbpedia.org/resource/速霸陸Sambar	http://dbpedia.org/resource/Subaru_Sambar
+http://zh.dbpedia.org/resource/速霸陸Sambar	http://dbpedia.org/resource/Sºru_Sambar
 http://zh.dbpedia.org/resource/联邦议会_(瑞士)	http://dbpedia.org/resource/Federal_Assembly_(Switzerland)
 http://zh.dbpedia.org/resource/韓圓	http://dbpedia.org/resource/South_Korean_won
 http://zh.dbpedia.org/resource/路納利羅	http://dbpedia.org/resource/Lunalilo
@@ -14780,7 +14780,7 @@ http://zh.dbpedia.org/resource/约翰·巴里奥	http://dbpedia.org/resource/Joh
 http://zh.dbpedia.org/resource/南越国	http://dbpedia.org/resource/Nanyue
 http://zh.dbpedia.org/resource/有人爱	http://dbpedia.org/resource/Somebody_to_Love_(30_Rock)
 http://zh.dbpedia.org/resource/信義線	http://dbpedia.org/resource/Xinyi_Line_(Taipei_Metro)
-http://zh.dbpedia.org/resource/蓮田市	http://dbpedia.org/resource/Hasuda,_Saitama
+http://zh.dbpedia.org/resource/蓮田市	http://dbpedia.org/resource/HasÚ,_Saitama
 http://zh.dbpedia.org/resource/Growing_of_my_heart	http://dbpedia.org/resource/Growing_of_My_Heart
 http://zh.dbpedia.org/resource/于格·卡佩	http://dbpedia.org/resource/Hugh_Capet
 http://zh.dbpedia.org/resource/悲傷的Twilight	http://dbpedia.org/resource/Kanashimi_Twilight
@@ -14897,7 +14897,7 @@ http://zh.dbpedia.org/resource/小松市	http://dbpedia.org/resource/Komatsu,_Is
 http://zh.dbpedia.org/resource/兩天一夜	http://dbpedia.org/resource/2_Days_&_1_Night
 http://zh.dbpedia.org/resource/瑞波	http://dbpedia.org/resource/Shwebo
 http://zh.dbpedia.org/resource/金县_(华盛顿州)	http://dbpedia.org/resource/King_County,_Washington
-http://zh.dbpedia.org/resource/筑波市	http://dbpedia.org/resource/Tsukuba,_Ibaraki
+http://zh.dbpedia.org/resource/筑波市	http://dbpedia.org/resource/Tsukº,_Ibaraki
 http://zh.dbpedia.org/resource/家燕	http://dbpedia.org/resource/Barn_swallow
 http://zh.dbpedia.org/resource/亚历山大·塔马尼扬	http://dbpedia.org/resource/Alexander_Tamanian
 http://zh.dbpedia.org/resource/扬帕河	http://dbpedia.org/resource/Yampa_River
@@ -14951,7 +14951,7 @@ http://zh.dbpedia.org/resource/鰂魚涌	http://dbpedia.org/resource/Quarry_Bay
 http://zh.dbpedia.org/resource/北京市地铁运营有限公司	http://dbpedia.org/resource/Beijing_Mass_Transit_Railway_Operation_Corporation_Limited
 http://zh.dbpedia.org/resource/阿魯渾	http://dbpedia.org/resource/Arghun
 http://zh.dbpedia.org/resource/香港聖公會	http://dbpedia.org/resource/Hong_Kong_Sheng_Kung_Hui
-http://zh.dbpedia.org/resource/章敬王后	http://dbpedia.org/resource/Queen_Janggyeong
+http://zh.dbpedia.org/resource/章敬王后	http://dbpedia.org/resource/Qîn_Janggyeong
 http://zh.dbpedia.org/resource/攻殼機動隊	http://dbpedia.org/resource/Ghost_in_the_Shell
 http://zh.dbpedia.org/resource/马里波恩	http://dbpedia.org/resource/Marylebone
 http://zh.dbpedia.org/resource/童话镇	http://dbpedia.org/resource/Once_Upon_a_Time_(TV_series)
@@ -14963,7 +14963,7 @@ http://zh.dbpedia.org/resource/吐蕃	http://dbpedia.org/resource/Tibetan_Empire
 http://zh.dbpedia.org/resource/萨非王朝	http://dbpedia.org/resource/Safavid_dynasty
 http://zh.dbpedia.org/resource/歐洲之星	http://dbpedia.org/resource/Eurostar
 http://zh.dbpedia.org/resource/BMW_1系列	http://dbpedia.org/resource/BMW_1_Series
-http://zh.dbpedia.org/resource/南蘇丹	http://dbpedia.org/resource/South_Sudan
+http://zh.dbpedia.org/resource/南蘇丹	http://dbpedia.org/resource/South_SÚn
 http://zh.dbpedia.org/resource/桶川市	http://dbpedia.org/resource/Okegawa,_Saitama
 http://zh.dbpedia.org/resource/老友记_(第八季)	http://dbpedia.org/resource/Friends_(season_8)
 http://zh.dbpedia.org/resource/Lollipop@F	http://dbpedia.org/resource/Lollipop_F

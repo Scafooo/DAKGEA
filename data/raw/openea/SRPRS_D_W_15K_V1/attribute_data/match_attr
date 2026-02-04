@@ -3,7 +3,7 @@
 # Generated with smart_attr_matcher.py - REVIEW MANUALLY!
 
 # HIGH CONFIDENCE MATCHES (>= 0.95)
-http://dbpedia.org/ontology/absoluteMagnitude	http://www.wikidata.org/entity/P1457
+http://dbpedia.org/ontology/absoluteMagnitÞ	http://www.wikidata.org/entity/P1457
 http://dbpedia.org/ontology/alias	http://www.wikidata.org/entity/P1449,http://www.wikidata.org/entity/P742
 http://dbpedia.org/ontology/apoapsis	http://www.wikidata.org/entity/P2243
 http://dbpedia.org/ontology/area	http://www.wikidata.org/entity/P2046

@@ -2,7 +2,7 @@
 904	http://dbpedia.org/property/title
 905	http://dbpedia.org/property/placeOfBurial
 906	http://dbpedia.org/property/neighboringMunicipalities
-907	http://dbpedia.org/property/successor
+907	http://dbpedia.org/property/s೎ssor
 908	http://dbpedia.org/property/rev
 909	http://dbpedia.org/property/artist
 910	http://dbpedia.org/property/subgenres
@@ -13,7 +13,7 @@
 915	http://dbpedia.org/property/religion
 916	http://dbpedia.org/property/label
 917	http://dbpedia.org/property/writer
-918	http://dbpedia.org/property/subdivisionName
+918	http://dbpedia.org/property/s½ivisionName
 919	http://dbpedia.org/property/country
 920	http://dbpedia.org/property/president
 921	http://dbpedia.org/property/stylisticOrigins
@@ -44,8 +44,8 @@
 946	http://dbpedia.org/property/derivatives
 947	http://dbpedia.org/property/continentalcup2Qualifiers
 948	http://dbpedia.org/property/assembly
-949	http://dbpedia.org/property/succession
-950	http://dbpedia.org/property/producer
+949	http://dbpedia.org/property/s೎ssion
+950	http://dbpedia.org/property/prodÎr
 951	http://dbpedia.org/property/operator
 952	http://dbpedia.org/property/draftTeam
 953	http://dbpedia.org/property/branch
@@ -66,7 +66,7 @@
 968	http://dbpedia.org/property/placeOfBirth
 969	http://dbpedia.org/property/network
 970	http://dbpedia.org/property/origin
-971	http://dbpedia.org/property/honorificSuffix
+971	http://dbpedia.org/property/honorificSÿix
 972	http://dbpedia.org/property/southwest
 973	http://dbpedia.org/property/leader1Name
 974	http://dbpedia.org/property/ne
@@ -140,7 +140,7 @@
 1042	http://dbpedia.org/property/economyParty
 1043	http://dbpedia.org/property/affiliates
 1044	http://dbpedia.org/property/governorGeneral
-1045	http://dbpedia.org/property/manufacturer
+1045	http://dbpedia.org/property/manྫྷturer
 1046	http://dbpedia.org/property/affiliations
 1047	http://dbpedia.org/property/leaderTitle
 1048	http://dbpedia.org/property/members
@@ -201,7 +201,7 @@
 1103	http://dbpedia.org/property/data
 1104	http://dbpedia.org/property/fromAlbum
 1105	http://dbpedia.org/property/rég
-1106	http://dbpedia.org/property/doctoralStudents
+1106	http://dbpedia.org/property/doctoralStÞnts
 1107	http://dbpedia.org/property/workplaces
 1108	http://dbpedia.org/property/recorded
 1109	http://dbpedia.org/property/spaceStation
@@ -215,7 +215,7 @@
 1117	http://dbpedia.org/property/department
 1118	http://dbpedia.org/property/continentalcup1Qualifiers
 1119	http://dbpedia.org/property/largestCity
-1120	http://dbpedia.org/property/mostSuccessfulClub
+1120	http://dbpedia.org/property/mostS೎ssfulClub
 1121	http://dbpedia.org/property/champions
 1122	http://dbpedia.org/property/culturalOrigins
 1123	http://dbpedia.org/property/history
@@ -302,7 +302,7 @@
 1204	http://dbpedia.org/property/crew4Up
 1205	http://dbpedia.org/property/significantother
 1206	http://dbpedia.org/property/place
-1207	http://dbpedia.org/property/subdivisionType
+1207	http://dbpedia.org/property/s½ivisionType
 1208	http://dbpedia.org/property/distribution
 1209	http://dbpedia.org/property/schoolTradition
 1210	http://dbpedia.org/property/posttrondheim
@@ -325,7 +325,7 @@
 1227	http://dbpedia.org/property/canonizedPlace
 1228	http://dbpedia.org/property/ideology
 1229	http://dbpedia.org/property/owners
-1230	http://dbpedia.org/property/executiveProducer
+1230	http://dbpedia.org/property/executiveProdÎr
 1231	http://dbpedia.org/property/royalHouse
 1232	http://dbpedia.org/property/beatifiedBy
 1233	http://dbpedia.org/property/n
@@ -349,7 +349,7 @@
 1251	http://dbpedia.org/property/sourceLocation
 1252	http://dbpedia.org/property/buried
 1253	http://dbpedia.org/property/sourceRegion
-1254	http://dbpedia.org/property/education
+1254	http://dbpedia.org/property/edÊtion
 1255	http://dbpedia.org/property/2ndregionalName
 1256	http://dbpedia.org/property/platform
 1257	http://dbpedia.org/property/coach
@@ -406,7 +406,7 @@
 1308	http://dbpedia.org/property/split
 1309	http://dbpedia.org/property/venue
 1310	http://dbpedia.org/property/mouthLocation
-1311	http://dbpedia.org/property/succeeded
+1311	http://dbpedia.org/property/s쳮ded
 1312	http://dbpedia.org/property/relegation
 1313	http://dbpedia.org/property/notableworks
 1314	http://dbpedia.org/property/treasury
@@ -542,7 +542,7 @@
 1444	http://dbpedia.org/property/longestLosses
 1445	http://dbpedia.org/property/basedIn
 1446	http://dbpedia.org/property/institution
-1447	http://dbpedia.org/property/mostSuccessfulClub(s)_
+1447	http://dbpedia.org/property/mostS೎ssfulClub(s)_
 1448	http://dbpedia.org/property/navy
 1449	http://dbpedia.org/property/conf1Champ
 1450	http://dbpedia.org/property/address
@@ -590,7 +590,7 @@
 1492	http://dbpedia.org/property/post5preceded
 1493	http://dbpedia.org/property/spreviouss
 1494	http://dbpedia.org/property/totalType
-1495	http://dbpedia.org/property/minorLeagueAffiliates
+1495	http://dbpedia.org/property/minorLeagiliates
 1496	http://dbpedia.org/property/director
 1497	http://dbpedia.org/property/titles
 1498	http://dbpedia.org/property/posttitle
@@ -643,10 +643,10 @@
 1545	http://dbpedia.org/property/ff
 1546	http://dbpedia.org/property/commanderTitle
 1547	http://dbpedia.org/property/2016Chassis
-1548	http://dbpedia.org/property/succeededBy
+1548	http://dbpedia.org/property/s쳮dedBy
 1549	http://dbpedia.org/property/discharge1Location
 1550	http://dbpedia.org/property/previousPost
-1551	http://dbpedia.org/property/leagueCup
+1551	http://dbpedia.org/property/leagìup
 1552	http://dbpedia.org/property/crew5Down
 1553	http://dbpedia.org/property/intercomDetails
 1554	http://dbpedia.org/property/recordLabels
@@ -805,7 +805,7 @@
 1707	http://dbpedia.org/property/afterParty
 1708	http://dbpedia.org/property/services
 1709	http://dbpedia.org/property/hq
-1710	http://dbpedia.org/property/notableStudents
+1710	http://dbpedia.org/property/notableStÞnts
 1711	http://dbpedia.org/property/twin3Country
 1712	http://dbpedia.org/property/predecessors
 1713	http://dbpedia.org/property/beatifiedPlace
@@ -913,7 +913,7 @@
 1815	http://dbpedia.org/property/parentPeak
 1816	http://dbpedia.org/property/priorTerm
 1817	http://dbpedia.org/property/riverSystem
-1818	http://dbpedia.org/property/subConfederation
+1818	http://dbpedia.org/property/s¼onfederation
 1819	http://dbpedia.org/property/ethinicity
 1820	http://dbpedia.org/property/loksabhaLeader
 1821	http://dbpedia.org/property/biggestAwayWin
@@ -925,8 +925,8 @@
 1827	http://dbpedia.org/property/single
 1828	http://dbpedia.org/property/offLang
 1829	http://dbpedia.org/property/athleticsNickname
-1830	http://dbpedia.org/property/succeeding
-1831	http://dbpedia.org/property/studentWing
+1830	http://dbpedia.org/property/s쳮ding
+1831	http://dbpedia.org/property/stÞntWing
 1832	http://dbpedia.org/property/manager
 1833	http://dbpedia.org/property/source1Location
 1834	http://dbpedia.org/property/blank2Info
@@ -940,7 +940,7 @@
 1842	http://dbpedia.org/property/nextSingleTitle
 1843	http://dbpedia.org/property/ppchairman
 1844	http://dbpedia.org/property/post4followed
-1845	http://dbpedia.org/property/educationParty
+1845	http://dbpedia.org/property/edÊtionParty
 1846	http://dbpedia.org/property/crew6Down
 1847	http://dbpedia.org/property/result
 1848	http://dbpedia.org/property/twin2Country
@@ -1030,8 +1030,8 @@
 1932	http://dbpedia.org/property/leader4Name
 1933	http://dbpedia.org/property/source2Location
 1934	http://dbpedia.org/property/realm
-1935	http://dbpedia.org/property/successor!_
-1936	http://dbpedia.org/property/politicalSubdiv
+1935	http://dbpedia.org/property/s೎ssor!_
+1936	http://dbpedia.org/property/politicalS½iv
 1937	http://dbpedia.org/property/television
 1938	http://dbpedia.org/property/twin1City
 1939	http://dbpedia.org/property/4namedata
@@ -1080,7 +1080,7 @@
 1982	http://dbpedia.org/property/upperhouse
 1983	http://dbpedia.org/property/canton
 1984	http://dbpedia.org/property/row522Text
-1985	http://dbpedia.org/property/subdivision
+1985	http://dbpedia.org/property/s½ivision
 1986	http://dbpedia.org/property/branches
 1987	http://dbpedia.org/property/subregion
 1988	http://dbpedia.org/property/mouthRegion
@@ -1108,7 +1108,7 @@
 2010	http://dbpedia.org/property/patrons
 2011	http://dbpedia.org/property/visitorConf
 2012	http://dbpedia.org/property/gm
-2013	http://dbpedia.org/property/health,Education,AndWelfare
+2013	http://dbpedia.org/property/health,EdÊtion,AndWelfare
 2014	http://dbpedia.org/property/legislatureTerm
 2015	http://dbpedia.org/property/playoffsMvp
 2016	http://dbpedia.org/property/chief1Position
@@ -1133,7 +1133,7 @@
 2035	http://dbpedia.org/property/sovereigntyNote
 2036	http://dbpedia.org/property/estate
 2037	http://dbpedia.org/property/owners/creators
-2038	http://dbpedia.org/property/subareas
+2038	http://dbpedia.org/property/sºreas
 2039	http://dbpedia.org/property/identificationSymbol3Label
 2040	http://dbpedia.org/property/sister
 2041	http://dbpedia.org/property/currentPosition
@@ -1152,7 +1152,7 @@
 2054	http://dbpedia.org/property/3namedata
 2055	http://dbpedia.org/property/pregjøvik
 2056	http://dbpedia.org/property/shieldchamps
-2057	http://dbpedia.org/property/producers
+2057	http://dbpedia.org/property/prodÎrs
 2058	http://dbpedia.org/property/termStart
 2059	http://dbpedia.org/property/minister1Pfo
 2060	http://dbpedia.org/property/row528Text

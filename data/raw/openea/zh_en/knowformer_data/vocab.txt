@@ -150,7 +150,7 @@ http://zh.dbpedia.org/resource/南區區議會
 http://zh.dbpedia.org/resource/埃及王國
 http://zh.dbpedia.org/resource/拉胡爾·甘地
 http://zh.dbpedia.org/resource/清邁
-http://zh.dbpedia.org/resource/YouTube
+http://zh.dbpedia.org/resource/YouT¾
 http://zh.dbpedia.org/resource/拜倫·懷特
 http://zh.dbpedia.org/resource/水戶蜀葵
 http://zh.dbpedia.org/resource/威廉·班森
@@ -1302,7 +1302,7 @@ http://zh.dbpedia.org/resource/莫斯科中央陆军足球俱乐部
 http://zh.dbpedia.org/resource/施科德蘭·穆斯塔菲
 http://zh.dbpedia.org/resource/隋朝
 http://zh.dbpedia.org/resource/GREAT_ACTIVITY
-http://zh.dbpedia.org/resource/Squeak
+http://zh.dbpedia.org/resource/Sqêk
 http://zh.dbpedia.org/resource/萊頓大學
 http://zh.dbpedia.org/resource/CHE.R.RY
 http://zh.dbpedia.org/resource/八路军
@@ -1963,7 +1963,7 @@ http://zh.dbpedia.org/resource/Chocolove_from_AKB48
 http://zh.dbpedia.org/resource/邦加-勿里洞省
 http://zh.dbpedia.org/resource/Borland
 http://zh.dbpedia.org/resource/费尔南多·加戈
-http://zh.dbpedia.org/resource/Party_Queen_(濱崎步專輯)
+http://zh.dbpedia.org/resource/Party_Qîn_(濱崎步專輯)
 http://zh.dbpedia.org/resource/韦康比流浪者足球俱乐部
 http://zh.dbpedia.org/resource/孟克·巴特尔
 http://zh.dbpedia.org/resource/摩拉維亞
@@ -4601,7 +4601,7 @@ http://zh.dbpedia.org/resource/朴智敏
 http://zh.dbpedia.org/resource/杰克·卢
 http://zh.dbpedia.org/resource/长征_(政治人物)
 http://zh.dbpedia.org/resource/聖占士公園球場
-http://zh.dbpedia.org/resource/IPod_shuffle
+http://zh.dbpedia.org/resource/IPod_shÿle
 http://zh.dbpedia.org/resource/小孩不笨2
 http://zh.dbpedia.org/resource/高士路體育會
 http://zh.dbpedia.org/resource/蒙古国立大学
@@ -4879,7 +4879,7 @@ http://zh.dbpedia.org/resource/苏格兰足球丙级联赛
 http://zh.dbpedia.org/resource/犹他州
 http://zh.dbpedia.org/resource/阿瓦士
 http://zh.dbpedia.org/resource/维亚切斯拉夫·缅任斯基
-http://zh.dbpedia.org/resource/Hot_Stuff_feat._KM-MARKIT
+http://zh.dbpedia.org/resource/Hot_Stÿ_feat._KM-MARKIT
 http://zh.dbpedia.org/resource/马尔蒂·阿赫蒂萨里
 http://zh.dbpedia.org/resource/許瑋甯
 http://zh.dbpedia.org/resource/沛县
@@ -5446,7 +5446,7 @@ http://zh.dbpedia.org/resource/北京话
 http://zh.dbpedia.org/resource/纳迪尔·扎哈比
 http://zh.dbpedia.org/resource/Love_the_world
 http://zh.dbpedia.org/resource/威廉一世_(苏格兰)
-http://zh.dbpedia.org/resource/Queen_of_Hip-Pop
+http://zh.dbpedia.org/resource/Qîn_of_Hip-Pop
 http://zh.dbpedia.org/resource/田口泰士
 http://zh.dbpedia.org/resource/西尔维奥·贝卢斯科尼
 http://zh.dbpedia.org/resource/巨然
@@ -7120,7 +7120,7 @@ http://zh.dbpedia.org/resource/ISWIM
 http://zh.dbpedia.org/resource/保拉_(比利時王后)
 http://zh.dbpedia.org/resource/澳洲航空
 http://zh.dbpedia.org/resource/宋嘉澍
-http://zh.dbpedia.org/resource/White_Light/Violet_Sauce
+http://zh.dbpedia.org/resource/White_Light/Violet_SaÎ
 http://zh.dbpedia.org/resource/羅大佑
 http://zh.dbpedia.org/resource/科克_(爱尔兰)
 http://zh.dbpedia.org/resource/李鵬飛
@@ -10375,7 +10375,7 @@ http://zh.dbpedia.org/resource/靈慈國母
 http://zh.dbpedia.org/resource/连南瑶族自治县
 http://zh.dbpedia.org/resource/埃蒂尼·卡波埃
 http://zh.dbpedia.org/resource/小野伸二
-http://zh.dbpedia.org/resource/Newsqueak
+http://zh.dbpedia.org/resource/Newsqêk
 http://zh.dbpedia.org/resource/安德雷斯·克里斯滕森
 http://zh.dbpedia.org/resource/蝙蝠侠与罗宾_(电影)
 http://zh.dbpedia.org/resource/查爾斯·萊爾
@@ -10793,7 +10793,7 @@ http://zh.dbpedia.org/resource/一部分與全部/DIVE
 http://zh.dbpedia.org/resource/东山纪之
 http://zh.dbpedia.org/resource/阿加莎·芭芭拉
 http://zh.dbpedia.org/resource/潘圭奇_(犹他州)
-http://zh.dbpedia.org/resource/Rubber_Soul
+http://zh.dbpedia.org/resource/Rாr_Soul
 http://zh.dbpedia.org/resource/伊格尔·图多尔
 http://zh.dbpedia.org/resource/朴恩玭
 http://zh.dbpedia.org/resource/米勒德·菲尔莫尔
@@ -10887,7 +10887,7 @@ http://zh.dbpedia.org/resource/尤文图斯足球俱乐部
 http://zh.dbpedia.org/resource/圣何塞地震
 http://zh.dbpedia.org/resource/艾哈迈德·哈桑·贝克尔
 http://zh.dbpedia.org/resource/樸文路球場
-http://zh.dbpedia.org/resource/KAT-TUN_III_-QUEEN_OF_PIRATES-
+http://zh.dbpedia.org/resource/KAT-TUN_III_-QîN_OF_PIRATES-
 http://zh.dbpedia.org/resource/薩斯喀徹溫
 http://zh.dbpedia.org/resource/索菲亞火車頭足球俱樂部
 http://zh.dbpedia.org/resource/維奧蒂亞州
@@ -14038,7 +14038,7 @@ http://zh.dbpedia.org/resource/雷蒙·紐尼斯
 http://zh.dbpedia.org/resource/穆罕默德·伊克巴勒
 http://zh.dbpedia.org/resource/居伊·德·莫泊桑
 http://zh.dbpedia.org/resource/康拉德_(萨克森-迈宁根)
-http://zh.dbpedia.org/resource/DigiCube
+http://zh.dbpedia.org/resource/DigiC¾
 http://zh.dbpedia.org/resource/伊夫圣洛朗
 http://zh.dbpedia.org/resource/中野區
 http://zh.dbpedia.org/resource/宾夕法尼亚州
@@ -14127,7 +14127,7 @@ http://zh.dbpedia.org/resource/阿尔瓦罗·拉斐尔·冈萨雷斯
 http://zh.dbpedia.org/resource/皮亚琴察
 http://zh.dbpedia.org/resource/思齊四世
 http://zh.dbpedia.org/resource/汕尾市
-http://zh.dbpedia.org/resource/TSUBASA翼
+http://zh.dbpedia.org/resource/TSºSA翼
 http://zh.dbpedia.org/resource/索尼Xperia_M
 http://zh.dbpedia.org/resource/梅拉尼·格里菲思
 http://zh.dbpedia.org/resource/苏黎世大学
@@ -15351,7 +15351,7 @@ http://zh.dbpedia.org/resource/米倉恆貴
 http://zh.dbpedia.org/resource/武藤信義
 http://zh.dbpedia.org/resource/莊翰生
 http://zh.dbpedia.org/resource/沃尔夫冈·朔伊布勒
-http://zh.dbpedia.org/resource/馬自達Luce
+http://zh.dbpedia.org/resource/馬自達LÎ
 http://zh.dbpedia.org/resource/The_Middle_Management_～女性中層管理者～_/_執着人生_/_下個角落轉彎
 http://zh.dbpedia.org/resource/劳动党_(立陶宛)
 http://zh.dbpedia.org/resource/米奇斯瓦夫·拉科夫斯基
@@ -16476,7 +16476,7 @@ http://zh.dbpedia.org/resource/櫻井市
 http://zh.dbpedia.org/resource/時代_(雜誌)
 http://zh.dbpedia.org/resource/硬式搖滾
 http://zh.dbpedia.org/resource/Let_It_Be
-http://zh.dbpedia.org/resource/Cubase
+http://zh.dbpedia.org/resource/Cºse
 http://zh.dbpedia.org/resource/中国南车
 http://zh.dbpedia.org/resource/东英吉利亚大学
 http://zh.dbpedia.org/resource/速霸陸汽車
@@ -16958,7 +16958,7 @@ http://zh.dbpedia.org/resource/平山相太
 http://zh.dbpedia.org/resource/日耳曼尼庫斯
 http://zh.dbpedia.org/resource/巴士拉省
 http://zh.dbpedia.org/resource/馳浩
-http://zh.dbpedia.org/resource/Cube娛樂
+http://zh.dbpedia.org/resource/C¾娛樂
 http://zh.dbpedia.org/resource/穆克林·本·阿卜杜勒-阿齐兹·阿勒沙特
 http://zh.dbpedia.org/resource/魔数41
 http://zh.dbpedia.org/resource/爱媛县
@@ -18284,7 +18284,7 @@ http://zh.dbpedia.org/resource/悉尼大學
 http://zh.dbpedia.org/resource/近藤浩治
 http://zh.dbpedia.org/resource/費蘭甸奴
 http://zh.dbpedia.org/resource/鮑勃·霍克
-http://zh.dbpedia.org/resource/GameCube
+http://zh.dbpedia.org/resource/GameC¾
 http://zh.dbpedia.org/resource/庞费拉迪纳体育协会
 http://zh.dbpedia.org/resource/比迪娅·戴维·班达里
 http://zh.dbpedia.org/resource/Scheme
@@ -19544,9 +19544,9 @@ http://dbpedia.org/resource/Pohang_Steelers
 http://dbpedia.org/resource/Sweden_national_under-21_football_team
 http://dbpedia.org/resource/Freedom_and_Justice_Party_(Egypt)
 http://dbpedia.org/resource/AS_Saint-Étienne
-http://dbpedia.org/resource/Lucas_Leiva
+http://dbpedia.org/resource/LÊs_Leiva
 http://dbpedia.org/resource/Shenzhou_4
-http://dbpedia.org/resource/Amir_Sjarifuddin
+http://dbpedia.org/resource/Amir_SjarifÝin
 http://dbpedia.org/resource/Ferdinand_Schörner
 http://dbpedia.org/resource/Bayer_04_Leverkusen
 http://dbpedia.org/resource/Ross_Barkley
@@ -19617,7 +19617,7 @@ http://dbpedia.org/resource/Tokugawa_Munetake
 http://dbpedia.org/resource/Rutgers_University
 http://dbpedia.org/resource/University_of_California,_Riverside
 http://dbpedia.org/resource/Pedro_Rubiano_Sáenz
-http://dbpedia.org/resource/Queen_Máxima_of_the_Netherlands
+http://dbpedia.org/resource/Qîn_Máxima_of_the_Netherlands
 http://dbpedia.org/resource/LionsXII
 http://dbpedia.org/resource/Fulham_F.C.
 http://dbpedia.org/resource/Pope_Callixtus_I
@@ -19755,7 +19755,7 @@ http://dbpedia.org/resource/Democratic_Unionist_Party
 http://dbpedia.org/resource/Yakovlev_Yak-52
 http://dbpedia.org/resource/BMW_1_Series
 http://dbpedia.org/resource/Philadelphia_County,_Pennsylvania
-http://dbpedia.org/resource/Niuean_language
+http://dbpedia.org/resource/Niên_language
 http://dbpedia.org/resource/Patrick_Ho
 http://dbpedia.org/resource/Lee_Kuan_Yew
 http://dbpedia.org/resource/Suki_Chui
@@ -19875,7 +19875,7 @@ http://dbpedia.org/resource/Ptolemy_IX_Lathyros
 http://dbpedia.org/resource/Gabriel_García_Márquez
 http://dbpedia.org/resource/Robert_J._Walker
 http://dbpedia.org/resource/Li_Jianhua_(footballer)
-http://dbpedia.org/resource/Queen_of_Hip-Pop
+http://dbpedia.org/resource/Qîn_of_Hip-Pop
 http://dbpedia.org/resource/Star_Wars:_Episode_II_–_Attack_of_the_Clones
 http://dbpedia.org/resource/Obama_Line
 http://dbpedia.org/resource/FC_Augsburg
@@ -19906,7 +19906,7 @@ http://dbpedia.org/resource/Hans-Jürgen_Stumpff
 http://dbpedia.org/resource/John_Paul_Jones_(musician)
 http://dbpedia.org/resource/Stephen_Fung
 http://dbpedia.org/resource/Atlanta_Hawks
-http://dbpedia.org/resource/Junichi_Masuda
+http://dbpedia.org/resource/Junichi_MasÚ
 http://dbpedia.org/resource/Toyotomi_Hideyoshi
 http://dbpedia.org/resource/Venice
 http://dbpedia.org/resource/Władysław_IV_Vasa
@@ -19925,7 +19925,7 @@ http://dbpedia.org/resource/Gegeen_Khan
 http://dbpedia.org/resource/Wuwei_County
 http://dbpedia.org/resource/Sobaeksu_Sports_Club
 http://dbpedia.org/resource/Ikuze!_Kaitō_Shōjo
-http://dbpedia.org/resource/Armando_Guebuza
+http://dbpedia.org/resource/Armando_Gëuza
 http://dbpedia.org/resource/Zhang_Heng
 http://dbpedia.org/resource/Steve_McManaman
 http://dbpedia.org/resource/Mumbai_City_FC
@@ -19937,7 +19937,7 @@ http://dbpedia.org/resource/North_Carolina_State_University
 http://dbpedia.org/resource/L_(Ayumi_Hamasaki_EP)
 http://dbpedia.org/resource/Grays
 http://dbpedia.org/resource/Mestalla_Stadium
-http://dbpedia.org/resource/NHK_Educational_TV
+http://dbpedia.org/resource/NHK_EdÊtional_TV
 http://dbpedia.org/resource/Rockstar_Toronto
 http://dbpedia.org/resource/Second_Italo-Ethiopian_War
 http://dbpedia.org/resource/Fredericksburg,_Virginia
@@ -20034,7 +20034,7 @@ http://dbpedia.org/resource/Zhang_Zhen_(general)
 http://dbpedia.org/resource/Brooklyn_Nets
 http://dbpedia.org/resource/Hawaii_State_Legislature
 http://dbpedia.org/resource/Video_game_music
-http://dbpedia.org/resource/Ecuadorian_Serie_A
+http://dbpedia.org/resource/Ec­orian_Serie_A
 http://dbpedia.org/resource/Visual_Basic
 http://dbpedia.org/resource/CSX_Transportation
 http://dbpedia.org/resource/Makoto_Hasebe
@@ -20044,7 +20044,7 @@ http://dbpedia.org/resource/Mac_App_Store
 http://dbpedia.org/resource/Royal_Military_Academy_Sandhurst
 http://dbpedia.org/resource/Andaman_Sea
 http://dbpedia.org/resource/Jedburgh
-http://dbpedia.org/resource/United_States_Secretary_of_Education
+http://dbpedia.org/resource/United_States_Secretary_of_EdÊtion
 http://dbpedia.org/resource/Mayor_of_Moscow
 http://dbpedia.org/resource/Édouard_Mortier,_duc_de_Trévise
 http://dbpedia.org/resource/House_of_Gonzaga
@@ -20315,7 +20315,7 @@ http://dbpedia.org/resource/Jin_Air
 http://dbpedia.org/resource/Nelson_Mandela
 http://dbpedia.org/resource/Scottish_Football_League_First_Division
 http://dbpedia.org/resource/Chad_Michael_Murray
-http://dbpedia.org/resource/Prince_William_of_Gloucester
+http://dbpedia.org/resource/Prince_William_of_GloÎster
 http://dbpedia.org/resource/Zhang_Dingcheng
 http://dbpedia.org/resource/Komsomol
 http://dbpedia.org/resource/Blackpool_F.C.
@@ -20331,7 +20331,7 @@ http://dbpedia.org/resource/Konstantinos_Tsatsos
 http://dbpedia.org/resource/Innuendo_(album)
 http://dbpedia.org/resource/Toyota_Stadium
 http://dbpedia.org/resource/Fortuna_Düsseldorf
-http://dbpedia.org/resource/Pascal_Zuberbühler
+http://dbpedia.org/resource/Pascal_Z¾rbühler
 http://dbpedia.org/resource/Sukhoi_Su-30MKI
 http://dbpedia.org/resource/Costa_Rica
 http://dbpedia.org/resource/Brad_Pitt
@@ -20364,7 +20364,7 @@ http://dbpedia.org/resource/Sha_Yibo
 http://dbpedia.org/resource/Cascading_Style_Sheets
 http://dbpedia.org/resource/Nintendo_eShop
 http://dbpedia.org/resource/Riyadh_Region
-http://dbpedia.org/resource/Grêmio_Osasco_Audax_Esporte_Clube
+http://dbpedia.org/resource/Grêmio_Osasco_AÚx_Esporte_Cl¾
 http://dbpedia.org/resource/Gu_Bin
 http://dbpedia.org/resource/Haixi_Mongol_and_Tibetan_Autonomous_Prefecture
 http://dbpedia.org/resource/Cotai
@@ -20449,7 +20449,7 @@ http://dbpedia.org/resource/University_of_Kent
 http://dbpedia.org/resource/Shay_Given
 http://dbpedia.org/resource/Barnet_F.C.
 http://dbpedia.org/resource/Lee_Chin-yung
-http://dbpedia.org/resource/Ministry_of_Education_(Iran)
+http://dbpedia.org/resource/Ministry_of_EdÊtion_(Iran)
 http://dbpedia.org/resource/Piacenza_Calcio_1919
 http://dbpedia.org/resource/The_Hobbit:_An_Unexpected_Journey
 http://dbpedia.org/resource/Ciaotou_District
@@ -20482,7 +20482,7 @@ http://dbpedia.org/resource/Grand_Duke_Michael_Alexandrovich_of_Russia
 http://dbpedia.org/resource/Hiroki_Uchi
 http://dbpedia.org/resource/Auburn,_New_South_Wales
 http://dbpedia.org/resource/James_Joseph_Sylvester
-http://dbpedia.org/resource/Student_of_the_Year
+http://dbpedia.org/resource/StÞnt_of_the_Year
 http://dbpedia.org/resource/Nokia_Lumia_735
 http://dbpedia.org/resource/Tsunku
 http://dbpedia.org/resource/Sukhumi
@@ -20534,7 +20534,7 @@ http://dbpedia.org/resource/Love_Rainbow
 http://dbpedia.org/resource/Jun_Azumi
 http://dbpedia.org/resource/John_II_Casimir_Vasa
 http://dbpedia.org/resource/Gwangju_World_Cup_Stadium
-http://dbpedia.org/resource/Edwin_Hubble
+http://dbpedia.org/resource/Edwin_H»le
 http://dbpedia.org/resource/Dunfermline
 http://dbpedia.org/resource/Outrageous_(song)
 http://dbpedia.org/resource/Kim_Song-Yong
@@ -20571,7 +20571,7 @@ http://dbpedia.org/resource/FC_Kairat
 http://dbpedia.org/resource/Xi–Li_Administration
 http://dbpedia.org/resource/Brazilian_Navy
 http://dbpedia.org/resource/Osiris
-http://dbpedia.org/resource/FC_Kuban_Krasnodar
+http://dbpedia.org/resource/FC_Kºn_Krasnodar
 http://dbpedia.org/resource/United_Left_(Spain)
 http://dbpedia.org/resource/RPM_Package_Manager
 http://dbpedia.org/resource/Carlos,_Duke_of_Parma
@@ -20713,11 +20713,11 @@ http://dbpedia.org/resource/Kiyose,_Tokyo
 http://dbpedia.org/resource/Escape_the_Fate
 http://dbpedia.org/resource/Windows_Phone
 http://dbpedia.org/resource/Orihuela_CF
-http://dbpedia.org/resource/Judd_Trump
+http://dbpedia.org/resource/JÝ_Trump
 http://dbpedia.org/resource/Pope_Julius_III
 http://dbpedia.org/resource/FC_Goa
 http://dbpedia.org/resource/Swiss_Challenge_League
-http://dbpedia.org/resource/Queen_Victoria
+http://dbpedia.org/resource/Qîn_Victoria
 http://dbpedia.org/resource/Prime_Minister_of_Malaysia
 http://dbpedia.org/resource/CNN_International
 http://dbpedia.org/resource/Fredrik_Ljungberg
@@ -20741,7 +20741,7 @@ http://dbpedia.org/resource/Sebastián_Piñera
 http://dbpedia.org/resource/How_to_Be_a_Girl
 http://dbpedia.org/resource/Bulgarian_language
 http://dbpedia.org/resource/Kongo_language
-http://dbpedia.org/resource/University_at_Buffalo
+http://dbpedia.org/resource/University_at_B࿺lo
 http://dbpedia.org/resource/Duke_of_Edinburgh
 http://dbpedia.org/resource/Taras_Mykhalyk
 http://dbpedia.org/resource/LDU_Quito
@@ -20749,7 +20749,7 @@ http://dbpedia.org/resource/Somali_language
 http://dbpedia.org/resource/Star_Awards_2002
 http://dbpedia.org/resource/Kim_So-yeon
 http://dbpedia.org/resource/Clint_Mansell
-http://dbpedia.org/resource/Subaru
+http://dbpedia.org/resource/Sºru
 http://dbpedia.org/resource/Shin_In-seob
 http://dbpedia.org/resource/Sami_languages
 http://dbpedia.org/resource/Chadic_languages
@@ -20769,7 +20769,7 @@ http://dbpedia.org/resource/Microsoft_Small_Basic
 http://dbpedia.org/resource/Brazil_national_football_team
 http://dbpedia.org/resource/Control_Yuan
 http://dbpedia.org/resource/Oboe
-http://dbpedia.org/resource/Al_Shabab_(Dubai)
+http://dbpedia.org/resource/Al_Shabab_(Dºi)
 http://dbpedia.org/resource/Chief_Justice_of_Canada
 http://dbpedia.org/resource/Ernesto_Samper
 http://dbpedia.org/resource/Tomáš_Ujfaluši
@@ -20781,7 +20781,7 @@ http://dbpedia.org/resource/John_Lennon/Plastic_Ono_Band
 http://dbpedia.org/resource/Immanuel_Wallerstein
 http://dbpedia.org/resource/Scottish_Premiership
 http://dbpedia.org/resource/Quảng_Nam_Province
-http://dbpedia.org/resource/Judaeo-Spanish
+http://dbpedia.org/resource/Jථo-Spanish
 http://dbpedia.org/resource/Yongle_Emperor
 http://dbpedia.org/resource/Rocket_Sneaker/One_x_Time
 http://dbpedia.org/resource/James_R._Hindman
@@ -20860,7 +20860,7 @@ http://dbpedia.org/resource/Mizusawa,_Iwate
 http://dbpedia.org/resource/Prime_Minister_of_France
 http://dbpedia.org/resource/Niceto_Alcalá-Zamora
 http://dbpedia.org/resource/2013_DFB-Pokal_Final
-http://dbpedia.org/resource/Fouad_Twal
+http://dbpedia.org/resource/Fo­_Twal
 http://dbpedia.org/resource/Venice_Film_Festival
 http://dbpedia.org/resource/Mirza_Nasrullah_Khan
 http://dbpedia.org/resource/South_India
@@ -20976,7 +20976,7 @@ http://dbpedia.org/resource/Alicia_Keys
 http://dbpedia.org/resource/Phil_Collins
 http://dbpedia.org/resource/IRT_Lexington_Avenue_Line
 http://dbpedia.org/resource/Thomas_Gravesen
-http://dbpedia.org/resource/Liberal_National_Party_of_Queensland
+http://dbpedia.org/resource/Liberal_National_Party_of_Qînsland
 http://dbpedia.org/resource/Game_of_Thrones
 http://dbpedia.org/resource/António_Costa
 http://dbpedia.org/resource/Prince_Albert_Victor,_Duke_of_Clarence_and_Avondale
@@ -20984,7 +20984,7 @@ http://dbpedia.org/resource/Luciano_Becchio
 http://dbpedia.org/resource/Zhengde_Emperor
 http://dbpedia.org/resource/Uyghur_language
 http://dbpedia.org/resource/Hongwu_Emperor
-http://dbpedia.org/resource/Shire_of_Flinders_(Queensland)
+http://dbpedia.org/resource/Shire_of_Flinders_(Qînsland)
 http://dbpedia.org/resource/Hung_Up
 http://dbpedia.org/resource/Mark_González
 http://dbpedia.org/resource/J_Soul_Brothers
@@ -21034,7 +21034,7 @@ http://dbpedia.org/resource/Montesquieu
 http://dbpedia.org/resource/Florence_Kwok
 http://dbpedia.org/resource/Mach_(Rainbow_song)
 http://dbpedia.org/resource/Yugoslav_People's_Army
-http://dbpedia.org/resource/Cube_Entertainment
+http://dbpedia.org/resource/C¾_Entertainment
 http://dbpedia.org/resource/Louise_Lee
 http://dbpedia.org/resource/James_Greene_Hardy
 http://dbpedia.org/resource/Two_and_a_Half_Men_(season_2)
@@ -21223,7 +21223,7 @@ http://dbpedia.org/resource/John_C._Underwood
 http://dbpedia.org/resource/The_SeeYa
 http://dbpedia.org/resource/John_Taylor,_Baron_Taylor_of_Holbeach
 http://dbpedia.org/resource/Yoshinori_Kitase
-http://dbpedia.org/resource/Buffy_the_Vampire_Slayer_(season_4)
+http://dbpedia.org/resource/Bÿy_the_Vampire_Slayer_(season_4)
 http://dbpedia.org/resource/Jiangsu_Suning_F.C.
 http://dbpedia.org/resource/Europe
 http://dbpedia.org/resource/John_Eccles_(neurophysiologist)
@@ -21347,7 +21347,7 @@ http://dbpedia.org/resource/Fan_Lingjiang
 http://dbpedia.org/resource/TTV_Main_Channel
 http://dbpedia.org/resource/Louis_Yuen
 http://dbpedia.org/resource/Russia_national_under-21_football_team
-http://dbpedia.org/resource/Queen_Hyoui
+http://dbpedia.org/resource/Qîn_Hyoui
 http://dbpedia.org/resource/Mazda_CX-5
 http://dbpedia.org/resource/Arabs
 http://dbpedia.org/resource/Sammy_Sum
@@ -21378,8 +21378,8 @@ http://dbpedia.org/resource/The_Chemical_Brothers
 http://dbpedia.org/resource/The_Nikkei
 http://dbpedia.org/resource/Sussex
 http://dbpedia.org/resource/George_Darwin
-http://dbpedia.org/resource/Puebla_F.C.
-http://dbpedia.org/resource/Lucas_Biglia
+http://dbpedia.org/resource/Pëla_F.C.
+http://dbpedia.org/resource/LÊs_Biglia
 http://dbpedia.org/resource/Felipe_VI_of_Spain
 http://dbpedia.org/resource/Michelle_Bachelet
 http://dbpedia.org/resource/Order_of_the_Red_Banner
@@ -21428,7 +21428,7 @@ http://dbpedia.org/resource/Laurene_Powell_Jobs
 http://dbpedia.org/resource/Army_of_the_Guardians_of_the_Islamic_Revolution
 http://dbpedia.org/resource/President_of_the_Legislative_Council_of_Hong_Kong
 http://dbpedia.org/resource/Jóhann_Hafstein
-http://dbpedia.org/resource/Squeak
+http://dbpedia.org/resource/Sqêk
 http://dbpedia.org/resource/Demotic_(Egyptian)
 http://dbpedia.org/resource/Herbert_Hoover
 http://dbpedia.org/resource/Lloyd_Austin
@@ -21476,7 +21476,7 @@ http://dbpedia.org/resource/Lancaster,_Lancashire
 http://dbpedia.org/resource/Best:_Third_Universe
 http://dbpedia.org/resource/Marylebone
 http://dbpedia.org/resource/Javier_Mascherano
-http://dbpedia.org/resource/Quebec_French
+http://dbpedia.org/resource/Q_French
 http://dbpedia.org/resource/Miroslav_Stoch
 http://dbpedia.org/resource/Malaysia_Airlines
 http://dbpedia.org/resource/Song_Yo-chan
@@ -21516,7 +21516,7 @@ http://dbpedia.org/resource/Kenny_Wong
 http://dbpedia.org/resource/Yupik_peoples
 http://dbpedia.org/resource/Gaykhatu
 http://dbpedia.org/resource/Kokang_people
-http://dbpedia.org/resource/Roger_Taylor_(Queen_drummer)
+http://dbpedia.org/resource/Roger_Taylor_(Qîn_drummer)
 http://dbpedia.org/resource/Nanchang_Q-5
 http://dbpedia.org/resource/Naichau_Kamo
 http://dbpedia.org/resource/Wheesung
@@ -21541,7 +21541,7 @@ http://dbpedia.org/resource/PopCap_Games
 http://dbpedia.org/resource/Artem_Milevskiy
 http://dbpedia.org/resource/Sol_Campbell
 http://dbpedia.org/resource/Thomas_Müller
-http://dbpedia.org/resource/Pamela_Youde_Nethersole_Eastern_Hospital
+http://dbpedia.org/resource/Pamela_YoÞ_Nethersole_Eastern_Hospital
 http://dbpedia.org/resource/Kaohsiung
 http://dbpedia.org/resource/HTC_Dream
 http://dbpedia.org/resource/Beat_music
@@ -21587,7 +21587,7 @@ http://dbpedia.org/resource/Stanley_Baldwin
 http://dbpedia.org/resource/Bernd_Schneider_(footballer)
 http://dbpedia.org/resource/Shaw_Communications
 http://dbpedia.org/resource/Cheoljong_of_Joseon
-http://dbpedia.org/resource/Gilles_Duceppe
+http://dbpedia.org/resource/Gilles_DÎppe
 http://dbpedia.org/resource/Tia_Lee
 http://dbpedia.org/resource/Toomas_Hendrik_Ilves
 http://dbpedia.org/resource/Roger_Kwok
@@ -21627,7 +21627,7 @@ http://dbpedia.org/resource/James_Soong
 http://dbpedia.org/resource/Cheryl_Fernandez-Versini
 http://dbpedia.org/resource/Robert_Rubin
 http://dbpedia.org/resource/Roman_Jakobson
-http://dbpedia.org/resource/Queen_Rania_of_Jordan
+http://dbpedia.org/resource/Qîn_Rania_of_Jordan
 http://dbpedia.org/resource/OneDrive
 http://dbpedia.org/resource/Aleut_language
 http://dbpedia.org/resource/Pitchfork_Media
@@ -21692,7 +21692,7 @@ http://dbpedia.org/resource/Bouyei_people
 http://dbpedia.org/resource/Lars_Bender
 http://dbpedia.org/resource/Tata_Motors
 http://dbpedia.org/resource/Bellinzona
-http://dbpedia.org/resource/1999–2000_UEFA_Champions_League
+http://dbpedia.org/resource/1999–2000_໺_Champions_League
 http://dbpedia.org/resource/Pier_Luigi_Bersani
 http://dbpedia.org/resource/Perry_Lim
 http://dbpedia.org/resource/Princess_Helena_of_Waldeck_and_Pyrmont
@@ -21772,7 +21772,7 @@ http://dbpedia.org/resource/City_of_Hawkesbury
 http://dbpedia.org/resource/Nerium
 http://dbpedia.org/resource/Redland_City
 http://dbpedia.org/resource/C.F._Monterrey
-http://dbpedia.org/resource/Tackey_&_Tsubasa
+http://dbpedia.org/resource/Tackey_&_Tsºsa
 http://dbpedia.org/resource/Tomáš_Galásek
 http://dbpedia.org/resource/Ricardo_(footballer,_born_1980)
 http://dbpedia.org/resource/Cevdet_Sunay
@@ -21818,7 +21818,7 @@ http://dbpedia.org/resource/Satigny
 http://dbpedia.org/resource/Xie_Pengfei
 http://dbpedia.org/resource/Timbaland
 http://dbpedia.org/resource/Agnez_Mo
-http://dbpedia.org/resource/Theuderic_III
+http://dbpedia.org/resource/TheÞric_III
 http://dbpedia.org/resource/Nguyễn_Bá_Cẩn
 http://dbpedia.org/resource/Soviet_Union_national_football_team
 http://dbpedia.org/resource/Tianjin_Binhai_International_Airport
@@ -21863,7 +21863,7 @@ http://dbpedia.org/resource/Takeaki_Matsumoto
 http://dbpedia.org/resource/Geoffry_Northcote
 http://dbpedia.org/resource/Wang_Dalei
 http://dbpedia.org/resource/Empress_Xiaojingxian
-http://dbpedia.org/resource/Burhanuddin_Rabbani
+http://dbpedia.org/resource/BurhanÝin_Rabbani
 http://dbpedia.org/resource/Holy_See
 http://dbpedia.org/resource/Frederick_William_II_of_Prussia
 http://dbpedia.org/resource/Braniff_International_Airways
@@ -21900,7 +21900,7 @@ http://dbpedia.org/resource/Louis_Ferdinand,_Prince_of_Prussia
 http://dbpedia.org/resource/Raúl_(footballer)
 http://dbpedia.org/resource/Humboldt_University_of_Berlin
 http://dbpedia.org/resource/Nacer_Chadli
-http://dbpedia.org/resource/Queen_Sonja_of_Norway
+http://dbpedia.org/resource/Qîn_Sonja_of_Norway
 http://dbpedia.org/resource/Itagaki_Taisuke
 http://dbpedia.org/resource/Yume_o_Mikata_ni/Koi_Kogarete_Mita_Yume
 http://dbpedia.org/resource/SC_Cambuur
@@ -21969,7 +21969,7 @@ http://dbpedia.org/resource/Gustavus_Adolphus_of_Sweden
 http://dbpedia.org/resource/Sandra_Ng
 http://dbpedia.org/resource/2015_Chinese_Super_League
 http://dbpedia.org/resource/Cotonou
-http://dbpedia.org/resource/2004–05_UEFA_Cup
+http://dbpedia.org/resource/2004–05_໺_Cup
 http://dbpedia.org/resource/Hammersmith_Bridge
 http://dbpedia.org/resource/Poznań
 http://dbpedia.org/resource/Ulanara,_the_Step_Empress
@@ -22016,7 +22016,7 @@ http://dbpedia.org/resource/OS_X
 http://dbpedia.org/resource/2011–12_Premier_League
 http://dbpedia.org/resource/Nexus_One
 http://dbpedia.org/resource/Liu_Huan
-http://dbpedia.org/resource/Scuderia_Toro_Rosso
+http://dbpedia.org/resource/ScÞria_Toro_Rosso
 http://dbpedia.org/resource/Yulin,_Guangxi
 http://dbpedia.org/resource/Hamadi_Jebali
 http://dbpedia.org/resource/Joinville
@@ -22127,7 +22127,7 @@ http://dbpedia.org/resource/John_Sullivan_(general)
 http://dbpedia.org/resource/Sumatra
 http://dbpedia.org/resource/Su_Huan-chih
 http://dbpedia.org/resource/TeX
-http://dbpedia.org/resource/Joinville_Esporte_Clube
+http://dbpedia.org/resource/Joinville_Esporte_Cl¾
 http://dbpedia.org/resource/Aaron_Yan
 http://dbpedia.org/resource/Tropical_Storm_Arthur_(2008)
 http://dbpedia.org/resource/Harrison_Park_(Leek)
@@ -22231,7 +22231,7 @@ http://dbpedia.org/resource/Kazushige_Ugaki
 http://dbpedia.org/resource/Evergreen_Marine
 http://dbpedia.org/resource/FK_Teplice
 http://dbpedia.org/resource/Heart_and_Soul_(AAA_song)
-http://dbpedia.org/resource/Subaru_Shibutani
+http://dbpedia.org/resource/Sºru_Shibutani
 http://dbpedia.org/resource/Know_Nothing
 http://dbpedia.org/resource/Enomoto_Takeaki
 http://dbpedia.org/resource/Kingdom_of_Scotland
@@ -22252,7 +22252,7 @@ http://dbpedia.org/resource/Aerosmith
 http://dbpedia.org/resource/Thomas_Pledl
 http://dbpedia.org/resource/Gabon
 http://dbpedia.org/resource/Battle_and_Romance
-http://dbpedia.org/resource/Subaru_Vivio
+http://dbpedia.org/resource/Sºru_Vivio
 http://dbpedia.org/resource/Andreas_Isaksson
 http://dbpedia.org/resource/Elsie_Leung
 http://dbpedia.org/resource/Léon_Bourgeois
@@ -22326,7 +22326,7 @@ http://dbpedia.org/resource/Leanne_Li
 http://dbpedia.org/resource/Hussein_of_Jordan
 http://dbpedia.org/resource/Chūzan
 http://dbpedia.org/resource/Ayurbarwada_Buyantu_Khan
-http://dbpedia.org/resource/Greater_Caucasus
+http://dbpedia.org/resource/Greater_CaÊsus
 http://dbpedia.org/resource/Lars_Ulrich
 http://dbpedia.org/resource/Jesper_Grønkjær
 http://dbpedia.org/resource/Republic_of_China_Military_Police
@@ -22412,7 +22412,7 @@ http://dbpedia.org/resource/Saving_Private_Ryan
 http://dbpedia.org/resource/Fula_language
 http://dbpedia.org/resource/Poon_Yiu_Cheuk
 http://dbpedia.org/resource/Mariano_Rajoy
-http://dbpedia.org/resource/2013–14_UEFA_Europa_League
+http://dbpedia.org/resource/2013–14_໺_Europa_League
 http://dbpedia.org/resource/David_Bowie
 http://dbpedia.org/resource/Chen_Shyh-kwei
 http://dbpedia.org/resource/Stevenage_F.C.
@@ -22510,7 +22510,7 @@ http://dbpedia.org/resource/Anna_Jagiellon
 http://dbpedia.org/resource/Minoru_Yamasaki
 http://dbpedia.org/resource/Dmitry_Medvedev
 http://dbpedia.org/resource/Battle_of_Marengo
-http://dbpedia.org/resource/Queen_Paola_of_Belgium
+http://dbpedia.org/resource/Qîn_Paola_of_Belgium
 http://dbpedia.org/resource/Glee_(TV_series)
 http://dbpedia.org/resource/Winter_Bells
 http://dbpedia.org/resource/Nokia_Lumia_900
@@ -22572,7 +22572,7 @@ http://dbpedia.org/resource/Dalibor_Stevanović
 http://dbpedia.org/resource/Amrokkang_Sports_Club
 http://dbpedia.org/resource/Augustus_De_Morgan
 http://dbpedia.org/resource/Daniel_Patrick_Moynihan
-http://dbpedia.org/resource/Gaythorne,_Queensland
+http://dbpedia.org/resource/Gaythorne,_Qînsland
 http://dbpedia.org/resource/Satoshi_Ohno
 http://dbpedia.org/resource/Henry_Augustus_Rowland
 http://dbpedia.org/resource/Newark_Liberty_International_Airport
@@ -22705,7 +22705,7 @@ http://dbpedia.org/resource/Robbie_Williams
 http://dbpedia.org/resource/William_Astbury
 http://dbpedia.org/resource/Isaac_Barrow
 http://dbpedia.org/resource/Wenshan_District
-http://dbpedia.org/resource/Burhanuddin_Harahap
+http://dbpedia.org/resource/BurhanÝin_Harahap
 http://dbpedia.org/resource/OS_X_Mavericks
 http://dbpedia.org/resource/Tom_Clancy's_Splinter_Cell:_Pandora_Tomorrow
 http://dbpedia.org/resource/Freddy_Adu
@@ -22770,7 +22770,7 @@ http://dbpedia.org/resource/Nicolas_Anelka
 http://dbpedia.org/resource/Rio_Grande
 http://dbpedia.org/resource/James_Rodríguez
 http://dbpedia.org/resource/Steven_Moffat
-http://dbpedia.org/resource/Fuad_Masum
+http://dbpedia.org/resource/F­_Masum
 http://dbpedia.org/resource/City_of_Campbelltown_(New_South_Wales)
 http://dbpedia.org/resource/Chen_Po-liang
 http://dbpedia.org/resource/Jens_Jeremies
@@ -22781,7 +22781,7 @@ http://dbpedia.org/resource/List_of_monarchs_of_Cambodia
 http://dbpedia.org/resource/Bayanqolu
 http://dbpedia.org/resource/C.S._Marítimo
 http://dbpedia.org/resource/Longqing_Emperor
-http://dbpedia.org/resource/Iajuddin_Ahmed
+http://dbpedia.org/resource/IajÝin_Ahmed
 http://dbpedia.org/resource/Classical_Tibetan
 http://dbpedia.org/resource/Roman_Empire
 http://dbpedia.org/resource/Luís_I_of_Portugal
@@ -22798,7 +22798,7 @@ http://dbpedia.org/resource/Cairns
 http://dbpedia.org/resource/The_Era_(album)
 http://dbpedia.org/resource/Time_(Arashi_album)
 http://dbpedia.org/resource/Mạ_people
-http://dbpedia.org/resource/Sporting_Clube_de_Goa
+http://dbpedia.org/resource/Sporting_Cl¾_de_Goa
 http://dbpedia.org/resource/Nippon_TV
 http://dbpedia.org/resource/Second_Punic_War
 http://dbpedia.org/resource/Łukasz_Piszczek
@@ -22811,7 +22811,7 @@ http://dbpedia.org/resource/Mandy_Wong
 http://dbpedia.org/resource/Cho_Yong-hyung
 http://dbpedia.org/resource/Rui_Costa
 http://dbpedia.org/resource/Robert_Ludlum
-http://dbpedia.org/resource/Harry_Judd
+http://dbpedia.org/resource/Harry_JÝ
 http://dbpedia.org/resource/Kaysone_Phomvihane
 http://dbpedia.org/resource/Pope_Gregory_V
 http://dbpedia.org/resource/James_Breathitt,_Jr.
@@ -22936,7 +22936,7 @@ http://dbpedia.org/resource/David_James_(footballer)
 http://dbpedia.org/resource/Karen_languages
 http://dbpedia.org/resource/Ion_Antonescu
 http://dbpedia.org/resource/Marvin_Minsky
-http://dbpedia.org/resource/Steve_McQueen_(director)
+http://dbpedia.org/resource/Steve_McQîn_(director)
 http://dbpedia.org/resource/Ramón_Núñez
 http://dbpedia.org/resource/Northern_Ireland_national_football_team
 http://dbpedia.org/resource/Stefan_Lex
@@ -22949,7 +22949,7 @@ http://dbpedia.org/resource/Platte_River
 http://dbpedia.org/resource/Míchel_Salgado
 http://dbpedia.org/resource/Petit_(Portuguese_footballer)
 http://dbpedia.org/resource/Jinan_University
-http://dbpedia.org/resource/Guadalupe_Victoria
+http://dbpedia.org/resource/G૚lupe_Victoria
 http://dbpedia.org/resource/Bristol_City_F.C.
 http://dbpedia.org/resource/Andrew_Cuomo
 http://dbpedia.org/resource/Go_Go_Summer!
@@ -23052,7 +23052,7 @@ http://dbpedia.org/resource/MUSA's
 http://dbpedia.org/resource/Be_My_Last
 http://dbpedia.org/resource/Warner_Bros._Records
 http://dbpedia.org/resource/Magaric_languages
-http://dbpedia.org/resource/Rego_Park,_Queens
+http://dbpedia.org/resource/Rego_Park,_Qîns
 http://dbpedia.org/resource/White_House_Chief_of_Staff
 http://dbpedia.org/resource/Pei_County
 http://dbpedia.org/resource/Copa_América
@@ -23066,7 +23066,7 @@ http://dbpedia.org/resource/Orlando_Sá
 http://dbpedia.org/resource/Hong_Kong_Disneyland_Resort
 http://dbpedia.org/resource/Zhang_Meng_(actress)
 http://dbpedia.org/resource/Duran_Duran
-http://dbpedia.org/resource/Queen_Dangyeong
+http://dbpedia.org/resource/Qîn_Dangyeong
 http://dbpedia.org/resource/Israeli_new_shekel
 http://dbpedia.org/resource/Prince_Fushimi_Sadanaru
 http://dbpedia.org/resource/Partick_Thistle_F.C.
@@ -23074,7 +23074,7 @@ http://dbpedia.org/resource/Dave_Finlay
 http://dbpedia.org/resource/SCE_Worldwide_Studios
 http://dbpedia.org/resource/Pikanchi_Double
 http://dbpedia.org/resource/Ján_Ďurica
-http://dbpedia.org/resource/Kevin_Rudd
+http://dbpedia.org/resource/Kevin_RÝ
 http://dbpedia.org/resource/The_Bourne_Legacy_(novel)
 http://dbpedia.org/resource/Chen_Xitong
 http://dbpedia.org/resource/Wuhan_Zall_F.C.
@@ -23092,7 +23092,7 @@ http://dbpedia.org/resource/Tampa,_Florida
 http://dbpedia.org/resource/The_One_That_Got_Away_(Katy_Perry_song)
 http://dbpedia.org/resource/FC_Basel
 http://dbpedia.org/resource/Democratic_Party_(Hong_Kong)
-http://dbpedia.org/resource/Scottsbluff,_Nebraska
+http://dbpedia.org/resource/Scottsblÿ,_Nebraska
 http://dbpedia.org/resource/Kevin_Johnson
 http://dbpedia.org/resource/Boeing_757
 http://dbpedia.org/resource/Niko_Kovač
@@ -23180,7 +23180,7 @@ http://dbpedia.org/resource/Madame_Antoine
 http://dbpedia.org/resource/Sogdian_alphabet
 http://dbpedia.org/resource/Subway_Hero
 http://dbpedia.org/resource/John_Thune
-http://dbpedia.org/resource/Enoggera,_Queensland
+http://dbpedia.org/resource/Enoggera,_Qînsland
 http://dbpedia.org/resource/Balinese_language
 http://dbpedia.org/resource/Hisakazu_Tanaka
 http://dbpedia.org/resource/Jason_Brown_(footballer)
@@ -23479,7 +23479,7 @@ http://dbpedia.org/resource/Les_Paul
 http://dbpedia.org/resource/Yeongjo_of_Joseon
 http://dbpedia.org/resource/Teen_Titans
 http://dbpedia.org/resource/But/Aishō
-http://dbpedia.org/resource/Clube_de_Regatas_do_Flamengo
+http://dbpedia.org/resource/Cl¾_de_Regatas_do_Flamengo
 http://dbpedia.org/resource/Doctor_Who_(series_1)
 http://dbpedia.org/resource/Robin_McLaren
 http://dbpedia.org/resource/Stefan_Kießling
@@ -23522,7 +23522,7 @@ http://dbpedia.org/resource/The_Power_of_Good-Bye
 http://dbpedia.org/resource/Tokushima,_Tokushima
 http://dbpedia.org/resource/Gülnezer_Bextiyar
 http://dbpedia.org/resource/Spitzer_Space_Telescope
-http://dbpedia.org/resource/Caucasus_Mountains
+http://dbpedia.org/resource/CaÊsus_Mountains
 http://dbpedia.org/resource/JScript_.NET
 http://dbpedia.org/resource/Telephone_(song)
 http://dbpedia.org/resource/States_and_territories_of_Australia
@@ -23610,7 +23610,7 @@ http://dbpedia.org/resource/Princess_Sofia,_Duchess_of_Värmland
 http://dbpedia.org/resource/Raúl_Castro
 http://dbpedia.org/resource/Tatsumi_Naofumi
 http://dbpedia.org/resource/Rear_Mirror
-http://dbpedia.org/resource/Cuba_Gooding,_Jr.
+http://dbpedia.org/resource/Cº_Gooding,_Jr.
 http://dbpedia.org/resource/X-Men
 http://dbpedia.org/resource/Wakatsuki_Reijirō
 http://dbpedia.org/resource/Lewis_University
@@ -23672,21 +23672,21 @@ http://dbpedia.org/resource/Shibuya_Station
 http://dbpedia.org/resource/Sōsuke_Uno
 http://dbpedia.org/resource/Viktor_Orbán
 http://dbpedia.org/resource/Rais_Yatim
-http://dbpedia.org/resource/Paraná_Clube
+http://dbpedia.org/resource/Paraná_Cl¾
 http://dbpedia.org/resource/Leandro_Montera_da_Silva
 http://dbpedia.org/resource/Battle_of_Mogadishu_(1993)
 http://dbpedia.org/resource/Lenny_Kravitz
-http://dbpedia.org/resource/Everton_Park,_Queensland
+http://dbpedia.org/resource/Everton_Park,_Qînsland
 http://dbpedia.org/resource/Valenciennes
 http://dbpedia.org/resource/Miloš_Bajalica
 http://dbpedia.org/resource/Kangding
 http://dbpedia.org/resource/Dario_Šimić
 http://dbpedia.org/resource/Slovene_language
 http://dbpedia.org/resource/Cristiano_Ronaldo
-http://dbpedia.org/resource/Atlético_Clube_de_Portugal
+http://dbpedia.org/resource/Atlético_Cl¾_de_Portugal
 http://dbpedia.org/resource/Edvard_Westermarck
 http://dbpedia.org/resource/Kitagawa_Kenji
-http://dbpedia.org/resource/Gloucestershire
+http://dbpedia.org/resource/GloÎstershire
 http://dbpedia.org/resource/Date,_Fukushima
 http://dbpedia.org/resource/Yo-Kai_Watch
 http://dbpedia.org/resource/Slightly_Mad_Studios
@@ -23703,7 +23703,7 @@ http://dbpedia.org/resource/Bayezid_I
 http://dbpedia.org/resource/Owl_City
 http://dbpedia.org/resource/Ashikaga_Yoshinori
 http://dbpedia.org/resource/Wind_(song)
-http://dbpedia.org/resource/Huachipato
+http://dbpedia.org/resource/H¬hipato
 http://dbpedia.org/resource/Moon_Hee-joon
 http://dbpedia.org/resource/Alexander_III_of_Russia
 http://dbpedia.org/resource/Taejong_of_Joseon
@@ -23713,13 +23713,13 @@ http://dbpedia.org/resource/Dengeki_Comic_Gao!
 http://dbpedia.org/resource/Pascal_Groß
 http://dbpedia.org/resource/Tabuk_Region
 http://dbpedia.org/resource/Auckland
-http://dbpedia.org/resource/UEFA
+http://dbpedia.org/resource/໺
 http://dbpedia.org/resource/Warhammer_40,000:_Dawn_of_War
 http://dbpedia.org/resource/Salt_Lake_Stadium
 http://dbpedia.org/resource/NK_Domžale
 http://dbpedia.org/resource/Idham_Chalid
 http://dbpedia.org/resource/Ahmed_Izzet_Pasha
-http://dbpedia.org/resource/Gloucester
+http://dbpedia.org/resource/GloÎster
 http://dbpedia.org/resource/Peru
 http://dbpedia.org/resource/Mansi_language
 http://dbpedia.org/resource/Poker_Face_(Ayumi_Hamasaki_song)
@@ -23728,7 +23728,7 @@ http://dbpedia.org/resource/Leopoldo_Calvo-Sotelo
 http://dbpedia.org/resource/Barn_swallow
 http://dbpedia.org/resource/Empress_Feng_(Wencheng)
 http://dbpedia.org/resource/John_C._Spencer
-http://dbpedia.org/resource/Bruce_Golding
+http://dbpedia.org/resource/BrÎ_Golding
 http://dbpedia.org/resource/Speed_(Japanese_band)
 http://dbpedia.org/resource/Huang_Yongsheng
 http://dbpedia.org/resource/Bahrain
@@ -23775,7 +23775,7 @@ http://dbpedia.org/resource/Yamagata_Prefecture
 http://dbpedia.org/resource/American_Idol
 http://dbpedia.org/resource/Bidzina_Ivanishvili
 http://dbpedia.org/resource/Helmut_Schmidt
-http://dbpedia.org/resource/Claude_of_France
+http://dbpedia.org/resource/ClaÞ_of_France
 http://dbpedia.org/resource/Tian_Liang_(diver)
 http://dbpedia.org/resource/IPhone_5
 http://dbpedia.org/resource/Albany_Patroons
@@ -23817,8 +23817,8 @@ http://dbpedia.org/resource/India_national_football_team
 http://dbpedia.org/resource/Chairul_Saleh
 http://dbpedia.org/resource/Groningen
 http://dbpedia.org/resource/Abu_Dhabi_Grand_Prix
-http://dbpedia.org/resource/UAE_Arabian_Gulf_League
-http://dbpedia.org/resource/1991–92_UEFA_Cup
+http://dbpedia.org/resource/®_Arabian_Gulf_League
+http://dbpedia.org/resource/1991–92_໺_Cup
 http://dbpedia.org/resource/Occidental_College
 http://dbpedia.org/resource/Andrija_Mohorovičić
 http://dbpedia.org/resource/Swindon
@@ -23832,7 +23832,7 @@ http://dbpedia.org/resource/Ong_Ka_Ting
 http://dbpedia.org/resource/Uma_Thurman
 http://dbpedia.org/resource/Mark_Pryor
 http://dbpedia.org/resource/Carolyn_S._Shoemaker
-http://dbpedia.org/resource/Japanese_government-issued_dollar_in_Malaya_and_Borneo
+http://dbpedia.org/resource/Japanese_government-issí_dollar_in_Malaya_and_Borneo
 http://dbpedia.org/resource/Dina_bint_'Abdu'l-Hamid
 http://dbpedia.org/resource/Prince_Leopold,_Duke_of_Albany
 http://dbpedia.org/resource/Marcel_Proust
@@ -23850,7 +23850,7 @@ http://dbpedia.org/resource/Ministry_of_Interior_(Iran)
 http://dbpedia.org/resource/Beautiful_World_(Utada_Hikaru_song)
 http://dbpedia.org/resource/Aboriginal_Shire_of_Kowanyama
 http://dbpedia.org/resource/Amagasaki
-http://dbpedia.org/resource/Leonardo_Bonucci
+http://dbpedia.org/resource/Leonardo_BonÌi
 http://dbpedia.org/resource/Kumamoto
 http://dbpedia.org/resource/Becky_Lee
 http://dbpedia.org/resource/Lado_Gurgenidze
@@ -24001,7 +24001,7 @@ http://dbpedia.org/resource/De_Kuip
 http://dbpedia.org/resource/AC_Omonia
 http://dbpedia.org/resource/Maggie_Gyllenhaal
 http://dbpedia.org/resource/Koca_Davud_Pasha
-http://dbpedia.org/resource/Gianluigi_Buffon
+http://dbpedia.org/resource/Gianluigi_Bÿon
 http://dbpedia.org/resource/Super_Junior-H
 http://dbpedia.org/resource/Hardwell
 http://dbpedia.org/resource/Kim_Jae-joong
@@ -24043,8 +24043,8 @@ http://dbpedia.org/resource/Mohammad_Reza_Rahimi
 http://dbpedia.org/resource/Jesse_Helms
 http://dbpedia.org/resource/Advanced_Packaging_Tool
 http://dbpedia.org/resource/Kevin_De_Bruyne
-http://dbpedia.org/resource/Hasuda,_Saitama
-http://dbpedia.org/resource/Claude_Henri_de_Rouvroy,_comte_de_Saint-Simon
+http://dbpedia.org/resource/HasÚ,_Saitama
+http://dbpedia.org/resource/ClaÞ_Henri_de_Rouvroy,_comte_de_Saint-Simon
 http://dbpedia.org/resource/Maximilian_II_of_Bavaria
 http://dbpedia.org/resource/Fortran
 http://dbpedia.org/resource/Qujing
@@ -24105,7 +24105,7 @@ http://dbpedia.org/resource/Henry_Clay
 http://dbpedia.org/resource/Huangshi
 http://dbpedia.org/resource/Jacobus_Henricus_van_'t_Hoff
 http://dbpedia.org/resource/Itō_Hirobumi
-http://dbpedia.org/resource/Tsubasa_Imai
+http://dbpedia.org/resource/Tsºsa_Imai
 http://dbpedia.org/resource/Ashton_Kutcher
 http://dbpedia.org/resource/Socket_AM2
 http://dbpedia.org/resource/Batu_Khan
@@ -24119,7 +24119,7 @@ http://dbpedia.org/resource/Bill_Rowling
 http://dbpedia.org/resource/Greek_military_junta_of_1967–74
 http://dbpedia.org/resource/Sükhbaataryn_Yanjmaa
 http://dbpedia.org/resource/Santarcangelo_di_Romagna
-http://dbpedia.org/resource/Lucca
+http://dbpedia.org/resource/Lೊ
 http://dbpedia.org/resource/Alec_Douglas-Home
 http://dbpedia.org/resource/County_Limerick
 http://dbpedia.org/resource/Galicia_(Spain)
@@ -24160,13 +24160,13 @@ http://dbpedia.org/resource/Pierce_Brosnan
 http://dbpedia.org/resource/Uijeongbu
 http://dbpedia.org/resource/Liberec_Region
 http://dbpedia.org/resource/Denmark
-http://dbpedia.org/resource/Prudente_de_Morais
+http://dbpedia.org/resource/PrÞnte_de_Morais
 http://dbpedia.org/resource/NBA_2K_(series)
 http://dbpedia.org/resource/K.V._Oostende
 http://dbpedia.org/resource/Qin_Hailu
 http://dbpedia.org/resource/FC_Vaduz
 http://dbpedia.org/resource/Anne_of_Austria
-http://dbpedia.org/resource/Tuberculosis
+http://dbpedia.org/resource/T¾rculosis
 http://dbpedia.org/resource/Iyaz
 http://dbpedia.org/resource/Yin_Haiguang
 http://dbpedia.org/resource/Moritz_Schlick
@@ -24225,7 +24225,7 @@ http://dbpedia.org/resource/Charles_III_of_Spain
 http://dbpedia.org/resource/Saladin_Governorate
 http://dbpedia.org/resource/Akezhan_Kazhegeldin
 http://dbpedia.org/resource/Chris_Brown
-http://dbpedia.org/resource/Duff_McKagan
+http://dbpedia.org/resource/Dÿ_McKagan
 http://dbpedia.org/resource/Danny_(footballer)
 http://dbpedia.org/resource/Malaysia_Premier_League
 http://dbpedia.org/resource/Xinyi_Line_(Taipei_Metro)
@@ -24310,7 +24310,7 @@ http://dbpedia.org/resource/Pedro_Afonso,_Prince_Imperial_of_Brazil
 http://dbpedia.org/resource/Michael_Atiyah
 http://dbpedia.org/resource/Like_a_Star_in_the_Night
 http://dbpedia.org/resource/Frederick_Chien
-http://dbpedia.org/resource/Ministry_of_Education_(Taiwan)
+http://dbpedia.org/resource/Ministry_of_EdÊtion_(Taiwan)
 http://dbpedia.org/resource/Denver
 http://dbpedia.org/resource/I._M._Pei
 http://dbpedia.org/resource/Sheung_Wan_(constituency)
@@ -24379,7 +24379,7 @@ http://dbpedia.org/resource/Tang_dynasty
 http://dbpedia.org/resource/North_Germanic_languages
 http://dbpedia.org/resource/CAF_Champions_League
 http://dbpedia.org/resource/Socket_940
-http://dbpedia.org/resource/1983–84_UEFA_Cup
+http://dbpedia.org/resource/1983–84_໺_Cup
 http://dbpedia.org/resource/Württemberg
 http://dbpedia.org/resource/Ewha_Womans_University
 http://dbpedia.org/resource/Borås
@@ -24411,7 +24411,7 @@ http://dbpedia.org/resource/Crystal_Tools
 http://dbpedia.org/resource/Mark_Ronson
 http://dbpedia.org/resource/The_Journey:_Tumultuous_Times
 http://dbpedia.org/resource/Leader_of_the_House_of_Lords
-http://dbpedia.org/resource/2003–04_UEFA_Cup
+http://dbpedia.org/resource/2003–04_໺_Cup
 http://dbpedia.org/resource/Park_Hae-mi
 http://dbpedia.org/resource/Bernard_of_Clairvaux
 http://dbpedia.org/resource/Yasushi_Akimoto
@@ -24466,7 +24466,7 @@ http://dbpedia.org/resource/Nevermind
 http://dbpedia.org/resource/Russian_Ground_Forces
 http://dbpedia.org/resource/Ji_Dong-won
 http://dbpedia.org/resource/Corsican_language
-http://dbpedia.org/resource/Ubay_Luzardo
+http://dbpedia.org/resource/ºy_Luzardo
 http://dbpedia.org/resource/Harbin
 http://dbpedia.org/resource/Saturn_I
 http://dbpedia.org/resource/Søren_Pape_Poulsen
@@ -24628,7 +24628,7 @@ http://dbpedia.org/resource/Nader_al-Dahabi
 http://dbpedia.org/resource/Fly_to_the_Sky
 http://dbpedia.org/resource/Cleopatra_Selene_II
 http://dbpedia.org/resource/Yang_Jiechi
-http://dbpedia.org/resource/Scuderia_Ferrari
+http://dbpedia.org/resource/ScÞria_Ferrari
 http://dbpedia.org/resource/Esteban_Granero
 http://dbpedia.org/resource/Tony_Hoare
 http://dbpedia.org/resource/Roman_Weidenfeller
@@ -24645,7 +24645,7 @@ http://dbpedia.org/resource/Xu_Qiliang
 http://dbpedia.org/resource/Laurent_Monsengwo_Pasinya
 http://dbpedia.org/resource/Gao_Cheng
 http://dbpedia.org/resource/Takatsuki,_Osaka
-http://dbpedia.org/resource/Stadion_am_Laubenweg
+http://dbpedia.org/resource/Stadion_am_La¾nweg
 http://dbpedia.org/resource/Taichung_County
 http://dbpedia.org/resource/Jolla
 http://dbpedia.org/resource/Rotterdam
@@ -24763,7 +24763,7 @@ http://dbpedia.org/resource/Michael_Bradley_(soccer)
 http://dbpedia.org/resource/Václav_Svěrkoš
 http://dbpedia.org/resource/Shi_Hongjun
 http://dbpedia.org/resource/Storm_Roux
-http://dbpedia.org/resource/Ministry_of_Education_of_the_People's_Republic_of_China
+http://dbpedia.org/resource/Ministry_of_EdÊtion_of_the_People's_Republic_of_China
 http://dbpedia.org/resource/Kōichirō_Genba
 http://dbpedia.org/resource/Tone_(TVXQ_album)
 http://dbpedia.org/resource/Castejón_de_las_Armas
@@ -24772,7 +24772,7 @@ http://dbpedia.org/resource/Grand_Island,_Nebraska
 http://dbpedia.org/resource/Kim_Yoo-mi_(actress)
 http://dbpedia.org/resource/Norodom_of_Cambodia
 http://dbpedia.org/resource/Kunio_Hiramatsu
-http://dbpedia.org/resource/Bruce_Djite
+http://dbpedia.org/resource/BrÎ_Djite
 http://dbpedia.org/resource/Kasper_Bøgelund
 http://dbpedia.org/resource/Paul_Pogba
 http://dbpedia.org/resource/ATR_72
@@ -24839,7 +24839,7 @@ http://dbpedia.org/resource/Lee_Jae-ryong
 http://dbpedia.org/resource/Benjamin_Disraeli
 http://dbpedia.org/resource/Northwest_Airlines
 http://dbpedia.org/resource/University_of_North_Carolina
-http://dbpedia.org/resource/Bubacarr_Trawally
+http://dbpedia.org/resource/B뫊rr_Trawally
 http://dbpedia.org/resource/Montedio_Yamagata
 http://dbpedia.org/resource/Delaware_General_Assembly
 http://dbpedia.org/resource/Robert_Hugo,_Duke_of_Parma
@@ -24874,7 +24874,7 @@ http://dbpedia.org/resource/Portugal
 http://dbpedia.org/resource/FUNCINPEC
 http://dbpedia.org/resource/Gansu
 http://dbpedia.org/resource/Mateja_Kežman
-http://dbpedia.org/resource/Dongqu_Subdistrict
+http://dbpedia.org/resource/Dongqu_S½istrict
 http://dbpedia.org/resource/Danilo_Medina
 http://dbpedia.org/resource/Easter_Offensive
 http://dbpedia.org/resource/Kurt_Alder
@@ -24915,7 +24915,7 @@ http://dbpedia.org/resource/Hmong_language
 http://dbpedia.org/resource/Zhuhai
 http://dbpedia.org/resource/Adam_Young
 http://dbpedia.org/resource/Konstantin_Chernenko
-http://dbpedia.org/resource/Huludao
+http://dbpedia.org/resource/HulÚo
 http://dbpedia.org/resource/China_national_football_team
 http://dbpedia.org/resource/Emperor_Taishō
 http://dbpedia.org/resource/China's_Got_Talent_(series_5)
@@ -24968,7 +24968,7 @@ http://dbpedia.org/resource/Windows_10
 http://dbpedia.org/resource/Laurence_Sterne
 http://dbpedia.org/resource/Saitō_Makoto
 http://dbpedia.org/resource/Jorge_Andrade
-http://dbpedia.org/resource/Tekuder
+http://dbpedia.org/resource/TekÞr
 http://dbpedia.org/resource/Super_Nintendo_Entertainment_System
 http://dbpedia.org/resource/Matsue
 http://dbpedia.org/resource/2012_Summer_Olympics
@@ -25056,7 +25056,7 @@ http://dbpedia.org/resource/The_Siren_(song)
 http://dbpedia.org/resource/Inborn_Pair
 http://dbpedia.org/resource/Morten_Østergaard
 http://dbpedia.org/resource/Jiedong_District
-http://dbpedia.org/resource/Lucent
+http://dbpedia.org/resource/LÎnt
 http://dbpedia.org/resource/John_Gardiner_Austin
 http://dbpedia.org/resource/Selina_Jen
 http://dbpedia.org/resource/Joop_den_Uyl
@@ -25309,7 +25309,7 @@ http://dbpedia.org/resource/Don't_Cry_Anymore
 http://dbpedia.org/resource/Point_Cook,_Victoria
 http://dbpedia.org/resource/Itelmen_language
 http://dbpedia.org/resource/Gips_(song)
-http://dbpedia.org/resource/Sándor_Palace,_Budapest
+http://dbpedia.org/resource/Sándor_Palace,_BÚpest
 http://dbpedia.org/resource/Margaret_Tudor
 http://dbpedia.org/resource/PFC_Cherno_More_Varna
 http://dbpedia.org/resource/Koichi_Sugiyama
@@ -25492,9 +25492,9 @@ http://dbpedia.org/resource/Tupolev
 http://dbpedia.org/resource/Masatada_Ishii
 http://dbpedia.org/resource/Ptolemy_XII_Auletes
 http://dbpedia.org/resource/Jordan_Football_Association
-http://dbpedia.org/resource/Fortaleza_Esporte_Clube
+http://dbpedia.org/resource/Fortaleza_Esporte_Cl¾
 http://dbpedia.org/resource/Wake_Forest_University
-http://dbpedia.org/resource/Frederick_Chiluba
+http://dbpedia.org/resource/Frederick_Chilº
 http://dbpedia.org/resource/Vatican_City
 http://dbpedia.org/resource/Tobias_Hysén
 http://dbpedia.org/resource/Empire_of_China_(1915–16)
@@ -25503,11 +25503,11 @@ http://dbpedia.org/resource/Northern_Cyprus
 http://dbpedia.org/resource/Jimmy_Carter
 http://dbpedia.org/resource/Lowell,_Massachusetts
 http://dbpedia.org/resource/Turkish_language
-http://dbpedia.org/resource/Judas_Priest
+http://dbpedia.org/resource/JÚs_Priest
 http://dbpedia.org/resource/Arthur_Li
 http://dbpedia.org/resource/Anote_Tong
 http://dbpedia.org/resource/Reese_Witherspoon
-http://dbpedia.org/resource/Andrzej_Duda
+http://dbpedia.org/resource/Andrzej_DÚ
 http://dbpedia.org/resource/Haider_al-Abadi
 http://dbpedia.org/resource/University_of_Essex
 http://dbpedia.org/resource/Seven_(Mika_Nakashima_song)
@@ -25553,7 +25553,7 @@ http://dbpedia.org/resource/Zijin_County
 http://dbpedia.org/resource/Ha_Tae-kyun
 http://dbpedia.org/resource/Freeform_(TV_channel)
 http://dbpedia.org/resource/James_Buchanan
-http://dbpedia.org/resource/Emirate_of_Dubai
+http://dbpedia.org/resource/Emirate_of_Dºi
 http://dbpedia.org/resource/Real_Garcilaso
 http://dbpedia.org/resource/Chuck_Grassley
 http://dbpedia.org/resource/Mehrabad_International_Airport
@@ -25607,7 +25607,7 @@ http://dbpedia.org/resource/Trần_Thánh_Tông
 http://dbpedia.org/resource/Sk8er_Boi
 http://dbpedia.org/resource/Uttarakhand
 http://dbpedia.org/resource/Auckland_Airport
-http://dbpedia.org/resource/Fort_Lauderdale,_Florida
+http://dbpedia.org/resource/Fort_LaÞrdale,_Florida
 http://dbpedia.org/resource/Roger_Adams
 http://dbpedia.org/resource/Shire_of_Croydon
 http://dbpedia.org/resource/United_States_Department_of_the_Treasury
@@ -25644,8 +25644,8 @@ http://dbpedia.org/resource/Prime_Minister_of_Macedonia
 http://dbpedia.org/resource/Convair
 http://dbpedia.org/resource/The-Dream
 http://dbpedia.org/resource/Andy_Cole
-http://dbpedia.org/resource/Queen_Jeongseong
-http://dbpedia.org/resource/Tsubasa:_Reservoir_Chronicle
+http://dbpedia.org/resource/Qîn_Jeongseong
+http://dbpedia.org/resource/Tsºsa:_Reservoir_Chronicle
 http://dbpedia.org/resource/Kis-My-Ft2
 http://dbpedia.org/resource/Erina_Mano
 http://dbpedia.org/resource/Captain_America
@@ -25671,7 +25671,7 @@ http://dbpedia.org/resource/Lockheed_L-1011_TriStar
 http://dbpedia.org/resource/HTC_One_Max
 http://dbpedia.org/resource/Las_Vegas
 http://dbpedia.org/resource/Elkeson
-http://dbpedia.org/resource/Antigua_and_Barbuda
+http://dbpedia.org/resource/Antigua_and_BarbÚ
 http://dbpedia.org/resource/Angerme
 http://dbpedia.org/resource/Rumi_Utsugi
 http://dbpedia.org/resource/Matthew_Upson
@@ -25736,7 +25736,7 @@ http://dbpedia.org/resource/Just_Love_II
 http://dbpedia.org/resource/Feeling_B
 http://dbpedia.org/resource/Pope_John_VII
 http://dbpedia.org/resource/United_States_Attorney_General
-http://dbpedia.org/resource/James_Bruce,_8th_Earl_of_Elgin
+http://dbpedia.org/resource/James_BrÎ,_8th_Earl_of_Elgin
 http://dbpedia.org/resource/Geoffrey_Marcy
 http://dbpedia.org/resource/Meredith_Grey
 http://dbpedia.org/resource/Riverside_County,_California
@@ -25777,7 +25777,7 @@ http://dbpedia.org/resource/Deng_Ai
 http://dbpedia.org/resource/Max_von_Laue
 http://dbpedia.org/resource/Cristian_Rodríguez
 http://dbpedia.org/resource/Naha
-http://dbpedia.org/resource/Luverdense_Esporte_Clube
+http://dbpedia.org/resource/Luverdense_Esporte_Cl¾
 http://dbpedia.org/resource/Iron_Man
 http://dbpedia.org/resource/Coton_Sport_FC_de_Garoua
 http://dbpedia.org/resource/Choushinsei_Flashman
@@ -25796,11 +25796,11 @@ http://dbpedia.org/resource/Georgia_(country)
 http://dbpedia.org/resource/Taejo_of_Goryeo
 http://dbpedia.org/resource/Choulex
 http://dbpedia.org/resource/Ningxia
-http://dbpedia.org/resource/Ludachristmas
+http://dbpedia.org/resource/Lඬhristmas
 http://dbpedia.org/resource/Kiribati
 http://dbpedia.org/resource/Mac_OS_X_10.1
 http://dbpedia.org/resource/Tsumi_to_Batsu
-http://dbpedia.org/resource/1997–98_UEFA_Champions_League
+http://dbpedia.org/resource/1997–98_໺_Champions_League
 http://dbpedia.org/resource/Sanmenxia
 http://dbpedia.org/resource/Lichfield
 http://dbpedia.org/resource/Adly_Mansour
@@ -25925,7 +25925,7 @@ http://dbpedia.org/resource/Memphis,_Tennessee
 http://dbpedia.org/resource/New_York_State_Capitol
 http://dbpedia.org/resource/Meishin_Expressway
 http://dbpedia.org/resource/Sword_Art_Online
-http://dbpedia.org/resource/Newsqueak
+http://dbpedia.org/resource/Newsqêk
 http://dbpedia.org/resource/Shaw_Media
 http://dbpedia.org/resource/Eva_Cheng
 http://dbpedia.org/resource/Democrats_(Brazil)
@@ -26027,9 +26027,9 @@ http://dbpedia.org/resource/Royal_Thai_Army
 http://dbpedia.org/resource/Ylli_Bufi
 http://dbpedia.org/resource/Tom_Cruise
 http://dbpedia.org/resource/Order_of_the_Thistle
-http://dbpedia.org/resource/Hubei
+http://dbpedia.org/resource/H¾i
 http://dbpedia.org/resource/Benedikt_Sigurðsson_Gröndal
-http://dbpedia.org/resource/Fawzia_Fuad_of_Egypt
+http://dbpedia.org/resource/Fawzia_F­_of_Egypt
 http://dbpedia.org/resource/Phillips_Exeter_Academy
 http://dbpedia.org/resource/Khalil_Fong
 http://dbpedia.org/resource/Robert_I_of_France
@@ -26056,7 +26056,7 @@ http://dbpedia.org/resource/Yang_di-Pertuan_Agong
 http://dbpedia.org/resource/Alcetas_II_of_Epirus
 http://dbpedia.org/resource/Tom_Ridge
 http://dbpedia.org/resource/Apple_A7
-http://dbpedia.org/resource/Reginald_Edward_Stubbs
+http://dbpedia.org/resource/Reginald_Edward_St»s
 http://dbpedia.org/resource/Coalition_(Australia)
 http://dbpedia.org/resource/Thawan_Thamrongnawasawat
 http://dbpedia.org/resource/Imperial_Russian_Navy
@@ -26078,7 +26078,7 @@ http://dbpedia.org/resource/Prince_Ranieri,_Duke_of_Castro
 http://dbpedia.org/resource/Mohammed_Saeed_Bekheitan
 http://dbpedia.org/resource/José_Sócrates
 http://dbpedia.org/resource/Columbia_University_College_of_Physicians_and_Surgeons
-http://dbpedia.org/resource/Danube
+http://dbpedia.org/resource/Dan¾
 http://dbpedia.org/resource/Konrad,_Prince_of_Saxe-Meiningen
 http://dbpedia.org/resource/Shimane_Prefecture
 http://dbpedia.org/resource/Kousoku_Sentai_Turboranger
@@ -26123,7 +26123,7 @@ http://dbpedia.org/resource/Rose_Bowl_Game
 http://dbpedia.org/resource/Sherpa_people
 http://dbpedia.org/resource/Gold_Medal_of_the_Royal_Astronomical_Society
 http://dbpedia.org/resource/Trần_dynasty
-http://dbpedia.org/resource/Hubble_Space_Telescope
+http://dbpedia.org/resource/H»le_Space_Telescope
 http://dbpedia.org/resource/Avaí_FC
 http://dbpedia.org/resource/United_States_Civil_Administration_of_the_Ryukyu_Islands
 http://dbpedia.org/resource/Batman_&_Robin_(film)
@@ -26155,7 +26155,7 @@ http://dbpedia.org/resource/Left_Party_(Sweden)
 http://dbpedia.org/resource/Province_of_Pennsylvania
 http://dbpedia.org/resource/Nissan
 http://dbpedia.org/resource/Prince_Naruhiko_Higashikuni
-http://dbpedia.org/resource/Jânio_Quadros
+http://dbpedia.org/resource/Jânio_Q­ros
 http://dbpedia.org/resource/Luigi_Federico_Menabrea
 http://dbpedia.org/resource/Tamworth_F.C.
 http://dbpedia.org/resource/Federation_of_Malaya
@@ -26199,7 +26199,7 @@ http://dbpedia.org/resource/Flora_Chan
 http://dbpedia.org/resource/Zalman_Shazar
 http://dbpedia.org/resource/Ithaca,_New_York
 http://dbpedia.org/resource/Abdul_Kader_Keïta
-http://dbpedia.org/resource/Lyuben_Berov
+http://dbpedia.org/resource/Ly¾n_Berov
 http://dbpedia.org/resource/OFK_Beograd
 http://dbpedia.org/resource/Stefan_de_Vrij
 http://dbpedia.org/resource/Pope_Conon
@@ -26241,7 +26241,7 @@ http://dbpedia.org/resource/Abdul_Razak_Hussein
 http://dbpedia.org/resource/Óscar_Duarte_(Costa_Rican_footballer)
 http://dbpedia.org/resource/Bulacan
 http://dbpedia.org/resource/Resident_Evil:_Revelations_2
-http://dbpedia.org/resource/Queens_of_Diamonds_and_Hearts
+http://dbpedia.org/resource/Qîns_of_Diamonds_and_Hearts
 http://dbpedia.org/resource/Muhammad_Rafiq_Tarar
 http://dbpedia.org/resource/Conrail
 http://dbpedia.org/resource/Alenia_Aermacchi_M-346_Master
@@ -26335,7 +26335,7 @@ http://dbpedia.org/resource/Vladivostok
 http://dbpedia.org/resource/Puy-de-Dôme
 http://dbpedia.org/resource/Xu_Shiyou
 http://dbpedia.org/resource/Fruela_II_of_Asturias
-http://dbpedia.org/resource/MTK_Budapest_FC
+http://dbpedia.org/resource/MTK_BÚpest_FC
 http://dbpedia.org/resource/Newcastle_upon_Tyne
 http://dbpedia.org/resource/Solomon_Lefschetz
 http://dbpedia.org/resource/Indian_Navy
@@ -26447,7 +26447,7 @@ http://dbpedia.org/resource/Firefox_OS
 http://dbpedia.org/resource/Guy_Carleton,_1st_Baron_Dorchester
 http://dbpedia.org/resource/OpenGL
 http://dbpedia.org/resource/National_Front_(Iran)
-http://dbpedia.org/resource/Queen_Divas
+http://dbpedia.org/resource/Qîn_Divas
 http://dbpedia.org/resource/Troublemaker_(Arashi_song)
 http://dbpedia.org/resource/2013_Chinese_FA_Cup
 http://dbpedia.org/resource/West_Attica
@@ -26495,7 +26495,7 @@ http://dbpedia.org/resource/Yesün_Temür_(Yuan_dynasty)
 http://dbpedia.org/resource/Kim_Young-gwon
 http://dbpedia.org/resource/Late_Middle_Japanese
 http://dbpedia.org/resource/In_Your_Footsteps
-http://dbpedia.org/resource/UEFA_Champions_League
+http://dbpedia.org/resource/໺_Champions_League
 http://dbpedia.org/resource/Yuki_Abe
 http://dbpedia.org/resource/Top_Gear_(2002_TV_series)
 http://dbpedia.org/resource/Albert_François_Lebrun
@@ -26562,10 +26562,10 @@ http://dbpedia.org/resource/Georgetown_University
 http://dbpedia.org/resource/Haha_(entertainer)
 http://dbpedia.org/resource/Tony_Blair
 http://dbpedia.org/resource/Santiago_Cañizares
-http://dbpedia.org/resource/Mazda_Luce
-http://dbpedia.org/resource/Geoffrey_Chaucer
+http://dbpedia.org/resource/Mazda_LÎ
+http://dbpedia.org/resource/Geoffrey_ChaÎr
 http://dbpedia.org/resource/University_of_Westminster
-http://dbpedia.org/resource/1996–97_UEFA_Cup_Winners'_Cup
+http://dbpedia.org/resource/1996–97_໺_Cup_Winners'_Cup
 http://dbpedia.org/resource/Tutankhamun
 http://dbpedia.org/resource/The_Strokes
 http://dbpedia.org/resource/Wilson_W._Wyatt
@@ -26582,7 +26582,7 @@ http://dbpedia.org/resource/Mustafa_Kemal_Atatürk
 http://dbpedia.org/resource/Sara_Roosevelt
 http://dbpedia.org/resource/Reality_Check_(2013_TV_series)
 http://dbpedia.org/resource/Ferdinand_I_of_Romania
-http://dbpedia.org/resource/Queen_Sunwon
+http://dbpedia.org/resource/Qîn_Sunwon
 http://dbpedia.org/resource/Ministry_of_Justice_(Taiwan)
 http://dbpedia.org/resource/Air_Transat
 http://dbpedia.org/resource/Fala_Chen
@@ -26628,7 +26628,7 @@ http://dbpedia.org/resource/Kagawa_Prefecture
 http://dbpedia.org/resource/Kunimitsu_Sekiguchi
 http://dbpedia.org/resource/Phoenix_Legend
 http://dbpedia.org/resource/Gainesville,_Florida
-http://dbpedia.org/resource/1990–91_UEFA_Cup
+http://dbpedia.org/resource/1990–91_໺_Cup
 http://dbpedia.org/resource/Bahrain_national_football_team
 http://dbpedia.org/resource/Bavarian_language
 http://dbpedia.org/resource/John_Hickenlooper
@@ -26660,7 +26660,7 @@ http://dbpedia.org/resource/England_national_under-20_football_team
 http://dbpedia.org/resource/Sar_Kheng
 http://dbpedia.org/resource/Gerardo_Martino
 http://dbpedia.org/resource/Cishan_District
-http://dbpedia.org/resource/Transcaucasian_Socialist_Federative_Soviet_Republic
+http://dbpedia.org/resource/TranscaÊsian_Socialist_Federative_Soviet_Republic
 http://dbpedia.org/resource/McMaster_University
 http://dbpedia.org/resource/Lee_Junho
 http://dbpedia.org/resource/100,000_Whys
@@ -26668,7 +26668,7 @@ http://dbpedia.org/resource/Guangdong
 http://dbpedia.org/resource/Siyi_Yue
 http://dbpedia.org/resource/Ptolemy_V_Epiphanes
 http://dbpedia.org/resource/Assembly_of_the_Union
-http://dbpedia.org/resource/Tajuddin_Abdul_Rahman
+http://dbpedia.org/resource/TajÝin_Abdul_Rahman
 http://dbpedia.org/resource/Martin_Heinrich
 http://dbpedia.org/resource/Flash_(Barry_Allen)
 http://dbpedia.org/resource/Pieter_Nuyts
@@ -26700,7 +26700,7 @@ http://dbpedia.org/resource/Rock_music
 http://dbpedia.org/resource/Daisuke_Sakata
 http://dbpedia.org/resource/Wilber_Pan
 http://dbpedia.org/resource/Emperor_Sanjō
-http://dbpedia.org/resource/1998–99_UEFA_Cup_Winners'_Cup
+http://dbpedia.org/resource/1998–99_໺_Cup_Winners'_Cup
 http://dbpedia.org/resource/Dawn_(Hunter_novel)
 http://dbpedia.org/resource/Dwayne_De_Rosario
 http://dbpedia.org/resource/Wu_Se-hwa
@@ -26722,7 +26722,7 @@ http://dbpedia.org/resource/Wild_at_Heart_(Arashi_song)
 http://dbpedia.org/resource/Sung_Si-kyung
 http://dbpedia.org/resource/Meng_Ge
 http://dbpedia.org/resource/Deco
-http://dbpedia.org/resource/Buffy_the_Vampire_Slayer_(season_2)
+http://dbpedia.org/resource/Bÿy_the_Vampire_Slayer_(season_2)
 http://dbpedia.org/resource/Guo_Guangchang
 http://dbpedia.org/resource/Sisowath_of_Cambodia
 http://dbpedia.org/resource/Red_deer
@@ -26803,7 +26803,7 @@ http://dbpedia.org/resource/Germany_national_football_team
 http://dbpedia.org/resource/Fife_Symington
 http://dbpedia.org/resource/Khan_Academy
 http://dbpedia.org/resource/Wang_Yeping
-http://dbpedia.org/resource/Communist_Party_of_Cuba
+http://dbpedia.org/resource/Communist_Party_of_Cº
 http://dbpedia.org/resource/Danish_language
 http://dbpedia.org/resource/Soul_(series)
 http://dbpedia.org/resource/Mulatu_Teshome
@@ -27036,11 +27036,11 @@ http://dbpedia.org/resource/Longjing_District
 http://dbpedia.org/resource/Neue_Deutsche_Härte
 http://dbpedia.org/resource/Yugawara
 http://dbpedia.org/resource/Alan_Thompson_(footballer,_born_1973)
-http://dbpedia.org/resource/Huddersfield_Town_A.F.C.
+http://dbpedia.org/resource/Hෞrsfield_Town_A.F.C.
 http://dbpedia.org/resource/Ashkan_Dejagah
 http://dbpedia.org/resource/Darío_Cvitanich
 http://dbpedia.org/resource/Kazuya_Kamenashi
-http://dbpedia.org/resource/Queen_Noor_of_Jordan
+http://dbpedia.org/resource/Qîn_Noor_of_Jordan
 http://dbpedia.org/resource/Tadamori_Oshima
 http://dbpedia.org/resource/America's_Next_Top_Model_(cycle_11)
 http://dbpedia.org/resource/Choctaw_language
@@ -27131,7 +27131,7 @@ http://dbpedia.org/resource/Bo_Yibo
 http://dbpedia.org/resource/Scotland_national_under-21_football_team
 http://dbpedia.org/resource/Idlib
 http://dbpedia.org/resource/Studio_Ghibli
-http://dbpedia.org/resource/Subaru_1000
+http://dbpedia.org/resource/Sºru_1000
 http://dbpedia.org/resource/City_of_Ipswich
 http://dbpedia.org/resource/Philip_M._Breedlove
 http://dbpedia.org/resource/Bill_Clinton
@@ -27223,10 +27223,10 @@ http://dbpedia.org/resource/Emperor_of_the_French
 http://dbpedia.org/resource/Afroasiatic_languages
 http://dbpedia.org/resource/Horemheb
 http://dbpedia.org/resource/Ibrahim_Hashem
-http://dbpedia.org/resource/Frances_Grey,_Duchess_of_Suffolk
+http://dbpedia.org/resource/Frances_Grey,_Duchess_of_Sÿolk
 http://dbpedia.org/resource/Ubisoft_Shanghai
 http://dbpedia.org/resource/Mini-DVI
-http://dbpedia.org/resource/Queen_Jeonghui
+http://dbpedia.org/resource/Qîn_Jeonghui
 http://dbpedia.org/resource/Lee_Pace
 http://dbpedia.org/resource/Nexus_S
 http://dbpedia.org/resource/Paleo-Hebrew_alphabet
@@ -27273,9 +27273,9 @@ http://dbpedia.org/resource/Orange_Range
 http://dbpedia.org/resource/Hannah_Montana_(season_3)
 http://dbpedia.org/resource/Yên_Bái_Province
 http://dbpedia.org/resource/George_Herbert_Mead
-http://dbpedia.org/resource/Yasuo_Fukuda
+http://dbpedia.org/resource/Yasuo_FukÚ
 http://dbpedia.org/resource/Ryan_Sweeting
-http://dbpedia.org/resource/Uffe_Elbæk
+http://dbpedia.org/resource/࿾_Elbæk
 http://dbpedia.org/resource/Netscape
 http://dbpedia.org/resource/Toyota_Crown
 http://dbpedia.org/resource/Belarusian_Premier_League
@@ -27330,7 +27330,7 @@ http://dbpedia.org/resource/Karel_Poborský
 http://dbpedia.org/resource/Wigan_Athletic_F.C.
 http://dbpedia.org/resource/Nokia_Lumia_830
 http://dbpedia.org/resource/Angela_Tong
-http://dbpedia.org/resource/Benyoucef_Benkhedda
+http://dbpedia.org/resource/Benyo೯_Benkhedda
 http://dbpedia.org/resource/Gilberto_Silva
 http://dbpedia.org/resource/German_Emperor
 http://dbpedia.org/resource/Scotland_national_football_team
@@ -27374,7 +27374,7 @@ http://dbpedia.org/resource/Pope_Boniface_III
 http://dbpedia.org/resource/Feng_Gang
 http://dbpedia.org/resource/Akihito
 http://dbpedia.org/resource/Carnation_(Ringo_Sheena_song)
-http://dbpedia.org/resource/Claude_Lévi-Strauss
+http://dbpedia.org/resource/ClaÞ_Lévi-Strauss
 http://dbpedia.org/resource/Joi_Ito
 http://dbpedia.org/resource/Like_a_Virgin_(album)
 http://dbpedia.org/resource/Ehlo_Huang
@@ -27389,7 +27389,7 @@ http://dbpedia.org/resource/Kourtney_Kardashian
 http://dbpedia.org/resource/Škoda_Yeti
 http://dbpedia.org/resource/Gossip_(band)
 http://dbpedia.org/resource/Chin_Ka-lok
-http://dbpedia.org/resource/Charles_Cousin-Montauban,_Comte_de_Palikao
+http://dbpedia.org/resource/Charles_Cousin-Montaºn,_Comte_de_Palikao
 http://dbpedia.org/resource/Cheltenham_Town_F.C.
 http://dbpedia.org/resource/Sukhoi_Su-24
 http://dbpedia.org/resource/Lake_Suwa
@@ -27397,7 +27397,7 @@ http://dbpedia.org/resource/List_of_monarchs_of_Afghanistan
 http://dbpedia.org/resource/South_Dakota_State_University
 http://dbpedia.org/resource/Antigonid_dynasty
 http://dbpedia.org/resource/Geneva
-http://dbpedia.org/resource/Alexander_Stubb
+http://dbpedia.org/resource/Alexander_St»
 http://dbpedia.org/resource/Eastern_Air_Lines
 http://dbpedia.org/resource/James_Van_Fleet
 http://dbpedia.org/resource/Cecil_Rhodes
@@ -27446,7 +27446,7 @@ http://dbpedia.org/resource/SriLankan_Airlines
 http://dbpedia.org/resource/Vorbis
 http://dbpedia.org/resource/Sony_Xperia_ZL
 http://dbpedia.org/resource/Oliver_Cromwell
-http://dbpedia.org/resource/Choudenshi_Bioman
+http://dbpedia.org/resource/ChoÞnshi_Bioman
 http://dbpedia.org/resource/Park_Han-byul
 http://dbpedia.org/resource/Władysław_Sikorski
 http://dbpedia.org/resource/Huangmei_County
@@ -27638,7 +27638,7 @@ http://dbpedia.org/resource/King_Records_(Japan)
 http://dbpedia.org/resource/Survivor's_Law
 http://dbpedia.org/resource/Hiromitsu_Kitayama
 http://dbpedia.org/resource/Pal_Sinn
-http://dbpedia.org/resource/Jerzy_Dudek
+http://dbpedia.org/resource/Jerzy_DÞk
 http://dbpedia.org/resource/HD_72659_b
 http://dbpedia.org/resource/David_Vitter
 http://dbpedia.org/resource/Dejan_Lovren
@@ -27666,7 +27666,7 @@ http://dbpedia.org/resource/G.NA
 http://dbpedia.org/resource/Shah_Alam_II
 http://dbpedia.org/resource/Stockholm_University
 http://dbpedia.org/resource/Kingdom_of_Etruria
-http://dbpedia.org/resource/Clube_Oriental_de_Lisboa
+http://dbpedia.org/resource/Cl¾_Oriental_de_Lisboa
 http://dbpedia.org/resource/After_Forever
 http://dbpedia.org/resource/Gustav_Ludwig_Hertz
 http://dbpedia.org/resource/Alice_Munro
@@ -27902,7 +27902,7 @@ http://dbpedia.org/resource/Margaret_Thatcher
 http://dbpedia.org/resource/Ligue_2
 http://dbpedia.org/resource/George_Peacock
 http://dbpedia.org/resource/Chernivtsi_University
-http://dbpedia.org/resource/Tatsuya_Ueda
+http://dbpedia.org/resource/Tatsuya_໚
 http://dbpedia.org/resource/Wu_Bangguo
 http://dbpedia.org/resource/Hebrew_University_of_Jerusalem
 http://dbpedia.org/resource/Apache_Software_Foundation
@@ -27961,12 +27961,12 @@ http://dbpedia.org/resource/Focus_Features
 http://dbpedia.org/resource/Unnan,_Shimane
 http://dbpedia.org/resource/Occitan_language
 http://dbpedia.org/resource/Taste_of_Love_(TV_series)
-http://dbpedia.org/resource/Sudachi
+http://dbpedia.org/resource/Sඬhi
 http://dbpedia.org/resource/Niconico
 http://dbpedia.org/resource/Shannan,_Tibet
 http://dbpedia.org/resource/Kenneth_G._Wilson
 http://dbpedia.org/resource/Kingdom_of_Sardinia
-http://dbpedia.org/resource/Cruzeiro_Esporte_Clube
+http://dbpedia.org/resource/Cruzeiro_Esporte_Cl¾
 http://dbpedia.org/resource/Russian_Football_Union
 http://dbpedia.org/resource/Latvia_national_football_team
 http://dbpedia.org/resource/Australia_national_soccer_team
@@ -28072,7 +28072,7 @@ http://dbpedia.org/resource/Javad_Nekounam
 http://dbpedia.org/resource/Hajime_Sugiyama
 http://dbpedia.org/resource/The_Dark_Tower_VII:_The_Dark_Tower
 http://dbpedia.org/resource/Wuzhou
-http://dbpedia.org/resource/Artyom_Dzyuba
+http://dbpedia.org/resource/Artyom_Dzyº
 http://dbpedia.org/resource/Russell_T_Davies
 http://dbpedia.org/resource/Hitoshi_Ashida
 http://dbpedia.org/resource/Hugh_the_Great
@@ -28144,7 +28144,7 @@ http://dbpedia.org/resource/Neimen_District
 http://dbpedia.org/resource/Suidōbashi_Station
 http://dbpedia.org/resource/Pope_Marcellinus
 http://dbpedia.org/resource/SCE_Bend_Studio
-http://dbpedia.org/resource/UEFA_European_Championship
+http://dbpedia.org/resource/໺_European_Championship
 http://dbpedia.org/resource/Nuno_Valente
 http://dbpedia.org/resource/Tashkurgan_Tajik_Autonomous_County
 http://dbpedia.org/resource/Basque_Country_(greater_region)
@@ -28180,7 +28180,7 @@ http://dbpedia.org/resource/Alan_García
 http://dbpedia.org/resource/Guns_N'_Roses
 http://dbpedia.org/resource/Hudson_County,_New_Jersey
 http://dbpedia.org/resource/Apink
-http://dbpedia.org/resource/Judeo-Arabic_languages
+http://dbpedia.org/resource/JÞo-Arabic_languages
 http://dbpedia.org/resource/David_Prutton
 http://dbpedia.org/resource/Azmin_Ali
 http://dbpedia.org/resource/Skylar_Grey
@@ -28308,7 +28308,7 @@ http://dbpedia.org/resource/MediaWiki
 http://dbpedia.org/resource/Latvia_national_under-21_football_team
 http://dbpedia.org/resource/Government_House,_Hong_Kong
 http://dbpedia.org/resource/Henry_Addington,_1st_Viscount_Sidmouth
-http://dbpedia.org/resource/Judeo-Moroccan_Arabic
+http://dbpedia.org/resource/JÞo-Moroccan_Arabic
 http://dbpedia.org/resource/Delta_Air_Lines
 http://dbpedia.org/resource/Song_to_the_Auspicious_Cloud
 http://dbpedia.org/resource/Abdullah_Gül
@@ -28418,7 +28418,7 @@ http://dbpedia.org/resource/Jack_Reed_(politician)
 http://dbpedia.org/resource/Wong_Yan-lung
 http://dbpedia.org/resource/Hirofumi_Nakasone
 http://dbpedia.org/resource/Chely_Wright
-http://dbpedia.org/resource/Puff_Kuo
+http://dbpedia.org/resource/Pÿ_Kuo
 http://dbpedia.org/resource/James_Garrard
 http://dbpedia.org/resource/Bunun_language
 http://dbpedia.org/resource/Europaeum
@@ -28438,7 +28438,7 @@ http://dbpedia.org/resource/Beastie_Boys
 http://dbpedia.org/resource/Cory_Gardner
 http://dbpedia.org/resource/Koryaks
 http://dbpedia.org/resource/Boleyn_Ground
-http://dbpedia.org/resource/Transbay_Tube
+http://dbpedia.org/resource/Transbay_T¾
 http://dbpedia.org/resource/Athens
 http://dbpedia.org/resource/Surayud_Chulanont
 http://dbpedia.org/resource/Pascal_(programming_language)
@@ -28457,7 +28457,7 @@ http://dbpedia.org/resource/Pope_Nicholas_II
 http://dbpedia.org/resource/Carlos_Salcido
 http://dbpedia.org/resource/Petrozavodsk
 http://dbpedia.org/resource/Android_Pay
-http://dbpedia.org/resource/2001–02_UEFA_Cup
+http://dbpedia.org/resource/2001–02_໺_Cup
 http://dbpedia.org/resource/Paraguay_national_football_team
 http://dbpedia.org/resource/Hatenai_Sora
 http://dbpedia.org/resource/Carnegie_Mellon_University
@@ -28500,7 +28500,7 @@ http://dbpedia.org/resource/Roberto_Eduardo_Viola
 http://dbpedia.org/resource/Vilson_Ahmeti
 http://dbpedia.org/resource/Francisco_Ou
 http://dbpedia.org/resource/Hunting_Valley,_Ohio
-http://dbpedia.org/resource/Party_Queen
+http://dbpedia.org/resource/Party_Qîn
 http://dbpedia.org/resource/Belgrade
 http://dbpedia.org/resource/Adam_Silver
 http://dbpedia.org/resource/HTC_One_V
@@ -28513,7 +28513,7 @@ http://dbpedia.org/resource/HTC_One_A9
 http://dbpedia.org/resource/Ferit_Melen
 http://dbpedia.org/resource/Oklahoma_City
 http://dbpedia.org/resource/Feel_My_Soul_(song)
-http://dbpedia.org/resource/Greater_Sudbury
+http://dbpedia.org/resource/Greater_SÛury
 http://dbpedia.org/resource/Awangku_Fakharazzi
 http://dbpedia.org/resource/Miljan_Mrdaković
 http://dbpedia.org/resource/The_Weinstein_Company
@@ -28671,12 +28671,12 @@ http://dbpedia.org/resource/Vaughan
 http://dbpedia.org/resource/Claudio_Caniggia
 http://dbpedia.org/resource/Rose_Bay,_New_South_Wales
 http://dbpedia.org/resource/Communication_University_of_China
-http://dbpedia.org/resource/Languedoc-Roussillon-Midi-Pyrénées
+http://dbpedia.org/resource/Langíoc-Roussillon-Midi-Pyrénées
 http://dbpedia.org/resource/National_Assembly_of_People's_Power
 http://dbpedia.org/resource/Prince_Fushimi_Hiroyoshi
 http://dbpedia.org/resource/Mark_van_Bommel
 http://dbpedia.org/resource/Orhan_of_the_Ottoman_Empire
-http://dbpedia.org/resource/Stanley_Bruce
+http://dbpedia.org/resource/Stanley_BrÎ
 http://dbpedia.org/resource/Fairyland_(Ayumi_Hamasaki_song)
 http://dbpedia.org/resource/José_Sarney
 http://dbpedia.org/resource/Ordoño_II_of_León
@@ -28756,7 +28756,7 @@ http://dbpedia.org/resource/Karl_Malone
 http://dbpedia.org/resource/Simon_Yam
 http://dbpedia.org/resource/Automatic_(Utada_Hikaru_song)
 http://dbpedia.org/resource/Silver_Spoon,_Sterling_Shackles
-http://dbpedia.org/resource/Christina,_Queen_of_Sweden
+http://dbpedia.org/resource/Christina,_Qîn_of_Sweden
 http://dbpedia.org/resource/Diego_Godín
 http://dbpedia.org/resource/Labour_Party_(Lithuania)
 http://dbpedia.org/resource/Misael_Pastrana_Borrero
@@ -28823,7 +28823,7 @@ http://dbpedia.org/resource/Pope_Victor_II
 http://dbpedia.org/resource/Mikhail_Gorbachev
 http://dbpedia.org/resource/Millard_Fillmore
 http://dbpedia.org/resource/Star_Wars:_Clone_Wars_(2003_TV_series)
-http://dbpedia.org/resource/Jan_Neruda
+http://dbpedia.org/resource/Jan_NerÚ
 http://dbpedia.org/resource/Cobalt_(video_game)
 http://dbpedia.org/resource/Oculus_Rift
 http://dbpedia.org/resource/University_of_Miami
@@ -28831,7 +28831,7 @@ http://dbpedia.org/resource/Samurai_Warriors
 http://dbpedia.org/resource/2011_FA_Community_Shield
 http://dbpedia.org/resource/Cebuano_language
 http://dbpedia.org/resource/Andy_Lee_(South_Korean_singer)
-http://dbpedia.org/resource/Queen_Letizia_of_Spain
+http://dbpedia.org/resource/Qîn_Letizia_of_Spain
 http://dbpedia.org/resource/Pashto
 http://dbpedia.org/resource/Premier_League
 http://dbpedia.org/resource/Portuguese_Second_Division
@@ -28860,7 +28860,7 @@ http://dbpedia.org/resource/Austria-Hungary
 http://dbpedia.org/resource/Odawara_Station
 http://dbpedia.org/resource/Rong_Hao
 http://dbpedia.org/resource/Shabab_Al-Ordon_Club
-http://dbpedia.org/resource/Elizabeth_of_York,_Duchess_of_Suffolk
+http://dbpedia.org/resource/Elizabeth_of_York,_Duchess_of_Sÿolk
 http://dbpedia.org/resource/Chen_Yun
 http://dbpedia.org/resource/Ichirō_Matsui
 http://dbpedia.org/resource/Vivien_Yeo
@@ -28914,7 +28914,7 @@ http://dbpedia.org/resource/Boeing_747SP
 http://dbpedia.org/resource/Butterfly_(Mariah_Carey_album)
 http://dbpedia.org/resource/Glendale,_Arizona
 http://dbpedia.org/resource/County_Mayo
-http://dbpedia.org/resource/Henry_Grey,_1st_Duke_of_Suffolk
+http://dbpedia.org/resource/Henry_Grey,_1st_Duke_of_Sÿolk
 http://dbpedia.org/resource/Felicity_Jones
 http://dbpedia.org/resource/Henry_I_of_England
 http://dbpedia.org/resource/Trajan
@@ -29001,7 +29001,7 @@ http://dbpedia.org/resource/Maruti_800
 http://dbpedia.org/resource/Nikolai_Tikhonov
 http://dbpedia.org/resource/Michael_Doyle_(footballer,_born_1981)
 http://dbpedia.org/resource/Fukuoka
-http://dbpedia.org/resource/Bermuda
+http://dbpedia.org/resource/BermÚ
 http://dbpedia.org/resource/Claremont,_California
 http://dbpedia.org/resource/Ali_Mamlouk
 http://dbpedia.org/resource/Rao_Weihui
@@ -29068,7 +29068,7 @@ http://dbpedia.org/resource/Envigado_F.C.
 http://dbpedia.org/resource/University_of_Basel
 http://dbpedia.org/resource/Socket_939
 http://dbpedia.org/resource/Olympique_Lyonnais
-http://dbpedia.org/resource/Arucas,_Las_Palmas
+http://dbpedia.org/resource/ArÊs,_Las_Palmas
 http://dbpedia.org/resource/City_of_Townsville
 http://dbpedia.org/resource/Ambrose_Lee
 http://dbpedia.org/resource/Jōetsu,_Niigata
@@ -29108,15 +29108,15 @@ http://dbpedia.org/resource/Horpa_language
 http://dbpedia.org/resource/Henry_of_Scotland
 http://dbpedia.org/resource/Qinhuangdao
 http://dbpedia.org/resource/Shinroku_Momose
-http://dbpedia.org/resource/Tsubasa_(train)
+http://dbpedia.org/resource/Tsºsa_(train)
 http://dbpedia.org/resource/Gain_(singer)
-http://dbpedia.org/resource/Lauda_Air
+http://dbpedia.org/resource/LaÚ_Air
 http://dbpedia.org/resource/Tuncay_Şanlı
 http://dbpedia.org/resource/Koko_ni_Ita_Koto
 http://dbpedia.org/resource/Henri_Poincaré
 http://dbpedia.org/resource/A-Hmao_language
 http://dbpedia.org/resource/Indonesian_Democratic_Party_of_Struggle
-http://dbpedia.org/resource/Lucas_Barrios
+http://dbpedia.org/resource/LÊs_Barrios
 http://dbpedia.org/resource/Christine_Ng
 http://dbpedia.org/resource/Waray_language
 http://dbpedia.org/resource/Empress_Xiaoyichun
@@ -29127,7 +29127,7 @@ http://dbpedia.org/resource/Alfred_the_Great
 http://dbpedia.org/resource/Stay_with_Me_(Kumi_Koda_song)
 http://dbpedia.org/resource/2012_Chinese_FA_Cup
 http://dbpedia.org/resource/Jules_Bianchi
-http://dbpedia.org/resource/Paducah,_Kentucky
+http://dbpedia.org/resource/PadÊh,_Kentucky
 http://dbpedia.org/resource/Nashik
 http://dbpedia.org/resource/Charles_I_of_Austria
 http://dbpedia.org/resource/Daniel_Kahneman
@@ -29185,7 +29185,7 @@ http://dbpedia.org/resource/Jen-Hsun_Huang
 http://dbpedia.org/resource/Hadano,_Kanagawa
 http://dbpedia.org/resource/Yao_Yilin
 http://dbpedia.org/resource/Grimsby_Town_F.C.
-http://dbpedia.org/resource/Sergio_Escudero_(footballer,_born_1988)
+http://dbpedia.org/resource/Sergio_EscÞro_(footballer,_born_1988)
 http://dbpedia.org/resource/Kimi_no_Tame_ni_Boku_ga_Iru
 http://dbpedia.org/resource/Astrakhan_Oblast
 http://dbpedia.org/resource/Amber_Liu_(singer)
@@ -29329,7 +29329,7 @@ http://dbpedia.org/resource/Morteza_Gholi_Khan_Hedayat
 http://dbpedia.org/resource/WAV
 http://dbpedia.org/resource/Colin_Trevorrow
 http://dbpedia.org/resource/Hong_Kong_Polytechnic_University
-http://dbpedia.org/resource/Sociedad_Deportiva_Aucas
+http://dbpedia.org/resource/Sociedad_Deportiva_AÊs
 http://dbpedia.org/resource/Coalition_Provisional_Authority
 http://dbpedia.org/resource/Michael_Bay
 http://dbpedia.org/resource/George_R._R._Martin
@@ -29356,16 +29356,16 @@ http://dbpedia.org/resource/Sabah_Al-Ahmad_Al-Jaber_Al-Sabah
 http://dbpedia.org/resource/BAE_Systems
 http://dbpedia.org/resource/Pavel_Filip
 http://dbpedia.org/resource/Old_Norse
-http://dbpedia.org/resource/Ulan-Ude
+http://dbpedia.org/resource/Ulan-Þ
 http://dbpedia.org/resource/Nenets_people
 http://dbpedia.org/resource/Chauncey_Billups
-http://dbpedia.org/resource/Fouad_Siniora
+http://dbpedia.org/resource/Fo­_Siniora
 http://dbpedia.org/resource/Team_Syachihoko
 http://dbpedia.org/resource/Kiss_(band)
 http://dbpedia.org/resource/Ministry_of_National_Defense_of_the_People's_Republic_of_China
 http://dbpedia.org/resource/Shinjuku_Station
 http://dbpedia.org/resource/Jan_Peter_Balkenende
-http://dbpedia.org/resource/Takahisa_Masuda
+http://dbpedia.org/resource/Takahisa_MasÚ
 http://dbpedia.org/resource/Discovery_Channel
 http://dbpedia.org/resource/UD_Salamanca
 http://dbpedia.org/resource/Nguyễn_Nhạc
@@ -29380,7 +29380,7 @@ http://dbpedia.org/resource/2011–12_Football_League_One
 http://dbpedia.org/resource/Jingzhou
 http://dbpedia.org/resource/MILF_Island
 http://dbpedia.org/resource/Guillermo_Barros_Schelotto
-http://dbpedia.org/resource/Chikashi_Masuda
+http://dbpedia.org/resource/Chikashi_MasÚ
 http://dbpedia.org/resource/Idaho_Stampede
 http://dbpedia.org/resource/Prince_Joachim_of_Belgium,_Archduke_of_Austria-Este
 http://dbpedia.org/resource/Dwyane_Wade
@@ -29393,7 +29393,7 @@ http://dbpedia.org/resource/Joseph_Boakai
 http://dbpedia.org/resource/ECMAScript
 http://dbpedia.org/resource/University_of_Saskatchewan
 http://dbpedia.org/resource/Princess_Alexandra,_2nd_Duchess_of_Fife
-http://dbpedia.org/resource/Princess_Alice,_Duchess_of_Gloucester
+http://dbpedia.org/resource/Princess_Alice,_Duchess_of_GloÎster
 http://dbpedia.org/resource/Carlo_Buonaparte
 http://dbpedia.org/resource/Teenage_Dream:_The_Complete_Confection
 http://dbpedia.org/resource/Gennady_Yanayev
@@ -29486,7 +29486,7 @@ http://dbpedia.org/resource/HD_45350
 http://dbpedia.org/resource/West_Hmongic
 http://dbpedia.org/resource/Stefan_Löfven
 http://dbpedia.org/resource/Baba_Rahman
-http://dbpedia.org/resource/Nissan_Cube
+http://dbpedia.org/resource/Nissan_C¾
 http://dbpedia.org/resource/Special_Generation_(Berryz_Kobo_song)
 http://dbpedia.org/resource/Digital_Spy
 http://dbpedia.org/resource/English_Civil_War
@@ -29544,7 +29544,7 @@ http://dbpedia.org/resource/Honshu
 http://dbpedia.org/resource/Bærum
 http://dbpedia.org/resource/Princess_Alia_bint_Hussein
 http://dbpedia.org/resource/Shire_of_Cloncurry
-http://dbpedia.org/resource/DigiCube
+http://dbpedia.org/resource/DigiC¾
 http://dbpedia.org/resource/Shanlin_District
 http://dbpedia.org/resource/J.League
 http://dbpedia.org/resource/Aymara_language
@@ -29713,13 +29713,13 @@ http://dbpedia.org/resource/Prime_Minister_of_Papua_New_Guinea
 http://dbpedia.org/resource/Albacete_Balompié
 http://dbpedia.org/resource/Will.i.am
 http://dbpedia.org/resource/Emperor_Kōmei
-http://dbpedia.org/resource/Suffolk
+http://dbpedia.org/resource/Sÿolk
 http://dbpedia.org/resource/Leon_M._Lederman
 http://dbpedia.org/resource/Together_When...
 http://dbpedia.org/resource/Marilyn_Manson_(band)
 http://dbpedia.org/resource/Thomas_Williams_(Archbishop_of_Wellington)
 http://dbpedia.org/resource/Joël_Veltman
-http://dbpedia.org/resource/Dubai
+http://dbpedia.org/resource/Dºi
 http://dbpedia.org/resource/TVXQ
 http://dbpedia.org/resource/Pope_Benedict_XIII
 http://dbpedia.org/resource/SOAS,_University_of_London
@@ -29940,7 +29940,7 @@ http://dbpedia.org/resource/Yuta_Tamamori
 http://dbpedia.org/resource/Wish_(Arashi_song)
 http://dbpedia.org/resource/High_Kick!
 http://dbpedia.org/resource/Durarara!!
-http://dbpedia.org/resource/Queen_Munjeong
+http://dbpedia.org/resource/Qîn_Munjeong
 http://dbpedia.org/resource/Hiroki_Sakai
 http://dbpedia.org/resource/2012–13_Hong_Kong_First_Division_League
 http://dbpedia.org/resource/Gilded_Chopsticks
@@ -29958,7 +29958,7 @@ http://dbpedia.org/resource/Hard_Candy_(Madonna_album)
 http://dbpedia.org/resource/Lê_Công_Vinh
 http://dbpedia.org/resource/Sahrawi_Arab_Democratic_Republic
 http://dbpedia.org/resource/Panorama_(song)
-http://dbpedia.org/resource/Tsukuba,_Ibaraki
+http://dbpedia.org/resource/Tsukº,_Ibaraki
 http://dbpedia.org/resource/Silesian_Voivodeship
 http://dbpedia.org/resource/USA_Network
 http://dbpedia.org/resource/Charles_X_Gustav_of_Sweden
@@ -30070,7 +30070,7 @@ http://dbpedia.org/resource/GE_Aviation
 http://dbpedia.org/resource/Ellie_Goulding
 http://dbpedia.org/resource/St_Catharine's_College,_Cambridge
 http://dbpedia.org/resource/William_Jackson_Worthington
-http://dbpedia.org/resource/Normanton,_Queensland
+http://dbpedia.org/resource/Normanton,_Qînsland
 http://dbpedia.org/resource/Angus_Macfadyen
 http://dbpedia.org/resource/Twilight_Watch
 http://dbpedia.org/resource/Virtues_of_Harmony
@@ -30321,7 +30321,7 @@ http://dbpedia.org/resource/Federica_Mogherini
 http://dbpedia.org/resource/François_Baroin
 http://dbpedia.org/resource/Ministry_of_Justice_of_the_People's_Republic_of_China
 http://dbpedia.org/resource/Charles_XIV_John_of_Sweden
-http://dbpedia.org/resource/1989–90_UEFA_Cup
+http://dbpedia.org/resource/1989–90_໺_Cup
 http://dbpedia.org/resource/Australian_Army
 http://dbpedia.org/resource/Tanzan_Ishibashi
 http://dbpedia.org/resource/Mitsubishi_F-2
@@ -30335,7 +30335,7 @@ http://dbpedia.org/resource/Moncton
 http://dbpedia.org/resource/Nicolas_Cage
 http://dbpedia.org/resource/Nagaland
 http://dbpedia.org/resource/Wang_Shenzhi
-http://dbpedia.org/resource/Alderley,_Queensland
+http://dbpedia.org/resource/Alderley,_Qînsland
 http://dbpedia.org/resource/Meles_Zenawi
 http://dbpedia.org/resource/Macau_national_football_team
 http://dbpedia.org/resource/Kotkan_Työväen_Palloilijat
@@ -30380,7 +30380,7 @@ http://dbpedia.org/resource/House_(TV_series)
 http://dbpedia.org/resource/Deir_ez-Zor
 http://dbpedia.org/resource/Bastian_Schweinsteiger
 http://dbpedia.org/resource/Kiseki_(Kumi_Koda_song)
-http://dbpedia.org/resource/Subaru_Rex
+http://dbpedia.org/resource/Sºru_Rex
 http://dbpedia.org/resource/Governor-General_of_India
 http://dbpedia.org/resource/Barbara_Pierce_Bush
 http://dbpedia.org/resource/Janet_Yellen
@@ -30434,7 +30434,7 @@ http://dbpedia.org/resource/Never_End_(song)
 http://dbpedia.org/resource/Solar_Dynamics_Observatory
 http://dbpedia.org/resource/Vala_(programming_language)
 http://dbpedia.org/resource/Sega_Game_Gear
-http://dbpedia.org/resource/Jack_Kerouac
+http://dbpedia.org/resource/Jack_Kero¬
 http://dbpedia.org/resource/Jean-Jacques_Rousseau
 http://dbpedia.org/resource/Mátyás_Szűrös
 http://dbpedia.org/resource/Konstantin_Zyryanov
@@ -30474,7 +30474,7 @@ http://dbpedia.org/resource/Triumph_Tour
 http://dbpedia.org/resource/William_Grenville,_1st_Baron_Grenville
 http://dbpedia.org/resource/San_Bernardino_County,_California
 http://dbpedia.org/resource/S.T.A.R._Labs
-http://dbpedia.org/resource/1971–72_UEFA_Cup
+http://dbpedia.org/resource/1971–72_໺_Cup
 http://dbpedia.org/resource/Yerevan_Opera_Theatre
 http://dbpedia.org/resource/Baekje
 http://dbpedia.org/resource/Harrow_School
@@ -30609,7 +30609,7 @@ http://dbpedia.org/resource/Lee_Yong_(footballer,_born_1986)
 http://dbpedia.org/resource/Khanty_language
 http://dbpedia.org/resource/My_Sister_of_Eternal_Flower
 http://dbpedia.org/resource/Jimmy_Wang_Yu
-http://dbpedia.org/resource/Emperor_Go-Uda
+http://dbpedia.org/resource/Emperor_Go-Ú
 http://dbpedia.org/resource/Emmanuel_Levinas
 http://dbpedia.org/resource/Otto_Weininger
 http://dbpedia.org/resource/Mohammed_VI_of_Morocco
@@ -30668,7 +30668,7 @@ http://dbpedia.org/resource/Matej_Mavrič
 http://dbpedia.org/resource/Kabul_University
 http://dbpedia.org/resource/AEL_Limassol
 http://dbpedia.org/resource/Freeman_Dyson
-http://dbpedia.org/resource/YouTube
+http://dbpedia.org/resource/YouT¾
 http://dbpedia.org/resource/Chester_A._Arthur
 http://dbpedia.org/resource/Ren'Py
 http://dbpedia.org/resource/City_of_Bankstown
@@ -30696,7 +30696,7 @@ http://dbpedia.org/resource/Santa_Clara_County,_California
 http://dbpedia.org/resource/Yan_Song_(footballer)
 http://dbpedia.org/resource/Way_Kuo
 http://dbpedia.org/resource/Bidhya_Devi_Bhandari
-http://dbpedia.org/resource/Pablo_Neruda
+http://dbpedia.org/resource/Pablo_NerÚ
 http://dbpedia.org/resource/James_William_Bryan
 http://dbpedia.org/resource/Tōgō_Heihachirō
 http://dbpedia.org/resource/Tomorrow's_Way
@@ -30717,7 +30717,7 @@ http://dbpedia.org/resource/Royal_Netherlands_Air_Force
 http://dbpedia.org/resource/Neo_Democrats
 http://dbpedia.org/resource/Sekhemre-Heruhirmaat_Intef
 http://dbpedia.org/resource/Yoshitaka_Shindō
-http://dbpedia.org/resource/Rancho_Cucamonga,_California
+http://dbpedia.org/resource/Rancho_CÊmonga,_California
 http://dbpedia.org/resource/Moonrise_(novel)
 http://dbpedia.org/resource/Lleida
 http://dbpedia.org/resource/Petrovsky_Stadium
@@ -30765,7 +30765,7 @@ http://dbpedia.org/resource/Mart_Laar
 http://dbpedia.org/resource/Loudness_(band)
 http://dbpedia.org/resource/Mandatory_Palestine
 http://dbpedia.org/resource/Sunderland,_Tyne_and_Wear
-http://dbpedia.org/resource/Sirajuddin_of_Perlis
+http://dbpedia.org/resource/SirajÝin_of_Perlis
 http://dbpedia.org/resource/Emperor_Entertainment_Group
 http://dbpedia.org/resource/Liamine_Zéroual
 http://dbpedia.org/resource/Argel_Fucks
@@ -30789,7 +30789,7 @@ http://dbpedia.org/resource/Izzat_Ibrahim_al-Douri
 http://dbpedia.org/resource/Antoine_Pinay
 http://dbpedia.org/resource/Robert_Downey_Jr.
 http://dbpedia.org/resource/Isahaya,_Nagasaki
-http://dbpedia.org/resource/Guadix
+http://dbpedia.org/resource/G­ix
 http://dbpedia.org/resource/Flower_(Japanese_band)
 http://dbpedia.org/resource/Richard_Mentor_Johnson
 http://dbpedia.org/resource/Psamtik_III
@@ -30862,7 +30862,7 @@ http://dbpedia.org/resource/Yusuke_Minagawa
 http://dbpedia.org/resource/How_I_Met_Your_Mother_(season_5)
 http://dbpedia.org/resource/Sweet_19_Blues_(song)
 http://dbpedia.org/resource/Hikone,_Shiga
-http://dbpedia.org/resource/Justin_Trudeau
+http://dbpedia.org/resource/Justin_Tr෪u
 http://dbpedia.org/resource/Adaílton_José_dos_Santos_Filho
 http://dbpedia.org/resource/Bruno_Martins_Indi
 http://dbpedia.org/resource/Always_and_Ever
@@ -30871,10 +30871,10 @@ http://dbpedia.org/resource/Anthony_Cáceres
 http://dbpedia.org/resource/Kunming_Ruilong_F.C.
 http://dbpedia.org/resource/Mutter_(song)
 http://dbpedia.org/resource/Alcalá_de_Henares
-http://dbpedia.org/resource/Pierre-Emerick_Aubameyang
+http://dbpedia.org/resource/Pierre-Emerick_Aºmeyang
 http://dbpedia.org/resource/EXID
 http://dbpedia.org/resource/The_Valley_of_Fear
-http://dbpedia.org/resource/Queen_Jeongsun
+http://dbpedia.org/resource/Qîn_Jeongsun
 http://dbpedia.org/resource/Umbro
 http://dbpedia.org/resource/Saint_Helena,_Ascension_and_Tristan_da_Cunha
 http://dbpedia.org/resource/Armed_Forces_of_the_Islamic_Republic_of_Iran
@@ -30908,7 +30908,7 @@ http://dbpedia.org/resource/Cebu_City
 http://dbpedia.org/resource/Sindhi_language
 http://dbpedia.org/resource/Penn_Nouth
 http://dbpedia.org/resource/Prince_Ludwig_of_Hesse_and_by_Rhine
-http://dbpedia.org/resource/UEFA_Euro_2012
+http://dbpedia.org/resource/໺_Euro_2012
 http://dbpedia.org/resource/David_Letterman
 http://dbpedia.org/resource/Dong_Biwu
 http://dbpedia.org/resource/Eita
@@ -30922,7 +30922,7 @@ http://dbpedia.org/resource/Goran_Pandev
 http://dbpedia.org/resource/Bình_Định_Province
 http://dbpedia.org/resource/Gotye
 http://dbpedia.org/resource/Lexie_Grey
-http://dbpedia.org/resource/Tom_Udall
+http://dbpedia.org/resource/Tom_Úll
 http://dbpedia.org/resource/Johan_Vonlanthen
 http://dbpedia.org/resource/Speed_metal
 http://dbpedia.org/resource/Yiling_Yangtze_River_Bridge
@@ -31013,7 +31013,7 @@ http://dbpedia.org/resource/Pope_Stephen_V
 http://dbpedia.org/resource/Licinius
 http://dbpedia.org/resource/Giancarlo_Fisichella
 http://dbpedia.org/resource/Fijian_language
-http://dbpedia.org/resource/Love_of_My_Life_(Queen_song)
+http://dbpedia.org/resource/Love_of_My_Life_(Qîn_song)
 http://dbpedia.org/resource/Tetsuji_Hashiratani
 http://dbpedia.org/resource/Ehime_Prefecture
 http://dbpedia.org/resource/Koganei,_Tokyo
@@ -31171,7 +31171,7 @@ http://dbpedia.org/resource/University_of_York
 http://dbpedia.org/resource/Jiujiang_Yangtze_River_Bridge
 http://dbpedia.org/resource/Nancy_Pelosi
 http://dbpedia.org/resource/Liang_Sicheng
-http://dbpedia.org/resource/Claude_Adrien_Helvétius
+http://dbpedia.org/resource/ClaÞ_Adrien_Helvétius
 http://dbpedia.org/resource/Manhattan
 http://dbpedia.org/resource/Sabah
 http://dbpedia.org/resource/Martin_Kamburov
@@ -31185,7 +31185,7 @@ http://dbpedia.org/resource/Skrillex
 http://dbpedia.org/resource/Henri_Queuille
 http://dbpedia.org/resource/Ayman_al-Zawahiri
 http://dbpedia.org/resource/Phan_Văn_Khải
-http://dbpedia.org/resource/Quechuan_languages
+http://dbpedia.org/resource/Qìhuan_languages
 http://dbpedia.org/resource/Matt_Lam
 http://dbpedia.org/resource/Arvfurstens_palats
 http://dbpedia.org/resource/Beji_Caid_Essebsi
@@ -31268,7 +31268,7 @@ http://dbpedia.org/resource/Yuichi_Nakamaru
 http://dbpedia.org/resource/Piacenza
 http://dbpedia.org/resource/Brandy_Norwood
 http://dbpedia.org/resource/Bronisław_Komorowski
-http://dbpedia.org/resource/Sporting_Clube_de_Portugal
+http://dbpedia.org/resource/Sporting_Cl¾_de_Portugal
 http://dbpedia.org/resource/Ren'ai_Revolution_21
 http://dbpedia.org/resource/African_National_Congress
 http://dbpedia.org/resource/Jordan
@@ -31312,7 +31312,7 @@ http://dbpedia.org/resource/Order_of_Blue_Sky_and_White_Sun
 http://dbpedia.org/resource/Songshan_Line
 http://dbpedia.org/resource/Sony_Xperia_P
 http://dbpedia.org/resource/Ashton_Gate_Stadium
-http://dbpedia.org/resource/Émile_Loubet
+http://dbpedia.org/resource/Émile_Lo¾t
 http://dbpedia.org/resource/Whig_Party_(United_States)
 http://dbpedia.org/resource/Mozaffar_ad-Din_Shah_Qajar
 http://dbpedia.org/resource/Syngman_Rhee
@@ -31354,12 +31354,12 @@ http://dbpedia.org/resource/Warwick
 http://dbpedia.org/resource/Legislative_Assembly_of_British_Columbia
 http://dbpedia.org/resource/HD_72659
 http://dbpedia.org/resource/Đoàn_Khuê
-http://dbpedia.org/resource/Succession_(30_Rock)
+http://dbpedia.org/resource/S೎ssion_(30_Rock)
 http://dbpedia.org/resource/Fred_M._Vinson
 http://dbpedia.org/resource/Nigel_de_Jong
-http://dbpedia.org/resource/Esporte_Clube_XV_de_Novembro_(Piracicaba)
+http://dbpedia.org/resource/Esporte_Cl¾_XV_de_Novembro_(Piracicaba)
 http://dbpedia.org/resource/Wang_Han_(host)
-http://dbpedia.org/resource/Victor_Bruce,_9th_Earl_of_Elgin
+http://dbpedia.org/resource/Victor_BrÎ,_9th_Earl_of_Elgin
 http://dbpedia.org/resource/Abdul_Hafiz_Ghoga
 http://dbpedia.org/resource/Robert_Lopez
 http://dbpedia.org/resource/Helmut_Schön
@@ -31390,7 +31390,7 @@ http://dbpedia.org/resource/Rob_Hulse
 http://dbpedia.org/resource/Japanese_occupation_of_Cambodia
 http://dbpedia.org/resource/United_States_Military_Academy
 http://dbpedia.org/resource/United_States_Secretary_of_Energy
-http://dbpedia.org/resource/Robert_the_Bruce
+http://dbpedia.org/resource/Robert_the_BrÎ
 http://dbpedia.org/resource/Bae_Yong-joon
 http://dbpedia.org/resource/Anderson_(footballer,_born_1988)
 http://dbpedia.org/resource/Chagatai_Khanate
@@ -31503,7 +31503,7 @@ http://dbpedia.org/resource/The_Republicans_(France)
 http://dbpedia.org/resource/Veria_F.C.
 http://dbpedia.org/resource/Henry_Pelham
 http://dbpedia.org/resource/California_State_Senate
-http://dbpedia.org/resource/Matsudaira_Katamori
+http://dbpedia.org/resource/MatsÚira_Katamori
 http://dbpedia.org/resource/Kylie_Jenner
 http://dbpedia.org/resource/Prime_Minister_of_Russia
 http://dbpedia.org/resource/V-Varen_Nagasaki
@@ -31519,7 +31519,7 @@ http://dbpedia.org/resource/Malaysian_Chinese
 http://dbpedia.org/resource/Penn_State_Nittany_Lions
 http://dbpedia.org/resource/Nouri_Abusahmain
 http://dbpedia.org/resource/Free_University_of_Berlin
-http://dbpedia.org/resource/Valle_del_Cauca_Department
+http://dbpedia.org/resource/Valle_del_CaÊ_Department
 http://dbpedia.org/resource/Mitsubishi_F-15J
 http://dbpedia.org/resource/J._Neely_Johnson
 http://dbpedia.org/resource/Argentinos_Juniors
@@ -31712,7 +31712,7 @@ http://dbpedia.org/resource/City_of_Ryde
 http://dbpedia.org/resource/Zwolle
 http://dbpedia.org/resource/The_Killers
 http://dbpedia.org/resource/Secretary-General_of_the_United_Nations
-http://dbpedia.org/resource/Ruud_Lubbers
+http://dbpedia.org/resource/Ruud_Lாrs
 http://dbpedia.org/resource/Charles,_Prince_Napoléon
 http://dbpedia.org/resource/Destiny_World_Tour
 http://dbpedia.org/resource/Mies
@@ -31776,7 +31776,7 @@ http://dbpedia.org/resource/Princess_Sumaya_bint_Hassan
 http://dbpedia.org/resource/Ronald_Arculli
 http://dbpedia.org/resource/Rolling_Love
 http://dbpedia.org/resource/New_Flemish_Alliance
-http://dbpedia.org/resource/Subaru_R-2
+http://dbpedia.org/resource/Sºru_R-2
 http://dbpedia.org/resource/Chinese_Taipei_national_futsal_team
 http://dbpedia.org/resource/Mathew_Ryan
 http://dbpedia.org/resource/Chiang_Fang-liang
@@ -31789,7 +31789,7 @@ http://dbpedia.org/resource/Marouane_Fellaini
 http://dbpedia.org/resource/Color_TV-Game
 http://dbpedia.org/resource/British_Columbia_New_Democratic_Party
 http://dbpedia.org/resource/Britney_(album)
-http://dbpedia.org/resource/Alex_Bruce_(footballer,_born_1984)
+http://dbpedia.org/resource/Alex_BrÎ_(footballer,_born_1984)
 http://dbpedia.org/resource/Ultimate_Diamond
 http://dbpedia.org/resource/Virgilio_Barco_Vargas
 http://dbpedia.org/resource/Min_River_(Sichuan)
@@ -31814,7 +31814,7 @@ http://dbpedia.org/resource/Google_Web_Toolkit
 http://dbpedia.org/resource/Beijing_Ducks
 http://dbpedia.org/resource/Green_Township,_Adams_County,_Ohio
 http://dbpedia.org/resource/Ashikaga,_Tochigi
-http://dbpedia.org/resource/Pueblo,_Colorado
+http://dbpedia.org/resource/Pëlo,_Colorado
 http://dbpedia.org/resource/Yasuhito,_Prince_Chichibu
 http://dbpedia.org/resource/Kansas_City_Royals
 http://dbpedia.org/resource/Luigi_Carlo_Farini
@@ -31860,14 +31860,14 @@ http://dbpedia.org/resource/Princess_Eugenie_of_York
 http://dbpedia.org/resource/Shelbyville,_Kentucky
 http://dbpedia.org/resource/Eliaquim_Mangala
 http://dbpedia.org/resource/Aimee_Chan
-http://dbpedia.org/resource/Queen_Mathilde_of_Belgium
+http://dbpedia.org/resource/Qîn_Mathilde_of_Belgium
 http://dbpedia.org/resource/Hua_Chenyu
 http://dbpedia.org/resource/General_Electric_GE90
 http://dbpedia.org/resource/Chiang_Ching-kuo
 http://dbpedia.org/resource/Hiroshi_Hase
 http://dbpedia.org/resource/Yang_Dezhi
 http://dbpedia.org/resource/Azad_Hind
-http://dbpedia.org/resource/Kayqubad_I
+http://dbpedia.org/resource/Kayq஭_I
 http://dbpedia.org/resource/Prince_Laurent_of_Belgium
 http://dbpedia.org/resource/Nineveh_Governorate
 http://dbpedia.org/resource/Mohammad-Ali_Najafi
@@ -31891,7 +31891,7 @@ http://dbpedia.org/resource/Raipur
 http://dbpedia.org/resource/Sarah_Palin
 http://dbpedia.org/resource/1st_SS_Panzer_Division_Leibstandarte_SS_Adolf_Hitler
 http://dbpedia.org/resource/Yugo_Kanno
-http://dbpedia.org/resource/Province_of_Ciudad_Real
+http://dbpedia.org/resource/Province_of_Ciත_Real
 http://dbpedia.org/resource/He_Yang
 http://dbpedia.org/resource/Bopomofo
 http://dbpedia.org/resource/Avusy
@@ -31910,8 +31910,8 @@ http://dbpedia.org/resource/Tajikistani_somoni
 http://dbpedia.org/resource/Emperor_Kōkaku
 http://dbpedia.org/resource/Shimizu-ku,_Shizuoka
 http://dbpedia.org/resource/Northrop_Grumman_RQ-4_Global_Hawk
-http://dbpedia.org/resource/Kathleen_Kennedy_(producer)
-http://dbpedia.org/resource/Claude_Makélélé
+http://dbpedia.org/resource/Kathleen_Kennedy_(prodÎr)
+http://dbpedia.org/resource/ClaÞ_Makélélé
 http://dbpedia.org/resource/Jarvis_Cocker
 http://dbpedia.org/resource/Li_Zhilang
 http://dbpedia.org/resource/Tehrik-i-Taliban_Pakistan
@@ -31966,7 +31966,7 @@ http://dbpedia.org/resource/Fengtai_County
 http://dbpedia.org/resource/Eden_Arena
 http://dbpedia.org/resource/Prince_Franz_Wilhelm_of_Prussia
 http://dbpedia.org/resource/Donald_Rumsfeld
-http://dbpedia.org/resource/Kanon_Fukuda
+http://dbpedia.org/resource/Kanon_FukÚ
 http://dbpedia.org/resource/Dong_Zhuo
 http://dbpedia.org/resource/Berryz_Mansion_9kai
 http://dbpedia.org/resource/Kōta,_Aichi
@@ -31990,7 +31990,7 @@ http://dbpedia.org/resource/Prince_Edward,_Duke_of_Kent
 http://dbpedia.org/resource/Jiang_Yi-huah
 http://dbpedia.org/resource/Roger_Waters
 http://dbpedia.org/resource/Herbert_Kitchener
-http://dbpedia.org/resource/Gold_Coast,_Queensland
+http://dbpedia.org/resource/Gold_Coast,_Qînsland
 http://dbpedia.org/resource/Polydor_Records
 http://dbpedia.org/resource/No3b
 http://dbpedia.org/resource/President_of_Algeria
@@ -32005,7 +32005,7 @@ http://dbpedia.org/resource/Northern_Formosan_languages
 http://dbpedia.org/resource/Enyimba_International_F.C.
 http://dbpedia.org/resource/Pierre_Mendès_France
 http://dbpedia.org/resource/Happy_Days_(Ai_Otsuka_song)
-http://dbpedia.org/resource/Queensland
+http://dbpedia.org/resource/Qînsland
 http://dbpedia.org/resource/Park_Joo-ho
 http://dbpedia.org/resource/Omotic_languages
 http://dbpedia.org/resource/Hong_Xiuquan
@@ -32086,7 +32086,7 @@ http://dbpedia.org/resource/Gujarat
 http://dbpedia.org/resource/Bessus
 http://dbpedia.org/resource/Melodica
 http://dbpedia.org/resource/Primera_Divisió
-http://dbpedia.org/resource/IPod_Shuffle
+http://dbpedia.org/resource/IPod_Shÿle
 http://dbpedia.org/resource/Augusta_Victoria_of_Schleswig-Holstein
 http://dbpedia.org/resource/Emma_Goldman
 http://dbpedia.org/resource/Shenzhou_1
@@ -32119,7 +32119,7 @@ http://dbpedia.org/resource/Hugh_Capet
 http://dbpedia.org/resource/Charles_Martel
 http://dbpedia.org/resource/FC_Viktoria_Plzeň
 http://dbpedia.org/resource/Municipality_of_Hunter's_Hill
-http://dbpedia.org/resource/Yoruba_language
+http://dbpedia.org/resource/Yorº_language
 http://dbpedia.org/resource/Salford_City_F.C.
 http://dbpedia.org/resource/Grigol_Mgaloblishvili
 http://dbpedia.org/resource/Trouble_Maker_(duo)
@@ -32138,7 +32138,7 @@ http://dbpedia.org/resource/Ikki_Tousen
 http://dbpedia.org/resource/Perl
 http://dbpedia.org/resource/Laibin
 http://dbpedia.org/resource/John_Backus
-http://dbpedia.org/resource/Clube_Atlético_Bragantino
+http://dbpedia.org/resource/Cl¾_Atlético_Bragantino
 http://dbpedia.org/resource/Anne_Boleyn
 http://dbpedia.org/resource/Kiss_of_Life_(Ken_Hirai_song)
 http://dbpedia.org/resource/Sean_Connery
@@ -32192,7 +32192,7 @@ http://dbpedia.org/resource/Pebble_Beach,_California
 http://dbpedia.org/resource/Philip_V_of_Spain
 http://dbpedia.org/resource/Sergei_Bagapsh
 http://dbpedia.org/resource/Lee_Hoi-chang
-http://dbpedia.org/resource/Queen_Silvia_of_Sweden
+http://dbpedia.org/resource/Qîn_Silvia_of_Sweden
 http://dbpedia.org/resource/Kaohsiung_International_Airport
 http://dbpedia.org/resource/2_Days_&_1_Night
 http://dbpedia.org/resource/Barbara_Cubin
@@ -32290,7 +32290,7 @@ http://dbpedia.org/resource/Steinberg
 http://dbpedia.org/resource/Östergötland
 http://dbpedia.org/resource/Viking_metal
 http://dbpedia.org/resource/Morgan_De_Sanctis
-http://dbpedia.org/resource/Toluca
+http://dbpedia.org/resource/TolÊ
 http://dbpedia.org/resource/Hotel_(Kumi_Koda_song)
 http://dbpedia.org/resource/Nobel_Prize_in_Literature
 http://dbpedia.org/resource/Cody,_Wyoming
@@ -32307,10 +32307,10 @@ http://dbpedia.org/resource/Cute_(Japanese_idol_group)
 http://dbpedia.org/resource/Pope_Zephyrinus
 http://dbpedia.org/resource/Eagle_Airways
 http://dbpedia.org/resource/Dordrecht
-http://dbpedia.org/resource/Bruce_Straley
+http://dbpedia.org/resource/BrÎ_Straley
 http://dbpedia.org/resource/Love_Letter_(Ai_Otsuka_album)
 http://dbpedia.org/resource/Jim_Morrison
-http://dbpedia.org/resource/Hishammuddin_Hussein
+http://dbpedia.org/resource/HishammÝin_Hussein
 http://dbpedia.org/resource/Bacary_Sagna
 http://dbpedia.org/resource/Pudong
 http://dbpedia.org/resource/Jesse_Dylan
@@ -32331,7 +32331,7 @@ http://dbpedia.org/resource/Wellington_Koo
 http://dbpedia.org/resource/Suzuka,_Mie
 http://dbpedia.org/resource/Emperor_Takakura
 http://dbpedia.org/resource/Fuheng
-http://dbpedia.org/resource/Buffy_the_Vampire_Slayer_(season_5)
+http://dbpedia.org/resource/Bÿy_the_Vampire_Slayer_(season_5)
 http://dbpedia.org/resource/Juventus_Stadium
 http://dbpedia.org/resource/North_Borneo
 http://dbpedia.org/resource/Ingush_language
@@ -32347,7 +32347,7 @@ http://dbpedia.org/resource/Woollim_Entertainment
 http://dbpedia.org/resource/Chancellor_of_the_Exchequer
 http://dbpedia.org/resource/Athlon_64
 http://dbpedia.org/resource/Governor-general_of_Ceylon
-http://dbpedia.org/resource/Buffy_the_Vampire_Slayer_(season_3)
+http://dbpedia.org/resource/Bÿy_the_Vampire_Slayer_(season_3)
 http://dbpedia.org/resource/Mein_Land
 http://dbpedia.org/resource/Kansas_City,_Missouri
 http://dbpedia.org/resource/Hatsune_Miku
@@ -32367,7 +32367,7 @@ http://dbpedia.org/resource/South_Chungcheong_Province
 http://dbpedia.org/resource/Sonne_(Rammstein_song)
 http://dbpedia.org/resource/Odds_BK
 http://dbpedia.org/resource/Cambridgeshire
-http://dbpedia.org/resource/Queen_Mary_University_of_London
+http://dbpedia.org/resource/Qîn_Mary_University_of_London
 http://dbpedia.org/resource/Bashkim_Fino
 http://dbpedia.org/resource/Jamie_Vardy
 http://dbpedia.org/resource/Hollywood
@@ -32401,7 +32401,7 @@ http://dbpedia.org/resource/Battle_of_Sekigahara
 http://dbpedia.org/resource/Aguila_Saleh_Issa
 http://dbpedia.org/resource/Shakugan_no_Shana
 http://dbpedia.org/resource/Microsoft_Dynamics
-http://dbpedia.org/resource/Lufeng,_Guangdong
+http://dbpedia.org/resource/Lþng,_Guangdong
 http://dbpedia.org/resource/Kigwancha_Sports_Club
 http://dbpedia.org/resource/Romain_Grosjean
 http://dbpedia.org/resource/Grand_Duchy_of_Finland
@@ -32683,7 +32683,7 @@ http://dbpedia.org/resource/Adam_Clayton_(footballer)
 http://dbpedia.org/resource/Lelystad
 http://dbpedia.org/resource/Id_Software
 http://dbpedia.org/resource/Bhumibol_Adulyadej
-http://dbpedia.org/resource/Quebec_Liberal_Party
+http://dbpedia.org/resource/Q_Liberal_Party
 http://dbpedia.org/resource/Yangzhou
 http://dbpedia.org/resource/Charles_Dupuy
 http://dbpedia.org/resource/Sizihwan_Station
@@ -32752,7 +32752,7 @@ http://dbpedia.org/resource/San_Juan_River_(Colorado_River)
 http://dbpedia.org/resource/Nangang_Line_(Taipei_Metro)
 http://dbpedia.org/resource/Rama_I
 http://dbpedia.org/resource/Luisão
-http://dbpedia.org/resource/UEFA_Europa_League
+http://dbpedia.org/resource/໺_Europa_League
 http://dbpedia.org/resource/MC_Jin
 http://dbpedia.org/resource/Richard_Rorty
 http://dbpedia.org/resource/Neyagawa,_Osaka
@@ -32765,7 +32765,7 @@ http://dbpedia.org/resource/Nissan_Be-1
 http://dbpedia.org/resource/Chūbu_Centrair_International_Airport
 http://dbpedia.org/resource/Benjamin_Apthorp_Gould
 http://dbpedia.org/resource/Long_An_Province
-http://dbpedia.org/resource/Queen's_University
+http://dbpedia.org/resource/Qîn's_University
 http://dbpedia.org/resource/Trinity_College,_Dublin
 http://dbpedia.org/resource/Joseph_Bech
 http://dbpedia.org/resource/Federal_Reserve_System
@@ -32818,7 +32818,7 @@ http://dbpedia.org/resource/Ukraine
 http://dbpedia.org/resource/Córdoba,_Andalusia
 http://dbpedia.org/resource/Vietnamese_people
 http://dbpedia.org/resource/Mister_Fantastic
-http://dbpedia.org/resource/Goiás_Esporte_Clube
+http://dbpedia.org/resource/Goiás_Esporte_Cl¾
 http://dbpedia.org/resource/Ok_Taecyeon
 http://dbpedia.org/resource/Saudi_Arabia
 http://dbpedia.org/resource/IronPython
@@ -32855,7 +32855,7 @@ http://dbpedia.org/resource/Marouf_al-Bakhit
 http://dbpedia.org/resource/Benedict_Cumberbatch
 http://dbpedia.org/resource/Ella_Koon
 http://dbpedia.org/resource/Tiffany_Tang
-http://dbpedia.org/resource/Gianluca_Zambrotta
+http://dbpedia.org/resource/GianlÊ_Zambrotta
 http://dbpedia.org/resource/Lee_Bo-young
 http://dbpedia.org/resource/Eclipse_(Meyer_novel)
 http://dbpedia.org/resource/Calatayud
@@ -32915,7 +32915,7 @@ http://dbpedia.org/resource/Nike,_Inc.
 http://dbpedia.org/resource/B'z
 http://dbpedia.org/resource/Love_Piece
 http://dbpedia.org/resource/Khalifa_International_Stadium
-http://dbpedia.org/resource/Al-Ahli_Dubai_F.C.
+http://dbpedia.org/resource/Al-Ahli_Dºi_F.C.
 http://dbpedia.org/resource/Boeing_777
 http://dbpedia.org/resource/International_Stadium_Yokohama
 http://dbpedia.org/resource/China_national_under-17_football_team
@@ -32961,7 +32961,7 @@ http://dbpedia.org/resource/The_Bride_with_White_Hair
 http://dbpedia.org/resource/Kitchener,_Ontario
 http://dbpedia.org/resource/Eerste_Divisie
 http://dbpedia.org/resource/Plastic_Ono_Band
-http://dbpedia.org/resource/Han_River_(Shaanxi_and_Hubei)
+http://dbpedia.org/resource/Han_River_(Shaanxi_and_H¾i)
 http://dbpedia.org/resource/Chang_Po-ya
 http://dbpedia.org/resource/Shelley_Moore_Capito
 http://dbpedia.org/resource/Sony_Ericsson_Xperia_mini
@@ -32984,8 +32984,8 @@ http://dbpedia.org/resource/Cinepoly_Records
 http://dbpedia.org/resource/Hercules_Robinson,_1st_Baron_Rosmead
 http://dbpedia.org/resource/Moon_Geun-young
 http://dbpedia.org/resource/Thaksin_Shinawatra
-http://dbpedia.org/resource/Ruben_Zadkovich
-http://dbpedia.org/resource/Hubertus,_Hereditary_Prince_of_Saxe-Coburg_and_Gotha
+http://dbpedia.org/resource/R¾n_Zadkovich
+http://dbpedia.org/resource/H¾rtus,_Hereditary_Prince_of_Saxe-Coburg_and_Gotha
 http://dbpedia.org/resource/George_Clement_Perkins
 http://dbpedia.org/resource/Nexus_7_(2012)
 http://dbpedia.org/resource/Empress_Elisabeth_of_Austria
@@ -33036,7 +33036,7 @@ http://dbpedia.org/resource/Jennifer_Lopez
 http://dbpedia.org/resource/Mitaka,_Tokyo
 http://dbpedia.org/resource/Yurihonjō
 http://dbpedia.org/resource/Never_Ever_(Ayumi_Hamasaki_song)
-http://dbpedia.org/resource/Alexander_Duff,_1st_Duke_of_Fife
+http://dbpedia.org/resource/Alexander_Dÿ,_1st_Duke_of_Fife
 http://dbpedia.org/resource/Steven_Berghuis
 http://dbpedia.org/resource/Jigme_Singye_Wangchuck
 http://dbpedia.org/resource/Chief_Executive_of_Hong_Kong
@@ -33086,7 +33086,7 @@ http://dbpedia.org/resource/Emerson_Beauchamp
 http://dbpedia.org/resource/Cai_Wu
 http://dbpedia.org/resource/Ghazi_of_Iraq
 http://dbpedia.org/resource/Jake_Peavy
-http://dbpedia.org/resource/Quechua_people
+http://dbpedia.org/resource/Qìhua_people
 http://dbpedia.org/resource/Louis_Koo
 http://dbpedia.org/resource/Norman_Chan
 http://dbpedia.org/resource/Taizhou,_Zhejiang
@@ -33340,10 +33340,10 @@ http://dbpedia.org/resource/Khentii_Province
 http://dbpedia.org/resource/Australian_Senate
 http://dbpedia.org/resource/Mohamed_Boudiaf
 http://dbpedia.org/resource/Antony_Golec
-http://dbpedia.org/resource/Mudanjiang
+http://dbpedia.org/resource/MÚnjiang
 http://dbpedia.org/resource/Edwin_Hall
 http://dbpedia.org/resource/Infante_Alfonso,_Duke_of_Calabria
-http://dbpedia.org/resource/Hubert_Humphrey
+http://dbpedia.org/resource/H¾rt_Humphrey
 http://dbpedia.org/resource/Cristiano_Zanetti
 http://dbpedia.org/resource/National_Assembly_(Hungary)
 http://dbpedia.org/resource/Unity_Party_(Liberia)
@@ -33375,7 +33375,7 @@ http://dbpedia.org/resource/Pyongan_dialect
 http://dbpedia.org/resource/The_Diary_of_Alicia_Keys
 http://dbpedia.org/resource/Swiss_German
 http://dbpedia.org/resource/Adolfo_Suárez
-http://dbpedia.org/resource/Hosni_Mubarak
+http://dbpedia.org/resource/Hosni_Mºrak
 http://dbpedia.org/resource/Kaliningrad_Oblast
 http://dbpedia.org/resource/Kalmykia
 http://dbpedia.org/resource/Leopold_III_of_Belgium
@@ -33419,7 +33419,7 @@ http://dbpedia.org/resource/Return_to_the_Nightosphere_/_Daddy's_Little_Monster
 http://dbpedia.org/resource/Bash_(Unix_shell)
 http://dbpedia.org/resource/Béziers
 http://dbpedia.org/resource/Muriqui_(footballer)
-http://dbpedia.org/resource/2014–15_UEFA_Europa_League
+http://dbpedia.org/resource/2014–15_໺_Europa_League
 http://dbpedia.org/resource/Peshawar
 http://dbpedia.org/resource/Ginkgo_biloba
 http://dbpedia.org/resource/Craig_Goodwin
@@ -33461,7 +33461,7 @@ http://dbpedia.org/resource/Alessandro_Del_Piero
 http://dbpedia.org/resource/Club_Deportivo_Palestino
 http://dbpedia.org/resource/Sarikoli_language
 http://dbpedia.org/resource/Tomoya_Nagase
-http://dbpedia.org/resource/Ube,_Yamaguchi
+http://dbpedia.org/resource/¾,_Yamaguchi
 http://dbpedia.org/resource/Beautiful_World_(Arashi_album)
 http://dbpedia.org/resource/Golf_&_Mike
 http://dbpedia.org/resource/Ignatius_of_Loyola
@@ -33687,7 +33687,7 @@ http://dbpedia.org/resource/Croats
 http://dbpedia.org/resource/Jilin_City
 http://dbpedia.org/resource/Luke_P._Blackburn
 http://dbpedia.org/resource/French_Polynesia
-http://dbpedia.org/resource/Subaru_Sambar
+http://dbpedia.org/resource/Sºru_Sambar
 http://dbpedia.org/resource/Pavlos,_Crown_Prince_of_Greece
 http://dbpedia.org/resource/Sangju_Sangmu_FC
 http://dbpedia.org/resource/Elizabeth_II
@@ -33818,7 +33818,7 @@ http://dbpedia.org/resource/Tobias_Wolff
 http://dbpedia.org/resource/Shane_Stefanutto
 http://dbpedia.org/resource/Brazil
 http://dbpedia.org/resource/Nantong
-http://dbpedia.org/resource/UAE_President's_Cup
+http://dbpedia.org/resource/®_President's_Cup
 http://dbpedia.org/resource/Fujiwara_no_Teishi
 http://dbpedia.org/resource/Cornwall
 http://dbpedia.org/resource/Hualien_City
@@ -33862,7 +33862,7 @@ http://dbpedia.org/resource/Mr._Taxi
 http://dbpedia.org/resource/SV_Ried
 http://dbpedia.org/resource/Ferdinand,_Duke_of_Parma
 http://dbpedia.org/resource/Union_of_Arab_Football_Associations
-http://dbpedia.org/resource/White_Light/Violet_Sauce
+http://dbpedia.org/resource/White_Light/Violet_SaÎ
 http://dbpedia.org/resource/Ptolemy_I_Soter
 http://dbpedia.org/resource/Seven_(Korean_singer)
 http://dbpedia.org/resource/Shire_of_Winton
@@ -33913,7 +33913,7 @@ http://dbpedia.org/resource/Barbados
 http://dbpedia.org/resource/Navajo
 http://dbpedia.org/resource/Barnes_Railway_Bridge
 http://dbpedia.org/resource/Prince_Pierre,_Duke_of_Valentinois
-http://dbpedia.org/resource/First_Secretary_of_the_Communist_Party_of_Cuba
+http://dbpedia.org/resource/First_Secretary_of_the_Communist_Party_of_Cº
 http://dbpedia.org/resource/Tabaré_Vázquez
 http://dbpedia.org/resource/University_of_Nevada,_Las_Vegas
 http://dbpedia.org/resource/IF_Elfsborg
@@ -33940,7 +33940,7 @@ http://dbpedia.org/resource/Simão_Sabrosa
 http://dbpedia.org/resource/Heping_District,_Taichung
 http://dbpedia.org/resource/Prince_Louis_of_Luxembourg
 http://dbpedia.org/resource/David_Stern
-http://dbpedia.org/resource/South_Sudan
+http://dbpedia.org/resource/South_SÚn
 http://dbpedia.org/resource/Tuyên_Quang_Province
 http://dbpedia.org/resource/Kim_Campbell
 http://dbpedia.org/resource/Jean_Chrétien
@@ -34006,7 +34006,7 @@ http://dbpedia.org/resource/John_Calvert_Griffiths
 http://dbpedia.org/resource/Brown_Ideye
 http://dbpedia.org/resource/Baron_Chen
 http://dbpedia.org/resource/Artyom_Filiposyan
-http://dbpedia.org/resource/Fuad_II_of_Egypt
+http://dbpedia.org/resource/F­_II_of_Egypt
 http://dbpedia.org/resource/Bamar_people
 http://dbpedia.org/resource/Ricardo_Steer
 http://dbpedia.org/resource/Ernst,_Prince_of_Saxe-Meiningen
@@ -34016,10 +34016,10 @@ http://dbpedia.org/resource/Simón_Bolívar
 http://dbpedia.org/resource/Princess_Johanna_of_Hesse_and_by_Rhine
 http://dbpedia.org/resource/What_Turns_You_On%3F
 http://dbpedia.org/resource/Kristal_Tin
-http://dbpedia.org/resource/Esporte_Clube_Vitória
+http://dbpedia.org/resource/Esporte_Cl¾_Vitória
 http://dbpedia.org/resource/Golden_Lion
 http://dbpedia.org/resource/Saint_Paul,_Minnesota
-http://dbpedia.org/resource/Takeo_Fukuda
+http://dbpedia.org/resource/Takeo_FukÚ
 http://dbpedia.org/resource/A.S.D._Reggio_Calabria
 http://dbpedia.org/resource/Royal_Spanish_Football_Federation
 http://dbpedia.org/resource/Suita_City_Football_Stadium
@@ -34045,7 +34045,7 @@ http://dbpedia.org/resource/Hiroshima_Prefecture
 http://dbpedia.org/resource/Park_Tae-hwan
 http://dbpedia.org/resource/Edgar_Faure
 http://dbpedia.org/resource/Lars_Løkke_Rasmussen
-http://dbpedia.org/resource/Anne,_Queen_of_Great_Britain
+http://dbpedia.org/resource/Anne,_Qîn_of_Great_Britain
 http://dbpedia.org/resource/Boyfriend_(band)
 http://dbpedia.org/resource/Chu–Han_Contention
 http://dbpedia.org/resource/Otto_of_Bavaria
@@ -34071,7 +34071,7 @@ http://dbpedia.org/resource/Kettering_Town_F.C.
 http://dbpedia.org/resource/Rudong_County
 http://dbpedia.org/resource/Heathrow_Airport
 http://dbpedia.org/resource/Gordon_Sprigg
-http://dbpedia.org/resource/A_Night_at_the_Opera_(Queen_album)
+http://dbpedia.org/resource/A_Night_at_the_Opera_(Qîn_album)
 http://dbpedia.org/resource/Marek_Jankulovski
 http://dbpedia.org/resource/Do_As_Infinity
 http://dbpedia.org/resource/Andranik_Teymourian
@@ -34096,7 +34096,7 @@ http://dbpedia.org/resource/John_L._Hennessy
 http://dbpedia.org/resource/Lee_Teng-hui
 http://dbpedia.org/resource/Chang_Myon
 http://dbpedia.org/resource/Emperor_Jimmu
-http://dbpedia.org/resource/Clube_Náutico_Capibaribe
+http://dbpedia.org/resource/Cl¾_Náutico_Capibaribe
 http://dbpedia.org/resource/Prince_George_of_Cambridge
 http://dbpedia.org/resource/H._H._Kung
 http://dbpedia.org/resource/Shawnee,_Oklahoma
@@ -34170,7 +34170,7 @@ http://dbpedia.org/resource/L.A._Boyz
 http://dbpedia.org/resource/Lin_Gengxin
 http://dbpedia.org/resource/Incheon_United_FC
 http://dbpedia.org/resource/Nu_metal
-http://dbpedia.org/resource/Donald_Luddington
+http://dbpedia.org/resource/Donald_LÝington
 http://dbpedia.org/resource/Bill_de_Blasio
 http://dbpedia.org/resource/Old_French
 http://dbpedia.org/resource/Bethlehem,_Pennsylvania
@@ -34236,7 +34236,7 @@ http://dbpedia.org/resource/Gagauzia
 http://dbpedia.org/resource/Sony_Xperia_sola
 http://dbpedia.org/resource/Borneo
 http://dbpedia.org/resource/SM_Town
-http://dbpedia.org/resource/Bruce_Willis
+http://dbpedia.org/resource/BrÎ_Willis
 http://dbpedia.org/resource/Sony_Xperia_E
 http://dbpedia.org/resource/Peter_Sarsgaard
 http://dbpedia.org/resource/Microsoft_Mobile
@@ -34302,7 +34302,7 @@ http://dbpedia.org/resource/Kelly_Cheung
 http://dbpedia.org/resource/Princess_Mary_Adelaide_of_Cambridge
 http://dbpedia.org/resource/Lee_Woon-jae
 http://dbpedia.org/resource/Ramazan_Özcan
-http://dbpedia.org/resource/Fudan_University
+http://dbpedia.org/resource/FÚn_University
 http://dbpedia.org/resource/Yan'an
 http://dbpedia.org/resource/Kenneth_Ma
 http://dbpedia.org/resource/George_O'Malley
@@ -34345,7 +34345,7 @@ http://dbpedia.org/resource/Ernest_Augustus_I_of_Hanover
 http://dbpedia.org/resource/Malay_language
 http://dbpedia.org/resource/Chōjin_Sentai_Jetman
 http://dbpedia.org/resource/Kurdistan_Province
-http://dbpedia.org/resource/Juan_Cuadrado
+http://dbpedia.org/resource/Juan_C­rado
 http://dbpedia.org/resource/Count_Claus-Casimir_of_Orange-Nassau_van_Amsberg
 http://dbpedia.org/resource/Matías_Kranevitter
 http://dbpedia.org/resource/Gallen_Lo
@@ -34398,12 +34398,12 @@ http://dbpedia.org/resource/Prince_Nashimoto_Morimasa
 http://dbpedia.org/resource/Siti_Hasmah_Mohamad_Ali
 http://dbpedia.org/resource/Akbar_Hashemi_Rafsanjani
 http://dbpedia.org/resource/Shandong_University
-http://dbpedia.org/resource/Judea_(Roman_province)
+http://dbpedia.org/resource/J෪_(Roman_province)
 http://dbpedia.org/resource/Die_Another_Day_(song)
 http://dbpedia.org/resource/Henry_VII_of_England
 http://dbpedia.org/resource/Charlotte_of_Mecklenburg-Strelitz
 http://dbpedia.org/resource/Jinny_Ng
-http://dbpedia.org/resource/Lesser_Caucasus
+http://dbpedia.org/resource/Lesser_CaÊsus
 http://dbpedia.org/resource/Tagalog_language
 http://dbpedia.org/resource/Battle_of_South_Mountain
 http://dbpedia.org/resource/Ponhea_Yat
@@ -34556,7 +34556,7 @@ http://dbpedia.org/resource/Tupolev_Tu-204
 http://dbpedia.org/resource/Laura_Bush
 http://dbpedia.org/resource/Hamamatsu
 http://dbpedia.org/resource/Sometimes_(Britney_Spears_song)
-http://dbpedia.org/resource/Queen_Ansun
+http://dbpedia.org/resource/Qîn_Ansun
 http://dbpedia.org/resource/Heilongjiang
 http://dbpedia.org/resource/Kirill_Vladimirovich,_Grand_Duke_of_Russia
 http://dbpedia.org/resource/Jackson,_Mississippi
@@ -34564,7 +34564,7 @@ http://dbpedia.org/resource/Skoda_Xanthi_F.C.
 http://dbpedia.org/resource/Kym_(singer)
 http://dbpedia.org/resource/Josephine_Siao
 http://dbpedia.org/resource/Bowie_Lam
-http://dbpedia.org/resource/University_of_Queensland
+http://dbpedia.org/resource/University_of_Qînsland
 http://dbpedia.org/resource/Kriegsmarine
 http://dbpedia.org/resource/Kamehameha_IV
 http://dbpedia.org/resource/J._R._Jayewardene
@@ -34723,7 +34723,7 @@ http://dbpedia.org/resource/Nicholas_II_of_Russia
 http://dbpedia.org/resource/Two_and_a_Half_Men_(season_4)
 http://dbpedia.org/resource/Kay_Tse
 http://dbpedia.org/resource/Hama_Governorate
-http://dbpedia.org/resource/Mogi_Mirim_Esporte_Clube
+http://dbpedia.org/resource/Mogi_Mirim_Esporte_Cl¾
 http://dbpedia.org/resource/Fukien_AC
 http://dbpedia.org/resource/Be_More_(Adventure_Time)
 http://dbpedia.org/resource/Hmongic_languages
@@ -34744,7 +34744,7 @@ http://dbpedia.org/resource/Robert_Muldoon
 http://dbpedia.org/resource/Autódromo_Hermanos_Rodríguez
 http://dbpedia.org/resource/Switzerland_national_under-21_football_team
 http://dbpedia.org/resource/David_Silva
-http://dbpedia.org/resource/Gyude_Bryant
+http://dbpedia.org/resource/GyÞ_Bryant
 http://dbpedia.org/resource/Ukrainian_Soviet_Socialist_Republic
 http://dbpedia.org/resource/Ahmed_Musa_(footballer)
 http://dbpedia.org/resource/Moshoeshoe_I
@@ -34774,7 +34774,7 @@ http://dbpedia.org/resource/Game_Boy_Advance
 http://dbpedia.org/resource/County_Cavan
 http://dbpedia.org/resource/Louis_the_Pious
 http://dbpedia.org/resource/Karel_Schwarzenberg
-http://dbpedia.org/resource/Anne_of_Austria,_Queen_of_Poland
+http://dbpedia.org/resource/Anne_of_Austria,_Qîn_of_Poland
 http://dbpedia.org/resource/Yushu_Tibetan_Autonomous_Prefecture
 http://dbpedia.org/resource/Derung_people
 http://dbpedia.org/resource/Musashimurayama,_Tokyo
@@ -34947,7 +34947,7 @@ http://dbpedia.org/resource/Dongcheng_District,_Beijing
 http://dbpedia.org/resource/Tseung_Kwan_O_Sports_Ground
 http://dbpedia.org/resource/Han_Ji-hye
 http://dbpedia.org/resource/Anawrahta
-http://dbpedia.org/resource/ATR_(aircraft_manufacturer)
+http://dbpedia.org/resource/ATR_(aircraft_manྫྷturer)
 http://dbpedia.org/resource/Bai_Jiajun
 http://dbpedia.org/resource/Moderate_Party
 http://dbpedia.org/resource/Underworld:_Rise_of_the_Lycans
@@ -34962,7 +34962,7 @@ http://dbpedia.org/resource/Tom_Cotton
 http://dbpedia.org/resource/Miguel_Obando_y_Bravo
 http://dbpedia.org/resource/Lee_Seung-hyun_(footballer)
 http://dbpedia.org/resource/Sam_Wang_(actor)
-http://dbpedia.org/resource/Queenie_Chu
+http://dbpedia.org/resource/Qînie_Chu
 http://dbpedia.org/resource/Greece
 http://dbpedia.org/resource/Microsoft_Studios
 http://dbpedia.org/resource/TDM_Ou_Mun
@@ -34986,7 +34986,7 @@ http://dbpedia.org/resource/Yi_Si-yeong
 http://dbpedia.org/resource/County_Wicklow
 http://dbpedia.org/resource/Temir_Sariyev
 http://dbpedia.org/resource/Igor_Akinfeev
-http://dbpedia.org/resource/Sauber
+http://dbpedia.org/resource/Sa¾r
 http://dbpedia.org/resource/Premier_of_the_Republic_of_China
 http://dbpedia.org/resource/Walt_Disney
 http://dbpedia.org/resource/Cleopatra_VI_of_Egypt
@@ -35013,7 +35013,7 @@ http://dbpedia.org/resource/Anupong_Paochinda
 http://dbpedia.org/resource/Yu_Zhengsheng
 http://dbpedia.org/resource/Principality_of_Serbia
 http://dbpedia.org/resource/Zhongxian_Yangtze_River_Bridge
-http://dbpedia.org/resource/Marcelino_Júnior_Lopes_Arruda
+http://dbpedia.org/resource/Marcelino_Júnior_Lopes_ArrÚ
 http://dbpedia.org/resource/Io_(programming_language)
 http://dbpedia.org/resource/Artur_Petrosyan
 http://dbpedia.org/resource/Prince_Friedrich_of_Saxe-Meiningen
@@ -35068,7 +35068,7 @@ http://dbpedia.org/resource/Edwin_Siu
 http://dbpedia.org/resource/Haris_Silajdžić
 http://dbpedia.org/resource/Republic_of_Korea_Navy
 http://dbpedia.org/resource/Kingdom_of_Navarre
-http://dbpedia.org/resource/Qu_Qiubai
+http://dbpedia.org/resource/Qu_Qiºi
 http://dbpedia.org/resource/Ali_Soheili
 http://dbpedia.org/resource/Ming_Dao
 http://dbpedia.org/resource/Demi_Lovato
@@ -35152,7 +35152,7 @@ http://dbpedia.org/resource/From_the_Bottom_of_My_Broken_Heart
 http://dbpedia.org/resource/Philip_Warren_Anderson
 http://dbpedia.org/resource/Günther_von_Kluge
 http://dbpedia.org/resource/Kim_Jin-su
-http://dbpedia.org/resource/1992–93_UEFA_Cup
+http://dbpedia.org/resource/1992–93_໺_Cup
 http://dbpedia.org/resource/Mark_Chao
 http://dbpedia.org/resource/Amr_Moussa
 http://dbpedia.org/resource/Huiyang_District
@@ -35321,17 +35321,17 @@ http://dbpedia.org/resource/Baltimore_and_Ohio_Railroad
 http://dbpedia.org/resource/Cai_Chuchuan
 http://dbpedia.org/resource/Wong_Cho-lam
 http://dbpedia.org/resource/Neftchi_PFK
-http://dbpedia.org/resource/Edward_Youde
+http://dbpedia.org/resource/Edward_YoÞ
 http://dbpedia.org/resource/National_Assembly_(Armenia)
 http://dbpedia.org/resource/Haiti
-http://dbpedia.org/resource/Queen_Janggyeong
+http://dbpedia.org/resource/Qîn_Janggyeong
 http://dbpedia.org/resource/Anne_Neville
 http://dbpedia.org/resource/Hsinchu_County
 http://dbpedia.org/resource/Luna_Sea
 http://dbpedia.org/resource/Jump_Square
 http://dbpedia.org/resource/Baudouin_of_Belgium
 http://dbpedia.org/resource/Sheikh_Hasina
-http://dbpedia.org/resource/Subaru_360
+http://dbpedia.org/resource/Sºru_360
 http://dbpedia.org/resource/The_Bourne_Supremacy
 http://dbpedia.org/resource/Paparazzi_(Girls'_Generation_song)
 http://dbpedia.org/resource/Dirge_of_Cerberus:_Final_Fantasy_VII
@@ -35369,7 +35369,7 @@ http://dbpedia.org/resource/Girls'_Generation_(2011_album)
 http://dbpedia.org/resource/Philip,_Duke_of_Parma
 http://dbpedia.org/resource/G15_Shenyang–Haikou_Expressway
 http://dbpedia.org/resource/Politburo_Standing_Committee_of_the_Communist_Party_of_China
-http://dbpedia.org/resource/Steinberg_Cubase
+http://dbpedia.org/resource/Steinberg_Cºse
 http://dbpedia.org/resource/Emperor_En'yū
 http://dbpedia.org/resource/Fernando_Gago
 http://dbpedia.org/resource/Russia_national_football_team
@@ -35394,7 +35394,7 @@ http://dbpedia.org/resource/Banharn_Silpa-archa
 http://dbpedia.org/resource/Sichuan_Longfor_F.C.
 http://dbpedia.org/resource/Jaguar_Cars
 http://dbpedia.org/resource/Swahili_language
-http://dbpedia.org/resource/Queen's_Park_F.C.
+http://dbpedia.org/resource/Qîn's_Park_F.C.
 http://dbpedia.org/resource/Airbus_A320_family
 http://dbpedia.org/resource/Alkmaar
 http://dbpedia.org/resource/Hamburg
@@ -35408,7 +35408,7 @@ http://dbpedia.org/resource/Early_Cyrillic_alphabet
 http://dbpedia.org/resource/K.Will
 http://dbpedia.org/resource/Fukuoka_Prefecture
 http://dbpedia.org/resource/Toby_Leung
-http://dbpedia.org/resource/Bruce_C._Murray
+http://dbpedia.org/resource/BrÎ_C._Murray
 http://dbpedia.org/resource/Joseph_Prueher
 http://dbpedia.org/resource/Maid_Sama!
 http://dbpedia.org/resource/Louis_the_Younger
@@ -35512,7 +35512,7 @@ http://dbpedia.org/resource/Mika_(singer)
 http://dbpedia.org/resource/Bouasone_Bouphavanh
 http://dbpedia.org/resource/German_Confederation
 http://dbpedia.org/resource/Mickaël_Landreau
-http://dbpedia.org/resource/2014–15_UEFA_Champions_League
+http://dbpedia.org/resource/2014–15_໺_Champions_League
 http://dbpedia.org/resource/Frederick_the_Great
 http://dbpedia.org/resource/Jia_Qinglin
 http://dbpedia.org/resource/Hawaii_Five-0_(season_1)
@@ -35576,7 +35576,7 @@ http://dbpedia.org/resource/Bến_Tre_Province
 http://dbpedia.org/resource/Bardonnex
 http://dbpedia.org/resource/Paik_Sun-yup
 http://dbpedia.org/resource/Government_House,_Sydney
-http://dbpedia.org/resource/Queen_(band)
+http://dbpedia.org/resource/Qîn_(band)
 http://dbpedia.org/resource/Kevin_Großkreutz
 http://dbpedia.org/resource/Central_Japan_Railway_Company
 http://dbpedia.org/resource/University_of_Palermo
@@ -35638,7 +35638,7 @@ http://dbpedia.org/resource/Balestier_Khalsa_FC
 http://dbpedia.org/resource/S.League
 http://dbpedia.org/resource/ZeniMax_Media
 http://dbpedia.org/resource/Studioseven_Recordings
-http://dbpedia.org/resource/Queen_Inhyeon
+http://dbpedia.org/resource/Qîn_Inhyeon
 http://dbpedia.org/resource/Yichang_Yangtze_River_Railway_Bridge
 http://dbpedia.org/resource/Summer_Trip
 http://dbpedia.org/resource/Jody_Wilson-Raybould
@@ -35648,7 +35648,7 @@ http://dbpedia.org/resource/Tokugawa_Mochinaga
 http://dbpedia.org/resource/Hurricane_Lili
 http://dbpedia.org/resource/Deportivo_Táchira
 http://dbpedia.org/resource/1st_Cavalry_Division_(United_States)
-http://dbpedia.org/resource/Michihiro_Yasuda
+http://dbpedia.org/resource/Michihiro_YasÚ
 http://dbpedia.org/resource/Bath_and_North_East_Somerset
 http://dbpedia.org/resource/Thomas_Aquinas
 http://dbpedia.org/resource/Amerika_(song)
@@ -35718,7 +35718,7 @@ http://dbpedia.org/resource/Victor_Emmanuel_III_of_Italy
 http://dbpedia.org/resource/Step_Up_2:_The_Streets_(soundtrack)
 http://dbpedia.org/resource/Wellington_International_Airport
 http://dbpedia.org/resource/Hina_Rabbani_Khar
-http://dbpedia.org/resource/Gucci
+http://dbpedia.org/resource/GÌi
 http://dbpedia.org/resource/Kazutoshi_Sakurai
 http://dbpedia.org/resource/Microsoft_Flight_Simulator
 http://dbpedia.org/resource/Austrian_Football_Association
@@ -35861,7 +35861,7 @@ http://dbpedia.org/resource/Li_Yapeng
 http://dbpedia.org/resource/Ely,_Nevada
 http://dbpedia.org/resource/Fox_International_Channels
 http://dbpedia.org/resource/DreamWorks_Animation
-http://dbpedia.org/resource/Prince_William,_Duke_of_Gloucester
+http://dbpedia.org/resource/Prince_William,_Duke_of_GloÎster
 http://dbpedia.org/resource/Golden_Dawn_(political_party)
 http://dbpedia.org/resource/Liu_Bocheng
 http://dbpedia.org/resource/Senate_of_Cambodia
@@ -35872,7 +35872,7 @@ http://dbpedia.org/resource/FK_Partizan
 http://dbpedia.org/resource/Dave_Mustaine
 http://dbpedia.org/resource/Kassam_Stadium
 http://dbpedia.org/resource/Princess_Thyra_of_Denmark
-http://dbpedia.org/resource/Ibán_Cuadrado
+http://dbpedia.org/resource/Ibán_C­rado
 http://dbpedia.org/resource/The_Fighting_Irish
 http://dbpedia.org/resource/Nicky_Morgan_(politician)
 http://dbpedia.org/resource/Phùng_Quang_Thanh
@@ -35925,7 +35925,7 @@ http://dbpedia.org/resource/Dag_Hammarskjöld
 http://dbpedia.org/resource/Hong_Chul
 http://dbpedia.org/resource/Civic_Platform
 http://dbpedia.org/resource/Mandy_Wei
-http://dbpedia.org/resource/Lucas_Radebe
+http://dbpedia.org/resource/LÊs_Radebe
 http://dbpedia.org/resource/Herbert_Blumer
 http://dbpedia.org/resource/Roman_Sharonov
 http://dbpedia.org/resource/Moriyama,_Shiga
@@ -36015,13 +36015,13 @@ http://dbpedia.org/resource/Helen_Chang
 http://dbpedia.org/resource/Hebe_Tien
 http://dbpedia.org/resource/Cleveland_Indians
 http://dbpedia.org/resource/Mostar
-http://dbpedia.org/resource/Yanbian_Fude_F.C.
+http://dbpedia.org/resource/Yanbian_FÞ_F.C.
 http://dbpedia.org/resource/Petter_Hansson
 http://dbpedia.org/resource/Michael_Bennet
 http://dbpedia.org/resource/Gerhard_Schröder
 http://dbpedia.org/resource/Ilie_Verdeț
 http://dbpedia.org/resource/Katowice
-http://dbpedia.org/resource/Criciúma_Esporte_Clube
+http://dbpedia.org/resource/Criciúma_Esporte_Cl¾
 http://dbpedia.org/resource/Pope_John_I
 http://dbpedia.org/resource/Love,_Day_After_Tomorrow
 http://dbpedia.org/resource/Hot_Game_(song)
@@ -36118,7 +36118,7 @@ http://zh.dbpedia.org/property/cityofbirth
 http://zh.dbpedia.org/property/round
 http://zh.dbpedia.org/property/profession
 http://zh.dbpedia.org/property/areas
-http://zh.dbpedia.org/property/successors
+http://zh.dbpedia.org/property/s೎ssors
 http://zh.dbpedia.org/property/books
 http://zh.dbpedia.org/property/silver
 http://zh.dbpedia.org/property/養子
@@ -36161,7 +36161,7 @@ http://zh.dbpedia.org/property/總製片人
 http://zh.dbpedia.org/property/season
 http://zh.dbpedia.org/property/cinematography
 http://zh.dbpedia.org/property/夫之继母
-http://zh.dbpedia.org/property/mostsuccessful
+http://zh.dbpedia.org/property/mosts೎ssful
 http://zh.dbpedia.org/property/minister1Pfo
 http://zh.dbpedia.org/property/region
 http://zh.dbpedia.org/property/parts
@@ -36173,7 +36173,7 @@ http://zh.dbpedia.org/property/生肖
 http://zh.dbpedia.org/property/containedBy
 http://zh.dbpedia.org/property/nextSeries
 http://zh.dbpedia.org/property/nextAlbum
-http://zh.dbpedia.org/property/succeededBy
+http://zh.dbpedia.org/property/s쳮dedBy
 http://zh.dbpedia.org/property/election
 http://zh.dbpedia.org/property/州务大臣
 http://zh.dbpedia.org/property/neighboringMunicipalities
@@ -36367,7 +36367,7 @@ http://zh.dbpedia.org/property/structuralEngineer
 http://zh.dbpedia.org/property/largestCity
 http://zh.dbpedia.org/property/usedBy
 http://zh.dbpedia.org/property/primeminister
-http://zh.dbpedia.org/property/educate
+http://zh.dbpedia.org/property/edÊte
 http://zh.dbpedia.org/property/hqCity
 http://zh.dbpedia.org/property/聲優
 http://zh.dbpedia.org/property/adslServ
@@ -36480,7 +36480,7 @@ http://zh.dbpedia.org/property/官方文字
 http://zh.dbpedia.org/property/前綴尊稱
 http://zh.dbpedia.org/property/任命者姓名
 http://zh.dbpedia.org/property/aircraftFighter
-http://zh.dbpedia.org/property/successoR
+http://zh.dbpedia.org/property/s೎ssoR
 http://zh.dbpedia.org/property/headquarters
 http://zh.dbpedia.org/property/nativeLang
 http://zh.dbpedia.org/property/soldby
@@ -36542,7 +36542,7 @@ http://zh.dbpedia.org/property/rtitle
 http://zh.dbpedia.org/property/母校
 http://zh.dbpedia.org/property/currentTenants
 http://zh.dbpedia.org/property/sourceState
-http://zh.dbpedia.org/property/manufacturer
+http://zh.dbpedia.org/property/manྫྷturer
 http://zh.dbpedia.org/property/notableworks
 http://zh.dbpedia.org/property/god
 http://zh.dbpedia.org/property/laterwork
@@ -36578,13 +36578,13 @@ http://zh.dbpedia.org/property/currentSeries
 http://zh.dbpedia.org/property/antiparticle
 http://zh.dbpedia.org/property/standard
 http://zh.dbpedia.org/property/east
-http://zh.dbpedia.org/property/subdivisionType
+http://zh.dbpedia.org/property/s½ivisionType
 http://zh.dbpedia.org/property/champions
 http://zh.dbpedia.org/property/first
 http://zh.dbpedia.org/property/sourceConfluenceState
 http://zh.dbpedia.org/property/sites
 http://zh.dbpedia.org/property/母
-http://zh.dbpedia.org/property/succesor
+http://zh.dbpedia.org/property/s೎sor
 http://zh.dbpedia.org/property/motm
 http://zh.dbpedia.org/property/nextSingle
 http://zh.dbpedia.org/property/author
@@ -36751,7 +36751,7 @@ http://zh.dbpedia.org/property/thisSeason
 http://zh.dbpedia.org/property/instrument
 http://zh.dbpedia.org/property/classisAuthority
 http://zh.dbpedia.org/property/rd5Team
-http://zh.dbpedia.org/property/successorLine
+http://zh.dbpedia.org/property/s೎ssorLine
 http://zh.dbpedia.org/property/作为
 http://zh.dbpedia.org/property/所屬部門
 http://zh.dbpedia.org/property/subunitName
@@ -36770,7 +36770,7 @@ http://zh.dbpedia.org/property/異母兄弟
 http://zh.dbpedia.org/property/監督
 http://zh.dbpedia.org/property/旁白
 http://zh.dbpedia.org/property/honorificPrefix
-http://zh.dbpedia.org/property/queen
+http://zh.dbpedia.org/property/qîn
 http://zh.dbpedia.org/property/首都
 http://zh.dbpedia.org/property/consecratedBy
 http://zh.dbpedia.org/property/shortsummary
@@ -36846,7 +36846,7 @@ http://zh.dbpedia.org/property/其他领袖职称二
 http://zh.dbpedia.org/property/nearNw
 http://zh.dbpedia.org/property/now
 http://zh.dbpedia.org/property/writtenby
-http://zh.dbpedia.org/property/doctoralStudents
+http://zh.dbpedia.org/property/doctoralStÞnts
 http://zh.dbpedia.org/property/burialPlace
 http://zh.dbpedia.org/property/restingplace
 http://zh.dbpedia.org/property/庶女
@@ -36922,7 +36922,7 @@ http://zh.dbpedia.org/property/受影響於
 http://zh.dbpedia.org/property/死亡
 http://zh.dbpedia.org/property/operatingSystem
 http://zh.dbpedia.org/property/chief
-http://zh.dbpedia.org/property/education
+http://zh.dbpedia.org/property/edÊtion
 http://zh.dbpedia.org/property/vicarGeneral
 http://zh.dbpedia.org/property/spouses
 http://zh.dbpedia.org/property/executive
@@ -36962,11 +36962,11 @@ http://zh.dbpedia.org/property/largestmetro
 http://zh.dbpedia.org/property/relatedComponents
 http://zh.dbpedia.org/property/戰爭
 http://zh.dbpedia.org/property/出生年
-http://zh.dbpedia.org/property/successor
+http://zh.dbpedia.org/property/s೎ssor
 http://zh.dbpedia.org/property/countryCapital
 http://zh.dbpedia.org/property/先代
 http://zh.dbpedia.org/property/nearN
-http://zh.dbpedia.org/property/producer
+http://zh.dbpedia.org/property/prodÎr
 http://zh.dbpedia.org/property/meanRadius
 http://zh.dbpedia.org/property/mouthLocation
 http://zh.dbpedia.org/property/省长
@@ -37075,7 +37075,7 @@ http://zh.dbpedia.org/property/photoname
 http://zh.dbpedia.org/property/hq
 http://zh.dbpedia.org/property/microarch
 http://zh.dbpedia.org/property/電視劇
-http://zh.dbpedia.org/property/notableStudents
+http://zh.dbpedia.org/property/notableStÞnts
 http://zh.dbpedia.org/property/members
 http://zh.dbpedia.org/property/創立者
 http://zh.dbpedia.org/property/predecessors
@@ -37145,7 +37145,7 @@ http://zh.dbpedia.org/property/predecessor
 http://zh.dbpedia.org/property/county
 http://zh.dbpedia.org/property/occupation
 http://zh.dbpedia.org/property/ui
-http://zh.dbpedia.org/property/succession
+http://zh.dbpedia.org/property/s೎ssion
 http://zh.dbpedia.org/property/regions
 http://zh.dbpedia.org/property/現任成員
 http://zh.dbpedia.org/property/最大城市名稱
@@ -37161,7 +37161,7 @@ http://zh.dbpedia.org/property/viceroy
 http://zh.dbpedia.org/property/data
 http://zh.dbpedia.org/property/immigrant
 http://zh.dbpedia.org/property/versionOf
-http://zh.dbpedia.org/property/honorificSuffix
+http://zh.dbpedia.org/property/honorificSÿix
 http://zh.dbpedia.org/property/latestReleaseVersion
 http://zh.dbpedia.org/property/专业
 http://zh.dbpedia.org/property/confedCup
@@ -37220,7 +37220,7 @@ http://zh.dbpedia.org/property/genus
 http://zh.dbpedia.org/property/nominatorpost
 http://zh.dbpedia.org/property/开国君主
 http://zh.dbpedia.org/property/marriage
-http://zh.dbpedia.org/property/includedWith
+http://zh.dbpedia.org/property/incl෭With
 http://zh.dbpedia.org/property/spinOffTo
 http://zh.dbpedia.org/property/network
 http://zh.dbpedia.org/property/areaServed
@@ -37246,9 +37246,9 @@ http://zh.dbpedia.org/property/stand
 http://zh.dbpedia.org/property/branches
 http://zh.dbpedia.org/property/beforeParty
 http://zh.dbpedia.org/property/mapCaption
-http://zh.dbpedia.org/property/subdivision
+http://zh.dbpedia.org/property/s½ivision
 http://zh.dbpedia.org/property/導演
-http://zh.dbpedia.org/property/succeeded
+http://zh.dbpedia.org/property/s쳮ded
 http://zh.dbpedia.org/property/音乐类型
 http://zh.dbpedia.org/property/逝世地點
 http://zh.dbpedia.org/property/ville
@@ -37302,7 +37302,7 @@ http://zh.dbpedia.org/property/placeofbirth
 http://zh.dbpedia.org/property/cadetBranches
 http://zh.dbpedia.org/property/after
 http://zh.dbpedia.org/property/外景
-http://zh.dbpedia.org/property/subclassis
+http://zh.dbpedia.org/property/s¼lassis
 http://zh.dbpedia.org/property/nearW
 http://zh.dbpedia.org/property/developedInto
 http://zh.dbpedia.org/property/progression
@@ -37362,7 +37362,7 @@ http://zh.dbpedia.org/property/creators
 http://zh.dbpedia.org/property/妻
 http://zh.dbpedia.org/property/method
 http://zh.dbpedia.org/property/governor
-http://zh.dbpedia.org/property/executiveProducer
+http://zh.dbpedia.org/property/executiveProdÎr
 http://zh.dbpedia.org/property/sousPrefectures
 http://zh.dbpedia.org/property/chief2Name
 http://zh.dbpedia.org/property/countryAdminDivisions
@@ -37445,7 +37445,7 @@ http://zh.dbpedia.org/property/firstSecretary
 http://zh.dbpedia.org/property/長官
 http://zh.dbpedia.org/property/developer
 http://zh.dbpedia.org/property/thirdTeam
-http://zh.dbpedia.org/property/mostSuccessfulClub
+http://zh.dbpedia.org/property/mostS೎ssfulClub
 http://zh.dbpedia.org/property/downstream
 http://zh.dbpedia.org/property/currentCommander
 http://zh.dbpedia.org/property/precededBy
@@ -37497,7 +37497,7 @@ http://zh.dbpedia.org/property/almaMater
 http://zh.dbpedia.org/property/use
 http://zh.dbpedia.org/property/chairmanParty
 http://zh.dbpedia.org/property/上一節目
-http://zh.dbpedia.org/property/subdivisionName
+http://zh.dbpedia.org/property/s½ivisionName
 http://zh.dbpedia.org/property/regionalScenes
 http://zh.dbpedia.org/property/语言
 http://zh.dbpedia.org/property/neighbors
@@ -37513,7 +37513,7 @@ http://zh.dbpedia.org/property/相关剧集
 http://zh.dbpedia.org/property/continent
 http://zh.dbpedia.org/property/總督
 http://zh.dbpedia.org/property/writter(s)_
-http://zh.dbpedia.org/property/succeeding
+http://zh.dbpedia.org/property/s쳮ding
 http://zh.dbpedia.org/property/侄女
 http://zh.dbpedia.org/property/veneratedIn
 http://zh.dbpedia.org/property/minister1pfo
@@ -37677,7 +37677,7 @@ http://zh.dbpedia.org/property/popularity
 http://zh.dbpedia.org/property/逝世日期
 http://zh.dbpedia.org/property/首長姓名
 http://zh.dbpedia.org/property/territory
-http://zh.dbpedia.org/property/kitManufacturer
+http://zh.dbpedia.org/property/kitManྫྷturer
 http://zh.dbpedia.org/property/northernDistrict
 http://zh.dbpedia.org/property/offspring
 http://zh.dbpedia.org/property/dynasty
@@ -37793,7 +37793,7 @@ http://dbpedia.org/property/lastSingle
 http://dbpedia.org/property/rb
 http://dbpedia.org/property/executiveName
 http://dbpedia.org/property/blankInfo
-http://dbpedia.org/property/executiveProducer
+http://dbpedia.org/property/executiveProdÎr
 http://dbpedia.org/property/start
 http://dbpedia.org/property/workInstitution
 http://dbpedia.org/property/diocese
@@ -37904,7 +37904,7 @@ http://dbpedia.org/property/nationalLanguages
 http://dbpedia.org/property/seats2Title
 http://dbpedia.org/property/manOfTheMatch1a
 http://dbpedia.org/property/cultures
-http://dbpedia.org/property/queen
+http://dbpedia.org/property/qîn
 http://dbpedia.org/property/secratary
 http://dbpedia.org/property/plane1Origin
 http://dbpedia.org/property/south
@@ -37928,7 +37928,7 @@ http://dbpedia.org/property/chairmanParty
 http://dbpedia.org/property/frequentFlyer
 http://dbpedia.org/property/discharge1Location
 http://dbpedia.org/property/blankData
-http://dbpedia.org/property/subdivisionName
+http://dbpedia.org/property/s½ivisionName
 http://dbpedia.org/property/launchRocket
 http://dbpedia.org/property/recognisedLanguages
 http://dbpedia.org/property/engine(jet)_
@@ -37946,10 +37946,10 @@ http://dbpedia.org/property/cm
 http://dbpedia.org/property/rival
 http://dbpedia.org/property/head
 http://dbpedia.org/property/multipleworking
-http://dbpedia.org/property/subdivisionType
+http://dbpedia.org/property/s½ivisionType
 http://dbpedia.org/property/blank5NameSec
 http://dbpedia.org/property/designer
-http://dbpedia.org/property/succeededBy
+http://dbpedia.org/property/s쳮dedBy
 http://dbpedia.org/property/leader1Title
 http://dbpedia.org/property/services
 http://dbpedia.org/property/aliases
@@ -38041,7 +38041,7 @@ http://dbpedia.org/property/treasury
 http://dbpedia.org/property/orbitReference
 http://dbpedia.org/property/canonizedPlace
 http://dbpedia.org/property/extendedTo
-http://dbpedia.org/property/honorificSuffix
+http://dbpedia.org/property/honorificSÿix
 http://dbpedia.org/property/leagueTopscorer
 http://dbpedia.org/property/productionCompanies
 http://dbpedia.org/property/sisters
@@ -38077,7 +38077,7 @@ http://dbpedia.org/property/opentheme
 http://dbpedia.org/property/use
 http://dbpedia.org/property/programmedIn
 http://dbpedia.org/property/legislatureTerm
-http://dbpedia.org/property/subareas
+http://dbpedia.org/property/sºreas
 http://dbpedia.org/property/residence
 http://dbpedia.org/property/country3ClaimDivisions
 http://dbpedia.org/property/ideology
@@ -38197,7 +38197,7 @@ http://dbpedia.org/property/partsType
 http://dbpedia.org/property/placeOfConsecration
 http://dbpedia.org/property/st
 http://dbpedia.org/property/conference
-http://dbpedia.org/property/currentmemubers
+http://dbpedia.org/property/currentmem¾rs
 http://dbpedia.org/property/site
 http://dbpedia.org/property/revenue
 http://dbpedia.org/property/ff
@@ -38225,7 +38225,7 @@ http://dbpedia.org/property/ppchairman
 http://dbpedia.org/property/chairman
 http://dbpedia.org/property/moreUsers
 http://dbpedia.org/property/beatifiedBy
-http://dbpedia.org/property/mostSuccessful
+http://dbpedia.org/property/mostS೎ssful
 http://dbpedia.org/property/awardedBy
 http://dbpedia.org/property/bestGoalkeeper
 http://dbpedia.org/property/see
@@ -38351,7 +38351,7 @@ http://dbpedia.org/property/chiefExecutive
 http://dbpedia.org/property/chiefParty
 http://dbpedia.org/property/confederation
 http://dbpedia.org/property/motto
-http://dbpedia.org/property/doctoralStudents
+http://dbpedia.org/property/doctoralStÞnts
 http://dbpedia.org/property/parentHouse
 http://dbpedia.org/property/children
 http://dbpedia.org/property/foreignSuppliers
@@ -38420,8 +38420,8 @@ http://dbpedia.org/property/archipelago
 http://dbpedia.org/property/bases
 http://dbpedia.org/property/season
 http://dbpedia.org/property/alsoAvailableFor
-http://dbpedia.org/property/successorLine
-http://dbpedia.org/property/kitManufacturer
+http://dbpedia.org/property/s೎ssorLine
+http://dbpedia.org/property/kitManྫྷturer
 http://dbpedia.org/property/countryCapitalCity
 http://dbpedia.org/property/nobleFamily
 http://dbpedia.org/property/places
@@ -38454,7 +38454,7 @@ http://dbpedia.org/property/capital
 http://dbpedia.org/property/canton
 http://dbpedia.org/property/sourceRegion
 http://dbpedia.org/property/war
-http://dbpedia.org/property/succeeding
+http://dbpedia.org/property/s쳮ding
 http://dbpedia.org/property/terms
 http://dbpedia.org/property/allMusic
 http://dbpedia.org/property/typeGenusAuthority
@@ -38492,7 +38492,7 @@ http://dbpedia.org/property/lounge
 http://dbpedia.org/property/showName
 http://dbpedia.org/property/spreviouss
 http://dbpedia.org/property/regions
-http://dbpedia.org/property/students
+http://dbpedia.org/property/stÞnts
 http://dbpedia.org/property/party
 http://dbpedia.org/property/asstManager
 http://dbpedia.org/property/associate
@@ -38566,10 +38566,10 @@ http://dbpedia.org/property/agent
 http://dbpedia.org/property/instrument
 http://dbpedia.org/property/secondTeam
 http://dbpedia.org/property/twin4Country
-http://dbpedia.org/property/notableStudents
+http://dbpedia.org/property/notableStÞnts
 http://dbpedia.org/property/subsid
 http://dbpedia.org/property/officiallyClosedBy
-http://dbpedia.org/property/studentWing
+http://dbpedia.org/property/stÞntWing
 http://dbpedia.org/property/author
 http://dbpedia.org/property/origin
 http://dbpedia.org/property/longestUnbeaten
@@ -38581,7 +38581,7 @@ http://dbpedia.org/property/tenants
 http://dbpedia.org/property/lw
 http://dbpedia.org/property/rcm
 http://dbpedia.org/property/deputyGovernmentHead
-http://dbpedia.org/property/producer
+http://dbpedia.org/property/prodÎr
 http://dbpedia.org/property/nidx
 http://dbpedia.org/property/deathDate
 http://dbpedia.org/property/langs
@@ -38594,7 +38594,7 @@ http://dbpedia.org/property/houses
 http://dbpedia.org/property/winners
 http://dbpedia.org/property/dynasty
 http://dbpedia.org/property/family
-http://dbpedia.org/property/educated
+http://dbpedia.org/property/edÊted
 http://dbpedia.org/property/chineseOrigin
 http://dbpedia.org/property/previousLocations
 http://dbpedia.org/property/areaServed
@@ -38637,7 +38637,7 @@ http://dbpedia.org/property/method
 http://dbpedia.org/property/state
 http://dbpedia.org/property/(as
 http://dbpedia.org/property/shrine
-http://dbpedia.org/property/includedWith
+http://dbpedia.org/property/incl෭With
 http://dbpedia.org/property/secretaryGeneral
 http://dbpedia.org/property/relatedComponents
 http://dbpedia.org/property/versionOf
@@ -38649,7 +38649,7 @@ http://dbpedia.org/property/presentHolder
 http://dbpedia.org/property/influenced
 http://dbpedia.org/property/crewMembers
 http://dbpedia.org/property/bishopric
-http://dbpedia.org/property/subConfederation
+http://dbpedia.org/property/s¼onfederation
 http://dbpedia.org/property/aircraftPatrol
 http://dbpedia.org/property/patronSaints
 http://dbpedia.org/property/standingCommittee
@@ -38714,7 +38714,7 @@ http://dbpedia.org/property/ordainedPriestBy
 http://dbpedia.org/property/workPlaces
 http://dbpedia.org/property/casualties
 http://dbpedia.org/property/department
-http://dbpedia.org/property/manufacturer
+http://dbpedia.org/property/manྫྷturer
 http://dbpedia.org/property/officialLang
 http://dbpedia.org/property/child3Agency
 http://dbpedia.org/property/workplaces
@@ -38732,7 +38732,7 @@ http://dbpedia.org/property/placeOfBirth
 http://dbpedia.org/property/foreign
 http://dbpedia.org/property/fedSen
 http://dbpedia.org/property/ukDistribution
-http://dbpedia.org/property/subclassis
+http://dbpedia.org/property/s¼lassis
 http://dbpedia.org/property/parts
 http://dbpedia.org/property/predecessorLine
 http://dbpedia.org/property/union
@@ -38760,7 +38760,7 @@ http://dbpedia.org/property/minority
 http://dbpedia.org/property/officialLanguages
 http://dbpedia.org/property/voices
 http://dbpedia.org/property/owned
-http://dbpedia.org/property/mostSuccessfulClub
+http://dbpedia.org/property/mostS೎ssfulClub
 http://dbpedia.org/property/chief
 http://dbpedia.org/property/episodeList
 http://dbpedia.org/property/trainer
@@ -38840,7 +38840,7 @@ http://dbpedia.org/property/replaced
 http://dbpedia.org/property/orders
 http://dbpedia.org/property/genusAuthority
 http://dbpedia.org/property/primaryUser
-http://dbpedia.org/property/introduced
+http://dbpedia.org/property/introd೭
 http://dbpedia.org/property/last
 http://dbpedia.org/property/note
 http://dbpedia.org/property/moviePeople
@@ -38910,7 +38910,7 @@ http://dbpedia.org/property/venue
 http://dbpedia.org/property/statusText
 http://dbpedia.org/property/fifaTrigramme
 http://dbpedia.org/property/range
-http://dbpedia.org/property/leagueCup
+http://dbpedia.org/property/leagìup
 http://dbpedia.org/property/ci
 http://dbpedia.org/property/beatifiedPlace
 http://dbpedia.org/property/aircraftHelicopterUtility
@@ -38923,7 +38923,7 @@ http://dbpedia.org/property/discharge4Location
 http://dbpedia.org/property/createdCardinalBy
 http://dbpedia.org/property/previousPost
 http://dbpedia.org/property/lowest
-http://dbpedia.org/property/succession
+http://dbpedia.org/property/s೎ssion
 http://dbpedia.org/property/rev
 http://dbpedia.org/property/commanderInChiefTitle
 http://dbpedia.org/property/organiser
@@ -38945,7 +38945,7 @@ http://dbpedia.org/property/packageManager
 http://dbpedia.org/property/satServ
 http://dbpedia.org/property/spinOffTo
 http://dbpedia.org/property/system
-http://dbpedia.org/property/succeeded
+http://dbpedia.org/property/s쳮ded
 http://dbpedia.org/property/routes
 http://dbpedia.org/property/blank1Info
 http://dbpedia.org/property/s
@@ -38964,7 +38964,7 @@ http://dbpedia.org/property/currentTenants
 http://dbpedia.org/property/sisterNames
 http://dbpedia.org/property/significantDesign
 http://dbpedia.org/property/realm
-http://dbpedia.org/property/education
+http://dbpedia.org/property/edÊtion
 http://dbpedia.org/property/ss
 http://dbpedia.org/property/torchLighter
 http://dbpedia.org/property/replacedNames
@@ -39014,7 +39014,7 @@ http://dbpedia.org/property/firstHolder
 http://dbpedia.org/property/connectivity
 http://dbpedia.org/property/structuralEngineer
 http://dbpedia.org/property/aka
-http://dbpedia.org/property/suffragants
+http://dbpedia.org/property/sÿragants
 http://dbpedia.org/property/bishop
 http://dbpedia.org/property/translitLang2Type
 http://dbpedia.org/property/west
@@ -39053,7 +39053,7 @@ http://dbpedia.org/property/metropolitanBorough
 http://dbpedia.org/property/ceo
 http://dbpedia.org/property/eventPre
 http://dbpedia.org/property/fruit
-http://dbpedia.org/property/successor
+http://dbpedia.org/property/s೎ssor
 http://dbpedia.org/property/format
 http://dbpedia.org/property/oppositionLeader
 http://dbpedia.org/property/office

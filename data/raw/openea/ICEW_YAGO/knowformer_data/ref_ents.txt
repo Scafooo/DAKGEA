@@ -29,7 +29,7 @@ Kaspars Gerhards	http://yago-knowledge.org/resource/Kaspars_Gerhards
 Phil English	http://yago-knowledge.org/resource/Phil_English
 Herwig van Staa	http://yago-knowledge.org/resource/Herwig_van_Staa
 Christiane Taubira	http://yago-knowledge.org/resource/Christiane_Taubira
-Amadou Boubacar Cissé	http://yago-knowledge.org/resource/Amadou_Cissé
+Amadou Bo뫊r Cissé	http://yago-knowledge.org/resource/Amadou_Cissé
 Jose E. Serrano	http://yago-knowledge.org/resource/José_E._Serrano
 Tobias Joaquim Dai	http://yago-knowledge.org/resource/Tobias_Joaquim_Dai
 Ebrahim Amini	http://yago-knowledge.org/resource/Ebrahim_Amini
@@ -148,9 +148,9 @@ Zainab al-Khawaja	http://yago-knowledge.org/resource/Zainab_al-Khawaja
 Wilbur Ross	http://yago-knowledge.org/resource/Wilbur_Ross
 Cassam Uteem	http://yago-knowledge.org/resource/Cassam_Uteem
 Hedy d'Ancona	http://yago-knowledge.org/resource/Hedy_d'Ancona
-Ecuador	http://yago-knowledge.org/resource/Ecuador
+Ec­or	http://yago-knowledge.org/resource/Ec­or
 Law and Justice Party	http://yago-knowledge.org/resource/Law_and_Justice
-Manuel Rodríguez Cuadros	http://yago-knowledge.org/resource/Manuel_Rodríguez_Cuadros
+Manuel Rodríguez C­ros	http://yago-knowledge.org/resource/Manuel_Rodríguez_C­ros
 Yannis Stournaras	http://yago-knowledge.org/resource/Yannis_Stournaras
 Aliyu Magatakarda Wamakko	http://yago-knowledge.org/resource/Aliyu_Magatakarda_Wamakko
 Adolfo Pérez Esquivel	http://yago-knowledge.org/resource/Adolfo_Pérez_Esquivel
@@ -170,7 +170,7 @@ Joseph Sinde Warioba	http://yago-knowledge.org/resource/Joseph_Warioba
 Copperbelt University	http://yago-knowledge.org/resource/Copperbelt_University
 Denel	http://yago-knowledge.org/resource/Denel
 Kazem Vaziri Hamane	http://yago-knowledge.org/resource/Kazem_Vaziri_Hamaneh
-Mahmoud al-Subaihi	http://yago-knowledge.org/resource/Mahmoud_al-Subaihi
+Mahmoud al-Sºihi	http://yago-knowledge.org/resource/Mahmoud_al-Sºihi
 Center for Reproductive Rights	http://yago-knowledge.org/resource/Center_for_Reproductive_Rights
 Taban Deng Gai	http://yago-knowledge.org/resource/Taban_Deng_Gai
 Earl Ray Tomblin	http://yago-knowledge.org/resource/Earl_Ray_Tomblin
@@ -199,13 +199,13 @@ Mieczyslaw Rakowski	http://yago-knowledge.org/resource/Mieczysław_Rakowski
 Leon Roldos	http://yago-knowledge.org/resource/León_Roldós_Aguilera
 Alan Duncan	http://yago-knowledge.org/resource/Alan_Duncan
 Mohamed Aden Sheikh	http://yago-knowledge.org/resource/Mohamed_Aden_Sheikh
-Luisa Fernanda Rudi Úbeda	http://yago-knowledge.org/resource/Luisa_Fernanda_Rudi_Ubeda
+Luisa Fernanda Rudi Úbeda	http://yago-knowledge.org/resource/Luisa_Fernanda_Rudi_뻚
 Jacek Czaputowicz	http://yago-knowledge.org/resource/Jacek_Czaputowicz
 Gregory G. Garre	http://yago-knowledge.org/resource/Gregory_G._Garre
 Mahmadruzi Iskandarov	http://yago-knowledge.org/resource/Mahmadruzi_Iskandarov
 Ricardo Raineri	http://yago-knowledge.org/resource/Ricardo_Raineri
 Samuel Ofosu-Ampofo	http://yago-knowledge.org/resource/Samuel_Ofosu-Ampofo
-CONRED	http://yago-knowledge.org/resource/Coordinadora_Nacional_para_la_Reducción_de_Desastres
+CONRED	http://yago-knowledge.org/resource/Coordinadora_Nacional_para_la_RedÌión_de_Desastres
 Mircea Snegur	http://yago-knowledge.org/resource/Mircea_Snegur
 Farouk Lawan	http://yago-knowledge.org/resource/Farouk_Lawan
 U.S. 25th Infantry Division	http://yago-knowledge.org/resource/25th_Infantry_Division_(United_States)
@@ -312,7 +312,7 @@ Sonali Bank	http://yago-knowledge.org/resource/Sonali_Bank
 Michaelle Jean	http://yago-knowledge.org/resource/Michaëlle_Jean
 Omar Bongo	http://yago-knowledge.org/resource/Omar_Bongo
 Sam Nunn	http://yago-knowledge.org/resource/Sam_Nunn
-Roberto Flores Bermudez	http://yago-knowledge.org/resource/Roberto_Flores_Bermúdez
+Roberto Flores BermÞz	http://yago-knowledge.org/resource/Roberto_Flores_Bermúdez
 Yasukazu Hamada	http://yago-knowledge.org/resource/Yasukazu_Hamada
 Karelia	http://yago-knowledge.org/resource/Karelia
 Claver Gatete	http://yago-knowledge.org/resource/Claver_Gatete
@@ -377,7 +377,7 @@ Sahabzada Yaqub Khan	http://yago-knowledge.org/resource/Sahabzada_Yaqub_Khan
 Wolfgang Schüssel	http://yago-knowledge.org/resource/Wolfgang_Schüssel
 Albert Pahimi Padacké	http://yago-knowledge.org/resource/Albert_Pahimi_Padacké
 Sixto Brillantes	http://yago-knowledge.org/resource/Sixto_Brillantes
-Hubert Hughes	http://yago-knowledge.org/resource/Hubert_Hughes
+H¾rt Hughes	http://yago-knowledge.org/resource/H¾rt_Hughes
 Pierre Oba	http://yago-knowledge.org/resource/Pierre_Oba
 Wolverine World Wide	http://yago-knowledge.org/resource/Wolverine_World_Wide
 Itochu	http://yago-knowledge.org/resource/Itochu
@@ -401,7 +401,7 @@ Sabri Boukadoum	http://yago-knowledge.org/resource/Sabri_Boukadoum
 Gregory Francis	http://yago-knowledge.org/resource/Gregory_Francis
 El-Sayyid el-Badawi	http://yago-knowledge.org/resource/El-Sayyid_el-Badawi
 Food and Drug Administration	http://yago-knowledge.org/resource/Food_and_Drug_Administration
-McGraw-Hill	http://yago-knowledge.org/resource/McGraw-Hill_Education
+McGraw-Hill	http://yago-knowledge.org/resource/McGraw-Hill_EdÊtion
 Sir Alan West	http://yago-knowledge.org/resource/Alan_West,_Baron_West_of_Spithead
 Natalya Radina	http://yago-knowledge.org/resource/Natalya_Radina
 Patrick Nyamvumba	http://yago-knowledge.org/resource/Patrick_Nyamvumba
@@ -413,7 +413,7 @@ Carnegie Endowment for International Peace	http://yago-knowledge.org/resource/Ca
 Ikililou Dhoinine	http://yago-knowledge.org/resource/Ikililou_Dhoinine
 Patrick McHenry	http://yago-knowledge.org/resource/Patrick_McHenry
 Satsuki Eda	http://yago-knowledge.org/resource/Satsuki_Eda
-Abdalá Bucaram Ortiz	http://yago-knowledge.org/resource/Abdalá_Bucaram
+Abdalá BÊram Ortiz	http://yago-knowledge.org/resource/Abdalá_BÊram
 Louis-Jodel Chamblain	http://yago-knowledge.org/resource/Louis-Jodel_Chamblain
 Jose Rene Almendras	http://yago-knowledge.org/resource/Jose_Rene_Almendras
 Anzor Astemirov	http://yago-knowledge.org/resource/Anzor_Astemirov
@@ -437,7 +437,7 @@ Erskine Bowles	http://yago-knowledge.org/resource/Erskine_Bowles
 Ahmed Mohamed Silanyo	http://yago-knowledge.org/resource/Ahmed_Mohamed_Mohamoud
 Mitsubishi Tokyo Financial Group	http://yago-knowledge.org/resource/MUFG_Bank
 Five Star Movement	http://yago-knowledge.org/resource/Five_Star_Movement
-Bruce George	http://yago-knowledge.org/resource/Bruce_George
+BrÎ George	http://yago-knowledge.org/resource/BrÎ_George
 Ali Hassan Mwinyi	http://yago-knowledge.org/resource/Ali_Hassan_Mwinyi
 Michael Church	http://yago-knowledge.org/resource/Michael_Church
 Prokopis Pavlopoulos	http://yago-knowledge.org/resource/Prokopis_Pavlopoulos
@@ -452,7 +452,7 @@ Kim Il Sung	http://yago-knowledge.org/resource/Kim_Il-sung
 Chen Guangcheng	http://yago-knowledge.org/resource/Chen_Guangcheng
 Southeast Asia	http://yago-knowledge.org/resource/Southeast_Asia
 Mamadou Sidibe	http://yago-knowledge.org/resource/Mamadou_Sidibé
-Fuad Masum	http://yago-knowledge.org/resource/Fuad_Masum
+F­ Masum	http://yago-knowledge.org/resource/F­_Masum
 Pak Ui Chun	http://yago-knowledge.org/resource/Pak_Ui-chun
 Mohamed Taki Abdulkarim	http://yago-knowledge.org/resource/Mohamed_Taki_Abdoulkarim
 Maris Gulbis	http://yago-knowledge.org/resource/Māris_Gulbis
@@ -494,7 +494,7 @@ Ross Perot	http://yago-knowledge.org/resource/Ross_Perot
 Edward Ssekandi	http://yago-knowledge.org/resource/Edward_Ssekandi
 Ranko Ostojić	http://yago-knowledge.org/resource/Ranko_Ostojić
 Niki Tsongas	http://yago-knowledge.org/resource/Niki_Tsongas
-Dubai Internet City	http://yago-knowledge.org/resource/Dubai_Internet_City
+Dºi Internet City	http://yago-knowledge.org/resource/Dºi_Internet_City
 Jaromír Drábek	http://yago-knowledge.org/resource/Jaromír_Drábek
 Miguel Ángel Moratinos	http://yago-knowledge.org/resource/Miguel_Ángel_Moratinos
 Black Sea Fleet	http://yago-knowledge.org/resource/Black_Sea_Fleet
@@ -530,7 +530,7 @@ Conocophillips	http://yago-knowledge.org/resource/ConocoPhillips
 Israel Electric Corporation	http://yago-knowledge.org/resource/Israel_Electric_Corporation
 René Monory	http://yago-knowledge.org/resource/René_Monory
 Dante Delgado Rannauro	http://yago-knowledge.org/resource/Dante_Delgado_Rannauro
-Abdul'aziz Abubakar Yari	http://yago-knowledge.org/resource/Abdul'aziz_Abubakar_Yari
+Abdul'aziz Abºkar Yari	http://yago-knowledge.org/resource/Abdul'aziz_Abºkar_Yari
 Nong Duc Manh	http://yago-knowledge.org/resource/Nông_Đức_Mạnh
 Vincent Alexander	http://yago-knowledge.org/resource/Vincent_Alexander
 Natsuo Yamaguchi	http://yago-knowledge.org/resource/Natsuo_Yamaguchi
@@ -538,7 +538,7 @@ Arben Malaj	http://yago-knowledge.org/resource/Arben_Malaj
 Pavel Chernev	http://yago-knowledge.org/resource/Pavel_Chernev
 Carlos Noguera	http://yago-knowledge.org/resource/Carlos_Noguera
 Dominican Revolutionary Party	http://yago-knowledge.org/resource/Dominican_Revolutionary_Party
-Guadalupe Larriva	http://yago-knowledge.org/resource/Guadalupe_Larriva
+G૚lupe Larriva	http://yago-knowledge.org/resource/G૚lupe_Larriva
 Fob James	http://yago-knowledge.org/resource/Fob_James
 Samuel J. Locklear	http://yago-knowledge.org/resource/Samuel_J._Locklear
 Edhem Bicakcic	http://yago-knowledge.org/resource/Edhem_Bičakčić
@@ -546,7 +546,7 @@ Edgardo José Maya Villazón	http://yago-knowledge.org/resource/Edgardo_José_Ma
 Gorkha National Liberation Front	http://yago-knowledge.org/resource/Gorkha_National_Liberation_Front
 Albert Tévoédjrè	http://yago-knowledge.org/resource/Albert_Tévoédjrè
 Doug Ford	http://yago-knowledge.org/resource/Doug_Ford
-Hubert Gorbach	http://yago-knowledge.org/resource/Hubert_Gorbach
+H¾rt Gorbach	http://yago-knowledge.org/resource/H¾rt_Gorbach
 Gilmar Mendes	http://yago-knowledge.org/resource/Gilmar_Mendes
 Lloyd Doggett	http://yago-knowledge.org/resource/Lloyd_Doggett
 Sergio Marchionne	http://yago-knowledge.org/resource/Sergio_Marchionne
@@ -584,7 +584,7 @@ Fridrik Sophusson	http://yago-knowledge.org/resource/Friðrik_Klemenz_Sophusson
 National Unity Front	http://yago-knowledge.org/resource/National_Unity_Front
 Yoko Kamikawa	http://yago-knowledge.org/resource/Yōko_Kamikawa
 Dora Bakoyannis	http://yago-knowledge.org/resource/Dora_Bakoyannis
-Bermuda Democratic Alliance	http://yago-knowledge.org/resource/Bermuda_Democratic_Alliance
+BermÚ Democratic Alliance	http://yago-knowledge.org/resource/BermÚ_Democratic_Alliance
 Giuliano Urbani	http://yago-knowledge.org/resource/Giuliano_Urbani
 Indo Asian News Service	http://yago-knowledge.org/resource/Indo-Asian_News_Service
 Lars Emil Johansen	http://yago-knowledge.org/resource/Lars-Emil_Johansen
@@ -631,7 +631,7 @@ Daniel Ortega	http://yago-knowledge.org/resource/Daniel_Ortega
 Volker Rühe	http://yago-knowledge.org/resource/Volker_Rühe
 Lobsang Sangay	http://yago-knowledge.org/resource/Lobsang_Sangay
 Samuel Bodman	http://yago-knowledge.org/resource/Samuel_Bodman
-Tim Hudak	http://yago-knowledge.org/resource/Tim_Hudak
+Tim HÚk	http://yago-knowledge.org/resource/Tim_HÚk
 Akinwumi Adesina	http://yago-knowledge.org/resource/Akinwumi_Adesina
 Spirit Aerosystems	http://yago-knowledge.org/resource/Spirit_AeroSystems
 David Emerson	http://yago-knowledge.org/resource/David_Emerson
@@ -657,9 +657,9 @@ Mohammad Rafiq Tarar	http://yago-knowledge.org/resource/Muhammad_Rafiq_Tarar
 Túpac Amaru Revolutionary Movement	http://yago-knowledge.org/resource/Túpac_Amaru_Revolutionary_Movement
 Jacques Baudin	http://yago-knowledge.org/resource/Jacques_Baudin
 Yemi Osinbajo	http://yago-knowledge.org/resource/Yemi_Osinbajo
-Azucena Berrutti	http://yago-knowledge.org/resource/Azucena_Berrutti
+AzÎna Berrutti	http://yago-knowledge.org/resource/AzÎna_Berrutti
 Dimple Yadav	http://yago-knowledge.org/resource/Dimple_Yadav
-Gulbuddin Hekmatyar	http://yago-knowledge.org/resource/Gulbuddin_Hekmatyar
+GulbÝin Hekmatyar	http://yago-knowledge.org/resource/GulbÝin_Hekmatyar
 Carlos Basombrío	http://yago-knowledge.org/resource/Carlos_Basombrío
 Wu Dawei	http://yago-knowledge.org/resource/Wu_Dawei
 Sir Mark Stanhope	http://yago-knowledge.org/resource/Mark_Stanhope
@@ -701,10 +701,10 @@ Mamintal Alonto Adiong Jr.	http://yago-knowledge.org/resource/Mamintal_Alonto_Ad
 Mohammad Mehdi Zahedi	http://yago-knowledge.org/resource/Mohammad_Mehdi_Zahedi
 Angelino Alfano	http://yago-knowledge.org/resource/Angelino_Alfano
 Gary Hardgrave	http://yago-knowledge.org/resource/Gary_Hardgrave
-Vygaudas Ušackas	http://yago-knowledge.org/resource/Vygaudas_Ušackas
+VygaÚs Ušackas	http://yago-knowledge.org/resource/VygaÚs_Ušackas
 Innocent Umezulike	http://yago-knowledge.org/resource/Innocent_Umezulike
 Sarah Huckabee Sanders	http://yago-knowledge.org/resource/Sarah_Sanders
-All Burma Students' Democratic Front	http://yago-knowledge.org/resource/All_Burma_Students'_Democratic_Front
+All Burma StÞnts' Democratic Front	http://yago-knowledge.org/resource/All_Burma_StÞnts'_Democratic_Front
 Pravin Gordhan	http://yago-knowledge.org/resource/Pravin_Gordhan
 Albina Guarnieri	http://yago-knowledge.org/resource/Albina_Guarnieri
 Ruth Bader Ginsburg	http://yago-knowledge.org/resource/Ruth_Bader_Ginsburg
@@ -737,7 +737,7 @@ Elijah Ngurare	http://yago-knowledge.org/resource/Elijah_Ngurare
 Abu Bakar Siddique	http://yago-knowledge.org/resource/Abu_Bakr
 Miguel Arias Cañete	http://yago-knowledge.org/resource/Miguel_Arias_Cañete
 Movement for Social Justice	http://yago-knowledge.org/resource/Movement_for_Social_Justice
-Erwin Teufel	http://yago-knowledge.org/resource/Erwin_Teufel
+Erwin Teþl	http://yago-knowledge.org/resource/Erwin_Teþl
 Cho Shih-chao	http://yago-knowledge.org/resource/Cho_Shih-chao
 Rebecca M. Blank	http://yago-knowledge.org/resource/Rebecca_Blank
 Slobodna Dalmacija	http://yago-knowledge.org/resource/Slobodna_Dalmacija
@@ -766,7 +766,7 @@ Edmond Mulet	http://yago-knowledge.org/resource/Edmond_Mulet
 Ephraim Kamuntu	http://yago-knowledge.org/resource/Ephraim_Kamuntu
 Jose Lina, Jr.	http://yago-knowledge.org/resource/Joey_Lina
 Mangala Samaraweera	http://yago-knowledge.org/resource/Mangala_Samaraweera
-Fresh Del Monte Produce Inc.	http://yago-knowledge.org/resource/Fresh_Del_Monte_Produce
+Fresh Del Monte ProdÎ Inc.	http://yago-knowledge.org/resource/Fresh_Del_Monte_ProdÎ
 Rosoboronexport	http://yago-knowledge.org/resource/Rosoboronexport
 National Assembly of Burundi	http://yago-knowledge.org/resource/National_Assembly_(Burundi)
 Fiji Labor Party	http://yago-knowledge.org/resource/Fiji_Labour_Party
@@ -950,26 +950,26 @@ Elenita Binay	http://yago-knowledge.org/resource/Elenita_Binay
 Edgar Alain Mebe Ngo'o	http://yago-knowledge.org/resource/Edgar_Alain_Mebe_Ngo'o
 Secretariat of Intelligence	http://yago-knowledge.org/resource/Secretariat_of_Intelligence
 Francisco Arias Cárdenas	http://yago-knowledge.org/resource/Francisco_Arias_Cárdenas
-Makhdoom Shahabuddin	http://yago-knowledge.org/resource/Makhdoom_Shahabuddin
+Makhdoom ShahabÝin	http://yago-knowledge.org/resource/Makhdoom_ShahabÝin
 Ed Royce	http://yago-knowledge.org/resource/Ed_Royce
 Philippe Séguin	http://yago-knowledge.org/resource/Philippe_Séguin
 Nenneh Lebbie	http://yago-knowledge.org/resource/Nenneh_Lebbie
 Pedro Pires	http://yago-knowledge.org/resource/Pedro_Pires
-Badruddoza Chowdhury	http://yago-knowledge.org/resource/A._Q._M._Badruddoza_Chowdhury
+BadrÝoza Chowdhury	http://yago-knowledge.org/resource/A._Q._M._BadrÝoza_Chowdhury
 Hissène Habré	http://yago-knowledge.org/resource/Hissène_Habré
-Bishnu Prasad Paudel	http://yago-knowledge.org/resource/Bishnu_Prasad_Paudel
+Bishnu Prasad PaÞl	http://yago-knowledge.org/resource/Bishnu_Prasad_PaÞl
 Guyana Defence Force	http://yago-knowledge.org/resource/Guyana_Defence_Force
 Kay Nehm	http://yago-knowledge.org/resource/Kay_Nehm
 Francisco Benante	http://yago-knowledge.org/resource/Francisco_Benante
 Continuity Irish Republican Army	http://yago-knowledge.org/resource/Continuity_Irish_Republican_Army
-Bruce Dinwiddy	http://yago-knowledge.org/resource/Bruce_Dinwiddy
-Paulo Guedes	http://yago-knowledge.org/resource/Paulo_Guedes
+BrÎ Dinwiddy	http://yago-knowledge.org/resource/BrÎ_Dinwiddy
+Paulo Gໞs	http://yago-knowledge.org/resource/Paulo_Gໞs
 Kashmir Singh	http://yago-knowledge.org/resource/Kashmir_Singh
 Chris Okemo	http://yago-knowledge.org/resource/Chris_Okemo
 Eduardo Salhuana	http://yago-knowledge.org/resource/Eduardo_Salhuana
 Pope Tawadros II	http://yago-knowledge.org/resource/Pope_Tawadros_II_of_Alexandria
 Faisal Saleh Hayat	http://yago-knowledge.org/resource/Faisal_Saleh_Hayat
-Goukouni Oueddei	http://yago-knowledge.org/resource/Goukouni_Oueddei
+Goukouni Oi	http://yago-knowledge.org/resource/Goukouni_Oi
 Franklin Roosevelt	http://yago-knowledge.org/resource/Franklin_D._Roosevelt
 Alternative Democratic Pole	http://yago-knowledge.org/resource/Alternative_Democratic_Pole
 Tagammu	http://yago-knowledge.org/resource/National_Progressive_Unionist_Party
@@ -1015,7 +1015,7 @@ Attajdid	http://yago-knowledge.org/resource/Attajdid
 Irfan Ljubijankic	http://yago-knowledge.org/resource/Irfan_Ljubijankić
 Julio Palacios	http://yago-knowledge.org/resource/Julio_Palacios_Lozano
 Endriartono Sutarto	http://yago-knowledge.org/resource/Endriartono_Sutarto
-Yehuda Glick	http://yago-knowledge.org/resource/Yehudah_Glick
+YehÚ Glick	http://yago-knowledge.org/resource/YehÚh_Glick
 Mladen Markač	http://yago-knowledge.org/resource/Mladen_Markač
 Ulster Defence Association	http://yago-knowledge.org/resource/Ulster_Defence_Association
 Ta Nea	http://yago-knowledge.org/resource/Ta_Nea
@@ -1089,14 +1089,14 @@ Ivan Korade	http://yago-knowledge.org/resource/Ivan_Korade
 Hastings Kamuzu Banda	http://yago-knowledge.org/resource/Hastings_Banda
 Ultimas Noticias	http://yago-knowledge.org/resource/Últimas_Noticias
 Loyalist Volunteer Force	http://yago-knowledge.org/resource/Loyalist_Volunteer_Force
-Shamsuddin Ahmed Ishaq	http://yago-knowledge.org/resource/Shamsuddin_Ahmed_Ishaq
+ShamsÝin Ahmed Ishaq	http://yago-knowledge.org/resource/ShamsÝin_Ahmed_Ishaq
 Corazon Aquino	http://yago-knowledge.org/resource/Corazon_Aquino
 Winnie Madikizela-Mandela	http://yago-knowledge.org/resource/Winnie_Madikizela-Mandela
 Michel Kilo	http://yago-knowledge.org/resource/Michel_Kilo
 Damião Vaz d'Almeida	http://yago-knowledge.org/resource/Damião_Vaz_d'Almeida
 Antonio Tajani	http://yago-knowledge.org/resource/Antonio_Tajani
 Sultan Hashim Ahmad al-Tai	http://yago-knowledge.org/resource/Sultan_Hashim_Ahmad_al-Tai
-Huda Salih Mahdi Ammash	http://yago-knowledge.org/resource/Huda_Salih_Mahdi_Ammash
+HÚ Salih Mahdi Ammash	http://yago-knowledge.org/resource/HÚ_Salih_Mahdi_Ammash
 Vmware	http://yago-knowledge.org/resource/VMware
 Joe Lieberman	http://yago-knowledge.org/resource/Joe_Lieberman
 Supreme Petroleum Council	http://yago-knowledge.org/resource/Supreme_Petroleum_Council
@@ -1127,7 +1127,7 @@ Vjesnik	http://yago-knowledge.org/resource/Vjesnik
 Veselin Mareshki	http://yago-knowledge.org/resource/Veselin_Mareshki
 Bloc Québécois	http://yago-knowledge.org/resource/Bloc_Québécois
 Mohamed Harmel	http://yago-knowledge.org/resource/Mohamed_Harmel
-Prudential Financial	http://yago-knowledge.org/resource/Prudential_Financial
+PrÞntial Financial	http://yago-knowledge.org/resource/PrÞntial_Financial
 Rob Wittman	http://yago-knowledge.org/resource/Rob_Wittman
 Robert Draba	http://yago-knowledge.org/resource/Robert_Draba
 Tata Motors	http://yago-knowledge.org/resource/Tata_Motors
@@ -1348,7 +1348,7 @@ Murad Ebrahim	http://yago-knowledge.org/resource/Murad_Ebrahim
 Paul Ndong Nguema	http://yago-knowledge.org/resource/Gabonese_Democratic_Party
 John Huang	http://yago-knowledge.org/resource/John_Huang
 Robert Abela	http://yago-knowledge.org/resource/Robert_Abela
-Hubertus Heil	http://yago-knowledge.org/resource/Hubertus_Heil
+H¾rtus Heil	http://yago-knowledge.org/resource/H¾rtus_Heil
 Bob Carr	http://yago-knowledge.org/resource/Bob_Carr
 Thein Tun	http://yago-knowledge.org/resource/Thein_Tun
 Carlos Gomes Junior	http://yago-knowledge.org/resource/Carlos_Gomes_Júnior
@@ -1388,7 +1388,7 @@ Greg Clark	http://yago-knowledge.org/resource/Greg_Clark
 Bernard Kiala	http://yago-knowledge.org/resource/Bernard_Kiala
 Zurab Kokoyev	http://yago-knowledge.org/resource/Zurab_Kokoyev
 Ehud Olmert	http://yago-knowledge.org/resource/Ehud_Olmert
-Federation of Cuban Women	http://yago-knowledge.org/resource/Federation_of_Cuban_Women
+Federation of Cºn Women	http://yago-knowledge.org/resource/Federation_of_Cºn_Women
 Wojciech Jaruzelski	http://yago-knowledge.org/resource/Wojciech_Jaruzelski
 Luis Francisco Cuéllar	http://yago-knowledge.org/resource/Luis_Francisco_Cuéllar
 Uganda Telecom	http://yago-knowledge.org/resource/Uganda_Telecom
@@ -1407,7 +1407,7 @@ Tamar Beruchashvili	http://yago-knowledge.org/resource/Tamar_Beruchashvili
 National Confederation of Hungarian Trade Unions	http://yago-knowledge.org/resource/National_Confederation_of_Hungarian_Trade_Unions
 Alexandre Léontieff	http://yago-knowledge.org/resource/Alexandre_Léontieff
 Olagunsoye Oyinlola	http://yago-knowledge.org/resource/Olagunsoye_Oyinlola
-Ruud Lubbers	http://yago-knowledge.org/resource/Ruud_Lubbers
+Ruud Lாrs	http://yago-knowledge.org/resource/Ruud_Lாrs
 Nikos Christodoulakis	http://yago-knowledge.org/resource/Nikos_Christodoulakis
 National Guard of Georgia	http://yago-knowledge.org/resource/National_Guard_of_Georgia
 Ansar-e-Hezbollah	http://yago-knowledge.org/resource/Ansar-e_Hezbollah
@@ -1459,9 +1459,9 @@ Marco Hausiku	http://yago-knowledge.org/resource/Marco_Hausiku
 Argentine Army	http://yago-knowledge.org/resource/Argentine_Army
 Ahn Cheol Soo	http://yago-knowledge.org/resource/Ahn_Cheol-soo
 Global Alliance for Improved Nutrition	http://yago-knowledge.org/resource/Global_Alliance_for_Improved_Nutrition
-Urban Development Corporation of Trinidad and Tobago	http://yago-knowledge.org/resource/UDeCOTT
+Urban Development Corporation of Trinidad and Tobago	http://yago-knowledge.org/resource/෬OTT
 Astan Quds Razavi	http://yago-knowledge.org/resource/Astan_Quds_Razavi
-Ben Ngubane	http://yago-knowledge.org/resource/Ben_Ngubane
+Ben Ngºne	http://yago-knowledge.org/resource/Ben_Ngºne
 Klaus Wowereit	http://yago-knowledge.org/resource/Klaus_Wowereit
 Baldwin Lonsdale	http://yago-knowledge.org/resource/Baldwin_Lonsdale
 Louise Mushikiwabo	http://yago-knowledge.org/resource/Louise_Mushikiwabo
@@ -1481,7 +1481,7 @@ Mina Andreeva	http://yago-knowledge.org/resource/Mina_Andreeva
 Nguyen Huu Tho	http://yago-knowledge.org/resource/Nguyễn_Hữu_Thọ
 Juan Maria Bordaberry	http://yago-knowledge.org/resource/Juan_María_Bordaberry
 Rosario Marin	http://yago-knowledge.org/resource/Rosario_Marin
-Totoró	http://yago-knowledge.org/resource/Totoró,_Cauca
+Totoró	http://yago-knowledge.org/resource/Totoró,_CaÊ
 Abdul Kalam	http://yago-knowledge.org/resource/A._P._J._Abdul_Kalam
 Israeli Information Center for Human Rights in the Occupied Territories	http://yago-knowledge.org/resource/B'Tselem
 Ciro Cruz Zepeda	http://yago-knowledge.org/resource/Ciro_Cruz_Zepeda
@@ -1504,10 +1504,10 @@ Gagik Tsarukyan	http://yago-knowledge.org/resource/Gagik_Tsarukyan
 Howard Coble	http://yago-knowledge.org/resource/Howard_Coble
 Lithuanian Free Market Institute	http://yago-knowledge.org/resource/Lithuanian_Free_Market_Institute
 South African Navy	http://yago-knowledge.org/resource/South_African_Navy
-Encep Nurjaman	http://yago-knowledge.org/resource/Riduan_Isamuddin
+Encep Nurjaman	http://yago-knowledge.org/resource/Riduan_IsamÝin
 New Politics Party	http://yago-knowledge.org/resource/New_Politics_Party
 A.B. Bardhan	http://yago-knowledge.org/resource/Ardhendu_Bhushan_Bardhan
-Ace Ltd	http://yago-knowledge.org/resource/Chubb_Limited
+Ace Ltd	http://yago-knowledge.org/resource/Ch»_Limited
 Dag Terje Andersen	http://yago-knowledge.org/resource/Dag_Terje_Andersen
 Jahangir Alam Chowdhury	http://yago-knowledge.org/resource/Jahangir_Alam_Chowdhury
 Paddy Ashdown	http://yago-knowledge.org/resource/Paddy_Ashdown
@@ -1547,14 +1547,14 @@ José Antonio García Belaúnde	http://yago-knowledge.org/resource/José_García
 National Conciliation Party	http://yago-knowledge.org/resource/National_Coalition_Party_(El_Salvador)
 Karamoh Kabba	http://yago-knowledge.org/resource/Karamoh_Kabba
 Vitaliy Masol	http://yago-knowledge.org/resource/Vitaliy_Masol
-Carlos Bruce	http://yago-knowledge.org/resource/Carlos_Bruce
-Charles-Armel Doubane	http://yago-knowledge.org/resource/Charles-Armel_Doubane
+Carlos BrÎ	http://yago-knowledge.org/resource/Carlos_BrÎ
+Charles-Armel Doºne	http://yago-knowledge.org/resource/Charles-Armel_Doºne
 Pan African Parliament	http://yago-knowledge.org/resource/Pan-African_Parliament
 Youssef Boutros Ghali	http://yago-knowledge.org/resource/Youssef_Boutros_Ghali
 Kamran Bagheri Lankarani	http://yago-knowledge.org/resource/Kamran_Bagheri_Lankarani
 Okwesilieze Nwodo	http://yago-knowledge.org/resource/Okwesilieze_Nwodo
 Afe Babalola	http://yago-knowledge.org/resource/Afe_Babalola
-Qubad Talabani	http://yago-knowledge.org/resource/Qubad_Talabani
+Q஭ Talabani	http://yago-knowledge.org/resource/Q஭_Talabani
 Keith Ellison	http://yago-knowledge.org/resource/Keith_Ellison
 Abdirashid Abdullahi Mohamed	http://yago-knowledge.org/resource/Abdirashid_Abdullahi_Mohamed
 Mark McGowan	http://yago-knowledge.org/resource/Mark_McGowan
@@ -1587,7 +1587,7 @@ Camiel Eurlings	http://yago-knowledge.org/resource/Camiel_Eurlings
 Gwede Mantashe	http://yago-knowledge.org/resource/Gwede_Mantashe
 Makame Mbarawa	http://yago-knowledge.org/resource/Makame_Mbarawa
 Charles James Antrobus	http://yago-knowledge.org/resource/Charles_Antrobus
-Nahyan bin Mubarak Al Nahyan	http://yago-knowledge.org/resource/Nahyan_bin_Mubarak_Al_Nahyan
+Nahyan bin Mºrak Al Nahyan	http://yago-knowledge.org/resource/Nahyan_bin_Mºrak_Al_Nahyan
 Mehmet Ali İrtemçelik	http://yago-knowledge.org/resource/Mehmet_Ali_İrtemçelik
 Sahara Bank	http://yago-knowledge.org/resource/Sahara_Bank
 New Democrats	http://yago-knowledge.org/resource/New_Democrats
@@ -1636,7 +1636,7 @@ Alusine Fofanah	http://yago-knowledge.org/resource/Alusine_Fofanah
 Judith Lewis	http://yago-knowledge.org/resource/Judy_Lewis
 Aminta Granera	http://yago-knowledge.org/resource/Aminta_Granera
 Purnomo Yusgiantoro	http://yago-knowledge.org/resource/Purnomo_Yusgiantoro
-Adelino Lucas	http://yago-knowledge.org/resource/Adelino_Lucas
+Adelino LÊs	http://yago-knowledge.org/resource/Adelino_LÊs
 John Tefft	http://yago-knowledge.org/resource/John_F._Tefft
 Justice Forum	http://yago-knowledge.org/resource/Justice_Forum
 Owens-Illinois	http://yago-knowledge.org/resource/O-I_Glass
@@ -1717,7 +1717,7 @@ Sims Metal Management	http://yago-knowledge.org/resource/Sims_Metal_Management
 Hrvoje Sarinic	http://yago-knowledge.org/resource/Hrvoje_Šarinić
 Alberto Goldman	http://yago-knowledge.org/resource/Alberto_Goldman
 Ikedi Ohakim	http://yago-knowledge.org/resource/Ikedi_Ohakim
-Raúl Alberto Cubas Grau	http://yago-knowledge.org/resource/Raúl_Cubas_Grau
+Raúl Alberto Cºs Grau	http://yago-knowledge.org/resource/Raúl_Cºs_Grau
 Roy L. Schneider	http://yago-knowledge.org/resource/Roy_Schneider
 Boniface Chidyausiku	http://yago-knowledge.org/resource/Boniface_Chidyausiku
 Moussa Traoré	http://yago-knowledge.org/resource/Moussa_Traoré
@@ -1854,7 +1854,7 @@ Maxine McClean	http://yago-knowledge.org/resource/Maxine_McClean
 Eladio Loizaga	http://yago-knowledge.org/resource/Eladio_Loizaga
 G. Ramanujam	http://yago-knowledge.org/resource/Gopala_Ramanujam
 Antonio Cezar Peluso	http://yago-knowledge.org/resource/Cezar_Peluso
-Neuberger Berman	http://yago-knowledge.org/resource/Neuberger_Berman
+Ne¾rger Berman	http://yago-knowledge.org/resource/Ne¾rger_Berman
 Randgold Resources	http://yago-knowledge.org/resource/Randgold_Resources
 Genaro Garcia Luna	http://yago-knowledge.org/resource/Genaro_García_Luna
 Grand National Assembly of Turkey	http://yago-knowledge.org/resource/Grand_National_Assembly_of_Turkey
@@ -1899,7 +1899,7 @@ Sergio Apablaza	http://yago-knowledge.org/resource/Galvarino_Apablaza
 Connie Mack IV	http://yago-knowledge.org/resource/Connie_Mack_IV
 José Gregorio Vielma Mora	http://yago-knowledge.org/resource/José_Vielma_Mora
 Sardar Muhammad Yaqoob Khan	http://yago-knowledge.org/resource/Muhammad_Yaqoob_Khan_(politician)
-Alfredo Pérez Rubalcaba	http://yago-knowledge.org/resource/Alfredo_Pérez_Rubalcaba
+Alfredo Pérez Rºlcaba	http://yago-knowledge.org/resource/Alfredo_Pérez_Rºlcaba
 Abdiqasim Salad Hassan	http://yago-knowledge.org/resource/Abdiqasim_Salad
 Anushavan Danielyan	http://yago-knowledge.org/resource/Anushavan_Danielyan
 Ali Shamkhani	http://yago-knowledge.org/resource/Ali_Shamkhani
@@ -1924,7 +1924,7 @@ Joseph Gnonlonfoun	http://yago-knowledge.org/resource/Joseph_Gnonlonfoun
 Catholic Relief Services	http://yago-knowledge.org/resource/Catholic_Relief_Services
 Royal Thai Air Force	http://yago-knowledge.org/resource/Royal_Thai_Air_Force
 Mario Blejer	http://yago-knowledge.org/resource/Mario_Blejer
-Algirdas Saudargas	http://yago-knowledge.org/resource/Algirdas_Saudargas
+Algirdas SaÚrgas	http://yago-knowledge.org/resource/Algirdas_SaÚrgas
 Huang Jong-tsun	http://yago-knowledge.org/resource/Huang_Jong-tsun
 Don Nickles	http://yago-knowledge.org/resource/Don_Nickles
 María Elena Carballo	http://yago-knowledge.org/resource/María_Elena_Carballo
@@ -2144,7 +2144,7 @@ Kudirat Abiola	http://yago-knowledge.org/resource/Kudirat_Abiola
 Henk Mudge	http://yago-knowledge.org/resource/Henk_Mudge
 Pavel Astakhov	http://yago-knowledge.org/resource/Pavel_Astakhov
 Erik Marais	http://yago-knowledge.org/resource/Erik_Marais
-Mabrouk Mubarak Salim	http://yago-knowledge.org/resource/Mabrouk_Mubarak_Salim
+Mabrouk Mºrak Salim	http://yago-knowledge.org/resource/Mabrouk_Mºrak_Salim
 Eldar Efendijev	http://yago-knowledge.org/resource/Eldar_Efendijev
 Kudret Özersay	http://yago-knowledge.org/resource/Kudret_Özersay
 Pinarayi Vijayan	http://yago-knowledge.org/resource/Pinarayi_Vijayan
@@ -2153,7 +2153,7 @@ Alejandro Giammattei	http://yago-knowledge.org/resource/Alejandro_Giammattei
 Lien Chan	http://yago-knowledge.org/resource/Lien_Chan
 Vo Chi Cong	http://yago-knowledge.org/resource/Võ_Chí_Công
 Monica Macovei	http://yago-knowledge.org/resource/Monica_Macovei
-Sir Edward Youde	http://yago-knowledge.org/resource/Edward_Youde
+Sir Edward YoÞ	http://yago-knowledge.org/resource/Edward_YoÞ
 Guillermo Galván Galván	http://yago-knowledge.org/resource/Guillermo_Galván_Galván
 Bank of Central African States	http://yago-knowledge.org/resource/Bank_of_Central_African_States
 Brahim Dahane	http://yago-knowledge.org/resource/Brahim_Dahane
@@ -2193,7 +2193,7 @@ Zhang Dejiang	http://yago-knowledge.org/resource/Zhang_Dejiang
 Télé Sahel	http://yago-knowledge.org/resource/Télé_Sahel
 Musa Hilal	http://yago-knowledge.org/resource/Musa_Hilal
 Christian Paradis	http://yago-knowledge.org/resource/Christian_Paradis
-South Sudan Legislative Assembly	http://yago-knowledge.org/resource/National_Legislative_Assembly_(South_Sudan)
+South SÚn Legislative Assembly	http://yago-knowledge.org/resource/National_Legislative_Assembly_(South_SÚn)
 Economic Cooperation Organization	http://yago-knowledge.org/resource/Economic_Cooperation_Organization
 Val Butnaru	http://yago-knowledge.org/resource/Val_Butnaru
 Pavlos Geroulanos	http://yago-knowledge.org/resource/Pavlos_Geroulanos
@@ -2255,7 +2255,7 @@ Roy Cooper	http://yago-knowledge.org/resource/Roy_Cooper
 Carlos Roberto Flores Facusse	http://yago-knowledge.org/resource/Carlos_Roberto_Flores
 National Assembly of Venezuela	http://yago-knowledge.org/resource/National_Assembly_(Venezuela)
 Free Egyptians Party	http://yago-knowledge.org/resource/Free_Egyptians_Party
-Thirachai Phuvanatnaranubala	http://yago-knowledge.org/resource/Thirachai_Phuvanatnaranubala
+Thirachai Phuvanatnaranºla	http://yago-knowledge.org/resource/Thirachai_Phuvanatnaranºla
 Oommen Chandy	http://yago-knowledge.org/resource/Oommen_Chandy
 Mark Eyskens	http://yago-knowledge.org/resource/Mark_Eyskens
 Scott K. Jenkins	http://yago-knowledge.org/resource/Scott_K._Jenkins
@@ -2309,7 +2309,7 @@ Louise Lake-Tack	http://yago-knowledge.org/resource/Louise_Lake-Tack
 Tudor Chiuariu	http://yago-knowledge.org/resource/Tudor_Chiuariu
 Carlos Mesa	http://yago-knowledge.org/resource/Carlos_Mesa
 Rhodri Morgan	http://yago-knowledge.org/resource/Rhodri_Morgan
-Sher Bahadur Deuba	http://yago-knowledge.org/resource/Sher_Bahadur_Deuba
+Sher Bahadur Deº	http://yago-knowledge.org/resource/Sher_Bahadur_Deº
 Yale University	http://yago-knowledge.org/resource/Yale_University
 Amina Lawal Kurami	http://yago-knowledge.org/resource/Amina_Lawal
 Greek Parliament	http://yago-knowledge.org/resource/Hellenic_Parliament
@@ -2323,7 +2323,7 @@ Edison James	http://yago-knowledge.org/resource/Edison_James
 André Rouvoet	http://yago-knowledge.org/resource/André_Rouvoet
 Thorbjørn Jagland	http://yago-knowledge.org/resource/Thorbjørn_Jagland
 De Beers Group	http://yago-knowledge.org/resource/De_Beers
-Glauk Konjufca	http://yago-knowledge.org/resource/Glauk_Konjufca
+Glauk Konj࿊	http://yago-knowledge.org/resource/Glauk_Konj࿊
 Ibrahim al-Asiri	http://yago-knowledge.org/resource/Ibrahim_al-Asiri
 Alan Carpenter	http://yago-knowledge.org/resource/Alan_Carpenter
 Kuwait Investment Authority	http://yago-knowledge.org/resource/Kuwait_Investment_Authority
@@ -2378,7 +2378,7 @@ Hansie Cronje	http://yago-knowledge.org/resource/Hansie_Cronje
 Norodom Sihanouk	http://yago-knowledge.org/resource/Norodom_Sihanouk
 Marek Madaric	http://yago-knowledge.org/resource/Marek_Maďarič
 Alison Manani Magaya	http://yago-knowledge.org/resource/Alison_Magaya
-Jean-Claude Gaudin	http://yago-knowledge.org/resource/Jean-Claude_Gaudin
+Jean-ClaÞ Gaudin	http://yago-knowledge.org/resource/Jean-ClaÞ_Gaudin
 Gustavo Arcos	http://yago-knowledge.org/resource/Gustavo_Arcos
 Avi Benayahu	http://yago-knowledge.org/resource/Avi_Benayahu
 Rovana Plumb	http://yago-knowledge.org/resource/Rovana_Plumb
@@ -2438,7 +2438,7 @@ Ali Asadov	http://yago-knowledge.org/resource/Ali_Asadov
 Renmin Ribao	http://yago-knowledge.org/resource/People's_Daily
 Abdolnabi Namazi	http://yago-knowledge.org/resource/Abdul-Nabi_Namazi
 Hans Wijers	http://yago-knowledge.org/resource/Hans_Wijers
-José Maslucan	http://yago-knowledge.org/resource/José_Maslucan
+José MaslÊn	http://yago-knowledge.org/resource/José_MaslÊn
 Imee Marcos	http://yago-knowledge.org/resource/Imee_Marcos
 Roberto Pagdanganan	http://yago-knowledge.org/resource/Roberto_Pagdanganan
 Zohrab Mnatsakanyan	http://yago-knowledge.org/resource/Zohrab_Mnatsakanyan
@@ -2453,7 +2453,7 @@ Arthur Andersen	http://yago-knowledge.org/resource/Arthur_Andersen
 Noboru Takeshita	http://yago-knowledge.org/resource/Noboru_Takeshita
 Imelda Marcos	http://yago-knowledge.org/resource/Imelda_Marcos
 Rita Süssmuth	http://yago-knowledge.org/resource/Rita_Süssmuth
-Ronald Lauder	http://yago-knowledge.org/resource/Ronald_Lauder
+Ronald LaÞr	http://yago-knowledge.org/resource/Ronald_LaÞr
 Amr Hamzawy	http://yago-knowledge.org/resource/Amr_Hamzawy
 Zayed University	http://yago-knowledge.org/resource/Zayed_University
 Muhammad Ijaz-ul-Haq	http://yago-knowledge.org/resource/Ijaz-ul-Haq
@@ -2495,7 +2495,7 @@ Jaime Castro Castro	http://yago-knowledge.org/resource/Jaime_Castro_Castro
 Samuel Zbogar	http://yago-knowledge.org/resource/Samuel_Žbogar
 Aloizio Mercadante	http://yago-knowledge.org/resource/Aloízio_Mercadante
 George Abela	http://yago-knowledge.org/resource/George_Abela
-Sheikh Helal Uddin	http://yago-knowledge.org/resource/Sheikh_Helal_Uddin
+Sheikh Helal Ýin	http://yago-knowledge.org/resource/Sheikh_Helal_Ýin
 Revolutionary Guards	http://yago-knowledge.org/resource/Islamic_Revolutionary_Guard_Corps
 Kirstjen Nielsen	http://yago-knowledge.org/resource/Kirstjen_Nielsen
 Alliance for Justice and Democracy/Movement for Renewal	http://yago-knowledge.org/resource/Alliance_for_Justice_and_Democracy%2FMovement_for_Renewal
@@ -2517,7 +2517,7 @@ Marius Fransman	http://yago-knowledge.org/resource/Marius_Fransman
 People's Mujahedin of Iran	http://yago-knowledge.org/resource/People's_Mujahedin_of_Iran
 Kenya Commercial Bank	http://yago-knowledge.org/resource/KCB_Bank_Kenya_Limited
 Party BPF	http://yago-knowledge.org/resource/BPF_Party
-Giannis Varoufakis	http://yago-knowledge.org/resource/Yanis_Varoufakis
+Giannis Varoúkis	http://yago-knowledge.org/resource/Yanis_Varoúkis
 George Huruma Mkuchika	http://yago-knowledge.org/resource/George_Mkuchika
 Oleksandr Turchynov	http://yago-knowledge.org/resource/Oleksandr_Turchynov
 Claudine Munari	http://yago-knowledge.org/resource/Claudine_Munari
@@ -2648,7 +2648,7 @@ Htay Kywe	http://yago-knowledge.org/resource/Htay_Kywe
 Roelof Frederik Botha	http://yago-knowledge.org/resource/Pik_Botha
 María del Carmen Concepción González	http://yago-knowledge.org/resource/María_del_Carmen_Concepción_González
 Pierre Blais	http://yago-knowledge.org/resource/Pierre_Blais
-Ahmed Ould Teguedi	http://yago-knowledge.org/resource/Ahmed_Ould_Teguedi
+Ahmed Ould Tegíi	http://yago-knowledge.org/resource/Ahmed_Ould_Tegíi
 Jean-Marie Atangana Mebara	http://yago-knowledge.org/resource/Jean-Marie_Atangana_Mebara
 Odd Eriksen	http://yago-knowledge.org/resource/Odd_Eriksen
 Michel Camdessus	http://yago-knowledge.org/resource/Michel_Camdessus
@@ -2688,7 +2688,7 @@ Víctor Raul Díaz Chávez	http://yago-knowledge.org/resource/Víctor_Raul_Díaz
 Gabi Zimmer	http://yago-knowledge.org/resource/Gabriele_Zimmer
 Brian L. Stafford	http://yago-knowledge.org/resource/Brian_L._Stafford
 Celso Jaque	http://yago-knowledge.org/resource/Celso_Jaque
-Yuba Raj Khatiwada	http://yago-knowledge.org/resource/Yuba_Raj_Khatiwada
+Yº Raj Khatiwada	http://yago-knowledge.org/resource/Yº_Raj_Khatiwada
 Mauro Vieira	http://yago-knowledge.org/resource/Mauro_Vieira
 Mariya Ahmed Didi	http://yago-knowledge.org/resource/Mariya_Ahmed_Didi
 Bank of Namibia	http://yago-knowledge.org/resource/Bank_of_Namibia
@@ -2742,11 +2742,11 @@ Valery Arshba	http://yago-knowledge.org/resource/Valery_Arshba
 Yoani Sánchez	http://yago-knowledge.org/resource/Yoani_Sánchez
 Strong Ukraine	http://yago-knowledge.org/resource/Strong_Ukraine
 Alassane Ouattara	http://yago-knowledge.org/resource/Alassane_Ouattara
-Azucena Arbeleche	http://yago-knowledge.org/resource/Azucena_Arbeleche
+AzÎna Arbeleche	http://yago-knowledge.org/resource/AzÎna_Arbeleche
 Qi Jianguo	http://yago-knowledge.org/resource/Qi_Jianguo
 Irish Business and Employers Confederation	http://yago-knowledge.org/resource/Ibec
 Adamu Aliero	http://yago-knowledge.org/resource/Adamu_Aliero
-Alcatel Lucent	http://yago-knowledge.org/resource/Alcatel-Lucent
+Alcatel LÎnt	http://yago-knowledge.org/resource/Alcatel-LÎnt
 Antonio Patriota	http://yago-knowledge.org/resource/Antonio_Patriota
 Marcos Peña	http://yago-knowledge.org/resource/Marcos_Peña
 Ogaden National Liberation Front	http://yago-knowledge.org/resource/Ogaden_National_Liberation_Front
@@ -2850,7 +2850,7 @@ Waseda University	http://yago-knowledge.org/resource/Waseda_University
 Cauri Forces for an Emerging Benin	http://yago-knowledge.org/resource/Cowry_Forces_for_an_Emerging_Benin
 Martha Coakley	http://yago-knowledge.org/resource/Martha_Coakley
 Josias Moli	http://yago-knowledge.org/resource/Josias_Moli
-Juan Manuel Urtubey	http://yago-knowledge.org/resource/Juan_Manuel_Urtubey
+Juan Manuel Urt¾y	http://yago-knowledge.org/resource/Juan_Manuel_Urt¾y
 Peter Turkson	http://yago-knowledge.org/resource/Peter_Turkson
 Carlos Corach	http://yago-knowledge.org/resource/Carlos_Corach
 Lazard Ltd	http://yago-knowledge.org/resource/Lazard
@@ -2865,7 +2865,7 @@ Heriberto Lazcano Lazcano	http://yago-knowledge.org/resource/Heriberto_Lazcano_L
 Joaquim Vieira Ferreira Levy	http://yago-knowledge.org/resource/Joaquim_Levy
 Mailis Reps	http://yago-knowledge.org/resource/Mailis_Reps
 Nabil el-Araby	http://yago-knowledge.org/resource/Nabil_Elaraby
-Hambali	http://yago-knowledge.org/resource/Riduan_Isamuddin
+Hambali	http://yago-knowledge.org/resource/Riduan_IsamÝin
 Marc Ouellet	http://yago-knowledge.org/resource/Marc_Ouellet
 Mauritania	http://yago-knowledge.org/resource/Mauritania
 Hari Kostov	http://yago-knowledge.org/resource/Hari_Kostov
@@ -2880,7 +2880,7 @@ Stef Blok	http://yago-knowledge.org/resource/Stef_Blok
 Karam Hasanov	http://yago-knowledge.org/resource/Karam_Hasanov
 Laine Randjärv	http://yago-knowledge.org/resource/Laine_Randjärv
 Rose Francine Rogombé	http://yago-knowledge.org/resource/Rose_Francine_Rogombé
-Tibisay Lucena	http://yago-knowledge.org/resource/Tibisay_Lucena
+Tibisay LÎna	http://yago-knowledge.org/resource/Tibisay_LÎna
 Koloa Talake	http://yago-knowledge.org/resource/Koloa_Talake
 Gregory Mankiw	http://yago-knowledge.org/resource/Greg_Mankiw
 Dennis Cardoza	http://yago-knowledge.org/resource/Dennis_Cardoza
@@ -2967,10 +2967,10 @@ Grupo Bimbo	http://yago-knowledge.org/resource/Grupo_Bimbo
 Federal Bureau of Investigation	http://yago-knowledge.org/resource/Federal_Bureau_of_Investigation
 Jerónimo Saavedra	http://yago-knowledge.org/resource/Jerónimo_Saavedra
 Kivutha Kibwana	http://yago-knowledge.org/resource/Kivutha_Kibwana
-Sirajuddin Haqqani	http://yago-knowledge.org/resource/Sirajuddin_Haqqani
+SirajÝin Haqqani	http://yago-knowledge.org/resource/SirajÝin_Haqqani
 Suez Cement	http://yago-knowledge.org/resource/Suez_Cement_SC
 Jennifer Rankine	http://yago-knowledge.org/resource/Jennifer_Rankine
-Pengiran Muda Mohamed Bolkiah	http://yago-knowledge.org/resource/Mohamed_Bolkiah,_Prince_of_Brunei
+Pengiran MÚ Mohamed Bolkiah	http://yago-knowledge.org/resource/Mohamed_Bolkiah,_Prince_of_Brunei
 Bank Sepah	http://yago-knowledge.org/resource/Bank_Sepah
 Giorgi Margvelashvili	http://yago-knowledge.org/resource/Giorgi_Margvelashvili
 Central Bank of Iceland	http://yago-knowledge.org/resource/Central_Bank_of_Iceland
@@ -3056,7 +3056,7 @@ Timothy Hauser	http://yago-knowledge.org/resource/Timothy_Hauser
 Shahid Hamid	http://yago-knowledge.org/resource/Shahid_Hamid
 Torild Skogsholm	http://yago-knowledge.org/resource/Torild_Skogsholm
 Revolutionary Struggle	http://yago-knowledge.org/resource/Revolutionary_Struggle
-Lucas Papademos	http://yago-knowledge.org/resource/Lucas_Papademos
+LÊs Papademos	http://yago-knowledge.org/resource/LÊs_Papademos
 House Financial Services Committee	http://yago-knowledge.org/resource/United_States_House_Committee_on_Financial_Services
 Haruko Obokata	http://yago-knowledge.org/resource/Haruko_Obokata
 Jorge Noguera Cotes	http://yago-knowledge.org/resource/Jorge_Noguera_Cotes
@@ -3082,7 +3082,7 @@ Brad Adams	http://yago-knowledge.org/resource/Brad_Adams
 Eugenio Hernández Flores	http://yago-knowledge.org/resource/Eugenio_Hernández_Flores
 Kyaw Win	http://yago-knowledge.org/resource/Kyaw_Win
 Reed Elsevier	http://yago-knowledge.org/resource/RELX
-Ljubco Georgievski	http://yago-knowledge.org/resource/Ljubčo_Georgievski
+Lj¼o Georgievski	http://yago-knowledge.org/resource/Ljubčo_Georgievski
 Muntasir Mamun	http://yago-knowledge.org/resource/Muntassir_Mamoon
 National Bank of Angola	http://yago-knowledge.org/resource/National_Bank_of_Angola
 Surayud Chulanont	http://yago-knowledge.org/resource/Surayud_Chulanont
@@ -3174,7 +3174,7 @@ Jóannes Eidesgaard	http://yago-knowledge.org/resource/Jóannes_Eidesgaard
 Rory O'Hanlon	http://yago-knowledge.org/resource/Rory_O'Hanlon
 Martinique	http://yago-knowledge.org/resource/Martinique
 Solange Pierre	http://yago-knowledge.org/resource/Sonia_Pierre
-Abubacarr Tambadou	http://yago-knowledge.org/resource/Ba_Tambadou
+Ab뫊rr Tambadou	http://yago-knowledge.org/resource/Ba_Tambadou
 National Bank of Ethiopia	http://yago-knowledge.org/resource/National_Bank_of_Ethiopia
 Mohamed Bangura	http://yago-knowledge.org/resource/Mohamed_Bangura
 Igor Levitin	http://yago-knowledge.org/resource/Igor_Levitin
@@ -3187,7 +3187,7 @@ Faizullah Khan	http://yago-knowledge.org/resource/Faizullah_Khan
 Tamil Tigers	http://yago-knowledge.org/resource/Liberation_Tigers_of_Tamil_Eelam
 Nicaraguan National Police	http://yago-knowledge.org/resource/National_Police_of_Nicaragua
 Jack Guy Lafontant	http://yago-knowledge.org/resource/Jack_Guy_Lafontant
-Suzanne Mubarak	http://yago-knowledge.org/resource/Suzanne_Mubarak
+Suzanne Mºrak	http://yago-knowledge.org/resource/Suzanne_Mºrak
 Marcolino Moco	http://yago-knowledge.org/resource/Marcolino_Moco
 Allen Chastanet	http://yago-knowledge.org/resource/Allen_Chastanet
 Iyi Party	http://yago-knowledge.org/resource/İyi_Party
@@ -3202,7 +3202,7 @@ Cláudio Lembo	http://yago-knowledge.org/resource/Cláudio_Lembo
 Didier Opertti	http://yago-knowledge.org/resource/Didier_Opertti
 Vladimir Konstantinov	http://yago-knowledge.org/resource/Vladimir_Konstantinov
 Adriana Delpiano	http://yago-knowledge.org/resource/Adriana_Delpiano
-Agudat Yisrael	http://yago-knowledge.org/resource/Agudat_Yisrael
+AgÚt Yisrael	http://yago-knowledge.org/resource/AgÚt_Yisrael
 Arpad Goncz	http://yago-knowledge.org/resource/Árpád_Göncz
 Nicole Bricq	http://yago-knowledge.org/resource/Nicole_Bricq
 Abdo Hussameddin	http://yago-knowledge.org/resource/Abdo_Hussameddin
@@ -3211,7 +3211,7 @@ Jayanthi Natarajan	http://yago-knowledge.org/resource/Jayanthi_Natarajan
 Joseph Philip Robert Murray	http://yago-knowledge.org/resource/Joseph_Philip_Robert_Murray
 Clifford Hart	http://yago-knowledge.org/resource/Clifford_Hart
 Gilbert Ondongo	http://yago-knowledge.org/resource/Gilbert_Ondongo
-Yazid Sufaat	http://yago-knowledge.org/resource/Yazid_Sufaat
+Yazid Sྪt	http://yago-knowledge.org/resource/Yazid_Sྪt
 Aerospace Industries Association	http://yago-knowledge.org/resource/Aerospace_Industries_Association
 John McCallum	http://yago-knowledge.org/resource/John_McCallum
 David Maynier	http://yago-knowledge.org/resource/David_Maynier
@@ -3220,7 +3220,7 @@ OTP Bank	http://yago-knowledge.org/resource/OTP_Bank
 Apostolos Kaklamanis	http://yago-knowledge.org/resource/Apostolos_Kaklamanis
 Osama Krayem	http://yago-knowledge.org/resource/Osama_Krayem
 Ravi Karunanayake	http://yago-knowledge.org/resource/Ravi_Karunanayake
-Pope Shenouda III	http://yago-knowledge.org/resource/Pope_Shenouda_III_of_Alexandria
+Pope ShenoÚ III	http://yago-knowledge.org/resource/Pope_ShenoÚ_III_of_Alexandria
 Joseph Kignoumbi Kia Mboungou	http://yago-knowledge.org/resource/Joseph_Kignoumbi_Kia_Mboungou
 Fred Upton	http://yago-knowledge.org/resource/Fred_Upton
 Congo-Ocean Railway	http://yago-knowledge.org/resource/Congo–Ocean_Railway
@@ -3287,7 +3287,7 @@ Julius Nyerere	http://yago-knowledge.org/resource/Julius_Nyerere
 Commonwealth Secretariat	http://yago-knowledge.org/resource/Commonwealth_Secretariat
 Truong Chinh	http://yago-knowledge.org/resource/Trường_Chinh
 Hamid Reza Assefi	http://yago-knowledge.org/resource/Hamid-Reza_Assefi
-UAE Navy	http://yago-knowledge.org/resource/United_Arab_Emirates_Navy
+® Navy	http://yago-knowledge.org/resource/United_Arab_Emirates_Navy
 CORFO	http://yago-knowledge.org/resource/CORFO
 Nguyen Tuong Van	http://yago-knowledge.org/resource/Van_Tuong_Nguyen
 Angela Kane	http://yago-knowledge.org/resource/Angela_Kane
@@ -3447,11 +3447,11 @@ Gjorge Ivanov	http://yago-knowledge.org/resource/Gjorge_Ivanov
 Toomas Savi	http://yago-knowledge.org/resource/Toomas_Savi
 International Committee of the Red Cross	http://yago-knowledge.org/resource/International_Committee_of_the_Red_Cross
 Maria Cino	http://yago-knowledge.org/resource/Maria_Cino
-Abubakar Shekau	http://yago-knowledge.org/resource/Abubakar_Shekau
+Abºkar Shekau	http://yago-knowledge.org/resource/Abºkar_Shekau
 Greenland	http://yago-knowledge.org/resource/Greenland
 TV Azteca	http://yago-knowledge.org/resource/TV_Azteca
 Tihomir Blaškić	http://yago-knowledge.org/resource/Tihomir_Blaškić
-Fuad Khan	http://yago-knowledge.org/resource/Fuad_Khan
+F­ Khan	http://yago-knowledge.org/resource/F­_Khan
 Dassault	http://yago-knowledge.org/resource/Dassault_Group
 Kwesi Botchwey	http://yago-knowledge.org/resource/Kwesi_Botchwey
 Patricia Poleo	http://yago-knowledge.org/resource/Patricia_Poleo
@@ -3462,11 +3462,11 @@ Hormando Vaca Díez	http://yago-knowledge.org/resource/Hormando_Vaca_Diez
 Julio Cobos	http://yago-knowledge.org/resource/Julio_Cobos
 Anna Maria Cancellieri	http://yago-knowledge.org/resource/Annamaria_Cancellieri
 Dangote Group	http://yago-knowledge.org/resource/Dangote_Group
-Venkatasubbiah	http://yago-knowledge.org/resource/G._Venkatasubbiah
+Venkatas»iah	http://yago-knowledge.org/resource/G._Venkatas»iah
 Kisaburo Tokai	http://yago-knowledge.org/resource/Kisaburo_Tokai
 Vincent Biruta	http://yago-knowledge.org/resource/Vincent_Biruta
 Péter Balázs	http://yago-knowledge.org/resource/Péter_Balázs
-Sergei Udaltsov	http://yago-knowledge.org/resource/Sergei_Udaltsov
+Sergei Últsov	http://yago-knowledge.org/resource/Sergei_Últsov
 Carlos Soria	http://yago-knowledge.org/resource/Carlos_Soria
 Joe E. Kernan	http://yago-knowledge.org/resource/Joe_E._Kernan
 Melquíades Rafael Martínez	http://yago-knowledge.org/resource/Mel_Martínez
@@ -3517,7 +3517,7 @@ Josée Verner	http://yago-knowledge.org/resource/Josée_Verner
 Canadian Forces Land Force Command	http://yago-knowledge.org/resource/Canadian_Army
 Eric Hoskins	http://yago-knowledge.org/resource/Eric_Hoskins
 Chrysler	http://yago-knowledge.org/resource/Chrysler
-Gerard Kango Ouedraogo	http://yago-knowledge.org/resource/Gérard_Kango_Ouédraogo
+Gerard Kango Oíraogo	http://yago-knowledge.org/resource/Gérard_Kango_Ouédraogo
 Vladimir Padrino Lopez	http://yago-knowledge.org/resource/Vladimir_Padrino_López
 Anel Townsend	http://yago-knowledge.org/resource/Anel_Townsend
 Cristina Fernández de Kirchner	http://yago-knowledge.org/resource/Cristina_Fernández_de_Kirchner
@@ -3536,7 +3536,7 @@ Ri Sol Ju	http://yago-knowledge.org/resource/Ri_Sol-ju
 Dalia Dorner	http://yago-knowledge.org/resource/Dalia_Dorner
 East Turkistan Islamic Movement	http://yago-knowledge.org/resource/Turkistan_Islamic_Party
 Glatfelter	http://yago-knowledge.org/resource/Glatfelter
-Boubacar Barry	http://yago-knowledge.org/resource/Boubacar_Barry
+Bo뫊r Barry	http://yago-knowledge.org/resource/Bo뫊r_Barry
 John Ebiye	http://yago-knowledge.org/resource/John_Ebiye
 Vlado Buckovski	http://yago-knowledge.org/resource/Vlado_Bučkovski
 Nouhad Machnouk	http://yago-knowledge.org/resource/Nohad_Machnouk
@@ -3595,7 +3595,7 @@ Level 3 Communications	http://yago-knowledge.org/resource/Level_3_Communications
 Population Action International	http://yago-knowledge.org/resource/Population_Action_International
 Federica Mogherini	http://yago-knowledge.org/resource/Federica_Mogherini
 Hans Tietmeyer	http://yago-knowledge.org/resource/Hans_Tietmeyer
-Queen Aishwarya	http://yago-knowledge.org/resource/Queen_Aishwarya_of_Nepal
+Qîn Aishwarya	http://yago-knowledge.org/resource/Qîn_Aishwarya_of_Nepal
 Rally of Democrats	http://yago-knowledge.org/resource/Rally_of_Democrats
 Gerrie Nel	http://yago-knowledge.org/resource/Gerrie_Nel
 Ghazi Kenaan	http://yago-knowledge.org/resource/Ghazi_Kanaan
@@ -3656,7 +3656,7 @@ Shin Dong-hyuk	http://yago-knowledge.org/resource/Shin_Dong-hyuk
 Idris Ibrahim Kuta	http://yago-knowledge.org/resource/Ibrahim_Kuta
 Dumiso Dabengwa	http://yago-knowledge.org/resource/Dumiso_Dabengwa
 Ranil Wickremasinghe	http://yago-knowledge.org/resource/Ranil_Wickremesinghe
-Daouda Malam Wanké	http://yago-knowledge.org/resource/Daouda_Malam_Wanké
+DaoÚ Malam Wanké	http://yago-knowledge.org/resource/DaoÚ_Malam_Wanké
 Magma Design Automation	http://yago-knowledge.org/resource/Magma_Design_Automation
 Bhabha Atomic Research Center	http://yago-knowledge.org/resource/Bhabha_Atomic_Research_Centre
 Don Pramudwinai	http://yago-knowledge.org/resource/Don_Pramudwinai
@@ -3692,7 +3692,7 @@ Akif Hamzaçebi	http://yago-knowledge.org/resource/Akif_Hamzaçebi
 Lutfozzaman Babar	http://yago-knowledge.org/resource/Lutfozzaman_Babar
 Nehru University	http://yago-knowledge.org/resource/Jawaharlal_Nehru_University
 High Commission for Refugees	http://yago-knowledge.org/resource/United_Nations_High_Commissioner_for_Refugees
-Salahuddin Rabbani	http://yago-knowledge.org/resource/Salahuddin_Rabbani
+SalahÝin Rabbani	http://yago-knowledge.org/resource/SalahÝin_Rabbani
 Christos Verelis	http://yago-knowledge.org/resource/Christos_Verelis
 Mengistu Haile Mariam	http://yago-knowledge.org/resource/Mengistu_Haile_Mariam
 Union of the Forces of Progress	http://yago-knowledge.org/resource/Union_of_the_Forces_of_Progress
@@ -3772,7 +3772,7 @@ National Endowment for Democracy	http://yago-knowledge.org/resource/National_End
 Party for Democratic Renewal	http://yago-knowledge.org/resource/Movement_for_Democratic_Renewal_and_Development
 International Medical Corps	http://yago-knowledge.org/resource/International_Medical_Corps
 Alexa McDonough	http://yago-knowledge.org/resource/Alexa_McDonough
-Gyude Bryant	http://yago-knowledge.org/resource/Gyude_Bryant
+GyÞ Bryant	http://yago-knowledge.org/resource/GyÞ_Bryant
 James Baker	http://yago-knowledge.org/resource/James_Baker
 Joao Bernardo Vieira	http://yago-knowledge.org/resource/João_Bernardo_Vieira
 Bahia Hariri	http://yago-knowledge.org/resource/Bahia_Hariri
@@ -3787,7 +3787,7 @@ Mario Matthew Cuomo	http://yago-knowledge.org/resource/Mario_Cuomo
 John J. Duncan, Jr.	http://yago-knowledge.org/resource/Jimmy_Duncan_(politician)
 Luan Rama	http://yago-knowledge.org/resource/Luan_Rama
 Democratic Constitutional Rally	http://yago-knowledge.org/resource/Democratic_Constitutional_Rally
-Taoufik Bouachrine	http://yago-knowledge.org/resource/Taoufik_Bouachrine
+Taoufik Bo¬hrine	http://yago-knowledge.org/resource/Taoufik_Bo¬hrine
 Alonso Lujambio	http://yago-knowledge.org/resource/Alonso_Lujambio
 Neritan Ceka	http://yago-knowledge.org/resource/Neritan_Ceka
 Senate of Spain	http://yago-knowledge.org/resource/Senate_of_Spain
@@ -3808,7 +3808,7 @@ All Nigeria Peoples Party	http://yago-knowledge.org/resource/All_Nigeria_Peoples
 Al-Badr	http://yago-knowledge.org/resource/Al-Badr
 Nation Media Group	http://yago-knowledge.org/resource/Nation_Media_Group
 Eduardo Bhatia	http://yago-knowledge.org/resource/Eduardo_Bhatia
-The Juba Post	http://yago-knowledge.org/resource/The_Juba_Post
+The Jº Post	http://yago-knowledge.org/resource/The_Jº_Post
 Mukunda Neupane	http://yago-knowledge.org/resource/Mukunda_Neupane
 John W. Warner	http://yago-knowledge.org/resource/John_Warner
 Vaughan Lewis	http://yago-knowledge.org/resource/Vaughan_Lewis
@@ -3858,7 +3858,7 @@ Teodoro Ribera	http://yago-knowledge.org/resource/Teodoro_Ribera
 Alberto Sileoni	http://yago-knowledge.org/resource/Alberto_Sileoni
 Sibusiso Moyo	http://yago-knowledge.org/resource/Sibusiso_Moyo
 Turkey	http://yago-knowledge.org/resource/Turkey
-Tobaiwa Mudede	http://yago-knowledge.org/resource/Tobaiwa_Mudede
+Tobaiwa M	http://yago-knowledge.org/resource/Tobaiwa_M
 Alun Michael	http://yago-knowledge.org/resource/Alun_Michael
 Farouk El Okdah	http://yago-knowledge.org/resource/Farouk_El_Okdah
 Siddique Khan Kanju	http://yago-knowledge.org/resource/Siddiq_Khan_Kanju
@@ -3926,14 +3926,14 @@ Fawzi Salloukh	http://yago-knowledge.org/resource/Fawzi_Salloukh
 Chuan Leekpai	http://yago-knowledge.org/resource/Chuan_Leekpai
 Alioune Sarr	http://yago-knowledge.org/resource/Alioune_Sarr
 Philippos Sachinidis	http://yago-knowledge.org/resource/Filippos_Sachinidis
-Hubert Nyanhongo	http://yago-knowledge.org/resource/Hubert_Nyanhongo
+H¾rt Nyanhongo	http://yago-knowledge.org/resource/H¾rt_Nyanhongo
 Vartan Oskanian	http://yago-knowledge.org/resource/Vartan_Oskanian
 Institute of Southeast Asian Studies	http://yago-knowledge.org/resource/ISEAS–Yusof_Ishak_Institute
 Iiro Viinanen	http://yago-knowledge.org/resource/Iiro_Viinanen
 Amgen Inc.	http://yago-knowledge.org/resource/Amgen
 Sumitomo Mitsui	http://yago-knowledge.org/resource/Sumitomo_Mitsui_Banking_Corporation
 Ndolo Airport	http://yago-knowledge.org/resource/N'Dolo_Airport
-Construcciones y Auxiliar de Ferrocarriles	http://yago-knowledge.org/resource/Construcciones_y_Auxiliar_de_Ferrocarriles
+ConstrÌiones y Auxiliar de Ferrocarriles	http://yago-knowledge.org/resource/ConstrÌiones_y_Auxiliar_de_Ferrocarriles
 Michael Bimha	http://yago-knowledge.org/resource/Michael_Bimha
 TD Bank	http://yago-knowledge.org/resource/Toronto-Dominion_Bank
 Hery Rajaonarimampianina	http://yago-knowledge.org/resource/Hery_Rajaonarimampianina
@@ -3983,7 +3983,7 @@ Abdul Serry-Kamal	http://yago-knowledge.org/resource/Abdul_Serry-Kamal
 Cayo Galindo	http://yago-knowledge.org/resource/Cayo_Galindo
 Sayyid Ali al-Husayni al-Sistani	http://yago-knowledge.org/resource/Ali_al-Sistani
 Howard L. Berman	http://yago-knowledge.org/resource/Howard_Berman
-R. Glenn Hubbard	http://yago-knowledge.org/resource/Glenn_Hubbard_(economist)
+R. Glenn H஺rd	http://yago-knowledge.org/resource/Glenn_H஺rd_(economist)
 Union Pacific	http://yago-knowledge.org/resource/Union_Pacific_Railroad
 Shelley Moore Capito	http://yago-knowledge.org/resource/Shelley_Moore_Capito
 Habibullah Jan	http://yago-knowledge.org/resource/Habibullah_Jan
@@ -4007,8 +4007,8 @@ Suheir Atassi	http://yago-knowledge.org/resource/Suheir_Atassi
 M.K. Narayanan	http://yago-knowledge.org/resource/M._K._Narayanan
 Raushan Ershad	http://yago-knowledge.org/resource/Rowshan_Ershad
 Nikolay Mladenov	http://yago-knowledge.org/resource/Nickolay_Mladenov
-Guan Youfei	http://yago-knowledge.org/resource/Guan_Youfei
-Sudanese Communist Party	http://yago-knowledge.org/resource/Sudanese_Communist_Party
+Guan Yoþi	http://yago-knowledge.org/resource/Guan_Yoþi
+SÚnese Communist Party	http://yago-knowledge.org/resource/SÚnese_Communist_Party
 Hussein Majali	http://yago-knowledge.org/resource/Hussein_Majali
 Sinan Hasani	http://yago-knowledge.org/resource/Sinan_Hasani
 Pierre Werner	http://yago-knowledge.org/resource/Pierre_Werner
@@ -4033,7 +4033,7 @@ Annette Schavan	http://yago-knowledge.org/resource/Annette_Schavan
 Alva Baptiste	http://yago-knowledge.org/resource/Alva_Baptiste
 György Matolcsy	http://yago-knowledge.org/resource/György_Matolcsy
 Haider Al-Abadi	http://yago-knowledge.org/resource/Haider_al-Abadi
-The Global Fund to Fight AIDS, Tuberculosis and Malaria	http://yago-knowledge.org/resource/The_Global_Fund_to_Fight_AIDS,_Tuberculosis_and_Malaria
+The Global Fund to Fight AIDS, T¾rculosis and Malaria	http://yago-knowledge.org/resource/The_Global_Fund_to_Fight_AIDS,_T¾rculosis_and_Malaria
 Mihai Stanisoara	http://yago-knowledge.org/resource/Mihai_Stănișoară
 Lidia Yermoshina	http://yago-knowledge.org/resource/Lidia_Yermoshina
 Derog Gioura	http://yago-knowledge.org/resource/Derog_Gioura
@@ -4125,7 +4125,7 @@ Alfred Gomolka	http://yago-knowledge.org/resource/Alfred_Gomolka
 UniCredit	http://yago-knowledge.org/resource/UniCredit
 Clover Moore	http://yago-knowledge.org/resource/Clover_Moore
 Choe Yong Rim	http://yago-knowledge.org/resource/Choe_Yong-rim
-Raghubar Das	http://yago-knowledge.org/resource/Raghubar_Das
+Raghºr Das	http://yago-knowledge.org/resource/Raghºr_Das
 Moti Almoz	http://yago-knowledge.org/resource/Moti_Almoz
 Abdul Rahim Wardak	http://yago-knowledge.org/resource/Abdul_Rahim_Wardak
 Chikez Diemu	http://yago-knowledge.org/resource/Chikez_Diemu
@@ -4313,8 +4313,8 @@ General Motors	http://yago-knowledge.org/resource/General_Motors
 Central Electoral Commission of Russia	http://yago-knowledge.org/resource/Central_Election_Commission_of_the_Russian_Federation
 Pedro Brolo	http://yago-knowledge.org/resource/Pedro_Brolo
 Jair Bolsonaro	http://yago-knowledge.org/resource/Jair_Bolsonaro
-Ramesh Dube	http://yago-knowledge.org/resource/Ramesh_Dube
-Thomas C. Hubbard	http://yago-knowledge.org/resource/Thomas_C._Hubbard
+Ramesh D¾	http://yago-knowledge.org/resource/Ramesh_D¾
+Thomas C. H஺rd	http://yago-knowledge.org/resource/Thomas_C._H஺rd
 Commerzbank	http://yago-knowledge.org/resource/Commerzbank
 Franz Fischler	http://yago-knowledge.org/resource/Franz_Fischler
 Mireya Moscoso	http://yago-knowledge.org/resource/Mireya_Moscoso
@@ -4353,7 +4353,7 @@ Lithuanian Air Force	http://yago-knowledge.org/resource/Lithuanian_Air_Force
 Miguel Ángel Rodríguez	http://yago-knowledge.org/resource/Miguel_Ángel_Rodríguez
 Ho Ching	http://yago-knowledge.org/resource/Ho_Ching
 José Eduardo de Barros Dutra	http://yago-knowledge.org/resource/José_Eduardo_Dutra
-United Nations Educational, Scientific and Cultural Organization	http://yago-knowledge.org/resource/UNESCO
+United Nations EdÊtional, Scientific and Cultural Organization	http://yago-knowledge.org/resource/UNESCO
 Partner Communications Company	http://yago-knowledge.org/resource/Partner_Communications_Company
 Ahmed Ould Daddah	http://yago-knowledge.org/resource/Ahmed_Ould_Daddah
 Michael Ogio	http://yago-knowledge.org/resource/Michael_Ogio
@@ -4373,7 +4373,7 @@ Cumulus Media Inc.	http://yago-knowledge.org/resource/Cumulus_Media
 Oleg Bebenin	http://yago-knowledge.org/resource/Aleh_Byabenin
 Muhammad Ali Samatar	http://yago-knowledge.org/resource/Mohammad_Ali_Samatar
 Ajit Doval	http://yago-knowledge.org/resource/Ajit_Doval
-Budapest Ferenc Liszt International Airport	http://yago-knowledge.org/resource/Budapest_Ferenc_Liszt_International_Airport
+BÚpest Ferenc Liszt International Airport	http://yago-knowledge.org/resource/BÚpest_Ferenc_Liszt_International_Airport
 Tomasi Puapua	http://yago-knowledge.org/resource/Tomasi_Puapua
 Frank Murkowski	http://yago-knowledge.org/resource/Frank_Murkowski
 Jay Warren	http://yago-knowledge.org/resource/Jay_Warren
@@ -4423,7 +4423,7 @@ Zeina Akar	http://yago-knowledge.org/resource/Zeina_Akar
 Ramon Guillermo Aveledo	http://yago-knowledge.org/resource/Ramón_Guillermo_Aveledo
 Patricia M. Haslach	http://yago-knowledge.org/resource/Patricia_M._Haslach
 Socialist Party of Ukraine	http://yago-knowledge.org/resource/Socialist_Party_of_Ukraine
-Lukman Hakim Saifuddin	http://yago-knowledge.org/resource/Lukman_Hakim_Saifuddin
+Lukman Hakim SaifÝin	http://yago-knowledge.org/resource/Lukman_Hakim_SaifÝin
 Ebrahim Rasool	http://yago-knowledge.org/resource/Ebrahim_Rasool
 Union for French Democracy	http://yago-knowledge.org/resource/Union_for_French_Democracy
 Baldo Prokurica	http://yago-knowledge.org/resource/Baldo_Prokurica
@@ -4498,7 +4498,7 @@ Masumeh Ebtekar	http://yago-knowledge.org/resource/Masoumeh_Ebtekar
 Kamil Jankovský	http://yago-knowledge.org/resource/Kamil_Jankovský
 Shirley Ayorkor Botchway	http://yago-knowledge.org/resource/Shirley_Ayorkor_Botchway
 Malteser International	http://yago-knowledge.org/resource/Malteser_International
-University of Queensland	http://yago-knowledge.org/resource/University_of_Queensland
+University of Qînsland	http://yago-knowledge.org/resource/University_of_Qînsland
 Artis Pabriks	http://yago-knowledge.org/resource/Artis_Pabriks
 Betty Ogwaro	http://yago-knowledge.org/resource/Betty_Ogwaro
 Change 90	http://yago-knowledge.org/resource/Cambio_90
@@ -4545,7 +4545,7 @@ Ibrahima Moctar Sarr	http://yago-knowledge.org/resource/Ibrahima_Sarr
 Mahamoud Ali Youssouf	http://yago-knowledge.org/resource/Mahamoud_Ali_Youssouf
 Jochen Borchert	http://yago-knowledge.org/resource/Jochen_Borchert
 Christina Romer	http://yago-knowledge.org/resource/Christina_Romer
-Mark Udall	http://yago-knowledge.org/resource/Mark_Udall
+Mark Úll	http://yago-knowledge.org/resource/Mark_Úll
 Hussein Badreddin al-Houthi	http://yago-knowledge.org/resource/Hussein_Badreddin_al-Houthi
 Bob Filner	http://yago-knowledge.org/resource/Bob_Filner
 Robert Reich	http://yago-knowledge.org/resource/Robert_Reich
@@ -4572,7 +4572,7 @@ Syarhey Sidorski	http://yago-knowledge.org/resource/Sergei_Sidorsky
 Ayesha Gulalai	http://yago-knowledge.org/resource/Ayesha_Gulalai_Wazir
 Heidi Heitkamp	http://yago-knowledge.org/resource/Heidi_Heitkamp
 Sam Johnson	http://yago-knowledge.org/resource/Sam_Johnson
-Wajihuddin Ahmed	http://yago-knowledge.org/resource/Wajihuddin_Ahmed
+WajihÝin Ahmed	http://yago-knowledge.org/resource/WajihÝin_Ahmed
 Teodoro Nguema Obiang Mangue	http://yago-knowledge.org/resource/Teodoro_Nguema_Obiang_Mangue
 Samuel Mumbengegwi	http://yago-knowledge.org/resource/Samuel_Mumbengegwi
 Senate of Nigeria	http://yago-knowledge.org/resource/Senate_of_Nigeria
@@ -4595,7 +4595,7 @@ Haren Pandya	http://yago-knowledge.org/resource/Haren_Pandya
 Aleksandar Jablanovic	http://yago-knowledge.org/resource/Aleksandar_Jablanović
 Heydar Aliyev International Airport	http://yago-knowledge.org/resource/Heydar_Aliyev_International_Airport
 Gol Linhas Aereas Inteligentes	http://yago-knowledge.org/resource/Gol_Transportes_Aéreos
-Anatoly Borisovich Chubais	http://yago-knowledge.org/resource/Anatoly_Chubais
+Anatoly Borisovich Chºis	http://yago-knowledge.org/resource/Anatoly_Chºis
 Kamla Persad-Bissessar	http://yago-knowledge.org/resource/Kamla_Persad-Bissessar
 Defense Industries Organization	http://yago-knowledge.org/resource/Defense_Industries_Organization
 Beja Congress	http://yago-knowledge.org/resource/Beja_Congress
@@ -4641,8 +4641,8 @@ Ali Roba	http://yago-knowledge.org/resource/Ali_Roba
 Rockefeller Foundation	http://yago-knowledge.org/resource/Rockefeller_Foundation
 Mario Das Neves	http://yago-knowledge.org/resource/Mario_das_Neves
 Abdullahi Adamu	http://yago-knowledge.org/resource/Abdullahi_Adamu
-Francis Nepomuceno Pangilinan	http://yago-knowledge.org/resource/Francis_Pangilinan
-Bermuda Police Service	http://yago-knowledge.org/resource/Bermuda_Police_Service
+Francis NepomÎno Pangilinan	http://yago-knowledge.org/resource/Francis_Pangilinan
+BermÚ Police Service	http://yago-knowledge.org/resource/BermÚ_Police_Service
 Jasmer Singh	http://yago-knowledge.org/resource/Jasmer_Singh
 Leopoldo Cintra Frías	http://yago-knowledge.org/resource/Leopoldo_Cintra_Frías
 Domingo Maza Zavala	http://yago-knowledge.org/resource/Domingo_Maza_Zavala
@@ -4651,7 +4651,7 @@ Luc Chatel	http://yago-knowledge.org/resource/Luc_Chatel
 George V. Voinovich	http://yago-knowledge.org/resource/George_Voinovich
 Syed Mehdi Shah	http://yago-knowledge.org/resource/Syed_Mehdi_Shah
 Prakash Javadekar	http://yago-knowledge.org/resource/Prakash_Javadekar
-Caucasus Emirate	http://yago-knowledge.org/resource/Caucasus_Emirate
+CaÊsus Emirate	http://yago-knowledge.org/resource/CaÊsus_Emirate
 Shanduka Group	http://yago-knowledge.org/resource/Shanduka_Group
 Lawrence Springborg	http://yago-knowledge.org/resource/Lawrence_Springborg
 Audrius Butkevičius	http://yago-knowledge.org/resource/Audrius_Butkevičius
@@ -4660,7 +4660,7 @@ Karunanidhi	http://yago-knowledge.org/resource/M._Karunanidhi
 Donald Etiebet	http://yago-knowledge.org/resource/Donald_Etiebet
 Albert Pintat Santolària	http://yago-knowledge.org/resource/Albert_Pintat
 Nguza Karl-I-Bond	http://yago-knowledge.org/resource/Jean_Nguza_Karl-i-Bond
-A.B.M. Mohiuddin Chowdhury	http://yago-knowledge.org/resource/A._B._M._Mohiuddin_Chowdhury
+A.B.M. MohiÝin Chowdhury	http://yago-knowledge.org/resource/A._B._M._MohiÝin_Chowdhury
 Tim Holden	http://yago-knowledge.org/resource/Tim_Holden
 Isaías Duarte Cancino	http://yago-knowledge.org/resource/Isaías_Duarte_Cancino
 Helena Demakova	http://yago-knowledge.org/resource/Helēna_Demakova
@@ -4668,7 +4668,7 @@ Antara News Agency	http://yago-knowledge.org/resource/Antara_(news_agency)
 Prayuth Chan-ocha	http://yago-knowledge.org/resource/Prayut_Chan-o-cha
 Jonas Savimbi	http://yago-knowledge.org/resource/Jonas_Savimbi
 Abdou Diouf	http://yago-knowledge.org/resource/Abdou_Diouf
-North Caucasus Military District	http://yago-knowledge.org/resource/North_Caucasus_Military_District
+North CaÊsus Military District	http://yago-knowledge.org/resource/North_CaÊsus_Military_District
 Cellou Dalein Diallo	http://yago-knowledge.org/resource/Cellou_Dalein_Diallo
 Occidental Petroleum	http://yago-knowledge.org/resource/Occidental_Petroleum
 Frédéric Bamvuginyumvira	http://yago-knowledge.org/resource/Frédéric_Bamvuginyumvira
@@ -4707,7 +4707,7 @@ Niue	http://yago-knowledge.org/resource/Niue
 Kem Sokha	http://yago-knowledge.org/resource/Kem_Sokha
 Shivraj Patil	http://yago-knowledge.org/resource/Shivraj_Patil
 Naftali Bennett	http://yago-knowledge.org/resource/Naftali_Bennett
-Hubert Weber	http://yago-knowledge.org/resource/Hubert_Weber
+H¾rt Weber	http://yago-knowledge.org/resource/H¾rt_Weber
 Barjees Tahir	http://yago-knowledge.org/resource/Barjees_Tahir
 Mauricio Domogan	http://yago-knowledge.org/resource/Mauricio_Domogan
 Eduardo R. Ermita	http://yago-knowledge.org/resource/Eduardo_Ermita
@@ -4734,7 +4734,7 @@ Katri Kulmuni	http://yago-knowledge.org/resource/Katri_Kulmuni
 Bansi Lal	http://yago-knowledge.org/resource/Bansi_Lal
 Toshimitsu Motegi	http://yago-knowledge.org/resource/Toshimitsu_Motegi
 French Academy	http://yago-knowledge.org/resource/Académie_française
-Subcomandante Marcos	http://yago-knowledge.org/resource/Subcomandante_Marcos
+S¼omandante Marcos	http://yago-knowledge.org/resource/S¼omandante_Marcos
 Ömer Kalyoncu	http://yago-knowledge.org/resource/Ömer_Kalyoncu
 Gabonese Democratic Party	http://yago-knowledge.org/resource/Gabonese_Democratic_Party
 Daniel Giacomino	http://yago-knowledge.org/resource/Daniel_Giacomino
@@ -4815,7 +4815,7 @@ Oleksandr Moroz	http://yago-knowledge.org/resource/Oleksandr_Moroz
 Eberhard van der Laan	http://yago-knowledge.org/resource/Eberhard_van_der_Laan
 Pierre Gramegna	http://yago-knowledge.org/resource/Pierre_Gramegna
 Speedway Motorsports	http://yago-knowledge.org/resource/Speedway_Motorsports
-Jean-Claude Gayssot	http://yago-knowledge.org/resource/Jean-Claude_Gayssot
+Jean-ClaÞ Gayssot	http://yago-knowledge.org/resource/Jean-ClaÞ_Gayssot
 Ali Rabiei	http://yago-knowledge.org/resource/Ali_Rabiei
 Juan N. Babauta	http://yago-knowledge.org/resource/Juan_Babauta
 International Paper Company	http://yago-knowledge.org/resource/International_Paper
@@ -4888,7 +4888,7 @@ House Appropriations Committee	http://yago-knowledge.org/resource/United_States_
 Charles Clarke	http://yago-knowledge.org/resource/Charles_Clarke
 National Democratic Action	http://yago-knowledge.org/resource/National_Democratic_Action_Society
 Bolivia	http://yago-knowledge.org/resource/Bolivia
-Lyuben Berov	http://yago-knowledge.org/resource/Lyuben_Berov
+Ly¾n Berov	http://yago-knowledge.org/resource/Ly¾n_Berov
 Wang Zhaoguo	http://yago-knowledge.org/resource/Wang_Zhaoguo
 Kwesi Amissah-Arthur	http://yago-knowledge.org/resource/Kwesi_Amissah-Arthur
 Mohammad Ibrahim al-Shaar	http://yago-knowledge.org/resource/Mohammad_al-Shaar
@@ -4937,7 +4937,7 @@ Agathon Rwasa	http://yago-knowledge.org/resource/Agathon_Rwasa
 Ezra Suruma	http://yago-knowledge.org/resource/Ezra_Suruma
 Isaias Afewerki	http://yago-knowledge.org/resource/Isaias_Afwerki
 Armstrong World Industries	http://yago-knowledge.org/resource/Armstrong_World_Industries
-Claudette Bradshaw	http://yago-knowledge.org/resource/Claudette_Bradshaw
+ClaÞtte Bradshaw	http://yago-knowledge.org/resource/ClaÞtte_Bradshaw
 Mohammad Javad Zarif	http://yago-knowledge.org/resource/Mohammad_Javad_Zarif
 Stockwell Burt Day	http://yago-knowledge.org/resource/Stockwell_Day
 Attica Bank	http://yago-knowledge.org/resource/Attica_Bank
@@ -5060,7 +5060,7 @@ Ajay Rai	http://yago-knowledge.org/resource/Ajay_Rai
 Radovan Žerjav	http://yago-knowledge.org/resource/Radovan_Žerjav
 Aminata Mbengue Ndiaye	http://yago-knowledge.org/resource/Aminata_Mbengue_Ndiaye
 Óscar Berger Perdomo	http://yago-knowledge.org/resource/Óscar_Berger
-Sudan People's Liberation Movement	http://yago-knowledge.org/resource/Sudan_People's_Liberation_Movement
+SÚn People's Liberation Movement	http://yago-knowledge.org/resource/SÚn_People's_Liberation_Movement
 National Union for the Progress of Romania	http://yago-knowledge.org/resource/National_Union_for_the_Progress_of_Romania
 Abay Tsehaye	http://yago-knowledge.org/resource/Abay_Tsehaye
 National League for Democracy	http://yago-knowledge.org/resource/National_League_for_Democracy
@@ -5082,7 +5082,7 @@ Ford Foundation	http://yago-knowledge.org/resource/Ford_Foundation
 Jordan	http://yago-knowledge.org/resource/Jordan
 Moussa Koussa	http://yago-knowledge.org/resource/Moussa_Koussa
 Nik Aziz	http://yago-knowledge.org/resource/Nik_Abdul_Aziz_Nik_Mat
-Hosni Mubarak	http://yago-knowledge.org/resource/Hosni_Mubarak
+Hosni Mºrak	http://yago-knowledge.org/resource/Hosni_Mºrak
 Abdoulaye Idrissa Maïga	http://yago-knowledge.org/resource/Abdoulaye_Idrissa_Maïga
 Mike McIntyre	http://yago-knowledge.org/resource/Mike_McIntyre
 Sergey Gaplikov	http://yago-knowledge.org/resource/Sergey_Gaplikov
@@ -5114,7 +5114,7 @@ Andrija Mandić	http://yago-knowledge.org/resource/Andrija_Mandić
 Evans Kidero	http://yago-knowledge.org/resource/Evans_Kidero
 Robert M. Kimmitt	http://yago-knowledge.org/resource/Robert_M._Kimmitt
 Hilmi Güler	http://yago-knowledge.org/resource/Hilmi_Güler
-Sylvia Nagginda	http://yago-knowledge.org/resource/Queen_Sylvia_of_Buganda
+Sylvia Nagginda	http://yago-knowledge.org/resource/Qîn_Sylvia_of_Buganda
 Virginia Foxx	http://yago-knowledge.org/resource/Virginia_Foxx
 Artis Kampars	http://yago-knowledge.org/resource/Artis_Kampars
 Mao Chi-kuo	http://yago-knowledge.org/resource/Mao_Chi-kuo
@@ -5126,7 +5126,7 @@ Zoran Stanković	http://yago-knowledge.org/resource/Zoran_Stanković
 Sberbank	http://yago-knowledge.org/resource/Sberbank_of_Russia
 Caribbean Airlines Limited	http://yago-knowledge.org/resource/Caribbean_Airlines
 Liu Ning	http://yago-knowledge.org/resource/Liu_Ning
-Shamsudeen Usman	http://yago-knowledge.org/resource/Shamsuddeen_Usman
+Shams෮n Usman	http://yago-knowledge.org/resource/Shamsn_Usman
 Klaudia Tanner	http://yago-knowledge.org/resource/Klaudia_Tanner
 Reza Faraji-Dana	http://yago-knowledge.org/resource/Reza_Farajidana
 Daniel Vila	http://yago-knowledge.org/resource/Daniel_Vila
@@ -5134,7 +5134,7 @@ Archy Kirkwood	http://yago-knowledge.org/resource/Archy_Kirkwood
 Jose Maria Neves	http://yago-knowledge.org/resource/José_Maria_Neves
 Democrats for a Strong Bulgaria	http://yago-knowledge.org/resource/Democrats_for_a_Strong_Bulgaria
 Lol Mahamat Choua	http://yago-knowledge.org/resource/Lol_Mahamat_Choua
-Subaru	http://yago-knowledge.org/resource/Subaru
+Sºru	http://yago-knowledge.org/resource/Sºru
 Marcelo Ebrard	http://yago-knowledge.org/resource/Marcelo_Ebrard
 Kendrick B. Meek	http://yago-knowledge.org/resource/Kendrick_Meek
 Adolfo Scilingo	http://yago-knowledge.org/resource/Adolfo_Scilingo
@@ -5289,7 +5289,7 @@ Carlos Castaño Gil	http://yago-knowledge.org/resource/Carlos_Castaño_Gil
 UAL Corporation	http://yago-knowledge.org/resource/UAL_Corporation
 Mohamed Amin Osman	http://yago-knowledge.org/resource/Mohamed_Amin_Osman
 Iveta Grigule	http://yago-knowledge.org/resource/Iveta_Grigule-Pēterse
-88 Generation Students	http://yago-knowledge.org/resource/88_Generation_Students_Group
+88 Generation StÞnts	http://yago-knowledge.org/resource/88_Generation_StÞnts_Group
 Riek Machar	http://yago-knowledge.org/resource/Riek_Machar
 Martin Jahn	http://yago-knowledge.org/resource/Martin_Jahn
 Sam Sesay	http://yago-knowledge.org/resource/Sam_Sesay
@@ -5315,7 +5315,7 @@ Abia State University	http://yago-knowledge.org/resource/Abia_State_University
 Internal Revenue Service	http://yago-knowledge.org/resource/Internal_Revenue_Service
 Samir Kassir	http://yago-knowledge.org/resource/Samir_Kassir
 Man Mohan Adhikari	http://yago-knowledge.org/resource/Man_Mohan_Adhikari
-Claude Verlon	http://yago-knowledge.org/resource/Claude_Verlon
+ClaÞ Verlon	http://yago-knowledge.org/resource/ClaÞ_Verlon
 Biswamohan Debbarma	http://yago-knowledge.org/resource/Biswamohan_Debbarma
 Reserve Bank of Zimbabwe	http://yago-knowledge.org/resource/Reserve_Bank_of_Zimbabwe
 Mehdi Sanaei	http://yago-knowledge.org/resource/Mehdi_Sanaei
@@ -5343,7 +5343,7 @@ Wilfried Martens	http://yago-knowledge.org/resource/Wilfried_Martens
 Freedom Movement of Iran	http://yago-knowledge.org/resource/Freedom_Movement_of_Iran
 Dina Nath Sharma	http://yago-knowledge.org/resource/Dina_Nath_Sharma
 Woldai Futur	http://yago-knowledge.org/resource/Woldai_Futur
-Fakhruddin Ahmed	http://yago-knowledge.org/resource/Fakhruddin_Ahmed
+FakhrÝin Ahmed	http://yago-knowledge.org/resource/FakhrÝin_Ahmed
 Sherig-ool Oorzhak	http://yago-knowledge.org/resource/Sherig-ool_Oorzhak
 Thomas Jefferson	http://yago-knowledge.org/resource/Thomas_Jefferson
 Michel Suleiman	http://yago-knowledge.org/resource/Michel_Suleiman
@@ -5449,7 +5449,7 @@ Ze'ev Elkin	http://yago-knowledge.org/resource/Ze'ev_Elkin
 Sanoh Thienthong	http://yago-knowledge.org/resource/Sanoh_Thienthong
 Randy David	http://yago-knowledge.org/resource/Randy_David
 Anna Kachikho	http://yago-knowledge.org/resource/Anna_Kachikho
-Goodyear Tire	http://yago-knowledge.org/resource/Goodyear_Tire_and_Rubber_Company
+Goodyear Tire	http://yago-knowledge.org/resource/Goodyear_Tire_and_Rாr_Company
 Urmila Singh	http://yago-knowledge.org/resource/Urmila_Singh
 Ibikunle Amosun	http://yago-knowledge.org/resource/Ibikunle_Amosun
 Anri Jergenia	http://yago-knowledge.org/resource/Anri_Jergenia
@@ -5479,7 +5479,7 @@ Berkin Elvan	http://yago-knowledge.org/resource/Berkin_Elvan
 Carlos Westendorp	http://yago-knowledge.org/resource/Carlos_Westendorp
 Supreme Court of Liberia	http://yago-knowledge.org/resource/Supreme_Court_of_Liberia
 Annemie Turtelboom	http://yago-knowledge.org/resource/Annemie_Turtelboom
-Massouda Jalal	http://yago-knowledge.org/resource/Massouda_Jalal
+MassoÚ Jalal	http://yago-knowledge.org/resource/MassoÚ_Jalal
 Martin Fedor	http://yago-knowledge.org/resource/Martin_Fedor
 B.N. Kirpal	http://yago-knowledge.org/resource/Bhupinder_Nath_Kirpal
 Sir Anerood Jugnauth	http://yago-knowledge.org/resource/Anerood_Jugnauth
@@ -5688,7 +5688,7 @@ Timken Company	http://yago-knowledge.org/resource/Timken_Company
 Abed Bwanika	http://yago-knowledge.org/resource/Abed_Bwanika
 Conexant Systems	http://yago-knowledge.org/resource/Conexant
 Amangeldy Muraliyev	http://yago-knowledge.org/resource/Amangeldy_Muraliyev
-Charles Ble Goude	http://yago-knowledge.org/resource/Charles_Blé_Goudé
+Charles Ble GoÞ	http://yago-knowledge.org/resource/Charles_Blé_Goudé
 Markos Kyprianou	http://yago-knowledge.org/resource/Markos_Kyprianou
 Akie Abe	http://yago-knowledge.org/resource/Akie_Abe
 National University of Rwanda	http://yago-knowledge.org/resource/National_University_of_Rwanda
@@ -5743,7 +5743,7 @@ Andreas Papandreou	http://yago-knowledge.org/resource/Andreas_Papandreou
 ActionAid	http://yago-knowledge.org/resource/ActionAid
 Valero Energy	http://yago-knowledge.org/resource/Valero_Energy
 People's National Congress Reform	http://yago-knowledge.org/resource/People's_National_Congress_(Guyana)
-Academy for Educational Development	http://yago-knowledge.org/resource/AED_(non-profit)
+Academy for EdÊtional Development	http://yago-knowledge.org/resource/AED_(non-profit)
 Population Services International	http://yago-knowledge.org/resource/Population_Services_International
 Zoltán Pokorni	http://yago-knowledge.org/resource/Zoltán_Pokorni
 Daniel Aguilar	http://yago-knowledge.org/resource/Daniel_Aguilar
@@ -5754,7 +5754,7 @@ Andrew Gurr	http://yago-knowledge.org/resource/Andrew_Gurr
 Union of Leftists	http://yago-knowledge.org/resource/Union_of_Leftists
 Nur Hassan Hussein	http://yago-knowledge.org/resource/Nur_Hassan_Hussein
 Witold Waszczykowski	http://yago-knowledge.org/resource/Witold_Waszczykowski
-Fuad Mohamed Qalaf	http://yago-knowledge.org/resource/Fuad_Qalaf
+F­ Mohamed Qalaf	http://yago-knowledge.org/resource/F­_Qalaf
 Liberal Socialist Party	http://yago-knowledge.org/resource/Liberal_Socialist_Party_(Singapore)
 Federica Guidi	http://yago-knowledge.org/resource/Federica_Guidi
 George Osborne	http://yago-knowledge.org/resource/George_Osborne
@@ -5838,7 +5838,7 @@ Abdisamad Ali Shire	http://yago-knowledge.org/resource/Abdisamad_Ali_Shire
 Credit Agricole	http://yago-knowledge.org/resource/Crédit_Agricole
 Al Badr	http://yago-knowledge.org/resource/Al-Badr_(Jammu_and_Kashmir)
 Ali Abdul-Amir Allawi	http://yago-knowledge.org/resource/Ali_Allawi
-Anuruddha Ratwatte	http://yago-knowledge.org/resource/Anuruddha_Ratwatte
+AnurÝha Ratwatte	http://yago-knowledge.org/resource/AnurÝha_Ratwatte
 Emanuel Cleaver	http://yago-knowledge.org/resource/Emanuel_Cleaver
 Francis Ole Kaparo	http://yago-knowledge.org/resource/Francis_Ole_Kaparo
 Marta Larraechea	http://yago-knowledge.org/resource/Marta_Larraechea
@@ -5938,11 +5938,11 @@ Bernard Tchibambelela	http://yago-knowledge.org/resource/Bernard_Tchibambelela
 Audrey Brown	http://yago-knowledge.org/resource/Audrey_Brown
 József Hámori	http://yago-knowledge.org/resource/József_Hámori
 Megawati Sukarnoputri	http://yago-knowledge.org/resource/Megawati_Sukarnoputri
-Salama al-Khufaji	http://yago-knowledge.org/resource/Salama_al-Khufaji
+Salama al-Khúji	http://yago-knowledge.org/resource/Salama_al-Khúji
 Agim Çeku	http://yago-knowledge.org/resource/Agim_Çeku
 Sean Patrick O'Malley	http://yago-knowledge.org/resource/Seán_Patrick_O'Malley
 International Centre for Settlement of Investment Disputes	http://yago-knowledge.org/resource/International_Centre_for_Settlement_of_Investment_Disputes
-Pavel Gubarev	http://yago-knowledge.org/resource/Pavel_Gubarev
+Pavel Gºrev	http://yago-knowledge.org/resource/Pavel_Gºrev
 Mohammed Lawal	http://yago-knowledge.org/resource/Mohammed_Lawal
 United Fiji Party	http://yago-knowledge.org/resource/Soqosoqo_Duavata_ni_Lewenivanua
 Anifah Aman	http://yago-knowledge.org/resource/Anifah_Aman
@@ -6052,7 +6052,7 @@ José Napoleón Duarte	http://yago-knowledge.org/resource/José_Napoleón_Duarte
 Donald Ramotar	http://yago-knowledge.org/resource/Donald_Ramotar
 Norm Kelly	http://yago-knowledge.org/resource/Norm_Kelly
 MAFRA	http://yago-knowledge.org/resource/Mafra_(company)
-Jamil Mahuad	http://yago-knowledge.org/resource/Jamil_Mahuad
+Jamil Mah­	http://yago-knowledge.org/resource/Jamil_Mah­
 Yeni Şafak	http://yago-knowledge.org/resource/Yeni_Şafak
 Tejarat Bank	http://yago-knowledge.org/resource/Tejarat_Bank
 Khemaies Jhinaoui	http://yago-knowledge.org/resource/Khemaies_Jhinaoui
@@ -6146,7 +6146,7 @@ Gino Costa	http://yago-knowledge.org/resource/Gino_Costa
 Vijaya Reddy	http://yago-knowledge.org/resource/Vijay_(director)
 Gilbert Saboya Sunyé	http://yago-knowledge.org/resource/Gilbert_Saboya_Sunyé
 Maris Kucinskis	http://yago-knowledge.org/resource/Māris_Kučinskis
-Council of State of Cuba	http://yago-knowledge.org/resource/Council_of_State_(Cuba)
+Council of State of Cº	http://yago-knowledge.org/resource/Council_of_State_(Cº)
 Akira Amari	http://yago-knowledge.org/resource/Akira_Amari
 Peter Daka	http://yago-knowledge.org/resource/Peter_Daka
 Alexei Pushkov	http://yago-knowledge.org/resource/Aleksey_Pushkov
@@ -6297,7 +6297,7 @@ Arsène Tsaty-Boungou	http://yago-knowledge.org/resource/Arsène_Tsaty-Boungou
 Lin Junq-tzer	http://yago-knowledge.org/resource/Lin_Junq-tzer
 Micheline Calmy-Rey	http://yago-knowledge.org/resource/Micheline_Calmy-Rey
 Joel Villanueva	http://yago-knowledge.org/resource/Joel_Villanueva
-Dauda Sulaiman Kamara	http://yago-knowledge.org/resource/Dauda_Kamara
+DaÚ Sulaiman Kamara	http://yago-knowledge.org/resource/DaÚ_Kamara
 Deepa Mehta	http://yago-knowledge.org/resource/Deepa_Mehta
 State Street Corp	http://yago-knowledge.org/resource/State_Street_Corporation
 Amrit Bohara	http://yago-knowledge.org/resource/Amrit_Kumar_Bohara
@@ -6328,7 +6328,7 @@ Devinder Singh	http://yago-knowledge.org/resource/Davinder_Singh_(field_hockey)
 Vincent Bolloré	http://yago-knowledge.org/resource/Vincent_Bolloré
 Pablo Marin	http://yago-knowledge.org/resource/Pablo_Marin
 Greg Rickford	http://yago-knowledge.org/resource/Greg_Rickford
-South Sudan Liberation Movement	http://yago-knowledge.org/resource/South_Sudan_Liberation_Movement
+South SÚn Liberation Movement	http://yago-knowledge.org/resource/South_SÚn_Liberation_Movement
 Eric Garcetti	http://yago-knowledge.org/resource/Eric_Garcetti
 Hervé de Charette	http://yago-knowledge.org/resource/Hervé_de_Charette
 Ahmat Hassaballah Soubiane	http://yago-knowledge.org/resource/Ahmat_Hassaballah_Soubiane
@@ -6435,7 +6435,7 @@ Georgia Today	http://yago-knowledge.org/resource/Georgia_Today
 Abdullahi Umar Ganduje	http://yago-knowledge.org/resource/Abdullahi_Umar_Ganduje
 European Parliament	http://yago-knowledge.org/resource/European_Parliament
 Transocean Inc.	http://yago-knowledge.org/resource/Transocean
-Youssouf Ouedraogo	http://yago-knowledge.org/resource/Youssouf_Ouédraogo
+Youssouf Oíraogo	http://yago-knowledge.org/resource/Youssouf_Ouédraogo
 Todd Akin	http://yago-knowledge.org/resource/Todd_Akin
 Shiv Shankar Mukherjee	http://yago-knowledge.org/resource/Shiv_Shankar_Mukherjee
 Elly Tumwine	http://yago-knowledge.org/resource/Elly_Tumwine
@@ -6560,7 +6560,7 @@ Banco Económico	http://yago-knowledge.org/resource/Banco_Económico
 Bakhyt Sultanov	http://yago-knowledge.org/resource/Bakhyt_Sultanov
 Tewodros Adhanom	http://yago-knowledge.org/resource/Tedros_Adhanom
 Ilir Rusmali	http://yago-knowledge.org/resource/Ilir_Rusmali
-Jean-Claude Juncker	http://yago-knowledge.org/resource/Jean-Claude_Juncker
+Jean-ClaÞ Juncker	http://yago-knowledge.org/resource/Jean-ClaÞ_Juncker
 Gideon Mung'aro	http://yago-knowledge.org/resource/Gideon_Mung'aro
 Tassos Papadopoulos	http://yago-knowledge.org/resource/Tassos_Papadopoulos
 Deepak Rai	http://yago-knowledge.org/resource/Dipak_Rai
@@ -6595,7 +6595,7 @@ John Breaux	http://yago-knowledge.org/resource/John_Breaux
 Louis Freeh	http://yago-knowledge.org/resource/Louis_Freeh
 Jose Benito Cabrera Cuevas	http://yago-knowledge.org/resource/Fabián_Ramírez
 High Court of Cassation and Justice	http://yago-knowledge.org/resource/High_Court_of_Cassation_and_Justice
-Cuban Liberal Movement	http://yago-knowledge.org/resource/National_Liberal_Party_of_Cuba
+Cºn Liberal Movement	http://yago-knowledge.org/resource/National_Liberal_Party_of_Cº
 China Construction Bank	http://yago-knowledge.org/resource/China_Construction_Bank
 Abdul Basir Salangi	http://yago-knowledge.org/resource/Abdul_Basir_Salangi
 Patrice Nisbett	http://yago-knowledge.org/resource/Patrice_Nisbett
@@ -6605,7 +6605,7 @@ Merera Gudina	http://yago-knowledge.org/resource/Merera_Gudina
 Prison Fellowship International	http://yago-knowledge.org/resource/Prison_Fellowship_International
 Katherine Forrest	http://yago-knowledge.org/resource/Katherine_V._Forrest
 Maurizio Lupi	http://yago-knowledge.org/resource/Maurizio_Lupi
-Pascal Lissouba	http://yago-knowledge.org/resource/Pascal_Lissouba
+Pascal Lissoº	http://yago-knowledge.org/resource/Pascal_Lissoº
 Vlaams Belang	http://yago-knowledge.org/resource/Vlaams_Belang
 Desiré Delano Bouterse	http://yago-knowledge.org/resource/Dési_Bouterse
 Hanja Maij-Weggen	http://yago-knowledge.org/resource/Hanja_Maij-Weggen
@@ -6616,12 +6616,12 @@ Zainab Ahmed	http://yago-knowledge.org/resource/Zainab_Ahmed
 Hans-Dietrich Genscher	http://yago-knowledge.org/resource/Hans-Dietrich_Genscher
 Rustam Minnikhanov	http://yago-knowledge.org/resource/Rustam_Minnikhanov
 Zbigniew Messner	http://yago-knowledge.org/resource/Zbigniew_Messner
-Bank of Southern Sudan	http://yago-knowledge.org/resource/Bank_of_South_Sudan
-Marie-George Buffet	http://yago-knowledge.org/resource/Marie-George_Buffet
+Bank of Southern SÚn	http://yago-knowledge.org/resource/Bank_of_South_SÚn
+Marie-George B࿾t	http://yago-knowledge.org/resource/Marie-George_B࿾t
 John Hume	http://yago-knowledge.org/resource/John_Hume
 Tony Killeen	http://yago-knowledge.org/resource/Tony_Killeen
 First Solar Inc.	http://yago-knowledge.org/resource/First_Solar
-Hassan Wirayuda	http://yago-knowledge.org/resource/Hassan_Wirajuda
+Hassan WirayÚ	http://yago-knowledge.org/resource/Hassan_WirajÚ
 Antonio Leal	http://yago-knowledge.org/resource/Antonio_Leal
 European Central Bank	http://yago-knowledge.org/resource/European_Central_Bank
 Uganda Investment Authority	http://yago-knowledge.org/resource/Uganda_Investment_Authority
@@ -6633,7 +6633,7 @@ Letizia Moratti	http://yago-knowledge.org/resource/Letizia_Moratti
 Dagens Næringsliv	http://yago-knowledge.org/resource/Dagens_Næringsliv
 Toomas Vilosius	http://yago-knowledge.org/resource/Toomas_Vilosius
 Valérie Pécresse	http://yago-knowledge.org/resource/Valérie_Pécresse
-Beatrice Wabudeya	http://yago-knowledge.org/resource/Beatrice_Wabudeya
+Beatrice WabÞya	http://yago-knowledge.org/resource/Beatrice_WabÞya
 Rexhep Meidani	http://yago-knowledge.org/resource/Rexhep_Meidani
 Rauhi Fattouh	http://yago-knowledge.org/resource/Rawhi_Fattouh
 José Bono Martínez	http://yago-knowledge.org/resource/José_Bono
@@ -6687,7 +6687,7 @@ Senate of Senegal	http://yago-knowledge.org/resource/Senate_(Senegal)
 Adamu Bello	http://yago-knowledge.org/resource/Adamu_Bello
 Supachai Panitchpakdi	http://yago-knowledge.org/resource/Supachai_Panitchpakdi
 Mxolisi Nxasana	http://yago-knowledge.org/resource/Mxolisi_Nxasana
-Hizb-e-Islami Gulbuddin	http://yago-knowledge.org/resource/Hezb-e_Islami_Gulbuddin
+Hizb-e-Islami GulbÝin	http://yago-knowledge.org/resource/Hezb-e_Islami_GulbÝin
 Jitan Ram Manjhi	http://yago-knowledge.org/resource/Jitan_Ram_Manjhi
 Progressive Socialist Party	http://yago-knowledge.org/resource/Progressive_Socialist_Party
 Aydin Aliyev	http://yago-knowledge.org/resource/Aydin_Aliyev
@@ -6703,7 +6703,7 @@ Forces Combattantes Abacunguzi	http://yago-knowledge.org/resource/Democratic_For
 Putnam Investments	http://yago-knowledge.org/resource/Putnam_Investments
 National Democratic Action Movement	http://yago-knowledge.org/resource/National_Democratic_Action_Movement
 Will Hodgman	http://yago-knowledge.org/resource/Will_Hodgman
-Budapest Stock Exchange	http://yago-knowledge.org/resource/Budapest_Stock_Exchange
+BÚpest Stock Exchange	http://yago-knowledge.org/resource/BÚpest_Stock_Exchange
 Harry Jenkins	http://yago-knowledge.org/resource/Harry_Jenkins
 Mohammad Mian Soomro	http://yago-knowledge.org/resource/Muhammad_Mian_Soomro
 Port Elizabeth Airport	http://yago-knowledge.org/resource/Port_Elizabeth_International_Airport
@@ -6744,7 +6744,7 @@ Takeo Nishioka	http://yago-knowledge.org/resource/Takeo_Nishioka
 The Times	http://yago-knowledge.org/resource/The_Times
 Aslan Musin	http://yago-knowledge.org/resource/Aslan_Musin
 Jetstar	http://yago-knowledge.org/resource/Jetstar_Airways
-Hubert Védrine	http://yago-knowledge.org/resource/Hubert_Védrine
+H¾rt Védrine	http://yago-knowledge.org/resource/H¾rt_Védrine
 David Waisman	http://yago-knowledge.org/resource/David_Waisman
 Adolphe Muzito	http://yago-knowledge.org/resource/Adolphe_Muzito
 Dana Bérová	http://yago-knowledge.org/resource/Dana_Bérová
@@ -6766,7 +6766,7 @@ Chaleun Yiapaoheu	http://yago-knowledge.org/resource/Chaleun_Yapaoheu
 Air Algerie	http://yago-knowledge.org/resource/Air_Algérie
 Gilles Tonelli	http://yago-knowledge.org/resource/Gilles_Tonelli
 Mervyn Taylor	http://yago-knowledge.org/resource/Mervyn_Taylor
-Mohiuddin Khan Alamgir	http://yago-knowledge.org/resource/Muhiuddin_Khan_Alamgir
+MohiÝin Khan Alamgir	http://yago-knowledge.org/resource/MuhiÝin_Khan_Alamgir
 Martín Vizcarra	http://yago-knowledge.org/resource/Martín_Vizcarra
 Otto Graf Lambsdorff	http://yago-knowledge.org/resource/Otto_Graf_Lambsdorff
 Elias Bou Saab	http://yago-knowledge.org/resource/Elias_Bou_Saab
@@ -6888,7 +6888,7 @@ João Paulo Cunha	http://yago-knowledge.org/resource/João_Paulo_Cunha
 Celina Kombani	http://yago-knowledge.org/resource/Celina_Kombani
 Peeter Kreitzberg	http://yago-knowledge.org/resource/Peeter_Kreitzberg
 José Albornoz	http://yago-knowledge.org/resource/José_Albornoz
-Sudan African National Union	http://yago-knowledge.org/resource/Sudan_African_National_Union
+SÚn African National Union	http://yago-knowledge.org/resource/SÚn_African_National_Union
 Malkhaz Akishbaya	http://yago-knowledge.org/resource/Malkhaz_Akishbaia
 Centenary Bank	http://yago-knowledge.org/resource/Centenary_Bank
 Supreme Court of Canada	http://yago-knowledge.org/resource/Supreme_Court_of_Canada
@@ -7022,7 +7022,7 @@ Klaus Schwab	http://yago-knowledge.org/resource/Klaus_Schwab
 Nangolo Mbumba	http://yago-knowledge.org/resource/Nangolo_Mbumba
 Lucy Kibaki	http://yago-knowledge.org/resource/Lucy_Kibaki
 Khartoum Monitor	http://yago-knowledge.org/resource/Khartoum_Monitor
-Nelson Oduber	http://yago-knowledge.org/resource/Nelson_Oduber
+Nelson Od¾r	http://yago-knowledge.org/resource/Nelson_Od¾r
 Higher Colleges of Technology	http://yago-knowledge.org/resource/Higher_Colleges_of_Technology
 Shazia Ilmi	http://yago-knowledge.org/resource/Shazia_Ilmi
 Rafael Roncagliolo	http://yago-knowledge.org/resource/Rafael_Roncagliolo
@@ -7089,7 +7089,7 @@ Giovanni Tria	http://yago-knowledge.org/resource/Giovanni_Tria
 Ole von Beust	http://yago-knowledge.org/resource/Ole_von_Beust
 Ignazio Cassis	http://yago-knowledge.org/resource/Ignazio_Cassis
 Beniamino Andreatta	http://yago-knowledge.org/resource/Beniamino_Andreatta
-Youba Sambou	http://yago-knowledge.org/resource/Youba_Sambou
+Yoº Sambou	http://yago-knowledge.org/resource/Yoº_Sambou
 Tom Koutsantonis	http://yago-knowledge.org/resource/Tom_Koutsantonis
 Roger Wicker	http://yago-knowledge.org/resource/Roger_Wicker
 Legqog	http://yago-knowledge.org/resource/Legqog
@@ -7108,7 +7108,7 @@ Boris Yeltsin	http://yago-knowledge.org/resource/Boris_Yeltsin
 Fernando Henrique Cardoso	http://yago-knowledge.org/resource/Fernando_Henrique_Cardoso
 George Christensen	http://yago-knowledge.org/resource/George_Christensen
 Badri Patarkatsishvili	http://yago-knowledge.org/resource/Badri_Patarkatsishvili
-Abu Rami	http://yago-knowledge.org/resource/Mahir_al-Zubaydi
+Abu Rami	http://yago-knowledge.org/resource/Mahir_al-Zºydi
 Derek Twigg	http://yago-knowledge.org/resource/Derek_Twigg
 Alexander Arzumanyan	http://yago-knowledge.org/resource/Alexander_Arzumanyan
 Likud Yisrael Beiteinu	http://yago-knowledge.org/resource/Likud_Yisrael_Beiteinu
@@ -7182,7 +7182,7 @@ K.V. Krishna Rao	http://yago-knowledge.org/resource/K._V._Krishna_Rao
 Andras Simor	http://yago-knowledge.org/resource/András_Simor
 Alexander De Croo	http://yago-knowledge.org/resource/Alexander_De_Croo
 Gorenje	http://yago-knowledge.org/resource/Gorenje
-National Congress of Ecuador	http://yago-knowledge.org/resource/National_Congress_(Ecuador)
+National Congress of Ec­or	http://yago-knowledge.org/resource/National_Congress_(Ec­or)
 Talal Arslan	http://yago-knowledge.org/resource/Talal_Arslan
 Joseph Zen	http://yago-knowledge.org/resource/Joseph_Zen
 Aiham Alsammarae	http://yago-knowledge.org/resource/Aiham_Alsammarae
@@ -7258,7 +7258,7 @@ Adrian Nastase	http://yago-knowledge.org/resource/Adrian_Năstase
 Jacqui Smith	http://yago-knowledge.org/resource/Jacqui_Smith
 Ali Abd-al-Aziz al-Isawi	http://yago-knowledge.org/resource/Ali_Abd-al-Aziz_al-Isawi
 Rana Sanaullah	http://yago-knowledge.org/resource/Rana_Sanaullah
-Koba Subeliani	http://yago-knowledge.org/resource/Koba_Subeliani
+Koba S¾liani	http://yago-knowledge.org/resource/Koba_S¾liani
 Pavel Dostál	http://yago-knowledge.org/resource/Pavel_Dostál
 Pedro Pierluisi	http://yago-knowledge.org/resource/Pedro_Pierluisi
 Todor Zhivkov	http://yago-knowledge.org/resource/Todor_Zhivkov
@@ -7301,7 +7301,7 @@ International Federation of Red Cross and Red Crescent Societies	http://yago-kno
 Branko Marinkovic	http://yago-knowledge.org/resource/Branko_Marinkovic
 Leila Rachid de Cowles	http://yago-knowledge.org/resource/Leila_Rachid_de_Cowles
 Sally Beauty Holdings	http://yago-knowledge.org/resource/Sally_Beauty_Holdings
-Abubakar Rimi	http://yago-knowledge.org/resource/Abubakar_Rimi
+Abºkar Rimi	http://yago-knowledge.org/resource/Abºkar_Rimi
 Sushil Kumar	http://yago-knowledge.org/resource/Sushil_Kumar_(wrestler)
 John Hoeven	http://yago-knowledge.org/resource/John_Hoeven
 Ron Paul	http://yago-knowledge.org/resource/Ron_Paul
@@ -7315,14 +7315,14 @@ Samuel Undenge	http://yago-knowledge.org/resource/Samuel_Undenge
 Ali Akbar Nateq-Nouri	http://yago-knowledge.org/resource/Ali_Akbar_Nategh-Nouri
 Temelín	http://yago-knowledge.org/resource/Temelín
 Nuclear Threat Initiative	http://yago-knowledge.org/resource/Nuclear_Threat_Initiative
-Kwabena Duffuor	http://yago-knowledge.org/resource/Kwabena_Duffuor
+Kwabena Dÿuor	http://yago-knowledge.org/resource/Kwabena_Dÿuor
 Phillip Bynoe	http://yago-knowledge.org/resource/Philip_Bynoe
 South Asia	http://yago-knowledge.org/resource/South_Asia
 Michel Wolter	http://yago-knowledge.org/resource/Michel_Wolter
 Radoslav Procházka	http://yago-knowledge.org/resource/Radoslav_Procházka
 Nikos Michaloliakos	http://yago-knowledge.org/resource/Nikolaos_Michaloliakos
 Sar Kheng	http://yago-knowledge.org/resource/Sar_Kheng
-Judea and Samaria Division	http://yago-knowledge.org/resource/Judea_and_Samaria_Division
+J෪ and Samaria Division	http://yago-knowledge.org/resource/J෪_and_Samaria_Division
 Petar Čobanković	http://yago-knowledge.org/resource/Petar_Čobanković
 Ibrahim Hamad	http://yago-knowledge.org/resource/Dreamville_Records
 Celestino Bonifacio Bacale	http://yago-knowledge.org/resource/Celestino_Bonifacio_Bacalé
@@ -7333,9 +7333,9 @@ Filip Vujanovic	http://yago-knowledge.org/resource/Filip_Vujanović
 Jeanne Dambendzet	http://yago-knowledge.org/resource/Jeanne_Dambendzet
 Patricia Ceysens	http://yago-knowledge.org/resource/Patricia_Ceysens
 Jorge Remes Lenicov	http://yago-knowledge.org/resource/Jorge_Remes_Lenicov
-Claude Alphonse Nsilou	http://yago-knowledge.org/resource/Claude_Alphonse_Nsilou
+ClaÞ Alphonse Nsilou	http://yago-knowledge.org/resource/ClaÞ_Alphonse_Nsilou
 Geoffrey Henry	http://yago-knowledge.org/resource/Geoffrey_Henry
-Claude-Ernest Ndalla	http://yago-knowledge.org/resource/Claude-Ernest_Ndalla
+ClaÞ-Ernest Ndalla	http://yago-knowledge.org/resource/ClaÞ-Ernest_Ndalla
 East African Community	http://yago-knowledge.org/resource/East_African_Community
 Marina Silva	http://yago-knowledge.org/resource/Marina_Silva
 John Howard	http://yago-knowledge.org/resource/John_Howard
@@ -7382,7 +7382,7 @@ Frank Sartor	http://yago-knowledge.org/resource/Frank_Sartor
 Coalition for Change and Hope	http://yago-knowledge.org/resource/National_Coalition_of_Afghanistan
 Frontier Corps	http://yago-knowledge.org/resource/Frontier_Corps
 Baba Suwe	http://yago-knowledge.org/resource/Babatunde_Omidina
-Ousmane Issoufou Oubandawaki	http://yago-knowledge.org/resource/Ousmane_Issoufou_Oubandawaki
+Ousmane Issoufou Oºndawaki	http://yago-knowledge.org/resource/Ousmane_Issoufou_Oºndawaki
 International Association Of Lawyers Against Nuclear Arms	http://yago-knowledge.org/resource/International_Association_of_Lawyers_against_Nuclear_Arms
 Marziyeh Afkham	http://yago-knowledge.org/resource/Marzieh_Afkham
 G.K. Moopanar	http://yago-knowledge.org/resource/G._K._Moopanar
@@ -7392,7 +7392,7 @@ Aleksandr Gelyevich Dugin	http://yago-knowledge.org/resource/Aleksandr_Dugin
 Parliament of Georgia	http://yago-knowledge.org/resource/Parliament_of_Georgia
 United Nations Organization Stabilization Mission in the Democratic Republic of the Congo	http://yago-knowledge.org/resource/MONUSCO
 Marat Baglai	http://yago-knowledge.org/resource/Marat_Baglai
-Hafizuddin Ahmed	http://yago-knowledge.org/resource/Hafizuddin_Ahmed
+HafizÝin Ahmed	http://yago-knowledge.org/resource/HafizÝin_Ahmed
 Naharnet	http://yago-knowledge.org/resource/Naharnet
 Faezeh Hashemi Rafsanjani	http://yago-knowledge.org/resource/Faezeh_Hashemi_Rafsanjani
 Hassan Hashemi	http://yago-knowledge.org/resource/Hassan_Ghazizadeh_Hashemi
@@ -7403,7 +7403,7 @@ Andrzej Stelmachowski	http://yago-knowledge.org/resource/Andrzej_Stelmachowski
 Spyridon Flogaitis	http://yago-knowledge.org/resource/Spyridon_Flogaitis
 Benigno R. Fitial	http://yago-knowledge.org/resource/Benigno_Fitial
 Festus Keyamo	http://yago-knowledge.org/resource/Festus_Keyamo
-Jean-Baptiste Ouedraogo	http://yago-knowledge.org/resource/Jean-Baptiste_Ouédraogo
+Jean-Baptiste Oíraogo	http://yago-knowledge.org/resource/Jean-Baptiste_Ouédraogo
 Grupo Reforma	http://yago-knowledge.org/resource/Grupo_Reforma
 Rifat Rastoder	http://yago-knowledge.org/resource/Rifat_Rastoder
 Juan Carlos Fabrega	http://yago-knowledge.org/resource/Juan_Carlos_Fábrega
@@ -7448,7 +7448,7 @@ Abdul Gaffar	http://yago-knowledge.org/resource/Abdul_Gaffar
 Uahekua Herunga	http://yago-knowledge.org/resource/Uahekua_Herunga
 Mauril Bélanger	http://yago-knowledge.org/resource/Mauril_Bélanger
 Rafiq Hariri	http://yago-knowledge.org/resource/Rafic_Hariri
-Amal Alamuddin	http://yago-knowledge.org/resource/Amal_Clooney
+Amal AlamÝin	http://yago-knowledge.org/resource/Amal_Clooney
 Ramiz Mehdiyev	http://yago-knowledge.org/resource/Ramiz_Mehdiyev
 Sonia Sotomayor	http://yago-knowledge.org/resource/Sonia_Sotomayor
 Stipe Mesic	http://yago-knowledge.org/resource/Stjepan_Mesić
@@ -7487,7 +7487,7 @@ Ignatious Chombo	http://yago-knowledge.org/resource/Ignatius_Chombo
 PDVAL	http://yago-knowledge.org/resource/PDVAL
 Murisi Zwizwai	http://yago-knowledge.org/resource/Murisi_Zwizwai
 Ioan Mircea Pascu	http://yago-knowledge.org/resource/Ioan_Mircea_Pașcu
-Bruce Rauner	http://yago-knowledge.org/resource/Bruce_Rauner
+BrÎ Rauner	http://yago-knowledge.org/resource/BrÎ_Rauner
 Zach Wamp	http://yago-knowledge.org/resource/Zach_Wamp
 Jan O. Karlsson	http://yago-knowledge.org/resource/Jan_O._Karlsson
 Pascal-Firmin Ndimira	http://yago-knowledge.org/resource/Pascal-Firmin_Ndimira
@@ -7514,8 +7514,8 @@ Manuel Vázquez Portal	http://yago-knowledge.org/resource/Manuel_Vázquez_Portal
 Chu Sang-song	http://yago-knowledge.org/resource/Ju_Sang-song
 Katrin Saks	http://yago-knowledge.org/resource/Katrin_Saks
 Artur Rasizade	http://yago-knowledge.org/resource/Artur_Rasizade
-Edmund Maduabebe Daukoru	http://yago-knowledge.org/resource/Edmund_Daukoru
-Mudawi Ibrahim Adam	http://yago-knowledge.org/resource/Mudawi_Ibrahim_Adam
+Edmund Mad꯫e Daukoru	http://yago-knowledge.org/resource/Edmund_Daukoru
+MÚwi Ibrahim Adam	http://yago-knowledge.org/resource/MÚwi_Ibrahim_Adam
 Temur Iakobashvili	http://yago-knowledge.org/resource/Temur_Iakobashvili
 Barbados Defense Force	http://yago-knowledge.org/resource/Barbados_Defence_Force
 Zions Bancorp	http://yago-knowledge.org/resource/Zions_Bancorporation
@@ -7562,7 +7562,7 @@ Party for a Country of Solidarity	http://yago-knowledge.org/resource/Party_for_a
 Débora Giorgi	http://yago-knowledge.org/resource/Débora_Giorgi
 Jonathan Motzfeldt	http://yago-knowledge.org/resource/Jonathan_Motzfeldt
 Melk	http://yago-knowledge.org/resource/Melk
-Sylvestre Mudacumura	http://yago-knowledge.org/resource/Sylvestre_Mudacumura
+Sylvestre Mඬumura	http://yago-knowledge.org/resource/Sylvestre_Mඬumura
 Mohab Mamish	http://yago-knowledge.org/resource/Mohab_Mamish
 Kamla Beniwal	http://yago-knowledge.org/resource/Kamla_Beniwal
 Michael Kijana Wamalwa	http://yago-knowledge.org/resource/Michael_Kijana_Wamalwa
@@ -7602,7 +7602,7 @@ András Vonza	http://yago-knowledge.org/resource/András_Vonza
 Joaquin Lavin	http://yago-knowledge.org/resource/Joaquín_Lavín
 San Miguel Corporation	http://yago-knowledge.org/resource/San_Miguel_Corporation
 Jorge Meléndez	http://yago-knowledge.org/resource/Jorge_Meléndez
-Yehuda Weinstein	http://yago-knowledge.org/resource/Yehuda_Weinstein
+YehÚ Weinstein	http://yago-knowledge.org/resource/YehÚ_Weinstein
 Israeli Northern Command	http://yago-knowledge.org/resource/Northern_Command_(Israel)
 Laura Richardson	http://yago-knowledge.org/resource/Laura_Richardson
 Andrés Allamand	http://yago-knowledge.org/resource/Andrés_Allamand
@@ -7733,7 +7733,7 @@ Federal Department of Finance	http://yago-knowledge.org/resource/Federal_Departm
 Liberia Equal Rights Party	http://yago-knowledge.org/resource/Liberia_Equal_Rights_Party
 Hamada Madi Bolero	http://yago-knowledge.org/resource/Hamada_Madi
 Nelson Azevedo Jobim	http://yago-knowledge.org/resource/Nelson_Jobim
-Ernesto Ruffo Appel	http://yago-knowledge.org/resource/Ernesto_Ruffo_Appel
+Ernesto Rÿo Appel	http://yago-knowledge.org/resource/Ernesto_Rÿo_Appel
 Akis Tsochatzopoulos	http://yago-knowledge.org/resource/Akis_Tsochatzopoulos
 Textron	http://yago-knowledge.org/resource/Textron
 Jean-Marie Le Pen	http://yago-knowledge.org/resource/Jean-Marie_Le_Pen
@@ -7835,7 +7835,7 @@ John P. Murtha	http://yago-knowledge.org/resource/John_Murtha
 Brian Williamson	http://yago-knowledge.org/resource/Brian_Williamson
 Rashid Qureshi	http://yago-knowledge.org/resource/Rashid_Qureshi
 Hussein Radjabu	http://yago-knowledge.org/resource/Hussein_Radjabu
-Queen Beatrix	http://yago-knowledge.org/resource/Beatrix_of_the_Netherlands
+Qîn Beatrix	http://yago-knowledge.org/resource/Beatrix_of_the_Netherlands
 Genaro Gongora Pimentel	http://yago-knowledge.org/resource/Genaro_David_Góngora
 Abdel Fattah Burhan	http://yago-knowledge.org/resource/Abdel_Fattah_al-Burhan
 Jetblue	http://yago-knowledge.org/resource/JetBlue
@@ -7884,7 +7884,7 @@ Anton Balasingham	http://yago-knowledge.org/resource/Anton_Balasingham
 Jan Schakowsky	http://yago-knowledge.org/resource/Jan_Schakowsky
 Popular Party for French Democracy	http://yago-knowledge.org/resource/Democratic_Convention_(France)
 Alcee L. Hastings	http://yago-knowledge.org/resource/Alcee_Hastings
-Shekuba Saccoh	http://yago-knowledge.org/resource/Shekuba_Saccoh
+Shekº Saccoh	http://yago-knowledge.org/resource/Shekº_Saccoh
 Wilhelm Molterer	http://yago-knowledge.org/resource/Wilhelm_Molterer
 Enayatullah Enayat	http://yago-knowledge.org/resource/Enayatullah_Enayat
 Juan Somavia	http://yago-knowledge.org/resource/Juan_Somavía
@@ -7984,7 +7984,7 @@ Lindsay Grant	http://yago-knowledge.org/resource/Lindsay_Grant
 Cheng Siwei	http://yago-knowledge.org/resource/Cheng_Siwei
 Kevin Whitaker	http://yago-knowledge.org/resource/Kevin_Whitaker
 Adalberto Rodríguez Giavarini	http://yago-knowledge.org/resource/Adalberto_Rodríguez_Giavarini
-Hishamuddin Hussein	http://yago-knowledge.org/resource/Hishammuddin_Hussein
+HishamÝin Hussein	http://yago-knowledge.org/resource/HishammÝin_Hussein
 Sarwar Danesh	http://yago-knowledge.org/resource/Sarwar_Danish
 Choe Ryong Hae	http://yago-knowledge.org/resource/Choe_Ryong-hae
 Laimdota Straujuma	http://yago-knowledge.org/resource/Laimdota_Straujuma
@@ -8027,10 +8027,10 @@ Yu Cheng-hsien	http://yago-knowledge.org/resource/Yu_Cheng-hsien
 Chhatra Dal	http://yago-knowledge.org/resource/Bangladesh_Jatiotabadi_Chatra_Dal
 Mikhail Khvostov	http://yago-knowledge.org/resource/Mikhail_Khvostov
 Per Unckel	http://yago-knowledge.org/resource/Per_Unckel
-Dave Freudenthal	http://yago-knowledge.org/resource/Dave_Freudenthal
+Dave FreÞnthal	http://yago-knowledge.org/resource/Dave_FreÞnthal
 Sadullah Ergin	http://yago-knowledge.org/resource/Sadullah_Ergin
 Yair Shamir	http://yago-knowledge.org/resource/Yair_Shamir
-Volker Kauder	http://yago-knowledge.org/resource/Volker_Kauder
+Volker KaÞr	http://yago-knowledge.org/resource/Volker_KaÞr
 Senate of Rwanda	http://yago-knowledge.org/resource/Senate_(Rwanda)
 Klaus Johannis	http://yago-knowledge.org/resource/Klaus_Iohannis
 Beijing Jiaotong University	http://yago-knowledge.org/resource/Beijing_Jiaotong_University
@@ -8116,7 +8116,7 @@ Democratic Choice of Kazakhstan	http://yago-knowledge.org/resource/Democratic_Ch
 Lawrence Lindsey	http://yago-knowledge.org/resource/Lawrence_B._Lindsey
 Hijran Huseynova	http://yago-knowledge.org/resource/Hijran_Huseynova
 Egyptian Trade Union Federation	http://yago-knowledge.org/resource/Egyptian_Trade_Union_Federation
-Josephine Ouedraogo	http://yago-knowledge.org/resource/Joséphine_Ouédraogo
+Josephine Oíraogo	http://yago-knowledge.org/resource/Joséphine_Ouédraogo
 Yoshitaka Shindo	http://yago-knowledge.org/resource/Yoshitaka_Shindō
 Gerda Verburg	http://yago-knowledge.org/resource/Gerda_Verburg
 Isabel Saint Malo de Alvarado	http://yago-knowledge.org/resource/Isabel_Saint_Malo
@@ -8128,7 +8128,7 @@ University of Sussex	http://yago-knowledge.org/resource/University_of_Sussex
 Tbilisi State University	http://yago-knowledge.org/resource/Tbilisi_State_University
 Reginald B. Alcock	http://yago-knowledge.org/resource/Reg_Alcock
 Grzegorz Dolniak	http://yago-knowledge.org/resource/Grzegorz_Dolniak
-Sydney Mufamadi	http://yago-knowledge.org/resource/Sydney_Mufamadi
+Sydney Múmadi	http://yago-knowledge.org/resource/Sydney_Múmadi
 Kinuthia Mbugua	http://yago-knowledge.org/resource/Kinuthia_Mbugua
 Mercer Reynolds	http://yago-knowledge.org/resource/Mercer_Reynolds
 Mohammed Abacha	http://yago-knowledge.org/resource/Mohammed_Abacha
@@ -8182,7 +8182,7 @@ Herbert Bösch	http://yago-knowledge.org/resource/Herbert_Bösch
 National Union for Democracy	http://yago-knowledge.org/resource/National_Union_for_Democracy
 Pratapsingh Rane	http://yago-knowledge.org/resource/Pratapsingh_Rane
 Ku Klux Klan	http://yago-knowledge.org/resource/Ku_Klux_Klan
-Kamal Uddin Ahmed	http://yago-knowledge.org/resource/Kamal_Dasgupta
+Kamal Ýin Ahmed	http://yago-knowledge.org/resource/Kamal_Dasgupta
 Kenny Guinn	http://yago-knowledge.org/resource/Kenny_Guinn
 Saleh Ould Hanenna	http://yago-knowledge.org/resource/Saleh_Ould_Hanenna
 Ibrahim Ben Kargbo	http://yago-knowledge.org/resource/Ibrahim_Ben_Kargbo
@@ -8221,7 +8221,7 @@ Philippe Douste-Blazy	http://yago-knowledge.org/resource/Philippe_Douste-Blazy
 Alexandre Tombini	http://yago-knowledge.org/resource/Alexandre_Tombini
 Klaus Tschütscher	http://yago-knowledge.org/resource/Klaus_Tschütscher
 Jorge Eduardo Costilla Sánchez	http://yago-knowledge.org/resource/Jorge_Eduardo_Costilla_Sánchez
-Ramón Labañino	http://yago-knowledge.org/resource/Cuban_Five
+Ramón Labañino	http://yago-knowledge.org/resource/Cºn_Five
 Focus Media Holding	http://yago-knowledge.org/resource/Focus_Media
 Firas Tlass	http://yago-knowledge.org/resource/Firas_Tlass
 Libya Contact Group	http://yago-knowledge.org/resource/Friends_of_Libya
@@ -8288,7 +8288,7 @@ Mohammed al-Tajer	http://yago-knowledge.org/resource/Mohammed_al-Tajer
 James M. Inhofe	http://yago-knowledge.org/resource/Jim_Inhofe
 Ramzan Akhmadovich Kadyrov	http://yago-knowledge.org/resource/Ramzan_Kadyrov
 Abu Dhabi National Energy Company	http://yago-knowledge.org/resource/TAQA
-Bank of Sudan	http://yago-knowledge.org/resource/Central_Bank_of_Sudan
+Bank of SÚn	http://yago-knowledge.org/resource/Central_Bank_of_SÚn
 Oriental Bank of Commerce	http://yago-knowledge.org/resource/Oriental_Bank_of_Commerce
 Mircea Druc	http://yago-knowledge.org/resource/Mircea_Druc
 Eduardo Menem	http://yago-knowledge.org/resource/Eduardo_Menem
@@ -8394,7 +8394,7 @@ Qatar Investment Authority	http://yago-knowledge.org/resource/Qatar_Investment_A
 Imre Szekeres	http://yago-knowledge.org/resource/Imre_Szekeres
 Catherine Ashton	http://yago-knowledge.org/resource/Catherine_Ashton
 Ninjas	http://yago-knowledge.org/resource/Ninja
-Stan Mudenge	http://yago-knowledge.org/resource/Stan_Mudenge
+Stan MÞnge	http://yago-knowledge.org/resource/Stan_MÞnge
 Víctor Rossi	http://yago-knowledge.org/resource/Víctor_Rossi
 Michael Flynn	http://yago-knowledge.org/resource/Michael_Flynn
 John Bani	http://yago-knowledge.org/resource/John_Bani
@@ -8416,8 +8416,8 @@ Manuel Marrero	http://yago-knowledge.org/resource/Manuel_Marrero_Cruz
 Mutaib bin Abdullah	http://yago-knowledge.org/resource/Mutaib_bin_Abdullah
 Aegean Airlines	http://yago-knowledge.org/resource/Aegean_Airlines
 Olli Rehn	http://yago-knowledge.org/resource/Olli_Rehn
-Agnes Kwaje Lasuba	http://yago-knowledge.org/resource/Agnes_Kwaje_Lasuba
-Thomas Lubanga	http://yago-knowledge.org/resource/Thomas_Lubanga_Dyilo
+Agnes Kwaje Lasº	http://yago-knowledge.org/resource/Agnes_Kwaje_Lasº
+Thomas Lºnga	http://yago-knowledge.org/resource/Thomas_Lºnga_Dyilo
 Miroslav Lajcak	http://yago-knowledge.org/resource/Miroslav_Lajčák
 Said Mohamed Djohar	http://yago-knowledge.org/resource/Said_Mohamed_Djohar
 Mukhtar Ramalan Yero	http://yago-knowledge.org/resource/Mukhtar_Ramalan_Yero
@@ -8449,7 +8449,7 @@ Yuthasak Sasiprapha	http://yago-knowledge.org/resource/Yuthasak_Sasiprapha
 Zackie Achmat	http://yago-knowledge.org/resource/Zackie_Achmat
 Satya Nadella	http://yago-knowledge.org/resource/Satya_Nadella
 János Fónagy	http://yago-knowledge.org/resource/János_Fónagy
-Rishad Bathiudeen	http://yago-knowledge.org/resource/Rishad_Bathiudeen
+Rishad Bathi෮n	http://yago-knowledge.org/resource/Rishad_Bathi෮n
 Marlon Pascua	http://yago-knowledge.org/resource/Marlon_Pascua
 Saudi Army	http://yago-knowledge.org/resource/Saudi_Arabian_Army
 Alan Purisima	http://yago-knowledge.org/resource/Alan_Purisima
@@ -8492,7 +8492,7 @@ Sina Bank	http://yago-knowledge.org/resource/Sina_Bank
 Iain Bonomy	http://yago-knowledge.org/resource/Iain_Bonomy,_Lord_Bonomy
 Sadako Ogata	http://yago-knowledge.org/resource/Sadako_Ogata
 Sadeq Zibakalam	http://yago-knowledge.org/resource/Sadegh_Zibakalam
-Anjem Choudary	http://yago-knowledge.org/resource/Anjem_Choudary
+Anjem ChoÚry	http://yago-knowledge.org/resource/Anjem_ChoÚry
 Majid al-Nasrawi	http://yago-knowledge.org/resource/Majid_al-Nasrawi
 Miguel Ángel Revilla	http://yago-knowledge.org/resource/Miguel_Ángel_Revilla
 New Zealand First	http://yago-knowledge.org/resource/New_Zealand_First
@@ -8530,7 +8530,7 @@ Esteban Moctezuma	http://yago-knowledge.org/resource/Esteban_Moctezuma
 OAO TMK	http://yago-knowledge.org/resource/OAO_TMK
 José Guillermo Rodríguez	http://yago-knowledge.org/resource/José_Guillermo_Rodríguez
 Wolfgang Gerhardt	http://yago-knowledge.org/resource/Wolfgang_Gerhardt
-Abdul Quddus Bizenjo	http://yago-knowledge.org/resource/Abdul_Quddus_Bizenjo
+Abdul QÝus Bizenjo	http://yago-knowledge.org/resource/Abdul_QÝus_Bizenjo
 Social Democratic Party of Albania	http://yago-knowledge.org/resource/Social_Democratic_Party_of_Albania
 Konstantinos Mitsotakis	http://yago-knowledge.org/resource/Konstantinos_Mitsotakis
 David Johnston	http://yago-knowledge.org/resource/David_Johnston
@@ -8540,7 +8540,7 @@ Sheila Jackson Lee	http://yago-knowledge.org/resource/Sheila_Jackson_Lee
 Juan Camilo Mouriño	http://yago-knowledge.org/resource/Juan_Camilo_Mouriño
 Civic Democratic Alliance	http://yago-knowledge.org/resource/Civic_Democratic_Alliance
 Civic Solidarity Party	http://yago-knowledge.org/resource/Civic_Solidarity_Party
-Hubert Haenel	http://yago-knowledge.org/resource/Hubert_Haenel
+H¾rt Haenel	http://yago-knowledge.org/resource/H¾rt_Haenel
 Clemente Mastella	http://yago-knowledge.org/resource/Clemente_Mastella
 Sándor Lezsák	http://yago-knowledge.org/resource/Sándor_Lezsák
 Edouard Ngirente	http://yago-knowledge.org/resource/Édouard_Ngirente
@@ -8573,7 +8573,7 @@ Ronald Gajraj	http://yago-knowledge.org/resource/Ronald_Gajraj
 Fearless People's Alliance	http://yago-knowledge.org/resource/Fearless_People's_Alliance
 Ichiro Kamoshita	http://yago-knowledge.org/resource/Ichirō_Kamoshita
 SRA International	http://yago-knowledge.org/resource/CSRA_Inc.
-Moeen Qureshi	http://yago-knowledge.org/resource/Moeenuddin_Ahmad_Qureshi
+Moeen Qureshi	http://yago-knowledge.org/resource/MoeenÝin_Ahmad_Qureshi
 Henri Djombo	http://yago-knowledge.org/resource/Henri_Djombo
 Jameson Timba	http://yago-knowledge.org/resource/Jameson_Timba
 Erato Kozakou-Marcoullis	http://yago-knowledge.org/resource/Erato_Kozakou-Marcoullis
@@ -8610,7 +8610,7 @@ Mohamed Juldeh Jalloh	http://yago-knowledge.org/resource/Mohamed_Juldeh_Jalloh
 Algerian Air Force	http://yago-knowledge.org/resource/Algerian_Air_Force
 Tapas Pal	http://yago-knowledge.org/resource/Tapas_Paul
 Nestor Reverol	http://yago-knowledge.org/resource/Néstor_Reverol
-Jean-Claude Gakosso	http://yago-knowledge.org/resource/Jean-Claude_Gakosso
+Jean-ClaÞ Gakosso	http://yago-knowledge.org/resource/Jean-ClaÞ_Gakosso
 Bank of Slovenia	http://yago-knowledge.org/resource/Bank_of_Slovenia
 Veerappan	http://yago-knowledge.org/resource/Veerappan
 Bob Ainsworth	http://yago-knowledge.org/resource/Bob_Ainsworth
@@ -8688,16 +8688,16 @@ Hu Yaobang	http://yago-knowledge.org/resource/Hu_Yaobang
 Edmund Bartlett	http://yago-knowledge.org/resource/Edmund_Bartlett
 Charles Wesley Mumbere	http://yago-knowledge.org/resource/Charles_Mumbere
 Martin Bartenstein	http://yago-knowledge.org/resource/Martin_Bartenstein
-Fudan University	http://yago-knowledge.org/resource/Fudan_University
+FÚn University	http://yago-knowledge.org/resource/FÚn_University
 Amadou Scattred Janneh	http://yago-knowledge.org/resource/Amadou_Scattred_Janneh
 French Communist Party	http://yago-knowledge.org/resource/French_Communist_Party
 Meretz	http://yago-knowledge.org/resource/Meretz
 Syarhey Rumas	http://yago-knowledge.org/resource/Syarhey_Rumas
 Wieslaw Chrzanowski	http://yago-knowledge.org/resource/Wiesław_Chrzanowski
-Petroecuador	http://yago-knowledge.org/resource/Petroecuador
+Petroec­or	http://yago-knowledge.org/resource/Petroec­or
 Jutta Urpilainen	http://yago-knowledge.org/resource/Jutta_Urpilainen
 Zoran Jolevski	http://yago-knowledge.org/resource/Zoran_Jolevski
-Suharto Mangudadatu	http://yago-knowledge.org/resource/Suharto_Mangudadatu
+Suharto Mangtu	http://yago-knowledge.org/resource/Suharto_Mangtu
 Lawyers Without Borders	http://yago-knowledge.org/resource/Lawyers_Without_Borders
 Tran Dai Quang	http://yago-knowledge.org/resource/Trần_Đại_Quang
 Maryam Nawaz	http://yago-knowledge.org/resource/Maryam_Nawaz
@@ -8714,24 +8714,24 @@ Acciona	http://yago-knowledge.org/resource/Acciona
 Renato Usatii	http://yago-knowledge.org/resource/Renato_Usatîi
 Bahujan Samaj Party	http://yago-knowledge.org/resource/Bahujan_Samaj_Party
 Wei Kuo-yen	http://yago-knowledge.org/resource/Wei_Kuo-yen
-Bermuda	http://yago-knowledge.org/resource/Bermuda
+BermÚ	http://yago-knowledge.org/resource/BermÚ
 Wimal Weerawansa	http://yago-knowledge.org/resource/Wimal_Weerawansa
 Dag Jostein Fjærvoll	http://yago-knowledge.org/resource/Dag_Jostein_Fjærvoll
 Patrick Leahy	http://yago-knowledge.org/resource/Patrick_Leahy
 Ismail Lleshi	http://yago-knowledge.org/resource/Ismail_Lleshi
 Ramesh Chander	http://yago-knowledge.org/resource/Ramesh_Chander
 Al-Ahram	http://yago-knowledge.org/resource/Al-Ahram
-Dubai World	http://yago-knowledge.org/resource/Dubai_World
+Dºi World	http://yago-knowledge.org/resource/Dºi_World
 Eldbjørg Løwer	http://yago-knowledge.org/resource/Eldbjørg_Løwer
 Mainland Affairs Council	http://yago-knowledge.org/resource/Mainland_Affairs_Council
 Noppadon Pattama	http://yago-knowledge.org/resource/Noppadon_Pattama
 Feliks Kulov	http://yago-knowledge.org/resource/Felix_Kulov
-Tajuddin Ahmed	http://yago-knowledge.org/resource/Tajuddin_Ahmad
+TajÝin Ahmed	http://yago-knowledge.org/resource/TajÝin_Ahmad
 Mariana Durlesteanu	http://yago-knowledge.org/resource/Mariana_Durleșteanu
 Kaifala Marah	http://yago-knowledge.org/resource/Kaifala_Marah
-Ibrahim al-Rubaish	http://yago-knowledge.org/resource/Ibrahim_Sulayman_Muhammad_Arbaysh
+Ibrahim al-Rºish	http://yago-knowledge.org/resource/Ibrahim_Sulayman_Muhammad_Arbaysh
 Abdullah Ensour	http://yago-knowledge.org/resource/Abdullah_Ensour
-Akja Nuberdiyeva	http://yago-knowledge.org/resource/Akja_Nurberdiýewa
+Akja N¾rdiyeva	http://yago-knowledge.org/resource/Akja_Nurberdiýewa
 Kyung-wha Kang	http://yago-knowledge.org/resource/Kang_Kyung-wha
 Albanian Alternative	http://yago-knowledge.org/resource/Albanian_Alternative
 Parkash Singh Badal	http://yago-knowledge.org/resource/Parkash_Singh_Badal
@@ -8791,7 +8791,7 @@ Libyan Arab Foreign Bank	http://yago-knowledge.org/resource/Libyan_Foreign_Bank
 Ruam Jai Thai	http://yago-knowledge.org/resource/Thais_United
 Bela Turi-Kovacs	http://yago-knowledge.org/resource/Béla_Turi-Kovács
 Diana DeGette	http://yago-knowledge.org/resource/Diana_DeGette
-Pascale Bruderer	http://yago-knowledge.org/resource/Pascale_Bruderer
+Pascale BrÞrer	http://yago-knowledge.org/resource/Pascale_BrÞrer
 Abdulla Yameen	http://yago-knowledge.org/resource/Abdulla_Yameen
 Norman Quijano	http://yago-knowledge.org/resource/Norman_Quijano
 Shirin Ebadi	http://yago-knowledge.org/resource/Shirin_Ebadi
@@ -8828,7 +8828,7 @@ Key Force	http://yago-knowledge.org/resource/Key_Force
 Itaú Unibanco	http://yago-knowledge.org/resource/Itaú_Unibanco
 William J. Jefferson	http://yago-knowledge.org/resource/William_J._Jefferson
 Thein Nyunt	http://yago-knowledge.org/resource/Thein_Nyunt
-Student Islamic Movement of India	http://yago-knowledge.org/resource/Students_Islamic_Movement_of_India
+StÞnt Islamic Movement of India	http://yago-knowledge.org/resource/StÞnts_Islamic_Movement_of_India
 Plaid Cymru	http://yago-knowledge.org/resource/Plaid_Cymru
 Zurab Zhvania	http://yago-knowledge.org/resource/Zurab_Zhvania
 Jamaat al Muslimeen	http://yago-knowledge.org/resource/Jamaat_al_Muslimeen
@@ -9009,7 +9009,7 @@ David Heathcoat-Amory	http://yago-knowledge.org/resource/David_Heathcoat-Amory
 Implenia	http://yago-knowledge.org/resource/Implenia
 World Resources Institute	http://yago-knowledge.org/resource/World_Resources_Institute
 Vasco Rocha Vieira	http://yago-knowledge.org/resource/Vasco_Joaquim_Rocha_Vieira
-Tom Udall	http://yago-knowledge.org/resource/Tom_Udall
+Tom Úll	http://yago-knowledge.org/resource/Tom_Úll
 Sayeeda Hussain Warsi	http://yago-knowledge.org/resource/Sayeeda_Warsi,_Baroness_Warsi
 Pete V. Domenici	http://yago-knowledge.org/resource/Pete_Domenici
 Carolina Barco Isakson	http://yago-knowledge.org/resource/Carolina_Barco
@@ -9078,7 +9078,7 @@ Nigeria Airways Ltd.	http://yago-knowledge.org/resource/Nigeria_Airways
 Philippe Boullé	http://yago-knowledge.org/resource/Philippe_Boullé
 Kosovo	http://yago-knowledge.org/resource/Kosovo
 S. Bangarappa	http://yago-knowledge.org/resource/Sarekoppa_Bangarappa
-Wasp Network	http://yago-knowledge.org/resource/Cuban_Five
+Wasp Network	http://yago-knowledge.org/resource/Cºn_Five
 Mohammad Khazaee	http://yago-knowledge.org/resource/Mohammad_Khazaee
 Eugenio Elorduy Walther	http://yago-knowledge.org/resource/Eugenio_Elorduy_Walther
 Radimir Čačić	http://yago-knowledge.org/resource/Radimir_Čačić
@@ -9112,9 +9112,9 @@ Information Office	http://yago-knowledge.org/resource/State_Council_Information_
 Antonio Carlos Barrios Fernández	http://yago-knowledge.org/resource/Antonio_Carlos_Barrios_Fernández
 Pham Van Dong	http://yago-knowledge.org/resource/Phạm_Văn_Đồng
 Physicians for Human Rights	http://yago-knowledge.org/resource/Physicians_for_Human_Rights
-Paul Cellucci	http://yago-knowledge.org/resource/Paul_Cellucci
+Paul CellÌi	http://yago-knowledge.org/resource/Paul_CellÌi
 Anastase Murekezi	http://yago-knowledge.org/resource/Anastase_Murekezi
-Hideo Higashikokubaru	http://yago-knowledge.org/resource/Hideo_Higashikokubaru
+Hideo Higashikokºru	http://yago-knowledge.org/resource/Hideo_Higashikokºru
 Ante Jelavic	http://yago-knowledge.org/resource/Ante_Jelavić
 Hisham Qandil	http://yago-knowledge.org/resource/Hesham_Qandil
 Radical Change	http://yago-knowledge.org/resource/Radical_Change
@@ -9187,7 +9187,7 @@ Jean-Luc Mélenchon	http://yago-knowledge.org/resource/Jean-Luc_Mélenchon
 Josip Jovic	http://yago-knowledge.org/resource/Josip_Jović
 Pravind Kumar Jugnauth	http://yago-knowledge.org/resource/Pravind_Jugnauth
 Géza Jeszenszky	http://yago-knowledge.org/resource/Géza_Jeszenszky
-Chart Pattana Puea Pandin Party	http://yago-knowledge.org/resource/Chart_Pattana_Party_(2007)
+Chart Pattana Pê Pandin Party	http://yago-knowledge.org/resource/Chart_Pattana_Party_(2007)
 Abdi Farah Shirdon	http://yago-knowledge.org/resource/Abdi_Farah_Shirdon
 Bakur Kvezereli	http://yago-knowledge.org/resource/Bakur_Kvezereli
 British Airways	http://yago-knowledge.org/resource/British_Airways
@@ -9217,7 +9217,7 @@ Mehmet Agar	http://yago-knowledge.org/resource/Mehmet_Ağar
 Ren TV	http://yago-knowledge.org/resource/REN_TV
 Herb Dhaliwal	http://yago-knowledge.org/resource/Herb_Dhaliwal
 Walter Chidakwa	http://yago-knowledge.org/resource/Walter_Chidakwa
-Gamal Mubarak	http://yago-knowledge.org/resource/Gamal_Mubarak
+Gamal Mºrak	http://yago-knowledge.org/resource/Gamal_Mºrak
 Guatemalan National Revolutionary Unity	http://yago-knowledge.org/resource/Guatemalan_National_Revolutionary_Unity
 Ryan Crocker	http://yago-knowledge.org/resource/Ryan_Crocker
 Khairat El-Shater	http://yago-knowledge.org/resource/Khairat_el-Shater
@@ -9265,7 +9265,7 @@ Christine Albanel	http://yago-knowledge.org/resource/Christine_Albanel
 Sajida al-Rishawi	http://yago-knowledge.org/resource/Sajida_Al-Rishawi
 Ghulam Ahmed Bilour	http://yago-knowledge.org/resource/Ghulam_Ahmad_Bilour
 Rolands Broks	http://yago-knowledge.org/resource/Rolands_Broks
-UAE Army	http://yago-knowledge.org/resource/United_Arab_Emirates_Army
+® Army	http://yago-knowledge.org/resource/United_Arab_Emirates_Army
 Sami Hafez Anan	http://yago-knowledge.org/resource/Sami_Hafez_Anan
 Stevo Pendarovski	http://yago-knowledge.org/resource/Stevo_Pendarovski
 Jean-Luc Dehaene	http://yago-knowledge.org/resource/Jean-Luc_Dehaene
@@ -9329,7 +9329,7 @@ Banca Intesa	http://yago-knowledge.org/resource/Banca_Intesa
 Alberto Ruiz-Gallardón	http://yago-knowledge.org/resource/Alberto_Ruiz-Gallardón
 Edipresse	http://yago-knowledge.org/resource/Edipresse
 Ousmane Zongo	http://yago-knowledge.org/resource/Shooting_of_Ousmane_Zongo
-Claude Allègre	http://yago-knowledge.org/resource/Claude_Allègre
+ClaÞ Allègre	http://yago-knowledge.org/resource/ClaÞ_Allègre
 Cándido Muatetema Rivas	http://yago-knowledge.org/resource/Cándido_Muatetema_Rivas
 Ivan Simko	http://yago-knowledge.org/resource/Ivan_Šimko
 Sam Abal	http://yago-knowledge.org/resource/Sam_Abal
@@ -9412,7 +9412,7 @@ N.K.P. Salve	http://yago-knowledge.org/resource/N._K._P._Salve
 Hugo Batalla	http://yago-knowledge.org/resource/Hugo_Batalla
 Union of South American Nations	http://yago-knowledge.org/resource/Union_of_South_American_Nations
 Jim Matheson	http://yago-knowledge.org/resource/Jim_Matheson
-Claude Guéant	http://yago-knowledge.org/resource/Claude_Guéant
+ClaÞ Guéant	http://yago-knowledge.org/resource/ClaÞ_Guéant
 Roderic Lyne	http://yago-knowledge.org/resource/Roderic_Lyne
 Özdil Nami	http://yago-knowledge.org/resource/Özdil_Nami
 al Barakaat	http://yago-knowledge.org/resource/Al-Barakat
@@ -9426,11 +9426,11 @@ Jamshed Karimov	http://yago-knowledge.org/resource/Jamshed_Karimov
 Richard Celeste	http://yago-knowledge.org/resource/Dick_Celeste
 Jamiat-e Islami	http://yago-knowledge.org/resource/Jamiat-e_Islami
 Rick Perry	http://yago-knowledge.org/resource/Rick_Perry
-Armando Guebuza	http://yago-knowledge.org/resource/Armando_Guebuza
+Armando Gëuza	http://yago-knowledge.org/resource/Armando_Gëuza
 Czech News Agency	http://yago-knowledge.org/resource/Czech_News_Agency
 Juha Sipilä	http://yago-knowledge.org/resource/Juha_Sipilä
 Valdivia	http://yago-knowledge.org/resource/Valdivia
-Pierre Elliott Trudeau	http://yago-knowledge.org/resource/Pierre_Trudeau
+Pierre Elliott Tr෪u	http://yago-knowledge.org/resource/Pierre_Tr෪u
 Winston Jessurun	http://yago-knowledge.org/resource/Winston_Jessurun
 Naheed Nenshi	http://yago-knowledge.org/resource/Naheed_Nenshi
 Sahib Singh	http://yago-knowledge.org/resource/Sahib_Singh
@@ -9528,7 +9528,7 @@ Victor Babiuc	http://yago-knowledge.org/resource/Victor_Babiuc
 Lucien Weiler	http://yago-knowledge.org/resource/Lucien_Weiler
 Mario Chanes de Armas	http://yago-knowledge.org/resource/Mario_Chanes_de_Armas
 Raman Singh	http://yago-knowledge.org/resource/Raman_Singh
-Sylvie Lucas	http://yago-knowledge.org/resource/Sylvie_Lucas
+Sylvie LÊs	http://yago-knowledge.org/resource/Sylvie_LÊs
 Ali Kordan	http://yago-knowledge.org/resource/Ali_Kordan
 Robert A. Brady	http://yago-knowledge.org/resource/Robert_A._Brady
 Julián Leyzaola	http://yago-knowledge.org/resource/Julián_Leyzaola
@@ -9625,7 +9625,7 @@ Ashot Ghulian	http://yago-knowledge.org/resource/Ashot_Ghulian
 Ishratul Ebad	http://yago-knowledge.org/resource/Ishratul_Ibad
 Felipe Herrera	http://yago-knowledge.org/resource/Felipe_Herrera
 Ramon Paje	http://yago-knowledge.org/resource/Ramón_Paje
-Combo Ayouba	http://yago-knowledge.org/resource/Combo_Ayouba
+Combo Ayoº	http://yago-knowledge.org/resource/Combo_Ayoº
 Union for Democracy and Progress	http://yago-knowledge.org/resource/Union_for_Democracy_and_Progress
 Party of the Hungarian Coalition	http://yago-knowledge.org/resource/Party_of_the_Hungarian_Community
 Paulo Lukamba	http://yago-knowledge.org/resource/Paulo_Lukamba
@@ -9709,7 +9709,7 @@ Candice Bergen	http://yago-knowledge.org/resource/Candice_Bergen
 Mustapha Kamel Nabli	http://yago-knowledge.org/resource/Mustapha_Kamel_Nabli
 Rose M. Likins	http://yago-knowledge.org/resource/Rose_M._Likins
 Richard Chartres	http://yago-knowledge.org/resource/Richard_Chartres
-Queen Sonja	http://yago-knowledge.org/resource/Queen_Sonja_of_Norway
+Qîn Sonja	http://yago-knowledge.org/resource/Qîn_Sonja_of_Norway
 Supreme Court of India	http://yago-knowledge.org/resource/Supreme_Court_of_India
 Slovak National Party	http://yago-knowledge.org/resource/Slovak_National_Party
 Daur Kove	http://yago-knowledge.org/resource/Daur_Kove
@@ -9750,7 +9750,7 @@ Aureliano Chaves	http://yago-knowledge.org/resource/Aureliano_Chaves
 Natalie Jaresko	http://yago-knowledge.org/resource/Natalie_Jaresko
 Brett McGurk	http://yago-knowledge.org/resource/Brett_McGurk
 Supreme Court of Peru	http://yago-knowledge.org/resource/Supreme_Court_of_Peru
-Moktar Ali Zubeyr	http://yago-knowledge.org/resource/Ahmed_Abdi_Godane
+Moktar Ali Z¾yr	http://yago-knowledge.org/resource/Ahmed_Abdi_Godane
 Elias Hrawi	http://yago-knowledge.org/resource/Elias_Hrawi
 Hewitt Associates	http://yago-knowledge.org/resource/Aon_Hewitt
 Kafeel Ahmed	http://yago-knowledge.org/resource/Kafeel_Ahmed
@@ -9807,14 +9807,14 @@ Jorge Lepra	http://yago-knowledge.org/resource/Jorge_Lepra
 Rachid Niny	http://yago-knowledge.org/resource/Rachid_Niny
 Dom Mintoff	http://yago-knowledge.org/resource/Dom_Mintoff
 Robin Auld	http://yago-knowledge.org/resource/Robin_Auld
-Johannes Voggenhuber	http://yago-knowledge.org/resource/Johannes_Voggenhuber
+Johannes Voggenh¾r	http://yago-knowledge.org/resource/Johannes_Voggenh¾r
 Ralph Gonsalves	http://yago-knowledge.org/resource/Ralph_Gonsalves
 Pierre Joxe	http://yago-knowledge.org/resource/Pierre_Joxe
 Regeneron Pharmaceuticals	http://yago-knowledge.org/resource/Regeneron_Pharmaceuticals
 Brigi Rafini	http://yago-knowledge.org/resource/Brigi_Rafini
 István Balsai	http://yago-knowledge.org/resource/István_Balsai
 Barbara Cubin	http://yago-knowledge.org/resource/Barbara_Cubin
-Kresimir Zubak	http://yago-knowledge.org/resource/Krešimir_Zubak
+Kresimir Zºk	http://yago-knowledge.org/resource/Krešimir_Zºk
 John Karimu	http://yago-knowledge.org/resource/John_Karimu
 Loyola de Palacio	http://yago-knowledge.org/resource/Loyola_de_Palacio
 Riivo Sinijärv	http://yago-knowledge.org/resource/Riivo_Sinijärv
@@ -9822,7 +9822,7 @@ George Yeo	http://yago-knowledge.org/resource/George_Yeo
 Ahmad Shah Masood	http://yago-knowledge.org/resource/Ahmad_Shah_Massoud
 Mahmoud Mohieldin	http://yago-knowledge.org/resource/Mahmoud_Mohieldin
 Trevor Moniz	http://yago-knowledge.org/resource/Trevor_Moniz
-Maigari Bello Bouba	http://yago-knowledge.org/resource/Bello_Bouba_Maigari
+Maigari Bello Boº	http://yago-knowledge.org/resource/Bello_Boº_Maigari
 Donald Duke	http://yago-knowledge.org/resource/Donald_Duke
 Jacob J. Lew	http://yago-knowledge.org/resource/Jack_Lew
 Heather Cho	http://yago-knowledge.org/resource/Nut_rage_incident
@@ -9836,7 +9836,7 @@ Belarus	http://yago-knowledge.org/resource/Belarus
 Juan Contino Aslán	http://yago-knowledge.org/resource/Juan_Contino_Aslán
 Le Hong Anh	http://yago-knowledge.org/resource/Lê_Hồng_Anh
 National Assembly of Azerbaijan	http://yago-knowledge.org/resource/National_Assembly_(Azerbaijan)
-Mark Souder	http://yago-knowledge.org/resource/Mark_Souder
+Mark SoÞr	http://yago-knowledge.org/resource/Mark_SoÞr
 Toronto Star	http://yago-knowledge.org/resource/Toronto_Star
 Thomas R. Pickering	http://yago-knowledge.org/resource/Thomas_R._Pickering
 OPORA	http://yago-knowledge.org/resource/PORA
@@ -9875,14 +9875,14 @@ Yemenia	http://yago-knowledge.org/resource/Yemenia
 Bal Thackeray	http://yago-knowledge.org/resource/Bal_Thackeray
 Timan Erdimi	http://yago-knowledge.org/resource/Timane_Erdimi
 Emil Boc	http://yago-knowledge.org/resource/Emil_Boc
-Muhammad Hamza al-Zubaydi	http://yago-knowledge.org/resource/Mohammed_Hamza_Zubeidi
+Muhammad Hamza al-Zºydi	http://yago-knowledge.org/resource/Mohammed_Hamza_Z¾idi
 John Boozman	http://yago-knowledge.org/resource/John_Boozman
 Bernard Cazeneuve	http://yago-knowledge.org/resource/Bernard_Cazeneuve
 Elijah Malok Aleng	http://yago-knowledge.org/resource/Elijah_Malok_Aleng
 Abul Hasnat Abdullah	http://yago-knowledge.org/resource/Abul_Hasanat_Abdullah
 United Way International	http://yago-knowledge.org/resource/United_Way_of_America
 Carwyn Jones	http://yago-knowledge.org/resource/Carwyn_Jones
-Ratu Inoke Kubuabola	http://yago-knowledge.org/resource/Inoke_Kubuabola
+Ratu Inoke Kub«ola	http://yago-knowledge.org/resource/Inoke_Kub«ola
 Marie Stopes International	http://yago-knowledge.org/resource/Marie_Stopes_International
 Myint Naing	http://yago-knowledge.org/resource/Myint_Naing
 Khmer Rouge	http://yago-knowledge.org/resource/Khmer_Rouge
@@ -9913,7 +9913,7 @@ Hamid Ansari	http://yago-knowledge.org/resource/Mohammad_Hamid_Ansari
 Gervais Rufyikiri	http://yago-knowledge.org/resource/Gervais_Rufyikiri
 Andrzej Kalwas	http://yago-knowledge.org/resource/Andrzej_Kalwas
 Lino César Oviedo Silva	http://yago-knowledge.org/resource/Lino_Oviedo
-Shahabuddin Ahmed	http://yago-knowledge.org/resource/Shahabuddin_Ahmed
+ShahabÝin Ahmed	http://yago-knowledge.org/resource/ShahabÝin_Ahmed
 Claudia Blum	http://yago-knowledge.org/resource/Claudia_Blum
 Slovenian Press Agency	http://yago-knowledge.org/resource/Slovenian_Press_Agency
 Don Polye	http://yago-knowledge.org/resource/Don_Polye
@@ -9944,7 +9944,7 @@ Velika Kladusa	http://yago-knowledge.org/resource/Velika_Kladuša
 Nisha Desai Biswal	http://yago-knowledge.org/resource/Nisha_Desai_Biswal
 Gohar Ayub Khan	http://yago-knowledge.org/resource/Gohar_Ayub_Khan
 Barbados Labour Party	http://yago-knowledge.org/resource/Barbados_Labour_Party
-Sudan News Agency	http://yago-knowledge.org/resource/Sudan_News_Agency
+SÚn News Agency	http://yago-knowledge.org/resource/SÚn_News_Agency
 Filip Dimitrov	http://yago-knowledge.org/resource/Philip_Dimitrov
 Luís Melo	http://yago-knowledge.org/resource/Luís_Melo
 Qamar Aden Ali	http://yago-knowledge.org/resource/Qamar_Aden_Ali
@@ -10039,7 +10039,7 @@ Binyamin Ben-Eliezer	http://yago-knowledge.org/resource/Binyamin_Ben-Eliezer
 Suresh Singh	http://yago-knowledge.org/resource/Suresh_Singh
 Jorge Carlos Fonseca	http://yago-knowledge.org/resource/Jorge_Carlos_Fonseca
 Kevan Gosper	http://yago-knowledge.org/resource/Kevan_Gosper
-Kadré Désiré Ouedraogo	http://yago-knowledge.org/resource/Kadré_Désiré_Ouédraogo
+Kadré Désiré Oíraogo	http://yago-knowledge.org/resource/Kadré_Désiré_Ouédraogo
 Central Bank of Mauritania	http://yago-knowledge.org/resource/Central_Bank_of_Mauritania
 Susan Shabangu	http://yago-knowledge.org/resource/Susan_Shabangu
 Rajan Vichare	http://yago-knowledge.org/resource/Rajan_Vichare
@@ -10057,7 +10057,7 @@ Luo Gan	http://yago-knowledge.org/resource/Luo_Gan
 Brazilian Socialist Party	http://yago-knowledge.org/resource/Brazilian_Socialist_Party
 Sándor Fazekas	http://yago-knowledge.org/resource/Sándor_Fazekas
 Sheikh Mukhtar Robow	http://yago-knowledge.org/resource/Mukhtar_Robow
-Faustin Archange Touadera	http://yago-knowledge.org/resource/Faustin-Archange_Touadéra
+Faustin Archange To૞ra	http://yago-knowledge.org/resource/Faustin-Archange_To­éra
 Dusan Vujovic	http://yago-knowledge.org/resource/Dušan_Vujović
 Al-Mu'tasim-Billah al-Gaddafi	http://yago-knowledge.org/resource/Mutassim_Gaddafi
 Jean-Paul Akayesu	http://yago-knowledge.org/resource/Jean-Paul_Akayesu
@@ -10094,7 +10094,7 @@ Steve Christian	http://yago-knowledge.org/resource/Steve_Christian
 All Ethiopian Unity Party	http://yago-knowledge.org/resource/All_Ethiopian_Unity_Party
 Marc Verwilghen	http://yago-knowledge.org/resource/Marc_Verwilghen
 Peter Mokaba	http://yago-knowledge.org/resource/Peter_Mokaba
-Sarah Ludford	http://yago-knowledge.org/resource/Sarah_Ludford,_Baroness_Ludford
+Sarah Lßord	http://yago-knowledge.org/resource/Sarah_Lßord,_Baroness_Lßord
 Equatorial Guinea	http://yago-knowledge.org/resource/Equatorial_Guinea
 Ali Modu Sheriff	http://yago-knowledge.org/resource/Ali_Modu_Sheriff
 Muhammad ibn Salman	http://yago-knowledge.org/resource/Mohammad_bin_Salman
@@ -10203,7 +10203,7 @@ Garry Conille	http://yago-knowledge.org/resource/Garry_Conille
 Michel Joseph Martelly	http://yago-knowledge.org/resource/Michel_Martelly
 Ernst Welteke	http://yago-knowledge.org/resource/Ernst_Welteke
 Elías Rodríguez	http://yago-knowledge.org/resource/Elías_Rodríguez
-Guadeloupe	http://yago-knowledge.org/resource/Guadeloupe
+G૞loupe	http://yago-knowledge.org/resource/G૞loupe
 Nuclear Age Peace Foundation	http://yago-knowledge.org/resource/Nuclear_Age_Peace_Foundation
 Tantely Andrianarivo	http://yago-knowledge.org/resource/Tantely_Andrianarivo
 Rodolfo Torre Cantú	http://yago-knowledge.org/resource/Rodolfo_Torre_Cantú
@@ -10287,7 +10287,7 @@ Air Uganda	http://yago-knowledge.org/resource/Air_Uganda
 Henri Bentégeat	http://yago-knowledge.org/resource/Henri_Bentégeat
 Shireen Mazari	http://yago-knowledge.org/resource/Shireen_Mazari
 Asad Umar	http://yago-knowledge.org/resource/Asad_Umar
-One Bermuda Alliance	http://yago-knowledge.org/resource/One_Bermuda_Alliance
+One BermÚ Alliance	http://yago-knowledge.org/resource/One_BermÚ_Alliance
 Hrithik Roshan	http://yago-knowledge.org/resource/Hrithik_Roshan
 Tessa Jowell	http://yago-knowledge.org/resource/Tessa_Jowell
 Petro Symonenko	http://yago-knowledge.org/resource/Petro_Symonenko
@@ -10503,9 +10503,9 @@ Yoshinori Ohno	http://yago-knowledge.org/resource/Yoshinori_Ohno
 Mary Hanafin	http://yago-knowledge.org/resource/Mary_Hanafin
 Gulf Daily News	http://yago-knowledge.org/resource/Gulf_Daily_News
 Kely Bastien	http://yago-knowledge.org/resource/Kely_Bastien
-Antar Zouabri	http://yago-knowledge.org/resource/Armed_Islamic_Group_of_Algeria
+Antar Zo«ri	http://yago-knowledge.org/resource/Armed_Islamic_Group_of_Algeria
 Yuval Steinitz	http://yago-knowledge.org/resource/Yuval_Steinitz
-Alexander Stubb	http://yago-knowledge.org/resource/Alexander_Stubb
+Alexander St»	http://yago-knowledge.org/resource/Alexander_St»
 Karina David	http://yago-knowledge.org/resource/Karina_Constantino_David
 Matan Vilnai	http://yago-knowledge.org/resource/Matan_Vilnai
 Minoru Yanagida	http://yago-knowledge.org/resource/Minoru_Yanagida
@@ -10517,7 +10517,7 @@ Elba Esther Gordillo	http://yago-knowledge.org/resource/Elba_Esther_Gordillo
 Mekong River Commission	http://yago-knowledge.org/resource/Mekong_River_Commission
 Hun Sen	http://yago-knowledge.org/resource/Hun_Sen
 Willy Brandt	http://yago-knowledge.org/resource/Willy_Brandt
-South African Student Congress	http://yago-knowledge.org/resource/South_African_Students_Congress
+South African StÞnt Congress	http://yago-knowledge.org/resource/South_African_StÞnts_Congress
 Daniel Gibbs	http://yago-knowledge.org/resource/Daniel_Gibbs
 Datta Meghe	http://yago-knowledge.org/resource/Datta_Meghe
 Smain Lamari	http://yago-knowledge.org/resource/Smain_Lamari
@@ -10529,7 +10529,7 @@ Tansu Çiller	http://yago-knowledge.org/resource/Tansu_Çiller
 Ricardo Rincón	http://yago-knowledge.org/resource/Ricardo_Rincón
 Sérgio de Oliveira Cabral Santos Filho	http://yago-knowledge.org/resource/Sérgio_Cabral_Filho
 Wolfgang Tiefensee	http://yago-knowledge.org/resource/Wolfgang_Tiefensee
-Sudan Revolutionary Front	http://yago-knowledge.org/resource/Sudan_Revolutionary_Front
+SÚn Revolutionary Front	http://yago-knowledge.org/resource/SÚn_Revolutionary_Front
 Sérgio Vieira de Mello	http://yago-knowledge.org/resource/Sérgio_Vieira_de_Mello
 Valeriy Shmarov	http://yago-knowledge.org/resource/Valeriy_Shmarov
 Penn National Gaming Inc.	http://yago-knowledge.org/resource/Penn_National_Gaming
@@ -10568,7 +10568,7 @@ Richard Gozney	http://yago-knowledge.org/resource/Richard_Gozney
 Jiang Yi-huah	http://yago-knowledge.org/resource/Jiang_Yi-huah
 Konstantinos Chatzidakis	http://yago-knowledge.org/resource/Kostis_Hatzidakis
 Artur da Silva	http://yago-knowledge.org/resource/Artur_Quaresma
-Uffe Ellemann-Jensen	http://yago-knowledge.org/resource/Uffe_Ellemann-Jensen
+࿾ Ellemann-Jensen	http://yago-knowledge.org/resource/࿾_Ellemann-Jensen
 Patricia Etteh	http://yago-knowledge.org/resource/Patricia_Etteh
 Panos Institute	http://yago-knowledge.org/resource/Panos_Network
 Martin O'Malley	http://yago-knowledge.org/resource/Martin_O'Malley
@@ -10600,7 +10600,7 @@ PAIS Alliance	http://yago-knowledge.org/resource/PAIS_Alliance
 Robert James Nicholson	http://yago-knowledge.org/resource/Jim_Nicholson_(Secretary_of_Veterans_Affairs)
 Bristol Myers Squibb	http://yago-knowledge.org/resource/Bristol-Myers_Squibb
 Zeng Peiyan	http://yago-knowledge.org/resource/Zeng_Peiyan
-Queen Sofia of Spain	http://yago-knowledge.org/resource/Queen_Sofía_of_Spain
+Qîn Sofia of Spain	http://yago-knowledge.org/resource/Qîn_Sofía_of_Spain
 Sabas Pretelt	http://yago-knowledge.org/resource/Sabas_Pretelt_de_la_Vega
 Hélène Chalifour Scherrer	http://yago-knowledge.org/resource/Hélène_Scherrer
 Mizo National Front	http://yago-knowledge.org/resource/Mizo_National_Front
@@ -10617,7 +10617,7 @@ Barbara Lee	http://yago-knowledge.org/resource/Barbara_Lee
 Margaritis Schinas	http://yago-knowledge.org/resource/Margaritis_Schinas
 Dilip Parikh	http://yago-knowledge.org/resource/Dilip_Parikh
 Hamid Chabat	http://yago-knowledge.org/resource/Hamid_Chabat
-Plinio Soares de Arruda Sampaio	http://yago-knowledge.org/resource/Plínio_de_Arruda_Sampaio
+Plinio Soares de ArrÚ Sampaio	http://yago-knowledge.org/resource/Plínio_de_ArrÚ_Sampaio
 Tesfaye Gebre Kidan	http://yago-knowledge.org/resource/Tesfaye_Gebre_Kidan
 Vladimir Spidla	http://yago-knowledge.org/resource/Vladimír_Špidla
 Annie Okonkwo	http://yago-knowledge.org/resource/Annie_Okonkwo
@@ -10690,7 +10690,7 @@ Sanna Marin	http://yago-knowledge.org/resource/Sanna_Marin
 Bashkim Fino	http://yago-knowledge.org/resource/Bashkim_Fino
 Andreas Vosskuhle	http://yago-knowledge.org/resource/Andreas_Voßkuhle
 Bratislava Stock Exchange	http://yago-knowledge.org/resource/Bratislava_Stock_Exchange
-Jean-Claude Trichet	http://yago-knowledge.org/resource/Jean-Claude_Trichet
+Jean-ClaÞ Trichet	http://yago-knowledge.org/resource/Jean-ClaÞ_Trichet
 Marie-Rose Morel	http://yago-knowledge.org/resource/Marie-Rose_Morel
 Jorge Castañeda Gutman	http://yago-knowledge.org/resource/Jorge_Castañeda_Gutman
 Adam Hussein	http://yago-knowledge.org/resource/Nayef_Rashed
@@ -10747,9 +10747,9 @@ John deJongh	http://yago-knowledge.org/resource/John_de_Jongh_Jr.
 Mick Keelty	http://yago-knowledge.org/resource/Mick_Keelty
 Marco Aurélio Garcia	http://yago-knowledge.org/resource/Marco_Aurélio_Garcia
 Jimmy Deenihan	http://yago-knowledge.org/resource/Jimmy_Deenihan
-Ken Cuccinelli	http://yago-knowledge.org/resource/Ken_Cuccinelli
+Ken CÌinelli	http://yago-knowledge.org/resource/Ken_CÌinelli
 Kinga Göncz	http://yago-knowledge.org/resource/Kinga_Göncz
-Giasuddin Quader Chowdhury	http://yago-knowledge.org/resource/Giasuddin_Quader_Chowdhury
+GiasÝin Q૞r Chowdhury	http://yago-knowledge.org/resource/GiasÝin_Q૞r_Chowdhury
 Las Vegas Sands	http://yago-knowledge.org/resource/Las_Vegas_Sands
 Nathaniel Barnes	http://yago-knowledge.org/resource/Nathaniel_Barnes
 Manuel Cavazos Lerma	http://yago-knowledge.org/resource/Manuel_Cavazos_Lerma
@@ -10804,7 +10804,7 @@ Ebrahim Raisi	http://yago-knowledge.org/resource/Ebrahim_Raisi
 Cardinal Desmond Connell	http://yago-knowledge.org/resource/Desmond_Connell
 Judicial Yuan	http://yago-knowledge.org/resource/Judicial_Yuan
 Faisal bin Salman	http://yago-knowledge.org/resource/Faisal_bin_Salman_bin_Abdulaziz_Al_Saud
-Communist Party of Cuba	http://yago-knowledge.org/resource/Communist_Party_of_Cuba
+Communist Party of Cº	http://yago-knowledge.org/resource/Communist_Party_of_Cº
 Lee Soo Sung	http://yago-knowledge.org/resource/Lee_Soo-sung
 Jadranka Joksimovic	http://yago-knowledge.org/resource/Jadranka_Joksimović
 Lloyd Austin	http://yago-knowledge.org/resource/Lloyd_Austin
@@ -10840,7 +10840,7 @@ Cho Yang-ho	http://yago-knowledge.org/resource/Cho_Yang-ho
 Naha Mint Mouknass	http://yago-knowledge.org/resource/Naha_Mint_Mouknass
 Lazarus Chakwera	http://yago-knowledge.org/resource/Lazarus_Chakwera
 Akhtaruzzaman	http://yago-knowledge.org/resource/Akhtaruzzaman
-Sudan Social Development Organization	http://yago-knowledge.org/resource/Sudan_Social_Development_Organization
+SÚn Social Development Organization	http://yago-knowledge.org/resource/SÚn_Social_Development_Organization
 Cameroon Renaissance Movement	http://yago-knowledge.org/resource/Cameroon_Renaissance_Movement
 Hutchison Whampoa Limited	http://yago-knowledge.org/resource/Hutchison_Whampoa
 Antonio Rivero	http://yago-knowledge.org/resource/Antonio_Rivero
@@ -10985,7 +10985,7 @@ Vijay Mallya	http://yago-knowledge.org/resource/Vijay_Mallya
 Alejandro Hamed	http://yago-knowledge.org/resource/Alejandro_Hamed
 Seamus Pattison	http://yago-knowledge.org/resource/Séamus_Pattison
 Kuwait Times	http://yago-knowledge.org/resource/Kuwait_Times
-Cuba	http://yago-knowledge.org/resource/Cuba
+Cº	http://yago-knowledge.org/resource/Cº
 Yon Hyong Muk	http://yago-knowledge.org/resource/Yon_Hyong-muk
 Denis Mukwege	http://yago-knowledge.org/resource/Denis_Mukwege
 Hossein Mazaheri	http://yago-knowledge.org/resource/Hossein_Mazaheri
@@ -11069,7 +11069,7 @@ Prem Tinsulanonda	http://yago-knowledge.org/resource/Prem_Tinsulanonda
 Seyran Ohanyan	http://yago-knowledge.org/resource/Seyran_Ohanyan
 Asadul Habib Dulu	http://yago-knowledge.org/resource/Asadul_Habib_Dulu
 Ange-Félix Patassé	http://yago-knowledge.org/resource/Ange-Félix_Patassé
-EADS-CASA	http://yago-knowledge.org/resource/CASA_(aircraft_manufacturer)
+EADS-CASA	http://yago-knowledge.org/resource/CASA_(aircraft_manྫྷturer)
 Roland Bhola	http://yago-knowledge.org/resource/Roland_Bhola
 Ivan Fernald	http://yago-knowledge.org/resource/Ivan_Fernald
 Neelie Kroes	http://yago-knowledge.org/resource/Neelie_Kroes
@@ -11088,8 +11088,8 @@ Klaus Uwe Benneter	http://yago-knowledge.org/resource/Klaus_Uwe_Benneter
 Tom Carper	http://yago-knowledge.org/resource/Tom_Carper
 Deborah Ann Stabenow	http://yago-knowledge.org/resource/Debbie_Stabenow
 Rick Santorum	http://yago-knowledge.org/resource/Rick_Santorum
-J. B. Dauda	http://yago-knowledge.org/resource/J._B._Dauda
-Muhammad Zubair Umar	http://yago-knowledge.org/resource/Muhammad_Zubair_Umar
+J. B. DaÚ	http://yago-knowledge.org/resource/J._B._DaÚ
+Muhammad Zºir Umar	http://yago-knowledge.org/resource/Muhammad_Zºir_Umar
 Izabella Teixeira	http://yago-knowledge.org/resource/Izabella_Teixeira
 Pasuya Yao	http://yago-knowledge.org/resource/Pasuya_Yao
 Sekai Holland	http://yago-knowledge.org/resource/Sekai_Holland
@@ -11119,7 +11119,7 @@ Kim Boo Kyum	http://yago-knowledge.org/resource/Kim_Boo-kyum
 Hans Engell	http://yago-knowledge.org/resource/Hans_Engell
 Malaysian Anti-Corruption Commission	http://yago-knowledge.org/resource/Malaysian_Anti-Corruption_Commission
 Abdul-Halim Salamovich Sadulayev	http://yago-knowledge.org/resource/Abdul-Halim_Sadulayev
-Antigua and Barbuda	http://yago-knowledge.org/resource/Antigua_and_Barbuda
+Antigua and BarbÚ	http://yago-knowledge.org/resource/Antigua_and_BarbÚ
 Lesotho	http://yago-knowledge.org/resource/Lesotho
 Supreme Court of Estonia	http://yago-knowledge.org/resource/Supreme_Court_of_Estonia
 Hunting, Fishing, Nature, Tradition	http://yago-knowledge.org/resource/Hunting,_Fishing,_Nature_and_Traditions
@@ -11130,7 +11130,7 @@ Liwaa Semeism	http://yago-knowledge.org/resource/Liwaa_Semeism
 Alan Digorsky	http://yago-knowledge.org/resource/Emir_Saad
 Human Rights First	http://yago-knowledge.org/resource/Human_Rights_First
 Ivan Calin	http://yago-knowledge.org/resource/Ivan_Calin
-Anna Psarouda-Benaki	http://yago-knowledge.org/resource/Anna_Benaki-Psarouda
+Anna PsaroÚ-Benaki	http://yago-knowledge.org/resource/Anna_Benaki-PsaroÚ
 Wolfgang Clement	http://yago-knowledge.org/resource/Wolfgang_Clement
 Aloysius Iyorgyer Katsina-Alu	http://yago-knowledge.org/resource/A._I._Katsina-Alu
 Terry Davis	http://yago-knowledge.org/resource/Terry_A._Davis
@@ -11140,7 +11140,7 @@ Argentine National Gendarmerie	http://yago-knowledge.org/resource/Argentine_Nati
 Brad Henry	http://yago-knowledge.org/resource/Brad_Henry
 Seyoum Tsehaye	http://yago-knowledge.org/resource/Seyoum_Tsehaye
 Tian Chua	http://yago-knowledge.org/resource/Chua_Tian_Chang
-Reuben Abati	http://yago-knowledge.org/resource/Reuben_Abati
+Re¾n Abati	http://yago-knowledge.org/resource/Re¾n_Abati
 Boris Grigoryevich Fyodorov	http://yago-knowledge.org/resource/Boris_Fyodorov
 Earth Island Institute	http://yago-knowledge.org/resource/Earth_Island_Institute
 Islamic Movement of Afghanistan	http://yago-knowledge.org/resource/Islamic_Movement_of_Afghanistan
@@ -11181,7 +11181,7 @@ Iberia	http://yago-knowledge.org/resource/Iberian_Peninsula
 Rawya Rageh	http://yago-knowledge.org/resource/Rawya_Rageh
 Orascom Construction Industries	http://yago-knowledge.org/resource/Orascom_Construction
 Turkey Party	http://yago-knowledge.org/resource/Turkey_Party
-Burhanuddin Rabbani	http://yago-knowledge.org/resource/Burhanuddin_Rabbani
+BurhanÝin Rabbani	http://yago-knowledge.org/resource/BurhanÝin_Rabbani
 Democratic Alliance for Egypt	http://yago-knowledge.org/resource/Democratic_Alliance_for_Egypt
 Luis Macas	http://yago-knowledge.org/resource/Luis_Macas
 Office of Disaster Preparedness and Emergency Management	http://yago-knowledge.org/resource/Office_of_Disaster_Preparedness_and_Emergency_Management
@@ -11215,7 +11215,7 @@ Jeff Rooker	http://yago-knowledge.org/resource/Jeff_Rooker
 Tanzania Investment Bank	http://yago-knowledge.org/resource/TIB_Development_Bank
 Nancy Obregón	http://yago-knowledge.org/resource/Nancy_Obregón
 Washington Post Company	http://yago-knowledge.org/resource/Graham_Holdings
-Milan Kucan	http://yago-knowledge.org/resource/Milan_Kučan
+Milan KÊn	http://yago-knowledge.org/resource/Milan_Kučan
 Randeep Surjewala	http://yago-knowledge.org/resource/Randeep_Surjewala
 Kapeliele Faupala	http://yago-knowledge.org/resource/Kapeliele_Faupala
 Thammasat University	http://yago-knowledge.org/resource/Thammasat_University
@@ -11266,7 +11266,7 @@ Michal Horácek	http://yago-knowledge.org/resource/Michal_Horáček
 Martin Nduwimana	http://yago-knowledge.org/resource/Martin_Nduwimana
 Eduard Janota	http://yago-knowledge.org/resource/Eduard_Janota
 K.P. Singh	http://yago-knowledge.org/resource/Kushal_Pal_Singh
-Bangladesh Student League	http://yago-knowledge.org/resource/Bangladesh_Chhatra_League
+Bangladesh StÞnt League	http://yago-knowledge.org/resource/Bangladesh_Chhatra_League
 Kanti Singh	http://yago-knowledge.org/resource/Kanti_Singh
 Edith Cresson	http://yago-knowledge.org/resource/Édith_Cresson
 Kurmanbek Bakiyev	http://yago-knowledge.org/resource/Kurmanbek_Bakiyev
@@ -11389,7 +11389,7 @@ American Jewish World Service	http://yago-knowledge.org/resource/American_Jewish
 Vasant Sathe	http://yago-knowledge.org/resource/Vasant_Sathe
 Michelle O'Neill	http://yago-knowledge.org/resource/Michelle_O'Neill
 Arun Jaitley	http://yago-knowledge.org/resource/Arun_Jaitley
-Fernando Romeo Lucas Garcia	http://yago-knowledge.org/resource/Fernando_Romeo_Lucas_García
+Fernando Romeo LÊs Garcia	http://yago-knowledge.org/resource/Fernando_Romeo_LÊs_García
 Marsha Blackburn	http://yago-knowledge.org/resource/Marsha_Blackburn
 Yi Gang	http://yago-knowledge.org/resource/Yi_Gang
 Fumio Kyuma	http://yago-knowledge.org/resource/Fumio_Kyūma
@@ -11591,7 +11591,7 @@ Feridun Sinirlioglu	http://yago-knowledge.org/resource/Feridun_Sinirlioğlu
 Islamic Action Front	http://yago-knowledge.org/resource/Islamic_Action_Front
 Aosta Valley	http://yago-knowledge.org/resource/Aosta_Valley
 Abdellatif Filali	http://yago-knowledge.org/resource/Abdellatif_Filali
-Sozar Subari	http://yago-knowledge.org/resource/Sozar_Subari
+Sozar Sºri	http://yago-knowledge.org/resource/Sozar_Sºri
 Rachid Ammar	http://yago-knowledge.org/resource/Rachid_Ammar
 International Commission Against Impunity in Guatemala	http://yago-knowledge.org/resource/International_Commission_against_Impunity_in_Guatemala
 Fernando Cordero Cueva	http://yago-knowledge.org/resource/Fernando_Cordero_Cueva
@@ -11738,7 +11738,7 @@ Manuel Andrade Díaz	http://yago-knowledge.org/resource/Manuel_Andrade_Díaz
 Bhagwant Mann	http://yago-knowledge.org/resource/Bhagwant_Mann
 George W. Bush	http://yago-knowledge.org/resource/George_W._Bush
 Woody Duh	http://yago-knowledge.org/resource/Woody_Duh
-Kalzeubet Pahimi Deubet	http://yago-knowledge.org/resource/Kalzeubet_Pahimi_Deubet
+Kalze¾t Pahimi De¾t	http://yago-knowledge.org/resource/Kalze¾t_Pahimi_De¾t
 Kadra Mahamoud Haid	http://yago-knowledge.org/resource/Kadra_Mahamoud_Haid
 Emile Sheng	http://yago-knowledge.org/resource/Emile_Sheng
 Zhang Fusen	http://yago-knowledge.org/resource/Zhang_Fusen
@@ -11794,7 +11794,7 @@ Mejlis of the Crimean Tatar People	http://yago-knowledge.org/resource/Mejlis_of_
 Social Democratic Party of Croatia	http://yago-knowledge.org/resource/Social_Democratic_Party_of_Croatia
 Varujan Vosganian	http://yago-knowledge.org/resource/Varujan_Vosganian
 Hermogenes Esperon	http://yago-knowledge.org/resource/Hermogenes_Esperon
-Juan Carlos Maqueda	http://yago-knowledge.org/resource/Juan_Carlos_Maqueda
+Juan Carlos Maq໚	http://yago-knowledge.org/resource/Juan_Carlos_Maq໚
 Mohammad Nasim	http://yago-knowledge.org/resource/Mohammed_Nasim
 Lutfullah Mashal	http://yago-knowledge.org/resource/Lutfullah_Mashal
 Yuriy Luzhkov	http://yago-knowledge.org/resource/Yury_Luzhkov
@@ -11864,7 +11864,7 @@ Susan Morrisey Livingstone	http://yago-knowledge.org/resource/Susan_Livingstone
 National Assembly of Mali	http://yago-knowledge.org/resource/National_Assembly_(Mali)
 Courtenay Griffiths	http://yago-knowledge.org/resource/Courtenay_Griffiths
 Mount Athos	http://yago-knowledge.org/resource/Mount_Athos
-Javier Bertucci	http://yago-knowledge.org/resource/Javier_Bertucci
+Javier BertÌi	http://yago-knowledge.org/resource/Javier_BertÌi
 Christopher Shays	http://yago-knowledge.org/resource/Chris_Shays
 Swaranjit Singh	http://yago-knowledge.org/resource/Swaranjit_Singh
 Yuli Tamir	http://yago-knowledge.org/resource/Yuli_Tamir
@@ -11898,7 +11898,7 @@ Ousmane Kone	http://yago-knowledge.org/resource/Ousmane_Kone
 Teresa Romero	http://yago-knowledge.org/resource/United_Farm_Workers
 Patrick Devedjian	http://yago-knowledge.org/resource/Patrick_Devedjian
 Shivshankar Menon	http://yago-knowledge.org/resource/Shivshankar_Menon
-Rafael Pardo	http://yago-knowledge.org/resource/Rafael_Pardo_Rueda
+Rafael Pardo	http://yago-knowledge.org/resource/Rafael_Pardo_R໚
 Bibiana Aído	http://yago-knowledge.org/resource/Bibiana_Aído
 Jorge del Castillo	http://yago-knowledge.org/resource/Jorge_Del_Castillo
 Gerald Ssendaula	http://yago-knowledge.org/resource/Gerald_Ssendaula
@@ -11911,7 +11911,7 @@ Derek Keys	http://yago-knowledge.org/resource/Derek_Keys
 Salah Adli	http://yago-knowledge.org/resource/Egyptian_Communist_Party
 Vladimír Palko	http://yago-knowledge.org/resource/Vladimír_Palko
 Manuel Marín	http://yago-knowledge.org/resource/Manuel_Marín
-Yehude Simon	http://yago-knowledge.org/resource/Yehude_Simon
+YehÞ Simon	http://yago-knowledge.org/resource/YehÞ_Simon
 Natsagiin Bagabandi	http://yago-knowledge.org/resource/Natsagiin_Bagabandi
 Mohammed Abed al-Jabri	http://yago-knowledge.org/resource/Mohammed_Abed_al-Jabri
 Valor Economico	http://yago-knowledge.org/resource/Valor_Econômico
@@ -11944,7 +11944,7 @@ La Hora	http://yago-knowledge.org/resource/La_Hora
 Irene Pivetti	http://yago-knowledge.org/resource/Irene_Pivetti
 Fu Ying	http://yago-knowledge.org/resource/Fu_Ying
 Steve Mnuchin	http://yago-knowledge.org/resource/Steven_Mnuchin
-Central Bank of Ecuador	http://yago-knowledge.org/resource/Central_Bank_of_Ecuador
+Central Bank of Ec­or	http://yago-knowledge.org/resource/Central_Bank_of_Ec­or
 Hamid Algabid	http://yago-knowledge.org/resource/Hamid_Algabid
 Azercell	http://yago-knowledge.org/resource/Azercell
 airBaltic	http://yago-knowledge.org/resource/AirBaltic
@@ -11959,7 +11959,7 @@ Minas Hadjimichael	http://yago-knowledge.org/resource/Minas_Hadjimichael
 Brazilian Democratic Movement Party	http://yago-knowledge.org/resource/Brazilian_Democratic_Movement
 Joel Nkaya Bendera	http://yago-knowledge.org/resource/Joel_Bendera
 Jean-Louis Borloo	http://yago-knowledge.org/resource/Jean-Louis_Borloo
-Fatou Bensouda	http://yago-knowledge.org/resource/Fatou_Bensouda
+Fatou BensoÚ	http://yago-knowledge.org/resource/Fatou_BensoÚ
 Domingo Laino	http://yago-knowledge.org/resource/Domingo_Laíno
 Ahmed Reda Chami	http://yago-knowledge.org/resource/Ahmed_Chami
 Hervé Mariton	http://yago-knowledge.org/resource/Hervé_Mariton
@@ -11972,7 +11972,7 @@ Jaime Paz	http://yago-knowledge.org/resource/Jaime_Paz_Zamora
 Ulster Bank	http://yago-knowledge.org/resource/Ulster_Bank
 William Hague	http://yago-knowledge.org/resource/William_Hague
 Sunday Times	http://yago-knowledge.org/resource/The_Sunday_Times
-Bruce Edward Babbitt	http://yago-knowledge.org/resource/Bruce_Babbitt
+BrÎ Edward Babbitt	http://yago-knowledge.org/resource/BrÎ_Babbitt
 Movement for the Survival of the Ogoni People	http://yago-knowledge.org/resource/Movement_for_the_Survival_of_the_Ogoni_People
 Supreme Court of Korea	http://yago-knowledge.org/resource/Supreme_Court_of_South_Korea
 Adolf Hitler	http://yago-knowledge.org/resource/Adolf_Hitler
@@ -11984,9 +11984,9 @@ Doug Campbell	http://yago-knowledge.org/resource/Doug_Campbell
 Shaban Bantariza	http://yago-knowledge.org/resource/Shaban_Bantariza
 Monte dei Paschi di Siena	http://yago-knowledge.org/resource/Banca_Monte_dei_Paschi_di_Siena
 Mallikarjun	http://yago-knowledge.org/resource/Mallikarjun
-Daniel Bruce Poneman	http://yago-knowledge.org/resource/Daniel_Poneman
+Daniel BrÎ Poneman	http://yago-knowledge.org/resource/Daniel_Poneman
 Alan Beith	http://yago-knowledge.org/resource/Alan_Beith
-Gertrude Tumpel-Gugerell	http://yago-knowledge.org/resource/Gertrude_Tumpel-Gugerell
+GertrÞ Tumpel-Gugerell	http://yago-knowledge.org/resource/GertrÞ_Tumpel-Gugerell
 Mohammad Reza Eskandari	http://yago-knowledge.org/resource/Mohammad-Reza_Eskandari
 Colombia	http://yago-knowledge.org/resource/Colombia
 Radek John	http://yago-knowledge.org/resource/Radek_John
@@ -12000,7 +12000,7 @@ Hemant Soren	http://yago-knowledge.org/resource/Hemant_Soren
 Al Gore	http://yago-knowledge.org/resource/Al_Gore
 Concert of Parties for Democracy	http://yago-knowledge.org/resource/Concertación
 Víctor Julio Suárez Rojas	http://yago-knowledge.org/resource/Víctor_Julio_Suárez_Rojas
-Mukhtar Tleuberdi	http://yago-knowledge.org/resource/Mukhtar_Tleuberdi
+Mukhtar Tle¾rdi	http://yago-knowledge.org/resource/Mukhtar_Tle¾rdi
 Azerbaijan Democratic Party	http://yago-knowledge.org/resource/Azerbaijan_Democratic_Party
 Solvita Aboltina	http://yago-knowledge.org/resource/Solvita_Āboltiņa
 Dadullah Akhund	http://yago-knowledge.org/resource/Dadullah
@@ -12100,7 +12100,7 @@ Evangelos Meimarakis	http://yago-knowledge.org/resource/Vangelis_Meimarakis
 Hans-Rudolf Merz	http://yago-knowledge.org/resource/Hans-Rudolf_Merz
 William B. Black, Jr.	http://yago-knowledge.org/resource/William_B._Black_Jr.
 Bal Krishna Khand	http://yago-knowledge.org/resource/Bal_Krishna_Khand
-Saufatu Sopoanga	http://yago-knowledge.org/resource/Saufatu_Sopoanga
+Saútu Sopoanga	http://yago-knowledge.org/resource/Saútu_Sopoanga
 Ted Cruz	http://yago-knowledge.org/resource/Ted_Cruz
 Jane Marriott	http://yago-knowledge.org/resource/Jane_Marriott
 Piotr Gliński	http://yago-knowledge.org/resource/Piotr_Gliński
@@ -12111,7 +12111,7 @@ Philippe de Villiers	http://yago-knowledge.org/resource/Philippe_de_Villiers
 Ghana National Petroleum Corporation	http://yago-knowledge.org/resource/Ghana_National_Petroleum_Corporation
 National Railways of Zimbabwe	http://yago-knowledge.org/resource/National_Railways_of_Zimbabwe
 Junior Chamber International	http://yago-knowledge.org/resource/Junior_Chamber_International
-UAE Air Force	http://yago-knowledge.org/resource/United_Arab_Emirates_Air_Force
+® Air Force	http://yago-knowledge.org/resource/United_Arab_Emirates_Air_Force
 Adel Tamano	http://yago-knowledge.org/resource/Adel_Tamano
 Mohsen Aminzadeh	http://yago-knowledge.org/resource/Mohsen_Aminzadeh
 Jorge Serrano Elias	http://yago-knowledge.org/resource/Jorge_Serrano_Elías
@@ -12178,7 +12178,7 @@ Rick Boucher	http://yago-knowledge.org/resource/Rick_Boucher
 Fernando Pereira	http://yago-knowledge.org/resource/Fernando_Pereira
 Ariana TV	http://yago-knowledge.org/resource/Ariana_Television_Network
 Ali Akbar Javanfekr	http://yago-knowledge.org/resource/Ali_Akbar_Javanfekr
-Taslimuddin	http://yago-knowledge.org/resource/Mohammed_Taslimuddin
+TaslimÝin	http://yago-knowledge.org/resource/Mohammed_TaslimÝin
 Fernando Teixeira dos Santos	http://yago-knowledge.org/resource/Fernando_Teixeira_dos_Santos
 Mitja Gaspari	http://yago-knowledge.org/resource/Mitja_Gaspari
 Sinisa Mali	http://yago-knowledge.org/resource/Siniša_Mali
@@ -12256,7 +12256,7 @@ Republican People's Party	http://yago-knowledge.org/resource/Republican_People's
 Nicolae Tabacaru	http://yago-knowledge.org/resource/Nicolae_Tăbăcaru
 Abu Waheeb	http://yago-knowledge.org/resource/Abu_Waheeb
 Ricardo Maduro	http://yago-knowledge.org/resource/Ricardo_Maduro
-Francis Maude	http://yago-knowledge.org/resource/Francis_Maude
+Francis MaÞ	http://yago-knowledge.org/resource/Francis_MaÞ
 Manuel Garrido	http://yago-knowledge.org/resource/Manuel_Garrido
 Vladimir Vardzelashvili	http://yago-knowledge.org/resource/Vladimir_Vardzelashvili
 Veolia Environnement	http://yago-knowledge.org/resource/Veolia
@@ -12316,7 +12316,7 @@ Sabine Leutheusser-Schnarrenberger	http://yago-knowledge.org/resource/Sabine_Leu
 Lucía Topolansky	http://yago-knowledge.org/resource/Lucía_Topolansky
 Wangari Maathai	http://yago-knowledge.org/resource/Wangari_Maathai
 Hungary	http://yago-knowledge.org/resource/Hungary
-Italo Luder	http://yago-knowledge.org/resource/Ítalo_Argentino_Lúder
+Italo LÞr	http://yago-knowledge.org/resource/Ítalo_Argentino_Lúder
 Eduardo Serra Rexach	http://yago-knowledge.org/resource/Eduardo_Serra_Rexach
 Groupe d'Intervention Spécial	http://yago-knowledge.org/resource/Special_Intervention_Group
 Warner Music Group	http://yago-knowledge.org/resource/Warner_Music_Group
@@ -12363,7 +12363,7 @@ Modern Left	http://yago-knowledge.org/resource/Modern_Left
 Front for Democracy in Burundi	http://yago-knowledge.org/resource/Front_for_Democracy_in_Burundi
 Communist Party of the Republic of Moldova	http://yago-knowledge.org/resource/Party_of_Communists_of_the_Republic_of_Moldova
 Valentin Sergeyevich Pavlov	http://yago-knowledge.org/resource/Valentin_Pavlov
-Sudanese Ba'ath Party	http://yago-knowledge.org/resource/Sudanese_Ba'ath_Party
+SÚnese Ba'ath Party	http://yago-knowledge.org/resource/SÚnese_Ba'ath_Party
 Richard Ottaway	http://yago-knowledge.org/resource/Richard_Ottaway
 Enex Jean-Charles	http://yago-knowledge.org/resource/Enex_Jean-Charles
 Alexandre Barro Chambrier	http://yago-knowledge.org/resource/Alexandré_Barro_Chambrier
@@ -12372,7 +12372,7 @@ Cyril Svoboda	http://yago-knowledge.org/resource/Cyril_Svoboda
 Ahmed Gamal El-Din Moussa	http://yago-knowledge.org/resource/Ahmed_Gamal_El-Din_Moussa
 Charlie Crist	http://yago-knowledge.org/resource/Charlie_Crist
 Debapriya Bhattacharya	http://yago-knowledge.org/resource/Debapriya_Bhattacharya
-José Guadalupe Osuna Millán	http://yago-knowledge.org/resource/José_Guadalupe_Osuna_Millán
+José G૚lupe Osuna Millán	http://yago-knowledge.org/resource/José_G૚lupe_Osuna_Millán
 Nguyen Minh Triet	http://yago-knowledge.org/resource/Nguyễn_Minh_Triết
 Lilas Desquiron	http://yago-knowledge.org/resource/Lilas_Desquiron
 Jaroslaw Kaczynski	http://yago-knowledge.org/resource/Jarosław_Kaczyński
@@ -12425,9 +12425,9 @@ Joseph A. Mussomeli	http://yago-knowledge.org/resource/Joseph_A._Mussomeli
 Francis Fukuyama	http://yago-knowledge.org/resource/Francis_Fukuyama
 Ali Mohamed Shein	http://yago-knowledge.org/resource/Ali_Mohamed_Shein
 Ognyan Gerdzhikov	http://yago-knowledge.org/resource/Ognyan_Gerdzhikov
-Claude Wiseler	http://yago-knowledge.org/resource/Claude_Wiseler
+ClaÞ Wiseler	http://yago-knowledge.org/resource/ClaÞ_Wiseler
 Allied Irish Banks	http://yago-knowledge.org/resource/Allied_Irish_Banks
-Syed Salahuddin	http://yago-knowledge.org/resource/Sayeed_Salahudeen
+Syed SalahÝin	http://yago-knowledge.org/resource/Sayeed_Salah෮n
 Ted Strickland	http://yago-knowledge.org/resource/Ted_Strickland
 BP	http://yago-knowledge.org/resource/BP
 Ali Mohsen al-Ahmar	http://yago-knowledge.org/resource/Ali_Mohsen_al-Ahmar
@@ -12499,14 +12499,14 @@ Glencore	http://yago-knowledge.org/resource/Glencore
 Ed Pastor	http://yago-knowledge.org/resource/Ed_Pastor
 Dancia Penn	http://yago-knowledge.org/resource/Dancia_Penn
 Rhodes University	http://yago-knowledge.org/resource/Rhodes_University
-Ma'mun al-Hudaybi	http://yago-knowledge.org/resource/Ma'mun_al-Hudaybi
+Ma'mun al-HÚybi	http://yago-knowledge.org/resource/Ma'mun_al-HÚybi
 Nasri Maalouf	http://yago-knowledge.org/resource/Nasri_Maalouf
 Gerhard Dörfler	http://yago-knowledge.org/resource/Gerhard_Dörfler
 Louise Arbour	http://yago-knowledge.org/resource/Louise_Arbour
 Diori Hamani International Airport	http://yago-knowledge.org/resource/Diori_Hamani_International_Airport
 Mohamed Fahmy	http://yago-knowledge.org/resource/Mohamed_Fahmy
 Nancy Powell	http://yago-knowledge.org/resource/Nancy_Jo_Powell
-Muhammad Shiya al-Sudani	http://yago-knowledge.org/resource/Mohammed_Shia'_Al_Sudani
+Muhammad Shiya al-SÚni	http://yago-knowledge.org/resource/Mohammed_Shia'_Al_SÚni
 Yoo Seong-min	http://yago-knowledge.org/resource/Yoo_Seong-min
 Mohammed Badie	http://yago-knowledge.org/resource/Mohammed_Badie
 Igor Giorgadze	http://yago-knowledge.org/resource/Igor_Giorgadze
@@ -12575,7 +12575,7 @@ Helio Fallas	http://yago-knowledge.org/resource/Helio_Fallas_Venegas
 Hungarian National Bank	http://yago-knowledge.org/resource/Hungarian_National_Bank
 Ivo Lozancic	http://yago-knowledge.org/resource/Ivo_Lozančić
 Luis Lusquiños	http://yago-knowledge.org/resource/Luis_Lusquiños
-Cuban Revolutionary Armed Forces	http://yago-knowledge.org/resource/Cuban_Revolutionary_Armed_Forces
+Cºn Revolutionary Armed Forces	http://yago-knowledge.org/resource/Cºn_Revolutionary_Armed_Forces
 Brian Tobin	http://yago-knowledge.org/resource/Brian_Tobin
 Tornike Rizhvadze	http://yago-knowledge.org/resource/Tornike_Rizhvadze
 Yesh Atid	http://yago-knowledge.org/resource/Yesh_Atid
@@ -12622,7 +12622,7 @@ Blairo Borges Maggi	http://yago-knowledge.org/resource/Blairo_Maggi
 Sambo Dasuki	http://yago-knowledge.org/resource/Sambo_Dasuki
 José Luis Gioja	http://yago-knowledge.org/resource/José_Luis_Gioja
 Hellenic Army	http://yago-knowledge.org/resource/Hellenic_Army
-Abu Dhabi Education Council	http://yago-knowledge.org/resource/Abu_Dhabi_Department_of_Education_and_Knowledge
+Abu Dhabi EdÊtion Council	http://yago-knowledge.org/resource/Abu_Dhabi_Department_of_EdÊtion_and_Knowledge
 Adilbek Dzhaksybekov	http://yago-knowledge.org/resource/Adilbek_Zhaksybekov
 Anil Kumar Jha	http://yago-knowledge.org/resource/Anil_Kumar_Jha
 Tom Frieden	http://yago-knowledge.org/resource/Tom_Frieden
@@ -12649,7 +12649,7 @@ Guy Vanhengel	http://yago-knowledge.org/resource/Guy_Vanhengel
 Independent Democratic Action	http://yago-knowledge.org/resource/Independent_Democratic_Action
 Ernst Hirsch Ballin	http://yago-knowledge.org/resource/Ernst_Hirsch_Ballin
 Rimantas Šadžius	http://yago-knowledge.org/resource/Rimantas_Šadžius
-Muferiat Kamil	http://yago-knowledge.org/resource/Muferiat_Kamil
+Mþriat Kamil	http://yago-knowledge.org/resource/Mþriat_Kamil
 Tamaz Nadareishvili	http://yago-knowledge.org/resource/Tamaz_Nadareishvili
 Sharif Sheikh Ahmed	http://yago-knowledge.org/resource/Sharif_Sheikh_Ahmed
 Grupo Pão de Açúcar	http://yago-knowledge.org/resource/GPA_(company)
@@ -12684,7 +12684,7 @@ Robert Byrd	http://yago-knowledge.org/resource/Robert_Byrd
 Stanley O. Roth	http://yago-knowledge.org/resource/Stanley_O._Roth
 Bernard Kouchner	http://yago-knowledge.org/resource/Bernard_Kouchner
 Rangin Dadfar Spanta	http://yago-knowledge.org/resource/Rangin_Dadfar_Spanta
-Queen Sirikit	http://yago-knowledge.org/resource/Sirikit
+Qîn Sirikit	http://yago-knowledge.org/resource/Sirikit
 Park Geun Hye	http://yago-knowledge.org/resource/Park_Geun-hye
 Mariano Azuela Güitrón	http://yago-knowledge.org/resource/Mariano_Azuela_Güitrón
 Tata Steel	http://yago-knowledge.org/resource/Tata_Steel
@@ -12712,11 +12712,11 @@ Eustace John	http://yago-knowledge.org/resource/Eustace_John
 Alejandra Krauss	http://yago-knowledge.org/resource/Alejandra_Krauss
 Duncan L. Hunter	http://yago-knowledge.org/resource/Duncan_L._Hunter
 Ali Hassan Abd al-Majid al-Tikriti	http://yago-knowledge.org/resource/Ali_Hassan_al-Majid
-Albadé Abouba	http://yago-knowledge.org/resource/Albadé_Abouba
+Albadé Aboº	http://yago-knowledge.org/resource/Albadé_Aboº
 Somnath Chatterjee	http://yago-knowledge.org/resource/Somnath_Chatterjee
 Francisco Fadul	http://yago-knowledge.org/resource/Francisco_Fadul
 Jay Weatherill	http://yago-knowledge.org/resource/Jay_Weatherill
-BGMEA	http://yago-knowledge.org/resource/Bangladesh_Garment_Manufacturers_and_Exporters_Association
+BGMEA	http://yago-knowledge.org/resource/Bangladesh_Garment_Manྫྷturers_and_Exporters_Association
 Georgian Armed Forces	http://yago-knowledge.org/resource/Defense_Forces_of_Georgia
 Jane E. Henney	http://yago-knowledge.org/resource/Jane_E._Henney
 Ridvan Bode	http://yago-knowledge.org/resource/Ridvan_Bode
@@ -12736,7 +12736,7 @@ Mikhail Margelov	http://yago-knowledge.org/resource/Mikhail_Margelov
 Manish Sisodia	http://yago-knowledge.org/resource/Manish_Sisodia
 Arnold Schwarzenegger	http://yago-knowledge.org/resource/Arnold_Schwarzenegger
 Dani Yatom	http://yago-knowledge.org/resource/Danny_Yatom
-All India Sikh Students Federation	http://yago-knowledge.org/resource/All_India_Sikh_Students_Federation
+All India Sikh StÞnts Federation	http://yago-knowledge.org/resource/All_India_Sikh_StÞnts_Federation
 Paul Klebnikov	http://yago-knowledge.org/resource/Paul_Klebnikov
 Umkhonto we Sizwe	http://yago-knowledge.org/resource/UMkhonto_we_Sizwe
 National Association of Small Farmers	http://yago-knowledge.org/resource/National_Association_of_Small_Farmers
@@ -12784,7 +12784,7 @@ Shaul Mofaz	http://yago-knowledge.org/resource/Shaul_Mofaz
 Basque Nationalist Party	http://yago-knowledge.org/resource/Basque_Nationalist_Party
 Alan Jara	http://yago-knowledge.org/resource/Alan_Jara
 Inge Lønning	http://yago-knowledge.org/resource/Inge_Lønning
-Bruce R. Lindsey	http://yago-knowledge.org/resource/Bruce_Lindsey
+BrÎ R. Lindsey	http://yago-knowledge.org/resource/BrÎ_Lindsey
 Johan Vande Lanotte	http://yago-knowledge.org/resource/Johan_Vande_Lanotte
 Vidmantas Žiemelis	http://yago-knowledge.org/resource/Vidmantas_Žiemelis
 Burundi	http://yago-knowledge.org/resource/Burundi
@@ -12796,7 +12796,7 @@ Zhang Xiaoqiang	http://yago-knowledge.org/resource/Zhang_Xiaoqiang
 Jim Muhwezi Katugugu	http://yago-knowledge.org/resource/Jim_Muhwezi
 National Security Agency	http://yago-knowledge.org/resource/National_Security_Agency
 Ali Babacan	http://yago-knowledge.org/resource/Ali_Babacan
-Fuad Hussein	http://yago-knowledge.org/resource/Fuad_Hussein
+F­ Hussein	http://yago-knowledge.org/resource/F­_Hussein
 Rodrigo Duterte	http://yago-knowledge.org/resource/Rodrigo_Duterte
 Laurent Mosar	http://yago-knowledge.org/resource/Laurent_Mosar
 Solomon Daushep Lar	http://yago-knowledge.org/resource/Solomon_Lar
@@ -12840,7 +12840,7 @@ CPPCC National Committee	http://yago-knowledge.org/resource/Chinese_People's_Pol
 Irving Kristol	http://yago-knowledge.org/resource/Irving_Kristol
 Mark Robert Warner	http://yago-knowledge.org/resource/Mark_Warner
 Antonella Mularoni	http://yago-knowledge.org/resource/Antonella_Mularoni
-Frank D. Lucas	http://yago-knowledge.org/resource/Frank_Lucas_(Oklahoma_politician)
+Frank D. LÊs	http://yago-knowledge.org/resource/Frank_LÊs_(Oklahoma_politician)
 Newt Gingrich	http://yago-knowledge.org/resource/Newt_Gingrich
 Telesur	http://yago-knowledge.org/resource/Telesur
 Jorge Menéndez	http://yago-knowledge.org/resource/Jorge_Menéndez
@@ -12918,7 +12918,7 @@ Dilma Rousseff	http://yago-knowledge.org/resource/Dilma_Rousseff
 Charter 97	http://yago-knowledge.org/resource/Charter_97
 Eduardo Duhalde	http://yago-knowledge.org/resource/Eduardo_Duhalde
 Fred Teeven	http://yago-knowledge.org/resource/Fred_Teeven
-Zakaria Zubeidi	http://yago-knowledge.org/resource/Zakaria_Zubeidi
+Zakaria Z¾idi	http://yago-knowledge.org/resource/Zakaria_Z¾idi
 Hung Hsiu-chu	http://yago-knowledge.org/resource/Hung_Hsiu-chu
 Michael Glos	http://yago-knowledge.org/resource/Michael_Glos
 Elijah Mwangale	http://yago-knowledge.org/resource/Elijah_Mwangale
@@ -12981,7 +12981,7 @@ Zilda Arns	http://yago-knowledge.org/resource/Zilda_Arns
 Eritrean Airlines	http://yago-knowledge.org/resource/Eritrean_Airlines
 Turkmen State News Service	http://yago-knowledge.org/resource/Turkmenistan_State_News_Agency
 Vivian Blake	http://yago-knowledge.org/resource/Vivian_Blake
-Mubarak al Fadil al Mahdi	http://yago-knowledge.org/resource/Mubarak_al_Fadil_al_Mahdi
+Mºrak al Fadil al Mahdi	http://yago-knowledge.org/resource/Mºrak_al_Fadil_al_Mahdi
 Ingvar Carlsson	http://yago-knowledge.org/resource/Ingvar_Carlsson
 Hassan al-Nouri	http://yago-knowledge.org/resource/Hassan_al-Nouri
 World Federation of Trade Unions	http://yago-knowledge.org/resource/World_Federation_of_Trade_Unions
@@ -13036,14 +13036,14 @@ Artiguist Stream	http://yago-knowledge.org/resource/Vertiente_Artiguista
 Sandra Suárez	http://yago-knowledge.org/resource/Sandra_Suárez
 Rashtriya Janata Dal	http://yago-knowledge.org/resource/Rashtriya_Janata_Dal
 Michael Lowry	http://yago-knowledge.org/resource/Michael_Lowry
-Confederation of Indigenous Nationalities of Ecuador	http://yago-knowledge.org/resource/Confederation_of_Indigenous_Nationalities_of_Ecuador
+Confederation of Indigenous Nationalities of Ec­or	http://yago-knowledge.org/resource/Confederation_of_Indigenous_Nationalities_of_Ec­or
 Djoko Suyanto	http://yago-knowledge.org/resource/Djoko_Suyanto
 Jotham Tumwesigye	http://yago-knowledge.org/resource/Jotham_Tumwesigye
 Amarinder Singh	http://yago-knowledge.org/resource/Amarinder_Singh
 Rodrigo Valdés	http://yago-knowledge.org/resource/Rodrigo_Valdés
 PDP-ANA	http://yago-knowledge.org/resource/Democratic_Party_for_Progress_–_Angolan_National_Alliance
 Peter M. Christian	http://yago-knowledge.org/resource/Peter_M._Christian
-Hiroya Masuda	http://yago-knowledge.org/resource/Hiroya_Masuda
+Hiroya MasÚ	http://yago-knowledge.org/resource/Hiroya_MasÚ
 Eric Matinenga	http://yago-knowledge.org/resource/Eric_Matinenga
 Gatluak Gai	http://yago-knowledge.org/resource/Gatluak_Gai
 Justin Metsing Lekhanya	http://yago-knowledge.org/resource/Justin_Lekhanya
@@ -13054,14 +13054,14 @@ Tasso Ribeiro Jereissati	http://yago-knowledge.org/resource/Tasso_Jereissati
 Ahmad al-Tayyib	http://yago-knowledge.org/resource/Ahmad_al-Tayyeb
 Korneliya Ninova	http://yago-knowledge.org/resource/Korneliya_Ninova
 José Blanco López	http://yago-knowledge.org/resource/José_Blanco_López
-Abdurajik Abubakar Janjalani	http://yago-knowledge.org/resource/Abdurajak_Abubakar_Janjalani
+Abdurajik Abºkar Janjalani	http://yago-knowledge.org/resource/Abdurajak_Abºkar_Janjalani
 Manuel Esquivel	http://yago-knowledge.org/resource/Manuel_Esquivel
 Hau Lung-pin	http://yago-knowledge.org/resource/Hau_Lung-pin
 Maria Eugenia Vidal	http://yago-knowledge.org/resource/María_Eugenia_Vidal
 Authentic Party of the Mexican Revolution	http://yago-knowledge.org/resource/Authentic_Party_of_the_Mexican_Revolution
 Samiu Kuita Vaipulu	http://yago-knowledge.org/resource/Samiu_Vaipulu
 Alison Redford	http://yago-knowledge.org/resource/Alison_Redford
-Dubai Cares	http://yago-knowledge.org/resource/Dubai_Cares
+Dºi Cares	http://yago-knowledge.org/resource/Dºi_Cares
 Tadao Chino	http://yago-knowledge.org/resource/Tadao_Chino
 Pieter Mulder	http://yago-knowledge.org/resource/Pieter_Mulder
 Constitutionalist Liberal Party	http://yago-knowledge.org/resource/Constitutionalist_Liberal_Party
@@ -13080,7 +13080,7 @@ Catholic University of Louvain	http://yago-knowledge.org/resource/Catholic_Unive
 Abderrahmane Youssoufi	http://yago-knowledge.org/resource/Abderrahmane_Youssoufi
 THQ Inc.	http://yago-knowledge.org/resource/THQ
 Saadoun al-Dulaimi	http://yago-knowledge.org/resource/Saadoun_al-Dulaimi
-Fakhruddin Ali Ahmed	http://yago-knowledge.org/resource/Fakhruddin_Ali_Ahmed
+FakhrÝin Ali Ahmed	http://yago-knowledge.org/resource/FakhrÝin_Ali_Ahmed
 Carl I. Hagen	http://yago-knowledge.org/resource/Carl_I._Hagen
 Jozias van Aartsen	http://yago-knowledge.org/resource/Jozias_van_Aartsen
 Hazem El-Beblawi	http://yago-knowledge.org/resource/Hazem_El_Beblawi
@@ -13109,7 +13109,7 @@ Rakesh Maria	http://yago-knowledge.org/resource/Rakesh_Maria
 Attila Verestóy	http://yago-knowledge.org/resource/Attila_Verestóy
 Peter Hintze	http://yago-knowledge.org/resource/Peter_Hintze
 Hüseyin Velioğlu	http://yago-knowledge.org/resource/Hüseyin_Velioğlu
-Karl Samuda	http://yago-knowledge.org/resource/Karl_Samuda
+Karl SamÚ	http://yago-knowledge.org/resource/Karl_SamÚ
 María Ignacia Benítez	http://yago-knowledge.org/resource/María_Ignacia_Benítez
 Christodoulos Christodoulou	http://yago-knowledge.org/resource/Christodoulos_Christodoulou
 Waleed Al-Tabtabaie	http://yago-knowledge.org/resource/Waleed_Al-Tabtabaie
@@ -13165,7 +13165,7 @@ Edward H. Crane	http://yago-knowledge.org/resource/Ed_Crane_(political_activist)
 Vazgen Manukyan	http://yago-knowledge.org/resource/Vazgen_Manukyan
 Desmond Tutu	http://yago-knowledge.org/resource/Desmond_Tutu
 Kenya African National Union	http://yago-knowledge.org/resource/Kenya_African_National_Union
-Quebec Liberal Party	http://yago-knowledge.org/resource/Quebec_Liberal_Party
+Q Liberal Party	http://yago-knowledge.org/resource/Q_Liberal_Party
 Igor Judge	http://yago-knowledge.org/resource/Igor_Judge,_Baron_Judge
 Socialist Liberal Party	http://yago-knowledge.org/resource/Liberal_Socialists_Party_(Egypt)
 Statistics Canada	http://yago-knowledge.org/resource/Statistics_Canada

@@ -128,7 +128,7 @@ Head of Government (Israel)	has_name	Head of Government (Israel)
 Royal Administration (Saudi Arabia)	has_name	Royal Administration (Saudi Arabia)
 Foreign Affairs (North Korea)	has_name	Foreign Affairs (North Korea)
 Defense / Security Ministry (United States)	has_name	Defense / Security Ministry (United States)
-Government (Sudan)	has_name	Government (Sudan)
+Government (SÚn)	has_name	Government (SÚn)
 Citizen (International)	has_name	Citizen (International)
 Military (Afghanistan)	has_name	Military (Afghanistan)
 Foreign Affairs (India)	has_name	Foreign Affairs (India)
@@ -247,12 +247,12 @@ Head of Government (Syria)	has_name	Head of Government (Syria)
 World Food Program	has_name	World Food Program
 G7	has_name	G7
 Armed Gang (Palestinian Territory, Occupied)	has_name	Armed Gang (Palestinian Territory, Occupied)
-Head of Government (Sudan)	has_name	Head of Government (Sudan)
+Head of Government (SÚn)	has_name	Head of Government (SÚn)
 Xinhua	has_name	Xinhua
 Mohammad Najib Abdul Razak	has_name	Mohammad Najib Abdul Razak
 Government (Philippines)	has_name	Government (Philippines)
 Business (Russia)	has_name	Business (Russia)
-Citizen (Sudan)	has_name	Citizen (Sudan)
+Citizen (SÚn)	has_name	Citizen (SÚn)
 Ministry (Australia)	has_name	Ministry (Australia)
 Jia Qinglin	has_name	Jia Qinglin
 Government (Thailand)	has_name	Government (Thailand)
@@ -269,7 +269,7 @@ Foreign Affairs (Azerbaijan)	has_name	Foreign Affairs (Azerbaijan)
 Democratic Progressive Party	has_name	Democratic Progressive Party
 Y. Sinha	has_name	Y. Sinha
 Police (Indonesia)	has_name	Police (Indonesia)
-Citizen (Cuba)	has_name	Citizen (Cuba)
+Citizen (Cº)	has_name	Citizen (Cº)
 Head of Government (Afghanistan)	has_name	Head of Government (Afghanistan)
 Party Member (India)	has_name	Party Member (India)
 Iyad Allawi	has_name	Iyad Allawi
@@ -290,7 +290,7 @@ Head of Government (Somalia)	has_name	Head of Government (Somalia)
 Laurent Kabila	has_name	Laurent Kabila
 Citizen (Somalia)	has_name	Citizen (Somalia)
 Police (Israel)	has_name	Police (Israel)
-Fouad Siniora	has_name	Fouad Siniora
+Fo­ Siniora	has_name	Fo­ Siniora
 Other Authorities / Officials (United States)	has_name	Other Authorities / Officials (United States)
 Haider Al-Abadi	has_name	Haider Al-Abadi
 Citizen (Ireland)	has_name	Citizen (Ireland)
@@ -398,7 +398,7 @@ Government (Italy)	has_name	Government (Italy)
 Media Personnel (International)	has_name	Media Personnel (International)
 Legislature (Russia)	has_name	Legislature (Russia)
 Hoshyar Zebari	has_name	Hoshyar Zebari
-Student (India)	has_name	Student (India)
+StÞnt (India)	has_name	StÞnt (India)
 Government (Greece)	has_name	Government (Greece)
 Foreign Affairs (Afghanistan)	has_name	Foreign Affairs (Afghanistan)
 Farm Worker (India)	has_name	Farm Worker (India)
@@ -417,7 +417,7 @@ Ministry (Turkey)	has_name	Ministry (Turkey)
 Daniel Arap Moi	has_name	Daniel Arap Moi
 Citizen (Algeria)	has_name	Citizen (Algeria)
 Head of Government (Portugal)	has_name	Head of Government (Portugal)
-Foreign Affairs (Sudan)	has_name	Foreign Affairs (Sudan)
+Foreign Affairs (SÚn)	has_name	Foreign Affairs (SÚn)
 Head of Government (Croatia)	has_name	Head of Government (Croatia)
 Citizen (Bosnia and Herzegovina)	has_name	Citizen (Bosnia and Herzegovina)
 Kim Kye Gwan	has_name	Kim Kye Gwan
@@ -460,7 +460,7 @@ Jean-Bertrand Aristide	has_name	Jean-Bertrand Aristide
 Ministry (Canada)	has_name	Ministry (Canada)
 Head of Government (Latvia)	has_name	Head of Government (Latvia)
 Mwai Kibaki	has_name	Mwai Kibaki
-Foreign Affairs (Cuba)	has_name	Foreign Affairs (Cuba)
+Foreign Affairs (Cº)	has_name	Foreign Affairs (Cº)
 Governor (Russia)	has_name	Governor (Russia)
 Citizen (Liberia)	has_name	Citizen (Liberia)
 Media (Russia)	has_name	Media (Russia)
@@ -470,7 +470,7 @@ Head of Government (Lithuania)	has_name	Head of Government (Lithuania)
 Wu Yi	has_name	Wu Yi
 Police (Palestinian Territory, Occupied)	has_name	Police (Palestinian Territory, Occupied)
 William Perry	has_name	William Perry
-Sudanese Armed Forces	has_name	Sudanese Armed Forces
+SÚnese Armed Forces	has_name	SÚnese Armed Forces
 Police (South Africa)	has_name	Police (South Africa)
 Ministry (Israel)	has_name	Ministry (Israel)
 Sartaj Aziz	has_name	Sartaj Aziz
@@ -609,7 +609,7 @@ Mainland Affairs Council	has_name	Mainland Affairs Council
 Women (India)	has_name	Women (India)
 Militant (Iraq)	has_name	Militant (Iraq)
 Houthis	has_name	Houthis
-Education (India)	has_name	Education (India)
+EdÊtion (India)	has_name	EdÊtion (India)
 Head of Government (Czech Republic)	has_name	Head of Government (Czech Republic)
 Alassane Ouattara	has_name	Alassane Ouattara
 Boris Trajkovski	has_name	Boris Trajkovski
@@ -640,7 +640,7 @@ Supreme National Security Council	has_name	Supreme National Security Council
 Chandrika Kumaratunga	has_name	Chandrika Kumaratunga
 Valentina Ivanovna Matviyenko	has_name	Valentina Ivanovna Matviyenko
 Domestic Affairs (India)	has_name	Domestic Affairs (India)
-Government (Cuba)	has_name	Government (Cuba)
+Government (Cº)	has_name	Government (Cº)
 Women (Australia)	has_name	Women (Australia)
 Citizen (Morocco)	has_name	Citizen (Morocco)
 Nitish Kumar	has_name	Nitish Kumar
@@ -719,7 +719,7 @@ Defense / Security Ministry (Georgia)	has_name	Defense / Security Ministry (Geor
 Prime Minister bin Ibrahim	has_name	Prime Minister bin Ibrahim
 Police (Egypt)	has_name	Police (Egypt)
 Central Bureau of Investigation	has_name	Central Bureau of Investigation
-Jiri Paroubek	has_name	Jiri Paroubek
+Jiri Paro¾k	has_name	Jiri Paro¾k
 Party Member (United States)	has_name	Party Member (United States)
 Businessperson (Russia)	has_name	Businessperson (Russia)
 Media Personnel (Turkey)	has_name	Media Personnel (Turkey)
@@ -741,7 +741,7 @@ René Préval	has_name	René Préval
 Representatives (United States)	has_name	Representatives (United States)
 Governor (Nigeria)	has_name	Governor (Nigeria)
 Insurgent (Afghanistan)	has_name	Insurgent (Afghanistan)
-Sher Bahadur Deuba	has_name	Sher Bahadur Deuba
+Sher Bahadur Deº	has_name	Sher Bahadur Deº
 Citizen (Bolivia)	has_name	Citizen (Bolivia)
 Ali Osman Taha	has_name	Ali Osman Taha
 Macky Sall	has_name	Macky Sall
@@ -751,11 +751,11 @@ Envoy (Iran)	has_name	Envoy (Iran)
 Surakiart Sathirathai	has_name	Surakiart Sathirathai
 George Yeo	has_name	George Yeo
 Political Parties (India)	has_name	Political Parties (India)
-Armed Rebel (Sudan)	has_name	Armed Rebel (Sudan)
+Armed Rebel (SÚn)	has_name	Armed Rebel (SÚn)
 Men (China)	has_name	Men (China)
 Citizen (Chad)	has_name	Citizen (Chad)
 The Liberal Democratic Party of Japan	has_name	The Liberal Democratic Party of Japan
-Uddhav Thackeray	has_name	Uddhav Thackeray
+Ýhav Thackeray	has_name	Ýhav Thackeray
 Polisario Front	has_name	Polisario Front
 Benjamin William Mkapa	has_name	Benjamin William Mkapa
 Citizen (Tajikistan)	has_name	Citizen (Tajikistan)
@@ -780,7 +780,7 @@ Joaquim Chissano	has_name	Joaquim Chissano
 Business (South Korea)	has_name	Business (South Korea)
 Defense / Security Ministry (China)	has_name	Defense / Security Ministry (China)
 Head of Government (Africa)	has_name	Head of Government (Africa)
-Ministry (Sudan)	has_name	Ministry (Sudan)
+Ministry (SÚn)	has_name	Ministry (SÚn)
 Lee Hoi Chang	has_name	Lee Hoi Chang
 Lawyer/Attorney (France)	has_name	Lawyer/Attorney (France)
 Ministry (Palestinian Territory, Occupied)	has_name	Ministry (Palestinian Territory, Occupied)
@@ -839,22 +839,22 @@ Armed Rebel (Colombia)	has_name	Armed Rebel (Colombia)
 Media Personnel (Afghanistan)	has_name	Media Personnel (Afghanistan)
 United Nations Development Programme	has_name	United Nations Development Programme
 Edward Nalbandyan	has_name	Edward Nalbandyan
-Philip Ruddock	has_name	Philip Ruddock
+Philip RÝock	has_name	Philip RÝock
 Sam Nujoma	has_name	Sam Nujoma
 Government (Hong Kong)	has_name	Government (Hong Kong)
 Lim Dong Won	has_name	Lim Dong Won
 Government (North Korea)	has_name	Government (North Korea)
 Police (Iran)	has_name	Police (Iran)
-Burhanuddin Rabbani	has_name	Burhanuddin Rabbani
+BurhanÝin Rabbani	has_name	BurhanÝin Rabbani
 Media Personnel (South Africa)	has_name	Media Personnel (South Africa)
 Ali Shamkhani	has_name	Ali Shamkhani
 Militant (Al Qaeda)	has_name	Militant (Al Qaeda)
 Zhang Dejiang	has_name	Zhang Dejiang
 Ilya Iosifovich Klebanov	has_name	Ilya Iosifovich Klebanov
-Citizen (Ecuador)	has_name	Citizen (Ecuador)
+Citizen (Ec­or)	has_name	Citizen (Ec­or)
 Police (South Korea)	has_name	Police (South Korea)
 Saulius Skvernelis	has_name	Saulius Skvernelis
-Head of Government (Cuba)	has_name	Head of Government (Cuba)
+Head of Government (Cº)	has_name	Head of Government (Cº)
 Combatant (Syria)	has_name	Combatant (Syria)
 David Levy	has_name	David Levy
 A.K. Antony	has_name	A.K. Antony
@@ -888,7 +888,7 @@ Military (Myanmar)	has_name	Military (Myanmar)
 Citizen (Sri Lanka)	has_name	Citizen (Sri Lanka)
 Prachanda	has_name	Prachanda
 Children (Australia)	has_name	Children (Australia)
-Nasser Judeh	has_name	Nasser Judeh
+Nasser JÞh	has_name	Nasser JÞh
 Media Personnel (Iraq)	has_name	Media Personnel (Iraq)
 Guerrilla (Revolutionary Armed Forces of Colombia)	has_name	Guerrilla (Revolutionary Armed Forces of Colombia)
 Uri Party	has_name	Uri Party
@@ -962,11 +962,11 @@ Zhu Bangzao	has_name	Zhu Bangzao
 Police (Czech Republic)	has_name	Police (Czech Republic)
 Other Authorities / Officials (Iran)	has_name	Other Authorities / Officials (Iran)
 Aigars Kalvitis	has_name	Aigars Kalvitis
-Adel al-Jubeir	has_name	Adel al-Jubeir
+Adel al-J¾ir	has_name	Adel al-J¾ir
 László Kovács	has_name	László Kovács
 Foreign Affairs (Kuwait)	has_name	Foreign Affairs (Kuwait)
 Other Authorities / Officials (Georgia)	has_name	Other Authorities / Officials (Georgia)
-Frederick Chiluba	has_name	Frederick Chiluba
+Frederick Chilº	has_name	Frederick Chilº
 Government (Nepal)	has_name	Government (Nepal)
 Devlet Bahçeli	has_name	Devlet Bahçeli
 Lawyer/Attorney (Australia)	has_name	Lawyer/Attorney (Australia)
@@ -985,7 +985,7 @@ Cabinet / Council of Ministers / Advisors (Australia)	has_name	Cabinet / Council
 Royal Administration (Bahrain)	has_name	Royal Administration (Bahrain)
 Foreign Affairs (Taiwan)	has_name	Foreign Affairs (Taiwan)
 Citizen (Haiti)	has_name	Citizen (Haiti)
-Bacharuddin Habibie	has_name	Bacharuddin Habibie
+BacharÝin Habibie	has_name	BacharÝin Habibie
 Head of Government (Chile)	has_name	Head of Government (Chile)
 Maris Kucinskis	has_name	Maris Kucinskis
 Media Personnel (Japan)	has_name	Media Personnel (Japan)
@@ -1023,7 +1023,7 @@ Main Opposition (Japan)	has_name	Main Opposition (Japan)
 Ján Kubis	has_name	Ján Kubis
 Government (Hungary)	has_name	Government (Hungary)
 Intergovernmental Authority on Development	has_name	Intergovernmental Authority on Development
-Armed Separatist (Sudan)	has_name	Armed Separatist (Sudan)
+Armed Separatist (SÚn)	has_name	Armed Separatist (SÚn)
 Head of Government (Kosovo)	has_name	Head of Government (Kosovo)
 Newspaper (United Kingdom)	has_name	Newspaper (United Kingdom)
 Wayne Swan	has_name	Wayne Swan
@@ -1060,7 +1060,7 @@ Men (United States)	has_name	Men (United States)
 Media Personnel (South Korea)	has_name	Media Personnel (South Korea)
 Jacinda Ardern	has_name	Jacinda Ardern
 Palestinian Legislative Council	has_name	Palestinian Legislative Council
-Armando Guebuza	has_name	Armando Guebuza
+Armando Gëuza	has_name	Armando Gëuza
 Foreign Affairs (United Arab Emirates)	has_name	Foreign Affairs (United Arab Emirates)
 Conservative Party (United Kingdom)	has_name	Conservative Party (United Kingdom)
 United Progressive Alliance	has_name	United Progressive Alliance
@@ -1074,7 +1074,7 @@ Military (Venezuela)	has_name	Military (Venezuela)
 Jorge Enrique Taiana	has_name	Jorge Enrique Taiana
 Priyanka Gandhi	has_name	Priyanka Gandhi
 Men (France)	has_name	Men (France)
-Head of Government (Ecuador)	has_name	Head of Government (Ecuador)
+Head of Government (Ec­or)	has_name	Head of Government (Ec­or)
 Party Member (Argentina)	has_name	Party Member (Argentina)
 Wang Jin Pyng	has_name	Wang Jin Pyng
 Treasury/Finance Ministry (Greece)	has_name	Treasury/Finance Ministry (Greece)
@@ -1086,7 +1086,7 @@ Envoy (North Korea)	has_name	Envoy (North Korea)
 Hina Rabbani Khar	has_name	Hina Rabbani Khar
 Criminal (Australia)	has_name	Criminal (Australia)
 Combatant (International)	has_name	Combatant (International)
-Nabil Abu-Rudaynah	has_name	Nabil Abu-Rudaynah
+Nabil Abu-RÚynah	has_name	Nabil Abu-RÚynah
 Ministry (Syria)	has_name	Ministry (Syria)
 Men (Germany)	has_name	Men (Germany)
 Governor (United States)	has_name	Governor (United States)
@@ -1156,7 +1156,7 @@ Communist Party (Vietnam)	has_name	Communist Party (Vietnam)
 Spanish Armed Forces	has_name	Spanish Armed Forces
 Military (Palestinian Territory, Occupied)	has_name	Military (Palestinian Territory, Occupied)
 Iraqi Governing Council	has_name	Iraqi Governing Council
-Student (China)	has_name	Student (China)
+StÞnt (China)	has_name	StÞnt (China)
 Leonel Fernández	has_name	Leonel Fernández
 Government (Singapore)	has_name	Government (Singapore)
 Ilir Meta	has_name	Ilir Meta
@@ -1180,7 +1180,7 @@ Government (Ethiopia)	has_name	Government (Ethiopia)
 Police (Greece)	has_name	Police (Greece)
 Head of Government (Ireland)	has_name	Head of Government (Ireland)
 Dimitrios Avramopoulos	has_name	Dimitrios Avramopoulos
-Dissident (Cuba)	has_name	Dissident (Cuba)
+Dissident (Cº)	has_name	Dissident (Cº)
 Akhmad Zavgayev	has_name	Akhmad Zavgayev
 Head of Government (Moldova)	has_name	Head of Government (Moldova)
 Cabinet / Council of Ministers / Advisors (Ukraine)	has_name	Cabinet / Council of Ministers / Advisors (Ukraine)
@@ -1384,7 +1384,7 @@ John Baird	has_name	John Baird
 Representatives (Slovakia)	has_name	Representatives (Slovakia)
 Immigrants (Africa)	has_name	Immigrants (Africa)
 Police (Uganda)	has_name	Police (Uganda)
-Foreign Affairs (Ecuador)	has_name	Foreign Affairs (Ecuador)
+Foreign Affairs (Ec­or)	has_name	Foreign Affairs (Ec­or)
 House of Representatives (Japan)	has_name	House of Representatives (Japan)
 Reporters Without Borders	has_name	Reporters Without Borders
 Muslim (India)	has_name	Muslim (India)
@@ -1424,11 +1424,11 @@ Military Personnel (Turkey)	has_name	Military Personnel (Turkey)
 Economic Cooperation Organization	has_name	Economic Cooperation Organization
 Court Judge (United Kingdom)	has_name	Court Judge (United Kingdom)
 Free Aceh Movement	has_name	Free Aceh Movement
-Student (United States)	has_name	Student (United States)
+StÞnt (United States)	has_name	StÞnt (United States)
 Government (Lithuania)	has_name	Government (Lithuania)
 Anayibe Rojas Valderrama	has_name	Anayibe Rojas Valderrama
 Legislature (Italy)	has_name	Legislature (Italy)
-Hassan Wirayuda	has_name	Hassan Wirayuda
+Hassan WirayÚ	has_name	Hassan WirayÚ
 Vasundhara Raje	has_name	Vasundhara Raje
 Shivraj Singh Chouhan	has_name	Shivraj Singh Chouhan
 Manohar Lal Khattar	has_name	Manohar Lal Khattar
@@ -1445,7 +1445,7 @@ Legislature (Japan)	has_name	Legislature (Japan)
 Citizen (Namibia)	has_name	Citizen (Namibia)
 Presidential Press Service (Russia)	has_name	Presidential Press Service (Russia)
 John Reid	has_name	John Reid
-Education Ministry (India)	has_name	Education Ministry (India)
+EdÊtion Ministry (India)	has_name	EdÊtion Ministry (India)
 Financial Times	has_name	Financial Times
 Government (Bolivia)	has_name	Government (Bolivia)
 Governor (Thailand)	has_name	Governor (Thailand)
@@ -1527,12 +1527,12 @@ Sergey Vladimirovich Yastrzhembsky	has_name	Sergey Vladimirovich Yastrzhembsky
 Combatant (Iraq)	has_name	Combatant (Iraq)
 Sean McCormack	has_name	Sean McCormack
 Enrique Bolaños	has_name	Enrique Bolaños
-Education (Australia)	has_name	Education (Australia)
+EdÊtion (Australia)	has_name	EdÊtion (Australia)
 Bo Xilai	has_name	Bo Xilai
 Governor (Turkey)	has_name	Governor (Turkey)
 Yasushi Akashi	has_name	Yasushi Akashi
 Mohamed Ould Abdel Aziz	has_name	Mohamed Ould Abdel Aziz
-Student (Russia)	has_name	Student (Russia)
+StÞnt (Russia)	has_name	StÞnt (Russia)
 Scotland Yard	has_name	Scotland Yard
 Head of Government (Nepal)	has_name	Head of Government (Nepal)
 Alberto Romulo	has_name	Alberto Romulo
@@ -1543,7 +1543,7 @@ Lawyer/Attorney (Brazil)	has_name	Lawyer/Attorney (Brazil)
 Armed Forces of the Democratic Republic of Congo	has_name	Armed Forces of the Democratic Republic of Congo
 Media Personnel (Ukraine)	has_name	Media Personnel (Ukraine)
 European Investment Bank	has_name	European Investment Bank
-Government (Ecuador)	has_name	Government (Ecuador)
+Government (Ec­or)	has_name	Government (Ec­or)
 Air Force (Israel)	has_name	Air Force (Israel)
 Hilmi Özkök	has_name	Hilmi Özkök
 Media Personnel (Egypt)	has_name	Media Personnel (Egypt)
@@ -1569,11 +1569,11 @@ Delcy Rodríguez	has_name	Delcy Rodríguez
 Activist (Russia)	has_name	Activist (Russia)
 Businessperson (United Kingdom)	has_name	Businessperson (United Kingdom)
 Pandeli Majko	has_name	Pandeli Majko
-Ibrahim Boubacar Keïta	has_name	Ibrahim Boubacar Keïta
+Ibrahim Bo뫊r Keïta	has_name	Ibrahim Bo뫊r Keïta
 Ministry (Latvia)	has_name	Ministry (Latvia)
 Media (Turkey)	has_name	Media (Turkey)
 Men (Iraq)	has_name	Men (Iraq)
-Student (Indonesia)	has_name	Student (Indonesia)
+StÞnt (Indonesia)	has_name	StÞnt (Indonesia)
 Government (Democratic Republic of Congo)	has_name	Government (Democratic Republic of Congo)
 Government (Rwanda)	has_name	Government (Rwanda)
 Militant (Hezbollah)	has_name	Militant (Hezbollah)
@@ -1593,7 +1593,7 @@ Presidential Family (United States)	has_name	Presidential Family (United States)
 Ricardo Martinelli	has_name	Ricardo Martinelli
 Mehdi Karrubi	has_name	Mehdi Karrubi
 Head of Government (Denmark)	has_name	Head of Government (Denmark)
-Student (Iran)	has_name	Student (Iran)
+StÞnt (Iran)	has_name	StÞnt (Iran)
 Lawyer/Attorney (Japan)	has_name	Lawyer/Attorney (Japan)
 Other Authorities / Officials (Germany)	has_name	Other Authorities / Officials (Germany)
 Department of the Treasury	has_name	Department of the Treasury
@@ -1645,7 +1645,7 @@ Government Official (Russia)	has_name	Government Official (Russia)
 Air Force (United States)	has_name	Air Force (United States)
 Le Kha Phieu	has_name	Le Kha Phieu
 Military Personnel - Special (Egypt)	has_name	Military Personnel - Special (Egypt)
-Other Authorities / Officials (Sudan)	has_name	Other Authorities / Officials (Sudan)
+Other Authorities / Officials (SÚn)	has_name	Other Authorities / Officials (SÚn)
 Lawyer/Attorney (Serbia)	has_name	Lawyer/Attorney (Serbia)
 Guerrilla (Lebanon)	has_name	Guerrilla (Lebanon)
 Police (Belgium)	has_name	Police (Belgium)
@@ -1676,7 +1676,7 @@ Other Authorities / Officials (Venezuela)	has_name	Other Authorities / Officials
 Zhang Gaoli	has_name	Zhang Gaoli
 Finance / Economy / Commerce / Trade Ministry (South Korea)	has_name	Finance / Economy / Commerce / Trade Ministry (South Korea)
 Shyam Saran	has_name	Shyam Saran
-Rebel Group (Sudan)	has_name	Rebel Group (Sudan)
+Rebel Group (SÚn)	has_name	Rebel Group (SÚn)
 Foreign Affairs (Ethiopia)	has_name	Foreign Affairs (Ethiopia)
 Government (Armenia)	has_name	Government (Armenia)
 James Michel	has_name	James Michel
@@ -1695,7 +1695,7 @@ Military Personnel (Pakistan)	has_name	Military Personnel (Pakistan)
 Head of Government (Tanzania)	has_name	Head of Government (Tanzania)
 Head of Government (Sweden)	has_name	Head of Government (Sweden)
 Armed Rebel (Turkish Kurds)	has_name	Armed Rebel (Turkish Kurds)
-Sudan Liberation Movement	has_name	Sudan Liberation Movement
+SÚn Liberation Movement	has_name	SÚn Liberation Movement
 Government (Kuwait)	has_name	Government (Kuwait)
 Other Authorities / Officials (Spain)	has_name	Other Authorities / Officials (Spain)
 Cui Tiankai	has_name	Cui Tiankai
@@ -1780,9 +1780,9 @@ Sam Rainsy	has_name	Sam Rainsy
 Tehrik-i-Taliban Pakistan	has_name	Tehrik-i-Taliban Pakistan
 Protester (Australia)	has_name	Protester (Australia)
 Party Member (South Korea)	has_name	Party Member (South Korea)
-Education (Russia)	has_name	Education (Russia)
+EdÊtion (Russia)	has_name	EdÊtion (Russia)
 Rupiah Banda	has_name	Rupiah Banda
-Education (China)	has_name	Education (China)
+EdÊtion (China)	has_name	EdÊtion (China)
 Manish Sisodia	has_name	Manish Sisodia
 Legislature (Palestinian Territory, Occupied)	has_name	Legislature (Palestinian Territory, Occupied)
 Foreign Affairs (Oman)	has_name	Foreign Affairs (Oman)
@@ -1804,7 +1804,7 @@ Terrorist (Islamic State of Iraq and the Levant)	has_name	Terrorist (Islamic Sta
 Media Personnel (Belgium)	has_name	Media Personnel (Belgium)
 Momcilo Krajisnik	has_name	Momcilo Krajisnik
 Lawyer/Attorney (Indonesia)	has_name	Lawyer/Attorney (Indonesia)
-Sudan People's Liberation Movement	has_name	Sudan People's Liberation Movement
+SÚn People's Liberation Movement	has_name	SÚn People's Liberation Movement
 Bank (China)	has_name	Bank (China)
 Other Authorities / Officials (Taiwan)	has_name	Other Authorities / Officials (Taiwan)
 Head of Government (Macedonia)	has_name	Head of Government (Macedonia)
@@ -1851,7 +1851,7 @@ Lawmaker (Taiwan)	has_name	Lawmaker (Taiwan)
 Businessperson (Germany)	has_name	Businessperson (Germany)
 Refugee (Iraq)	has_name	Refugee (Iraq)
 Party Member (Lebanon)	has_name	Party Member (Lebanon)
-Other Authorities / Officials (Cuba)	has_name	Other Authorities / Officials (Cuba)
+Other Authorities / Officials (Cº)	has_name	Other Authorities / Officials (Cº)
 Men (Saudi Arabia)	has_name	Men (Saudi Arabia)
 John Dramani Mahama	has_name	John Dramani Mahama
 Anthony James Leon	has_name	Anthony James Leon
@@ -1929,7 +1929,7 @@ Vishva Hindu Parishad	has_name	Vishva Hindu Parishad
 Media Personnel (Canada)	has_name	Media Personnel (Canada)
 Joint Chiefs of Staff (United States)	has_name	Joint Chiefs of Staff (United States)
 Representatives (Czech Republic)	has_name	Representatives (Czech Republic)
-Refugee (Sudan)	has_name	Refugee (Sudan)
+Refugee (SÚn)	has_name	Refugee (SÚn)
 Jason C. Hu	has_name	Jason C. Hu
 Ministry (Venezuela)	has_name	Ministry (Venezuela)
 Alfonso Portillo Cabrera	has_name	Alfonso Portillo Cabrera
@@ -1961,10 +1961,10 @@ Ministry (Vietnam)	has_name	Ministry (Vietnam)
 Lawyer/Attorney (South Africa)	has_name	Lawyer/Attorney (South Africa)
 Protester (Iraq)	has_name	Protester (Iraq)
 Government Official (Greece)	has_name	Government Official (Greece)
-Deputy Prime Minister Suthep Thaugsuban	has_name	Deputy Prime Minister Suthep Thaugsuban
+Deputy Prime Minister Suthep Thaugsºn	has_name	Deputy Prime Minister Suthep Thaugsºn
 Eric Solheim	has_name	Eric Solheim
 L.P. Yadav	has_name	L.P. Yadav
-Government (South Sudan)	has_name	Government (South Sudan)
+Government (South SÚn)	has_name	Government (South SÚn)
 Citizen (Costa Rica)	has_name	Citizen (Costa Rica)
 Foreign Affairs (Slovenia)	has_name	Foreign Affairs (Slovenia)
 Cabinet / Council of Ministers / Advisors (Germany)	has_name	Cabinet / Council of Ministers / Advisors (Germany)
@@ -2166,11 +2166,11 @@ Separatist (India)	has_name	Separatist (India)
 Legislature (Mexico)	has_name	Legislature (Mexico)
 Pál Csáky	has_name	Pál Csáky
 Head of Government (Norway)	has_name	Head of Government (Norway)
-Dr. Iajuddin Ahmed	has_name	Dr. Iajuddin Ahmed
+Dr. IajÝin Ahmed	has_name	Dr. IajÝin Ahmed
 Abdelmadjid Tebboune	has_name	Abdelmadjid Tebboune
 National League for Democracy	has_name	National League for Democracy
 Men (Lebanon)	has_name	Men (Lebanon)
-Detainee (Cuba)	has_name	Detainee (Cuba)
+Detainee (Cº)	has_name	Detainee (Cº)
 Head of Government (Bahrain)	has_name	Head of Government (Bahrain)
 Royal Administration (Malaysia)	has_name	Royal Administration (Malaysia)
 Anton Rop	has_name	Anton Rop
@@ -2206,10 +2206,10 @@ Envoy (India)	has_name	Envoy (India)
 Ministry (United Arab Emirates)	has_name	Ministry (United Arab Emirates)
 Head of Government (Bosnia and Herzegovina)	has_name	Head of Government (Bosnia and Herzegovina)
 Ricardo Maduro	has_name	Ricardo Maduro
-Ljubco Georgievski	has_name	Ljubco Georgievski
+Lj¼o Georgievski	has_name	Lj¼o Georgievski
 Insurgent (Thailand)	has_name	Insurgent (Thailand)
 Head of Government (Montenegro)	has_name	Head of Government (Montenegro)
-Fatou Bensouda	has_name	Fatou Bensouda
+Fatou BensoÚ	has_name	Fatou BensoÚ
 Federal Electoral Institute	has_name	Federal Electoral Institute
 Robert James Brown	has_name	Robert James Brown
 Other Authorities / Officials (Lebanon)	has_name	Other Authorities / Officials (Lebanon)
@@ -2233,7 +2233,7 @@ Mohamed Abdullahi Mohamed	has_name	Mohamed Abdullahi Mohamed
 Villager (India)	has_name	Villager (India)
 NTV	has_name	NTV
 Activist (United States)	has_name	Activist (United States)
-Citizen (South Sudan)	has_name	Citizen (South Sudan)
+Citizen (South SÚn)	has_name	Citizen (South SÚn)
 Han Myung Sook	has_name	Han Myung Sook
 Activist (Syria)	has_name	Activist (Syria)
 Samir Geagea	has_name	Samir Geagea
@@ -2272,7 +2272,7 @@ Kenichiro Sasae	has_name	Kenichiro Sasae
 Government (Austria)	has_name	Government (Austria)
 Social Democratic Party (Romania)	has_name	Social Democratic Party (Romania)
 Congress (Peru)	has_name	Congress (Peru)
-Sudan People's Liberation Army	has_name	Sudan People's Liberation Army
+SÚn People's Liberation Army	has_name	SÚn People's Liberation Army
 Citizen (El Salvador)	has_name	Citizen (El Salvador)
 Criminal (Spain)	has_name	Criminal (Spain)
 Government (Algeria)	has_name	Government (Algeria)
@@ -2280,7 +2280,7 @@ Media Personnel (Taiwan)	has_name	Media Personnel (Taiwan)
 Military Personnel (Bosnia and Herzegovina)	has_name	Military Personnel (Bosnia and Herzegovina)
 Militant (Somalia)	has_name	Militant (Somalia)
 Protester (China)	has_name	Protester (China)
-Militia (Sudan)	has_name	Militia (Sudan)
+Militia (SÚn)	has_name	Militia (SÚn)
 Media (Australia)	has_name	Media (Australia)
 Chen Chien-Jen	has_name	Chen Chien-Jen
 Military Personnel (North Korea)	has_name	Military Personnel (North Korea)
@@ -2324,7 +2324,7 @@ Government (Kosovo)	has_name	Government (Kosovo)
 Government (Cote d'Ivoire)	has_name	Government (Cote d'Ivoire)
 Other Authorities / Officials (Argentina)	has_name	Other Authorities / Officials (Argentina)
 Zlatko Lagumdzija	has_name	Zlatko Lagumdzija
-Education (United States)	has_name	Education (United States)
+EdÊtion (United States)	has_name	EdÊtion (United States)
 The Rio Group	has_name	The Rio Group
 Citizen (Gambia)	has_name	Citizen (Gambia)
 Carlos Miguel Gutiérrez	has_name	Carlos Miguel Gutiérrez
@@ -2333,7 +2333,7 @@ People First Party Korea	has_name	People First Party Korea
 Head of Government (Guatemala)	has_name	Head of Government (Guatemala)
 Employee (Philippines)	has_name	Employee (Philippines)
 Defense / Security Ministry (Poland)	has_name	Defense / Security Ministry (Poland)
-Atiku Abubakar	has_name	Atiku Abubakar
+Atiku Abºkar	has_name	Atiku Abºkar
 Representatives (Germany)	has_name	Representatives (Germany)
 East African Community	has_name	East African Community
 Luís Filipe Marques Amado	has_name	Luís Filipe Marques Amado
@@ -2342,11 +2342,11 @@ Adnan Terzic	has_name	Adnan Terzic
 Aircraft Carrier (United States)	has_name	Aircraft Carrier (United States)
 Lawyer/Attorney (China)	has_name	Lawyer/Attorney (China)
 Member of the Judiciary (Russia)	has_name	Member of the Judiciary (Russia)
-Student (Australia)	has_name	Student (Australia)
+StÞnt (Australia)	has_name	StÞnt (Australia)
 Media Personnel (New Zealand)	has_name	Media Personnel (New Zealand)
 Randeep Surjewala	has_name	Randeep Surjewala
 Pramod Mahajan	has_name	Pramod Mahajan
-Jamil Mahuad	has_name	Jamil Mahuad
+Jamil Mah­	has_name	Jamil Mah­
 Scholar (China)	has_name	Scholar (China)
 Association for Relations Across the Taiwan Straits	has_name	Association for Relations Across the Taiwan Straits
 Legislature (Canada)	has_name	Legislature (Canada)
@@ -2361,7 +2361,7 @@ Lawmaker (Israel)	has_name	Lawmaker (Israel)
 Soe Win	has_name	Soe Win
 Militia (Afghanistan)	has_name	Militia (Afghanistan)
 Abel Pacheco De La Espriella	has_name	Abel Pacheco De La Espriella
-Kanat Saudabayev	has_name	Kanat Saudabayev
+Kanat Sayev	has_name	Kanat Sayev
 Armed Gang (Syria)	has_name	Armed Gang (Syria)
 Barry O'Farrell	has_name	Barry O'Farrell
 Baron Ashdown	has_name	Baron Ashdown
@@ -2372,10 +2372,10 @@ John Pombe Magufuli	has_name	John Pombe Magufuli
 Military Personnel (Serbia)	has_name	Military Personnel (Serbia)
 Zoran Zivkovic	has_name	Zoran Zivkovic
 Robert S. Gelbard	has_name	Robert S. Gelbard
-Paulo Guedes	has_name	Paulo Guedes
+Paulo Gໞs	has_name	Paulo Gໞs
 Government (Tajikistan)	has_name	Government (Tajikistan)
 Military Personnel (Syria)	has_name	Military Personnel (Syria)
-Education (United Kingdom)	has_name	Education (United Kingdom)
+EdÊtion (United Kingdom)	has_name	EdÊtion (United Kingdom)
 John Anderson	has_name	John Anderson
 Tourist (United States)	has_name	Tourist (United States)
 Dragan Covic	has_name	Dragan Covic
@@ -2421,7 +2421,7 @@ Ruling Coalition (Japan)	has_name	Ruling Coalition (Japan)
 Protester (Lebanon)	has_name	Protester (Lebanon)
 Mehdi Jomaa	has_name	Mehdi Jomaa
 Nasser Bourita	has_name	Nasser Bourita
-Military (South Sudan)	has_name	Military (South Sudan)
+Military (South SÚn)	has_name	Military (South SÚn)
 Banharn Silpa-archa	has_name	Banharn Silpa-archa
 Annastacia Palaszczuk	has_name	Annastacia Palaszczuk
 Chen Zhili	has_name	Chen Zhili
@@ -2430,7 +2430,7 @@ Somchai Wongsawat	has_name	Somchai Wongsawat
 Government Official (Afghanistan)	has_name	Government Official (Afghanistan)
 Lawyer/Attorney (Canada)	has_name	Lawyer/Attorney (Canada)
 Cristian Diaconescu	has_name	Cristian Diaconescu
-Medical Personnel (Cuba)	has_name	Medical Personnel (Cuba)
+Medical Personnel (Cº)	has_name	Medical Personnel (Cº)
 Indigenous People (Iran)	has_name	Indigenous People (Iran)
 Envoy (Pakistan)	has_name	Envoy (Pakistan)
 Presidential Aide (Russia)	has_name	Presidential Aide (Russia)
@@ -2448,7 +2448,7 @@ Chang Wanquan	has_name	Chang Wanquan
 Member of Legislative (Govt) (Turkey)	has_name	Member of Legislative (Govt) (Turkey)
 Protester (Indonesia)	has_name	Protester (Indonesia)
 Sharif Sheikh Ahmed	has_name	Sharif Sheikh Ahmed
-Hishamuddin Hussein	has_name	Hishamuddin Hussein
+HishamÝin Hussein	has_name	HishamÝin Hussein
 Senate (Italy)	has_name	Senate (Italy)
 Court Judge (Australia)	has_name	Court Judge (Australia)
 City Mayor (Israel)	has_name	City Mayor (Israel)
@@ -2480,7 +2480,7 @@ Court Judge (South Africa)	has_name	Court Judge (South Africa)
 Defense / Security Ministry (Australia)	has_name	Defense / Security Ministry (Australia)
 Police (Latvia)	has_name	Police (Latvia)
 Shotaro Yachi	has_name	Shotaro Yachi
-Ministry (Cuba)	has_name	Ministry (Cuba)
+Ministry (Cº)	has_name	Ministry (Cº)
 Other Authorities / Officials (Switzerland)	has_name	Other Authorities / Officials (Switzerland)
 Health Ministry (Palestinian Territory, Occupied)	has_name	Health Ministry (Palestinian Territory, Occupied)
 Tourist (Japan)	has_name	Tourist (Japan)
@@ -2497,7 +2497,7 @@ Haqqani Network	has_name	Haqqani Network
 Foreign Affairs (Somalia)	has_name	Foreign Affairs (Somalia)
 Roberto Micheletti	has_name	Roberto Micheletti
 Member of Legislative (Govt) (South Korea)	has_name	Member of Legislative (Govt) (South Korea)
-Police (Sudan)	has_name	Police (Sudan)
+Police (SÚn)	has_name	Police (SÚn)
 Media (Ukraine)	has_name	Media (Ukraine)
 Military (Latvia)	has_name	Military (Latvia)
 Other Authorities / Officials (Croatia)	has_name	Other Authorities / Officials (Croatia)
@@ -2521,7 +2521,7 @@ Zdenka Kramplová	has_name	Zdenka Kramplová
 Mick Keelty	has_name	Mick Keelty
 Mohamed Ghannouchi	has_name	Mohamed Ghannouchi
 Foreign Affairs (Zimbabwe)	has_name	Foreign Affairs (Zimbabwe)
-Gulbuddin Hekmatyar	has_name	Gulbuddin Hekmatyar
+GulbÝin Hekmatyar	has_name	GulbÝin Hekmatyar
 Thief (India)	has_name	Thief (India)
 Government (Zambia)	has_name	Government (Zambia)
 Citizen (Guinea)	has_name	Citizen (Guinea)
@@ -2538,14 +2538,14 @@ Military Personnel (Indonesia)	has_name	Military Personnel (Indonesia)
 Other Authorities / Officials (Azerbaijan)	has_name	Other Authorities / Officials (Azerbaijan)
 Women (Japan)	has_name	Women (Japan)
 Oqil Oqilov	has_name	Oqil Oqilov
-Media Personnel (Sudan)	has_name	Media Personnel (Sudan)
+Media Personnel (SÚn)	has_name	Media Personnel (SÚn)
 Muhammad Dahlan	has_name	Muhammad Dahlan
 Abdul Hamid	has_name	Abdul Hamid
 Government (Nicaragua)	has_name	Government (Nicaragua)
 Representatives (Japan)	has_name	Representatives (Japan)
 Lawyer/Attorney (Taiwan)	has_name	Lawyer/Attorney (Taiwan)
 Domestic Affairs (Egypt)	has_name	Domestic Affairs (Egypt)
-UAE Armed Forces	has_name	UAE Armed Forces
+® Armed Forces	has_name	® Armed Forces
 Criminal (Japan)	has_name	Criminal (Japan)
 Lower House of Parliament (Russia)	has_name	Lower House of Parliament (Russia)
 James Morris	has_name	James Morris
@@ -2628,7 +2628,7 @@ Domestic Affairs (Iraq)	has_name	Domestic Affairs (Iraq)
 Main Opposition (Pakistan)	has_name	Main Opposition (Pakistan)
 Moaz al-Khatib	has_name	Moaz al-Khatib
 Jan Fischer	has_name	Jan Fischer
-Government Official (Sudan)	has_name	Government Official (Sudan)
+Government Official (SÚn)	has_name	Government Official (SÚn)
 Attorney General (Indonesia)	has_name	Attorney General (Indonesia)
 Royal Administration (Denmark)	has_name	Royal Administration (Denmark)
 Foreign Affairs (Macedonia)	has_name	Foreign Affairs (Macedonia)
@@ -2802,7 +2802,7 @@ High Ranking Military Personnel (Indonesia)	has_name	High Ranking Military Perso
 Prakash Javadekar	has_name	Prakash Javadekar
 Reserve Personnel (Japan)	has_name	Reserve Personnel (Japan)
 Pheu Thai Party	has_name	Pheu Thai Party
-Student (South Korea)	has_name	Student (South Korea)
+StÞnt (South Korea)	has_name	StÞnt (South Korea)
 Hipolito Mejia	has_name	Hipolito Mejia
 Michael Cullen	has_name	Michael Cullen
 Kenneth Kaunda	has_name	Kenneth Kaunda
@@ -2903,7 +2903,7 @@ Joint Chiefs of Staff (South Korea)	has_name	Joint Chiefs of Staff (South Korea)
 Main Opposition (Canada)	has_name	Main Opposition (Canada)
 Khmer Rouge	has_name	Khmer Rouge
 Men (Bangladesh)	has_name	Men (Bangladesh)
-Student (Egypt)	has_name	Student (Egypt)
+StÞnt (Egypt)	has_name	StÞnt (Egypt)
 Han Ducksoo	has_name	Han Ducksoo
 Military Personnel (Ukraine)	has_name	Military Personnel (Ukraine)
 Ministry (Colombia)	has_name	Ministry (Colombia)
@@ -2912,7 +2912,7 @@ Member of the Judiciary (Argentina)	has_name	Member of the Judiciary (Argentina)
 Domestic Affairs (Turkey)	has_name	Domestic Affairs (Turkey)
 Congress (Colombia)	has_name	Congress (Colombia)
 Citizen (Mongolia)	has_name	Citizen (Mongolia)
-Salahuddin Rabbani	has_name	Salahuddin Rabbani
+SalahÝin Rabbani	has_name	SalahÝin Rabbani
 Newspaper (Iran)	has_name	Newspaper (Iran)
 Military Personnel - Special (Lebanon)	has_name	Military Personnel - Special (Lebanon)
 Police (Romania)	has_name	Police (Romania)
@@ -2922,7 +2922,7 @@ Lawmaker (Iraq)	has_name	Lawmaker (Iraq)
 Businessperson (Italy)	has_name	Businessperson (Italy)
 Professor (India)	has_name	Professor (India)
 Cleric (Iraq)	has_name	Cleric (Iraq)
-Governor (Sudan)	has_name	Governor (Sudan)
+Governor (SÚn)	has_name	Governor (SÚn)
 Iraqi National Congress	has_name	Iraqi National Congress
 Armed Band (Afghanistan)	has_name	Armed Band (Afghanistan)
 Wu Den-yih	has_name	Wu Den-yih
@@ -2935,7 +2935,7 @@ Mario Abdo Benítez	has_name	Mario Abdo Benítez
 Cabinet / Council of Ministers / Advisors (Latvia)	has_name	Cabinet / Council of Ministers / Advisors (Latvia)
 Citizen (Slovenia)	has_name	Citizen (Slovenia)
 Criminal (Bangladesh)	has_name	Criminal (Bangladesh)
-Police (Ecuador)	has_name	Police (Ecuador)
+Police (Ec­or)	has_name	Police (Ec­or)
 Military Personnel (Nigeria)	has_name	Military Personnel (Nigeria)
 Indigenous People (Turkey)	has_name	Indigenous People (Turkey)
 Labor Union (South Africa)	has_name	Labor Union (South Africa)
@@ -3100,7 +3100,7 @@ Thomas Shannon	has_name	Thomas Shannon
 Head of Government (Costa Rica)	has_name	Head of Government (Costa Rica)
 Police (Austria)	has_name	Police (Austria)
 Head of Government (Latin America)	has_name	Head of Government (Latin America)
-Student (Japan)	has_name	Student (Japan)
+StÞnt (Japan)	has_name	StÞnt (Japan)
 Ruling Party (South Korea)	has_name	Ruling Party (South Korea)
 Employee (North Korea)	has_name	Employee (North Korea)
 Labor Union (Turkey)	has_name	Labor Union (Turkey)
@@ -3150,7 +3150,7 @@ Thongsing Thammavong	has_name	Thongsing Thammavong
 Media Personnel (Azerbaijan)	has_name	Media Personnel (Azerbaijan)
 Peter Reith	has_name	Peter Reith
 Tedros Adhanom	has_name	Tedros Adhanom
-Raghubar Das	has_name	Raghubar Das
+Raghºr Das	has_name	Raghºr Das
 Ömer Izgi	has_name	Ömer Izgi
 National Front (France)	has_name	National Front (France)
 Other Authorities / Officials (North Korea)	has_name	Other Authorities / Officials (North Korea)
@@ -3159,8 +3159,8 @@ Armed Band (Russia)	has_name	Armed Band (Russia)
 Member of Legislative (Govt) (India)	has_name	Member of Legislative (Govt) (India)
 Air Self-Defence Force	has_name	Air Self-Defence Force
 Roberto Victor de Almeida	has_name	Roberto Victor de Almeida
-Immigrants (Cuba)	has_name	Immigrants (Cuba)
-Abdulsalami Alhaji Abubakar	has_name	Abdulsalami Alhaji Abubakar
+Immigrants (Cº)	has_name	Immigrants (Cº)
+Abdulsalami Alhaji Abºkar	has_name	Abdulsalami Alhaji Abºkar
 Governor General Hollingworth	has_name	Governor General Hollingworth
 Zacarias Moussaoui	has_name	Zacarias Moussaoui
 Phumzile Mlambo-Ngcuka	has_name	Phumzile Mlambo-Ngcuka
@@ -3224,7 +3224,7 @@ Socialist Party (Spain)	has_name	Socialist Party (Spain)
 Hani Al-Mulqi	has_name	Hani Al-Mulqi
 Government (Finland)	has_name	Government (Finland)
 Main Opposition (Taiwan)	has_name	Main Opposition (Taiwan)
-Iranian Students News Agency	has_name	Iranian Students News Agency
+Iranian StÞnts News Agency	has_name	Iranian StÞnts News Agency
 Zabihollah Mojahed	has_name	Zabihollah Mojahed
 Civic Group (South Korea)	has_name	Civic Group (South Korea)
 Armed Gang (France)	has_name	Armed Gang (France)
@@ -3323,7 +3323,7 @@ Ann Linde	has_name	Ann Linde
 Bank (Japan)	has_name	Bank (Japan)
 Military (Vietnam)	has_name	Military (Vietnam)
 Military Personnel (Egypt)	has_name	Military Personnel (Egypt)
-Protester (Sudan)	has_name	Protester (Sudan)
+Protester (SÚn)	has_name	Protester (SÚn)
 Government Affiliated Bank (Russia)	has_name	Government Affiliated Bank (Russia)
 Michael Chertoff	has_name	Michael Chertoff
 Communist Party (Greece)	has_name	Communist Party (Greece)
@@ -3335,7 +3335,7 @@ Nikolay Tanayev	has_name	Nikolay Tanayev
 Tourist (Germany)	has_name	Tourist (Germany)
 Miroslav Grebeníček	has_name	Miroslav Grebeníček
 Refugee (Rwanda)	has_name	Refugee (Rwanda)
-Military (Ecuador)	has_name	Military (Ecuador)
+Military (Ec­or)	has_name	Military (Ec­or)
 Businessperson (Israel)	has_name	Businessperson (Israel)
 Industrial / Textiles / Mining Ministry (Japan)	has_name	Industrial / Textiles / Mining Ministry (Japan)
 United Liberation Force of Assam	has_name	United Liberation Force of Assam
@@ -3345,7 +3345,7 @@ Armed Rebel (Taliban)	has_name	Armed Rebel (Taliban)
 Russian Federal Space Service	has_name	Russian Federal Space Service
 Head of Government (Sierra Leone)	has_name	Head of Government (Sierra Leone)
 Kemal Kilicdaroglu	has_name	Kemal Kilicdaroglu
-Moinuddin Haider	has_name	Moinuddin Haider
+MoinÝin Haider	has_name	MoinÝin Haider
 Qamar Javed Bajwa	has_name	Qamar Javed Bajwa
 Activist (Egypt)	has_name	Activist (Egypt)
 Assemblies (Pakistan)	has_name	Assemblies (Pakistan)
@@ -3383,7 +3383,7 @@ Medical Personnel (United Kingdom)	has_name	Medical Personnel (United Kingdom)
 State Media (Syria)	has_name	State Media (Syria)
 Arab Israelis	has_name	Arab Israelis
 Austria Press Agency	has_name	Austria Press Agency
-Student (United Kingdom)	has_name	Student (United Kingdom)
+StÞnt (United Kingdom)	has_name	StÞnt (United Kingdom)
 Member of the Judiciary (South Africa)	has_name	Member of the Judiciary (South Africa)
 Muslim (Thailand)	has_name	Muslim (Thailand)
 City Mayor (Germany)	has_name	City Mayor (Germany)
@@ -3402,7 +3402,7 @@ Mahamadou Issoufou	has_name	Mahamadou Issoufou
 Scholar (Afghanistan)	has_name	Scholar (Afghanistan)
 Agustín Carstens	has_name	Agustín Carstens
 Citizen (Madagascar)	has_name	Citizen (Madagascar)
-Exiles (Cuba)	has_name	Exiles (Cuba)
+Exiles (Cº)	has_name	Exiles (Cº)
 Scientist (United States)	has_name	Scientist (United States)
 Other Authorities / Officials (Canada)	has_name	Other Authorities / Officials (Canada)
 Envoy (Norway)	has_name	Envoy (Norway)
@@ -3416,7 +3416,7 @@ Simon Wiesenthal Center	has_name	Simon Wiesenthal Center
 City Mayor (Croatia)	has_name	City Mayor (Croatia)
 Ernesto Araújo	has_name	Ernesto Araújo
 Commando (United States)	has_name	Commando (United States)
-Education Ministry (Australia)	has_name	Education Ministry (Australia)
+EdÊtion Ministry (Australia)	has_name	EdÊtion Ministry (Australia)
 Men (Taiwan)	has_name	Men (Taiwan)
 Legislature (Belgium)	has_name	Legislature (Belgium)
 Asylum Seeker (North Korea)	has_name	Asylum Seeker (North Korea)
@@ -3529,8 +3529,8 @@ Head of Government (Niger)	has_name	Head of Government (Niger)
 Protester (South Africa)	has_name	Protester (South Africa)
 Business (Croatia)	has_name	Business (Croatia)
 Company - Owner or Operator (Argentina)	has_name	Company - Owner or Operator (Argentina)
-Student (Palestinian Territory, Occupied)	has_name	Student (Palestinian Territory, Occupied)
-Fakhruddin Ahmed	has_name	Fakhruddin Ahmed
+StÞnt (Palestinian Territory, Occupied)	has_name	StÞnt (Palestinian Territory, Occupied)
+FakhrÝin Ahmed	has_name	FakhrÝin Ahmed
 Zakir Hasanov	has_name	Zakir Hasanov
 Governor (Angola)	has_name	Governor (Angola)
 Party Member (Hungary)	has_name	Party Member (Hungary)
@@ -3538,7 +3538,7 @@ Police (Switzerland)	has_name	Police (Switzerland)
 Armed Rebel (Lord's Resistance Army)	has_name	Armed Rebel (Lord's Resistance Army)
 Lulzim Basha	has_name	Lulzim Basha
 Ministry (Portugal)	has_name	Ministry (Portugal)
-Education (Japan)	has_name	Education (Japan)
+EdÊtion (Japan)	has_name	EdÊtion (Japan)
 Industry (Russia)	has_name	Industry (Russia)
 Armed Rebel (Cote d'Ivoire)	has_name	Armed Rebel (Cote d'Ivoire)
 Criminal (Bosnia and Herzegovina)	has_name	Criminal (Bosnia and Herzegovina)
@@ -3572,7 +3572,7 @@ Criminal (Israel)	has_name	Criminal (Israel)
 Congress of South African Trade Unions	has_name	Congress of South African Trade Unions
 Armed Rebel (Chad)	has_name	Armed Rebel (Chad)
 Militia (Yemen)	has_name	Militia (Yemen)
-Queen Ranya	has_name	Queen Ranya
+Qîn Ranya	has_name	Qîn Ranya
 Military Ruler (Pakistan)	has_name	Military Ruler (Pakistan)
 Nikos Christodoulides	has_name	Nikos Christodoulides
 Other Authorities / Officials (Tunisia)	has_name	Other Authorities / Officials (Tunisia)
@@ -3585,7 +3585,7 @@ Iveta Radicová	has_name	Iveta Radicová
 Criminal (Egypt)	has_name	Criminal (Egypt)
 Armed Band (Palestinian Territory, Occupied)	has_name	Armed Band (Palestinian Territory, Occupied)
 Businessperson (Canada)	has_name	Businessperson (Canada)
-Stan Mudenge	has_name	Stan Mudenge
+Stan MÞnge	has_name	Stan MÞnge
 Martín Vizcarra	has_name	Martín Vizcarra
 First Nations	has_name	First Nations
 Justice Department/Ministery (Brazil)	has_name	Justice Department/Ministery (Brazil)
@@ -3620,7 +3620,7 @@ News Editor (India)	has_name	News Editor (India)
 Refugee (Serbia)	has_name	Refugee (Serbia)
 People Associated with the Opposition (United Kingdom)	has_name	People Associated with the Opposition (United Kingdom)
 Do Muoi	has_name	Do Muoi
-Shahabuddin Ahmed	has_name	Shahabuddin Ahmed
+ShahabÝin Ahmed	has_name	ShahabÝin Ahmed
 Vladimír Vetchý	has_name	Vladimír Vetchý
 Defense / Security Ministry (Czech Republic)	has_name	Defense / Security Ministry (Czech Republic)
 Criminal (Italy)	has_name	Criminal (Italy)
@@ -3709,7 +3709,7 @@ Martin Nesirky	has_name	Martin Nesirky
 Men (Yemen)	has_name	Men (Yemen)
 Head of Government (Djibouti)	has_name	Head of Government (Djibouti)
 Presidential Candidate (United States)	has_name	Presidential Candidate (United States)
-Kresimir Zubak	has_name	Kresimir Zubak
+Kresimir Zºk	has_name	Kresimir Zºk
 Fawzi Salloukh	has_name	Fawzi Salloukh
 Head of Government (Saudi Arabia)	has_name	Head of Government (Saudi Arabia)
 Government Official (Mexico)	has_name	Government Official (Mexico)
@@ -3733,7 +3733,7 @@ Ministry (Zambia)	has_name	Ministry (Zambia)
 Media (Egypt)	has_name	Media (Egypt)
 Thief (Argentina)	has_name	Thief (Argentina)
 Militant (Boko Haram)	has_name	Militant (Boko Haram)
-Ministry (Ecuador)	has_name	Ministry (Ecuador)
+Ministry (Ec­or)	has_name	Ministry (Ec­or)
 Government (Papua New Guinea)	has_name	Government (Papua New Guinea)
 Jung Hong-won	has_name	Jung Hong-won
 Drug Gang (Colombia)	has_name	Drug Gang (Colombia)
@@ -3787,7 +3787,7 @@ Meira Kumar	has_name	Meira Kumar
 Information / Communication / Transparency Ministry (Australia)	has_name	Information / Communication / Transparency Ministry (Australia)
 Government (Malawi)	has_name	Government (Malawi)
 Armed Rebel (Mali)	has_name	Armed Rebel (Mali)
-Student (Israel)	has_name	Student (Israel)
+StÞnt (Israel)	has_name	StÞnt (Israel)
 Newspaper (Italy)	has_name	Newspaper (Italy)
 High Ranking Military Personnel (Afghanistan)	has_name	High Ranking Military Personnel (Afghanistan)
 Tien Hung Mao	has_name	Tien Hung Mao
@@ -3844,7 +3844,7 @@ Inam-ul-Haq	has_name	Inam-ul-Haq
 Militant (Ukraine)	has_name	Militant (Ukraine)
 City Mayor (South Africa)	has_name	City Mayor (South Africa)
 Armed Band (Libya)	has_name	Armed Band (Libya)
-Refugee (South Sudan)	has_name	Refugee (South Sudan)
+Refugee (South SÚn)	has_name	Refugee (South SÚn)
 Domestic Affairs (Thailand)	has_name	Domestic Affairs (Thailand)
 Deng Alor Kuol	has_name	Deng Alor Kuol
 Swiss Federal Council	has_name	Swiss Federal Council
@@ -3879,7 +3879,7 @@ Women (Iran)	has_name	Women (Iran)
 Anthony Garotinho	has_name	Anthony Garotinho
 Francisco de Narvaez Steuer	has_name	Francisco de Narvaez Steuer
 Broad Front	has_name	Broad Front
-Student (Canada)	has_name	Student (Canada)
+StÞnt (Canada)	has_name	StÞnt (Canada)
 Political Parties (United Kingdom)	has_name	Political Parties (United Kingdom)
 National Security Advisor (Russia)	has_name	National Security Advisor (Russia)
 Environment Department/Ministry (India)	has_name	Environment Department/Ministry (India)
@@ -3932,7 +3932,7 @@ Muslim (Pakistan)	has_name	Muslim (Pakistan)
 Head of Government (Namibia)	has_name	Head of Government (Namibia)
 Health Ministry (Turkey)	has_name	Health Ministry (Turkey)
 Hambali	has_name	Hambali
-Congress (Ecuador)	has_name	Congress (Ecuador)
+Congress (Ec­or)	has_name	Congress (Ec­or)
 Abdul Mannan Bhuiyan	has_name	Abdul Mannan Bhuiyan
 Karel Kühnl	has_name	Karel Kühnl
 Guillermo Lasso	has_name	Guillermo Lasso
@@ -3965,7 +3965,7 @@ Legislature (Argentina)	has_name	Legislature (Argentina)
 Chris Evans	has_name	Chris Evans
 Alejandro Encinas Rodríguez	has_name	Alejandro Encinas Rodríguez
 Protester (Greece)	has_name	Protester (Greece)
-Student (France)	has_name	Student (France)
+StÞnt (France)	has_name	StÞnt (France)
 Senate (Thailand)	has_name	Senate (Thailand)
 Opposition Supporter (Pakistan)	has_name	Opposition Supporter (Pakistan)
 Ruling Party (Zimbabwe)	has_name	Ruling Party (Zimbabwe)
@@ -4015,7 +4015,7 @@ Admiral (Iran)	has_name	Admiral (Iran)
 House of Representatives (Nigeria)	has_name	House of Representatives (Nigeria)
 Detainee (United States)	has_name	Detainee (United States)
 Protester (Argentina)	has_name	Protester (Argentina)
-Student (Thailand)	has_name	Student (Thailand)
+StÞnt (Thailand)	has_name	StÞnt (Thailand)
 Hindustan Times	has_name	Hindustan Times
 Medical Personnel (Germany)	has_name	Medical Personnel (Germany)
 Ministry (Rwanda)	has_name	Ministry (Rwanda)
@@ -4034,7 +4034,7 @@ Navtej Sarna	has_name	Navtej Sarna
 Indigenous People (Thailand)	has_name	Indigenous People (Thailand)
 Lawyer/Attorney (Switzerland)	has_name	Lawyer/Attorney (Switzerland)
 Main Opposition (Greece)	has_name	Main Opposition (Greece)
-Student (South Africa)	has_name	Student (South Africa)
+StÞnt (South Africa)	has_name	StÞnt (South Africa)
 Businessperson (Philippines)	has_name	Businessperson (Philippines)
 Mukhtar Altynbayev	has_name	Mukhtar Altynbayev
 Atis Slakteris	has_name	Atis Slakteris
@@ -4058,7 +4058,7 @@ Peter Greste	has_name	Peter Greste
 Hwang Joon-kook	has_name	Hwang Joon-kook
 Marija Pejcinovic Buric	has_name	Marija Pejcinovic Buric
 Ludovic Orban	has_name	Ludovic Orban
-Head of Government (South Sudan)	has_name	Head of Government (South Sudan)
+Head of Government (South SÚn)	has_name	Head of Government (South SÚn)
 Criminal (Uganda)	has_name	Criminal (Uganda)
 Special Court (India)	has_name	Special Court (India)
 Business (Egypt)	has_name	Business (Egypt)
@@ -4112,7 +4112,7 @@ Mikio Aoki	has_name	Mikio Aoki
 Joshua Wong	has_name	Joshua Wong
 Ante Jelavic	has_name	Ante Jelavic
 Albin Kurti	has_name	Albin Kurti
-Student (Brazil)	has_name	Student (Brazil)
+StÞnt (Brazil)	has_name	StÞnt (Brazil)
 Employee (Japan)	has_name	Employee (Japan)
 British Airways	has_name	British Airways
 Ministry (Cyprus)	has_name	Ministry (Cyprus)
@@ -4171,20 +4171,20 @@ Business (Zimbabwe)	has_name	Business (Zimbabwe)
 Activist (Pakistan)	has_name	Activist (Pakistan)
 Domestic Affairs (Saudi Arabia)	has_name	Domestic Affairs (Saudi Arabia)
 Media (Afghanistan)	has_name	Media (Afghanistan)
-Armed Rebel (South Sudan)	has_name	Armed Rebel (South Sudan)
+Armed Rebel (South SÚn)	has_name	Armed Rebel (South SÚn)
 Turkish Industrialists' and Businessmen's Association	has_name	Turkish Industrialists' and Businessmen's Association
 Armed Rebel (Tamil Tigers)	has_name	Armed Rebel (Tamil Tigers)
 Party of the Democratic Left	has_name	Party of the Democratic Left
 Percival J. Patterson	has_name	Percival J. Patterson
 Lino César Oviedo Silva	has_name	Lino César Oviedo Silva
-Jan Bubenik	has_name	Jan Bubenik
+Jan B¾nik	has_name	Jan B¾nik
 Indigenous People (Saudi Arabia)	has_name	Indigenous People (Saudi Arabia)
 Cabinet / Council of Ministers / Advisors (China)	has_name	Cabinet / Council of Ministers / Advisors (China)
 Attacker (Nigeria)	has_name	Attacker (Nigeria)
 Party President (Russia)	has_name	Party President (Russia)
 Fighter Bomber (Turkey)	has_name	Fighter Bomber (Turkey)
 Ministry (Ghana)	has_name	Ministry (Ghana)
-Student (Mexico)	has_name	Student (Mexico)
+StÞnt (Mexico)	has_name	StÞnt (Mexico)
 Justice Department/Ministery (Israel)	has_name	Justice Department/Ministery (Israel)
 Juan Gabriel Valdés	has_name	Juan Gabriel Valdés
 Tunca Toskay	has_name	Tunca Toskay
@@ -4229,7 +4229,7 @@ High Ranking Military Personnel (India)	has_name	High Ranking Military Personnel
 Ján Carnogurský	has_name	Ján Carnogurský
 Ajit Singh	has_name	Ajit Singh
 Public Courts (Croatia)	has_name	Public Courts (Croatia)
-Subcomandante Marcos	has_name	Subcomandante Marcos
+S¼omandante Marcos	has_name	S¼omandante Marcos
 Sisavat Keobounphan	has_name	Sisavat Keobounphan
 Nayib Bukele	has_name	Nayib Bukele
 Legislature (Syria)	has_name	Legislature (Syria)
@@ -4254,7 +4254,7 @@ Abdolmajid Rigi	has_name	Abdolmajid Rigi
 Government Official (Syria)	has_name	Government Official (Syria)
 Criminal (Lebanon)	has_name	Criminal (Lebanon)
 Political Parties (Mexico)	has_name	Political Parties (Mexico)
-Representatives (Sudan)	has_name	Representatives (Sudan)
+Representatives (SÚn)	has_name	Representatives (SÚn)
 Opposition Activist (Russia)	has_name	Opposition Activist (Russia)
 Bank (United States)	has_name	Bank (United States)
 Representatives (Australia)	has_name	Representatives (Australia)
@@ -4304,7 +4304,7 @@ Public Courts (Iraq)	has_name	Public Courts (Iraq)
 Selahattin Demirtas	has_name	Selahattin Demirtas
 Tihomir Oreskovic	has_name	Tihomir Oreskovic
 Military (Denmark)	has_name	Military (Denmark)
-Envoy (Sudan)	has_name	Envoy (Sudan)
+Envoy (SÚn)	has_name	Envoy (SÚn)
 Foreign Affairs (Ghana)	has_name	Foreign Affairs (Ghana)
 Business (Poland)	has_name	Business (Poland)
 Militant (International)	has_name	Militant (International)
@@ -4317,7 +4317,7 @@ Armed Forces of Ukraine	has_name	Armed Forces of Ukraine
 D. Sharma	has_name	D. Sharma
 Berislav Rončević	has_name	Berislav Rončević
 Joao Bernardo Vieira	has_name	Joao Bernardo Vieira
-Defense / Security Ministry (Sudan)	has_name	Defense / Security Ministry (Sudan)
+Defense / Security Ministry (SÚn)	has_name	Defense / Security Ministry (SÚn)
 Barnaba Marial Benjamin	has_name	Barnaba Marial Benjamin
 Military (Central African Republic)	has_name	Military (Central African Republic)
 Supreme Council (Iraq)	has_name	Supreme Council (Iraq)
@@ -4331,9 +4331,9 @@ Kolinda Grabar-Kitarovi?	has_name	Kolinda Grabar-Kitarovi?
 Sanj Bayar	has_name	Sanj Bayar
 Socialist Party	has_name	Socialist Party
 Military (Albania)	has_name	Military (Albania)
-Cabinet / Council of Ministers / Advisors (Sudan)	has_name	Cabinet / Council of Ministers / Advisors (Sudan)
+Cabinet / Council of Ministers / Advisors (SÚn)	has_name	Cabinet / Council of Ministers / Advisors (SÚn)
 Other Authorities / Officials (Democratic Republic of Congo)	has_name	Other Authorities / Officials (Democratic Republic of Congo)
-Welshman Ncube	has_name	Welshman Ncube
+Welshman Nc¾	has_name	Welshman Nc¾
 Government (Maldives)	has_name	Government (Maldives)
 Ministry (Belarus)	has_name	Ministry (Belarus)
 Ansar al-Islam	has_name	Ansar al-Islam
@@ -4348,16 +4348,16 @@ Georgios Iakovou	has_name	Georgios Iakovou
 Indian Navy	has_name	Indian Navy
 Mahmoud Vaezi	has_name	Mahmoud Vaezi
 Jadranko Prlić	has_name	Jadranko Prlić
-Fuad Hussein	has_name	Fuad Hussein
+F­ Hussein	has_name	F­ Hussein
 Representatives (Albania)	has_name	Representatives (Albania)
 Other Authorities / Officials (Haiti)	has_name	Other Authorities / Officials (Haiti)
 Lawmaker (Afghanistan)	has_name	Lawmaker (Afghanistan)
 Julio Cobos	has_name	Julio Cobos
-Faustin Archange Touadera	has_name	Faustin Archange Touadera
+Faustin Archange To૞ra	has_name	Faustin Archange To૞ra
 Daniel Fernando Filmus	has_name	Daniel Fernando Filmus
 Court Judge (Indonesia)	has_name	Court Judge (Indonesia)
 Court Judge (Peru)	has_name	Court Judge (Peru)
-Student (Venezuela)	has_name	Student (Venezuela)
+StÞnt (Venezuela)	has_name	StÞnt (Venezuela)
 Andrew Scheer	has_name	Andrew Scheer
 Hong Soonyoung	has_name	Hong Soonyoung
 Oleksandr Tkachenko	has_name	Oleksandr Tkachenko
@@ -4377,7 +4377,7 @@ Carlos Alvarado	has_name	Carlos Alvarado
 Government Official (Somalia)	has_name	Government Official (Somalia)
 Armed Rebel (Somalia)	has_name	Armed Rebel (Somalia)
 Carter Center	has_name	Carter Center
-Education (Pakistan)	has_name	Education (Pakistan)
+EdÊtion (Pakistan)	has_name	EdÊtion (Pakistan)
 Bukola Saraki	has_name	Bukola Saraki
 Shalva Natelashvili	has_name	Shalva Natelashvili
 Carlos Salinas De Gortari	has_name	Carlos Salinas De Gortari
@@ -4413,9 +4413,9 @@ Htin Kyaw	has_name	Htin Kyaw
 Navy Seals	has_name	Navy Seals
 Muslim (Iran)	has_name	Muslim (Iran)
 Foreign Affairs (Paraguay)	has_name	Foreign Affairs (Paraguay)
-Student (Turkey)	has_name	Student (Turkey)
+StÞnt (Turkey)	has_name	StÞnt (Turkey)
 Governor (Palestinian Territory, Occupied)	has_name	Governor (Palestinian Territory, Occupied)
-Communist Party (Cuba)	has_name	Communist Party (Cuba)
+Communist Party (Cº)	has_name	Communist Party (Cº)
 Lawmaker (Lebanon)	has_name	Lawmaker (Lebanon)
 Labor Union (Brazil)	has_name	Labor Union (Brazil)
 World Tourism Organization	has_name	World Tourism Organization
@@ -4435,7 +4435,7 @@ Tourist (Taiwan)	has_name	Tourist (Taiwan)
 Constitutional Court (Turkey)	has_name	Constitutional Court (Turkey)
 Indigenous People (Indonesia)	has_name	Indigenous People (Indonesia)
 Constitutional Court (South Africa)	has_name	Constitutional Court (South Africa)
-Student (Hong Kong)	has_name	Student (Hong Kong)
+StÞnt (Hong Kong)	has_name	StÞnt (Hong Kong)
 Member of Parliament (Uganda)	has_name	Member of Parliament (Uganda)
 Indigenous People (Iraq)	has_name	Indigenous People (Iraq)
 Militant (Chechen)	has_name	Militant (Chechen)
@@ -4473,7 +4473,7 @@ Senate (Chile)	has_name	Senate (Chile)
 Rabbie Namaliu	has_name	Rabbie Namaliu
 Silvia Cartwright	has_name	Silvia Cartwright
 Hussein Mohammed Farrah	has_name	Hussein Mohammed Farrah
-Mowaffak Baqer al-Rubaie	has_name	Mowaffak Baqer al-Rubaie
+Mowaffak Baqer al-Rºie	has_name	Mowaffak Baqer al-Rºie
 David Granger	has_name	David Granger
 Reinaldo Gargano	has_name	Reinaldo Gargano
 Legislative Yuan	has_name	Legislative Yuan
@@ -4481,7 +4481,7 @@ Business (Switzerland)	has_name	Business (Switzerland)
 Women (Argentina)	has_name	Women (Argentina)
 Armed Gang (Philippines)	has_name	Armed Gang (Philippines)
 Admiral (Russia)	has_name	Admiral (Russia)
-Education (France)	has_name	Education (France)
+EdÊtion (France)	has_name	EdÊtion (France)
 Regional Governor (Russia)	has_name	Regional Governor (Russia)
 Richard Prosper Pierre	has_name	Richard Prosper Pierre
 Hossein Salami	has_name	Hossein Salami
@@ -4498,7 +4498,7 @@ Asylum Seeker (Afghanistan)	has_name	Asylum Seeker (Afghanistan)
 Constitutional Court (Russia)	has_name	Constitutional Court (Russia)
 Consultative Assembly (Indonesia)	has_name	Consultative Assembly (Indonesia)
 Treasury/Finance Ministry (Poland)	has_name	Treasury/Finance Ministry (Poland)
-Student (Taiwan)	has_name	Student (Taiwan)
+StÞnt (Taiwan)	has_name	StÞnt (Taiwan)
 Legislature (Portugal)	has_name	Legislature (Portugal)
 Armed Gang (Kenya)	has_name	Armed Gang (Kenya)
 House of Representatives (Philippines)	has_name	House of Representatives (Philippines)
@@ -4585,7 +4585,7 @@ Wunna Maung Lwin	has_name	Wunna Maung Lwin
 Member of Parliament (Turkey)	has_name	Member of Parliament (Turkey)
 Oversight Court (Ukraine)	has_name	Oversight Court (Ukraine)
 Legislature (Slovenia)	has_name	Legislature (Slovenia)
-Police (Cuba)	has_name	Police (Cuba)
+Police (Cº)	has_name	Police (Cº)
 Domestic Affairs (Syria)	has_name	Domestic Affairs (Syria)
 Naval (France)	has_name	Naval (France)
 Khalid Sheikh Mohammed	has_name	Khalid Sheikh Mohammed
@@ -4630,7 +4630,7 @@ Djibrill Yipènè Bassolé	has_name	Djibrill Yipènè Bassolé
 Military (Honduras)	has_name	Military (Honduras)
 Medical Personnel (Brazil)	has_name	Medical Personnel (Brazil)
 Lebanese Forces	has_name	Lebanese Forces
-Education (Indonesia)	has_name	Education (Indonesia)
+EdÊtion (Indonesia)	has_name	EdÊtion (Indonesia)
 Donald J. Johnston	has_name	Donald J. Johnston
 Member of Parliament (Germany)	has_name	Member of Parliament (Germany)
 Democratic Left	has_name	Democratic Left
@@ -4639,14 +4639,14 @@ Party President (Bangladesh)	has_name	Party President (Bangladesh)
 Main Opposition (Mexico)	has_name	Main Opposition (Mexico)
 Afonso Dhlakama	has_name	Afonso Dhlakama
 Hezbul Mujahedeen	has_name	Hezbul Mujahedeen
-Sékouba Konaté	has_name	Sékouba Konaté
+Sékoº Konaté	has_name	Sékoº Konaté
 Political Parties (South Africa)	has_name	Political Parties (South Africa)
 Finance / Economy / Commerce / Trade Ministry (United Kingdom)	has_name	Finance / Economy / Commerce / Trade Ministry (United Kingdom)
 Military (Macedonia)	has_name	Military (Macedonia)
 Xiao Yang	has_name	Xiao Yang
 Extremist (Albania)	has_name	Extremist (Albania)
 Andrew Robb	has_name	Andrew Robb
-Fuad Masum	has_name	Fuad Masum
+F­ Masum	has_name	F­ Masum
 Armando Calderón Sol	has_name	Armando Calderón Sol
 Member of Parliament (Somalia)	has_name	Member of Parliament (Somalia)
 Patricia de Lille	has_name	Patricia de Lille
@@ -4706,7 +4706,7 @@ Nikola Špirić	has_name	Nikola Špirić
 Damir Krsticevic	has_name	Damir Krsticevic
 Ben Wallace	has_name	Ben Wallace
 Khemaies Jhinaoui	has_name	Khemaies Jhinaoui
-Military Personnel - Special (Sudan)	has_name	Military Personnel - Special (Sudan)
+Military Personnel - Special (SÚn)	has_name	Military Personnel - Special (SÚn)
 Kundy Pahiama	has_name	Kundy Pahiama
 Political Parties (Bangladesh)	has_name	Political Parties (Bangladesh)
 Other Authorities / Officials (Kosovo)	has_name	Other Authorities / Officials (Kosovo)
@@ -4739,12 +4739,12 @@ City Mayor (Slovakia)	has_name	City Mayor (Slovakia)
 Xiang Huaicheng	has_name	Xiang Huaicheng
 Roosevelt Skerrit	has_name	Roosevelt Skerrit
 Envoy (Libya)	has_name	Envoy (Libya)
-High Ranking Military Personnel (Sudan)	has_name	High Ranking Military Personnel (Sudan)
+High Ranking Military Personnel (SÚn)	has_name	High Ranking Military Personnel (SÚn)
 Other Authorities / Officials (Kazakhstan)	has_name	Other Authorities / Officials (Kazakhstan)
 Healthcare Facility (Russia)	has_name	Healthcare Facility (Russia)
 Sergei Ivanovich Shmatkó	has_name	Sergei Ivanovich Shmatkó
 Government Affiliated Bank (Australia)	has_name	Government Affiliated Bank (Australia)
-Student (Chile)	has_name	Student (Chile)
+StÞnt (Chile)	has_name	StÞnt (Chile)
 Other Authorities / Officials (South Africa)	has_name	Other Authorities / Officials (South Africa)
 Scholar (India)	has_name	Scholar (India)
 High Ranking Military Personnel (South Korea)	has_name	High Ranking Military Personnel (South Korea)
@@ -4753,7 +4753,7 @@ Jorge Rodríguez	has_name	Jorge Rodríguez
 Election Commission (Georgia)	has_name	Election Commission (Georgia)
 Royal Administration (Bhutan)	has_name	Royal Administration (Bhutan)
 Naval (Israel)	has_name	Naval (Israel)
-Education (Turkey)	has_name	Education (Turkey)
+EdÊtion (Turkey)	has_name	EdÊtion (Turkey)
 Citizen (Solomon Islands)	has_name	Citizen (Solomon Islands)
 Military Personnel - Special (Nepal)	has_name	Military Personnel - Special (Nepal)
 Unified Energy System	has_name	Unified Energy System
@@ -4768,7 +4768,7 @@ Legislature (Uzbekistan)	has_name	Legislature (Uzbekistan)
 Cabinet / Council of Ministers / Advisors (Bulgaria)	has_name	Cabinet / Council of Ministers / Advisors (Bulgaria)
 Lawyer/Attorney (Lebanon)	has_name	Lawyer/Attorney (Lebanon)
 Military Personnel (Mexico)	has_name	Military Personnel (Mexico)
-Other Authorities / Officials (Ecuador)	has_name	Other Authorities / Officials (Ecuador)
+Other Authorities / Officials (Ec­or)	has_name	Other Authorities / Officials (Ec­or)
 Member of Legislative (Govt) (Indonesia)	has_name	Member of Legislative (Govt) (Indonesia)
 Businessperson (Hong Kong)	has_name	Businessperson (Hong Kong)
 Secret Agent (India)	has_name	Secret Agent (India)
@@ -4792,7 +4792,7 @@ The Irish Times	has_name	The Irish Times
 Businessperson (Switzerland)	has_name	Businessperson (Switzerland)
 Voltaire Gazmin	has_name	Voltaire Gazmin
 Member of Legislative (Govt) (Croatia)	has_name	Member of Legislative (Govt) (Croatia)
-Men (Sudan)	has_name	Men (Sudan)
+Men (SÚn)	has_name	Men (SÚn)
 Military of Hungary	has_name	Military of Hungary
 Member of Parliament (Bangladesh)	has_name	Member of Parliament (Bangladesh)
 Truth and Reconciliation Commission	has_name	Truth and Reconciliation Commission
@@ -4802,7 +4802,7 @@ Francis Mer	has_name	Francis Mer
 Government Official (Poland)	has_name	Government Official (Poland)
 Khalil Ibrahim	has_name	Khalil Ibrahim
 Industry (China)	has_name	Industry (China)
-Student (Nigeria)	has_name	Student (Nigeria)
+StÞnt (Nigeria)	has_name	StÞnt (Nigeria)
 Ministry (Myanmar)	has_name	Ministry (Myanmar)
 Employee (Turkey)	has_name	Employee (Turkey)
 Member of the Judiciary (Mexico)	has_name	Member of the Judiciary (Mexico)
@@ -4810,7 +4810,7 @@ Su Chi	has_name	Su Chi
 Head of Government (Guyana)	has_name	Head of Government (Guyana)
 Media Personnel (Ireland)	has_name	Media Personnel (Ireland)
 Treasury/Finance Ministry (Brazil)	has_name	Treasury/Finance Ministry (Brazil)
-Student (Pakistan)	has_name	Student (Pakistan)
+StÞnt (Pakistan)	has_name	StÞnt (Pakistan)
 Election Commission (Indonesia)	has_name	Election Commission (Indonesia)
 Health Ministry (Japan)	has_name	Health Ministry (Japan)
 Armed Rebel (Indonesia)	has_name	Armed Rebel (Indonesia)
@@ -4868,7 +4868,7 @@ Labor and Employment Ministry (India)	has_name	Labor and Employment Ministry (In
 Other Authorities / Officials (Cambodia)	has_name	Other Authorities / Officials (Cambodia)
 Media (Thailand)	has_name	Media (Thailand)
 Industrial / Textiles / Mining Ministry (Russia)	has_name	Industrial / Textiles / Mining Ministry (Russia)
-Education (Palestinian Territory, Occupied)	has_name	Education (Palestinian Territory, Occupied)
+EdÊtion (Palestinian Territory, Occupied)	has_name	EdÊtion (Palestinian Territory, Occupied)
 Department of Geologic Survey and its Mineral Exploration (India)	has_name	Department of Geologic Survey and its Mineral Exploration (India)
 Protester (Canada)	has_name	Protester (Canada)
 Muslim (United States)	has_name	Muslim (United States)
@@ -4932,13 +4932,13 @@ Armed Gang (Indonesia)	has_name	Armed Gang (Indonesia)
 Detainee (Afghanistan)	has_name	Detainee (Afghanistan)
 Democratic League of Kosovo	has_name	Democratic League of Kosovo
 Senate (Japan)	has_name	Senate (Japan)
-Armed Band (Sudan)	has_name	Armed Band (Sudan)
+Armed Band (SÚn)	has_name	Armed Band (SÚn)
 Legislature (Ireland)	has_name	Legislature (Ireland)
 Naval (Indonesia)	has_name	Naval (Indonesia)
 Ali Benflis	has_name	Ali Benflis
 Bernama	has_name	Bernama
 Businessperson (Colombia)	has_name	Businessperson (Colombia)
-Gyude Bryant	has_name	Gyude Bryant
+GyÞ Bryant	has_name	GyÞ Bryant
 Special Court (Pakistan)	has_name	Special Court (Pakistan)
 Samia Suluhu Hassan	has_name	Samia Suluhu Hassan
 Ferenc Somogyi	has_name	Ferenc Somogyi
@@ -4990,10 +4990,10 @@ Mohammed Salem Basindwa	has_name	Mohammed Salem Basindwa
 Presidential Candidate (Russia)	has_name	Presidential Candidate (Russia)
 Peter Obi	has_name	Peter Obi
 Raymond Burghardt	has_name	Raymond Burghardt
-Education (Israel)	has_name	Education (Israel)
+EdÊtion (Israel)	has_name	EdÊtion (Israel)
 Party Member (Bangladesh)	has_name	Party Member (Bangladesh)
 United Iraqi Alliance	has_name	United Iraqi Alliance
-Military Personnel (Sudan)	has_name	Military Personnel (Sudan)
+Military Personnel (SÚn)	has_name	Military Personnel (SÚn)
 Company - Owner or Operator (South Korea)	has_name	Company - Owner or Operator (South Korea)
 Elvira Sakhipzadovna Nabiullina	has_name	Elvira Sakhipzadovna Nabiullina
 Heng Samrin	has_name	Heng Samrin
@@ -5020,7 +5020,7 @@ Political Parties (Italy)	has_name	Political Parties (Italy)
 Government Official (Ukraine)	has_name	Government Official (Ukraine)
 National Democratic Front	has_name	National Democratic Front
 Media Personnel (Uganda)	has_name	Media Personnel (Uganda)
-Education Ministry (Japan)	has_name	Education Ministry (Japan)
+EdÊtion Ministry (Japan)	has_name	EdÊtion Ministry (Japan)
 Central American Integration System	has_name	Central American Integration System
 Ahmad Zahid Hamidi	has_name	Ahmad Zahid Hamidi
 Ion Diaconescu	has_name	Ion Diaconescu
@@ -5033,7 +5033,7 @@ Ahmed Shaheed	has_name	Ahmed Shaheed
 People Associated with the Opposition (Armenia)	has_name	People Associated with the Opposition (Armenia)
 Media Personnel (Netherlands)	has_name	Media Personnel (Netherlands)
 Commonwealth Secretariat	has_name	Commonwealth Secretariat
-Rebel Commander (Sudan)	has_name	Rebel Commander (Sudan)
+Rebel Commander (SÚn)	has_name	Rebel Commander (SÚn)
 People Associated with the Opposition (Thailand)	has_name	People Associated with the Opposition (Thailand)
 Immigrants (Indonesia)	has_name	Immigrants (Indonesia)
 Mahmoud Jibril	has_name	Mahmoud Jibril
@@ -5060,7 +5060,7 @@ Ma Kai	has_name	Ma Kai
 Ombudsman (Philippines)	has_name	Ombudsman (Philippines)
 Grand Coalition	has_name	Grand Coalition
 Media (Taiwan)	has_name	Media (Taiwan)
-Education (South Africa)	has_name	Education (South Africa)
+EdÊtion (South Africa)	has_name	EdÊtion (South Africa)
 Vladimír Palko	has_name	Vladimír Palko
 Opposition Supporter (Zimbabwe)	has_name	Opposition Supporter (Zimbabwe)
 Norwegian Nobel Committee	has_name	Norwegian Nobel Committee
@@ -5131,7 +5131,7 @@ Military (Nicaragua)	has_name	Military (Nicaragua)
 Immigrants (Bangladesh)	has_name	Immigrants (Bangladesh)
 Activist (Turkey)	has_name	Activist (Turkey)
 Minister Maran	has_name	Minister Maran
-Surapong Suebwonglee	has_name	Surapong Suebwonglee
+Surapong Sëwonglee	has_name	Surapong Sëwonglee
 High Commissioner Dixit	has_name	High Commissioner Dixit
 Alan Carpenter	has_name	Alan Carpenter
 Stef Blok	has_name	Stef Blok
@@ -5155,13 +5155,13 @@ Business (Bangladesh)	has_name	Business (Bangladesh)
 Immigrants (Russia)	has_name	Immigrants (Russia)
 Armed Band (Somalia)	has_name	Armed Band (Somalia)
 Media Personnel (Latvia)	has_name	Media Personnel (Latvia)
-Criminal (Sudan)	has_name	Criminal (Sudan)
+Criminal (SÚn)	has_name	Criminal (SÚn)
 Lai Changxing	has_name	Lai Changxing
 Government Official (Zimbabwe)	has_name	Government Official (Zimbabwe)
 Conservative Party (Canada)	has_name	Conservative Party (Canada)
 Resistance Movement (Uganda)	has_name	Resistance Movement (Uganda)
 Federal Judge (United States)	has_name	Federal Judge (United States)
-Media Personnel (Cuba)	has_name	Media Personnel (Cuba)
+Media Personnel (Cº)	has_name	Media Personnel (Cº)
 Turkish Radio and Television Corporation	has_name	Turkish Radio and Television Corporation
 Domestic Affairs (Belarus)	has_name	Domestic Affairs (Belarus)
 Indigenous People (Lithuania)	has_name	Indigenous People (Lithuania)
@@ -5186,7 +5186,7 @@ Businessperson (Egypt)	has_name	Businessperson (Egypt)
 Government (El Salvador)	has_name	Government (El Salvador)
 Protester (Nepal)	has_name	Protester (Nepal)
 Military (Haiti)	has_name	Military (Haiti)
-Employee (Sudan)	has_name	Employee (Sudan)
+Employee (SÚn)	has_name	Employee (SÚn)
 New Patriotic Party	has_name	New Patriotic Party
 Labor Union (Canada)	has_name	Labor Union (Canada)
 Party Member (Bulgaria)	has_name	Party Member (Bulgaria)
@@ -5201,7 +5201,7 @@ Ahmed Patel	has_name	Ahmed Patel
 Abhishek Manu Singhvi	has_name	Abhishek Manu Singhvi
 Police (Bahrain)	has_name	Police (Bahrain)
 Central Bank of the Islamic Republic of Iran	has_name	Central Bank of the Islamic Republic of Iran
-Salahuddin of Selangor	has_name	Salahuddin of Selangor
+SalahÝin of Selangor	has_name	SalahÝin of Selangor
 Men (Zimbabwe)	has_name	Men (Zimbabwe)
 Lawmaker (Greece)	has_name	Lawmaker (Greece)
 Airline (Turkey)	has_name	Airline (Turkey)
@@ -5229,7 +5229,7 @@ Government Affiliated Bank (China)	has_name	Government Affiliated Bank (China)
 Professor (Iran)	has_name	Professor (Iran)
 Combatant (Al-Shabaab)	has_name	Combatant (Al-Shabaab)
 Government Official (Myanmar)	has_name	Government Official (Myanmar)
-Student (Afghanistan)	has_name	Student (Afghanistan)
+StÞnt (Afghanistan)	has_name	StÞnt (Afghanistan)
 Business (Liberia)	has_name	Business (Liberia)
 Government Official (Argentina)	has_name	Government Official (Argentina)
 Transport (Iran)	has_name	Transport (Iran)
@@ -5284,7 +5284,7 @@ Anote Tong	has_name	Anote Tong
 Honda	has_name	Honda
 Media (Greece)	has_name	Media (Greece)
 Kengo Wa Dondo	has_name	Kengo Wa Dondo
-Education (Bangladesh)	has_name	Education (Bangladesh)
+EdÊtion (Bangladesh)	has_name	EdÊtion (Bangladesh)
 Protester (Chile)	has_name	Protester (Chile)
 Lawmaker (Lithuania)	has_name	Lawmaker (Lithuania)
 Member of Parliament (Bulgaria)	has_name	Member of Parliament (Bulgaria)
@@ -5305,7 +5305,7 @@ People Associated with the Opposition (Albania)	has_name	People Associated with 
 Protester (Italy)	has_name	Protester (Italy)
 Men (North Korea)	has_name	Men (North Korea)
 Shao Qiwei	has_name	Shao Qiwei
-Student (Ukraine)	has_name	Student (Ukraine)
+StÞnt (Ukraine)	has_name	StÞnt (Ukraine)
 Legislature (Thailand)	has_name	Legislature (Thailand)
 Party Member (Hong Kong)	has_name	Party Member (Hong Kong)
 Uong Chu Luu	has_name	Uong Chu Luu
@@ -5347,10 +5347,10 @@ Military (Timor-Leste)	has_name	Military (Timor-Leste)
 Taieb Baccouche	has_name	Taieb Baccouche
 Robert Dussey	has_name	Robert Dussey
 Vera Jourova	has_name	Vera Jourova
-Student (Bangladesh)	has_name	Student (Bangladesh)
+StÞnt (Bangladesh)	has_name	StÞnt (Bangladesh)
 Businessperson (Pakistan)	has_name	Businessperson (Pakistan)
 Abdelilah Benkirane	has_name	Abdelilah Benkirane
-Education (Canada)	has_name	Education (Canada)
+EdÊtion (Canada)	has_name	EdÊtion (Canada)
 Hardeep Singh Puri	has_name	Hardeep Singh Puri
 Appeals Court (United States)	has_name	Appeals Court (United States)
 Treasury/Finance Ministry (Egypt)	has_name	Treasury/Finance Ministry (Egypt)
@@ -5435,14 +5435,14 @@ Foreign Affairs (Congo)	has_name	Foreign Affairs (Congo)
 Other Authorities / Officials (Hungary)	has_name	Other Authorities / Officials (Hungary)
 Military (El Salvador)	has_name	Military (El Salvador)
 Political Parties (Cyprus)	has_name	Political Parties (Cyprus)
-Media (Cuba)	has_name	Media (Cuba)
+Media (Cº)	has_name	Media (Cº)
 Other Authorities / Officials (Nepal)	has_name	Other Authorities / Officials (Nepal)
 Party Member (Malaysia)	has_name	Party Member (Malaysia)
 Bhattarai	has_name	Bhattarai
 Information Ministry (China)	has_name	Information Ministry (China)
 Socialist Party (Albania)	has_name	Socialist Party (Albania)
 Business (Georgia)	has_name	Business (Georgia)
-Thomas C. Hubbard	has_name	Thomas C. Hubbard
+Thomas C. H஺rd	has_name	Thomas C. H஺rd
 Refugee (Bosnia and Herzegovina)	has_name	Refugee (Bosnia and Herzegovina)
 Bloc Yulia Tymoshenko	has_name	Bloc Yulia Tymoshenko
 Manuel Augusto	has_name	Manuel Augusto
@@ -5522,7 +5522,7 @@ Admiral (United States)	has_name	Admiral (United States)
 Armed Gang (Mali)	has_name	Armed Gang (Mali)
 Police (Libya)	has_name	Police (Libya)
 Ministry of Health	has_name	Ministry of Health
-Protester (Ecuador)	has_name	Protester (Ecuador)
+Protester (Ec­or)	has_name	Protester (Ec­or)
 Finance / Economy / Commerce / Trade Ministry (Turkey)	has_name	Finance / Economy / Commerce / Trade Ministry (Turkey)
 Mervyn King	has_name	Mervyn King
 Media Personnel (Democratic Republic of Congo)	has_name	Media Personnel (Democratic Republic of Congo)
@@ -5545,7 +5545,7 @@ State Media (Serbia)	has_name	State Media (Serbia)
 Other Authorities / Officials (Jordan)	has_name	Other Authorities / Officials (Jordan)
 Ahmad Khatami	has_name	Ahmad Khatami
 Michael Noonan	has_name	Michael Noonan
-Air Force (Sudan)	has_name	Air Force (Sudan)
+Air Force (SÚn)	has_name	Air Force (SÚn)
 Veterans (United States)	has_name	Veterans (United States)
 Foreign Affairs (Cote d'Ivoire)	has_name	Foreign Affairs (Cote d'Ivoire)
 Court Judge (Ireland)	has_name	Court Judge (Ireland)
@@ -5562,7 +5562,7 @@ Fighter Bomber (Saudi Arabia)	has_name	Fighter Bomber (Saudi Arabia)
 Claudia Ruiz Massieu	has_name	Claudia Ruiz Massieu
 Protester (Nigeria)	has_name	Protester (Nigeria)
 Political Parties (Greece)	has_name	Political Parties (Greece)
-Education (Nigeria)	has_name	Education (Nigeria)
+EdÊtion (Nigeria)	has_name	EdÊtion (Nigeria)
 Other Authorities / Officials (Uganda)	has_name	Other Authorities / Officials (Uganda)
 Government Affiliated Bank (Iran)	has_name	Government Affiliated Bank (Iran)
 Vladimir Aleksandrovich Ryzhkov	has_name	Vladimir Aleksandrovich Ryzhkov
@@ -5594,7 +5594,7 @@ Refugee (Greece)	has_name	Refugee (Greece)
 Democratic Action	has_name	Democratic Action
 Georgian Armed Forces	has_name	Georgian Armed Forces
 Tyronne Fernando	has_name	Tyronne Fernando
-Lawmaker (Ecuador)	has_name	Lawmaker (Ecuador)
+Lawmaker (Ec­or)	has_name	Lawmaker (Ec­or)
 Legislature (Albania)	has_name	Legislature (Albania)
 Lucia Hiriart	has_name	Lucia Hiriart
 Baron Waqa	has_name	Baron Waqa
@@ -5606,7 +5606,7 @@ Foreign Affairs (Djibouti)	has_name	Foreign Affairs (Djibouti)
 Lawmaker (Romania)	has_name	Lawmaker (Romania)
 Times of India	has_name	Times of India
 International Maritime Organization	has_name	International Maritime Organization
-Business (Cuba)	has_name	Business (Cuba)
+Business (Cº)	has_name	Business (Cº)
 Militant (France)	has_name	Militant (France)
 Party Member (Palestinian Territory, Occupied)	has_name	Party Member (Palestinian Territory, Occupied)
 Business (Sweden)	has_name	Business (Sweden)
@@ -5701,7 +5701,7 @@ Foreign Affairs (Chad)	has_name	Foreign Affairs (Chad)
 Roy Bennett	has_name	Roy Bennett
 Military Personnel (Rwanda)	has_name	Military Personnel (Rwanda)
 People Associated with the Opposition (Bolivia)	has_name	People Associated with the Opposition (Bolivia)
-Education Ministry (China)	has_name	Education Ministry (China)
+EdÊtion Ministry (China)	has_name	EdÊtion Ministry (China)
 Chief of the Defence Staff	has_name	Chief of the Defence Staff
 Space Agency (Russia)	has_name	Space Agency (Russia)
 David Lin	has_name	David Lin
@@ -5731,7 +5731,7 @@ USS Carl Vinson	has_name	USS Carl Vinson
 Fukushima Daiichi Nuclear Power Plant	has_name	Fukushima Daiichi Nuclear Power Plant
 Business (Hungary)	has_name	Business (Hungary)
 Bureaucrat (Japan)	has_name	Bureaucrat (Japan)
-Military (Cuba)	has_name	Military (Cuba)
+Military (Cº)	has_name	Military (Cº)
 Women (Spain)	has_name	Women (Spain)
 Peacekeeping Troop (France)	has_name	Peacekeeping Troop (France)
 Ferenc Juhász	has_name	Ferenc Juhász
@@ -5929,7 +5929,7 @@ Ministry (Democratic Republic of Congo)	has_name	Ministry (Democratic Republic o
 Representatives (Kyrgyzstan)	has_name	Representatives (Kyrgyzstan)
 Protester (Peru)	has_name	Protester (Peru)
 Nurse (Australia)	has_name	Nurse (Australia)
-Criminal (Cuba)	has_name	Criminal (Cuba)
+Criminal (Cº)	has_name	Criminal (Cº)
 People Associated with the Opposition (Azerbaijan)	has_name	People Associated with the Opposition (Azerbaijan)
 Socialist Party (Serbia)	has_name	Socialist Party (Serbia)
 Legislature (Bosnia and Herzegovina)	has_name	Legislature (Bosnia and Herzegovina)
@@ -6011,7 +6011,7 @@ Mahmoud Abbas	has_name	Mahmoud Abbas
 North Atlantic Treaty Organization	has_name	North Atlantic Treaty Organization
 Australia	has_name	Australia
 Iran	has_name	Iran
-South Sudan	has_name	South Sudan
+South SÚn	has_name	South SÚn
 Greece	has_name	Greece
 Syria	has_name	Syria
 Arab League	has_name	Arab League
@@ -6029,7 +6029,7 @@ Somalia	has_name	Somalia
 Abdoulaye Wade	has_name	Abdoulaye Wade
 Vitaly Ivanovich Churkin	has_name	Vitaly Ivanovich Churkin
 UN Security Council	has_name	UN Security Council
-Cuba	has_name	Cuba
+Cº	has_name	Cº
 Benedict XVI	has_name	Benedict XVI
 Jordan	has_name	Jordan
 European Union	has_name	European Union
@@ -6094,7 +6094,7 @@ Cristina Fernández de Kirchner	has_name	Cristina Fernández de Kirchner
 Andrés Manuel López Obrador	has_name	Andrés Manuel López Obrador
 Yoani Sánchez	has_name	Yoani Sánchez
 Egypt	has_name	Egypt
-Hosni Mubarak	has_name	Hosni Mubarak
+Hosni Mºrak	has_name	Hosni Mºrak
 Benigno Aquino III	has_name	Benigno Aquino III
 Philippines	has_name	Philippines
 Non-Governmental Organizations	has_name	Non-Governmental Organizations
@@ -6191,11 +6191,11 @@ Rick Perry	has_name	Rick Perry
 Christian Wulff	has_name	Christian Wulff
 Gambia	has_name	Gambia
 Robert Mugabe	has_name	Robert Mugabe
-Ecuador	has_name	Ecuador
+Ec­or	has_name	Ec­or
 Persian Gulf	has_name	Persian Gulf
 Zine El Abidine Ben Ali	has_name	Zine El Abidine Ben Ali
 Didier Reynders	has_name	Didier Reynders
-Kevin Rudd	has_name	Kevin Rudd
+Kevin RÝ	has_name	Kevin RÝ
 Liam Byrne	has_name	Liam Byrne
 Alexandr Vondra	has_name	Alexandr Vondra
 Joe Lieberman	has_name	Joe Lieberman
@@ -6458,7 +6458,7 @@ Ernesto Zedillo	has_name	Ernesto Zedillo
 BBC	has_name	BBC
 10 Downing Street	has_name	10 Downing Street
 University of Tehran	has_name	University of Tehran
-Audronius Ažubalis	has_name	Audronius Ažubalis
+Audronius Ažºlis	has_name	Audronius Ažºlis
 Shinzo Abe	has_name	Shinzo Abe
 Sayeeda Hussain Warsi	has_name	Sayeeda Hussain Warsi
 Viktor Pshonka	has_name	Viktor Pshonka
@@ -6568,7 +6568,7 @@ Transnistria	has_name	Transnistria
 British Army	has_name	British Army
 Theresa May	has_name	Theresa May
 Papua New Guinea	has_name	Papua New Guinea
-Antigua and Barbuda	has_name	Antigua and Barbuda
+Antigua and BarbÚ	has_name	Antigua and BarbÚ
 Roberta Anastase	has_name	Roberta Anastase
 Holy See	has_name	Holy See
 Ai Weiwei	has_name	Ai Weiwei
@@ -6577,7 +6577,7 @@ Gideon Sa'ar	has_name	Gideon Sa'ar
 Vladimir Volfovich Zhirinovsky	has_name	Vladimir Volfovich Zhirinovsky
 Olafur Ragnar Grimsson	has_name	Olafur Ragnar Grimsson
 Safar Abiyev	has_name	Safar Abiyev
-Queen Beatrix	has_name	Queen Beatrix
+Qîn Beatrix	has_name	Qîn Beatrix
 Maxime Verhagen	has_name	Maxime Verhagen
 Peter Wittig	has_name	Peter Wittig
 Mikhail Sergeyevich Gorbachev	has_name	Mikhail Sergeyevich Gorbachev
@@ -6642,7 +6642,7 @@ Ken Livingstone	has_name	Ken Livingstone
 Narendra Modi	has_name	Narendra Modi
 Joseph Parry	has_name	Joseph Parry
 Sauli Niinistö	has_name	Sauli Niinistö
-Jean-Claude Juncker	has_name	Jean-Claude Juncker
+Jean-ClaÞ Juncker	has_name	Jean-ClaÞ Juncker
 Luis Posada Carriles	has_name	Luis Posada Carriles
 Ricardo Ehrlich	has_name	Ricardo Ehrlich
 Telugu Desam Party	has_name	Telugu Desam Party
@@ -6741,7 +6741,7 @@ Stanford University	has_name	Stanford University
 World Health Organization	has_name	World Health Organization
 Ryutaro Hashimoto	has_name	Ryutaro Hashimoto
 Adrian Nastase	has_name	Adrian Nastase
-Communist Party of Cuba	has_name	Communist Party of Cuba
+Communist Party of Cº	has_name	Communist Party of Cº
 Viktor Basargin	has_name	Viktor Basargin
 Achmad Sukarno	has_name	Achmad Sukarno
 Yuriy Lutsenko	has_name	Yuriy Lutsenko
@@ -6840,7 +6840,7 @@ Sergey Kuzhugetovich Shoygu	has_name	Sergey Kuzhugetovich Shoygu
 Hannes Swoboda	has_name	Hannes Swoboda
 Lindsey Graham	has_name	Lindsey Graham
 Patxi López	has_name	Patxi López
-Alfredo Pérez Rubalcaba	has_name	Alfredo Pérez Rubalcaba
+Alfredo Pérez Rºlcaba	has_name	Alfredo Pérez Rºlcaba
 Tomislav Donchev	has_name	Tomislav Donchev
 Jorge Rafael Videla	has_name	Jorge Rafael Videla
 Vladimir Meciar	has_name	Vladimir Meciar
@@ -6902,7 +6902,7 @@ Vojislav Kostunica	has_name	Vojislav Kostunica
 Andriy Klyuyev	has_name	Andriy Klyuyev
 Le Parisien	has_name	Le Parisien
 Ferdinand Marcos	has_name	Ferdinand Marcos
-Yasuo Fukuda	has_name	Yasuo Fukuda
+Yasuo FukÚ	has_name	Yasuo FukÚ
 Milos Zeman	has_name	Milos Zeman
 Adolfo Pérez Esquivel	has_name	Adolfo Pérez Esquivel
 Peter Phillips	has_name	Peter Phillips
@@ -7096,7 +7096,7 @@ Baath Party	has_name	Baath Party
 Special Air Service	has_name	Special Air Service
 Yuriy Kolobov	has_name	Yuriy Kolobov
 Keit Pentus	has_name	Keit Pentus
-North Caucasus Military District	has_name	North Caucasus Military District
+North CaÊsus Military District	has_name	North CaÊsus Military District
 Disney	has_name	Disney
 Mikhail Mikhailovich Kasyanov	has_name	Mikhail Mikhailovich Kasyanov
 Eveline Widmer-Schlumpf	has_name	Eveline Widmer-Schlumpf
@@ -7166,7 +7166,7 @@ Hewlett-packard	has_name	Hewlett-packard
 Carter F. Ham	has_name	Carter F. Ham
 French Polynesia	has_name	French Polynesia
 Jean-Pierre Raffarin	has_name	Jean-Pierre Raffarin
-Francis Maude	has_name	Francis Maude
+Francis MaÞ	has_name	Francis MaÞ
 Jean-Louis Tauran	has_name	Jean-Louis Tauran
 Arsen Avakov	has_name	Arsen Avakov
 Federation Council of Russia	has_name	Federation Council of Russia
@@ -7183,7 +7183,7 @@ Jamal Khashoggi	has_name	Jamal Khashoggi
 Leszek Miller	has_name	Leszek Miller
 San Marino	has_name	San Marino
 Sima Samar	has_name	Sima Samar
-Volker Kauder	has_name	Volker Kauder
+Volker KaÞr	has_name	Volker KaÞr
 Nehru University	has_name	Nehru University
 Junichiro Koizumi	has_name	Junichiro Koizumi
 Robert Menendez	has_name	Robert Menendez
@@ -7210,7 +7210,7 @@ Massachusetts Institute of Technology	has_name	Massachusetts Institute of Techno
 Jay Nixon	has_name	Jay Nixon
 Stipe Mesic	has_name	Stipe Mesic
 Leopoldo Galtieri	has_name	Leopoldo Galtieri
-Alexander Stubb	has_name	Alexander Stubb
+Alexander St»	has_name	Alexander St»
 Pier Ferdinando Casini	has_name	Pier Ferdinando Casini
 Iurie Leanca	has_name	Iurie Leanca
 Islamic Azad University	has_name	Islamic Azad University
@@ -7223,7 +7223,7 @@ Yossi Beilin	has_name	Yossi Beilin
 David Johnston	has_name	David Johnston
 Charlie Crist	has_name	Charlie Crist
 La Línea	has_name	La Línea
-Milan Kucan	has_name	Milan Kucan
+Milan KÊn	has_name	Milan KÊn
 Beatrix Karl	has_name	Beatrix Karl
 Saxby Chambliss	has_name	Saxby Chambliss
 Keiko Fujimori	has_name	Keiko Fujimori
@@ -7288,14 +7288,14 @@ Andrew Mark Cuomo	has_name	Andrew Mark Cuomo
 Čedomir Jovanović	has_name	Čedomir Jovanović
 Ursula von der Leyen	has_name	Ursula von der Leyen
 Gro Harlem Brundtland	has_name	Gro Harlem Brundtland
-Jalaluddin Haqqani	has_name	Jalaluddin Haqqani
+JalalÝin Haqqani	has_name	JalalÝin Haqqani
 Timothy McVeigh	has_name	Timothy McVeigh
 Spanish Navy	has_name	Spanish Navy
 Margrethe Vestager	has_name	Margrethe Vestager
 Alistair Darling	has_name	Alistair Darling
 Rudy Giuliani	has_name	Rudy Giuliani
 Pete Wilson	has_name	Pete Wilson
-United Nations Educational, Scientific and Cultural Organization	has_name	United Nations Educational, Scientific and Cultural Organization
+United Nations EdÊtional, Scientific and Cultural Organization	has_name	United Nations EdÊtional, Scientific and Cultural Organization
 Ku Klux Klan	has_name	Ku Klux Klan
 Lincoln Chafee	has_name	Lincoln Chafee
 Dan Lungren	has_name	Dan Lungren
@@ -7359,7 +7359,7 @@ McGill University	has_name	McGill University
 Corina Creţu	has_name	Corina Creţu
 Rebiya Kadeer	has_name	Rebiya Kadeer
 Corneliu Vadim Tudor	has_name	Corneliu Vadim Tudor
-Queen Sofia of Spain	has_name	Queen Sofia of Spain
+Qîn Sofia of Spain	has_name	Qîn Sofia of Spain
 Joe Walsh	has_name	Joe Walsh
 Bill Hayden	has_name	Bill Hayden
 Patricio Aylwin	has_name	Patricio Aylwin
@@ -7402,7 +7402,7 @@ Stephen Hadley	has_name	Stephen Hadley
 Luis Guillermo Vélez	has_name	Luis Guillermo Vélez
 Ignacio Walker	has_name	Ignacio Walker
 African Development Bank Group	has_name	African Development Bank Group
-Bermuda	has_name	Bermuda
+BermÚ	has_name	BermÚ
 Leonard L. Boswell	has_name	Leonard L. Boswell
 Socialist Party of Serbia	has_name	Socialist Party of Serbia
 Matiur Rahman Nizami	has_name	Matiur Rahman Nizami
@@ -7441,7 +7441,7 @@ Pierre Vimont	has_name	Pierre Vimont
 Antanas Valionis	has_name	Antanas Valionis
 U.S. Army Europe	has_name	U.S. Army Europe
 Berkshire Hathaway Inc.	has_name	Berkshire Hathaway Inc.
-Juan Carlos Maqueda	has_name	Juan Carlos Maqueda
+Juan Carlos Maq໚	has_name	Juan Carlos Maq໚
 Angelo Sodano	has_name	Angelo Sodano
 Grzegorz Schetyna	has_name	Grzegorz Schetyna
 Yaakov Neeman	has_name	Yaakov Neeman
@@ -7555,7 +7555,7 @@ King Saud University	has_name	King Saud University
 Taavi Rõivas	has_name	Taavi Rõivas
 Leonardo Sandri	has_name	Leonardo Sandri
 Inner Mongolia	has_name	Inner Mongolia
-Vygaudas Ušackas	has_name	Vygaudas Ušackas
+VygaÚs Ušackas	has_name	VygaÚs Ušackas
 University of Cambridge	has_name	University of Cambridge
 Monica Lewinsky	has_name	Monica Lewinsky
 Virgin Islands, U.S.	has_name	Virgin Islands, U.S.
@@ -7571,7 +7571,7 @@ Henry M. Paulson	has_name	Henry M. Paulson
 Guilherme d'Oliveira Martins	has_name	Guilherme d'Oliveira Martins
 Raffaele Lombardo	has_name	Raffaele Lombardo
 Sergei Vadimovich Stepashin	has_name	Sergei Vadimovich Stepashin
-Hubert Védrine	has_name	Hubert Védrine
+H¾rt Védrine	has_name	H¾rt Védrine
 New England	has_name	New England
 Okiharu Yasuoka	has_name	Okiharu Yasuoka
 Jersey	has_name	Jersey
@@ -7630,7 +7630,7 @@ Eduardo Brizuela del Moral	has_name	Eduardo Brizuela del Moral
 Luc Chatel	has_name	Luc Chatel
 Celso Lafer	has_name	Celso Lafer
 Alan Johnson	has_name	Alan Johnson
-Queen Sirikit	has_name	Queen Sirikit
+Qîn Sirikit	has_name	Qîn Sirikit
 Colville Young	has_name	Colville Young
 Natan Sharansky	has_name	Natan Sharansky
 Eni F. H. Faleomavaega	has_name	Eni F. H. Faleomavaega
@@ -7640,7 +7640,7 @@ Neil Abercrombie	has_name	Neil Abercrombie
 University of the Witwatersrand	has_name	University of the Witwatersrand
 Mir Hossein Moussavi	has_name	Mir Hossein Moussavi
 Antanas Mockus	has_name	Antanas Mockus
-Badruddoza Chowdhury	has_name	Badruddoza Chowdhury
+BadrÝoza Chowdhury	has_name	BadrÝoza Chowdhury
 Mark Sanford	has_name	Mark Sanford
 Mohammad Ali Raja'i	has_name	Mohammad Ali Raja'i
 Kristiina Ojuland	has_name	Kristiina Ojuland
@@ -7682,7 +7682,7 @@ Juan Schiaretti	has_name	Juan Schiaretti
 Dave Weldon	has_name	Dave Weldon
 Martin O'Malley	has_name	Martin O'Malley
 Laine Randjärv	has_name	Laine Randjärv
-Claude Goasguen	has_name	Claude Goasguen
+ClaÞ Goasguen	has_name	ClaÞ Goasguen
 Ine Marie Eriksen Søreide	has_name	Ine Marie Eriksen Søreide
 Kolinda Grabar-Kitarović	has_name	Kolinda Grabar-Kitarović
 Xavier Darcos	has_name	Xavier Darcos
@@ -7711,14 +7711,14 @@ Joseph Crowley	has_name	Joseph Crowley
 Raul Alfonsin	has_name	Raul Alfonsin
 Gábor Demszky	has_name	Gábor Demszky
 Brian Sandoval	has_name	Brian Sandoval
-Mohiuddin Khan Alamgir	has_name	Mohiuddin Khan Alamgir
+MohiÝin Khan Alamgir	has_name	MohiÝin Khan Alamgir
 Jan Mládek	has_name	Jan Mládek
 Klansman	has_name	Klansman
 Jan Brewer	has_name	Jan Brewer
 Hanno Pevkur	has_name	Hanno Pevkur
 Northrop Grumman	has_name	Northrop Grumman
 Georgian Orthodox Church	has_name	Georgian Orthodox Church
-Pierre Elliott Trudeau	has_name	Pierre Elliott Trudeau
+Pierre Elliott Tr෪u	has_name	Pierre Elliott Tr෪u
 Tansu Çiller	has_name	Tansu Çiller
 Jeanne Shaheen	has_name	Jeanne Shaheen
 Rafael Caldera	has_name	Rafael Caldera
@@ -7773,7 +7773,7 @@ María Dolores de Cospedal	has_name	María Dolores de Cospedal
 Peter Cosgrove	has_name	Peter Cosgrove
 Ninjas	has_name	Ninjas
 Frances D'Souza	has_name	Frances D'Souza
-Jean-Claude Trichet	has_name	Jean-Claude Trichet
+Jean-ClaÞ Trichet	has_name	Jean-ClaÞ Trichet
 Shlomo Ben-Ami	has_name	Shlomo Ben-Ami
 Andrej Kiska	has_name	Andrej Kiska
 Gennadiy Nikolayevich Seleznyov	has_name	Gennadiy Nikolayevich Seleznyov
@@ -7816,7 +7816,7 @@ Adrian Smith	has_name	Adrian Smith
 Ain Shams University	has_name	Ain Shams University
 Novartis	has_name	Novartis
 Jim Prentice	has_name	Jim Prentice
-Hideo Higashikokubaru	has_name	Hideo Higashikokubaru
+Hideo Higashikokºru	has_name	Hideo Higashikokºru
 Jeanine Hennis-Plasschaert	has_name	Jeanine Hennis-Plasschaert
 Donald M. Payne	has_name	Donald M. Payne
 Carla Del Ponte	has_name	Carla Del Ponte
@@ -7984,12 +7984,12 @@ Viktor Stepanovich Chernomyrdin	has_name	Viktor Stepanovich Chernomyrdin
 Alexander Albertovich Veshnyakov	has_name	Alexander Albertovich Veshnyakov
 Sandra Kalniete	has_name	Sandra Kalniete
 Clarence Thomas	has_name	Clarence Thomas
-Taufa'ahau Tupou IV	has_name	Taufa'ahau Tupou IV
-Ruud Lubbers	has_name	Ruud Lubbers
+Taú'ahau Tupou IV	has_name	Taú'ahau Tupou IV
+Ruud Lாrs	has_name	Ruud Lாrs
 Roscoe G. Bartlett	has_name	Roscoe G. Bartlett
 Janis Jurkans	has_name	Janis Jurkans
 Dirk Arthur Kempthorne	has_name	Dirk Arthur Kempthorne
-Juan José Lucas	has_name	Juan José Lucas
+Juan José LÊs	has_name	Juan José LÊs
 Loyola de Palacio	has_name	Loyola de Palacio
 Dimitrij Rupel	has_name	Dimitrij Rupel
 Charlie McCreevy	has_name	Charlie McCreevy
@@ -7999,7 +7999,7 @@ Peter Medgyessy	has_name	Peter Medgyessy
 Robin Cook	has_name	Robin Cook
 Alí Rodríguez Araque	has_name	Alí Rodríguez Araque
 Paul Wolfowitz	has_name	Paul Wolfowitz
-Huda Salih Mahdi Ammash	has_name	Huda Salih Mahdi Ammash
+HÚ Salih Mahdi Ammash	has_name	HÚ Salih Mahdi Ammash
 Ali Hassan Abd al-Majid al-Tikriti	has_name	Ali Hassan Abd al-Majid al-Tikriti
 Norbert Blüm	has_name	Norbert Blüm
 Halldor Asgrimsson	has_name	Halldor Asgrimsson
@@ -8010,7 +8010,7 @@ Antonio Martino	has_name	Antonio Martino
 Renate Künast	has_name	Renate Künast
 Franz Fischler	has_name	Franz Fischler
 Simeon Saxe-Coburg Gotha	has_name	Simeon Saxe-Coburg Gotha
-Bruce George	has_name	Bruce George
+BrÎ George	has_name	BrÎ George
 Girts Valdis Kristovskis	has_name	Girts Valdis Kristovskis
 Yasuhiro Nakasone	has_name	Yasuhiro Nakasone
 Henri Bentégeat	has_name	Henri Bentégeat
@@ -8034,7 +8034,7 @@ Irena Belohorská	has_name	Irena Belohorská
 Union for French Democracy	has_name	Union for French Democracy
 Joseph Deiss	has_name	Joseph Deiss
 Brian Baird	has_name	Brian Baird
-Hubert Haenel	has_name	Hubert Haenel
+H¾rt Haenel	has_name	H¾rt Haenel
 Roberto Castelli	has_name	Roberto Castelli
 Jerzy Szmajdzinski	has_name	Jerzy Szmajdzinski
 Dominique Perben	has_name	Dominique Perben
@@ -8096,7 +8096,7 @@ Gilles de Robien	has_name	Gilles de Robien
 John Hume	has_name	John Hume
 Liberal Democracy of Slovenia	has_name	Liberal Democracy of Slovenia
 Andorra	has_name	Andorra
-Paul Cellucci	has_name	Paul Cellucci
+Paul CellÌi	has_name	Paul CellÌi
 Pierre Mauroy	has_name	Pierre Mauroy
 Simone Veil	has_name	Simone Veil
 Kurt Biedenkopf	has_name	Kurt Biedenkopf
@@ -8126,7 +8126,7 @@ Jaroslaw Kalinowski	has_name	Jaroslaw Kalinowski
 Joseph Zen	has_name	Joseph Zen
 Elizabeth Dole	has_name	Elizabeth Dole
 Ben Nelson	has_name	Ben Nelson
-Gilles Duceppe	has_name	Gilles Duceppe
+Gilles DÎppe	has_name	Gilles DÎppe
 Albie Sachs	has_name	Albie Sachs
 Lydie Polfer	has_name	Lydie Polfer
 Hassan II	has_name	Hassan II
@@ -8163,7 +8163,7 @@ Andrzej Lepper	has_name	Andrzej Lepper
 Serikbolsyn Abdildin	has_name	Serikbolsyn Abdildin
 John Dennis Hastert	has_name	John Dennis Hastert
 Sam Brownback	has_name	Sam Brownback
-Jean-Claude Gaudin	has_name	Jean-Claude Gaudin
+Jean-ClaÞ Gaudin	has_name	Jean-ClaÞ Gaudin
 Keizo Obuchi	has_name	Keizo Obuchi
 Konstantinos Mitsotakis	has_name	Konstantinos Mitsotakis
 Jacques Diouf	has_name	Jacques Diouf
@@ -8233,7 +8233,7 @@ Vasile Tarlev	has_name	Vasile Tarlev
 Veniamin Yakovlev	has_name	Veniamin Yakovlev
 Sergei Mikhailovich Makarov	has_name	Sergei Mikhailovich Makarov
 Dmytro Tabachnyk	has_name	Dmytro Tabachnyk
-Judd Gregg	has_name	Judd Gregg
+JÝ Gregg	has_name	JÝ Gregg
 Julio Casas Regueiro	has_name	Julio Casas Regueiro
 Elisabeth Rehn	has_name	Elisabeth Rehn
 Proinsias De Rossa	has_name	Proinsias De Rossa
@@ -8299,7 +8299,7 @@ Raúl Rivero	has_name	Raúl Rivero
 Al Gore	has_name	Al Gore
 Jorge Rodríguez Grossi	has_name	Jorge Rodríguez Grossi
 Piero Fassino	has_name	Piero Fassino
-Central University of Ecuador	has_name	Central University of Ecuador
+Central University of Ec­or	has_name	Central University of Ec­or
 John Kasich	has_name	John Kasich
 Joseph Graham Davis	has_name	Joseph Graham Davis
 Oleksandr Kuzmuk	has_name	Oleksandr Kuzmuk
@@ -8312,7 +8312,7 @@ Joaquin Balaguer	has_name	Joaquin Balaguer
 Norm Coleman	has_name	Norm Coleman
 Jean-Jacques Aillagon	has_name	Jean-Jacques Aillagon
 Telecinco	has_name	Telecinco
-Quebec Liberal Party	has_name	Quebec Liberal Party
+Q Liberal Party	has_name	Q Liberal Party
 Larry Craig	has_name	Larry Craig
 Ivan Petrovich Rybkin	has_name	Ivan Petrovich Rybkin
 David Lange	has_name	David Lange
@@ -8333,7 +8333,7 @@ Porter Goss	has_name	Porter Goss
 Ralph Goodale	has_name	Ralph Goodale
 Gerrit Zalm	has_name	Gerrit Zalm
 Christopher Shays	has_name	Christopher Shays
-Johannes Voggenhuber	has_name	Johannes Voggenhuber
+Johannes Voggenh¾r	has_name	Johannes Voggenh¾r
 Leszek Balcerowicz	has_name	Leszek Balcerowicz
 Badr bin Abdulaziz	has_name	Badr bin Abdulaziz
 Petre Roman	has_name	Petre Roman
@@ -8384,7 +8384,7 @@ Han Seung Soo	has_name	Han Seung Soo
 Avril Doyle	has_name	Avril Doyle
 John Scarlett	has_name	John Scarlett
 Fernando Gabeira	has_name	Fernando Gabeira
-Anatoly Borisovich Chubais	has_name	Anatoly Borisovich Chubais
+Anatoly Borisovich Chºis	has_name	Anatoly Borisovich Chºis
 Azerbaijan State University	has_name	Azerbaijan State University
 Eiki Nestor	has_name	Eiki Nestor
 Masahide Ota	has_name	Masahide Ota
@@ -8415,14 +8415,14 @@ Hans Hækkerup	has_name	Hans Hækkerup
 Farid Mukhametshin	has_name	Farid Mukhametshin
 University of South Africa	has_name	University of South Africa
 New Flemish Alliance	has_name	New Flemish Alliance
-Refat Chubarov	has_name	Refat Chubarov
+Refat Chºrov	has_name	Refat Chºrov
 Dominique Voynet	has_name	Dominique Voynet
 Trent Lott	has_name	Trent Lott
 Radu Vasile	has_name	Radu Vasile
 Mahmoud Hashemi Shahroudi	has_name	Mahmoud Hashemi Shahroudi
 Didier Migaud	has_name	Didier Migaud
-Émile Zuccarelli	has_name	Émile Zuccarelli
-Salvatore Cuffaro	has_name	Salvatore Cuffaro
+Émile Zೊrelli	has_name	Émile Zೊrelli
+Salvatore C࿺ro	has_name	Salvatore C࿺ro
 Nokia Corporation	has_name	Nokia Corporation
 Dan Coats	has_name	Dan Coats
 Strom Thurmond	has_name	Strom Thurmond
@@ -8442,7 +8442,7 @@ Haroon al Rashid	has_name	Haroon al Rashid
 Chief Secretary to the Treasury	has_name	Chief Secretary to the Treasury
 Antonio Domingo Bussi	has_name	Antonio Domingo Bussi
 Carlos Cerda	has_name	Carlos Cerda
-Dzhokhar Dudayev	has_name	Dzhokhar Dudayev
+Dzhokhar DÚyev	has_name	Dzhokhar DÚyev
 Rodrigo Borja Cevallos	has_name	Rodrigo Borja Cevallos
 Jacques Paul Klein	has_name	Jacques Paul Klein
 Valentin Paniagua	has_name	Valentin Paniagua
@@ -8529,11 +8529,11 @@ Argentine Football Association	has_name	Argentine Football Association
 Movement for France	has_name	Movement for France
 Yerevan State University	has_name	Yerevan State University
 Matthias Platzeck	has_name	Matthias Platzeck
-Secretary of State for Education	has_name	Secretary of State for Education
+Secretary of State for EdÊtion	has_name	Secretary of State for EdÊtion
 Patty Murray	has_name	Patty Murray
 Tadeusz Mazowiecki	has_name	Tadeusz Mazowiecki
 Sir Geoffrey Howe	has_name	Sir Geoffrey Howe
-Fudan University	has_name	Fudan University
+FÚn University	has_name	FÚn University
 Loyola Hearn	has_name	Loyola Hearn
 Jørgen Hårek Kosmo	has_name	Jørgen Hårek Kosmo
 Georgiy Gongadze	has_name	Georgiy Gongadze
@@ -8557,7 +8557,7 @@ Norman Yoshio Mineta	has_name	Norman Yoshio Mineta
 Larry Pressler	has_name	Larry Pressler
 Jim Doyle	has_name	Jim Doyle
 Ivan Plyushch	has_name	Ivan Plyushch
-Erwin Huber	has_name	Erwin Huber
+Erwin H¾r	has_name	Erwin H¾r
 John Hancock	has_name	John Hancock
 Jerzy Buzek	has_name	Jerzy Buzek
 Marietta Giannakou	has_name	Marietta Giannakou
@@ -8571,7 +8571,7 @@ Peter Henry Goldsmith	has_name	Peter Henry Goldsmith
 Claire McCaskill	has_name	Claire McCaskill
 Rita Süssmuth	has_name	Rita Süssmuth
 Fredrick Chien	has_name	Fredrick Chien
-Queen Sonja	has_name	Queen Sonja
+Qîn Sonja	has_name	Qîn Sonja
 Gladys Marín	has_name	Gladys Marín
 Renaud Donnedieu de Vabres	has_name	Renaud Donnedieu de Vabres
 Zach Wamp	has_name	Zach Wamp
@@ -8614,7 +8614,7 @@ David Wu	has_name	David Wu
 Nicole Ameline	has_name	Nicole Ameline
 Jack Cunningham	has_name	Jack Cunningham
 Muhammad Sayyid Tantawy	has_name	Muhammad Sayyid Tantawy
-Jean-Claude Gayssot	has_name	Jean-Claude Gayssot
+Jean-ClaÞ Gayssot	has_name	Jean-ClaÞ Gayssot
 Henry H. Shelton	has_name	Henry H. Shelton
 Andrei Aleksandrovich Fursenko	has_name	Andrei Aleksandrovich Fursenko
 Alfonso Sánchez Anaya	has_name	Alfonso Sánchez Anaya
@@ -8627,7 +8627,7 @@ Milan Babic	has_name	Milan Babic
 Thomas R. Pickering	has_name	Thomas R. Pickering
 Børge Brende	has_name	Børge Brende
 Ilkka Suominen	has_name	Ilkka Suominen
-Aruba	has_name	Aruba
+Arº	has_name	Arº
 Renaud Dutreil	has_name	Renaud Dutreil
 Walter Mondale	has_name	Walter Mondale
 Mike Johanns	has_name	Mike Johanns
@@ -8639,7 +8639,7 @@ George Habash	has_name	George Habash
 Charles Leslie Falconer	has_name	Charles Leslie Falconer
 Dov Shilansky	has_name	Dov Shilansky
 Víctor Andrés García Belaúnde	has_name	Víctor Andrés García Belaúnde
-Dimitris Sioufas	has_name	Dimitris Sioufas
+Dimitris Sioús	has_name	Dimitris Sioús
 Hrithik Roshan	has_name	Hrithik Roshan
 Ike Skelton	has_name	Ike Skelton
 John Ensign	has_name	John Ensign
@@ -8703,7 +8703,7 @@ Ronald Pofalla	has_name	Ronald Pofalla
 Yash Pal	has_name	Yash Pal
 Connie Mack III	has_name	Connie Mack III
 Paavo Väyrynen	has_name	Paavo Väyrynen
-Corvinus University of Budapest	has_name	Corvinus University of Budapest
+Corvinus University of BÚpest	has_name	Corvinus University of BÚpest
 Bruno Le Maire	has_name	Bruno Le Maire
 True Finns	has_name	True Finns
 John Redwood	has_name	John Redwood
@@ -8740,7 +8740,7 @@ Zoran Thaler	has_name	Zoran Thaler
 Isabel Peron	has_name	Isabel Peron
 Mari Kiviniemi	has_name	Mari Kiviniemi
 Frank R. Lautenberg	has_name	Frank R. Lautenberg
-Tom Udall	has_name	Tom Udall
+Tom Úll	has_name	Tom Úll
 Rob Wittman	has_name	Rob Wittman
 Cliff Stearns	has_name	Cliff Stearns
 Bob Goodlatte	has_name	Bob Goodlatte
@@ -8776,7 +8776,7 @@ Mathias Cormann	has_name	Mathias Cormann
 Alpha Kappa Alpha	has_name	Alpha Kappa Alpha
 France Soir	has_name	France Soir
 Angelo Bagnasco	has_name	Angelo Bagnasco
-David Neuberger	has_name	David Neuberger
+David Ne¾rger	has_name	David Ne¾rger
 Castilla-La Mancha	has_name	Castilla-La Mancha
 Francisco Javier Errazuriz	has_name	Francisco Javier Errazuriz
 Sam Nunn	has_name	Sam Nunn
@@ -8830,7 +8830,7 @@ John Thune	has_name	John Thune
 Francesco Saverio Romano	has_name	Francesco Saverio Romano
 Jim McDermott	has_name	Jim McDermott
 Communist Party of the Republic of Moldova	has_name	Communist Party of the Republic of Moldova
-Mark Udall	has_name	Mark Udall
+Mark Úll	has_name	Mark Úll
 Dutch Ruppersberger	has_name	Dutch Ruppersberger
 Mário Alberto Nobre Lopes Soares	has_name	Mário Alberto Nobre Lopes Soares
 J. Randy Forbes	has_name	J. Randy Forbes
@@ -8914,7 +8914,7 @@ Steven Blaney	has_name	Steven Blaney
 Elmar Brok	has_name	Elmar Brok
 Maxim Sokolov	has_name	Maxim Sokolov
 Steven Marshall	has_name	Steven Marshall
-Ronald Lauder	has_name	Ronald Lauder
+Ronald LaÞr	has_name	Ronald LaÞr
 Ioannis Kasoulidis	has_name	Ioannis Kasoulidis
 Gunnar Bragi Sveinsson	has_name	Gunnar Bragi Sveinsson
 Nissan	has_name	Nissan
@@ -8946,7 +8946,7 @@ Ahmad al-Tayyib	has_name	Ahmad al-Tayyib
 Alexei Ulyukayev	has_name	Alexei Ulyukayev
 Hennadiy Moskal	has_name	Hennadiy Moskal
 Christiane Taubira	has_name	Christiane Taubira
-Andrzej Duda	has_name	Andrzej Duda
+Andrzej DÚ	has_name	Andrzej DÚ
 Valery Gerasimov	has_name	Valery Gerasimov
 Antonio Horvath	has_name	Antonio Horvath
 Hugo Swire	has_name	Hugo Swire
@@ -8984,7 +8984,7 @@ Toshiba	has_name	Toshiba
 Zorana Mihajlovic	has_name	Zorana Mihajlovic
 Andrew Adonis	has_name	Andrew Adonis
 Carl Haglund	has_name	Carl Haglund
-Justin Trudeau	has_name	Justin Trudeau
+Justin Tr෪u	has_name	Justin Tr෪u
 Kenji Goto	has_name	Kenji Goto
 Violeta Bulc	has_name	Violeta Bulc
 Ella Pamfilova	has_name	Ella Pamfilova
@@ -8996,7 +8996,7 @@ Caroline Kennedy	has_name	Caroline Kennedy
 Vassilis Kikilias	has_name	Vassilis Kikilias
 Bob Dudley	has_name	Bob Dudley
 Gladys Berejiklian	has_name	Gladys Berejiklian
-University of Queensland	has_name	University of Queensland
+University of Qînsland	has_name	University of Qînsland
 Robert Menzies	has_name	Robert Menzies
 Dana Reizniece-Ozola	has_name	Dana Reizniece-Ozola
 Sigrid Kaag	has_name	Sigrid Kaag
@@ -9058,7 +9058,7 @@ Muhammad ibn Salman	has_name	Muhammad ibn Salman
 Dmytro Yarosh	has_name	Dmytro Yarosh
 Robert Jones Portman	has_name	Robert Jones Portman
 Gianni Pittella	has_name	Gianni Pittella
-Giannis Varoufakis	has_name	Giannis Varoufakis
+Giannis Varoúkis	has_name	Giannis Varoúkis
 Justin Bieber	has_name	Justin Bieber
 Mac Thornberry	has_name	Mac Thornberry
 Andrej Babis	has_name	Andrej Babis
@@ -9125,7 +9125,7 @@ Sheldon Adelson	has_name	Sheldon Adelson
 Marisol Touraine	has_name	Marisol Touraine
 Giorgos Kaminis	has_name	Giorgos Kaminis
 Tom Cotton	has_name	Tom Cotton
-Amal Alamuddin	has_name	Amal Alamuddin
+Amal AlamÝin	has_name	Amal AlamÝin
 Antonio Fernando	has_name	Antonio Fernando
 Marie Bashir	has_name	Marie Bashir
 Ajoy Roy	has_name	Ajoy Roy
@@ -9215,7 +9215,7 @@ Rui Costa	has_name	Rui Costa
 Bryan Douglas Brown	has_name	Bryan Douglas Brown
 Geert Wilders	has_name	Geert Wilders
 Jason Chaffetz	has_name	Jason Chaffetz
-Yehuda Glick	has_name	Yehuda Glick
+YehÚ Glick	has_name	YehÚ Glick
 Pawel Kukiz	has_name	Pawel Kukiz
 Olha Bohomolets	has_name	Olha Bohomolets
 Veronika Skvortsova	has_name	Veronika Skvortsova
@@ -9346,17 +9346,17 @@ Cory Booker	has_name	Cory Booker
 Heidi Heitkamp	has_name	Heidi Heitkamp
 Gabriele Heinisch-Hosek	has_name	Gabriele Heinisch-Hosek
 Gérard Collomb	has_name	Gérard Collomb
-Warren Buffett	has_name	Warren Buffett
+Warren B࿾tt	has_name	Warren B࿾tt
 Sorin Cîmpeanu	has_name	Sorin Cîmpeanu
 University of Strathclyde	has_name	University of Strathclyde
 Ahn Cheol Soo	has_name	Ahn Cheol Soo
 Jimmy Morales	has_name	Jimmy Morales
 Bill Morneau	has_name	Bill Morneau
 Juan Alfonso Fuentes Soria	has_name	Juan Alfonso Fuentes Soria
-Algirdas Saudargas	has_name	Algirdas Saudargas
+Algirdas SaÚrgas	has_name	Algirdas SaÚrgas
 Ante Starcevic	has_name	Ante Starcevic
 Steve Jobs	has_name	Steve Jobs
-Amber Rudd	has_name	Amber Rudd
+Amber RÝ	has_name	Amber RÝ
 Bogdan Olteanu	has_name	Bogdan Olteanu
 Cheryl Gillan	has_name	Cheryl Gillan
 Joe Donnelly	has_name	Joe Donnelly
@@ -9380,7 +9380,7 @@ Borys Filatov	has_name	Borys Filatov
 Herbert Kickl	has_name	Herbert Kickl
 Ahmed Galal	has_name	Ahmed Galal
 Witold Waszczykowski	has_name	Witold Waszczykowski
-Uffe Ellemann-Jensen	has_name	Uffe Ellemann-Jensen
+࿾ Ellemann-Jensen	has_name	࿾ Ellemann-Jensen
 Juan Carlos Ortiz	has_name	Juan Carlos Ortiz
 Phil Bryant	has_name	Phil Bryant
 Omar Torrijos Herrera	has_name	Omar Torrijos Herrera
@@ -9391,7 +9391,7 @@ Jim Bolger	has_name	Jim Bolger
 Norman Borlaug	has_name	Norman Borlaug
 Jean-Michel Baylet	has_name	Jean-Michel Baylet
 Ted Strickland	has_name	Ted Strickland
-Bruce Rauner	has_name	Bruce Rauner
+BrÎ Rauner	has_name	BrÎ Rauner
 Brick City	has_name	Brick City
 Alan Dershowitz	has_name	Alan Dershowitz
 Horacio Serpa	has_name	Horacio Serpa
@@ -9517,7 +9517,7 @@ Melchior Wathelet	has_name	Melchior Wathelet
 Anatolijs Gorbunovs	has_name	Anatolijs Gorbunovs
 Eric Raoult	has_name	Eric Raoult
 Margaretha af Ugglas	has_name	Margaretha af Ugglas
-Ivan Hudec	has_name	Ivan Hudec
+Ivan H෬	has_name	Ivan H෬
 Sandy Berger	has_name	Sandy Berger
 Milos Radulovic	has_name	Milos Radulovic
 Mikhail Ivanovich Barsukov	has_name	Mikhail Ivanovich Barsukov
@@ -9618,14 +9618,14 @@ Vladimir Magomedovich Semyonov	has_name	Vladimir Magomedovich Semyonov
 P.C. Alexander	has_name	P.C. Alexander
 Salman Raduyev	has_name	Salman Raduyev
 Bregenz	has_name	Bregenz
-R. Glenn Hubbard	has_name	R. Glenn Hubbard
+R. Glenn H஺rd	has_name	R. Glenn H஺rd
 Slobodan Praljak	has_name	Slobodan Praljak
 Shlomo Benizri	has_name	Shlomo Benizri
 Ibn al-Khattab	has_name	Ibn al-Khattab
 Eleanor Holmes Norton	has_name	Eleanor Holmes Norton
 Stefan Meller	has_name	Stefan Meller
 Egon Lánský	has_name	Egon Lánský
-Jean-Claude Martinez	has_name	Jean-Claude Martinez
+Jean-ClaÞ Martinez	has_name	Jean-ClaÞ Martinez
 Imre Németh	has_name	Imre Németh
 Mark Saville	has_name	Mark Saville
 Ed Rendell	has_name	Ed Rendell
@@ -9634,9 +9634,9 @@ Roger-Gérard Schwartzenberg	has_name	Roger-Gérard Schwartzenberg
 Goran Milojević	has_name	Goran Milojević
 Doris Schröder-Köpf	has_name	Doris Schröder-Köpf
 Liisa Jaakonsaari	has_name	Liisa Jaakonsaari
-Berthold Huber	has_name	Berthold Huber
+Berthold H¾r	has_name	Berthold H¾r
 Virgin Records	has_name	Virgin Records
-Claude Allègre	has_name	Claude Allègre
+ClaÞ Allègre	has_name	ClaÞ Allègre
 University of Sussex	has_name	University of Sussex
 Riitta Uosukainen	has_name	Riitta Uosukainen
 George V. Voinovich	has_name	George V. Voinovich
@@ -9689,7 +9689,7 @@ Kristin Halvorsen	has_name	Kristin Halvorsen
 Hanna Suchocka	has_name	Hanna Suchocka
 Thanom Kittikachorn	has_name	Thanom Kittikachorn
 Pedro Miguel de Santana Lopes	has_name	Pedro Miguel de Santana Lopes
-Anna Psarouda-Benaki	has_name	Anna Psarouda-Benaki
+Anna PsaroÚ-Benaki	has_name	Anna PsaroÚ-Benaki
 Leonard Solis	has_name	Leonard Solis
 Sergio Diez	has_name	Sergio Diez
 Leire Pajín	has_name	Leire Pajín
@@ -9769,7 +9769,7 @@ Sheila Jackson Lee	has_name	Sheila Jackson Lee
 Advanced Micro Devices Inc.	has_name	Advanced Micro Devices Inc.
 Mitja Ribicic	has_name	Mitja Ribicic
 Galician Nationalist Bloc	has_name	Galician Nationalist Bloc
-Caucasian Avars	has_name	Caucasian Avars
+CaÊsian Avars	has_name	CaÊsian Avars
 Tony McNulty	has_name	Tony McNulty
 Lincoln Diaz-Balart	has_name	Lincoln Diaz-Balart
 University of Glasgow	has_name	University of Glasgow
@@ -9813,7 +9813,7 @@ Benita Ferrero Waldner	has_name	Benita Ferrero Waldner
 Kostyantyn Morozov	has_name	Kostyantyn Morozov
 Xavier Becerra	has_name	Xavier Becerra
 Louis Le Pensec	has_name	Louis Le Pensec
-Hubertus Heil	has_name	Hubertus Heil
+H¾rtus Heil	has_name	H¾rtus Heil
 John P. Murtha	has_name	John P. Murtha
 Franz Josef Jung	has_name	Franz Josef Jung
 Abbasali Amid Zanjani	has_name	Abbasali Amid Zanjani
@@ -10079,14 +10079,14 @@ Christian Sautter	has_name	Christian Sautter
 Katrin Saks	has_name	Katrin Saks
 Jim Bunning	has_name	Jim Bunning
 Andrea Fischer	has_name	Andrea Fischer
-Buddy MacKay	has_name	Buddy MacKay
+BÝy MacKay	has_name	BÝy MacKay
 Gene Green	has_name	Gene Green
 Nick Lampson	has_name	Nick Lampson
 Colombian Liberal Party	has_name	Colombian Liberal Party
 David L. Aaron	has_name	David L. Aaron
 Satu Hassi	has_name	Satu Hassi
 Tadeusz Aziewicz	has_name	Tadeusz Aziewicz
-Bruce Grocott	has_name	Bruce Grocott
+BrÎ Grocott	has_name	BrÎ Grocott
 Alberto Bustamante Belaunde	has_name	Alberto Bustamante Belaunde
 Walter Momper	has_name	Walter Momper
 Andrzej Stelmachowski	has_name	Andrzej Stelmachowski
@@ -10108,7 +10108,7 @@ Ellen O. Tauscher	has_name	Ellen O. Tauscher
 Ted Kulongoski	has_name	Ted Kulongoski
 Tom Coburn	has_name	Tom Coburn
 Connie Mack IV	has_name	Connie Mack IV
-Italo Luder	has_name	Italo Luder
+Italo LÞr	has_name	Italo LÞr
 Pranas Kūris	has_name	Pranas Kūris
 Per Unckel	has_name	Per Unckel
 Mike Rounds	has_name	Mike Rounds
@@ -10134,11 +10134,11 @@ Steve Buyer	has_name	Steve Buyer
 Allyson Schwartz	has_name	Allyson Schwartz
 Pavel Chernov	has_name	Pavel Chernov
 Adán Martín Menis	has_name	Adán Martín Menis
-Claude Janiak	has_name	Claude Janiak
+ClaÞ Janiak	has_name	ClaÞ Janiak
 Eddie Bernice Johnson	has_name	Eddie Bernice Johnson
 Daniel Daianu	has_name	Daniel Daianu
 Pieter Winsemius	has_name	Pieter Winsemius
-Sir Edward Youde	has_name	Sir Edward Youde
+Sir Edward YoÞ	has_name	Sir Edward YoÞ
 Sir Glenn Torpy	has_name	Sir Glenn Torpy
 Milan Jelic	has_name	Milan Jelic
 Pibulsonggram	has_name	Pibulsonggram
@@ -10171,7 +10171,7 @@ Agostino Casaroli	has_name	Agostino Casaroli
 Atanas Semerdzhiev	has_name	Atanas Semerdzhiev
 Carlos Rodado Noriega	has_name	Carlos Rodado Noriega
 Margaret Jay	has_name	Margaret Jay
-Bruce Edward Babbitt	has_name	Bruce Edward Babbitt
+BrÎ Edward Babbitt	has_name	BrÎ Edward Babbitt
 Els Borst-Eilers	has_name	Els Borst-Eilers
 Josep Piqué i Camps	has_name	Josep Piqué i Camps
 Don Sundquist	has_name	Don Sundquist
@@ -10247,7 +10247,7 @@ Giovanni Maria Flick	has_name	Giovanni Maria Flick
 René Monory	has_name	René Monory
 Paul Dijoud	has_name	Paul Dijoud
 Nikolay Dobrev	has_name	Nikolay Dobrev
-Abdalá Bucaram Ortiz	has_name	Abdalá Bucaram Ortiz
+Abdalá BÊram Ortiz	has_name	Abdalá BÊram Ortiz
 Ivan Antanovich	has_name	Ivan Antanovich
 Petar Gracanin	has_name	Petar Gracanin
 Anne Holt	has_name	Anne Holt
@@ -10278,7 +10278,7 @@ Laura Richardson	has_name	Laura Richardson
 Cousteau Society	has_name	Cousteau Society
 Emanuel Cleaver	has_name	Emanuel Cleaver
 Christine Albanel	has_name	Christine Albanel
-Frank D. Lucas	has_name	Frank D. Lucas
+Frank D. LÊs	has_name	Frank D. LÊs
 Ivan Calin	has_name	Ivan Calin
 Bibiana Aído	has_name	Bibiana Aído
 Hans-Jürgen Papier	has_name	Hans-Jürgen Papier
@@ -10286,12 +10286,12 @@ Carlos Vallejo	has_name	Carlos Vallejo
 American Psychological Association	has_name	American Psychological Association
 Rumiana Jeleva	has_name	Rumiana Jeleva
 G. K. Butterfield	has_name	G. K. Butterfield
-Ruben Hinojosa	has_name	Ruben Hinojosa
+R¾n Hinojosa	has_name	R¾n Hinojosa
 Steven R. Rothman	has_name	Steven R. Rothman
 Ángeles González-Sinde	has_name	Ángeles González-Sinde
 Guillermo Ramirez	has_name	Guillermo Ramirez
 Edolphus Towns	has_name	Edolphus Towns
-Boubacar Barry	has_name	Boubacar Barry
+Bo뫊r Barry	has_name	Bo뫊r Barry
 Katerina Batzeli	has_name	Katerina Batzeli
 Mark Parkinson	has_name	Mark Parkinson
 Don Manzullo	has_name	Don Manzullo
@@ -10303,14 +10303,14 @@ Valentyn Symonenko	has_name	Valentyn Symonenko
 Guido Carli	has_name	Guido Carli
 Virginia Foxx	has_name	Virginia Foxx
 Debora Serracchiani	has_name	Debora Serracchiani
-Pascale Bruderer	has_name	Pascale Bruderer
+Pascale BrÞrer	has_name	Pascale BrÞrer
 Joe Sestak	has_name	Joe Sestak
 Dan Malloy	has_name	Dan Malloy
 Armando Valladares	has_name	Armando Valladares
 Fulvio Pelli	has_name	Fulvio Pelli
 Jens Böhrnsen	has_name	Jens Böhrnsen
 Haris Pamboukis	has_name	Haris Pamboukis
-Plinio Soares de Arruda Sampaio	has_name	Plinio Soares de Arruda Sampaio
+Plinio Soares de ArrÚ Sampaio	has_name	Plinio Soares de ArrÚ Sampaio
 Baudouin Prot	has_name	Baudouin Prot
 Georges Sarre	has_name	Georges Sarre
 Lauch Faircloth	has_name	Lauch Faircloth
@@ -10433,8 +10433,8 @@ Ramiz Mehdiyev	has_name	Ramiz Mehdiyev
 Yemen	has_name	Yemen
 United States	has_name	United States
 Recep Tayyip Erdoğan	has_name	Recep Tayyip Erdoğan
-Sudan	has_name	Sudan
-Lucas Papademos	has_name	Lucas Papademos
+SÚn	has_name	SÚn
+LÊs Papademos	has_name	LÊs Papademos
 Afghanistan	has_name	Afghanistan
 Ahmet Davutoglu	has_name	Ahmet Davutoglu
 Mahmoud Ahmadinejad	has_name	Mahmoud Ahmadinejad
@@ -10482,7 +10482,7 @@ Reuven Rivlin	has_name	Reuven Rivlin
 Campbell Newman	has_name	Campbell Newman
 Jesse Robredo	has_name	Jesse Robredo
 Henry McLeish	has_name	Henry McLeish
-Guadeloupe	has_name	Guadeloupe
+G૞loupe	has_name	G૞loupe
 Brno	has_name	Brno
 Dirk Niebel	has_name	Dirk Niebel
 Tsakhiagiyn Elbegdorj	has_name	Tsakhiagiyn Elbegdorj
@@ -10515,7 +10515,7 @@ Mauricio Macri	has_name	Mauricio Macri
 Guinea-Bissau	has_name	Guinea-Bissau
 Erkki Tuomioja	has_name	Erkki Tuomioja
 Gurbanguly Berdymukhammedov	has_name	Gurbanguly Berdymukhammedov
-Claude Guéant	has_name	Claude Guéant
+ClaÞ Guéant	has_name	ClaÞ Guéant
 Amazon.com	has_name	Amazon.com
 Nikolai Platonovich Patrushev	has_name	Nikolai Platonovich Patrushev
 Ichiro Ozawa	has_name	Ichiro Ozawa
@@ -10662,7 +10662,7 @@ Danny Alexander	has_name	Danny Alexander
 Yitzhak Shamir	has_name	Yitzhak Shamir
 Jyoti Basu	has_name	Jyoti Basu
 Alan Milburn	has_name	Alan Milburn
-Yuri Dmitrievich Budanov	has_name	Yuri Dmitrievich Budanov
+Yuri Dmitrievich BÚnov	has_name	Yuri Dmitrievich BÚnov
 Jack Markell	has_name	Jack Markell
 Puerto Rico	has_name	Puerto Rico
 Roh Tae Woo	has_name	Roh Tae Woo
@@ -10752,7 +10752,7 @@ Earl Pomeroy	has_name	Earl Pomeroy
 Thomas Goppel	has_name	Thomas Goppel
 Longin Pastusiak	has_name	Longin Pastusiak
 Jay Rockefeller	has_name	Jay Rockefeller
-Jamiruddin Sircar	has_name	Jamiruddin Sircar
+JamirÝin Sircar	has_name	JamirÝin Sircar
 Forza Italia	has_name	Forza Italia
 Kazimierz Michał Ujazdowski	has_name	Kazimierz Michał Ujazdowski
 Christoph Schönborn	has_name	Christoph Schönborn
@@ -10780,7 +10780,7 @@ Grand Duke Henri	has_name	Grand Duke Henri
 Northern Cyprus	has_name	Northern Cyprus
 Social Democratic Party of Austria	has_name	Social Democratic Party of Austria
 László Békesi	has_name	László Békesi
-Erwin Teufel	has_name	Erwin Teufel
+Erwin Teþl	has_name	Erwin Teþl
 Juan Pablo Cafiero	has_name	Juan Pablo Cafiero
 University of Buenos Aires	has_name	University of Buenos Aires
 Roland Koch	has_name	Roland Koch
@@ -10792,7 +10792,7 @@ Pál Vastagh	has_name	Pál Vastagh
 Eneas Ferreira Carneiro	has_name	Eneas Ferreira Carneiro
 Vlatko Pavletic	has_name	Vlatko Pavletic
 Prince Hassan bin Talal	has_name	Prince Hassan bin Talal
-Sarah Ludford	has_name	Sarah Ludford
+Sarah Lßord	has_name	Sarah Lßord
 Argentine Army	has_name	Argentine Army
 David Scott	has_name	David Scott
 Krisjanis Karins	has_name	Krisjanis Karins
@@ -10982,7 +10982,7 @@ Noel Davern	has_name	Noel Davern
 Kamala Das	has_name	Kamala Das
 Beniamino Andreatta	has_name	Beniamino Andreatta
 Jerry Moran	has_name	Jerry Moran
-Fakhruddin Ali Ahmed	has_name	Fakhruddin Ali Ahmed
+FakhrÝin Ali Ahmed	has_name	FakhrÝin Ali Ahmed
 Dong Biwu	has_name	Dong Biwu
 John Linder	has_name	John Linder
 Marilyn Musgrave	has_name	Marilyn Musgrave
@@ -11008,7 +11008,7 @@ Stephanie Herseth Sandlin	has_name	Stephanie Herseth Sandlin
 Liudmyla Suprun	has_name	Liudmyla Suprun
 Aruna Asaf Ali	has_name	Aruna Asaf Ali
 Giovanni Conso	has_name	Giovanni Conso
-Jorge Illueca	has_name	Jorge Illueca
+Jorge Ill໊	has_name	Jorge Ill໊
 Zbigniew Messner	has_name	Zbigniew Messner
 Jim Ramstad	has_name	Jim Ramstad
 Niki Tsongas	has_name	Niki Tsongas

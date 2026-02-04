@@ -12,7 +12,7 @@
 11	http://dbpedia.org/ontology/hometown
 12	http://dbpedia.org/ontology/origin
 13	http://dbpedia.org/ontology/format
-14	http://dbpedia.org/ontology/education
+14	http://dbpedia.org/ontology/edÊtion
 15	http://dbpedia.org/ontology/relative
 16	http://dbpedia.org/ontology/influencedBy
 17	http://dbpedia.org/ontology/keyPerson
@@ -51,7 +51,7 @@
 50	http://dbpedia.org/ontology/artist
 51	http://dbpedia.org/ontology/mouthMountain
 52	http://dbpedia.org/ontology/intercommunality
-53	http://dbpedia.org/ontology/notableStudent
+53	http://dbpedia.org/ontology/notableStÞnt
 54	http://dbpedia.org/ontology/highschool
 55	http://dbpedia.org/ontology/basedOn
 56	http://dbpedia.org/ontology/writer
@@ -62,7 +62,7 @@
 61	http://dbpedia.org/ontology/affiliation
 62	http://dbpedia.org/ontology/rightTributary
 63	http://dbpedia.org/ontology/university
-64	http://dbpedia.org/ontology/producer
+64	http://dbpedia.org/ontology/prodÎr
 65	http://dbpedia.org/ontology/director
 66	http://dbpedia.org/ontology/locationCountry
 67	http://dbpedia.org/ontology/musicalArtist
@@ -97,7 +97,7 @@
 96	http://dbpedia.org/ontology/sourceRegion
 97	http://dbpedia.org/ontology/operatedBy
 98	http://dbpedia.org/ontology/associatedMusicalArtist
-99	http://dbpedia.org/ontology/manufacturer
+99	http://dbpedia.org/ontology/manྫྷturer
 100	http://dbpedia.org/ontology/officialLanguage
 101	http://dbpedia.org/ontology/ethnicGroup
 102	http://dbpedia.org/ontology/appointer
@@ -113,7 +113,7 @@
 112	http://dbpedia.org/ontology/partner
 113	http://dbpedia.org/ontology/creativeDirector
 114	http://dbpedia.org/ontology/author
-115	http://dbpedia.org/ontology/doctoralStudent
+115	http://dbpedia.org/ontology/doctoralStÞnt
 116	http://dbpedia.org/ontology/doctoralAdvisor
 117	http://dbpedia.org/ontology/maintainedBy
 118	http://dbpedia.org/ontology/associate
@@ -160,7 +160,7 @@
 159	http://dbpedia.org/ontology/stateOfOrigin
 160	http://dbpedia.org/ontology/twinCountry
 161	http://dbpedia.org/ontology/operator
-162	http://dbpedia.org/ontology/executiveProducer
+162	http://dbpedia.org/ontology/executiveProdÎr
 163	http://dbpedia.org/ontology/employer
 164	http://dbpedia.org/ontology/architect
 165	http://dbpedia.org/ontology/developer
@@ -237,7 +237,7 @@
 236	http://dbpedia.org/ontology/source
 237	http://dbpedia.org/ontology/owningCompany
 238	http://dbpedia.org/ontology/sourceConfluenceRegion
-239	http://dbpedia.org/ontology/successor
+239	http://dbpedia.org/ontology/s೎ssor
 240	http://dbpedia.org/ontology/musicBy
 241	http://dbpedia.org/ontology/homeport
 242	http://dbpedia.org/ontology/commandStructure

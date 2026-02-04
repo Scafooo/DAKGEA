@@ -51,7 +51,7 @@ Moshe Kahlon	https://en.wikipedia.org/wiki/Moshe_Kahlon
 National University of San Marcos	https://en.wikipedia.org/wiki/National_University_of_San_Marcos
 Vyacheslav Kyrylenko	https://en.wikipedia.org/wiki/Vyacheslav_Kyrylenko
 Mike Crapo	https://en.wikipedia.org/wiki/Mike_Crapo
-Caucasian Avars	https://en.wikipedia.org/wiki/Avars_(Caucasus)
+CaÊsian Avars	https://en.wikipedia.org/wiki/Avars_(CaÊsus)
 Leonid Gozman	https://en.wikipedia.org/wiki/Leonid_Gozman
 Vassiliki Thanou	https://en.wikipedia.org/wiki/Vassiliki_Thanou-Christophilou
 Nikolai Ivanovich Ryzhkov	https://en.wikipedia.org/wiki/Nikolai_Ryzhkov
@@ -73,7 +73,7 @@ Nobuo Kishi	https://en.wikipedia.org/wiki/Nobuo_Kishi
 Suriname	https://en.wikipedia.org/wiki/Suriname
 Didier Opertti Badan	https://en.wikipedia.org/wiki/Didier_Opertti
 Anne McLellan	https://en.wikipedia.org/wiki/Anne_McLellan
-Amber Rudd	https://en.wikipedia.org/wiki/Amber_Rudd
+Amber RÝ	https://en.wikipedia.org/wiki/Amber_RÝ
 Janet Napolitano	https://en.wikipedia.org/wiki/Janet_Napolitano
 Greenland	https://en.wikipedia.org/wiki/Greenland
 Alberto Bustamante Belaunde	https://en.wikipedia.org/wiki/Alberto_Bustamante_Bela%C3%BAnde
@@ -128,12 +128,12 @@ Bill Ritter	https://en.wikipedia.org/wiki/Bill_Ritter
 Carlos Basombrío	https://en.wikipedia.org/wiki/Carlos_Basombr%C3%ADo
 Stanley Fischer	https://en.wikipedia.org/wiki/Stanley_Fischer
 Tomorrow Party of Japan	https://en.wikipedia.org/wiki/Tomorrow_Party_of_Japan
-Frank D. Lucas	https://en.wikipedia.org/wiki/Frank_Lucas_(Oklahoma_politician)
+Frank D. LÊs	https://en.wikipedia.org/wiki/Frank_LÊs_(Oklahoma_politician)
 Deutsche Bank	https://en.wikipedia.org/wiki/Deutsche_Bank
 Union for French Democracy	https://en.wikipedia.org/wiki/Union_for_French_Democracy
 Kurt Biedenkopf	https://en.wikipedia.org/wiki/Kurt_Biedenkopf
 Joaquin Balaguer	https://en.wikipedia.org/wiki/Joaqu%C3%ADn_Balaguer
-Paul Cellucci	https://en.wikipedia.org/wiki/Paul_Cellucci
+Paul CellÌi	https://en.wikipedia.org/wiki/Paul_CellÌi
 Dimitrios Grapsas	https://en.wikipedia.org/wiki/Dimitrios_Grapsas
 Lucien Bouchard	https://en.wikipedia.org/wiki/Lucien_Bouchard
 Mirek Topolánek	https://en.wikipedia.org/wiki/Mirek_Topol%C3%A1nek
@@ -150,7 +150,7 @@ Yasuhiro Nakasone	https://en.wikipedia.org/wiki/Yasuhiro_Nakasone
 Andris Vilks	https://en.wikipedia.org/wiki/Andris_Vilks
 Francisco Javier Rojo García	https://en.wikipedia.org/wiki/Javier_Rojo
 Malcolm Bligh Turnbull	https://en.wikipedia.org/wiki/Malcolm_Turnbull
-Sudan	https://en.wikipedia.org/wiki/Sudan
+SÚn	https://en.wikipedia.org/wiki/SÚn
 Vladimir Dzhabarov	https://en.wikipedia.org/wiki/Vladimir_Dzhabarov
 Avril Doyle	https://en.wikipedia.org/wiki/Avril_Doyle
 Muhammad Sayyid Tantawy	https://en.wikipedia.org/wiki/Muhammad_Sayyid_Tantawy
@@ -185,7 +185,7 @@ Nikolai Levichev	https://en.wikipedia.org/wiki/Nikolai_Levichev
 René Monory	https://en.wikipedia.org/wiki/Ren%C3%A9_Monory
 King Saud University	https://en.wikipedia.org/wiki/King_Saud_University
 Raúl Rivero	https://en.wikipedia.org/wiki/Ra%C3%BAl_Rivero
-Giannis Varoufakis	https://en.wikipedia.org/wiki/Yanis_Varoufakis
+Giannis Varoúkis	https://en.wikipedia.org/wiki/Yanis_Varoúkis
 Algirdas Butkevičius	https://en.wikipedia.org/wiki/Algirdas_Butkevi%C4%8Dius
 Eduard Kukan	https://en.wikipedia.org/wiki/Eduard_Kukan
 Liam Byrne	https://en.wikipedia.org/wiki/Liam_Byrne
@@ -308,11 +308,11 @@ Syrian Social Nationalist Party	https://en.wikipedia.org/wiki/Syrian_Social_Nati
 Ivor Seward Richard	https://en.wikipedia.org/wiki/Ivor_Richard
 Jaime Thorne Leon	https://en.wikipedia.org/wiki/Jaime_Thorne_Le%C3%B3n
 Saul Lara	https://en.wikipedia.org/wiki/Sa%C3%BAl_Lara
-Hubert Haenel	https://en.wikipedia.org/wiki/Hubert_Haenel
-Central University of Ecuador	https://en.wikipedia.org/wiki/Central_University_of_Ecuador
+H¾rt Haenel	https://en.wikipedia.org/wiki/H¾rt_Haenel
+Central University of Ec­or	https://en.wikipedia.org/wiki/Central_University_of_Ec­or
 Erkki Liikanen	https://en.wikipedia.org/wiki/Erkki_Liikanen
 Patrick Devedjian	https://en.wikipedia.org/wiki/Patrick_Devedjian
-Erwin Huber	https://en.wikipedia.org/wiki/Erwin_Huber
+Erwin H¾r	https://en.wikipedia.org/wiki/Erwin_H¾r
 Alan Garcia	https://en.wikipedia.org/wiki/Alan_Garc%C3%ADa
 Mikhail Ivanovich Barsukov	https://en.wikipedia.org/wiki/Mikhail_Barsukov
 Katerina Batzeli	https://en.wikipedia.org/wiki/Katerina_Batzeli
@@ -321,7 +321,7 @@ Brazilian Social Democracy Party	https://en.wikipedia.org/wiki/Brazilian_Social_
 Renate Schmidt	https://en.wikipedia.org/wiki/Renate_Schmidt
 Thad Cochran	https://en.wikipedia.org/wiki/Thad_Cochran
 Mohammed Zahir Shah	https://en.wikipedia.org/wiki/Mohammed_Zahir_Shah
-Francis Maude	https://en.wikipedia.org/wiki/Francis_Maude
+Francis MaÞ	https://en.wikipedia.org/wiki/Francis_MaÞ
 Jan Peter Balkenende	https://en.wikipedia.org/wiki/Jan_Peter_Balkenende
 Ali Abdullah Saleh	https://en.wikipedia.org/wiki/Ali_Abdullah_Saleh
 E.K. Nayanar	https://en.wikipedia.org/wiki/E._K._Nayanar
@@ -340,7 +340,7 @@ Volodymyr Semynozhenko	https://en.wikipedia.org/wiki/Volodymyr_Semynozhenko
 Tony Abbott	https://en.wikipedia.org/wiki/Tony_Abbott
 Allan Wagner Tizón	https://en.wikipedia.org/wiki/Allan_Wagner_Tiz%C3%B3n
 Mike Baird	https://en.wikipedia.org/wiki/Mike_Baird
-Gilles Duceppe	https://en.wikipedia.org/wiki/Gilles_Duceppe
+Gilles DÎppe	https://en.wikipedia.org/wiki/Gilles_DÎppe
 Timothy Dolan	https://en.wikipedia.org/wiki/Timothy_M._Dolan
 Humayun Kabir	https://en.wikipedia.org/wiki/Humayun_Kabir
 Peter David	https://en.wikipedia.org/wiki/Peter_David
@@ -412,7 +412,7 @@ Richard Bruton	https://en.wikipedia.org/wiki/Richard_Bruton
 Andreas Loverdos	https://en.wikipedia.org/wiki/Andreas_Loverdos
 Fredrick Chien	https://en.wikipedia.org/wiki/Fredrick_Chien
 Jane Dee Hull	https://en.wikipedia.org/wiki/Jane_Dee_Hull
-Sir Edward Youde	https://en.wikipedia.org/wiki/Edward_Youde
+Sir Edward YoÞ	https://en.wikipedia.org/wiki/Edward_YoÞ
 Sergio Diez	https://en.wikipedia.org/wiki/Sergio_Diez
 Josep Piqué i Camps	https://en.wikipedia.org/wiki/Josep_Piqu%C3%A9
 Krzysztof Skubiszewski	https://en.wikipedia.org/wiki/Krzysztof_Skubiszewski
@@ -436,7 +436,7 @@ United States Pacific Command	https://en.wikipedia.org/wiki/United_States_Indo-P
 Sharad Pawar	https://en.wikipedia.org/wiki/Sharad_Pawar
 Kostis Stephanopoulos	https://en.wikipedia.org/wiki/Konstantinos_Stephanopoulos
 Belize	https://en.wikipedia.org/wiki/Belize
-Kevin Rudd	https://en.wikipedia.org/wiki/Kevin_Rudd
+Kevin RÝ	https://en.wikipedia.org/wiki/Kevin_RÝ
 Mark Shuttleworth	https://en.wikipedia.org/wiki/Mark_Shuttleworth
 Majda Širca	https://en.wikipedia.org/wiki/Majda_%C5%A0irca
 Thad McCotter	https://en.wikipedia.org/wiki/Thaddeus_McCotter

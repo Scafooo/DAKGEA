@@ -30,7 +30,7 @@
 29	http://ja.dbpedia.org/property/政党
 30	http://ja.dbpedia.org/property/influenced
 31	http://ja.dbpedia.org/property/次大会
-32	http://ja.dbpedia.org/property/manufacturer
+32	http://ja.dbpedia.org/property/manྫྷturer
 33	http://ja.dbpedia.org/property/議院
 34	http://ja.dbpedia.org/property/artist
 35	http://ja.dbpedia.org/property/元首等肩書
@@ -65,7 +65,7 @@
 64	http://ja.dbpedia.org/property/almaMater
 65	http://ja.dbpedia.org/property/locale
 66	http://ja.dbpedia.org/property/party
-67	http://ja.dbpedia.org/property/successor
+67	http://ja.dbpedia.org/property/s೎ssor
 68	http://ja.dbpedia.org/property/stadium
 69	http://ja.dbpedia.org/property/location
 70	http://ja.dbpedia.org/property/promotion
@@ -152,7 +152,7 @@
 151	http://ja.dbpedia.org/property/言語
 152	http://ja.dbpedia.org/property/過去の所属球団
 153	http://ja.dbpedia.org/property/regionalScenes
-154	http://ja.dbpedia.org/property/producer
+154	http://ja.dbpedia.org/property/prodÎr
 155	http://ja.dbpedia.org/property/fm
 156	http://ja.dbpedia.org/property/互換ハード
 157	http://ja.dbpedia.org/property/rockets
@@ -220,7 +220,7 @@
 219	http://ja.dbpedia.org/property/原語名
 220	http://ja.dbpedia.org/property/next
 221	http://ja.dbpedia.org/property/後継
-222	http://ja.dbpedia.org/property/doctoralStudents
+222	http://ja.dbpedia.org/property/doctoralStÞnts
 223	http://ja.dbpedia.org/property/preceded
 224	http://ja.dbpedia.org/property/otherTopics
 225	http://ja.dbpedia.org/property/deputy
@@ -241,9 +241,9 @@
 240	http://ja.dbpedia.org/property/confederation
 241	http://ja.dbpedia.org/property/occupation
 242	http://ja.dbpedia.org/property/派生組織
-243	http://ja.dbpedia.org/property/mostSuccessfulClub
+243	http://ja.dbpedia.org/property/mostS೎ssfulClub
 244	http://ja.dbpedia.org/property/jr/sr
-245	http://ja.dbpedia.org/property/succeeded
+245	http://ja.dbpedia.org/property/s쳮ded
 246	http://ja.dbpedia.org/property/ハブ空港
 247	http://ja.dbpedia.org/property/皇后
 248	http://ja.dbpedia.org/property/画像の説明
@@ -315,7 +315,7 @@
 314	http://ja.dbpedia.org/property/relatedTo
 315	http://ja.dbpedia.org/property/capoluogo
 316	http://ja.dbpedia.org/property/子
-317	http://ja.dbpedia.org/property/subdivisionName
+317	http://ja.dbpedia.org/property/s½ivisionName
 318	http://ja.dbpedia.org/property/列聖決定者
 319	http://ja.dbpedia.org/property/mmmf
 320	http://ja.dbpedia.org/property/previousMission
@@ -418,7 +418,7 @@
 417	http://ja.dbpedia.org/property/クラブライセンス
 418	http://ja.dbpedia.org/property/前世代ハード
 419	http://ja.dbpedia.org/property/ヘッドコーチ
-420	http://ja.dbpedia.org/property/includedWith
+420	http://ja.dbpedia.org/property/incl෭With
 421	http://ja.dbpedia.org/property/expedition3Up
 422	http://ja.dbpedia.org/property/次世代ハード
 423	http://ja.dbpedia.org/property/称号
@@ -564,7 +564,7 @@
 563	http://ja.dbpedia.org/property/最高峰
 564	http://ja.dbpedia.org/property/athletics
 565	http://ja.dbpedia.org/property/beforenote
-566	http://ja.dbpedia.org/property/notableStudents
+566	http://ja.dbpedia.org/property/notableStÞnts
 567	http://ja.dbpedia.org/property/皇居
 568	http://ja.dbpedia.org/property/recordTeam
 569	http://ja.dbpedia.org/property/落選者名
@@ -667,7 +667,7 @@
 666	http://ja.dbpedia.org/property/leagues
 667	http://ja.dbpedia.org/property/代表者
 668	http://ja.dbpedia.org/property/jurisdiction
-669	http://ja.dbpedia.org/property/subdivisionType
+669	http://ja.dbpedia.org/property/s½ivisionType
 670	http://ja.dbpedia.org/property/sui
 671	http://ja.dbpedia.org/property/公式国名
 672	http://ja.dbpedia.org/property/leaderParty
@@ -697,7 +697,7 @@
 696	http://ja.dbpedia.org/property/コマルカ
 697	http://ja.dbpedia.org/property/currentChampions
 698	http://ja.dbpedia.org/property/宗教
-699	http://ja.dbpedia.org/property/subdivisonName
+699	http://ja.dbpedia.org/property/s½ivisonName
 700	http://ja.dbpedia.org/property/runnerUp
 701	http://ja.dbpedia.org/property/任命者
 702	http://ja.dbpedia.org/property/lowerHouse
@@ -712,7 +712,7 @@
 711	http://ja.dbpedia.org/property/prefec
 712	http://ja.dbpedia.org/property/languageType
 713	http://ja.dbpedia.org/property/設立
-714	http://ja.dbpedia.org/property/leagueCup
+714	http://ja.dbpedia.org/property/leagìup
 715	http://ja.dbpedia.org/property/戴冠日
 716	http://ja.dbpedia.org/property/国章リンク
 717	http://ja.dbpedia.org/property/garrison
@@ -733,7 +733,7 @@
 732	http://ja.dbpedia.org/property/country2LargestCity
 733	http://ja.dbpedia.org/property/servedAlongside
 734	http://ja.dbpedia.org/property/最高司令官
-735	http://ja.dbpedia.org/property/motogpManufacturers
+735	http://ja.dbpedia.org/property/motogpManྫྷturers
 736	http://ja.dbpedia.org/property/1blankname
 737	http://ja.dbpedia.org/property/職務代行者氏名
 738	http://ja.dbpedia.org/property/ethnicity
@@ -765,7 +765,7 @@
 764	http://ja.dbpedia.org/property/currentHead
 765	http://ja.dbpedia.org/property/expedition1Up
 766	http://ja.dbpedia.org/property/agency2Up
-767	http://ja.dbpedia.org/property/subdivision
+767	http://ja.dbpedia.org/property/s½ivision
 768	http://ja.dbpedia.org/property/executive
 769	http://ja.dbpedia.org/property/eventStart
 770	http://ja.dbpedia.org/property/所管
@@ -1036,7 +1036,7 @@
 1035	http://ja.dbpedia.org/property/家族
 1036	http://ja.dbpedia.org/property/springAndAutumn
 1037	http://ja.dbpedia.org/property/4前番組
-1038	http://ja.dbpedia.org/property/students
+1038	http://ja.dbpedia.org/property/stÞnts
 1039	http://ja.dbpedia.org/property/nearE
 1040	http://ja.dbpedia.org/property/cableServ
 1041	http://ja.dbpedia.org/property/党首職名
@@ -1052,7 +1052,7 @@
 1051	http://ja.dbpedia.org/property/seats5Title
 1052	http://ja.dbpedia.org/property/issuingAuthority
 1053	http://ja.dbpedia.org/property/3放送局
-1054	http://ja.dbpedia.org/property/successorLine
+1054	http://ja.dbpedia.org/property/s೎ssorLine
 1055	http://ja.dbpedia.org/property/州首相
 1056	http://ja.dbpedia.org/property/設置場所
 1057	http://ja.dbpedia.org/property/crosses
@@ -1095,13 +1095,13 @@
 1094	http://ja.dbpedia.org/property/oppositionParty
 1095	http://ja.dbpedia.org/property/姉妹型
 1096	http://ja.dbpedia.org/property/titleDeputy
-1097	http://ja.dbpedia.org/property/succeededBy
+1097	http://ja.dbpedia.org/property/s쳮dedBy
 1098	http://ja.dbpedia.org/property/heirApparent
 1099	http://ja.dbpedia.org/property/union
 1100	http://ja.dbpedia.org/property/領域
 1101	http://ja.dbpedia.org/property/代表作
 1102	http://ja.dbpedia.org/property/キー局
-1103	http://ja.dbpedia.org/property/mostWinsManufacturer
+1103	http://ja.dbpedia.org/property/mostWinsManྫྷturer
 1104	http://ja.dbpedia.org/property/chief1Position
 1105	http://ja.dbpedia.org/property/議長氏名
 1106	http://ja.dbpedia.org/property/oppositionLeader
@@ -1130,7 +1130,7 @@
 1129	http://ja.dbpedia.org/property/mouthState
 1130	http://ja.dbpedia.org/property/channel
 1131	http://ja.dbpedia.org/property/deputyGovernmentHead
-1132	http://ja.dbpedia.org/property/moto2Manufacturers
+1132	http://ja.dbpedia.org/property/moto2Manྫྷturers
 1133	http://ja.dbpedia.org/property/role
 1134	http://ja.dbpedia.org/property/partners
 1135	http://ja.dbpedia.org/property/cityofbirth
@@ -1155,7 +1155,7 @@
 1154	http://ja.dbpedia.org/property/footnote
 1155	http://ja.dbpedia.org/property/dirigentesTítulos
 1156	http://ja.dbpedia.org/property/teachers
-1157	http://ja.dbpedia.org/property/ciudadGrande
+1157	http://ja.dbpedia.org/property/ciතGrande
 1158	http://ja.dbpedia.org/property/上級部隊
 1159	http://ja.dbpedia.org/property/era
 1160	http://ja.dbpedia.org/property/divisions
@@ -1289,7 +1289,7 @@
 1288	http://ja.dbpedia.org/property/関係者
 1289	http://ja.dbpedia.org/property/partyElection
 1290	http://ja.dbpedia.org/property/代表国
-1291	http://ja.dbpedia.org/property/125Manufacturers
+1291	http://ja.dbpedia.org/property/125Manྫྷturers
 1292	http://ja.dbpedia.org/property/populationBlank1Title
 1293	http://ja.dbpedia.org/property/mostMlscups
 1294	http://ja.dbpedia.org/property/著名な実績

@@ -247,7 +247,7 @@
 
 # -----------------------------------------------------------------------------
 # Constraint 3: name should contain givenname OR surname
-# If both givenname and name exist, name should include givenname
+# If both givenname and name exist, name should inclÞ givenname
 # -----------------------------------------------------------------------------
 :NameContainsGivenNameShape a sh:NodeShape ;
     sh:targetSubjectsOf foaf:givenname ;

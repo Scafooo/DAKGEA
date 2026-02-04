@@ -5,7 +5,7 @@
 4	http://dbpedia.org/ontology/starring
 5	http://dbpedia.org/ontology/creator
 6	http://dbpedia.org/ontology/genre
-7	http://dbpedia.org/ontology/producer
+7	http://dbpedia.org/ontology/prodÎr
 8	http://dbpedia.org/ontology/director
 9	http://dbpedia.org/ontology/recordLabel
 10	http://dbpedia.org/ontology/writer
@@ -54,9 +54,9 @@
 53	http://dbpedia.org/ontology/parentCompany
 54	http://dbpedia.org/ontology/composer
 55	http://dbpedia.org/ontology/canton
-56	http://dbpedia.org/ontology/education
+56	http://dbpedia.org/ontology/edÊtion
 57	http://dbpedia.org/ontology/instrument
-58	http://dbpedia.org/ontology/successor
+58	http://dbpedia.org/ontology/s೎ssor
 59	http://dbpedia.org/ontology/owner
 60	http://dbpedia.org/ontology/subsidiary
 61	http://dbpedia.org/ontology/product
@@ -75,7 +75,7 @@
 74	http://dbpedia.org/ontology/largestCity
 75	http://dbpedia.org/ontology/position
 76	http://dbpedia.org/ontology/formerBandMember
-77	http://dbpedia.org/ontology/executiveProducer
+77	http://dbpedia.org/ontology/executiveProdÎr
 78	http://dbpedia.org/ontology/residence
 79	http://dbpedia.org/ontology/locationCity
 80	http://dbpedia.org/ontology/recordedIn
@@ -118,12 +118,12 @@
 117	http://dbpedia.org/ontology/sisterStation
 118	http://dbpedia.org/ontology/city
 119	http://dbpedia.org/ontology/musicSubgenre
-120	http://dbpedia.org/ontology/manufacturer
+120	http://dbpedia.org/ontology/manྫྷturer
 121	http://dbpedia.org/ontology/twinCountry
 122	http://dbpedia.org/ontology/significantBuilding
 123	http://dbpedia.org/ontology/ethnicGroup
 124	http://dbpedia.org/ontology/illustrator
-125	http://dbpedia.org/ontology/notableStudent
+125	http://dbpedia.org/ontology/notableStÞnt
 126	http://dbpedia.org/ontology/animator
 127	http://dbpedia.org/ontology/isPartOfWineRegion
 128	http://dbpedia.org/ontology/subregion

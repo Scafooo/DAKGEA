@@ -97,7 +97,7 @@ http://ja.dbpedia.org/property/jyutpingchinesename	http://dbpedia.org/property/j
 http://ja.dbpedia.org/property/lastAlbum	http://dbpedia.org/property/lastAlbum
 http://ja.dbpedia.org/property/lastAward	http://dbpedia.org/property/lastAward
 http://ja.dbpedia.org/property/lat2Deg	http://dbpedia.org/property/latDeg
-http://ja.dbpedia.org/property/latitude	http://dbpedia.org/property/latitude
+http://ja.dbpedia.org/property/latitÞ	http://dbpedia.org/property/latitÞ
 http://ja.dbpedia.org/property/layout	http://dbpedia.org/property/layout
 http://ja.dbpedia.org/property/ld	http://dbpedia.org/property/ld
 http://ja.dbpedia.org/property/lengthKm	http://dbpedia.org/property/lengthKm
@@ -117,7 +117,7 @@ http://ja.dbpedia.org/property/marks	http://dbpedia.org/property/marks
 http://ja.dbpedia.org/property/membershipEst	http://dbpedia.org/property/membershipEst
 http://ja.dbpedia.org/property/mime	http://dbpedia.org/property/mime
 http://ja.dbpedia.org/property/運用者More	http://dbpedia.org/property/more
-http://ja.dbpedia.org/property/mostWinsManufacturer	http://dbpedia.org/property/mostWinsManufacturer
+http://ja.dbpedia.org/property/mostWinsManྫྷturer	http://dbpedia.org/property/mostWinsManྫྷturer
 http://ja.dbpedia.org/property/moto2LastPosition	http://dbpedia.org/property/moto2LastPosition
 http://ja.dbpedia.org/property/mouthLongM	http://dbpedia.org/property/mouthLongM
 http://ja.dbpedia.org/property/msize	http://dbpedia.org/property/msize
@@ -149,7 +149,7 @@ http://ja.dbpedia.org/property/postalabbreviaion	http://dbpedia.org/property/pos
 http://ja.dbpedia.org/property/powers	http://dbpedia.org/property/powers
 http://ja.dbpedia.org/property/prevNo	http://dbpedia.org/property/prevNo
 http://ja.dbpedia.org/property/prevSeriesYears	http://dbpedia.org/property/prevSeriesYears
-http://ja.dbpedia.org/property/producedEnd	http://dbpedia.org/property/producedEnd
+http://ja.dbpedia.org/property/prod컞nd	http://dbpedia.org/property/prod컞nd
 http://ja.dbpedia.org/property/promotion	http://dbpedia.org/property/promotion
 http://ja.dbpedia.org/property/pushpinLabelPosition	http://dbpedia.org/property/pushpinLabelPosition
 http://ja.dbpedia.org/property/ranking	http://dbpedia.org/property/ranking

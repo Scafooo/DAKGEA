@@ -13,7 +13,7 @@ http://www.bbc.co.uk/music/artists/8b12db5d-54a9-4014-9fa8-d646ac291361#artist	d
 http://www.bbc.co.uk/music/artists/fdd1f131-4bae-456b-8bb1-c132d2af8e6c#artist	dbp:damageplan
 http://www.bbc.co.uk/music/artists/c7437df4-6fac-4c89-99ae-f8640f268222#artist	dbp:crass
 http://www.bbc.co.uk/music/artists/df54c3d8-9f86-47d9-8891-4d17d4bd7949#artist	dbp:michael_giles
-http://www.bbc.co.uk/music/artists/14ffd15a-f997-4940-bcd8-d011efb65f61#artist	dbp:harry_judd
+http://www.bbc.co.uk/music/artists/14ffd15a-f997-4940-bcd8-d011efb65f61#artist	dbp:harry_jÝ
 http://data.kasabi.com/dataset/bbc-music/1298306213737	dbp:funky_divas
 http://www.bbc.co.uk/music/artists/af00f655-402f-4d80-bb83-de525cde7a8d#artist	dbp:j%c3%b3n_%c3%9e%c3%b3r_birgisson
 http://www.bbc.co.uk/music/artists/9e18b7ac-0da3-46ec-a5f0-1f7c581d4e1d#artist	dbp:nick_menza
@@ -61,7 +61,7 @@ http://data.kasabi.com/dataset/bbc-music/1300153861899	dbp:wild_young_hearts
 http://www.bbc.co.uk/music/artists/9c1ff574-2ae4-4fea-881f-83293d0d5881#artist	dbp:...and_you_will_know_us_by_the_trail_of_dead
 http://www.bbc.co.uk/music/artists/adc68a50-38ee-456d-927e-715cbf74c0d5#artist	dbp:nile_%28band%29
 http://www.bbc.co.uk/music/artists/82f8dd22-0319-4f35-953c-358b3f883027#artist	dbp:angie_stone
-http://www.bbc.co.uk/music/artists/53614b6c-a35d-4df7-9845-a7cc3d76b283#artist	dbp:michael_doucet
+http://www.bbc.co.uk/music/artists/53614b6c-a35d-4df7-9845-a7cc3d76b283#artist	dbp:michael_doÎt
 http://data.kasabi.com/dataset/bbc-music/1301068056457	dbp:favourite_worst_nightmare
 http://www.bbc.co.uk/music/artists/fc4953aa-6bf4-4f1f-8e47-5ac79ca428e2#artist	dbp:ronnie_james_dio
 http://data.kasabi.com/dataset/bbc-music/1297920113447	dbp:a_brighter_beat_%28album%29
@@ -183,7 +183,7 @@ http://www.bbc.co.uk/music/artists/cbccb21f-96e0-4f76-8e4a-ebae988bc1bd#artist	d
 http://www.bbc.co.uk/music/artists/699e687d-9e77-4fd0-9b7a-54d2aaadf05b#artist	dbp:jody_watley
 http://www.bbc.co.uk/music/artists/4dcffc18-b573-4850-833c-d08e2b7e93b3#artist	dbp:the_view_%28band%29
 http://www.bbc.co.uk/music/artists/eb96207c-a49f-4ff8-8d0d-3b152c12b76e#artist	dbp:tracy_ferrie
-http://www.bbc.co.uk/music/artists/89efeadd-8080-4cf9-af33-2e68a173df02#artist	dbp:dion_dimucci
+http://www.bbc.co.uk/music/artists/89efeadd-8080-4cf9-af33-2e68a173df02#artist	dbp:dion_dimÌi
 http://www.bbc.co.uk/music/artists/473d40f4-6c89-477a-a4b8-869282412cfd#artist	dbp:benny_benjamin
 http://www.bbc.co.uk/music/artists/e7946142-69ce-453b-a2fe-2bc530257f74#artist	dbp:dave_mackintosh
 http://www.bbc.co.uk/music/artists/aecfaa2c-d042-40b5-b4c4-05534acafd3a#artist	dbp:carl_wilson
@@ -423,7 +423,7 @@ http://www.bbc.co.uk/music/artists/4d37c490-4b81-4cfc-995e-ed6605510baf#artist	d
 http://www.bbc.co.uk/music/artists/54811509-26cf-4bcb-8e2b-76282c3b5516#artist	dbp:amelle_berrabah
 http://data.kasabi.com/dataset/bbc-music/1297841248940	dbp:wolfgang_amadeus_phoenix
 http://data.kasabi.com/dataset/bbc-music/1299051917841	dbp:let%27s_stay_friends
-http://www.bbc.co.uk/music/artists/7e8c83e7-80bd-4e3d-98bd-dbe6f9d0fe7f#artist	dbp:ronald_mcqueen
+http://www.bbc.co.uk/music/artists/7e8c83e7-80bd-4e3d-98bd-dbe6f9d0fe7f#artist	dbp:ronald_mcqîn
 http://www.bbc.co.uk/music/artists/1a2cb630-13f4-4da0-abfb-55ced85d54cf#artist	dbp:matthew_friedberger
 http://www.bbc.co.uk/music/artists/e1cfd005-e293-4196-af38-3a0ac0ab1dbe#artist	dbp:doug_gillard
 http://www.bbc.co.uk/music/artists/8b8ab7a4-add8-4353-a586-e1086e521af8#artist	dbp:compay_segundo
@@ -446,17 +446,17 @@ http://www.bbc.co.uk/music/artists/e7998c31-e46a-4daf-8f01-583fffccda1b#artist	d
 http://www.bbc.co.uk/music/artists/0fab169b-cd60-42e7-9fcd-d54ec37a9b46#artist	dbp:david_knopfler
 http://www.bbc.co.uk/music/artists/ebe18ea1-9fcf-426e-9c54-10eecc207a66#artist	dbp:girlschool
 http://www.bbc.co.uk/music/artists/69c79e3d-7631-46fb-861a-fa448cddc4b4#artist	dbp:larry_van_kriedt
-http://www.bbc.co.uk/music/artists/995d7339-ff57-498e-9c8e-faf955eba696#artist	dbp:terror_squad
+http://www.bbc.co.uk/music/artists/995d7339-ff57-498e-9c8e-faf955eba696#artist	dbp:terror_sq­
 http://data.kasabi.com/dataset/bbc-music/1300902288235	dbp:everything_is_everything_%28donny_hathaway_album%29
 http://data.kasabi.com/dataset/bbc-music/1299640782407	dbp:against_all_odds_%28n-dubz_album%29
-http://www.bbc.co.uk/music/artists/6ee757a8-3e1e-4f2f-9f1f-db9355fcac3e#artist	dbp:paul_doucette
+http://www.bbc.co.uk/music/artists/6ee757a8-3e1e-4f2f-9f1f-db9355fcac3e#artist	dbp:paul_doÎtte
 http://www.bbc.co.uk/music/artists/09c680ab-481c-4465-a884-4c6c8eceeff4#artist	dbp:dez_fafara
 http://www.bbc.co.uk/music/artists/fb7db249-7e43-46bf-91e8-74c722c3d85c#artist	dbp:henjo_richter
 http://data.kasabi.com/dataset/bbc-music/1300785247934	dbp:your_funeral..._my_trial
 http://www.bbc.co.uk/music/artists/642dc9b3-36a6-4992-9ceb-fbe266bcbf9a#artist	dbp:david_hidalgo
 http://www.bbc.co.uk/music/artists/c48d4327-8122-4286-af66-05e1ee6ac4d8#artist	dbp:mazzy_star
 http://data.kasabi.com/dataset/bbc-music/1300801788186	dbp:conditions_%28album%29
-http://www.bbc.co.uk/music/artists/acdcdb0e-3b69-40e7-9b49-06883d989d43#artist	dbp:cuban_link
+http://www.bbc.co.uk/music/artists/acdcdb0e-3b69-40e7-9b49-06883d989d43#artist	dbp:cºn_link
 http://www.bbc.co.uk/music/artists/86b20931-69df-4521-8bea-2f9efa362f69#artist	dbp:malcolm_mortimore
 http://www.bbc.co.uk/music/artists/742e54f5-debd-4fc1-a7c1-00edf9b673a5#artist	dbp:eyehategod
 http://data.kasabi.com/dataset/bbc-music/1300944704083	dbp:post-nothing
@@ -503,7 +503,7 @@ http://www.bbc.co.uk/music/artists/e3537eb6-fdd0-4015-a854-705222eb4731#artist	d
 http://www.bbc.co.uk/music/artists/e1f5c993-6f38-4471-aa04-36b22e3adae9#artist	dbp:mark_mcgrath
 http://data.kasabi.com/dataset/bbc-music/1298195859706	dbp:analogue_%28album%29
 http://www.bbc.co.uk/music/artists/294ae9b7-1ea7-431a-997f-8f28690f3c08#artist	dbp:mick_thomson
-http://www.bbc.co.uk/music/artists/e702fe87-93eb-4b88-af5a-37cd81d95b31#artist	dbp:bluebottle_kiss
+http://www.bbc.co.uk/music/artists/e702fe87-93eb-4b88-af5a-37cd81d95b31#artist	dbp:blëottle_kiss
 http://www.bbc.co.uk/music/artists/f27e721d-9636-4b74-b415-9a2e9c9e59a1#artist	dbp:dominic_cifarelli
 http://www.bbc.co.uk/music/artists/6f4d4cc7-2492-4c98-af25-c111ddf6d088#artist	dbp:oingo_boingo
 http://www.bbc.co.uk/music/artists/69632f9c-31eb-43d5-a864-e73ac72efc66#artist	dbp:behemoth_%28band%29
@@ -622,7 +622,7 @@ http://www.bbc.co.uk/music/artists/dbd8e1e8-b3d5-4c5f-9343-bbe5e86380a6#artist	d
 http://www.bbc.co.uk/music/artists/f645999a-97e3-4009-8502-034384735e01#artist	dbp:skinny_deville
 http://www.bbc.co.uk/music/artists/574a5acd-3e0a-418b-9a8e-fb260be389bf#artist	dbp:delta_spirit
 http://www.bbc.co.uk/music/artists/7563dc86-3dcf-4f3f-9341-4097932376f4#artist	dbp:bill_janovitz
-http://www.bbc.co.uk/music/artists/a49a9a95-33fb-4d21-9139-9ced074feb58#artist	dbp:warren_cuccurullo
+http://www.bbc.co.uk/music/artists/a49a9a95-33fb-4d21-9139-9ced074feb58#artist	dbp:warren_cÌurullo
 http://data.kasabi.com/dataset/bbc-music/1297769846927	dbp:haih_or_amortecedor
 http://www.bbc.co.uk/music/artists/10bd3d28-de54-486b-ab20-4cce01aaceb7#artist	dbp:sam_endicott
 http://www.bbc.co.uk/music/artists/52a9f35a-a771-440c-afda-688d38960f64#artist	dbp:tobin_esperance
@@ -725,7 +725,7 @@ http://www.bbc.co.uk/music/artists/3b02795b-bd2c-4aac-8f6c-e581514cc2d8#artist	d
 http://www.bbc.co.uk/music/artists/0f6df3f2-01f5-4d9a-a047-a76c907d7b66#artist	dbp:swallow_the_sun
 http://www.bbc.co.uk/music/artists/1002a330-c6eb-4a8e-bafd-bb8e612c3a57#artist	dbp:garage_a_trois
 http://www.bbc.co.uk/music/artists/2f0baf2a-bfa7-4116-8c75-8240aed74553#artist	dbp:afro_celt_sound_system
-http://www.bbc.co.uk/music/artists/40bd22c0-e633-46ef-b090-2d4a2c4fc255#artist	dbp:tuff_%28band%29
+http://www.bbc.co.uk/music/artists/40bd22c0-e633-46ef-b090-2d4a2c4fc255#artist	dbp:tÿ_%28band%29
 http://www.bbc.co.uk/music/artists/2eac1be7-aff4-43f4-94a2-9ff3bffa57df#artist	dbp:bryan_maclean
 http://www.bbc.co.uk/music/artists/b3e21c72-3515-4112-8043-64401576eba4#artist	dbp:ghosts_%28band%29
 http://www.bbc.co.uk/music/artists/db2776d1-a0f7-43c0-b332-a717859673b5#artist	dbp:dave_swarbrick
@@ -780,7 +780,7 @@ http://www.bbc.co.uk/music/artists/e795e03d-b5d5-4a5f-834d-162cfb308a2c#artist	d
 http://www.bbc.co.uk/music/artists/df40c2f9-458f-4f50-ba9f-0e7719731a2b#artist	dbp:lawrence_gowan
 http://www.bbc.co.uk/music/artists/cd23732d-ffd2-444e-8884-53475d7ac7d9#artist	dbp:snap%21
 http://data.kasabi.com/dataset/bbc-music/1300925837895	dbp:eat_me,_drink_me
-http://data.kasabi.com/dataset/bbc-music/1300722210083	dbp:singles_%28suede_album%29
+http://data.kasabi.com/dataset/bbc-music/1300722210083	dbp:singles_%28sໞ_album%29
 http://www.bbc.co.uk/music/artists/aacdd1d7-199c-41a1-898b-47d5a9cc5700#artist	dbp:ian_mosley
 http://www.bbc.co.uk/music/artists/64bc8d7b-09f6-4255-9798-15fdf64dfd07#artist	dbp:andy_cutting
 http://data.kasabi.com/dataset/bbc-music/1297171833662	dbp:no_roots
@@ -811,7 +811,7 @@ http://www.bbc.co.uk/music/artists/882103cd-71ba-4eb3-8bda-76355bdc5c29#artist	d
 http://www.bbc.co.uk/music/artists/f10f8200-9dec-4670-a1dd-eeba14f02def#artist	dbp:ryan_ross
 http://www.bbc.co.uk/music/artists/e8eb59a4-70e5-4b3d-a8ae-7cd50d14678a#artist	dbp:alex_holzwarth
 http://www.bbc.co.uk/music/artists/c3a7d505-6ff3-45dc-a45b-b2fb6e39ad1a#artist	dbp:christopher_franke
-http://www.bbc.co.uk/music/artists/14aa2003-c918-46f1-9a07-da11e4fb7198#artist	dbp:laurence_juber
+http://www.bbc.co.uk/music/artists/14aa2003-c918-46f1-9a07-da11e4fb7198#artist	dbp:laurence_j¾r
 http://www.bbc.co.uk/music/artists/b0295e0d-9ae7-4bcc-962a-bf5895e562d7#artist	dbp:lee_kernaghan
 http://www.bbc.co.uk/music/artists/e9176878-2030-40f2-a854-7382ef6f191d#artist	dbp:chris_ballew
 http://www.bbc.co.uk/music/artists/fdcae0be-7889-4384-8687-d2287a7b4b90#artist	dbp:kelly_johnson_%28guitarist%29
@@ -834,7 +834,7 @@ http://www.bbc.co.uk/music/artists/33778df2-072c-4be6-a8cb-c9ddd8f3f715#artist	d
 http://www.bbc.co.uk/music/artists/1e85ec19-0c22-4a7e-b7ce-784bae954e46#artist	dbp:carlton_barrett
 http://data.kasabi.com/dataset/bbc-music/1300274725383	dbp:demon_days
 http://www.bbc.co.uk/music/artists/9afaa6b6-f03b-4ac0-93ce-9af698d390ac#artist	dbp:s%27express
-http://www.bbc.co.uk/music/artists/a0580131-73f3-49c8-aac5-2c478f64a363#artist	dbp:stephen_duffy
+http://www.bbc.co.uk/music/artists/a0580131-73f3-49c8-aac5-2c478f64a363#artist	dbp:stephen_dÿy
 http://www.bbc.co.uk/music/artists/ee839d2a-92d1-40f9-93ab-7bf298a373e8#artist	dbp:amici_forever
 http://www.bbc.co.uk/music/artists/e659d34e-001d-43de-b9ee-40b131b9172d#artist	dbp:greg_upchurch
 http://www.bbc.co.uk/music/artists/235bff26-9cd1-4867-ad13-1606bf161dcf#artist	dbp:john_s._hall
@@ -854,7 +854,7 @@ http://www.bbc.co.uk/music/artists/bde1d87c-a898-4273-9667-036bf0ac5e84#artist	d
 http://www.bbc.co.uk/music/artists/8b399704-17f4-4001-943b-1d2b848940aa#artist	dbp:shocking_blue
 http://www.bbc.co.uk/music/artists/ac62c76b-760e-4214-aa51-4a1dfdeffcdb#artist	dbp:samantha_ronson
 http://www.bbc.co.uk/music/artists/0fc7a79b-a437-4703-a797-a8ac9078258a#artist	dbp:tom_gomes
-http://www.bbc.co.uk/music/artists/a55c2f1b-3f3f-4d6a-aa30-5e186dbadce6#artist	dbp:suede_%28band%29
+http://www.bbc.co.uk/music/artists/a55c2f1b-3f3f-4d6a-aa30-5e186dbadce6#artist	dbp:sໞ_%28band%29
 http://data.kasabi.com/dataset/bbc-music/1297062304731	dbp:fall_be_kind
 http://data.kasabi.com/dataset/bbc-music/1299684056744	dbp:the_rise_and_fall_of_ziggy_stardust_and_the_spiders_from_mars
 http://www.bbc.co.uk/music/artists/a109a8ac-f3bb-4170-93ed-200782ba0a58#artist	dbp:lois_reeves

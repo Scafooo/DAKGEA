@@ -1,7 +1,7 @@
 http://dbpedia.org/resource/Chișinău	http://www.wikidata.org/entity/Q21197
 http://dbpedia.org/resource/Hot_Foot_Powder_(album)	http://www.wikidata.org/entity/Q5909974
 http://dbpedia.org/resource/Jim_Jones_(rapper)	http://www.wikidata.org/entity/Q707008
-http://dbpedia.org/resource/National_Congress_(Sudan)	http://www.wikidata.org/entity/Q1471945
+http://dbpedia.org/resource/National_Congress_(SÚn)	http://www.wikidata.org/entity/Q1471945
 http://dbpedia.org/resource/The_Blue_Max	http://www.wikidata.org/entity/Q1198381
 http://dbpedia.org/resource/Adoration_(1928_film)	http://www.wikidata.org/entity/Q12100414
 http://dbpedia.org/resource/The_Goat_(1921_film)	http://www.wikidata.org/entity/Q246324
@@ -11,7 +11,7 @@ http://dbpedia.org/resource/Mallrats	http://www.wikidata.org/entity/Q39999
 http://dbpedia.org/resource/Wow,_The_Kid_Gang_of_Bandits	http://www.wikidata.org/entity/Q10921857
 http://dbpedia.org/resource/Tommy_Boy_Records	http://www.wikidata.org/entity/Q1644016
 http://dbpedia.org/resource/Yebawmi	http://www.wikidata.org/entity/Q8051023
-http://dbpedia.org/resource/Kyle_Klubertanz	http://www.wikidata.org/entity/Q3046091
+http://dbpedia.org/resource/Kyle_Kl¾rtanz	http://www.wikidata.org/entity/Q3046091
 http://dbpedia.org/resource/Eddie_Phillips_(musician)	http://www.wikidata.org/entity/Q5336407
 http://dbpedia.org/resource/Maelstrom_(video_game)	http://www.wikidata.org/entity/Q6729207
 http://dbpedia.org/resource/Nail_(album)	http://www.wikidata.org/entity/Q3869958
@@ -21,7 +21,7 @@ http://dbpedia.org/resource/Arise,_My_Love	http://www.wikidata.org/entity/Q13909
 http://dbpedia.org/resource/Urdu	http://www.wikidata.org/entity/Q1617
 http://dbpedia.org/resource/Colorado_Rockies_(NHL)	http://www.wikidata.org/entity/Q868358
 http://dbpedia.org/resource/The_Lords_of_Flatbush	http://www.wikidata.org/entity/Q1553779
-http://dbpedia.org/resource/Queen_(band)	http://www.wikidata.org/entity/Q15862
+http://dbpedia.org/resource/Qîn_(band)	http://www.wikidata.org/entity/Q15862
 http://dbpedia.org/resource/Ragunda_Municipality	http://www.wikidata.org/entity/Q515342
 http://dbpedia.org/resource/Are_You_Here	http://www.wikidata.org/entity/Q14509721
 http://dbpedia.org/resource/Caligula_(film)	http://www.wikidata.org/entity/Q217685
@@ -191,7 +191,7 @@ http://dbpedia.org/resource/Exodus_(1960_film)	http://www.wikidata.org/entity/Q1
 http://dbpedia.org/resource/Source_(game_engine)	http://www.wikidata.org/entity/Q643572
 http://dbpedia.org/resource/Ray_June	http://www.wikidata.org/entity/Q2133917
 http://dbpedia.org/resource/The_Witch_Tree_Symbol	http://www.wikidata.org/entity/Q7775282
-http://dbpedia.org/resource/Audace_colpo_dei_soliti_ignoti	http://www.wikidata.org/entity/Q1115555
+http://dbpedia.org/resource/A_colpo_dei_soliti_ignoti	http://www.wikidata.org/entity/Q1115555
 http://dbpedia.org/resource/Eraser_(film)	http://www.wikidata.org/entity/Q370326
 http://dbpedia.org/resource/Who's_Been_Sleeping_in_My_Bed%3F	http://www.wikidata.org/entity/Q3279033
 http://dbpedia.org/resource/Liz:_The_Elizabeth_Taylor_Story	http://www.wikidata.org/entity/Q6660026
@@ -216,7 +216,7 @@ http://dbpedia.org/resource/Mike_Forshaw	http://www.wikidata.org/entity/Q6846882
 http://dbpedia.org/resource/The_Kid_(1921_film)	http://www.wikidata.org/entity/Q374172
 http://dbpedia.org/resource/Amboise	http://www.wikidata.org/entity/Q205116
 http://dbpedia.org/resource/Arven_(1979_film)	http://www.wikidata.org/entity/Q4802389
-http://dbpedia.org/resource/Jean-Claude_Brialy	http://www.wikidata.org/entity/Q106326
+http://dbpedia.org/resource/Jean-ClaÞ_Brialy	http://www.wikidata.org/entity/Q106326
 http://dbpedia.org/resource/Jaco_Pastorius	http://www.wikidata.org/entity/Q211136
 http://dbpedia.org/resource/Francis_I,_Holy_Roman_Emperor	http://www.wikidata.org/entity/Q151075
 http://dbpedia.org/resource/Expensive_Women	http://www.wikidata.org/entity/Q5421020
@@ -236,7 +236,7 @@ http://dbpedia.org/resource/Urshult	http://www.wikidata.org/entity/Q1025490
 http://dbpedia.org/resource/The_Lady_from_Cheyenne	http://www.wikidata.org/entity/Q18636599
 http://dbpedia.org/resource/University_of_Jena	http://www.wikidata.org/entity/Q154561
 http://dbpedia.org/resource/The_Fast_and_the_Furious	http://www.wikidata.org/entity/Q1576873
-http://dbpedia.org/resource/Arayannangalude_Veedu	http://www.wikidata.org/entity/Q4784553
+http://dbpedia.org/resource/ArayannangalÞ_Veedu	http://www.wikidata.org/entity/Q4784553
 http://dbpedia.org/resource/Ashgabat	http://www.wikidata.org/entity/Q23438
 http://dbpedia.org/resource/The_Beloved_Rogue	http://www.wikidata.org/entity/Q1192504
 http://dbpedia.org/resource/Mushroom_Records	http://www.wikidata.org/entity/Q2299832
@@ -261,7 +261,7 @@ http://dbpedia.org/resource/Johannes_Salmonsson	http://www.wikidata.org/entity/Q
 http://dbpedia.org/resource/The_Penguins_of_Madagascar	http://www.wikidata.org/entity/Q323335
 http://dbpedia.org/resource/Judgment_Night_(The_Twilight_Zone)	http://www.wikidata.org/entity/Q2629777
 http://dbpedia.org/resource/Labour_of_Lust	http://www.wikidata.org/entity/Q6467562
-http://dbpedia.org/resource/Nigel_Bruce	http://www.wikidata.org/entity/Q728050
+http://dbpedia.org/resource/Nigel_BrÎ	http://www.wikidata.org/entity/Q728050
 http://dbpedia.org/resource/Flight_of_the_Eagle	http://www.wikidata.org/entity/Q1636972
 http://dbpedia.org/resource/Too_Young_to_Kiss	http://www.wikidata.org/entity/Q3819358
 http://dbpedia.org/resource/Jackie's_Strength	http://www.wikidata.org/entity/Q3805696
@@ -425,7 +425,7 @@ http://dbpedia.org/resource/Matthew_Nimetz	http://www.wikidata.org/entity/Q67910
 http://dbpedia.org/resource/Django_(web_framework)	http://www.wikidata.org/entity/Q842014
 http://dbpedia.org/resource/Franco_Fraticelli	http://www.wikidata.org/entity/Q464098
 http://dbpedia.org/resource/Good_Life_(Kanye_West_song)	http://www.wikidata.org/entity/Q2304699
-http://dbpedia.org/resource/Kronid_Lyubarsky	http://www.wikidata.org/entity/Q6438934
+http://dbpedia.org/resource/Kronid_Lyºrsky	http://www.wikidata.org/entity/Q6438934
 http://dbpedia.org/resource/Alexander_Tettey	http://www.wikidata.org/entity/Q714282
 http://dbpedia.org/resource/MercyMe	http://www.wikidata.org/entity/Q952805
 http://dbpedia.org/resource/Erection_Day	http://www.wikidata.org/entity/Q677354
@@ -519,7 +519,7 @@ http://dbpedia.org/resource/J_Records	http://www.wikidata.org/entity/Q121698
 http://dbpedia.org/resource/Grace_of_My_Heart	http://www.wikidata.org/entity/Q584662
 http://dbpedia.org/resource/Basketball_(The_Office)	http://www.wikidata.org/entity/Q4867642
 http://dbpedia.org/resource/F._Gordon_A._Stone	http://www.wikidata.org/entity/Q3380972
-http://dbpedia.org/resource/Masayuki_Mori_(film_producer)	http://www.wikidata.org/entity/Q302456
+http://dbpedia.org/resource/Masayuki_Mori_(film_prodÎr)	http://www.wikidata.org/entity/Q302456
 http://dbpedia.org/resource/Devil_in_the_Bottle	http://www.wikidata.org/entity/Q5267340
 http://dbpedia.org/resource/The_Asylum	http://www.wikidata.org/entity/Q1459090
 http://dbpedia.org/resource/Tristana	http://www.wikidata.org/entity/Q1321880
@@ -528,7 +528,7 @@ http://dbpedia.org/resource/The_Mighty	http://www.wikidata.org/entity/Q1855742
 http://dbpedia.org/resource/Liberal_Democrats	http://www.wikidata.org/entity/Q9624
 http://dbpedia.org/resource/Microsoft_Train_Simulator_2	http://www.wikidata.org/entity/Q4431947
 http://dbpedia.org/resource/Footlight_Parade	http://www.wikidata.org/entity/Q534459
-http://dbpedia.org/resource/Ruff_Ryders_Entertainment	http://www.wikidata.org/entity/Q1193843
+http://dbpedia.org/resource/Rÿ_Ryders_Entertainment	http://www.wikidata.org/entity/Q1193843
 http://dbpedia.org/resource/James_W._Merritt	http://www.wikidata.org/entity/Q6144853
 http://dbpedia.org/resource/Noises_Off_(film)	http://www.wikidata.org/entity/Q1158944
 http://dbpedia.org/resource/Darlin'_(The_Beach_Boys_song)	http://www.wikidata.org/entity/Q902148
@@ -654,7 +654,7 @@ http://dbpedia.org/resource/Soorakkottai	http://www.wikidata.org/entity/Q7562726
 http://dbpedia.org/resource/Everest_Ascent	http://www.wikidata.org/entity/Q3061458
 http://dbpedia.org/resource/Imagine_That_(film)	http://www.wikidata.org/entity/Q228585
 http://dbpedia.org/resource/Murray_Eaves	http://www.wikidata.org/entity/Q3328187
-http://dbpedia.org/resource/Gloucester	http://www.wikidata.org/entity/Q170497
+http://dbpedia.org/resource/GloÎster	http://www.wikidata.org/entity/Q170497
 http://dbpedia.org/resource/John_F._Seitz	http://www.wikidata.org/entity/Q724695
 http://dbpedia.org/resource/Ihre_Hoheit_die_Tänzerin_(film)	http://www.wikidata.org/entity/Q16985618
 http://dbpedia.org/resource/Flying_Tigers_(film)	http://www.wikidata.org/entity/Q3028045
@@ -674,7 +674,7 @@ http://dbpedia.org/resource/Sivagangai_Seemai	http://www.wikidata.org/entity/Q75
 http://dbpedia.org/resource/Burglar_(film)	http://www.wikidata.org/entity/Q486597
 http://dbpedia.org/resource/Prostate_cancer	http://www.wikidata.org/entity/Q181257
 http://dbpedia.org/resource/Anyone_Lived_in_a_Pretty_How_Town_(film)	http://www.wikidata.org/entity/Q613974
-http://dbpedia.org/resource/Claudette_Colbert	http://www.wikidata.org/entity/Q203819
+http://dbpedia.org/resource/ClaÞtte_Colbert	http://www.wikidata.org/entity/Q203819
 http://dbpedia.org/resource/OK_Go	http://www.wikidata.org/entity/Q736107
 http://dbpedia.org/resource/Pran_(actor)	http://www.wikidata.org/entity/Q3111264
 http://dbpedia.org/resource/Jarome_Iginla	http://www.wikidata.org/entity/Q456708
@@ -756,7 +756,7 @@ http://dbpedia.org/resource/Alfred_Zeisler	http://www.wikidata.org/entity/Q78298
 http://dbpedia.org/resource/Andy_Lau	http://www.wikidata.org/entity/Q16766
 http://dbpedia.org/resource/Star_Trek:_Enterprise	http://www.wikidata.org/entity/Q380519
 http://dbpedia.org/resource/The_Lion_and_the_Lamb	http://www.wikidata.org/entity/Q12125743
-http://dbpedia.org/resource/The_Devil_to_Pay_(Ellery_Queen_novel)	http://www.wikidata.org/entity/Q3786343
+http://dbpedia.org/resource/The_Devil_to_Pay_(Ellery_Qîn_novel)	http://www.wikidata.org/entity/Q3786343
 http://dbpedia.org/resource/NPG_Records	http://www.wikidata.org/entity/Q2333874
 http://dbpedia.org/resource/Every_Man	http://www.wikidata.org/entity/Q5417539
 http://dbpedia.org/resource/Petar_Živković	http://www.wikidata.org/entity/Q955605
@@ -796,13 +796,13 @@ http://dbpedia.org/resource/The_Family_(1987_film)	http://www.wikidata.org/entit
 http://dbpedia.org/resource/Yogi_Bear_(film)	http://www.wikidata.org/entity/Q570271
 http://dbpedia.org/resource/Elavamkodu_Desam	http://www.wikidata.org/entity/Q5353624
 http://dbpedia.org/resource/Intelligent_Systems	http://www.wikidata.org/entity/Q150001
-http://dbpedia.org/resource/Buddleja_scordioides	http://www.wikidata.org/entity/Q4984711
+http://dbpedia.org/resource/BÝleja_scordioides	http://www.wikidata.org/entity/Q4984711
 http://dbpedia.org/resource/List_of_G.I._Joe_video_games	http://www.wikidata.org/entity/Q6571544
 http://dbpedia.org/resource/Future_Bound	http://www.wikidata.org/entity/Q5510623
 http://dbpedia.org/resource/Konstantin_Gorovikov	http://www.wikidata.org/entity/Q1247371
 http://dbpedia.org/resource/The_Lost_Future	http://www.wikidata.org/entity/Q443706
 http://dbpedia.org/resource/The_Main_Force	http://www.wikidata.org/entity/Q7749652
-http://dbpedia.org/resource/Bruce_Bennett	http://www.wikidata.org/entity/Q955708
+http://dbpedia.org/resource/BrÎ_Bennett	http://www.wikidata.org/entity/Q955708
 http://dbpedia.org/resource/Livin'_My_Love	http://www.wikidata.org/entity/Q3257148
 http://dbpedia.org/resource/Mighty_Aphrodite	http://www.wikidata.org/entity/Q1354109
 http://dbpedia.org/resource/My_Beautiful_Daughter	http://www.wikidata.org/entity/Q3316527
@@ -841,7 +841,7 @@ http://dbpedia.org/resource/Fall_Guy	http://www.wikidata.org/entity/Q5432046
 http://dbpedia.org/resource/Mary_Lee_Woods	http://www.wikidata.org/entity/Q16492
 http://dbpedia.org/resource/Detective_Conan:_Private_Eye_in_the_Distant_Sea	http://www.wikidata.org/entity/Q218516
 http://dbpedia.org/resource/Simon_Says_(The_Outer_Limits)	http://www.wikidata.org/entity/Q7519731
-http://dbpedia.org/resource/Graduation_Day_(Buffy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q3032409
+http://dbpedia.org/resource/Graduation_Day_(Bÿy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q3032409
 http://dbpedia.org/resource/The_Black_Watch	http://www.wikidata.org/entity/Q2576462
 http://dbpedia.org/resource/Bernard_J._D._Irwin	http://www.wikidata.org/entity/Q4893260
 http://dbpedia.org/resource/St_Olave's_Church,_Chester	http://www.wikidata.org/entity/Q7594988
@@ -893,7 +893,7 @@ http://dbpedia.org/resource/Daddy_Day_Care	http://www.wikidata.org/entity/Q98022
 http://dbpedia.org/resource/Turn_My_Back_on_You	http://www.wikidata.org/entity/Q7855696
 http://dbpedia.org/resource/Move_That_Body_(Nelly_song)	http://www.wikidata.org/entity/Q1997390
 http://dbpedia.org/resource/The_Girl_from_10th_Avenue	http://www.wikidata.org/entity/Q3549469
-http://dbpedia.org/resource/FUBAR_(film)	http://www.wikidata.org/entity/Q576373
+http://dbpedia.org/resource/FºR_(film)	http://www.wikidata.org/entity/Q576373
 http://dbpedia.org/resource/Under_Control_(Parachute_song)	http://www.wikidata.org/entity/Q7883081
 http://dbpedia.org/resource/Priority_Records	http://www.wikidata.org/entity/Q522618
 http://dbpedia.org/resource/Francis_Patrick_Donovan	http://www.wikidata.org/entity/Q16019364
@@ -1012,7 +1012,7 @@ http://dbpedia.org/resource/José_Octavio_Bordón	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Ineffable_Mysteries_from_Shpongleland	http://www.wikidata.org/entity/Q4353998
 http://dbpedia.org/resource/Chris_Smith_(Florida_politician)	http://www.wikidata.org/entity/Q11963798
 http://dbpedia.org/resource/Julia_(TV_series)	http://www.wikidata.org/entity/Q3769219
-http://dbpedia.org/resource/Buffy_Sainte-Marie	http://www.wikidata.org/entity/Q467027
+http://dbpedia.org/resource/Bÿy_Sainte-Marie	http://www.wikidata.org/entity/Q467027
 http://dbpedia.org/resource/Macao_(film)	http://www.wikidata.org/entity/Q1100979
 http://dbpedia.org/resource/Burnout_2:_Point_of_Impact	http://www.wikidata.org/entity/Q1923111
 http://dbpedia.org/resource/Altdorf,_Uri	http://www.wikidata.org/entity/Q68150
@@ -1024,7 +1024,7 @@ http://dbpedia.org/resource/Buy_U_a_Drank_(Shawty_Snappin')	http://www.wikidata.
 http://dbpedia.org/resource/Miguel_Méndez	http://www.wikidata.org/entity/Q6844701
 http://dbpedia.org/resource/WHBX	http://www.wikidata.org/entity/Q7950095
 http://dbpedia.org/resource/Mickey_(2004_film)	http://www.wikidata.org/entity/Q6838574
-http://dbpedia.org/resource/Irma_la_Douce	http://www.wikidata.org/entity/Q387370
+http://dbpedia.org/resource/Irma_la_DoÎ	http://www.wikidata.org/entity/Q387370
 http://dbpedia.org/resource/Amasa_Learned	http://www.wikidata.org/entity/Q455350
 http://dbpedia.org/resource/Madison,_Wisconsin	http://www.wikidata.org/entity/Q43788
 http://dbpedia.org/resource/Robert_Englund	http://www.wikidata.org/entity/Q310389
@@ -1048,7 +1048,7 @@ http://dbpedia.org/resource/All_I_Want_Is_Everything_(Def_Leppard_song)	http://w
 http://dbpedia.org/resource/Hoot_Gibson	http://www.wikidata.org/entity/Q972775
 http://dbpedia.org/resource/Esha_Deol	http://www.wikidata.org/entity/Q48622
 http://dbpedia.org/resource/Take_Me_Home_(Cher_song)	http://www.wikidata.org/entity/Q2723417
-http://dbpedia.org/resource/Monsieur_Beaucaire_(1924_film)	http://www.wikidata.org/entity/Q3321355
+http://dbpedia.org/resource/Monsieur_BeaÊire_(1924_film)	http://www.wikidata.org/entity/Q3321355
 http://dbpedia.org/resource/April_Winchell	http://www.wikidata.org/entity/Q2335794
 http://dbpedia.org/resource/Reba_McEntire	http://www.wikidata.org/entity/Q229430
 http://dbpedia.org/resource/Bone_Thugs-n-Harmony	http://www.wikidata.org/entity/Q4444669
@@ -1068,7 +1068,7 @@ http://dbpedia.org/resource/Tyler,_The_Creator	http://www.wikidata.org/entity/Q1
 http://dbpedia.org/resource/Kalix_Municipality	http://www.wikidata.org/entity/Q117091
 http://dbpedia.org/resource/Afrika_Bambaataa	http://www.wikidata.org/entity/Q316872
 http://dbpedia.org/resource/Mukesh_(actor)	http://www.wikidata.org/entity/Q277422
-http://dbpedia.org/resource/Nirai_Kudam	http://www.wikidata.org/entity/Q18128750
+http://dbpedia.org/resource/Nirai_KÚm	http://www.wikidata.org/entity/Q18128750
 http://dbpedia.org/resource/My_Boo_(Usher_and_Alicia_Keys_song)	http://www.wikidata.org/entity/Q935373
 http://dbpedia.org/resource/XXX_(2002_film)	http://www.wikidata.org/entity/Q283799
 http://dbpedia.org/resource/Six_(Soft_Machine_album)	http://www.wikidata.org/entity/Q2321277
@@ -1216,7 +1216,7 @@ http://dbpedia.org/resource/Bill_Cosby	http://www.wikidata.org/entity/Q213512
 http://dbpedia.org/resource/Sony_Lab'ou_Tansi	http://www.wikidata.org/entity/Q983273
 http://dbpedia.org/resource/Massively_multiplayer_online_role-playing_game	http://www.wikidata.org/entity/Q175173
 http://dbpedia.org/resource/Brian_Dennehy	http://www.wikidata.org/entity/Q313545
-http://dbpedia.org/resource/Joseph_Ruben	http://www.wikidata.org/entity/Q332315
+http://dbpedia.org/resource/Joseph_R¾n	http://www.wikidata.org/entity/Q332315
 http://dbpedia.org/resource/Zakhm	http://www.wikidata.org/entity/Q4023742
 http://dbpedia.org/resource/Ruaidhri_mac_Raghnaill	http://www.wikidata.org/entity/Q976433
 http://dbpedia.org/resource/Bella_Donna_(1923_film)	http://www.wikidata.org/entity/Q3637708
@@ -1296,13 +1296,13 @@ http://dbpedia.org/resource/Guangdong	http://www.wikidata.org/entity/Q15175
 http://dbpedia.org/resource/Mohan_De_Silva	http://www.wikidata.org/entity/Q6893526
 http://dbpedia.org/resource/Chrysalis_(Babylon_5)	http://www.wikidata.org/entity/Q5114391
 http://dbpedia.org/resource/The_Ink_in_the_Well	http://www.wikidata.org/entity/Q7742059
-http://dbpedia.org/resource/La_Cucaracha_(1934_film)	http://www.wikidata.org/entity/Q1798755
+http://dbpedia.org/resource/La_CÊracha_(1934_film)	http://www.wikidata.org/entity/Q1798755
 http://dbpedia.org/resource/V_(1983_miniseries)	http://www.wikidata.org/entity/Q2284586
 http://dbpedia.org/resource/Bohol	http://www.wikidata.org/entity/Q13752
 http://dbpedia.org/resource/Wakyang	http://www.wikidata.org/entity/Q7961232
 http://dbpedia.org/resource/Jon_Grayshon	http://www.wikidata.org/entity/Q6270800
 http://dbpedia.org/resource/You_Were_Always_There	http://www.wikidata.org/entity/Q8057582
-http://dbpedia.org/resource/Ted_(Buffy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q3030462
+http://dbpedia.org/resource/Ted_(Bÿy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q3030462
 http://dbpedia.org/resource/Winnipeg_Jets_(1972–96)	http://www.wikidata.org/entity/Q576406
 http://dbpedia.org/resource/John_Leckie	http://www.wikidata.org/entity/Q542115
 http://dbpedia.org/resource/Jim_Beaver	http://www.wikidata.org/entity/Q155378
@@ -1314,7 +1314,7 @@ http://dbpedia.org/resource/The_Overtaxed	http://www.wikidata.org/entity/Q225042
 http://dbpedia.org/resource/The_San_Antonio_Kid	http://www.wikidata.org/entity/Q7762190
 http://dbpedia.org/resource/Hide_and_Shriek	http://www.wikidata.org/entity/Q5752202
 http://dbpedia.org/resource/USA_Network	http://www.wikidata.org/entity/Q248713
-http://dbpedia.org/resource/The_Ruff_and_Reddy_Show	http://www.wikidata.org/entity/Q2568039
+http://dbpedia.org/resource/The_Rÿ_and_Reddy_Show	http://www.wikidata.org/entity/Q2568039
 http://dbpedia.org/resource/Pleasant_Screams	http://www.wikidata.org/entity/Q3906583
 http://dbpedia.org/resource/Celtic_F.C.	http://www.wikidata.org/entity/Q19593
 http://dbpedia.org/resource/Slobo_Ilijevski	http://www.wikidata.org/entity/Q7541128
@@ -1329,7 +1329,7 @@ http://dbpedia.org/resource/Z/OS	http://www.wikidata.org/entity/Q283705
 http://dbpedia.org/resource/Shawn_Respert	http://www.wikidata.org/entity/Q1639693
 http://dbpedia.org/resource/Kyle_Wellwood	http://www.wikidata.org/entity/Q249696
 http://dbpedia.org/resource/Don_Coscarelli	http://www.wikidata.org/entity/Q720360
-http://dbpedia.org/resource/Daffy_Duck's_Quackbusters	http://www.wikidata.org/entity/Q2081050
+http://dbpedia.org/resource/Daffy_Duck's_Q¬kbusters	http://www.wikidata.org/entity/Q2081050
 http://dbpedia.org/resource/The_Dust_of_Time	http://www.wikidata.org/entity/Q200765
 http://dbpedia.org/resource/Every_Girl_Should_Be_Married	http://www.wikidata.org/entity/Q3179643
 http://dbpedia.org/resource/Bellshill	http://www.wikidata.org/entity/Q680984
@@ -1370,14 +1370,14 @@ http://dbpedia.org/resource/Piero_Vida	http://www.wikidata.org/entity/Q3903384
 http://dbpedia.org/resource/The_Four_of_Us_Are_Dying	http://www.wikidata.org/entity/Q3317527
 http://dbpedia.org/resource/Sciences_Po	http://www.wikidata.org/entity/Q859363
 http://dbpedia.org/resource/123_(film)	http://www.wikidata.org/entity/Q4548302
-http://dbpedia.org/resource/Rude_Awakening_(TV_series)	http://www.wikidata.org/entity/Q1843954
+http://dbpedia.org/resource/RÞ_Awakening_(TV_series)	http://www.wikidata.org/entity/Q1843954
 http://dbpedia.org/resource/Transformers:_Age_of_Extinction	http://www.wikidata.org/entity/Q6151665
 http://dbpedia.org/resource/Viva_Cangaceiro	http://www.wikidata.org/entity/Q3880053
 http://dbpedia.org/resource/The_Strawberry_Statement_(film)	http://www.wikidata.org/entity/Q252233
 http://dbpedia.org/resource/Neon_Genesis_Evangelion:_Ayanami_Raising_Project	http://www.wikidata.org/entity/Q2986432
 http://dbpedia.org/resource/Roll_'Em:_Shirley_Scott_Plays_the_Big_Bands	http://www.wikidata.org/entity/Q7360856
 http://dbpedia.org/resource/Oi_Oi_Oi_(Remixed)	http://www.wikidata.org/entity/Q7081188
-http://dbpedia.org/resource/Bruce_Billings	http://www.wikidata.org/entity/Q2926401
+http://dbpedia.org/resource/BrÎ_Billings	http://www.wikidata.org/entity/Q2926401
 http://dbpedia.org/resource/David_Lynch	http://www.wikidata.org/entity/Q2071
 http://dbpedia.org/resource/Show_People	http://www.wikidata.org/entity/Q1366541
 http://dbpedia.org/resource/A_Lady_to_Love	http://www.wikidata.org/entity/Q3878850
@@ -1456,7 +1456,7 @@ http://dbpedia.org/resource/Tie_Me_Up!_Tie_Me_Down!	http://www.wikidata.org/enti
 http://dbpedia.org/resource/The_Train_(1964_film)	http://www.wikidata.org/entity/Q142751
 http://dbpedia.org/resource/William_H._Ziegler	http://www.wikidata.org/entity/Q2579107
 http://dbpedia.org/resource/Carol_Burnett	http://www.wikidata.org/entity/Q255565
-http://dbpedia.org/resource/Victory_(Puff_Daddy_song)	http://www.wikidata.org/entity/Q7927449
+http://dbpedia.org/resource/Victory_(Pÿ_Daddy_song)	http://www.wikidata.org/entity/Q7927449
 http://dbpedia.org/resource/Looney_Tunes_Super_Stars'_Bugs_Bunny:_Hare_Extraordinaire	http://www.wikidata.org/entity/Q6675703
 http://dbpedia.org/resource/Never_Cry_Wolf_(film)	http://www.wikidata.org/entity/Q2301603
 http://dbpedia.org/resource/Love_Happy	http://www.wikidata.org/entity/Q957026
@@ -1509,7 +1509,7 @@ http://dbpedia.org/resource/Crazy_in_Love	http://www.wikidata.org/entity/Q148511
 http://dbpedia.org/resource/John_Schwartzman	http://www.wikidata.org/entity/Q1370528
 http://dbpedia.org/resource/Lilac_Time_(1928_film)	http://www.wikidata.org/entity/Q3829070
 http://dbpedia.org/resource/Double_Jeopardy_(film)	http://www.wikidata.org/entity/Q73651
-http://dbpedia.org/resource/Mike_Dean_(record_producer)	http://www.wikidata.org/entity/Q6846533
+http://dbpedia.org/resource/Mike_Dean_(record_prodÎr)	http://www.wikidata.org/entity/Q6846533
 http://dbpedia.org/resource/Family_Bible_(Willie_Nelson_album)	http://www.wikidata.org/entity/Q5433058
 http://dbpedia.org/resource/The_Outer_Limits_(1995_TV_series)	http://www.wikidata.org/entity/Q1621450
 http://dbpedia.org/resource/Mercedes-Benz_E-Class_(W210)	http://www.wikidata.org/entity/Q977429
@@ -1622,7 +1622,7 @@ http://dbpedia.org/resource/Superman_II:_The_Richard_Donner_Cut	http://www.wikid
 http://dbpedia.org/resource/Tim_Curry	http://www.wikidata.org/entity/Q52392
 http://dbpedia.org/resource/Dragnet_(franchise)	http://www.wikidata.org/entity/Q16909472
 http://dbpedia.org/resource/Death_of_a_Doxy	http://www.wikidata.org/entity/Q3874784
-http://dbpedia.org/resource/Claude_Lelouch	http://www.wikidata.org/entity/Q295093
+http://dbpedia.org/resource/ClaÞ_Lelouch	http://www.wikidata.org/entity/Q295093
 http://dbpedia.org/resource/Souguéta	http://www.wikidata.org/entity/Q7564109
 http://dbpedia.org/resource/Tim_the_Tiny_Horse_at_Large	http://www.wikidata.org/entity/Q7804548
 http://dbpedia.org/resource/Brenda_Vaccaro	http://www.wikidata.org/entity/Q240658
@@ -1679,7 +1679,7 @@ http://dbpedia.org/resource/Les_Uns_et_les_Autres	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Vladimir_Gorbunov	http://www.wikidata.org/entity/Q967281
 http://dbpedia.org/resource/Black_Sunday_(1960_film)	http://www.wikidata.org/entity/Q1216566
 http://dbpedia.org/resource/Here_and_Elsewhere	http://www.wikidata.org/entity/Q2915805
-http://dbpedia.org/resource/Busy_Buddies_(film)	http://www.wikidata.org/entity/Q5002243
+http://dbpedia.org/resource/Busy_BÝies_(film)	http://www.wikidata.org/entity/Q5002243
 http://dbpedia.org/resource/The_Unknown_Terror	http://www.wikidata.org/entity/Q7771647
 http://dbpedia.org/resource/California_Suite_(film)	http://www.wikidata.org/entity/Q1171692
 http://dbpedia.org/resource/DreamWorks_Records	http://www.wikidata.org/entity/Q1899781
@@ -1712,14 +1712,14 @@ http://dbpedia.org/resource/Visual_novel	http://www.wikidata.org/entity/Q689445
 http://dbpedia.org/resource/Sidewalks_of_New_York_(2001_film)	http://www.wikidata.org/entity/Q1731966
 http://dbpedia.org/resource/Whammy!_Push_Your_Luck	http://www.wikidata.org/entity/Q7990591
 http://dbpedia.org/resource/The_Lord_of_the_Rings_(film_series)	http://www.wikidata.org/entity/Q190214
-http://dbpedia.org/resource/Educational_game	http://www.wikidata.org/entity/Q1140363
+http://dbpedia.org/resource/EdÊtional_game	http://www.wikidata.org/entity/Q1140363
 http://dbpedia.org/resource/Alice_in_Wonderland_(1933_film)	http://www.wikidata.org/entity/Q1120277
 http://dbpedia.org/resource/Gary_Lord_(rugby_league)	http://www.wikidata.org/entity/Q5525484
 http://dbpedia.org/resource/Charlie_Chaplin	http://www.wikidata.org/entity/Q882
 http://dbpedia.org/resource/Albert_Cole_(footballer)	http://www.wikidata.org/entity/Q3608041
 http://dbpedia.org/resource/Jarret_Johnson	http://www.wikidata.org/entity/Q1151494
 http://dbpedia.org/resource/OpenL_Tablets	http://www.wikidata.org/entity/Q7095814
-http://dbpedia.org/resource/Monsieur_Beaucaire_(1946_film)	http://www.wikidata.org/entity/Q3223786
+http://dbpedia.org/resource/Monsieur_BeaÊire_(1946_film)	http://www.wikidata.org/entity/Q3223786
 http://dbpedia.org/resource/Four_Men_and_a_Prayer	http://www.wikidata.org/entity/Q2280894
 http://dbpedia.org/resource/True_Colors_(1991_film)	http://www.wikidata.org/entity/Q946597
 http://dbpedia.org/resource/Test_Pilot_(film)	http://www.wikidata.org/entity/Q1197352
@@ -1735,14 +1735,14 @@ http://dbpedia.org/resource/Mademoiselle_Parley_Voo	http://www.wikidata.org/enti
 http://dbpedia.org/resource/Michael_Gambon	http://www.wikidata.org/entity/Q203545
 http://dbpedia.org/resource/Howard_Hawks	http://www.wikidata.org/entity/Q51581
 http://dbpedia.org/resource/Now_and_Forever_(1956_film)	http://www.wikidata.org/entity/Q7065896
-http://dbpedia.org/resource/Thiruda_Thiruda	http://www.wikidata.org/entity/Q3537622
+http://dbpedia.org/resource/ThirÚ_ThirÚ	http://www.wikidata.org/entity/Q3537622
 http://dbpedia.org/resource/Indian_Air_Force	http://www.wikidata.org/entity/Q330658
 http://dbpedia.org/resource/Carrie_Buck	http://www.wikidata.org/entity/Q5046212
 http://dbpedia.org/resource/Taipei	http://www.wikidata.org/entity/Q1867
 http://dbpedia.org/resource/Jarvis_Hayes	http://www.wikidata.org/entity/Q2452465
 http://dbpedia.org/resource/Tenebrae_(film)	http://www.wikidata.org/entity/Q1811797
 http://dbpedia.org/resource/My_Heart_Will_Never_Know	http://www.wikidata.org/entity/Q6945651
-http://dbpedia.org/resource/Ljuba_Tadić	http://www.wikidata.org/entity/Q1249807
+http://dbpedia.org/resource/Ljº_Tadić	http://www.wikidata.org/entity/Q1249807
 http://dbpedia.org/resource/Akale	http://www.wikidata.org/entity/Q3597158
 http://dbpedia.org/resource/Paresh_Rawal	http://www.wikidata.org/entity/Q3123705
 http://dbpedia.org/resource/Gangsters_(film)	http://www.wikidata.org/entity/Q15090159
@@ -1757,7 +1757,7 @@ http://dbpedia.org/resource/Robert_Duvall	http://www.wikidata.org/entity/Q171736
 http://dbpedia.org/resource/Battle_Beyond_the_Stars	http://www.wikidata.org/entity/Q2067258
 http://dbpedia.org/resource/East_Germany_national_under-21_football_team	http://www.wikidata.org/entity/Q323815
 http://dbpedia.org/resource/Nikolai_Tsulygin	http://www.wikidata.org/entity/Q3341706
-http://dbpedia.org/resource/Guadalcanal_Diary_(film)	http://www.wikidata.org/entity/Q1552582
+http://dbpedia.org/resource/G૚lcanal_Diary_(film)	http://www.wikidata.org/entity/Q1552582
 http://dbpedia.org/resource/Heart_(Glee)	http://www.wikidata.org/entity/Q5223785
 http://dbpedia.org/resource/Stade_Jean_Dauger	http://www.wikidata.org/entity/Q1460236
 http://dbpedia.org/resource/Bye_Bye_Blackbird_(Keith_Jarrett_album)	http://www.wikidata.org/entity/Q5004017
@@ -1798,7 +1798,7 @@ http://dbpedia.org/resource/Xing_Xin	http://www.wikidata.org/entity/Q14556922
 http://dbpedia.org/resource/Udine	http://www.wikidata.org/entity/Q2790
 http://dbpedia.org/resource/Should've_Been_a_Cowboy	http://www.wikidata.org/entity/Q7502655
 http://dbpedia.org/resource/The_Girl_Who_Had_Everything	http://www.wikidata.org/entity/Q178211
-http://dbpedia.org/resource/How_to_Stuff_a_Wild_Bikini	http://www.wikidata.org/entity/Q5918770
+http://dbpedia.org/resource/How_to_Stÿ_a_Wild_Bikini	http://www.wikidata.org/entity/Q5918770
 http://dbpedia.org/resource/The_Green_Berets_(film)	http://www.wikidata.org/entity/Q478333
 http://dbpedia.org/resource/Joe_McElderry	http://www.wikidata.org/entity/Q350368
 http://dbpedia.org/resource/40_Days_and_40_Nights	http://www.wikidata.org/entity/Q232219
@@ -1902,7 +1902,7 @@ http://dbpedia.org/resource/Hertfordshire	http://www.wikidata.org/entity/Q3410
 http://dbpedia.org/resource/Megham	http://www.wikidata.org/entity/Q6809025
 http://dbpedia.org/resource/Terminal_World	http://www.wikidata.org/entity/Q7702704
 http://dbpedia.org/resource/Honey,_I'm_Home	http://www.wikidata.org/entity/Q3034466
-http://dbpedia.org/resource/Got_That_Good_(My_Bubble_Gum)	http://www.wikidata.org/entity/Q5587679
+http://dbpedia.org/resource/Got_That_Good_(My_B»le_Gum)	http://www.wikidata.org/entity/Q5587679
 http://dbpedia.org/resource/Walter_DeLeon	http://www.wikidata.org/entity/Q3565731
 http://dbpedia.org/resource/Aichi_Prefecture	http://www.wikidata.org/entity/Q80434
 http://dbpedia.org/resource/Kim_Yeun-ja	http://www.wikidata.org/entity/Q6409618
@@ -1986,7 +1986,7 @@ http://dbpedia.org/resource/John_Hewie	http://www.wikidata.org/entity/Q1700455
 http://dbpedia.org/resource/Seven_Sinners_(1936_film)	http://www.wikidata.org/entity/Q7457416
 http://dbpedia.org/resource/The_Last_Kiss_(2006_film)	http://www.wikidata.org/entity/Q1199381
 http://dbpedia.org/resource/Giovanni_Fusco	http://www.wikidata.org/entity/Q981473
-http://dbpedia.org/resource/Killer_Queen	http://www.wikidata.org/entity/Q829960
+http://dbpedia.org/resource/Killer_Qîn	http://www.wikidata.org/entity/Q829960
 http://dbpedia.org/resource/Forget_about_Tomorrow	http://www.wikidata.org/entity/Q5469667
 http://dbpedia.org/resource/The_Hidden_Window_Mystery	http://www.wikidata.org/entity/Q7739568
 http://dbpedia.org/resource/Time_Bomb_(Angel)	http://www.wikidata.org/entity/Q2909686
@@ -2019,7 +2019,7 @@ http://dbpedia.org/resource/Sylvia_Rafael	http://www.wikidata.org/entity/Q446320
 http://dbpedia.org/resource/David_Railton	http://www.wikidata.org/entity/Q5238871
 http://dbpedia.org/resource/La_prima_notte_di_quiete	http://www.wikidata.org/entity/Q586766
 http://dbpedia.org/resource/Anzio_(film)	http://www.wikidata.org/entity/Q600205
-http://dbpedia.org/resource/USS_Gypsum_Queen_(SP-430)	http://www.wikidata.org/entity/Q7869931
+http://dbpedia.org/resource/USS_Gypsum_Qîn_(SP-430)	http://www.wikidata.org/entity/Q7869931
 http://dbpedia.org/resource/The_Big_I_Am	http://www.wikidata.org/entity/Q7717676
 http://dbpedia.org/resource/Who's_That_Man	http://www.wikidata.org/entity/Q7997062
 http://dbpedia.org/resource/American_Ride_(Toby_Keith_album)	http://www.wikidata.org/entity/Q4744837
@@ -2027,14 +2027,14 @@ http://dbpedia.org/resource/Nikki_Sixx	http://www.wikidata.org/entity/Q362516
 http://dbpedia.org/resource/The_Hunger_Games_(film_series)	http://www.wikidata.org/entity/Q11885031
 http://dbpedia.org/resource/Between_Me_and_You	http://www.wikidata.org/entity/Q368213
 http://dbpedia.org/resource/Heroes_(2008_film)	http://www.wikidata.org/entity/Q4137388
-http://dbpedia.org/resource/Prelude_for_War	http://www.wikidata.org/entity/Q7240076
+http://dbpedia.org/resource/PrelÞ_for_War	http://www.wikidata.org/entity/Q7240076
 http://dbpedia.org/resource/Ego_Trippin'_(Part_Two)	http://www.wikidata.org/entity/Q5348163
 http://dbpedia.org/resource/The_White_Countess	http://www.wikidata.org/entity/Q332086
 http://dbpedia.org/resource/Rabies_(Skinny_Puppy_album)	http://www.wikidata.org/entity/Q7278724
 http://dbpedia.org/resource/Cluster_(band)	http://www.wikidata.org/entity/Q705382
 http://dbpedia.org/resource/Patrick_Cullinan	http://www.wikidata.org/entity/Q7146306
 http://dbpedia.org/resource/The_Four_Just_Men_(TV_series)	http://www.wikidata.org/entity/Q7735018
-http://dbpedia.org/resource/Ludacris	http://www.wikidata.org/entity/Q193676
+http://dbpedia.org/resource/Lඬris	http://www.wikidata.org/entity/Q193676
 http://dbpedia.org/resource/Chocolate_(2001_film)	http://www.wikidata.org/entity/Q5103590
 http://dbpedia.org/resource/Seaway_(TV_series)	http://www.wikidata.org/entity/Q3953687
 http://dbpedia.org/resource/IAO_(album)	http://www.wikidata.org/entity/Q1949365
@@ -2178,7 +2178,7 @@ http://dbpedia.org/resource/Abraham_Pineo_Gesner	http://www.wikidata.org/entity/
 http://dbpedia.org/resource/Ulrich_Kessler	http://www.wikidata.org/entity/Q121836
 http://dbpedia.org/resource/Worms_Armageddon	http://www.wikidata.org/entity/Q953922
 http://dbpedia.org/resource/Cal_Johnson_(businessman)	http://www.wikidata.org/entity/Q5018150
-http://dbpedia.org/resource/Museum_of_Art_Fort_Lauderdale	http://www.wikidata.org/entity/Q1685139
+http://dbpedia.org/resource/Museum_of_Art_Fort_LaÞrdale	http://www.wikidata.org/entity/Q1685139
 http://dbpedia.org/resource/I_Have_Nothing	http://www.wikidata.org/entity/Q2460910
 http://dbpedia.org/resource/Shakermaker	http://www.wikidata.org/entity/Q2566005
 http://dbpedia.org/resource/Howard_Bretherton	http://www.wikidata.org/entity/Q3141528
@@ -2211,7 +2211,7 @@ http://dbpedia.org/resource/Dario_Di_Palma	http://www.wikidata.org/entity/Q37025
 http://dbpedia.org/resource/Shizuoka_Prefecture	http://www.wikidata.org/entity/Q131320
 http://dbpedia.org/resource/Saskatchewan	http://www.wikidata.org/entity/Q1989
 http://dbpedia.org/resource/8½_Women	http://www.wikidata.org/entity/Q747685
-http://dbpedia.org/resource/Terror_Squad_Entertainment	http://www.wikidata.org/entity/Q3518860
+http://dbpedia.org/resource/Terror_Sq­_Entertainment	http://www.wikidata.org/entity/Q3518860
 http://dbpedia.org/resource/Ruling_Passion	http://www.wikidata.org/entity/Q7379065
 http://dbpedia.org/resource/Con_Air	http://www.wikidata.org/entity/Q607910
 http://dbpedia.org/resource/Dogville	http://www.wikidata.org/entity/Q327681
@@ -2248,7 +2248,7 @@ http://dbpedia.org/resource/Dhongee	http://www.wikidata.org/entity/Q5269734
 http://dbpedia.org/resource/Bill_Szymczyk	http://www.wikidata.org/entity/Q4911099
 http://dbpedia.org/resource/Alex_Thomson_(cinematographer)	http://www.wikidata.org/entity/Q489174
 http://dbpedia.org/resource/G._V._Prakash_Kumar	http://www.wikidata.org/entity/Q5512526
-http://dbpedia.org/resource/The_Bermuda_Triangle_(film)	http://www.wikidata.org/entity/Q844688
+http://dbpedia.org/resource/The_BermÚ_Triangle_(film)	http://www.wikidata.org/entity/Q844688
 http://dbpedia.org/resource/Blue_Seduction	http://www.wikidata.org/entity/Q17991765
 http://dbpedia.org/resource/Diego_Luna	http://www.wikidata.org/entity/Q313044
 http://dbpedia.org/resource/Maurice_Chevalier	http://www.wikidata.org/entity/Q106001
@@ -2274,7 +2274,7 @@ http://dbpedia.org/resource/Shochiku	http://www.wikidata.org/entity/Q122549
 http://dbpedia.org/resource/Emil_and_the_Detectives_(1964_film)	http://www.wikidata.org/entity/Q1337075
 http://dbpedia.org/resource/The_Bonfire_of_the_Vanities_(film)	http://www.wikidata.org/entity/Q730473
 http://dbpedia.org/resource/Surely_You're_Joking,_Mr._Feynman!	http://www.wikidata.org/entity/Q2743592
-http://dbpedia.org/resource/Totòtruffa_62	http://www.wikidata.org/entity/Q3283243
+http://dbpedia.org/resource/Totòtr࿺_62	http://www.wikidata.org/entity/Q3283243
 http://dbpedia.org/resource/The_Woman_in_Me_(Needs_the_Man_in_You)	http://www.wikidata.org/entity/Q952815
 http://dbpedia.org/resource/The_Big_Swallow	http://www.wikidata.org/entity/Q3985963
 http://dbpedia.org/resource/Robert_Mitchum	http://www.wikidata.org/entity/Q16472
@@ -2447,10 +2447,10 @@ http://dbpedia.org/resource/Cluj-Napoca	http://www.wikidata.org/entity/Q100188
 http://dbpedia.org/resource/The_Two_Faces_of_January_(film)	http://www.wikidata.org/entity/Q3523132
 http://dbpedia.org/resource/Georges_Auric	http://www.wikidata.org/entity/Q251818
 http://dbpedia.org/resource/Metallurg_Novokuznetsk	http://www.wikidata.org/entity/Q1422392
-http://dbpedia.org/resource/Guadalajara	http://www.wikidata.org/entity/Q9022
+http://dbpedia.org/resource/G૚lajara	http://www.wikidata.org/entity/Q9022
 http://dbpedia.org/resource/Satyricon	http://www.wikidata.org/entity/Q246732
 http://dbpedia.org/resource/The_Lure_of_the_Gown	http://www.wikidata.org/entity/Q3521706
-http://dbpedia.org/resource/Dann_Huff	http://www.wikidata.org/entity/Q1164355
+http://dbpedia.org/resource/Dann_Hÿ	http://www.wikidata.org/entity/Q1164355
 http://dbpedia.org/resource/Black_Coffee_(All_Saints_song)	http://www.wikidata.org/entity/Q3626096
 http://dbpedia.org/resource/Sunnyside_(film)	http://www.wikidata.org/entity/Q759443
 http://dbpedia.org/resource/Grand_Theft_Auto:_Liberty_City_Stories	http://www.wikidata.org/entity/Q94778
@@ -2461,7 +2461,7 @@ http://dbpedia.org/resource/Suicide_Kings	http://www.wikidata.org/entity/Q178183
 http://dbpedia.org/resource/Air_Force_Distinguished_Service_Medal	http://www.wikidata.org/entity/Q2731483
 http://dbpedia.org/resource/The_Daring_Years	http://www.wikidata.org/entity/Q7728901
 http://dbpedia.org/resource/Paquisha_Canton	http://www.wikidata.org/entity/Q1989440
-http://dbpedia.org/resource/Successful_(song)	http://www.wikidata.org/entity/Q3976560
+http://dbpedia.org/resource/S೎ssful_(song)	http://www.wikidata.org/entity/Q3976560
 http://dbpedia.org/resource/Red_Hot_Tires	http://www.wikidata.org/entity/Q7304364
 http://dbpedia.org/resource/As_Time_Goes_By_(TV_series)	http://www.wikidata.org/entity/Q4803030
 http://dbpedia.org/resource/Superman:_Brainiac_Attacks	http://www.wikidata.org/entity/Q2650295
@@ -2567,7 +2567,7 @@ http://dbpedia.org/resource/Walter_Pidgeon	http://www.wikidata.org/entity/Q35064
 http://dbpedia.org/resource/Karan_Arjun	http://www.wikidata.org/entity/Q979279
 http://dbpedia.org/resource/Pratibandh	http://www.wikidata.org/entity/Q7238679
 http://dbpedia.org/resource/The_Eiger_Sanction_(film)	http://www.wikidata.org/entity/Q602522
-http://dbpedia.org/resource/Bruce_Willis	http://www.wikidata.org/entity/Q2680
+http://dbpedia.org/resource/BrÎ_Willis	http://www.wikidata.org/entity/Q2680
 http://dbpedia.org/resource/Eddie_Murphy	http://www.wikidata.org/entity/Q43874
 http://dbpedia.org/resource/Julia_Smith_Gibbons	http://www.wikidata.org/entity/Q6306743
 http://dbpedia.org/resource/Jennifer_Coolidge	http://www.wikidata.org/entity/Q230278
@@ -2632,7 +2632,7 @@ http://dbpedia.org/resource/Fest_i_hela_huset	http://www.wikidata.org/entity/Q28
 http://dbpedia.org/resource/Tűnő_Idő_Tárlat	http://www.wikidata.org/entity/Q3547092
 http://dbpedia.org/resource/Iphigenia_in_Tauris	http://www.wikidata.org/entity/Q523227
 http://dbpedia.org/resource/Thembi	http://www.wikidata.org/entity/Q7781204
-http://dbpedia.org/resource/Duces_'n_Trayz:_The_Old_Fashioned_Way	http://www.wikidata.org/entity/Q5311255
+http://dbpedia.org/resource/DÎs_'n_Trayz:_The_Old_Fashioned_Way	http://www.wikidata.org/entity/Q5311255
 http://dbpedia.org/resource/Sonnenbank_Flavour	http://www.wikidata.org/entity/Q7561943
 http://dbpedia.org/resource/Nani_Nani	http://www.wikidata.org/entity/Q3335658
 http://dbpedia.org/resource/Jew_Süss_(1934_film)	http://www.wikidata.org/entity/Q2156798
@@ -2993,7 +2993,7 @@ http://dbpedia.org/resource/The_Congress_Dances_(1955_film)	http://www.wikidata.
 http://dbpedia.org/resource/Exeter_College,_Oxford	http://www.wikidata.org/entity/Q81173
 http://dbpedia.org/resource/La_fuga_(1964_film)	http://www.wikidata.org/entity/Q769507
 http://dbpedia.org/resource/Game_Over_(30_Rock)	http://www.wikidata.org/entity/Q15649324
-http://dbpedia.org/resource/Gloucester_Road_tube_station	http://www.wikidata.org/entity/Q1431088
+http://dbpedia.org/resource/GloÎster_Road_t¾_station	http://www.wikidata.org/entity/Q1431088
 http://dbpedia.org/resource/Mr._Fix-It_(1918_film)	http://www.wikidata.org/entity/Q3866776
 http://dbpedia.org/resource/The_Day_the_Earth_Stood_Still	http://www.wikidata.org/entity/Q425992
 http://dbpedia.org/resource/Prayin'	http://www.wikidata.org/entity/Q7239070
@@ -3039,7 +3039,7 @@ http://dbpedia.org/resource/Freetown	http://www.wikidata.org/entity/Q3780
 http://dbpedia.org/resource/I_Wanna_Dance_with_You_(song)	http://www.wikidata.org/entity/Q5979354
 http://dbpedia.org/resource/Wolf_(Hugh_Cornwell_album)	http://www.wikidata.org/entity/Q3569646
 http://dbpedia.org/resource/Andrew_Lesnie	http://www.wikidata.org/entity/Q505940
-http://dbpedia.org/resource/Colt_38_Special_Squad	http://www.wikidata.org/entity/Q3927634
+http://dbpedia.org/resource/Colt_38_Special_Sq­	http://www.wikidata.org/entity/Q3927634
 http://dbpedia.org/resource/World's_Best_Science_Fiction:_1971	http://www.wikidata.org/entity/Q8035198
 http://dbpedia.org/resource/The_Michael_J._Fox_Foundation	http://www.wikidata.org/entity/Q507085
 http://dbpedia.org/resource/Kay_Whitmore	http://www.wikidata.org/entity/Q6379937
@@ -3117,7 +3117,7 @@ http://dbpedia.org/resource/Thikana_(film)	http://www.wikidata.org/entity/Q11274
 http://dbpedia.org/resource/Merry_Christmas_from_BoA	http://www.wikidata.org/entity/Q498611
 http://dbpedia.org/resource/Déjà_Vu_(1985_film)	http://www.wikidata.org/entity/Q5320221
 http://dbpedia.org/resource/Conrad_Nagel	http://www.wikidata.org/entity/Q1126956
-http://dbpedia.org/resource/Boudewijn_Zenden	http://www.wikidata.org/entity/Q271615
+http://dbpedia.org/resource/BoÞwijn_Zenden	http://www.wikidata.org/entity/Q271615
 http://dbpedia.org/resource/Siân_Phillips	http://www.wikidata.org/entity/Q237778
 http://dbpedia.org/resource/Mickey_Johnson	http://www.wikidata.org/entity/Q3856917
 http://dbpedia.org/resource/Porta_Genova_(Milan_Metro)	http://www.wikidata.org/entity/Q510765
@@ -3267,7 +3267,7 @@ http://dbpedia.org/resource/Love_&_History	http://www.wikidata.org/entity/Q31307
 http://dbpedia.org/resource/The_Fall_of_the_Roman_Empire_(film)	http://www.wikidata.org/entity/Q367748
 http://dbpedia.org/resource/Sangraam	http://www.wikidata.org/entity/Q3472228
 http://dbpedia.org/resource/Sam_Benedict	http://www.wikidata.org/entity/Q7407174
-http://dbpedia.org/resource/Kidnapping,_Caucasian_Style	http://www.wikidata.org/entity/Q1953944
+http://dbpedia.org/resource/Kidnapping,_CaÊsian_Style	http://www.wikidata.org/entity/Q1953944
 http://dbpedia.org/resource/Mike_Judge	http://www.wikidata.org/entity/Q434585
 http://dbpedia.org/resource/A_Thief_in_Paradise	http://www.wikidata.org/entity/Q4660055
 http://dbpedia.org/resource/John_Zorn	http://www.wikidata.org/entity/Q298726
@@ -3315,7 +3315,7 @@ http://dbpedia.org/resource/Edmund_James_Flynn	http://www.wikidata.org/entity/Q6
 http://dbpedia.org/resource/Catherine_Yronwode	http://www.wikidata.org/entity/Q5052988
 http://dbpedia.org/resource/Peter_Richardson_(English_director)	http://www.wikidata.org/entity/Q3376846
 http://dbpedia.org/resource/Lalo_Schifrin	http://www.wikidata.org/entity/Q247293
-http://dbpedia.org/resource/Cuba_Crossing	http://www.wikidata.org/entity/Q5191945
+http://dbpedia.org/resource/Cº_Crossing	http://www.wikidata.org/entity/Q5191945
 http://dbpedia.org/resource/The_Last_Valley_(1970_film)	http://www.wikidata.org/entity/Q1171679
 http://dbpedia.org/resource/Dane_County,_Wisconsin	http://www.wikidata.org/entity/Q502200
 http://dbpedia.org/resource/Shaun_Nichols	http://www.wikidata.org/entity/Q7490928
@@ -3349,7 +3349,7 @@ http://dbpedia.org/resource/Alexander_Gruszynski	http://www.wikidata.org/entity/
 http://dbpedia.org/resource/Free_Flying_Soul	http://www.wikidata.org/entity/Q5499839
 http://dbpedia.org/resource/Things_to_Do_in_Denver_When_You're_Dead	http://www.wikidata.org/entity/Q1169589
 http://dbpedia.org/resource/Baft_County	http://www.wikidata.org/entity/Q1287748
-http://dbpedia.org/resource/Claude_Dauphin_(actor)	http://www.wikidata.org/entity/Q1096611
+http://dbpedia.org/resource/ClaÞ_Dauphin_(actor)	http://www.wikidata.org/entity/Q1096611
 http://dbpedia.org/resource/Incredible_(Keith_Murray_song)	http://www.wikidata.org/entity/Q6015357
 http://dbpedia.org/resource/Reach_for_the_Sky	http://www.wikidata.org/entity/Q303495
 http://dbpedia.org/resource/Esme_Percy	http://www.wikidata.org/entity/Q5398505
@@ -3366,7 +3366,7 @@ http://dbpedia.org/resource/Four_Rooms	http://www.wikidata.org/entity/Q1137372
 http://dbpedia.org/resource/Don't_Let_It_Bring_You_Down	http://www.wikidata.org/entity/Q5291722
 http://dbpedia.org/resource/Paz_Vega	http://www.wikidata.org/entity/Q234618
 http://dbpedia.org/resource/Impossamole	http://www.wikidata.org/entity/Q4399887
-http://dbpedia.org/resource/Mary,_Queen_of_Scots_(1971_film)	http://www.wikidata.org/entity/Q1856597
+http://dbpedia.org/resource/Mary,_Qîn_of_Scots_(1971_film)	http://www.wikidata.org/entity/Q1856597
 http://dbpedia.org/resource/The_Young_in_Heart	http://www.wikidata.org/entity/Q1162433
 http://dbpedia.org/resource/Walter_G._Andrews	http://www.wikidata.org/entity/Q3538195
 http://dbpedia.org/resource/Electra_(1962_film)	http://www.wikidata.org/entity/Q1326400
@@ -3450,7 +3450,7 @@ http://dbpedia.org/resource/Zach_Cregger	http://www.wikidata.org/entity/Q3574497
 http://dbpedia.org/resource/Slam_/_Out_Here	http://www.wikidata.org/entity/Q7538563
 http://dbpedia.org/resource/The_Return_of_October	http://www.wikidata.org/entity/Q7760419
 http://dbpedia.org/resource/National_Sports_Council	http://www.wikidata.org/entity/Q3701698
-http://dbpedia.org/resource/Buddleja_madagascariensis	http://www.wikidata.org/entity/Q2265513
+http://dbpedia.org/resource/BÝleja_madagascariensis	http://www.wikidata.org/entity/Q2265513
 http://dbpedia.org/resource/Bringing_Down_the_House_(film)	http://www.wikidata.org/entity/Q202029
 http://dbpedia.org/resource/Travis_Burns	http://www.wikidata.org/entity/Q7836214
 http://dbpedia.org/resource/Beetlejuice	http://www.wikidata.org/entity/Q320384
@@ -3519,7 +3519,7 @@ http://dbpedia.org/resource/Cesar_Romero	http://www.wikidata.org/entity/Q443585
 http://dbpedia.org/resource/HMCS_Cape_Breton_(K350)	http://www.wikidata.org/entity/Q5630747
 http://dbpedia.org/resource/Frances_Goodrich	http://www.wikidata.org/entity/Q508285
 http://dbpedia.org/resource/Death_Race_3:_Inferno	http://www.wikidata.org/entity/Q3020730
-http://dbpedia.org/resource/Charles_Gordon_(producer)	http://www.wikidata.org/entity/Q1064570
+http://dbpedia.org/resource/Charles_Gordon_(prodÎr)	http://www.wikidata.org/entity/Q1064570
 http://dbpedia.org/resource/The_Way_Back	http://www.wikidata.org/entity/Q575778
 http://dbpedia.org/resource/Little_Nicky	http://www.wikidata.org/entity/Q267866
 http://dbpedia.org/resource/Tamaryn_Hendler	http://www.wikidata.org/entity/Q1619502
@@ -3542,7 +3542,7 @@ http://dbpedia.org/resource/Love_Love_Love_(Linda_Chung_album)	http://www.wikida
 http://dbpedia.org/resource/The_Return_(1980_film)	http://www.wikidata.org/entity/Q7760369
 http://dbpedia.org/resource/Sweet_Suicide_Summer_Story	http://www.wikidata.org/entity/Q377232
 http://dbpedia.org/resource/Kaal	http://www.wikidata.org/entity/Q1553584
-http://dbpedia.org/resource/Queens'_College,_Cambridge	http://www.wikidata.org/entity/Q765642
+http://dbpedia.org/resource/Qîns'_College,_Cambridge	http://www.wikidata.org/entity/Q765642
 http://dbpedia.org/resource/New_Horizon_(The_Country_Gentlemen_album)	http://www.wikidata.org/entity/Q7008832
 http://dbpedia.org/resource/Bridget_Jones's_Diary_(film)	http://www.wikidata.org/entity/Q752313
 http://dbpedia.org/resource/Johnny_Frenchman	http://www.wikidata.org/entity/Q6266703
@@ -3615,7 +3615,7 @@ http://dbpedia.org/resource/Gabriel_Landeskog	http://www.wikidata.org/entity/Q71
 http://dbpedia.org/resource/Paddington	http://www.wikidata.org/entity/Q124230
 http://dbpedia.org/resource/Henry_Ernest_Atkins	http://www.wikidata.org/entity/Q1375984
 http://dbpedia.org/resource/Oh,_Kay!_(film)	http://www.wikidata.org/entity/Q3881259
-http://dbpedia.org/resource/Prom_Queen_(Glee)	http://www.wikidata.org/entity/Q2604434
+http://dbpedia.org/resource/Prom_Qîn_(Glee)	http://www.wikidata.org/entity/Q2604434
 http://dbpedia.org/resource/Glenn_Ford	http://www.wikidata.org/entity/Q212048
 http://dbpedia.org/resource/Rango_(2011_film)	http://www.wikidata.org/entity/Q275432
 http://dbpedia.org/resource/Tony_Tonks	http://www.wikidata.org/entity/Q7823576
@@ -3637,7 +3637,7 @@ http://dbpedia.org/resource/Green_Street	http://www.wikidata.org/entity/Q1133132
 http://dbpedia.org/resource/Stoned_Soul_Picnic_(album)	http://www.wikidata.org/entity/Q7619153
 http://dbpedia.org/resource/Iserlohn_Roosters	http://www.wikidata.org/entity/Q498084
 http://dbpedia.org/resource/King's_Bounty:_Crossworlds	http://www.wikidata.org/entity/Q1076308
-http://dbpedia.org/resource/Balandougouba,_Mandiana	http://www.wikidata.org/entity/Q4850018
+http://dbpedia.org/resource/Balandougoº,_Mandiana	http://www.wikidata.org/entity/Q4850018
 http://dbpedia.org/resource/Adhisaya_Manithan	http://www.wikidata.org/entity/Q3998
 http://dbpedia.org/resource/The_Last_House_on_the_Left_(2009_film)	http://www.wikidata.org/entity/Q1581710
 http://dbpedia.org/resource/Date_Warp	http://www.wikidata.org/entity/Q5227552
@@ -3668,7 +3668,7 @@ http://dbpedia.org/resource/John_Barrow_(Canadian_football)	http://www.wikidata.
 http://dbpedia.org/resource/Luc_Chatel	http://www.wikidata.org/entity/Q642640
 http://dbpedia.org/resource/Elegy_(The_Twilight_Zone)	http://www.wikidata.org/entity/Q2692812
 http://dbpedia.org/resource/No_Love_for_Johnnie	http://www.wikidata.org/entity/Q3731438
-http://dbpedia.org/resource/The_Sin_of_Madelon_Claudet	http://www.wikidata.org/entity/Q940054
+http://dbpedia.org/resource/The_Sin_of_Madelon_ClaÞt	http://www.wikidata.org/entity/Q940054
 http://dbpedia.org/resource/Bomberman_World	http://www.wikidata.org/entity/Q2909732
 http://dbpedia.org/resource/Lala_Shevket	http://www.wikidata.org/entity/Q2032185
 http://dbpedia.org/resource/Spies_Strike_Silently	http://www.wikidata.org/entity/Q15104759
@@ -3731,7 +3731,7 @@ http://dbpedia.org/resource/Brad_Krevoy	http://www.wikidata.org/entity/Q4954064
 http://dbpedia.org/resource/How's_It_Going%3F	http://www.wikidata.org/entity/Q2759092
 http://dbpedia.org/resource/The_Stranger_(1946_film)	http://www.wikidata.org/entity/Q978770
 http://dbpedia.org/resource/Counterpoint_(1968_film)	http://www.wikidata.org/entity/Q2066369
-http://dbpedia.org/resource/Richard_Duffy	http://www.wikidata.org/entity/Q642981
+http://dbpedia.org/resource/Richard_Dÿy	http://www.wikidata.org/entity/Q642981
 http://dbpedia.org/resource/The_Corsican_Brothers_(1941_film)	http://www.wikidata.org/entity/Q7727683
 http://dbpedia.org/resource/Let's_Hope_It's_a_Girl	http://www.wikidata.org/entity/Q1225121
 http://dbpedia.org/resource/Ernst_Bickel	http://www.wikidata.org/entity/Q107191
@@ -3760,7 +3760,7 @@ http://dbpedia.org/resource/Ernest_Haller	http://www.wikidata.org/entity/Q431611
 http://dbpedia.org/resource/Karma_(The_Black_Eyed_Peas_song)	http://www.wikidata.org/entity/Q2357816
 http://dbpedia.org/resource/Bas-Rhin	http://www.wikidata.org/entity/Q12717
 http://dbpedia.org/resource/Lino_Capolicchio	http://www.wikidata.org/entity/Q238665
-http://dbpedia.org/resource/Laval,_Quebec	http://www.wikidata.org/entity/Q141810
+http://dbpedia.org/resource/Laval,_Q	http://www.wikidata.org/entity/Q141810
 http://dbpedia.org/resource/HBO	http://www.wikidata.org/entity/Q23633
 http://dbpedia.org/resource/The_Condemned_of_Altona_(film)	http://www.wikidata.org/entity/Q1406083
 http://dbpedia.org/resource/M._S._Viswanathan	http://www.wikidata.org/entity/Q3115598
@@ -3918,7 +3918,7 @@ http://dbpedia.org/resource/Adventures_of_a_Teenage_Dragon_Slayer	http://www.wik
 http://dbpedia.org/resource/Westwood_Village_Memorial_Park_Cemetery	http://www.wikidata.org/entity/Q1358639
 http://dbpedia.org/resource/Backstreet_Boys	http://www.wikidata.org/entity/Q17140
 http://dbpedia.org/resource/Traryd	http://www.wikidata.org/entity/Q2584179
-http://dbpedia.org/resource/The_Grand_Budapest_Hotel	http://www.wikidata.org/entity/Q3521099
+http://dbpedia.org/resource/The_Grand_BÚpest_Hotel	http://www.wikidata.org/entity/Q3521099
 http://dbpedia.org/resource/Erich_Ollenhauer	http://www.wikidata.org/entity/Q62185
 http://dbpedia.org/resource/What's_Up_Nurse!	http://www.wikidata.org/entity/Q7990844
 http://dbpedia.org/resource/Gangrene_(album)	http://www.wikidata.org/entity/Q5521183
@@ -3936,7 +3936,7 @@ http://dbpedia.org/resource/Winona_Ryder	http://www.wikidata.org/entity/Q101797
 http://dbpedia.org/resource/Basilisk_(The_Legendary_Pink_Dots_album)	http://www.wikidata.org/entity/Q4867455
 http://dbpedia.org/resource/Holla_at_Me	http://www.wikidata.org/entity/Q5880762
 http://dbpedia.org/resource/It's_the_Rage_(film)	http://www.wikidata.org/entity/Q4025341
-http://dbpedia.org/resource/Clapham_South_tube_station	http://www.wikidata.org/entity/Q1095083
+http://dbpedia.org/resource/Clapham_South_t¾_station	http://www.wikidata.org/entity/Q1095083
 http://dbpedia.org/resource/Alice_Wu	http://www.wikidata.org/entity/Q2836688
 http://dbpedia.org/resource/Swing_Shift_(film)	http://www.wikidata.org/entity/Q923009
 http://dbpedia.org/resource/The_Hoose-Gow	http://www.wikidata.org/entity/Q3018327
@@ -4151,7 +4151,7 @@ http://dbpedia.org/resource/Safari_(1956_film)	http://www.wikidata.org/entity/Q3
 http://dbpedia.org/resource/Gautam_Govinda	http://www.wikidata.org/entity/Q3417209
 http://dbpedia.org/resource/Who'd_Have_Known	http://www.wikidata.org/entity/Q1969199
 http://dbpedia.org/resource/Audi_A6	http://www.wikidata.org/entity/Q758718
-http://dbpedia.org/resource/Break_Stuff	http://www.wikidata.org/entity/Q2260730
+http://dbpedia.org/resource/Break_Stÿ	http://www.wikidata.org/entity/Q2260730
 http://dbpedia.org/resource/Natalia_Lavrova	http://www.wikidata.org/entity/Q231522
 http://dbpedia.org/resource/Saravana	http://www.wikidata.org/entity/Q7423406
 http://dbpedia.org/resource/Danuel_Pipoly	http://www.wikidata.org/entity/Q4363227
@@ -4204,7 +4204,7 @@ http://dbpedia.org/resource/The_Life_of_Joseph_W._McVey	http://www.wikidata.org/
 http://dbpedia.org/resource/Littlest_Things	http://www.wikidata.org/entity/Q651633
 http://dbpedia.org/resource/The_Miracle_(1991_film)	http://www.wikidata.org/entity/Q1452232
 http://dbpedia.org/resource/Ninaithale_Inikkum_(1979_film)	http://www.wikidata.org/entity/Q7038193
-http://dbpedia.org/resource/International_Squadron_(film)	http://www.wikidata.org/entity/Q6053604
+http://dbpedia.org/resource/International_Sq­ron_(film)	http://www.wikidata.org/entity/Q6053604
 http://dbpedia.org/resource/Carl_Friedrich_Gauss	http://www.wikidata.org/entity/Q6722
 http://dbpedia.org/resource/Johnny_Depp	http://www.wikidata.org/entity/Q37175
 http://dbpedia.org/resource/Kentavious_Caldwell-Pope	http://www.wikidata.org/entity/Q13562909
@@ -4302,7 +4302,7 @@ http://dbpedia.org/resource/Si_j'avais_au_moins...	http://www.wikidata.org/entit
 http://dbpedia.org/resource/Andre_Nickatina	http://www.wikidata.org/entity/Q3303558
 http://dbpedia.org/resource/Crawling_Back_to_You_(Backstreet_Boys_song)	http://www.wikidata.org/entity/Q2600548
 http://dbpedia.org/resource/A_Day_Late,_a_Dollar_Short	http://www.wikidata.org/entity/Q4656284
-http://dbpedia.org/resource/Space_Marauder	http://www.wikidata.org/entity/Q7572413
+http://dbpedia.org/resource/Space_MaraÞr	http://www.wikidata.org/entity/Q7572413
 http://dbpedia.org/resource/The_Sun_Comes_Up	http://www.wikidata.org/entity/Q3921672
 http://dbpedia.org/resource/Torpedo_Nizhny_Novgorod	http://www.wikidata.org/entity/Q568805
 http://dbpedia.org/resource/Makes_Me_Wonder	http://www.wikidata.org/entity/Q1982129
@@ -4340,7 +4340,7 @@ http://dbpedia.org/resource/Up_in_Smoke_(1957_film)	http://www.wikidata.org/enti
 http://dbpedia.org/resource/Keep_'Em_Flying	http://www.wikidata.org/entity/Q80509
 http://dbpedia.org/resource/The_Reckoning_(Star_Trek:_Deep_Space_Nine)	http://www.wikidata.org/entity/Q7759792
 http://dbpedia.org/resource/The_Concert_for_Bangladesh_(film)	http://www.wikidata.org/entity/Q3520375
-http://dbpedia.org/resource/Quebec_(1951_film)	http://www.wikidata.org/entity/Q7269740
+http://dbpedia.org/resource/Q_(1951_film)	http://www.wikidata.org/entity/Q7269740
 http://dbpedia.org/resource/Roy_Orbison_Sings_Don_Gibson	http://www.wikidata.org/entity/Q3282876
 http://dbpedia.org/resource/To_Sleep_with_Anger	http://www.wikidata.org/entity/Q7811124
 http://dbpedia.org/resource/Just_Another_Day_in_Parodies	http://www.wikidata.org/entity/Q6315769
@@ -4480,7 +4480,7 @@ http://dbpedia.org/resource/Winnipeg_Blue_Bombers	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Power_(KMFDM_song)	http://www.wikidata.org/entity/Q7236254
 http://dbpedia.org/resource/Gandhi_(film)	http://www.wikidata.org/entity/Q202211
 http://dbpedia.org/resource/Richard_Pryor:_Omit_the_Logic	http://www.wikidata.org/entity/Q16976993
-http://dbpedia.org/resource/Edmund_de_la_Pole,_3rd_Duke_of_Suffolk	http://www.wikidata.org/entity/Q1287021
+http://dbpedia.org/resource/Edmund_de_la_Pole,_3rd_Duke_of_Sÿolk	http://www.wikidata.org/entity/Q1287021
 http://dbpedia.org/resource/Mr._Denton_on_Doomsday	http://www.wikidata.org/entity/Q2634018
 http://dbpedia.org/resource/Gharba	http://www.wikidata.org/entity/Q5555701
 http://dbpedia.org/resource/Frank_Watson_Dyson	http://www.wikidata.org/entity/Q945309
@@ -4532,7 +4532,7 @@ http://dbpedia.org/resource/Snapper_Music	http://www.wikidata.org/entity/Q748710
 http://dbpedia.org/resource/Penny_Gold	http://www.wikidata.org/entity/Q43911
 http://dbpedia.org/resource/Chasing_Pavements	http://www.wikidata.org/entity/Q1068057
 http://dbpedia.org/resource/Staind	http://www.wikidata.org/entity/Q266496
-http://dbpedia.org/resource/Vic_Bubas	http://www.wikidata.org/entity/Q7924750
+http://dbpedia.org/resource/Vic_Bºs	http://www.wikidata.org/entity/Q7924750
 http://dbpedia.org/resource/The_Subtle_Knife	http://www.wikidata.org/entity/Q472208
 http://dbpedia.org/resource/I'm_the_Slime	http://www.wikidata.org/entity/Q3146426
 http://dbpedia.org/resource/David_Foster	http://www.wikidata.org/entity/Q77112
@@ -4563,7 +4563,7 @@ http://dbpedia.org/resource/The_Invisible_Menace	http://www.wikidata.org/entity/
 http://dbpedia.org/resource/She's_Tight	http://www.wikidata.org/entity/Q7491869
 http://dbpedia.org/resource/The_Byrds'_Greatest_Hits_Volume_II	http://www.wikidata.org/entity/Q7720840
 http://dbpedia.org/resource/Maurice_Leggett	http://www.wikidata.org/entity/Q3852429
-http://dbpedia.org/resource/David_Brown_(producer)	http://www.wikidata.org/entity/Q369175
+http://dbpedia.org/resource/David_Brown_(prodÎr)	http://www.wikidata.org/entity/Q369175
 http://dbpedia.org/resource/Homs_District	http://www.wikidata.org/entity/Q4115826
 http://dbpedia.org/resource/Vineeth	http://www.wikidata.org/entity/Q277292
 http://dbpedia.org/resource/Don't_Tell_Mom_the_Babysitter's_Dead	http://www.wikidata.org/entity/Q1397667
@@ -4680,7 +4680,7 @@ http://dbpedia.org/resource/Agrypnus	http://www.wikidata.org/entity/Q1307419
 http://dbpedia.org/resource/Mike_Starr_(actor)	http://www.wikidata.org/entity/Q1373450
 http://dbpedia.org/resource/Out_of_Reach_(song)	http://www.wikidata.org/entity/Q3887523
 http://dbpedia.org/resource/The_Curse_of_the_Gloamglozer	http://www.wikidata.org/entity/Q1427198
-http://dbpedia.org/resource/Kings_and_Queens_(Thirty_Seconds_to_Mars_song)	http://www.wikidata.org/entity/Q2015128
+http://dbpedia.org/resource/Kings_and_Qîns_(Thirty_Seconds_to_Mars_song)	http://www.wikidata.org/entity/Q2015128
 http://dbpedia.org/resource/Rock'n_Roll_Band	http://www.wikidata.org/entity/Q4019276
 http://dbpedia.org/resource/Martin_Ruhe	http://www.wikidata.org/entity/Q107574
 http://dbpedia.org/resource/Jars_of_Clay	http://www.wikidata.org/entity/Q617822
@@ -4720,7 +4720,7 @@ http://dbpedia.org/resource/Geoffrey_Toye	http://www.wikidata.org/entity/Q553493
 http://dbpedia.org/resource/He_Would_a_Hunting_Go	http://www.wikidata.org/entity/Q5689001
 http://dbpedia.org/resource/Karl_Malden	http://www.wikidata.org/entity/Q94992
 http://dbpedia.org/resource/I_Got_You_Babe_/_Soda_Pop	http://www.wikidata.org/entity/Q5977320
-http://dbpedia.org/resource/Claude_Chabrol	http://www.wikidata.org/entity/Q55375
+http://dbpedia.org/resource/ClaÞ_Chabrol	http://www.wikidata.org/entity/Q55375
 http://dbpedia.org/resource/Russian_language	http://www.wikidata.org/entity/Q7737
 http://dbpedia.org/resource/Jørgen_Jensen_(VC)	http://www.wikidata.org/entity/Q12320745
 http://dbpedia.org/resource/I_Married_You_for_Fun	http://www.wikidata.org/entity/Q3991035
@@ -4873,7 +4873,7 @@ http://dbpedia.org/resource/Martin_Růžička	http://www.wikidata.org/entity/Q77
 http://dbpedia.org/resource/Sathyaraj	http://www.wikidata.org/entity/Q3522947
 http://dbpedia.org/resource/The_Beastmaster	http://www.wikidata.org/entity/Q813050
 http://dbpedia.org/resource/Lode_Runner	http://www.wikidata.org/entity/Q1197566
-http://dbpedia.org/resource/Gurudev_(film)	http://www.wikidata.org/entity/Q11057119
+http://dbpedia.org/resource/GurÞv_(film)	http://www.wikidata.org/entity/Q11057119
 http://dbpedia.org/resource/Andrei_Posnov	http://www.wikidata.org/entity/Q502618
 http://dbpedia.org/resource/Kung_Mamahalin_Mo_Lang_Ako	http://www.wikidata.org/entity/Q6444495
 http://dbpedia.org/resource/John_Condit	http://www.wikidata.org/entity/Q381565
@@ -5003,8 +5003,8 @@ http://dbpedia.org/resource/Frankie_Sanders	http://www.wikidata.org/entity/Q3082
 http://dbpedia.org/resource/Charles_Wheatstone	http://www.wikidata.org/entity/Q156942
 http://dbpedia.org/resource/Anjelica_Huston	http://www.wikidata.org/entity/Q190998
 http://dbpedia.org/resource/Vries,_Drenthe	http://www.wikidata.org/entity/Q501788
-http://dbpedia.org/resource/Marvel_Super_Hero_Squad:_The_Infinity_Gauntlet	http://www.wikidata.org/entity/Q3850389
-http://dbpedia.org/resource/Restless_(Buffy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q2740175
+http://dbpedia.org/resource/Marvel_Super_Hero_Sq­:_The_Infinity_Gauntlet	http://www.wikidata.org/entity/Q3850389
+http://dbpedia.org/resource/Restless_(Bÿy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q2740175
 http://dbpedia.org/resource/Frankfurt	http://www.wikidata.org/entity/Q1794
 http://dbpedia.org/resource/Charles_Lang	http://www.wikidata.org/entity/Q486883
 http://dbpedia.org/resource/The_Devil's_in_Love	http://www.wikidata.org/entity/Q3885905
@@ -5124,7 +5124,7 @@ http://dbpedia.org/resource/Airplane!	http://www.wikidata.org/entity/Q497256
 http://dbpedia.org/resource/Paveh_County	http://www.wikidata.org/entity/Q393366
 http://dbpedia.org/resource/Nate_Dogg	http://www.wikidata.org/entity/Q47159
 http://dbpedia.org/resource/Give_It_to_You_(Eve_song)	http://www.wikidata.org/entity/Q2065489
-http://dbpedia.org/resource/Saudagar_(1991_film)	http://www.wikidata.org/entity/Q2054362
+http://dbpedia.org/resource/SaÚgar_(1991_film)	http://www.wikidata.org/entity/Q2054362
 http://dbpedia.org/resource/Prêt-à-Porter_(film)	http://www.wikidata.org/entity/Q911775
 http://dbpedia.org/resource/AIK_IF	http://www.wikidata.org/entity/Q59583
 http://dbpedia.org/resource/Daniel_Rouzier	http://www.wikidata.org/entity/Q3013611
@@ -5195,7 +5195,7 @@ http://dbpedia.org/resource/Everyday_(The_Oak_Ridge_Boys_song)	http://www.wikida
 http://dbpedia.org/resource/Andy_Richter	http://www.wikidata.org/entity/Q497851
 http://dbpedia.org/resource/Caspar_Neumann	http://www.wikidata.org/entity/Q96611
 http://dbpedia.org/resource/Roy_Webb	http://www.wikidata.org/entity/Q1367973
-http://dbpedia.org/resource/Fort_Lauderdale_Stadium	http://www.wikidata.org/entity/Q2974594
+http://dbpedia.org/resource/Fort_LaÞrdale_Stadium	http://www.wikidata.org/entity/Q2974594
 http://dbpedia.org/resource/Sean_Kingston	http://www.wikidata.org/entity/Q216934
 http://dbpedia.org/resource/Lost_(TV_series)	http://www.wikidata.org/entity/Q23567
 http://dbpedia.org/resource/Corey_Glover	http://www.wikidata.org/entity/Q2166120
@@ -5229,7 +5229,7 @@ http://dbpedia.org/resource/Urimaikural	http://www.wikidata.org/entity/Q18210084
 http://dbpedia.org/resource/What_Are_You_Looking_For	http://www.wikidata.org/entity/Q7990983
 http://dbpedia.org/resource/Oxfordshire	http://www.wikidata.org/entity/Q23169
 http://dbpedia.org/resource/Three_Smart_Saps	http://www.wikidata.org/entity/Q7797825
-http://dbpedia.org/resource/Bayswater_tube_station	http://www.wikidata.org/entity/Q812631
+http://dbpedia.org/resource/Bayswater_t¾_station	http://www.wikidata.org/entity/Q812631
 http://dbpedia.org/resource/Reggie_Slack	http://www.wikidata.org/entity/Q7308310
 http://dbpedia.org/resource/Harcourt_(publisher)	http://www.wikidata.org/entity/Q5654997
 http://dbpedia.org/resource/The_Land_Before_Time_XIII:_The_Wisdom_of_Friends	http://www.wikidata.org/entity/Q1042099
@@ -5242,7 +5242,7 @@ http://dbpedia.org/resource/Margaret_de_Bohun,_Countess_of_Devon	http://www.wiki
 http://dbpedia.org/resource/Samuel_Evans_(VC)	http://www.wikidata.org/entity/Q7411339
 http://dbpedia.org/resource/Three_on_a_Limb	http://www.wikidata.org/entity/Q3540042
 http://dbpedia.org/resource/Syreeta_Wright	http://www.wikidata.org/entity/Q456598
-http://dbpedia.org/resource/Salavat_Yulaev_Ufa	http://www.wikidata.org/entity/Q1142030
+http://dbpedia.org/resource/Salavat_Yulaev_ú	http://www.wikidata.org/entity/Q1142030
 http://dbpedia.org/resource/Sidney_Sheinberg	http://www.wikidata.org/entity/Q3246861
 http://dbpedia.org/resource/Welcome_to_the_World_(song)	http://www.wikidata.org/entity/Q4018843
 http://dbpedia.org/resource/Mindshadow	http://www.wikidata.org/entity/Q6863964
@@ -5410,7 +5410,7 @@ http://dbpedia.org/resource/Life_in_1472	http://www.wikidata.org/entity/Q6545139
 http://dbpedia.org/resource/The_Big_Empty_(2005_film)	http://www.wikidata.org/entity/Q7717615
 http://dbpedia.org/resource/Luxembourg_City	http://www.wikidata.org/entity/Q1842
 http://dbpedia.org/resource/Cameron_Crowe	http://www.wikidata.org/entity/Q318287
-http://dbpedia.org/resource/Adult_Education_(song)	http://www.wikidata.org/entity/Q4685892
+http://dbpedia.org/resource/Adult_EdÊtion_(song)	http://www.wikidata.org/entity/Q4685892
 http://dbpedia.org/resource/Naval_War_College	http://www.wikidata.org/entity/Q575662
 http://dbpedia.org/resource/About_Elly	http://www.wikidata.org/entity/Q1311890
 http://dbpedia.org/resource/One_Son	http://www.wikidata.org/entity/Q7093210
@@ -5656,7 +5656,7 @@ http://dbpedia.org/resource/High_School_Musical:_Sing_It!	http://www.wikidata.or
 http://dbpedia.org/resource/Mahesh,_Saranya_Matrum_Palar	http://www.wikidata.org/entity/Q6733843
 http://dbpedia.org/resource/Irving_Brecher	http://www.wikidata.org/entity/Q382596
 http://dbpedia.org/resource/Villain_(1971_film)	http://www.wikidata.org/entity/Q12131571
-http://dbpedia.org/resource/Billy_Budd_(film)	http://www.wikidata.org/entity/Q1121916
+http://dbpedia.org/resource/Billy_BÝ_(film)	http://www.wikidata.org/entity/Q1121916
 http://dbpedia.org/resource/Vampire_Blvd.	http://www.wikidata.org/entity/Q7912966
 http://dbpedia.org/resource/Ai_no_Chikyūsai	http://www.wikidata.org/entity/Q15052450
 http://dbpedia.org/resource/Dave_Grusin	http://www.wikidata.org/entity/Q502923
@@ -5804,7 +5804,7 @@ http://dbpedia.org/resource/Vin_Diesel	http://www.wikidata.org/entity/Q178166
 http://dbpedia.org/resource/Peter_Coyote	http://www.wikidata.org/entity/Q354873
 http://dbpedia.org/resource/Erase_Me	http://www.wikidata.org/entity/Q2895187
 http://dbpedia.org/resource/Groningen	http://www.wikidata.org/entity/Q749
-http://dbpedia.org/resource/Caucasian_race	http://www.wikidata.org/entity/Q7129609
+http://dbpedia.org/resource/CaÊsian_race	http://www.wikidata.org/entity/Q7129609
 http://dbpedia.org/resource/Porno_Graffitti	http://www.wikidata.org/entity/Q1156513
 http://dbpedia.org/resource/Orchestral_Manoeuvres_in_the_Dark	http://www.wikidata.org/entity/Q956500
 http://dbpedia.org/resource/Michael_Miles	http://www.wikidata.org/entity/Q6832829
@@ -5855,7 +5855,7 @@ http://dbpedia.org/resource/Together_We_Stand	http://www.wikidata.org/entity/Q78
 http://dbpedia.org/resource/The_Grand_Duel	http://www.wikidata.org/entity/Q479837
 http://dbpedia.org/resource/Summer_of_Sam	http://www.wikidata.org/entity/Q1150713
 http://dbpedia.org/resource/Vera_Miles	http://www.wikidata.org/entity/Q237864
-http://dbpedia.org/resource/My_Blueberry_Nights	http://www.wikidata.org/entity/Q737650
+http://dbpedia.org/resource/My_Bl຾rry_Nights	http://www.wikidata.org/entity/Q737650
 http://dbpedia.org/resource/Chhatrapati_(film)	http://www.wikidata.org/entity/Q251908
 http://dbpedia.org/resource/Stop_for_a_Minute_(Keane_song)	http://www.wikidata.org/entity/Q2489304
 http://dbpedia.org/resource/Damien_Pottinger	http://www.wikidata.org/entity/Q5212500
@@ -5891,7 +5891,7 @@ http://dbpedia.org/resource/Yuri_Koksharov	http://www.wikidata.org/entity/Q46479
 http://dbpedia.org/resource/Tie_Your_Mother_Down	http://www.wikidata.org/entity/Q931887
 http://dbpedia.org/resource/Mikhail_Zhukov_(ice_hockey)	http://www.wikidata.org/entity/Q196335
 http://dbpedia.org/resource/Stage_Fright_(1950_film)	http://www.wikidata.org/entity/Q502530
-http://dbpedia.org/resource/Takeo_Fukuda	http://www.wikidata.org/entity/Q315584
+http://dbpedia.org/resource/Takeo_FukÚ	http://www.wikidata.org/entity/Q315584
 http://dbpedia.org/resource/Upendra_(actor)	http://www.wikidata.org/entity/Q7377106
 http://dbpedia.org/resource/Arul	http://www.wikidata.org/entity/Q2866020
 http://dbpedia.org/resource/Joseph_LaShelle	http://www.wikidata.org/entity/Q351563
@@ -5929,7 +5929,7 @@ http://dbpedia.org/resource/La_Bête_Humaine_(film)	http://www.wikidata.org/enti
 http://dbpedia.org/resource/Wallace_H._White,_Jr.	http://www.wikidata.org/entity/Q442200
 http://dbpedia.org/resource/Illinois	http://www.wikidata.org/entity/Q1204
 http://dbpedia.org/resource/Stroker_Ace	http://www.wikidata.org/entity/Q655487
-http://dbpedia.org/resource/Bruce_Almighty	http://www.wikidata.org/entity/Q207816
+http://dbpedia.org/resource/BrÎ_Almighty	http://www.wikidata.org/entity/Q207816
 http://dbpedia.org/resource/Love_Don't_Care_(Whose_Heart_It_Breaks)	http://www.wikidata.org/entity/Q6690522
 http://dbpedia.org/resource/Perfect_Mismatch	http://www.wikidata.org/entity/Q7168015
 http://dbpedia.org/resource/Police_procedural	http://www.wikidata.org/entity/Q2321734
@@ -6022,7 +6022,7 @@ http://dbpedia.org/resource/Parrish_(film)	http://www.wikidata.org/entity/Q95072
 http://dbpedia.org/resource/Trinidad	http://www.wikidata.org/entity/Q128323
 http://dbpedia.org/resource/Jean-Pierre_Léaud	http://www.wikidata.org/entity/Q295834
 http://dbpedia.org/resource/My_Wife_Is_an_Actress	http://www.wikidata.org/entity/Q2446893
-http://dbpedia.org/resource/Dubai_National_School,_Al_Twar	http://www.wikidata.org/entity/Q5310591
+http://dbpedia.org/resource/Dºi_National_School,_Al_Twar	http://www.wikidata.org/entity/Q5310591
 http://dbpedia.org/resource/Korea_Patrol	http://www.wikidata.org/entity/Q6431687
 http://dbpedia.org/resource/Tam-Lin_(film)	http://www.wikidata.org/entity/Q3514609
 http://dbpedia.org/resource/Where_the_Truth_Lies	http://www.wikidata.org/entity/Q151848
@@ -6110,7 +6110,7 @@ http://dbpedia.org/resource/Florian_(film)	http://www.wikidata.org/entity/Q54609
 http://dbpedia.org/resource/Angel_in_the_Night	http://www.wikidata.org/entity/Q2849363
 http://dbpedia.org/resource/Aniyathipraavu	http://www.wikidata.org/entity/Q4764442
 http://dbpedia.org/resource/Dhwani	http://www.wikidata.org/entity/Q13112773
-http://dbpedia.org/resource/Holloway_Road_tube_station	http://www.wikidata.org/entity/Q1624885
+http://dbpedia.org/resource/Holloway_Road_t¾_station	http://www.wikidata.org/entity/Q1624885
 http://dbpedia.org/resource/Chen_Ding-nan	http://www.wikidata.org/entity/Q256274
 http://dbpedia.org/resource/Bridget_Jones:_The_Edge_of_Reason_(film)	http://www.wikidata.org/entity/Q843612
 http://dbpedia.org/resource/Mighty_Joe_Young_(1949_film)	http://www.wikidata.org/entity/Q1640553
@@ -6154,7 +6154,7 @@ http://dbpedia.org/resource/Le_coppie	http://www.wikidata.org/entity/Q3828638
 http://dbpedia.org/resource/Darius_(video_game)	http://www.wikidata.org/entity/Q374820
 http://dbpedia.org/resource/Eragon_(film)	http://www.wikidata.org/entity/Q239296
 http://dbpedia.org/resource/Seven_Angry_Men	http://www.wikidata.org/entity/Q7457174
-http://dbpedia.org/resource/William_Fox_(producer)	http://www.wikidata.org/entity/Q134382
+http://dbpedia.org/resource/William_Fox_(prodÎr)	http://www.wikidata.org/entity/Q134382
 http://dbpedia.org/resource/Freaks_of_Nature_(Kansas_album)	http://www.wikidata.org/entity/Q384988
 http://dbpedia.org/resource/Divided_Loyalties	http://www.wikidata.org/entity/Q5284024
 http://dbpedia.org/resource/Confidence_(2003_film)	http://www.wikidata.org/entity/Q652586
@@ -6217,7 +6217,7 @@ http://dbpedia.org/resource/Linköping_Municipality	http://www.wikidata.org/enti
 http://dbpedia.org/resource/1634:_The_Ram_Rebellion	http://www.wikidata.org/entity/Q4551382
 http://dbpedia.org/resource/Dietrich_Lohmann	http://www.wikidata.org/entity/Q109714
 http://dbpedia.org/resource/Wilfrid_Hyde-White	http://www.wikidata.org/entity/Q1334296
-http://dbpedia.org/resource/How_to_Succeed_in_Business_Without_Really_Trying_(film)	http://www.wikidata.org/entity/Q1037371
+http://dbpedia.org/resource/How_to_S쳮d_in_Business_Without_Really_Trying_(film)	http://www.wikidata.org/entity/Q1037371
 http://dbpedia.org/resource/Baba_Jan,_East_Azerbaijan	http://www.wikidata.org/entity/Q5836182
 http://dbpedia.org/resource/East_Easy_Rider	http://www.wikidata.org/entity/Q5328268
 http://dbpedia.org/resource/Uttar_Pradesh	http://www.wikidata.org/entity/Q1498
@@ -6371,7 +6371,7 @@ http://dbpedia.org/resource/Joe_Cassidy_(footballer,_born_1896)	http://www.wikid
 http://dbpedia.org/resource/Kerman_County	http://www.wikidata.org/entity/Q1286434
 http://dbpedia.org/resource/Neon_Genesis_Evangelion:_Girlfriend_of_Steel_2nd	http://www.wikidata.org/entity/Q2451413
 http://dbpedia.org/resource/I'm_Single	http://www.wikidata.org/entity/Q5966736
-http://dbpedia.org/resource/Nasty_Girl_(Ludacris_song)	http://www.wikidata.org/entity/Q4045068
+http://dbpedia.org/resource/Nasty_Girl_(Lඬris_song)	http://www.wikidata.org/entity/Q4045068
 http://dbpedia.org/resource/Kurupt	http://www.wikidata.org/entity/Q448930
 http://dbpedia.org/resource/Elizabeth:_The_Golden_Age	http://www.wikidata.org/entity/Q727846
 http://dbpedia.org/resource/Second_Noah	http://www.wikidata.org/entity/Q3208622
@@ -6467,7 +6467,7 @@ http://dbpedia.org/resource/Madalena_Felix	http://www.wikidata.org/entity/Q65444
 http://dbpedia.org/resource/Show_(The_Cure_album)	http://www.wikidata.org/entity/Q1931144
 http://dbpedia.org/resource/Socialist_Party_(France)	http://www.wikidata.org/entity/Q170972
 http://dbpedia.org/resource/Shiawase_No_Iro	http://www.wikidata.org/entity/Q7495989
-http://dbpedia.org/resource/Huddersfield	http://www.wikidata.org/entity/Q201812
+http://dbpedia.org/resource/Hෞrsfield	http://www.wikidata.org/entity/Q201812
 http://dbpedia.org/resource/Philip_Giraldi	http://www.wikidata.org/entity/Q7183615
 http://dbpedia.org/resource/Water_Drops_on_Burning_Rocks	http://www.wikidata.org/entity/Q284103
 http://dbpedia.org/resource/Parks_and_Recreation	http://www.wikidata.org/entity/Q218035
@@ -6518,7 +6518,7 @@ http://dbpedia.org/resource/Jong_Yong-hyok	http://www.wikidata.org/entity/Q49679
 http://dbpedia.org/resource/Boom_Town_(film)	http://www.wikidata.org/entity/Q1193014
 http://dbpedia.org/resource/I_Get_Money	http://www.wikidata.org/entity/Q2456090
 http://dbpedia.org/resource/England_national_under-18_football_team	http://www.wikidata.org/entity/Q1049171
-http://dbpedia.org/resource/Gratitude_(song)	http://www.wikidata.org/entity/Q5597705
+http://dbpedia.org/resource/GratitÞ_(song)	http://www.wikidata.org/entity/Q5597705
 http://dbpedia.org/resource/Monte_Carlo	http://www.wikidata.org/entity/Q45240
 http://dbpedia.org/resource/Paul_Anka	http://www.wikidata.org/entity/Q216563
 http://dbpedia.org/resource/Lucky_7_(album)	http://www.wikidata.org/entity/Q6697842
@@ -6546,8 +6546,8 @@ http://dbpedia.org/resource/William_G._Tapply	http://www.wikidata.org/entity/Q80
 http://dbpedia.org/resource/Adam_Berkhoel	http://www.wikidata.org/entity/Q348756
 http://dbpedia.org/resource/Walter_Slezak	http://www.wikidata.org/entity/Q113328
 http://dbpedia.org/resource/Nicosia	http://www.wikidata.org/entity/Q3856
-http://dbpedia.org/resource/Hubei	http://www.wikidata.org/entity/Q46862
-http://dbpedia.org/resource/Muddat_(1986_film)	http://www.wikidata.org/entity/Q6931596
+http://dbpedia.org/resource/H¾i	http://www.wikidata.org/entity/Q46862
+http://dbpedia.org/resource/Mේt_(1986_film)	http://www.wikidata.org/entity/Q6931596
 http://dbpedia.org/resource/Shalini_Ente_Koottukari	http://www.wikidata.org/entity/Q7487230
 http://dbpedia.org/resource/Ketia_Swanier	http://www.wikidata.org/entity/Q3195605
 http://dbpedia.org/resource/I'd_Rather_Be_Rich	http://www.wikidata.org/entity/Q5965544
@@ -6740,7 +6740,7 @@ http://dbpedia.org/resource/Dunhill_Records	http://www.wikidata.org/entity/Q3716
 http://dbpedia.org/resource/The_Lions_Are_Loose	http://www.wikidata.org/entity/Q3236383
 http://dbpedia.org/resource/Ocean's_Trilogy	http://www.wikidata.org/entity/Q4463076
 http://dbpedia.org/resource/Andie_MacDowell	http://www.wikidata.org/entity/Q208558
-http://dbpedia.org/resource/Naseeruddin_Shah	http://www.wikidata.org/entity/Q469945
+http://dbpedia.org/resource/NaseerÝin_Shah	http://www.wikidata.org/entity/Q469945
 http://dbpedia.org/resource/Qix++	http://www.wikidata.org/entity/Q7267969
 http://dbpedia.org/resource/Broadway_Babies	http://www.wikidata.org/entity/Q4972408
 http://dbpedia.org/resource/Chimmie_Fadden_Out_West	http://www.wikidata.org/entity/Q508813
@@ -6769,7 +6769,7 @@ http://dbpedia.org/resource/Art_Nouveau	http://www.wikidata.org/entity/Q34636
 http://dbpedia.org/resource/Crash_Here_Tonight	http://www.wikidata.org/entity/Q5182359
 http://dbpedia.org/resource/Ripley_Under_Ground_(film)	http://www.wikidata.org/entity/Q570973
 http://dbpedia.org/resource/The_Big_Blue	http://www.wikidata.org/entity/Q517239
-http://dbpedia.org/resource/The_King_and_Queen_of_America	http://www.wikidata.org/entity/Q9358066
+http://dbpedia.org/resource/The_King_and_Qîn_of_America	http://www.wikidata.org/entity/Q9358066
 http://dbpedia.org/resource/Take_the_Skinheads_Bowling	http://www.wikidata.org/entity/Q7677942
 http://dbpedia.org/resource/LaFace_Records	http://www.wikidata.org/entity/Q1338446
 http://dbpedia.org/resource/Liverpool_F.C.	http://www.wikidata.org/entity/Q1130849
@@ -6799,7 +6799,7 @@ http://dbpedia.org/resource/Michel_Serrault	http://www.wikidata.org/entity/Q3180
 http://dbpedia.org/resource/Dawn_(2014_film)	http://www.wikidata.org/entity/Q20078746
 http://dbpedia.org/resource/Chicago_(band)	http://www.wikidata.org/entity/Q371938
 http://dbpedia.org/resource/The_Cardinal	http://www.wikidata.org/entity/Q737065
-http://dbpedia.org/resource/Sudden_Strike_(video_game)	http://www.wikidata.org/entity/Q13439813
+http://dbpedia.org/resource/Sෞn_Strike_(video_game)	http://www.wikidata.org/entity/Q13439813
 http://dbpedia.org/resource/Yasutaka_Nakata	http://www.wikidata.org/entity/Q1196321
 http://dbpedia.org/resource/Assassination_of_a_High_School_President	http://www.wikidata.org/entity/Q739440
 http://dbpedia.org/resource/Musée_d'Art_Moderne_de_Céret	http://www.wikidata.org/entity/Q3329642
@@ -6811,7 +6811,7 @@ http://dbpedia.org/resource/Rocksmith	http://www.wikidata.org/entity/Q248611
 http://dbpedia.org/resource/Silas_(TV_series)	http://www.wikidata.org/entity/Q321869
 http://dbpedia.org/resource/DFA_Records	http://www.wikidata.org/entity/Q1153070
 http://dbpedia.org/resource/Bill_Harburn	http://www.wikidata.org/entity/Q18126000
-http://dbpedia.org/resource/Kerala_House_Udan_Vilpanakku	http://www.wikidata.org/entity/Q6393354
+http://dbpedia.org/resource/Kerala_House_Ún_Vilpanakku	http://www.wikidata.org/entity/Q6393354
 http://dbpedia.org/resource/Star_Trek:_Voyager	http://www.wikidata.org/entity/Q156329
 http://dbpedia.org/resource/Charles_Bally	http://www.wikidata.org/entity/Q13236
 http://dbpedia.org/resource/The_Last_Time_I_Committed_Suicide	http://www.wikidata.org/entity/Q1508993
@@ -6843,7 +6843,7 @@ http://dbpedia.org/resource/My_Downfall_(Original_Soundtrack)	http://www.wikidat
 http://dbpedia.org/resource/Scooby-Doo!_Mystery_Incorporated	http://www.wikidata.org/entity/Q680462
 http://dbpedia.org/resource/Sarah_Courtney	http://www.wikidata.org/entity/Q16197735
 http://dbpedia.org/resource/Pezizomycotina	http://www.wikidata.org/entity/Q387893
-http://dbpedia.org/resource/Hot_Sauce_Committee_Part_Two	http://www.wikidata.org/entity/Q1933719
+http://dbpedia.org/resource/Hot_SaÎ_Committee_Part_Two	http://www.wikidata.org/entity/Q1933719
 http://dbpedia.org/resource/Kalvanin_Kadhali_(2006_film)	http://www.wikidata.org/entity/Q6354708
 http://dbpedia.org/resource/Michael_McElhatton	http://www.wikidata.org/entity/Q6832667
 http://dbpedia.org/resource/Remi_Adefarasin	http://www.wikidata.org/entity/Q1889725
@@ -6982,11 +6982,11 @@ http://dbpedia.org/resource/David_Bowie	http://www.wikidata.org/entity/Q5383
 http://dbpedia.org/resource/Willie_Havenga	http://www.wikidata.org/entity/Q10471296
 http://dbpedia.org/resource/Mikhail_Tikhonov	http://www.wikidata.org/entity/Q4458680
 http://dbpedia.org/resource/Get_Out_Your_Handkerchiefs	http://www.wikidata.org/entity/Q1451544
-http://dbpedia.org/resource/Gudgudee	http://www.wikidata.org/entity/Q3031312
+http://dbpedia.org/resource/Gudg෮	http://www.wikidata.org/entity/Q3031312
 http://dbpedia.org/resource/Nine_Lives_(1957_film)	http://www.wikidata.org/entity/Q1402615
 http://dbpedia.org/resource/Ron_Dayne	http://www.wikidata.org/entity/Q7363689
 http://dbpedia.org/resource/Battle_of_the_Dnieper	http://www.wikidata.org/entity/Q313836
-http://dbpedia.org/resource/Queen's_Park_F.C.	http://www.wikidata.org/entity/Q852753
+http://dbpedia.org/resource/Qîn's_Park_F.C.	http://www.wikidata.org/entity/Q852753
 http://dbpedia.org/resource/Tony_Pierce-Roberts	http://www.wikidata.org/entity/Q452731
 http://dbpedia.org/resource/Captain_Commando	http://www.wikidata.org/entity/Q2568609
 http://dbpedia.org/resource/One_Time_for_Me	http://www.wikidata.org/entity/Q7093291
@@ -7007,7 +7007,7 @@ http://dbpedia.org/resource/Spencer_Gordon_Bennet	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Deep_Impact_(film)	http://www.wikidata.org/entity/Q49498
 http://dbpedia.org/resource/The_Crazy_Stranger	http://www.wikidata.org/entity/Q2464146
 http://dbpedia.org/resource/Vijayakanth	http://www.wikidata.org/entity/Q3534435
-http://dbpedia.org/resource/University_of_Queensland	http://www.wikidata.org/entity/Q866012
+http://dbpedia.org/resource/University_of_Qînsland	http://www.wikidata.org/entity/Q866012
 http://dbpedia.org/resource/Your_Turn_to_Die	http://www.wikidata.org/entity/Q13423994
 http://dbpedia.org/resource/Libble_Rabble	http://www.wikidata.org/entity/Q6540403
 http://dbpedia.org/resource/Var_(department)	http://www.wikidata.org/entity/Q12789
@@ -7078,7 +7078,7 @@ http://dbpedia.org/resource/Bullet_for_Stefano	http://www.wikidata.org/entity/Q3
 http://dbpedia.org/resource/Mony_Mony_(album)	http://www.wikidata.org/entity/Q6906974
 http://dbpedia.org/resource/Philippine_Standard_Time	http://www.wikidata.org/entity/Q3543509
 http://dbpedia.org/resource/Deva_(composer)	http://www.wikidata.org/entity/Q3424313
-http://dbpedia.org/resource/Get_Back_(Ludacris_song)	http://www.wikidata.org/entity/Q1147490
+http://dbpedia.org/resource/Get_Back_(Lඬris_song)	http://www.wikidata.org/entity/Q1147490
 http://dbpedia.org/resource/Diante_do_Trono	http://www.wikidata.org/entity/Q1427329
 http://dbpedia.org/resource/Kader_Khan	http://www.wikidata.org/entity/Q3191765
 http://dbpedia.org/resource/Nikolai_Lemtyugov	http://www.wikidata.org/entity/Q965977
@@ -7238,7 +7238,7 @@ http://dbpedia.org/resource/The_Emperor_(film)	http://www.wikidata.org/entity/Q2
 http://dbpedia.org/resource/Ross_Robinson	http://www.wikidata.org/entity/Q712244
 http://dbpedia.org/resource/Rudolf_Gerhardt	http://www.wikidata.org/entity/Q3942264
 http://dbpedia.org/resource/Ted_Richmond	http://www.wikidata.org/entity/Q7693660
-http://dbpedia.org/resource/Fluffy_(1965_film)	http://www.wikidata.org/entity/Q16993541
+http://dbpedia.org/resource/Flÿy_(1965_film)	http://www.wikidata.org/entity/Q16993541
 http://dbpedia.org/resource/Combat_Records	http://www.wikidata.org/entity/Q1113541
 http://dbpedia.org/resource/Music_executive	http://www.wikidata.org/entity/Q3089940
 http://dbpedia.org/resource/Flying_Wild	http://www.wikidata.org/entity/Q5463559
@@ -7280,7 +7280,7 @@ http://dbpedia.org/resource/Yasashii_Aka	http://www.wikidata.org/entity/Q8049648
 http://dbpedia.org/resource/Born_to_Kill_(1947_film)	http://www.wikidata.org/entity/Q1089519
 http://dbpedia.org/resource/Begin_Again_(Space_song)	http://www.wikidata.org/entity/Q3458697
 http://dbpedia.org/resource/Brandon_Harrison	http://www.wikidata.org/entity/Q4956895
-http://dbpedia.org/resource/Roy_Budd	http://www.wikidata.org/entity/Q4762
+http://dbpedia.org/resource/Roy_BÝ	http://www.wikidata.org/entity/Q4762
 http://dbpedia.org/resource/ANTI-	http://www.wikidata.org/entity/Q295794
 http://dbpedia.org/resource/Michael_McKean	http://www.wikidata.org/entity/Q1384181
 http://dbpedia.org/resource/Gas-s-s-s	http://www.wikidata.org/entity/Q3758579
@@ -7302,7 +7302,7 @@ http://dbpedia.org/resource/The_Super_Spy	http://www.wikidata.org/entity/Q776746
 http://dbpedia.org/resource/Steven_C._Hebert	http://www.wikidata.org/entity/Q7614532
 http://dbpedia.org/resource/Unpretty	http://www.wikidata.org/entity/Q1407660
 http://dbpedia.org/resource/Joanna_Cassidy	http://www.wikidata.org/entity/Q236702
-http://dbpedia.org/resource/Hubert_Parker	http://www.wikidata.org/entity/Q5927530
+http://dbpedia.org/resource/H¾rt_Parker	http://www.wikidata.org/entity/Q5927530
 http://dbpedia.org/resource/Sigrid_Fry-Revere	http://www.wikidata.org/entity/Q7513122
 http://dbpedia.org/resource/Anton_Plenikowski	http://www.wikidata.org/entity/Q120502
 http://dbpedia.org/resource/Sujoy_Ghosh	http://www.wikidata.org/entity/Q10993792
@@ -7338,7 +7338,7 @@ http://dbpedia.org/resource/Your_Studio_and_You	http://www.wikidata.org/entity/Q
 http://dbpedia.org/resource/Majunu	http://www.wikidata.org/entity/Q3537023
 http://dbpedia.org/resource/Gino_Ferrer_Callegari	http://www.wikidata.org/entity/Q1491659
 http://dbpedia.org/resource/Shyam_K._Naidu	http://www.wikidata.org/entity/Q7505918
-http://dbpedia.org/resource/Crush_(Buffy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q3031224
+http://dbpedia.org/resource/Crush_(Bÿy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q3031224
 http://dbpedia.org/resource/Saint_Joan_(film)	http://www.wikidata.org/entity/Q589555
 http://dbpedia.org/resource/Terrorist_(album)	http://www.wikidata.org/entity/Q7703961
 http://dbpedia.org/resource/Pocrnela_burma	http://www.wikidata.org/entity/Q7206554
@@ -7349,7 +7349,7 @@ http://dbpedia.org/resource/X_You	http://www.wikidata.org/entity/Q8221323
 http://dbpedia.org/resource/10.5:_Apocalypse	http://www.wikidata.org/entity/Q163903
 http://dbpedia.org/resource/Vladimir_Arnold	http://www.wikidata.org/entity/Q157642
 http://dbpedia.org/resource/Hans_Friessen	http://www.wikidata.org/entity/Q4492797
-http://dbpedia.org/resource/Yakusoku_no_Tsubasa	http://www.wikidata.org/entity/Q8047251
+http://dbpedia.org/resource/Yakusoku_no_Tsºsa	http://www.wikidata.org/entity/Q8047251
 http://dbpedia.org/resource/Crows_Fly_Black	http://www.wikidata.org/entity/Q3005481
 http://dbpedia.org/resource/Career_Opportunities_(film)	http://www.wikidata.org/entity/Q1114685
 http://dbpedia.org/resource/Lane_Nishikawa	http://www.wikidata.org/entity/Q6485431
@@ -7391,9 +7391,9 @@ http://dbpedia.org/resource/You_Can_Depend_on_Me_(Restless_Heart_song)	http://ww
 http://dbpedia.org/resource/Gangvaa	http://www.wikidata.org/entity/Q5521274
 http://dbpedia.org/resource/Ronnie_de_Mel	http://www.wikidata.org/entity/Q7366034
 http://dbpedia.org/resource/A_Time_for_Killing	http://www.wikidata.org/entity/Q650539
-http://dbpedia.org/resource/Edward_Black_(producer)	http://www.wikidata.org/entity/Q5341908
+http://dbpedia.org/resource/Edward_Black_(prodÎr)	http://www.wikidata.org/entity/Q5341908
 http://dbpedia.org/resource/For_Colored_Girls	http://www.wikidata.org/entity/Q4359765
-http://dbpedia.org/resource/Buffy_the_Vampire_Slayer_(2002_video_game)	http://www.wikidata.org/entity/Q4035486
+http://dbpedia.org/resource/Bÿy_the_Vampire_Slayer_(2002_video_game)	http://www.wikidata.org/entity/Q4035486
 http://dbpedia.org/resource/Thomas_Arnold	http://www.wikidata.org/entity/Q887226
 http://dbpedia.org/resource/Lauren_Sánchez	http://www.wikidata.org/entity/Q4407963
 http://dbpedia.org/resource/Florentia_Sale	http://www.wikidata.org/entity/Q5460883
@@ -7438,7 +7438,7 @@ http://dbpedia.org/resource/L'inafferrabile_12	http://www.wikidata.org/entity/Q3
 http://dbpedia.org/resource/Sing_When_You're_Winning	http://www.wikidata.org/entity/Q910334
 http://dbpedia.org/resource/Hutchinson_(publisher)	http://www.wikidata.org/entity/Q378809
 http://dbpedia.org/resource/Otakebi_Boy_Wao!_/_Tomodachi_wa_Tomodachi_Nanda!	http://www.wikidata.org/entity/Q1134684
-http://dbpedia.org/resource/Steve_McQueen_(The_Automatic_song)	http://www.wikidata.org/entity/Q7613348
+http://dbpedia.org/resource/Steve_McQîn_(The_Automatic_song)	http://www.wikidata.org/entity/Q7613348
 http://dbpedia.org/resource/Wired_(film)	http://www.wikidata.org/entity/Q3283214
 http://dbpedia.org/resource/Sathyameva_Jayathe	http://www.wikidata.org/entity/Q7426179
 http://dbpedia.org/resource/Russ_Mitchell	http://www.wikidata.org/entity/Q7381188
@@ -7554,7 +7554,7 @@ http://dbpedia.org/resource/Germi_County	http://www.wikidata.org/entity/Q1274543
 http://dbpedia.org/resource/Salem_Ablo	http://www.wikidata.org/entity/Q16148119
 http://dbpedia.org/resource/Xander_Berkeley	http://www.wikidata.org/entity/Q361610
 http://dbpedia.org/resource/Metello	http://www.wikidata.org/entity/Q645490
-http://dbpedia.org/resource/Sudesi	http://www.wikidata.org/entity/Q7633714
+http://dbpedia.org/resource/SÞsi	http://www.wikidata.org/entity/Q7633714
 http://dbpedia.org/resource/Fixed_Bayonets!	http://www.wikidata.org/entity/Q562639
 http://dbpedia.org/resource/Nevada_(1944_film)	http://www.wikidata.org/entity/Q10336498
 http://dbpedia.org/resource/Bernard_Campan	http://www.wikidata.org/entity/Q822345
@@ -7622,7 +7622,7 @@ http://dbpedia.org/resource/King_Kong_(2005_film)	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Unity_(Star_Trek:_Voyager)	http://www.wikidata.org/entity/Q7893741
 http://dbpedia.org/resource/Mick_Scott	http://www.wikidata.org/entity/Q17017912
 http://dbpedia.org/resource/José_and_Pilar	http://www.wikidata.org/entity/Q1709746
-http://dbpedia.org/resource/Buddleja	http://www.wikidata.org/entity/Q158011
+http://dbpedia.org/resource/BÝleja	http://www.wikidata.org/entity/Q158011
 http://dbpedia.org/resource/Serge_Grouard	http://www.wikidata.org/entity/Q3479338
 http://dbpedia.org/resource/The_Fatal_Mallet	http://www.wikidata.org/entity/Q763858
 http://dbpedia.org/resource/Jump_the_Shark_(The_X-Files)	http://www.wikidata.org/entity/Q6311207
@@ -7634,7 +7634,7 @@ http://dbpedia.org/resource/Lanny_McDonald	http://www.wikidata.org/entity/Q13323
 http://dbpedia.org/resource/Jamie_Storr	http://www.wikidata.org/entity/Q1681424
 http://dbpedia.org/resource/Charles_Worrod	http://www.wikidata.org/entity/Q5083716
 http://dbpedia.org/resource/Lift_Off_(song)	http://www.wikidata.org/entity/Q2698498
-http://dbpedia.org/resource/Revelations_(Buffy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q3458442
+http://dbpedia.org/resource/Revelations_(Bÿy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q3458442
 http://dbpedia.org/resource/Pilgrim_(film)	http://www.wikidata.org/entity/Q1504375
 http://dbpedia.org/resource/Edward_Maitland	http://www.wikidata.org/entity/Q328622
 http://dbpedia.org/resource/Fury_(2014_film)	http://www.wikidata.org/entity/Q14786561
@@ -7684,7 +7684,7 @@ http://dbpedia.org/resource/Going_Bye-Bye!	http://www.wikidata.org/entity/Q30105
 http://dbpedia.org/resource/Beau_Ideal	http://www.wikidata.org/entity/Q4877364
 http://dbpedia.org/resource/The_Dick_Powell_Show	http://www.wikidata.org/entity/Q1248449
 http://dbpedia.org/resource/Rap_Life	http://www.wikidata.org/entity/Q7293800
-http://dbpedia.org/resource/Ralph_Winter_(producer)	http://www.wikidata.org/entity/Q7288285
+http://dbpedia.org/resource/Ralph_Winter_(prodÎr)	http://www.wikidata.org/entity/Q7288285
 http://dbpedia.org/resource/Guaranteed_(Ronnie_Drew_album)	http://www.wikidata.org/entity/Q5613915
 http://dbpedia.org/resource/Dâmbovița_County	http://www.wikidata.org/entity/Q188797
 http://dbpedia.org/resource/Pirates_of_Black_Cove	http://www.wikidata.org/entity/Q13582278
@@ -7904,7 +7904,7 @@ http://dbpedia.org/resource/You_Save_Me	http://www.wikidata.org/entity/Q8057486
 http://dbpedia.org/resource/Goldsmiths,_University_of_London	http://www.wikidata.org/entity/Q528231
 http://dbpedia.org/resource/The_1980_Annual_World's_Best_SF	http://www.wikidata.org/entity/Q7711788
 http://dbpedia.org/resource/If_I_Were_King_(1920_film)	http://www.wikidata.org/entity/Q5990538
-http://dbpedia.org/resource/Flubber_(film)	http://www.wikidata.org/entity/Q1325217
+http://dbpedia.org/resource/Flாr_(film)	http://www.wikidata.org/entity/Q1325217
 http://dbpedia.org/resource/Sankar_Kumar_Pal	http://www.wikidata.org/entity/Q7418633
 http://dbpedia.org/resource/Alpha_Dog	http://www.wikidata.org/entity/Q661061
 http://dbpedia.org/resource/Bedtime_Story_(Madonna_song)	http://www.wikidata.org/entity/Q2291771
@@ -8043,7 +8043,7 @@ http://dbpedia.org/resource/High_School_High	http://www.wikidata.org/entity/Q130
 http://dbpedia.org/resource/Ocean_Software	http://www.wikidata.org/entity/Q1408498
 http://dbpedia.org/resource/Week-End_at_the_Waldorf	http://www.wikidata.org/entity/Q2656400
 http://dbpedia.org/resource/Bomberman_'94	http://www.wikidata.org/entity/Q3141541
-http://dbpedia.org/resource/Some_Dudes_Can_Fight	http://www.wikidata.org/entity/Q7559386
+http://dbpedia.org/resource/Some_DÞs_Can_Fight	http://www.wikidata.org/entity/Q7559386
 http://dbpedia.org/resource/This_Love_(Maroon_5_song)	http://www.wikidata.org/entity/Q1982114
 http://dbpedia.org/resource/Kelly_O'Dwyer	http://www.wikidata.org/entity/Q6386229
 http://dbpedia.org/resource/Swimfan	http://www.wikidata.org/entity/Q749569
@@ -8100,7 +8100,7 @@ http://dbpedia.org/resource/Ruby_(1977_film)	http://www.wikidata.org/entity/Q737
 http://dbpedia.org/resource/Kiss_the_Blood_off_My_Hands	http://www.wikidata.org/entity/Q1610106
 http://dbpedia.org/resource/Drive:_The_Surprising_Truth_About_What_Motivates_Us	http://www.wikidata.org/entity/Q5307874
 http://dbpedia.org/resource/Indian_Ocean	http://www.wikidata.org/entity/Q1239
-http://dbpedia.org/resource/Pokémon:_Lucario_and_the_Mystery_of_Mew	http://www.wikidata.org/entity/Q890720
+http://dbpedia.org/resource/Pokémon:_LÊrio_and_the_Mystery_of_Mew	http://www.wikidata.org/entity/Q890720
 http://dbpedia.org/resource/Me,_Gangster	http://www.wikidata.org/entity/Q16028689
 http://dbpedia.org/resource/El_Deseo	http://www.wikidata.org/entity/Q1324070
 http://dbpedia.org/resource/Airheads	http://www.wikidata.org/entity/Q408725
@@ -8366,7 +8366,7 @@ http://dbpedia.org/resource/Jay_and_Silent_Bob_Strike_Back	http://www.wikidata.o
 http://dbpedia.org/resource/Ashraf_Rashid	http://www.wikidata.org/entity/Q2866577
 http://dbpedia.org/resource/Branded_(1950_film)	http://www.wikidata.org/entity/Q3032792
 http://dbpedia.org/resource/Made_in_Brooklyn	http://www.wikidata.org/entity/Q2258770
-http://dbpedia.org/resource/Steve_Adubato	http://www.wikidata.org/entity/Q7611764
+http://dbpedia.org/resource/Steve_Adºto	http://www.wikidata.org/entity/Q7611764
 http://dbpedia.org/resource/House_of_Bamboo	http://www.wikidata.org/entity/Q2602267
 http://dbpedia.org/resource/Narashino	http://www.wikidata.org/entity/Q318047
 http://dbpedia.org/resource/Hugo_Friedhofer	http://www.wikidata.org/entity/Q1350676
@@ -8406,11 +8406,11 @@ http://dbpedia.org/resource/Loco_Boy_Makes_Good	http://www.wikidata.org/entity/Q
 http://dbpedia.org/resource/Confrontation_(Soilent_Green_album)	http://www.wikidata.org/entity/Q5160291
 http://dbpedia.org/resource/File_Under:_Easy_Listening	http://www.wikidata.org/entity/Q1940990
 http://dbpedia.org/resource/BNA_Records	http://www.wikidata.org/entity/Q4836116
-http://dbpedia.org/resource/Ellery_Queen	http://www.wikidata.org/entity/Q586362
+http://dbpedia.org/resource/Ellery_Qîn	http://www.wikidata.org/entity/Q586362
 http://dbpedia.org/resource/Live_(band)	http://www.wikidata.org/entity/Q165714
 http://dbpedia.org/resource/John_Erick_Dowdle	http://www.wikidata.org/entity/Q3181441
 http://dbpedia.org/resource/Dinavar_District	http://www.wikidata.org/entity/Q964561
-http://dbpedia.org/resource/Queen_Kelly	http://www.wikidata.org/entity/Q288491
+http://dbpedia.org/resource/Qîn_Kelly	http://www.wikidata.org/entity/Q288491
 http://dbpedia.org/resource/The_Garden_of_Weeds	http://www.wikidata.org/entity/Q3987180
 http://dbpedia.org/resource/The_Payoff_(1942_film)	http://www.wikidata.org/entity/Q7756412
 http://dbpedia.org/resource/Grand_Ages:_Rome	http://www.wikidata.org/entity/Q2571116
@@ -8462,7 +8462,7 @@ http://dbpedia.org/resource/Albert_Watson_(South_Carolina)	http://www.wikidata.o
 http://dbpedia.org/resource/Amerie	http://www.wikidata.org/entity/Q233377
 http://dbpedia.org/resource/In_Praise_of_Love_(film)	http://www.wikidata.org/entity/Q3032174
 http://dbpedia.org/resource/Mannan_(film)	http://www.wikidata.org/entity/Q10998844
-http://dbpedia.org/resource/Battlecat_(record_producer)	http://www.wikidata.org/entity/Q3636868
+http://dbpedia.org/resource/Battlecat_(record_prodÎr)	http://www.wikidata.org/entity/Q3636868
 http://dbpedia.org/resource/Laila_Mehdin	http://www.wikidata.org/entity/Q431002
 http://dbpedia.org/resource/Bread,_Love_and_Jealousy	http://www.wikidata.org/entity/Q1585239
 http://dbpedia.org/resource/Korie_Lucious	http://www.wikidata.org/entity/Q6432267
@@ -8530,7 +8530,7 @@ http://dbpedia.org/resource/Man_Without_a_Star	http://www.wikidata.org/entity/Q1
 http://dbpedia.org/resource/Doraemon:_Nobita's_Diary_of_the_Creation_of_the_World	http://www.wikidata.org/entity/Q1309576
 http://dbpedia.org/resource/The_Waikiki_Widow	http://www.wikidata.org/entity/Q7773197
 http://dbpedia.org/resource/John_Barry_(composer)	http://www.wikidata.org/entity/Q111074
-http://dbpedia.org/resource/Quebec_Nordiques	http://www.wikidata.org/entity/Q530764
+http://dbpedia.org/resource/Q_Nordiques	http://www.wikidata.org/entity/Q530764
 http://dbpedia.org/resource/Thomas_H._Ince	http://www.wikidata.org/entity/Q942822
 http://dbpedia.org/resource/Viva_Max!	http://www.wikidata.org/entity/Q1409108
 http://dbpedia.org/resource/Peter_Jackson_(rugby_league)	http://www.wikidata.org/entity/Q7174921
@@ -9094,7 +9094,7 @@ http://dbpedia.org/resource/Chuck_Terry	http://www.wikidata.org/entity/Q3676050
 http://dbpedia.org/resource/Full_Metal_Daemon:_Muramasa	http://www.wikidata.org/entity/Q5227007
 http://dbpedia.org/resource/Iphigenia_in_Aulis	http://www.wikidata.org/entity/Q1233770
 http://dbpedia.org/resource/Chuck_(TV_series)	http://www.wikidata.org/entity/Q2293
-http://dbpedia.org/resource/Juddmental	http://www.wikidata.org/entity/Q6302330
+http://dbpedia.org/resource/JÝmental	http://www.wikidata.org/entity/Q6302330
 http://dbpedia.org/resource/SST_Records	http://www.wikidata.org/entity/Q639182
 http://dbpedia.org/resource/Nuvve_Nuvve	http://www.wikidata.org/entity/Q7070650
 http://dbpedia.org/resource/The_Hours_(film)	http://www.wikidata.org/entity/Q157044
@@ -9194,7 +9194,7 @@ http://dbpedia.org/resource/Stéphane_Fiset	http://www.wikidata.org/entity/Q1803
 http://dbpedia.org/resource/Varna	http://www.wikidata.org/entity/Q6506
 http://dbpedia.org/resource/Count_the_Days	http://www.wikidata.org/entity/Q5176814
 http://dbpedia.org/resource/Paulo_Macedo_(basketball)	http://www.wikidata.org/entity/Q3372812
-http://dbpedia.org/resource/Claude_Lanthier	http://www.wikidata.org/entity/Q2977646
+http://dbpedia.org/resource/ClaÞ_Lanthier	http://www.wikidata.org/entity/Q2977646
 http://dbpedia.org/resource/I'll_Still_Kill	http://www.wikidata.org/entity/Q2703463
 http://dbpedia.org/resource/David_Snell_(composer)	http://www.wikidata.org/entity/Q3018799
 http://dbpedia.org/resource/The_Firm_(1993_film)	http://www.wikidata.org/entity/Q821692
@@ -9238,7 +9238,7 @@ http://dbpedia.org/resource/George_William_Johnson_(congressman)	http://www.wiki
 http://dbpedia.org/resource/Laura_Pausini	http://www.wikidata.org/entity/Q170697
 http://dbpedia.org/resource/The_Beach_Boys	http://www.wikidata.org/entity/Q183048
 http://dbpedia.org/resource/Alexei_Tertyshny	http://www.wikidata.org/entity/Q464087
-http://dbpedia.org/resource/Dubai	http://www.wikidata.org/entity/Q612
+http://dbpedia.org/resource/Dºi	http://www.wikidata.org/entity/Q612
 http://dbpedia.org/resource/Sune_Bergström	http://www.wikidata.org/entity/Q295696
 http://dbpedia.org/resource/Ann_Rutherford	http://www.wikidata.org/entity/Q231704
 http://dbpedia.org/resource/The_Family_Bible	http://www.wikidata.org/entity/Q7733295
@@ -9321,7 +9321,7 @@ http://dbpedia.org/resource/Jonathan_Bender	http://www.wikidata.org/entity/Q1362
 http://dbpedia.org/resource/The_Adventures_of_Rocky_and_Bullwinkle	http://www.wikidata.org/entity/Q705198
 http://dbpedia.org/resource/Shirley_MacLaine	http://www.wikidata.org/entity/Q95026
 http://dbpedia.org/resource/Ace_Combat_Zero:_The_Belkan_War	http://www.wikidata.org/entity/Q2629197
-http://dbpedia.org/resource/Damon_Stoudamire	http://www.wikidata.org/entity/Q460516
+http://dbpedia.org/resource/Damon_StoÚmire	http://www.wikidata.org/entity/Q460516
 http://dbpedia.org/resource/Over_the_Rainbow_(Angel)	http://www.wikidata.org/entity/Q3020366
 http://dbpedia.org/resource/Captain_Newman,_M.D.	http://www.wikidata.org/entity/Q1035124
 http://dbpedia.org/resource/Jack_Warner_(actor)	http://www.wikidata.org/entity/Q1566430
@@ -9334,7 +9334,7 @@ http://dbpedia.org/resource/Lone_Star_(1952_film)	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Muppet_Treasure_Island	http://www.wikidata.org/entity/Q1788520
 http://dbpedia.org/resource/Piraeus	http://www.wikidata.org/entity/Q58976
 http://dbpedia.org/resource/Rowdy_Rajamma	http://www.wikidata.org/entity/Q18391256
-http://dbpedia.org/resource/Buffy_the_Vampire_Slayer	http://www.wikidata.org/entity/Q183513
+http://dbpedia.org/resource/Bÿy_the_Vampire_Slayer	http://www.wikidata.org/entity/Q183513
 http://dbpedia.org/resource/Jews	http://www.wikidata.org/entity/Q7325
 http://dbpedia.org/resource/(If_You're_Wondering_If_I_Want_You_To)_I_Want_You_To	http://www.wikidata.org/entity/Q2627309
 http://dbpedia.org/resource/Encino,_Los_Angeles	http://www.wikidata.org/entity/Q1190590
@@ -9441,7 +9441,7 @@ http://dbpedia.org/resource/ATLiens	http://www.wikidata.org/entity/Q299003
 http://dbpedia.org/resource/Murali_Mohan	http://www.wikidata.org/entity/Q6937288
 http://dbpedia.org/resource/The_Champ_(1979_film)	http://www.wikidata.org/entity/Q2294175
 http://dbpedia.org/resource/Confessions_of_a_Dangerous_Mind	http://www.wikidata.org/entity/Q770965
-http://dbpedia.org/resource/Gianluca_Pozzi	http://www.wikidata.org/entity/Q959217
+http://dbpedia.org/resource/GianlÊ_Pozzi	http://www.wikidata.org/entity/Q959217
 http://dbpedia.org/resource/The_Tenth_Level	http://www.wikidata.org/entity/Q7768468
 http://dbpedia.org/resource/Get_Up_(50_Cent_song)	http://www.wikidata.org/entity/Q1519925
 http://dbpedia.org/resource/The_Wildest_Dream	http://www.wikidata.org/entity/Q7774950
@@ -9521,7 +9521,7 @@ http://dbpedia.org/resource/Pam_Tillis	http://www.wikidata.org/entity/Q464232
 http://dbpedia.org/resource/Chrysalis_Records	http://www.wikidata.org/entity/Q1088453
 http://dbpedia.org/resource/The_Killers_(1964_film)	http://www.wikidata.org/entity/Q1197463
 http://dbpedia.org/resource/Jimmy_Conlin	http://www.wikidata.org/entity/Q3179026
-http://dbpedia.org/resource/Come_with_Me_(Puff_Daddy_song)	http://www.wikidata.org/entity/Q5151370
+http://dbpedia.org/resource/Come_with_Me_(Pÿ_Daddy_song)	http://www.wikidata.org/entity/Q5151370
 http://dbpedia.org/resource/Masal_County	http://www.wikidata.org/entity/Q1291651
 http://dbpedia.org/resource/Crown_of_Souls	http://www.wikidata.org/entity/Q5189512
 http://dbpedia.org/resource/Djurgårdens_IF_Hockey	http://www.wikidata.org/entity/Q1232297
@@ -9532,7 +9532,7 @@ http://dbpedia.org/resource/On_ne_meurt_que_deux_fois	http://www.wikidata.org/en
 http://dbpedia.org/resource/Melissa_Joan_Hart	http://www.wikidata.org/entity/Q429777
 http://dbpedia.org/resource/Bandai_Namco_Entertainment	http://www.wikidata.org/entity/Q1194689
 http://dbpedia.org/resource/Led_Zeppelin_Boxed_Set_2	http://www.wikidata.org/entity/Q966033
-http://dbpedia.org/resource/Budapest	http://www.wikidata.org/entity/Q1781
+http://dbpedia.org/resource/BÚpest	http://www.wikidata.org/entity/Q1781
 http://dbpedia.org/resource/Road_to_Zion	http://www.wikidata.org/entity/Q2020548
 http://dbpedia.org/resource/Cheney_Stadium	http://www.wikidata.org/entity/Q2962638
 http://dbpedia.org/resource/The_Dollar-a-Year_Man	http://www.wikidata.org/entity/Q7730570
@@ -9562,7 +9562,7 @@ http://dbpedia.org/resource/Viva_Villa!	http://www.wikidata.org/entity/Q1619412
 http://dbpedia.org/resource/Al_Quraishyah_District	http://www.wikidata.org/entity/Q4118316
 http://dbpedia.org/resource/In:_Sanity	http://www.wikidata.org/entity/Q6008703
 http://dbpedia.org/resource/Human_Cargo_(film)	http://www.wikidata.org/entity/Q1498106
-http://dbpedia.org/resource/Dancing_Queen	http://www.wikidata.org/entity/Q870786
+http://dbpedia.org/resource/Dancing_Qîn	http://www.wikidata.org/entity/Q870786
 http://dbpedia.org/resource/Andy_Colby's_Incredible_Adventure	http://www.wikidata.org/entity/Q4531833
 http://dbpedia.org/resource/Mary_Pickford	http://www.wikidata.org/entity/Q104109
 http://dbpedia.org/resource/Anja_Breien	http://www.wikidata.org/entity/Q1779128
@@ -9574,7 +9574,7 @@ http://dbpedia.org/resource/Judy_at_Carnegie_Hall	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Quest_for_Camelot	http://www.wikidata.org/entity/Q1764174
 http://dbpedia.org/resource/Sisqó	http://www.wikidata.org/entity/Q730108
 http://dbpedia.org/resource/Children_of_the_Dust_(miniseries)	http://www.wikidata.org/entity/Q5098534
-http://dbpedia.org/resource/The_Dude_(Devin_the_Dude_album)	http://www.wikidata.org/entity/Q7731141
+http://dbpedia.org/resource/The_DÞ_(Devin_the_DÞ_album)	http://www.wikidata.org/entity/Q7731141
 http://dbpedia.org/resource/Beauty_and_the_Beast_(David_Bowie_song)	http://www.wikidata.org/entity/Q4877926
 http://dbpedia.org/resource/Stuart_Hendrie	http://www.wikidata.org/entity/Q7626636
 http://dbpedia.org/resource/Kurt_Schwitters	http://www.wikidata.org/entity/Q155158
@@ -9608,7 +9608,7 @@ http://dbpedia.org/resource/Sunsoft	http://www.wikidata.org/entity/Q2298387
 http://dbpedia.org/resource/Won't_Back_Down_(film)	http://www.wikidata.org/entity/Q4020750
 http://dbpedia.org/resource/American_Revolutionary_War	http://www.wikidata.org/entity/Q40949
 http://dbpedia.org/resource/Bussen_(film)	http://www.wikidata.org/entity/Q5002028
-http://dbpedia.org/resource/Queen_(film)	http://www.wikidata.org/entity/Q15907466
+http://dbpedia.org/resource/Qîn_(film)	http://www.wikidata.org/entity/Q15907466
 http://dbpedia.org/resource/Forever_Mine	http://www.wikidata.org/entity/Q1437245
 http://dbpedia.org/resource/Randu_Penkuttikal	http://www.wikidata.org/entity/Q7292033
 http://dbpedia.org/resource/Vallavan_Oruvan	http://www.wikidata.org/entity/Q7911840
@@ -9688,7 +9688,7 @@ http://dbpedia.org/resource/Dushmani:_A_Violent_Love_Story	http://www.wikidata.o
 http://dbpedia.org/resource/Shahrud_County	http://www.wikidata.org/entity/Q1286402
 http://dbpedia.org/resource/Earnest_Byner	http://www.wikidata.org/entity/Q3297577
 http://dbpedia.org/resource/Come_Back_Around	http://www.wikidata.org/entity/Q5151088
-http://dbpedia.org/resource/Irattakuttikalude_Achan	http://www.wikidata.org/entity/Q17014535
+http://dbpedia.org/resource/IrattakuttikalÞ_Achan	http://www.wikidata.org/entity/Q17014535
 http://dbpedia.org/resource/Mr._and_Mrs._Bridge	http://www.wikidata.org/entity/Q1951409
 http://dbpedia.org/resource/Thacholi_Ambu	http://www.wikidata.org/entity/Q7708897
 http://dbpedia.org/resource/Clay_Walker	http://www.wikidata.org/entity/Q320583
@@ -9707,8 +9707,8 @@ http://dbpedia.org/resource/Edward_Hawker	http://www.wikidata.org/entity/Q534336
 http://dbpedia.org/resource/Fran_Walsh	http://www.wikidata.org/entity/Q116861
 http://dbpedia.org/resource/Dragon_Warrior_Monsters_2	http://www.wikidata.org/entity/Q3038754
 http://dbpedia.org/resource/Michael_Madana_Kama_Rajan	http://www.wikidata.org/entity/Q6832432
-http://dbpedia.org/resource/The_Powerpuff_Girls	http://www.wikidata.org/entity/Q1236206
-http://dbpedia.org/resource/Estrela_Clube_Primeiro_de_Maio	http://www.wikidata.org/entity/Q1305651
+http://dbpedia.org/resource/The_Powerpÿ_Girls	http://www.wikidata.org/entity/Q1236206
+http://dbpedia.org/resource/Estrela_Cl¾_Primeiro_de_Maio	http://www.wikidata.org/entity/Q1305651
 http://dbpedia.org/resource/Thalaimuraigal	http://www.wikidata.org/entity/Q16254697
 http://dbpedia.org/resource/Berryz_Kobo	http://www.wikidata.org/entity/Q827223
 http://dbpedia.org/resource/Girls!_Girls!_Girls!	http://www.wikidata.org/entity/Q1526796
@@ -9765,7 +9765,7 @@ http://dbpedia.org/resource/The_Dean_Martin_Comedy_World	http://www.wikidata.org
 http://dbpedia.org/resource/Cornelis_de_Witt	http://www.wikidata.org/entity/Q249292
 http://dbpedia.org/resource/Donna_d'Onna	http://www.wikidata.org/entity/Q3713926
 http://dbpedia.org/resource/Daniel_Gélin	http://www.wikidata.org/entity/Q663553
-http://dbpedia.org/resource/Buddy_Rich	http://www.wikidata.org/entity/Q318339
+http://dbpedia.org/resource/BÝy_Rich	http://www.wikidata.org/entity/Q318339
 http://dbpedia.org/resource/A_Question_of_Honour	http://www.wikidata.org/entity/Q1306328
 http://dbpedia.org/resource/Primrose_Path_(film)	http://www.wikidata.org/entity/Q1785051
 http://dbpedia.org/resource/If_Only_(KT_Tunstall_song)	http://www.wikidata.org/entity/Q3792113
@@ -9784,7 +9784,7 @@ http://dbpedia.org/resource/Hometown_Story	http://www.wikidata.org/entity/Q15538
 http://dbpedia.org/resource/Money_to_Burn_(song)	http://www.wikidata.org/entity/Q6899297
 http://dbpedia.org/resource/In_the_Good_Old_Summertime	http://www.wikidata.org/entity/Q2844035
 http://dbpedia.org/resource/Norm_Gratton	http://www.wikidata.org/entity/Q1218547
-http://dbpedia.org/resource/Monster_Island_(Buffy/Angel_novel)	http://www.wikidata.org/entity/Q6902737
+http://dbpedia.org/resource/Monster_Island_(Bÿy/Angel_novel)	http://www.wikidata.org/entity/Q6902737
 http://dbpedia.org/resource/Reno_911!:_Miami	http://www.wikidata.org/entity/Q964424
 http://dbpedia.org/resource/Lady_in_the_Water	http://www.wikidata.org/entity/Q621529
 http://dbpedia.org/resource/Euripides	http://www.wikidata.org/entity/Q48305
@@ -9820,7 +9820,7 @@ http://dbpedia.org/resource/East_Germany	http://www.wikidata.org/entity/Q16957
 http://dbpedia.org/resource/Blanche_Sweet	http://www.wikidata.org/entity/Q267718
 http://dbpedia.org/resource/Juicy_(The_Notorious_B.I.G._song)	http://www.wikidata.org/entity/Q2701727
 http://dbpedia.org/resource/Donald_Charles_Cameron_(politician)	http://www.wikidata.org/entity/Q1239776
-http://dbpedia.org/resource/Machucando	http://www.wikidata.org/entity/Q3842096
+http://dbpedia.org/resource/MachÊndo	http://www.wikidata.org/entity/Q3842096
 http://dbpedia.org/resource/Dead_End_(Angel)	http://www.wikidata.org/entity/Q3149188
 http://dbpedia.org/resource/Lost_in_Space_(film)	http://www.wikidata.org/entity/Q502908
 http://dbpedia.org/resource/Bullets_don't_come_back	http://www.wikidata.org/entity/Q2409042
@@ -9976,7 +9976,7 @@ http://dbpedia.org/resource/Johannes_Peter_Müller	http://www.wikidata.org/entit
 http://dbpedia.org/resource/James_L._Brooks	http://www.wikidata.org/entity/Q95125
 http://dbpedia.org/resource/My_Darkest_Days_(album)	http://www.wikidata.org/entity/Q9047437
 http://dbpedia.org/resource/Doomsday_(2008_film)	http://www.wikidata.org/entity/Q1242543
-http://dbpedia.org/resource/Visitors_(Buffy_novel)	http://www.wikidata.org/entity/Q7936341
+http://dbpedia.org/resource/Visitors_(Bÿy_novel)	http://www.wikidata.org/entity/Q7936341
 http://dbpedia.org/resource/Gaston_Defferre	http://www.wikidata.org/entity/Q608815
 http://dbpedia.org/resource/William_Walton	http://www.wikidata.org/entity/Q310939
 http://dbpedia.org/resource/Morning_Musume	http://www.wikidata.org/entity/Q174291
@@ -10042,7 +10042,7 @@ http://dbpedia.org/resource/Noah_Beery,_Jr.	http://www.wikidata.org/entity/Q1361
 http://dbpedia.org/resource/Things_We_Lost_in_the_Fire_(film)	http://www.wikidata.org/entity/Q1306840
 http://dbpedia.org/resource/Azerbaijan	http://www.wikidata.org/entity/Q227
 http://dbpedia.org/resource/Sons_of_the_Pioneers	http://www.wikidata.org/entity/Q2414335
-http://dbpedia.org/resource/The_Secret_of_My_Success_(1987_film)	http://www.wikidata.org/entity/Q496227
+http://dbpedia.org/resource/The_Secret_of_My_S೎ss_(1987_film)	http://www.wikidata.org/entity/Q496227
 http://dbpedia.org/resource/Banjo-Kazooie:_Nuts_&_Bolts	http://www.wikidata.org/entity/Q806592
 http://dbpedia.org/resource/Gentleman's_Agreement	http://www.wikidata.org/entity/Q898840
 http://dbpedia.org/resource/Genevieve_(album)	http://www.wikidata.org/entity/Q5533054
@@ -10116,7 +10116,7 @@ http://dbpedia.org/resource/Kakavand-e_Sharqi_Rural_District	http://www.wikidata
 http://dbpedia.org/resource/Sol_Kaplan	http://www.wikidata.org/entity/Q1231073
 http://dbpedia.org/resource/Ninnu_Choodalani	http://www.wikidata.org/entity/Q18128746
 http://dbpedia.org/resource/Jamie_Milam	http://www.wikidata.org/entity/Q5986928
-http://dbpedia.org/resource/Andrei_Zubarev	http://www.wikidata.org/entity/Q502544
+http://dbpedia.org/resource/Andrei_Zºrev	http://www.wikidata.org/entity/Q502544
 http://dbpedia.org/resource/Where_Them_Girls_At	http://www.wikidata.org/entity/Q645342
 http://dbpedia.org/resource/The_Chinese_Room	http://www.wikidata.org/entity/Q1725456
 http://dbpedia.org/resource/Dark_Command	http://www.wikidata.org/entity/Q515687
@@ -10157,7 +10157,7 @@ http://dbpedia.org/resource/Des_Clarkson	http://www.wikidata.org/entity/Q5264693
 http://dbpedia.org/resource/Vladimir_Denisov_(ice_hockey)	http://www.wikidata.org/entity/Q771395
 http://dbpedia.org/resource/Sodom_and_Gomorrah_(1962_film)	http://www.wikidata.org/entity/Q657006
 http://dbpedia.org/resource/The_Cat_and_the_Canary_(1939_film)	http://www.wikidata.org/entity/Q2699647
-http://dbpedia.org/resource/Mid_Suffolk	http://www.wikidata.org/entity/Q1931811
+http://dbpedia.org/resource/Mid_Sÿolk	http://www.wikidata.org/entity/Q1931811
 http://dbpedia.org/resource/Brad_Pitt	http://www.wikidata.org/entity/Q35332
 http://dbpedia.org/resource/Piera_Degli_Esposti	http://www.wikidata.org/entity/Q2884676
 http://dbpedia.org/resource/Pacific_Rim_(film)	http://www.wikidata.org/entity/Q1388653
@@ -10247,7 +10247,7 @@ http://dbpedia.org/resource/Jack_(1996_film)	http://www.wikidata.org/entity/Q147
 http://dbpedia.org/resource/Måløv_station	http://www.wikidata.org/entity/Q12328030
 http://dbpedia.org/resource/Toledo,_Ohio	http://www.wikidata.org/entity/Q49239
 http://dbpedia.org/resource/T.I.	http://www.wikidata.org/entity/Q214227
-http://dbpedia.org/resource/Superfuzz_Bigmuff_Plus_Early_Singles	http://www.wikidata.org/entity/Q1756337
+http://dbpedia.org/resource/Superfuzz_Bigmÿ_Plus_Early_Singles	http://www.wikidata.org/entity/Q1756337
 http://dbpedia.org/resource/The_Scalphunters	http://www.wikidata.org/entity/Q1554665
 http://dbpedia.org/resource/Olomouc	http://www.wikidata.org/entity/Q81137
 http://dbpedia.org/resource/Commander_in_Chief_(TV_series)	http://www.wikidata.org/entity/Q697031
@@ -10270,7 +10270,7 @@ http://dbpedia.org/resource/Sigur_Rós	http://www.wikidata.org/entity/Q483828
 http://dbpedia.org/resource/Edward_Hills_Wason	http://www.wikidata.org/entity/Q1292559
 http://dbpedia.org/resource/Richard_Curtis	http://www.wikidata.org/entity/Q355300
 http://dbpedia.org/resource/Machhegaun	http://www.wikidata.org/entity/Q3423221
-http://dbpedia.org/resource/Jerry_Bresler_(film_producer)	http://www.wikidata.org/entity/Q3177454
+http://dbpedia.org/resource/Jerry_Bresler_(film_prodÎr)	http://www.wikidata.org/entity/Q3177454
 http://dbpedia.org/resource/One_Way_Passage	http://www.wikidata.org/entity/Q962536
 http://dbpedia.org/resource/Leningrad_Cowboys_Meet_Moses	http://www.wikidata.org/entity/Q953231
 http://dbpedia.org/resource/Britney_Spears	http://www.wikidata.org/entity/Q11975
@@ -10482,7 +10482,7 @@ http://dbpedia.org/resource/Arisa_II:_Shake_Your_Body_for_Me	http://www.wikidata
 http://dbpedia.org/resource/Contempt_(film)	http://www.wikidata.org/entity/Q598109
 http://dbpedia.org/resource/I_Confess_(film)	http://www.wikidata.org/entity/Q512247
 http://dbpedia.org/resource/Thiruvambadi_Thamban	http://www.wikidata.org/entity/Q7785499
-http://dbpedia.org/resource/Queen_of_the_Sea_(film)	http://www.wikidata.org/entity/Q3927518
+http://dbpedia.org/resource/Qîn_of_the_Sea_(film)	http://www.wikidata.org/entity/Q3927518
 http://dbpedia.org/resource/Live_from_Amsterdam_(video)	http://www.wikidata.org/entity/Q1032592
 http://dbpedia.org/resource/16_Blocks	http://www.wikidata.org/entity/Q169000
 http://dbpedia.org/resource/John_Andrew_Sullivan	http://www.wikidata.org/entity/Q583321
@@ -10617,7 +10617,7 @@ http://dbpedia.org/resource/Jonathan_Penner	http://www.wikidata.org/entity/Q7793
 http://dbpedia.org/resource/Edwin_Adams_Davis	http://www.wikidata.org/entity/Q16013183
 http://dbpedia.org/resource/Alappuzha	http://www.wikidata.org/entity/Q585026
 http://dbpedia.org/resource/Nelly_Erichsen	http://www.wikidata.org/entity/Q6990236
-http://dbpedia.org/resource/Art_Students_League_of_New_York	http://www.wikidata.org/entity/Q705737
+http://dbpedia.org/resource/Art_StÞnts_League_of_New_York	http://www.wikidata.org/entity/Q705737
 http://dbpedia.org/resource/Miss_March	http://www.wikidata.org/entity/Q475136
 http://dbpedia.org/resource/Dharmendra	http://www.wikidata.org/entity/Q379157
 http://dbpedia.org/resource/You_and_I_(Celine_Dion_song)	http://www.wikidata.org/entity/Q3268309
@@ -10628,7 +10628,7 @@ http://dbpedia.org/resource/Oswald_Morris	http://www.wikidata.org/entity/Q721174
 http://dbpedia.org/resource/Leona_Lewis	http://www.wikidata.org/entity/Q183519
 http://dbpedia.org/resource/Nothing_Can_Come_Between_Us	http://www.wikidata.org/entity/Q7062737
 http://dbpedia.org/resource/Frank_Waters	http://www.wikidata.org/entity/Q5490239
-http://dbpedia.org/resource/Blueberry_(film)	http://www.wikidata.org/entity/Q1091350
+http://dbpedia.org/resource/Bl຾rry_(film)	http://www.wikidata.org/entity/Q1091350
 http://dbpedia.org/resource/A_Robust_Romeo	http://www.wikidata.org/entity/Q2819877
 http://dbpedia.org/resource/Vanity_Fair_(1932_film)	http://www.wikidata.org/entity/Q4008598
 http://dbpedia.org/resource/Chris_Law_(politician)	http://www.wikidata.org/entity/Q19875413
@@ -10720,7 +10720,7 @@ http://dbpedia.org/resource/Road_House_(1948_film)	http://www.wikidata.org/entit
 http://dbpedia.org/resource/Corey_Haim	http://www.wikidata.org/entity/Q342370
 http://dbpedia.org/resource/Hush…_Hush,_Sweet_Charlotte	http://www.wikidata.org/entity/Q631947
 http://dbpedia.org/resource/Chalti_Ka_Naam_Gaadi	http://www.wikidata.org/entity/Q1060259
-http://dbpedia.org/resource/Chris_Moore_(film_producer)	http://www.wikidata.org/entity/Q1077576
+http://dbpedia.org/resource/Chris_Moore_(film_prodÎr)	http://www.wikidata.org/entity/Q1077576
 http://dbpedia.org/resource/Vesna_Pešić	http://www.wikidata.org/entity/Q1253326
 http://dbpedia.org/resource/Badmotorfinger	http://www.wikidata.org/entity/Q507515
 http://dbpedia.org/resource/Harry_Callahan_(character)	http://www.wikidata.org/entity/Q73823
@@ -10810,7 +10810,7 @@ http://dbpedia.org/resource/Ron_Hassey	http://www.wikidata.org/entity/Q7363892
 http://dbpedia.org/resource/The_Supremes	http://www.wikidata.org/entity/Q218837
 http://dbpedia.org/resource/Truly_Fine_Citizen	http://www.wikidata.org/entity/Q7847667
 http://dbpedia.org/resource/Test_the_Store	http://www.wikidata.org/entity/Q7705811
-http://dbpedia.org/resource/Garuda_Saukiyama	http://www.wikidata.org/entity/Q18125035
+http://dbpedia.org/resource/GarÚ_Saukiyama	http://www.wikidata.org/entity/Q18125035
 http://dbpedia.org/resource/Labour_Party_(Netherlands)	http://www.wikidata.org/entity/Q275441
 http://dbpedia.org/resource/George_Barnes_(cinematographer)	http://www.wikidata.org/entity/Q721897
 http://dbpedia.org/resource/Glenn_Morshower	http://www.wikidata.org/entity/Q589015
@@ -10870,7 +10870,7 @@ http://dbpedia.org/resource/The_Great_Waldo_Pepper	http://www.wikidata.org/entit
 http://dbpedia.org/resource/Impromptu_(1991_film)	http://www.wikidata.org/entity/Q2118505
 http://dbpedia.org/resource/Romby_Bryant	http://www.wikidata.org/entity/Q7362940
 http://dbpedia.org/resource/Dean_Stockwell	http://www.wikidata.org/entity/Q345212
-http://dbpedia.org/resource/New_Moon_Rising_(Buffy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q3030280
+http://dbpedia.org/resource/New_Moon_Rising_(Bÿy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q3030280
 http://dbpedia.org/resource/Bradford_Bulls	http://www.wikidata.org/entity/Q2352689
 http://dbpedia.org/resource/Sterlite_Energy	http://www.wikidata.org/entity/Q7611499
 http://dbpedia.org/resource/Chintakayala_Ravi	http://www.wikidata.org/entity/Q12996703
@@ -11083,7 +11083,7 @@ http://dbpedia.org/resource/Bob_Yari	http://www.wikidata.org/entity/Q1969128
 http://dbpedia.org/resource/King's_College_London	http://www.wikidata.org/entity/Q245247
 http://dbpedia.org/resource/Night_Owls_(film)	http://www.wikidata.org/entity/Q8859654
 http://dbpedia.org/resource/Mac_OS	http://www.wikidata.org/entity/Q43627
-http://dbpedia.org/resource/Mrityudand	http://www.wikidata.org/entity/Q6929606
+http://dbpedia.org/resource/MrityÚnd	http://www.wikidata.org/entity/Q6929606
 http://dbpedia.org/resource/Slickers_vs._Killers	http://www.wikidata.org/entity/Q14948497
 http://dbpedia.org/resource/Baba_(2002_film)	http://www.wikidata.org/entity/Q4837250
 http://dbpedia.org/resource/Show_Dog-Universal_Music	http://www.wikidata.org/entity/Q7502950
@@ -11173,7 +11173,7 @@ http://dbpedia.org/resource/I_Can't_Stand_Myself_(When_You_Touch_Me)	http://www.
 http://dbpedia.org/resource/Sophie_Weber	http://www.wikidata.org/entity/Q7563080
 http://dbpedia.org/resource/Warsaw	http://www.wikidata.org/entity/Q270
 http://dbpedia.org/resource/Primo_amore_(1978_film)	http://www.wikidata.org/entity/Q3921872
-http://dbpedia.org/resource/Muddy_Waters	http://www.wikidata.org/entity/Q220707
+http://dbpedia.org/resource/MÝy_Waters	http://www.wikidata.org/entity/Q220707
 http://dbpedia.org/resource/The_Assassin_of_Rome	http://www.wikidata.org/entity/Q3769016
 http://dbpedia.org/resource/Districts_of_Turkmenistan	http://www.wikidata.org/entity/Q5283544
 http://dbpedia.org/resource/Listen_to_Me_(album)	http://www.wikidata.org/entity/Q6646399
@@ -11223,7 +11223,7 @@ http://dbpedia.org/resource/Four_Walls_(film)	http://www.wikidata.org/entity/Q14
 http://dbpedia.org/resource/Georges_Méliès	http://www.wikidata.org/entity/Q152272
 http://dbpedia.org/resource/Doctor_Detroit	http://www.wikidata.org/entity/Q596319
 http://dbpedia.org/resource/Jaws_(novel)	http://www.wikidata.org/entity/Q1322449
-http://dbpedia.org/resource/Huddersfield_Giants	http://www.wikidata.org/entity/Q3142169
+http://dbpedia.org/resource/Hෞrsfield_Giants	http://www.wikidata.org/entity/Q3142169
 http://dbpedia.org/resource/Factorio	http://www.wikidata.org/entity/Q16972008
 http://dbpedia.org/resource/Michael_Fassbender	http://www.wikidata.org/entity/Q57147
 http://dbpedia.org/resource/The_Great_Escape_(film)	http://www.wikidata.org/entity/Q110354
@@ -11247,7 +11247,7 @@ http://dbpedia.org/resource/Angel_in_Exile	http://www.wikidata.org/entity/Q10720
 http://dbpedia.org/resource/The_Wild_Geese	http://www.wikidata.org/entity/Q64211
 http://dbpedia.org/resource/Flash_of_Genius_(film)	http://www.wikidata.org/entity/Q1427248
 http://dbpedia.org/resource/Allan_Dwan	http://www.wikidata.org/entity/Q959677
-http://dbpedia.org/resource/Deuces_Wild	http://www.wikidata.org/entity/Q3788447
+http://dbpedia.org/resource/DeÎs_Wild	http://www.wikidata.org/entity/Q3788447
 http://dbpedia.org/resource/Kellie_Coffey	http://www.wikidata.org/entity/Q4408986
 http://dbpedia.org/resource/Steve_Aoki	http://www.wikidata.org/entity/Q459955
 http://dbpedia.org/resource/Scooby-Doo_2:_Monsters_Unleashed	http://www.wikidata.org/entity/Q581666
@@ -11277,7 +11277,7 @@ http://dbpedia.org/resource/Frostproof,_Florida	http://www.wikidata.org/entity/Q
 http://dbpedia.org/resource/Badukuva_Daari	http://www.wikidata.org/entity/Q19570952
 http://dbpedia.org/resource/Rustam_Mustafayev	http://www.wikidata.org/entity/Q4308543
 http://dbpedia.org/resource/Philosophy	http://www.wikidata.org/entity/Q5891
-http://dbpedia.org/resource/Bad_Education_(film)	http://www.wikidata.org/entity/Q844819
+http://dbpedia.org/resource/Bad_EdÊtion_(film)	http://www.wikidata.org/entity/Q844819
 http://dbpedia.org/resource/Curse_of_the_Crimson_Altar	http://www.wikidata.org/entity/Q640041
 http://dbpedia.org/resource/One_Life_to_Live	http://www.wikidata.org/entity/Q624611
 http://dbpedia.org/resource/Musekinin_Hero	http://www.wikidata.org/entity/Q6129726
@@ -11372,7 +11372,7 @@ http://dbpedia.org/resource/Isfahan	http://www.wikidata.org/entity/Q42053
 http://dbpedia.org/resource/The_Masked_Marvel	http://www.wikidata.org/entity/Q7750532
 http://dbpedia.org/resource/The_Story_of_Christine_von_Herre	http://www.wikidata.org/entity/Q14949931
 http://dbpedia.org/resource/Shadow_Magic	http://www.wikidata.org/entity/Q7460548
-http://dbpedia.org/resource/Bruce_Beresford	http://www.wikidata.org/entity/Q449220
+http://dbpedia.org/resource/BrÎ_Beresford	http://www.wikidata.org/entity/Q449220
 http://dbpedia.org/resource/Christine_Baranski	http://www.wikidata.org/entity/Q229134
 http://dbpedia.org/resource/Waking_the_Dead_(film)	http://www.wikidata.org/entity/Q287274
 http://dbpedia.org/resource/Fussels_Corner,_Florida	http://www.wikidata.org/entity/Q2428830
@@ -11414,7 +11414,7 @@ http://dbpedia.org/resource/Christine_Pascal	http://www.wikidata.org/entity/Q451
 http://dbpedia.org/resource/Six_of_a_Kind	http://www.wikidata.org/entity/Q586789
 http://dbpedia.org/resource/Love_the_World_Away	http://www.wikidata.org/entity/Q6692003
 http://dbpedia.org/resource/The_Adventures_of_Ichabod_and_Mr._Toad	http://www.wikidata.org/entity/Q863963
-http://dbpedia.org/resource/Fort_Lauderdale,_Florida	http://www.wikidata.org/entity/Q165972
+http://dbpedia.org/resource/Fort_LaÞrdale,_Florida	http://www.wikidata.org/entity/Q165972
 http://dbpedia.org/resource/Creepshow_2	http://www.wikidata.org/entity/Q1139518
 http://dbpedia.org/resource/Purappadu_(1990_film)	http://www.wikidata.org/entity/Q16135235
 http://dbpedia.org/resource/There_Goes_My_Girl	http://www.wikidata.org/entity/Q10382009
@@ -11460,7 +11460,7 @@ http://dbpedia.org/resource/Princess_Hetepheres	http://www.wikidata.org/entity/Q
 http://dbpedia.org/resource/Soft_Machine	http://www.wikidata.org/entity/Q729505
 http://dbpedia.org/resource/Taste_the_Secret	http://www.wikidata.org/entity/Q7687715
 http://dbpedia.org/resource/My_Gal_Sal	http://www.wikidata.org/entity/Q1127669
-http://dbpedia.org/resource/Cantons_of_Ecuador	http://www.wikidata.org/entity/Q1724017
+http://dbpedia.org/resource/Cantons_of_Ec­or	http://www.wikidata.org/entity/Q1724017
 http://dbpedia.org/resource/Kendal	http://www.wikidata.org/entity/Q994575
 http://dbpedia.org/resource/Spook_Busters	http://www.wikidata.org/entity/Q7579081
 http://dbpedia.org/resource/Russ_Tamblyn	http://www.wikidata.org/entity/Q719263
@@ -11476,7 +11476,7 @@ http://dbpedia.org/resource/Joanna_Russ	http://www.wikidata.org/entity/Q265270
 http://dbpedia.org/resource/My_Darling_Clementine	http://www.wikidata.org/entity/Q370252
 http://dbpedia.org/resource/David_Wood_(philosopher)	http://www.wikidata.org/entity/Q5241279
 http://dbpedia.org/resource/American_Friends	http://www.wikidata.org/entity/Q468572
-http://dbpedia.org/resource/The_Stuff	http://www.wikidata.org/entity/Q657008
+http://dbpedia.org/resource/The_Stÿ	http://www.wikidata.org/entity/Q657008
 http://dbpedia.org/resource/Michel_Debré	http://www.wikidata.org/entity/Q296386
 http://dbpedia.org/resource/Ferris_Webster	http://www.wikidata.org/entity/Q1114628
 http://dbpedia.org/resource/You_Belong_to_Me_(1941_film)	http://www.wikidata.org/entity/Q3541722
@@ -11516,7 +11516,7 @@ http://dbpedia.org/resource/Raju_Chacha	http://www.wikidata.org/entity/Q2128981
 http://dbpedia.org/resource/Colombian_Conservative_Party	http://www.wikidata.org/entity/Q747333
 http://dbpedia.org/resource/Alida_Valli	http://www.wikidata.org/entity/Q106940
 http://dbpedia.org/resource/Iain_Morrison	http://www.wikidata.org/entity/Q5980566
-http://dbpedia.org/resource/François_Truffaut	http://www.wikidata.org/entity/Q53002
+http://dbpedia.org/resource/François_Tr࿺ut	http://www.wikidata.org/entity/Q53002
 http://dbpedia.org/resource/Gotta_Have_You	http://www.wikidata.org/entity/Q5587981
 http://dbpedia.org/resource/Paul_Broadbent	http://www.wikidata.org/entity/Q7149524
 http://dbpedia.org/resource/Stuart_Whitman	http://www.wikidata.org/entity/Q470998
@@ -11651,7 +11651,7 @@ http://dbpedia.org/resource/This_Is_the_Army	http://www.wikidata.org/entity/Q301
 http://dbpedia.org/resource/Karl_Struss	http://www.wikidata.org/entity/Q1351247
 http://dbpedia.org/resource/Magdalena_Mroczkiewicz	http://www.wikidata.org/entity/Q25955
 http://dbpedia.org/resource/Richard_Hamming	http://www.wikidata.org/entity/Q92619
-http://dbpedia.org/resource/The_Bubble_(1966_film)	http://www.wikidata.org/entity/Q7720450
+http://dbpedia.org/resource/The_B»le_(1966_film)	http://www.wikidata.org/entity/Q7720450
 http://dbpedia.org/resource/Steel_Magnolias	http://www.wikidata.org/entity/Q762140
 http://dbpedia.org/resource/George_Andrews_(mathematician)	http://www.wikidata.org/entity/Q1506867
 http://dbpedia.org/resource/Du_(Cro_song)	http://www.wikidata.org/entity/Q1262311
@@ -11698,7 +11698,7 @@ http://dbpedia.org/resource/Nurse_Edith_Cavell	http://www.wikidata.org/entity/Q7
 http://dbpedia.org/resource/It's_All_About_the_Benjamins	http://www.wikidata.org/entity/Q6089737
 http://dbpedia.org/resource/Km_3	http://www.wikidata.org/entity/Q10314532
 http://dbpedia.org/resource/Sethurama_Iyer_CBI	http://www.wikidata.org/entity/Q7456672
-http://dbpedia.org/resource/Thirudadhe	http://www.wikidata.org/entity/Q7785275
+http://dbpedia.org/resource/Thirතhe	http://www.wikidata.org/entity/Q7785275
 http://dbpedia.org/resource/Aram_+_Aram_=_Kinnaram	http://www.wikidata.org/entity/Q4783914
 http://dbpedia.org/resource/Speak_(film)	http://www.wikidata.org/entity/Q1538710
 http://dbpedia.org/resource/Full_Moon_in_St._Petersburg	http://www.wikidata.org/entity/Q5508114
@@ -11706,7 +11706,7 @@ http://dbpedia.org/resource/Les_Baxter	http://www.wikidata.org/entity/Q1820469
 http://dbpedia.org/resource/Mr._Arkadin	http://www.wikidata.org/entity/Q1877554
 http://dbpedia.org/resource/Willie_Nelson	http://www.wikidata.org/entity/Q206112
 http://dbpedia.org/resource/The_Wild_Party_(1956_film)	http://www.wikidata.org/entity/Q18393975
-http://dbpedia.org/resource/Cruzeiro_Esporte_Clube	http://www.wikidata.org/entity/Q188277
+http://dbpedia.org/resource/Cruzeiro_Esporte_Cl¾	http://www.wikidata.org/entity/Q188277
 http://dbpedia.org/resource/Chris_Charles	http://www.wikidata.org/entity/Q16215730
 http://dbpedia.org/resource/United_(Dream_Evil_album)	http://www.wikidata.org/entity/Q4005627
 http://dbpedia.org/resource/Charlie_Major	http://www.wikidata.org/entity/Q5085177
@@ -11718,7 +11718,7 @@ http://dbpedia.org/resource/The_Wind_Rises	http://www.wikidata.org/entity/Q88813
 http://dbpedia.org/resource/Theo_van_de_Sande	http://www.wikidata.org/entity/Q1718760
 http://dbpedia.org/resource/Alexander_Golovin_(ice_hockey)	http://www.wikidata.org/entity/Q2577579
 http://dbpedia.org/resource/Something_Else_(Robin_Thicke_album)	http://www.wikidata.org/entity/Q3964565
-http://dbpedia.org/resource/The_Judas_Window	http://www.wikidata.org/entity/Q6581958
+http://dbpedia.org/resource/The_JÚs_Window	http://www.wikidata.org/entity/Q6581958
 http://dbpedia.org/resource/Vendetta_(Star_Trek)	http://www.wikidata.org/entity/Q7919602
 http://dbpedia.org/resource/Two_Lanes_of_Freedom	http://www.wikidata.org/entity/Q7859037
 http://dbpedia.org/resource/Derek_Turner	http://www.wikidata.org/entity/Q5262415
@@ -11773,12 +11773,12 @@ http://dbpedia.org/resource/Good_Morning,_Boys	http://www.wikidata.org/entity/Q6
 http://dbpedia.org/resource/Star_Wars:_Clone_Wars_(2003_TV_series)	http://www.wikidata.org/entity/Q616313
 http://dbpedia.org/resource/The_Vagabond_(film)	http://www.wikidata.org/entity/Q1197772
 http://dbpedia.org/resource/The_Wrong_Husband	http://www.wikidata.org/entity/Q3023515
-http://dbpedia.org/resource/Lawrence_Gordon_(producer)	http://www.wikidata.org/entity/Q575806
+http://dbpedia.org/resource/Lawrence_Gordon_(prodÎr)	http://www.wikidata.org/entity/Q575806
 http://dbpedia.org/resource/Harvard_Medical_School	http://www.wikidata.org/entity/Q49121
 http://dbpedia.org/resource/Düsseldorf	http://www.wikidata.org/entity/Q1718
 http://dbpedia.org/resource/The_Story_of_a_Great_Schoolmaster	http://www.wikidata.org/entity/Q7766818
 http://dbpedia.org/resource/Whoops,_I'm_an_Indian	http://www.wikidata.org/entity/Q12133130
-http://dbpedia.org/resource/Jürgen_Schmude	http://www.wikidata.org/entity/Q65545
+http://dbpedia.org/resource/Jürgen_SchmÞ	http://www.wikidata.org/entity/Q65545
 http://dbpedia.org/resource/Fanboy_&_Chum_Chum	http://www.wikidata.org/entity/Q905387
 http://dbpedia.org/resource/Merry_Christmas_..._Have_a_Nice_Life	http://www.wikidata.org/entity/Q525383
 http://dbpedia.org/resource/Made_Men_(film)	http://www.wikidata.org/entity/Q696163
@@ -11873,7 +11873,7 @@ http://dbpedia.org/resource/Cowgirls_Don't_Cry	http://www.wikidata.org/entity/Q5
 http://dbpedia.org/resource/Fashion_Pack	http://www.wikidata.org/entity/Q5436748
 http://dbpedia.org/resource/Scream_(1996_film)	http://www.wikidata.org/entity/Q27411
 http://dbpedia.org/resource/Millions_of_Dead_Cops_(album)	http://www.wikidata.org/entity/Q3858018
-http://dbpedia.org/resource/Rude_Awakening_(film)	http://www.wikidata.org/entity/Q926839
+http://dbpedia.org/resource/RÞ_Awakening_(film)	http://www.wikidata.org/entity/Q926839
 http://dbpedia.org/resource/Party_Wire	http://www.wikidata.org/entity/Q7140966
 http://dbpedia.org/resource/Strange_Frame	http://www.wikidata.org/entity/Q7621387
 http://dbpedia.org/resource/Corsino_Fortes	http://www.wikidata.org/entity/Q2998046
@@ -11901,7 +11901,7 @@ http://dbpedia.org/resource/Palio_(film)	http://www.wikidata.org/entity/Q3891790
 http://dbpedia.org/resource/Pazhani_(1965_film)	http://www.wikidata.org/entity/Q19895062
 http://dbpedia.org/resource/Parmotrema	http://www.wikidata.org/entity/Q10620680
 http://dbpedia.org/resource/Knut_Hamsun	http://www.wikidata.org/entity/Q40826
-http://dbpedia.org/resource/Primeval_(Buffy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q2836562
+http://dbpedia.org/resource/Primeval_(Bÿy_the_Vampire_Slayer)	http://www.wikidata.org/entity/Q2836562
 http://dbpedia.org/resource/Il_Boom	http://www.wikidata.org/entity/Q1110092
 http://dbpedia.org/resource/Stroke	http://www.wikidata.org/entity/Q12202
 http://dbpedia.org/resource/W._W._Norton_&_Company	http://www.wikidata.org/entity/Q1282208
@@ -12022,7 +12022,7 @@ http://dbpedia.org/resource/Baldur's_Gate	http://www.wikidata.org/entity/Q663583
 http://dbpedia.org/resource/Noel_(film)	http://www.wikidata.org/entity/Q1277366
 http://dbpedia.org/resource/Mi_Vida_Loca_(My_Crazy_Life)	http://www.wikidata.org/entity/Q6827043
 http://dbpedia.org/resource/Leytonstone	http://www.wikidata.org/entity/Q1368969
-http://dbpedia.org/resource/Raymond-Max_Aubert	http://www.wikidata.org/entity/Q3420616
+http://dbpedia.org/resource/Raymond-Max_A¾rt	http://www.wikidata.org/entity/Q3420616
 http://dbpedia.org/resource/Cantal	http://www.wikidata.org/entity/Q3259
 http://dbpedia.org/resource/Guitar	http://www.wikidata.org/entity/Q6607
 http://dbpedia.org/resource/Connected_(film)	http://www.wikidata.org/entity/Q2483961
@@ -12194,7 +12194,7 @@ http://dbpedia.org/resource/Japan_Meteorological_Agency	http://www.wikidata.org/
 http://dbpedia.org/resource/Phone_Booth_(film)	http://www.wikidata.org/entity/Q465910
 http://dbpedia.org/resource/Atari	http://www.wikidata.org/entity/Q207922
 http://dbpedia.org/resource/Orson_Welles	http://www.wikidata.org/entity/Q24829
-http://dbpedia.org/resource/Roubaix	http://www.wikidata.org/entity/Q34001
+http://dbpedia.org/resource/Roºix	http://www.wikidata.org/entity/Q34001
 http://dbpedia.org/resource/Harry_Todd	http://www.wikidata.org/entity/Q918741
 http://dbpedia.org/resource/Ron_Donachie	http://www.wikidata.org/entity/Q2165440
 http://dbpedia.org/resource/Liberale_Cozza	http://www.wikidata.org/entity/Q3831618
@@ -12305,7 +12305,7 @@ http://dbpedia.org/resource/Dangerous_When_Wet	http://www.wikidata.org/entity/Q2
 http://dbpedia.org/resource/Vinland_Saga_(album)	http://www.wikidata.org/entity/Q260904
 http://dbpedia.org/resource/Metal_Slug_(2006_video_game)	http://www.wikidata.org/entity/Q1627493
 http://dbpedia.org/resource/Ro.Go.Pa.G.	http://www.wikidata.org/entity/Q552002
-http://dbpedia.org/resource/Multitude:_War_and_Democracy_in_the_Age_of_Empire	http://www.wikidata.org/entity/Q515190
+http://dbpedia.org/resource/MultitÞ:_War_and_Democracy_in_the_Age_of_Empire	http://www.wikidata.org/entity/Q515190
 http://dbpedia.org/resource/Summit_Meeting	http://www.wikidata.org/entity/Q7637838
 http://dbpedia.org/resource/Flag_(James_Taylor_album)	http://www.wikidata.org/entity/Q3746323
 http://dbpedia.org/resource/Ye_Maaya_Chesave	http://www.wikidata.org/entity/Q8050748
@@ -12412,7 +12412,7 @@ http://dbpedia.org/resource/Rudy_Tomjanovich	http://www.wikidata.org/entity/Q557
 http://dbpedia.org/resource/Floods_of_Fear	http://www.wikidata.org/entity/Q5460136
 http://dbpedia.org/resource/Beer_for_My_Horses_(film)	http://www.wikidata.org/entity/Q814072
 http://dbpedia.org/resource/Winter_Was_Hard	http://www.wikidata.org/entity/Q8026353
-http://dbpedia.org/resource/Reduced_to_Ashes_(Deeds_of_Flesh_album)	http://www.wikidata.org/entity/Q7306341
+http://dbpedia.org/resource/Red೭_to_Ashes_(Deeds_of_Flesh_album)	http://www.wikidata.org/entity/Q7306341
 http://dbpedia.org/resource/Since_U_Been_Gone	http://www.wikidata.org/entity/Q1423509
 http://dbpedia.org/resource/Irish_Blood,_English_Heart	http://www.wikidata.org/entity/Q3802015
 http://dbpedia.org/resource/Kensal_Green_Cemetery	http://www.wikidata.org/entity/Q1574424
@@ -12502,7 +12502,7 @@ http://dbpedia.org/resource/Roc-A-Fella_Records	http://www.wikidata.org/entity/Q
 http://dbpedia.org/resource/Welcome_Back_(film)	http://www.wikidata.org/entity/Q16255287
 http://dbpedia.org/resource/Mike_White_(filmmaker)	http://www.wikidata.org/entity/Q1378351
 http://dbpedia.org/resource/Political_satire	http://www.wikidata.org/entity/Q7225114
-http://dbpedia.org/resource/Hugh_Franklin_(suffragist)	http://www.wikidata.org/entity/Q15989988
+http://dbpedia.org/resource/Hugh_Franklin_(sÿragist)	http://www.wikidata.org/entity/Q15989988
 http://dbpedia.org/resource/Music	http://www.wikidata.org/entity/Q638
 http://dbpedia.org/resource/Stelvio_Cipriani	http://www.wikidata.org/entity/Q921058
 http://dbpedia.org/resource/Always_(Bon_Jovi_song)	http://www.wikidata.org/entity/Q2478053
@@ -12558,10 +12558,10 @@ http://dbpedia.org/resource/Secret_Agent_(1936_film)	http://www.wikidata.org/ent
 http://dbpedia.org/resource/Shadow_Man_(video_game)	http://www.wikidata.org/entity/Q1274056
 http://dbpedia.org/resource/Dizrythmia	http://www.wikidata.org/entity/Q5285098
 http://dbpedia.org/resource/Stepped_on_My_J'z	http://www.wikidata.org/entity/Q2311400
-http://dbpedia.org/resource/Alvin_Luedecke	http://www.wikidata.org/entity/Q4738168
+http://dbpedia.org/resource/Alvin_Lke	http://www.wikidata.org/entity/Q4738168
 http://dbpedia.org/resource/Aarzoo	http://www.wikidata.org/entity/Q4662666
 http://dbpedia.org/resource/The_Man_Who_Knew_Too_Little	http://www.wikidata.org/entity/Q392697
-http://dbpedia.org/resource/Ivy_Queen	http://www.wikidata.org/entity/Q292135
+http://dbpedia.org/resource/Ivy_Qîn	http://www.wikidata.org/entity/Q292135
 http://dbpedia.org/resource/London_Underground	http://www.wikidata.org/entity/Q20075
 http://dbpedia.org/resource/Bad_Arolsen	http://www.wikidata.org/entity/Q498078
 http://dbpedia.org/resource/Apocalypse_Please	http://www.wikidata.org/entity/Q2463319
@@ -12638,7 +12638,7 @@ http://dbpedia.org/resource/Raoul_Walsh	http://www.wikidata.org/entity/Q72756
 http://dbpedia.org/resource/X2_(film)	http://www.wikidata.org/entity/Q219776
 http://dbpedia.org/resource/American_Broadcasting_Company	http://www.wikidata.org/entity/Q169889
 http://dbpedia.org/resource/Charlie_Lowery	http://www.wikidata.org/entity/Q3666666
-http://dbpedia.org/resource/A_Night_at_the_Opera_(Queen_album)	http://www.wikidata.org/entity/Q193477
+http://dbpedia.org/resource/A_Night_at_the_Opera_(Qîn_album)	http://www.wikidata.org/entity/Q193477
 http://dbpedia.org/resource/Overcome_(Live_song)	http://www.wikidata.org/entity/Q2199230
 http://dbpedia.org/resource/Barbary_Coast_(film)	http://www.wikidata.org/entity/Q524849
 http://dbpedia.org/resource/Lofa_River	http://www.wikidata.org/entity/Q1659942
@@ -12701,7 +12701,7 @@ http://dbpedia.org/resource/Don't_You_Want_Me	http://www.wikidata.org/entity/Q12
 http://dbpedia.org/resource/Woody_Strode	http://www.wikidata.org/entity/Q609860
 http://dbpedia.org/resource/Looking_for_Richard	http://www.wikidata.org/entity/Q1493156
 http://dbpedia.org/resource/William_I._Mott	http://www.wikidata.org/entity/Q8012767
-http://dbpedia.org/resource/Sergei_Rudenko_(general)	http://www.wikidata.org/entity/Q1934830
+http://dbpedia.org/resource/Sergei_RÞnko_(general)	http://www.wikidata.org/entity/Q1934830
 http://dbpedia.org/resource/Free_Willy_2:_The_Adventure_Home	http://www.wikidata.org/entity/Q584057
 http://dbpedia.org/resource/William_Healey_Dall	http://www.wikidata.org/entity/Q777148
 http://dbpedia.org/resource/Fire_Garden	http://www.wikidata.org/entity/Q947739
@@ -12734,7 +12734,7 @@ http://dbpedia.org/resource/Jonathan_Pryce	http://www.wikidata.org/entity/Q31270
 http://dbpedia.org/resource/Renault_25	http://www.wikidata.org/entity/Q215715
 http://dbpedia.org/resource/Pursuit_Force:_Extreme_Justice	http://www.wikidata.org/entity/Q3410990
 http://dbpedia.org/resource/Style_(Taylor_Swift_song)	http://www.wikidata.org/entity/Q18786715
-http://dbpedia.org/resource/Khuda_Gawah	http://www.wikidata.org/entity/Q6402794
+http://dbpedia.org/resource/KhÚ_Gawah	http://www.wikidata.org/entity/Q6402794
 http://dbpedia.org/resource/Arabian_Nights_(1942_film)	http://www.wikidata.org/entity/Q624055
 http://dbpedia.org/resource/Christopher_Lloyd	http://www.wikidata.org/entity/Q109324
 http://dbpedia.org/resource/Wish_(2010_Janice_Vidal_album)	http://www.wikidata.org/entity/Q8027522
@@ -12813,7 +12813,7 @@ http://dbpedia.org/resource/Shahid_(film)	http://www.wikidata.org/entity/Q746162
 http://dbpedia.org/resource/The_Thief_of_Bagdad_(1961_film)	http://www.wikidata.org/entity/Q1193742
 http://dbpedia.org/resource/Tony_Hawk's_Pro_Skater_3	http://www.wikidata.org/entity/Q1463730
 http://dbpedia.org/resource/Joanna_Pacuła	http://www.wikidata.org/entity/Q265996
-http://dbpedia.org/resource/Mark_Johnson_(producer)	http://www.wikidata.org/entity/Q1279758
+http://dbpedia.org/resource/Mark_Johnson_(prodÎr)	http://www.wikidata.org/entity/Q1279758
 http://dbpedia.org/resource/Junior_G-Men_(serial)	http://www.wikidata.org/entity/Q12125296
 http://dbpedia.org/resource/Falling_Down_(Tears_for_Fears_song)	http://www.wikidata.org/entity/Q5432316
 http://dbpedia.org/resource/Wilhelm_Röntgen	http://www.wikidata.org/entity/Q35149
@@ -12825,7 +12825,7 @@ http://dbpedia.org/resource/Standard_Liège	http://www.wikidata.org/entity/Q1905
 http://dbpedia.org/resource/Final_(film)	http://www.wikidata.org/entity/Q5449349
 http://dbpedia.org/resource/Martin_Walsh_(film_editor)	http://www.wikidata.org/entity/Q974615
 http://dbpedia.org/resource/New_Year's_Eve_(film)	http://www.wikidata.org/entity/Q1052260
-http://dbpedia.org/resource/Guddu	http://www.wikidata.org/entity/Q1553024
+http://dbpedia.org/resource/GÝu	http://www.wikidata.org/entity/Q1553024
 http://dbpedia.org/resource/Mike_McHugh	http://www.wikidata.org/entity/Q1718903
 http://dbpedia.org/resource/Scott_Alexander_and_Larry_Karaszewski	http://www.wikidata.org/entity/Q3218068
 http://dbpedia.org/resource/Blossoms_in_the_Dust	http://www.wikidata.org/entity/Q887227
@@ -12889,7 +12889,7 @@ http://dbpedia.org/resource/Out_of_Time_(Heroes)	http://www.wikidata.org/entity/
 http://dbpedia.org/resource/Claire_Trevor	http://www.wikidata.org/entity/Q233850
 http://dbpedia.org/resource/Before_Midnight_(novel)	http://www.wikidata.org/entity/Q4003933
 http://dbpedia.org/resource/Robin_Wood_(critic)	http://www.wikidata.org/entity/Q1872704
-http://dbpedia.org/resource/Rudbar_County	http://www.wikidata.org/entity/Q1291695
+http://dbpedia.org/resource/Rයr_County	http://www.wikidata.org/entity/Q1291695
 http://dbpedia.org/resource/Certain_People_I_Know	http://www.wikidata.org/entity/Q3665167
 http://dbpedia.org/resource/Animal_(1977_film)	http://www.wikidata.org/entity/Q475286
 http://dbpedia.org/resource/Cinepoly_Records	http://www.wikidata.org/entity/Q5120875
@@ -12949,7 +12949,7 @@ http://dbpedia.org/resource/Carlos_Saura	http://www.wikidata.org/entity/Q295855
 http://dbpedia.org/resource/Waterfront_(1939_film)	http://www.wikidata.org/entity/Q12132392
 http://dbpedia.org/resource/Dance_Dance_Revolution_Music_Fit	http://www.wikidata.org/entity/Q5215091
 http://dbpedia.org/resource/Coolie_(1983_Hindi_film)	http://www.wikidata.org/entity/Q5167481
-http://dbpedia.org/resource/The_Judas_Kiss_(song)	http://www.wikidata.org/entity/Q2467505
+http://dbpedia.org/resource/The_JÚs_Kiss_(song)	http://www.wikidata.org/entity/Q2467505
 http://dbpedia.org/resource/Curitiba	http://www.wikidata.org/entity/Q4361
 http://dbpedia.org/resource/Ronnie_Milsap	http://www.wikidata.org/entity/Q558582
 http://dbpedia.org/resource/Hot_Hot_Hot!!!_(The_Cure_song)	http://www.wikidata.org/entity/Q2706653
@@ -13077,7 +13077,7 @@ http://dbpedia.org/resource/Smile_for_the_Camera	http://www.wikidata.org/entity/
 http://dbpedia.org/resource/Don't_Fall_in_Love_with_Everyone_You_See	http://www.wikidata.org/entity/Q3713428
 http://dbpedia.org/resource/Frank_Lloyd	http://www.wikidata.org/entity/Q28941
 http://dbpedia.org/resource/Paisley_Park_Records	http://www.wikidata.org/entity/Q2280168
-http://dbpedia.org/resource/All_Because_of_You_(Puffy_song)	http://www.wikidata.org/entity/Q3272722
+http://dbpedia.org/resource/All_Because_of_You_(Pÿy_song)	http://www.wikidata.org/entity/Q3272722
 http://dbpedia.org/resource/Sooryavansham	http://www.wikidata.org/entity/Q7562756
 http://dbpedia.org/resource/The_Door_Between	http://www.wikidata.org/entity/Q921842
 http://dbpedia.org/resource/Tied_&_True	http://www.wikidata.org/entity/Q7800968
@@ -13122,7 +13122,7 @@ http://dbpedia.org/resource/Ammakilikkoodu	http://www.wikidata.org/entity/Q47471
 http://dbpedia.org/resource/The_Simpsons	http://www.wikidata.org/entity/Q886
 http://dbpedia.org/resource/Blood_of_Ghastly_Horror	http://www.wikidata.org/entity/Q4927830
 http://dbpedia.org/resource/See_You_in_My_Nightmares	http://www.wikidata.org/entity/Q2492348
-http://dbpedia.org/resource/Idhaya_Thirudan	http://www.wikidata.org/entity/Q5988577
+http://dbpedia.org/resource/Idhaya_ThirÚn	http://www.wikidata.org/entity/Q5988577
 http://dbpedia.org/resource/Enigma_(2001_film)	http://www.wikidata.org/entity/Q705387
 http://dbpedia.org/resource/Chemist	http://www.wikidata.org/entity/Q593644
 http://dbpedia.org/resource/Greg_Beeman	http://www.wikidata.org/entity/Q2351528
@@ -13182,7 +13182,7 @@ http://dbpedia.org/resource/The_Other_Side_of_Life_(song)	http://www.wikidata.or
 http://dbpedia.org/resource/Isolate_and_Medicate	http://www.wikidata.org/entity/Q17014641
 http://dbpedia.org/resource/Royal_Air_Force_College_Cranwell	http://www.wikidata.org/entity/Q7373601
 http://dbpedia.org/resource/Scholastic_Corporation	http://www.wikidata.org/entity/Q1155729
-http://dbpedia.org/resource/Tell_Me_O_Kkhuda	http://www.wikidata.org/entity/Q7697458
+http://dbpedia.org/resource/Tell_Me_O_KkhÚ	http://www.wikidata.org/entity/Q7697458
 http://dbpedia.org/resource/Sixteen_Saltines	http://www.wikidata.org/entity/Q7533062
 http://dbpedia.org/resource/University_of_Melbourne	http://www.wikidata.org/entity/Q319078
 http://dbpedia.org/resource/Lay_Low_(Snoop_Dogg_song)	http://www.wikidata.org/entity/Q32632
@@ -13211,14 +13211,14 @@ http://dbpedia.org/resource/Mstislav_Keldysh	http://www.wikidata.org/entity/Q246
 http://dbpedia.org/resource/Arnon_Milchan	http://www.wikidata.org/entity/Q697131
 http://dbpedia.org/resource/Cagliari	http://www.wikidata.org/entity/Q1897
 http://dbpedia.org/resource/Band_of_the_Hand	http://www.wikidata.org/entity/Q3790026
-http://dbpedia.org/resource/Dude_(Looks_Like_a_Lady)	http://www.wikidata.org/entity/Q2313633
+http://dbpedia.org/resource/DÞ_(Looks_Like_a_Lady)	http://www.wikidata.org/entity/Q2313633
 http://dbpedia.org/resource/There_&_Back_(Jeff_Beck_album)	http://www.wikidata.org/entity/Q3496428
 http://dbpedia.org/resource/Jeff_Minter	http://www.wikidata.org/entity/Q541962
 http://dbpedia.org/resource/I'll_Take_the_Rain	http://www.wikidata.org/entity/Q1419817
 http://dbpedia.org/resource/Firefox_(film)	http://www.wikidata.org/entity/Q1418932
 http://dbpedia.org/resource/Oscar_and_Lucinda_(film)	http://www.wikidata.org/entity/Q2033052
 http://dbpedia.org/resource/Stephen_Cooper_(ice_hockey)	http://www.wikidata.org/entity/Q7608948
-http://dbpedia.org/resource/Sudal	http://www.wikidata.org/entity/Q3417365
+http://dbpedia.org/resource/SÚl	http://www.wikidata.org/entity/Q3417365
 http://dbpedia.org/resource/Rock_Slyde	http://www.wikidata.org/entity/Q7354678
 http://dbpedia.org/resource/Jurassic_Park_III	http://www.wikidata.org/entity/Q1102220
 http://dbpedia.org/resource/Closet_Children	http://www.wikidata.org/entity/Q3232394
@@ -13229,7 +13229,7 @@ http://dbpedia.org/resource/Samantha_Mathis	http://www.wikidata.org/entity/Q2371
 http://dbpedia.org/resource/The_Big_Kahuna_(film)	http://www.wikidata.org/entity/Q484951
 http://dbpedia.org/resource/World_Filled_with_Love	http://www.wikidata.org/entity/Q8035734
 http://dbpedia.org/resource/Cheers_(album)	http://www.wikidata.org/entity/Q1068878
-http://dbpedia.org/resource/Virginia_Bruce	http://www.wikidata.org/entity/Q242462
+http://dbpedia.org/resource/Virginia_BrÎ	http://www.wikidata.org/entity/Q242462
 http://dbpedia.org/resource/Waqt_Hamara_Hai	http://www.wikidata.org/entity/Q7968334
 http://dbpedia.org/resource/Young_Jeezy	http://www.wikidata.org/entity/Q342447
 http://dbpedia.org/resource/American_Gothic_(film)	http://www.wikidata.org/entity/Q2605428
@@ -13395,7 +13395,7 @@ http://dbpedia.org/resource/British_Raj	http://www.wikidata.org/entity/Q129286
 http://dbpedia.org/resource/Tony_Gatlif	http://www.wikidata.org/entity/Q127481
 http://dbpedia.org/resource/Bulawayo	http://www.wikidata.org/entity/Q193250
 http://dbpedia.org/resource/Lost_in_La_Mancha	http://www.wikidata.org/entity/Q1757581
-http://dbpedia.org/resource/Annie_Ducaux	http://www.wikidata.org/entity/Q2851649
+http://dbpedia.org/resource/Annie_DÊux	http://www.wikidata.org/entity/Q2851649
 http://dbpedia.org/resource/Fly_Farm_Blues	http://www.wikidata.org/entity/Q5463155
 http://dbpedia.org/resource/A_Big_10-8_Place	http://www.wikidata.org/entity/Q4655452
 http://dbpedia.org/resource/Ren'Py	http://www.wikidata.org/entity/Q1196014
@@ -13435,10 +13435,10 @@ http://dbpedia.org/resource/Slums_of_Beverly_Hills	http://www.wikidata.org/entit
 http://dbpedia.org/resource/Show_Me_What_You_Got	http://www.wikidata.org/entity/Q3287098
 http://dbpedia.org/resource/The_Desert_of_the_Tartars	http://www.wikidata.org/entity/Q645770
 http://dbpedia.org/resource/Muscle_March	http://www.wikidata.org/entity/Q11340490
-http://dbpedia.org/resource/Devin_the_Dude	http://www.wikidata.org/entity/Q1206920
+http://dbpedia.org/resource/Devin_the_DÞ	http://www.wikidata.org/entity/Q1206920
 http://dbpedia.org/resource/Batman_&_Robin_(film)	http://www.wikidata.org/entity/Q276523
 http://dbpedia.org/resource/A_Girl_in_a_Million	http://www.wikidata.org/entity/Q4657043
-http://dbpedia.org/resource/The_Man_Who_Could_Not_Shudder	http://www.wikidata.org/entity/Q10904448
+http://dbpedia.org/resource/The_Man_Who_Could_Not_Shෞr	http://www.wikidata.org/entity/Q10904448
 http://dbpedia.org/resource/Mutiny_on_the_Bounty_(1935_film)	http://www.wikidata.org/entity/Q329709
 http://dbpedia.org/resource/Meiringen–Innertkirchen_railway	http://www.wikidata.org/entity/Q681193
 http://dbpedia.org/resource/Nottinghamshire	http://www.wikidata.org/entity/Q23092
@@ -13479,7 +13479,7 @@ http://dbpedia.org/resource/Ashington	http://www.wikidata.org/entity/Q202348
 http://dbpedia.org/resource/Académie_Julian	http://www.wikidata.org/entity/Q337480
 http://dbpedia.org/resource/AB_Svensk_Filmindustri	http://www.wikidata.org/entity/Q177955
 http://dbpedia.org/resource/Girl_(Beck_song)	http://www.wikidata.org/entity/Q5564333
-http://dbpedia.org/resource/Camp_Cuddly_Pines_Powertool_Massacre	http://www.wikidata.org/entity/Q1029789
+http://dbpedia.org/resource/Camp_CÝly_Pines_Powertool_Massacre	http://www.wikidata.org/entity/Q1029789
 http://dbpedia.org/resource/Faber_and_Faber	http://www.wikidata.org/entity/Q898097
 http://dbpedia.org/resource/Snatched	http://www.wikidata.org/entity/Q3963084
 http://dbpedia.org/resource/Swindon	http://www.wikidata.org/entity/Q200942
@@ -13626,7 +13626,7 @@ http://dbpedia.org/resource/The_Carson_City_Kid	http://www.wikidata.org/entity/Q
 http://dbpedia.org/resource/The_Alamo_(1960_film)	http://www.wikidata.org/entity/Q1621909
 http://dbpedia.org/resource/Come_On_(The_New_Power_Generation_song)	http://www.wikidata.org/entity/Q5151209
 http://dbpedia.org/resource/Flesh_Will_Surrender	http://www.wikidata.org/entity/Q3221967
-http://dbpedia.org/resource/George_Lucas	http://www.wikidata.org/entity/Q38222
+http://dbpedia.org/resource/George_LÊs	http://www.wikidata.org/entity/Q38222
 http://dbpedia.org/resource/Priyadarshan	http://www.wikidata.org/entity/Q3115713
 http://dbpedia.org/resource/Rocky_IV	http://www.wikidata.org/entity/Q387638
 http://dbpedia.org/resource/Viktor_Tikhonov_(ice_hockey,_born_1988)	http://www.wikidata.org/entity/Q247265
@@ -13721,7 +13721,7 @@ http://dbpedia.org/resource/Major_general	http://www.wikidata.org/entity/Q157148
 http://dbpedia.org/resource/B._J._Ward_(actress)	http://www.wikidata.org/entity/Q2900254
 http://dbpedia.org/resource/Bristol_Rugby	http://www.wikidata.org/entity/Q917973
 http://dbpedia.org/resource/Kaante	http://www.wikidata.org/entity/Q3812382
-http://dbpedia.org/resource/Quebec_Liberal_Party	http://www.wikidata.org/entity/Q1631384
+http://dbpedia.org/resource/Q_Liberal_Party	http://www.wikidata.org/entity/Q1631384
 http://dbpedia.org/resource/Fillmore_(film)	http://www.wikidata.org/entity/Q12120565
 http://dbpedia.org/resource/Two_of_a_Kind_(1983_film)	http://www.wikidata.org/entity/Q232248
 http://dbpedia.org/resource/Breaking_Up_(film)	http://www.wikidata.org/entity/Q903854
@@ -13902,7 +13902,7 @@ http://dbpedia.org/resource/Albanian_language	http://www.wikidata.org/entity/Q87
 http://dbpedia.org/resource/Robert_De_Niro's_Waiting...	http://www.wikidata.org/entity/Q7343457
 http://dbpedia.org/resource/No_One_Lives	http://www.wikidata.org/entity/Q3342445
 http://dbpedia.org/resource/The_Scold's_Bridle	http://www.wikidata.org/entity/Q7762595
-http://dbpedia.org/resource/Born_to_Be_Blue_(Freddie_Hubbard_album)	http://www.wikidata.org/entity/Q4945932
+http://dbpedia.org/resource/Born_to_Be_Blue_(Freddie_H஺rd_album)	http://www.wikidata.org/entity/Q4945932
 http://dbpedia.org/resource/Wild_Bill_(1995_film)	http://www.wikidata.org/entity/Q1471493
 http://dbpedia.org/resource/Rastan_(video_game)	http://www.wikidata.org/entity/Q1158763
 http://dbpedia.org/resource/The_Easiest_Way	http://www.wikidata.org/entity/Q846810
@@ -14024,7 +14024,7 @@ http://dbpedia.org/resource/Naked_Weapon	http://www.wikidata.org/entity/Q2975195
 http://dbpedia.org/resource/Anne_of_Green_Gables_(1934_film)	http://www.wikidata.org/entity/Q384524
 http://dbpedia.org/resource/The_Caretakers	http://www.wikidata.org/entity/Q726634
 http://dbpedia.org/resource/The_Prisoner_of_Shark_Island	http://www.wikidata.org/entity/Q1193757
-http://dbpedia.org/resource/Andrew_Bruce_Holmes	http://www.wikidata.org/entity/Q4756462
+http://dbpedia.org/resource/Andrew_BrÎ_Holmes	http://www.wikidata.org/entity/Q4756462
 http://dbpedia.org/resource/Something_Better_Change_(song)	http://www.wikidata.org/entity/Q4049731
 http://dbpedia.org/resource/It's_a_Wonderful_World_(1939_film)	http://www.wikidata.org/entity/Q1261358
 http://dbpedia.org/resource/Kessel,_Limburg	http://www.wikidata.org/entity/Q73031
@@ -14055,7 +14055,7 @@ http://dbpedia.org/resource/Human_Emergency	http://www.wikidata.org/entity/Q5937
 http://dbpedia.org/resource/The_Sixteen-Millimeter_Shrine	http://www.wikidata.org/entity/Q2631660
 http://dbpedia.org/resource/John_Q.	http://www.wikidata.org/entity/Q1141457
 http://dbpedia.org/resource/Milas_Rural_District	http://www.wikidata.org/entity/Q5682211
-http://dbpedia.org/resource/Queen_Christina_(film)	http://www.wikidata.org/entity/Q1634665
+http://dbpedia.org/resource/Qîn_Christina_(film)	http://www.wikidata.org/entity/Q1634665
 http://dbpedia.org/resource/Philips_Records	http://www.wikidata.org/entity/Q1536003
 http://dbpedia.org/resource/Bhakta_Tukaram	http://www.wikidata.org/entity/Q4900867
 http://dbpedia.org/resource/Burt_Reynolds	http://www.wikidata.org/entity/Q202148
@@ -14069,7 +14069,7 @@ http://dbpedia.org/resource/What_Kind_of_Love_Are_You_On	http://www.wikidata.org
 http://dbpedia.org/resource/Then_Nilavu	http://www.wikidata.org/entity/Q11008377
 http://dbpedia.org/resource/Monmouthshire	http://www.wikidata.org/entity/Q207176
 http://dbpedia.org/resource/Carl_Friedrich_von_Weizsäcker	http://www.wikidata.org/entity/Q65350
-http://dbpedia.org/resource/Wilfred_Lucas	http://www.wikidata.org/entity/Q2477748
+http://dbpedia.org/resource/Wilfred_LÊs	http://www.wikidata.org/entity/Q2477748
 http://dbpedia.org/resource/August_Wilhelm_von_Hofmann	http://www.wikidata.org/entity/Q76360
 http://dbpedia.org/resource/Aix-en-Provence	http://www.wikidata.org/entity/Q47465
 http://dbpedia.org/resource/Anarchism	http://www.wikidata.org/entity/Q6199
@@ -14088,7 +14088,7 @@ http://dbpedia.org/resource/Aaye_Din_Bahar_Ke	http://www.wikidata.org/entity/Q46
 http://dbpedia.org/resource/Dick_Feagler	http://www.wikidata.org/entity/Q5272902
 http://dbpedia.org/resource/Vaanam	http://www.wikidata.org/entity/Q387092
 http://dbpedia.org/resource/Doha	http://www.wikidata.org/entity/Q3861
-http://dbpedia.org/resource/The_Flying_Squad_(1929_film)	http://www.wikidata.org/entity/Q7734625
+http://dbpedia.org/resource/The_Flying_Sq­_(1929_film)	http://www.wikidata.org/entity/Q7734625
 http://dbpedia.org/resource/Brian_Eastick	http://www.wikidata.org/entity/Q4963650
 http://dbpedia.org/resource/William_Stewart_(footballer,_born_1876)	http://www.wikidata.org/entity/Q20712614
 http://dbpedia.org/resource/Ben_O'Loughlin	http://www.wikidata.org/entity/Q4886240
@@ -14108,7 +14108,7 @@ http://dbpedia.org/resource/Maan_Gaye_Ustaad	http://www.wikidata.org/entity/Q672
 http://dbpedia.org/resource/Ralph_von_Rettberg	http://www.wikidata.org/entity/Q7288340
 http://dbpedia.org/resource/The_Girl_from_Trieste	http://www.wikidata.org/entity/Q1195319
 http://dbpedia.org/resource/Scopula_ferrilineata	http://www.wikidata.org/entity/Q7434718
-http://dbpedia.org/resource/The_Works_(Queen_album)	http://www.wikidata.org/entity/Q224641
+http://dbpedia.org/resource/The_Works_(Qîn_album)	http://www.wikidata.org/entity/Q224641
 http://dbpedia.org/resource/Quick_Change	http://www.wikidata.org/entity/Q1305773
 http://dbpedia.org/resource/Pantera	http://www.wikidata.org/entity/Q180880
 http://dbpedia.org/resource/Harvey_Braban	http://www.wikidata.org/entity/Q5677058
@@ -14150,7 +14150,7 @@ http://dbpedia.org/resource/Makkalai_Petra_Magarasi	http://www.wikidata.org/enti
 http://dbpedia.org/resource/Onur_Demirsoy	http://www.wikidata.org/entity/Q7095096
 http://dbpedia.org/resource/Trauma_(1993_film)	http://www.wikidata.org/entity/Q774067
 http://dbpedia.org/resource/Gypsys,_Tramps_&_Thieves_(album)	http://www.wikidata.org/entity/Q2532938
-http://dbpedia.org/resource/Bluebeard_(1944_film)	http://www.wikidata.org/entity/Q2884134
+http://dbpedia.org/resource/Blrd_(1944_film)	http://www.wikidata.org/entity/Q2884134
 http://dbpedia.org/resource/Tailspin_Tommy_(serial)	http://www.wikidata.org/entity/Q7676136
 http://dbpedia.org/resource/Future_World_(Pretty_Maids_album)	http://www.wikidata.org/entity/Q3755200
 http://dbpedia.org/resource/Full_Moon_in_Blue_Water	http://www.wikidata.org/entity/Q5508112
@@ -14186,7 +14186,7 @@ http://dbpedia.org/resource/Eshtehard_County	http://www.wikidata.org/entity/Q480
 http://dbpedia.org/resource/Sunshine_Rainbows_and_Violins	http://www.wikidata.org/entity/Q7641556
 http://dbpedia.org/resource/Mongols	http://www.wikidata.org/entity/Q41975
 http://dbpedia.org/resource/Lino_Ventura	http://www.wikidata.org/entity/Q337260
-http://dbpedia.org/resource/Subash_Chandra_Bose_(film)	http://www.wikidata.org/entity/Q7630833
+http://dbpedia.org/resource/Sºsh_Chandra_Bose_(film)	http://www.wikidata.org/entity/Q7630833
 http://dbpedia.org/resource/Camilo_Romero	http://www.wikidata.org/entity/Q521913
 http://dbpedia.org/resource/What_Else_Is_There%3F	http://www.wikidata.org/entity/Q7991091
 http://dbpedia.org/resource/Sign_(Flow_song)	http://www.wikidata.org/entity/Q3960348
@@ -14256,7 +14256,7 @@ http://dbpedia.org/resource/The_Water_Babies_(film)	http://www.wikidata.org/enti
 http://dbpedia.org/resource/Anime	http://www.wikidata.org/entity/Q1107
 http://dbpedia.org/resource/Make_Way_for_Tomorrow	http://www.wikidata.org/entity/Q2607713
 http://dbpedia.org/resource/The_Toy_(1982_film)	http://www.wikidata.org/entity/Q1197013
-http://dbpedia.org/resource/Illuminations_(Buffy_Sainte-Marie_album)	http://www.wikidata.org/entity/Q6000384
+http://dbpedia.org/resource/Illuminations_(Bÿy_Sainte-Marie_album)	http://www.wikidata.org/entity/Q6000384
 http://dbpedia.org/resource/Lagos	http://www.wikidata.org/entity/Q8673
 http://dbpedia.org/resource/The_Case_of_the_Constant_Suicides	http://www.wikidata.org/entity/Q2790732
 http://dbpedia.org/resource/Lumumba_(film)	http://www.wikidata.org/entity/Q3267400
@@ -14322,8 +14322,8 @@ http://dbpedia.org/resource/Voyage_to_the_Bottom_of_the_Sea	http://www.wikidata.
 http://dbpedia.org/resource/J._Roy_Hunt	http://www.wikidata.org/entity/Q3156832
 http://dbpedia.org/resource/Cyril_J._Mockridge	http://www.wikidata.org/entity/Q328857
 http://dbpedia.org/resource/She's_Funny_That_Way	http://www.wikidata.org/entity/Q14526650
-http://dbpedia.org/resource/Queen's_University_Belfast	http://www.wikidata.org/entity/Q877925
-http://dbpedia.org/resource/LucasArts	http://www.wikidata.org/entity/Q216611
+http://dbpedia.org/resource/Qîn's_University_Belfast	http://www.wikidata.org/entity/Q877925
+http://dbpedia.org/resource/LÊsArts	http://www.wikidata.org/entity/Q216611
 http://dbpedia.org/resource/Roman_Kukhtinov	http://www.wikidata.org/entity/Q2164618
 http://dbpedia.org/resource/Timegates	http://www.wikidata.org/entity/Q7805521
 http://dbpedia.org/resource/Age_of_Empires:_Castle_Siege	http://www.wikidata.org/entity/Q18119586
@@ -14346,7 +14346,7 @@ http://dbpedia.org/resource/Time_on_Earth	http://www.wikidata.org/entity/Q327900
 http://dbpedia.org/resource/Ava_Gardner	http://www.wikidata.org/entity/Q164487
 http://dbpedia.org/resource/Spring_Love_(Come_Back_to_Me)	http://www.wikidata.org/entity/Q10373946
 http://dbpedia.org/resource/Alliance_Atlantis	http://www.wikidata.org/entity/Q10748653
-http://dbpedia.org/resource/Ufa	http://www.wikidata.org/entity/Q911
+http://dbpedia.org/resource/ú	http://www.wikidata.org/entity/Q911
 http://dbpedia.org/resource/American_Cyborg:_Steel_Warrior	http://www.wikidata.org/entity/Q3284428
 http://dbpedia.org/resource/Danny_Elfman	http://www.wikidata.org/entity/Q193338
 http://dbpedia.org/resource/Denis_Istomin_(ice_hockey)	http://www.wikidata.org/entity/Q3022748
@@ -14389,7 +14389,7 @@ http://dbpedia.org/resource/Yogi's_Ark_Lark	http://www.wikidata.org/entity/Q8881
 http://dbpedia.org/resource/DJ_Khaled	http://www.wikidata.org/entity/Q80805
 http://dbpedia.org/resource/Autumn_Leaves_(film)	http://www.wikidata.org/entity/Q1609570
 http://dbpedia.org/resource/Menahem_Golan	http://www.wikidata.org/entity/Q542003
-http://dbpedia.org/resource/Queen_Bee_(graphic_novel)	http://www.wikidata.org/entity/Q7270226
+http://dbpedia.org/resource/Qîn_Bee_(graphic_novel)	http://www.wikidata.org/entity/Q7270226
 http://dbpedia.org/resource/University_of_Bonn	http://www.wikidata.org/entity/Q152171
 http://dbpedia.org/resource/Channel_4	http://www.wikidata.org/entity/Q501070
 http://dbpedia.org/resource/Farewell_(Bob_Dylan_song)	http://www.wikidata.org/entity/Q5435000
@@ -14403,7 +14403,7 @@ http://dbpedia.org/resource/Sampler_(musical_instrument)	http://www.wikidata.org
 http://dbpedia.org/resource/Kentucky_Pride	http://www.wikidata.org/entity/Q2185567
 http://dbpedia.org/resource/Going_to_America	http://www.wikidata.org/entity/Q5577889
 http://dbpedia.org/resource/Toto_(band)	http://www.wikidata.org/entity/Q207472
-http://dbpedia.org/resource/The_Right_Stuff_(film)	http://www.wikidata.org/entity/Q1197185
+http://dbpedia.org/resource/The_Right_Stÿ_(film)	http://www.wikidata.org/entity/Q1197185
 http://dbpedia.org/resource/Numb/Encore	http://www.wikidata.org/entity/Q19979
 http://dbpedia.org/resource/Lady_and_the_Tramp_II:_Scamp's_Adventure	http://www.wikidata.org/entity/Q244434
 http://dbpedia.org/resource/Robert_Vince	http://www.wikidata.org/entity/Q7350620
@@ -14532,7 +14532,7 @@ http://dbpedia.org/resource/Love_Affair_(1994_film)	http://www.wikidata.org/enti
 http://dbpedia.org/resource/Edward_Selzer	http://www.wikidata.org/entity/Q974385
 http://dbpedia.org/resource/Dil-e-Nadaan	http://www.wikidata.org/entity/Q5276597
 http://dbpedia.org/resource/Risto_Siltanen	http://www.wikidata.org/entity/Q449404
-http://dbpedia.org/resource/Robert_Arthur_(film_producer)	http://www.wikidata.org/entity/Q7341609
+http://dbpedia.org/resource/Robert_Arthur_(film_prodÎr)	http://www.wikidata.org/entity/Q7341609
 http://dbpedia.org/resource/Mission:_Impossible_III	http://www.wikidata.org/entity/Q288173
 http://dbpedia.org/resource/The_Mask_and_Mirror	http://www.wikidata.org/entity/Q2306494
 http://dbpedia.org/resource/Women_of_the_World	http://www.wikidata.org/entity/Q3822168
@@ -14593,7 +14593,7 @@ http://dbpedia.org/resource/A_Double_Dose_of_Soul	http://www.wikidata.org/entity
 http://dbpedia.org/resource/Lost_Odyssey	http://www.wikidata.org/entity/Q558753
 http://dbpedia.org/resource/Pure_Luck	http://www.wikidata.org/entity/Q1508548
 http://dbpedia.org/resource/Paul_Bettany	http://www.wikidata.org/entity/Q242707
-http://dbpedia.org/resource/Queen_Bitch	http://www.wikidata.org/entity/Q1608702
+http://dbpedia.org/resource/Qîn_Bitch	http://www.wikidata.org/entity/Q1608702
 http://dbpedia.org/resource/The_Tip-Off	http://www.wikidata.org/entity/Q7769459
 http://dbpedia.org/resource/Church_(song)	http://www.wikidata.org/entity/Q5116545
 http://dbpedia.org/resource/Meatballs_(film)	http://www.wikidata.org/entity/Q2601425
@@ -14648,7 +14648,7 @@ http://dbpedia.org/resource/Running_Scared_(1986_film)	http://www.wikidata.org/e
 http://dbpedia.org/resource/The_Seduction_(film)	http://www.wikidata.org/entity/Q3667388
 http://dbpedia.org/resource/Limpopo_River	http://www.wikidata.org/entity/Q173017
 http://dbpedia.org/resource/She_Couldn't_Take_It	http://www.wikidata.org/entity/Q3793843
-http://dbpedia.org/resource/Eagle_Squadron_(film)	http://www.wikidata.org/entity/Q3203198
+http://dbpedia.org/resource/Eagle_Sq­ron_(film)	http://www.wikidata.org/entity/Q3203198
 http://dbpedia.org/resource/The_White_Devil_(film)	http://www.wikidata.org/entity/Q3793785
 http://dbpedia.org/resource/Who_Done_It%3F_(1949_film)	http://www.wikidata.org/entity/Q7997226
 http://dbpedia.org/resource/Hare_Tonic	http://www.wikidata.org/entity/Q12124700
@@ -14700,7 +14700,7 @@ http://dbpedia.org/resource/Ray_Heindorf	http://www.wikidata.org/entity/Q713301
 http://dbpedia.org/resource/Scars_(Allison_Iraheta_song)	http://www.wikidata.org/entity/Q3951703
 http://dbpedia.org/resource/Traktor_Chelyabinsk	http://www.wikidata.org/entity/Q887198
 http://dbpedia.org/resource/Muse_(band)	http://www.wikidata.org/entity/Q22151
-http://dbpedia.org/resource/Turbo-Charged_Prelude	http://www.wikidata.org/entity/Q2892281
+http://dbpedia.org/resource/Turbo-Charged_PrelÞ	http://www.wikidata.org/entity/Q2892281
 http://dbpedia.org/resource/James_Spader	http://www.wikidata.org/entity/Q296928
 http://dbpedia.org/resource/Stan_Getz	http://www.wikidata.org/entity/Q30587
 http://dbpedia.org/resource/This_Happy_Feeling	http://www.wikidata.org/entity/Q2563230
@@ -14751,7 +14751,7 @@ http://dbpedia.org/resource/Emma_of_Waldeck_and_Pyrmont	http://www.wikidata.org/
 http://dbpedia.org/resource/The_Weight	http://www.wikidata.org/entity/Q2734855
 http://dbpedia.org/resource/Talk_Like_That	http://www.wikidata.org/entity/Q7679660
 http://dbpedia.org/resource/Nowhere_Man_(song)	http://www.wikidata.org/entity/Q1418568
-http://dbpedia.org/resource/Prelude_to_a_Kiss_(film)	http://www.wikidata.org/entity/Q148428
+http://dbpedia.org/resource/PrelÞ_to_a_Kiss_(film)	http://www.wikidata.org/entity/Q148428
 http://dbpedia.org/resource/Jharkhand	http://www.wikidata.org/entity/Q1184
 http://dbpedia.org/resource/No_More_(Neil_Young_song)	http://www.wikidata.org/entity/Q20649203
 http://dbpedia.org/resource/Fool_(novel)	http://www.wikidata.org/entity/Q1435964
@@ -14793,7 +14793,7 @@ http://dbpedia.org/resource/Tora's_Tropical_Fever	http://www.wikidata.org/entity
 http://dbpedia.org/resource/New_Zealand_Post	http://www.wikidata.org/entity/Q1144511
 http://dbpedia.org/resource/Lost_and_Found_(1979_film)	http://www.wikidata.org/entity/Q6684332
 http://dbpedia.org/resource/Shania_Twain	http://www.wikidata.org/entity/Q131433
-http://dbpedia.org/resource/Budanilkantha	http://www.wikidata.org/entity/Q2385194
+http://dbpedia.org/resource/BÚnilkantha	http://www.wikidata.org/entity/Q2385194
 http://dbpedia.org/resource/Bill_Whelan	http://www.wikidata.org/entity/Q2469021
 http://dbpedia.org/resource/John_W._Geary	http://www.wikidata.org/entity/Q795522
 http://dbpedia.org/resource/New_Allegiances	http://www.wikidata.org/entity/Q7005280

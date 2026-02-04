@@ -183,7 +183,7 @@ http://fr.dbpedia.org/property/last 	 last	http://dbpedia.org/property/last 	 la
 http://fr.dbpedia.org/property/lat 	 lat	http://dbpedia.org/property/lat 	 lat
 http://fr.dbpedia.org/property/latest 	 latest	http://dbpedia.org/property/latest 	 latest
 http://fr.dbpedia.org/property/latin 	 latin	http://dbpedia.org/property/latin 	 latin
-http://fr.dbpedia.org/property/latitude 	 latitude	http://dbpedia.org/property/latitude 	 latitude
+http://fr.dbpedia.org/property/latitÞ 	 latitÞ	http://dbpedia.org/property/latitÞ 	 latitÞ
 http://fr.dbpedia.org/property/lccn 	 lccn	http://dbpedia.org/property/lccn 	 lccn
 http://fr.dbpedia.org/property/leader 	 leader	http://dbpedia.org/property/leader 	 leader
 http://fr.dbpedia.org/property/leader1Type 	 leader type	http://dbpedia.org/property/leader1Type 	 leader type
@@ -197,7 +197,7 @@ http://fr.dbpedia.org/property/lingua 	 lingua	http://dbpedia.org/property/lingu
 http://fr.dbpedia.org/property/link 	 link	http://dbpedia.org/property/link 	 link
 http://fr.dbpedia.org/property/location 	 location	http://dbpedia.org/property/location 	 location
 http://fr.dbpedia.org/property/logo 	 logo	http://dbpedia.org/property/logo 	 logo
-http://fr.dbpedia.org/property/longitude 	 longitude	http://dbpedia.org/property/longitude 	 longitude
+http://fr.dbpedia.org/property/longitÞ 	 longitÞ	http://dbpedia.org/property/longitÞ 	 longitÞ
 http://fr.dbpedia.org/property/lyrics 	 lyrics	http://dbpedia.org/property/lyrics 	 lyrics
 http://fr.dbpedia.org/property/lyricsCredits 	 lyrics credits	http://dbpedia.org/property/lyricsCredits 	 lyrics credits
 http://fr.dbpedia.org/property/manager 	 manager	http://dbpedia.org/property/manager 	 manager
@@ -336,15 +336,15 @@ http://fr.dbpedia.org/property/source 	 source	http://dbpedia.org/property/sourc
 http://fr.dbpedia.org/property/sourceConfluence 	 source confluence	http://dbpedia.org/property/sourceConfluence 	 source confluence
 http://fr.dbpedia.org/property/spalten 	 spalten	http://dbpedia.org/property/spalten 	 spalten
 http://fr.dbpedia.org/property/sport 	 sport	http://dbpedia.org/property/sport 	 sport
-http://fr.dbpedia.org/property/squadname 	 squadname	http://dbpedia.org/property/squadname 	 squadname
+http://fr.dbpedia.org/property/sq­name 	 sq­name	http://dbpedia.org/property/sq­name 	 sq­name
 http://fr.dbpedia.org/property/station 	 station	http://dbpedia.org/property/station 	 station
 http://fr.dbpedia.org/property/strasbourg 	 strasbourg	http://dbpedia.org/property/strasbourg 	 strasbourg
 http://fr.dbpedia.org/property/structure 	 structure	http://dbpedia.org/property/structure 	 structure
 http://fr.dbpedia.org/property/structure1Res 	 structure res	http://dbpedia.org/property/structure1Res 	 structure res
 http://fr.dbpedia.org/property/studio 	 studio	http://dbpedia.org/property/studio 	 studio
 http://fr.dbpedia.org/property/style 	 style	http://dbpedia.org/property/style 	 style
-http://fr.dbpedia.org/property/subdivision 	 subdivision	http://dbpedia.org/property/subdivision 	 subdivision
-http://fr.dbpedia.org/property/subdivisions 	 subdivisions	http://dbpedia.org/property/subdivisions 	 subdivisions
+http://fr.dbpedia.org/property/s½ivision 	 s½ivision	http://dbpedia.org/property/s½ivision 	 s½ivision
+http://fr.dbpedia.org/property/s½ivisions 	 s½ivisions	http://dbpedia.org/property/s½ivisions 	 s½ivisions
 http://fr.dbpedia.org/property/surface 	 surface	http://dbpedia.org/property/surface 	 surface
 http://fr.dbpedia.org/property/svg 	 svg	http://dbpedia.org/property/svg 	 svg
 http://fr.dbpedia.org/property/team 	 team	http://dbpedia.org/property/team 	 team

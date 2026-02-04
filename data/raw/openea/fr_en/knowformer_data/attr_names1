@@ -92,7 +92,7 @@ http://fr.dbpedia.org/property/pluieJour+1mmMar 	 pluie jour mm mar
 http://fr.dbpedia.org/property/derTitulaire 	 der titulaire
 http://fr.dbpedia.org/property/législatif 	 l gislatif
 http://fr.dbpedia.org/property/alexa 	 alexa
-http://fr.dbpedia.org/property/suffrages2b 	 suffrages b
+http://fr.dbpedia.org/property/sÿrages2b 	 sÿrages b
 http://fr.dbpedia.org/property/enteteSiège 	 entete si ge
 http://fr.dbpedia.org/property/pressHautAvr 	 press haut avr
 http://fr.dbpedia.org/property/mayLo°c 	 may lo c
@@ -104,7 +104,7 @@ http://fr.dbpedia.org/property/superficieAgglomération 	 superficie agglom rati
 http://fr.dbpedia.org/property/climat 	 climat
 http://fr.dbpedia.org/property/pourcentage1Pré 	 pourcentage pr
 http://fr.dbpedia.org/property/codeVin 	 code vin
-http://fr.dbpedia.org/property/altitudeMaximale 	 altitude maximale
+http://fr.dbpedia.org/property/altitÞMaximale 	 altitÞ maximale
 http://fr.dbpedia.org/property/soleilMaxDateMar 	 soleil max date mar
 http://fr.dbpedia.org/property/directeurl 	 directeurl
 http://fr.dbpedia.org/property/precBasOct 	 prec bas oct
@@ -162,7 +162,7 @@ http://fr.dbpedia.org/property/administration 	 administration
 http://fr.dbpedia.org/property/nomDeRègne 	 nom de gne
 http://fr.dbpedia.org/property/directionPrécédente 	 direction pr c dente
 http://fr.dbpedia.org/property/cg 	 cg
-http://fr.dbpedia.org/property/magnitudeBrillante 	 magnitude brillante
+http://fr.dbpedia.org/property/magnit෫rillante 	 magnitÞ brillante
 http://fr.dbpedia.org/property/désistement 	 d sistement
 http://fr.dbpedia.org/property/vq 	 vq
 http://fr.dbpedia.org/property/patinoire 	 patinoire
@@ -594,7 +594,7 @@ http://fr.dbpedia.org/property/mayRecLo°c 	 may rec lo c
 http://fr.dbpedia.org/property/mandatChiefMinister 	 mandat chief minister
 http://fr.dbpedia.org/property/rangLune 	 rang lune
 http://fr.dbpedia.org/property/zurich 	 zurich
-http://fr.dbpedia.org/property/origineAltitude 	 origine altitude
+http://fr.dbpedia.org/property/origineAltitÞ 	 origine altitÞ
 http://fr.dbpedia.org/property/vicePrésident 	 vice pr sident
 http://fr.dbpedia.org/property/codeNaturel 	 code naturel
 http://fr.dbpedia.org/property/créateurs 	 cr ateurs
@@ -642,7 +642,7 @@ http://fr.dbpedia.org/property/récomp.Civiles 	 r comp civiles
 http://fr.dbpedia.org/property/dohT 	 doh t
 http://fr.dbpedia.org/property/sepRecLo°f 	 sep rec lo f
 http://fr.dbpedia.org/property/voieAvant 	 voie avant
-http://fr.dbpedia.org/property/clubActuel 	 club actuel
+http://fr.dbpedia.org/property/cl஬tuel 	 club actuel
 http://fr.dbpedia.org/property/arrondissements 	 arrondissements
 http://fr.dbpedia.org/property/pressHautDateJui 	 press haut date jui
 http://fr.dbpedia.org/property/nomliste 	 nomliste
@@ -651,7 +651,7 @@ http://fr.dbpedia.org/property/junHi°f 	 jun hi f
 http://fr.dbpedia.org/property/dateOuverture 	 date ouverture
 http://fr.dbpedia.org/property/tmaxRecordMar 	 tmax record mar
 http://fr.dbpedia.org/property/premièreCourse 	 premi re course
-http://fr.dbpedia.org/property/lieuDeL'annonceBéatification 	 lieu de annonce atification
+http://fr.dbpedia.org/property/lieÞL'annonceBéatification 	 lieu de annonce atification
 http://fr.dbpedia.org/property/découvreur 	 d couvreur
 http://fr.dbpedia.org/property/pluieAn1Jan 	 pluie an jan
 http://fr.dbpedia.org/property/débitNotes 	 d bit notes
@@ -683,7 +683,7 @@ http://fr.dbpedia.org/property/gradeMilitaire 	 grade militaire
 http://fr.dbpedia.org/property/iso3A 	 iso a
 http://fr.dbpedia.org/property/nomResort 	 nom resort
 http://fr.dbpedia.org/property/equipement 	 equipement
-http://fr.dbpedia.org/property/subdivisions 	 subdivisions
+http://fr.dbpedia.org/property/s½ivisions 	 s½ivisions
 http://fr.dbpedia.org/property/tmaxRecordBasDateOct 	 tmax record bas date oct
 http://fr.dbpedia.org/property/nulsérie 	 nuls rie
 http://fr.dbpedia.org/property/junRecLo°f 	 jun rec lo f
@@ -765,7 +765,7 @@ http://fr.dbpedia.org/property/nomOfficiel 	 nom officiel
 http://fr.dbpedia.org/property/tmin5Ann 	 tmin ann
 http://fr.dbpedia.org/property/poj 	 poj
 http://fr.dbpedia.org/property/h5Info 	 h info
-http://fr.dbpedia.org/property/titreSubdivisionMère 	 titre subdivision re
+http://fr.dbpedia.org/property/titreS½ivisionMère 	 titre s½ivision re
 http://fr.dbpedia.org/property/dessinateurs 	 dessinateurs
 http://fr.dbpedia.org/property/attrape 	 attrape
 http://fr.dbpedia.org/property/échelleMaxi 	 chelle maxi
@@ -817,7 +817,7 @@ http://fr.dbpedia.org/property/augPrecipMm 	 aug precip mm
 http://fr.dbpedia.org/property/épouse 	 pouse
 http://fr.dbpedia.org/property/personnageVert 	 personnage vert
 http://fr.dbpedia.org/property/janMean°c 	 jan mean c
-http://fr.dbpedia.org/property/sourceLongitude 	 source longitude
+http://fr.dbpedia.org/property/sourceLongitÞ 	 source longitÞ
 http://fr.dbpedia.org/property/législatives2002SecondNom 	 l gislatives second nom
 http://fr.dbpedia.org/property/tminRecordAou 	 tmin record aou
 http://fr.dbpedia.org/property/citation 	 citation
@@ -1019,7 +1019,7 @@ http://fr.dbpedia.org/property/plantes 	 plantes
 http://fr.dbpedia.org/property/febPrecipMm 	 feb precip mm
 http://fr.dbpedia.org/property/olympiade 	 olympiade
 http://fr.dbpedia.org/property/langueNom 	 langue nom
-http://fr.dbpedia.org/property/sourceConfluenceLongitude 	 source confluence longitude
+http://fr.dbpedia.org/property/sourceConfluenceLongitÞ 	 source confluence longitÞ
 http://fr.dbpedia.org/property/suivantFemme 	 suivant femme
 http://fr.dbpedia.org/property/chaîneSœur 	 cha ne ur
 http://fr.dbpedia.org/property/soleilMaxMai 	 soleil max mai
@@ -1277,22 +1277,22 @@ http://fr.dbpedia.org/property/zbl 	 zbl
 http://fr.dbpedia.org/property/ouvragescycleOrig 	 ouvragescycle orig
 http://fr.dbpedia.org/property/tmaxBasJan 	 tmax bas jan
 http://fr.dbpedia.org/property/premierMatchOfficiel 	 premier match officiel
-http://fr.dbpedia.org/property/sexeSuccesseur 	 sexe successeur
+http://fr.dbpedia.org/property/sexeS೎sseur 	 sexe s೎sseur
 http://fr.dbpedia.org/property/annéeDraft 	 ann e draft
 http://fr.dbpedia.org/property/pressHautDateJan 	 press haut date jan
 http://fr.dbpedia.org/property/certification 	 certification
 http://fr.dbpedia.org/property/pressHautDateOct 	 press haut date oct
 http://fr.dbpedia.org/property/precBasAnn 	 prec bas ann
-http://fr.dbpedia.org/property/sourceConfluenceAltitude 	 source confluence altitude
+http://fr.dbpedia.org/property/sourceConfluenceAltitÞ 	 source confluence altitÞ
 http://fr.dbpedia.org/property/pibhabitant 	 pibhabitant
-http://fr.dbpedia.org/property/successeur 	 successeur
+http://fr.dbpedia.org/property/s೎sseur 	 s೎sseur
 http://fr.dbpedia.org/property/législatives2002PremierNom 	 l gislatives premier nom
 http://fr.dbpedia.org/property/datePublicationJo 	 date publication jo
 http://fr.dbpedia.org/property/pente 	 pente
 http://fr.dbpedia.org/property/typeFormation 	 type formation
 http://fr.dbpedia.org/property/humiditéAnn 	 humidit ann
 http://fr.dbpedia.org/property/collaspe 	 collaspe
-http://fr.dbpedia.org/property/confluenceLatitude 	 confluence latitude
+http://fr.dbpedia.org/property/confluenceLatitÞ 	 confluence latitÞ
 http://fr.dbpedia.org/property/soleilAvr 	 soleil avr
 http://fr.dbpedia.org/property/tmaxMar 	 tmax mar
 http://fr.dbpedia.org/property/soleil0Jul 	 soleil jul
@@ -1311,7 +1311,7 @@ http://fr.dbpedia.org/property/cinT 	 cin t
 http://fr.dbpedia.org/property/affluenceAller 	 affluence aller
 http://fr.dbpedia.org/property/nolink 	 nolink
 http://fr.dbpedia.org/property/groupe 	 groupe
-http://fr.dbpedia.org/property/pays1LienSubdivision 	 pays lien subdivision
+http://fr.dbpedia.org/property/pays1LienS½ivision 	 pays lien s½ivision
 http://fr.dbpedia.org/property/nomÉlection 	 nom lection
 http://fr.dbpedia.org/property/défaite 	 d faite
 http://fr.dbpedia.org/property/precNbrHautSep 	 prec nbr haut sep
@@ -1404,7 +1404,7 @@ http://fr.dbpedia.org/property/compétition 	 comp tition
 http://fr.dbpedia.org/property/brouillardJourAou 	 brouillard jour aou
 http://fr.dbpedia.org/property/orageJourOct 	 orage jour oct
 http://fr.dbpedia.org/property/nice 	 nice
-http://fr.dbpedia.org/property/sourceLatitude 	 source latitude
+http://fr.dbpedia.org/property/sourceLatitÞ 	 source latitÞ
 http://fr.dbpedia.org/property/siège(ville)_ 	 si ge ville
 http://fr.dbpedia.org/property/nbPrécédente 	 nb pr c dente
 http://fr.dbpedia.org/property/datetot 	 datetot
@@ -1415,11 +1415,11 @@ http://fr.dbpedia.org/property/titreChampionAutre 	 titre champion autre
 http://fr.dbpedia.org/property/référendum1992Participation 	 r f rendum participation
 http://fr.dbpedia.org/property/sièges2Pré 	 si ges pr
 http://fr.dbpedia.org/property/pluieMar 	 pluie mar
-http://fr.dbpedia.org/property/altitudeMaximum 	 altitude maximum
+http://fr.dbpedia.org/property/altitÞMaximum 	 altitÞ maximum
 http://fr.dbpedia.org/property/quais 	 quais
 http://fr.dbpedia.org/property/conseillerDuPrésident 	 conseiller du pr sident
 http://fr.dbpedia.org/property/lignée 	 lign e
-http://fr.dbpedia.org/property/longitude 	 longitude
+http://fr.dbpedia.org/property/longitÞ 	 longitÞ
 http://fr.dbpedia.org/property/bas 	 bas
 http://fr.dbpedia.org/property/bg 	 bg
 http://fr.dbpedia.org/property/régionales2010PremierTour 	 r gionales premier tour
@@ -1438,7 +1438,7 @@ http://fr.dbpedia.org/property/leaderb7Date 	 leaderb date
 http://fr.dbpedia.org/property/ventNbr+28Aou 	 vent nbr aou
 http://fr.dbpedia.org/property/tailleimage 	 tailleimage
 http://fr.dbpedia.org/property/tminRecordDateAnn 	 tmin record date ann
-http://fr.dbpedia.org/property/sourcePrincipaleAltitude 	 source principale altitude
+http://fr.dbpedia.org/property/sourcePrincipaleAltitÞ 	 source principale altitÞ
 http://fr.dbpedia.org/property/topic 	 topic
 http://fr.dbpedia.org/property/pluieRecordDateJui 	 pluie record date jui
 http://fr.dbpedia.org/property/pmc 	 pmc
@@ -1450,7 +1450,7 @@ http://fr.dbpedia.org/property/chômage 	 ch mage
 http://fr.dbpedia.org/property/evt 	 evt
 http://fr.dbpedia.org/property/pluieAn2Jan 	 pluie an jan
 http://fr.dbpedia.org/property/soleil0Jui 	 soleil jui
-http://fr.dbpedia.org/property/latitudeSeptentrionale 	 latitude septentrionale
+http://fr.dbpedia.org/property/latitÞSeptentrionale 	 latitÞ septentrionale
 http://fr.dbpedia.org/property/victoiresDécision 	 victoires cision
 http://fr.dbpedia.org/property/capitalisationBoursière 	 capitalisation boursi re
 http://fr.dbpedia.org/property/référenceSimplifiée 	 r f rence simplifi e
@@ -1489,7 +1489,7 @@ http://fr.dbpedia.org/property/pressBasDateJui 	 press bas date jui
 http://fr.dbpedia.org/property/dernièreAttribution 	 derni re attribution
 http://fr.dbpedia.org/property/vertesAlpin 	 vertes alpin
 http://fr.dbpedia.org/property/candidat 	 candidat
-http://fr.dbpedia.org/property/intituléSubdivision 	 intitul subdivision
+http://fr.dbpedia.org/property/intituléS½ivision 	 intitul s½ivision
 http://fr.dbpedia.org/property/lieuNaissance 	 lieu naissance
 http://fr.dbpedia.org/property/precHautDec 	 prec haut dec
 http://fr.dbpedia.org/property/lienBlason 	 lien blason
@@ -1498,7 +1498,7 @@ http://fr.dbpedia.org/property/allegeance 	 allegeance
 http://fr.dbpedia.org/property/align 	 align
 http://fr.dbpedia.org/property/asin 	 asin
 http://fr.dbpedia.org/property/deuxième%23_ 	 deuxi me
-http://fr.dbpedia.org/property/lieuDeRéunion 	 lieu de union
+http://fr.dbpedia.org/property/lieÞRéunion 	 lieu de union
 http://fr.dbpedia.org/property/tminRecordHautNov 	 tmin record haut nov
 http://fr.dbpedia.org/property/surface 	 surface
 http://fr.dbpedia.org/property/tmax+25Nov 	 tmax nov
@@ -1513,7 +1513,7 @@ http://fr.dbpedia.org/property/ancêtres 	 anc tres
 http://fr.dbpedia.org/property/alias2Explications 	 alias explications
 http://fr.dbpedia.org/property/chapter 	 chapter
 http://fr.dbpedia.org/property/tmaxBasMar 	 tmax bas mar
-http://fr.dbpedia.org/property/lieuDeNaissance 	 lieu de naissance
+http://fr.dbpedia.org/property/lieÞNaissance 	 lieu de naissance
 http://fr.dbpedia.org/property/méthodeDeMiseÀJour 	 m thode de mise jour
 http://fr.dbpedia.org/property/dateDeDernièreVersion 	 date de derni re version
 http://fr.dbpedia.org/property/janPrecipInch 	 jan precip inch
@@ -1535,11 +1535,11 @@ http://fr.dbpedia.org/property/flottant 	 flottant
 http://fr.dbpedia.org/property/constructeur 	 constructeur
 http://fr.dbpedia.org/property/échelleSecondaire 	 chelle secondaire
 http://fr.dbpedia.org/property/unusedData 	 unused data
-http://fr.dbpedia.org/property/lieuDeMort 	 lieu de mort
+http://fr.dbpedia.org/property/lieÞMort 	 lieu de mort
 http://fr.dbpedia.org/property/latin 	 latin
 http://fr.dbpedia.org/property/soleil+5Sep 	 soleil sep
 http://fr.dbpedia.org/property/indexCirconscription 	 index circonscription
-http://fr.dbpedia.org/property/altitudeMinimale 	 altitude minimale
+http://fr.dbpedia.org/property/altitÞMinimale 	 altitÞ minimale
 http://fr.dbpedia.org/property/annéeFr 	 ann e fr
 http://fr.dbpedia.org/property/ae 	 ae
 http://fr.dbpedia.org/property/tminJul 	 tmin jul
@@ -1568,7 +1568,7 @@ http://fr.dbpedia.org/property/championPilote 	 champion pilote
 http://fr.dbpedia.org/property/tmoyOct 	 tmoy oct
 http://fr.dbpedia.org/property/électionSuivante 	 lection suivante
 http://fr.dbpedia.org/property/nombre 	 nombre
-http://fr.dbpedia.org/property/premierJeuAffiché 	 premier jeu affich
+http://fr.dbpedia.org/property/premierJe૿iché 	 premier jeu affich
 http://fr.dbpedia.org/property/tmaxHautSep 	 tmax haut sep
 http://fr.dbpedia.org/property/tminHautDateSep 	 tmin haut date sep
 http://fr.dbpedia.org/property/popCatho 	 pop catho
@@ -1584,7 +1584,7 @@ http://fr.dbpedia.org/property/nomDuParlement 	 nom du parlement
 http://fr.dbpedia.org/property/lecture 	 lecture
 http://fr.dbpedia.org/property/nomcomplet 	 nomcomplet
 http://fr.dbpedia.org/property/precBasDateAvr 	 prec bas date avr
-http://fr.dbpedia.org/property/évolutionDuCa 	 volution du ca
+http://fr.dbpedia.org/property/évolutionDÊ 	 volution du ca
 http://fr.dbpedia.org/property/leaderd5Date 	 leaderd date
 http://fr.dbpedia.org/property/openD'australieMixte 	 open australie mixte
 http://fr.dbpedia.org/property/altname 	 altname
@@ -1599,7 +1599,7 @@ http://fr.dbpedia.org/property/humiditéDec 	 humidit dec
 http://fr.dbpedia.org/property/famille 	 famille
 http://fr.dbpedia.org/property/jourDeParution 	 jour de parution
 http://fr.dbpedia.org/property/mayRecHi°f 	 may rec hi f
-http://fr.dbpedia.org/property/subdiv 	 subdiv
+http://fr.dbpedia.org/property/s½iv 	 s½iv
 http://fr.dbpedia.org/property/cantonales2004Participation 	 cantonales participation
 http://fr.dbpedia.org/property/tmaxJui 	 tmax jui
 http://fr.dbpedia.org/property/soleil0Oct 	 soleil oct
@@ -1720,7 +1720,7 @@ http://fr.dbpedia.org/property/démolition 	 d molition
 http://fr.dbpedia.org/property/filename 	 filename
 http://fr.dbpedia.org/property/entraîneursAssociés 	 entra neurs associ s
 http://fr.dbpedia.org/property/débutPontificat 	 d but pontificat
-http://fr.dbpedia.org/property/subdivision 	 subdivision
+http://fr.dbpedia.org/property/s½ivision 	 s½ivision
 http://fr.dbpedia.org/property/pageJo 	 page jo
 http://fr.dbpedia.org/property/pibHabnom 	 pib habnom
 http://fr.dbpedia.org/property/halloffame 	 halloffame
@@ -1733,7 +1733,7 @@ http://fr.dbpedia.org/property/suédois 	 su dois
 http://fr.dbpedia.org/property/tminRecordHautMar 	 tmin record haut mar
 http://fr.dbpedia.org/property/tmin5Aou 	 tmin aou
 http://fr.dbpedia.org/property/p1Article 	 p article
-http://fr.dbpedia.org/property/partiSuccesseur 	 parti successeur
+http://fr.dbpedia.org/property/partiS೎sseur 	 parti s೎sseur
 http://fr.dbpedia.org/property/pluieJour+10mmOct 	 pluie jour mm oct
 http://fr.dbpedia.org/property/junPrecipInch 	 jun precip inch
 http://fr.dbpedia.org/property/extraColumn 	 extra column
@@ -1763,9 +1763,9 @@ http://fr.dbpedia.org/property/evt12Date 	 evt date
 http://fr.dbpedia.org/property/ad 	 ad
 http://fr.dbpedia.org/property/personnelAcadémique 	 personnel acad mique
 http://fr.dbpedia.org/property/tmin10Nov 	 tmin nov
-http://fr.dbpedia.org/property/embouchureLongitude 	 embouchure longitude
+http://fr.dbpedia.org/property/embouchureLongitÞ 	 embouchure longitÞ
 http://fr.dbpedia.org/property/lieuÉditeur 	 lieu diteur
-http://fr.dbpedia.org/property/lieuDeSignature 	 lieu de signature
+http://fr.dbpedia.org/property/lieÞSignature 	 lieu de signature
 http://fr.dbpedia.org/property/nomIdentifiant 	 nom identifiant
 http://fr.dbpedia.org/property/conti 	 conti
 http://fr.dbpedia.org/property/titreNuméro 	 titre num ro
@@ -1787,7 +1787,7 @@ http://fr.dbpedia.org/property/popDate 	 pop date
 http://fr.dbpedia.org/property/alignLeft 	 align left
 http://fr.dbpedia.org/property/juridiction 	 juridiction
 http://fr.dbpedia.org/property/artist 	 artist
-http://fr.dbpedia.org/property/origineLongitude 	 origine longitude
+http://fr.dbpedia.org/property/origineLongitÞ 	 origine longitÞ
 http://fr.dbpedia.org/property/brouillardJourJul 	 brouillard jour jul
 http://fr.dbpedia.org/property/tmax0Oct 	 tmax oct
 http://fr.dbpedia.org/property/pourcentage5Pré 	 pourcentage pr
@@ -1819,7 +1819,7 @@ http://fr.dbpedia.org/property/tmax0Ann 	 tmax ann
 http://fr.dbpedia.org/property/dateÉtablissement 	 date tablissement
 http://fr.dbpedia.org/property/extensions 	 extensions
 http://fr.dbpedia.org/property/gemme 	 gemme
-http://fr.dbpedia.org/property/sourceSecondaireLongitude 	 source secondaire longitude
+http://fr.dbpedia.org/property/sourceSecondaireLongitÞ 	 source secondaire longitÞ
 http://fr.dbpedia.org/property/matchsJoués 	 matchs jou s
 http://fr.dbpedia.org/property/tminOct 	 tmin oct
 http://fr.dbpedia.org/property/nbÉquipes 	 nb quipes
@@ -1851,7 +1851,7 @@ http://fr.dbpedia.org/property/traductiondevise 	 traductiondevise
 http://fr.dbpedia.org/property/atp 	 atp
 http://fr.dbpedia.org/property/julMean°c 	 jul mean c
 http://fr.dbpedia.org/property/débitLieu 	 d bit lieu
-http://fr.dbpedia.org/property/noteNumériqueA 	 note num rique a
+http://fr.dbpedia.org/property/noteNumériqê 	 note num rique a
 http://fr.dbpedia.org/property/h6Info 	 h info
 http://fr.dbpedia.org/property/codeIata 	 code iata
 http://fr.dbpedia.org/property/mandats 	 mandats
@@ -1951,7 +1951,7 @@ http://fr.dbpedia.org/property/sénateurs 	 s nateurs
 http://fr.dbpedia.org/property/mai 	 mai
 http://fr.dbpedia.org/property/musicCredits 	 music credits
 http://fr.dbpedia.org/property/org 	 org
-http://fr.dbpedia.org/property/lieuDeVénération 	 lieu de n ration
+http://fr.dbpedia.org/property/lieÞVénération 	 lieu de n ration
 http://fr.dbpedia.org/property/chiffreD'affaires 	 chiffre affaires
 http://fr.dbpedia.org/property/blasonLien 	 blason lien
 http://fr.dbpedia.org/property/neigeRecordDateMai 	 neige record date mai
@@ -1964,7 +1964,7 @@ http://fr.dbpedia.org/property/suivantLien 	 suivant lien
 http://fr.dbpedia.org/property/bp 	 bp
 http://fr.dbpedia.org/property/annéeDébut 	 ann e but
 http://fr.dbpedia.org/property/dateS 	 date s
-http://fr.dbpedia.org/property/sourceConfluenceLatitude 	 source confluence latitude
+http://fr.dbpedia.org/property/sourceConfluenceLatitÞ 	 source confluence latitÞ
 http://fr.dbpedia.org/property/occupationActuelle 	 occupation actuelle
 http://fr.dbpedia.org/property/pluieAn4Jul 	 pluie an jul
 http://fr.dbpedia.org/property/pressHautFev 	 press haut fev
@@ -2042,7 +2042,7 @@ http://fr.dbpedia.org/property/étoilesVisiblesÀL'œilNu 	 toiles visibles il n
 http://fr.dbpedia.org/property/interfaceGraphique 	 interface graphique
 http://fr.dbpedia.org/property/janRecLo°c 	 jan rec lo c
 http://fr.dbpedia.org/property/precHautSep 	 prec haut sep
-http://fr.dbpedia.org/property/latitude 	 latitude
+http://fr.dbpedia.org/property/latitÞ 	 latitÞ
 http://fr.dbpedia.org/property/tminBasDateJan 	 tmin bas date jan
 http://fr.dbpedia.org/property/positionDuMoteur 	 position du moteur
 http://fr.dbpedia.org/property/chefOpp3ChambreDébut 	 chef opp chambre but
@@ -2061,7 +2061,7 @@ http://fr.dbpedia.org/property/matchPrécédent 	 match pr c dent
 http://fr.dbpedia.org/property/pluieRecordDateAvr 	 pluie record date avr
 http://fr.dbpedia.org/property/ventNbr+28Avr 	 vent nbr avr
 http://fr.dbpedia.org/property/fabricant 	 fabricant
-http://fr.dbpedia.org/property/confluenceAltitude 	 confluence altitude
+http://fr.dbpedia.org/property/confluenceAltitÞ 	 confluence altitÞ
 http://fr.dbpedia.org/property/nombreDeRapports 	 nombre de rapports
 http://fr.dbpedia.org/property/fuseauxHoraires 	 fuseaux horaires
 http://fr.dbpedia.org/property/brouillardJourFev 	 brouillard jour fev
@@ -2258,7 +2258,7 @@ http://fr.dbpedia.org/property/superficie2Date 	 superficie date
 http://fr.dbpedia.org/property/prologue 	 prologue
 http://fr.dbpedia.org/property/scoreTab 	 score tab
 http://fr.dbpedia.org/property/dec 	 dec
-http://fr.dbpedia.org/property/confluenceLongitude 	 confluence longitude
+http://fr.dbpedia.org/property/confluenceLongitÞ 	 confluence longitÞ
 http://fr.dbpedia.org/property/nomDiversGéo 	 nom divers o
 http://fr.dbpedia.org/property/tmaxRecordDateMar 	 tmax record date mar
 http://fr.dbpedia.org/property/julRecHi°f 	 jul rec hi f
@@ -2278,7 +2278,7 @@ http://fr.dbpedia.org/property/soleil0Sep 	 soleil sep
 http://fr.dbpedia.org/property/filNeige 	 fil neige
 http://fr.dbpedia.org/property/julLo°c 	 jul lo c
 http://fr.dbpedia.org/property/couleurArrièreInfobox 	 couleur arri re infobox
-http://fr.dbpedia.org/property/altitude 	 altitude
+http://fr.dbpedia.org/property/altitÞ 	 altitÞ
 http://fr.dbpedia.org/property/genresDérivés 	 genres riv s
 http://fr.dbpedia.org/property/ar 	 ar
 http://fr.dbpedia.org/property/disponibles 	 disponibles
@@ -2440,11 +2440,11 @@ http://fr.dbpedia.org/property/chancelier 	 chancelier
 http://fr.dbpedia.org/property/ressources 	 ressources
 http://fr.dbpedia.org/property/pluieRecordMar 	 pluie record mar
 http://fr.dbpedia.org/property/entourage 	 entourage
-http://fr.dbpedia.org/property/pays2LienSubdivision 	 pays lien subdivision
+http://fr.dbpedia.org/property/pays2LienS½ivision 	 pays lien s½ivision
 http://fr.dbpedia.org/property/dimensionsEtPoids 	 dimensions et poids
 http://fr.dbpedia.org/property/embouchure 	 embouchure
 http://fr.dbpedia.org/property/5559m 	 m
-http://fr.dbpedia.org/property/langueDeFacto 	 langue de facto
+http://fr.dbpedia.org/property/langacto 	 langue de facto
 http://fr.dbpedia.org/property/villeindé 	 villeind
 http://fr.dbpedia.org/property/pluieRecordAou 	 pluie record aou
 http://fr.dbpedia.org/property/échellePrincipale 	 chelle principale
@@ -2664,7 +2664,7 @@ http://fr.dbpedia.org/property/caméra 	 cam ra
 http://fr.dbpedia.org/property/complément 	 compl ment
 http://fr.dbpedia.org/property/evolène 	 evol ne
 http://fr.dbpedia.org/property/febRecLo°f 	 feb rec lo f
-http://fr.dbpedia.org/property/sourceSecondaireLatitude 	 source secondaire latitude
+http://fr.dbpedia.org/property/sourceSecondaireLatitÞ 	 source secondaire latitÞ
 http://fr.dbpedia.org/property/tminMai 	 tmin mai
 http://fr.dbpedia.org/property/metricFirst 	 metric first
 http://fr.dbpedia.org/property/sup 	 sup
@@ -2696,7 +2696,7 @@ http://fr.dbpedia.org/property/pluieJourSep 	 pluie jour sep
 http://fr.dbpedia.org/property/soleilNov 	 soleil nov
 http://fr.dbpedia.org/property/autresActivités 	 autres activit s
 http://fr.dbpedia.org/property/humiditéMar 	 humidit mar
-http://fr.dbpedia.org/property/sourcePrincipaleLatitude 	 source principale latitude
+http://fr.dbpedia.org/property/sourcePrincipaleLatitÞ 	 source principale latitÞ
 http://fr.dbpedia.org/property/carteTaille 	 carte taille
 http://fr.dbpedia.org/property/tmaxRecordBasMai 	 tmax record bas mai
 http://fr.dbpedia.org/property/febLo°f 	 feb lo f
@@ -2704,7 +2704,7 @@ http://fr.dbpedia.org/property/taille 	 taille
 http://fr.dbpedia.org/property/hTitre 	 h titre
 http://fr.dbpedia.org/property/brouillardJourSep 	 brouillard jour sep
 http://fr.dbpedia.org/property/typeChambre 	 type chambre
-http://fr.dbpedia.org/property/sudEst 	 sud est
+http://fr.dbpedia.org/property/sÞst 	 sud est
 http://fr.dbpedia.org/property/revenuMoyen 	 revenu moyen
 http://fr.dbpedia.org/property/clubs 	 clubs
 http://fr.dbpedia.org/property/voies 	 voies
@@ -2716,7 +2716,7 @@ http://fr.dbpedia.org/property/positionDépartement 	 position partement
 http://fr.dbpedia.org/property/aliasImage 	 alias image
 http://fr.dbpedia.org/property/périodeOrbitaleUnité 	 p riode orbitale unit
 http://fr.dbpedia.org/property/rev5score 	 rev score
-http://fr.dbpedia.org/property/pays3Subdivision 	 pays subdivision
+http://fr.dbpedia.org/property/pays3S½ivision 	 pays s½ivision
 http://fr.dbpedia.org/property/lanceur 	 lanceur
 http://fr.dbpedia.org/property/format 	 format
 http://fr.dbpedia.org/property/precNbrHautDateOct 	 prec nbr haut date oct
@@ -2732,7 +2732,7 @@ http://fr.dbpedia.org/property/jourPluieJui 	 jour pluie jui
 http://fr.dbpedia.org/property/heureÉté 	 heure t
 http://fr.dbpedia.org/property/passage 	 passage
 http://fr.dbpedia.org/property/dateAutonomie 	 date autonomie
-http://fr.dbpedia.org/property/pays1Subdivision 	 pays subdivision
+http://fr.dbpedia.org/property/pays1S½ivision 	 pays s½ivision
 http://fr.dbpedia.org/property/entete 	 entete
 http://fr.dbpedia.org/property/missionPrécédente 	 mission pr c dente
 http://fr.dbpedia.org/property/passagers 	 passagers
@@ -2824,7 +2824,7 @@ http://fr.dbpedia.org/property/analyste 	 analyste
 http://fr.dbpedia.org/property/soleilAnn 	 soleil ann
 http://fr.dbpedia.org/property/pluieAn1Oct 	 pluie an oct
 http://fr.dbpedia.org/property/tmin10Ann 	 tmin ann
-http://fr.dbpedia.org/property/meilleurClassementUefa 	 meilleur classement uefa
+http://fr.dbpedia.org/property/meilleurClassement໺ 	 meilleur classement ໺
 http://fr.dbpedia.org/property/polePositions 	 pole positions
 http://fr.dbpedia.org/property/brouillardJourAvr 	 brouillard jour avr
 http://fr.dbpedia.org/property/métro 	 m tro
@@ -2869,7 +2869,7 @@ http://fr.dbpedia.org/property/caps 	 caps
 http://fr.dbpedia.org/property/rangpop 	 rangpop
 http://fr.dbpedia.org/property/régionales2015PremierPourcentage 	 r gionales premier pourcentage
 http://fr.dbpedia.org/property/indexCommune 	 index commune
-http://fr.dbpedia.org/property/lienSubdivision 	 lien subdivision
+http://fr.dbpedia.org/property/lienS½ivision 	 lien s½ivision
 http://fr.dbpedia.org/property/mairem 	 mairem
 http://fr.dbpedia.org/property/precNbrBasDateJul 	 prec nbr bas date jul
 http://fr.dbpedia.org/property/pibHab 	 pib hab
@@ -3039,7 +3039,7 @@ http://fr.dbpedia.org/property/géolocDépartement 	 g oloc partement
 http://fr.dbpedia.org/property/dateNaissance 	 date naissance
 http://fr.dbpedia.org/property/formatLivre 	 format livre
 http://fr.dbpedia.org/property/titreVo 	 titre vo
-http://fr.dbpedia.org/property/idéesRemarquables 	 id es remarquables
+http://fr.dbpedia.org/property/idéesRemarq«les 	 id es remarq«les
 http://fr.dbpedia.org/property/choixDraftLnh 	 choix draft lnh
 http://fr.dbpedia.org/property/editorFirst 	 editor first
 http://fr.dbpedia.org/property/tminRecordJul 	 tmin record jul
@@ -3066,7 +3066,7 @@ http://fr.dbpedia.org/property/sièges5Pré 	 si ges pr
 http://fr.dbpedia.org/property/rightarm 	 rightarm
 http://fr.dbpedia.org/property/victoire%23_ 	 victoire
 http://fr.dbpedia.org/property/pibppaAnnée 	 pibppa ann e
-http://fr.dbpedia.org/property/cartesuffragants 	 cartesuffragants
+http://fr.dbpedia.org/property/cartesÿragants 	 cartesÿragants
 http://fr.dbpedia.org/property/h5V 	 h v
 http://fr.dbpedia.org/property/extrémité2Intersection 	 extr mit intersection
 http://fr.dbpedia.org/property/conflit 	 conflit
@@ -3335,13 +3335,13 @@ http://fr.dbpedia.org/property/prépublication 	 pr publication
 http://fr.dbpedia.org/property/directeur 	 directeur
 http://fr.dbpedia.org/property/tmaxHautDateDec 	 tmax haut date dec
 http://fr.dbpedia.org/property/rapport 	 rapport
-http://fr.dbpedia.org/property/dateDuDernierJeuEnDate 	 date du dernier jeu en date
+http://fr.dbpedia.org/property/dateDÞrnierJeuEnDate 	 date du dernier jeu en date
 http://fr.dbpedia.org/property/tminRecordDateOct 	 tmin record date oct
 http://fr.dbpedia.org/property/nomFi 	 nom fi
 http://fr.dbpedia.org/property/pluieAn2Jul 	 pluie an jul
 http://fr.dbpedia.org/property/soleilMinJui 	 soleil min jui
 http://fr.dbpedia.org/property/siteNumérique 	 site num rique
-http://fr.dbpedia.org/property/pays3LienSubdivision 	 pays lien subdivision
+http://fr.dbpedia.org/property/pays3LienS½ivision 	 pays lien s½ivision
 http://fr.dbpedia.org/property/résultatPréc 	 r sultat pr c
 http://fr.dbpedia.org/property/pibNominal(2013)_ 	 pib nominal
 http://fr.dbpedia.org/property/tmax+30Jan 	 tmax jan
@@ -3374,7 +3374,7 @@ http://fr.dbpedia.org/property/soleil+5Fev 	 soleil fev
 http://fr.dbpedia.org/property/hiérarchie 	 hi rarchie
 http://fr.dbpedia.org/property/écurieRecordTour 	 curie record tour
 http://fr.dbpedia.org/property/soleilMinDateDec 	 soleil min date dec
-http://fr.dbpedia.org/property/pays2Subdivision 	 pays subdivision
+http://fr.dbpedia.org/property/pays2S½ivision 	 pays s½ivision
 http://fr.dbpedia.org/property/nomlocuteurs 	 nomlocuteurs
 http://fr.dbpedia.org/property/createurs 	 createurs
 http://fr.dbpedia.org/property/gareSuivante 	 gare suivante
@@ -3405,7 +3405,7 @@ http://fr.dbpedia.org/property/pluieJour+5mmJan 	 pluie jour mm jan
 http://fr.dbpedia.org/property/tmoyAou 	 tmoy aou
 http://fr.dbpedia.org/property/novRecLo°f 	 nov rec lo f
 http://fr.dbpedia.org/property/buteurNom 	 buteur nom
-http://fr.dbpedia.org/property/sourceSecondaireAltitude 	 source secondaire altitude
+http://fr.dbpedia.org/property/sourceSecondaireAltitÞ 	 source secondaire altitÞ
 http://fr.dbpedia.org/property/surnomFrançais 	 surnom fran ais
 http://fr.dbpedia.org/property/annéeActive 	 ann e active
 http://fr.dbpedia.org/property/commercial 	 commercial
@@ -3489,7 +3489,7 @@ http://fr.dbpedia.org/property/secrétaires 	 secr taires
 http://fr.dbpedia.org/property/chefs 	 chefs
 http://fr.dbpedia.org/property/nomm 	 nomm
 http://fr.dbpedia.org/property/pluieAn3Jan 	 pluie an jan
-http://fr.dbpedia.org/property/typeSubdivision 	 type subdivision
+http://fr.dbpedia.org/property/typeS½ivision 	 type s½ivision
 http://fr.dbpedia.org/property/maire 	 maire
 http://fr.dbpedia.org/property/rémunération 	 r mun ration
 http://fr.dbpedia.org/property/tmaxBasDateJul 	 tmax bas date jul
@@ -3526,7 +3526,7 @@ http://fr.dbpedia.org/property/pluieAn3Avr 	 pluie an avr
 http://fr.dbpedia.org/property/yearHi°c 	 year hi c
 http://fr.dbpedia.org/property/mandat 	 mandat
 http://fr.dbpedia.org/property/siègesLandtag 	 si ges landtag
-http://fr.dbpedia.org/property/lieuDeL'annonceCanonisation 	 lieu de annonce canonisation
+http://fr.dbpedia.org/property/lieÞL'annonceCanonisation 	 lieu de annonce canonisation
 http://fr.dbpedia.org/property/propriétaire 	 propri taire
 http://fr.dbpedia.org/property/coordonnéesCapitale 	 coordonn es capitale
 http://fr.dbpedia.org/property/neigeRecordSep 	 neige record sep
@@ -3555,7 +3555,7 @@ http://fr.dbpedia.org/property/annéePremière 	 ann e premi re
 http://fr.dbpedia.org/property/authormask 	 authormask
 http://fr.dbpedia.org/property/creditsParoles 	 credits paroles
 http://fr.dbpedia.org/property/cvg 	 cvg
-http://fr.dbpedia.org/property/embouchureLatitude 	 embouchure latitude
+http://fr.dbpedia.org/property/embouchureLatitÞ 	 embouchure latitÞ
 http://fr.dbpedia.org/property/soleilMaxAnn 	 soleil max ann
 http://fr.dbpedia.org/property/titreDuCommandantEnChef 	 titre du commandant en chef
 http://fr.dbpedia.org/property/salaire 	 salaire
@@ -3603,7 +3603,7 @@ http://fr.dbpedia.org/property/participant 	 participant
 http://fr.dbpedia.org/property/aprRecLo°c 	 apr rec lo c
 http://fr.dbpedia.org/property/derniereselection 	 derniereselection
 http://fr.dbpedia.org/property/ol 	 ol
-http://fr.dbpedia.org/property/clubEntraîneur 	 club entra neur
+http://fr.dbpedia.org/property/cl¾ntraîneur 	 club entra neur
 http://fr.dbpedia.org/property/législatives2012PremierTour 	 l gislatives premier tour
 http://fr.dbpedia.org/property/annéeMiss 	 ann e miss
 http://fr.dbpedia.org/property/nomde 	 nomde
@@ -3684,7 +3684,7 @@ http://fr.dbpedia.org/property/titreTome 	 titre tome
 http://fr.dbpedia.org/property/parlement 	 parlement
 http://fr.dbpedia.org/property/orageJourJan 	 orage jour jan
 http://fr.dbpedia.org/property/nomtamazight 	 nomtamazight
-http://fr.dbpedia.org/property/squadname 	 squadname
+http://fr.dbpedia.org/property/sq­name 	 sq­name
 http://fr.dbpedia.org/property/lienDistributeur 	 lien distributeur
 http://fr.dbpedia.org/property/suspensionAvant 	 suspension avant
 http://fr.dbpedia.org/property/boxOffice 	 box office
@@ -3693,7 +3693,7 @@ http://fr.dbpedia.org/property/6064m 	 m
 http://fr.dbpedia.org/property/profondeurMoyenne 	 profondeur moyenne
 http://fr.dbpedia.org/property/teamManager 	 team manager
 http://fr.dbpedia.org/property/lignes 	 lignes
-http://fr.dbpedia.org/property/origineLatitude 	 origine latitude
+http://fr.dbpedia.org/property/origineLatitÞ 	 origine latitÞ
 http://fr.dbpedia.org/property/nombreCommunes 	 nombre communes
 http://fr.dbpedia.org/property/titreCorresp 	 titre corresp
 http://fr.dbpedia.org/property/cantonales2001PremierNom 	 cantonales premier nom
@@ -3720,13 +3720,13 @@ http://fr.dbpedia.org/property/pressBasDateNov 	 press bas date nov
 http://fr.dbpedia.org/property/tminBasSep 	 tmin bas sep
 http://xmlns.com/foaf/0.1/nick 	 http xmlns com foaf nick
 http://fr.dbpedia.org/property/fuse 	 fuse
-http://fr.dbpedia.org/property/sourcePrincipaleLongitude 	 source principale longitude
+http://fr.dbpedia.org/property/sourcePrincipaleLongitÞ 	 source principale longitÞ
 http://fr.dbpedia.org/property/tminRecordHautAou 	 tmin record haut aou
 http://fr.dbpedia.org/property/febPrecipInch 	 feb precip inch
 http://fr.dbpedia.org/property/soleil+5Jul 	 soleil jul
 http://fr.dbpedia.org/property/annéeDraftAmh 	 ann e draft amh
 http://fr.dbpedia.org/property/moteurDeJeu 	 moteur de jeu
-http://fr.dbpedia.org/property/longitudeOrientale 	 longitude orientale
+http://fr.dbpedia.org/property/longitÞOrientale 	 longitÞ orientale
 http://fr.dbpedia.org/property/decRecLo°c 	 dec rec lo c
 http://fr.dbpedia.org/property/configuration 	 configuration
 http://fr.dbpedia.org/property/hauteurLignes 	 hauteur lignes
@@ -3744,7 +3744,7 @@ http://fr.dbpedia.org/property/signePourcent 	 signe pourcent
 http://fr.dbpedia.org/property/siteWeb 	 site web
 http://fr.dbpedia.org/property/tminRecordHautDateOct 	 tmin record haut date oct
 http://fr.dbpedia.org/property/débutEnCmF 	 d but en cm f
-http://fr.dbpedia.org/property/ligueEnt 	 ligue ent
+http://fr.dbpedia.org/property/ligînt 	 ligue ent
 http://fr.dbpedia.org/property/superficieNotes 	 superficie notes
 http://fr.dbpedia.org/property/yearRecLo°c 	 year rec lo c
 http://fr.dbpedia.org/property/codeLangue 	 code langue
@@ -3769,8 +3769,8 @@ http://fr.dbpedia.org/property/part 	 part
 http://fr.dbpedia.org/property/ref 	 ref
 http://fr.dbpedia.org/property/saison 	 saison
 http://fr.dbpedia.org/property/marPrecipMm 	 mar precip mm
-http://fr.dbpedia.org/property/suffrages 	 suffrages
-http://fr.dbpedia.org/property/sourceAltitude 	 source altitude
+http://fr.dbpedia.org/property/sÿrages 	 sÿrages
+http://fr.dbpedia.org/property/sourceAltitÞ 	 source altitÞ
 http://fr.dbpedia.org/property/evt13Date 	 evt date
 http://fr.dbpedia.org/property/pluieAn4Fev 	 pluie an fev
 http://fr.dbpedia.org/property/janLo°c 	 jan lo c
@@ -3804,7 +3804,7 @@ http://fr.dbpedia.org/property/missionSuivante 	 mission suivante
 http://fr.dbpedia.org/property/femmes 	 femmes
 http://fr.dbpedia.org/property/tminHautAvr 	 tmin haut avr
 http://fr.dbpedia.org/property/jourPluieAou 	 jour pluie aou
-http://fr.dbpedia.org/property/lieuDeDécès 	 lieu de c s
+http://fr.dbpedia.org/property/lie෭écès 	 lieu de c s
 http://fr.dbpedia.org/property/tmaxBasAou 	 tmax bas aou
 http://fr.dbpedia.org/property/novMean°c 	 nov mean c
 http://fr.dbpedia.org/property/pibAnnée 	 pib ann e
@@ -3903,7 +3903,7 @@ http://fr.dbpedia.org/property/tmaxBasMai 	 tmax bas mai
 http://fr.dbpedia.org/property/sénateurs6Pré 	 s nateurs pr
 http://fr.dbpedia.org/property/precMai 	 prec mai
 http://fr.dbpedia.org/property/parti3Coalition 	 parti coalition
-http://fr.dbpedia.org/property/pays2NomSubdivision 	 pays nom subdivision
+http://fr.dbpedia.org/property/pays2NomS½ivision 	 pays nom s½ivision
 http://fr.dbpedia.org/property/alternative 	 alternative
 http://fr.dbpedia.org/property/dernièreVersionStable 	 derni re version stable
 http://fr.dbpedia.org/property/tmax+25Fev 	 tmax fev
@@ -3945,7 +3945,7 @@ http://fr.dbpedia.org/property/pib/habitant 	 pib habitant
 http://fr.dbpedia.org/property/province 	 province
 http://fr.dbpedia.org/property/soleilJui 	 soleil jui
 http://fr.dbpedia.org/property/députés2Pré 	 d put s pr
-http://fr.dbpedia.org/property/médiaNumériqueA 	 m dia num rique a
+http://fr.dbpedia.org/property/médiaNumériqê 	 m dia num rique a
 http://fr.dbpedia.org/property/codeIso 	 code iso
 http://fr.dbpedia.org/property/tournéePrécédente 	 tourn e pr c dente
 http://fr.dbpedia.org/property/demiFinale 	 demi finale
@@ -4054,9 +4054,9 @@ http://fr.dbpedia.org/property/lien 	 lien
 http://fr.dbpedia.org/property/vénéréPar 	 v n r par
 http://fr.dbpedia.org/property/régionales2010PremierPourcentage 	 r gionales premier pourcentage
 http://fr.dbpedia.org/property/nombreÉpisodes 	 nombre pisodes
-http://fr.dbpedia.org/property/embouchureAltitude 	 embouchure altitude
+http://fr.dbpedia.org/property/embouchureAltitÞ 	 embouchure altitÞ
 http://fr.dbpedia.org/property/deviseDeLaVille 	 devise de la ville
-http://fr.dbpedia.org/property/clubAnnée 	 club ann e
+http://fr.dbpedia.org/property/clºnnée 	 club ann e
 http://fr.dbpedia.org/property/dateD'atterrissage 	 date atterrissage
 http://fr.dbpedia.org/property/législatives2012SecondPourcentage 	 l gislatives second pourcentage
 http://fr.dbpedia.org/property/name 	 name
@@ -4087,7 +4087,7 @@ http://fr.dbpedia.org/property/fusionDe 	 fusion de
 http://fr.dbpedia.org/property/perigee 	 perigee
 http://fr.dbpedia.org/property/nombreD'épreuves 	 nombre preuves
 http://fr.dbpedia.org/property/échelle 	 chelle
-http://fr.dbpedia.org/property/langueDuTitre 	 langue du titre
+http://fr.dbpedia.org/property/langíuTitre 	 langue du titre
 http://fr.dbpedia.org/property/licenciés 	 licenci s
 http://fr.dbpedia.org/property/organismeGestionnaire 	 organisme gestionnaire
 http://fr.dbpedia.org/property/relégation 	 rel gation
@@ -4273,7 +4273,7 @@ http://fr.dbpedia.org/property/mayPrecipDays 	 may precip days
 http://fr.dbpedia.org/property/precBasJan 	 prec bas jan
 http://fr.dbpedia.org/property/popcatho 	 popcatho
 http://fr.dbpedia.org/property/pib(2013)_ 	 pib
-http://fr.dbpedia.org/property/nomSubdivisionMère 	 nom subdivision re
+http://fr.dbpedia.org/property/nomS½ivisionMère 	 nom s½ivision re
 http://fr.dbpedia.org/property/sœurs 	 s urs
 http://fr.dbpedia.org/property/arr 	 arr
 http://fr.dbpedia.org/property/tmin10Mar 	 tmin mar
@@ -4414,7 +4414,7 @@ http://fr.dbpedia.org/property/tmaxRecordDateOct 	 tmax record date oct
 http://fr.dbpedia.org/property/soleilMaxAvr 	 soleil max avr
 http://fr.dbpedia.org/property/défaitesDécision 	 d faites cision
 http://fr.dbpedia.org/property/pluieAn3Mar 	 pluie an mar
-http://fr.dbpedia.org/property/langueDeJure 	 langue de jure
+http://fr.dbpedia.org/property/langໞJure 	 langue de jure
 http://fr.dbpedia.org/property/nbMatchs 	 nb matchs
 http://fr.dbpedia.org/property/tempsRecordTour 	 temps record tour
 http://fr.dbpedia.org/property/extra 	 extra
@@ -4423,7 +4423,7 @@ http://fr.dbpedia.org/property/commons 	 commons
 http://fr.dbpedia.org/property/thumb 	 thumb
 http://fr.dbpedia.org/property/tminBasDateJul 	 tmin bas date jul
 http://fr.dbpedia.org/property/nordEst 	 nord est
-http://fr.dbpedia.org/property/pays1NomSubdivision 	 pays nom subdivision
+http://fr.dbpedia.org/property/pays1NomS½ivision 	 pays nom s½ivision
 http://fr.dbpedia.org/property/héritier 	 h ritier
 http://fr.dbpedia.org/property/maireDélégué 	 maire l gu
 http://fr.dbpedia.org/property/cinématographie 	 cin matographie
@@ -4511,7 +4511,7 @@ http://fr.dbpedia.org/property/nomJaponais 	 nom japonais
 http://fr.dbpedia.org/property/pressBasOct 	 press bas oct
 http://fr.dbpedia.org/property/distributeur 	 distributeur
 http://fr.dbpedia.org/property/precNbrHautDateMar 	 prec nbr haut date mar
-http://fr.dbpedia.org/property/suffrages1b 	 suffrages b
+http://fr.dbpedia.org/property/sÿrages1b 	 sÿrages b
 http://fr.dbpedia.org/property/densité 	 densit
 http://fr.dbpedia.org/property/padding 	 padding
 http://fr.dbpedia.org/property/sep 	 sep
@@ -4535,7 +4535,7 @@ http://fr.dbpedia.org/property/sitelancement 	 sitelancement
 http://fr.dbpedia.org/property/grêleJourAvr 	 gr le jour avr
 http://fr.dbpedia.org/property/precNbrHautDateJul 	 prec nbr haut date jul
 http://fr.dbpedia.org/property/étiquette 	 tiquette
-http://fr.dbpedia.org/property/clubEntraineur 	 club entraineur
+http://fr.dbpedia.org/property/cl¾ntraineur 	 club entraineur
 http://fr.dbpedia.org/property/présidente 	 pr sidente
 http://fr.dbpedia.org/property/annéesD'activité 	 ann es activit
 http://xmlns.com/foaf/0.1/name 	 http xmlns com foaf name

@@ -116,7 +116,7 @@ Cyprus
 Jadranka Kosor
 Wells Fargo
 Business (Bulgaria)
-Education Ministry (India)
+EdÊtion Ministry (India)
 Laurenz Meyer
 Newspaper (Australia)
 Opposition Force (Syria)
@@ -175,7 +175,7 @@ Lloyd Doggett
 Media Personnel (South Korea)
 Dwight E. Evans
 Bingu wa Mutharika
-Central University of Ecuador
+Central University of Ec­or
 Julio Cobos
 Paul Berenger
 Representatives (Ukraine)
@@ -191,7 +191,7 @@ Apas Jumagulov
 John F. Kennedy
 Guillermo Ortiz Martínez
 Legislature (Greece)
-Refugee (South Sudan)
+Refugee (South SÚn)
 Bernard Accoyer
 Militant (France)
 City Mayor (Brazil)
@@ -223,7 +223,7 @@ Opposition Supporter (Pakistan)
 Isabel Carrasco
 Leszek Balcerowicz
 Member of Parliament (Greece)
-Military Personnel - Special (Sudan)
+Military Personnel - Special (SÚn)
 Michael Cullen
 Ali Zeidan
 Other Authorities / Officials (Yemen)
@@ -255,7 +255,7 @@ Pavel Sergeyevich Grachev
 Brice Hortefeux
 Nebojsa Covic
 Media Personnel (Georgia)
-Education (Australia)
+EdÊtion (Australia)
 Court Judge (Nigeria)
 Armed Forces of the Republic of Armenia
 Governor (Syria)
@@ -269,10 +269,10 @@ Citizen (Canada)
 Phil Gramm
 Peter Brooke
 Don Brash
-Education (United Kingdom)
+EdÊtion (United Kingdom)
 Danilo Astori
 Danny Alexander
-Italo Luder
+Italo LÞr
 Tunca Toskay
 Miguel Ángel Fernández Ordóñez
 France Cukjati
@@ -285,9 +285,9 @@ Khin Nyunt
 Sigmundur Davíd Gunnlaugsson
 Domestic Affairs (Iraq)
 Military (Taiwan)
-Taufa'ahau Tupou IV
+Taú'ahau Tupou IV
 Activist (Palestinian Territory, Occupied)
-Exiles (Cuba)
+Exiles (Cº)
 Business (Croatia)
 Alexander Dzasokhov
 Juan Gelman
@@ -297,7 +297,7 @@ Immigrants (India)
 Marc Isaiah Grossman
 Media Personnel (Palestinian Territory, Occupied)
 Morocco
-Government Official (Sudan)
+Government Official (SÚn)
 Htin Kyaw
 Cabinet of Greece
 Ebrahim Yazdi
@@ -338,7 +338,7 @@ Citizen (Burkina Faso)
 Gholamali Haddad Adel
 Zhou Wenzhong
 Daniel Inouye
-Warren Buffett
+Warren B࿾tt
 Lawmaker (Canada)
 Chung Un Chan
 Government (Ghana)
@@ -356,9 +356,9 @@ Erdal Inönü
 Adolfo Aguilar Zínser
 Head of Government (Mexico)
 Sheikh Khalifa ibn Zaid al Nahayan
-Student (Nigeria)
+StÞnt (Nigeria)
 Pavel Rychetský
-Bruce Rauner
+BrÎ Rauner
 Saulius Skvernelis
 José Juan Bautista Pampuro
 Businessperson (France)
@@ -490,7 +490,7 @@ Kakha Kaladze
 Criminal (Libya)
 Armed Gang (Hamas)
 Protester (Algeria)
-Head of Government (South Sudan)
+Head of Government (South SÚn)
 Ömer Izgi
 Anton Rop
 Foreign Affairs (Kuwait)
@@ -505,7 +505,7 @@ Representatives (Russia)
 Citizen (Qatar)
 Assembly of the Union (Belarus)
 Police (Zambia)
-South Sudan
+South SÚn
 National Security and Defense Council
 Refugee (Democratic Republic of Congo)
 Guinea
@@ -551,7 +551,7 @@ Minister Maran
 Neven Mimica
 Ireland
 Joon Young Woo
-Jean-Claude Gaudin
+Jean-ClaÞ Gaudin
 Altero Matteoli
 Mohamed Nasheed
 Jean-Louis Debré
@@ -600,7 +600,7 @@ Military Personnel (Afghanistan)
 Ajoy Roy
 Nigeria
 Ministry (Bolivia)
-Claude Janiak
+ClaÞ Janiak
 Alan Garcia
 Head of Government (South Korea)
 Viktor Ivanov
@@ -652,7 +652,7 @@ Mladen Ivanic
 Foreign Affairs (Uruguay)
 Jersey
 James Francis Dobbins
-Employee (Sudan)
+Employee (SÚn)
 Crimea
 Xavier Bettel
 Carme Chacón Piqueras
@@ -666,7 +666,7 @@ Treasury/Finance Ministry (Mexico)
 Human Rights Activist (Russia)
 Serbian Renewal Movement
 David Blunkett
-Justin Trudeau
+Justin Tr෪u
 Palaniappan Chidambaram
 Lynn Woolsey
 Political Parties (Iraq)
@@ -687,7 +687,7 @@ Russian Navy
 Party Member (United States)
 Ryerson University
 Other Authorities / Officials (Hungary)
-Media Personnel (Sudan)
+Media Personnel (SÚn)
 People Associated with the Opposition (Philippines)
 Philippe Maystadt
 Criminal (Kenya)
@@ -701,13 +701,13 @@ Citizen (Spain)
 Luxembourg Socialist Workers' Party
 World Economic Forum
 Juhan Parts
-Volker Kauder
+Volker KaÞr
 Communist Party (China)
 Manuchehr Mottaki
 Tony McNulty
 Blaise Compaoré
 Taiwan Affairs Office
-Men (Sudan)
+Men (SÚn)
 Protester (Mexico)
 Ibrahim Abd al-Aziz al-Assaf
 Børge Brende
@@ -718,7 +718,7 @@ Group of Eight
 General Electric
 Adobe Systems
 High Ranking Military Personnel (Philippines)
-Paulo Guedes
+Paulo Gໞs
 Men (Yemen)
 Philippines
 Karim Khalili
@@ -737,7 +737,7 @@ Gholamali Khoshru
 Akhmetzhan Yesimov
 Canadian Forces Land Force Command
 Hasan Hasanov
-Armed Rebel (Sudan)
+Armed Rebel (SÚn)
 Ralph E. Eberhart
 Salah Tarif
 Sima Samar
@@ -798,7 +798,7 @@ Saeb Erekat
 Eric Garcetti
 Head of Government (Egypt)
 Political Parties (Italy)
-Sir Edward Youde
+Sir Edward YoÞ
 Mikael Harutyunyan
 Lawyer/Attorney (Nigeria)
 Ine Marie Eriksen Søreide
@@ -868,7 +868,7 @@ Royal Administration (Saudi Arabia)
 Harry A. Blackmun
 Toomas Hendrik Ilves
 István Csurka
-Judd Gregg
+JÝ Gregg
 Party Member (Nigeria)
 Dave Reichert
 Khosrov Harutyunyan
@@ -905,7 +905,7 @@ Foreign Affairs (Eritrea)
 Muammar al-Qaddafi
 Natan Sharansky
 Duncan Kerr
-Algirdas Saudargas
+Algirdas SaÚrgas
 Mark Saville
 Media Personnel (Armenia)
 Military (Romania)
@@ -941,13 +941,13 @@ Businessperson (Iran)
 Latin America
 Ministry (Cote d'Ivoire)
 Spanish Armed Forces
-Frederick Chiluba
+Frederick Chilº
 University of Waterloo
 Radical Civic Union
 Salman bin Abdulaziz al-Saud
 Democratic Liberal Party
 Said Wilbert Musa
-Salvatore Cuffaro
+Salvatore C࿺ro
 Businessperson (Russia)
 David Laws
 National Party (New Zealand)
@@ -1020,7 +1020,7 @@ Hosei Norota
 Mwai Kibaki
 Tom Schieffer
 Youssef Chahed
-Cabinet / Council of Ministers / Advisors (Sudan)
+Cabinet / Council of Ministers / Advisors (SÚn)
 Military of Hungary
 Women (Mexico)
 Kasymzhomart Tokayev
@@ -1047,7 +1047,7 @@ Uruguay
 Amnon Lipkin-Shahak
 Armed Gang (Russia)
 Mexico
-Secretary of State for Education
+Secretary of State for EdÊtion
 Ghana
 Dan Boren
 Mitch Landrieu
@@ -1139,7 +1139,7 @@ Ministry (Africa)
 Alexander Prokhorovich Losyukov
 Gérard Larcher
 Men (Saudi Arabia)
-Anatoly Borisovich Chubais
+Anatoly Borisovich Chºis
 Bart Stupak
 Tatarstan
 Askar Akayev
@@ -1149,10 +1149,10 @@ Daniel Arap Moi
 Domestic Affairs (Germany)
 BHP Billiton
 Criminal (Venezuela)
-Fakhruddin Ali Ahmed
+FakhrÝin Ali Ahmed
 Gerry Adams
 Armed Rebel (United Kingdom)
-Lucas Papademos
+LÊs Papademos
 Alfred Moisiu
 Itsunori Onodera
 Militant (Ukraine)
@@ -1177,7 +1177,7 @@ Dean Smith
 Kostis Stephanopoulos
 Ministry (Thailand)
 Carlos Miguel Gutiérrez
-UAE Armed Forces
+® Armed Forces
 Sanjeev Kumar
 Penny Mordaunt
 Nancy  Boyda
@@ -1357,7 +1357,7 @@ Taha Yasin Ramadan
 Raffi Hovannisian
 Indigenous People (Romania)
 USS Carl Vinson
-Protester (Sudan)
+Protester (SÚn)
 Antony Harold Curties "Tony" Windsor
 Bill Clinton
 Françoise de Panafieu
@@ -1423,21 +1423,21 @@ Head of Government (Senegal)
 Domestic Affairs (Saudi Arabia)
 Men (Pakistan)
 Paul Sarbanes
-Jorge Illueca
+Jorge Ill໊
 Claudio Huepe
-Medical Personnel (Cuba)
+Medical Personnel (Cº)
 Estonia
 Business (Nigeria)
 Sergei Ryabkov
 András Bozóki
-Ivan Hudec
+Ivan H෬
 Ferdinand Marcos, Jr.
 Marek Belka
 Federal Reserve
 Men (Afghanistan)
 Militant (India)
 John Sarbanes
-Student (Chile)
+StÞnt (Chile)
 Bev Perdue
 International Crisis Group
 Media (Thailand)
@@ -1528,7 +1528,7 @@ Member of Parliament (Lithuania)
 United Liberation Force of Assam
 Head of Government (Slovenia)
 Adolfo Zaldívar
-Armed Band (Sudan)
+Armed Band (SÚn)
 Healthcare Facility (United Kingdom)
 Christian Kern
 Scottish Government
@@ -1578,7 +1578,7 @@ Mariano Fernández
 Alejandro García Padilla
 Court Judge (Argentina)
 Leo Varadkar
-Antigua and Barbuda
+Antigua and BarbÚ
 Angus Houston
 Medical Personnel (Argentina)
 Valeriy Horbatov
@@ -1751,7 +1751,7 @@ Christian Social Union of Bavaria
 Yair Lapid
 Mamuka Bakhtadze
 Military Personnel - Special (Israel)
-Refat Chubarov
+Refat Chºrov
 Saddam Hussein
 Paul Murphy
 Chiang Pin-kung
@@ -1763,7 +1763,7 @@ Milos Radulovic
 Tessa Jowell
 Representatives (China)
 Men (North Korea)
-Representatives (Sudan)
+Representatives (SÚn)
 Carlos Slim
 Scientist (India)
 Naval (United Kingdom)
@@ -1783,7 +1783,7 @@ Combatant (Chechen)
 Lawmaker (Spain)
 Walter Schwimmer
 David Willetts
-Philip Ruddock
+Philip RÝock
 Party Member (Peru)
 Government (Mozambique)
 Didier Migaud
@@ -1815,7 +1815,7 @@ Abdellatif Filali
 Defense / Security Ministry (Denmark)
 Gladys Marín
 Chinua Achebe
-Ljubco Georgievski
+Lj¼o Georgievski
 Jiang Zemin
 Armed Rebel (India)
 Boris Johnson
@@ -1850,7 +1850,7 @@ Head of Government (Kyrgyzstan)
 Emilio Chuayffet
 Military (Tajikistan)
 Peter Struck
-Uffe Ellemann-Jensen
+࿾ Ellemann-Jensen
 Neritan Ceka
 Herwig van Staa
 National Academy of Engineering
@@ -1977,7 +1977,7 @@ Richard B. Myers
 Business (France)
 Sadiq Khan
 Jennifer Granholm
-Claude Goasguen
+ClaÞ Goasguen
 Protester (Japan)
 Media Personnel (Spain)
 Armed Band (Pakistan)
@@ -1999,7 +1999,7 @@ Ulla Schmidt
 Christiane Taubira
 Palau
 Rehavam Zeevi
-Sudan
+SÚn
 Police (Kazakhstan)
 Vladimir Aleksandrovich Ryzhkov
 International Press Institute
@@ -2008,7 +2008,7 @@ Newspaper (South Korea)
 Fernando Araújo Perdomo
 Humberto De la Calle
 Mikhail Dobkin
-Student (Taiwan)
+StÞnt (Taiwan)
 David Miliband
 Foreign Affairs (Belarus)
 Armed Gang (Philippines)
@@ -2038,7 +2038,7 @@ Louise Mushikiwabo
 WAM news agency
 Aleksandar Vučić
 Charles Murigande
-Erwin Teufel
+Erwin Teþl
 James L. Oberstar
 University of Chile
 Citizen (Laos)
@@ -2104,7 +2104,7 @@ Party Member (Mexico)
 Royal Australian Air Force
 Citizen (Sierra Leone)
 Bheki Khumalo
-Lawmaker (Ecuador)
+Lawmaker (Ec­or)
 Children (Afghanistan)
 International Maritime Organization
 Military Personnel (Pakistan)
@@ -2149,7 +2149,7 @@ Yitzhak Mordechai
 Antonio Horvath
 Alexei Pushkov
 Yasuhiro Nakasone
-Fakhruddin Ahmed
+FakhrÝin Ahmed
 Valery Gerasimov
 Citizen (Luxembourg)
 New Zealand
@@ -2181,7 +2181,7 @@ Stephanie Herseth Sandlin
 Ahmed Shaheed
 Foreign Affairs (Albania)
 Malcolm Fraser
-Student (Brazil)
+StÞnt (Brazil)
 Health Ministry (Indonesia)
 Catherine Tasca
 Izz ad-Din al-Qassam Brigades
@@ -2189,7 +2189,7 @@ John J. Duncan, Jr.
 Urmas Paet
 Government (Senegal)
 Presidential Family (United States)
-Paul Cellucci
+Paul CellÌi
 Vojislav Kostunica
 Amalia García
 Henri Bentégeat
@@ -2210,7 +2210,7 @@ Wang Gang
 Korean Workers Party
 Ernesto Pérez Balladares
 Rumen Radev
-Faustin Archange Touadera
+Faustin Archange To૞ra
 Michael Chertoff
 Michel Charasse
 Charles Haughey
@@ -2260,7 +2260,7 @@ Túpac Amaru Revolutionary Movement
 Eero Heinäluoma
 Foreign Affairs (Slovenia)
 Kim Jong-Nam
-Student (Russia)
+StÞnt (Russia)
 Activist (United Kingdom)
 Social Democratic Party
 Military (Brazil)
@@ -2315,11 +2315,11 @@ Warren Christopher
 Luis Edgar Devia Silva
 Oliver North
 Liu Xiaobo
-Citizen (South Sudan)
+Citizen (South SÚn)
 Citizen (Mongolia)
 Roland Dumas
 Jonas Gahr Støre
-Military (Ecuador)
+Military (Ec­or)
 Fulvio Rossi
 Faisal al-Fayez
 Michael Sommer
@@ -2380,7 +2380,7 @@ Patrick Ollier
 Presidential Candidate (Afghanistan)
 Sergio Vieira De Mello
 Foreign Affairs (Ethiopia)
-Hubert Védrine
+H¾rt Védrine
 Bantz J. Craddock
 Denny Rehberg
 Cabinet / Council of Ministers / Advisors (Iran)
@@ -2399,7 +2399,7 @@ The Observer
 Ben Bot
 Mohammad Reza Aref
 Nandan Nilekani
-Queen Sonja
+Qîn Sonja
 Yisrael Beiteinu
 The Irish Times
 Viktor Stepanov
@@ -2502,7 +2502,7 @@ Military Personnel (Uganda)
 Governor (China)
 Media (United Kingdom)
 Ministry (South Africa)
-Fuad Masum
+F­ Masum
 Grand Assembly
 Ante Gotovina
 Foreign Affairs (Mauritania)
@@ -2542,7 +2542,7 @@ Gregor Gysi
 Andrew Mitchell
 Herman De Croo
 Jüri Ratas
-Francis Maude
+Francis MaÞ
 Salam Fayyad
 Sheldon Whitehouse
 Aruna Asaf Ali
@@ -2550,7 +2550,7 @@ Keit Pentus
 Secretariat of State
 Jutta Limbach
 Ben Nighthorse Campbell
-Ibrahim Boubacar Keïta
+Ibrahim Bo뫊r Keïta
 Hassanal Bolkiah Mu'izzadin Waddaulah
 César Navas
 Oman
@@ -2718,7 +2718,7 @@ Li Yuanchao
 Slovak Democratic and Christian Union
 Kiran Bedi
 Hanna Birna Kristjánsdóttir
-Education (Turkey)
+EdÊtion (Turkey)
 Margrethe Vestager
 Member of the Judiciary (Bangladesh)
 Tom Fletcher
@@ -2730,12 +2730,12 @@ Hans Hoogervorst
 Li Ruihuan
 Bill Janklow
 Hans-Jürgen Papier
-Student (Thailand)
+StÞnt (Thailand)
 Foreign Affairs (Pakistan)
 Cleric (Iran)
 International Court of Justice
 Employee (Egypt)
-Sudanese Armed Forces
+SÚnese Armed Forces
 Citizen (Gambia)
 Media (Egypt)
 Zorana Mihajlovic
@@ -2747,11 +2747,11 @@ Head of Government (Venezuela)
 Military Personnel (Canada)
 Carlo Azeglio Ciampi
 League of Polish Families
-Kevin Rudd
+Kevin RÝ
 Aleksandar Dimitrov
 Mike Honda
 American Geophysical Union
-Sudan People's Liberation Movement
+SÚn People's Liberation Movement
 Dalia Itzik
 Shlomo Ben-Ami
 Ministry (Czech Republic)
@@ -2815,7 +2815,7 @@ RIA Novosti
 Giampaolo Di Paola
 Tony Tan Keng Yam
 Karunanidhi
-Sudan People's Liberation Army
+SÚn People's Liberation Army
 Frank Dobson
 Public Courts (Croatia)
 Osama bin Laden
@@ -2841,12 +2841,12 @@ Legislature (Croatia)
 Muslim (Russia)
 Comcast
 Protester (Tunisia)
-Hubertus Heil
+H¾rtus Heil
 Anastasios Papaligouras
 Todd Akin
 Armando Valladares
 Naftali Bennett
-Buddy MacKay
+BÝy MacKay
 Stefan Meller
 Health Ministry (Czech Republic)
 City Mayor (Czech Republic)
@@ -2881,7 +2881,7 @@ Tourist (France)
 Václav Klaus
 Ministry (Kosovo)
 Abdul Aziz al-Hakim
-Refugee (Sudan)
+Refugee (SÚn)
 Seiji Maehara
 Brunei
 Ministry (Pakistan)
@@ -2901,7 +2901,7 @@ Glaxosmithkline
 Liberia
 Nikola Gruevski
 Hanno Pevkur
-Ministry (Cuba)
+Ministry (Cº)
 Irakli Alasania
 National Party of Australia
 Lee Jae-joung
@@ -2957,7 +2957,7 @@ Defense / Security Ministry (Russia)
 United States
 Armed Gang (Somalia)
 Medical Personnel (South Africa)
-Protester (Ecuador)
+Protester (Ec­or)
 Mario Vargas Llosa
 Dissident (China)
 Miklos Nemeth
@@ -2992,7 +2992,7 @@ Marek Borowski
 Lai Shin-yuan
 Self-Defence of the Republic of Poland
 Syrian Social Nationalist Party
-Student (China)
+StÞnt (China)
 Yukio Edano
 Noam Chomsky
 Teofisto Guingona
@@ -3018,7 +3018,7 @@ Alastair Goodlad
 Hugo Martínez
 Jerónimo Saavedra
 Armed Gang (South Africa)
-Armando Guebuza
+Armando Gëuza
 Félix Houphouët-Boigny
 Peter DeFazio
 Foreign Affairs (Uzbekistan)
@@ -3076,7 +3076,7 @@ Foreign Affairs (United Arab Emirates)
 Chung Sye Kyun
 Peter Welch
 Militia (Yemen)
-Quebec Liberal Party
+Q Liberal Party
 Byron L. Dorgan
 Health Ministry (China)
 Jens Weidmann
@@ -3115,7 +3115,7 @@ Abdul Salam Zaeef
 Arsen Avakov
 Jacques Diouf
 Labor Union (China)
-Burhanuddin Rabbani
+BurhanÝin Rabbani
 Cesare Previti
 Other Authorities / Officials (Bulgaria)
 Government (Switzerland)
@@ -3130,7 +3130,7 @@ Universidade de São Paulo
 Women (Iraq)
 Nikos Alivizatos
 Chile
-Milan Kucan
+Milan KÊn
 Criminal (Italy)
 Lawrence H. Summers
 Bougainville
@@ -3305,7 +3305,7 @@ George Robertson
 United States Central Command
 Thad McCotter
 Government (Oman)
-United Nations Educational, Scientific and Cultural Organization
+United Nations EdÊtional, Scientific and Cultural Organization
 Koji Kakizawa
 Dragan Šutanovac
 Representatives (Pakistan)
@@ -3350,7 +3350,7 @@ Armed Rebel (Revolutionary Armed Forces of Colombia)
 Labor Union (Australia)
 Tasso Ribeiro Jereissati
 Lansana Conté
-Anna Psarouda-Benaki
+Anna PsaroÚ-Benaki
 Martin O'Malley
 Separatist (Turkish Kurds)
 Police (Kenya)
@@ -3387,7 +3387,7 @@ Police (Russia)
 Ivica Racan
 Abu Nawas
 Samuel Alito
-Ruben Hinojosa
+R¾n Hinojosa
 Other Authorities / Officials (China)
 Pawel Kukiz
 Noboru Takeshita
@@ -3412,9 +3412,9 @@ Christoph Blocher
 Immigrants (Myanmar)
 Foreign Affairs (France)
 Gerardo Morales
-Jalaluddin Haqqani
+JalalÝin Haqqani
 Alliance for the Future of Austria
-Ronald Lauder
+Ronald LaÞr
 Elisabeth Guigou
 Jaroslaw Kalinowski
 Luis Posada Carriles
@@ -3460,7 +3460,7 @@ Federal University of Rio de Janeiro
 Meglena Kuneva
 Alaksandar Kazulin
 Royal Navy
-Education Ministry (Australia)
+EdÊtion Ministry (Australia)
 Henry McLeish
 Minister Rabuki
 Mustafa Tlass
@@ -3476,14 +3476,14 @@ Denis Berezovsky
 William Michael Daley
 Andy Burnham
 Theo Waigel
-Shahabuddin Ahmed
+ShahabÝin Ahmed
 Media Personnel (Bulgaria)
 Legislature (Latvia)
 Carolyn Cheeks Kilpatrick
 Samoa
 Other Authorities / Officials (North Korea)
 British Army
-Student (Japan)
+StÞnt (Japan)
 United Progressive Alliance
 Labor Union (Mexico)
 Protester (Greece)
@@ -3514,15 +3514,15 @@ Louis Michel
 Media Personnel (Colombia)
 Cote d'Ivoire
 Naval (China)
-Émile Zuccarelli
+Émile Zೊrelli
 Hrithik Roshan
 Oswaldo Payá
 Indian Administered Kashmir
-Giannis Varoufakis
+Giannis Varoúkis
 Yoshihide Suga
 Dick Marty
 Morteza Sarmadi
-Vygaudas Ušackas
+VygaÚs Ušackas
 Economist (China)
 Shilpa Shetty
 Netherlands
@@ -3641,7 +3641,7 @@ Lawmaker (Taiwan)
 Zlatko Matesa
 Roberta Anastase
 Juan José Ibarretxe
-Education (Bangladesh)
+EdÊtion (Bangladesh)
 Citizen (Niger)
 Defense / Security Ministry (Slovakia)
 Other Authorities / Officials (Cambodia)
@@ -3705,7 +3705,7 @@ Anifah Aman
 Hossein Dehqan
 Muslim (Iran)
 Navanethem Pillay
-Student (Israel)
+StÞnt (Israel)
 Geir H. Haarde
 Ziaur Rahman
 Bruno Le Roux
@@ -3726,7 +3726,7 @@ Tomás Petrícek
 Vo Hong Phuc
 Ali Babacan
 Retno Marsudi
-Dimitris Sioufas
+Dimitris Sioús
 Salvador Allende
 National Security Advisor (Russia)
 Government (Myanmar)
@@ -3766,7 +3766,7 @@ Ramin Mehmanparast
 Other Authorities / Officials (Sweden)
 Zhou Xiaochuan
 Timothy Geithner
-Bruce Grocott
+BrÎ Grocott
 Separatist (Spain)
 Nechervan Barzani
 Indulis Emsis
@@ -3787,7 +3787,7 @@ Military Personnel - Special (Myanmar)
 Antonio Anastasia
 Melvin L. Watt
 Political Parties (Russia)
-Rebel Commander (Sudan)
+Rebel Commander (SÚn)
 Ludovic Orban
 Bank (Japan)
 Border Security Force
@@ -3845,7 +3845,7 @@ Zoran Milanović
 Edward Snowden
 House of Representatives (Indonesia)
 Member of Parliament (Slovakia)
-Claude Guéant
+ClaÞ Guéant
 Stanislav Gross
 Barbara Lee
 Kyoto University
@@ -3947,7 +3947,7 @@ Russian Orthodox Church
 Sigrid Kaag
 Sabor
 Baron Ashdown
-Subcomandante Marcos
+S¼omandante Marcos
 India
 Head of Government (Belarus)
 Legislature (China)
@@ -4059,13 +4059,13 @@ Criminal (Lebanon)
 Eni F. H. Faleomavaega
 Media Personnel (Ukraine)
 Communist Party (Russia)
-Head of Government (Sudan)
+Head of Government (SÚn)
 Cory Booker
 Zhang Dejiang
 Aslan Aliyevich Maskhadov
 Willy Claes
 Mike Moore
-Student (Turkey)
+StÞnt (Turkey)
 Industry (China)
 Gilles de Robien
 Media Personnel (Mexico)
@@ -4085,7 +4085,7 @@ Jorge Castañeda Gutman
 Sir Cuthbert Sebastian
 Barbara A. Mikulski
 Election Commission (Afghanistan)
-Salahuddin Rabbani
+SalahÝin Rabbani
 Steven Mnuchin
 Ronnie Mamoepa
 Catherine Trautmann
@@ -4159,9 +4159,9 @@ National News Agency
 Citizen (Fiji)
 Member of the Judiciary (South Africa)
 Mark Filip
-Student (Australia)
+StÞnt (Australia)
 al-Aqsa Martyrs' Brigades
-Atiku Abubakar
+Atiku Abºkar
 Foreign Affairs (Singapore)
 Al Jazeera
 Eritrea
@@ -4238,7 +4238,7 @@ Bekir Bozdag
 Jose Maria Velasco Ibarra
 Sayyed Ali Khamenei
 Eliot L. Engel
-Berthold Huber
+Berthold H¾r
 Bill Bradley
 Ernesto Zedillo
 Monica Macovei
@@ -4308,7 +4308,7 @@ Foreign Affairs (Colombia)
 Shahbaz Sharif
 Peter Beattie
 Mario Matthew Cuomo
-Student (Ukraine)
+StÞnt (Ukraine)
 Villager (China)
 Attacker (Palestinian Territory, Occupied)
 Isabel Allende Bussi
@@ -4324,8 +4324,8 @@ Zurab Zhvania
 Court Judge (India)
 Colombian Conservative Party
 Defense / Security Ministry (Hungary)
-Adel al-Jubeir
-Jean-Claude Martinez
+Adel al-J¾ir
+Jean-ClaÞ Martinez
 Rifat Hisarcıklıoğlu
 European Union
 Senate (Czech Republic)
@@ -4351,7 +4351,7 @@ Petr Pavel
 Ahmad Ibrahim al Tahir
 Pavel Svoboda
 Abdul Karim al-Kabariti
-Other Authorities / Officials (Cuba)
+Other Authorities / Officials (Cº)
 Rafael Izquierdo
 Domestic Affairs (Egypt)
 Ian Paisley
@@ -4376,7 +4376,7 @@ Jean Chrétien
 Head of Government (Nigeria)
 Valeriy Ivashchenko
 Citizen (Yemen)
-Foreign Affairs (Sudan)
+Foreign Affairs (SÚn)
 Tunisia
 Media (South Africa)
 Richard Codey
@@ -4429,7 +4429,7 @@ Tshering Tobgay
 Ahmed Ben Bella
 Nicos Nicolaides
 Stefaan De Clerck
-Student (Egypt)
+StÞnt (Egypt)
 Robert James Brown
 Émile Lahoud
 Moshe Feiglin
@@ -4471,8 +4471,8 @@ Haroon al Rashid
 Nigerian Army
 Dalia Grybauskaitė
 Government (Philippines)
-Plinio Soares de Arruda Sampaio
-Education (South Africa)
+Plinio Soares de ArrÚ Sampaio
+EdÊtion (South Africa)
 Pilgrim (Iran)
 Men (Philippines)
 Wojciech Olejniczak
@@ -4556,7 +4556,7 @@ Lech Walesa
 Constitutional Court (Ukraine)
 Opposition Supporter (Russia)
 Der Spiegel
-Sher Bahadur Deuba
+Sher Bahadur Deº
 Governor (Argentina)
 Media Personnel (Belarus)
 Charles Millon
@@ -4620,7 +4620,7 @@ Samuel Santos
 Alawi
 Günter Rexrodt
 Li Peng
-Student (Iran)
+StÞnt (Iran)
 Nitin Gadkari
 Nguyen Thien Nhan
 Craig Emerson
@@ -4648,7 +4648,7 @@ Main Opposition (South Korea)
 Lockwood Smith
 Giovanni Maria Flick
 Head of Government (Kenya)
-Sudan Liberation Movement
+SÚn Liberation Movement
 Milan Cic
 Extremist (Iraq)
 Denis Sassou Nguesso
@@ -4702,7 +4702,7 @@ Zoran Thaler
 Representatives (Japan)
 Mohamed Bazoum
 Wang Qishan
-Hosni Mubarak
+Hosni Mºrak
 Ariel Atias
 Abdullah II of Jordan
 Henry Brown
@@ -4730,7 +4730,7 @@ Public Courts (Iraq)
 University of Strathclyde
 Sergey Bagapsh
 John Brennan
-David Neuberger
+David Ne¾rger
 Mohammad Reza Naqdi
 Lothar Bisky
 Amal Clooney
@@ -4767,7 +4767,7 @@ Peter Reith
 Carlos Santana
 Government (Canada)
 Giorgio Napolitano
-Military (South Sudan)
+Military (South SÚn)
 Hellenic Army
 Gough Whitlam
 Military (International)
@@ -4812,11 +4812,11 @@ Vladimír Železný
 Sabine Leutheusser-Schnarrenberger
 Pavel Klimkin
 Prince Hassan bin Talal
-Student (Canada)
+StÞnt (Canada)
 István Balsai
 Domenico Corcione
 Separatist (Russia)
-Student (France)
+StÞnt (France)
 La Croix
 Wolfgang Priklopil
 Grant Shapps
@@ -4838,13 +4838,13 @@ José Antonio García Belaúnde
 Michael Mullen
 Domestic Affairs (Ukraine)
 Ingibjörg Sólrún Gísladóttir
-Bacharuddin Habibie
+BacharÝin Habibie
 Government (Zimbabwe)
 Volodymyr Lytvyn
 Zhou Enlai
 Government (Somalia)
 Rosatom
-Education (Nigeria)
+EdÊtion (Nigeria)
 Sri Lanka
 Dumitru Diacov
 Alexander Vladimirovich Konovalov
@@ -4873,7 +4873,7 @@ Ruling Parties (Japan)
 James Steinberg
 Government (Burundi)
 Kosovo
-Claude Allègre
+ClaÞ Allègre
 Military Personnel (South Korea)
 Joanne Liu
 Claudia Roth
@@ -4904,7 +4904,7 @@ David Dreier
 Sadiq al-Mahdi
 Scholar (China)
 Daniel Lipinski
-Queen Beatrix
+Qîn Beatrix
 Pemex
 Media (France)
 Senate (Serbia)
@@ -4989,7 +4989,7 @@ Militant (Libya)
 High Peace Council
 Men (Uzbekistan)
 Francisco Aguirre
-Boubacar Barry
+Bo뫊r Barry
 Yasukazu Hamada
 Ali Larayedh
 Scholar (Iran)
@@ -5018,7 +5018,7 @@ Muhammad Sabah Al-Salem Al-Sabah
 Yury Ushakov
 Military Personnel (Libya)
 Abdulla Aripov
-Education (United States)
+EdÊtion (United States)
 Leos Heger
 Head of Government (Cote d'Ivoire)
 Hellenic Broadcasting Corporation
@@ -5047,7 +5047,7 @@ Pim Fortuyn
 Claudia Ruiz Massieu
 Kim Suksoo
 Han Min Koo
-Jiri Paroubek
+Jiri Paro¾k
 Party President (Bharatiya Janata)
 Head of Government (Norway)
 Foreign Affairs (Costa Rica)
@@ -5118,10 +5118,10 @@ Head of Government (Azerbaijan)
 Defense / Security Ministry (Malaysia)
 Hilary Benn
 Janko Bobetko
-Other Authorities / Officials (Sudan)
+Other Authorities / Officials (SÚn)
 Pál Csáky
 Germany
-Dzhokhar Dudayev
+Dzhokhar DÚyev
 Hissène Habré
 Governor Khan
 Avraham Shohat
@@ -5135,7 +5135,7 @@ R.P. Singh
 France Soir
 High Ranking Military Personnel (Turkey)
 Nikola Sainovic
-Aruba
+Arº
 Lawyer/Attorney (Argentina)
 Naval (United States)
 M.R. Sharma
@@ -5239,7 +5239,7 @@ Rob Bishop
 Cabinet / Council of Ministers / Advisors (Bulgaria)
 Stephen Rapp
 Roselyne Bachelot
-Juan José Lucas
+Juan José LÊs
 Tatar
 Islamic Rebel (India)
 Anatoly Kucherena
@@ -5468,7 +5468,7 @@ Men (Egypt)
 Bobby Jindal
 Federal Judge (Argentina)
 Court Judge (United States)
-Bruce Edward Babbitt
+BrÎ Edward Babbitt
 Blogger (Russia)
 Federal Judge (United States)
 Scott McClellan
@@ -5476,7 +5476,7 @@ Representatives (Indonesia)
 Citizen (Senegal)
 Hipolito Mejia
 Park Chung Hee
-Head of Government (Ecuador)
+Head of Government (Ec­or)
 Eric H. Holder
 Alexander Staliyevich Voloshin
 Wesley K. Clark
@@ -5520,7 +5520,7 @@ Government Delegation (China)
 Mustafa Osman Ismail
 Head of Government (Iceland)
 Caroline Flint
-Hubert Haenel
+H¾rt Haenel
 International Atomic Energy Agency
 Sergey Gaplikov
 Liechtenstein
@@ -5569,7 +5569,7 @@ Jean-Luc Dehaene
 Ben Wallace
 Dioncounda Traoré
 Lim Dong Won
-Armed Separatist (Sudan)
+Armed Separatist (SÚn)
 Company - Owner or Operator (Australia)
 Sholban Kara-ool
 Martin Cauchon
@@ -5590,7 +5590,7 @@ Harvard University
 Civic Democratic Party
 Arkadi Ghukasyan
 Pakistan administered Kashmir
-Student (Hong Kong)
+StÞnt (Hong Kong)
 Víctor Andrés García Belaúnde
 Jeb Hensarling
 Surya Bahadur Thapa
@@ -5608,7 +5608,7 @@ Bart De Wever
 Wolfgang Petritsch
 Foreign Affairs (Moldova)
 Ahmed el-Tayeb
-Communist Party of Cuba
+Communist Party of Cº
 Inara Murniece
 French Guiana
 Awami (People's) League
@@ -5616,8 +5616,8 @@ Lalla Meryem
 Lawyer/Attorney (Lithuania)
 Lee Hoi Chang
 Straits Exchange Foundation
-Police (Ecuador)
-Government (Sudan)
+Police (Ec­or)
+Government (SÚn)
 Fabio Valencia Cossio
 Five Star Movement
 Military (Czech Republic)
@@ -5668,7 +5668,7 @@ Romania
 Business (India)
 Charlene Barshefsky
 Niger
-Salahuddin of Selangor
+SalahÝin of Selangor
 Ken Starr
 Pedro Pablo Kuczynski
 Other Authorities / Officials (Peru)
@@ -5690,7 +5690,7 @@ Norwegian Nobel Committee
 Najib Mikati
 City Mayor (Russia)
 Representatives (Italy)
-Congress (Ecuador)
+Congress (Ec­or)
 Senate (Palestinian Territory, Occupied)
 Clive Palmer
 American Political Science Association
@@ -5706,7 +5706,7 @@ Representatives (Romania)
 Khaleda Zia
 Criminal (Egypt)
 Business (Russia)
-Ruud Lubbers
+Ruud Lாrs
 Jin Renqing
 Al-Shabaab
 Citizen (Zambia)
@@ -5766,7 +5766,7 @@ High Commission (Australia)
 Media (Belarus)
 Mohammad Javad Zarif
 Ministry (Algeria)
-Student (United States)
+StÞnt (United States)
 Mohammad Reza Pahlavi
 Isa Gambar
 Anatoliy Eduardovich Serdyukov
@@ -5799,7 +5799,7 @@ Business (Latvia)
 Other Authorities / Officials (South Africa)
 Amani Abeid Karume
 Jimmy Morales
-Government (Ecuador)
+Government (Ec­or)
 Muhammad VI
 Medical Personnel (Australia)
 Richard Boucher
@@ -5851,7 +5851,7 @@ Samuel Zbogar
 Ministry (Cyprus)
 Court Judge (Peru)
 Alfred Baphethuxolo Nzo
-Education (Japan)
+EdÊtion (Japan)
 Domenico Siniscalco
 Tom Daschle
 Khalifa Belqasim Haftar
@@ -5860,7 +5860,7 @@ Bakili Muluzi
 Carlos Cerda
 Ghazi al-Yawer
 Minister Prabhu
-Badruddoza Chowdhury
+BadrÝoza Chowdhury
 Nguyensinh Hung
 Central Intelligence Agency
 Media Personnel (Yemen)
@@ -5907,7 +5907,7 @@ Gary Roughead
 Reinhold Mitterlehner
 Abdülkadir Aksu
 Somchai Wongsawat
-Foreign Affairs (Ecuador)
+Foreign Affairs (Ec­or)
 Loretta Sanchez
 Claus Hjort Frederiksen
 Domestic Affairs (Georgia)
@@ -5925,11 +5925,11 @@ Albie Sachs
 Dmytro Tabachnyk
 Sameh Shoukry
 Foreign Affairs (Israel)
-Ministry (Ecuador)
+Ministry (Ec­or)
 Government (Maldives)
 Government (Central African Republic)
 Habibollah Sayyari
-Citizen (Sudan)
+Citizen (SÚn)
 Soraya Saenz de Santamaria
 Martin Cullen
 House of Lords
@@ -5972,7 +5972,7 @@ Armed Rebel (Sierra Leone)
 Felipe Kast
 Anna Hazare
 Sulejman Tihic
-Mark Udall
+Mark Úll
 Su Chi
 Mark Esper
 Medical Personnel (Russia)
@@ -6057,9 +6057,9 @@ Hun Sen
 Northern Alliance
 Domestic Affairs (Pakistan)
 Mino Martinazzoli
-Gyude Bryant
+GyÞ Bryant
 Governor (Democratic Republic of Congo)
-Media Personnel (Cuba)
+Media Personnel (Cº)
 Polish People's Party
 Václav Havel
 Yossi Beilin
@@ -6300,7 +6300,7 @@ New People's Army
 Ze'ev Elkin
 Glenn Greenwald
 Kim Moo-sung
-Frank D. Lucas
+Frank D. LÊs
 Nakagawa Shoichi
 Lord President of the Council
 Combatant (Al Qaeda)
@@ -6319,11 +6319,11 @@ Houthis
 Ismail Ould Cheikh Ahmed
 Alexandr Vondra
 Combatant (Israel)
-Student (Palestinian Territory, Occupied)
+StÞnt (Palestinian Territory, Occupied)
 Attacker (France)
 Civil Aviation Authority
 Guo Boxiong
-Nasser Judeh
+Nasser JÞh
 Hassan Dahir Aweys
 Citizen (Botswana)
 Rudolf Seiters
@@ -6349,7 +6349,7 @@ People First Party Korea
 Men (Tunisia)
 Mykhailo Koval
 Jean-Paul Proust
-Fouad Siniora
+Fo­ Siniora
 Militant (Turkey)
 Panasonic
 Ministry (Finland)
@@ -6378,7 +6378,7 @@ Pan Africanist Congress of Azania
 Social Democratic Party (Czech Republic)
 Saudi Arabian Defence Forces
 Constitutional Court (South Korea)
-Mowaffak Baqer al-Rubaie
+Mowaffak Baqer al-Rºie
 Media (Syria)
 Makiko Tanaka
 Indigenous People (Vietnam)
@@ -6413,7 +6413,7 @@ Ruling Party (Taiwan)
 Kiran Desai
 Activist (Greenpeace)
 Head of Government (Togo)
-Amal Alamuddin
+Amal AlamÝin
 Gerson Martinez
 Military (France)
 Activist (Australia)
@@ -6421,7 +6421,7 @@ Ileana Ros-Lehtinen
 Armed Band (Palestinian Territory, Occupied)
 Party Member (Kenya)
 University of Winnipeg
-Jean-Claude Trichet
+Jean-ClaÞ Trichet
 Frank Murkowski
 Piotr Kolodziejczyk
 Ursula Plassnik
@@ -6430,7 +6430,7 @@ Jorge Amado
 Choe Ryong Hae
 Spencer Abraham
 Employee (Iraq)
-Education (Indonesia)
+EdÊtion (Indonesia)
 Sihanouk
 Media (North Korea)
 Philippe Séguin
@@ -6442,16 +6442,16 @@ Adilgerei Magomedtagirov
 Carolina Tohá
 Laurent Nkunda
 Roberto Ampuero
-Hideo Higashikokubaru
+Hideo Higashikokºru
 Abul Kalam Abdul Momen
 National League for Democracy
 Opposition Supporter (Taiwan)
 Frank R. Lautenberg
 Wolfgang Clement
 Kazakhstan
-Police (Sudan)
+Police (SÚn)
 Angelo Sodano
-Education (France)
+EdÊtion (France)
 Chris Huhne
 Lawmaker (Iraq)
 National Liberal Party
@@ -6464,7 +6464,7 @@ Police (Canada)
 Pravin Gordhan
 Priest (India)
 Aishwarya Rai
-Ecuador
+Ec­or
 Planning Commission (India)
 Criminal (United Kingdom)
 Ansar Dine
@@ -6706,7 +6706,7 @@ Vladimir Yelagin
 Ahmet Davutoglu
 Alain Richard
 Vishva Hindu Parishad
-Envoy (Sudan)
+Envoy (SÚn)
 Military (Australia)
 Raymond Burghardt
 Militant (Israel)
@@ -6727,7 +6727,7 @@ Christian Democratic Party (Germany)
 Guerrilla (Philippines)
 Ferdi Sabit Soyer
 Head of Government (Mongolia)
-Education (Russia)
+EdÊtion (Russia)
 Commando (India)
 Vladimir Titov
 Other Authorities / Officials (Australia)
@@ -6764,8 +6764,8 @@ Vincent Cable
 Media (Saudi Arabia)
 Pedro Manuel Mamede Passos Coelho
 Le Kha Phieu
-Education (Canada)
-Juan Carlos Maqueda
+EdÊtion (Canada)
+Juan Carlos Maq໚
 Li Changchun
 Gianni Letta
 Hector Marcos Timerman
@@ -6813,13 +6813,13 @@ Margaritis Schinas
 Marialiese Flemming
 Minister Suphamongkhon
 Oskar Lafontaine
-Tom Udall
+Tom Úll
 Frederik Willem De Klerk
 Fighter Bomber (Russia)
 The People of Freedom
 Mikhail Prokhorov
 Company - Owner or Operator (Nigeria)
-Student (Afghanistan)
+StÞnt (Afghanistan)
 Head of Government (Afghanistan)
 Werner Hoyer
 New Azerbaijan Party
@@ -6866,7 +6866,7 @@ Wieslaw Chrzanowski
 Citizen (Paraguay)
 Connie Morella
 Aaron Schock
-Armed Rebel (South Sudan)
+Armed Rebel (South SÚn)
 Abhishek Manu Singhvi
 Chief of Staff (Israel)
 Ibrahim Agboola Gambari
@@ -6890,12 +6890,12 @@ Eladio Loizaga
 Vyacheslav Shport
 Dave Camp
 Envoy (Syria)
-Student (South Korea)
+StÞnt (South Korea)
 Separatist (Ukraine)
 Keizo Obuchi
 Business (United Kingdom)
 National Front (France)
-Pascale Bruderer
+Pascale BrÞrer
 Tim Fischer
 Lyndon Johnson
 Lucia Hiriart
@@ -6956,7 +6956,7 @@ Ministry of Tourism (India)
 Abdelkader Bensalah
 Nikolay Nikolayevich Bordyuzha
 Militant (Thailand)
-Raghubar Das
+Raghºr Das
 Janet Wood Reno
 Novartis
 Panfilio Lacson
@@ -7024,7 +7024,7 @@ Refugee (Afghanistan)
 Muqtada Al-Sadr
 Kang Jae Sup
 Rodolphe Adada
-Dissident (Cuba)
+Dissident (Cº)
 Women (Palestinian Territory, Occupied)
 Teodor Baconschi
 Noemí Sanín
@@ -7032,7 +7032,7 @@ National Democratic Front (India)
 Digvijay Singh
 Office of the Attorney General
 Businessperson (United States)
-Immigrants (Cuba)
+Immigrants (Cº)
 Business (Australia)
 Gary Johnson
 Military Personnel - Special (Turkey)
@@ -7044,7 +7044,7 @@ FranÃ§ois Hollande
 Nilda Garré
 Juan Almeida Bosque
 Marwan Moasher
-Education (India)
+EdÊtion (India)
 Andris Skele
 Brian Mikkelsen
 Humayun Azad
@@ -7074,7 +7074,7 @@ Military Personnel (Palestinian Territory, Occupied)
 Patrick McHenry
 Thai Loves Thai
 Lawyer/Attorney (Ukraine)
-Johannes Voggenhuber
+Johannes Voggenh¾r
 Tourist (Taiwan)
 Environment Department/Ministry (Germany)
 Óscar Berger Perdomo
@@ -7100,7 +7100,7 @@ Jerry John Rawlings
 Bharatiya Janata
 Detainee (Myanmar)
 Andrzej Zakrzewski
-Dr. Iajuddin Ahmed
+Dr. IajÝin Ahmed
 Bhattarai
 Criminal (Morocco)
 Military Personnel (Somalia)
@@ -7134,7 +7134,7 @@ Spyridon Flogaitis
 Muttahida Qaumi Movement
 Fotis Kouvelis
 Boko Haram
-Education Ministry (China)
+EdÊtion Ministry (China)
 Member of the Judiciary (Argentina)
 Horacio Serpa
 Daniel Scioli
@@ -7146,7 +7146,7 @@ Phumzile Mlambo-Ngcuka
 Roberto Gualtieri
 Hugo Banzer Suárez
 African Development Bank
-Bruce George
+BrÎ George
 Sheila Copps
 Avraham Poraz
 Domitien Ndayizeye
@@ -7169,7 +7169,7 @@ Oliviero Diliberto
 Cabinet / Council of Ministers / Advisors (Italy)
 Korn Chatikavanij
 Adán Martín Menis
-Student (Bangladesh)
+StÞnt (Bangladesh)
 Tadeusz Mazowiecki
 Jack Dempsey
 Envoy (Israel)
@@ -7210,7 +7210,7 @@ Alberto Rodríguez Saá
 Viktor Yushchenko
 John Crosbie
 Laine Randjärv
-Hassan Wirayuda
+Hassan WirayÚ
 Mario Gomez
 Refugee (Congo)
 Head of Government (Latvia)
@@ -7312,7 +7312,7 @@ Robert C. Smith
 Lincoln Davis
 Tajikistan
 Haider Al-Abadi
-Abdalá Bucaram Ortiz
+Abdalá BÊram Ortiz
 Steve Chabot
 Legislature (Moldova)
 Khamis al-Gaddafi
@@ -7516,7 +7516,7 @@ Other Authorities / Officials (Bangladesh)
 Abdus Sattar
 Carol Shea-Porter
 The Rio Group
-Education (Pakistan)
+EdÊtion (Pakistan)
 Foreign Affairs (Finland)
 Hanan Ashrawi
 Sergey Semyonovich Sobyanin
@@ -7588,7 +7588,7 @@ Lawmaker (Brazil)
 Satoshi Morimoto
 Defense / Security Ministry (Belarus)
 Indigenous People (Croatia)
-Uddhav Thackeray
+Ýhav Thackeray
 Member of the Judiciary (Nigeria)
 Protester (Armenia)
 William Ruto
@@ -7628,7 +7628,7 @@ Mahathir Mohamad
 Labor Union (Slovakia)
 Head of Government (Latin America)
 Tigran Torosyan
-Amber Rudd
+Amber RÝ
 Amr Mohammed Moussa
 Cabinet / Council of Ministers / Advisors (New Zealand)
 Abu Sayyaf
@@ -7688,7 +7688,7 @@ Armed Gang (India)
 Leon Panetta
 Military (Angola)
 Militant (Al-Shabaab)
-Business (Cuba)
+Business (Cº)
 Representatives (North Korea)
 António Vitorino
 Head of Government (Australia)
@@ -7742,7 +7742,7 @@ Daniel Toribio
 Cees Veerman
 New Flemish Alliance
 Le Monde
-Corvinus University of Budapest
+Corvinus University of BÚpest
 Envoy (Taiwan)
 Haim Ramon
 Member of the Judiciary (United States)
@@ -7776,7 +7776,7 @@ Ellen O. Tauscher
 Government (Argentina)
 Government Official (Indonesia)
 Peter Hintze
-High Ranking Military Personnel (Sudan)
+High Ranking Military Personnel (SÚn)
 Imre Németh
 Head of Government (Somalia)
 Police (United Kingdom)
@@ -7905,7 +7905,7 @@ Chadli Bendjedid
 Head of Government (Argentina)
 Pranas Kūris
 Governor (Russia)
-Detainee (Cuba)
+Detainee (Cº)
 Other Authorities / Officials (Algeria)
 Ben Cardin
 Government (Rwanda)
@@ -7914,7 +7914,7 @@ Mel Carnahan
 Baitullah Mehsud
 Company - Owner or Operator (China)
 Citizen (Uruguay)
-Education (Palestinian Territory, Occupied)
+EdÊtion (Palestinian Territory, Occupied)
 David Trimble
 Vladimir Seks
 Citizen (Malaysia)
@@ -7925,7 +7925,7 @@ Criminal (Russia)
 Han Myung Sook
 Bill Graham
 Li Keqiang
-Jan Bubenik
+Jan B¾nik
 Ricardo Miguel Cavallo
 Miguel De La Madrid
 Party Member (Estonia)
@@ -7980,7 +7980,7 @@ Detainee (Australia)
 Head of Government (Denmark)
 Police (Algeria)
 Pedro Antonio Marín
-Abdulsalami Alhaji Abubakar
+Abdulsalami Alhaji Abºkar
 Citizen (Mozambique)
 David Vitter
 Zbigniew Messner
@@ -7999,7 +7999,7 @@ Finance / Economy / Commerce / Trade Ministry (Iraq)
 Armed Rebel (Indonesia)
 Representatives (Armenia)
 Laurent Kabila
-Alexander Stubb
+Alexander St»
 Congress (Colombia)
 Defense / Security Ministry (United Kingdom)
 Donald M. Payne
@@ -8012,7 +8012,7 @@ Reinhard Klimmt
 Georgian Armed Forces
 Hafez al-Assad
 University of Tehran
-Yehuda Glick
+YehÚ Glick
 Yesh Atid
 Military (El Salvador)
 Fethullah Gulen
@@ -8136,7 +8136,7 @@ Igor Sergeyevich Ivanov
 Robert Kocharyan
 Libya
 Dušan Petrović
-Fudan University
+FÚn University
 Labor Party
 R. Venkataraman
 International Civil Aviation Organization
@@ -8262,7 +8262,7 @@ Justice and Equality Movement
 Government (South Korea)
 Mauri Pekkarinen
 Scholar (India)
-Other Authorities / Officials (Ecuador)
+Other Authorities / Officials (Ec­or)
 Ash Carter
 Xinjiang Uyghur
 Kay Bailey Hutchison
@@ -8289,7 +8289,7 @@ Samajwadi Janata Party
 Francisco Fonseca
 Hartmut Bagger
 Zbigniew Siemiatkowski
-Guadeloupe
+G૞loupe
 Jesse Jackson
 Movement for Democratic Change
 Bronislaw Geremek
@@ -8300,7 +8300,7 @@ Foreign Affairs (Uganda)
 Al-Quds
 Military Personnel (United States)
 Immigrants (Turkey)
-Caucasian Avars
+CaÊsian Avars
 Juan Pablo Cafiero
 Mark Burton
 Wiranto
@@ -8380,7 +8380,7 @@ Business (South Korea)
 Envoy (Libya)
 High Ranking Military Personnel (Pakistan)
 Chang Chunhsiung
-Sarah Ludford
+Sarah Lßord
 Vladislav Ardzinba
 Jim Guy Tucker
 Party Member (South Korea)
@@ -8471,7 +8471,7 @@ Guyana
 Seyoum Mesfin
 Nintendo
 Hau Lung-pin
-Defense / Security Ministry (Sudan)
+Defense / Security Ministry (SÚn)
 Greg Abbott
 Levan Izoria
 Gilad Erdan
@@ -8634,7 +8634,7 @@ Parliament of Canada
 Rosario Green
 Legislature (Lebanon)
 Militant (Russia)
-Student (United Kingdom)
+StÞnt (United Kingdom)
 Yaakov Edri
 Surayud Chulanont
 Miltiadis Evert
@@ -8666,7 +8666,7 @@ Juan Gabriel Valdés
 Marine Corp (United States)
 Sejm
 Newspaper (India)
-Jamiruddin Sircar
+JamirÝin Sircar
 Yuriy Kolobov
 Defense / Security Ministry (Canada)
 Akinwumi Adesina
@@ -8675,7 +8675,7 @@ Maung Aye
 Susan Whelan
 International Criminal Court
 Yoon Kwang Ung
-Nabil Abu-Rudaynah
+Nabil Abu-RÚynah
 Sam Johnson
 Other Authorities / Officials (Israel)
 Treasury/Finance Ministry (Taiwan)
@@ -8696,7 +8696,7 @@ José Ángel Gurría Treviño
 Iftikhar Muhammad Chaudhry
 Farm Worker (China)
 Pete Wilson
-Militia (Sudan)
+Militia (SÚn)
 George Habash
 Lee Nak-yeon
 John Bercow
@@ -8708,13 +8708,13 @@ Maria Rauch-Kallat
 Vesselin Bliznakov
 High Ranking Military Personnel (Croatia)
 Liu Qi
-Education Ministry (Japan)
+EdÊtion Ministry (Japan)
 Lawmaker (Mexico)
 Danny Pieters
 Media Personnel (New Zealand)
-Pierre Elliott Trudeau
+Pierre Elliott Tr෪u
 Marco Rubio
-Deputy Prime Minister Suthep Thaugsuban
+Deputy Prime Minister Suthep Thaugsºn
 Philippine National Police
 Foreign Affairs (Kazakhstan)
 Patricio Aylwin
@@ -8781,7 +8781,7 @@ Ministry (Egypt)
 Angelika Beer
 Margaretha af Ugglas
 Shiv Sena
-Jamil Mahuad
+Jamil Mah­
 Government (Gambia)
 Hans-Rudolf Merz
 State Peace and Development
@@ -8798,7 +8798,7 @@ Ministry (Botswana)
 Government (India)
 Medical Personnel (Pakistan)
 Armed Rebel (Liberia)
-Kanat Saudabayev
+Kanat Sayev
 Norman Yoshio Mineta
 Presidential Press Service (Russia)
 Religion (United States)
@@ -9048,7 +9048,7 @@ Party Member (Malaysia)
 Jack Straw
 Media (Japan)
 People's Democratic Party (Nigeria)
-Audronius Ažubalis
+Audronius Ažºlis
 Wladyslaw Bartoszewski
 Stephen Byers
 Eamon Gilmore
@@ -9059,7 +9059,7 @@ Ministry (Sri Lanka)
 Google
 Per Unckel
 Hans-Peter von Kirchbach
-Huda Salih Mahdi Ammash
+HÚ Salih Mahdi Ammash
 Pope Francis
 New Era Party
 Fars News
@@ -9092,7 +9092,7 @@ Secretary of State for Justice
 Alex Salmond
 Tabare Vazquez
 Trevor Manuel
-Kresimir Zubak
+Kresimir Zºk
 Government (Afghanistan)
 Armed Gang (Iran)
 Pdea
@@ -9100,7 +9100,7 @@ Employee (Israel)
 Police (Belgium)
 Secret Agent (India)
 Stepan Poltorak
-Government (South Sudan)
+Government (South SÚn)
 Gus Bilirakis
 Thor Pedersen
 Republic of Artsakh
@@ -9129,7 +9129,7 @@ Al-Ahram
 Rachida Dati
 Coalition of the Radical Left
 Heydar Aliyev
-Citizen (Cuba)
+Citizen (Cº)
 Vern Clark
 Medical Personnel (Germany)
 Min Aung Hlaing
@@ -9155,7 +9155,7 @@ Roberto Madrazo
 Okiharu Yasuoka
 Legislature (France)
 Church of England
-Military (Cuba)
+Military (Cº)
 Party Member (Syria)
 Justice Department/Ministery (Israel)
 Foreign Affairs (Qatar)
@@ -9198,7 +9198,7 @@ Arturas Paulauskas
 Janez Jansa
 Naval (France)
 Member of the Judiciary (Russia)
-Hishamuddin Hussein
+HishamÝin Hussein
 Milan Zver
 John G. Roberts
 Ministry (Myanmar)
@@ -9229,7 +9229,7 @@ Hugo Swire
 Krzysztof Kwiatkowski
 Mart Siimann
 Edmund Stoiber
-R. Glenn Hubbard
+R. Glenn H஺rd
 African National Congress
 Armed Gang (Turkey)
 José Graziano da Silva
@@ -9305,7 +9305,7 @@ Labor Union (India)
 Pilgrim (India)
 Head of Government (Bulgaria)
 Member of Parliament (Afghanistan)
-Police (Cuba)
+Police (Cº)
 Alois Philipp Maria
 Ivanka Trump
 Agriculture / Fishing / Forestry Ministry (Australia)
@@ -9332,7 +9332,7 @@ Iraqi Kurdistan
 Men (Iraq)
 Mike Pence
 Li Zhauxing
-Iranian Students News Agency
+Iranian StÞnts News Agency
 Mariela Castro
 Immigrants (Spain)
 Industry (India)
@@ -9442,7 +9442,7 @@ Secretary of State for Wales
 Mohamed Kamel Amr
 Vitaly Ivanovich Churkin
 Barrister Moudud Ahmed
-Communist Party (Cuba)
+Communist Party (Cº)
 Viktor Borisovich Khristenko
 Eduardo Frei
 Rajya Sabha
@@ -9513,7 +9513,7 @@ Medical Personnel (Japan)
 Porfirio Muñoz Ledo
 Ministry (Colombia)
 Commonwealth Secretariat
-Queen Sofia of Spain
+Qîn Sofia of Spain
 Jaime Mayor Oreja
 England
 Refugee (Liberia)
@@ -9530,7 +9530,7 @@ Men (Zimbabwe)
 Robert E. Andrews
 Party Member (Georgia)
 Adama Coulibaly
-Rebel Group (Sudan)
+Rebel Group (SÚn)
 Roger Etchegaray
 Yury Chaika
 United Democratic Front
@@ -9539,7 +9539,7 @@ Party Member (Israel)
 Member of Parliament (Israel)
 Foreign Affairs (Tajikistan)
 Other Authorities / Officials (Poland)
-Gulbuddin Hekmatyar
+GulbÝin Hekmatyar
 Citizen (Cyprus)
 Zalmai Rassoul
 Inter-Services Intelligence
@@ -9590,7 +9590,7 @@ Christos Protopapas
 Newt Gingrich
 Sean McCormack
 Virgin Islands, British
-Welshman Ncube
+Welshman Nc¾
 Avijit Roy
 Dom Mintoff
 Anand Panyarachun
@@ -9633,7 +9633,7 @@ Orange Mali
 Governor (Brazil)
 Rashid Qureshi
 Other Authorities / Officials (Switzerland)
-Student (Pakistan)
+StÞnt (Pakistan)
 Ed Royce
 Celestino Corbacho
 Government (Kosovo)
@@ -9647,7 +9647,7 @@ People Associated with the Opposition (Turkey)
 Islamic Militant (India)
 J.J. Singh
 Jean-Pierre Chevènement
-Erwin Huber
+Erwin H¾r
 Gennady Novitsky
 Tourist (Japan)
 Awa Marie Coll-Seck
@@ -9687,7 +9687,7 @@ Luis de Guindos
 Scottish National Party
 Citizen (Egypt)
 University of Toronto
-North Caucasus Military District
+North CaÊsus Military District
 Attacker (Israel)
 Combatant (Turkey)
 Foreign Affairs (Portugal)
@@ -9901,7 +9901,7 @@ Senate (Liberia)
 Jean-Pierre Raffarin
 Police (Turkey)
 Howard Government
-Student (Venezuela)
+StÞnt (Venezuela)
 Citizen (Syria)
 Military (Eritrea)
 Immigrants (Haiti)
@@ -9948,7 +9948,7 @@ Svoboda
 Jay Inslee
 Phil English
 Defense / Security Ministry (United States)
-Jean-Claude Juncker
+Jean-ClaÞ Juncker
 Thomas Goppel
 Beatriz Merino
 Air France
@@ -9963,11 +9963,11 @@ Ministry (Saudi Arabia)
 Democratic Force
 Toomas Savi
 Sweden
-Mohiuddin Khan Alamgir
+MohiÝin Khan Alamgir
 Foreign Affairs (Turkmenistan)
 City Mayor (Canada)
 Gilberto Kassab
-Air Force (Sudan)
+Air Force (SÚn)
 Richard E. Neal
 Ernesto Araújo
 Margarita Robles
@@ -9976,7 +9976,7 @@ Anatoliy Zlenko
 Business (Sweden)
 John Agyekum Kufuor
 Dreamworks Animation
-Thomas C. Hubbard
+Thomas C. H஺rd
 Vazgen Sarksyan
 Leopoldo Galtieri
 Police (Peru)
@@ -9994,7 +9994,7 @@ Diane E. Watson
 Yoshiro Mori
 Desmond Tutu
 Military (Slovakia)
-Fuad Hussein
+F­ Hussein
 Czeslaw Kiszczak
 Lucio Gutierrez
 Igor Ivanov
@@ -10002,7 +10002,7 @@ Newspaper (Japan)
 French Polynesia
 Hamadi Jebali
 Association for Relations Across the Taiwan Straits
-Yasuo Fukuda
+Yasuo FukÚ
 Tarja Halonen
 Other Authorities / Officials (Iraq)
 Badri Patarkatsishvili
@@ -10047,7 +10047,7 @@ Leonard L. Boswell
 Ain Shams University
 Tang Jiaxuan
 People Associated with the Opposition (Croatia)
-Gilles Duceppe
+Gilles DÎppe
 Lawmaker (Japan)
 Konrad Porzner
 Assemblies (Cambodia)
@@ -10075,19 +10075,19 @@ Xavier Bertrand
 Miro Kovač
 Democratic Front for the Liberation of Palestine
 John Redwood
-Citizen (Ecuador)
+Citizen (Ec­or)
 Court Judge (Spain)
-Governor (Sudan)
+Governor (SÚn)
 Lawyer/Attorney (China)
 Professor (China)
-Jean-Claude Gayssot
+Jean-ClaÞ Gayssot
 Citizen (Holy See (Vatican City State))
 Mahamadou Issoufou
 Nissan
 Other Authorities / Officials (Uzbekistan)
 Mario Draghi
 Viktor Yanukovych
-Queen Ranya
+Qîn Ranya
 Liberals (Canada)
 Women (Ireland)
 Lawmaker (Indonesia)
@@ -10107,7 +10107,7 @@ Businessperson (Czech Republic)
 Civic Group (South Korea)
 Redha Malek
 Treasury/Finance Ministry (United States)
-University of Queensland
+University of Qînsland
 Media Personnel (Argentina)
 Dominique Perben
 Orrin G. Hatch
@@ -10130,7 +10130,7 @@ Sam Rainsy
 Assemblies (Pakistan)
 Newspaper (France)
 Governor (Philippines)
-Yuri Dmitrievich Budanov
+Yuri Dmitrievich BÚnov
 Vladimir Volfovich Zhirinovsky
 International Parliament
 Eli Yishai
@@ -10169,7 +10169,7 @@ Rod Blagojevich
 Yuri Petrovich Trutnev
 Fatos Nano
 Edi Rama
-Fatou Bensouda
+Fatou BensoÚ
 Nacionalista Party
 Bogdan Zdrojewski
 René Préval
@@ -10221,7 +10221,7 @@ Police (Syria)
 Islamic Jihad
 Miguel Ángel Moratinos
 María Emma Mejía Vélez
-Cuba
+Cº
 Plaid Cymru
 Charles B. Rangel
 Mirek Topolánek
@@ -10242,7 +10242,7 @@ Lee Kun-hee
 Activision Blizzard
 Uzi Landau
 Bernard Bosson
-Media (Cuba)
+Media (Cº)
 Olha Bohomolets
 Jeremy Clarkson
 Foreign Affairs (Palestinian Territory, Occupied)
@@ -10269,8 +10269,8 @@ Atomic Energy Organization of Iran
 Harriet Harman
 Iberia
 Branko Vukelic
-Military Personnel (Sudan)
-Andrzej Duda
+Military Personnel (SÚn)
+Andrzej DÚ
 Government Official (Afghanistan)
 Steffen Seibert
 Deve Gowda
@@ -10484,7 +10484,7 @@ Juraj Liska
 Liberal Democratic Party (Russia)
 Head of Government (Kazakhstan)
 Other Authorities / Officials (Afghanistan)
-Head of Government (Cuba)
+Head of Government (Cº)
 Hranush Hakobyan
 Fukushima Daiichi Nuclear Power Plant
 Indigenous People (Japan)
@@ -10520,7 +10520,7 @@ Hans Blix
 Hossain Mohammad Ershad
 Aung San
 Martti Ahtisaari
-Foreign Affairs (Cuba)
+Foreign Affairs (Cº)
 National Emergency Management Agency
 Military Personnel - Special (Thailand)
 Giuliano Urbani
@@ -10620,7 +10620,7 @@ Candice Bergen
 Dale Bumpers
 Peter Milliken
 Haile-Mariam Desalegne
-Student (Mexico)
+StÞnt (Mexico)
 Militant (Kurdistan Workers' Party)
 Governor (India)
 Jeanne Shaheen
@@ -10633,7 +10633,7 @@ Dulce María Sauri Riancho
 Adolf Ogi
 Party Member (Czech Republic)
 Daniel Russel
-Government (Cuba)
+Government (Cº)
 Media Personnel (Afghanistan)
 Georgi Purvanov
 Scotland Yard
@@ -10713,7 +10713,7 @@ Abu Bakr al-Baghdadi
 Renaud Donnedieu de Vabres
 Rand Paul
 Marcelo Ebrard
-Bermuda
+BermÚ
 Police (Mexico)
 Carl Haglund
 Brian Schweitzer
@@ -10723,7 +10723,7 @@ Krisjanis Karins
 Head of Government (Turkmenistan)
 Alexander Lentsov
 Reserve Personnel (United States)
-Surapong Suebwonglee
+Surapong Sëwonglee
 Dominican Republic
 Citizen (Armenia)
 Lisa Murkowski
@@ -10742,7 +10742,7 @@ Finance / Economy / Commerce / Trade Ministry (Australia)
 Cabinet / Council of Ministers / Advisors (France)
 Terrorist Leader (Syria)
 Prem Nath
-Sékouba Konaté
+Sékoº Konaté
 Dharam Singh
 Massimo D'Alema
 Environment Department/Ministry (Canada)
@@ -10762,7 +10762,7 @@ Turkish Air Force
 Nguyen Thi Kim Ngan
 Janet Louise Yellen
 Sean Spicer
-Moinuddin Haider
+MoinÝin Haider
 Nobuo Kishi
 Moshe Arens
 Michael W. Hagee
@@ -10792,7 +10792,7 @@ Police (Zimbabwe)
 Miodrag Vlahovic
 Military Personnel (Iraq)
 Yevgeny Shevchuk
-Stan Mudenge
+Stan MÞnge
 Ebrahim Raisi
 Avigdor Lieberman
 Ansar al-Islam
@@ -10808,7 +10808,7 @@ Tamil Rebel
 Hassan Ebrahim Habibi
 Lawmaker (Afghanistan)
 Libération
-Education (China)
+EdÊtion (China)
 Muhammad al-Baradei
 Susana Martinez
 Juan Miguel González
@@ -10820,7 +10820,7 @@ Antti Rinne
 Ministry (Bosnia and Herzegovina)
 Gerd Mueller
 Dan Quayle
-Criminal (Cuba)
+Criminal (Cº)
 Bill English
 Jalal Talabani
 Paskal Milo
@@ -10873,7 +10873,7 @@ Royal Administration (Australia)
 Citizen (Serbia)
 Jim Risch
 Jack McConnell
-Student (India)
+StÞnt (India)
 Mehsud Tribe (Social Group)
 Peacekeeping Troop (France)
 Kulbhushan Jadhav
@@ -10894,11 +10894,11 @@ Darrell Issa
 Domestic Affairs (France)
 Alexis Tsipras
 Ministry (Kyrgyzstan)
-Student (Indonesia)
+StÞnt (Indonesia)
 Oles Buzina
 Party Member (Iran)
 Main Opposition (Syria)
-Queen Sirikit
+Qîn Sirikit
 Peronist Youth
 Akhmad Zavgayev
 Milan Chovanec
@@ -10957,11 +10957,11 @@ Leena Luhtanen
 Irakli Garibashvili
 David Wu
 Vladimir Voronin
-Ministry (Sudan)
+Ministry (SÚn)
 Government (United States)
 Government (Hong Kong)
 Jesus Dureza
-Student (South Africa)
+StÞnt (South Africa)
 Guerrilla (Colombia)
 Senate (Brazil)
 Vladimir Dzhabarov
@@ -10970,7 +10970,7 @@ Butch Otter
 Viviane Reding
 Police (Italy)
 Leland Yee
-Alfredo Pérez Rubalcaba
+Alfredo Pérez Rºlcaba
 Congress of Deputies
 Pascal Clément
 Bill Roth
@@ -11026,7 +11026,7 @@ Amina Mohamed
 Lien Chan
 Vano Merabishvili
 Legislature (Belgium)
-Criminal (Sudan)
+Criminal (SÚn)
 Harry Harris
 Martin Bursík
 Ella Pamfilova
@@ -11042,7 +11042,7 @@ Tigran Sarkisyan
 Herb Gray
 Commonwealth of Nations
 Jaroslaw Kaczynski
-Education (Israel)
+EdÊtion (Israel)
 Men (Denmark)
 Defense / Security Ministry (Australia)
 Josep Piqué i Camps
@@ -11159,7 +11159,7 @@ https://en.wikipedia.org/wiki/Secretary_of_State_for_Environment,_Food_and_Rural
 https://en.wikipedia.org/wiki/Michel_Barnier
 https://en.wikipedia.org/wiki/Nadezhda_Alliluyeva
 https://en.wikipedia.org/wiki/Hannelore_Kohl
-https://en.wikipedia.org/wiki/Anna_Benaki-Psarouda
+https://en.wikipedia.org/wiki/Anna_Benaki-PsaroÚ
 https://en.wikipedia.org/wiki/Emmanuel_Joseph_Siey%C3%A8s
 https://en.wikipedia.org/wiki/William_F._Bringle
 https://en.wikipedia.org/wiki/The_Dirty_Dozen
@@ -11265,7 +11265,7 @@ https://en.wikipedia.org/wiki/Ronald_Steel
 https://en.wikipedia.org/wiki/Sytin_Military_Encyclopedia
 https://en.wikipedia.org/wiki/Netanya
 https://en.wikipedia.org/wiki/S%C3%A9rgio_Vieira_de_Mello
-https://en.wikipedia.org/wiki/Russian_Federation_Presidential_Certificate_of_Gratitude
+https://en.wikipedia.org/wiki/Russian_Federation_Presidential_Certificate_of_GratitÞ
 https://en.wikipedia.org/wiki/Gda%C5%84sk
 https://en.wikipedia.org/wiki/Order_of_the_Liberator_General_San_Mart%C3%ADn
 https://en.wikipedia.org/wiki/Markus_S%C3%B6der
@@ -11303,7 +11303,7 @@ https://en.wikipedia.org/wiki/Sergey_Brin
 https://en.wikipedia.org/wiki/Indiana_University
 https://en.wikipedia.org/wiki/Zaporizhzhia
 https://en.wikipedia.org/wiki/Zhou_Zuoren
-https://en.wikipedia.org/wiki/Yehudah_Glick
+https://en.wikipedia.org/wiki/YehÚh_Glick
 https://en.wikipedia.org/wiki/Fidesz
 https://en.wikipedia.org/wiki/Sir_George_Grey,_2nd_Baronet
 https://en.wikipedia.org/wiki/Chairman_of_the_Joint_Chiefs_of_Staff
@@ -11319,8 +11319,8 @@ https://en.wikipedia.org/wiki/National_Film_Award_for_Best_Actor
 https://en.wikipedia.org/wiki/Simon_Du_Bois
 https://en.wikipedia.org/wiki/Kirill_Eskov
 https://en.wikipedia.org/wiki/Alain_Robbe-Grillet
-https://en.wikipedia.org/wiki/Claude-Fran%C3%A7ois_Fraguier
-https://en.wikipedia.org/wiki/Claude_Farr%C3%A8re
+https://en.wikipedia.org/wiki/ClaÞ-Fran%C3%A7ois_Fraguier
+https://en.wikipedia.org/wiki/ClaÞ_Farr%C3%A8re
 https://en.wikipedia.org/wiki/Jean-Baptiste_Sanson_de_Pongerville
 https://en.wikipedia.org/wiki/Edward_VIII
 https://en.wikipedia.org/wiki/David_Beck
@@ -11365,7 +11365,7 @@ https://en.wikipedia.org/wiki/Delhi_University
 https://en.wikipedia.org/wiki/Francisco_Fonseca
 https://en.wikipedia.org/wiki/Frankfurt
 https://en.wikipedia.org/wiki/Teddy_Kollek
-https://en.wikipedia.org/wiki/Franciscan_University_of_Steubenville
+https://en.wikipedia.org/wiki/Franciscan_University_of_Ste¾nville
 https://en.wikipedia.org/wiki/University_of_Tokyo
 https://en.wikipedia.org/wiki/Ant%C3%B3nio_de_Sousa_Franco
 https://en.wikipedia.org/wiki/Nassau,_Bahamas
@@ -11458,7 +11458,7 @@ https://en.wikipedia.org/wiki/Kyjov
 https://en.wikipedia.org/wiki/Norberto_Rivera_Carrera
 https://en.wikipedia.org/wiki/Burkina_Faso
 https://en.wikipedia.org/wiki/Dutch_people
-https://en.wikipedia.org/wiki/Herbert_Sausgruber
+https://en.wikipedia.org/wiki/Herbert_Sausgr¾r
 https://en.wikipedia.org/wiki/Heinrich_Scheuch
 https://en.wikipedia.org/wiki/Maurice_Donnay
 https://en.wikipedia.org/wiki/Eric_Chu
@@ -11497,7 +11497,7 @@ https://en.wikipedia.org/wiki/Denmark_national_under-16_football_team
 https://en.wikipedia.org/wiki/Oslo
 https://en.wikipedia.org/wiki/Jerome_Bruner
 https://en.wikipedia.org/wiki/Leire_Paj%C3%ADn
-https://en.wikipedia.org/wiki/Francis_Maude
+https://en.wikipedia.org/wiki/Francis_MaÞ
 https://en.wikipedia.org/wiki/C.F._La_Piedad
 https://en.wikipedia.org/wiki/Foreign_minister
 https://en.wikipedia.org/wiki/Michael_E._Ryan
@@ -11522,7 +11522,7 @@ https://en.wikipedia.org/wiki/John_Ensign
 https://en.wikipedia.org/wiki/Heather_Wilson
 https://en.wikipedia.org/wiki/Upper_Austria
 https://en.wikipedia.org/wiki/Ohio_University
-https://en.wikipedia.org/wiki/Claude_I._Bakewell
+https://en.wikipedia.org/wiki/ClaÞ_I._Bakewell
 https://en.wikipedia.org/wiki/Adrian_Scott_Stokes
 https://en.wikipedia.org/wiki/Florence
 https://en.wikipedia.org/wiki/Gideon_Sa%27ar
@@ -11602,7 +11602,7 @@ https://en.wikipedia.org/wiki/Arthur_Bülow
 https://en.wikipedia.org/wiki/Avraham_Hirschson
 https://en.wikipedia.org/wiki/Woo_Kwok-hing
 https://en.wikipedia.org/wiki/Adriaen_van_der_Cabel
-https://en.wikipedia.org/wiki/Hideo_Higashikokubaru
+https://en.wikipedia.org/wiki/Hideo_Higashikokºru
 https://en.wikipedia.org/wiki/Cologne
 https://en.wikipedia.org/wiki/Occidental_College
 https://en.wikipedia.org/wiki/Eric_Berne
@@ -11623,7 +11623,7 @@ https://en.wikipedia.org/wiki/Robert_Stannard_(cyclist)
 https://en.wikipedia.org/wiki/Four_Freedoms_Award_-_Freedom_Medal
 https://en.wikipedia.org/wiki/George_P._Goold
 https://en.wikipedia.org/wiki/Andrew_Goodpaster
-https://en.wikipedia.org/wiki/Deportivo_Toluca_F.C.
+https://en.wikipedia.org/wiki/Deportivo_TolÊ_F.C.
 https://en.wikipedia.org/wiki/Lucius_Cary,_2nd_Viscount_Falkland
 https://en.wikipedia.org/wiki/Slovenia
 https://en.wikipedia.org/wiki/Doris_Leuthard
@@ -11736,7 +11736,7 @@ https://en.wikipedia.org/wiki/Mette-Marit,_Crown_Princess_of_Norway
 https://en.wikipedia.org/wiki/Emile_Berliner
 https://en.wikipedia.org/wiki/Juozas_Bernatonis
 https://en.wikipedia.org/wiki/Italian_Minister_of_Justice
-https://en.wikipedia.org/wiki/Hubert_Lynes
+https://en.wikipedia.org/wiki/H¾rt_Lynes
 https://en.wikipedia.org/wiki/Member_of_the_55th_Parliament_of_the_United_Kingdom
 https://en.wikipedia.org/wiki/Borys_Paton
 https://en.wikipedia.org/wiki/Malaysia
@@ -11783,7 +11783,7 @@ https://en.wikipedia.org/wiki/Ceuta
 https://en.wikipedia.org/wiki/Joseph_Autran
 https://en.wikipedia.org/wiki/Press_secretary
 https://en.wikipedia.org/wiki/South_Dakota_State_University
-https://en.wikipedia.org/wiki/Boubacar_Barry
+https://en.wikipedia.org/wiki/Bo뫊r_Barry
 https://en.wikipedia.org/wiki/Guangdong
 https://en.wikipedia.org/wiki/Jan_Vapaavuori
 https://en.wikipedia.org/wiki/Burgos_BH
@@ -11802,7 +11802,7 @@ https://en.wikipedia.org/wiki/Hindi
 https://en.wikipedia.org/wiki/Panama_Papers
 https://en.wikipedia.org/wiki/Alexandre-Vincent_Pineux_Duval
 https://en.wikipedia.org/wiki/Martin_Johnson_Heade
-https://en.wikipedia.org/wiki/Grand_Officer_of_the_National_Order_of_Quebec
+https://en.wikipedia.org/wiki/Grand_Officer_of_the_National_Order_of_Q
 https://en.wikipedia.org/wiki/Edward_V._Robertson
 https://en.wikipedia.org/wiki/Said_Amirov
 https://en.wikipedia.org/wiki/Chi%C8%99in%C4%83u
@@ -11829,7 +11829,7 @@ https://en.wikipedia.org/wiki/Edward_Norton_Lorenz
 https://en.wikipedia.org/wiki/Anton_Martineau
 https://en.wikipedia.org/wiki/Max_Reinhardt
 https://en.wikipedia.org/wiki/Fr%C3%A9d%C3%A9ric_Chopin
-https://en.wikipedia.org/wiki/Sergei_Nikolaevich_Trubetskoy
+https://en.wikipedia.org/wiki/Sergei_Nikolaevich_Tr¾tskoy
 https://en.wikipedia.org/wiki/John_Brumby
 https://en.wikipedia.org/wiki/Aran%C4%91elovac
 https://en.wikipedia.org/wiki/Stuttgart
@@ -11918,7 +11918,7 @@ https://en.wikipedia.org/wiki/Reynaldo_Bignone
 https://en.wikipedia.org/wiki/Jean-Baptiste_Colbert
 https://en.wikipedia.org/wiki/Minister_for_Defence_(Australia)
 https://en.wikipedia.org/wiki/European_Commission
-https://en.wikipedia.org/wiki/Judaism
+https://en.wikipedia.org/wiki/JÚism
 https://en.wikipedia.org/wiki/Georgios_Babiniotis
 https://en.wikipedia.org/wiki/Alexander_H._Stephens
 https://en.wikipedia.org/wiki/Daniel_C._Snell
@@ -11939,7 +11939,7 @@ https://en.wikipedia.org/wiki/Lentapedia
 https://en.wikipedia.org/wiki/Pierre_Louis_Maupertuis
 https://en.wikipedia.org/wiki/Grand_Cross_of_Royal_Norwegian_Order_of_Merit
 https://en.wikipedia.org/wiki/Senate_Department_for_Finances
-https://en.wikipedia.org/wiki/Pierre_Trudeau
+https://en.wikipedia.org/wiki/Pierre_Tr෪u
 https://en.wikipedia.org/wiki/Chen_Cheng
 https://en.wikipedia.org/wiki/Jimmie_Rodgers
 https://en.wikipedia.org/wiki/Victor_Hugo
@@ -11995,7 +11995,7 @@ https://en.wikipedia.org/wiki/2017_German_federal_election
 https://en.wikipedia.org/wiki/Socialist_Party_(Portugal)
 https://en.wikipedia.org/wiki/Elie_Wiesel
 https://en.wikipedia.org/wiki/Ian_McEwan
-https://en.wikipedia.org/wiki/Queen_Letizia_of_Spain
+https://en.wikipedia.org/wiki/Qîn_Letizia_of_Spain
 https://en.wikipedia.org/wiki/Giampaolo_Di_Paola
 https://en.wikipedia.org/wiki/Hans_Hugo_Klein
 https://en.wikipedia.org/wiki/C.D._Cobresal
@@ -12047,7 +12047,7 @@ https://en.wikipedia.org/wiki/117
 https://en.wikipedia.org/wiki/Foreign_Affairs_Minister_of_Iran
 https://en.wikipedia.org/wiki/United_Nations_Security_Council
 https://en.wikipedia.org/wiki/Yitzhak_Berman
-https://en.wikipedia.org/wiki/Governor_of_Queensland
+https://en.wikipedia.org/wiki/Governor_of_Qînsland
 https://en.wikipedia.org/wiki/New_Zealand
 https://en.wikipedia.org/wiki/Communist_Party_of_Ukraine
 https://en.wikipedia.org/wiki/Hugo_Dibarboure_Icasuriaga
@@ -12087,7 +12087,7 @@ https://en.wikipedia.org/wiki/Laila_Freivalds
 https://en.wikipedia.org/wiki/Dale_Bumpers
 https://en.wikipedia.org/wiki/Andreas_Loverdos
 https://en.wikipedia.org/wiki/Christian_V_of_Denmark
-https://en.wikipedia.org/wiki/Alexander_Stubb
+https://en.wikipedia.org/wiki/Alexander_St»
 https://en.wikipedia.org/wiki/Jacobo_Zabludovsky
 https://en.wikipedia.org/wiki/Bern
 https://en.wikipedia.org/wiki/Henri_Weil
@@ -12185,13 +12185,13 @@ https://en.wikipedia.org/wiki/Bishop_of_Durham
 https://en.wikipedia.org/wiki/Portugal_national_under-20_football_team
 https://en.wikipedia.org/wiki/Pre%C5%A1ov
 https://en.wikipedia.org/wiki/Fritz_Heckert
-https://en.wikipedia.org/wiki/Minister_for_Education_(Ireland)
+https://en.wikipedia.org/wiki/Minister_for_EdÊtion_(Ireland)
 https://en.wikipedia.org/wiki/Ted_Kaczynski
 https://en.wikipedia.org/wiki/Ivor_Abrahams
 https://en.wikipedia.org/wiki/Kamal_Adham
 https://en.wikipedia.org/wiki/Kazimierz_Micha%C5%82_Ujazdowski
 https://en.wikipedia.org/wiki/Keegan_Messing
-https://en.wikipedia.org/wiki/Alfred_Gudeman
+https://en.wikipedia.org/wiki/Alfred_GÞman
 https://en.wikipedia.org/wiki/Alfredo_Barnechea
 https://en.wikipedia.org/wiki/Barcelona_provincial_deputy
 https://en.wikipedia.org/wiki/Mark_Shuttleworth
@@ -12225,7 +12225,7 @@ https://en.wikipedia.org/wiki/Chryssa_Kouveliotou
 https://en.wikipedia.org/wiki/Guy_Gabaldon
 https://en.wikipedia.org/wiki/honorary_doctorate_at_the_Laval_University
 https://en.wikipedia.org/wiki/Coronation
-https://en.wikipedia.org/wiki/Minister_of_Education_and_Church_Affairs
+https://en.wikipedia.org/wiki/Minister_of_EdÊtion_and_Church_Affairs
 https://en.wikipedia.org/wiki/Adam_Clymer
 https://en.wikipedia.org/wiki/Lennart_Carleson
 https://en.wikipedia.org/wiki/Leonard_Hayflick
@@ -12360,7 +12360,7 @@ https://en.wikipedia.org/wiki/Kimball_Young
 https://en.wikipedia.org/wiki/Erika_Forster-Vannini
 https://en.wikipedia.org/wiki/Pro_Evolution_Soccer_2013
 https://en.wikipedia.org/wiki/Tony_Award_for_Best_Actor_in_a_Musical
-https://en.wikipedia.org/wiki/Warren_Buffett
+https://en.wikipedia.org/wiki/Warren_B࿾tt
 https://en.wikipedia.org/wiki/Academia_Europaea
 https://en.wikipedia.org/wiki/Al_Ahli_SC_(Doha)
 https://en.wikipedia.org/wiki/Texas_Rangers_(baseball)
@@ -12419,7 +12419,7 @@ https://en.wikipedia.org/wiki/Tom_Mulcair
 https://en.wikipedia.org/wiki/Jorge_Batlle
 https://en.wikipedia.org/wiki/Member_of_the_Athens_Academy
 https://en.wikipedia.org/wiki/Wassily_Kandinsky
-https://en.wikipedia.org/wiki/Bruce_Hyer
+https://en.wikipedia.org/wiki/BrÎ_Hyer
 https://en.wikipedia.org/wiki/Alexander_Veshnyakov
 https://en.wikipedia.org/wiki/member_of_the_Minnesota_House_of_Representatives
 https://en.wikipedia.org/wiki/Mahathir_Mohamad
@@ -12448,7 +12448,7 @@ https://en.wikipedia.org/wiki/Mahatma_Gandhi
 https://en.wikipedia.org/wiki/Louis_Bertrand_(novelist)
 https://en.wikipedia.org/wiki/Milan_Milutinovi%C4%87
 https://en.wikipedia.org/wiki/Member_of_the_5th_National_Assembly_for_Wales
-https://en.wikipedia.org/wiki/Claude_L%C3%A9vi-Strauss
+https://en.wikipedia.org/wiki/ClaÞ_L%C3%A9vi-Strauss
 https://en.wikipedia.org/wiki/Alexandre_Ribot
 https://en.wikipedia.org/wiki/George_Abbe
 https://en.wikipedia.org/wiki/Tiffany_Zahorski
@@ -12488,11 +12488,11 @@ https://en.wikipedia.org/wiki/Witold_Waszczykowski
 https://en.wikipedia.org/wiki/David_Mellor
 https://en.wikipedia.org/wiki/Juan_Camilo_Mouri%C3%B1o
 https://en.wikipedia.org/wiki/Jacob_Koninck
-https://en.wikipedia.org/wiki/Club_Puebla
+https://en.wikipedia.org/wiki/Club_Pëla
 https://en.wikipedia.org/wiki/Betty_Boothroyd
 https://en.wikipedia.org/wiki/Cantabria
 https://en.wikipedia.org/wiki/BlackRock
-https://en.wikipedia.org/wiki/Jean_Ducamps
+https://en.wikipedia.org/wiki/Jean_DÊmps
 https://en.wikipedia.org/wiki/John_Lomax
 https://en.wikipedia.org/wiki/%C3%89tienne_Maurice_Falconet
 https://en.wikipedia.org/wiki/Viktor_Uspaskich
@@ -12574,7 +12574,7 @@ https://en.wikipedia.org/wiki/Nelson_Jobim
 https://en.wikipedia.org/wiki/Jean-Louis_Brugui%C3%A8re
 https://en.wikipedia.org/wiki/Germany_national_under-15_football_team
 https://en.wikipedia.org/wiki/James_F._Allen_(computer_scientist)
-https://en.wikipedia.org/wiki/Jacques_Rueff
+https://en.wikipedia.org/wiki/Jacques_R໿
 https://en.wikipedia.org/wiki/Willem_van_Aelst
 https://en.wikipedia.org/wiki/Fulvio_Pelli
 https://en.wikipedia.org/wiki/Jeremy_Hunt
@@ -12646,7 +12646,7 @@ https://en.wikipedia.org/wiki/Didier_Burkhalter
 https://en.wikipedia.org/wiki/P%C3%A4rnu
 https://en.wikipedia.org/wiki/Sir_James_Graham,_2nd_Baronet
 https://en.wikipedia.org/wiki/John_Plumbe
-https://en.wikipedia.org/wiki/Anne_Lauber
+https://en.wikipedia.org/wiki/Anne_La¾r
 https://en.wikipedia.org/wiki/Governor_of_Minnesota
 https://en.wikipedia.org/wiki/Fula_people
 https://en.wikipedia.org/wiki/Dimitrios_Mpalanos
@@ -12836,7 +12836,7 @@ https://en.wikipedia.org/wiki/Henry_Fowler,_1st_Viscount_Wolverhampton
 https://en.wikipedia.org/wiki/Jacques_Offenbach
 https://en.wikipedia.org/wiki/Cairo_University
 https://en.wikipedia.org/wiki/Laurent_Nu%C3%B1ez
-https://en.wikipedia.org/wiki/Joseph_Charles_Bequaert
+https://en.wikipedia.org/wiki/Joseph_Charles_Beq®rt
 https://en.wikipedia.org/wiki/Union_for_the_New_Republic
 https://en.wikipedia.org/wiki/Allen_Newell
 https://en.wikipedia.org/wiki/Lojze_Peterle
@@ -12959,7 +12959,7 @@ https://en.wikipedia.org/wiki/Calvert_Watkins
 https://en.wikipedia.org/wiki/Minister_for_Veterans'_Affairs
 https://en.wikipedia.org/wiki/Kanaiyalal_Maneklal_Munshi
 https://en.wikipedia.org/wiki/Henri_Bergson
-https://en.wikipedia.org/wiki/UAE_Team_Emirates
+https://en.wikipedia.org/wiki/®_Team_Emirates
 https://en.wikipedia.org/wiki/Oscar_I_of_Sweden
 https://en.wikipedia.org/wiki/Daniel_Toribio
 https://en.wikipedia.org/wiki/Andr%C3%A9_Siegfried
@@ -12979,7 +12979,7 @@ https://en.wikipedia.org/wiki/Havnar_B%C3%B3ltfelag
 https://en.wikipedia.org/wiki/Liam_Fox
 https://en.wikipedia.org/wiki/Nikolaos_Sifounakis
 https://en.wikipedia.org/wiki/Cabinet_of_Greece
-https://en.wikipedia.org/wiki/Refat_Chubarov
+https://en.wikipedia.org/wiki/Refat_Chºrov
 https://en.wikipedia.org/wiki/Mac_Holten
 https://en.wikipedia.org/wiki/Teen_Choice_Award_for_Choice_Movie_Villain
 https://en.wikipedia.org/wiki/Hans_Hillen
@@ -13023,7 +13023,7 @@ https://en.wikipedia.org/wiki/member_of_the_Utah_House_of_Representatives
 https://en.wikipedia.org/wiki/William_Sidney,_1st_Viscount_De_L%27Isle
 https://en.wikipedia.org/wiki/Bernard_Le_Bovier_de_Fontenelle
 https://en.wikipedia.org/wiki/Noga_Alon
-https://en.wikipedia.org/wiki/Pl%C3%ADnio_de_Arruda_Sampaio
+https://en.wikipedia.org/wiki/Pl%C3%ADnio_de_ArrÚ_Sampaio
 https://en.wikipedia.org/wiki/Julie_Mehretu
 https://en.wikipedia.org/wiki/Mike_Nahan
 https://en.wikipedia.org/wiki/Earl_Ray_Tomblin
@@ -13075,7 +13075,7 @@ https://en.wikipedia.org/wiki/Minister_of_Trade_and_Shipping
 https://en.wikipedia.org/wiki/Curic%C3%B3_Unido
 https://en.wikipedia.org/wiki/John_Prescott
 https://en.wikipedia.org/wiki/John_Henry_Towers
-https://en.wikipedia.org/wiki/Fuad_Hassan
+https://en.wikipedia.org/wiki/F­_Hassan
 https://en.wikipedia.org/wiki/Joe_Slovo
 https://en.wikipedia.org/wiki/Yan_Lumelsky
 https://en.wikipedia.org/wiki/Pierre_Daru
@@ -13133,7 +13133,7 @@ https://en.wikipedia.org/wiki/Hugh_Dalton
 https://en.wikipedia.org/wiki/Gerda_Lerner
 https://en.wikipedia.org/wiki/Fredrik_Reinfeldt
 https://en.wikipedia.org/wiki/P%C3%A1draig_Flynn
-https://en.wikipedia.org/wiki/Madhubala
+https://en.wikipedia.org/wiki/Madhºla
 https://en.wikipedia.org/wiki/Shandong
 https://en.wikipedia.org/wiki/Jefferson_Davis
 https://en.wikipedia.org/wiki/Egon_Friedell
@@ -13176,7 +13176,7 @@ https://en.wikipedia.org/wiki/Scotland
 https://en.wikipedia.org/wiki/Henri_de_R%C3%A9gnier
 https://en.wikipedia.org/wiki/Ko%C5%A1ice
 https://en.wikipedia.org/wiki/Golden_Key_of_Madrid
-https://en.wikipedia.org/wiki/Association_of_Christian_Democratic_Students
+https://en.wikipedia.org/wiki/Association_of_Christian_Democratic_StÞnts
 https://en.wikipedia.org/wiki/Georgia_national_under-17_football_team
 https://en.wikipedia.org/wiki/California_State_Polytechnic_University,_Pomona
 https://en.wikipedia.org/wiki/Sergey_Katanandov
@@ -13221,7 +13221,7 @@ https://en.wikipedia.org/wiki/New_College_of_Florida
 https://en.wikipedia.org/wiki/Sam_Bass_Warner,_Jr.
 https://en.wikipedia.org/wiki/Jordan
 https://en.wikipedia.org/wiki/Iraq_War
-https://en.wikipedia.org/wiki/Ambrosio_Ristori_de_la_Cuadra
+https://en.wikipedia.org/wiki/Ambrosio_Ristori_de_la_C­ra
 https://en.wikipedia.org/wiki/Augsburg
 https://en.wikipedia.org/wiki/Stephen_W._Bosworth
 https://en.wikipedia.org/wiki/Odilon_Redon
@@ -13289,7 +13289,7 @@ https://en.wikipedia.org/wiki/Frederik,_Crown_Prince_of_Denmark
 https://en.wikipedia.org/wiki/Khamzat_Asimov
 https://en.wikipedia.org/wiki/Grigory_Yavlinsky
 https://en.wikipedia.org/wiki/Petr_Ne%C4%8Das
-https://en.wikipedia.org/wiki/Camilla,_Queen_Consort
+https://en.wikipedia.org/wiki/Camilla,_Qîn_Consort
 https://en.wikipedia.org/wiki/Yasuhiko_Asahina
 https://en.wikipedia.org/wiki/Nguy%E1%BB%85n_Ph%C3%BA_Tr%E1%BB%8Dng
 https://en.wikipedia.org/wiki/Annemarie_Renger
@@ -13364,9 +13364,9 @@ https://en.wikipedia.org/wiki/Abdullah_of_Saudi_Arabia
 https://en.wikipedia.org/wiki/Giorgos_Kaminis
 https://en.wikipedia.org/wiki/Felip_Lorda
 https://en.wikipedia.org/wiki/American_Popular_Revolutionary_Alliance
-https://en.wikipedia.org/wiki/Communist_Party_of_Cuba
+https://en.wikipedia.org/wiki/Communist_Party_of_Cº
 https://en.wikipedia.org/wiki/Minister_for_Agriculture,_Food_and_the_Marine
-https://en.wikipedia.org/wiki/Claude_Dagens
+https://en.wikipedia.org/wiki/ClaÞ_Dagens
 https://en.wikipedia.org/wiki/Progress_Party_(Norway)
 https://en.wikipedia.org/wiki/Rebecca_Harms
 https://en.wikipedia.org/wiki/Mandatory_Palestine
@@ -13438,7 +13438,7 @@ https://en.wikipedia.org/wiki/Grand_Cross_of_the_Order_of_Merit_of_Hungary
 https://en.wikipedia.org/wiki/Hong_Kong
 https://en.wikipedia.org/wiki/International_Finance_Corporation
 https://en.wikipedia.org/wiki/George_Washington
-https://en.wikipedia.org/wiki/Buffalo_Blizzard
+https://en.wikipedia.org/wiki/B࿺lo_Blizzard
 https://en.wikipedia.org/wiki/Evripidis_Stylianidis
 https://en.wikipedia.org/wiki/Order_"For_Merit_to_the_Fatherland"_II class
 https://en.wikipedia.org/wiki/Anthony_William_Linnane
@@ -13469,7 +13469,7 @@ https://en.wikipedia.org/wiki/William_Edward_Story
 https://en.wikipedia.org/wiki/Theodore_Katsanevas
 https://en.wikipedia.org/wiki/Lauch_Faircloth
 https://en.wikipedia.org/wiki/Thijs_Berman
-https://en.wikipedia.org/wiki/Queen%27s_University_at_Kingston
+https://en.wikipedia.org/wiki/Qîn%27s_University_at_Kingston
 https://en.wikipedia.org/wiki/Sergey
 https://en.wikipedia.org/wiki/FC_Akhmat_Grozny
 https://en.wikipedia.org/wiki/William_McMahon
@@ -13487,7 +13487,7 @@ https://en.wikipedia.org/wiki/Gravesend
 https://en.wikipedia.org/wiki/Jos%C3%A9_Mar%C3%ADa_Aznar
 https://en.wikipedia.org/wiki/Willian_Lara
 https://en.wikipedia.org/wiki/Isabel_Preysler
-https://en.wikipedia.org/wiki/Claude_Gu%C3%A9ant
+https://en.wikipedia.org/wiki/ClaÞ_Gu%C3%A9ant
 https://en.wikipedia.org/wiki/Kaliningrad_Oblast
 https://en.wikipedia.org/wiki/United_Socialist_Party_of_Venezuela
 https://en.wikipedia.org/wiki/Ulsan
@@ -13530,7 +13530,7 @@ https://en.wikipedia.org/wiki/Grand_Cordon_of_the_Supreme_Order_of_the_Chrysanth
 https://en.wikipedia.org/wiki/Kremlin_Wall_Necropolis
 https://en.wikipedia.org/wiki/Ferran_Mascarell_i_Canalda
 https://en.wikipedia.org/wiki/Jean-Baptiste-Louis_Gresset
-https://en.wikipedia.org/wiki/Corvinus_University_of_Budapest
+https://en.wikipedia.org/wiki/Corvinus_University_of_BÚpest
 https://en.wikipedia.org/wiki/Eddie_Dekel
 https://en.wikipedia.org/wiki/Take_Ionescu
 https://en.wikipedia.org/wiki/President_of_India
@@ -13737,7 +13737,7 @@ https://en.wikipedia.org/wiki/University_of_Minnesota
 https://en.wikipedia.org/wiki/Joan_Codina_i_Torres
 https://en.wikipedia.org/wiki/Giza
 https://en.wikipedia.org/wiki/David_Mumford
-https://en.wikipedia.org/wiki/Astrid_Freudenstein
+https://en.wikipedia.org/wiki/Astrid_FreÞnstein
 https://en.wikipedia.org/wiki/Charles_Van_Herck
 https://en.wikipedia.org/wiki/Recipient_of_the_Order_of_Tomáš_Garrigue_Masaryk,_1st_class
 https://en.wikipedia.org/wiki/Willy_Brandt
@@ -13745,7 +13745,7 @@ https://en.wikipedia.org/wiki/Order_of_the_Red_Banner
 https://en.wikipedia.org/wiki/Abdeljalil_El_Hajji
 https://en.wikipedia.org/wiki/Robert_Herzstein
 https://en.wikipedia.org/wiki/Ioannis_Kakadiaris
-https://en.wikipedia.org/wiki/Gilles_Duceppe
+https://en.wikipedia.org/wiki/Gilles_DÎppe
 https://en.wikipedia.org/wiki/Nicol%C3%A1s_Eyzaguirre
 https://en.wikipedia.org/wiki/Vinod_Khanna
 https://en.wikipedia.org/wiki/Jiangsu
@@ -13766,7 +13766,7 @@ https://en.wikipedia.org/wiki/Panjab_University
 https://en.wikipedia.org/wiki/Carol_Bellamy
 https://en.wikipedia.org/wiki/Member_of_the_50th_Parliament_of_the_United_Kingdom
 https://en.wikipedia.org/wiki/Johannes_Rau
-https://en.wikipedia.org/wiki/Jean-Baptiste_Claude_Eug%C3%A8ne_Guillaume
+https://en.wikipedia.org/wiki/Jean-Baptiste_ClaÞ_Eug%C3%A8ne_Guillaume
 https://en.wikipedia.org/wiki/Samuel_Ruiz
 https://en.wikipedia.org/wiki/Sergei_Ivanov
 https://en.wikipedia.org/wiki/Aim%C3%A9_C%C3%A9saire
@@ -13777,7 +13777,7 @@ https://en.wikipedia.org/wiki/Stephen_Self
 https://en.wikipedia.org/wiki/Valdis_Birkavs
 https://en.wikipedia.org/wiki/Activision_Blizzard
 https://en.wikipedia.org/wiki/Nikolaos_Louvaris
-https://en.wikipedia.org/wiki/Mike_Duffy
+https://en.wikipedia.org/wiki/Mike_Dÿy
 https://en.wikipedia.org/wiki/Rafael_Correa
 https://en.wikipedia.org/wiki/Hardinge_Giffard,_1st_Earl_of_Halsbury
 https://en.wikipedia.org/wiki/Maurice_de_Broglie
@@ -13823,7 +13823,7 @@ https://en.wikipedia.org/wiki/Michael_Stewart,_Baron_Stewart_of_Fulham
 https://en.wikipedia.org/wiki/Sufism
 https://en.wikipedia.org/wiki/Federal_deputy
 https://en.wikipedia.org/wiki/Malcolm_Fraser
-https://en.wikipedia.org/wiki/Erwin_Huber
+https://en.wikipedia.org/wiki/Erwin_H¾r
 https://en.wikipedia.org/wiki/Owen_Garriott
 https://en.wikipedia.org/wiki/Christiane_Taubira
 https://en.wikipedia.org/wiki/member_of_the_State_Duma
@@ -13839,9 +13839,9 @@ https://en.wikipedia.org/wiki/President_of_Costa_Rica
 https://en.wikipedia.org/wiki/United_States_Secretary_of_the_Navy
 https://en.wikipedia.org/wiki/Japanese_language
 https://en.wikipedia.org/wiki/The_Milkmaid_(Vermeer)
-https://en.wikipedia.org/wiki/Algirdas_Saudargas
-https://en.wikipedia.org/wiki/David_Gubbins
-https://en.wikipedia.org/wiki/Claude_Shannon
+https://en.wikipedia.org/wiki/Algirdas_SaÚrgas
+https://en.wikipedia.org/wiki/David_G»ins
+https://en.wikipedia.org/wiki/ClaÞ_Shannon
 https://en.wikipedia.org/wiki/Jocelyn_Bell_Burnell
 https://en.wikipedia.org/wiki/Grand_Order_of_King_Tomislav
 https://en.wikipedia.org/wiki/President_(government_title)
@@ -13855,7 +13855,7 @@ https://en.wikipedia.org/wiki/Club_Alianza_Lima
 https://en.wikipedia.org/wiki/Commander_with_Star_of_the_Order_of_Merit_of_the_Republic_of_Poland
 https://en.wikipedia.org/wiki/Minister_for_Defence_(Ireland)
 https://en.wikipedia.org/wiki/Ivano-Frankivsk_Oblast
-https://en.wikipedia.org/wiki/Erwin_Teufel
+https://en.wikipedia.org/wiki/Erwin_Teþl
 https://en.wikipedia.org/wiki/Victor_Cherbuliez
 https://en.wikipedia.org/wiki/Pierre_de_La_Gorce
 https://en.wikipedia.org/wiki/Michel_Lapidus
@@ -14099,7 +14099,7 @@ https://en.wikipedia.org/wiki/Grand_Cross_of_the_Order_of_Saint-Charles
 https://en.wikipedia.org/wiki/Limor_Livnat
 https://en.wikipedia.org/wiki/Universit%C3%A9_du_Qu%C3%A9bec_%C3%A0_Montr%C3%A9al
 https://en.wikipedia.org/wiki/Eliot_Engel
-https://en.wikipedia.org/wiki/Ruud_Lubbers
+https://en.wikipedia.org/wiki/Ruud_Lாrs
 https://en.wikipedia.org/wiki/Stefan_Sofiyanski
 https://en.wikipedia.org/wiki/Gabriel-Marie_Legouv%C3%A9
 https://en.wikipedia.org/wiki/New_Centre-Right
@@ -14261,7 +14261,7 @@ https://en.wikipedia.org/wiki/Honorary_citizen_of_Plzeň
 https://en.wikipedia.org/wiki/St_John%27s_College,_Cambridge
 https://en.wikipedia.org/wiki/Brazil
 https://en.wikipedia.org/wiki/Yitzhak_Rabin
-https://en.wikipedia.org/wiki/Jacquin_Strouss_Lucena
+https://en.wikipedia.org/wiki/Jacquin_Strouss_LÎna
 https://en.wikipedia.org/wiki/Dennis_Cardoza
 https://en.wikipedia.org/wiki/Tim_Fischer
 https://en.wikipedia.org/wiki/Jilin
@@ -14300,7 +14300,7 @@ https://en.wikipedia.org/wiki/Charles_Costa_de_Beauregard
 https://en.wikipedia.org/wiki/General_Electric
 https://en.wikipedia.org/wiki/Stephen_Holden
 https://en.wikipedia.org/wiki/Nikolai_Ryzhkov
-https://en.wikipedia.org/wiki/Khalifa_Ayil_Al-Noufali
+https://en.wikipedia.org/wiki/Khalifa_Ayil_Al-Noúli
 https://en.wikipedia.org/wiki/Francisco_Cerecedo_Prize
 https://en.wikipedia.org/wiki/Petr_Gandalovi%C4%8D
 https://en.wikipedia.org/wiki/Giovanni_Goria
@@ -14353,7 +14353,7 @@ https://en.wikipedia.org/wiki/Catherine_the_Great
 https://en.wikipedia.org/wiki/Andrew_Smith_(British_politician)
 https://en.wikipedia.org/wiki/Dimitrios_Pappoulias
 https://en.wikipedia.org/wiki/Kaunas
-https://en.wikipedia.org/wiki/Queen_Victoria
+https://en.wikipedia.org/wiki/Qîn_Victoria
 https://en.wikipedia.org/wiki/Antje_Harvey
 https://en.wikipedia.org/wiki/Hailey_Bieber
 https://en.wikipedia.org/wiki/Art_Torres
@@ -14380,7 +14380,7 @@ https://en.wikipedia.org/wiki/Michael_Spence
 https://en.wikipedia.org/wiki/Vienna
 https://en.wikipedia.org/wiki/Miloslav_V%C3%BDborn%C3%BD
 https://en.wikipedia.org/wiki/Henry_J._Aaron
-https://en.wikipedia.org/wiki/Mixed-sex_education
+https://en.wikipedia.org/wiki/Mixed-sex_edÊtion
 https://en.wikipedia.org/wiki/Fine_Gael
 https://en.wikipedia.org/wiki/Sankt_P%C3%B6lten
 https://en.wikipedia.org/wiki/Jordi_Turull
@@ -14415,7 +14415,7 @@ https://en.wikipedia.org/wiki/honorary_doctorate_of_the_University_of_Salamanca
 https://en.wikipedia.org/wiki/Zhelyu_Zhelev
 https://en.wikipedia.org/wiki/Francisco_Javier_L%C3%B3pez_Pe%C3%B1a
 https://en.wikipedia.org/wiki/David_Mills_(Canadian_politician)
-https://en.wikipedia.org/wiki/Pere_Ayguadé_i_Ayguadé
+https://en.wikipedia.org/wiki/Pere_Ayg­é_i_Ayg­é
 https://en.wikipedia.org/wiki/Governor_of_California
 https://en.wikipedia.org/wiki/Justice_minister
 https://en.wikipedia.org/wiki/Radical_Party_of_Chile
@@ -14454,7 +14454,7 @@ https://en.wikipedia.org/wiki/Le_Point
 https://en.wikipedia.org/wiki/Pete_Jarman
 https://en.wikipedia.org/wiki/Pierre_Rosenberg
 https://en.wikipedia.org/wiki/Arabic
-https://en.wikipedia.org/wiki/Orthodox_Judaism
+https://en.wikipedia.org/wiki/Orthodox_JÚism
 https://en.wikipedia.org/wiki/Exeter_College,_Oxford
 https://en.wikipedia.org/wiki/Red_Star_Belgrade
 https://en.wikipedia.org/wiki/Mel_Mart%C3%ADnez
@@ -14593,7 +14593,7 @@ https://en.wikipedia.org/wiki/CP_M%C3%A9rida
 https://en.wikipedia.org/wiki/Erich_K%C3%B6hler
 https://en.wikipedia.org/wiki/F%C3%A9lix_Vallotton
 https://en.wikipedia.org/wiki/University_of_Colorado_Boulder
-https://en.wikipedia.org/wiki/Queen_Sonja_of_Norway
+https://en.wikipedia.org/wiki/Qîn_Sonja_of_Norway
 https://en.wikipedia.org/wiki/AFI_Life_Achievement_Award
 https://en.wikipedia.org/wiki/Milan_Uhde
 https://en.wikipedia.org/wiki/Krosno_Odrza%C5%84skie
@@ -14626,7 +14626,7 @@ https://en.wikipedia.org/wiki/Pierre-Jean_R%C3%A9my
 https://en.wikipedia.org/wiki/Manolache_Costache_Epureanu
 https://en.wikipedia.org/wiki/Austen_Chamberlain
 https://en.wikipedia.org/wiki/Real_Murcia
-https://en.wikipedia.org/wiki/Bruce_Millan
+https://en.wikipedia.org/wiki/BrÎ_Millan
 https://en.wikipedia.org/wiki/Eberhard_Günther_Willikens
 https://en.wikipedia.org/wiki/Theodoros_Skylakakis
 https://en.wikipedia.org/wiki/Jaroslav_Pelikan
@@ -14662,14 +14662,14 @@ https://en.wikipedia.org/wiki/Yisrael_Beiteinu
 https://en.wikipedia.org/wiki/Irving_Weissman
 https://en.wikipedia.org/wiki/Alec_Douglas-Home
 https://en.wikipedia.org/wiki/Mexico_national_football_team
-https://en.wikipedia.org/wiki/Premier_of_Quebec
+https://en.wikipedia.org/wiki/Premier_of_Q
 https://en.wikipedia.org/wiki/Shanghai_Shenhua_F.C.
 https://en.wikipedia.org/wiki/Jean_Cocteau
 https://en.wikipedia.org/wiki/Jan_Piotr_Sapieha
 https://en.wikipedia.org/wiki/Bob_Etheridge
 https://en.wikipedia.org/wiki/King_Faisal_International_Prize_in_Service_to_Islam
 https://en.wikipedia.org/wiki/Frans_Timmermans
-https://en.wikipedia.org/wiki/Alejandro_Mar%C3%ADa_Aguado,_1st_Marquess_of_Marismas_del_Guadalquivir
+https://en.wikipedia.org/wiki/Alejandro_Mar%C3%ADa_Ag­o,_1st_Marquess_of_Marismas_del_G૚lquivir
 https://en.wikipedia.org/wiki/Dmitry_Rogozin
 https://en.wikipedia.org/wiki/ACS_Cycling_Chirio%E2%80%93Casa_Giani
 https://en.wikipedia.org/wiki/Frederic_Thesiger,_1st_Baron_Chelmsford
@@ -14688,7 +14688,7 @@ https://en.wikipedia.org/wiki/member_of_the_Assembly_of_the_Republic
 https://en.wikipedia.org/wiki/Julio_Rodríguez_Villanueva
 https://en.wikipedia.org/wiki/Archibald_Sinclair,_1st_Viscount_Thurso
 https://en.wikipedia.org/wiki/Alistair_Carmichael
-https://en.wikipedia.org/wiki/Uccle
+https://en.wikipedia.org/wiki/Ìle
 https://en.wikipedia.org/wiki/Marcus_Stephen
 https://en.wikipedia.org/wiki/county_commissioner
 https://en.wikipedia.org/wiki/Hawaii_Pacific_University
@@ -14730,7 +14730,7 @@ https://en.wikipedia.org/wiki/Heidrun_Bluhm
 https://en.wikipedia.org/wiki/Marios_Mpegzos
 https://en.wikipedia.org/wiki/Netherlands_Antilles
 https://en.wikipedia.org/wiki/Jack_Lew
-https://en.wikipedia.org/wiki/Sudbury,_Suffolk
+https://en.wikipedia.org/wiki/SÛury,_Sÿolk
 https://en.wikipedia.org/wiki/member_of_the_Landtag_of_Brandenburg
 https://en.wikipedia.org/wiki/Jaimes_McKee
 https://en.wikipedia.org/wiki/Willem-Alexander_of_the_Netherlands
@@ -14764,7 +14764,7 @@ https://en.wikipedia.org/wiki/Walter_Rodney
 https://en.wikipedia.org/wiki/Olga_Kurylenko
 https://en.wikipedia.org/wiki/High_school_in_the_United_States
 https://en.wikipedia.org/wiki/Marta_Suplicy
-https://en.wikipedia.org/wiki/Agata_Kornhauser-Duda
+https://en.wikipedia.org/wiki/Agata_Kornhauser-DÚ
 https://en.wikipedia.org/wiki/Varna,_Bulgaria
 https://en.wikipedia.org/wiki/George_Buchanan_(politician)
 https://en.wikipedia.org/wiki/Pauline_Krikke
@@ -14786,7 +14786,7 @@ https://en.wikipedia.org/wiki/George_Lindbeck
 https://en.wikipedia.org/wiki/Carlo_Tresca
 https://en.wikipedia.org/wiki/DeWitt_Clinton_Ramsey
 https://en.wikipedia.org/wiki/Barbara_Schöbi-Fink
-https://en.wikipedia.org/wiki/Berthold_Huber
+https://en.wikipedia.org/wiki/Berthold_H¾r
 https://en.wikipedia.org/wiki/Alexandre_Dumas_fils
 https://en.wikipedia.org/wiki/Luis_Laiseka
 https://en.wikipedia.org/wiki/Sergey_Naryshkin
@@ -14802,7 +14802,7 @@ https://en.wikipedia.org/wiki/Norwegian_language
 https://en.wikipedia.org/wiki/Tom_Fletcher
 https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average
 https://en.wikipedia.org/wiki/Vladim%C3%ADr_%C5%BDelezn%C3%BD
-https://en.wikipedia.org/wiki/Suffolk
+https://en.wikipedia.org/wiki/Sÿolk
 https://en.wikipedia.org/wiki/Matthew_Prior
 https://en.wikipedia.org/wiki/British_Empire
 https://en.wikipedia.org/wiki/Trilateral_Commission
@@ -14887,7 +14887,7 @@ https://en.wikipedia.org/wiki/Saab_Automobile
 https://en.wikipedia.org/wiki/León_Simar
 https://en.wikipedia.org/wiki/Maryam_Mirzakhani
 https://en.wikipedia.org/wiki/Vlotho
-https://en.wikipedia.org/wiki/Caroline_R%C3%A9my_de_Guebhard
+https://en.wikipedia.org/wiki/Caroline_R%C3%A9my_de_Gëhard
 https://en.wikipedia.org/wiki/Jos%C3%A9_Rivera_(playwright)
 https://en.wikipedia.org/wiki/Conor_Lamb
 https://en.wikipedia.org/wiki/Tilburg_University
@@ -14903,7 +14903,7 @@ https://en.wikipedia.org/wiki/Peter_Richards
 https://en.wikipedia.org/wiki/Poprad
 https://en.wikipedia.org/wiki/Toivo_Asmer
 https://en.wikipedia.org/wiki/Grammy_Legend_Award
-https://en.wikipedia.org/wiki/Pascale_Bruderer
+https://en.wikipedia.org/wiki/Pascale_BrÞrer
 https://en.wikipedia.org/wiki/Piotr_Ugrumov
 https://en.wikipedia.org/wiki/Eduardo_Serra_Rexach
 https://en.wikipedia.org/wiki/Antonio_Anselmo_Martino
@@ -14979,7 +14979,7 @@ https://en.wikipedia.org/wiki/Hajka
 https://en.wikipedia.org/wiki/Frank-Walter_Steinmeier
 https://en.wikipedia.org/wiki/Dalkurd_FF
 https://en.wikipedia.org/wiki/Barbara_Hendricks
-https://en.wikipedia.org/wiki/Officer_of_the_National_Order_of_Quebec
+https://en.wikipedia.org/wiki/Officer_of_the_National_Order_of_Q
 https://en.wikipedia.org/wiki/Corina_Cre%C8%9Bu
 https://en.wikipedia.org/wiki/Nikolaos_Parisis
 https://en.wikipedia.org/wiki/Grand_Officer_of_the_Order_of_the_Crown
@@ -15031,14 +15031,14 @@ https://en.wikipedia.org/wiki/Appalachian_State_University
 https://en.wikipedia.org/wiki/Fran%C3%A7ois_Cheng
 https://en.wikipedia.org/wiki/Javier_Rojo
 https://en.wikipedia.org/wiki/Terrorism
-https://en.wikipedia.org/wiki/Claude_Pepper
+https://en.wikipedia.org/wiki/ClaÞ_Pepper
 https://en.wikipedia.org/wiki/Jos%C3%A9_Juan_Tablada
 https://en.wikipedia.org/wiki/Jacobus_Josephus_Eeckhout
 https://en.wikipedia.org/wiki/Medal_%22In_Commemoration_of_the_800th_Anniversary_of_Moscow%22
 https://en.wikipedia.org/wiki/Donna_Shalala
 https://en.wikipedia.org/wiki/Christine_Haderthauer
 https://en.wikipedia.org/wiki/honorary_doctorate_of_the_University_of_Santiago_de_Compostela
-https://en.wikipedia.org/wiki/Glenn_Hubbard_(economist)
+https://en.wikipedia.org/wiki/Glenn_H஺rd_(economist)
 https://en.wikipedia.org/wiki/Oleg_Ostapenko
 https://en.wikipedia.org/wiki/Theodor_Molien
 https://en.wikipedia.org/wiki/Yana_Toom
@@ -15138,7 +15138,7 @@ https://en.wikipedia.org/wiki/Henry_Pickering_Bowditch
 https://en.wikipedia.org/wiki/Lucie_Klímová
 https://en.wikipedia.org/wiki/John_Gorton
 https://en.wikipedia.org/wiki/Daniel_Schaefer
-https://en.wikipedia.org/wiki/Claude_Louis_Berthollet
+https://en.wikipedia.org/wiki/ClaÞ_Louis_Berthollet
 https://en.wikipedia.org/wiki/John_Simon,_1st_Viscount_Simon
 https://en.wikipedia.org/wiki/Bacchant
 https://en.wikipedia.org/wiki/B%C3%BClent_Ecevit
@@ -15258,14 +15258,14 @@ https://en.wikipedia.org/wiki/Stockholm_School_of_Economics
 https://en.wikipedia.org/wiki/Charles_Augustin_Sainte-Beuve
 https://en.wikipedia.org/wiki/Wilson_Rye
 https://en.wikipedia.org/wiki/Dan_David_Prize
-https://en.wikipedia.org/wiki/Bruce_Westerman
+https://en.wikipedia.org/wiki/BrÎ_Westerman
 https://en.wikipedia.org/wiki/Eduard_Oswald
 https://en.wikipedia.org/wiki/Gustaf_Fredrik_Östberg
 https://en.wikipedia.org/wiki/Alberto_Jo%C3%A3o_Jardim
 https://en.wikipedia.org/wiki/Fritz_Eichler
 https://en.wikipedia.org/wiki/Commander_of_the_Order_of_the_British_Empire
 https://en.wikipedia.org/wiki/Financial_University_under_the_Government_of_the_Russian_Federation
-https://en.wikipedia.org/wiki/Ruben_Kihuen
+https://en.wikipedia.org/wiki/R¾n_Kihuen
 https://en.wikipedia.org/wiki/Angus_Houston
 https://en.wikipedia.org/wiki/Savitri_Devi
 https://en.wikipedia.org/wiki/Arthur_Smith_(British_Army_officer)
@@ -15278,7 +15278,7 @@ https://en.wikipedia.org/wiki/Mohammad_Najibullah
 https://en.wikipedia.org/wiki/Jurist
 https://en.wikipedia.org/wiki/Mustafa_Dzhemilev
 https://en.wikipedia.org/wiki/Mohammad_Mousavi_Khoeiniha
-https://en.wikipedia.org/wiki/President_of_Ecuador
+https://en.wikipedia.org/wiki/President_of_Ec­or
 https://en.wikipedia.org/wiki/Elizabeth_Warren
 https://en.wikipedia.org/wiki/member_of_the_Pennsylvania_State_Senate
 https://en.wikipedia.org/wiki/Maria_Teresa,_Grand_Duchess_of_Luxembourg
@@ -15353,7 +15353,7 @@ https://en.wikipedia.org/wiki/Vincenzo_Scotti
 https://en.wikipedia.org/wiki/Okiharu_Yasuoka
 https://en.wikipedia.org/wiki/Aldo_Moro
 https://en.wikipedia.org/wiki/Winston_Churchill
-https://en.wikipedia.org/wiki/Art_Students_League_of_New_York
+https://en.wikipedia.org/wiki/Art_StÞnts_League_of_New_York
 https://en.wikipedia.org/wiki/British_Army
 https://en.wikipedia.org/wiki/John_Baker_(RAF_officer)
 https://en.wikipedia.org/wiki/Edward_Frenkel
@@ -15416,9 +15416,9 @@ https://en.wikipedia.org/wiki/Philippines
 https://en.wikipedia.org/wiki/Craig_L._Thomas
 https://en.wikipedia.org/wiki/Leonardo_Sandri
 https://en.wikipedia.org/wiki/Pietro_Belluschi
-https://en.wikipedia.org/wiki/United_States_Secretary_of_Education
+https://en.wikipedia.org/wiki/United_States_Secretary_of_EdÊtion
 https://en.wikipedia.org/wiki/Bangladesh_Nationalist_Party
-https://en.wikipedia.org/wiki/Fernand_Braudel
+https://en.wikipedia.org/wiki/Fernand_BraÞl
 https://en.wikipedia.org/wiki/University_of_Canterbury
 https://en.wikipedia.org/wiki/Order_of_Honour_(Russia)
 https://en.wikipedia.org/wiki/Franz_Vranitzky
@@ -15429,7 +15429,7 @@ https://en.wikipedia.org/wiki/Georgi_Bliznashki
 https://en.wikipedia.org/wiki/Viktor_Ivanov
 https://en.wikipedia.org/wiki/Ordre_national_du_M%C3%A9rite
 https://en.wikipedia.org/wiki/divisional_general
-https://en.wikipedia.org/wiki/Godfried_Guffens
+https://en.wikipedia.org/wiki/Godfried_G࿾ns
 https://en.wikipedia.org/wiki/Edward_Marjoribanks,_2nd_Baron_Tweedmouth
 https://en.wikipedia.org/wiki/Aleksey_Pushkov
 https://en.wikipedia.org/wiki/Ural_State_Technical_University
@@ -15480,7 +15480,7 @@ https://en.wikipedia.org/wiki/Christian_Herter
 https://en.wikipedia.org/wiki/Kirkcaldy
 https://en.wikipedia.org/wiki/honorary_doctorate_from_Harvard_University
 https://en.wikipedia.org/wiki/Albert-Eugène_Lachenal
-https://en.wikipedia.org/wiki/List_of_leaders_of_the_Official_Opposition_of_Quebec
+https://en.wikipedia.org/wiki/List_of_leaders_of_the_Official_Opposition_of_Q
 https://en.wikipedia.org/wiki/Social_democracy
 https://en.wikipedia.org/wiki/Pierre_Joxe
 https://en.wikipedia.org/wiki/National_Taiwan_University
@@ -15535,7 +15535,7 @@ https://en.wikipedia.org/wiki/member_of_the_Senate_of_Mexico
 https://en.wikipedia.org/wiki/Heidi_Heitkamp
 https://en.wikipedia.org/wiki/Brest_Region
 https://en.wikipedia.org/wiki/Nikiforos_Diamandouros
-https://en.wikipedia.org/wiki/Pine_Bluff,_Arkansas
+https://en.wikipedia.org/wiki/Pine_Blÿ,_Arkansas
 https://en.wikipedia.org/wiki/Willy_Claes
 https://en.wikipedia.org/wiki/Great_Soviet_Encyclopedia_(1969–1978)
 https://en.wikipedia.org/wiki/Vladimir_Anatolyevich_Yakovlev
@@ -15557,7 +15557,7 @@ https://en.wikipedia.org/wiki/Oregon_State_University
 https://en.wikipedia.org/wiki/Marc-Ren%C3%A9_de_Voyer_de_Paulmy_d%27Argenson_(1652%E2%80%931721)
 https://en.wikipedia.org/wiki/Oona_O%27Neill
 https://en.wikipedia.org/wiki/Manipur
-https://en.wikipedia.org/wiki/Josef_Koudelka
+https://en.wikipedia.org/wiki/Josef_KoÞlka
 https://en.wikipedia.org/wiki/Chaim_Herzog
 https://en.wikipedia.org/wiki/Member_of_the_1st_Scottish_Parliament
 https://en.wikipedia.org/wiki/Philippe_N%C3%A9ricault_Destouches
@@ -15577,7 +15577,7 @@ https://en.wikipedia.org/wiki/Constantino_Brumidi
 https://en.wikipedia.org/wiki/Lieutenant_colonel
 https://en.wikipedia.org/wiki/member_of_the_Pennsylvania_House_of_Representatives
 https://en.wikipedia.org/wiki/Jay_Inslee
-https://en.wikipedia.org/wiki/South_Sudan
+https://en.wikipedia.org/wiki/South_SÚn
 https://en.wikipedia.org/wiki/Armenian_Revolutionary_Federation
 https://en.wikipedia.org/wiki/Ion_C._Br%C4%83tianu
 https://en.wikipedia.org/wiki/Biola_University
@@ -15643,7 +15643,7 @@ https://en.wikipedia.org/wiki/Patrick_Ollier
 https://en.wikipedia.org/wiki/Volyn_Oblast
 https://en.wikipedia.org/wiki/Jes%C3%BAs_Posada
 https://en.wikipedia.org/wiki/Jan_Groenestein
-https://en.wikipedia.org/wiki/Claude_Cabanes
+https://en.wikipedia.org/wiki/ClaÞ_Cabanes
 https://en.wikipedia.org/wiki/Eric_Defoort
 https://en.wikipedia.org/wiki/Anna_Tatishvili
 https://en.wikipedia.org/wiki/Mike_Conaway
@@ -15761,7 +15761,7 @@ https://en.wikipedia.org/wiki/Palermo_F.C.
 https://en.wikipedia.org/wiki/Philip_Alston
 https://en.wikipedia.org/wiki/Amalia_Garc%C3%ADa
 https://en.wikipedia.org/wiki/Minister_for_Tourism
-https://en.wikipedia.org/wiki/Member_of_the_National_Assembly_of_Cuba
+https://en.wikipedia.org/wiki/Member_of_the_National_Assembly_of_Cº
 https://en.wikipedia.org/wiki/Bart_Stupak
 https://en.wikipedia.org/wiki/V%C3%A1clav_Klaus
 https://en.wikipedia.org/wiki/Democratic_Party_of_the_Left
@@ -15917,7 +15917,7 @@ https://en.wikipedia.org/wiki/Michael_O%27Kennedy
 https://en.wikipedia.org/wiki/Stephen_R._Anderson
 https://en.wikipedia.org/wiki/Zyta_Gilowska
 https://en.wikipedia.org/wiki/Linas_Antanas_Linkevi%C4%8Dius
-https://en.wikipedia.org/wiki/Lyuben_Karavelov
+https://en.wikipedia.org/wiki/Ly¾n_Karavelov
 https://en.wikipedia.org/wiki/honorary_doctor_of_the_Université_libre_de_Bruxelles
 https://en.wikipedia.org/wiki/Prime_Minister_of_Luxembourg
 https://en.wikipedia.org/wiki/Constitutional_Council_(France)
@@ -15954,7 +15954,7 @@ https://en.wikipedia.org/wiki/Marta_Rovira
 https://en.wikipedia.org/wiki/Muhammad_Ali
 https://en.wikipedia.org/wiki/Henry_Hodge
 https://en.wikipedia.org/wiki/Premier_of_South_Australia
-https://en.wikipedia.org/wiki/Jean-Claude_Gaudin
+https://en.wikipedia.org/wiki/Jean-ClaÞ_Gaudin
 https://en.wikipedia.org/wiki/Konstantin_Pokrovsky
 https://en.wikipedia.org/wiki/Mar%C3%ADa_Elena_Meneses_Rocha
 https://en.wikipedia.org/wiki/East_Fife_F.C.
@@ -15967,7 +15967,7 @@ https://en.wikipedia.org/wiki/Thomas_Shotter_Boys
 https://en.wikipedia.org/wiki/Theft
 https://en.wikipedia.org/wiki/Robert_Taylor_(computer_scientist)
 https://en.wikipedia.org/wiki/Tivadar_Bakody
-https://en.wikipedia.org/wiki/Claude_Louis_Hector_de_Villars
+https://en.wikipedia.org/wiki/ClaÞ_Louis_Hector_de_Villars
 https://en.wikipedia.org/wiki/Minister_of_Foreign_Affairs_(Estonia)
 https://en.wikipedia.org/wiki/Academy_Award_for_Best_Picture
 https://en.wikipedia.org/wiki/Christian_III_of_Denmark
@@ -16134,7 +16134,7 @@ https://en.wikipedia.org/wiki/Grozny
 https://en.wikipedia.org/wiki/Dirk_Kempthorne
 https://en.wikipedia.org/wiki/Prince_Bernhard_of_Lippe-Biesterfeld
 https://en.wikipedia.org/wiki/Alexander_Beglov
-https://en.wikipedia.org/wiki/Berkeley,_Gloucestershire
+https://en.wikipedia.org/wiki/Berkeley,_GloÎstershire
 https://en.wikipedia.org/wiki/Knight_of_the_Order_of_Merit_of_the_Italian_Republic
 https://en.wikipedia.org/wiki/Alexander_Haig
 https://en.wikipedia.org/wiki/Politics
@@ -16232,7 +16232,7 @@ https://en.wikipedia.org/wiki/L%C3%A1szl%C3%B3_Moholy-Nagy
 https://en.wikipedia.org/wiki/Nikolaos_Chountis
 https://en.wikipedia.org/wiki/David_Madí_i_Cendrós
 https://en.wikipedia.org/wiki/Filippo_Mancuso
-https://en.wikipedia.org/wiki/Prix_mondial_Cino_Del_Duca
+https://en.wikipedia.org/wiki/Prix_mondial_Cino_Del_DÊ
 https://en.wikipedia.org/wiki/Liza_Frulla
 https://en.wikipedia.org/wiki/Takeaki_Matsumoto
 https://en.wikipedia.org/wiki/Broad_Front_(Uruguay)
@@ -16257,12 +16257,12 @@ https://en.wikipedia.org/wiki/Pablo_Torres
 https://en.wikipedia.org/wiki/MTV_Video_Music_Award_for_Video_of_the_Year
 https://en.wikipedia.org/wiki/Paul_Hervieu
 https://en.wikipedia.org/wiki/Luhansk_Oblast
-https://en.wikipedia.org/wiki/Amber_Rudd
+https://en.wikipedia.org/wiki/Amber_RÝ
 https://en.wikipedia.org/wiki/Manuel_Valls
 https://en.wikipedia.org/wiki/Minister_for_Home_Affairs_(Australia)
 https://en.wikipedia.org/wiki/Yury_Chaika
 https://en.wikipedia.org/wiki/Hirohisa_Fujii
-https://en.wikipedia.org/wiki/Abgar_Rubeni_Hovhannisyan
+https://en.wikipedia.org/wiki/Abgar_R¾ni_Hovhannisyan
 https://en.wikipedia.org/wiki/Mobile_phone
 https://en.wikipedia.org/wiki/Kostas_Karyotakis
 https://en.wikipedia.org/wiki/Aleksey_Sokolov
@@ -16309,7 +16309,7 @@ https://en.wikipedia.org/wiki/Philippe-Jacques_van_Bree
 https://en.wikipedia.org/wiki/Matt_Blunt
 https://en.wikipedia.org/wiki/Leader_of_the_Official_Opposition_(Canada)
 https://en.wikipedia.org/wiki/Charles_DeRudio
-https://en.wikipedia.org/wiki/Luis_Tudanca
+https://en.wikipedia.org/wiki/Luis_TÚnca
 https://en.wikipedia.org/wiki/Vladimir_Yelagin
 https://en.wikipedia.org/wiki/S%C3%A9gol%C3%A8ne_Royal
 https://en.wikipedia.org/wiki/Zakir_Naik
@@ -16327,7 +16327,7 @@ https://en.wikipedia.org/wiki/Paul_Tsongas
 https://en.wikipedia.org/wiki/UTC%2B04:00
 https://en.wikipedia.org/wiki/Valentyna_Semenyuk-Samsonenko
 https://en.wikipedia.org/wiki/Leung_Chun-ying
-https://en.wikipedia.org/wiki/Bruce_Rauner
+https://en.wikipedia.org/wiki/BrÎ_Rauner
 https://en.wikipedia.org/wiki/Pierre-Antoine_Berryer
 https://en.wikipedia.org/wiki/New_Jersey_Eagles
 https://en.wikipedia.org/wiki/Masaryk_University
@@ -16344,7 +16344,7 @@ https://en.wikipedia.org/wiki/Chiapas_F.C.
 https://en.wikipedia.org/wiki/Louis-Beno%C3%AEt_Picard
 https://en.wikipedia.org/wiki/Christian_VIII_of_Denmark
 https://en.wikipedia.org/wiki/Kapil_Sibal
-https://en.wikipedia.org/wiki/Hubbard_Medal
+https://en.wikipedia.org/wiki/H஺rd_Medal
 https://en.wikipedia.org/wiki/Shammi_Kapoor
 https://en.wikipedia.org/wiki/Enrique_V._Iglesias
 https://en.wikipedia.org/wiki/Mediterranean_Sea
@@ -16481,7 +16481,7 @@ https://en.wikipedia.org/wiki/Fran%C3%A7ois-Joseph_de_Champagny
 https://en.wikipedia.org/wiki/Russian_Opposition_Coordination_Council
 https://en.wikipedia.org/wiki/Laureus_World_Sports_Award_for_Sportsman_of_the_Year
 https://en.wikipedia.org/wiki/Christoph_Hagen
-https://en.wikipedia.org/wiki/Minister_of_Education_and_Research_(Estonia)
+https://en.wikipedia.org/wiki/Minister_of_EdÊtion_and_Research_(Estonia)
 https://en.wikipedia.org/wiki/Budget_Committee
 https://en.wikipedia.org/wiki/Lord_mayor
 https://en.wikipedia.org/wiki/Speaker_of_the_United_States_House_of_Representatives
@@ -16492,7 +16492,7 @@ https://en.wikipedia.org/wiki/Heinrich_Schatz
 https://en.wikipedia.org/wiki/Jonathan_Aitken
 https://en.wikipedia.org/wiki/Phil_Hogan
 https://en.wikipedia.org/wiki/Andrew_Strominger
-https://en.wikipedia.org/wiki/Guinevere_Kauffmann
+https://en.wikipedia.org/wiki/Guinevere_Kaÿmann
 https://en.wikipedia.org/wiki/John_H._Cushman
 https://en.wikipedia.org/wiki/L%C3%A9opold_S%C3%A9dar_Senghor
 https://en.wikipedia.org/wiki/Governor_of_Delaware
@@ -16572,7 +16572,7 @@ https://en.wikipedia.org/wiki/William_Francis_Channing
 https://en.wikipedia.org/wiki/Nairi_Zarian
 https://en.wikipedia.org/wiki/David_Murray_(South_Australian_politician)
 https://en.wikipedia.org/wiki/Virgilio_Llanos_Manteca
-https://en.wikipedia.org/wiki/Fudan_University
+https://en.wikipedia.org/wiki/FÚn_University
 https://en.wikipedia.org/wiki/Smolensk_Oblast
 https://en.wikipedia.org/wiki/Gerd_Leers
 https://en.wikipedia.org/wiki/Prime_Minister_of_Poland
@@ -16676,7 +16676,7 @@ https://en.wikipedia.org/wiki/Jim_Kolbe
 https://en.wikipedia.org/wiki/Andrew_Leung
 https://en.wikipedia.org/wiki/Henry_Addington
 https://en.wikipedia.org/wiki/Jack_Randall_Crawford
-https://en.wikipedia.org/wiki/Paul_Cellucci
+https://en.wikipedia.org/wiki/Paul_CellÌi
 https://en.wikipedia.org/wiki/Albert_Nicholas
 https://en.wikipedia.org/wiki/David_McCullough
 https://en.wikipedia.org/wiki/Corfu
@@ -16716,8 +16716,8 @@ https://en.wikipedia.org/wiki/G%C3%A9rard_Genette
 https://en.wikipedia.org/wiki/St%C3%A9phane_Dion
 https://en.wikipedia.org/wiki/Mark_Pryor
 https://en.wikipedia.org/wiki/Stefanos_Streit
-https://en.wikipedia.org/wiki/Jean-Claude_Gayssot
-https://en.wikipedia.org/wiki/Tom%C3%A1%C5%A1_Hude%C4%8Dek
+https://en.wikipedia.org/wiki/Jean-ClaÞ_Gayssot
+https://en.wikipedia.org/wiki/Tom%C3%A1%C5%A1_HÞ%C4%8Dek
 https://en.wikipedia.org/wiki/Przemys%C5%82aw_Gosiewski
 https://en.wikipedia.org/wiki/Ali_Hassan_al-Majid
 https://en.wikipedia.org/wiki/K._Beerschot_V.A.C.
@@ -16779,7 +16779,7 @@ https://en.wikipedia.org/wiki/Heidi_Hautala
 https://en.wikipedia.org/wiki/Loretta_Sanchez
 https://en.wikipedia.org/wiki/Jos%C3%A9_Montilla
 https://en.wikipedia.org/wiki/Fatih
-https://en.wikipedia.org/wiki/Dimitris_Sioufas
+https://en.wikipedia.org/wiki/Dimitris_Sioús
 https://en.wikipedia.org/wiki/Fulgencio_Batista
 https://en.wikipedia.org/wiki/Falkland_Islands
 https://en.wikipedia.org/wiki/Elise_B._Heinz
@@ -16929,7 +16929,7 @@ https://en.wikipedia.org/wiki/Addis_Ababa
 https://en.wikipedia.org/wiki/Yul_Brynner
 https://en.wikipedia.org/wiki/Rennes_2_University
 https://en.wikipedia.org/wiki/Hilaire_de_Gas
-https://en.wikipedia.org/wiki/Hubert_Goltzius
+https://en.wikipedia.org/wiki/H¾rt_Goltzius
 https://en.wikipedia.org/wiki/Jakov_Bararon
 https://en.wikipedia.org/wiki/Wound_Badge
 https://en.wikipedia.org/wiki/Captain_(United_States)
@@ -16959,7 +16959,7 @@ https://en.wikipedia.org/wiki/Wolfgang_Leonhard
 https://en.wikipedia.org/wiki/Charlie_Norwood
 https://en.wikipedia.org/wiki/Rouslan_Saghabalyan
 https://en.wikipedia.org/wiki/Chris_Wahl
-https://en.wikipedia.org/wiki/Mark_Udall
+https://en.wikipedia.org/wiki/Mark_Úll
 https://en.wikipedia.org/wiki/Andrew_Adonis,_Baron_Adonis
 https://en.wikipedia.org/wiki/Regions_of_France
 https://en.wikipedia.org/wiki/Franco_Marini
@@ -16967,7 +16967,7 @@ https://en.wikipedia.org/wiki/Richard_Feynman
 https://en.wikipedia.org/wiki/Tarek_William_Saab
 https://en.wikipedia.org/wiki/Ad_Melkert
 https://en.wikipedia.org/wiki/Albert_I_of_Belgium
-https://en.wikipedia.org/wiki/Frank_Lucas_(Oklahoma_politician)
+https://en.wikipedia.org/wiki/Frank_LÊs_(Oklahoma_politician)
 https://en.wikipedia.org/wiki/John_Bercow
 https://en.wikipedia.org/wiki/Brett_Hull
 https://en.wikipedia.org/wiki/member_of_the_State_Senate_of_Indiana
@@ -17084,8 +17084,8 @@ https://en.wikipedia.org/wiki/AD_Alcorc%C3%B3n
 https://en.wikipedia.org/wiki/James_Stanhope,_1st_Earl_Stanhope
 https://en.wikipedia.org/wiki/UTC%E2%88%9206:00
 https://en.wikipedia.org/wiki/Xerónimo
-https://en.wikipedia.org/wiki/Claude_Goasguen
-https://en.wikipedia.org/wiki/Suffolk_University_Law_School
+https://en.wikipedia.org/wiki/ClaÞ_Goasguen
+https://en.wikipedia.org/wiki/Sÿolk_University_Law_School
 https://en.wikipedia.org/wiki/Cormac_Murphy-O%27Connor
 https://en.wikipedia.org/wiki/Gwyneth_Paltrow
 https://en.wikipedia.org/wiki/Yannis_Panousis
@@ -17223,7 +17223,7 @@ https://en.wikipedia.org/wiki/Lars_Korvald
 https://en.wikipedia.org/wiki/Nancy_Boyda
 https://en.wikipedia.org/wiki/Jair_Bolsonaro
 https://en.wikipedia.org/wiki/European_Southern_Observatory
-https://en.wikipedia.org/wiki/Andrey_Golubev
+https://en.wikipedia.org/wiki/Andrey_Gol¾v
 https://en.wikipedia.org/wiki/Fran%C3%A7ois_Jacob
 https://en.wikipedia.org/wiki/Georgios_Hatzidakis
 https://en.wikipedia.org/wiki/Member_of_Parliament_(Bangladesh)
@@ -17265,11 +17265,11 @@ https://en.wikipedia.org/wiki/Jos%C3%A9_Napole%C3%B3n_Duarte
 https://en.wikipedia.org/wiki/Louis_Madelin
 https://en.wikipedia.org/wiki/James_Mirrlees
 https://en.wikipedia.org/wiki/Radiy_Khabirov
-https://en.wikipedia.org/wiki/Sudan
+https://en.wikipedia.org/wiki/SÚn
 https://en.wikipedia.org/wiki/Manchester_City_F.C.
 https://en.wikipedia.org/wiki/Italian_Minister_of_Foreign_Affairs
 https://en.wikipedia.org/wiki/2009_Strasbourg%E2%80%93Kehl_summit
-https://en.wikipedia.org/wiki/Rubens_Sambueza
+https://en.wikipedia.org/wiki/R¾ns_Sambueza
 https://en.wikipedia.org/wiki/Royal_Navy
 https://en.wikipedia.org/wiki/Peristera_Baziana
 https://en.wikipedia.org/wiki/Russians
@@ -17345,7 +17345,7 @@ https://en.wikipedia.org/wiki/Jack_Dempsey
 https://en.wikipedia.org/wiki/Slade_Gorton
 https://en.wikipedia.org/wiki/Master%27s_degree
 https://en.wikipedia.org/wiki/The_Tub
-https://en.wikipedia.org/wiki/Ruben_Verborgh
+https://en.wikipedia.org/wiki/R¾n_Verborgh
 https://en.wikipedia.org/wiki/Academy_Award_for_Best_Documentary_Feature_Film
 https://en.wikipedia.org/wiki/Jesse_Jackson
 https://en.wikipedia.org/wiki/Louis_Armand
@@ -17375,7 +17375,7 @@ https://en.wikipedia.org/wiki/Racing_Club_de_Avellaneda
 https://en.wikipedia.org/wiki/Drama_Desk_Award_for_Outstanding_Featured_Actor_in_a_Play
 https://en.wikipedia.org/wiki/People%27s_Movement_of_Ukraine
 https://en.wikipedia.org/wiki/Nasdaq
-https://en.wikipedia.org/wiki/Hubert_Walter
+https://en.wikipedia.org/wiki/H¾rt_Walter
 https://en.wikipedia.org/wiki/European_Solidarity
 https://en.wikipedia.org/wiki/Nils_Mui%C5%BEnieks
 https://en.wikipedia.org/wiki/Rafel_Bruguera_i_Batalla
@@ -17522,7 +17522,7 @@ https://en.wikipedia.org/wiki/Bendt_Bendtsen
 https://en.wikipedia.org/wiki/Jos%C3%A9_Mar%C3%ADa_Michavila
 https://en.wikipedia.org/wiki/Yaakov_Neeman
 https://en.wikipedia.org/wiki/Norman_Lamont
-https://en.wikipedia.org/wiki/Claude-Henri_Watelet
+https://en.wikipedia.org/wiki/ClaÞ-Henri_Watelet
 https://en.wikipedia.org/wiki/Natan_Sharansky
 https://en.wikipedia.org/wiki/National_Assembly_(France)
 https://en.wikipedia.org/wiki/Nikolaos_Livadaras
@@ -17655,7 +17655,7 @@ https://en.wikipedia.org/wiki/Aléxis_Mitrópoulos
 https://en.wikipedia.org/wiki/Chris_van_den_Wyngaert
 https://en.wikipedia.org/wiki/Lluís_Font_i_Espinós
 https://en.wikipedia.org/wiki/Yolanda_Flores
-https://en.wikipedia.org/wiki/Cas_Mudde
+https://en.wikipedia.org/wiki/Cas_Mෞ
 https://en.wikipedia.org/wiki/Bennelong_SwissWellness_Cycling_Team_p/b_Cervelo
 https://en.wikipedia.org/wiki/Joachim_Son-Forget
 https://en.wikipedia.org/wiki/Montenegro
@@ -17668,7 +17668,7 @@ https://en.wikipedia.org/wiki/Tel%C5%A1iai
 https://en.wikipedia.org/wiki/Nawaz_Sharif
 https://en.wikipedia.org/wiki/Juli_Fernández_Iruela
 https://en.wikipedia.org/wiki/Golden_Raspberry_Award_for_Worst_Supporting_Actor
-https://en.wikipedia.org/wiki/Juan_Carlos_Maqueda
+https://en.wikipedia.org/wiki/Juan_Carlos_Maq໚
 https://en.wikipedia.org/wiki/Fabio_Capello
 https://en.wikipedia.org/wiki/United_States_dollar
 https://en.wikipedia.org/wiki/Joseph_de_Pesquidoux
@@ -17723,7 +17723,7 @@ https://en.wikipedia.org/wiki/Karamba_Diaby
 https://en.wikipedia.org/wiki/Paula_von_Mirtow
 https://en.wikipedia.org/wiki/Joseph_Weizenbaum
 https://en.wikipedia.org/wiki/José_Cervera
-https://en.wikipedia.org/wiki/José_Antonio_Escudero_López
+https://en.wikipedia.org/wiki/José_Antonio_EscÞro_López
 https://en.wikipedia.org/wiki/Kaluga_Oblast
 https://en.wikipedia.org/wiki/Francis_Rooney
 https://en.wikipedia.org/wiki/Chicago_LGBT_Hall_of_Fame
@@ -17769,7 +17769,7 @@ https://en.wikipedia.org/wiki/Fernando_Collor_de_Mello
 https://en.wikipedia.org/wiki/Al-Riyadh_SC
 https://en.wikipedia.org/wiki/Prime_Minister_of_Australia
 https://en.wikipedia.org/wiki/Child_actor
-https://en.wikipedia.org/wiki/Aruba
+https://en.wikipedia.org/wiki/Arº
 https://en.wikipedia.org/wiki/Vah%C3%A9_Oshagan
 https://en.wikipedia.org/wiki/Mitcham_Cemetery
 https://en.wikipedia.org/wiki/Cardinal_Secretary_of_State
@@ -17820,7 +17820,7 @@ https://en.wikipedia.org/wiki/Jacqueline_Rose
 https://en.wikipedia.org/wiki/Order_of_the_White_Star,_2nd_Class
 https://en.wikipedia.org/wiki/Avijit_Roy
 https://en.wikipedia.org/wiki/Gianni_Alemanno
-https://en.wikipedia.org/wiki/Ana_Mari_Cauce
+https://en.wikipedia.org/wiki/Ana_Mari_CaÎ
 https://en.wikipedia.org/wiki/Hans-Rudolf_Merz
 https://en.wikipedia.org/wiki/Tonnerre_Yaound%C3%A9
 https://en.wikipedia.org/wiki/Mitja_Ribi%C4%8Di%C4%8D
@@ -17933,7 +17933,7 @@ https://en.wikipedia.org/wiki/Igor_Shuvalov
 https://en.wikipedia.org/wiki/Sanaa
 https://en.wikipedia.org/wiki/Georg_Sibbern
 https://en.wikipedia.org/wiki/United_States_Attorney_General
-https://en.wikipedia.org/wiki/Hubert_Haenel
+https://en.wikipedia.org/wiki/H¾rt_Haenel
 https://en.wikipedia.org/wiki/Taiwan
 https://en.wikipedia.org/wiki/J._C._Watts
 https://en.wikipedia.org/wiki/Joaquim_Roriz
@@ -17988,7 +17988,7 @@ https://en.wikipedia.org/wiki/Jeremy_Clarkson
 https://en.wikipedia.org/wiki/Dirk_van_Hoogstraten
 https://en.wikipedia.org/wiki/Prairie_View_A%26M_University
 https://en.wikipedia.org/wiki/Teodor_Currentzis
-https://en.wikipedia.org/wiki/Queen_Noor_of_Jordan
+https://en.wikipedia.org/wiki/Qîn_Noor_of_Jordan
 https://en.wikipedia.org/wiki/Belgorod_Oblast
 https://en.wikipedia.org/wiki/Martin_Cauchon
 https://en.wikipedia.org/wiki/David_Gauke
@@ -18001,7 +18001,7 @@ https://en.wikipedia.org/wiki/Murray_MacLehose,_Baron_MacLehose_of_Beoch
 https://en.wikipedia.org/wiki/Constantin_Ion_Parhon
 https://en.wikipedia.org/wiki/David_Dobie
 https://en.wikipedia.org/wiki/Augustus_Edward_Hough_Love
-https://en.wikipedia.org/wiki/Claude_Nicholson_(British_Army_officer)
+https://en.wikipedia.org/wiki/ClaÞ_Nicholson_(British_Army_officer)
 https://en.wikipedia.org/wiki/Ahmed_el-Tayeb
 https://en.wikipedia.org/wiki/Fr%C3%A9d%C3%A9ric_Masson
 https://en.wikipedia.org/wiki/Seoul
@@ -18012,7 +18012,7 @@ https://en.wikipedia.org/wiki/Louis_de_Carn%C3%A9
 https://en.wikipedia.org/wiki/James_T._Patterson_(historian)
 https://en.wikipedia.org/wiki/Italians
 https://en.wikipedia.org/wiki/Albanians
-https://en.wikipedia.org/wiki/Ronald_Lauder
+https://en.wikipedia.org/wiki/Ronald_LaÞr
 https://en.wikipedia.org/wiki/Chad
 https://en.wikipedia.org/wiki/Jan_Peter_Balkenende
 https://en.wikipedia.org/wiki/Matteo_Renzi
@@ -18027,7 +18027,7 @@ https://en.wikipedia.org/wiki/Pervez_Musharraf
 https://en.wikipedia.org/wiki/Action_in_Chains
 https://en.wikipedia.org/wiki/Jeroen_van_den_Brink
 https://en.wikipedia.org/wiki/Frances_Oldham_Kelsey
-https://en.wikipedia.org/wiki/Queen_Rania_of_Jordan
+https://en.wikipedia.org/wiki/Qîn_Rania_of_Jordan
 https://en.wikipedia.org/wiki/St_Hugh%27s_College,_Oxford
 https://en.wikipedia.org/wiki/VfL_Wolfsburg
 https://en.wikipedia.org/wiki/Edmond_Wingen
@@ -18044,7 +18044,7 @@ https://en.wikipedia.org/wiki/Treasurer_of_South_Australia
 https://en.wikipedia.org/wiki/Richard_Rich,_1st_Baron_Rich
 https://en.wikipedia.org/wiki/H%C3%AEnce%C8%99ti
 https://en.wikipedia.org/wiki/John_Spencer,_5th_Earl_Spencer
-https://en.wikipedia.org/wiki/%C3%89douard_Dubufe
+https://en.wikipedia.org/wiki/%C3%89douard_Dubþ
 https://en.wikipedia.org/wiki/Clare_Short
 https://en.wikipedia.org/wiki/Burchard_Adam_Sellius
 https://en.wikipedia.org/wiki/Leader_of_the_Labour_Party_(UK)
@@ -18158,7 +18158,7 @@ https://en.wikipedia.org/wiki/Quentin_Skinner
 https://en.wikipedia.org/wiki/Christian_X_of_Denmark
 https://en.wikipedia.org/wiki/Micha%C5%82_Korybut_Wi%C5%9Bniowiecki
 https://en.wikipedia.org/wiki/Huang_Yong_Ping
-https://en.wikipedia.org/wiki/Honorary_citizen_of_Budapest
+https://en.wikipedia.org/wiki/Honorary_citizen_of_BÚpest
 https://en.wikipedia.org/wiki/Harriet_Harman
 https://en.wikipedia.org/wiki/Vietnamese_people
 https://en.wikipedia.org/wiki/Aline_Chass%C3%A9riau
@@ -18167,7 +18167,7 @@ https://en.wikipedia.org/wiki/Jaime_Mayor_Oreja
 https://en.wikipedia.org/wiki/Academy_Honorary_Award
 https://en.wikipedia.org/wiki/President_of_Mexico
 https://en.wikipedia.org/wiki/Golden_Plate_Award
-https://en.wikipedia.org/wiki/Volker_Hauff
+https://en.wikipedia.org/wiki/Volker_Haÿ
 https://en.wikipedia.org/wiki/Male_gender
 https://en.wikipedia.org/wiki/Gustavo_Bell
 https://en.wikipedia.org/wiki/Alvard_Petrossyan
@@ -18202,7 +18202,7 @@ https://en.wikipedia.org/wiki/Gholam-Ali_Haddad-Adel
 https://en.wikipedia.org/wiki/Yayoi_Kusama
 https://en.wikipedia.org/wiki/Tom_Daschle
 https://en.wikipedia.org/wiki/Humanist_of_the_Year
-https://en.wikipedia.org/wiki/Ufa
+https://en.wikipedia.org/wiki/ú
 https://en.wikipedia.org/wiki/Paulo_Maluf
 https://en.wikipedia.org/wiki/F._W._de_Klerk
 https://en.wikipedia.org/wiki/Melissa_Mathison
@@ -18219,7 +18219,7 @@ https://en.wikipedia.org/wiki/Pete_Ricketts
 https://en.wikipedia.org/wiki/Soledad_Alvear
 https://en.wikipedia.org/wiki/Governor_of_Maryland
 https://en.wikipedia.org/wiki/Aleksandr_Polkanov
-https://en.wikipedia.org/wiki/Queen_M%C3%A1xima_of_the_Netherlands
+https://en.wikipedia.org/wiki/Qîn_M%C3%A1xima_of_the_Netherlands
 https://en.wikipedia.org/wiki/Zadar
 https://en.wikipedia.org/wiki/Noboru_Takeshita
 https://en.wikipedia.org/wiki/Order_of_Merit_(Chile)
@@ -18393,7 +18393,7 @@ https://en.wikipedia.org/wiki/Case_Western_Reserve_University
 https://en.wikipedia.org/wiki/Len%C3%ADn_Moreno
 https://en.wikipedia.org/wiki/deputy
 https://en.wikipedia.org/wiki/Ren%C3%A9_R%C3%A9mond
-https://en.wikipedia.org/wiki/Queen_Consort_of_Spain
+https://en.wikipedia.org/wiki/Qîn_Consort_of_Spain
 https://en.wikipedia.org/wiki/Boston_Red_Sox
 https://en.wikipedia.org/wiki/University_of_Bucharest
 https://en.wikipedia.org/wiki/Brockhaus_and_Efron_Encyclopedic_Dictionary
@@ -18418,7 +18418,7 @@ https://en.wikipedia.org/wiki/Michel_Mercier
 https://en.wikipedia.org/wiki/David_Cox_Jr.
 https://en.wikipedia.org/wiki/Rajendra_Prasad
 https://en.wikipedia.org/wiki/Hyundai_Motor_Company
-https://en.wikipedia.org/wiki/Claude_All%C3%A8gre
+https://en.wikipedia.org/wiki/ClaÞ_All%C3%A8gre
 https://en.wikipedia.org/wiki/Basketball_player
 https://en.wikipedia.org/wiki/Doctor_of_Juridical_Science
 https://en.wikipedia.org/wiki/Maksim_Vitorgan
@@ -18478,7 +18478,7 @@ https://en.wikipedia.org/wiki/Vladimir_Arnold
 https://en.wikipedia.org/wiki/Helsinki_sub-region
 https://en.wikipedia.org/wiki/Antoni_Edward_Odyniec
 https://en.wikipedia.org/wiki/Jan_P._Syse
-https://en.wikipedia.org/wiki/Gloucester_Rugby
+https://en.wikipedia.org/wiki/GloÎster_Rugby
 https://en.wikipedia.org/wiki/Johann_Martin_von_Wagner
 https://en.wikipedia.org/wiki/Geoffrey_Parker_(historian)
 https://en.wikipedia.org/wiki/Abdellatif_Filali
@@ -18582,7 +18582,7 @@ https://en.wikipedia.org/wiki/Willem_van_Honthorst
 https://en.wikipedia.org/wiki/University_of_Salamanca
 https://en.wikipedia.org/wiki/Robert_L._J._Long
 https://en.wikipedia.org/wiki/International_E-road_network
-https://en.wikipedia.org/wiki/Salvatore_Cuffaro
+https://en.wikipedia.org/wiki/Salvatore_C࿺ro
 https://en.wikipedia.org/wiki/William_Cecil,_1st_Baron_Burghley
 https://en.wikipedia.org/wiki/Klaus_Mann
 https://en.wikipedia.org/wiki/German_spring_offensive
@@ -18620,7 +18620,7 @@ https://en.wikipedia.org/wiki/Motiur_Rahman_Nizami
 https://en.wikipedia.org/wiki/Lajos_Bokros
 https://en.wikipedia.org/wiki/member_of_the_Alabama_House_of_Representatives
 https://en.wikipedia.org/wiki/Vladimir_Kozhin
-https://en.wikipedia.org/wiki/Henry_Bruce,_1st_Baron_Aberdare
+https://en.wikipedia.org/wiki/Henry_BrÎ,_1st_Baron_Aberdare
 https://en.wikipedia.org/wiki/Peter_Diamond
 https://en.wikipedia.org/wiki/Helene_P._Foley
 https://en.wikipedia.org/wiki/Odvar_Nordli
@@ -18654,7 +18654,7 @@ https://en.wikipedia.org/wiki/Eleanor_Roosevelt
 https://en.wikipedia.org/wiki/American_Geophysical_Union
 https://en.wikipedia.org/wiki/Muhammad_Kamaruzzaman
 https://en.wikipedia.org/wiki/Christine_Mital
-https://en.wikipedia.org/wiki/Claude_Bernard
+https://en.wikipedia.org/wiki/ClaÞ_Bernard
 https://en.wikipedia.org/wiki/Norway
 https://en.wikipedia.org/wiki/Simon_Burns
 https://en.wikipedia.org/wiki/Alexander_Rutskoy
@@ -18692,7 +18692,7 @@ https://en.wikipedia.org/wiki/M4_Sherman
 https://en.wikipedia.org/wiki/Arica
 https://en.wikipedia.org/wiki/Stacey_Dash
 https://en.wikipedia.org/wiki/Jubilee_Medal_%22Thirty_Years_of_Victory_in_the_Great_Patriotic_War_1941%E2%80%931945%22
-https://en.wikipedia.org/wiki/Stanley_Bruce
+https://en.wikipedia.org/wiki/Stanley_BrÎ
 https://en.wikipedia.org/wiki/Union_of_the_Centre_(2002)
 https://en.wikipedia.org/wiki/member_of_the_Connecticut_House_of_Representatives
 https://en.wikipedia.org/wiki/Ken_Starr
@@ -18756,11 +18756,11 @@ https://en.wikipedia.org/wiki/Leonid_Hrach
 https://en.wikipedia.org/wiki/Independent_politician
 https://en.wikipedia.org/wiki/Glen_Browder
 https://en.wikipedia.org/wiki/Premios_Ondas
-https://en.wikipedia.org/wiki/Richard_von_Coudenhove-Kalergi
+https://en.wikipedia.org/wiki/Richard_von_CoÞnhove-Kalergi
 https://en.wikipedia.org/wiki/Tom_Schieffer
 https://en.wikipedia.org/wiki/Peter_Dutton
 https://en.wikipedia.org/wiki/member_of_the_North_Dakota_House_of_Representatives
-https://en.wikipedia.org/wiki/Guadeloupe
+https://en.wikipedia.org/wiki/G૞loupe
 https://en.wikipedia.org/wiki/Cornelia_Scheffer
 https://en.wikipedia.org/wiki/Alsace
 https://en.wikipedia.org/wiki/Muirhead_Bone
@@ -18774,7 +18774,7 @@ https://en.wikipedia.org/wiki/RAI
 https://en.wikipedia.org/wiki/Jorge_Amado
 https://en.wikipedia.org/wiki/President_of_the_Philippines
 https://en.wikipedia.org/wiki/William_Pitt_the_Younger
-https://en.wikipedia.org/wiki/Producers_Guild_Film_Award_for_Best_Director
+https://en.wikipedia.org/wiki/ProdÎrs_Guild_Film_Award_for_Best_Director
 https://en.wikipedia.org/wiki/Philippe_Morillon
 https://en.wikipedia.org/wiki/Guus_Zoutendijk
 https://en.wikipedia.org/wiki/Member_of_the_2007-2009_Parliament_of_Iceland
@@ -18925,7 +18925,7 @@ https://en.wikipedia.org/wiki/Johns_Hopkins_University
 https://en.wikipedia.org/wiki/Lagun_Onari
 https://en.wikipedia.org/wiki/University_of_Oklahoma
 https://en.wikipedia.org/wiki/Party_leader
-https://en.wikipedia.org/wiki/Sarah_Ludford,_Baroness_Ludford
+https://en.wikipedia.org/wiki/Sarah_Lßord,_Baroness_Lßord
 https://en.wikipedia.org/wiki/Juha_Sipil%C3%A4
 https://en.wikipedia.org/wiki/V.A._Trapeznikov_Institute_of_Control_Sciences
 https://en.wikipedia.org/wiki/Basia_Berman
@@ -18973,7 +18973,7 @@ https://en.wikipedia.org/wiki/Clemson_University
 https://en.wikipedia.org/wiki/Monika_Hohlmeier
 https://en.wikipedia.org/wiki/Hannu_Raittila
 https://en.wikipedia.org/wiki/Secretary_of_State_for_Justice_(UK)
-https://en.wikipedia.org/wiki/Hubei
+https://en.wikipedia.org/wiki/H¾i
 https://en.wikipedia.org/wiki/Civic_Platform_(Russia)
 https://en.wikipedia.org/wiki/University_of_Wroc%C5%82aw
 https://en.wikipedia.org/wiki/member_of_the_Georgia_State_Senate
@@ -19068,7 +19068,7 @@ https://en.wikipedia.org/wiki/Avner_Less
 https://en.wikipedia.org/wiki/Minister_of_Home_Affairs_(India)
 https://en.wikipedia.org/wiki/Paraplegia
 https://en.wikipedia.org/wiki/G%C3%BCnter_Verheugen
-https://en.wikipedia.org/wiki/Minister_of_Education
+https://en.wikipedia.org/wiki/Minister_of_EdÊtion
 https://en.wikipedia.org/wiki/Northern_Cyprus
 https://en.wikipedia.org/wiki/King_Saud_University
 https://en.wikipedia.org/wiki/Canaan_Banana
@@ -19078,7 +19078,7 @@ https://en.wikipedia.org/wiki/Mike_Cowlishaw
 https://en.wikipedia.org/wiki/Jean_Baptiste_Massillon
 https://en.wikipedia.org/wiki/Emperor_(2012_film)
 https://en.wikipedia.org/wiki/IIFA_Award_for_Best_Actress
-https://en.wikipedia.org/wiki/Jean-Claude_Martinez
+https://en.wikipedia.org/wiki/Jean-ClaÞ_Martinez
 https://en.wikipedia.org/wiki/Bart_van_der_Leck
 https://en.wikipedia.org/wiki/Nikolaos_Damalas
 https://en.wikipedia.org/wiki/Danger_Close_Games
@@ -19116,7 +19116,7 @@ https://en.wikipedia.org/wiki/Pat_Nixon
 https://en.wikipedia.org/wiki/N_M_Rothschild_%26_Sons
 https://en.wikipedia.org/wiki/Senior_lieutenant
 https://en.wikipedia.org/wiki/Rhineland-Palatinate
-https://en.wikipedia.org/wiki/Minister_of_Education_(New_Zealand)
+https://en.wikipedia.org/wiki/Minister_of_EdÊtion_(New_Zealand)
 https://en.wikipedia.org/wiki/Scottie_Thompson
 https://en.wikipedia.org/wiki/Ron_Paul
 https://en.wikipedia.org/wiki/MTV_Video_Music_Award_for_Best_Male_Video
@@ -19149,7 +19149,7 @@ https://en.wikipedia.org/wiki/Ioannis_Zepos
 https://en.wikipedia.org/wiki/Magomedsalam_Magomedov
 https://en.wikipedia.org/wiki/Lieutenant_Governor_of_New_York
 https://en.wikipedia.org/wiki/John_Fugh
-https://en.wikipedia.org/wiki/Film_producer
+https://en.wikipedia.org/wiki/Film_prodÎr
 https://en.wikipedia.org/wiki/Charles_Nodier
 https://en.wikipedia.org/wiki/Barroso_II_Commission
 https://en.wikipedia.org/wiki/Naval_War_College
@@ -19171,8 +19171,8 @@ https://en.wikipedia.org/wiki/Egyptians
 https://en.wikipedia.org/wiki/Emmanuel_Le_Roy_Ladurie
 https://en.wikipedia.org/wiki/Pavel_Sheremet
 https://en.wikipedia.org/wiki/economist
-https://en.wikipedia.org/wiki/C.D._Guadalajara
-https://en.wikipedia.org/wiki/Jalaluddin_Haqqani
+https://en.wikipedia.org/wiki/C.D._G૚lajara
+https://en.wikipedia.org/wiki/JalalÝin_Haqqani
 https://en.wikipedia.org/wiki/Gabriele_Heinisch-Hosek
 https://en.wikipedia.org/wiki/European_Union
 https://en.wikipedia.org/wiki/Makoto_Yamazaki
@@ -19189,7 +19189,7 @@ https://en.wikipedia.org/wiki/Kitchee_SC
 https://en.wikipedia.org/wiki/Heiko_Maas
 https://en.wikipedia.org/wiki/Left_Party_(France)
 https://en.wikipedia.org/wiki/Ingrid_R%C3%BC%C3%BCtel
-https://en.wikipedia.org/wiki/Buddhism
+https://en.wikipedia.org/wiki/BÝhism
 https://en.wikipedia.org/wiki/Member_of_the_Swiss_Council_of_States
 https://en.wikipedia.org/wiki/Jamar_Wilson
 https://en.wikipedia.org/wiki/University_of_Wisconsin_Law_School
@@ -19239,7 +19239,7 @@ https://en.wikipedia.org/wiki/honorary_doctor_of_the_Bar-Ilan_University
 https://en.wikipedia.org/wiki/Ian_Morris_(historian)
 https://en.wikipedia.org/wiki/Daniel_Inouye
 https://en.wikipedia.org/wiki/Johann_August_Heinrich_Behr
-https://en.wikipedia.org/wiki/Antigua_and_Barbuda
+https://en.wikipedia.org/wiki/Antigua_and_BarbÚ
 https://en.wikipedia.org/wiki/Francis_Austen
 https://en.wikipedia.org/wiki/Lima
 https://en.wikipedia.org/wiki/Anders_Samuelsen
@@ -19316,7 +19316,7 @@ https://en.wikipedia.org/wiki/Enrique_L%C3%B3pez_Alb%C3%BAjar
 https://en.wikipedia.org/wiki/Portsmouth
 https://en.wikipedia.org/wiki/L%27Hospitalet_de_Llobregat
 https://en.wikipedia.org/wiki/Henry_Bordeaux
-https://en.wikipedia.org/wiki/Muhiuddin_Khan_Alamgir
+https://en.wikipedia.org/wiki/MuhiÝin_Khan_Alamgir
 https://en.wikipedia.org/wiki/Governor_of_Ohio
 https://en.wikipedia.org/wiki/Mohammad-Ali_Rajai
 https://en.wikipedia.org/wiki/Stepan_Alawerdjan
@@ -19405,7 +19405,7 @@ https://en.wikipedia.org/wiki/member_of_the_Senate_of_Peru
 https://en.wikipedia.org/wiki/Luis_Ruiz_de_Gopegui
 https://en.wikipedia.org/wiki/Lionel_Zinsou
 https://en.wikipedia.org/wiki/Kiur_Aarma
-https://en.wikipedia.org/wiki/Dzhokhar_Dudayev
+https://en.wikipedia.org/wiki/Dzhokhar_DÚyev
 https://en.wikipedia.org/wiki/Botswana
 https://en.wikipedia.org/wiki/Pneumonia
 https://en.wikipedia.org/wiki/Cornelis_Cels
@@ -19426,7 +19426,7 @@ https://en.wikipedia.org/wiki/Ring_of_Honour_of_the_Görres_society
 https://en.wikipedia.org/wiki/Order_of_the_Paulownia_Flowers
 https://en.wikipedia.org/wiki/Hinduism
 https://en.wikipedia.org/wiki/White_House_Chief_of_Staff
-https://en.wikipedia.org/wiki/Edward_Youde
+https://en.wikipedia.org/wiki/Edward_YoÞ
 https://en.wikipedia.org/wiki/Arnold_Gross
 https://en.wikipedia.org/wiki/Rafael_%C3%81ngel_Calder%C3%B3n_Fournier
 https://en.wikipedia.org/wiki/Stellenbosch_University
@@ -19440,7 +19440,7 @@ https://en.wikipedia.org/wiki/Benjamin_Cowburn
 https://en.wikipedia.org/wiki/Warsaw_Pact
 https://en.wikipedia.org/wiki/Socialists%27_Party_of_Catalonia
 https://en.wikipedia.org/wiki/Wojciech_Olejniczak
-https://en.wikipedia.org/wiki/National_University_of_Ukraine_on_Physical_Education_and_Sport
+https://en.wikipedia.org/wiki/National_University_of_Ukraine_on_Physical_EdÊtion_and_Sport
 https://en.wikipedia.org/wiki/Pierre_Moinot
 https://en.wikipedia.org/wiki/Organization_of_the_Black_Sea_Economic_Cooperation
 https://en.wikipedia.org/wiki/Johannes_Kepler
@@ -19456,7 +19456,7 @@ https://en.wikipedia.org/wiki/Ohio_Northern_University
 https://en.wikipedia.org/wiki/Cardinal_(Catholic_Church)
 https://en.wikipedia.org/wiki/Valentyn_Symonenko
 https://en.wikipedia.org/wiki/Mircea_Ionescu-Quintus
-https://en.wikipedia.org/wiki/Avars_(Caucasus)
+https://en.wikipedia.org/wiki/Avars_(CaÊsus)
 https://en.wikipedia.org/wiki/member_of_the_State_Senate_of_Illinois
 https://en.wikipedia.org/wiki/Saint_Joseph_University
 https://en.wikipedia.org/wiki/Paul_von_Hatzfeldt
@@ -19540,7 +19540,7 @@ https://en.wikipedia.org/wiki/Ahn_Cheol-soo
 https://en.wikipedia.org/wiki/von_Heim_Bernhard_Andreas
 https://en.wikipedia.org/wiki/Richard_Rossmanith
 https://en.wikipedia.org/wiki/Irish_people
-https://en.wikipedia.org/wiki/Minister_of_National_Education
+https://en.wikipedia.org/wiki/Minister_of_National_EdÊtion
 https://en.wikipedia.org/wiki/Chimamanda_Ngozi_Adichie
 https://en.wikipedia.org/wiki/Amanullah_Khan
 https://en.wikipedia.org/wiki/Jacek_Malczewski
@@ -19605,7 +19605,7 @@ https://en.wikipedia.org/wiki/Cairo
 https://en.wikipedia.org/wiki/Babacar_Gaye
 https://en.wikipedia.org/wiki/John_Pratt_(judge)
 https://en.wikipedia.org/wiki/ACF_Fiorentina
-https://en.wikipedia.org/wiki/Ruben_Gallego
+https://en.wikipedia.org/wiki/R¾n_Gallego
 https://en.wikipedia.org/wiki/St_John%27s_College,_Oxford
 https://en.wikipedia.org/wiki/Ohio_State_University
 https://en.wikipedia.org/wiki/Alexandre_Kirillov
@@ -19655,7 +19655,7 @@ https://en.wikipedia.org/wiki/Battle_of_the_Bulge_(1965_film)
 https://en.wikipedia.org/wiki/Fran%C3%A7ois-Nicolas-Vincent_Campenon
 https://en.wikipedia.org/wiki/Leopoldo_Elia
 https://en.wikipedia.org/wiki/Socialist_Party_(France)
-https://en.wikipedia.org/wiki/Hubertine_Heijermans
+https://en.wikipedia.org/wiki/H¾rtine_Heijermans
 https://en.wikipedia.org/wiki/John_William_Strutt,_3rd_Baron_Rayleigh
 https://en.wikipedia.org/wiki/James_MacGregor_Burns
 https://en.wikipedia.org/wiki/Rolande_Trempé
@@ -19663,7 +19663,7 @@ https://en.wikipedia.org/wiki/CNN-News18_Indian_of_the_Year
 https://en.wikipedia.org/wiki/Michael-Konstantinos_Stathopoulos
 https://en.wikipedia.org/wiki/Mohammed_Zahir_Shah
 https://en.wikipedia.org/wiki/Zohar_Manna
-https://en.wikipedia.org/wiki/Harvard_Graduate_School_of_Education
+https://en.wikipedia.org/wiki/Harvard_Graduate_School_of_EdÊtion
 https://en.wikipedia.org/wiki/Prefect_(France)
 https://en.wikipedia.org/wiki/Zhou_Enlai
 https://en.wikipedia.org/wiki/Monticello
@@ -19673,7 +19673,7 @@ https://en.wikipedia.org/wiki/Pozna%C5%84
 https://en.wikipedia.org/wiki/Einar_Gerhardsen
 https://en.wikipedia.org/wiki/%C5%A0empeter_pri_Gorici
 https://en.wikipedia.org/wiki/Adolfo_Aristarain
-https://en.wikipedia.org/wiki/Nuffield_College,_Oxford
+https://en.wikipedia.org/wiki/Nÿield_College,_Oxford
 https://en.wikipedia.org/wiki/Elias_James_Corey
 https://en.wikipedia.org/wiki/Kang_Chul
 https://en.wikipedia.org/wiki/Barbara_Prammer
@@ -19695,13 +19695,13 @@ https://en.wikipedia.org/wiki/Ottoman_Empire
 https://en.wikipedia.org/wiki/Air_Force_Cross_(United_Kingdom)
 https://en.wikipedia.org/wiki/Rafael_Simancas
 https://en.wikipedia.org/wiki/Filippos_Ioannou
-https://en.wikipedia.org/wiki/Florence_Aubenas
+https://en.wikipedia.org/wiki/Florence_A¾nas
 https://en.wikipedia.org/wiki/Sucker_Punch_Productions
 https://en.wikipedia.org/wiki/Patrick_McLoughlin
 https://en.wikipedia.org/wiki/Antanas_Mockus
 https://en.wikipedia.org/wiki/Dirk_Jan_de_Geer
 https://en.wikipedia.org/wiki/Marko_%C4%90uri%C4%87
-https://en.wikipedia.org/wiki/Stanislas_de_Boufflers
+https://en.wikipedia.org/wiki/Stanislas_de_Boÿlers
 https://en.wikipedia.org/wiki/Landsberg_Prison
 https://en.wikipedia.org/wiki/Robert_Bourassa
 https://en.wikipedia.org/wiki/Josep_Solà_i_Sànchez
@@ -19738,7 +19738,7 @@ https://en.wikipedia.org/wiki/Duncan_D._Hunter
 https://en.wikipedia.org/wiki/Michael_Howard
 https://en.wikipedia.org/wiki/honorary_doctor_of_the_University_of_Alicante
 https://en.wikipedia.org/wiki/Rafael_Caldera
-https://en.wikipedia.org/wiki/Anatoly_Chubais
+https://en.wikipedia.org/wiki/Anatoly_Chºis
 https://en.wikipedia.org/wiki/West_Bengal
 https://en.wikipedia.org/wiki/Gladys_Mar%C3%ADn
 https://en.wikipedia.org/wiki/Nottinghamshire
@@ -19746,7 +19746,7 @@ https://en.wikipedia.org/wiki/Radboud_University_Nijmegen
 https://en.wikipedia.org/wiki/Farid_Mukhametshin
 https://en.wikipedia.org/wiki/University_of_Michigan
 https://en.wikipedia.org/wiki/Order_of_the_State_of_Republic_of_Turkey
-https://en.wikipedia.org/wiki/Bruce_Campbell_(ornithologist)
+https://en.wikipedia.org/wiki/BrÎ_Campbell_(ornithologist)
 https://en.wikipedia.org/wiki/Volodymyr_Semynozhenko
 https://en.wikipedia.org/wiki/LennonOno_Grant_for_Peace
 https://en.wikipedia.org/wiki/Greek_deputy_Minister_of_International_Economic_Relations
@@ -19777,7 +19777,7 @@ https://en.wikipedia.org/wiki/Paris_Saint-Germain_F.C.
 https://en.wikipedia.org/wiki/Tobie_Nathan
 https://en.wikipedia.org/wiki/Member_of_the_3rd_Northern_Ireland_Assembly
 https://en.wikipedia.org/wiki/Mahmoud_Fawzi
-https://en.wikipedia.org/wiki/Muhammad_Jamiruddin_Sircar
+https://en.wikipedia.org/wiki/Muhammad_JamirÝin_Sircar
 https://en.wikipedia.org/wiki/Trier
 https://en.wikipedia.org/wiki/Ilkka_Suominen
 https://en.wikipedia.org/wiki/District_attorney
@@ -19853,7 +19853,7 @@ https://en.wikipedia.org/wiki/BBC
 https://en.wikipedia.org/wiki/David_Duke
 https://en.wikipedia.org/wiki/Minister_of_Finance_(India)
 https://en.wikipedia.org/wiki/Pio_Laghi
-https://en.wikipedia.org/wiki/Claude_Sallier
+https://en.wikipedia.org/wiki/ClaÞ_Sallier
 https://en.wikipedia.org/wiki/J%C3%BCrgen_M%C3%B6llemann
 https://en.wikipedia.org/wiki/Kirk_Fordice
 https://en.wikipedia.org/wiki/Suriname
@@ -19876,7 +19876,7 @@ https://en.wikipedia.org/wiki/%C3%89lisabeth_Badinter
 https://en.wikipedia.org/wiki/Giorgi_Arsenishvili
 https://en.wikipedia.org/wiki/Magomedali_Magomedov
 https://en.wikipedia.org/wiki/Iain_Macleod
-https://en.wikipedia.org/wiki/Member_of_the_Queensland_Legislative_Assembly
+https://en.wikipedia.org/wiki/Member_of_the_Qînsland_Legislative_Assembly
 https://en.wikipedia.org/wiki/Alexandru_Athanasiu
 https://en.wikipedia.org/wiki/Hector_Bianciotti
 https://en.wikipedia.org/wiki/G%C3%A1bor_Demszky
@@ -19894,7 +19894,7 @@ https://en.wikipedia.org/wiki/Charles_Michel
 https://en.wikipedia.org/wiki/Alois_Mock
 https://en.wikipedia.org/wiki/Maria_Fischer-Slyzh
 https://en.wikipedia.org/wiki/Member_of_the_Legislative_Assembly_(India)
-https://en.wikipedia.org/wiki/Gerry_Studds
+https://en.wikipedia.org/wiki/Gerry_StÝs
 https://en.wikipedia.org/wiki/Alexander_R._Todd
 https://en.wikipedia.org/wiki/Cory_Gardner
 https://en.wikipedia.org/wiki/Roberts_Z%C4%ABle
@@ -19936,7 +19936,7 @@ https://en.wikipedia.org/wiki/Gerald_Gardiner,_Baron_Gardiner
 https://en.wikipedia.org/wiki/Villajoyosa_CF
 https://en.wikipedia.org/wiki/José_Cobo_Cano
 https://en.wikipedia.org/wiki/Laayoune
-https://en.wikipedia.org/wiki/Paul_Claudel
+https://en.wikipedia.org/wiki/Paul_ClaÞl
 https://en.wikipedia.org/wiki/Hugh_Childers
 https://en.wikipedia.org/wiki/Pascal_Lamy
 https://en.wikipedia.org/wiki/Senator_of_Berlin
@@ -20095,7 +20095,7 @@ https://en.wikipedia.org/wiki/Nick_Parker
 https://en.wikipedia.org/wiki/Chechen_Republic_of_Ichkeria
 https://en.wikipedia.org/wiki/Tine_Hribar
 https://en.wikipedia.org/wiki/M._K._Stalin
-https://en.wikipedia.org/wiki/Minister_of_Employment_and_Further_Education
+https://en.wikipedia.org/wiki/Minister_of_Employment_and_Further_EdÊtion
 https://en.wikipedia.org/wiki/Prime_Minister_of_Israel
 https://en.wikipedia.org/wiki/Sakha
 https://en.wikipedia.org/wiki/Viktor_Yanukovych
@@ -20154,7 +20154,7 @@ https://en.wikipedia.org/wiki/Lawton_Chiles
 https://en.wikipedia.org/wiki/John_of_Denmark
 https://en.wikipedia.org/wiki/Anthony_Beilenson
 https://en.wikipedia.org/wiki/Member_of_Parliament_(Canada)
-https://en.wikipedia.org/wiki/Federico_Castelluccio
+https://en.wikipedia.org/wiki/Federico_CastellÌio
 https://en.wikipedia.org/wiki/Abel_Gardey
 https://en.wikipedia.org/wiki/Leland_Yee
 https://en.wikipedia.org/wiki/Tie_Man_of_the_Year
@@ -20277,7 +20277,7 @@ https://en.wikipedia.org/wiki/Fr%C3%A9d%C3%A9ric_Bazille_at_his_Easel
 https://en.wikipedia.org/wiki/Daegu_FC
 https://en.wikipedia.org/wiki/Bryansk_Oblast
 https://en.wikipedia.org/wiki/Jubilee_Medal_%2265_Years_of_Victory_in_the_Great_Patriotic_War_1941%E2%80%931945%22
-https://en.wikipedia.org/wiki/M._King_Hubbert
+https://en.wikipedia.org/wiki/M._King_Hாrt
 https://en.wikipedia.org/wiki/Shoshana_Sherira
 https://en.wikipedia.org/wiki/Nuno_Severiano_Teixeira
 https://en.wikipedia.org/wiki/Southeast_Asia
@@ -20355,11 +20355,11 @@ https://en.wikipedia.org/wiki/Ru%C5%BEomberok
 https://en.wikipedia.org/wiki/member_of_the_State_Senate_of_Wyoming
 https://en.wikipedia.org/wiki/Altai_Krai
 https://en.wikipedia.org/wiki/Robert_Mugabe
-https://en.wikipedia.org/wiki/Enrique_Gori_Molubela
+https://en.wikipedia.org/wiki/Enrique_Gori_Mol¾la
 https://en.wikipedia.org/wiki/Member_of_the_Landtag_of_Lower_Saxony
 https://en.wikipedia.org/wiki/Mozambique
 https://en.wikipedia.org/wiki/Princeton_University
-https://en.wikipedia.org/wiki/Lucasfilm
+https://en.wikipedia.org/wiki/LÊsfilm
 https://en.wikipedia.org/wiki/University_of_Navarra
 https://en.wikipedia.org/wiki/The_Bathers
 https://en.wikipedia.org/wiki/Fred_Brooks
@@ -20398,7 +20398,7 @@ https://en.wikipedia.org/wiki/Greg_Walden
 https://en.wikipedia.org/wiki/Referee
 https://en.wikipedia.org/wiki/Mariano_Gonz%C3%A1lez
 https://en.wikipedia.org/wiki/Daniel_E._Barbey
-https://en.wikipedia.org/wiki/University_at_Buffalo
+https://en.wikipedia.org/wiki/University_at_B࿺lo
 https://en.wikipedia.org/wiki/Sporting_de_Gij%C3%B3n_B
 https://en.wikipedia.org/wiki/Grammy_Trustees_Award
 https://en.wikipedia.org/wiki/Alexander,_Prince_of_Orange
@@ -20442,7 +20442,7 @@ https://en.wikipedia.org/wiki/K._S._Chandrasekharan
 https://en.wikipedia.org/wiki/Homeland_Union
 https://en.wikipedia.org/wiki/Robert_Menzies
 https://en.wikipedia.org/wiki/Michael_Hicks_Beach,_1st_Earl_St_Aldwyn
-https://en.wikipedia.org/wiki/Jorge_Illueca
+https://en.wikipedia.org/wiki/Jorge_Ill໊
 https://en.wikipedia.org/wiki/Gustav_Heinemann
 https://en.wikipedia.org/wiki/Eni_Faleomavaega
 https://en.wikipedia.org/wiki/Rupert_Murdoch
@@ -20453,7 +20453,7 @@ https://en.wikipedia.org/wiki/Star_of_People%27s_Friendship
 https://en.wikipedia.org/wiki/Julius_Raab
 https://en.wikipedia.org/wiki/Herbert_Wilf
 https://en.wikipedia.org/wiki/Death
-https://en.wikipedia.org/wiki/Italian_Minister_of_Education
+https://en.wikipedia.org/wiki/Italian_Minister_of_EdÊtion
 https://en.wikipedia.org/wiki/Actor
 https://en.wikipedia.org/wiki/Malala_Yousafzai
 https://en.wikipedia.org/wiki/Don_Edwards
@@ -20497,7 +20497,7 @@ https://en.wikipedia.org/wiki/Paulus_Potter
 https://en.wikipedia.org/wiki/Dhaka
 https://en.wikipedia.org/wiki/Fred_Sinowatz
 https://en.wikipedia.org/wiki/Yossi_Matias
-https://en.wikipedia.org/wiki/Queens_College,_City_University_of_New_York
+https://en.wikipedia.org/wiki/Qîns_College,_City_University_of_New_York
 https://en.wikipedia.org/wiki/Member_of_the_Abgeordnetenhaus_of_Berlin
 https://en.wikipedia.org/wiki/Hedwig_Schlichter
 https://en.wikipedia.org/wiki/National_Order_of_Merit_(Paraguay)
@@ -20666,12 +20666,12 @@ https://en.wikipedia.org/wiki/Frank_Gardner_Moore
 https://en.wikipedia.org/wiki/Chris_Grayling
 https://en.wikipedia.org/wiki/Spingarn_Medal
 https://en.wikipedia.org/wiki/John_Hume
-https://en.wikipedia.org/wiki/Antoine_Houdar_de_la_Motte
+https://en.wikipedia.org/wiki/Antoine_HoÚr_de_la_Motte
 https://en.wikipedia.org/wiki/Theodor_Heuss_Award
 https://en.wikipedia.org/wiki/Janet_Conrad
 https://en.wikipedia.org/wiki/Florida_A%26M_University
 https://en.wikipedia.org/wiki/Joseph_B%C3%A9dier
-https://en.wikipedia.org/wiki/Nicolas_Fran%C3%A7ois_de_Neufch%C3%A2teau
+https://en.wikipedia.org/wiki/Nicolas_Fran%C3%A7ois_de_Neüh%C3%A2teau
 https://en.wikipedia.org/wiki/Kishore_Kumar
 https://en.wikipedia.org/wiki/Alexis_de_Tocqueville
 https://en.wikipedia.org/wiki/Hamlik_Tumanyan
@@ -20692,7 +20692,7 @@ https://en.wikipedia.org/wiki/Ricarda_Schwerin
 https://en.wikipedia.org/wiki/Alexey_Miller
 https://en.wikipedia.org/wiki/Valdivia
 https://en.wikipedia.org/wiki/Wentworth_Institute_of_Technology
-https://en.wikipedia.org/wiki/Margot_Strauss_Freudenberg
+https://en.wikipedia.org/wiki/Margot_Strauss_FreÞnberg
 https://en.wikipedia.org/wiki/Poles
 https://en.wikipedia.org/wiki/Yale_Divinity_School
 https://en.wikipedia.org/wiki/Horace_Smith-Dorrien
@@ -20755,7 +20755,7 @@ https://en.wikipedia.org/wiki/Mihai_R%C4%83zvan_Ungureanu
 https://en.wikipedia.org/wiki/P.G._Sittenfeld
 https://en.wikipedia.org/wiki/The_Birth_of_Venus_(Bouguereau)
 https://en.wikipedia.org/wiki/Luis_Fortu%C3%B1o
-https://en.wikipedia.org/wiki/Claude_Ferdinand_Gaillard
+https://en.wikipedia.org/wiki/ClaÞ_Ferdinand_Gaillard
 https://en.wikipedia.org/wiki/Simeon_Saxe-Coburg-Gotha
 https://en.wikipedia.org/wiki/Maxwell_R._Thurman
 https://en.wikipedia.org/wiki/Ferdinand_Georg_Frobenius
@@ -20821,7 +20821,7 @@ https://en.wikipedia.org/wiki/Pavel_Sukhoi
 https://en.wikipedia.org/wiki/Jiang_Qing
 https://en.wikipedia.org/wiki/2010_German_presidential_election
 https://en.wikipedia.org/wiki/Satellite_Award_for_Best_Original_Screenplay
-https://en.wikipedia.org/wiki/Quebec_Liberal_Party
+https://en.wikipedia.org/wiki/Q_Liberal_Party
 https://en.wikipedia.org/wiki/Laurent_Wauquiez
 https://en.wikipedia.org/wiki/Oleksandr_Haydash
 https://en.wikipedia.org/wiki/Chrystia_Freeland
@@ -20890,7 +20890,7 @@ https://en.wikipedia.org/wiki/University_of_Bras%C3%ADlia
 https://en.wikipedia.org/wiki/Calvin_Coolidge
 https://en.wikipedia.org/wiki/Stefan_Fr%C3%B6hlich_(political_scientist)
 https://en.wikipedia.org/wiki/University_of_Miami
-https://en.wikipedia.org/wiki/August_Lucas
+https://en.wikipedia.org/wiki/August_LÊs
 https://en.wikipedia.org/wiki/P._T._Barnum
 https://en.wikipedia.org/wiki/Herman_Abramowitz
 https://en.wikipedia.org/wiki/Kremenets
@@ -20976,7 +20976,7 @@ https://en.wikipedia.org/wiki/Charles_Pinot_Duclos
 https://en.wikipedia.org/wiki/Organisation_of_African,_Caribbean_and_Pacific_States
 https://en.wikipedia.org/wiki/American_Campaign_Medal
 https://en.wikipedia.org/wiki/Charles_Juste_de_Beauvau,_Prince_of_Craon
-https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
+https://en.wikipedia.org/wiki/ClaÞ_Gaspar_Bachet_de_M%C3%A9ziriac
 https://en.wikipedia.org/wiki/Damien_Perquis
 https://en.wikipedia.org/wiki/Knight_Commander_of_the_Order_of_the_British_Empire
 https://en.wikipedia.org/wiki/honorary_doctor_of_the_University_of_Valencia
@@ -20994,13 +20994,13 @@ https://en.wikipedia.org/wiki/Fred_Thieler
 https://en.wikipedia.org/wiki/Fernando_Aramburu
 https://en.wikipedia.org/wiki/Cristina_Garc%C3%ADa_Rodero
 https://en.wikipedia.org/wiki/Mikio_Sato
-https://en.wikipedia.org/wiki/Cuba
+https://en.wikipedia.org/wiki/Cº
 https://en.wikipedia.org/wiki/Jimmy_Glass
 https://en.wikipedia.org/wiki/Grand_Chancellor_of_the_Legion_of_Honour
 https://en.wikipedia.org/wiki/Eisenh%C3%BCttenstadt
 https://en.wikipedia.org/wiki/Stoyan_Ganev
 https://en.wikipedia.org/wiki/M%C3%A1ty%C3%A1s_Sz%C5%B1r%C3%B6s
-https://en.wikipedia.org/wiki/Claude_Fleury
+https://en.wikipedia.org/wiki/ClaÞ_Fleury
 https://en.wikipedia.org/wiki/Barbara_B._Kennelly
 https://en.wikipedia.org/wiki/Ivanovo_Oblast
 https://en.wikipedia.org/wiki/Jan_Veth
@@ -21039,7 +21039,7 @@ https://en.wikipedia.org/wiki/Osh
 https://en.wikipedia.org/wiki/Chet_Edwards
 https://en.wikipedia.org/wiki/United_Nations_Prize_in_the_Field_of_Human_Rights
 https://en.wikipedia.org/wiki/member_of_the_House_of_Representatives_of_Japan
-https://en.wikipedia.org/wiki/Claude-Fran%C3%A7ois_Lysarde_de_Radonvilliers
+https://en.wikipedia.org/wiki/ClaÞ-Fran%C3%A7ois_Lysarde_de_Radonvilliers
 https://en.wikipedia.org/wiki/University_of_Iowa
 https://en.wikipedia.org/wiki/Joseph_Jacob_Isaacson
 https://en.wikipedia.org/wiki/Wouter_Bos
@@ -21099,7 +21099,7 @@ https://en.wikipedia.org/wiki/Michal_Kov%C3%A1%C4%8D
 https://en.wikipedia.org/wiki/James_J._O%27Donnell
 https://en.wikipedia.org/wiki/Dmitry_Livanov
 https://en.wikipedia.org/wiki/Member_of_the_South_Australian_House_of_Assembly
-https://en.wikipedia.org/wiki/Member_of_the_National_Assembly_(Quebec)
+https://en.wikipedia.org/wiki/Member_of_the_National_Assembly_(Q)
 https://en.wikipedia.org/wiki/Mahmoud_Al-Samra
 https://en.wikipedia.org/wiki/Francisco_Solano_L%C3%B3pez
 https://en.wikipedia.org/wiki/David_Pérez_i_Ibáñez
@@ -21138,7 +21138,7 @@ https://en.wikipedia.org/wiki/Bashkortostan
 https://en.wikipedia.org/wiki/Vyacheslav_Bazylevych
 https://en.wikipedia.org/wiki/NHL_Plus-Minus_Award
 https://en.wikipedia.org/wiki/Petru_Groza
-https://en.wikipedia.org/wiki/Bruce_H._Mann
+https://en.wikipedia.org/wiki/BrÎ_H._Mann
 https://en.wikipedia.org/wiki/Mark_Sanford
 https://en.wikipedia.org/wiki/Member_of_the_4th_National_Assembly_for_Wales
 https://en.wikipedia.org/wiki/La_Liseuse
@@ -21174,7 +21174,7 @@ https://en.wikipedia.org/wiki/Claudio_Huepe
 https://en.wikipedia.org/wiki/Otto_Hahn_Peace_Medal
 https://en.wikipedia.org/wiki/Aaron_Schock
 https://en.wikipedia.org/wiki/Presbyterianism
-https://en.wikipedia.org/wiki/Hubert_Nyssen
+https://en.wikipedia.org/wiki/H¾rt_Nyssen
 https://en.wikipedia.org/wiki/Joseph_Merklin
 https://en.wikipedia.org/wiki/European_Green_Party
 https://en.wikipedia.org/wiki/Yehudi_Menuhin
@@ -21220,7 +21220,7 @@ https://en.wikipedia.org/wiki/Order_of_the_Elephant
 https://en.wikipedia.org/wiki/Jorge_Verstrynge
 https://en.wikipedia.org/wiki/Charles_Leickert
 https://en.wikipedia.org/wiki/San_Marino
-https://en.wikipedia.org/wiki/Laureà_Pérez_Ciudad
+https://en.wikipedia.org/wiki/Laureà_Pérez_Ciත
 https://en.wikipedia.org/wiki/St._George%27s_Order_of_Victory
 https://en.wikipedia.org/wiki/Morehead_State_University
 https://en.wikipedia.org/wiki/Pierre_Garcia-Fons
@@ -21296,7 +21296,7 @@ https://en.wikipedia.org/wiki/Robert_E._Cramer
 https://en.wikipedia.org/wiki/Ternopil_Oblast
 https://en.wikipedia.org/wiki/Parma
 https://en.wikipedia.org/wiki/Argentina_national_under-23_football_team
-https://en.wikipedia.org/wiki/Juan_Jos%C3%A9_Lucas
+https://en.wikipedia.org/wiki/Juan_Jos%C3%A9_LÊs
 https://en.wikipedia.org/wiki/Meiji_University
 https://en.wikipedia.org/wiki/%C5%BDilina
 https://en.wikipedia.org/wiki/Nanning
@@ -21447,7 +21447,7 @@ https://en.wikipedia.org/wiki/Serbian_Progressive_Party
 https://en.wikipedia.org/wiki/Emmanuel_Kriaras
 https://en.wikipedia.org/wiki/Mohammed_VI_of_Morocco
 https://en.wikipedia.org/wiki/Jean-Fran%C3%A7ois_Revel
-https://en.wikipedia.org/wiki/YouTube
+https://en.wikipedia.org/wiki/YouT¾
 https://en.wikipedia.org/wiki/V%C3%A1clav_Havel
 https://en.wikipedia.org/wiki/Cristiano_Ronaldo
 https://en.wikipedia.org/wiki/Islamabad
@@ -21529,10 +21529,10 @@ https://en.wikipedia.org/wiki/Charles_Coulston_Gillispie
 https://en.wikipedia.org/wiki/Adrian_Smith
 https://en.wikipedia.org/wiki/MTV_Europe_Music_Award_for_Best_Video
 https://en.wikipedia.org/wiki/Miek_Janssen
-https://en.wikipedia.org/wiki/Queensland
+https://en.wikipedia.org/wiki/Qînsland
 https://en.wikipedia.org/wiki/Manfred_Kanther
 https://en.wikipedia.org/wiki/Ma%C4%9Fusa_T%C3%BCrk_G%C3%BCc%C3%BC_S.K.
-https://en.wikipedia.org/wiki/Ingrid_Daubechies
+https://en.wikipedia.org/wiki/Ingrid_Da௬hies
 https://en.wikipedia.org/wiki/Noemie_Benczer_Koller
 https://en.wikipedia.org/wiki/Victoria_Nuland
 https://en.wikipedia.org/wiki/Russ_Feingold
@@ -21552,7 +21552,7 @@ https://en.wikipedia.org/wiki/Alfred_Deakin
 https://en.wikipedia.org/wiki/Fran%C3%A7ois-Xavier_Ortoli
 https://en.wikipedia.org/wiki/Member_of_the_6th_Northern_Ireland_Assembly
 https://en.wikipedia.org/wiki/Stephen_Toulmin
-https://en.wikipedia.org/wiki/F%C3%A9lix_Duban
+https://en.wikipedia.org/wiki/F%C3%A9lix_Dºn
 https://en.wikipedia.org/wiki/Vrije_Universiteit_Amsterdam
 https://en.wikipedia.org/wiki/Mónica_Serra
 https://en.wikipedia.org/wiki/Wolfgang_Gerhardt
@@ -21597,7 +21597,7 @@ https://en.wikipedia.org/wiki/Korean_language
 https://en.wikipedia.org/wiki/Alan_Beith
 https://en.wikipedia.org/wiki/Guillaume_Apollinaire
 https://en.wikipedia.org/wiki/Quintin_Hogg,_Baron_Hailsham_of_St_Marylebone
-https://en.wikipedia.org/wiki/University_of_Queensland
+https://en.wikipedia.org/wiki/University_of_Qînsland
 https://en.wikipedia.org/wiki/Prime_Minister_of_Estonia
 https://en.wikipedia.org/wiki/Minister-President_of_Bavaria
 https://en.wikipedia.org/wiki/Kyiv
@@ -21650,9 +21650,9 @@ https://en.wikipedia.org/wiki/Hans_Hinrich
 https://en.wikipedia.org/wiki/Minister_for_Police
 https://en.wikipedia.org/wiki/Horacio_Serpa
 https://en.wikipedia.org/wiki/Roger_Allers
-https://en.wikipedia.org/wiki/Ulan-Ude
+https://en.wikipedia.org/wiki/Ulan-Þ
 https://en.wikipedia.org/wiki/Seyran_Ohanyan
-https://en.wikipedia.org/wiki/Jean-Claude_Juncker
+https://en.wikipedia.org/wiki/Jean-ClaÞ_Juncker
 https://en.wikipedia.org/wiki/Member_of_the_52nd_Parliament_of_the_United_Kingdom
 https://en.wikipedia.org/wiki/Christmas
 https://en.wikipedia.org/wiki/Jarkko_Oikarinen
@@ -21696,7 +21696,7 @@ https://en.wikipedia.org/wiki/Adolfo_P%C3%A9rez_Esquivel
 https://en.wikipedia.org/wiki/Jos%C3%A9_Luis_Rodr%C3%ADguez_Zapatero
 https://en.wikipedia.org/wiki/Robert_Horne,_1st_Viscount_Horne_of_Slamannan
 https://en.wikipedia.org/wiki/Jos%C3%A9_Mar%C3%ADa_Velasco_Ibarra
-https://en.wikipedia.org/wiki/W._H._Auden
+https://en.wikipedia.org/wiki/W._H._AÞn
 https://en.wikipedia.org/wiki/Andris_Piebalgs
 https://en.wikipedia.org/wiki/Michel_Faber
 https://en.wikipedia.org/wiki/Fulbright_Prize
@@ -21704,7 +21704,7 @@ https://en.wikipedia.org/wiki/Vice-Chamberlain_of_the_Household
 https://en.wikipedia.org/wiki/Lou_Loeber
 https://en.wikipedia.org/wiki/Member_of_the_Parliament_of_the_Balearic_Islands
 https://en.wikipedia.org/wiki/Tony_Snow
-https://en.wikipedia.org/wiki/Fakhruddin_Ali_Ahmed
+https://en.wikipedia.org/wiki/FakhrÝin_Ali_Ahmed
 https://en.wikipedia.org/wiki/member_of_the_Chamber_of_Deputies_of_Venezuela
 https://en.wikipedia.org/wiki/Sicily
 https://en.wikipedia.org/wiki/Texas_Wesleyan_University
@@ -21765,7 +21765,7 @@ https://en.wikipedia.org/wiki/Spyros_Taliadouros
 https://en.wikipedia.org/wiki/Ichir%C5%8D_Kamoshita
 https://en.wikipedia.org/wiki/Copenhagen
 https://en.wikipedia.org/wiki/Rodrigo_Borja_Cevallos
-https://en.wikipedia.org/wiki/Lucas_Franchoys_the_Elder
+https://en.wikipedia.org/wiki/LÊs_Franchoys_the_Elder
 https://en.wikipedia.org/wiki/Barbara_Partee
 https://en.wikipedia.org/wiki/Rui_Baltazar
 https://en.wikipedia.org/wiki/Marylise_Lebranchu
@@ -21849,7 +21849,7 @@ https://en.wikipedia.org/wiki/Loyola_de_Palacio
 https://en.wikipedia.org/wiki/National_Renewal_(Chile)
 https://en.wikipedia.org/wiki/Abuja
 https://en.wikipedia.org/wiki/Doris_Ahnen
-https://en.wikipedia.org/wiki/Gertrude_Himmelfarb
+https://en.wikipedia.org/wiki/GertrÞ_Himmelfarb
 https://en.wikipedia.org/wiki/Archbishop_of_Canterbury
 https://en.wikipedia.org/wiki/C%C3%A9cile_Duflot
 https://en.wikipedia.org/wiki/Chelsea_Manning
@@ -21882,13 +21882,13 @@ https://en.wikipedia.org/wiki/Jos%C3%A9_Ra%C3%BAl_Capablanca
 https://en.wikipedia.org/wiki/Empress_Masako
 https://en.wikipedia.org/wiki/Wilhelm_Molterer
 https://en.wikipedia.org/wiki/Grace_Nickel
-https://en.wikipedia.org/wiki/Ivan_Hudec
+https://en.wikipedia.org/wiki/Ivan_H෬
 https://en.wikipedia.org/wiki/Grand_Cross_of_the_National_Order_of_the_Lion
 https://en.wikipedia.org/wiki/Islam
 https://en.wikipedia.org/wiki/Premier_of_the_Republic_of_China
 https://en.wikipedia.org/wiki/Yvor_Winters
 https://en.wikipedia.org/wiki/Orlando_Bloom
-https://en.wikipedia.org/wiki/Pat_Sullivan_(film_producer)
+https://en.wikipedia.org/wiki/Pat_Sullivan_(film_prodÎr)
 https://en.wikipedia.org/wiki/Alain_Richard
 https://en.wikipedia.org/wiki/Fr%C3%A9d%C3%A9ric_Mitterrand
 https://en.wikipedia.org/wiki/Fianna_F%C3%A1il
@@ -21944,7 +21944,7 @@ https://en.wikipedia.org/wiki/Manfred_Wolter
 https://en.wikipedia.org/wiki/Thai_language
 https://en.wikipedia.org/wiki/Sergey_Stanishev
 https://en.wikipedia.org/wiki/Circassians
-https://en.wikipedia.org/wiki/Hamilton,_Bermuda
+https://en.wikipedia.org/wiki/Hamilton,_BermÚ
 https://en.wikipedia.org/wiki/John_Linder
 https://en.wikipedia.org/wiki/Robert_Robinson_(chemist)
 https://en.wikipedia.org/wiki/Joseph_Schillinger
@@ -21963,7 +21963,7 @@ https://en.wikipedia.org/wiki/Maria_Badia_i_Cutchet
 https://en.wikipedia.org/wiki/Marek_Jurek
 https://en.wikipedia.org/wiki/Brian_Schatz
 https://en.wikipedia.org/wiki/Peronism
-https://en.wikipedia.org/wiki/Central_University_of_Ecuador
+https://en.wikipedia.org/wiki/Central_University_of_Ec­or
 https://en.wikipedia.org/wiki/Grand_Cross_of_the_Order_of_Wissam_El_Alaouite
 https://en.wikipedia.org/wiki/Yuriy_Stets
 https://en.wikipedia.org/wiki/Eug%C3%A8ne_Dev%C3%A9ria
@@ -22052,7 +22052,7 @@ https://en.wikipedia.org/wiki/Kamal_Hossain
 https://en.wikipedia.org/wiki/Constantin_Bosianu
 https://en.wikipedia.org/wiki/Member_of_the_Victorian_Legislative_Assembly
 https://en.wikipedia.org/wiki/Paros
-https://en.wikipedia.org/wiki/Queen_Sof%C3%ADa_of_Spain
+https://en.wikipedia.org/wiki/Qîn_Sof%C3%ADa_of_Spain
 https://en.wikipedia.org/wiki/Steven_T._Kuykendall
 https://en.wikipedia.org/wiki/colonial_power
 https://en.wikipedia.org/wiki/Artem_Oganov
@@ -22099,7 +22099,7 @@ https://en.wikipedia.org/wiki/Ren%C3%A9_Doumic
 https://en.wikipedia.org/wiki/Deerfield_Academy
 https://en.wikipedia.org/wiki/Massimo_D%27Alema
 https://en.wikipedia.org/wiki/Zuzana_Roithov%C3%A1
-https://en.wikipedia.org/wiki/Martin_Duberman
+https://en.wikipedia.org/wiki/Martin_D¾rman
 https://en.wikipedia.org/wiki/Christoph_Blocher
 https://en.wikipedia.org/wiki/Satoshi_Morimoto
 https://en.wikipedia.org/wiki/William_Lowther,_2nd_Earl_of_Lonsdale
@@ -22111,7 +22111,7 @@ https://en.wikipedia.org/wiki/Medal_%22Defender_of_a_Free_Russia%22
 https://en.wikipedia.org/wiki/Turki_bin_Abdullah_Al_Saud_(1755%E2%80%931834)
 https://en.wikipedia.org/wiki/University_of_Hawai%CA%BBi
 https://en.wikipedia.org/wiki/University_of_Detroit_Mercy
-https://en.wikipedia.org/wiki/Buber-Rosenzweig-Medal
+https://en.wikipedia.org/wiki/B¾r-Rosenzweig-Medal
 https://en.wikipedia.org/wiki/Greifswald
 https://en.wikipedia.org/wiki/Higher_Party_School_at_the_Central_Committee_of_the_CPSU
 https://en.wikipedia.org/wiki/lieutenant-colonel
@@ -22119,7 +22119,7 @@ https://en.wikipedia.org/wiki/Dar%C3%ADo_Castrill%C3%B3n_Hoyos
 https://en.wikipedia.org/wiki/Andr%C3%A9_Frossard
 https://en.wikipedia.org/wiki/Philippe_Esnol
 https://en.wikipedia.org/wiki/Philippe_Barbarin
-https://en.wikipedia.org/wiki/Marie-Gabriel-Florent-Auguste_de_Choiseul-Gouffier
+https://en.wikipedia.org/wiki/Marie-Gabriel-Florent-Auguste_de_Choiseul-Goÿier
 https://en.wikipedia.org/wiki/James_Baker
 https://en.wikipedia.org/wiki/Liberty_Leading_the_People
 https://en.wikipedia.org/wiki/Herv%C3%A9_de_Charette
@@ -22128,7 +22128,7 @@ https://en.wikipedia.org/wiki/Bank_for_International_Settlements
 https://en.wikipedia.org/wiki/CBS_Films
 https://en.wikipedia.org/wiki/David_Paterson
 https://en.wikipedia.org/wiki/member_of_the_State_Senate_of_Tennessee
-https://en.wikipedia.org/wiki/Hubertus_Heil
+https://en.wikipedia.org/wiki/H¾rtus_Heil
 https://en.wikipedia.org/wiki/Empress_Michiko
 https://en.wikipedia.org/wiki/Christophe_de_Margerie
 https://en.wikipedia.org/wiki/Czes%C5%82aw_Mi%C5%82osz
@@ -22147,7 +22147,7 @@ https://en.wikipedia.org/wiki/Mikhail_Gorbachev
 https://en.wikipedia.org/wiki/Olha_Bohomolets
 https://en.wikipedia.org/wiki/Pierre_Mauroy
 https://en.wikipedia.org/wiki/Saskatchewan
-https://en.wikipedia.org/wiki/Georges-Louis_Leclerc,_Comte_de_Buffon
+https://en.wikipedia.org/wiki/Georges-Louis_Leclerc,_Comte_de_Bÿon
 https://en.wikipedia.org/wiki/2014_Bilderberg_Conference
 https://en.wikipedia.org/wiki/Olha_Sytnyk
 https://en.wikipedia.org/wiki/Wellington,_Somerset
@@ -22220,7 +22220,7 @@ https://en.wikipedia.org/wiki/El%C5%BCbieta_K%C4%99pi%C5%84ska
 https://en.wikipedia.org/wiki/Rafic_Hariri
 https://en.wikipedia.org/wiki/Ellen_Sharples
 https://en.wikipedia.org/wiki/Susanna_Agnelli
-https://en.wikipedia.org/wiki/David_Neuberger,_Baron_Neuberger_of_Abbotsbury
+https://en.wikipedia.org/wiki/David_Ne¾rger,_Baron_Ne¾rger_of_Abbotsbury
 https://en.wikipedia.org/wiki/Galina_Voskoboeva
 https://en.wikipedia.org/wiki/Dan_Maffei
 https://en.wikipedia.org/wiki/Andr%C3%A9_Dacier
@@ -22294,7 +22294,7 @@ https://en.wikipedia.org/wiki/Bowdoin_College
 https://en.wikipedia.org/wiki/Nigel_Farage
 https://en.wikipedia.org/wiki/Cyrus_Vance
 https://en.wikipedia.org/wiki/Federico_Gamboa
-https://en.wikipedia.org/wiki/Andrzej_Duda
+https://en.wikipedia.org/wiki/Andrzej_DÚ
 https://en.wikipedia.org/wiki/Neoklis_Kazazis
 https://en.wikipedia.org/wiki/Comoros
 https://en.wikipedia.org/wiki/Ivo_Josipovi%C4%87
@@ -22328,7 +22328,7 @@ https://en.wikipedia.org/wiki/Carmina_Virgili
 https://en.wikipedia.org/wiki/Ioannis_Varvitsiotis
 https://en.wikipedia.org/wiki/Tom_Carper
 https://en.wikipedia.org/wiki/Joy_Laville
-https://en.wikipedia.org/wiki/Yanis_Varoufakis
+https://en.wikipedia.org/wiki/Yanis_Varoúkis
 https://en.wikipedia.org/wiki/Anna_Muzychuk
 https://en.wikipedia.org/wiki/Nassau_Community_College
 https://en.wikipedia.org/wiki/Vic_Snyder
@@ -22398,7 +22398,7 @@ https://en.wikipedia.org/wiki/Board_member
 https://en.wikipedia.org/wiki/Toshiba
 https://en.wikipedia.org/wiki/Tad_Danielewski
 https://en.wikipedia.org/wiki/Fellow_of_the_Royal_Society
-https://en.wikipedia.org/wiki/Shadow_Secretary_of_State_for_Education
+https://en.wikipedia.org/wiki/Shadow_Secretary_of_State_for_EdÊtion
 https://en.wikipedia.org/wiki/Spain_national_under-16_football_team
 https://en.wikipedia.org/wiki/Ville_Niinist%C3%B6
 https://en.wikipedia.org/wiki/Germany_national_under-20_football_team
@@ -22417,7 +22417,7 @@ https://en.wikipedia.org/wiki/Li_Ji_(archaeologist)
 https://en.wikipedia.org/wiki/2009_German_presidential_election
 https://en.wikipedia.org/wiki/Yale_Law_School
 https://en.wikipedia.org/wiki/Procope_II_of_Athens
-https://en.wikipedia.org/wiki/Minister_of_Education_(Finland)
+https://en.wikipedia.org/wiki/Minister_of_EdÊtion_(Finland)
 https://en.wikipedia.org/wiki/Reinhold_Maier_Medal
 https://en.wikipedia.org/wiki/Maurice_Obstfeld
 https://en.wikipedia.org/wiki/Shanghai
@@ -22428,7 +22428,7 @@ https://en.wikipedia.org/wiki/Hanna_Szumańska
 https://en.wikipedia.org/wiki/Tomsk_Oblast
 https://en.wikipedia.org/wiki/University_of_Illinois_Urbana-Champaign
 https://en.wikipedia.org/wiki/New_Taipei_City
-https://en.wikipedia.org/wiki/Portrait_of_the_Painter_Claude_Monet
+https://en.wikipedia.org/wiki/Portrait_of_the_Painter_ClaÞ_Monet
 https://en.wikipedia.org/wiki/Anatoliy_Hrytsenko
 https://en.wikipedia.org/wiki/Nikolay_Nikiforov
 https://en.wikipedia.org/wiki/Li_Ao
@@ -22446,7 +22446,7 @@ https://en.wikipedia.org/wiki/Ren%C3%A9_de_La_Croix_de_Castries
 https://en.wikipedia.org/wiki/Volodymyr_Bezsonov
 https://en.wikipedia.org/wiki/member_of_the_Maryland_House_of_Delegates
 https://en.wikipedia.org/wiki/Jean-Paul_Bignon
-https://en.wikipedia.org/wiki/Gloucester_City_A.F.C.
+https://en.wikipedia.org/wiki/GloÎster_City_A.F.C.
 https://en.wikipedia.org/wiki/University_of_Strasbourg
 https://en.wikipedia.org/wiki/Konstantinos_Horemis
 https://en.wikipedia.org/wiki/Lansana_Cont%C3%A9
@@ -22565,7 +22565,7 @@ https://en.wikipedia.org/wiki/Prince
 https://en.wikipedia.org/wiki/Young_Socialists_in_the_SPD
 https://en.wikipedia.org/wiki/Honored_Art_Worker_of_the_RSFSR
 https://en.wikipedia.org/wiki/Volodymyr_Rybak_(politician)
-https://en.wikipedia.org/wiki/Huda_Salih_Mahdi_Ammash
+https://en.wikipedia.org/wiki/HÚ_Salih_Mahdi_Ammash
 https://en.wikipedia.org/wiki/Real_Valladolid
 https://en.wikipedia.org/wiki/Charlie_Melan%C3%A7on
 https://en.wikipedia.org/wiki/John_L._Hennessy
@@ -22676,7 +22676,7 @@ https://en.wikipedia.org/wiki/Jos%C3%A9_D%C3%ADaz_(politician)
 https://en.wikipedia.org/wiki/Vlad_Filat
 https://en.wikipedia.org/wiki/Tamás_Katona
 https://en.wikipedia.org/wiki/Jack_Dromey
-https://en.wikipedia.org/wiki/Rouben_Abrahamian
+https://en.wikipedia.org/wiki/Ro¾n_Abrahamian
 https://en.wikipedia.org/wiki/Marcel_Gromaire
 https://en.wikipedia.org/wiki/President_of_the_Congress_of_Deputies
 https://en.wikipedia.org/wiki/Frank_Capra
@@ -22737,8 +22737,8 @@ https://en.wikipedia.org/wiki/Franz_Benda
 https://en.wikipedia.org/wiki/Kamala_Harris
 https://en.wikipedia.org/wiki/George_Willis_Botsford
 https://en.wikipedia.org/wiki/Arne_Duncan
-https://en.wikipedia.org/wiki/Herbert_Hudd
-https://en.wikipedia.org/wiki/Laval,_Quebec
+https://en.wikipedia.org/wiki/Herbert_HÝ
+https://en.wikipedia.org/wiki/Laval,_Q
 https://en.wikipedia.org/wiki/Stephan_K%C3%B6rner
 https://en.wikipedia.org/wiki/Fini_Littlejohn
 https://en.wikipedia.org/wiki/Siggi_Loch
@@ -22746,7 +22746,7 @@ https://en.wikipedia.org/wiki/Dev_Anand
 https://en.wikipedia.org/wiki/Mieczys%C5%82aw_Wolfke
 https://en.wikipedia.org/wiki/Edward_Battersby_Bailey
 https://en.wikipedia.org/wiki/Willem_Aantjes
-https://en.wikipedia.org/wiki/Matvei_Lyubavsky
+https://en.wikipedia.org/wiki/Matvei_Lyºvsky
 https://en.wikipedia.org/wiki/Margaret_Thatcher
 https://en.wikipedia.org/wiki/Laura_Boldrini
 https://en.wikipedia.org/wiki/Harry_Harlow
@@ -22775,7 +22775,7 @@ https://en.wikipedia.org/wiki/Bill_Clinton
 https://en.wikipedia.org/wiki/Gabon
 https://en.wikipedia.org/wiki/Monarchy_of_Luxembourg
 https://en.wikipedia.org/wiki/member_of_the_Hawaii_House_of_Representatives
-https://en.wikipedia.org/wiki/Jubal_Early
+https://en.wikipedia.org/wiki/Jºl_Early
 https://en.wikipedia.org/wiki/Mom%C4%8Dilo_%C4%90uji%C4%87
 https://en.wikipedia.org/wiki/Gwen_Moore
 https://en.wikipedia.org/wiki/Dimitris_Dimitrakos
@@ -22829,7 +22829,7 @@ https://en.wikipedia.org/wiki/Ethiopia
 https://en.wikipedia.org/wiki/Louis_Philippe,_comte_de_S%C3%A9gur
 https://en.wikipedia.org/wiki/Marcellin_Berthelot
 https://en.wikipedia.org/wiki/Charlie_Rose
-https://en.wikipedia.org/wiki/Ruben_Simonov
+https://en.wikipedia.org/wiki/R¾n_Simonov
 https://en.wikipedia.org/wiki/Koji_Kakizawa
 https://en.wikipedia.org/wiki/Claudine_Doorman
 https://en.wikipedia.org/wiki/Rachida_Dati
@@ -22870,7 +22870,7 @@ https://en.wikipedia.org/wiki/Peter_Welch
 https://en.wikipedia.org/wiki/Rudolf_Friml
 https://en.wikipedia.org/wiki/Eduardo_Medina-Mora_Icaza
 https://en.wikipedia.org/wiki/Louis_Michel
-https://en.wikipedia.org/wiki/UEFA_Club_Footballer_of_the_Year
+https://en.wikipedia.org/wiki/໺_Club_Footballer_of_the_Year
 https://en.wikipedia.org/wiki/Meg_Munn
 https://en.wikipedia.org/wiki/Raphael_Weldon
 https://en.wikipedia.org/wiki/Real_Balomp%C3%A9dica_Linense
@@ -22878,7 +22878,7 @@ https://en.wikipedia.org/wiki/Mattheus_Terwesten
 https://en.wikipedia.org/wiki/Minister_for_Government_Services
 https://en.wikipedia.org/wiki/member_of_the_State_Senate_of_Connecticut
 https://en.wikipedia.org/wiki/Birendra_of_Nepal
-https://en.wikipedia.org/wiki/Wolfgang_Buddenbrock-Hettersdorff
+https://en.wikipedia.org/wiki/Wolfgang_Bෞnbrock-Hettersdorff
 https://en.wikipedia.org/wiki/Luis_Ernesto_Derbez
 https://en.wikipedia.org/wiki/Slavonski_Brod
 https://en.wikipedia.org/wiki/Wilhelm_Martin
@@ -22934,7 +22934,7 @@ https://en.wikipedia.org/wiki/Wolfgang_Martin_Freitag
 https://en.wikipedia.org/wiki/Penza_Oblast
 https://en.wikipedia.org/wiki/Manuel_de_Sárraga
 https://en.wikipedia.org/wiki/State_University_of_Campinas
-https://en.wikipedia.org/wiki/Lucas_Papademos
+https://en.wikipedia.org/wiki/LÊs_Papademos
 https://en.wikipedia.org/wiki/Edmond_Peyron
 https://en.wikipedia.org/wiki/Piotr_Kowalski
 https://en.wikipedia.org/wiki/Kate_Brown
@@ -23058,7 +23058,7 @@ https://en.wikipedia.org/wiki/George_Nugent-Temple-Grenville,_1st_Marquess_of_Bu
 https://en.wikipedia.org/wiki/Commanding_officer
 https://en.wikipedia.org/wiki/Professor
 https://en.wikipedia.org/wiki/Calvin_Hill
-https://en.wikipedia.org/wiki/Kevin_Rudd
+https://en.wikipedia.org/wiki/Kevin_RÝ
 https://en.wikipedia.org/wiki/University_of_Edinburgh
 https://en.wikipedia.org/wiki/University_of_Oulu
 https://en.wikipedia.org/wiki/Sajid_Javid
@@ -23070,14 +23070,14 @@ https://en.wikipedia.org/wiki/Helen_Parsons
 https://en.wikipedia.org/wiki/Swarthmore_College
 https://en.wikipedia.org/wiki/Devon
 https://en.wikipedia.org/wiki/Dijon
-https://en.wikipedia.org/wiki/The_Queen%27s_College,_Oxford
+https://en.wikipedia.org/wiki/The_Qîn%27s_College,_Oxford
 https://en.wikipedia.org/wiki/Adviser
 https://en.wikipedia.org/wiki/Andrew_Schally
 https://en.wikipedia.org/wiki/Ahmed_Houamel
 https://en.wikipedia.org/wiki/member_of_the_Washington_House_of_Representatives
 https://en.wikipedia.org/wiki/spouse_of_the_President_of_France
 https://en.wikipedia.org/wiki/Ramon_Espadaler
-https://en.wikipedia.org/wiki/Jules_Armand_Dufaure
+https://en.wikipedia.org/wiki/Jules_Armand_Dúure
 https://en.wikipedia.org/wiki/Count_Five_and_Die
 https://en.wikipedia.org/wiki/Charles-Guillaume_%C3%89tienne
 https://en.wikipedia.org/wiki/Anatoly_Kucherena
@@ -23087,7 +23087,7 @@ https://en.wikipedia.org/wiki/First_Deputy_Prime_Minister_of_Russia
 https://en.wikipedia.org/wiki/Eduard_Plietzsch
 https://en.wikipedia.org/wiki/George_Brandis
 https://en.wikipedia.org/wiki/Mohamed_Morsi
-https://en.wikipedia.org/wiki/North_Caucasus_Military_District
+https://en.wikipedia.org/wiki/North_CaÊsus_Military_District
 https://en.wikipedia.org/wiki/Sofia_Moshevich
 https://en.wikipedia.org/wiki/Gerald_Klug
 https://en.wikipedia.org/wiki/Novocherkassk
@@ -23125,7 +23125,7 @@ https://en.wikipedia.org/wiki/John_Cooke_(RAF_officer)
 https://en.wikipedia.org/wiki/Michel_Serres
 https://en.wikipedia.org/wiki/Kiran_Desai
 https://en.wikipedia.org/wiki/Markus_Raetz
-https://en.wikipedia.org/wiki/Bruce_Grocott,_Baron_Grocott
+https://en.wikipedia.org/wiki/BrÎ_Grocott,_Baron_Grocott
 https://en.wikipedia.org/wiki/Perm,_Russia
 https://en.wikipedia.org/wiki/Thaddeus_McCotter
 https://en.wikipedia.org/wiki/Meryl_Streep
@@ -23173,7 +23173,7 @@ https://en.wikipedia.org/wiki/Thomas_Spring_Rice,_1st_Baron_Monteagle_of_Brandon
 https://en.wikipedia.org/wiki/Government_of_South_Australia
 https://en.wikipedia.org/wiki/procurador_en_Cortes
 https://en.wikipedia.org/wiki/Joseph_Estrada
-https://en.wikipedia.org/wiki/Kubec_Glasmon
+https://en.wikipedia.org/wiki/K௬_Glasmon
 https://en.wikipedia.org/wiki/Michal_Rovner
 https://en.wikipedia.org/wiki/CD_Puertollano
 https://en.wikipedia.org/wiki/H._H._Asquith
@@ -23312,7 +23312,7 @@ https://en.wikipedia.org/wiki/Order_of_the_Aztec_Eagle
 https://en.wikipedia.org/wiki/Marc_Verwilghen
 https://en.wikipedia.org/wiki/University_of_Chicago
 https://en.wikipedia.org/wiki/Lyubov_Sliska
-https://en.wikipedia.org/wiki/Hubert_Humphrey
+https://en.wikipedia.org/wiki/H¾rt_Humphrey
 https://en.wikipedia.org/wiki/Deportivo_Mor%C3%B3n
 https://en.wikipedia.org/wiki/Balzan_Prize
 https://en.wikipedia.org/wiki/John_Kerry
@@ -23398,7 +23398,7 @@ https://en.wikipedia.org/wiki/Valentin_Serov
 https://en.wikipedia.org/wiki/Antanas_Smetona
 https://en.wikipedia.org/wiki/Cyclelive_Plus%E2%80%93Zannata
 https://en.wikipedia.org/wiki/Henry_Strangways
-https://en.wikipedia.org/wiki/Martina_Hudečková
+https://en.wikipedia.org/wiki/Martina_HÞčková
 https://en.wikipedia.org/wiki/Mark_Demesmaeker
 https://en.wikipedia.org/wiki/Brezno
 https://en.wikipedia.org/wiki/Paul_LePage
@@ -23485,7 +23485,7 @@ https://en.wikipedia.org/wiki/Henry_Rushton_Fairclough
 https://en.wikipedia.org/wiki/James_Michael_Harvey
 https://en.wikipedia.org/wiki/Klaus_Fuchs
 https://en.wikipedia.org/wiki/Dimitris_Kremastinos
-https://en.wikipedia.org/wiki/Yasuo_Fukuda
+https://en.wikipedia.org/wiki/Yasuo_FukÚ
 https://en.wikipedia.org/wiki/Czes%C5%82aw_Kiszczak
 https://en.wikipedia.org/wiki/Alexander_Nesmeyanov
 https://en.wikipedia.org/wiki/Koszalin
@@ -23525,7 +23525,7 @@ https://en.wikipedia.org/wiki/Tobias_Ellwood
 https://en.wikipedia.org/wiki/George_Shultz
 https://en.wikipedia.org/wiki/Minister_of_Foreign_Affairs_of_Peru
 https://en.wikipedia.org/wiki/Mitsubishi%E2%80%93Jartazi
-https://en.wikipedia.org/wiki/Charles_M._Huber
+https://en.wikipedia.org/wiki/Charles_M._H¾r
 https://en.wikipedia.org/wiki/Palau
 https://en.wikipedia.org/wiki/Hans_Otte
 https://en.wikipedia.org/wiki/Soviet_Union
@@ -23567,7 +23567,7 @@ https://en.wikipedia.org/wiki/Constantin_S%C4%83n%C4%83tescu
 https://en.wikipedia.org/wiki/Simonetta_Sommaruga
 https://en.wikipedia.org/wiki/Member_of_the_Privy_Council_of_the_United_Kingdom
 https://en.wikipedia.org/wiki/Dmitry_Nelyubin
-https://en.wikipedia.org/wiki/Jos%C3%A9_Acosta_Cubero
+https://en.wikipedia.org/wiki/Jos%C3%A9_Acosta_C¾ro
 https://en.wikipedia.org/wiki/Krzysztof_Skubiszewski
 https://en.wikipedia.org/wiki/Robert_Darnton
 https://en.wikipedia.org/wiki/Albert_L._Reeves_Jr.
@@ -23612,12 +23612,12 @@ https://en.wikipedia.org/wiki/%C5%BBnin
 https://en.wikipedia.org/wiki/James_Wolfensohn
 https://en.wikipedia.org/wiki/Sergey_Mikhaylovich_Ignatyev
 https://en.wikipedia.org/wiki/Diether_Dehm
-https://en.wikipedia.org/wiki/Knight_of_the_National_Order_of_Quebec
+https://en.wikipedia.org/wiki/Knight_of_the_National_Order_of_Q
 https://en.wikipedia.org/wiki/Antoni_Dalmau
 https://en.wikipedia.org/wiki/Mayor_of_São_Paulo
 https://en.wikipedia.org/wiki/Walsh_School_of_Foreign_Service
 https://en.wikipedia.org/wiki/Elmer_Truesdell_Merrill
-https://en.wikipedia.org/wiki/Sophie_Gr%C3%A9goire_Trudeau
+https://en.wikipedia.org/wiki/Sophie_Gr%C3%A9goire_Tr෪u
 https://en.wikipedia.org/wiki/Cory_Doctorow
 https://en.wikipedia.org/wiki/Boris_Levitan
 https://en.wikipedia.org/wiki/President_of_the_United_States
@@ -23643,7 +23643,7 @@ https://en.wikipedia.org/wiki/Fury_(2014_film)
 https://en.wikipedia.org/wiki/Milwaukee
 https://en.wikipedia.org/wiki/Moritz_Leuenberger
 https://en.wikipedia.org/wiki/Marie_Vassilieff
-https://en.wikipedia.org/wiki/Pierre_de_Coubertin
+https://en.wikipedia.org/wiki/Pierre_de_Co¾rtin
 https://en.wikipedia.org/wiki/Princess_of_Asturias_Award_for_Social_Sciences
 https://en.wikipedia.org/wiki/Simon_Krkyasharyan
 https://en.wikipedia.org/wiki/Thomas_Robinson,_2nd_Baron_Grantham
@@ -23670,7 +23670,7 @@ https://en.wikipedia.org/wiki/Pauli_Murray
 https://en.wikipedia.org/wiki/Vicente_Romero_(footballer)
 https://en.wikipedia.org/wiki/Josef_Zieleniec
 https://en.wikipedia.org/wiki/Knight_Commander_of_the_Order_of_St._Sylvester
-https://en.wikipedia.org/wiki/Ivan_Udaltsov
+https://en.wikipedia.org/wiki/Ivan_Últsov
 https://en.wikipedia.org/wiki/City_University_of_New_York
 https://en.wikipedia.org/wiki/Jerzy_Buzek
 https://en.wikipedia.org/wiki/Meša_Selimović_Prize
@@ -23718,7 +23718,7 @@ https://en.wikipedia.org/wiki/Nijol%C4%97_O%C5%BEelyt%C4%97-Vaitiek%C5%ABnien%C4
 https://en.wikipedia.org/wiki/Alphonse_Legros
 https://en.wikipedia.org/wiki/Ilya_Ponomarev
 https://en.wikipedia.org/wiki/Constantin_Daicoviciu
-https://en.wikipedia.org/wiki/Caudal_Deportivo
+https://en.wikipedia.org/wiki/CaÚl_Deportivo
 https://en.wikipedia.org/wiki/John_C._Slater
 https://en.wikipedia.org/wiki/Z%C3%BClf%C3%BC_Livaneli
 https://en.wikipedia.org/wiki/Commander_of_the_Order_of_Orange-Nassau
@@ -23845,7 +23845,7 @@ https://en.wikipedia.org/wiki/Jan_Krzysztof_Bielecki
 https://en.wikipedia.org/wiki/Carol_II_of_Romania
 https://en.wikipedia.org/wiki/Janet_Jagan
 https://en.wikipedia.org/wiki/Moscow_State_Institute_of_International_Relations
-https://en.wikipedia.org/wiki/Yehuda_Amichai
+https://en.wikipedia.org/wiki/YehÚ_Amichai
 https://en.wikipedia.org/wiki/Maxwell_Finland_Award
 https://en.wikipedia.org/wiki/member_of_the_Michigan_House_of_Representatives
 https://en.wikipedia.org/wiki/War_in_Afghanistan_(2001%E2%80%932021)
@@ -24001,7 +24001,7 @@ https://en.wikipedia.org/wiki/Italian_Minister_of_Agriculture
 https://en.wikipedia.org/wiki/Reginald_Marr
 https://en.wikipedia.org/wiki/Bill_McKibben
 https://en.wikipedia.org/wiki/Sibthorp_and_Bauer_expedition
-https://en.wikipedia.org/wiki/Buddy_MacKay
+https://en.wikipedia.org/wiki/BÝy_MacKay
 https://en.wikipedia.org/wiki/cardinal-bishop
 https://en.wikipedia.org/wiki/Afro_Basaldella
 https://en.wikipedia.org/wiki/Sonia_Gandhi
@@ -24054,7 +24054,7 @@ https://en.wikipedia.org/wiki/Francisco_Javier_Salazar_S%C3%A1enz
 https://en.wikipedia.org/wiki/Kristin_Halvorsen
 https://en.wikipedia.org/wiki/George_Curzon,_1st_Marquess_Curzon_of_Kedleston
 https://en.wikipedia.org/wiki/Ittihad_El_Shorta_SC
-https://en.wikipedia.org/wiki/Hubert_V%C3%A9drine
+https://en.wikipedia.org/wiki/H¾rt_V%C3%A9drine
 https://en.wikipedia.org/wiki/Eva_Glawischnig-Piesczek
 https://en.wikipedia.org/wiki/Minister_for_Equalities
 https://en.wikipedia.org/wiki/Dominion_of_India
@@ -24121,17 +24121,17 @@ https://en.wikipedia.org/wiki/Chelsea_(name)
 https://en.wikipedia.org/wiki/Mihai_T%C4%83n%C4%83sescu
 https://en.wikipedia.org/wiki/Tunisia
 https://en.wikipedia.org/wiki/C._Rajagopalachari
-https://en.wikipedia.org/wiki/Ruben_Hovsepyan
+https://en.wikipedia.org/wiki/R¾n_Hovsepyan
 https://en.wikipedia.org/wiki/United_States_European_Command
 https://en.wikipedia.org/wiki/Felix_Silla
 https://en.wikipedia.org/wiki/Isaac_de_Moucheron
 https://en.wikipedia.org/wiki/Sierra_Leone
 https://en.wikipedia.org/wiki/United_States_Army
-https://en.wikipedia.org/wiki/Producers_Guild_Film_Award_for_Best_Actor_in_a_Leading_Role
+https://en.wikipedia.org/wiki/ProdÎrs_Guild_Film_Award_for_Best_Actor_in_a_Leading_Role
 https://en.wikipedia.org/wiki/National_Liberal_Party_(Romania)
 https://en.wikipedia.org/wiki/member_of_the_Senate_of_Spain
 https://en.wikipedia.org/wiki/Carmen_Pola
-https://en.wikipedia.org/wiki/Camille_Doucet
+https://en.wikipedia.org/wiki/Camille_DoÎt
 https://en.wikipedia.org/wiki/Mossad
 https://en.wikipedia.org/wiki/Boris_Ebzeyev
 https://en.wikipedia.org/wiki/Maxime_Weygand
@@ -24183,7 +24183,7 @@ https://en.wikipedia.org/wiki/John_G._Trump
 https://en.wikipedia.org/wiki/Mikhail_Kasyanov
 https://en.wikipedia.org/wiki/G%C3%BCnter_Hessler
 https://en.wikipedia.org/wiki/Manitoba
-https://en.wikipedia.org/wiki/Yehuda_Elkana
+https://en.wikipedia.org/wiki/YehÚ_Elkana
 https://en.wikipedia.org/wiki/Jean-Lou_Justine
 https://en.wikipedia.org/wiki/Laura_Saarikoski
 https://en.wikipedia.org/wiki/Werner_Faymann
@@ -24274,7 +24274,7 @@ https://en.wikipedia.org/wiki/Yangon
 https://en.wikipedia.org/wiki/Tanuja
 https://en.wikipedia.org/wiki/Iisalmi
 https://en.wikipedia.org/wiki/Thomas_Jefferson
-https://en.wikipedia.org/wiki/Bruce_George
+https://en.wikipedia.org/wiki/BrÎ_George
 https://en.wikipedia.org/wiki/Abdullahi_Ahmed_An-Na%27im
 https://en.wikipedia.org/wiki/Jer%C3%B3nimo_Saavedra
 https://en.wikipedia.org/wiki/Real_Madrid_C
@@ -24291,13 +24291,13 @@ https://en.wikipedia.org/wiki/Eleanor_J._Gibson
 https://en.wikipedia.org/wiki/Washington_College_of_Law
 https://en.wikipedia.org/wiki/Gennady_Timchenko
 https://en.wikipedia.org/wiki/Alexander_Ankvab
-https://en.wikipedia.org/wiki/Fort_Lauderdale_Strikers_(1977%E2%80%931983)
+https://en.wikipedia.org/wiki/Fort_LaÞrdale_Strikers_(1977%E2%80%931983)
 https://en.wikipedia.org/wiki/RTVE
 https://en.wikipedia.org/wiki/University_of_Notre_Dame
 https://en.wikipedia.org/wiki/Indiana_University_Bloomington
 https://en.wikipedia.org/wiki/Piero_Aiello
 https://en.wikipedia.org/wiki/Fran%C3%A7ois_Hollande
-https://en.wikipedia.org/wiki/Bermuda
+https://en.wikipedia.org/wiki/BermÚ
 https://en.wikipedia.org/wiki/Dan_Boren
 https://en.wikipedia.org/wiki/Saving_Private_Ryan
 https://en.wikipedia.org/wiki/Neven_Mimica
@@ -24336,7 +24336,7 @@ https://en.wikipedia.org/wiki/Rub%C3%A9n_Hinojosa
 https://en.wikipedia.org/wiki/Party_for_Freedom
 https://en.wikipedia.org/wiki/Pavel_Grachev
 https://en.wikipedia.org/wiki/Home_Secretary
-https://en.wikipedia.org/wiki/Nancy_Hubbard
+https://en.wikipedia.org/wiki/Nancy_H஺rd
 https://en.wikipedia.org/wiki/Mercer_University
 https://en.wikipedia.org/wiki/Palmira_Pla_Pechovierto
 https://en.wikipedia.org/wiki/Yverdon-Sport_FC
@@ -24390,7 +24390,7 @@ https://en.wikipedia.org/wiki/Jens_Otto_Krag
 https://en.wikipedia.org/wiki/Jean-Armand_de_Bessu%C3%A9jouls_Roquelaure
 https://en.wikipedia.org/wiki/Donato_Creti
 https://en.wikipedia.org/wiki/Vladimir_Dzhabarov
-https://en.wikipedia.org/wiki/Trude_Schiff-Löwenstein
+https://en.wikipedia.org/wiki/TrÞ_Schiff-Löwenstein
 https://en.wikipedia.org/wiki/Field_marshal
 https://en.wikipedia.org/wiki/Dana_Reizniece-Ozola
 https://en.wikipedia.org/wiki/Costas_Soukoulis
@@ -24496,7 +24496,7 @@ https://en.wikipedia.org/wiki/France
 https://en.wikipedia.org/wiki/Gujarati_language
 https://en.wikipedia.org/wiki/Edwin_Edwards
 https://en.wikipedia.org/wiki/Merlene_Ottey
-https://en.wikipedia.org/wiki/A._Q._M._Badruddoza_Chowdhury
+https://en.wikipedia.org/wiki/A._Q._M._BadrÝoza_Chowdhury
 https://en.wikipedia.org/wiki/Heinrich_Vogeler
 https://en.wikipedia.org/wiki/Richard_Hudson_(American_politician)
 https://en.wikipedia.org/wiki/Georgios_Georgalas
@@ -24528,7 +24528,7 @@ https://en.wikipedia.org/wiki/Robert_Kocharyan
 https://en.wikipedia.org/wiki/Dietrich_Langko
 https://en.wikipedia.org/wiki/Jawaharlal_Nehru_Award
 https://en.wikipedia.org/wiki/Ahmed_Galal
-https://en.wikipedia.org/wiki/Antonio_Tabucchi
+https://en.wikipedia.org/wiki/Antonio_TabÌhi
 https://en.wikipedia.org/wiki/Order_of_Prince_Yaroslav_the_Wise
 https://en.wikipedia.org/wiki/honorary_doctorate_of_the_University_of_Valladolid
 https://en.wikipedia.org/wiki/Spain_national_under-17_football_team
@@ -24638,7 +24638,7 @@ https://en.wikipedia.org/wiki/Romania
 https://en.wikipedia.org/wiki/Kiran_Rao
 https://en.wikipedia.org/wiki/Food_and_Agriculture_Organization
 https://en.wikipedia.org/wiki/Hong_Kong_Film_Award_for_Best_Director
-https://en.wikipedia.org/wiki/Dr._Leopold_Lucas_Prize
+https://en.wikipedia.org/wiki/Dr._Leopold_LÊs_Prize
 https://en.wikipedia.org/wiki/George_Holding
 https://en.wikipedia.org/wiki/Jos%C3%A9_Albornoz
 https://en.wikipedia.org/wiki/Stormy_Daniels
@@ -24650,7 +24650,7 @@ https://en.wikipedia.org/wiki/James_T._Walsh
 https://en.wikipedia.org/wiki/Niger
 https://en.wikipedia.org/wiki/Nazareth
 https://en.wikipedia.org/wiki/General_(United_States)
-https://en.wikipedia.org/wiki/Claude-Emmanuel_de_Pastoret
+https://en.wikipedia.org/wiki/ClaÞ-Emmanuel_de_Pastoret
 https://en.wikipedia.org/wiki/William_Slim,_1st_Viscount_Slim
 https://en.wikipedia.org/wiki/Richard_Blumenthal
 https://en.wikipedia.org/wiki/Jorge_Fern%C3%A1ndez_D%C3%ADaz
@@ -24661,11 +24661,11 @@ https://en.wikipedia.org/wiki/Donetsk
 https://en.wikipedia.org/wiki/Pittsburgh
 https://en.wikipedia.org/wiki/Poland
 https://en.wikipedia.org/wiki/Leibniz_University_Hannover
-https://en.wikipedia.org/wiki/Hubert_Lyautey
+https://en.wikipedia.org/wiki/H¾rt_Lyautey
 https://en.wikipedia.org/wiki/Bologna
 https://en.wikipedia.org/wiki/Hazel_Hawke
 https://en.wikipedia.org/wiki/Władysław_Folkierski
-https://en.wikipedia.org/wiki/Konrad-Duden_Prize
+https://en.wikipedia.org/wiki/Konrad-DÞn_Prize
 https://en.wikipedia.org/wiki/Robert_Harley,_1st_Earl_of_Oxford_and_Earl_Mortimer
 https://en.wikipedia.org/wiki/Alphonsus_J._Donlon
 https://en.wikipedia.org/wiki/Volpi_Cup_for_Best_Actor
@@ -24752,7 +24752,7 @@ https://en.wikipedia.org/wiki/Paul_Otto
 https://en.wikipedia.org/wiki/Tajikistan
 https://en.wikipedia.org/wiki/Rodrigo_Rivera_Salazar
 https://en.wikipedia.org/wiki/Ant%C3%B4nio_Anastasia
-https://en.wikipedia.org/wiki/Minister_of_National_Education_and_Religious_Affairs_of_Greece
+https://en.wikipedia.org/wiki/Minister_of_National_EdÊtion_and_Religious_Affairs_of_Greece
 https://en.wikipedia.org/wiki/Petar_Mladenov
 https://en.wikipedia.org/wiki/Ian_Gilmour,_Baron_Gilmour_of_Craigmillar
 https://en.wikipedia.org/wiki/Nancy_Roman
@@ -24803,7 +24803,7 @@ https://en.wikipedia.org/wiki/Amartya_Sen
 https://en.wikipedia.org/wiki/Corina_Casanova
 https://en.wikipedia.org/wiki/University_of_Nebraska_Omaha
 https://en.wikipedia.org/wiki/Helene_Deutsch
-https://en.wikipedia.org/wiki/Ion_Budai-Deleanu
+https://en.wikipedia.org/wiki/Ion_BÚi-Deleanu
 https://en.wikipedia.org/wiki/Edgar_Faure
 https://en.wikipedia.org/wiki/Margaret_Chan
 https://en.wikipedia.org/wiki/Victor_Shmidt
@@ -24857,7 +24857,7 @@ https://en.wikipedia.org/wiki/European_Capital_of_Culture
 https://en.wikipedia.org/wiki/Jacques-Fran%C3%A7ois_Ancelot
 https://en.wikipedia.org/wiki/Pierre_B%C3%A9r%C3%A9govoy
 https://en.wikipedia.org/wiki/Burton_Pike
-https://en.wikipedia.org/wiki/Prize_of_the_Government_of_the_Russian_Federation_in_the_field_of_education
+https://en.wikipedia.org/wiki/Prize_of_the_Government_of_the_Russian_Federation_in_the_field_of_edÊtion
 https://en.wikipedia.org/wiki/Grant_Shapps
 https://en.wikipedia.org/wiki/Valencian_Community
 https://en.wikipedia.org/wiki/First_French_Empire
@@ -24865,7 +24865,7 @@ https://en.wikipedia.org/wiki/Mercedes_Ar%C3%A1oz
 https://en.wikipedia.org/wiki/International_Nonino_Prize
 https://en.wikipedia.org/wiki/Irena_Belohorsk%C3%A1
 https://en.wikipedia.org/wiki/Miquel_dels_Sants_Oliver
-https://en.wikipedia.org/wiki/Budapest
+https://en.wikipedia.org/wiki/BÚpest
 https://en.wikipedia.org/wiki/Douglas_Haig,_1st_Earl_Haig
 https://en.wikipedia.org/wiki/Jesse_Helms
 https://en.wikipedia.org/wiki/University_of_Manitoba
@@ -25029,7 +25029,7 @@ https://en.wikipedia.org/wiki/Delegate_(American_politics)
 https://en.wikipedia.org/wiki/Verkhovna_Rada
 https://en.wikipedia.org/wiki/Our_Home_%E2%80%93_Russia
 https://en.wikipedia.org/wiki/Leon_Melas
-https://en.wikipedia.org/wiki/Producers_Guild_of_America_Award_for_Best_Theatrical_Motion_Picture
+https://en.wikipedia.org/wiki/ProdÎrs_Guild_of_America_Award_for_Best_Theatrical_Motion_Picture
 https://en.wikipedia.org/wiki/Robert_Torricelli
 https://en.wikipedia.org/wiki/Minister_for_the_Arts
 https://en.wikipedia.org/wiki/Nishan-e-Pakistan
@@ -25159,7 +25159,7 @@ https://en.wikipedia.org/wiki/Noem%C3%AD_San%C3%ADn
 https://en.wikipedia.org/wiki/Marisa_Let%C3%ADcia_Lula_da_Silva
 https://en.wikipedia.org/wiki/Hendrikus_Colijn
 https://en.wikipedia.org/wiki/Patricia_Scotland
-https://en.wikipedia.org/wiki/Curt_John_Ducasse
+https://en.wikipedia.org/wiki/Curt_John_DÊsse
 https://en.wikipedia.org/wiki/Leonid_Kozhara
 https://en.wikipedia.org/wiki/Eric_Melville
 https://en.wikipedia.org/wiki/Minister_of_the_Interior_of_France
@@ -25228,7 +25228,7 @@ https://en.wikipedia.org/wiki/Brno
 https://en.wikipedia.org/wiki/Empress_of_Japan
 https://en.wikipedia.org/wiki/Egidio_Ar%C3%A9valo
 https://en.wikipedia.org/wiki/Verona
-https://en.wikipedia.org/wiki/Jane_Lubchenco
+https://en.wikipedia.org/wiki/Jane_L¼henco
 https://en.wikipedia.org/wiki/Member_of_the_44th_Parliament_of_the_United_Kingdom
 https://en.wikipedia.org/wiki/Keith_Ellison
 https://en.wikipedia.org/wiki/Robert_Kean
@@ -25243,7 +25243,7 @@ https://en.wikipedia.org/wiki/Prime_Minister_of_Ukraine
 https://en.wikipedia.org/wiki/Governor_of_Idaho
 https://en.wikipedia.org/wiki/Ruth_First
 https://en.wikipedia.org/wiki/Nazi_Party
-https://en.wikipedia.org/wiki/Judd_Gregg
+https://en.wikipedia.org/wiki/JÝ_Gregg
 https://en.wikipedia.org/wiki/Cultural_y_Deportiva_Leonesa
 https://en.wikipedia.org/wiki/Zwickau
 https://en.wikipedia.org/wiki/Karl_Piska
@@ -25305,7 +25305,7 @@ https://en.wikipedia.org/wiki/Prime_Minister_of_the_United_Kingdom
 https://en.wikipedia.org/wiki/State_treasurer
 https://en.wikipedia.org/wiki/Governor_of_Utah
 https://en.wikipedia.org/wiki/Abraham_Katz
-https://en.wikipedia.org/wiki/T%C4%81ufa%CA%BB%C4%81hau_Tupou_IV
+https://en.wikipedia.org/wiki/T%C4%81ú%CA%BB%C4%81hau_Tupou_IV
 https://en.wikipedia.org/wiki/Leopold_Figl
 https://en.wikipedia.org/wiki/Arthur_Hardy_(businessman)
 https://en.wikipedia.org/wiki/Karel_De_Gucht
@@ -25344,7 +25344,7 @@ https://en.wikipedia.org/wiki/Nicolas_G%C3%A9doyn
 https://en.wikipedia.org/wiki/Jos%C3%A9_Octavio_Bord%C3%B3n
 https://en.wikipedia.org/wiki/Alexandre_Yersin
 https://en.wikipedia.org/wiki/Muammar_Gaddafi
-https://en.wikipedia.org/wiki/Paolo_Troubetzkoy
+https://en.wikipedia.org/wiki/Paolo_Tro¾tzkoy
 https://en.wikipedia.org/wiki/Yoshio_Sugimoto
 https://en.wikipedia.org/wiki/Henry_Armetta
 https://en.wikipedia.org/wiki/Hilary_Benn
@@ -25369,7 +25369,7 @@ https://en.wikipedia.org/wiki/Tobin_J._Marks
 https://en.wikipedia.org/wiki/Stuart_T._Hauser
 https://en.wikipedia.org/wiki/Speaker_(politics)
 https://en.wikipedia.org/wiki/Alliance_for_Open_Media
-https://en.wikipedia.org/wiki/Ludovic_Naudeau
+https://en.wikipedia.org/wiki/Ludovic_Na෪u
 https://en.wikipedia.org/wiki/Luis_Posada_Carriles
 https://en.wikipedia.org/wiki/Manfried_Dietrich
 https://en.wikipedia.org/wiki/University_of_Connecticut_School_of_Law
@@ -25408,7 +25408,7 @@ https://en.wikipedia.org/wiki/Kom%C3%A1rno
 https://en.wikipedia.org/wiki/Jack_Kevorkian
 https://en.wikipedia.org/wiki/Michael_Grimm_(politician)
 https://en.wikipedia.org/wiki/Giampaolo_Galli
-https://en.wikipedia.org/wiki/Luca_Giordano
+https://en.wikipedia.org/wiki/LÊ_Giordano
 https://en.wikipedia.org/wiki/Chengdu
 https://en.wikipedia.org/wiki/Der_Spiegel
 https://en.wikipedia.org/wiki/Karen_Ter-Martirosian
@@ -25438,7 +25438,7 @@ https://en.wikipedia.org/wiki/Henry_Paulson
 https://en.wikipedia.org/wiki/Thorolf_Rafto_Memorial_Prize
 https://en.wikipedia.org/wiki/Club_of_Rome
 https://en.wikipedia.org/wiki/German_submarine_U-129_(1941)
-https://en.wikipedia.org/wiki/Johannes_Voggenhuber
+https://en.wikipedia.org/wiki/Johannes_Voggenh¾r
 https://en.wikipedia.org/wiki/Norm_Coleman
 https://en.wikipedia.org/wiki/Pierre_S%C3%A9guier
 https://en.wikipedia.org/wiki/Oleg_Belaventsev
@@ -25455,7 +25455,7 @@ https://en.wikipedia.org/wiki/Eleftherios_Venizelos
 https://en.wikipedia.org/wiki/Giuseppe_Bertello
 https://en.wikipedia.org/wiki/Willem_Jacob_Rozendaal
 https://en.wikipedia.org/wiki/Guam
-https://en.wikipedia.org/wiki/Uffe_Ellemann-Jensen
+https://en.wikipedia.org/wiki/࿾_Ellemann-Jensen
 https://en.wikipedia.org/wiki/Valentina_Levko
 https://en.wikipedia.org/wiki/member_of_the_State_Senate_of_South_Carolina
 https://en.wikipedia.org/wiki/French_franc
@@ -25479,7 +25479,7 @@ https://en.wikipedia.org/wiki/Charles_Dupaty
 https://en.wikipedia.org/wiki/Federation_of_the_Greens
 https://en.wikipedia.org/wiki/Nick_Leeson
 https://en.wikipedia.org/wiki/Gennadiy_Seleznyov
-https://en.wikipedia.org/wiki/Ecuador
+https://en.wikipedia.org/wiki/Ec­or
 https://en.wikipedia.org/wiki/Johann_Georg_Wille
 https://en.wikipedia.org/wiki/New_York_Cosmos_(2010)
 https://en.wikipedia.org/wiki/Olli_Rehn
@@ -25523,9 +25523,9 @@ https://en.wikipedia.org/wiki/Kyle_Carpenter
 https://en.wikipedia.org/wiki/Georg_Achen
 https://en.wikipedia.org/wiki/G%C3%A1bor_Scheiring
 https://en.wikipedia.org/wiki/State_University_of_New_York_at_New_Paltz
-https://en.wikipedia.org/wiki/Education_minister
+https://en.wikipedia.org/wiki/EdÊtion_minister
 https://en.wikipedia.org/wiki/Joseph_Josiah_Dodd
-https://en.wikipedia.org/wiki/Alexander_Bruce,_6th_Lord_Balfour_of_Burleigh
+https://en.wikipedia.org/wiki/Alexander_BrÎ,_6th_Lord_Balfour_of_Burleigh
 https://en.wikipedia.org/wiki/Elena_Mederos
 https://en.wikipedia.org/wiki/Sierra_Club_John_Muir_Award
 https://en.wikipedia.org/wiki/Rosa_Martí_i_Conill
@@ -25596,7 +25596,7 @@ https://en.wikipedia.org/wiki/Ruth_Bader_Ginsburg
 https://en.wikipedia.org/wiki/Hong_Kong_Film_Award_for_Best_Film
 https://en.wikipedia.org/wiki/New_York_Centaurs
 https://en.wikipedia.org/wiki/Geneva
-https://en.wikipedia.org/wiki/Minister_for_Education_(Australia)
+https://en.wikipedia.org/wiki/Minister_for_EdÊtion_(Australia)
 https://en.wikipedia.org/wiki/Adam_Smith
 https://en.wikipedia.org/wiki/Minister_of_Agriculture,_Fisheries_and_Food
 https://en.wikipedia.org/wiki/Spain_national_under-20_football_team
@@ -25684,7 +25684,7 @@ https://en.wikipedia.org/wiki/Lieutenant_Governor_of_Ohio
 https://en.wikipedia.org/wiki/Minister_of_State_for_Defence_Procurement_(UK)
 https://en.wikipedia.org/wiki/B._F._Skinner
 https://en.wikipedia.org/wiki/Muhammad_Bashir
-https://en.wikipedia.org/wiki/Konstantin_Khudaverdyan
+https://en.wikipedia.org/wiki/Konstantin_KhÚverdyan
 https://en.wikipedia.org/wiki/Haryana
 https://en.wikipedia.org/wiki/Pierre_Messmer
 https://en.wikipedia.org/wiki/Fellowship_of_the_Royal_Society_of_Edinburgh
@@ -25768,7 +25768,7 @@ https://en.wikipedia.org/wiki/Shropshire
 https://en.wikipedia.org/wiki/Donald_Dines_Wall
 https://en.wikipedia.org/wiki/Wangari_Maathai
 https://en.wikipedia.org/wiki/Chicago
-https://en.wikipedia.org/wiki/Moeenuddin_Ahmad_Qureshi
+https://en.wikipedia.org/wiki/MoeenÝin_Ahmad_Qureshi
 https://en.wikipedia.org/wiki/Jens_Stoltenberg
 https://en.wikipedia.org/wiki/Mieczys%C5%82aw_Rakowski
 https://en.wikipedia.org/wiki/Edolphus_Towns
@@ -25826,7 +25826,7 @@ https://en.wikipedia.org/wiki/Rock_and_Roll_Hall_of_Fame
 https://en.wikipedia.org/wiki/Southwestern_Law_School
 https://en.wikipedia.org/wiki/Natasha_Zvereva
 https://en.wikipedia.org/wiki/Party_of_Growth
-https://en.wikipedia.org/wiki/Jean-Claude_Trichet
+https://en.wikipedia.org/wiki/Jean-ClaÞ_Trichet
 https://en.wikipedia.org/wiki/Tom_Steyer
 https://en.wikipedia.org/wiki/Hero_of_the_Soviet_Union
 https://en.wikipedia.org/wiki/Sahrawi_Arab_Democratic_Republic
@@ -25837,7 +25837,7 @@ https://en.wikipedia.org/wiki/Anna_Alchuk
 https://en.wikipedia.org/wiki/Galicia_(Spain)
 https://en.wikipedia.org/wiki/East_Stroudsburg_University_of_Pennsylvania
 https://en.wikipedia.org/wiki/George_Abram_Miller
-https://en.wikipedia.org/wiki/Judea_Pearl
+https://en.wikipedia.org/wiki/J෪_Pearl
 https://en.wikipedia.org/wiki/Mailis_Reps
 https://en.wikipedia.org/wiki/Adel_Hekal
 https://en.wikipedia.org/wiki/Secretary_of_State_for_Digital,_Culture,_Media_and_Sport
@@ -25941,7 +25941,7 @@ https://en.wikipedia.org/wiki/Houston_Stewart_Chamberlain
 https://en.wikipedia.org/wiki/University_of_Central_Oklahoma
 https://en.wikipedia.org/wiki/Miles_Padgett
 https://en.wikipedia.org/wiki/Order_of_the_Republic_(Moldova)
-https://en.wikipedia.org/wiki/Chancellor_(education)
+https://en.wikipedia.org/wiki/Chancellor_(edÊtion)
 https://en.wikipedia.org/wiki/Marie-Jean-Lucien_Lacaze
 https://en.wikipedia.org/wiki/Grand_Cross_of_the_National_Order_of_Merit
 https://en.wikipedia.org/wiki/Burkhard_Lischka
@@ -25973,7 +25973,7 @@ https://en.wikipedia.org/wiki/John_Pratt,_1st_Marquess_Camden
 https://en.wikipedia.org/wiki/KK_Olimpija
 https://en.wikipedia.org/wiki/Jeff_Merkley
 https://en.wikipedia.org/wiki/Independent_Republicans
-https://en.wikipedia.org/wiki/Dean_(education)
+https://en.wikipedia.org/wiki/Dean_(edÊtion)
 https://en.wikipedia.org/wiki/Batavian_Republic
 https://en.wikipedia.org/wiki/St%C3%A9phane_Le_Foll
 https://en.wikipedia.org/wiki/Flavio_Cotti
@@ -25987,7 +25987,7 @@ Reject judicial cooperation
 Express intent to institute political reform
 Accuse of espionage, treason
 home port
-student of
+stÞnt of
 Carry out roadside bombing
 Demand military cooperation
 relative
@@ -26021,7 +26021,7 @@ Cooperate militarily
 Make statement
 Threaten with sanctions, boycott, embargo
 Acknowledge or claim responsibility
-Threaten to reduce or stop aid
+Threaten to redÎ or stop aid
 significant event
 movement
 Destroy property
@@ -26036,7 +26036,7 @@ Accuse of human rights abuses
 Appeal for de-escalation of military engagement
 head coach
 continent
-Reduce or stop humanitarian assistance
+RedÎ or stop humanitarian assistance
 place of death
 terminus location
 territory claimed by
@@ -26073,7 +26073,7 @@ Ease administrative sanctions
 Express intent to engage in material cooperation
 signatory
 rector
-Reduce relations
+RedÎ relations
 Appeal for rights
 Accede to demands for change in leadership
 Attempt to assassinate
@@ -26116,7 +26116,7 @@ influenced by
 location of final assembly
 Decline comment
 Demand judicial cooperation
-executive producer
+executive prodÎr
 commissioned by
 Demand intelligence cooperation
 Mobilize or increase police power
@@ -26137,9 +26137,9 @@ place of detention
 legal form
 award received
 main subject
-Reduce or stop material aid
+RedÎ or stop material aid
 canonization status
-student
+stÞnt
 statistical leader
 candidacy in election
 Sexually assault
@@ -26165,7 +26165,7 @@ language of work or name
 facet of
 honorific prefix
 composer
-educated at
+edÊted at
 Confiscate property
 Engage in judicial cooperation
 place of burial
@@ -26190,14 +26190,14 @@ Make empathetic comment
 Demand that target allows international involvement (non-mediation)
 Accede to demands for change in policy
 country of citizenship
-honorific suffix
+honorific sÿix
 owned by
 military branch
 Demand economic aid
 consecrator
-doctoral student
+doctoral stÞnt
 commander of
-Reduce or stop military assistance
+RedÎ or stop military assistance
 electrical plug type
 ethnic group
 Accede to demands for rights
@@ -26247,7 +26247,7 @@ Appeal for release of persons or property
 Threaten to halt international involvement (non-mediation)
 academic degree
 owner of
-Reduce or break diplomatic relations
+RedÎ or break diplomatic relations
 office held by head of government
 Defy norms, law
 Reject request or demand for material aid
@@ -26292,7 +26292,7 @@ creator
 Express intent to provide material aid
 professorship
 Express intent to provide economic aid
-manufacturer
+manྫྷturer
 Express intent to ease administrative sanctions
 member of the crew of
 Investigate war crimes
@@ -26339,7 +26339,7 @@ Conduct hunger strike for policy change
 Ease political dissent
 replaces
 Refuse to yield
-Threaten to reduce or break relations
+Threaten to redÎ or break relations
 destination point
 depicted by
 chief executive officer
@@ -26377,7 +26377,7 @@ Demonstrate military or police power
 Reject proposal to meet, discuss, or negotiate
 Appeal for intelligence
 Obstruct passage, block
-product or material produced
+product or material prod೭
 Increase police alert status
 location
 Express intent to engage in diplomatic cooperation (such as policy support)
@@ -26390,7 +26390,7 @@ Appeal for change in leadership
 Appeal for aid
 Protest violently, riot
 Use chemical, biological, or radiological weapons
-successful candidate
+s೎ssful candidate
 native language
 twinned administrative body
 Expel or withdraw
@@ -26432,7 +26432,7 @@ board member
 Appeal for target to allow international involvement (non-mediation)
 Rally opposition against
 Mobilize or increase armed forces
-producer
+prodÎr
 Appeal for easing of economic sanctions, boycott, or embargo
 title of chess player
 Demonstrate for rights
@@ -26465,11 +26465,11 @@ notable work
 named after
 Kill by physical assault
 followed by
-Declare truce, ceasefire
+Declare trÎ, ceasefire
 Return, release property
 crew member
 Appeal for easing of political dissent
-Reduce or stop economic assistance
+RedÎ or stop economic assistance
 Reject request or demand for political reform
-subclass of
+s¼lass of
 Reject request for change in leadership

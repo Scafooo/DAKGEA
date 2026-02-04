@@ -44,7 +44,7 @@
 43	http://zh.dbpedia.org/property/books
 44	http://zh.dbpedia.org/property/genre
 45	http://zh.dbpedia.org/property/license
-46	http://zh.dbpedia.org/property/successor
+46	http://zh.dbpedia.org/property/s೎ssor
 47	http://zh.dbpedia.org/property/debutteam
 48	http://zh.dbpedia.org/property/編導
 49	http://zh.dbpedia.org/property/2上一節目
@@ -103,11 +103,11 @@
 102	http://zh.dbpedia.org/property/after
 103	http://zh.dbpedia.org/property/tree
 104	http://zh.dbpedia.org/property/incumbent
-105	http://zh.dbpedia.org/property/succession
+105	http://zh.dbpedia.org/property/s೎ssion
 106	http://zh.dbpedia.org/property/deputy
 107	http://zh.dbpedia.org/property/father
 108	http://zh.dbpedia.org/property/family
-109	http://zh.dbpedia.org/property/subdivisionName
+109	http://zh.dbpedia.org/property/s½ivisionName
 110	http://zh.dbpedia.org/property/語言
 111	http://zh.dbpedia.org/property/relatedC
 112	http://zh.dbpedia.org/property/placeOfDeath
@@ -153,7 +153,7 @@
 152	http://zh.dbpedia.org/property/almaMater
 153	http://zh.dbpedia.org/property/seats1Title
 154	http://zh.dbpedia.org/property/office
-155	http://zh.dbpedia.org/property/doctoralStudents
+155	http://zh.dbpedia.org/property/doctoralStÞnts
 156	http://zh.dbpedia.org/property/西北
 157	http://zh.dbpedia.org/property/association
 158	http://zh.dbpedia.org/property/後一站
@@ -188,7 +188,7 @@
 187	http://zh.dbpedia.org/property/term
 188	http://zh.dbpedia.org/property/出生日期
 189	http://zh.dbpedia.org/property/notableInstruments
-190	http://zh.dbpedia.org/property/succeeded
+190	http://zh.dbpedia.org/property/s쳮ded
 191	http://zh.dbpedia.org/property/operatingSystem
 192	http://zh.dbpedia.org/property/state
 193	http://zh.dbpedia.org/property/head
@@ -211,7 +211,7 @@
 210	http://zh.dbpedia.org/property/commonLanguages
 211	http://zh.dbpedia.org/property/ideology
 212	http://zh.dbpedia.org/property/programmedIn
-213	http://zh.dbpedia.org/property/producer
+213	http://zh.dbpedia.org/property/prodÎr
 214	http://zh.dbpedia.org/property/cteam
 215	http://zh.dbpedia.org/property/manager
 216	http://zh.dbpedia.org/property/cableServ
@@ -276,7 +276,7 @@
 275	http://zh.dbpedia.org/property/戰役
 276	http://zh.dbpedia.org/property/workInstitution
 277	http://zh.dbpedia.org/property/居处
-278	http://zh.dbpedia.org/property/includedWith
+278	http://zh.dbpedia.org/property/incl෭With
 279	http://zh.dbpedia.org/property/next
 280	http://zh.dbpedia.org/property/國家
 281	http://zh.dbpedia.org/property/chancellor
@@ -295,7 +295,7 @@
 294	http://zh.dbpedia.org/property/footnoteB
 295	http://zh.dbpedia.org/property/focusCities
 296	http://zh.dbpedia.org/property/養父
-297	http://zh.dbpedia.org/property/manufacturer
+297	http://zh.dbpedia.org/property/manྫྷturer
 298	http://zh.dbpedia.org/property/author
 299	http://zh.dbpedia.org/property/電視台
 300	http://zh.dbpedia.org/property/allWriting
@@ -383,7 +383,7 @@
 382	http://zh.dbpedia.org/property/statusText
 383	http://zh.dbpedia.org/property/发射地点
 384	http://zh.dbpedia.org/property/officiallang
-385	http://zh.dbpedia.org/property/succeededBy
+385	http://zh.dbpedia.org/property/s쳮dedBy
 386	http://zh.dbpedia.org/property/其它語言与文字
 387	http://zh.dbpedia.org/property/中央政府所在地
 388	http://zh.dbpedia.org/property/siblings
@@ -501,7 +501,7 @@
 500	http://zh.dbpedia.org/property/twin1Country
 501	http://zh.dbpedia.org/property/立國事件
 502	http://zh.dbpedia.org/property/seats2Title
-503	http://zh.dbpedia.org/property/mostSuccessfulClub
+503	http://zh.dbpedia.org/property/mostS೎ssfulClub
 504	http://zh.dbpedia.org/property/previousPost
 505	http://zh.dbpedia.org/property/usedname
 506	http://zh.dbpedia.org/property/夫之父
@@ -530,7 +530,7 @@
 529	http://zh.dbpedia.org/property/preceded
 530	http://zh.dbpedia.org/property/largestcity
 531	http://zh.dbpedia.org/property/institution
-532	http://zh.dbpedia.org/property/honorificSuffix
+532	http://zh.dbpedia.org/property/honorificSÿix
 533	http://zh.dbpedia.org/property/aircraftFighter
 534	http://zh.dbpedia.org/property/續集
 535	http://zh.dbpedia.org/property/architect
@@ -544,7 +544,7 @@
 543	http://zh.dbpedia.org/property/播放地區
 544	http://zh.dbpedia.org/property/populationBlank
 545	http://zh.dbpedia.org/property/subgenres
-546	http://zh.dbpedia.org/property/education
+546	http://zh.dbpedia.org/property/edÊtion
 547	http://zh.dbpedia.org/property/電視劇
 548	http://zh.dbpedia.org/property/rd5Team
 549	http://zh.dbpedia.org/property/鳥
@@ -609,7 +609,7 @@
 608	http://zh.dbpedia.org/property/launchSite
 609	http://zh.dbpedia.org/property/demonym
 610	http://zh.dbpedia.org/property/aircraftHelicopter
-611	http://zh.dbpedia.org/property/educate
+611	http://zh.dbpedia.org/property/edÊte
 612	http://zh.dbpedia.org/property/東南
 613	http://zh.dbpedia.org/property/下集
 614	http://zh.dbpedia.org/property/妃
@@ -689,7 +689,7 @@
 688	http://zh.dbpedia.org/property/champion
 689	http://zh.dbpedia.org/property/設計
 690	http://zh.dbpedia.org/property/導演
-691	http://zh.dbpedia.org/property/kitManufacturer
+691	http://zh.dbpedia.org/property/kitManྫྷturer
 692	http://zh.dbpedia.org/property/employer
 693	http://zh.dbpedia.org/property/source1Country
 694	http://zh.dbpedia.org/property/起點站
@@ -706,7 +706,7 @@
 705	http://zh.dbpedia.org/property/firstOfficeholder
 706	http://zh.dbpedia.org/property/languagesspoken
 707	http://zh.dbpedia.org/property/firstReleaseVersion
-708	http://zh.dbpedia.org/property/subdivisionType
+708	http://zh.dbpedia.org/property/s½ivisionType
 709	http://zh.dbpedia.org/property/star
 710	http://zh.dbpedia.org/property/longestWins
 711	http://zh.dbpedia.org/property/debut2team
@@ -799,7 +799,7 @@
 798	http://zh.dbpedia.org/property/製片人
 799	http://zh.dbpedia.org/property/夫之側室
 800	http://zh.dbpedia.org/property/child3Agency
-801	http://zh.dbpedia.org/property/mostsuccessful
+801	http://zh.dbpedia.org/property/mosts೎ssful
 802	http://zh.dbpedia.org/property/diocese
 803	http://zh.dbpedia.org/property/easternChurch
 804	http://zh.dbpedia.org/property/genusAuthority
@@ -919,7 +919,7 @@
 918	http://zh.dbpedia.org/property/晚于
 919	http://zh.dbpedia.org/property/description
 920	http://zh.dbpedia.org/property/superseded
-921	http://zh.dbpedia.org/property/notableStudents
+921	http://zh.dbpedia.org/property/notableStÞnts
 922	http://zh.dbpedia.org/property/referee
 923	http://zh.dbpedia.org/property/latestReleaseVersion
 924	http://zh.dbpedia.org/property/作曲
@@ -1048,7 +1048,7 @@
 1047	http://zh.dbpedia.org/property/asstManager
 1048	http://zh.dbpedia.org/property/流入
 1049	http://zh.dbpedia.org/property/currentHead
-1050	http://zh.dbpedia.org/property/subclassis
+1050	http://zh.dbpedia.org/property/s¼lassis
 1051	http://zh.dbpedia.org/property/所屬團體
 1052	http://zh.dbpedia.org/property/本级监察
 1053	http://zh.dbpedia.org/property/机构
@@ -1174,7 +1174,7 @@
 1173	http://zh.dbpedia.org/property/awardedBy
 1174	http://zh.dbpedia.org/property/site
 1175	http://zh.dbpedia.org/property/流經
-1176	http://zh.dbpedia.org/property/executiveProducer
+1176	http://zh.dbpedia.org/property/executiveProdÎr
 1177	http://zh.dbpedia.org/property/出生年
 1178	http://zh.dbpedia.org/property/establishedTitle
 1179	http://zh.dbpedia.org/property/墳墓
@@ -1228,7 +1228,7 @@
 1227	http://zh.dbpedia.org/property/職業
 1228	http://zh.dbpedia.org/property/fields
 1229	http://zh.dbpedia.org/property/原作
-1230	http://zh.dbpedia.org/property/successorLine
+1230	http://zh.dbpedia.org/property/s೎ssorLine
 1231	http://zh.dbpedia.org/property/stateName
 1232	http://zh.dbpedia.org/property/dischargeLocation
 1233	http://zh.dbpedia.org/property/经纪公司
@@ -1283,7 +1283,7 @@
 1282	http://zh.dbpedia.org/property/precursor
 1283	http://zh.dbpedia.org/property/m
 1284	http://zh.dbpedia.org/property/arena
-1285	http://zh.dbpedia.org/property/succeeding
+1285	http://zh.dbpedia.org/property/s쳮ding
 1286	http://zh.dbpedia.org/property/today
 1287	http://zh.dbpedia.org/property/allLyrics
 1288	http://zh.dbpedia.org/property/著名指揮官
@@ -1483,7 +1483,7 @@
 1482	http://zh.dbpedia.org/property/judges
 1483	http://zh.dbpedia.org/property/debut2league
 1484	http://zh.dbpedia.org/property/afterElection
-1485	http://zh.dbpedia.org/property/successors
+1485	http://zh.dbpedia.org/property/s೎ssors
 1486	http://zh.dbpedia.org/property/forms
 1487	http://zh.dbpedia.org/property/被接替者
 1488	http://zh.dbpedia.org/property/secondReleaseVersion
@@ -1529,7 +1529,7 @@
 1528	http://zh.dbpedia.org/property/filetype
 1529	http://zh.dbpedia.org/property/滅亡君主
 1530	http://zh.dbpedia.org/property/職務
-1531	http://zh.dbpedia.org/property/succesor
+1531	http://zh.dbpedia.org/property/s೎sor
 1532	http://zh.dbpedia.org/property/首席部长
 1533	http://zh.dbpedia.org/property/相關勳獎
 1534	http://zh.dbpedia.org/property/sound
@@ -1586,7 +1586,7 @@
 1585	http://zh.dbpedia.org/property/saint
 1586	http://zh.dbpedia.org/property/builders
 1587	http://zh.dbpedia.org/property/vicarGeneral
-1588	http://zh.dbpedia.org/property/subdivision
+1588	http://zh.dbpedia.org/property/s½ivision
 1589	http://zh.dbpedia.org/property/metropolitanCounty
 1590	http://zh.dbpedia.org/property/formerNames
 1591	http://zh.dbpedia.org/property/legaljuris
@@ -1605,7 +1605,7 @@
 1604	http://zh.dbpedia.org/property/headquarter
 1605	http://zh.dbpedia.org/property/绰号
 1606	http://zh.dbpedia.org/property/嫡女
-1607	http://zh.dbpedia.org/property/successoR
+1607	http://zh.dbpedia.org/property/s೎ssoR
 1608	http://zh.dbpedia.org/property/subsidiary
 1609	http://zh.dbpedia.org/property/exploitant
 1610	http://zh.dbpedia.org/property/openglversion
@@ -1641,7 +1641,7 @@
 1640	http://zh.dbpedia.org/property/application
 1641	http://zh.dbpedia.org/property/genusAuthor
 1642	http://zh.dbpedia.org/property/過往團體
-1643	http://zh.dbpedia.org/property/queen
+1643	http://zh.dbpedia.org/property/qîn
 1644	http://zh.dbpedia.org/property/copyright
 1645	http://zh.dbpedia.org/property/foreign
 1646	http://zh.dbpedia.org/property/blank4NameSec

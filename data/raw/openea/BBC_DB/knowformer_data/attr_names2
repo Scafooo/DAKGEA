@@ -53,7 +53,7 @@ prop:apraw 	 apraw
 prop:othercontributors 	 other contributors
 prop:rev30score 	 rev30score
 prop:peak8c 	 peak8c
-prop:successor 	 successor
+prop:s೎ssor 	 s೎ssor
 dbo:deathyear 	 death year
 prop:eyetothetelescope 	 eye to the telescope
 prop:noprose 	 no prose
@@ -117,7 +117,7 @@ dbo:status 	 dbo:status
 prop:total 	 total
 prop:apran 	 apran
 prop:format 	 format
-prop:producer 	 producer
+prop:prodÎr 	 prodÎr
 prop:latin 	 latin
 prop:born 	 born
 prop:longtype 	 long type
@@ -272,7 +272,7 @@ prop:peak16c 	 peak16c
 prop:citationstyle 	 citation style
 prop:sections 	 sections
 prop:website 	 website
-prop:includefootnote 	 include footnote
+prop:incl෯ootnote 	 inclÞ footnote
 prop:artist 	 artist
 prop:quoted 	 quoted
 prop:placeofbirth 	 place of birth
@@ -342,7 +342,7 @@ dbo:broadcaststationclass 	 broadcast station class
 prop:singleslink 	 singles link
 prop:currently 	 currently
 prop:help 	 help
-prop:honorificsuffix 	 honorificsuffix
+prop:honorificsÿix 	 honorificsÿix
 prop:awards 	 awards
 prop:imagewidth 	 image width
 prop:brothers 	 brothers
@@ -394,7 +394,7 @@ prop:extra 	 extra
 prop:colwidth 	 col width
 prop:associatedwork 	 associated work
 prop:pos 	 pos
-prop:executiveproducers 	 executive producers
+prop:executiveprodÎrs 	 executive prodÎrs
 prop:youthyears 	 youth years
 prop:optionname 	 option name
 prop:tmfw 	 tmfw
@@ -469,7 +469,7 @@ prop:chartf 	 chartf
 prop:award4n 	 award4n
 prop:number 	 number
 prop:nrjw 	 nrjw
-prop:education 	 education
+prop:edÊtion 	 edÊtion
 prop:peak5a 	 peak5a
 prop:eptfinaltables 	 ept final tables
 dbo:position 	 dbo:position
@@ -677,7 +677,7 @@ prop:drumtech 	 drum tech
 prop:peak12h 	 peak12h
 http://xmlns.com/foaf/0.1/surname 	 surname
 prop:t 	 t
-prop:executiveproducer 	 executive producer
+prop:executiveprodÎr 	 executive prodÎr
 prop:disputed 	 disputed
 prop:fromalbum 	 from album
 prop:alsoknownas 	 also known as

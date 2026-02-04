@@ -5,10 +5,10 @@
 1303	http://dbpedia.org/property/after
 1304	http://dbpedia.org/property/starring
 1305	http://dbpedia.org/property/platforms
-1306	http://dbpedia.org/property/successor
+1306	http://dbpedia.org/property/s೎ssor
 1307	http://dbpedia.org/property/order
 1308	http://dbpedia.org/property/associatedActs
-1309	http://dbpedia.org/property/doctoralStudents
+1309	http://dbpedia.org/property/doctoralStÞnts
 1310	http://dbpedia.org/property/first
 1311	http://dbpedia.org/property/federalDistrict
 1312	http://dbpedia.org/property/predecessor
@@ -44,7 +44,7 @@
 1342	http://dbpedia.org/property/grandsire
 1343	http://dbpedia.org/property/allegiance
 1344	http://dbpedia.org/property/localScenes
-1345	http://dbpedia.org/property/producer
+1345	http://dbpedia.org/property/prodÎr
 1346	http://dbpedia.org/property/capital
 1347	http://dbpedia.org/property/fmff
 1348	http://dbpedia.org/property/north
@@ -57,7 +57,7 @@
 1355	http://dbpedia.org/property/language
 1356	http://dbpedia.org/property/primeminister
 1357	http://dbpedia.org/property/allLyrics
-1358	http://dbpedia.org/property/subdivisionName
+1358	http://dbpedia.org/property/s½ivisionName
 1359	http://dbpedia.org/property/clubs
 1360	http://dbpedia.org/property/fromAlbum
 1361	http://dbpedia.org/property/related
@@ -142,7 +142,7 @@
 1440	http://dbpedia.org/property/youthclubs
 1441	http://dbpedia.org/property/damsire
 1442	http://dbpedia.org/property/commander
-1443	http://dbpedia.org/property/manufacturer
+1443	http://dbpedia.org/property/manྫྷturer
 1444	http://dbpedia.org/property/founder
 1445	http://dbpedia.org/property/commonLanguages
 1446	http://dbpedia.org/property/composer
@@ -188,7 +188,7 @@
 1486	http://dbpedia.org/property/sire
 1487	http://dbpedia.org/property/crew1Up
 1488	http://dbpedia.org/property/incumbent
-1489	http://dbpedia.org/property/education
+1489	http://dbpedia.org/property/edÊtion
 1490	http://dbpedia.org/property/lyrics
 1491	http://dbpedia.org/property/launchRocket
 1492	http://dbpedia.org/property/reason
@@ -196,12 +196,12 @@
 1494	http://dbpedia.org/property/conference
 1495	http://dbpedia.org/property/house
 1496	http://dbpedia.org/property/director
-1497	http://dbpedia.org/property/subConfederation
+1497	http://dbpedia.org/property/s¼onfederation
 1498	http://dbpedia.org/property/currentclub
 1499	http://dbpedia.org/property/f
 1500	http://dbpedia.org/property/fff
 1501	http://dbpedia.org/property/placeofburial
-1502	http://dbpedia.org/property/includedWith
+1502	http://dbpedia.org/property/incl෭With
 1503	http://dbpedia.org/property/domesticCup
 1504	http://dbpedia.org/property/with
 1505	http://dbpedia.org/property/vicePresident
@@ -241,7 +241,7 @@
 1539	http://dbpedia.org/property/venue
 1540	http://dbpedia.org/property/partners
 1541	http://dbpedia.org/property/regionalScenes
-1542	http://dbpedia.org/property/notableStudents
+1542	http://dbpedia.org/property/notableStÞnts
 1543	http://dbpedia.org/property/platform
 1544	http://dbpedia.org/property/popplace
 1545	http://dbpedia.org/property/magazine
@@ -252,7 +252,7 @@
 1550	http://dbpedia.org/property/sites
 1551	http://dbpedia.org/property/nextsuppl
 1552	http://dbpedia.org/property/mission
-1553	http://dbpedia.org/property/mostSuccessfulClub
+1553	http://dbpedia.org/property/mostS೎ssfulClub
 1554	http://dbpedia.org/property/controlledby
 1555	http://dbpedia.org/property/parents
 1556	http://dbpedia.org/property/politicalGroups
@@ -297,7 +297,7 @@
 1595	http://dbpedia.org/property/license
 1596	http://dbpedia.org/property/os
 1597	http://dbpedia.org/property/regionalLanguages
-1598	http://dbpedia.org/property/moto2Manufacturers
+1598	http://dbpedia.org/property/moto2Manྫྷturers
 1599	http://dbpedia.org/property/war
 1600	http://dbpedia.org/property/programme
 1601	http://dbpedia.org/property/end
@@ -332,7 +332,7 @@
 1630	http://dbpedia.org/property/blank1NameSec
 1631	http://dbpedia.org/property/meetingPlace
 1632	http://dbpedia.org/property/demographics2Info
-1633	http://dbpedia.org/property/honorificSuffix
+1633	http://dbpedia.org/property/honorificSÿix
 1634	http://dbpedia.org/property/route
 1635	http://dbpedia.org/property/agency1Up
 1636	http://dbpedia.org/property/organization
@@ -369,7 +369,7 @@
 1667	http://dbpedia.org/property/seats4Title
 1668	http://dbpedia.org/property/parenthood
 1669	http://dbpedia.org/property/pastmajorleague
-1670	http://dbpedia.org/property/succeeded
+1670	http://dbpedia.org/property/s쳮ded
 1671	http://dbpedia.org/property/judges
 1672	http://dbpedia.org/property/as
 1673	http://dbpedia.org/property/variant
@@ -378,7 +378,7 @@
 1676	http://dbpedia.org/property/academicAdvisors
 1677	http://dbpedia.org/property/userland
 1678	http://dbpedia.org/property/recognisedLanguages
-1679	http://dbpedia.org/property/succession
+1679	http://dbpedia.org/property/s೎ssion
 1680	http://dbpedia.org/property/beatifiedBy
 1681	http://dbpedia.org/property/keyPeople
 1682	http://dbpedia.org/property/rd3Team
@@ -412,7 +412,7 @@
 1710	http://dbpedia.org/property/ffmf
 1711	http://dbpedia.org/property/aka
 1712	http://dbpedia.org/property/chronology
-1713	http://dbpedia.org/property/subdivisionType
+1713	http://dbpedia.org/property/s½ivisionType
 1714	http://dbpedia.org/property/lowestpoint
 1715	http://dbpedia.org/property/inaugural
 1716	http://dbpedia.org/property/post
@@ -485,7 +485,7 @@
 1783	http://dbpedia.org/property/agency7Up
 1784	http://dbpedia.org/property/usedBy
 1785	http://dbpedia.org/property/department
-1786	http://dbpedia.org/property/succeededBy
+1786	http://dbpedia.org/property/s쳮dedBy
 1787	http://dbpedia.org/property/status
 1788	http://dbpedia.org/property/style
 1789	http://dbpedia.org/property/choreographer
@@ -614,7 +614,7 @@
 1912	http://dbpedia.org/property/super
 1913	http://dbpedia.org/property/blank3Info
 1914	http://dbpedia.org/property/rd2Team
-1915	http://dbpedia.org/property/subdivision
+1915	http://dbpedia.org/property/s½ivision
 1916	http://dbpedia.org/property/agency7Down
 1917	http://dbpedia.org/property/translitLang
 1918	http://dbpedia.org/property/mostWinsDriver
@@ -663,7 +663,7 @@
 1961	http://dbpedia.org/property/followedBy
 1962	http://dbpedia.org/property/subprefecture
 1963	http://dbpedia.org/property/previousPost
-1964	http://dbpedia.org/property/health,Education,AndWelfare
+1964	http://dbpedia.org/property/health,EdÊtion,AndWelfare
 1965	http://dbpedia.org/property/thisAlbum
 1966	http://dbpedia.org/property/products
 1967	http://dbpedia.org/property/commandStructure
@@ -682,7 +682,7 @@
 1980	http://dbpedia.org/property/parentOrganisation
 1981	http://dbpedia.org/property/rcb
 1982	http://dbpedia.org/property/highestScoring
-1983	http://dbpedia.org/property/successorLine
+1983	http://dbpedia.org/property/s೎ssorLine
 1984	http://dbpedia.org/property/evolvesto
 1985	http://dbpedia.org/property/regions
 1986	http://dbpedia.org/property/sourceConfluenceState
@@ -727,7 +727,7 @@
 2025	http://dbpedia.org/property/body
 2026	http://dbpedia.org/property/unit
 2027	http://dbpedia.org/property/mostCaps
-2028	http://dbpedia.org/property/leagueCup
+2028	http://dbpedia.org/property/leagìup
 2029	http://dbpedia.org/property/venues
 2030	http://dbpedia.org/property/lw
 2031	http://dbpedia.org/property/issuingAuthority
@@ -742,14 +742,14 @@
 2040	http://dbpedia.org/property/constituencyMp
 2041	http://dbpedia.org/property/rels
 2042	http://dbpedia.org/property/sourceConfluenceRegion
-2043	http://dbpedia.org/property/subclassis
+2043	http://dbpedia.org/property/s¼lassis
 2044	http://dbpedia.org/property/ci
-2045	http://dbpedia.org/property/125Manufacturers
+2045	http://dbpedia.org/property/125Manྫྷturers
 2046	http://dbpedia.org/property/honours
 2047	http://dbpedia.org/property/child3Agency
 2048	http://dbpedia.org/property/voiceActor
 2049	http://dbpedia.org/property/leagues
-2050	http://dbpedia.org/property/successor!_
+2050	http://dbpedia.org/property/s೎ssor!_
 2051	http://dbpedia.org/property/parlName
 2052	http://dbpedia.org/property/associatedArtists
 2053	http://dbpedia.org/property/chiefOfStaff
@@ -760,7 +760,7 @@
 2058	http://dbpedia.org/property/launchContractor
 2059	http://dbpedia.org/property/governingBody
 2060	http://dbpedia.org/property/services
-2061	http://dbpedia.org/property/mostSuccessfulClubs
+2061	http://dbpedia.org/property/mostS೎ssfulClubs
 2062	http://dbpedia.org/property/possessions
 2063	http://dbpedia.org/property/locality
 2064	http://dbpedia.org/property/timesHeld
@@ -872,14 +872,14 @@
 2170	http://dbpedia.org/property/containedBy
 2171	http://dbpedia.org/property/spinoffs
 2172	http://dbpedia.org/property/relatedComponents
-2173	http://dbpedia.org/property/succeeding
+2173	http://dbpedia.org/property/s쳮ding
 2174	http://dbpedia.org/property/gov'tRoles
 2175	http://dbpedia.org/property/socialdevParty
 2176	http://dbpedia.org/property/mlscupchamps
 2177	http://dbpedia.org/property/containerFor
 2178	http://dbpedia.org/property/translitLang1Type
 2179	http://dbpedia.org/property/agency5Down
-2180	http://dbpedia.org/property/subfamilia
+2180	http://dbpedia.org/property/s௺milia
 2181	http://dbpedia.org/property/recordLabels
 2182	http://dbpedia.org/property/runnersUp
 2183	http://dbpedia.org/property/defenseParty
@@ -911,7 +911,7 @@
 2209	http://dbpedia.org/property/teleplay
 2210	http://dbpedia.org/property/ldm
 2211	http://dbpedia.org/property/lived
-2212	http://dbpedia.org/property/subdivisonName
+2212	http://dbpedia.org/property/s½ivisonName
 2213	http://dbpedia.org/property/transportParty
 2214	http://dbpedia.org/property/sw
 2215	http://dbpedia.org/property/domesticpartner
@@ -930,7 +930,7 @@
 2228	http://dbpedia.org/property/mouthCountry
 2229	http://dbpedia.org/property/twintowns
 2230	http://dbpedia.org/property/signatories
-2231	http://dbpedia.org/property/mostWinsManufacturer
+2231	http://dbpedia.org/property/mostWinsManྫྷturer
 2232	http://dbpedia.org/property/chiefJustice
 2233	http://dbpedia.org/property/replacedBy
 2234	http://dbpedia.org/property/rank
@@ -957,7 +957,7 @@
 2255	http://dbpedia.org/property/blank4Name
 2256	http://dbpedia.org/property/longestWinless
 2257	http://dbpedia.org/property/species
-2258	http://dbpedia.org/property/motogpManufacturers
+2258	http://dbpedia.org/property/motogpManྫྷturers
 2259	http://dbpedia.org/property/regionServed
 2260	http://dbpedia.org/property/child2Agency
 2261	http://dbpedia.org/property/builder
@@ -1103,7 +1103,7 @@
 2401	http://dbpedia.org/property/country2LargestCity
 2402	http://dbpedia.org/property/playOffWinners
 2403	http://dbpedia.org/property/strength
-2404	http://dbpedia.org/property/mostSuccessful
+2404	http://dbpedia.org/property/mostS೎ssful
 2405	http://dbpedia.org/property/sourceConfluenceLocation
 2406	http://dbpedia.org/property/coatOfArmsLegend
 2407	http://dbpedia.org/property/lingname
@@ -1133,12 +1133,12 @@
 2431	http://dbpedia.org/property/campus
 2432	http://dbpedia.org/property/teacher
 2433	http://dbpedia.org/property/southWest
-2434	http://dbpedia.org/property/executiveProducer
+2434	http://dbpedia.org/property/executiveProdÎr
 2435	http://dbpedia.org/property/feeds
 2436	http://dbpedia.org/property/expedition3Down
 2437	http://dbpedia.org/property/notableworks
 2438	http://dbpedia.org/property/result
-2439	http://dbpedia.org/property/educationParty
+2439	http://dbpedia.org/property/edÊtionParty
 2440	http://dbpedia.org/property/residences
 2441	http://dbpedia.org/property/fedSen
 2442	http://dbpedia.org/property/parts

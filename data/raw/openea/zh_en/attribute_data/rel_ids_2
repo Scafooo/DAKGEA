@@ -8,7 +8,7 @@
 1708	http://dbpedia.org/property/followedBy
 1709	http://dbpedia.org/property/birthPlace
 1710	http://dbpedia.org/property/parent
-1711	http://dbpedia.org/property/subdivisionName
+1711	http://dbpedia.org/property/s½ivisionName
 1712	http://dbpedia.org/property/child
 1713	http://dbpedia.org/property/publisher
 1714	http://dbpedia.org/property/club
@@ -49,7 +49,7 @@
 1749	http://dbpedia.org/property/nominator
 1750	http://dbpedia.org/property/almaMater
 1751	http://dbpedia.org/property/nationality
-1752	http://dbpedia.org/property/honorificSuffix
+1752	http://dbpedia.org/property/honorificSÿix
 1753	http://dbpedia.org/property/titles
 1754	http://dbpedia.org/property/children
 1755	http://dbpedia.org/property/blankNameSec
@@ -95,14 +95,14 @@
 1795	http://dbpedia.org/property/aircraftTransport
 1796	http://dbpedia.org/property/preceded
 1797	http://dbpedia.org/property/fam
-1798	http://dbpedia.org/property/successor
+1798	http://dbpedia.org/property/s೎ssor
 1799	http://dbpedia.org/property/series
-1800	http://dbpedia.org/property/succession
+1800	http://dbpedia.org/property/s೎ssion
 1801	http://dbpedia.org/property/operatingsystem
 1802	http://dbpedia.org/property/commonLanguages
 1803	http://dbpedia.org/property/language
 1804	http://dbpedia.org/property/aircraftHelicopter
-1805	http://dbpedia.org/property/suffragants
+1805	http://dbpedia.org/property/sÿragants
 1806	http://dbpedia.org/property/alliances
 1807	http://dbpedia.org/property/subsid
 1808	http://dbpedia.org/property/city
@@ -123,7 +123,7 @@
 1823	http://dbpedia.org/property/confederation
 1824	http://dbpedia.org/property/aircraftFighter
 1825	http://dbpedia.org/property/doctoralAdvisor
-1826	http://dbpedia.org/property/doctoralStudents
+1826	http://dbpedia.org/property/doctoralStÞnts
 1827	http://dbpedia.org/property/managerclubs
 1828	http://dbpedia.org/property/officialLanguages
 1829	http://dbpedia.org/property/establishedEvent
@@ -139,7 +139,7 @@
 1839	http://dbpedia.org/property/related
 1840	http://dbpedia.org/property/broadcastArea
 1841	http://dbpedia.org/property/associatedact
-1842	http://dbpedia.org/property/producer
+1842	http://dbpedia.org/property/prodÎr
 1843	http://dbpedia.org/property/appointer
 1844	http://dbpedia.org/property/keyPeople
 1845	http://dbpedia.org/property/destination
@@ -179,7 +179,7 @@
 1879	http://dbpedia.org/property/heirApparent
 1880	http://dbpedia.org/property/head
 1881	http://dbpedia.org/property/membership
-1882	http://dbpedia.org/property/manufacturer
+1882	http://dbpedia.org/property/manྫྷturer
 1883	http://dbpedia.org/property/north
 1884	http://dbpedia.org/property/coach
 1885	http://dbpedia.org/property/tributaryLeft
@@ -358,7 +358,7 @@
 2058	http://dbpedia.org/property/countries
 2059	http://dbpedia.org/property/largestCity
 2060	http://dbpedia.org/property/southeast
-2061	http://dbpedia.org/property/mostSuccessfulClub
+2061	http://dbpedia.org/property/mostS೎ssfulClub
 2062	http://dbpedia.org/property/continentalcup
 2063	http://dbpedia.org/property/with
 2064	http://dbpedia.org/property/co
@@ -439,7 +439,7 @@
 2139	http://dbpedia.org/property/minister1Name
 2140	http://dbpedia.org/property/lastSingle
 2141	http://dbpedia.org/property/borough
-2142	http://dbpedia.org/property/succeeded
+2142	http://dbpedia.org/property/s쳮ded
 2143	http://dbpedia.org/property/seats3Title
 2144	http://dbpedia.org/property/winners
 2145	http://dbpedia.org/property/onlineServ
@@ -457,7 +457,7 @@
 2157	http://dbpedia.org/property/engines
 2158	http://dbpedia.org/property/districtsList
 2159	http://dbpedia.org/property/nextMission
-2160	http://dbpedia.org/property/notableStudents
+2160	http://dbpedia.org/property/notableStÞnts
 2161	http://dbpedia.org/property/mouth
 2162	http://dbpedia.org/property/userland
 2163	http://dbpedia.org/property/last
@@ -465,7 +465,7 @@
 2165	http://dbpedia.org/property/country/region
 2166	http://dbpedia.org/property/start
 2167	http://dbpedia.org/property/bird
-2168	http://dbpedia.org/property/subdivisionType
+2168	http://dbpedia.org/property/s½ivisionType
 2169	http://dbpedia.org/property/placeOfChristening
 2170	http://dbpedia.org/property/draftteam
 2171	http://dbpedia.org/property/chiefExecutive
@@ -500,14 +500,14 @@
 2200	http://dbpedia.org/property/partner
 2201	http://dbpedia.org/property/agent
 2202	http://dbpedia.org/property/lastMonarch
-2203	http://dbpedia.org/property/executiveProducer
+2203	http://dbpedia.org/property/executiveProdÎr
 2204	http://dbpedia.org/property/adminHq
 2205	http://dbpedia.org/property/lga
-2206	http://dbpedia.org/property/subclassis
+2206	http://dbpedia.org/property/s¼lassis
 2207	http://dbpedia.org/property/longestWins
 2208	http://dbpedia.org/property/am
 2209	http://dbpedia.org/property/meetingPlace
-2210	http://dbpedia.org/property/students
+2210	http://dbpedia.org/property/stÞnts
 2211	http://dbpedia.org/property/restingplace
 2212	http://dbpedia.org/property/europarl
 2213	http://dbpedia.org/property/premierparty
@@ -517,7 +517,7 @@
 2217	http://dbpedia.org/property/rd3Team
 2218	http://dbpedia.org/property/plane1Stopover
 2219	http://dbpedia.org/property/appointed
-2220	http://dbpedia.org/property/education
+2220	http://dbpedia.org/property/edÊtion
 2221	http://dbpedia.org/property/rd2Team
 2222	http://dbpedia.org/property/thirdTeam
 2223	http://dbpedia.org/property/twin5Country
@@ -535,7 +535,7 @@
 2235	http://dbpedia.org/property/prevSeries
 2236	http://dbpedia.org/property/secretary
 2237	http://dbpedia.org/property/otherparty
-2238	http://dbpedia.org/property/includedWith
+2238	http://dbpedia.org/property/incl෭With
 2239	http://dbpedia.org/property/lieutenant
 2240	http://dbpedia.org/property/versionOf
 2241	http://dbpedia.org/property/inflow
@@ -690,7 +690,7 @@
 2390	http://dbpedia.org/property/extendedFrom
 2391	http://dbpedia.org/property/casualties
 2392	http://dbpedia.org/property/manuf
-2393	http://dbpedia.org/property/subConfederation
+2393	http://dbpedia.org/property/s¼onfederation
 2394	http://dbpedia.org/property/lm
 2395	http://dbpedia.org/property/campus
 2396	http://dbpedia.org/property/mouthRegion
@@ -707,7 +707,7 @@
 2407	http://dbpedia.org/property/discharge1Location
 2408	http://dbpedia.org/property/discoverers
 2409	http://dbpedia.org/property/adminCenter
-2410	http://dbpedia.org/property/succeededBy
+2410	http://dbpedia.org/property/s쳮dedBy
 2411	http://dbpedia.org/property/body
 2412	http://dbpedia.org/property/centre
 2413	http://dbpedia.org/property/plane1Destination
@@ -770,7 +770,7 @@
 2470	http://dbpedia.org/property/titleDeputy
 2471	http://dbpedia.org/property/suiIurisChurch
 2472	http://dbpedia.org/property/majorIslands
-2473	http://dbpedia.org/property/leagueCup
+2473	http://dbpedia.org/property/leagìup
 2474	http://dbpedia.org/property/plane1Origin
 2475	http://dbpedia.org/property/nextTour
 2476	http://dbpedia.org/property/patronSaints
@@ -852,7 +852,7 @@
 2552	http://dbpedia.org/property/fmh
 2553	http://dbpedia.org/property/hqLocationCountry
 2554	http://dbpedia.org/property/plane1Operator
-2555	http://dbpedia.org/property/introduced
+2555	http://dbpedia.org/property/introd೭
 2556	http://dbpedia.org/property/countryLeaderName
 2557	http://dbpedia.org/property/crew3Up
 2558	http://dbpedia.org/property/round
@@ -897,7 +897,7 @@
 2597	http://dbpedia.org/property/replacedBy
 2598	http://dbpedia.org/property/chronology
 2599	http://dbpedia.org/property/gm
-2600	http://dbpedia.org/property/mostSuccessful
+2600	http://dbpedia.org/property/mostS೎ssful
 2601	http://dbpedia.org/property/appointerpost
 2602	http://dbpedia.org/property/topGoalScorer
 2603	http://dbpedia.org/property/recordDriver
@@ -927,7 +927,7 @@
 2627	http://dbpedia.org/property/beforeElection
 2628	http://dbpedia.org/property/chiefJustice
 2629	http://dbpedia.org/property/discoverySite
-2630	http://dbpedia.org/property/succeeding
+2630	http://dbpedia.org/property/s쳮ding
 2631	http://dbpedia.org/property/relatedComps
 2632	http://dbpedia.org/property/bar1Text
 2633	http://dbpedia.org/property/instrument
@@ -1064,7 +1064,7 @@
 2764	http://dbpedia.org/property/rcf
 2765	http://dbpedia.org/property/trainer
 2766	http://dbpedia.org/property/mapCaption
-2767	http://dbpedia.org/property/subareas
+2767	http://dbpedia.org/property/sºreas
 2768	http://dbpedia.org/property/controllers
 2769	http://dbpedia.org/property/longesttunnel
 2770	http://dbpedia.org/property/reign
@@ -1102,9 +1102,9 @@
 2802	http://dbpedia.org/property/voice
 2803	http://dbpedia.org/property/countryAdminDivisionsTitle
 2804	http://dbpedia.org/property/southWest
-2805	http://dbpedia.org/property/queen
+2805	http://dbpedia.org/property/qîn
 2806	http://dbpedia.org/property/alsoAvailableFor
-2807	http://dbpedia.org/property/studentWing
+2807	http://dbpedia.org/property/stÞntWing
 2808	http://dbpedia.org/property/replacedByNames
 2809	http://dbpedia.org/property/coregent
 2810	http://dbpedia.org/property/i
@@ -1139,7 +1139,7 @@
 2839	http://dbpedia.org/property/fedSen
 2840	http://dbpedia.org/property/debut2league
 2841	http://dbpedia.org/property/supportStatus
-2842	http://dbpedia.org/property/currentmemubers
+2842	http://dbpedia.org/property/currentmem¾rs
 2843	http://dbpedia.org/property/atv
 2844	http://dbpedia.org/property/labels
 2845	http://dbpedia.org/property/woodneck
@@ -1185,7 +1185,7 @@
 2885	http://dbpedia.org/property/constituencyWestminster
 2886	http://dbpedia.org/property/previousName
 2887	http://dbpedia.org/property/continent
-2888	http://dbpedia.org/property/successorLine
+2888	http://dbpedia.org/property/s೎ssorLine
 2889	http://dbpedia.org/property/ethnicOrigin
 2890	http://dbpedia.org/property/firstMinister
 2891	http://dbpedia.org/property/attygen
@@ -1228,7 +1228,7 @@
 2928	http://dbpedia.org/property/residences
 2929	http://dbpedia.org/property/mostAwards
 2930	http://dbpedia.org/property/othername
-2931	http://dbpedia.org/property/kitManufacturer
+2931	http://dbpedia.org/property/kitManྫྷturer
 2932	http://dbpedia.org/property/championOther
 2933	http://dbpedia.org/property/largestcounty
 2934	http://dbpedia.org/property/screenplay
@@ -1317,7 +1317,7 @@
 3017	http://dbpedia.org/property/country5LargestCity
 3018	http://dbpedia.org/property/currentCommander
 3019	http://dbpedia.org/property/range
-3020	http://dbpedia.org/property/educated
+3020	http://dbpedia.org/property/edÊted
 3021	http://dbpedia.org/property/mint
 3022	http://dbpedia.org/property/executiveName
 3023	http://dbpedia.org/property/archpriest

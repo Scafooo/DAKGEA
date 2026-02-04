@@ -31,12 +31,12 @@
 30	Use conventional military force
 31	Arrest, detain, or charge with legal action
 32	Demonstrate or rally
-33	Reduce or stop material aid
+33	RedÎ or stop material aid
 34	Mobilize or increase armed forces
 35	Threaten with military force
 36	Accuse of crime, corruption
 37	Occupy territory
-38	Reduce relations
+38	RedÎ relations
 39	Cooperate economically
 40	Return, release person(s)
 41	Employ aerial weapons
@@ -54,7 +54,7 @@
 53	Consider policy option
 54	Threaten with sanctions, boycott, embargo
 55	Give ultimatum
-56	Reduce or break diplomatic relations
+56	RedÎ or break diplomatic relations
 57	Engage in judicial cooperation
 58	Appeal for release of persons or property
 59	Impose restrictions on political freedoms
@@ -92,7 +92,7 @@
 91	Ease administrative sanctions
 92	Provide aid
 93	Yield
-94	Reduce or stop military assistance
+94	RedÎ or stop military assistance
 95	Express intent to settle dispute
 96	Accede to requests or demands for political reform
 97	Demand meeting, negotiation
@@ -112,7 +112,7 @@
 111	Appeal for economic aid
 112	Demand economic aid
 113	Reject plan, agreement to settle dispute
-114	Threaten to reduce or break relations
+114	Threaten to redÎ or break relations
 115	Defy norms, law
 116	Appeal for change in institutions, regime
 117	Appeal for easing of administrative sanctions
@@ -123,7 +123,7 @@
 122	Provide military protection or peacekeeping
 123	Abduct, hijack, or take hostage
 124	Demand humanitarian aid
-125	Reduce or stop economic assistance
+125	RedÎ or stop economic assistance
 126	Torture
 127	Express intent to de-escalate military engagement
 128	Appeal for intelligence
@@ -162,11 +162,11 @@
 161	Accuse of war crimes
 162	Refuse to ease economic sanctions, boycott, or embargo
 163	Demand intelligence cooperation
-164	Threaten to reduce or stop aid
+164	Threaten to redÎ or stop aid
 165	Express intent to cooperate on judicial matters
 166	Accuse of human rights abuses
 167	Destroy property
-168	Reduce or stop humanitarian assistance
+168	RedÎ or stop humanitarian assistance
 169	Investigate crime, corruption
 170	Demand material cooperation
 171	Demand change in leadership
@@ -203,7 +203,7 @@
 202	Appeal for target to allow international involvement (non-mediation)
 203	Attempt to assassinate
 204	Engage in political dissent
-205	Declare truce, ceasefire
+205	Declare trÎ, ceasefire
 206	Engage in ethnic cleansing
 207	Carry out car bombing
 208	Appeal for military protection or peacekeeping
