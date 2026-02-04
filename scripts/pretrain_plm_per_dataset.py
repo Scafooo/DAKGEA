@@ -87,13 +87,13 @@ def load_dataset(dataset_name: str):
     return dataset
 
 
-def _local_name(uri: str) -> str:
-    """Extract local name from URI."""
-    return str(uri).split("/")[-1].split("#")[-1].lower().replace("_", " ")
+def collect_aligned_test_data(dataset, canonical_map, attr_map):
+    """Collect aligned pairs for testing, grouped by predicate.
 
+    Uses same predicate naming as training (clean_predicate with attr_map).
+    """
+    from src.augmentation.methods.plm.mixup_data_builder import clean_predicate
 
-def collect_aligned_test_data(dataset, canonical_map):
-    """Collect aligned pairs for testing, grouped by predicate."""
     kg_src = dataset.knowledge_graph_source
     kg_tgt = dataset.knowledge_graph_target
 
@@ -108,14 +108,14 @@ def collect_aligned_test_data(dataset, canonical_map):
         if isinstance(o, Literal):
             tgt_lits[s].append((p, str(o)))
 
-    # Collect aligned pairs by predicate
+    # Collect aligned pairs by predicate (same naming as training!)
     aligned_pool = defaultdict(list)
     for s_uri, t_uri in dataset.aligned_entities:
         s_attrs = src_lits.get(s_uri, [])
         t_attrs = tgt_lits.get(t_uri, [])
 
         for ps, vs in s_attrs:
-            p_name = _local_name(ps)
+            p_name = clean_predicate(ps, attr_map).replace('_', ' ')
             for pt, vt in t_attrs:
                 if canonical_map.get(str(ps)) == canonical_map.get(str(pt)):
                     vs_c, vt_c = vs.strip().lower(), vt.strip().lower()
@@ -126,8 +126,13 @@ def collect_aligned_test_data(dataset, canonical_map):
     return aligned_pool
 
 
-def collect_orphan_data(dataset):
-    """Collect orphan values grouped by predicate."""
+def collect_orphan_data(dataset, attr_map):
+    """Collect orphan values grouped by predicate.
+
+    Uses same predicate naming as training (clean_predicate with attr_map).
+    """
+    from src.augmentation.methods.plm.mixup_data_builder import clean_predicate
+
     kg_src = dataset.knowledge_graph_source
     kg_tgt = dataset.knowledge_graph_target
 
@@ -136,20 +141,27 @@ def collect_orphan_data(dataset):
         if isinstance(o, Literal):
             val = str(o).strip()
             if val:
-                p_name = _local_name(p)
+                p_name = clean_predicate(p, attr_map).replace('_', ' ')
                 orphans_by_pred[p_name].append(val)
 
     # Deduplicate
     return {p: list(set(vals)) for p, vals in orphans_by_pred.items()}
 
 
-def validate_model(interpolator, dataset, canonical_map, report_path: Path):
+def validate_model(interpolator, dataset, canonical_map, report_path: Path, dataset_path: str = None):
     """Run validation sweep and generate report with scores."""
     from src.augmentation.methods.plm.scoring import calculate_pair_score, calculate_score
+    from src.augmentation.methods.plm.mixup_data_builder import load_attr_names
+
+    # Load attr_map for consistent predicate naming with training
+    attr_map = {}
+    if dataset_path:
+        attr_map = load_attr_names(dataset_path)
+        logger.info(f"Loaded {len(attr_map)} attribute name mappings for validation")
 
     logger.info("Collecting test data for validation...")
-    aligned_pool = collect_aligned_test_data(dataset, canonical_map)
-    orphans_by_pred = collect_orphan_data(dataset)
+    aligned_pool = collect_aligned_test_data(dataset, canonical_map, attr_map)
+    orphans_by_pred = collect_orphan_data(dataset, attr_map)
 
     # Build sweep pool
     sweep_pool = []
@@ -300,8 +312,9 @@ def pretrain_dataset(dataset_name: str, output_dir: Path, config: dict, dry_run:
                     pretrained_path=str(model_dir),
                 )
                 builder = MixupDataBuilder()
-                _, canonical_mapping = builder.build_training_data(dataset, max_pairs_per_pred=10)
-                validate_model(interpolator, dataset, canonical_mapping, model_dir / "validation_report.txt")
+                dataset_path_str = str(get_dataset_path(dataset_name))
+                _, canonical_mapping = builder.build_training_data(dataset, max_pairs_per_pred=10, dataset_path=dataset_path_str)
+                validate_model(interpolator, dataset, canonical_mapping, model_dir / "validation_report.txt", dataset_path=dataset_path_str)
             except Exception as e:
                 logger.warning(f"Validation failed: {e}")
         return True
@@ -362,7 +375,8 @@ def pretrain_dataset(dataset_name: str, output_dir: Path, config: dict, dry_run:
         logger.info("Running post-training validation...")
         try:
             best_config = validate_model(
-                interpolator, dataset, canonical_mapping, model_dir / "validation_report.txt"
+                interpolator, dataset, canonical_mapping, model_dir / "validation_report.txt",
+                dataset_path=str(get_dataset_path(dataset_name))
             )
             if best_config:
                 logger.info(f"Best generation config: {best_config}")
