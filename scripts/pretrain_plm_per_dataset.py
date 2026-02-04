@@ -337,6 +337,7 @@ def pretrain_dataset(dataset_name: str, output_dir: Path, config: dict, dry_run:
     training_rows, canonical_mapping = builder.build_training_data(
         dataset=dataset,
         max_pairs_per_pred=config["max_pairs_per_pred"],
+        dataset_path=str(get_dataset_path(dataset_name)),
     )
 
     if not training_rows:

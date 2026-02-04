@@ -58,6 +58,30 @@ def _local_name(uri: str) -> str:
     return str(uri).split("/")[-1].split("#")[-1].upper()
 
 
+def load_attr_names(dataset_path: str) -> dict:
+    """Load attribute name mappings from dataset."""
+    from pathlib import Path
+    attr_map = {}
+    dataset_dir = Path(dataset_path)
+    for i in [1, 2]:
+        path = dataset_dir / f"attribute_data/attr_names{i}"
+        if path.exists():
+            with open(path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    parts = line.strip().split('\t')
+                    if len(parts) >= 2:
+                        attr_map[parts[0].strip()] = parts[1].strip()
+    return attr_map
+
+
+def clean_predicate(uri: str, attr_map: dict) -> str:
+    """Get clean predicate name using attr_map or falling back to URI extraction."""
+    uri_str = str(uri)
+    if uri_str in attr_map:
+        return attr_map[uri_str].replace(' ', '_').lower()
+    return uri_str.split('/')[-1].split('#')[-1].replace('>', '').replace('<', '').lower()
+
+
 def fix_unicode_escapes(text: str) -> str:
     """Decode common unicode escapes."""
     result = text
@@ -276,25 +300,8 @@ def vary_all_words(text: str, learned: Dict[str, List[str]] = None) -> str:
     return ' '.join(varied_words)
 
 
-# ============================================================
-# Creative Variation Generator (simplified)
-# ============================================================
-class CreativeVariationGenerator:
-    """Generate creative variations for training."""
-
-    def generate(self, value: str, target: str = None, predicate: str = "") -> str:
-        """Generate a creative variation of the value."""
-        if not value or len(value) < 2:
-            return value
-
-        words = value.split()
-
-        if len(words) == 1:
-            return vary_word_algorithmic(value)
-
-        # Multi-word: vary each word
-        varied = [vary_word_algorithmic(w) for w in words]
-        return ' '.join(varied)
+# Import the full CreativeVariationGenerator
+from src.augmentation.methods.plm.creative_variation_generator import CreativeVariationGenerator
 
 
 # ============================================================
@@ -383,13 +390,24 @@ class MixupDataBuilder:
         logger.info(f"[FILTER] Kept: {len(filtered)}/{len(rows)} ({100*len(filtered)/len(rows) if rows else 0:.1f}%)")
         return filtered
 
-    def build_training_data(self, dataset: Dataset, max_pairs_per_pred: int = 5000) -> Tuple[List[Dict[str, str]], Dict[str, str]]:
+    def build_training_data(self, dataset: Dataset, max_pairs_per_pred: int = 5000, dataset_path: str = None) -> Tuple[List[Dict[str, str]], Dict[str, str]]:
         """Build comprehensive training data with all optimizations.
+
+        Args:
+            dataset: The dataset object
+            max_pairs_per_pred: Maximum pairs per predicate
+            dataset_path: Optional path to dataset for loading attr_names
 
         Returns:
             Tuple of (training_rows, canonical_mapping)
         """
         logger.info("[MixupBuilder] Building Creative Variation training data...")
+
+        # Load attribute name mappings if dataset_path provided
+        attr_map = {}
+        if dataset_path:
+            attr_map = load_attr_names(dataset_path)
+            logger.info(f"[MixupBuilder] Loaded {len(attr_map)} attribute name mappings")
 
         # Build canonical map
         canonical_map = {
@@ -397,6 +415,9 @@ class MixupDataBuilder:
             for p in (set(dataset.knowledge_graph_source.predicates()) |
                      set(dataset.knowledge_graph_target.predicates()))
         }
+
+        # Store attr_map for use in loops
+        self._attr_map = attr_map
 
         kg_src = dataset.knowledge_graph_source
         kg_tgt = dataset.knowledge_graph_target
@@ -424,7 +445,7 @@ class MixupDataBuilder:
             t_attrs = tgt_lits.get(t_uri, [])
 
             for ps, vs in s_attrs:
-                p_name = _local_name(ps).lower().replace('_', ' ')
+                p_name = clean_predicate(ps, self._attr_map).replace('_', ' ')
                 p_tok = canonical_map.get(str(ps), f"<{p_name}>")
 
                 if pred_counts[p_tok] >= max_pairs_per_pred:
@@ -470,7 +491,7 @@ class MixupDataBuilder:
             if isinstance(o, Literal):
                 val = str(o).strip()
                 if val:
-                    p_name = _local_name(p).lower().replace('_', ' ')
+                    p_name = clean_predicate(p, self._attr_map).replace('_', ' ')
                     orphans_by_pred[p_name].append(val)
 
         orphan_count = 0
