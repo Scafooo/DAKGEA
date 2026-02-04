@@ -1,0 +1,109 @@
+# PLM Mix-up Augmentation Configuration
+# Uses encoder hidden state interpolation with predicate conditioning.
+#
+# Supported backends:
+#   - "bart" (facebook/bart-base) - faster, less accurate
+#   - "flan-t5-xl" (google/flan-t5-xl) - slower, more accurate, requires LoRA
+#
+# Training: DAE + Identity Mapping via Seq2SeqTrainer
+# Inference: Asymmetric Mix-up (one encode, two decode)
+
+augmentation:
+  method: plm_mixup
+
+  # Backend selection: "bart" or "flan-t5-xl"
+  backbone: "bart"
+
+  # Pre-trained model directory (skip fine-tuning if set)
+  # Example: "models/pretrained_plm/BBC_DB"
+  pretrained_model_dir: null
+
+  # BFS expansion parameters
+  max_depth: 2
+  ratio: 0.5
+  max_pairs: null
+
+  # Provenance tracking
+  add_derived_predicate: false
+
+  # Value consistency
+  value_consistency:
+    intra_node:
+      enabled: true
+      selection: "first"
+    inter_node:
+      enabled: true
+      scope: "alignment_pair"
+
+  # ============================================================
+  # BART Configuration (used when backbone: "bart")
+  # ============================================================
+  bart:
+    enable_finetuning: true
+    model_name: "facebook/bart-base"
+    out_dir: "./bart_mixup_model"
+
+    # Training parameters (Seq2SeqTrainer)
+    epochs: 5
+    batch_size: 16
+    learning_rate: 5.0e-5
+    force_retrain: false
+    max_pairs_per_pred: 2000
+
+    # Input length
+    max_len_in: 96
+
+    # Interpolation
+    base_alpha: 0.5
+
+    # Generation parameters
+    generation:
+      max_new_tokens: 32
+      do_sample: true
+      top_p: 0.9
+      temperature: 0.9
+      repetition_penalty: 1.5
+
+    # Predicate matching (for NodeExpander)
+    predicate_matching:
+      embedding_model: "all-MiniLM-L6-v2"
+      similarity_threshold: 0.6
+      use_value_similarity: true
+      name_weight: 0.85
+      value_weight: 0.15
+
+    # Unmatched attributes
+    generate_unmatched: true
+    unmatched_sample_rate: 1.0
+
+  # ============================================================
+  # FLAN-T5-XL Configuration (used when backbone: "flan-t5-xl")
+  # ============================================================
+  flan_t5:
+    model_name: "google/flan-t5-xl"
+    out_dir: "./flan_t5_mixup_model"
+
+    # Training parameters (with LoRA)
+    epochs: 3
+    batch_size: 8
+    learning_rate: 1.0e-3
+    max_pairs_per_pred: 2000
+
+    # Input length
+    max_len_in: 128
+
+    # LoRA configuration
+    lora:
+      r: 16
+      alpha: 32
+      dropout: 0.05
+      target_modules: ["q", "v"]
+
+    # Generation parameters (optimized for T5)
+    generation:
+      max_new_tokens: 64
+      temperature: 1.0
+      num_beams: 4
+      repetition_penalty: 2.0
+      top_p: 0.9
+      latent_noise_std: 0.05

@@ -1,0 +1,28 @@
+experiment:
+  suite: flan_t5_bert_int
+  name: D_W_15K_V1_08_01
+  dataset:
+    name: openea/D_W_15K_V1
+    writer: bert_int
+  reduction:
+    method: forget_labels
+    ratio: 0.8
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm_mixup
+    ratio: 0.1
+    backbone: flan-t5-xl
+    pretrained_model_dir: models/pretrained_plm/D_W_15K_V1
+    writer:
+      type: bert_int
+      augmented_only_train: true
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: false

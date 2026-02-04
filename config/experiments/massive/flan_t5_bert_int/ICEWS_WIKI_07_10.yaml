@@ -1,0 +1,28 @@
+experiment:
+  suite: flan_t5_bert_int
+  name: ICEWS_WIKI_07_10
+  dataset:
+    name: openea/ICEWS_WIKI
+    writer: bert_int
+  reduction:
+    method: forget_labels
+    ratio: 0.7
+    writer: bert_int
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm_mixup
+    ratio: 1.0
+    backbone: flan-t5-xl
+    pretrained_model_dir: models/pretrained_plm/ICEWS_WIKI
+    writer:
+      type: bert_int
+      augmented_only_train: true
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: bert_int
+  seed: 11037
+  clear: true
+  overwrite_existing: false
