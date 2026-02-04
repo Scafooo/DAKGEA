@@ -212,7 +212,7 @@
 401	http://purl.org/dc/elements/1.1/title	conqueror
 403	http://purl.org/dc/elements/1.1/title	intriguer
 405	http://purl.org/dc/elements/1.1/title	bubble scrape
-407	http://purl.org/dc/elements/1.1/title	u00e8re premi
+407	http://purl.org/dc/elements/1.1/title	ère premi
 409	http://purl.org/dc/elements/1.1/title	canada library treasury
 411	http://purl.org/dc/elements/1.1/title	sensuous
 413	http://purl.org/dc/elements/1.1/title	danger gone disc
@@ -336,7 +336,7 @@
 620	http://purl.org/dc/elements/1.1/title	way taking
 622	http://purl.org/dc/elements/1.1/title	bulletin soft
 623	http://purl.org/dc/elements/1.1/title	rouen road
-624	http://purl.org/dc/elements/1.1/title	u00f0 vi og
+624	http://purl.org/dc/elements/1.1/title	ð vi og
 626	http://purl.org/dc/elements/1.1/title	search
 628	http://purl.org/dc/elements/1.1/title	now speak
 630	http://purl.org/dc/elements/1.1/title	enemy
@@ -517,7 +517,7 @@
 927	http://purl.org/dc/elements/1.1/title	til shiloh
 929	http://purl.org/dc/elements/1.1/title	fix
 931	http://purl.org/dc/elements/1.1/title	thought
-933	http://purl.org/dc/elements/1.1/title	med u00falla
+933	http://purl.org/dc/elements/1.1/title	med úlla
 935	http://purl.org/dc/elements/1.1/title	way
 7702	http://purl.org/dc/elements/1.1/title	radiolina
 937	http://purl.org/dc/elements/1.1/title	slicker average
@@ -786,7 +786,7 @@
 1349	http://purl.org/dc/elements/1.1/title	modern times
 1350	http://purl.org/dc/elements/1.1/title	hurley
 1351	http://purl.org/dc/elements/1.1/title	paralysis option
-1353	http://purl.org/dc/elements/1.1/title	mc u00b2
+1353	http://purl.org/dc/elements/1.1/title	mc ²
 1354	http://purl.org/dc/elements/1.1/title	frontier final
 1355	http://purl.org/dc/elements/1.1/title	times
 1356	http://purl.org/dc/elements/1.1/title	wind prairie
@@ -1232,7 +1232,7 @@
 2003	http://purl.org/dc/elements/1.1/title	story
 2005	http://purl.org/dc/elements/1.1/title	death magnetic
 2006	http://purl.org/dc/elements/1.1/title	nightmare worst favourite
-2008	http://purl.org/dc/elements/1.1/title	u00e5ker u00d6ster u00e5
+2008	http://purl.org/dc/elements/1.1/title	åker Öster å
 2009	http://purl.org/dc/elements/1.1/title	trust brand
 7164	http://purl.org/dc/elements/1.1/title	hanging tired around
 2011	http://purl.org/dc/elements/1.1/title	andrea best vivere bocelli
@@ -1317,8 +1317,8 @@
 2122	http://open.vocab.org/terms/sortlabel	diamond king
 2122	rdfs:comment	band
 2122	http://xmlns.com/foaf/0.1/name	diamond king
-2131	http://open.vocab.org/terms/sortlabel	sol u00eds marco antonio
-2131	http://xmlns.com/foaf/0.1/name	sol u00eds marco antonio
+2131	http://open.vocab.org/terms/sortlabel	sol ís marco antonio
+2131	http://xmlns.com/foaf/0.1/name	sol ís marco antonio
 2133	http://open.vocab.org/terms/sortlabel	rainhard fendrich
 2133	http://xmlns.com/foaf/0.1/name	rainhard fendrich
 1251	http://open.vocab.org/terms/sortlabel	1990s
@@ -1326,8 +1326,8 @@
 2135	http://open.vocab.org/terms/sortlabel	2wo
 2135	rdfs:comment	rob halford band industrial
 2135	http://xmlns.com/foaf/0.1/name	2wo
-2137	http://open.vocab.org/terms/sortlabel	u00f6ller ale
-2137	http://xmlns.com/foaf/0.1/name	u00f6ller ale
+2137	http://open.vocab.org/terms/sortlabel	öller ale
+2137	http://xmlns.com/foaf/0.1/name	öller ale
 2139	http://open.vocab.org/terms/sortlabel	nick simper
 2139	http://xmlns.com/foaf/0.1/name	nick simper
 2140	http://open.vocab.org/terms/sortlabel	lopez orlando
@@ -1422,8 +1422,8 @@
 2257	http://open.vocab.org/terms/sortlabel	jones mick
 2257	rdfs:comment	dynamite audio big clash
 2257	http://xmlns.com/foaf/0.1/name	jones mick
-2261	http://open.vocab.org/terms/sortlabel	lev john u00e9n
-2261	http://xmlns.com/foaf/0.1/name	lev john u00e9n
+2261	http://open.vocab.org/terms/sortlabel	lev john én
+2261	http://xmlns.com/foaf/0.1/name	lev john én
 2263	http://open.vocab.org/terms/sortlabel	old crow show medicine
 2263	http://xmlns.com/foaf/0.1/name	old crow show medicine
 2100	http://open.vocab.org/terms/sortlabel	gibbard ben
@@ -1502,8 +1502,8 @@
 2360	http://xmlns.com/foaf/0.1/name	gorilla biscuits
 2363	http://open.vocab.org/terms/sortlabel	astaire adele
 2363	http://xmlns.com/foaf/0.1/name	astaire adele
-503	http://open.vocab.org/terms/sortlabel	alex u00f3nsi
-503	http://xmlns.com/foaf/0.1/name	alex u00f3nsi
+503	http://open.vocab.org/terms/sortlabel	alex ónsi
+503	http://xmlns.com/foaf/0.1/name	alex ónsi
 2365	http://open.vocab.org/terms/sortlabel	philharmonique orchestre radio france
 2365	http://xmlns.com/foaf/0.1/name	philharmonique orchestre radio france
 2367	http://open.vocab.org/terms/sortlabel	landscape
@@ -1561,8 +1561,8 @@
 2413	http://xmlns.com/foaf/0.1/name	paul gardiner
 2415	http://open.vocab.org/terms/sortlabel	maxim
 2415	http://xmlns.com/foaf/0.1/name	maxim
-2416	http://open.vocab.org/terms/sortlabel	enfoir u00e9s les
-2416	http://xmlns.com/foaf/0.1/name	enfoir u00e9s les
+2416	http://open.vocab.org/terms/sortlabel	enfoir és les
+2416	http://xmlns.com/foaf/0.1/name	enfoir és les
 2451	http://open.vocab.org/terms/sortlabel	pimp
 2451	http://xmlns.com/foaf/0.1/name	pimp
 2453	http://open.vocab.org/terms/sortlabel	james alex
@@ -1677,8 +1677,8 @@
 2557	http://xmlns.com/foaf/0.1/name	bobby rogers
 2559	http://open.vocab.org/terms/sortlabel	klass myleene
 2559	http://xmlns.com/foaf/0.1/name	klass myleene
-2561	http://open.vocab.org/terms/sortlabel	u00fa dan
-2561	http://xmlns.com/foaf/0.1/name	u00fa dan
+2561	http://open.vocab.org/terms/sortlabel	ú dan
+2561	http://xmlns.com/foaf/0.1/name	ú dan
 2563	http://open.vocab.org/terms/sortlabel	schmickler marcus
 2563	http://xmlns.com/foaf/0.1/name	schmickler marcus
 2565	http://open.vocab.org/terms/sortlabel	sleeper
@@ -1895,8 +1895,8 @@
 2807	http://xmlns.com/foaf/0.1/name	meola al di
 2809	http://open.vocab.org/terms/sortlabel	fafara dez
 2809	http://xmlns.com/foaf/0.1/name	fafara dez
-2812	http://open.vocab.org/terms/sortlabel	eugene u00fctz
-2812	http://xmlns.com/foaf/0.1/name	eugene u00fctz
+2812	http://open.vocab.org/terms/sortlabel	eugene ütz
+2812	http://xmlns.com/foaf/0.1/name	eugene ütz
 2813	http://open.vocab.org/terms/sortlabel	lloyd cole
 2813	http://xmlns.com/foaf/0.1/name	lloyd cole
 2815	http://open.vocab.org/terms/sortlabel	rehasher
@@ -1977,8 +1977,8 @@
 2894	http://xmlns.com/foaf/0.1/name	dulli greg
 2897	http://open.vocab.org/terms/sortlabel	alan price
 2897	http://xmlns.com/foaf/0.1/name	price alan
-2900	http://open.vocab.org/terms/sortlabel	bj fredrik u00f6rling
-2900	http://xmlns.com/foaf/0.1/name	bj fredrik u00f6rling
+2900	http://open.vocab.org/terms/sortlabel	bj fredrik örling
+2900	http://xmlns.com/foaf/0.1/name	bj fredrik örling
 2418	http://open.vocab.org/terms/sortlabel	jean goldman jacques
 2418	http://xmlns.com/foaf/0.1/name	jean goldman jacques
 2901	http://open.vocab.org/terms/sortlabel	ednaswap
@@ -2052,8 +2052,8 @@
 2921	http://xmlns.com/foaf/0.1/name	electric orchestra light
 2985	http://open.vocab.org/terms/sortlabel	allin gg
 2985	http://xmlns.com/foaf/0.1/name	allin gg
-2988	http://open.vocab.org/terms/sortlabel	u00e9d u00e9ric fr leclercq
-2988	http://xmlns.com/foaf/0.1/name	u00e9d u00e9ric fr leclercq
+2988	http://open.vocab.org/terms/sortlabel	éd éric fr leclercq
+2988	http://xmlns.com/foaf/0.1/name	éd éric fr leclercq
 2990	http://open.vocab.org/terms/sortlabel	shields jimi
 2990	http://xmlns.com/foaf/0.1/name	shields jimi
 1148	http://open.vocab.org/terms/sortlabel	band horse
@@ -2203,8 +2203,8 @@
 3117	http://xmlns.com/foaf/0.1/name	cats stray
 3082	http://open.vocab.org/terms/sortlabel	ginger air force baker
 3082	http://xmlns.com/foaf/0.1/name	ginger air force baker
-3125	http://open.vocab.org/terms/sortlabel	u00ed dhomhnaill tr u00edona
-3125	http://xmlns.com/foaf/0.1/name	u00ed dhomhnaill tr u00edona
+3125	http://open.vocab.org/terms/sortlabel	í dhomhnaill tr íona
+3125	http://xmlns.com/foaf/0.1/name	í dhomhnaill tr íona
 3129	http://open.vocab.org/terms/sortlabel	dodgers crooklyn
 3129	rdfs:comment	single key
 3129	http://xmlns.com/foaf/0.1/name	dodgers crooklyn
@@ -2289,8 +2289,8 @@
 3212	http://xmlns.com/foaf/0.1/name	gomes tom
 3213	http://open.vocab.org/terms/sortlabel	ross valory
 3213	http://xmlns.com/foaf/0.1/name	ross valory
-3215	http://open.vocab.org/terms/sortlabel	u00fdsd u00f3ttir anna krist u00edn valt
-3215	http://xmlns.com/foaf/0.1/name	u00fdsd u00f3ttir anna krist u00edn valt
+3215	http://open.vocab.org/terms/sortlabel	ýsd óttir anna krist ín valt
+3215	http://xmlns.com/foaf/0.1/name	ýsd óttir anna krist ín valt
 947	http://open.vocab.org/terms/sortlabel	tang clan wu
 947	http://xmlns.com/foaf/0.1/name	tang clan wu
 3223	http://open.vocab.org/terms/sortlabel	dey susan
@@ -2473,8 +2473,8 @@
 3413	http://xmlns.com/foaf/0.1/name	joel plaskett
 3415	http://open.vocab.org/terms/sortlabel	bruce welch
 3415	http://xmlns.com/foaf/0.1/name	bruce welch
-3417	http://open.vocab.org/terms/sortlabel	michael u00f6rg
-3417	http://xmlns.com/foaf/0.1/name	michael u00f6rg
+3417	http://open.vocab.org/terms/sortlabel	michael örg
+3417	http://xmlns.com/foaf/0.1/name	michael örg
 2281	http://open.vocab.org/terms/sortlabel	cruz jason
 2281	http://xmlns.com/foaf/0.1/name	cruz jason
 3422	http://open.vocab.org/terms/sortlabel	bucky pizzarelli
@@ -2690,8 +2690,8 @@
 3619	http://xmlns.com/foaf/0.1/name	smith jaden
 3621	http://open.vocab.org/terms/sortlabel	special
 3621	http://xmlns.com/foaf/0.1/name	special
-3623	http://open.vocab.org/terms/sortlabel	u00fdrason u00e1ll orri
-3623	http://xmlns.com/foaf/0.1/name	u00fdrason u00e1ll orri
+3623	http://open.vocab.org/terms/sortlabel	ýrason áll orri
+3623	http://xmlns.com/foaf/0.1/name	ýrason áll orri
 3624	http://open.vocab.org/terms/sortlabel	reed brett
 3624	http://xmlns.com/foaf/0.1/name	reed brett
 2023	http://open.vocab.org/terms/sortlabel	coleman ornette
@@ -2759,8 +2759,8 @@
 3723	http://xmlns.com/foaf/0.1/name	atreyu
 3726	http://open.vocab.org/terms/sortlabel	moore chant
 3726	http://xmlns.com/foaf/0.1/name	moore chant
-3728	http://open.vocab.org/terms/sortlabel	u00fcnder u00fcs u00fcp th
-3728	http://xmlns.com/foaf/0.1/name	u00fcnder u00fcs u00fcp th
+3728	http://open.vocab.org/terms/sortlabel	ünder üs üp th
+3728	http://xmlns.com/foaf/0.1/name	ünder üs üp th
 2676	http://open.vocab.org/terms/sortlabel	fates warning
 2676	http://xmlns.com/foaf/0.1/name	fates warning
 3732	http://open.vocab.org/terms/sortlabel	centipede
@@ -2915,8 +2915,8 @@
 3876	http://xmlns.com/foaf/0.1/name	antony genn
 3878	http://open.vocab.org/terms/sortlabel	sub
 3878	http://xmlns.com/foaf/0.1/name	sub
-3881	http://open.vocab.org/terms/sortlabel	mikael u00c5kerfeldt
-3881	http://xmlns.com/foaf/0.1/name	u00c5kerfeldt mikael
+3881	http://open.vocab.org/terms/sortlabel	mikael Åkerfeldt
+3881	http://xmlns.com/foaf/0.1/name	Åkerfeldt mikael
 3884	http://open.vocab.org/terms/sortlabel	friedberger matthew
 3884	http://xmlns.com/foaf/0.1/name	friedberger matthew
 3886	http://open.vocab.org/terms/sortlabel	babys
@@ -2951,8 +2951,8 @@
 3914	http://xmlns.com/foaf/0.1/name	panic channel
 2273	http://open.vocab.org/terms/sortlabel	levin bill bruford tony
 2273	http://xmlns.com/foaf/0.1/name	levin bill bruford tony
-2419	http://open.vocab.org/terms/sortlabel	u00e9gara u00e9l u00e8ne
-2419	http://xmlns.com/foaf/0.1/name	u00e9gara u00e9l u00e8ne
+2419	http://open.vocab.org/terms/sortlabel	égara él ène
+2419	http://xmlns.com/foaf/0.1/name	égara él ène
 3917	http://open.vocab.org/terms/sortlabel	etat haiku
 3917	http://xmlns.com/foaf/0.1/name	etat haiku
 3919	http://open.vocab.org/terms/sortlabel	pete nice
@@ -3596,7 +3596,7 @@
 4477	http://open.vocab.org/terms/sortlabel	sales soupy
 4477	http://xmlns.com/foaf/0.1/name	sales soupy
 2124	http://open.vocab.org/terms/sortlabel	dee mikkey
-2124	rdfs:comment	u00f6rhead michael mot drummer delaouglou
+2124	rdfs:comment	örhead michael mot drummer delaouglou
 2124	http://xmlns.com/foaf/0.1/name	dee mikkey
 4480	http://open.vocab.org/terms/sortlabel	jimmy cauty
 4480	http://xmlns.com/foaf/0.1/name	jimmy cauty
@@ -3746,7 +3746,7 @@
 4222	rdfs:comment	renamed band metal tundra later suns
 4222	http://xmlns.com/foaf/0.1/name	peach
 4606	http://open.vocab.org/terms/sortlabel	eddie jackson
-4606	rdfs:comment	metal bassist queensr u00ffche
+4606	rdfs:comment	metal bassist queensr ÿche
 4606	http://xmlns.com/foaf/0.1/name	eddie jackson
 4607	http://open.vocab.org/terms/sortlabel	joe trohman
 4607	http://xmlns.com/foaf/0.1/name	joe trohman
@@ -3849,8 +3849,8 @@
 3130	http://xmlns.com/foaf/0.1/name	special ed
 4701	http://open.vocab.org/terms/sortlabel	slint
 4701	http://xmlns.com/foaf/0.1/name	slint
-4703	http://open.vocab.org/terms/sortlabel	gilberto u00e3o jo
-4703	http://xmlns.com/foaf/0.1/name	gilberto u00e3o jo
+4703	http://open.vocab.org/terms/sortlabel	gilberto ão jo
+4703	http://xmlns.com/foaf/0.1/name	gilberto ão jo
 4705	http://open.vocab.org/terms/sortlabel	chickenfoot
 4705	http://xmlns.com/foaf/0.1/name	chickenfoot
 4710	http://open.vocab.org/terms/sortlabel	paul tucker
@@ -4037,11 +4037,11 @@
 4834	http://xmlns.com/foaf/0.1/name	felumlee mike
 2371	http://open.vocab.org/terms/sortlabel	kinsella mike
 2371	http://xmlns.com/foaf/0.1/name	kinsella mike
-301	http://open.vocab.org/terms/sortlabel	u00fam
+301	http://open.vocab.org/terms/sortlabel	úm
 301	rdfs:comment	icelandic experimental group
-301	http://xmlns.com/foaf/0.1/name	u00fam
-4838	http://open.vocab.org/terms/sortlabel	tito u00edguez rodr
-4838	http://xmlns.com/foaf/0.1/name	tito u00edguez rodr
+301	http://xmlns.com/foaf/0.1/name	úm
+4838	http://open.vocab.org/terms/sortlabel	tito íguez rodr
+4838	http://xmlns.com/foaf/0.1/name	tito íguez rodr
 4840	http://open.vocab.org/terms/sortlabel	jack mannequin
 4840	http://xmlns.com/foaf/0.1/name	jack mannequin
 4667	http://open.vocab.org/terms/sortlabel	gene clark
@@ -4118,16 +4118,16 @@
 4905	http://xmlns.com/foaf/0.1/name	githead
 759	http://open.vocab.org/terms/sortlabel	fiery furnaces
 759	http://xmlns.com/foaf/0.1/name	fiery furnaces
-4908	http://open.vocab.org/terms/sortlabel	u00eb agnew chlo
-4908	http://xmlns.com/foaf/0.1/name	u00eb agnew chlo
+4908	http://open.vocab.org/terms/sortlabel	ë agnew chlo
+4908	http://xmlns.com/foaf/0.1/name	ë agnew chlo
 4909	http://open.vocab.org/terms/sortlabel	cosey chris
 4909	http://xmlns.com/foaf/0.1/name	cosey chris
 4911	http://open.vocab.org/terms/sortlabel	sandkings
 4911	http://xmlns.com/foaf/0.1/name	sandkings
 4912	http://open.vocab.org/terms/sortlabel	pirroni marco
 4912	http://xmlns.com/foaf/0.1/name	pirroni marco
-4914	http://open.vocab.org/terms/sortlabel	u00e9vics
-4914	http://xmlns.com/foaf/0.1/name	u00e9vics
+4914	http://open.vocab.org/terms/sortlabel	évics
+4914	http://xmlns.com/foaf/0.1/name	évics
 4917	http://open.vocab.org/terms/sortlabel	sisters clark
 4917	rdfs:comment	released 1973 gospel album group detroit first
 4917	http://xmlns.com/foaf/0.1/name	sisters clark
@@ -4140,8 +4140,8 @@
 4920	http://xmlns.com/foaf/0.1/name	wood brothers
 4922	http://open.vocab.org/terms/sortlabel	operation
 4922	http://xmlns.com/foaf/0.1/name	operation
-4924	http://open.vocab.org/terms/sortlabel	lavoe u00e9ctor
-4924	http://xmlns.com/foaf/0.1/name	lavoe u00e9ctor
+4924	http://open.vocab.org/terms/sortlabel	lavoe éctor
+4924	http://xmlns.com/foaf/0.1/name	lavoe éctor
 4926	http://open.vocab.org/terms/sortlabel	louie fingers 88
 4926	http://xmlns.com/foaf/0.1/name	louie fingers 88
 3465	http://open.vocab.org/terms/sortlabel	shrinebuilder
@@ -4169,8 +4169,8 @@
 918	http://open.vocab.org/terms/sortlabel	cheryl cole
 918	rdfs:comment	member aloud girls
 918	http://xmlns.com/foaf/0.1/name	cole cheryl
-3128	http://open.vocab.org/terms/sortlabel	u00e1l miche u00d3 domhnaill
-3128	http://xmlns.com/foaf/0.1/name	u00e1l miche u00d3 domhnaill
+3128	http://open.vocab.org/terms/sortlabel	ál miche Ó domhnaill
+3128	http://xmlns.com/foaf/0.1/name	ál miche Ó domhnaill
 4941	http://open.vocab.org/terms/sortlabel	jay farrar
 4941	http://xmlns.com/foaf/0.1/name	farrar jay
 2793	http://open.vocab.org/terms/sortlabel	pilson jeff
@@ -4573,8 +4573,8 @@
 4357	http://xmlns.com/foaf/0.1/name	sugarhill gang
 5230	http://open.vocab.org/terms/sortlabel	45 grave
 5230	http://xmlns.com/foaf/0.1/name	45 grave
-5231	http://open.vocab.org/terms/sortlabel	u0131 bar man u015f u00e7o
-5231	http://xmlns.com/foaf/0.1/name	u0131 bar man u00e7o u015f
+5231	http://open.vocab.org/terms/sortlabel	u0131 bar man u015f ço
+5231	http://xmlns.com/foaf/0.1/name	u0131 bar man ço u015f
 3224	http://open.vocab.org/terms/sortlabel	family partridge
 3224	http://xmlns.com/foaf/0.1/name	family partridge
 2126	http://open.vocab.org/terms/sortlabel	timi hansen
@@ -4619,8 +4619,8 @@
 5266	http://xmlns.com/foaf/0.1/name	tony mcphee
 5268	http://open.vocab.org/terms/sortlabel	solomon sophie
 5268	http://xmlns.com/foaf/0.1/name	solomon sophie
-5270	http://open.vocab.org/terms/sortlabel	u00f6m lindstr anders
-5270	http://xmlns.com/foaf/0.1/name	u00f6m lindstr anders
+5270	http://open.vocab.org/terms/sortlabel	öm lindstr anders
+5270	http://xmlns.com/foaf/0.1/name	öm lindstr anders
 5271	http://open.vocab.org/terms/sortlabel	chaussee mark
 5271	http://xmlns.com/foaf/0.1/name	chaussee mark
 5272	http://open.vocab.org/terms/sortlabel	heather small
@@ -4797,7 +4797,7 @@
 5408	http://open.vocab.org/terms/sortlabel	jeff holdsworth
 5408	http://xmlns.com/foaf/0.1/name	jeff holdsworth
 5410	http://open.vocab.org/terms/sortlabel	nico
-5410	rdfs:comment	model fashion german singer christa actress u00e4ffgen
+5410	rdfs:comment	model fashion german singer christa actress äffgen
 5410	http://xmlns.com/foaf/0.1/name	nico
 4359	http://open.vocab.org/terms/sortlabel	kennedys dead
 4359	http://xmlns.com/foaf/0.1/name	kennedys dead
@@ -5051,8 +5051,8 @@
 5584	http://xmlns.com/foaf/0.1/name	gouryella
 5585	http://open.vocab.org/terms/sortlabel	garraud joachim
 5585	http://xmlns.com/foaf/0.1/name	garraud joachim
-5586	http://open.vocab.org/terms/sortlabel	u00e1n se cannon
-5586	http://xmlns.com/foaf/0.1/name	u00e1n se cannon
+5586	http://open.vocab.org/terms/sortlabel	án se cannon
+5586	http://xmlns.com/foaf/0.1/name	án se cannon
 1523	http://open.vocab.org/terms/sortlabel	ghostface killah
 1523	http://xmlns.com/foaf/0.1/name	ghostface killah
 5587	http://open.vocab.org/terms/sortlabel	clark mike
@@ -5204,8 +5204,8 @@
 5685	http://xmlns.com/foaf/0.1/name	morton roll jelly
 5687	http://open.vocab.org/terms/sortlabel	marble giants young
 5687	http://xmlns.com/foaf/0.1/name	marble giants young
-5689	http://open.vocab.org/terms/sortlabel	u00e4rdelin emma
-5689	http://xmlns.com/foaf/0.1/name	u00e4rdelin emma
+5689	http://open.vocab.org/terms/sortlabel	ärdelin emma
+5689	http://xmlns.com/foaf/0.1/name	ärdelin emma
 5692	http://open.vocab.org/terms/sortlabel	ruffin david
 5692	http://xmlns.com/foaf/0.1/name	ruffin david
 1089	http://open.vocab.org/terms/sortlabel	aerosmith
@@ -5323,8 +5323,8 @@
 5769	http://xmlns.com/foaf/0.1/name	specimen
 5771	http://open.vocab.org/terms/sortlabel	jake lee
 5771	http://xmlns.com/foaf/0.1/name	lee jake
-5772	http://open.vocab.org/terms/sortlabel	u00f6ble daniel
-5772	http://xmlns.com/foaf/0.1/name	u00f6ble daniel
+5772	http://open.vocab.org/terms/sortlabel	öble daniel
+5772	http://xmlns.com/foaf/0.1/name	öble daniel
 5774	http://open.vocab.org/terms/sortlabel	neufeld sarah
 5774	http://xmlns.com/foaf/0.1/name	neufeld sarah
 5775	http://open.vocab.org/terms/sortlabel	flint keith
@@ -6017,8 +6017,8 @@
 6247	http://xmlns.com/foaf/0.1/name	gallup simon
 5572	http://open.vocab.org/terms/sortlabel	newell ryan
 5572	http://xmlns.com/foaf/0.1/name	newell ryan
-6248	http://open.vocab.org/terms/sortlabel	u00ef mirwais ahmadza
-6248	http://xmlns.com/foaf/0.1/name	u00ef ahmadza mirwais
+6248	http://open.vocab.org/terms/sortlabel	ï mirwais ahmadza
+6248	http://xmlns.com/foaf/0.1/name	ï ahmadza mirwais
 2285	http://open.vocab.org/terms/sortlabel	ali mcmordie
 2285	http://xmlns.com/foaf/0.1/name	ali mcmordie
 6250	http://open.vocab.org/terms/sortlabel	widow black
@@ -6062,8 +6062,8 @@
 6266	http://xmlns.com/foaf/0.1/name	battlefield band
 6268	http://open.vocab.org/terms/sortlabel	kenny clarke
 6268	http://xmlns.com/foaf/0.1/name	kenny clarke
-6269	http://open.vocab.org/terms/sortlabel	hansi u00fcrsch
-6269	http://xmlns.com/foaf/0.1/name	u00fcrsch hansi
+6269	http://open.vocab.org/terms/sortlabel	hansi ürsch
+6269	http://xmlns.com/foaf/0.1/name	ürsch hansi
 1037	http://open.vocab.org/terms/sortlabel	swami
 1037	rdfs:comment	band bhangra pop
 1037	http://xmlns.com/foaf/0.1/name	swami
@@ -6208,8 +6208,8 @@
 3992	http://xmlns.com/foaf/0.1/name	gators stray
 6353	http://open.vocab.org/terms/sortlabel	carter christina
 6353	http://xmlns.com/foaf/0.1/name	carter christina
-6355	http://open.vocab.org/terms/sortlabel	u00e4rnvind peter stj
-6355	http://xmlns.com/foaf/0.1/name	u00e4rnvind peter stj
+6355	http://open.vocab.org/terms/sortlabel	ärnvind peter stj
+6355	http://xmlns.com/foaf/0.1/name	ärnvind peter stj
 6357	http://open.vocab.org/terms/sortlabel	tobin sprout
 6357	http://xmlns.com/foaf/0.1/name	tobin sprout
 4275	http://open.vocab.org/terms/sortlabel	paul butterfield
@@ -6259,8 +6259,8 @@
 2355	http://xmlns.com/foaf/0.1/name	ian mcnabb
 889	http://open.vocab.org/terms/sortlabel	chains alice
 889	http://xmlns.com/foaf/0.1/name	chains alice
-5361	http://open.vocab.org/terms/sortlabel	u00e5p sw
-5361	http://xmlns.com/foaf/0.1/name	u00e5p sw
+5361	http://open.vocab.org/terms/sortlabel	åp sw
+5361	http://xmlns.com/foaf/0.1/name	åp sw
 6378	http://open.vocab.org/terms/sortlabel	slapp happy
 6378	http://xmlns.com/foaf/0.1/name	slapp happy
 6381	http://open.vocab.org/terms/sortlabel	maria gilhooley
@@ -6292,8 +6292,8 @@
 5186	http://xmlns.com/foaf/0.1/name	maines natalie
 6390	http://open.vocab.org/terms/sortlabel	jones jr roy
 6390	http://xmlns.com/foaf/0.1/name	jones jr roy
-5054	http://open.vocab.org/terms/sortlabel	u00f3is u00edn murphy
-5054	http://xmlns.com/foaf/0.1/name	u00f3is u00edn murphy
+5054	http://open.vocab.org/terms/sortlabel	óis ín murphy
+5054	http://xmlns.com/foaf/0.1/name	óis ín murphy
 5859	http://open.vocab.org/terms/sortlabel	guess
 5859	http://xmlns.com/foaf/0.1/name	guess
 4757	http://open.vocab.org/terms/sortlabel	volts re
@@ -6309,8 +6309,8 @@
 2929	http://xmlns.com/foaf/0.1/name	prince revolution
 6402	http://open.vocab.org/terms/sortlabel	tony mansfield
 6402	http://xmlns.com/foaf/0.1/name	tony mansfield
-6405	http://open.vocab.org/terms/sortlabel	benediktsson u00d6rn einar
-6405	http://xmlns.com/foaf/0.1/name	benediktsson u00d6rn einar
+6405	http://open.vocab.org/terms/sortlabel	benediktsson Örn einar
+6405	http://xmlns.com/foaf/0.1/name	benediktsson Örn einar
 6407	http://open.vocab.org/terms/sortlabel	pop group
 6407	http://xmlns.com/foaf/0.1/name	pop group
 6410	http://open.vocab.org/terms/sortlabel	pete wernick
@@ -6415,8 +6415,8 @@
 6460	http://xmlns.com/foaf/0.1/name	siouxsie sioux
 6462	http://open.vocab.org/terms/sortlabel	john panozzo
 6462	http://xmlns.com/foaf/0.1/name	john panozzo
-2964	http://open.vocab.org/terms/sortlabel	u00e9d chichin u00e9ric fr
-2964	http://xmlns.com/foaf/0.1/name	chichin u00e9d u00e9ric fr
+2964	http://open.vocab.org/terms/sortlabel	éd chichin éric fr
+2964	http://xmlns.com/foaf/0.1/name	chichin éd éric fr
 4361	http://open.vocab.org/terms/sortlabel	salovaara jaakko
 4361	http://xmlns.com/foaf/0.1/name	salovaara jaakko
 2756	http://open.vocab.org/terms/sortlabel	vines
@@ -6439,7 +6439,7 @@
 6468	rdfs:comment	james usm carter morrison singer
 6468	http://xmlns.com/foaf/0.1/name	jim bob
 5882	http://open.vocab.org/terms/sortlabel	act
-5882	rdfs:comment	u00fccken claudia leer br thomas
+5882	rdfs:comment	ücken claudia leer br thomas
 5882	http://xmlns.com/foaf/0.1/name	act
 6164	http://open.vocab.org/terms/sortlabel	ray wilson
 6164	rdfs:comment	short genesis time vocalist
@@ -6496,12 +6496,12 @@
 5746	http://xmlns.com/foaf/0.1/name	ginn greg
 1011	http://open.vocab.org/terms/sortlabel	deerhunter
 1011	http://xmlns.com/foaf/0.1/name	deerhunter
-6497	http://open.vocab.org/terms/sortlabel	georg u00f3lm
-6497	http://xmlns.com/foaf/0.1/name	georg u00f3lm
+6497	http://open.vocab.org/terms/sortlabel	georg ólm
+6497	http://xmlns.com/foaf/0.1/name	georg ólm
 4352	http://open.vocab.org/terms/sortlabel	kosheen
 4352	http://xmlns.com/foaf/0.1/name	kosheen
-6498	http://open.vocab.org/terms/sortlabel	u00f1a fari mimi
-6498	http://xmlns.com/foaf/0.1/name	u00f1a fari mimi
+6498	http://open.vocab.org/terms/sortlabel	ña fari mimi
+6498	http://xmlns.com/foaf/0.1/name	ña fari mimi
 5555	http://open.vocab.org/terms/sortlabel	andrew weatherall
 5555	http://xmlns.com/foaf/0.1/name	andrew weatherall
 6501	http://open.vocab.org/terms/sortlabel	benjamin kowalewicz
@@ -6586,8 +6586,8 @@
 6548	http://xmlns.com/foaf/0.1/name	jim babjak
 6550	http://open.vocab.org/terms/sortlabel	confessional dashboard
 6550	http://xmlns.com/foaf/0.1/name	confessional dashboard
-6551	http://open.vocab.org/terms/sortlabel	hagstr u00e5rten u00f6m
-6551	http://xmlns.com/foaf/0.1/name	hagstr u00f6m u00e5rten
+6551	http://open.vocab.org/terms/sortlabel	hagstr årten öm
+6551	http://xmlns.com/foaf/0.1/name	hagstr öm årten
 6552	http://open.vocab.org/terms/sortlabel	gidget gein
 6552	http://xmlns.com/foaf/0.1/name	gidget gein
 6553	http://open.vocab.org/terms/sortlabel	cillian vallely
@@ -6793,8 +6793,8 @@
 4776	http://xmlns.com/foaf/0.1/name	james mtume
 6683	http://open.vocab.org/terms/sortlabel	rahsaan patterson
 6683	http://xmlns.com/foaf/0.1/name	patterson rahsaan
-2845	http://open.vocab.org/terms/sortlabel	gildenl daniel u00f6w
-2845	http://xmlns.com/foaf/0.1/name	gildenl daniel u00f6w
+2845	http://open.vocab.org/terms/sortlabel	gildenl daniel öw
+2845	http://xmlns.com/foaf/0.1/name	gildenl daniel öw
 4340	http://open.vocab.org/terms/sortlabel	wreckers
 4340	http://xmlns.com/foaf/0.1/name	wreckers
 6688	http://open.vocab.org/terms/sortlabel	law leash
@@ -7070,8 +7070,8 @@
 6822	http://xmlns.com/foaf/0.1/name	splendid
 6824	http://open.vocab.org/terms/sortlabel	tear garden
 6824	http://xmlns.com/foaf/0.1/name	tear garden
-1427	http://open.vocab.org/terms/sortlabel	u00f6rhead mot
-1427	http://xmlns.com/foaf/0.1/name	u00f6rhead mot
+1427	http://open.vocab.org/terms/sortlabel	örhead mot
+1427	http://xmlns.com/foaf/0.1/name	örhead mot
 6831	http://open.vocab.org/terms/sortlabel	jim cuddy
 6831	http://xmlns.com/foaf/0.1/name	jim cuddy
 5193	http://open.vocab.org/terms/sortlabel	parsons ted
@@ -7775,8 +7775,8 @@
 7169	http://xmlns.com/foaf/0.1/name	mcconnell drew
 2076	http://open.vocab.org/terms/sortlabel	mills ben
 2076	http://xmlns.com/foaf/0.1/name	mills ben
-5557	http://open.vocab.org/terms/sortlabel	u00e4rts abw
-5557	http://xmlns.com/foaf/0.1/name	u00e4rts abw
+5557	http://open.vocab.org/terms/sortlabel	ärts abw
+5557	http://xmlns.com/foaf/0.1/name	ärts abw
 1056	http://open.vocab.org/terms/sortlabel	music
 1056	http://xmlns.com/foaf/0.1/name	music
 7170	http://open.vocab.org/terms/sortlabel	don reno
@@ -8402,8 +8402,8 @@
 6952	http://xmlns.com/foaf/0.1/name	smith willow
 1930	http://open.vocab.org/terms/sortlabel	jackson janet
 1930	http://xmlns.com/foaf/0.1/name	jackson janet
-5343	http://open.vocab.org/terms/sortlabel	bj u00f6rler anders
-5343	http://xmlns.com/foaf/0.1/name	bj u00f6rler anders
+5343	http://open.vocab.org/terms/sortlabel	bj örler anders
+5343	http://xmlns.com/foaf/0.1/name	bj örler anders
 4849	http://open.vocab.org/terms/sortlabel	hellacopters
 4849	rdfs:comment	band swedish rock
 4849	http://xmlns.com/foaf/0.1/name	hellacopters
@@ -8421,8 +8421,8 @@
 7456	http://xmlns.com/foaf/0.1/name	parry gripp
 5658	http://open.vocab.org/terms/sortlabel	lindsay arto
 5658	http://xmlns.com/foaf/0.1/name	lindsay arto
-6799	http://open.vocab.org/terms/sortlabel	wolfgang fl u00fcr
-6799	http://xmlns.com/foaf/0.1/name	fl wolfgang u00fcr
+6799	http://open.vocab.org/terms/sortlabel	wolfgang fl ür
+6799	http://xmlns.com/foaf/0.1/name	fl wolfgang ür
 7334	http://open.vocab.org/terms/sortlabel	van zant
 7334	rdfs:comment	project van band zant johnny duet donnie
 7334	http://xmlns.com/foaf/0.1/name	van zant
@@ -8551,12 +8551,12 @@
 7516	http://open.vocab.org/terms/sortlabel	jeremy spencer
 7516	http://xmlns.com/foaf/0.1/name	jeremy spencer
 6041	http://open.vocab.org/terms/sortlabel	patton mike
-6041	rdfs:comment	more mr faith etc fant u00f4mas bungle
+6041	rdfs:comment	more mr faith etc fant ômas bungle
 6041	http://xmlns.com/foaf/0.1/name	patton mike
 1167	http://open.vocab.org/terms/sortlabel	robert glasper
 1167	http://xmlns.com/foaf/0.1/name	glasper robert
-4386	http://open.vocab.org/terms/sortlabel	neubauten einst u00fcrzende
-4386	http://xmlns.com/foaf/0.1/name	neubauten einst u00fcrzende
+4386	http://open.vocab.org/terms/sortlabel	neubauten einst ürzende
+4386	http://xmlns.com/foaf/0.1/name	neubauten einst ürzende
 7519	http://open.vocab.org/terms/sortlabel	band devin townsend
 7519	http://xmlns.com/foaf/0.1/name	band townsend devin
 6986	http://open.vocab.org/terms/sortlabel	lee ranaldo
@@ -8716,8 +8716,8 @@
 4518	http://open.vocab.org/terms/sortlabel	james sullivan
 4518	rdfs:comment	rev sevenfold aka avenged drummer
 4518	http://xmlns.com/foaf/0.1/name	james sullivan
-797	http://open.vocab.org/terms/sortlabel	u00ea bonde rol
-797	http://xmlns.com/foaf/0.1/name	u00ea bonde rol
+797	http://open.vocab.org/terms/sortlabel	ê bonde rol
+797	http://xmlns.com/foaf/0.1/name	ê bonde rol
 4666	http://open.vocab.org/terms/sortlabel	mckay stephanie
 4666	http://xmlns.com/foaf/0.1/name	mckay stephanie
 7583	http://open.vocab.org/terms/sortlabel	alan hull
@@ -8912,8 +8912,8 @@
 5288	http://xmlns.com/foaf/0.1/name	mitchell trio chad
 7068	http://open.vocab.org/terms/sortlabel	steve gadd
 7068	http://xmlns.com/foaf/0.1/name	steve gadd
-2202	http://open.vocab.org/terms/sortlabel	lauri yl u00f6nen
-2202	http://xmlns.com/foaf/0.1/name	lauri yl u00f6nen
+2202	http://open.vocab.org/terms/sortlabel	lauri yl önen
+2202	http://xmlns.com/foaf/0.1/name	lauri yl önen
 2357	http://open.vocab.org/terms/sortlabel	ged lynch
 2357	http://xmlns.com/foaf/0.1/name	ged lynch
 7676	http://open.vocab.org/terms/sortlabel	northern great
@@ -9017,8 +9017,8 @@
 7407	http://xmlns.com/foaf/0.1/name	jamie pineda
 7721	http://open.vocab.org/terms/sortlabel	ryan vikedal
 7721	http://xmlns.com/foaf/0.1/name	ryan vikedal
-7722	http://open.vocab.org/terms/sortlabel	u00f3rsveit nix noltes st
-7722	http://xmlns.com/foaf/0.1/name	u00f3rsveit nix noltes st
+7722	http://open.vocab.org/terms/sortlabel	órsveit nix noltes st
+7722	http://xmlns.com/foaf/0.1/name	órsveit nix noltes st
 4888	http://open.vocab.org/terms/sortlabel	francis reader
 4888	http://xmlns.com/foaf/0.1/name	reader francis
 2491	http://open.vocab.org/terms/sortlabel	helloween
@@ -9249,8 +9249,8 @@
 7814	http://xmlns.com/foaf/0.1/name	asleep wheel
 6229	http://open.vocab.org/terms/sortlabel	farriss tim
 6229	http://xmlns.com/foaf/0.1/name	farriss tim
-243	http://open.vocab.org/terms/sortlabel	u00e4rttin u00e4
-243	http://xmlns.com/foaf/0.1/name	u00e4rttin u00e4
+243	http://open.vocab.org/terms/sortlabel	ärttin ä
+243	http://xmlns.com/foaf/0.1/name	ärttin ä
 7817	http://open.vocab.org/terms/sortlabel	blue deepest
 7817	http://xmlns.com/foaf/0.1/name	blue deepest
 7819	http://open.vocab.org/terms/sortlabel	dick taylor
@@ -9410,8 +9410,8 @@
 7885	http://xmlns.com/foaf/0.1/name	hardson tre
 7887	http://open.vocab.org/terms/sortlabel	roland orzabal
 7887	http://xmlns.com/foaf/0.1/name	roland orzabal
-6940	http://open.vocab.org/terms/sortlabel	u00f6m lundstr ted
-6940	http://xmlns.com/foaf/0.1/name	u00f6m lundstr ted
+6940	http://open.vocab.org/terms/sortlabel	öm lundstr ted
+6940	http://xmlns.com/foaf/0.1/name	öm lundstr ted
 7888	http://open.vocab.org/terms/sortlabel	terry balsamo
 7888	http://xmlns.com/foaf/0.1/name	terry balsamo
 7889	http://open.vocab.org/terms/sortlabel	divine rule lions teeth
@@ -9715,8 +9715,8 @@
 7999	http://xmlns.com/foaf/0.1/name	traynor chris
 3824	http://open.vocab.org/terms/sortlabel	mick pointer
 3824	http://xmlns.com/foaf/0.1/name	mick pointer
-1132	http://open.vocab.org/terms/sortlabel	u00e9lique ang kidjo
-1132	http://xmlns.com/foaf/0.1/name	u00e9lique ang kidjo
+1132	http://open.vocab.org/terms/sortlabel	élique ang kidjo
+1132	http://xmlns.com/foaf/0.1/name	élique ang kidjo
 2483	http://open.vocab.org/terms/sortlabel	paul shortino
 2483	http://xmlns.com/foaf/0.1/name	paul shortino
 8001	http://open.vocab.org/terms/sortlabel	jim jones
@@ -9765,8 +9765,8 @@
 3654	http://xmlns.com/foaf/0.1/name	silenoz
 5503	http://open.vocab.org/terms/sortlabel	ohio players
 5503	http://xmlns.com/foaf/0.1/name	ohio players
-8018	http://open.vocab.org/terms/sortlabel	u00e8re minist amer
-8018	http://xmlns.com/foaf/0.1/name	u00e8re minist amer
+8018	http://open.vocab.org/terms/sortlabel	ère minist amer
+8018	http://xmlns.com/foaf/0.1/name	ère minist amer
 8020	http://open.vocab.org/terms/sortlabel	judge smith
 8020	http://xmlns.com/foaf/0.1/name	judge smith
 8021	http://open.vocab.org/terms/sortlabel	goodie khujo
@@ -9842,8 +9842,8 @@
 8041	http://xmlns.com/foaf/0.1/name	winter johnny
 6442	http://open.vocab.org/terms/sortlabel	glen buxton
 6442	http://xmlns.com/foaf/0.1/name	glen buxton
-132	http://open.vocab.org/terms/sortlabel	u00e9la flecktones fleck
-132	http://xmlns.com/foaf/0.1/name	u00e9la flecktones fleck
+132	http://open.vocab.org/terms/sortlabel	éla flecktones fleck
+132	http://xmlns.com/foaf/0.1/name	éla flecktones fleck
 3715	http://open.vocab.org/terms/sortlabel	gosling john
 3715	rdfs:comment	keyboarder kinks
 3715	http://xmlns.com/foaf/0.1/name	gosling john
@@ -9912,8 +9912,8 @@
 1064	http://xmlns.com/foaf/0.1/name	pearl jam
 4071	http://open.vocab.org/terms/sortlabel	stella parton
 4071	http://xmlns.com/foaf/0.1/name	stella parton
-6499	http://open.vocab.org/terms/sortlabel	u00f1a fari richard
-6499	http://xmlns.com/foaf/0.1/name	u00f1a fari richard
+6499	http://open.vocab.org/terms/sortlabel	ña fari richard
+6499	http://xmlns.com/foaf/0.1/name	ña fari richard
 2981	http://open.vocab.org/terms/sortlabel	bevan bev
 2981	http://xmlns.com/foaf/0.1/name	bevan bev
 8073	http://open.vocab.org/terms/sortlabel	john densmore
@@ -9942,8 +9942,8 @@
 5926	http://xmlns.com/foaf/0.1/name	chick corea
 6380	http://open.vocab.org/terms/sortlabel	anthony moore
 6380	http://xmlns.com/foaf/0.1/name	anthony moore
-5340	http://open.vocab.org/terms/sortlabel	von u00fcdenfed
-5340	http://xmlns.com/foaf/0.1/name	von u00fcdenfed
+5340	http://open.vocab.org/terms/sortlabel	von üdenfed
+5340	http://xmlns.com/foaf/0.1/name	von üdenfed
 5042	http://open.vocab.org/terms/sortlabel	chevelle
 5042	http://xmlns.com/foaf/0.1/name	chevelle
 5756	http://open.vocab.org/terms/sortlabel	stanley ralph
@@ -9958,8 +9958,8 @@
 31	http://open.vocab.org/terms/sortlabel	placebo
 31	rdfs:comment	uk band alternative rock
 31	http://xmlns.com/foaf/0.1/name	placebo
-209	http://open.vocab.org/terms/sortlabel	dion u00e9line
-209	http://xmlns.com/foaf/0.1/name	dion u00e9line
+209	http://open.vocab.org/terms/sortlabel	dion éline
+209	http://xmlns.com/foaf/0.1/name	dion éline
 6412	http://open.vocab.org/terms/sortlabel	mayorga roy
 6412	http://xmlns.com/foaf/0.1/name	mayorga roy
 177	http://open.vocab.org/terms/sortlabel	feeling
@@ -10181,10 +10181,10 @@
 7512	http://xmlns.com/foaf/0.1/name	enho meiju
 7554	http://open.vocab.org/terms/sortlabel	cuomo rivers
 7554	http://xmlns.com/foaf/0.1/name	cuomo rivers
-934	http://open.vocab.org/terms/sortlabel	bj u00f6rk
-934	http://xmlns.com/foaf/0.1/name	bj u00f6rk
-8156	http://open.vocab.org/terms/sortlabel	barrab u00e1s
-8156	http://xmlns.com/foaf/0.1/name	barrab u00e1s
+934	http://open.vocab.org/terms/sortlabel	bj örk
+934	http://xmlns.com/foaf/0.1/name	bj örk
+8156	http://open.vocab.org/terms/sortlabel	barrab ás
+8156	http://xmlns.com/foaf/0.1/name	barrab ás
 8009	http://open.vocab.org/terms/sortlabel	henry vestine
 8009	http://xmlns.com/foaf/0.1/name	vestine henry
 5020	http://open.vocab.org/terms/sortlabel	emitt rhodes
@@ -10207,8 +10207,8 @@
 1718	http://xmlns.com/foaf/0.1/name	british power sea
 7704	http://open.vocab.org/terms/sortlabel	u0107 goran bregovi
 7704	http://xmlns.com/foaf/0.1/name	u0107 goran bregovi
-7513	http://open.vocab.org/terms/sortlabel	u00e4enp jari u00e4
-7513	http://xmlns.com/foaf/0.1/name	u00e4enp jari u00e4
+7513	http://open.vocab.org/terms/sortlabel	äenp jari ä
+7513	http://xmlns.com/foaf/0.1/name	äenp jari ä
 2699	http://open.vocab.org/terms/sortlabel	cult
 2699	http://xmlns.com/foaf/0.1/name	cult
 8166	http://open.vocab.org/terms/sortlabel	pirner dave
@@ -10311,7 +10311,7 @@
 8190	http://open.vocab.org/terms/sortlabel	lora logic
 8190	http://xmlns.com/foaf/0.1/name	lora logic
 3240	http://open.vocab.org/terms/sortlabel	vibe dj
-3240	rdfs:comment	techno pereira u00f3 dj producer portugese
+3240	rdfs:comment	techno pereira ó dj producer portugese
 3240	http://xmlns.com/foaf/0.1/name	vibe dj
 5111	http://open.vocab.org/terms/sortlabel	alain johannes
 5111	http://xmlns.com/foaf/0.1/name	alain johannes
@@ -10343,8 +10343,8 @@
 5243	http://xmlns.com/foaf/0.1/name	barker dave
 911	http://open.vocab.org/terms/sortlabel	elvis costello
 911	http://xmlns.com/foaf/0.1/name	elvis costello
-7723	http://open.vocab.org/terms/sortlabel	hildur u00f3ttir gu u00f0nad
-7723	http://xmlns.com/foaf/0.1/name	hildur u00f3ttir gu u00f0nad
+7723	http://open.vocab.org/terms/sortlabel	hildur óttir gu ðnad
+7723	http://xmlns.com/foaf/0.1/name	hildur óttir gu ðnad
 4609	http://open.vocab.org/terms/sortlabel	puppets last shadow
 4609	http://xmlns.com/foaf/0.1/name	puppets last shadow
 3646	http://open.vocab.org/terms/sortlabel	kelliher bill
@@ -10359,7 +10359,7 @@
 6304	http://open.vocab.org/terms/sortlabel	add
 6304	http://xmlns.com/foaf/0.1/name	add
 8203	http://open.vocab.org/terms/sortlabel	mortiis
-8203	rdfs:comment	u00e5vard real name ellefsen
+8203	rdfs:comment	åvard real name ellefsen
 8203	http://xmlns.com/foaf/0.1/name	mortiis
 1274	http://open.vocab.org/terms/sortlabel	efterklang
 1274	http://xmlns.com/foaf/0.1/name	efterklang
@@ -10645,8 +10645,8 @@
 5527	http://xmlns.com/foaf/0.1/name	redd kross
 7645	http://open.vocab.org/terms/sortlabel	candlebox
 7645	http://xmlns.com/foaf/0.1/name	candlebox
-5475	http://open.vocab.org/terms/sortlabel	ventor u00fcrgen reil
-5475	http://xmlns.com/foaf/0.1/name	ventor u00fcrgen reil
+5475	http://open.vocab.org/terms/sortlabel	ventor ürgen reil
+5475	http://xmlns.com/foaf/0.1/name	ventor ürgen reil
 5489	http://open.vocab.org/terms/sortlabel	freddy cricien
 5489	http://xmlns.com/foaf/0.1/name	freddy cricien
 4720	http://open.vocab.org/terms/sortlabel	mckeown les
@@ -10654,7 +10654,7 @@
 4564	http://open.vocab.org/terms/sortlabel	kurt dahle
 4564	http://xmlns.com/foaf/0.1/name	dahle kurt
 8313	http://open.vocab.org/terms/sortlabel	stone mike
-8313	rdfs:comment	metal guitarist queensr u00ffche
+8313	rdfs:comment	metal guitarist queensr ÿche
 8313	http://xmlns.com/foaf/0.1/name	stone mike
 452	http://open.vocab.org/terms/sortlabel	yorke thom
 452	http://xmlns.com/foaf/0.1/name	yorke thom
@@ -10829,8 +10829,8 @@
 8035	http://xmlns.com/foaf/0.1/name	vibrators
 3789	http://open.vocab.org/terms/sortlabel	andes mark
 3789	http://xmlns.com/foaf/0.1/name	andes mark
-4568	http://open.vocab.org/terms/sortlabel	u00d6hrn frida
-4568	http://xmlns.com/foaf/0.1/name	u00d6hrn frida
+4568	http://open.vocab.org/terms/sortlabel	Öhrn frida
+4568	http://xmlns.com/foaf/0.1/name	Öhrn frida
 7541	http://open.vocab.org/terms/sortlabel	mickey hart
 7541	http://xmlns.com/foaf/0.1/name	mickey hart
 3577	http://open.vocab.org/terms/sortlabel	relentless7 ben harper
@@ -10861,7 +10861,7 @@
 6469	http://open.vocab.org/terms/sortlabel	sex carter unstoppable machine
 6469	http://xmlns.com/foaf/0.1/name	sex carter unstoppable machine
 8366	http://open.vocab.org/terms/sortlabel	gayatri ganjawala
-8366	rdfs:comment	iyer u00e9e
+8366	rdfs:comment	iyer ée
 8366	http://xmlns.com/foaf/0.1/name	gayatri ganjawala
 6371	http://open.vocab.org/terms/sortlabel	ugly joe kid
 6371	http://xmlns.com/foaf/0.1/name	ugly joe kid
@@ -11168,8 +11168,8 @@
 8467	http://xmlns.com/foaf/0.1/name	martin bengtsson
 2410	http://open.vocab.org/terms/sortlabel	zevon warren
 2410	http://xmlns.com/foaf/0.1/name	zevon warren
-5518	http://open.vocab.org/terms/sortlabel	sadier u00e6titia
-5518	http://xmlns.com/foaf/0.1/name	sadier u00e6titia
+5518	http://open.vocab.org/terms/sortlabel	sadier ætitia
+5518	http://xmlns.com/foaf/0.1/name	sadier ætitia
 6959	http://open.vocab.org/terms/sortlabel	pailhead
 6959	http://xmlns.com/foaf/0.1/name	pailhead
 2627	http://open.vocab.org/terms/sortlabel	cecil malcolm
@@ -11271,7 +11271,7 @@
 2134	http://open.vocab.org/terms/sortlabel	austria3
 2134	http://xmlns.com/foaf/0.1/name	austria3
 6827	http://open.vocab.org/terms/sortlabel	campbell phil
-6827	rdfs:comment	risk u00f6rhead persian metal welsh mot guitarist
+6827	rdfs:comment	risk örhead persian metal welsh mot guitarist
 6827	http://xmlns.com/foaf/0.1/name	campbell phil
 4598	http://open.vocab.org/terms/sortlabel	modern talking
 4598	http://xmlns.com/foaf/0.1/name	modern talking
@@ -11621,8 +11621,8 @@
 7449	http://xmlns.com/foaf/0.1/name	hodgkinson tim
 7466	http://open.vocab.org/terms/sortlabel	paul kossoff
 7466	http://xmlns.com/foaf/0.1/name	paul kossoff
-7344	http://open.vocab.org/terms/sortlabel	u00fc amon ii u00fcl
-7344	http://xmlns.com/foaf/0.1/name	u00fc amon ii u00fcl
+7344	http://open.vocab.org/terms/sortlabel	ü amon ii ül
+7344	http://xmlns.com/foaf/0.1/name	ü amon ii ül
 8593	http://open.vocab.org/terms/sortlabel	facemob
 8593	http://xmlns.com/foaf/0.1/name	facemob
 3981	http://open.vocab.org/terms/sortlabel	ferris save
@@ -11730,9 +11730,9 @@
 566	http://xmlns.com/foaf/0.1/name	wyatt robert
 8618	http://open.vocab.org/terms/sortlabel	barry stock
 8618	http://xmlns.com/foaf/0.1/name	barry stock
-6941	http://open.vocab.org/terms/sortlabel	u00f6derberg johan
+6941	http://open.vocab.org/terms/sortlabel	öderberg johan
 6941	rdfs:comment	member amon metal swedish amarth guitarist doom
-6941	http://xmlns.com/foaf/0.1/name	u00f6derberg johan
+6941	http://xmlns.com/foaf/0.1/name	öderberg johan
 2136	http://open.vocab.org/terms/sortlabel	rob halford
 2136	http://xmlns.com/foaf/0.1/name	rob halford
 4565	http://open.vocab.org/terms/sortlabel	bejar daniel
@@ -12083,8 +12083,8 @@
 941	http://xmlns.com/foaf/0.1/name	pink big
 3588	http://open.vocab.org/terms/sortlabel	slipknot
 3588	http://xmlns.com/foaf/0.1/name	slipknot
-3953	http://open.vocab.org/terms/sortlabel	sami u00f6 sirni yli
-3953	http://xmlns.com/foaf/0.1/name	u00f6 sami sirni yli
+3953	http://open.vocab.org/terms/sortlabel	sami ö sirni yli
+3953	http://xmlns.com/foaf/0.1/name	ö sami sirni yli
 3854	http://open.vocab.org/terms/sortlabel	rod argent
 3854	http://xmlns.com/foaf/0.1/name	rod argent
 192	http://open.vocab.org/terms/sortlabel	barkley gnarls
@@ -12312,8 +12312,8 @@
 6195	http://open.vocab.org/terms/sortlabel	adams terry
 6195	rdfs:comment	composer pianist
 6195	http://xmlns.com/foaf/0.1/name	adams terry
-8603	http://open.vocab.org/terms/sortlabel	u00ebl ja
-8603	http://xmlns.com/foaf/0.1/name	u00ebl ja
+8603	http://open.vocab.org/terms/sortlabel	ël ja
+8603	http://xmlns.com/foaf/0.1/name	ël ja
 7397	http://open.vocab.org/terms/sortlabel	claudette robinson
 7397	http://xmlns.com/foaf/0.1/name	claudette robinson
 8773	http://open.vocab.org/terms/sortlabel	call caedmon
@@ -12339,8 +12339,8 @@
 8778	http://xmlns.com/foaf/0.1/name	da royce
 4466	http://open.vocab.org/terms/sortlabel	caesars mighty thee
 4466	http://xmlns.com/foaf/0.1/name	caesars mighty thee
-8779	http://open.vocab.org/terms/sortlabel	u00c5kesson fredrik
-8779	http://xmlns.com/foaf/0.1/name	u00c5kesson fredrik
+8779	http://open.vocab.org/terms/sortlabel	Åkesson fredrik
+8779	http://xmlns.com/foaf/0.1/name	Åkesson fredrik
 2097	http://open.vocab.org/terms/sortlabel	mills crispian
 2097	http://xmlns.com/foaf/0.1/name	mills crispian
 8780	http://open.vocab.org/terms/sortlabel	sly stone
@@ -12498,8 +12498,8 @@
 3609	http://xmlns.com/foaf/0.1/name	toto
 2406	http://open.vocab.org/terms/sortlabel	mcleod sarah
 2406	http://xmlns.com/foaf/0.1/name	mcleod sarah
-1379	http://open.vocab.org/terms/sortlabel	u00ebsto ti
-1379	http://xmlns.com/foaf/0.1/name	u00ebsto ti
+1379	http://open.vocab.org/terms/sortlabel	ësto ti
+1379	http://xmlns.com/foaf/0.1/name	ësto ti
 8527	http://open.vocab.org/terms/sortlabel	tom coster
 8527	http://xmlns.com/foaf/0.1/name	tom coster
 8813	http://open.vocab.org/terms/sortlabel	kuoppala alexander
@@ -12720,10 +12720,10 @@
 961	http://xmlns.com/foaf/0.1/name	coheed cambria
 2225	http://open.vocab.org/terms/sortlabel	navarro dave
 2225	http://xmlns.com/foaf/0.1/name	navarro dave
-5151	http://open.vocab.org/terms/sortlabel	bj gelotte u00f6rn
-5151	http://xmlns.com/foaf/0.1/name	bj gelotte u00f6rn
-8852	http://open.vocab.org/terms/sortlabel	svensson esbj u00f6rn
-8852	http://xmlns.com/foaf/0.1/name	svensson esbj u00f6rn
+5151	http://open.vocab.org/terms/sortlabel	bj gelotte örn
+5151	http://xmlns.com/foaf/0.1/name	bj gelotte örn
+8852	http://open.vocab.org/terms/sortlabel	svensson esbj örn
+8852	http://xmlns.com/foaf/0.1/name	svensson esbj örn
 6208	http://open.vocab.org/terms/sortlabel	judds
 6208	http://xmlns.com/foaf/0.1/name	judds
 8854	http://open.vocab.org/terms/sortlabel	glen chris
@@ -12777,8 +12777,8 @@
 4566	http://xmlns.com/foaf/0.1/name	calder kathryn
 2762	http://open.vocab.org/terms/sortlabel	reality masters
 2762	http://xmlns.com/foaf/0.1/name	reality masters
-8869	http://open.vocab.org/terms/sortlabel	u00e4ltskog agnetha
-8869	http://xmlns.com/foaf/0.1/name	u00e4ltskog agnetha
+8869	http://open.vocab.org/terms/sortlabel	ältskog agnetha
+8869	http://xmlns.com/foaf/0.1/name	ältskog agnetha
 8872	http://open.vocab.org/terms/sortlabel	mozart kart go
 8872	http://xmlns.com/foaf/0.1/name	mozart kart go
 8525	http://open.vocab.org/terms/sortlabel	manson shirley
@@ -12797,8 +12797,8 @@
 3560	http://xmlns.com/foaf/0.1/name	messina loggins
 7732	http://open.vocab.org/terms/sortlabel	mercedes lander
 7732	http://xmlns.com/foaf/0.1/name	lander mercedes
-8874	http://open.vocab.org/terms/sortlabel	u00fe u00f3r birgisson u00f3n
-8874	http://xmlns.com/foaf/0.1/name	u00fe u00f3r birgisson u00f3n
+8874	http://open.vocab.org/terms/sortlabel	þ ór birgisson ón
+8874	http://xmlns.com/foaf/0.1/name	þ ór birgisson ón
 8827	http://open.vocab.org/terms/sortlabel	stefan elmgren
 8827	http://xmlns.com/foaf/0.1/name	stefan elmgren
 4019	http://open.vocab.org/terms/sortlabel	wild orchid
@@ -12903,8 +12903,8 @@
 3120	http://xmlns.com/foaf/0.1/name	rocker lee
 2186	http://open.vocab.org/terms/sortlabel	barry gibb
 2186	http://xmlns.com/foaf/0.1/name	barry gibb
-5262	http://open.vocab.org/terms/sortlabel	u00f6bel kristoffer
-5262	http://xmlns.com/foaf/0.1/name	u00f6bel kristoffer
+5262	http://open.vocab.org/terms/sortlabel	öbel kristoffer
+5262	http://xmlns.com/foaf/0.1/name	öbel kristoffer
 8886	http://open.vocab.org/terms/sortlabel	harris jason
 8886	http://xmlns.com/foaf/0.1/name	harris jason
 8887	http://open.vocab.org/terms/sortlabel	disciples young
@@ -13060,10 +13060,10 @@
 738	http://xmlns.com/foaf/0.1/name	salif keita
 3038	http://open.vocab.org/terms/sortlabel	bass bomb
 3038	http://xmlns.com/foaf/0.1/name	bass bomb
-8918	http://open.vocab.org/terms/sortlabel	smyth u00e1n se
-8918	http://xmlns.com/foaf/0.1/name	smyth u00e1n se
-1628	http://open.vocab.org/terms/sortlabel	torrini u00edana emil
-1628	http://xmlns.com/foaf/0.1/name	torrini u00edana emil
+8918	http://open.vocab.org/terms/sortlabel	smyth án se
+8918	http://xmlns.com/foaf/0.1/name	smyth án se
+1628	http://open.vocab.org/terms/sortlabel	torrini íana emil
+1628	http://xmlns.com/foaf/0.1/name	torrini íana emil
 8154	http://open.vocab.org/terms/sortlabel	mccombs ryan
 8154	http://xmlns.com/foaf/0.1/name	mccombs ryan
 7830	http://open.vocab.org/terms/sortlabel	sir douglas quintet
@@ -13119,8 +13119,8 @@
 8927	http://xmlns.com/foaf/0.1/name	jarman joseph
 7787	http://open.vocab.org/terms/sortlabel	goodwyn myles
 7787	http://xmlns.com/foaf/0.1/name	goodwyn myles
-8928	http://open.vocab.org/terms/sortlabel	u00e2nia beth maria
-8928	http://xmlns.com/foaf/0.1/name	u00e2nia beth maria
+8928	http://open.vocab.org/terms/sortlabel	ânia beth maria
+8928	http://xmlns.com/foaf/0.1/name	ânia beth maria
 8453	http://open.vocab.org/terms/sortlabel	tip
 8453	http://xmlns.com/foaf/0.1/name	tip
 8633	http://open.vocab.org/terms/sortlabel	year
@@ -13172,7 +13172,7 @@
 8941	http://open.vocab.org/terms/sortlabel	tide october
 8941	http://xmlns.com/foaf/0.1/name	tide october
 2441	http://open.vocab.org/terms/sortlabel	khaled
-2441	rdfs:comment	songwriter ra u00ef singer khaled algerian
+2441	rdfs:comment	songwriter ra ï singer khaled algerian
 2441	http://xmlns.com/foaf/0.1/name	khaled
 7378	http://open.vocab.org/terms/sortlabel	trial
 7378	rdfs:comment	band edge political hardcore straight
@@ -13242,8 +13242,8 @@
 1442	http://xmlns.com/foaf/0.1/name	jazzanova
 2442	http://open.vocab.org/terms/sortlabel	florent pagny
 2442	http://xmlns.com/foaf/0.1/name	florent pagny
-8953	http://open.vocab.org/terms/sortlabel	tekr u00f8 le ronni
-8953	http://xmlns.com/foaf/0.1/name	tekr u00f8 le ronni
+8953	http://open.vocab.org/terms/sortlabel	tekr ø le ronni
+8953	http://xmlns.com/foaf/0.1/name	tekr ø le ronni
 6263	http://open.vocab.org/terms/sortlabel	lordi
 6263	http://xmlns.com/foaf/0.1/name	lordi
 486	http://open.vocab.org/terms/sortlabel	gil scott heron
@@ -13520,8 +13520,8 @@
 8958	http://xmlns.com/foaf/0.1/name	69 eyes
 7863	http://open.vocab.org/terms/sortlabel	limahl
 7863	http://xmlns.com/foaf/0.1/name	limahl
-9008	http://open.vocab.org/terms/sortlabel	u00e1n ciar u00e1in u00d3 braon
-9008	http://xmlns.com/foaf/0.1/name	u00e1n u00e1in ciar u00d3 braon
+9008	http://open.vocab.org/terms/sortlabel	án ciar áin Ó braon
+9008	http://xmlns.com/foaf/0.1/name	án áin ciar Ó braon
 2628	http://open.vocab.org/terms/sortlabel	scott ronnie
 2628	http://xmlns.com/foaf/0.1/name	scott ronnie
 2829	http://open.vocab.org/terms/sortlabel	carmine appice
@@ -13798,8 +13798,8 @@
 1483	http://xmlns.com/foaf/0.1/name	slayer
 4585	http://open.vocab.org/terms/sortlabel	mark sandman
 4585	http://xmlns.com/foaf/0.1/name	mark sandman
-9047	http://open.vocab.org/terms/sortlabel	u00d8ye erlend
-9047	http://xmlns.com/foaf/0.1/name	u00d8ye erlend
+9047	http://open.vocab.org/terms/sortlabel	Øye erlend
+9047	http://xmlns.com/foaf/0.1/name	Øye erlend
 6178	http://open.vocab.org/terms/sortlabel	carrion doug
 6178	http://xmlns.com/foaf/0.1/name	carrion doug
 8747	http://open.vocab.org/terms/sortlabel	michael williams
@@ -13824,8 +13824,8 @@
 4981	http://xmlns.com/foaf/0.1/name	brian fair
 8648	http://open.vocab.org/terms/sortlabel	fred color
 8648	http://xmlns.com/foaf/0.1/name	fred color
-9051	http://open.vocab.org/terms/sortlabel	u00e9ta irglov mark u00e1
-9051	http://xmlns.com/foaf/0.1/name	u00e9ta irglov mark u00e1
+9051	http://open.vocab.org/terms/sortlabel	éta irglov mark á
+9051	http://xmlns.com/foaf/0.1/name	éta irglov mark á
 1299	http://open.vocab.org/terms/sortlabel	raconteurs
 1299	rdfs:comment	saboteurs australia known
 1299	http://xmlns.com/foaf/0.1/name	raconteurs
@@ -13944,8 +13944,8 @@
 5844	http://xmlns.com/foaf/0.1/name	davol sam
 8556	http://open.vocab.org/terms/sortlabel	collin walcott
 8556	http://xmlns.com/foaf/0.1/name	collin walcott
-2445	http://open.vocab.org/terms/sortlabel	doc u00e9co gyn
-2445	http://xmlns.com/foaf/0.1/name	doc u00e9co gyn
+2445	http://open.vocab.org/terms/sortlabel	doc éco gyn
+2445	http://xmlns.com/foaf/0.1/name	doc éco gyn
 7751	http://open.vocab.org/terms/sortlabel	john lodge
 7751	http://xmlns.com/foaf/0.1/name	john lodge
 8569	http://open.vocab.org/terms/sortlabel	keely conrad
@@ -14589,10 +14589,10 @@
 8289	http://xmlns.com/foaf/0.1/name	earl brutus
 6907	http://open.vocab.org/terms/sortlabel	clay jars
 6907	http://xmlns.com/foaf/0.1/name	clay jars
-8732	http://open.vocab.org/terms/sortlabel	u00f4a
-8732	http://xmlns.com/foaf/0.1/name	u00f4a
-4293	http://open.vocab.org/terms/sortlabel	u00e9ill damian
-4293	http://xmlns.com/foaf/0.1/name	u00e9ill damian
+8732	http://open.vocab.org/terms/sortlabel	ôa
+8732	http://xmlns.com/foaf/0.1/name	ôa
+4293	http://open.vocab.org/terms/sortlabel	éill damian
+4293	http://xmlns.com/foaf/0.1/name	éill damian
 5310	http://open.vocab.org/terms/sortlabel	slim smith
 5310	rdfs:comment	singer jamaican
 5310	http://xmlns.com/foaf/0.1/name	slim smith
@@ -14637,8 +14637,8 @@
 972	http://xmlns.com/foaf/0.1/name	maiden iron
 2605	http://open.vocab.org/terms/sortlabel	gypsys band
 2605	http://xmlns.com/foaf/0.1/name	gypsys band
-3196	http://open.vocab.org/terms/sortlabel	u00e3o rom dom um
-3196	http://xmlns.com/foaf/0.1/name	u00e3o rom dom um
+3196	http://open.vocab.org/terms/sortlabel	ão rom dom um
+3196	http://xmlns.com/foaf/0.1/name	ão rom dom um
 8509	http://open.vocab.org/terms/sortlabel	homicide dj
 8509	http://xmlns.com/foaf/0.1/name	homicide dj
 8757	http://open.vocab.org/terms/sortlabel	harry hess
@@ -14771,8 +14771,8 @@
 9183	http://xmlns.com/foaf/0.1/name	propagandhi
 8671	http://open.vocab.org/terms/sortlabel	formell juan
 8671	http://xmlns.com/foaf/0.1/name	formell juan
-4839	http://open.vocab.org/terms/sortlabel	jr tito u00edguez rodr
-4839	http://xmlns.com/foaf/0.1/name	jr tito u00edguez rodr
+4839	http://open.vocab.org/terms/sortlabel	jr tito íguez rodr
+4839	http://xmlns.com/foaf/0.1/name	jr tito íguez rodr
 223	http://open.vocab.org/terms/sortlabel	convention fairport
 223	http://xmlns.com/foaf/0.1/name	convention fairport
 9188	http://open.vocab.org/terms/sortlabel	kovenant
@@ -14870,8 +14870,8 @@
 2345	http://open.vocab.org/terms/sortlabel	slaughterhouse
 2345	rdfs:comment	hip group hop
 2345	http://xmlns.com/foaf/0.1/name	slaughterhouse
-9201	http://open.vocab.org/terms/sortlabel	coralie u00e9ment cl
-9201	http://xmlns.com/foaf/0.1/name	coralie u00e9ment cl
+9201	http://open.vocab.org/terms/sortlabel	coralie ément cl
+9201	http://xmlns.com/foaf/0.1/name	coralie ément cl
 4192	http://open.vocab.org/terms/sortlabel	marc bolan
 4192	http://xmlns.com/foaf/0.1/name	marc bolan
 5097	http://open.vocab.org/terms/sortlabel	blasters
@@ -14894,8 +14894,8 @@
 1976	http://xmlns.com/foaf/0.1/name	sarah mclachlan
 6052	http://open.vocab.org/terms/sortlabel	copping chris
 6052	http://xmlns.com/foaf/0.1/name	copping chris
-2158	http://open.vocab.org/terms/sortlabel	sami u00e4nsk u00e4
-2158	http://xmlns.com/foaf/0.1/name	sami u00e4nsk u00e4
+2158	http://open.vocab.org/terms/sortlabel	sami änsk ä
+2158	http://xmlns.com/foaf/0.1/name	sami änsk ä
 6411	http://open.vocab.org/terms/sortlabel	rize hot
 6411	http://xmlns.com/foaf/0.1/name	rize hot
 5737	http://open.vocab.org/terms/sortlabel	death napalm
@@ -14933,8 +14933,8 @@
 3132	http://open.vocab.org/terms/sortlabel	ace masta
 3132	rdfs:comment	rapper
 3132	http://xmlns.com/foaf/0.1/name	ace masta
-9209	http://open.vocab.org/terms/sortlabel	mar carlos u00edn
-9209	http://xmlns.com/foaf/0.1/name	mar carlos u00edn
+9209	http://open.vocab.org/terms/sortlabel	mar carlos ín
+9209	http://xmlns.com/foaf/0.1/name	mar carlos ín
 7120	http://open.vocab.org/terms/sortlabel	crystal gayle
 7120	http://xmlns.com/foaf/0.1/name	crystal gayle
 4625	http://open.vocab.org/terms/sortlabel	funkadelic
@@ -14981,8 +14981,8 @@
 9220	http://xmlns.com/foaf/0.1/name	hidden cameras
 3498	http://open.vocab.org/terms/sortlabel	haden rachel
 3498	http://xmlns.com/foaf/0.1/name	haden rachel
-8853	http://open.vocab.org/terms/sortlabel	svensson esbj trio u00f6rn
-8853	http://xmlns.com/foaf/0.1/name	svensson esbj trio u00f6rn
+8853	http://open.vocab.org/terms/sortlabel	svensson esbj trio örn
+8853	http://xmlns.com/foaf/0.1/name	svensson esbj trio örn
 8788	http://open.vocab.org/terms/sortlabel	dominic chad
 8788	http://xmlns.com/foaf/0.1/name	dominic chad
 9222	http://open.vocab.org/terms/sortlabel	raphaels
@@ -15076,8 +15076,8 @@
 3332	http://xmlns.com/foaf/0.1/name	tuna hot
 1323	http://open.vocab.org/terms/sortlabel	tegan sara
 1323	http://xmlns.com/foaf/0.1/name	tegan sara
-7454	http://open.vocab.org/terms/sortlabel	kenny u00e5kansson
-7454	http://xmlns.com/foaf/0.1/name	kenny u00e5kansson
+7454	http://open.vocab.org/terms/sortlabel	kenny åkansson
+7454	http://xmlns.com/foaf/0.1/name	kenny åkansson
 7531	http://open.vocab.org/terms/sortlabel	moony
 7531	http://xmlns.com/foaf/0.1/name	moony
 730	http://open.vocab.org/terms/sortlabel	keys black
@@ -15317,8 +15317,8 @@
 8459	http://xmlns.com/foaf/0.1/name	stevens
 2587	http://open.vocab.org/terms/sortlabel	base ace
 2587	http://xmlns.com/foaf/0.1/name	base ace
-7598	http://open.vocab.org/terms/sortlabel	marc u00f1ones qui
-7598	http://xmlns.com/foaf/0.1/name	u00f1ones marc qui
+7598	http://open.vocab.org/terms/sortlabel	marc ñones qui
+7598	http://xmlns.com/foaf/0.1/name	ñones marc qui
 9262	http://open.vocab.org/terms/sortlabel	castellano torry
 9262	http://xmlns.com/foaf/0.1/name	castellano torry
 8259	http://open.vocab.org/terms/sortlabel	daniel ash
@@ -15518,8 +15518,8 @@
 9281	http://xmlns.com/foaf/0.1/name	kut klose
 5884	http://open.vocab.org/terms/sortlabel	jonas nick
 5884	http://xmlns.com/foaf/0.1/name	jonas nick
-2200	http://open.vocab.org/terms/sortlabel	lyxz dennis u00e9n
-2200	http://xmlns.com/foaf/0.1/name	lyxz dennis u00e9n
+2200	http://open.vocab.org/terms/sortlabel	lyxz dennis én
+2200	http://xmlns.com/foaf/0.1/name	lyxz dennis én
 8356	http://open.vocab.org/terms/sortlabel	name use
 8356	http://xmlns.com/foaf/0.1/name	name use
 5929	http://open.vocab.org/terms/sortlabel	dave weckl
@@ -15616,8 +15616,8 @@
 6837	http://xmlns.com/foaf/0.1/name	longet claudine
 5341	http://open.vocab.org/terms/sortlabel	smith brix
 5341	http://xmlns.com/foaf/0.1/name	smith brix
-625	http://open.vocab.org/terms/sortlabel	u00d3l arnalds u00f6f
-625	http://xmlns.com/foaf/0.1/name	u00d3l arnalds u00f6f
+625	http://open.vocab.org/terms/sortlabel	Ól arnalds öf
+625	http://xmlns.com/foaf/0.1/name	Ól arnalds öf
 4936	http://open.vocab.org/terms/sortlabel	anastasio trey
 4936	http://xmlns.com/foaf/0.1/name	anastasio trey
 6753	http://open.vocab.org/terms/sortlabel	randy randall
@@ -15683,8 +15683,8 @@
 6482	http://xmlns.com/foaf/0.1/name	carter maybelle
 7599	http://open.vocab.org/terms/sortlabel	trucks butch
 7599	http://xmlns.com/foaf/0.1/name	trucks butch
-6800	http://open.vocab.org/terms/sortlabel	ralf u00fctter
-6800	http://xmlns.com/foaf/0.1/name	ralf u00fctter
+6800	http://open.vocab.org/terms/sortlabel	ralf ütter
+6800	http://xmlns.com/foaf/0.1/name	ralf ütter
 4966	http://open.vocab.org/terms/sortlabel	mindflayer
 4966	http://xmlns.com/foaf/0.1/name	mindflayer
 8165	http://open.vocab.org/terms/sortlabel	billy duffy
@@ -15754,8 +15754,8 @@
 8520	http://xmlns.com/foaf/0.1/name	ray dead man
 1185	http://open.vocab.org/terms/sortlabel	nice
 1185	http://xmlns.com/foaf/0.1/name	nice
-6434	http://open.vocab.org/terms/sortlabel	u00e1ir u00e9ad nesbitt
-6434	http://xmlns.com/foaf/0.1/name	u00e1ir nesbitt u00e9ad
+6434	http://open.vocab.org/terms/sortlabel	áir éad nesbitt
+6434	http://xmlns.com/foaf/0.1/name	áir nesbitt éad
 8263	http://open.vocab.org/terms/sortlabel	mann aimee
 8263	http://xmlns.com/foaf/0.1/name	mann aimee
 7039	http://open.vocab.org/terms/sortlabel	turner aaron
@@ -15816,8 +15816,8 @@
 4857	http://xmlns.com/foaf/0.1/name	lozano conrad
 770	http://open.vocab.org/terms/sortlabel	rabbit frightened
 770	http://xmlns.com/foaf/0.1/name	rabbit frightened
-4768	http://open.vocab.org/terms/sortlabel	bj ivar u00f8rnson
-4768	http://xmlns.com/foaf/0.1/name	bj u00f8rnson ivar
+4768	http://open.vocab.org/terms/sortlabel	bj ivar ørnson
+4768	http://xmlns.com/foaf/0.1/name	bj ørnson ivar
 8989	http://open.vocab.org/terms/sortlabel	newmark andy
 8989	http://xmlns.com/foaf/0.1/name	newmark andy
 7057	http://open.vocab.org/terms/sortlabel	keith whitley
@@ -15916,8 +15916,8 @@
 7877	http://xmlns.com/foaf/0.1/name	brubeck dave
 394	http://open.vocab.org/terms/sortlabel	metal death eagles
 394	http://xmlns.com/foaf/0.1/name	metal death eagles
-5345	http://open.vocab.org/terms/sortlabel	jonas bj u00f6rler
-5345	http://xmlns.com/foaf/0.1/name	jonas bj u00f6rler
+5345	http://open.vocab.org/terms/sortlabel	jonas bj örler
+5345	http://xmlns.com/foaf/0.1/name	jonas bj örler
 2447	http://open.vocab.org/terms/sortlabel	renaud
 2447	http://xmlns.com/foaf/0.1/name	renaud
 8591	http://open.vocab.org/terms/sortlabel	jason lytle
@@ -15938,8 +15938,8 @@
 8843	http://xmlns.com/foaf/0.1/name	gordon martin
 8793	http://open.vocab.org/terms/sortlabel	chris poland
 8793	http://xmlns.com/foaf/0.1/name	chris poland
-7213	http://open.vocab.org/terms/sortlabel	carl bar u00e2t
-7213	http://xmlns.com/foaf/0.1/name	carl bar u00e2t
+7213	http://open.vocab.org/terms/sortlabel	carl bar ât
+7213	http://xmlns.com/foaf/0.1/name	carl bar ât
 6175	http://open.vocab.org/terms/sortlabel	wife katastrophy
 6175	http://xmlns.com/foaf/0.1/name	wife katastrophy
 6957	http://open.vocab.org/terms/sortlabel	jimmy rankin
@@ -15979,8 +15979,8 @@
 3069	http://xmlns.com/foaf/0.1/name	marsalis jason
 7841	http://open.vocab.org/terms/sortlabel	peter beckett
 7841	http://xmlns.com/foaf/0.1/name	peter beckett
-4473	http://open.vocab.org/terms/sortlabel	queensr u00ffche
-4473	http://xmlns.com/foaf/0.1/name	queensr u00ffche
+4473	http://open.vocab.org/terms/sortlabel	queensr ÿche
+4473	http://xmlns.com/foaf/0.1/name	queensr ÿche
 4330	http://open.vocab.org/terms/sortlabel	frank agnew
 4330	http://xmlns.com/foaf/0.1/name	frank agnew
 7428	http://open.vocab.org/terms/sortlabel	tad kinchla
@@ -16125,8 +16125,8 @@
 6700	http://xmlns.com/foaf/0.1/name	subroc
 1232	http://open.vocab.org/terms/sortlabel	cudi kid
 1232	http://xmlns.com/foaf/0.1/name	cudi kid
-6350	http://open.vocab.org/terms/sortlabel	u00f8vland rolf
-6350	http://xmlns.com/foaf/0.1/name	u00f8vland rolf
+6350	http://open.vocab.org/terms/sortlabel	øvland rolf
+6350	http://xmlns.com/foaf/0.1/name	øvland rolf
 6768	http://open.vocab.org/terms/sortlabel	schieppati brandan
 6768	http://xmlns.com/foaf/0.1/name	schieppati brandan
 3187	http://open.vocab.org/terms/sortlabel	adam schlesinger
@@ -16375,8 +16375,8 @@
 3360	http://xmlns.com/foaf/0.1/name	meg white
 2769	http://open.vocab.org/terms/sortlabel	appleton natalie
 2769	http://xmlns.com/foaf/0.1/name	appleton natalie
-6067	http://open.vocab.org/terms/sortlabel	schulz u00fcnter
-6067	http://xmlns.com/foaf/0.1/name	schulz u00fcnter
+6067	http://open.vocab.org/terms/sortlabel	schulz ünter
+6067	http://xmlns.com/foaf/0.1/name	schulz ünter
 3206	http://open.vocab.org/terms/sortlabel	knopfler mark
 3206	http://xmlns.com/foaf/0.1/name	knopfler mark
 2148	http://open.vocab.org/terms/sortlabel	weasel screeching
@@ -17194,8 +17194,8 @@
 1297	http://xmlns.com/foaf/0.1/name	stereolab
 8418	http://open.vocab.org/terms/sortlabel	michael urbano
 8418	http://xmlns.com/foaf/0.1/name	michael urbano
-6365	http://open.vocab.org/terms/sortlabel	col willie u00f3n
-6365	http://xmlns.com/foaf/0.1/name	col willie u00f3n
+6365	http://open.vocab.org/terms/sortlabel	col willie ón
+6365	http://xmlns.com/foaf/0.1/name	col willie ón
 8291	http://open.vocab.org/terms/sortlabel	clock dva
 8291	http://xmlns.com/foaf/0.1/name	clock dva
 8818	http://open.vocab.org/terms/sortlabel	larry carlton
@@ -17228,8 +17228,8 @@
 7938	http://xmlns.com/foaf/0.1/name	agua annique
 3326	http://open.vocab.org/terms/sortlabel	vega
 3326	http://xmlns.com/foaf/0.1/name	vega louie little
-6554	http://open.vocab.org/terms/sortlabel	u00fanasa
-6554	http://xmlns.com/foaf/0.1/name	u00fanasa
+6554	http://open.vocab.org/terms/sortlabel	únasa
+6554	http://xmlns.com/foaf/0.1/name	únasa
 8738	http://open.vocab.org/terms/sortlabel	hickey ken
 8738	http://xmlns.com/foaf/0.1/name	hickey ken
 8458	http://open.vocab.org/terms/sortlabel	swann donald
@@ -17293,8 +17293,8 @@
 2696	http://xmlns.com/foaf/0.1/name	dirnt mike
 9058	http://open.vocab.org/terms/sortlabel	murder
 9058	http://xmlns.com/foaf/0.1/name	murder
-7179	http://open.vocab.org/terms/sortlabel	jim u00e9nez flaco
-7179	http://xmlns.com/foaf/0.1/name	jim u00e9nez flaco
+7179	http://open.vocab.org/terms/sortlabel	jim énez flaco
+7179	http://xmlns.com/foaf/0.1/name	jim énez flaco
 9378	http://open.vocab.org/terms/sortlabel	carnage cornelius
 9378	http://xmlns.com/foaf/0.1/name	carnage cornelius
 2811	http://open.vocab.org/terms/sortlabel	coal chamber
@@ -17435,8 +17435,8 @@
 9304	http://xmlns.com/foaf/0.1/name	chenier
 8332	http://open.vocab.org/terms/sortlabel	walkyier martin
 8332	http://xmlns.com/foaf/0.1/name	walkyier martin
-7289	http://open.vocab.org/terms/sortlabel	mouquet u00c9ric
-7289	http://xmlns.com/foaf/0.1/name	mouquet u00c9ric
+7289	http://open.vocab.org/terms/sortlabel	mouquet Éric
+7289	http://xmlns.com/foaf/0.1/name	mouquet Éric
 8961	http://open.vocab.org/terms/sortlabel	hall jerry
 8961	http://xmlns.com/foaf/0.1/name	hall jerry
 9298	http://open.vocab.org/terms/sortlabel	ray stevie vaughan
@@ -17542,8 +17542,8 @@
 9035	http://xmlns.com/foaf/0.1/name	capone
 9386	http://open.vocab.org/terms/sortlabel	carl jimmy black
 9386	http://xmlns.com/foaf/0.1/name	carl jimmy black
-263	http://open.vocab.org/terms/sortlabel	u00f3s sigur
-263	http://xmlns.com/foaf/0.1/name	u00f3s sigur
+263	http://open.vocab.org/terms/sortlabel	ós sigur
+263	http://xmlns.com/foaf/0.1/name	ós sigur
 8534	http://open.vocab.org/terms/sortlabel	american prevention hallowe north initiative
 8534	http://xmlns.com/foaf/0.1/name	american prevention hallowe north initiative
 6519	http://open.vocab.org/terms/sortlabel	seeds
@@ -17575,8 +17575,8 @@
 8355	http://xmlns.com/foaf/0.1/name	williams clarence
 5009	http://open.vocab.org/terms/sortlabel	iris donnie
 5009	http://xmlns.com/foaf/0.1/name	iris donnie
-9239	http://open.vocab.org/terms/sortlabel	u00e1n ciar bourke
-9239	http://xmlns.com/foaf/0.1/name	u00e1n ciar bourke
+9239	http://open.vocab.org/terms/sortlabel	án ciar bourke
+9239	http://xmlns.com/foaf/0.1/name	án ciar bourke
 2986	http://open.vocab.org/terms/sortlabel	murder junkies
 2986	http://xmlns.com/foaf/0.1/name	murder junkies
 4587	http://open.vocab.org/terms/sortlabel	gentle giant
@@ -18141,8 +18141,8 @@
 8323	http://xmlns.com/foaf/0.1/name	starship cobra
 2221	http://open.vocab.org/terms/sortlabel	tamar braxton
 2221	http://xmlns.com/foaf/0.1/name	tamar braxton
-8871	http://open.vocab.org/terms/sortlabel	bj ulvaeus u00f6rn
-8871	http://xmlns.com/foaf/0.1/name	bj ulvaeus u00f6rn
+8871	http://open.vocab.org/terms/sortlabel	bj ulvaeus örn
+8871	http://xmlns.com/foaf/0.1/name	bj ulvaeus örn
 6363	http://open.vocab.org/terms/sortlabel	friends phil lesh
 6363	http://xmlns.com/foaf/0.1/name	friends phil lesh
 6722	http://open.vocab.org/terms/sortlabel	menuck efrim
