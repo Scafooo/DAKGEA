@@ -318,6 +318,49 @@ class MixupDataBuilder:
     def _string_similarity(a: str, b: str) -> float:
         return SequenceMatcher(None, a.lower(), b.lower()).ratio()
 
+    def _build_canonical_map_from_matches(self, dataset: Dataset) -> Dict[str, str]:
+        """Build canonical map using attribute_matches.
+
+        Groups matched predicates under the same canonical token.
+        Falls back to local name extraction for unmatched predicates.
+
+        Example:
+            attribute_matches = {"http://dbpedia.org/ontology/birthDate": ["http://www.wikidata.org/entity/P569"]}
+            -> {"http://dbpedia.org/ontology/birthDate": "<BIRTHDATE>",
+                "http://www.wikidata.org/entity/P569": "<BIRTHDATE>"}
+        """
+        canonical_map: Dict[str, str] = {}
+
+        # First, map all predicates from attribute_matches
+        if dataset.attribute_matches:
+            for src_uri, tgt_uris in dataset.attribute_matches.items():
+                # Use local name from source predicate as canonical token
+                local = src_uri.split("/")[-1].split("#")[-1]
+                token = f"<{local.upper()}>"
+                canonical_map[src_uri] = token
+                for tgt_uri in tgt_uris:
+                    canonical_map[tgt_uri] = token
+
+            logger.info(f"[MixupBuilder] Built canonical map from attribute_matches: "
+                       f"{len(canonical_map)} URIs -> {len(set(canonical_map.values()))} tokens")
+        else:
+            logger.warning("[MixupBuilder] No attribute_matches available")
+
+        # Add remaining predicates not in attribute_matches (with their own token)
+        all_predicates = (set(dataset.knowledge_graph_source.predicates()) |
+                         set(dataset.knowledge_graph_target.predicates()))
+        unmapped_count = 0
+        for p in all_predicates:
+            p_str = str(p)
+            if p_str not in canonical_map:
+                canonical_map[p_str] = f"<{_local_name(p)}>"
+                unmapped_count += 1
+
+        if unmapped_count > 0:
+            logger.info(f"[MixupBuilder] Added {unmapped_count} unmapped predicates with individual tokens")
+
+        return canonical_map
+
     def _generate_flip_pairs(self) -> List[Dict[str, str]]:
         """Generate flip training pairs (yes/no, true/false, etc.)."""
         pairs = []
@@ -409,12 +452,8 @@ class MixupDataBuilder:
             attr_map = load_attr_names(dataset_path)
             logger.info(f"[MixupBuilder] Loaded {len(attr_map)} attribute name mappings")
 
-        # Build canonical map
-        canonical_map = {
-            str(p): f"<{_local_name(p)}>"
-            for p in (set(dataset.knowledge_graph_source.predicates()) |
-                     set(dataset.knowledge_graph_target.predicates()))
-        }
+        # Build canonical map using attribute_matches (groups matched predicates under same token)
+        canonical_map = self._build_canonical_map_from_matches(dataset)
 
         # Store attr_map for use in loops
         self._attr_map = attr_map

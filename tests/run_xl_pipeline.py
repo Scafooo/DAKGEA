@@ -6,6 +6,7 @@ import time
 import numpy as np
 import re
 import os
+import argparse
 from pathlib import Path
 from collections import defaultdict
 from rdflib import Literal
@@ -29,6 +30,9 @@ EPOCHS = 3
 TOTAL_REPORT_SAMPLES = 200
 MAX_ORPHANS_PER_PRED = 200
 SWEEP_SAMPLES = 50
+
+# Available datasets
+AVAILABLE_DATASETS = ["BBC_DB", "D_W_15K_V1", "D_W_15K_V2", "D_Y_15K_V1", "D_Y_15K_V2"]
 
 logger = get_logger("FlanT5XL_Creative")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -469,16 +473,49 @@ def clean_p(uri, attr_map):
     if uri_str in attr_map: return attr_map[uri_str].replace(' ', '_').lower()
     return uri_str.split('/')[-1].split('#')[-1].replace('>', '').replace('<', '').lower()
 
-def run_xl_pipeline():
-    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 XL (3B) - CREATIVE VARIATION PIPELINE ".center(98) + "█"); print("█"*100)
+def build_canonical_map_from_matches(dataset) -> dict:
+    """Build canonical map using attribute_matches (same logic as MixupDataBuilder)."""
+    canonical_map = {}
+
+    # First, map all predicates from attribute_matches
+    if dataset.attribute_matches:
+        for src_uri, tgt_uris in dataset.attribute_matches.items():
+            local = src_uri.split("/")[-1].split("#")[-1]
+            token = f"<{local.upper()}>"
+            canonical_map[src_uri] = token
+            for tgt_uri in tgt_uris:
+                canonical_map[tgt_uri] = token
+        print(f"    [CANONICAL] Built from attribute_matches: {len(canonical_map)} URIs -> {len(set(canonical_map.values()))} tokens")
+    else:
+        print("    [WARN] No attribute_matches available!")
+
+    # Add remaining predicates
+    all_predicates = (set(dataset.knowledge_graph_source.predicates()) |
+                     set(dataset.knowledge_graph_target.predicates()))
+    for p in all_predicates:
+        p_str = str(p)
+        if p_str not in canonical_map:
+            local = p_str.split("/")[-1].split("#")[-1].upper()
+            canonical_map[p_str] = f"<{local}>"
+
+    return canonical_map
+
+
+def run_xl_pipeline(dataset_name: str = "BBC_DB"):
+    print("\n" + "█"*100); print(f"█ RTX 4090: FLAN-T5 XL (3B) - CREATIVE VARIATION PIPELINE [{dataset_name}] ".center(98) + "█"); print("█"*100)
 
     # 1. DATA
-    dataset_path = str(PROJECT_ROOT / "data/raw/openea/BBC_DB")
+    dataset_path = str(PROJECT_ROOT / "data/raw/openea" / dataset_name)
+    if not Path(dataset_path).exists():
+        print(f"ERROR: Dataset path not found: {dataset_path}")
+        return
     reader = OpeneaDatasetReader()
     dataset = reader.read(dataset_path)
     attr_map = load_attr_names(dataset_path)
-    builder = MixupDataBuilder()
-    _, canonical_map = builder.build_training_data(dataset, max_pairs_per_pred=10)
+
+    # Build canonical map using attribute_matches (key fix for non-BBC_DB datasets!)
+    canonical_map = build_canonical_map_from_matches(dataset)
+
     kg_src, kg_tgt = dataset.knowledge_graph_source, dataset.knowledge_graph_target
 
     print("    [1/4] Building Training Data (CREATIVE VARIATION Focus)...")
@@ -599,7 +636,7 @@ def run_xl_pipeline():
 
     # 2. MODEL XL (BF16 + LoRA)
     device = "cuda"
-    out_dir = "./results/t5_xl_creative_v14"  # v14: NAME VARIANTS dizionario, meno typo
+    out_dir = f"./results/t5_xl_creative_v14_{dataset_name}"  # Separate model per dataset
     interpolator = MixupT5XLInterpolator(model_name=MODEL_NAME, out_dir=out_dir, device=device)
 
     # 3. TRAINING (Forza retraining per nuovo paradigma)
@@ -637,9 +674,9 @@ def run_xl_pipeline():
     # 4. REPORT
     print(f"    [4/4] Generating Creative Variation Report...")
     interpolator.latent_noise_std, interpolator.gen_temperature = best['n'], best['t']
-    output_file = "massive_t5_xl_creative_v14_report.txt"
+    output_file = f"massive_t5_xl_creative_v14_{dataset_name}_report.txt"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v14\n")
+        f.write(f"DAKGEA FLAN-T5-XL (3B) CREATIVE VARIATION REPORT v14 [{dataset_name}]\n")
         f.write(f"Config: {best} | Model: XL | Strategy: v14 - NAME VARIANTS + less typos\n")
         f.write("="*120 + "\n\n")
         
@@ -678,4 +715,9 @@ def run_xl_pipeline():
     print(f"\n>>> SUCCESS: XL Creative v14 Report (NAME VARIANTS + less typos) saved to {output_file}")
 
 if __name__ == "__main__":
-    run_xl_pipeline()
+    parser = argparse.ArgumentParser(description="Run FLAN-T5 XL Creative Variation Pipeline")
+    parser.add_argument("--dataset", "-d", type=str, default="BBC_DB",
+                       choices=AVAILABLE_DATASETS,
+                       help=f"Dataset to use (default: BBC_DB). Options: {AVAILABLE_DATASETS}")
+    args = parser.parse_args()
+    run_xl_pipeline(args.dataset)
