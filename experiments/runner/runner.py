@@ -6,7 +6,9 @@ import copy
 import json
 import logging
 import shutil
+import time
 import warnings
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -116,6 +118,10 @@ class ExperimentRunner:
 
         self._early_exit = False
         self.base_workspace.mkdir(parents=True, exist_ok=True)
+
+        # Timing tracking
+        self._experiment_start_time: Optional[float] = None
+        self._experiment_end_time: Optional[float] = None
 
         self.metadata: Dict[str, Any] = {
             "name": self.name,
@@ -242,6 +248,9 @@ class ExperimentRunner:
             logger.info("✅ Experiment already completed, skipping execution (set overwrite_existing=true to re-run)")
             return
 
+        # Track experiment start time
+        self._experiment_start_time = time.time()
+
         # Check if we're in direct path mode (no ratios = direct dataset access)
         direct_mode = self.normalized_cfg.direct_mode
 
@@ -251,6 +260,9 @@ class ExperimentRunner:
             else:
                 self._run_standard_mode()
         finally:
+            # Track experiment end time
+            self._experiment_end_time = time.time()
+
             # Clean up intermediate files if requested (always execute, even on error)
             if self.clear_intermediate:
                 self._cleanup_intermediate_files()
@@ -1725,6 +1737,50 @@ class ExperimentRunner:
                 logger.warning("Failed to parse evaluation results from %s", path_obj)
         return aggregated
 
+    def _collect_timing_from_summaries(self) -> Dict[str, Any]:
+        """Collect timing information from stage summary files."""
+        timing = {}
+
+        # Try to find summary files in the workspace
+        reduction_summary = self.base_workspace / "reduction" / "summary.json"
+        augmentation_summary = self.base_workspace / "augmentation" / "summary.json"
+
+        # Reduction timing
+        if reduction_summary.exists():
+            try:
+                with reduction_summary.open("r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    if "timing" in data:
+                        timing["reduction_seconds"] = data["timing"].get("total_seconds")
+            except (json.JSONDecodeError, OSError):
+                pass
+
+        # Augmentation timing
+        if augmentation_summary.exists():
+            try:
+                with augmentation_summary.open("r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    if "timing" in data:
+                        timing["augmentation_seconds"] = data["timing"].get("total_seconds")
+            except (json.JSONDecodeError, OSError):
+                pass
+
+        # Evaluation timing from results.json
+        for stage_dir in ["reduction", "augmentation"]:
+            results_file = self.base_workspace / stage_dir / "results.json"
+            if results_file.exists():
+                try:
+                    with results_file.open("r", encoding="utf-8") as f:
+                        data = json.load(f)
+                        for model_name, model_results in data.items():
+                            if isinstance(model_results, dict) and "timing" in model_results:
+                                key = f"{stage_dir}_eval_seconds"
+                                timing[key] = model_results["timing"].get("total_seconds")
+                except (json.JSONDecodeError, OSError):
+                    pass
+
+        return timing
+
     def _build_metadata_payload(self) -> Dict[str, Any]:
         """Return a flattened metadata dictionary for persistence."""
         dataset_entry = next(iter(self.metadata.get("datasets", {}).items()), (None, {}))
@@ -1739,6 +1795,15 @@ class ExperimentRunner:
                 "name": aug_name,
                 "details": copy.deepcopy(aug_meta),
             }
+
+        # Collect timing information
+        timing = self._collect_timing_from_summaries()
+
+        # Add overall experiment timing
+        if self._experiment_start_time and self._experiment_end_time:
+            timing["total_seconds"] = round(self._experiment_end_time - self._experiment_start_time, 2)
+            timing["started_at"] = datetime.fromtimestamp(self._experiment_start_time).isoformat()
+            timing["finished_at"] = datetime.fromtimestamp(self._experiment_end_time).isoformat()
 
         payload = {
             "name": self.name,
@@ -1756,6 +1821,7 @@ class ExperimentRunner:
             "models": self.models,
             "overwrite_existing": self.overwrite_existing,
             "workspace_root": str(self.base_workspace.resolve()),
+            "timing": timing if timing else None,
         }
         return payload
 

@@ -5,6 +5,8 @@ from __future__ import annotations
 import copy
 import json
 import shutil
+import time
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
@@ -28,6 +30,15 @@ VARIANT_REDUCED = "reduced"
 def _ensure_directory(path: Path) -> Path:
     path.mkdir(parents=True, exist_ok=True)
     return path
+
+
+def _format_timing(start_time: float, end_time: float) -> Dict[str, Any]:
+    """Format timing information for JSON output."""
+    return {
+        "total_seconds": round(end_time - start_time, 2),
+        "started_at": datetime.fromtimestamp(start_time).isoformat(),
+        "finished_at": datetime.fromtimestamp(end_time).isoformat(),
+    }
 
 
 def _is_baseline_variant(name: Optional[str]) -> bool:
@@ -223,11 +234,19 @@ class ReductionStage(_WriterStage):
                 "Cached reduction at %s incomplete; recomputing.", reader_root
             )
 
+        # Track timing
+        start_time = time.time()
+
         reducer = self.reducer_cls(stage_cfg)
         dataset_reduced = reducer.reduce(dataset.clone())
+
+        end_time = time.time()
+        timing_info = _format_timing(start_time, end_time)
+
         logger.info(
-            "[SUCCESS] Reduction complete (%d aligned pairs)",
+            "[SUCCESS] Reduction complete (%d aligned pairs) in %.2fs",
             len(dataset_reduced.aligned_entities),
+            timing_info["total_seconds"],
         )
 
         for plan in self.writer_plans:
@@ -263,6 +282,7 @@ class ReductionStage(_WriterStage):
                 "aligned_pairs": stats["aligned_pairs"],
                 "writer": writer_name,
                 "statistics": stats,
+                "timing": timing_info,
             },
         )
         return dataset_reduced
@@ -325,16 +345,24 @@ class AugmentationStage(_WriterStage):
                 reader_root,
             )
 
+        # Track timing
+        start_time = time.time()
+
         augmenter_cls = AUGMENTATION_REGISTRY.get(augmentation_name)
         # Add stage_root to config so augmenter can save artifacts
         augmenter_config = dict(stage_cfg)
         augmenter_config.setdefault("augmentation", {})["stage_root"] = str(stage_root)
         augmenter = augmenter_cls(augmenter_config)
         dataset_augmented = augmenter.augment(dataset_reduced.clone())
+
+        end_time = time.time()
+        timing_info = _format_timing(start_time, end_time)
+
         logger.info(
-            "[SUCCESS] Augmentation '%s' complete (%d aligned pairs)",
+            "[SUCCESS] Augmentation '%s' complete (%d aligned pairs) in %.2fs",
             augmentation_name,
             len(dataset_augmented.aligned_entities),
+            timing_info["total_seconds"],
         )
 
         # SHACL validation (optional, disabled by default)
@@ -395,6 +423,7 @@ class AugmentationStage(_WriterStage):
                 "aligned_pairs": stats["aligned_pairs"],
                 "writer": writer_name,
                 "statistics": stats,
+                "timing": timing_info,
             },
         )
 
@@ -583,9 +612,24 @@ class EvaluationStage:
 
             model_cls = get_alignment_model(model_name)
             logger.info("[STEP] → Evaluating model '%s' (augmentation=%s)", model_name, augmentation_name)
+
+            # Track timing for model training + evaluation
+            model_start_time = time.time()
+
             model = model_cls(stage_cfg_eval)
             results = model.evaluate(dataset_reduced, dataset_augmented)
-            logger.info("[SUCCESS] Model '%s' evaluation finished", model_name)
+
+            model_end_time = time.time()
+            model_timing = _format_timing(model_start_time, model_end_time)
+
+            # Add timing to results
+            results["timing"] = model_timing
+
+            logger.info(
+                "[SUCCESS] Model '%s' evaluation finished in %.2fs",
+                model_name,
+                model_timing["total_seconds"],
+            )
 
             all_results[model_name] = results
 
