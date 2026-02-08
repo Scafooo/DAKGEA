@@ -115,44 +115,65 @@ except Exception:
 "
 }
 
+# Helper: create reduction-only config (stub augmentation + custom seed)
+make_reduction_only_config() {
+    local src_config="$1"
+    local dst_config="$2"
+    local seed="$3"
+    python3 -c "
+import yaml
+with open('$src_config') as f:
+    cfg = yaml.safe_load(f)
+cfg['experiment']['seed'] = $seed
+cfg['experiment']['augmentation'] = {
+    'method': 'stub',
+    'writer': 'bert_int',
+    'eval': False,
+    'save_dataset': False,
+    'save_model': False
+}
+with open('$dst_config', 'w') as f:
+    yaml.dump(cfg, f, default_flow_style=False)
+"
+}
+
 for config_file in "$CONFIG_DIR"/*.yaml; do
     CURRENT=$((CURRENT + 1))
     CONFIG_NAME=$(basename "$config_file" .yaml)
 
-    # Check if experiment already completed with multi-run
     EXP_DIR="$RESULTS_DIR/$CONFIG_NAME"
     METADATA_FILE="$EXP_DIR/metadata.json"
 
+    # Skip if already completed (multi-run or legacy single-run)
     if [[ -f "$METADATA_FILE" ]]; then
-        if grep -q '"reduction_runs"' "$METADATA_FILE" 2>/dev/null; then
-            log "[$CURRENT/$TOTAL_CONFIGS] [SKIP] $CONFIG_NAME - already completed ($REDUCTION_RUNS runs)"
+        if grep -q '"reduction_runs"\|"results"' "$METADATA_FILE" 2>/dev/null; then
+            log "[$CURRENT/$TOTAL_CONFIGS] [SKIP] $CONFIG_NAME - already completed"
             SKIPPED=$((SKIPPED + 1))
             continue
         fi
     fi
 
-    log "[$CURRENT/$TOTAL_CONFIGS] $CONFIG_NAME - running $REDUCTION_RUNS reduction runs..."
+    log "[$CURRENT/$TOTAL_CONFIGS] $CONFIG_NAME - $REDUCTION_RUNS reduction runs + 1 augmentation..."
 
+    # --- Phase A: Reduction-only runs to find lowest hits@1 ---
     BEST_HITS1=""
-    BEST_RUN=0
+    BEST_SEED=$BASE_SEED
 
     for run in $(seq 1 $REDUCTION_RUNS); do
-        # Create temp config with a different seed per run
         RUN_SEED=$((BASE_SEED + run - 1))
-        TEMP_CONFIG="$LOG_DIR/tmp_${CONFIG_NAME}_run${run}.yaml"
-        sed "s/seed: [0-9]*/seed: $RUN_SEED/" "$config_file" > "$TEMP_CONFIG"
+        TEMP_CONFIG="$LOG_DIR/tmp_${CONFIG_NAME}_red${run}.yaml"
 
-        log "  [RUN $run/$REDUCTION_RUNS] seed=$RUN_SEED..."
+        make_reduction_only_config "$config_file" "$TEMP_CONFIG" "$RUN_SEED"
+
+        log "  [RED $run/$REDUCTION_RUNS] seed=$RUN_SEED..."
 
         python -m experiments.runner "$TEMP_CONFIG" --overwrite-existing \
-            2>&1 | tee -a "$LOG_DIR/exp_${CONFIG_NAME}_run${run}_${TIMESTAMP}.log"
+            2>&1 | tee -a "$LOG_DIR/exp_${CONFIG_NAME}_red${run}_${TIMESTAMP}.log"
 
-        # Extract reduction hits@1 from this run
         REDUCTION_RESULTS="$EXP_DIR/reduction/results.json"
         if [[ -f "$REDUCTION_RESULTS" ]]; then
             CURRENT_HITS1=$(extract_reduction_hits1 "$REDUCTION_RESULTS")
 
-            # Check if this run is the best (lowest hits@1)
             IS_BETTER=$(python3 -c "
 best = '$BEST_HITS1'
 current = float('$CURRENT_HITS1')
@@ -161,44 +182,47 @@ if best == '' or current < float(best):
 else:
     print('no')
 ")
-
             if [[ "$IS_BETTER" == "yes" ]]; then
                 BEST_HITS1="$CURRENT_HITS1"
-                BEST_RUN=$run
-                rm -rf "$EXP_DIR.best"
-                cp -r "$EXP_DIR" "$EXP_DIR.best"
-                log "  [RUN $run/$REDUCTION_RUNS] NEW BEST hits@1=$BEST_HITS1"
+                BEST_SEED=$RUN_SEED
+                log "  [RED $run/$REDUCTION_RUNS] NEW BEST hits@1=$BEST_HITS1"
             else
-                log "  [RUN $run/$REDUCTION_RUNS] hits@1=$CURRENT_HITS1 (best=$BEST_HITS1)"
+                log "  [RED $run/$REDUCTION_RUNS] hits@1=$CURRENT_HITS1 (best=$BEST_HITS1)"
             fi
         else
-            log "  [RUN $run/$REDUCTION_RUNS] WARNING: no reduction results found"
+            log "  [RED $run/$REDUCTION_RUNS] WARNING: no reduction results"
         fi
 
         rm -f "$TEMP_CONFIG"
     done
 
-    # Restore best results
-    if [[ -d "$EXP_DIR.best" ]]; then
-        rm -rf "$EXP_DIR"
-        mv "$EXP_DIR.best" "$EXP_DIR"
-        log "  [SELECTED] Run $BEST_RUN (hits@1=$BEST_HITS1)"
+    # --- Phase B: Full pipeline (reduction + augmentation) with best seed ---
+    log "  [AUG] Full run with best seed=$BEST_SEED..."
+    FINAL_CONFIG="$LOG_DIR/tmp_${CONFIG_NAME}_final.yaml"
+    sed "s/seed: [0-9]*/seed: $BEST_SEED/" "$config_file" > "$FINAL_CONFIG"
 
-        # Tag metadata with multi-run info
-        python3 -c "
+    python -m experiments.runner "$FINAL_CONFIG" --overwrite-existing \
+        2>&1 | tee -a "$LOG_DIR/exp_${CONFIG_NAME}_aug_${TIMESTAMP}.log"
+
+    rm -f "$FINAL_CONFIG"
+
+    # Tag metadata with multi-run info
+    python3 -c "
 import json
 meta_file = '$METADATA_FILE'
-with open(meta_file) as f:
-    meta = json.load(f)
-meta['reduction_runs'] = $REDUCTION_RUNS
-meta['best_reduction_run'] = $BEST_RUN
-meta['best_reduction_seed'] = $((BASE_SEED + BEST_RUN - 1))
-meta['best_reduction_hits1'] = float('$BEST_HITS1')
-with open(meta_file, 'w') as f:
-    json.dump(meta, f, indent=2)
+try:
+    with open(meta_file) as f:
+        meta = json.load(f)
+    meta['reduction_runs'] = $REDUCTION_RUNS
+    meta['best_reduction_seed'] = $BEST_SEED
+    meta['best_reduction_hits1'] = float('$BEST_HITS1')
+    with open(meta_file, 'w') as f:
+        json.dump(meta, f, indent=2)
+except Exception as e:
+    print(f'WARNING: could not update metadata: {e}')
 "
-    fi
 
+    log "  [DONE] best_seed=$BEST_SEED, reduction_hits@1=$BEST_HITS1"
     RAN=$((RAN + 1))
 done
 
