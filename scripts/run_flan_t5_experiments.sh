@@ -115,16 +115,18 @@ except Exception:
 "
 }
 
-# Helper: create reduction-only config (stub augmentation + custom seed)
+# Helper: create reduction-only config (stub augmentation + custom seed + trial name)
 make_reduction_only_config() {
     local src_config="$1"
     local dst_config="$2"
     local seed="$3"
+    local trial_name="$4"
     python3 -c "
 import yaml
 with open('$src_config') as f:
     cfg = yaml.safe_load(f)
 cfg['experiment']['seed'] = $seed
+cfg['experiment']['name'] = '$trial_name'
 cfg['experiment']['augmentation'] = {
     'method': 'stub',
     'writer': 'bert_int',
@@ -176,26 +178,50 @@ for GROUP_KEY in $(echo "${!REDUCTION_GROUPS[@]}" | tr ' ' '\n' | sort); do
     GROUP_CURRENT=$((GROUP_CURRENT + 1))
     TEMPLATE_CONFIG="${REDUCTION_GROUPS[$GROUP_KEY]}"
 
-    # Skip if ALL configs already have reduction_runs tag
-    GROUP_REDUCTION_DONE=true
+    # Check if ANY config in this group already has reduction_runs
+    # If so, recover the best seed from its metadata (no need to redo 5 runs)
+    RECOVERED_SEED=""
+    GROUP_ALL_DONE=true
     for cfg in ${GROUP_CONFIGS[$GROUP_KEY]}; do
         CFG_NAME=$(basename "$cfg" .yaml)
         CFG_META="$RESULTS_DIR/$CFG_NAME/metadata.json"
-        if [[ ! -f "$CFG_META" ]] || ! grep -q '"reduction_runs"' "$CFG_META" 2>/dev/null; then
-            GROUP_REDUCTION_DONE=false
-            break
+        if [[ -f "$CFG_META" ]] && grep -q '"reduction_runs"' "$CFG_META" 2>/dev/null; then
+            if [[ -z "$RECOVERED_SEED" ]]; then
+                RECOVERED_SEED=$(python3 -c "
+import json
+with open('$CFG_META') as f:
+    meta = json.load(f)
+print(meta.get('best_reduction_seed', $BASE_SEED))
+")
+                RECOVERED_HITS1=$(python3 -c "
+import json
+with open('$CFG_META') as f:
+    meta = json.load(f)
+print(meta.get('best_reduction_hits1', 0))
+")
+            fi
+        else
+            GROUP_ALL_DONE=false
         fi
     done
 
-    if [[ "$GROUP_REDUCTION_DONE" == "true" ]]; then
-        log "[$GROUP_CURRENT/$TOTAL_GROUPS] [SKIP] $GROUP_KEY - reduction already selected"
+    if [[ "$GROUP_ALL_DONE" == "true" ]]; then
+        log "[$GROUP_CURRENT/$TOTAL_GROUPS] [SKIP] $GROUP_KEY - all configs already completed"
+        continue
+    fi
+
+    # If we recovered a seed, reuse it (some configs already ran)
+    if [[ -n "$RECOVERED_SEED" ]]; then
+        BEST_SEED_FOR[$GROUP_KEY]=$RECOVERED_SEED
+        BEST_HITS1_FOR[$GROUP_KEY]=${RECOVERED_HITS1:-0}
+        log "[$GROUP_CURRENT/$TOTAL_GROUPS] [REUSE] $GROUP_KEY - recovered seed=$RECOVERED_SEED, hits@1=${RECOVERED_HITS1:-0} from existing results"
         continue
     fi
 
     log "[$GROUP_CURRENT/$TOTAL_GROUPS] $GROUP_KEY - $REDUCTION_RUNS reduction runs..."
 
-    TEMPLATE_NAME=$(basename "$TEMPLATE_CONFIG" .yaml)
-    TEMPLATE_EXP_DIR="$RESULTS_DIR/$TEMPLATE_NAME"
+    TRIAL_NAME="${GROUP_KEY}_red_trial"
+    TRIAL_EXP_DIR="$RESULTS_DIR/$TRIAL_NAME"
     BEST_REDUCTION_FILE="$LOG_DIR/tmp_${GROUP_KEY}_best_reduction.json"
 
     BEST_HITS1=""
@@ -205,14 +231,14 @@ for GROUP_KEY in $(echo "${!REDUCTION_GROUPS[@]}" | tr ' ' '\n' | sort); do
         RUN_SEED=$((BASE_SEED + run - 1))
         TEMP_CONFIG="$LOG_DIR/tmp_${GROUP_KEY}_red${run}.yaml"
 
-        make_reduction_only_config "$TEMPLATE_CONFIG" "$TEMP_CONFIG" "$RUN_SEED"
+        make_reduction_only_config "$TEMPLATE_CONFIG" "$TEMP_CONFIG" "$RUN_SEED" "$TRIAL_NAME"
 
         log "  [RED $run/$REDUCTION_RUNS] seed=$RUN_SEED..."
 
         python -m experiments.runner "$TEMP_CONFIG" --overwrite-existing \
             2>&1 | tee -a "$LOG_DIR/exp_${GROUP_KEY}_red${run}_${TIMESTAMP}.log"
 
-        REDUCTION_RESULTS="$TEMPLATE_EXP_DIR/reduction/results.json"
+        REDUCTION_RESULTS="$TRIAL_EXP_DIR/reduction/results.json"
         if [[ -f "$REDUCTION_RESULTS" ]]; then
             CURRENT_HITS1=$(extract_reduction_hits1 "$REDUCTION_RESULTS")
 
@@ -279,6 +305,8 @@ except Exception as e:
         fi
     done
 
+    # Clean up trial directory and temp files
+    rm -rf "$TRIAL_EXP_DIR"
     rm -f "$BEST_REDUCTION_FILE"
     log "  [SELECTED] $GROUP_KEY -> seed=$BEST_SEED, hits@1=$BEST_HITS1"
 done
