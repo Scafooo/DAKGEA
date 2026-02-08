@@ -116,6 +116,7 @@ except Exception:
 }
 
 # Helper: create reduction-only config (stub augmentation + custom seed + trial name)
+# Saves the reduced dataset so it can be reused by other configs
 make_reduction_only_config() {
     local src_config="$1"
     local dst_config="$2"
@@ -127,6 +128,34 @@ with open('$src_config') as f:
     cfg = yaml.safe_load(f)
 cfg['experiment']['seed'] = $seed
 cfg['experiment']['name'] = '$trial_name'
+cfg['experiment']['reduction']['save_dataset'] = True
+cfg['experiment']['augmentation'] = {
+    'method': 'stub',
+    'writer': 'bert_int',
+    'eval': False,
+    'save_dataset': False,
+    'save_model': False
+}
+with open('$dst_config', 'w') as f:
+    yaml.dump(cfg, f, default_flow_style=False)
+"
+}
+
+# Helper: create config to cache the reduction dataset (no eval, no augmentation)
+# Used when we already know the best seed but need the cached dataset on disk
+make_reduction_cache_config() {
+    local src_config="$1"
+    local dst_config="$2"
+    local seed="$3"
+    local trial_name="$4"
+    python3 -c "
+import yaml
+with open('$src_config') as f:
+    cfg = yaml.safe_load(f)
+cfg['experiment']['seed'] = $seed
+cfg['experiment']['name'] = '$trial_name'
+cfg['experiment']['reduction']['save_dataset'] = True
+cfg['experiment']['reduction']['eval'] = False
 cfg['experiment']['augmentation'] = {
     'method': 'stub',
     'writer': 'bert_int',
@@ -217,18 +246,36 @@ print(meta.get('best_reduction_hits1', 0))
         continue
     fi
 
-    # Case 2: Some configs done, recover seed (no need to redo 5 runs)
+    # Shared temp dir for best reduction data (dataset + results)
+    BEST_REDUCTION_DIR="$LOG_DIR/tmp_${GROUP_KEY}_best_reduction"
+
+    # Case 2: Some configs done, recover seed
     if [[ -n "$RECOVERED_SEED" ]]; then
         BEST_SEED=$RECOVERED_SEED
         BEST_HITS1=${RECOVERED_HITS1:-0}
-        log "  [REUSE] recovered seed=$BEST_SEED, hits@1=$BEST_HITS1 from existing results"
+        log "  [REUSE] recovered seed=$BEST_SEED, hits@1=$BEST_HITS1"
+
+        # Cache the reduction dataset (fast, eval=false) so new configs can skip reduction
+        CACHE_NAME="${GROUP_KEY}_red_cache"
+        CACHE_EXP_DIR="$RESULTS_DIR/$CACHE_NAME"
+        CACHE_CONFIG="$LOG_DIR/tmp_${GROUP_KEY}_cache.yaml"
+
+        make_reduction_cache_config "$TEMPLATE_CONFIG" "$CACHE_CONFIG" "$BEST_SEED" "$CACHE_NAME"
+
+        log "  [CACHE] generating reduction dataset (eval=false)..."
+        python -m experiments.runner "$CACHE_CONFIG" --overwrite-existing \
+            2>&1 | tee -a "$LOG_DIR/exp_${GROUP_KEY}_cache_${TIMESTAMP}.log"
+
+        cp -r "$CACHE_EXP_DIR/reduction" "$BEST_REDUCTION_DIR"
+        rm -rf "$CACHE_EXP_DIR"
+        rm -f "$CACHE_CONFIG"
+
     else
-        # Case 3: No configs done, run 5 reduction trials
+        # Case 3: No configs done, run 5 reduction trials (eval=true, save_dataset=true)
         log "  [REDUCTION] $REDUCTION_RUNS runs to select best seed..."
 
         TRIAL_NAME="${GROUP_KEY}_red_trial"
         TRIAL_EXP_DIR="$RESULTS_DIR/$TRIAL_NAME"
-        BEST_REDUCTION_FILE="$LOG_DIR/tmp_${GROUP_KEY}_best_reduction.json"
 
         BEST_HITS1=""
         BEST_SEED=$BASE_SEED
@@ -259,7 +306,9 @@ else:
                 if [[ "$IS_BETTER" == "yes" ]]; then
                     BEST_HITS1="$CURRENT_HITS1"
                     BEST_SEED=$RUN_SEED
-                    cp "$REDUCTION_RESULTS" "$BEST_REDUCTION_FILE"
+                    # Save entire reduction directory (dataset + results)
+                    rm -rf "$BEST_REDUCTION_DIR"
+                    cp -r "$TRIAL_EXP_DIR/reduction" "$BEST_REDUCTION_DIR"
                     log "    [RED $run/$REDUCTION_RUNS] NEW BEST hits@1=$BEST_HITS1"
                 else
                     log "    [RED $run/$REDUCTION_RUNS] hits@1=$CURRENT_HITS1 (best=$BEST_HITS1)"
@@ -273,8 +322,7 @@ else:
 
         log "  [SELECTED] seed=$BEST_SEED, hits@1=$BEST_HITS1"
 
-        # Copy best reduction results.json to configs that already had results
-        # (update reduction without touching their augmentation)
+        # Update reduction results for configs that already had results
         for cfg in ${GROUP_CONFIGS[$GROUP_KEY]}; do
             CFG_NAME=$(basename "$cfg" .yaml)
             if [[ "${HAD_RESULTS[$CFG_NAME]:-no}" != "yes" ]]; then
@@ -286,8 +334,8 @@ else:
             CFG_META="$CFG_EXP_DIR/metadata.json"
 
             mkdir -p "$CFG_RED_DIR"
-            if [[ -f "$BEST_REDUCTION_FILE" ]]; then
-                cp "$BEST_REDUCTION_FILE" "$CFG_RED_DIR/results.json"
+            if [[ -f "$BEST_REDUCTION_DIR/results.json" ]]; then
+                cp "$BEST_REDUCTION_DIR/results.json" "$CFG_RED_DIR/results.json"
                 log "  [UPDATE] $CFG_NAME - reduction results updated"
             fi
 
@@ -310,10 +358,9 @@ except Exception as e:
 
         # Clean up trial directory
         rm -rf "$TRIAL_EXP_DIR"
-        rm -f "$BEST_REDUCTION_FILE"
     fi
 
-    # ---- Run pending configs in this group ----
+    # ---- Run pending configs: copy reduction cache + run with --resume ----
     for cfg in ${GROUP_CONFIGS[$GROUP_KEY]}; do
         CFG_NAME=$(basename "$cfg" .yaml)
         CURRENT=$((CURRENT + 1))
@@ -325,18 +372,23 @@ except Exception as e:
             continue
         fi
 
-        log "  [$CURRENT/$TOTAL_CONFIGS] [RUN] $CFG_NAME (seed=$BEST_SEED)..."
+        log "  [$CURRENT/$TOTAL_CONFIGS] [RUN] $CFG_NAME (seed=$BEST_SEED, reduction cached)..."
+
+        # Pre-populate reduction directory so runner skips it
+        CFG_EXP_DIR="$RESULTS_DIR/$CFG_NAME"
+        mkdir -p "$CFG_EXP_DIR"
+        cp -r "$BEST_REDUCTION_DIR" "$CFG_EXP_DIR/reduction"
 
         FINAL_CONFIG="$LOG_DIR/tmp_${CFG_NAME}_final.yaml"
         sed "s/seed: [0-9]*/seed: $BEST_SEED/" "$cfg" > "$FINAL_CONFIG"
 
-        python -m experiments.runner "$FINAL_CONFIG" --overwrite-existing \
+        python -m experiments.runner "$FINAL_CONFIG" --resume \
             2>&1 | tee -a "$LOG_DIR/exp_${CFG_NAME}_${TIMESTAMP}.log"
 
         rm -f "$FINAL_CONFIG"
 
         # Tag metadata
-        METADATA_FILE="$RESULTS_DIR/$CFG_NAME/metadata.json"
+        METADATA_FILE="$CFG_EXP_DIR/metadata.json"
         if [[ -f "$METADATA_FILE" ]]; then
             python3 -c "
 import json
@@ -355,6 +407,9 @@ except Exception as e:
 
         RAN=$((RAN + 1))
     done
+
+    # Clean up cached reduction data
+    rm -rf "$BEST_REDUCTION_DIR"
 done
 
 log ""
