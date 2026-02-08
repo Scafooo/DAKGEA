@@ -164,12 +164,10 @@ for config_file in "$CONFIG_DIR"/*.yaml; do
     GROUP_CONFIGS[$GROUP_KEY]="${GROUP_CONFIGS[$GROUP_KEY]:-} $config_file"
 done
 
-# ---- Phase 2A: Best reduction per (dataset, ratio) ----
-# Run 5 reduction-only trials, pick lowest hits@1, copy results.json
-# to ALL configs in the group. Does NOT touch augmentation results.
-
-log ""
-log "--- Phase 2A: Reduction selection ($REDUCTION_RUNS runs per dataset×ratio) ---"
+# ---- Per-group loop: reduction selection + immediate execution ----
+# For each (dataset, ratio) group:
+#   1. Select best reduction seed (5 runs) or recover from existing
+#   2. Immediately run all pending configs in that group
 
 TOTAL_GROUPS=${#REDUCTION_GROUPS[@]}
 GROUP_CURRENT=0
@@ -178,9 +176,13 @@ for GROUP_KEY in $(echo "${!REDUCTION_GROUPS[@]}" | tr ' ' '\n' | sort); do
     GROUP_CURRENT=$((GROUP_CURRENT + 1))
     TEMPLATE_CONFIG="${REDUCTION_GROUPS[$GROUP_KEY]}"
 
+    log ""
+    log "--- [$GROUP_CURRENT/$TOTAL_GROUPS] Group: $GROUP_KEY ---"
+
     # Check if ANY config in this group already has reduction_runs
     # If so, recover the best seed from its metadata (no need to redo 5 runs)
     RECOVERED_SEED=""
+    RECOVERED_HITS1=""
     GROUP_ALL_DONE=true
     for cfg in ${GROUP_CONFIGS[$GROUP_KEY]}; do
         CFG_NAME=$(basename "$cfg" .yaml)
@@ -205,44 +207,48 @@ print(meta.get('best_reduction_hits1', 0))
         fi
     done
 
+    # Case 1: All configs in group already completed
     if [[ "$GROUP_ALL_DONE" == "true" ]]; then
-        log "[$GROUP_CURRENT/$TOTAL_GROUPS] [SKIP] $GROUP_KEY - all configs already completed"
+        log "  [SKIP] all configs already completed"
+        for cfg in ${GROUP_CONFIGS[$GROUP_KEY]}; do
+            CURRENT=$((CURRENT + 1))
+            SKIPPED=$((SKIPPED + 1))
+        done
         continue
     fi
 
-    # If we recovered a seed, reuse it (some configs already ran)
+    # Case 2: Some configs done, recover seed (no need to redo 5 runs)
     if [[ -n "$RECOVERED_SEED" ]]; then
-        BEST_SEED_FOR[$GROUP_KEY]=$RECOVERED_SEED
-        BEST_HITS1_FOR[$GROUP_KEY]=${RECOVERED_HITS1:-0}
-        log "[$GROUP_CURRENT/$TOTAL_GROUPS] [REUSE] $GROUP_KEY - recovered seed=$RECOVERED_SEED, hits@1=${RECOVERED_HITS1:-0} from existing results"
-        continue
-    fi
+        BEST_SEED=$RECOVERED_SEED
+        BEST_HITS1=${RECOVERED_HITS1:-0}
+        log "  [REUSE] recovered seed=$BEST_SEED, hits@1=$BEST_HITS1 from existing results"
+    else
+        # Case 3: No configs done, run 5 reduction trials
+        log "  [REDUCTION] $REDUCTION_RUNS runs to select best seed..."
 
-    log "[$GROUP_CURRENT/$TOTAL_GROUPS] $GROUP_KEY - $REDUCTION_RUNS reduction runs..."
+        TRIAL_NAME="${GROUP_KEY}_red_trial"
+        TRIAL_EXP_DIR="$RESULTS_DIR/$TRIAL_NAME"
+        BEST_REDUCTION_FILE="$LOG_DIR/tmp_${GROUP_KEY}_best_reduction.json"
 
-    TRIAL_NAME="${GROUP_KEY}_red_trial"
-    TRIAL_EXP_DIR="$RESULTS_DIR/$TRIAL_NAME"
-    BEST_REDUCTION_FILE="$LOG_DIR/tmp_${GROUP_KEY}_best_reduction.json"
+        BEST_HITS1=""
+        BEST_SEED=$BASE_SEED
 
-    BEST_HITS1=""
-    BEST_SEED=$BASE_SEED
+        for run in $(seq 1 $REDUCTION_RUNS); do
+            RUN_SEED=$((BASE_SEED + run - 1))
+            TEMP_CONFIG="$LOG_DIR/tmp_${GROUP_KEY}_red${run}.yaml"
 
-    for run in $(seq 1 $REDUCTION_RUNS); do
-        RUN_SEED=$((BASE_SEED + run - 1))
-        TEMP_CONFIG="$LOG_DIR/tmp_${GROUP_KEY}_red${run}.yaml"
+            make_reduction_only_config "$TEMPLATE_CONFIG" "$TEMP_CONFIG" "$RUN_SEED" "$TRIAL_NAME"
 
-        make_reduction_only_config "$TEMPLATE_CONFIG" "$TEMP_CONFIG" "$RUN_SEED" "$TRIAL_NAME"
+            log "    [RED $run/$REDUCTION_RUNS] seed=$RUN_SEED..."
 
-        log "  [RED $run/$REDUCTION_RUNS] seed=$RUN_SEED..."
+            python -m experiments.runner "$TEMP_CONFIG" --overwrite-existing \
+                2>&1 | tee -a "$LOG_DIR/exp_${GROUP_KEY}_red${run}_${TIMESTAMP}.log"
 
-        python -m experiments.runner "$TEMP_CONFIG" --overwrite-existing \
-            2>&1 | tee -a "$LOG_DIR/exp_${GROUP_KEY}_red${run}_${TIMESTAMP}.log"
+            REDUCTION_RESULTS="$TRIAL_EXP_DIR/reduction/results.json"
+            if [[ -f "$REDUCTION_RESULTS" ]]; then
+                CURRENT_HITS1=$(extract_reduction_hits1 "$REDUCTION_RESULTS")
 
-        REDUCTION_RESULTS="$TRIAL_EXP_DIR/reduction/results.json"
-        if [[ -f "$REDUCTION_RESULTS" ]]; then
-            CURRENT_HITS1=$(extract_reduction_hits1 "$REDUCTION_RESULTS")
-
-            IS_BETTER=$(python3 -c "
+                IS_BETTER=$(python3 -c "
 best = '$BEST_HITS1'
 current = float('$CURRENT_HITS1')
 if best == '' or current < float(best):
@@ -250,46 +256,43 @@ if best == '' or current < float(best):
 else:
     print('no')
 ")
-            if [[ "$IS_BETTER" == "yes" ]]; then
-                BEST_HITS1="$CURRENT_HITS1"
-                BEST_SEED=$RUN_SEED
-                cp "$REDUCTION_RESULTS" "$BEST_REDUCTION_FILE"
-                log "  [RED $run/$REDUCTION_RUNS] NEW BEST hits@1=$BEST_HITS1"
+                if [[ "$IS_BETTER" == "yes" ]]; then
+                    BEST_HITS1="$CURRENT_HITS1"
+                    BEST_SEED=$RUN_SEED
+                    cp "$REDUCTION_RESULTS" "$BEST_REDUCTION_FILE"
+                    log "    [RED $run/$REDUCTION_RUNS] NEW BEST hits@1=$BEST_HITS1"
+                else
+                    log "    [RED $run/$REDUCTION_RUNS] hits@1=$CURRENT_HITS1 (best=$BEST_HITS1)"
+                fi
             else
-                log "  [RED $run/$REDUCTION_RUNS] hits@1=$CURRENT_HITS1 (best=$BEST_HITS1)"
+                log "    [RED $run/$REDUCTION_RUNS] WARNING: no reduction results"
             fi
-        else
-            log "  [RED $run/$REDUCTION_RUNS] WARNING: no reduction results"
-        fi
 
-        rm -f "$TEMP_CONFIG"
-    done
+            rm -f "$TEMP_CONFIG"
+        done
 
-    BEST_SEED_FOR[$GROUP_KEY]=$BEST_SEED
-    BEST_HITS1_FOR[$GROUP_KEY]=$BEST_HITS1
+        log "  [SELECTED] seed=$BEST_SEED, hits@1=$BEST_HITS1"
 
-    # Copy best reduction results.json ONLY to configs that already had results
-    # (Case 2: update reduction without touching augmentation).
-    # New configs (Case 1) are left untouched — Phase 2B handles everything.
-    for cfg in ${GROUP_CONFIGS[$GROUP_KEY]}; do
-        CFG_NAME=$(basename "$cfg" .yaml)
-        if [[ "${HAD_RESULTS[$CFG_NAME]:-no}" != "yes" ]]; then
-            continue  # new config, Phase 2B will handle it
-        fi
+        # Copy best reduction results.json to configs that already had results
+        # (update reduction without touching their augmentation)
+        for cfg in ${GROUP_CONFIGS[$GROUP_KEY]}; do
+            CFG_NAME=$(basename "$cfg" .yaml)
+            if [[ "${HAD_RESULTS[$CFG_NAME]:-no}" != "yes" ]]; then
+                continue
+            fi
 
-        CFG_EXP_DIR="$RESULTS_DIR/$CFG_NAME"
-        CFG_RED_DIR="$CFG_EXP_DIR/reduction"
-        CFG_META="$CFG_EXP_DIR/metadata.json"
+            CFG_EXP_DIR="$RESULTS_DIR/$CFG_NAME"
+            CFG_RED_DIR="$CFG_EXP_DIR/reduction"
+            CFG_META="$CFG_EXP_DIR/metadata.json"
 
-        mkdir -p "$CFG_RED_DIR"
-        if [[ -f "$BEST_REDUCTION_FILE" ]]; then
-            cp "$BEST_REDUCTION_FILE" "$CFG_RED_DIR/results.json"
-            log "  [UPDATE] $CFG_NAME - reduction results.json updated"
-        fi
+            mkdir -p "$CFG_RED_DIR"
+            if [[ -f "$BEST_REDUCTION_FILE" ]]; then
+                cp "$BEST_REDUCTION_FILE" "$CFG_RED_DIR/results.json"
+                log "  [UPDATE] $CFG_NAME - reduction results updated"
+            fi
 
-        # Tag metadata
-        if [[ -f "$CFG_META" ]]; then
-            python3 -c "
+            if [[ -f "$CFG_META" ]]; then
+                python3 -c "
 import json
 try:
     with open('$CFG_META') as f:
@@ -302,53 +305,40 @@ try:
 except Exception as e:
     print(f'WARNING: could not update metadata: {e}')
 "
-        fi
-    done
+            fi
+        done
 
-    # Clean up trial directory and temp files
-    rm -rf "$TRIAL_EXP_DIR"
-    rm -f "$BEST_REDUCTION_FILE"
-    log "  [SELECTED] $GROUP_KEY -> seed=$BEST_SEED, hits@1=$BEST_HITS1"
-done
-
-# ---- Phase 2B: Augmentation for NEW configs only ----
-# Only runs configs that did NOT have results before Phase 2A.
-# Configs that already had results keep their augmentation untouched.
-
-log ""
-log "--- Phase 2B: Augmentation runs (new experiments only) ---"
-
-for config_file in "$CONFIG_DIR"/*.yaml; do
-    CURRENT=$((CURRENT + 1))
-    CONFIG_NAME=$(basename "$config_file" .yaml)
-    GROUP_KEY="${CONFIG_NAME%_*}"
-
-    # Skip if this config already had results before we started
-    if [[ "${HAD_RESULTS[$CONFIG_NAME]:-no}" == "yes" ]]; then
-        log "[$CURRENT/$TOTAL_CONFIGS] [SKIP] $CONFIG_NAME - already had results"
-        SKIPPED=$((SKIPPED + 1))
-        continue
+        # Clean up trial directory
+        rm -rf "$TRIAL_EXP_DIR"
+        rm -f "$BEST_REDUCTION_FILE"
     fi
 
-    EXP_DIR="$RESULTS_DIR/$CONFIG_NAME"
-    METADATA_FILE="$EXP_DIR/metadata.json"
+    # ---- Run pending configs in this group ----
+    for cfg in ${GROUP_CONFIGS[$GROUP_KEY]}; do
+        CFG_NAME=$(basename "$cfg" .yaml)
+        CURRENT=$((CURRENT + 1))
 
-    BEST_SEED=${BEST_SEED_FOR[$GROUP_KEY]:-$BASE_SEED}
-    BEST_HITS1=${BEST_HITS1_FOR[$GROUP_KEY]:-""}
+        # Skip if already had results
+        if [[ "${HAD_RESULTS[$CFG_NAME]:-no}" == "yes" ]]; then
+            log "  [$CURRENT/$TOTAL_CONFIGS] [SKIP] $CFG_NAME - already had results"
+            SKIPPED=$((SKIPPED + 1))
+            continue
+        fi
 
-    log "[$CURRENT/$TOTAL_CONFIGS] [RUN] $CONFIG_NAME (seed=$BEST_SEED)..."
+        log "  [$CURRENT/$TOTAL_CONFIGS] [RUN] $CFG_NAME (seed=$BEST_SEED)..."
 
-    FINAL_CONFIG="$LOG_DIR/tmp_${CONFIG_NAME}_final.yaml"
-    sed "s/seed: [0-9]*/seed: $BEST_SEED/" "$config_file" > "$FINAL_CONFIG"
+        FINAL_CONFIG="$LOG_DIR/tmp_${CFG_NAME}_final.yaml"
+        sed "s/seed: [0-9]*/seed: $BEST_SEED/" "$cfg" > "$FINAL_CONFIG"
 
-    python -m experiments.runner "$FINAL_CONFIG" --overwrite-existing \
-        2>&1 | tee -a "$LOG_DIR/exp_${CONFIG_NAME}_${TIMESTAMP}.log"
+        python -m experiments.runner "$FINAL_CONFIG" --overwrite-existing \
+            2>&1 | tee -a "$LOG_DIR/exp_${CFG_NAME}_${TIMESTAMP}.log"
 
-    rm -f "$FINAL_CONFIG"
+        rm -f "$FINAL_CONFIG"
 
-    # Tag metadata
-    if [[ -f "$METADATA_FILE" ]]; then
-        python3 -c "
+        # Tag metadata
+        METADATA_FILE="$RESULTS_DIR/$CFG_NAME/metadata.json"
+        if [[ -f "$METADATA_FILE" ]]; then
+            python3 -c "
 import json
 try:
     with open('$METADATA_FILE') as f:
@@ -361,11 +351,13 @@ try:
 except Exception as e:
     print(f'WARNING: could not update metadata: {e}')
 "
-    fi
+        fi
 
-    RAN=$((RAN + 1))
+        RAN=$((RAN + 1))
+    done
 done
 
+log ""
 log "[COMPLETE] Experiments: $RAN ran, $SKIPPED skipped"
 
 # ==============================================================
