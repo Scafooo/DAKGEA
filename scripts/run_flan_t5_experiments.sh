@@ -242,10 +242,15 @@ else:
     BEST_SEED_FOR[$GROUP_KEY]=$BEST_SEED
     BEST_HITS1_FOR[$GROUP_KEY]=$BEST_HITS1
 
-    # Copy best reduction results.json to ALL configs in this group
-    # and tag their metadata (without touching augmentation)
+    # Copy best reduction results.json ONLY to configs that already had results
+    # (Case 2: update reduction without touching augmentation).
+    # New configs (Case 1) are left untouched — Phase 2B handles everything.
     for cfg in ${GROUP_CONFIGS[$GROUP_KEY]}; do
         CFG_NAME=$(basename "$cfg" .yaml)
+        if [[ "${HAD_RESULTS[$CFG_NAME]:-no}" != "yes" ]]; then
+            continue  # new config, Phase 2B will handle it
+        fi
+
         CFG_EXP_DIR="$RESULTS_DIR/$CFG_NAME"
         CFG_RED_DIR="$CFG_EXP_DIR/reduction"
         CFG_META="$CFG_EXP_DIR/metadata.json"
@@ -253,9 +258,10 @@ else:
         mkdir -p "$CFG_RED_DIR"
         if [[ -f "$BEST_REDUCTION_FILE" ]]; then
             cp "$BEST_REDUCTION_FILE" "$CFG_RED_DIR/results.json"
+            log "  [UPDATE] $CFG_NAME - reduction results.json updated"
         fi
 
-        # Tag metadata if it exists (old results)
+        # Tag metadata
         if [[ -f "$CFG_META" ]]; then
             python3 -c "
 import json
@@ -268,13 +274,13 @@ try:
     with open('$CFG_META', 'w') as f:
         json.dump(meta, f, indent=2)
 except Exception as e:
-    print(f'WARNING: could not update {\"$CFG_META\"}: {e}')
+    print(f'WARNING: could not update metadata: {e}')
 "
         fi
     done
 
     rm -f "$BEST_REDUCTION_FILE"
-    log "  [SELECTED] $GROUP_KEY -> seed=$BEST_SEED, hits@1=$BEST_HITS1 (copied to all configs)"
+    log "  [SELECTED] $GROUP_KEY -> seed=$BEST_SEED, hits@1=$BEST_HITS1"
 done
 
 # ---- Phase 2B: Augmentation for NEW configs only ----
