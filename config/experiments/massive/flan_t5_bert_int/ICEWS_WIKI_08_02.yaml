@@ -2,7 +2,7 @@ experiment:
   suite: flan_t5_bert_int
   name: ICEWS_WIKI_08_02
   dataset:
-    name: openea/ICEWS_WIKI
+    name: openea/ICEW_WIKI
     writer: bert_int
   reduction:
     method: forget_labels
@@ -15,7 +15,7 @@ experiment:
     method: plm_mixup
     ratio: 0.2
     backbone: flan-t5-xl
-    pretrained_model_dir: models/pretrained_plm/ICEWS_WIKI
+    pretrained_model_dir: models/pretrained_plm/ICEW_WIKI
     writer:
       type: bert_int
       augmented_only_train: true
