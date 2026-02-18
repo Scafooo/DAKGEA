@@ -165,15 +165,14 @@ def run_context_pipeline():
         max_len_in=MAX_LEN_IN
     )
 
-    # 2. TRAINING
-    if not (Path(out_dir) / "pytorch_model.bin").exists() and not (Path(out_dir) / "adapter_model.safetensors").exists():
-        print(f"    [2/4] Fine-tuning (Context-Aware, {len(t5_rows)} samples)...")
-        # Use fine_tune from base class (it handles list of dicts fine)
-        interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=3e-5, force_retrain=True)
-    else:
-        print(f"    [2/4] Context model ready.")
-
-    # 3. SWEEP
+        # 2. TRAINING
+        if not (Path(out_dir) / "pytorch_model.bin").exists() and not (Path(out_dir) / "adapter_model.safetensors").exists():
+            print(f"    [2/4] Fine-tuning (Context-Aware, {len(t5_rows)} samples)...")
+            # Use fine_tune from base class (it handles list of dicts fine)
+            interpolator.fine_tune(t5_rows, epochs=EPOCHS, batch_size=BATCH_SIZE, lr=3e-5)
+        else: 
+            print(f"    [2/4] Context model ready.")
+        # 3. SWEEP
     print(f"\n>>> PHASE 3: SWEEPING")
     sweep_pool = []
     all_test_preds = list(aligned_test_pool.keys())
