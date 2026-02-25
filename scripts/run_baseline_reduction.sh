@@ -52,6 +52,7 @@ for DATASET in "${DATASETS[@]}"; do
             cat > "$CONFIG_FILE" <<EOF
 experiment:
   name: ${EXP_NAME}
+  suite: baseline_reduction
   dataset:
     name: openea/${DATASET}
     writer: bert_int
@@ -60,6 +61,8 @@ experiment:
     ratio: ${RATIO}
     writer: bert_int
     eval: true
+    save_dataset: false
+    save_model: false
   model: bert_int
   seed: ${SEED}
   clear: true
@@ -107,7 +110,7 @@ for dataset in datasets:
         all_runs = []
         for seed in seeds:
             exp_name    = f"baseline_red_{dataset}_r{ratio}_s{seed}"
-            result_path = res_dir / exp_name / "reduction" / "results.json"
+            result_path = res_dir / "baseline_reduction" / exp_name / "reduction" / "results.json"
             if not result_path.exists():
                 print(f"  MISSING: {result_path}")
                 continue
