@@ -48,7 +48,7 @@ for DATASET in "${DATASETS[@]}"; do
             EXP_NAME="baseline_red_${DATASET}_r${RATIO}_s${SEED}"
             CONFIG_FILE="${CONFIG_DIR}/${EXP_NAME}.yaml"
 
-            # Generate config (no augmentation section = fully skipped by runner)
+            # Generate config
             cat > "$CONFIG_FILE" <<EOF
 experiment:
   name: ${EXP_NAME}
@@ -61,6 +61,11 @@ experiment:
     ratio: ${RATIO}
     writer: bert_int
     eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: stub
+    eval: false
     save_dataset: false
     save_model: false
   model: bert_int
