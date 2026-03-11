@@ -1,4 +1,4 @@
-<h1><img src="assets/images/onepiece_flag.jpg" alt="🏴" style="height: 1em; vertical-align: middle; margin-right: 12px;">LUFFY — Data Augmentation for Knowledge Graph Entity Resolution</h1>
+<h1>LUFFY — Data Augmentation for Knowledge Graph Entity Resolution</h1>
 
 <div style="display: flex; justify-content: center;">
   <img src="assets/images/banner.png" alt="Data Augmentation for Knowledge Graph Entity Resolution" style="max-width: 55%; height: auto;">
