@@ -61,3 +61,11 @@ Each stage writes outputs below `results/<name>/<stage>/`, following the `Writer
 
 - Issues and pull requests are welcome—remember to keep configs and PLM logging in sync.
 - License: see `LICENSE`.
+
+---
+
+<div style="text-align: center; margin-top: 2em; opacity: 0.6;">
+  <img src="assets/images/onepiece_flag.jpg" alt="Straw Hat Pirates" style="height: 40px;"><br>
+  <sub><em>"I don't want to conquer anything. I just think the guy with the most freedom in this whole ocean is the Pirate King."</em> — Monkey D. Luffy</sub><br><br>
+  <sub><strong>Hito Hito no Mi, Model: Nika</strong> — The most ridiculous power in the world. A Mythical Zoan fruit that transforms its user into the legendary Sun God Nika, granting a rubber body whose only limit is the user's imagination.</sub>
+</div>
