@@ -26,6 +26,7 @@ pip install -r install/requirements.txt
 ./scripts/run_experiment.sh config/experiments/exp_direct.yaml
 ```
 
+
 Artifacts are stored in `results/<experiment>/`, including caches, logs, and JSON summaries.
 
 ## Project layout
