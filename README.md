@@ -1,7 +1,7 @@
 <h1>LUFFY — Data Augmentation for Knowledge Graph Entity Resolution</h1>
 
 <div style="display: flex; justify-content: center;">
-  <img src="assets/images/banner.png" alt="Data Augmentation for Knowledge Graph Entity Resolution" style="max-width: 35%; height: auto;">
+  <img src="assets/images/bannerhat.png" alt="Data Augmentation for Knowledge Graph Entity Resolution" style="max-width: 35%; height: auto;">
 </div>
 
 **LUFFY** (*Latent-space Unified Framework for data augmentation in KG Entity resolution*) — or **DAKGEA** — is a modular Python 3.11 pipeline for dataset reduction, augmentation, and evaluation in Entity Alignment tasks.

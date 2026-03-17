@@ -27,6 +27,8 @@ from experiments.statistics.advanced_stats import (
 )
 from experiments.statistics.visualizations import (
     plot_heatmap,
+    plot_delta_heatmap_latex as plot_delta_heatmap,
+    plot_delta_heatmap_latex_combined as plot_delta_heatmap_combined,
     plot_boxplot,
     plot_violin,
     plot_scatter_correlation,
@@ -1350,18 +1352,49 @@ def main() -> None:
                     plot_delta_chart(dataset, red_values, aug_values, metric, plots_base, delta_colors, dpi=args.dpi)
 
         # Generate heatmaps for ratio combinations
-        for dataset, ratio_group in ratio_plot_groups.items():
-            for metric in args.metrics:
+        # Pre-compute global vmax for delta heatmaps (uniform scale across datasets)
+        for metric in args.metrics:
+            global_delta_vmax = 0.0
+            for ratio_group in ratio_plot_groups.values():
+                for aug_dict in ratio_group.values():
+                    for stage_data in aug_dict.values():
+                        av = stage_data.get("augmentation", {}).get(metric)
+                        rv = stage_data.get("reduction", {}).get(metric)
+                        if av is not None and rv is not None:
+                            global_delta_vmax = max(global_delta_vmax, av - rv)
+            global_delta_vmax = global_delta_vmax if global_delta_vmax > 0 else None
+
+            all_delta_data = {}
+            for dataset, ratio_group in ratio_plot_groups.items():
                 heatmap_data = {}
+                aug_heatmap_data = {}
+                red_heatmap_data = {}
                 for red_ratio, aug_dict in ratio_group.items():
                     heatmap_data[red_ratio] = {}
+                    aug_heatmap_data[red_ratio] = {}
+                    red_heatmap_data[red_ratio] = {}
                     for aug_ratio, stage_data in aug_dict.items():
                         aug_value = stage_data.get("augmentation", {}).get(metric)
+                        red_value = stage_data.get("reduction", {}).get(metric)
                         if aug_value is not None:
                             heatmap_data[red_ratio][aug_ratio] = aug_value
+                            aug_heatmap_data[red_ratio][aug_ratio] = aug_value
+                        if red_value is not None:
+                            red_heatmap_data[red_ratio][aug_ratio] = red_value
 
                 if heatmap_data:
                     plot_heatmap(dataset, heatmap_data, metric, plots_base, dpi=args.dpi)
+                if aug_heatmap_data and red_heatmap_data:
+                    plot_delta_heatmap(
+                        dataset, aug_heatmap_data, red_heatmap_data,
+                        metric, plots_base,
+                        global_vmax=global_delta_vmax,
+                        dpi=args.dpi,
+                    )
+                    all_delta_data[dataset] = (aug_heatmap_data, red_heatmap_data)
+
+            if len(all_delta_data) > 1:
+                plot_delta_heatmap_combined(all_delta_data, metric, plots_base, dpi=args.dpi)
 
         # Generate 3D surface plots for both stages
         logger.info("Generating 3D surface plots...")
