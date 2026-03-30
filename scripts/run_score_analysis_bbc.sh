@@ -62,7 +62,7 @@ experiment:
     eval: true
   model: bert_int
   seed: ${SEED}
-  clear: true
+  clear: false
   overwrite_existing: true
 EOF
 
