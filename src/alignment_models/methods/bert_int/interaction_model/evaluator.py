@@ -190,6 +190,48 @@ class InteractionEvaluator:
 
         return metrics
 
+    def get_score_distributions(self) -> Dict:
+        """Return per-entity scored candidates for post-hoc analysis.
+
+        Returns a dict with one entry per test entity:
+        {
+            "entities": [
+                {
+                    "e1": int,
+                    "true_match": int,
+                    "true_match_score": float,
+                    "rank": int,           # 1-based rank of true match among candidates
+                    "candidates": [[e2, score], ...]   # sorted best-first
+                },
+                ...
+            ]
+        }
+        """
+        test_pairs, scores = self._score_all_test_pairs()
+        true_match: Dict[int, int] = {e1: e2 for e1, e2 in self.dataset.test_ill}
+
+        # Group by e1
+        entity_candidates: Dict[int, List[Tuple[int, float]]] = {}
+        for (e1, e2), score in zip(test_pairs, scores):
+            entity_candidates.setdefault(e1, []).append((e2, float(score)))
+
+        entities = []
+        for e1, candidates in entity_candidates.items():
+            candidates.sort(key=lambda x: x[1], reverse=True)
+            tm = true_match.get(e1)
+            tm_score = next((s for e2, s in candidates if e2 == tm), None)
+            rank = next((i + 1 for i, (e2, _) in enumerate(candidates) if e2 == tm), -1)
+            entities.append({
+                "e1": e1,
+                "true_match": tm,
+                "true_match_score": tm_score,
+                "rank": rank,
+                "candidates": [[e2, s] for e2, s in candidates],
+            })
+
+        entities.sort(key=lambda x: x["e1"])
+        return {"entities": entities}
+
     def get_best_alignments(self) -> List[Tuple[int, int]]:
         """Get best alignment predictions (argmax) for all test entities.
 

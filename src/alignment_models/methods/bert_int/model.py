@@ -364,6 +364,13 @@ class BertIntAlignment:
         # Final evaluation (now on best model!)
         final_results = trainer.evaluator.evaluate(topk=candidate_topk)
 
+        # Save per-pair score distributions for post-hoc analysis
+        score_dist = trainer.evaluator.get_score_distributions()
+        score_dist_path = self.checkpoint_dir / "score_distributions.json"
+        with open(score_dist_path, "w") as _f:
+            json.dump(score_dist, _f)
+        logger.info(f"[BERT-INT Phase 2] Saved score distributions to {score_dist_path}")
+
         # Add training metadata to results (only best epoch info, not full history)
         final_results["best_epoch"] = training_results["best_epoch"]
         final_results["best_hits@1"] = training_results["best_hits@1"]
