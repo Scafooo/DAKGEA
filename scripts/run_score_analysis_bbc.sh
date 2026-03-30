@@ -17,7 +17,6 @@ DATASET="openea/BBC_DB"
 RED_RATIO="0.1"
 AUG_RATIO="0.2"
 SEED="11037"
-TOPK="10"
 CSV_OUT="${PROJECT_ROOT}/analysis/bbc_01_02_scores.csv"
 
 NO_AUG_CONFIG="/tmp/score_analysis_no_aug.yaml"
@@ -31,11 +30,12 @@ experiment:
     name: ${DATASET}
     writer: bert_int
   reduction:
-    method: random_entities
+    method: forget_labels
     ratio: ${RED_RATIO}
     writer: bert_int
-    save: false
     eval: true
+    save_dataset: false
+    save_model: false
   model: bert_int
   seed: ${SEED}
   clear: true
@@ -49,17 +49,19 @@ experiment:
     name: ${DATASET}
     writer: bert_int
   reduction:
-    method: random_entities
+    method: forget_labels
     ratio: ${RED_RATIO}
     writer: bert_int
-    save: false
     eval: false
+    save_dataset: false
+    save_model: false
   augmentation:
     method: plm
     ratio: ${AUG_RATIO}
     writer: bert_int
-    save: false
     eval: true
+    save_dataset: false
+    save_model: false
   model: bert_int
   seed: ${SEED}
   clear: false
@@ -103,5 +105,4 @@ echo "============================================================"
 python "${PROJECT_ROOT}/scripts/tools/analyze_score_distributions.py" \
     --no-aug "${NO_AUG_SCORES}" \
     --aug    "${AUG_SCORES}"    \
-    --topk   "${TOPK}"          \
     --csv    "${CSV_OUT}"
