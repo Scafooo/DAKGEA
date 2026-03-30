@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+source "$(dirname "$0")/../.venv/bin/activate"
+
 python scripts/run_score_analysis.py \
     --dataset   openea/BBC_DB \
     --red-ratio 0.1 \
