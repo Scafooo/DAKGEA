@@ -105,4 +105,5 @@ echo "============================================================"
 python "${PROJECT_ROOT}/scripts/tools/analyze_score_distributions.py" \
     --no-aug "${NO_AUG_SCORES}" \
     --aug    "${AUG_SCORES}"    \
+    --topk   50                 \
     --csv    "${CSV_OUT}"
