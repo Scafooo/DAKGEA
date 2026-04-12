@@ -67,7 +67,8 @@ experiment:
     save_dataset: false
     save_model: false
   augmentation:
-    method: plm
+    method: plm_mixup
+    backbone: "flan-t5-xl"
     ratio: ${AUG_RATIO}
     writer: bert_int
     eval: true
