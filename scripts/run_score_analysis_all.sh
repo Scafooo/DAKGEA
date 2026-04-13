@@ -91,7 +91,7 @@ EOF
     NO_AUG_SCORES=$(find "${PROJECT_ROOT}/results/score_analysis_no_aug_${DS_NAME}" \
         -name "score_distributions.json" -path "*/bert_int/reduced/*" | head -1)
     AUG_SCORES=$(find "${PROJECT_ROOT}/results/score_analysis_aug_${DS_NAME}" \
-        -name "score_distributions.json" -path "*/bert_int/plm/*" | head -1)
+        -name "score_distributions.json" -path "*/bert_int/plm_mixup/*" | head -1)
 
     if [[ -z "${NO_AUG_SCORES}" ]]; then
         echo "ERROR: score_distributions.json not found for no-aug run (${DS_NAME})"
