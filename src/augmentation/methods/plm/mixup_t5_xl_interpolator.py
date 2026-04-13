@@ -105,6 +105,14 @@ class MixupT5XLInterpolator:
         logger.info("[T5-XL] Pre-trained model loaded successfully.")
         return model
 
+    def set_predicate_mapping(self, mapping: Dict[str, str]) -> None:
+        self.predicate_mapping = mapping
+        self.canonical_tokens = sorted(list(set(mapping.values())))
+        if self.canonical_tokens:
+            self.tokenizer.add_tokens(self.canonical_tokens)
+            self.model.resize_token_embeddings(len(self.tokenizer))
+            logger.info(f"[T5-XL] Added {len(self.canonical_tokens)} canonical predicate tokens to tokenizer")
+
     def _clean_output(self, text: str) -> str:
         text = re.sub(r'<extra_id_\d+>', '', text)
         text = re.sub(r'^.*:\s*', '', text)

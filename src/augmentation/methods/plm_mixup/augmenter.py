@@ -259,10 +259,13 @@ class PLMMixupAugmenter(PLMAugmenter):
         else:
             max_pairs = self.bart_cfg.get("max_pairs_per_pred", 2000)
 
-        training_rows, _ = builder.build_training_data(
+        training_rows, canonical_map = builder.build_training_data(
             dataset=dataset,
             max_pairs_per_pred=max_pairs,
         )
+
+        if canonical_map:
+            self.bart_interpolator.set_predicate_mapping(canonical_map)
 
         if not training_rows:
             self.logger.warning("[PLM-MIXUP] No training data generated. Skipping fine-tuning.")
