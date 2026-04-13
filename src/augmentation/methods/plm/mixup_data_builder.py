@@ -497,8 +497,8 @@ class MixupDataBuilder:
                         if v1_c != v2_c:
                             # BIDIRECTIONAL: real pairs duplicated 3x for weight
                             for _ in range(3):
-                                rows.append({"input": f"generate variation <{p_name}>: {vs}", "target": vt})
-                                rows.append({"input": f"generate variation <{p_name}>: {vt}", "target": vs})
+                                rows.append({"input": f"generate variation {p_tok}: {vs}", "target": vt})
+                                rows.append({"input": f"generate variation {p_tok}: {vt}", "target": vs})
                             real_pairs_count += 2
                             pred_counts[p_tok] += 1
 
@@ -506,13 +506,13 @@ class MixupDataBuilder:
                             if random.random() < 0.3:
                                 var_vs = self.creative_gen.generate(vs, vt, predicate=p_name)
                                 if var_vs != vs and var_vs != vt:
-                                    rows.append({"input": f"generate variation <{p_name}>: {vs}", "target": var_vs})
+                                    rows.append({"input": f"generate variation {p_tok}: {vs}", "target": var_vs})
                                     synthetic_pairs_count += 1
 
                             if random.random() < 0.3:
                                 var_vt = self.creative_gen.generate(vt, vs, predicate=p_name)
                                 if var_vt != vt and var_vt != vs:
-                                    rows.append({"input": f"generate variation <{p_name}>: {vt}", "target": var_vt})
+                                    rows.append({"input": f"generate variation {p_tok}: {vt}", "target": var_vt})
                                     synthetic_pairs_count += 1
 
                         aligned_pairs.append((vs, vt))
@@ -531,17 +531,18 @@ class MixupDataBuilder:
                 val = str(o).strip()
                 if val:
                     p_name = clean_predicate(p, self._attr_map).replace('_', ' ')
-                    orphans_by_pred[p_name].append(val)
+                    p_tok = canonical_map.get(str(p), f"<{p_name}>")
+                    orphans_by_pred[(p_name, p_tok)].append(val)
 
         orphan_count = 0
-        for p_name, vals in orphans_by_pred.items():
+        for (p_name, p_tok), vals in orphans_by_pred.items():
             unique_vals = list(set(vals))
             selected = random.sample(unique_vals, min(len(unique_vals), 100))
             for v in selected:
                 if random.random() < 0.5:
                     v_creative = self.creative_gen.generate(v, predicate=p_name)
                     if v_creative != v and len(v_creative) > 2:
-                        rows.append({"input": f"generate variation <{p_name}>: {v}", "target": v_creative})
+                        rows.append({"input": f"generate variation {p_tok}: {v}", "target": v_creative})
                         orphan_count += 1
 
         logger.info(f"[ORPHANS] Synthetic variations: {orphan_count}")

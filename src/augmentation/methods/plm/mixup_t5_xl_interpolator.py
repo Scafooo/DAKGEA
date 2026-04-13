@@ -161,10 +161,12 @@ class MixupT5XLInterpolator:
         # Use default_alpha if not specified (loaded from best_config.json)
         if alpha is None:
             alpha = self.default_alpha
-        p_name = predicate.replace("<", "").replace(">", "").lower().replace('_', ' ')
+        # Look up canonical token from mapping (same as training rows); fall back to uppercase local name
+        pred_mapping = getattr(self, 'predicate_mapping', {})
+        p_tok = pred_mapping.get(predicate, f"<{predicate.split('/')[-1].split('#')[-1].upper()}>")
         # IMPORTANTE: prompt deve matchare ESATTAMENTE il training (NO "synthetic"!)
-        prompt_src = f"generate variation <{p_name}>: {val_src}"
-        prompt_tgt = f"generate variation <{p_name}>: {val_tgt}"
+        prompt_src = f"generate variation {p_tok}: {val_src}"
+        prompt_tgt = f"generate variation {p_tok}: {val_tgt}"
         
         inputs = self.tokenizer([prompt_src, prompt_tgt], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len_in).to(self.device)
 
