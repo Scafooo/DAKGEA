@@ -259,9 +259,8 @@ class PLMMixupAugmenter(PLMAugmenter):
         else:
             max_pairs = self.bart_cfg.get("max_pairs_per_pred", 2000)
 
-        training_rows = builder.build_training_data(
+        training_rows, _ = builder.build_training_data(
             dataset=dataset,
-            canonical_mapping=canonical_mapping,
             max_pairs_per_pred=max_pairs,
         )
 
