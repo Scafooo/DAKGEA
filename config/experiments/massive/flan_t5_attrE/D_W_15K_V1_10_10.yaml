@@ -1,0 +1,28 @@
+experiment:
+  suite: flan_t5_attrE
+  name: D_W_15K_V1_10_10
+  dataset:
+    name: openea/D_W_15K_V1
+    writer: openea
+  reduction:
+    method: forget_labels
+    ratio: 1.0
+    writer: openea
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm_mixup
+    ratio: 1.0
+    backbone: flan-t5-xl
+    pretrained_model_dir: models/pretrained_plm/D_W_15K_V1
+    writer:
+      type: openea
+      augmented_only_train: true
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: attrE
+  seed: 11037
+  clear: true
+  overwrite_existing: false

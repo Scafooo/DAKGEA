@@ -1,0 +1,28 @@
+experiment:
+  suite: flan_t5_multiKE
+  name: ICEWS_WIKI_01_03
+  dataset:
+    name: openea/ICEW_WIKI
+    writer: openea
+  reduction:
+    method: forget_labels
+    ratio: 0.1
+    writer: openea
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm_mixup
+    ratio: 0.3
+    backbone: flan-t5-xl
+    pretrained_model_dir: models/pretrained_plm/ICEW_WIKI
+    writer:
+      type: openea
+      augmented_only_train: true
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: multiKE
+  seed: 11037
+  clear: true
+  overwrite_existing: false

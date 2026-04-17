@@ -1,0 +1,28 @@
+experiment:
+  suite: flan_t5_multiKE
+  name: BBC_DB_04_08
+  dataset:
+    name: openea/BBC_DB
+    writer: openea
+  reduction:
+    method: forget_labels
+    ratio: 0.4
+    writer: openea
+    eval: true
+    save_dataset: false
+    save_model: false
+  augmentation:
+    method: plm_mixup
+    ratio: 0.8
+    backbone: flan-t5-xl
+    pretrained_model_dir: models/pretrained_plm/BBC_DB
+    writer:
+      type: openea
+      augmented_only_train: true
+    eval: true
+    save_dataset: false
+    save_model: false
+  model: multiKE
+  seed: 11037
+  clear: true
+  overwrite_existing: false
