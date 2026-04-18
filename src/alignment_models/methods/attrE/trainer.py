@@ -60,6 +60,10 @@ class AttrETrainer:
         self.device = _resolve_device(device_spec)
         self.model.to(self.device)
 
+        # Fast-lookup sets for KG membership (used in KG-specific neg sampling)
+        self._kg1_id_set: set = set(data.kg1_entity_ids)
+        self._kg2_id_set: set = set(data.kg2_entity_ids)
+
         lr = float(config.get("learning_rate", 0.01))
         self.opt_rel = Adam(
             list(model.rel_ent_emb.parameters()) +
@@ -269,16 +273,26 @@ class AttrETrainer:
         pos_r: Tuple[int, ...],
         pos_t: Tuple[int, ...],
     ) -> Tuple[List[int], List[int], List[int]]:
-        """Corrupt either head or tail of each positive triple."""
+        """Corrupt either head or tail of each positive triple.
+
+        Tail corruption uses a KG-specific pool (matching KBA.py): a KG1 triple
+        gets a KG1 negative tail, a KG2 triple gets a KG2 negative tail.
+        Cross-KG negatives would teach the model to push KG1 and KG2 embeddings
+        apart — the opposite of alignment.  Head corruption uses the full pool
+        (also matching KBA.py which uses the full entity_vocab for head negatives).
+        """
         neg_h, neg_r, neg_t = list(pos_h), list(pos_r), list(pos_t)
-        neg_pool = self.data.neg_pool_1 + self.data.neg_pool_2
+        all_pool = self.data.neg_pool_1 + self.data.neg_pool_2
         for i in range(len(pos_h)):
             if random.random() < 0.5:
-                # Corrupt tail
-                neg_t[i] = random.choice(neg_pool)
+                # Corrupt tail — KG-specific pool
+                if pos_h[i] in self._kg1_id_set:
+                    neg_t[i] = random.choice(self.data.neg_pool_1)
+                else:
+                    neg_t[i] = random.choice(self.data.neg_pool_2)
             else:
-                # Corrupt head
-                neg_h[i] = random.choice(neg_pool)
+                # Corrupt head — full pool (matches KBA.py)
+                neg_h[i] = random.choice(all_pool)
         return neg_h, neg_r, neg_t
 
     def _corrupt_attr_batch(
@@ -288,7 +302,13 @@ class AttrETrainer:
         pos_char: Tuple[List[int], ...],
         pos_w: Tuple[float, ...],
     ) -> Tuple[List[int], List[int], List[List[int]], List[float]]:
-        """Corrupt the head entity of each positive attribute triple."""
-        neg_pool = self.data.neg_pool_1 + self.data.neg_pool_2
-        neg_h = [random.choice(neg_pool) for _ in pos_h]
+        """Corrupt the head entity of each positive attribute triple.
+
+        Uses a KG-specific negative pool so attribute training does not
+        teach the model to separate KG1 from KG2 embeddings.
+        """
+        neg_h = [
+            random.choice(self.data.neg_pool_1 if h in self._kg1_id_set else self.data.neg_pool_2)
+            for h in pos_h
+        ]
         return neg_h, list(pos_r), list(pos_char), list(pos_w)
