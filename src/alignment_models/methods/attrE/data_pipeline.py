@@ -141,6 +141,42 @@ def build_attre_data(
     )
 
     # ------------------------------------------------------------------
+    # 1b. Build predicate remap from attribute_matches
+    #
+    # In cross-schema datasets (e.g. DBpedia–Wikidata) the same attribute
+    # (e.g. birth date) has different predicate URIs in the two KGs.
+    # AttrE's alignment signal only works when aligned entities share the
+    # *same* predicate embedding.  dataset.attribute_matches maps
+    #   KG1_pred_uri -> [KG2_pred_uri, ...]
+    # We remap KG2 predicate IDs to their KG1 counterpart so both KGs use
+    # the same embedding for matched predicates.
+    # ------------------------------------------------------------------
+    attr_matches: Dict[str, List[str]] = getattr(dataset, "attribute_matches", None) or {}
+    pred_remap: Dict[int, int] = {}   # kg2_pred_id → kg1_pred_id
+    if attr_matches:
+        n_remapped = 0
+        for kg1_pred, kg2_preds in attr_matches.items():
+            if kg1_pred not in pred2id:
+                continue
+            kg1_pid = pred2id[kg1_pred]
+            for kg2_pred in kg2_preds:
+                if kg2_pred in pred2id:
+                    kg2_pid = pred2id[kg2_pred]
+                    if kg2_pid != kg1_pid:
+                        pred_remap[kg2_pid] = kg1_pid
+                        n_remapped += 1
+        logger.info(
+            "[AttrE] Predicate remap: %d KG2 predicates → KG1 equivalents "
+            "(from %d attribute_matches entries)",
+            n_remapped, len(attr_matches),
+        )
+    else:
+        logger.warning(
+            "[AttrE] No attribute_matches found — KG1 and KG2 predicates are "
+            "treated independently. Alignment signal may be weak on cross-schema datasets."
+        )
+
+    # ------------------------------------------------------------------
     # 2. Build character vocabulary from literal values
     # ------------------------------------------------------------------
     char2id: Dict[str, int] = {"<PAD>": 0}
@@ -176,7 +212,19 @@ def build_attre_data(
         seq += [0] * (char_seq_len - len(seq))   # pad to fixed length
         return seq
 
-    def _extract_triples(kg, entity_uris_set):
+    def _extract_triples(
+        kg,
+        entity_uris_set,
+        remap: Optional[Dict[int, int]] = None,
+    ):
+        """Extract relation and attribute triples from *kg*.
+
+        Args:
+            remap: Optional mapping ``{original_pred_id: canonical_pred_id}``.
+                   Applied to both relation and attribute triples so that
+                   matched predicates from different KGs share the same
+                   embedding.
+        """
         rel_triples: List[RelTriple] = []
         attr_triples_raw: List[Tuple[int, int, str]] = []  # (s, p, literal_str)
         pred_freq: Dict[int, int] = {}
@@ -189,6 +237,8 @@ def build_attre_data(
                 continue
             s_id = entity2id[s_str]
             p_id = pred2id[p_str]
+            if remap:
+                p_id = remap.get(p_id, p_id)
 
             if isinstance(o, URIRef):
                 o_str = str(o)
@@ -206,7 +256,7 @@ def build_attre_data(
         return rel_triples, attr_triples
 
     rel_triples_1, attr_triples_1 = _extract_triples(kg1, kg1_entity_uris)
-    rel_triples_2, attr_triples_2 = _extract_triples(kg2, kg2_entity_uris)
+    rel_triples_2, attr_triples_2 = _extract_triples(kg2, kg2_entity_uris, remap=pred_remap)
 
     logger.info(
         "[AttrE] Triples — rel1=%d rel2=%d attr1=%d attr2=%d",
