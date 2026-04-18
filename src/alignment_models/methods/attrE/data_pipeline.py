@@ -216,24 +216,51 @@ def build_attre_data(
     # ------------------------------------------------------------------
     # 4. Alignment train / test split
     # ------------------------------------------------------------------
-    all_pairs = [(entity2id[str(e1)], entity2id[str(e2)]) for e1, e2 in dataset.aligned_entities]
+    # dataset.aligned_entities contains ONLY training pairs when the pipeline
+    # uses ForgetLabelsReducer (which separates train/test and stores the test
+    # pool in dataset.fixed_test_pairs).  We must NOT filter all_pairs against
+    # fixed_test_pairs — they are disjoint by construction.
+    train_pairs = [(entity2id[str(e1)], entity2id[str(e2)]) for e1, e2 in dataset.aligned_entities]
 
-    # Honour fixed_test_pairs if set by the pipeline
     if getattr(dataset, "fixed_test_pairs", None) is not None:
-        test_set = {
+        # Test pairs come directly from the fixed split, not from aligned_entities.
+        # Also ensure their entities are in the vocab (they appear in triples, but
+        # add them explicitly for safety).
+        for e1, e2 in dataset.fixed_test_pairs:
+            s1, s2 = str(e1), str(e2)
+            if s1 not in entity2id:
+                new_id = len(entity2id)
+                entity2id[s1] = new_id
+                id2entity[new_id] = s1
+                kg1_entity_uris.add(s1)
+                kg1_entity_ids.append(new_id)
+            if s2 not in entity2id:
+                new_id = len(entity2id)
+                entity2id[s2] = new_id
+                id2entity[new_id] = s2
+                kg2_entity_uris.add(s2)
+                kg2_entity_ids.append(new_id)
+
+        test_pairs = [
             (entity2id[str(e1)], entity2id[str(e2)])
             for e1, e2 in dataset.fixed_test_pairs
             if str(e1) in entity2id and str(e2) in entity2id
-        }
-        train_pairs = [p for p in all_pairs if p not in test_set]
-        test_pairs = [p for p in all_pairs if p in test_set]
+        ]
     else:
         rng = random.Random(42)
-        shuffled = list(all_pairs)
+        shuffled = list(train_pairs)
         rng.shuffle(shuffled)
         n_train = max(1, int(len(shuffled) * train_ratio))
         train_pairs = shuffled[:n_train]
         test_pairs = shuffled[n_train:]
+
+    if not test_pairs:
+        logger.warning(
+            "[AttrE] test_pairs is EMPTY — evaluation will return 0. "
+            "fixed_test_pairs=%s, aligned_entities=%d",
+            "set" if getattr(dataset, "fixed_test_pairs", None) is not None else "None",
+            len(dataset.aligned_entities),
+        )
 
     logger.info("[AttrE] Alignment split: train=%d test=%d", len(train_pairs), len(test_pairs))
 
