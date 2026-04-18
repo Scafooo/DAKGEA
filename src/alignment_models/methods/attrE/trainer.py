@@ -72,9 +72,12 @@ class AttrETrainer:
             list(model.char_emb.parameters()),
             lr=lr,
         )
+        # opt_sim must NOT update atr_ent_emb — doing so would pull attr-view
+        # embeddings toward the (heterogeneous-schema) rel-view, destroying the
+        # attribute alignment built by even-epoch training.  The TF original
+        # (KBA.py opt_vars_sim) only updates relationship_ent_embedding.
         self.opt_sim = Adam(
-            list(model.rel_ent_emb.parameters()) +
-            list(model.atr_ent_emb.parameters()),
+            list(model.rel_ent_emb.parameters()),
             lr=lr,
         )
 
