@@ -153,33 +153,6 @@ class AttrEModel(nn.Module):
     # Loss helpers
     # ------------------------------------------------------------------
 
-    def rel_loss(
-        self,
-        pos_h: torch.Tensor,
-        pos_r: torch.Tensor,
-        pos_t: torch.Tensor,
-        neg_h: torch.Tensor,
-        neg_r: torch.Tensor,
-        neg_t: torch.Tensor,
-        margin: float = 1.0,
-    ) -> torch.Tensor:
-        """Margin ranking loss for relation triples + cosine alignment."""
-        pos_score = self.score_rel(pos_h, pos_r, pos_t)
-        neg_score = self.score_rel(neg_h, neg_r, neg_t)
-        ranking_loss = F.relu(pos_score - neg_score + margin).mean()
-
-        # Cosine similarity loss between relation and attribute views
-        h_rel = F.normalize(self.rel_ent_emb(
-            # We re-use indices from pos_h embedding lookup to get IDs.
-            # Instead we compute the view alignment on the full batch.
-            self._batch_ids_from_emb(pos_h, self.rel_ent_emb),
-        ), dim=-1)
-        h_atr = F.normalize(self.atr_ent_emb(
-            self._batch_ids_from_emb(pos_h, self.rel_ent_emb),
-        ), dim=-1)
-        sim_loss = (1.0 - (h_rel * h_atr).sum(dim=-1)).mean()
-        return ranking_loss + sim_loss
-
     def attr_loss(
         self,
         pos_h: torch.Tensor,
@@ -203,24 +176,6 @@ class AttrEModel(nn.Module):
         h_atr = F.normalize(self.atr_ent_emb(entity_ids), dim=-1)
         return (1.0 - (h_rel * h_atr).sum(dim=-1)).mean()
 
-    @staticmethod
-    def _batch_ids_from_emb(
-        embedded: torch.Tensor,
-        emb_module: nn.Embedding,
-    ) -> torch.Tensor:
-        """Recover integer IDs from an already-looked-up embedding batch.
-
-        This is used internally where we have the embedding tensor but need
-        the IDs for a second lookup in a different table.  We locate each
-        row in the weight matrix via nearest-neighbour.
-
-        Note: for training this is only an approximation; the exact IDs are
-        passed explicitly in :meth:`forward_rel` / :meth:`forward_attr`.
-        """
-        # Dot-product similarity: [B, num_entities]
-        sim = embedded @ emb_module.weight.T
-        return sim.argmax(dim=-1)
-
     # ------------------------------------------------------------------
     # Convenience forward methods
     # ------------------------------------------------------------------
@@ -236,9 +191,8 @@ class AttrEModel(nn.Module):
     ) -> torch.Tensor:
         """Relation-view forward pass, returns scalar loss.
 
-        Per the original AttrE paper, even epochs train *only* on relation
-        triples (no similarity-alignment term).  The sim loss is applied
-        exclusively in the dedicated sim epoch (odd epochs).
+        Faithful port of KBA.py (even-epoch URI branch): ranking loss +
+        per-batch cosine similarity alignment on the tail entities.
         """
         pos_h = self.rel_ent_emb(pos_h_ids)
         pos_r = self.rel_pred_emb(pos_r_ids)
@@ -247,10 +201,12 @@ class AttrEModel(nn.Module):
         neg_r = self.rel_pred_emb(neg_r_ids)
         neg_t = self.rel_ent_emb(neg_t_ids)
 
-        return F.relu(
+        ranking_loss = F.relu(
             self.score_rel(pos_h, pos_r, pos_t) -
             self.score_rel(neg_h, neg_r, neg_t) + 1.0
         ).mean()
+        sim_loss = self.sim_alignment_loss(pos_t_ids)
+        return ranking_loss + sim_loss
 
     def forward_attr(
         self,

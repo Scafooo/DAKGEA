@@ -96,14 +96,18 @@ class AttrETrainer:
 
         for epoch in range(epochs):
             if epoch % 2 == 0:
+                # Even epoch: relation triples (ranking + sim) + attribute triples (ranking only)
+                # Matches KBA.py even-epoch branch: URI data then literal data.
                 loss_r = self._train_relation_epoch(batch_size)
-                logger.debug("[AttrE] epoch=%d rel_loss=%.4f", epoch, loss_r)
-            else:
                 loss_a = self._train_attribute_epoch(batch_size)
-                loss_s = self._train_sim_epoch(batch_size)
                 logger.debug(
-                    "[AttrE] epoch=%d attr_loss=%.4f sim_loss=%.4f", epoch, loss_a, loss_s
+                    "[AttrE] epoch=%d rel_loss=%.4f attr_loss=%.4f", epoch, loss_r, loss_a
                 )
+            else:
+                # Odd epoch: sim alignment only (on attribute-triple head entities)
+                # Matches KBA.py odd-epoch branch: sim_optimizer on literal data.
+                loss_s = self._train_sim_epoch(batch_size)
+                logger.debug("[AttrE] epoch=%d sim_loss=%.4f", epoch, loss_s)
 
             if (epoch + 1) % eval_freq == 0:
                 metrics = self.evaluate()
@@ -205,16 +209,42 @@ class AttrETrainer:
         return total_loss / max(num_batches, 1)
 
     def _train_sim_epoch(self, batch_size: int) -> float:
-        """Similarity alignment pass: pull rel-view and attr-view together."""
-        all_ids = list(range(self.data.num_entities))
-        random.shuffle(all_ids)
+        """Similarity alignment pass: pull rel-view and attr-view together.
+
+        Matches KBA.py odd-epoch branch: sim_optimizer is run on attribute
+        triple batches, using the *head* entity of each triple as the target.
+        """
+        all_triples = self.data.attr_triples_1 + self.data.attr_triples_2
+        if not all_triples:
+            # No attribute triples — fall back to all entities
+            all_ids = list(range(self.data.num_entities))
+            random.shuffle(all_ids)
+            total_loss = 0.0
+            num_batches = 0
+            for start in range(0, len(all_ids), batch_size):
+                batch_ids = all_ids[start : start + batch_size]
+                ids_t = torch.tensor(batch_ids, dtype=torch.long, device=self.device)
+                self.opt_sim.zero_grad()
+                loss = self.model.forward_sim(ids_t)
+                loss.backward()
+                self.opt_sim.step()
+                total_loss += loss.item()
+                num_batches += 1
+            return total_loss / max(num_batches, 1)
+
+        random.shuffle(all_triples)
 
         total_loss = 0.0
         num_batches = 0
 
-        for start in range(0, len(all_ids), batch_size):
-            batch_ids = all_ids[start : start + batch_size]
-            ids_t = torch.tensor(batch_ids, dtype=torch.long, device=self.device)
+        for start in range(0, len(all_triples), batch_size):
+            batch = all_triples[start : start + batch_size]
+            if not batch:
+                continue
+
+            # Use head entity IDs (subject of each attribute triple)
+            head_ids = [t[0] for t in batch]
+            ids_t = torch.tensor(head_ids, dtype=torch.long, device=self.device)
 
             self.opt_sim.zero_grad()
             loss = self.model.forward_sim(ids_t)
