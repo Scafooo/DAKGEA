@@ -234,7 +234,12 @@ class AttrEModel(nn.Module):
         neg_r_ids: torch.Tensor,
         neg_t_ids: torch.Tensor,
     ) -> torch.Tensor:
-        """Relation-view forward pass, returns scalar loss."""
+        """Relation-view forward pass, returns scalar loss.
+
+        Per the original AttrE paper, even epochs train *only* on relation
+        triples (no similarity-alignment term).  The sim loss is applied
+        exclusively in the dedicated sim epoch (odd epochs).
+        """
         pos_h = self.rel_ent_emb(pos_h_ids)
         pos_r = self.rel_pred_emb(pos_r_ids)
         pos_t = self.rel_ent_emb(pos_t_ids)
@@ -242,12 +247,10 @@ class AttrEModel(nn.Module):
         neg_r = self.rel_pred_emb(neg_r_ids)
         neg_t = self.rel_ent_emb(neg_t_ids)
 
-        rank_loss = F.relu(
+        return F.relu(
             self.score_rel(pos_h, pos_r, pos_t) -
             self.score_rel(neg_h, neg_r, neg_t) + 1.0
         ).mean()
-        sim_loss = self.sim_alignment_loss(pos_h_ids)
-        return rank_loss + sim_loss
 
     def forward_attr(
         self,
