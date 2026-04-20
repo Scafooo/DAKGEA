@@ -208,6 +208,10 @@ def build_attre_data(
         return float(math.log(1.0 + total / freq) / math.log(1.0 + total))
 
     def _str_to_char_seq(text: str) -> List[int]:
+        # Strip leading/trailing whitespace: KG2 raw values often have a
+        # leading space from the TSV format ("\tpred\t value"), which would
+        # break the char match against KG1 values that have no such space.
+        text = text.strip()
         seq = [char2id.get(ch, 0) for ch in text[:char_seq_len]]
         seq += [0] * (char_seq_len - len(seq))   # pad to fixed length
         return seq
