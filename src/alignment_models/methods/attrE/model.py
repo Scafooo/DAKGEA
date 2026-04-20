@@ -61,7 +61,13 @@ class AttrEAlignment:
         logger.info("[AttrE] Building data bundle from Dataset object …")
         train_ratio = float(self.model_config.get("train_ratio", 0.3))
         char_seq_len = int(self.model_config.get("char_seq_len", 10))
-        bundle = build_attre_data(dataset, train_ratio=train_ratio, char_seq_len=char_seq_len)
+        filter_noise_attr = bool(self.model_config.get("filter_noise_attr", True))
+        bundle = build_attre_data(
+            dataset,
+            train_ratio=train_ratio,
+            char_seq_len=char_seq_len,
+            filter_noise_attr=filter_noise_attr,
+        )
 
         logger.info(
             "[AttrE] Vocabulary: %d entities, %d predicates, %d chars",

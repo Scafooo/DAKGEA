@@ -82,6 +82,7 @@ def build_attre_data(
     dataset: Dataset,
     train_ratio: float = 0.3,
     char_seq_len: int = CHAR_SEQ_LEN,
+    filter_noise_attr: bool = True,
 ) -> AttrEDataBundle:
     """Convert *dataset* into an :class:`AttrEDataBundle`.
 
@@ -89,6 +90,13 @@ def build_attre_data(
         dataset: Project-standard Dataset (two KGs + aligned entities).
         train_ratio: Fraction of aligned pairs used for training supervision.
         char_seq_len: Number of characters kept per literal value.
+        filter_noise_attr: When True (default) and ``dataset.attribute_matches``
+            is non-empty, KG2 attribute triples whose predicate (after remap)
+            is not one of the canonical KG1 predicates are dropped before
+            training.  This removes unmatched KG2-specific attributes that
+            would otherwise create a high noise-to-signal gradient ratio and
+            prevent the model from learning the alignment signal.
+            Set to False to use all KG2 attr triples (original behaviour).
 
     Returns:
         Fully populated AttrEDataBundle ready for AttrETrainer.
@@ -220,6 +228,7 @@ def build_attre_data(
         kg,
         entity_uris_set,
         remap: Optional[Dict[int, int]] = None,
+        canonical_pred_ids: Optional[set] = None,
     ):
         """Extract relation and attribute triples from *kg*.
 
@@ -228,6 +237,10 @@ def build_attre_data(
                    Applied to both relation and attribute triples so that
                    matched predicates from different KGs share the same
                    embedding.
+            canonical_pred_ids: If provided, attribute triples whose predicate
+                   (after remap) is NOT in this set are silently dropped.
+                   Use this to remove noisy unmatched KG2 predicates that
+                   would otherwise overwhelm the alignment signal.
         """
         rel_triples: List[RelTriple] = []
         attr_triples_raw: List[Tuple[int, int, str]] = []  # (s, p, literal_str)
@@ -249,6 +262,8 @@ def build_attre_data(
                 if o_str in entity2id:
                     rel_triples.append((s_id, p_id, entity2id[o_str]))
             elif isinstance(o, Literal):
+                if canonical_pred_ids is not None and p_id not in canonical_pred_ids:
+                    continue   # drop noisy non-canonical attr triples
                 attr_triples_raw.append((s_id, p_id, str(o)))
                 pred_freq[p_id] = pred_freq.get(p_id, 0) + 1
 
@@ -259,8 +274,26 @@ def build_attre_data(
         ]
         return rel_triples, attr_triples
 
+    # Canonical KG1 predicate IDs (used for noise filtering of KG2 attr triples)
+    canonical_pred_ids: Optional[set] = None
+    if filter_noise_attr and attr_matches:
+        canonical_pred_ids = set()
+        for kg1_pred in attr_matches:
+            if kg1_pred in pred2id:
+                canonical_pred_ids.add(pred2id[kg1_pred])
+        if canonical_pred_ids:
+            logger.info(
+                "[AttrE] Noise filter: KG2 attr triples restricted to %d canonical pred IDs "
+                "(filter_noise_attr=True)",
+                len(canonical_pred_ids),
+            )
+        else:
+            canonical_pred_ids = None   # no valid canonical preds — skip filtering
+
     rel_triples_1, attr_triples_1 = _extract_triples(kg1, kg1_entity_uris)
-    rel_triples_2, attr_triples_2 = _extract_triples(kg2, kg2_entity_uris, remap=pred_remap)
+    rel_triples_2, attr_triples_2 = _extract_triples(
+        kg2, kg2_entity_uris, remap=pred_remap, canonical_pred_ids=canonical_pred_ids
+    )
 
     logger.info(
         "[AttrE] Triples — rel1=%d rel2=%d attr1=%d attr2=%d",
