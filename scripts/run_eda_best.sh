@@ -36,12 +36,12 @@ echo "============================================================"
 echo ""
 
 # Generate one YAML config per entry in the JSON
-python - <<'PYEOF'
-import json, pathlib, sys
+PROJECT_ROOT="${PROJECT_ROOT}" python - <<'PYEOF'
+import json, os, pathlib
 
-root      = pathlib.Path(sys.argv[0]).resolve().parents[0] if False else pathlib.Path(".")
-best_json = pathlib.Path("analysis/best_configs_flan_t5.json")
-gen_dir   = pathlib.Path("config/experiments/generated")
+root      = pathlib.Path(os.environ["PROJECT_ROOT"])
+best_json = root / "analysis/best_configs_flan_t5.json"
+gen_dir   = root / "config/experiments/generated"
 
 with open(best_json) as f:
     best = json.load(f)
@@ -77,7 +77,7 @@ experiment:
 """
     out = gen_dir / f"{name}.yaml"
     out.write_text(yaml_content)
-    print(out)
+    print(str(out))
 PYEOF
 
 echo ""
