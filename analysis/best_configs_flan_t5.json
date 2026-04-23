@@ -1,0 +1,7 @@
+{
+  "BBC_DB":      { "dataset": "openea/BBC_DB",      "red": 0.1, "aug": 0.9, "seed": 11037, "folder": "BBC_DB_01_09",      "base_h1": 0.3684, "aug_h1": 0.8018, "delta": 0.4334 },
+  "D_W_15K_V1":  { "dataset": "openea/D_W_15K_V1",  "red": 0.1, "aug": 0.7, "seed": 11039, "folder": "D_W_15K_V1_01_07",  "base_h1": 0.1540, "aug_h1": 0.2231, "delta": 0.0691 },
+  "D_W_15K_V2":  { "dataset": "openea/D_W_15K_V2",  "red": 0.7, "aug": 0.6, "seed": 11041, "folder": "D_W_15K_V2_07_06",  "base_h1": 0.2688, "aug_h1": 0.3890, "delta": 0.1202 },
+  "ICEW_WIKI":   { "dataset": "openea/ICEW_WIKI",   "red": 0.2, "aug": 0.8, "seed": 11041, "folder": "ICEWS_WIKI_02_08",   "base_h1": 0.4460, "aug_h1": 0.8643, "delta": 0.4183 },
+  "ICEW_YAGO":   { "dataset": "openea/ICEW_YAGO",   "red": 0.1, "aug": 0.4, "seed": 11041, "folder": "ICEWS_YAGO_01_04",   "base_h1": 0.6730, "aug_h1": 0.8867, "delta": 0.2137 }
+}
