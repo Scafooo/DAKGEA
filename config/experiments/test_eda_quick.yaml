@@ -1,0 +1,25 @@
+experiment:
+  name: test_eda_quick
+  dataset:
+    name: openea/BBC_DB
+    writer: bert_int
+  reduction:
+    method: random_entities
+    ratio: 0.1
+    writer: bert_int
+    save: false
+    eval: false
+  augmentation:
+    method: eda
+    ratio: 0.1
+    alpha_sr: 0.1
+    alpha_ri: 0.1
+    alpha_rs: 0.1
+    alpha_rd: 0.1
+    writer: bert_int
+    save: false
+    eval: true
+  model: bert_int
+  seed: 42
+  clear: false
+  overwrite_existing: true
