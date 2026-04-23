@@ -55,11 +55,12 @@ experiment:
     name: {cfg['dataset']}
     writer: bert_int
   reduction:
-    method: random_entities
+    method: forget_labels
     ratio: {cfg['red']}
     writer: bert_int
-    save: false
     eval: false
+    save_dataset: false
+    save_model: false
   augmentation:
     method: eda
     ratio: {cfg['aug']}
@@ -67,12 +68,15 @@ experiment:
     alpha_ri: 0.1
     alpha_rs: 0.1
     alpha_rd: 0.1
-    writer: bert_int
-    save: false
+    writer:
+      type: bert_int
+      augmented_only_train: true
     eval: true
+    save_dataset: false
+    save_model: false
   model: bert_int
   seed: {cfg['seed']}
-  clear: false
+  clear: true
   overwrite_existing: true
 """
     out = gen_dir / f"{name}.yaml"
