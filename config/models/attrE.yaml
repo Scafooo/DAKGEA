@@ -1,0 +1,35 @@
+model:
+  # ============================================================================
+  # Model architecture
+  # ============================================================================
+  hidden_dim: 100        # entity / predicate / char embedding size
+  char_seq_len: 20       # characters kept per literal value (truncate / pad)
+
+  # ============================================================================
+  # Training
+  # ============================================================================
+  epochs: 200            # total training epochs (even=rel, odd=attr+sim)
+  batch_size: 100        # triples per mini-batch
+  learning_rate: 0.01    # Adam learning rate (shared across all 3 optimisers)
+  train_ratio: 0.3       # fraction of aligned pairs used as training supervision
+
+  # ============================================================================
+  # Evaluation
+  # ============================================================================
+  eval_freq: 20          # evaluate every N epochs
+
+  # ============================================================================
+  # Data
+  # ============================================================================
+  # When True (default), KG2 attr triples whose predicate has no match in
+  # attribute_matches are dropped before training.  This prevents noisy
+  # KG2-specific predicates from overwhelming the alignment signal on
+  # cross-schema datasets (e.g. BBC_DB).  Set to False to use all triples
+  # (original AttrE behaviour, recommended for matched-schema datasets).
+  filter_noise_attr: true
+
+  # ============================================================================
+  # Runtime
+  # ============================================================================
+  # Torch device: "cpu", "cuda", "cuda:0", or null (auto-detect)
+  device: null

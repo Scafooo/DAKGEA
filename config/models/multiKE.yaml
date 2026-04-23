@@ -1,0 +1,75 @@
+model:
+  # ============================================================================
+  # Runtime
+  # ============================================================================
+  # Path to the Python interpreter that has TF 1.x and the MultiKE dependencies.
+  # Set to a conda-env binary if the main project environment is TF 2.x.
+  # Example: /home/user/miniconda3/envs/multiKE_env/bin/python
+  python_executable: python
+
+  # Maximum wall-clock time (seconds) before the subprocess is killed.
+  timeout_seconds: 7200
+
+  # ============================================================================
+  # Data layout
+  # ============================================================================
+  # OpenEA 631 split convention used for train/test/valid link files.
+  dataset_division: "631/"
+
+  # Path to pre-trained word2vec embeddings used for literal encoding.
+  # Must be set to a valid .vec file before running MultiKE.
+  word2vec_path: ""
+
+  # ============================================================================
+  # Model architecture
+  # ============================================================================
+  alignment_module: swapping
+  dim: 75
+
+  # Literal encoder
+  encoder_epoch: 100
+  encoder_active: thah
+  encoder_normalize: true
+  retrain_literal_embeds: true
+  literal_normalize: true
+
+  # ============================================================================
+  # Training
+  # ============================================================================
+  learning_rate: 0.001
+  optimizer: Adagrad
+  max_epoch: 200
+  shared_learning_max_epoch: 200
+
+  batch_size: 5000
+  entity_batch_size: 5000
+  attribute_batch_size: 5000
+
+  neg_triple_num: 10
+  neg_sampling: truncated
+  truncated_epsilon: 0.98
+  truncated_freq: 20
+
+  batch_threads_num: 4
+  test_threads_num: 8
+
+  # ============================================================================
+  # Evaluation
+  # ============================================================================
+  start_valid: 100
+  eval_freq: 10
+  stop_metric: mrr
+  top_k: [1, 5, 10, 50]
+
+  # ============================================================================
+  # Cross-view / predicate alignment
+  # ============================================================================
+  orthogonal_weight: 2
+  cv_name_weight: 1
+  cv_weight: 1
+
+  start_predicate_soft_alignment: 10
+  predicate_soft_sim: 0.85
+  predicate_init_sim: 0.90
+  relation_learning_rate: 0.005
+  ITC_learning_rate: 0.004

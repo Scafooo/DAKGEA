@@ -1,0 +1,13 @@
+augmentation:
+  method: eda
+
+  # Fraction of seed pairs to augment (ignored if max_pairs is set)
+  ratio: 0.3
+  # Hard cap on generated pairs (null = use ratio)
+  max_pairs: null
+
+  # EDA transformation intensities (fraction of words affected)
+  alpha_sr: 0.1   # synonym replacement
+  alpha_ri: 0.1   # random insertion
+  alpha_rs: 0.1   # random swap
+  alpha_rd: 0.1   # random deletion probability per word

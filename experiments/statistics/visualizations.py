@@ -114,10 +114,12 @@ def plot_heatmap(
 def _build_heatmap_matrices(
     aug_data: Dict[float, Dict[float, float]],
     red_data: Dict[float, Dict[float, float]],
+    global_rr=None,
+    global_ar=None,
 ):
     """Return (reduction_ratios, augmentation_ratios, red_matrix, delta_matrix) in %."""
-    reduction_ratios = sorted(aug_data.keys())
-    augmentation_ratios = sorted({a for d in aug_data.values() for a in d})
+    reduction_ratios = global_rr if global_rr is not None else sorted(aug_data.keys())
+    augmentation_ratios = global_ar if global_ar is not None else sorted({a for d in aug_data.values() for a in d})
     n_rows, n_cols = len(reduction_ratios), len(augmentation_ratios)
     red_matrix   = np.full((n_rows, n_cols), np.nan)
     delta_matrix = np.full((n_rows, n_cols), np.nan)
@@ -375,6 +377,13 @@ def _tikz_heatmap_body(
     fs_tick: str,
     fs_label: str,
     fs_title: str,
+    y_off: float = 0.0,
+    show_xlabel: bool = True,
+    show_xlabel_top: bool = False,
+    show_yticks: bool = True,
+    show_corner_label: bool = False,
+    show_title: bool = True,
+    fs_cell_top: str = None,
 ) -> tuple:
     """Return (tikz_lines, grid_width, grid_height)."""
     n_rows, n_cols = len(reduction_ratios), len(augmentation_ratios)
@@ -386,7 +395,7 @@ def _tikz_heatmap_body(
             rv = red_matrix[i, j]
             dv = delta_matrix[i, j]
             x0 = x_off + j * cw
-            y0 = -i * ch
+            y0 = y_off - i * ch
 
             if not np.isnan(dv):
                 rgba = cmap(norm(float(dv)))
@@ -407,12 +416,18 @@ def _tikz_heatmap_body(
             )
             cx = x0 + cw / 2
             if not np.isnan(rv):
+                ft = fs_cell_top if fs_cell_top is not None else fs_cell
                 lines.append(
-                    f"  \\node[{tc},font={fs_cell},anchor=center]"
+                    f"  \\node[{tc},font={ft},anchor=center]"
                     f" at ({cx:.3f}cm,{y0 - ch*0.29:.3f}cm) {{{rv:.1f}}};"
                 )
             if not np.isnan(dv):
-                dstr = f"{float(dv):+.1f}"
+                val = float(dv)
+                sign = r"\scalebox{0.65}{+}" if val >= 0 else ""
+                num  = f"{abs(val):.1f}" if val >= 0 else f"{val:.1f}"
+                content = sign + num
+                # 3-digit integer part (≥10): shrink whole string slightly to prevent overflow
+                dstr = (r"\scalebox{0.86}{" + content + r"}") if abs(val) >= 10 else content
                 lines.append(
                     f"  \\node[{tc},font={fs_cell}\\bfseries\\itshape,anchor=center]"
                     f" at ({cx:.3f}cm,{y0 - ch*0.71:.3f}cm) {{{dstr}}};"
@@ -420,7 +435,7 @@ def _tikz_heatmap_body(
 
     # Minor grid lines
     for ii in range(1, n_rows):
-        y = -ii * ch
+        y = y_off - ii * ch
         lines.append(
             f"  \\draw[black!20,line width=0.2pt]"
             f" ({x_off:.3f}cm,{y:.3f}cm) -- ({x_off+gw:.3f}cm,{y:.3f}cm);"
@@ -429,46 +444,124 @@ def _tikz_heatmap_body(
         x = x_off + jj * cw
         lines.append(
             f"  \\draw[black!20,line width=0.2pt]"
-            f" ({x:.3f}cm,0cm) -- ({x:.3f}cm,{-gh:.3f}cm);"
+            f" ({x:.3f}cm,{y_off:.3f}cm) -- ({x:.3f}cm,{y_off-gh:.3f}cm);"
         )
     # Border
     lines.append(
         f"  \\draw[black!60,line width=0.5pt]"
-        f" ({x_off:.3f}cm,0cm) rectangle ({x_off+gw:.3f}cm,{-gh:.3f}cm);"
+        f" ({x_off:.3f}cm,{y_off:.3f}cm) rectangle ({x_off+gw:.3f}cm,{y_off-gh:.3f}cm);"
     )
 
-    # X-axis ticks (in %)
-    for j, a in enumerate(augmentation_ratios):
-        x = x_off + j * cw + cw / 2
-        lines.append(
-            f"  \\node[anchor=north,font={fs_tick}]"
-            f" at ({x:.3f}cm,{-gh:.3f}cm) {{{int(round(a * 100))}}};"
-        )
-    lines.append(
-        f"  \\node[anchor=north,font={fs_label}]"
-        f" at ({x_off + gw/2:.3f}cm,{-gh - 0.5:.3f}cm) {{Augmentation (\\%)}};"
-    )
+    # X-axis ticks at bottom
+    if show_xlabel:
+        for j, a in enumerate(augmentation_ratios):
+            x = x_off + j * cw + cw / 2
+            lines.append(
+                f"  \\node[anchor=north,font={fs_tick}]"
+                f" at ({x:.3f}cm,{y_off-gh:.3f}cm) {{{int(round(a * 100))}}};"
+            )
 
-    # Y-axis ticks (only leftmost subplot, in %)
-    if show_ylabel:
+    # X-axis ticks at top (ticks only, no text label)
+    if show_xlabel_top:
+        for j, a in enumerate(augmentation_ratios):
+            x = x_off + j * cw + cw / 2
+            lines.append(
+                f"  \\node[anchor=south,font={fs_tick}]"
+                f" at ({x:.3f}cm,{y_off:.3f}cm) {{{int(round(a * 100))}}};"
+            )
+
+    # Y-axis numeric ticks
+    if show_yticks:
         for i, r in enumerate(reduction_ratios):
-            y = -i * ch - ch / 2
+            y = y_off - i * ch - ch / 2
             lines.append(
                 f"  \\node[anchor=east,font={fs_tick}]"
                 f" at ({x_off - 0.1:.3f}cm,{y:.3f}cm) {{{int(round(r * 100))}}};"
             )
+
+    # Y-axis text label (once, centered on this block)
+    if show_ylabel:
         lines.append(
             f"  \\node[anchor=south,rotate=90,font={fs_label}]"
-            f" at ({x_off - 0.65:.3f}cm,{-gh/2:.3f}cm) {{Reduction (\\%)}};"
+            f" at ({x_off - 0.65:.3f}cm,{y_off-gh/2:.3f}cm) {{Reduction (\\%)}};"
         )
 
-    # Title
-    lines.append(
-        f"  \\node[anchor=south,font={fs_title}]"
-        f" at ({x_off + gw/2:.3f}cm,0.2cm) {{\\textbf{{{_esc(dataset)}}}}};"
-    )
+    # Corner split: diagonal line, "r%" lower-left (row axis), "a%" upper-right (col axis)
+    if show_corner_label:
+        cx0, cy0 = x_off - 0.46, y_off + 0.18
+        cx1, cy1 = x_off,         y_off
+        lines += [
+            f"  \\draw[black!50,line width=0.3pt]"
+            f" ({cx0:.3f}cm,{cy0:.3f}cm) -- ({cx1:.3f}cm,{cy1:.3f}cm);",
+            f"  \\node[anchor=north,font={fs_tick}\\itshape]"
+            f" at ({x_off-0.35:.3f}cm,{y_off+0.14:.3f}cm) {{r\\%}};",
+            f"  \\node[anchor=south,font={fs_tick}\\itshape]"
+            f" at ({x_off-0.13:.3f}cm,{y_off+0.04:.3f}cm) {{a\\%}};",
+        ]
+
+    # Title (above each block)
+    if show_title:
+        lines.append(
+            f"  \\node[anchor=south,font={fs_title}]"
+            f" at ({x_off + gw/2:.3f}cm,{y_off+0.45:.3f}cm) {{\\textbf{{{_esc(dataset)}}}}};"
+        )
 
     return lines, gw, gh
+
+
+def _tikz_colorbar_horizontal(
+    x_pos: float,
+    y_pos: float,
+    width: float,
+    vmin: float,
+    vmax: float,
+    norm,
+    cmap,
+    metric: str,
+    height: float = 0.35,
+    n_steps: int = 256,
+    fs_tick: str = r"\scriptsize",
+    fs_label: str = r"\footnotesize",
+) -> list:
+    """Draw a horizontal colorbar as stacked colored rectangles."""
+    lines = []
+    step_w = width / n_steps
+    sat = 0.75
+    for k in range(n_steps):
+        v = vmin + (vmax - vmin) * k / n_steps
+        rgba = cmap(norm(float(v)))
+        rc = rgba[0] * sat + (1 - sat)
+        gc = rgba[1] * sat + (1 - sat)
+        bc = rgba[2] * sat + (1 - sat)
+        fill = _rgb_tikz(rc, gc, bc)
+        x = x_pos + k * step_w
+        lines.append(
+            f"  \\fill[fill={fill}] ({x:.3f}cm,{y_pos:.3f}cm)"
+            f" rectangle ++({step_w + 0.01:.3f}cm,{-height:.3f}cm);"
+        )
+    lines.append(
+        f"  \\draw[black!60,line width=0.4pt]"
+        f" ({x_pos:.3f}cm,{y_pos:.3f}cm)"
+        f" rectangle ({x_pos+width:.3f}cm,{y_pos-height:.3f}cm);"
+    )
+    span = vmax - vmin if (vmax - vmin) > 1e-9 else 1.0
+    for tv in [vmin, vmin / 2, 0.0, vmax / 2, vmax]:
+        if vmin <= tv <= vmax:
+            frac = (tv - vmin) / span
+            x = x_pos + frac * width
+            lines.append(
+                f"  \\draw[black!70] ({x:.3f}cm,{y_pos-height:.3f}cm) -- ++(0,{-0.10:.2f}cm);"
+            )
+            lines.append(
+                f"  \\node[anchor=north,font={fs_tick}]"
+                f" at ({x:.3f}cm,{y_pos-height-0.13:.3f}cm) {{{tv:.1f}}};"
+            )
+    lines.append(
+        f"  \\node[anchor=north,font={fs_label}]"
+        f" at ({x_pos+width/2:.3f}cm,{y_pos-height-0.45:.3f}cm)"
+        f" {{$\\Delta$ {_esc(metric)} (pp)}};"
+    )
+    return lines
 
 
 def _tikz_colorbar(
@@ -619,14 +712,19 @@ def plot_delta_heatmap_latex_combined(
     plots_dir: Path,
     dpi: int = 300,
     cell_size: float = 0.85,
+    show_right_labels: bool = False,
 ) -> None:
     if not all_data:
         return
 
+    # Global union of ratios so missing rows/cols appear as gray cells
+    global_rr = sorted({r for aug, _ in all_data.values() for r in aug})
+    global_ar = sorted({a for aug, _ in all_data.values() for d in aug.values() for a in d})
+
     built = {}
     abs_max = 0.0
     for ds, (aug_data, red_data) in all_data.items():
-        rr, ar, rm, dm = _build_heatmap_matrices(aug_data, red_data)
+        rr, ar, rm, dm = _build_heatmap_matrices(aug_data, red_data, global_rr, global_ar)
         if rr and ar:
             built[ds] = (rr, ar, rm, dm)
             if not np.all(np.isnan(dm)):
@@ -641,35 +739,96 @@ def plot_delta_heatmap_latex_combined(
     cw = ch = cell_size
     gap = 0.6
     body_lines = []
-    x_cur = 0.0
-    gh = 0.0
+    n_ds = len(all_data)
+    # Pre-compute exact grid dimensions to avoid floating-point drift
+    n_rows = len(global_rr)
+    n_cols = len(global_ar)
+    gw = n_cols * cw
+    gh = n_rows * ch
 
     for idx, ds in enumerate(all_data.keys()):
-        show_y = (idx == 0)
+        y_cur = -(idx * (gh + gap))   # exact, no accumulation
         if ds in built:
             rr, ar, rm, dm = built[ds]
             lines, gw, gh = _tikz_heatmap_body(
-                rm, dm, rr, ar, norm, cmap, ds, cw, ch, x_cur, show_y,
-                r"\scriptsize", r"\scriptsize", r"\footnotesize", r"\small",
+                rm, dm, rr, ar, norm, cmap, ds, cw, ch, 0.0, False,
+                r"\small", r"\scriptsize", r"\footnotesize", r"\small",
+                y_off=y_cur, show_xlabel=False,
+                show_xlabel_top=True, show_yticks=True, show_corner_label=True,
+                show_title=False, fs_cell_top=r"\normalsize",
             )
         else:
-            n_r = n_c = 10
+            # Placeholder block for missing dataset
+            ref_rr = sorted({r for v in built.values() for r in v[0]}) or list(range(10))
+            ref_ar = sorted({a for v in built.values() for a in v[1]}) or list(range(10))
+            n_r, n_c = len(ref_rr), len(ref_ar)
             gw, gh = n_c * cw, n_r * ch
-            lines = [
-                f"  \\fill[gray!12] ({x_cur:.3f}cm,0cm)"
-                f" rectangle ({x_cur+gw:.3f}cm,{-gh:.3f}cm);",
-                f"  \\draw[black!40,line width=0.5pt] ({x_cur:.3f}cm,0cm)"
-                f" rectangle ({x_cur+gw:.3f}cm,{-gh:.3f}cm);",
-                f"  \\node[gray,font=\\small\\itshape,anchor=center]"
-                f" at ({x_cur+gw/2:.3f}cm,{-gh/2:.3f}cm) {{Data not available}};",
-                f"  \\node[anchor=south,font=\\small]"
-                f" at ({x_cur+gw/2:.3f}cm,0.2cm) {{\\textbf{{{_esc(ds)}}}}};",
+            lines = []
+            for i in range(n_r):
+                for j in range(n_c):
+                    x0 = j * cw
+                    y0 = y_cur - i * ch
+                    lines.append(
+                        f"  \\fill[gray!15] ({x0:.3f}cm,{y0:.3f}cm)"
+                        f" rectangle ++({cw:.3f}cm,{-ch:.3f}cm);"
+                    )
+            # grid lines
+            for ii in range(1, n_r):
+                y = y_cur - ii * ch
+                lines.append(
+                    f"  \\draw[black!20,line width=0.2pt]"
+                    f" (0cm,{y:.3f}cm) -- ({gw:.3f}cm,{y:.3f}cm);"
+                )
+            for jj in range(1, n_c):
+                x = jj * cw
+                lines.append(
+                    f"  \\draw[black!20,line width=0.2pt]"
+                    f" ({x:.3f}cm,{y_cur:.3f}cm) -- ({x:.3f}cm,{y_cur-gh:.3f}cm);"
+                )
+            lines += [
+                f"  \\draw[black!60,line width=0.5pt]"
+                f" (0cm,{y_cur:.3f}cm) rectangle ({gw:.3f}cm,{y_cur-gh:.3f}cm);",
+                f"  \\node[gray!60,font=\\scriptsize\\itshape,anchor=center]"
+                f" at ({gw/2:.3f}cm,{y_cur-gh/2:.3f}cm) {{n/a}};",
             ]
+            # Augmentation ticks at top
+            for j, a in enumerate(ref_ar):
+                x = j * cw + cw / 2
+                lines.append(
+                    f"  \\node[anchor=south,font=\\scriptsize]"
+                    f" at ({x:.3f}cm,{y_cur:.3f}cm) {{{int(round(a * 100))}}};"
+                )
+            # Reduction ticks on left
+            for i, r in enumerate(ref_rr):
+                y = y_cur - i * ch - ch / 2
+                lines.append(
+                    f"  \\node[anchor=east,font=\\scriptsize]"
+                    f" at (-0.1cm,{y:.3f}cm) {{{int(round(r * 100))}}};"
+                )
+            # Corner split: diagonal line
+            cx0, cy0 = -0.46, y_cur + 0.18
+            cx1, cy1 = 0.0,   y_cur
+            lines += [
+                f"  \\draw[black!50,line width=0.3pt]"
+                f" ({cx0:.3f}cm,{cy0:.3f}cm) -- ({cx1:.3f}cm,{cy1:.3f}cm);",
+                f"  \\node[anchor=north,font=\\scriptsize\\itshape]"
+                f" at (-0.35cm,{y_cur+0.14:.3f}cm) {{r\\%}};",
+                f"  \\node[anchor=south,font=\\scriptsize\\itshape]"
+                f" at (-0.13cm,{y_cur+0.04:.3f}cm) {{a\\%}};",
+            ]
+        # Right-side dataset label (or phantom for bounding-box consistency)
+        y_mid = y_cur - gh / 2
+        label_color = "black" if show_right_labels else "white"
         body_lines.extend(lines)
-        x_cur += gw + gap
+        body_lines.append(
+            f"  \\node[{label_color},rotate=-90,anchor=center,font=\\small]"
+            f" at ({gw+0.35:.3f}cm,{y_mid:.3f}cm) {{\\textbf{{{_esc(ds)}}}}};"
+        )
 
-    body_lines += _tikz_colorbar(
-        x_cur - gap + 0.3, gh, -abs_max, abs_max, norm, cmap, metric,
+    # Horizontal colorbar below all blocks
+    total_height = n_ds * gh + (n_ds - 1) * gap
+    body_lines += _tikz_colorbar_horizontal(
+        0.0, -(total_height + 0.5), gw, -abs_max, abs_max, norm, cmap, metric,
         fs_tick=r"\scriptsize", fs_label=r"\footnotesize",
     )
 
