@@ -40,6 +40,7 @@ for dataset in "${DATASETS[@]}"; do
         cat > "${outfile}" <<YAML
 experiment:
   name: ${exp_name}
+  suite: sdea_ratio_sweep
   dataset:
     name: ${dataset}
     writer: bert_int
