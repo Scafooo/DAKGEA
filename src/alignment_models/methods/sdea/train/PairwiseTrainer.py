@@ -42,13 +42,6 @@ class PairwiseTrainer:
 
         print(Announce.printMessage(), 'eid2data1 len:', len(self.eid2data1))
         print(Announce.printMessage(), 'eid2data2 len:', len(self.eid2data2))
-        print(Announce.printMessage(), '── Phase-1 effective split ──────────────────────')
-        print(Announce.printMessage(), f'  train pairs (tokenized) : {len(self.train_links_p)}')
-        print(Announce.printMessage(), f'  valid pairs (tokenized) : {len(self.valid_links_p)}')
-        print(Announce.printMessage(), f'  test  pairs (tokenized) : {len(self.test_links_p)}')
-        print(Announce.printMessage(), f'  KG1 candidate pool      : {len(self.all_ent1s_p)}')
-        print(Announce.printMessage(), f'  KG2 candidate pool      : {len(self.all_ent2s_p)}')
-        print(Announce.printMessage(), '─────────────────────────────────────────────────')
 
         self.train_links = self.load_links(_links.train, fs1.entity_ids, fs2.entity_ids)
         self.valid_links = self.load_links(_links.valid, fs1.entity_ids, fs2.entity_ids)
@@ -80,6 +73,14 @@ class PairwiseTrainer:
         self.all_ent2s = list(fs2.entity_ids.values())
         self.all_ent1s_p_idx = [self.all_ent1s.index(ent) for ent in self.all_ent1s_p]
         self.all_ent2s_p_idx = [self.all_ent2s.index(ent) for ent in self.all_ent2s_p]
+
+        print(Announce.printMessage(), '── Phase-1 effective split ──────────────────────')
+        print(Announce.printMessage(), f'  train pairs (tokenized) : {len(self.train_links_p)}')
+        print(Announce.printMessage(), f'  valid pairs (tokenized) : {len(self.valid_links_p)}')
+        print(Announce.printMessage(), f'  test  pairs (tokenized) : {len(self.test_links_p)}')
+        print(Announce.printMessage(), f'  KG1 candidate pool      : {len(self.all_ent1s_p)}')
+        print(Announce.printMessage(), f'  KG2 candidate pool      : {len(self.all_ent2s_p)}')
+        print(Announce.printMessage(), '─────────────────────────────────────────────────')
 
         # Precompute correct column indices for open evaluation (rank against all KG2 entities)
         ent2s_p_set = {e: i for i, e in enumerate(self.all_ent2s_p)}
