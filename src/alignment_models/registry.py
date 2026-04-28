@@ -15,6 +15,7 @@ _MODEL_MODULES: Dict[str, str] = {
     "rrea": "src.alignment_models.methods.RREA.model",
     "multiKE": "src.alignment_models.methods.multiKE.model",
     "attrE": "src.alignment_models.methods.attrE.model",
+    "sdea": "src.alignment_models.methods.sdea.model",
 }
 
 
