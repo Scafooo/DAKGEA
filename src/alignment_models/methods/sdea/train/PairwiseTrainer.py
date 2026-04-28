@@ -12,7 +12,7 @@ from ..tools.MultiprocessingTool import MPTool, MultiprocessingTool
 from ..tools.TrainingTools import TrainingTools
 from .BasicBertModel import BasicBertModel
 from .PairwiseDataset import PairwiseDataset
-from .train_utils import cos_sim_mat_generate, batch_topk, hits
+from .train_utils import cos_sim_mat_generate, batch_topk, hits_open
 import torch.nn.functional as F
 
 VALID = True
@@ -75,14 +75,15 @@ class PairwiseTrainer:
         self.all_ent1s_p_idx = [self.all_ent1s.index(ent) for ent in self.all_ent1s_p]
         self.all_ent2s_p_idx = [self.all_ent2s.index(ent) for ent in self.all_ent2s_p]
 
+        # Precompute correct column indices for open evaluation (rank against all KG2 entities)
+        ent2s_p_set = {e: i for i, e in enumerate(self.all_ent2s_p)}
+        self.valid_correct_idx2s = [ent2s_p_set[e2] for e2 in self.valid_ent2s_p]
+        self.test_correct_idx2s = [ent2s_p_set[e2] for e2 in self.test_ent2s_p]
+
         self.block_loader1, self.block_loader2 = self.links_pair_loader(self.all_ent1s_p, self.all_ent2s_p)
         if VALID:
-            self.valid_link_loader1, self.valid_link_loader2 = self.links_pair_loader(
-                self.valid_ent1s_p, self.valid_ent2s_p
-            )
-        self.test_link_loader1, self.test_link_loader2 = self.links_pair_loader(
-            self.test_ent1s_p, self.test_ent2s_p
-        )
+            self.valid_link_loader1 = self.links_pair_loader(self.valid_ent1s_p, self.valid_ent2s_p)[0]
+        self.test_link_loader1 = self.links_pair_loader(self.test_ent1s_p, self.test_ent2s_p)[0]
 
     def links_pair_loader(self, ent1s, ent2s):
         inputs1 = self.get_tensor_data(ent1s, self.eid2data1)
@@ -109,7 +110,7 @@ class PairwiseTrainer:
         criterion = t.nn.MarginRankingLoss(MARGIN)
         optimizer = t.optim.AdamW(bert_model.parameters(), lr=1e-5)
 
-        self.get_hits(bert_model, self.test_link_loader1, self.test_link_loader2, device=device)
+        self.get_hits(bert_model, self.test_link_loader1, self.test_correct_idx2s, device=device)
 
         if VALID:
             model_tool = ModelTools(3, 'max')
@@ -134,14 +135,14 @@ class PairwiseTrainer:
                 bert_model.eval()
                 with t.no_grad():
                     hit_values, mrr = self.get_hits(
-                        bert_model, self.valid_link_loader1, self.valid_link_loader2, device=device
+                        bert_model, self.valid_link_loader1, self.valid_correct_idx2s, device=device
                     )
                 stop = model_tool.early_stopping(bert_model, _links.model_save, hit_values[0])
             else:
                 ModelTools.save_model(bert_model, _links.model_save)
 
             print(Announce.printMessage(), 'test phase')
-            self.get_hits(bert_model, self.test_link_loader1, self.test_link_loader2, device=device)
+            self.get_hits(bert_model, self.test_link_loader1, self.test_correct_idx2s, device=device)
             print(Announce.done(), 'Epoch', epoch, '/', epochs, 'end')
 
             if VALID and epoch > 5 and stop:
@@ -150,7 +151,7 @@ class PairwiseTrainer:
 
         # Final test evaluation
         final_hit_values, final_mrr = self.get_hits(
-            bert_model, self.test_link_loader1, self.test_link_loader2, device=device
+            bert_model, self.test_link_loader1, self.test_correct_idx2s, device=device
         )
         return {
             "hits@1": final_hit_values[0] if len(final_hit_values) > 0 else 0.0,
@@ -160,12 +161,13 @@ class PairwiseTrainer:
             "model_path": _links.model_save,
         }
 
-    def get_hits(self, bert_model, link_loader1, link_loader2, device):
-        valid_emb1s = self.get_emb_valid(link_loader1, bert_model, device=device)
-        valid_emb2s = self.get_emb_valid(link_loader2, bert_model, device=device)
-        cos_sim_mat = cos_sim_mat_generate(valid_emb1s, valid_emb2s, device=device)
+    def get_hits(self, bert_model, source_loader1, correct_indices, device):
+        """Open evaluation: rank each source entity against ALL KG2 entities."""
+        src_emb1s = self.get_emb_valid(source_loader1, bert_model, device=device)
+        all_emb2s = self.get_emb_valid(self.block_loader2, bert_model, device=device)
+        cos_sim_mat = cos_sim_mat_generate(src_emb1s, all_emb2s, device=device)
         _, topk_idx = batch_topk(cos_sim_mat, topn=self.nearest_sample_num, largest=True)
-        return hits(topk_idx)
+        return hits_open(topk_idx, correct_indices)
 
     def train_batch(self, bert_model, tt, batch, criterion, device):
         pos_emb1 = bert_model(batch[0][0].to(device), batch[0][1].to(device))

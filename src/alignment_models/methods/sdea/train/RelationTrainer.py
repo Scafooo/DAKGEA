@@ -13,7 +13,7 @@ from .PairwiseTrainer import PairwiseTrainer
 from .RelationDataset import RelationDataset
 from .RelationModel import RelationModel
 from .RelationValidDataset import RelationValidDataset
-from .train_utils import cos_sim_mat_generate, batch_topk, hits
+from .train_utils import cos_sim_mat_generate, batch_topk, hits_open
 import os
 
 VALID = True
@@ -74,14 +74,12 @@ class RelationTrainer:
         self.all_ent1s = list(fs1.entity_ids.values())
         self.all_ent2s = list(fs2.entity_ids.values())
 
+        # Correct column indices for open evaluation (rank against all KG2 entities)
+        ent2s_p_set = {e: i for i, e in enumerate(self.all_ent2s_p)}
+        self.valid_correct_idx2s = [ent2s_p_set[e2] for e2 in self.valid_ent2s_p]
+        self.test_correct_idx2s = [ent2s_p_set[e2] for e2 in self.test_ent2s_p]
+
         self.block_loader1, self.block_loader2 = self.links_pair_loader(self.all_ent1s_p, self.all_ent2s_p)
-        if VALID:
-            self.valid_link_loader1, self.valid_link_loader2 = self.links_pair_loader(
-                self.valid_ent1s_p, self.valid_ent2s_p
-            )
-        self.test_link_loader1, self.test_link_loader2 = self.links_pair_loader(
-            self.test_ent1s_p, self.test_ent2s_p
-        )
 
     def links_pair_loader(self, ent1s, ent2s):
         inputs1 = RelationTrainer.get_tensor_data(ent1s, self.eid2data1)
@@ -154,14 +152,15 @@ class RelationTrainer:
         print(Announce.printMessage(), 'train_tups len:', len(train_tups))
         print(Announce.printMessage(), 'train_tups_r len:', len(train_tups_r))
 
+        # Loaders for ALL KG2 entities (used as candidate pool in open evaluation)
+        all_link_loader_r2 = RelationValidDataset(self.all_ent2s_p, self.fs2, all_embed2s, self.rel_valid_batch)
+
         if VALID:
             model_tool1 = ModelTools(5, 'max')
             model_tool2 = ModelTools(5, 'max')
             valid_link_loader_r1 = RelationValidDataset(self.valid_ent1s, self.fs1, all_embed1s, self.rel_valid_batch)
-            valid_link_loader_r2 = RelationValidDataset(self.valid_ent2s, self.fs2, all_embed2s, self.rel_valid_batch)
 
         test_link_loader_r1 = RelationValidDataset(self.test_ent1s_p, self.fs1, all_embed1s, self.rel_valid_batch)
-        test_link_loader_r2 = RelationValidDataset(self.test_ent2s_p, self.fs2, all_embed2s, self.rel_valid_batch)
 
         for epoch in range(1, epochs + 1):
             print(Announce.doing(), 'Epoch', epoch, '/', epochs, 'start')
@@ -181,14 +180,21 @@ class RelationTrainer:
 
             rel_model.eval()
             if VALID:
-                hit_values1, mrr1 = self.get_hits_r(rel_model, valid_link_loader_r1, valid_link_loader_r2, 'rel', device=device)
-                hit_values2, mrr2 = self.get_hits_r(rel_model, valid_link_loader_r1, valid_link_loader_r2, 'all', device=device)
+                valid_link_loader_r1 = RelationValidDataset(self.valid_ent1s, self.fs1, all_embed1s, self.rel_valid_batch)
+                all_link_loader_r2 = RelationValidDataset(self.all_ent2s_p, self.fs2, all_embed2s, self.rel_valid_batch)
+                hit_values1, mrr1 = self.get_hits_r(rel_model, valid_link_loader_r1, self.valid_correct_idx2s, all_link_loader_r2, 'rel', device=device)
+                all_link_loader_r2 = RelationValidDataset(self.all_ent2s_p, self.fs2, all_embed2s, self.rel_valid_batch)
+                hit_values2, mrr2 = self.get_hits_r(rel_model, valid_link_loader_r1, self.valid_correct_idx2s, all_link_loader_r2, 'all', device=device)
                 if epoch > 5:
                     stop1 = model_tool1.early_stopping(rel_model, _links.rel_model_save, hit_values1[0])
                     stop2 = model_tool2.early_stopping(rel_model, _links.rel_model_save, hit_values2[0])
 
-            self.get_hits_r(rel_model, test_link_loader_r1, test_link_loader_r2, 'rel', device=device)
-            self.get_hits_r(rel_model, test_link_loader_r1, test_link_loader_r2, 'all', device=device)
+            test_link_loader_r1 = RelationValidDataset(self.test_ent1s_p, self.fs1, all_embed1s, self.rel_valid_batch)
+            all_link_loader_r2 = RelationValidDataset(self.all_ent2s_p, self.fs2, all_embed2s, self.rel_valid_batch)
+            self.get_hits_r(rel_model, test_link_loader_r1, self.test_correct_idx2s, all_link_loader_r2, 'rel', device=device)
+            test_link_loader_r1 = RelationValidDataset(self.test_ent1s_p, self.fs1, all_embed1s, self.rel_valid_batch)
+            all_link_loader_r2 = RelationValidDataset(self.all_ent2s_p, self.fs2, all_embed2s, self.rel_valid_batch)
+            self.get_hits_r(rel_model, test_link_loader_r1, self.test_correct_idx2s, all_link_loader_r2, 'all', device=device)
             print(Announce.done(), 'Epoch', epoch, '/', epochs, 'end')
 
             if VALID and epoch > 20 and stop1 and stop2:
@@ -201,15 +207,14 @@ class RelationTrainer:
             rel_model = ModelTools.load_model(_links.rel_model_save)
             rel_model.to(device)
 
-        # Rebuild test loaders with fresh iteration state
         test_link_loader_r1 = RelationValidDataset(self.test_ent1s_p, self.fs1, all_embed1s, self.rel_valid_batch)
-        test_link_loader_r2 = RelationValidDataset(self.test_ent2s_p, self.fs2, all_embed2s, self.rel_valid_batch)
-        _, _ = self.get_hits_r(rel_model, test_link_loader_r1, test_link_loader_r2, 'rel', device=device)
+        all_link_loader_r2 = RelationValidDataset(self.all_ent2s_p, self.fs2, all_embed2s, self.rel_valid_batch)
+        _, _ = self.get_hits_r(rel_model, test_link_loader_r1, self.test_correct_idx2s, all_link_loader_r2, 'rel', device=device)
 
         test_link_loader_r1 = RelationValidDataset(self.test_ent1s_p, self.fs1, all_embed1s, self.rel_valid_batch)
-        test_link_loader_r2 = RelationValidDataset(self.test_ent2s_p, self.fs2, all_embed2s, self.rel_valid_batch)
+        all_link_loader_r2 = RelationValidDataset(self.all_ent2s_p, self.fs2, all_embed2s, self.rel_valid_batch)
         final_hit_values, final_mrr = self.get_hits_r(
-            rel_model, test_link_loader_r1, test_link_loader_r2, 'all', device=device
+            rel_model, test_link_loader_r1, self.test_correct_idx2s, all_link_loader_r2, 'all', device=device
         )
 
         return {
@@ -219,14 +224,15 @@ class RelationTrainer:
             "mrr": final_mrr,
         }
 
-    def get_hits_r(self, rel_model: RelationModel, link_loader1, link_loader2, mode, device='cpu'):
+    def get_hits_r(self, rel_model: RelationModel, src_loader1, correct_indices, all_loader2, mode, device='cpu'):
+        """Open evaluation: rank each source entity against ALL KG2 entities."""
         print('hits_r:', mode)
         rel_model.eval()
-        valid_emb1s = self.get_emb_valid_r(link_loader1, rel_model, rel_model.rel_embedding1, rel_model.ent_embedding1, mode, device=device)
-        valid_emb2s = self.get_emb_valid_r(link_loader2, rel_model, rel_model.rel_embedding2, rel_model.ent_embedding2, mode, device=device)
-        cos_sim_mat = cos_sim_mat_generate(valid_emb1s, valid_emb2s, device=device)
+        src_emb1s = self.get_emb_valid_r(src_loader1, rel_model, rel_model.rel_embedding1, rel_model.ent_embedding1, mode, device=device)
+        all_emb2s = self.get_emb_valid_r(all_loader2, rel_model, rel_model.rel_embedding2, rel_model.ent_embedding2, mode, device=device)
+        cos_sim_mat = cos_sim_mat_generate(src_emb1s, all_emb2s, device=device)
         _, topk_idx = batch_topk(cos_sim_mat, topn=self.nearest_sample_num, largest=True)
-        return hits(topk_idx)
+        return hits_open(topk_idx, correct_indices)
 
     def generate_train_tups(self, bert_model, train_ent1s, train_ent2s, train_links, all_emb1s, all_emb2s, device):
         train_ent_idx1s = [self.all_ent1s_p.index(e) for e in train_ent1s]

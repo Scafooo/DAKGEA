@@ -43,11 +43,18 @@ def batch_topk(mat, bs=128, topn=50, largest=False):
 hits_list = [1, 5, 10, 50]
 
 
-def hits(index_mat):
+def _compute_hits(index_mat, correct_indices):
+    """Core hits/MRR computation. correct_indices[i] is the gold column index for row i."""
     ent1_num, cands_num = index_mat.shape
     print(Announce.printMessage(), 'index_mat.shape', index_mat.shape)
-    result_mat = [[1 if index_mat[i][j] == i else 0 for j in range(cands_num)] for i in range(ent1_num)]
-    mrr_mat = [sum([1 / (j + 1) if index_mat[i][j] == i else 0 for j in range(cands_num)]) for i in range(ent1_num)]
+    result_mat = [
+        [1 if index_mat[i][j] == correct_indices[i] else 0 for j in range(cands_num)]
+        for i in range(ent1_num)
+    ]
+    mrr_mat = [
+        sum([1 / (j + 1) if index_mat[i][j] == correct_indices[i] else 0 for j in range(cands_num)])
+        for i in range(ent1_num)
+    ]
     result_title_str = ""
     result_str = ""
     hit_values = []
@@ -66,3 +73,17 @@ def hits(index_mat):
     print(result_title_str.strip())
     print(result_str.strip())
     return hit_values, mrr_value
+
+
+def hits(index_mat):
+    """Closed evaluation: entity i in KG1 should match entity i in KG2."""
+    correct_indices = list(range(index_mat.shape[0]))
+    return _compute_hits(index_mat, correct_indices)
+
+
+def hits_open(index_mat, correct_indices):
+    """Open evaluation: rank each KG1 test entity against ALL KG2 entities.
+
+    correct_indices[i] = position of the gold partner in the full KG2 entity list.
+    """
+    return _compute_hits(index_mat, correct_indices)
