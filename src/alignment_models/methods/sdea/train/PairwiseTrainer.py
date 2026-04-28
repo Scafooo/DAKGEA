@@ -5,7 +5,6 @@ from transformers import BertTokenizer
 
 from .._globals import args, seq_max_len, PARALLEL, SCORE_DISTANCE_LEVEL, MARGIN, links
 from ..preprocess.KBStore import KBStore
-from ..preprocess.Parser import oea_truth_line
 from ..tools.Announce import Announce
 from ..tools.ModelTools import ModelTools
 from ..tools.MultiprocessingTool import MPTool, MultiprocessingTool
@@ -243,13 +242,13 @@ class PairwiseTrainer:
     @staticmethod
     def load_links(link_path, entity_ids1: dict, entity_ids2: dict):
         def links_line(line: str):
-            sbj, obj = oea_truth_line(line)
-            sbj = entity_ids1.get(sbj)
-            obj = entity_ids2.get(obj)
+            parts = line.strip().split('\t')
+            sbj = entity_ids1.get(parts[0])
+            obj = entity_ids2.get(parts[1])
             return sbj, obj
 
         with open(link_path, 'r', encoding='utf-8') as rfile:
-            lnks = [links_line(line) for line in rfile]
+            lnks = [links_line(line) for line in rfile if line.strip()]
             lnks = list(filter(lambda x: x[0] is not None and x[1] is not None, lnks))
         return lnks
 

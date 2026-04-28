@@ -5,7 +5,6 @@ from torch.utils.data import DataLoader, TensorDataset, SequentialSampler
 
 from .._globals import args, PARALLEL, SCORE_DISTANCE_LEVEL, MARGIN, links
 from ..preprocess.KBStore import KBStore
-from ..preprocess.Parser import oea_truth_line
 from ..tools.Announce import Announce
 from ..tools.ModelTools import ModelTools
 from ..tools.TrainingTools import TrainingTools

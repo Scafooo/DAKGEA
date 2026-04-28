@@ -18,8 +18,8 @@ DATASETS=(
     "openea/BBC_DB"
     "openea/D_W_15K_V1"
     "openea/D_W_15K_V2"
-    "openea/ICEWS_WIKI"
-    "openea/ICEWS_YAGO"
+    "openea/ICEW_WIKI"
+    "openea/ICEW_YAGO"
 )
 
 RATIO="0.1"
