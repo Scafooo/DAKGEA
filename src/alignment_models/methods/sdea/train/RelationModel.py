@@ -100,7 +100,9 @@ class RelationModel(t.nn.Module):
             bns, brs = self.get_neighbors_batch(fs, pad_idx, device=self.device)
             rel_embs = self.get_rel_embeds(bns, brs, ents, rel_embedding, all_embed)
             if mode == 'all':
-                final_embds = t.cat((ents, rel_embs), dim=1).to(self.device)
+                # Mirror the training forward(): combiner([BERT|GRU]) → [GRU | combined]
+                combined = self.combiner(t.cat((ents, rel_embs), dim=1))
+                final_embds = t.cat((rel_embs, combined), dim=1)
             elif mode == 'rel':
                 final_embds = rel_embs
             else:

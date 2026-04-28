@@ -22,7 +22,7 @@ DATASETS=(
     "openea/ICEW_YAGO"
 )
 
-RATIO="0.1"
+RATIO="0.01"
 SEED="11037"
 
 # ---- Generate YAMLs ---------------------------------------------------------
@@ -30,7 +30,7 @@ generated=()
 
 for dataset in "${DATASETS[@]}"; do
     ds_slug="${dataset##*/}"
-    exp_name="sdea_${ds_slug}_fl10"
+    exp_name="sdea_${ds_slug}_fl01"
     outfile="${OUTDIR}/${exp_name}.yaml"
 
     cat > "${outfile}" <<YAML
