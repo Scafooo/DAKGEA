@@ -145,7 +145,7 @@ class RelationModel(t.nn.Module):
         if device is None:
             device = t.device('cpu')
         lens = [len(facts) if facts is not None else 0 for facts in batch_facts]
-        N = max(lens) if lens else 1
+        N = max(max(lens), 1) if lens else 1
         batch_neighbors = [
             [ent for rel, ent in facts] if facts is not None else []
             for facts in batch_facts

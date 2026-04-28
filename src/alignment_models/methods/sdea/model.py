@@ -170,8 +170,13 @@ class SDEAAlignment:
             return {"hits@1": 0.0, "hits@10": 0.0, "mrr": 0.0}
 
         train_pairs, valid_pairs, test_pairs = _split_links(train_aligned_id, test_aligned_id)
-        logger.info("[SDEA] Links – train: %d, valid: %d, test: %d",
-                    len(train_pairs), len(valid_pairs), len(test_pairs))
+        logger.info("[SDEA] ── Split summary ──────────────────────────────")
+        logger.info("[SDEA]   Aligned entities (supervision) : %d", len(train_aligned_id))
+        logger.info("[SDEA]   Fixed test pool                : %d", len(test_aligned_id) if test_aligned_id else 0)
+        logger.info("[SDEA]   → train pairs                  : %d", len(train_pairs))
+        logger.info("[SDEA]   → valid pairs                  : %d", len(valid_pairs))
+        logger.info("[SDEA]   → test  pairs                  : %d", len(test_pairs))
+        logger.info("[SDEA] ─────────────────────────────────────────────")
 
         # Write link files and configure module globals
         tmpdir = self.checkpoint_dir / "links"

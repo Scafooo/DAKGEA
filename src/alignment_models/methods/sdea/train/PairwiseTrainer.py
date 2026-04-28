@@ -42,6 +42,13 @@ class PairwiseTrainer:
 
         print(Announce.printMessage(), 'eid2data1 len:', len(self.eid2data1))
         print(Announce.printMessage(), 'eid2data2 len:', len(self.eid2data2))
+        print(Announce.printMessage(), '── Phase-1 effective split ──────────────────────')
+        print(Announce.printMessage(), f'  train pairs (tokenized) : {len(self.train_links_p)}')
+        print(Announce.printMessage(), f'  valid pairs (tokenized) : {len(self.valid_links_p)}')
+        print(Announce.printMessage(), f'  test  pairs (tokenized) : {len(self.test_links_p)}')
+        print(Announce.printMessage(), f'  KG1 candidate pool      : {len(self.all_ent1s_p)}')
+        print(Announce.printMessage(), f'  KG2 candidate pool      : {len(self.all_ent2s_p)}')
+        print(Announce.printMessage(), '─────────────────────────────────────────────────')
 
         self.train_links = self.load_links(_links.train, fs1.entity_ids, fs2.entity_ids)
         self.valid_links = self.load_links(_links.valid, fs1.entity_ids, fs2.entity_ids)
