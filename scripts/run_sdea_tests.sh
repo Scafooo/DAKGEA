@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ============================================================
 #  SDEA Test Suite
-#  forget_labels @ 10% — reduction evaluation only, no augmentation
+#  forget_labels @ 1%–10% sweep — reduction evaluation only, no augmentation
 #  Generates config YAMLs and runs them via run_experiment.sh
 # ============================================================
 
@@ -22,7 +22,9 @@ DATASETS=(
     "openea/ICEW_YAGO"
 )
 
-RATIO="0.01"
+# ---- Ratios (1% → 10%) ------------------------------------------------------
+RATIOS=("0.01" "0.02" "0.03" "0.04" "0.05" "0.06" "0.07" "0.08" "0.09" "0.10")
+
 SEED="11037"
 
 # ---- Generate YAMLs ---------------------------------------------------------
@@ -30,10 +32,12 @@ generated=()
 
 for dataset in "${DATASETS[@]}"; do
     ds_slug="${dataset##*/}"
-    exp_name="sdea_${ds_slug}_fl01"
-    outfile="${OUTDIR}/${exp_name}.yaml"
+    for ratio in "${RATIOS[@]}"; do
+        ratio_tag="${ratio/./}"   # 0.01 → 001, 0.10 → 010
+        exp_name="sdea_${ds_slug}_fl${ratio_tag}"
+        outfile="${OUTDIR}/${exp_name}.yaml"
 
-    cat > "${outfile}" <<YAML
+        cat > "${outfile}" <<YAML
 experiment:
   name: ${exp_name}
   dataset:
@@ -41,7 +45,7 @@ experiment:
     writer: bert_int
   reduction:
     method: forget_labels
-    ratio: ${RATIO}
+    ratio: ${ratio}
     writer: bert_int
     save: false
     eval: true
@@ -55,7 +59,8 @@ experiment:
   clear: true
   overwrite_existing: true
 YAML
-    generated+=("${outfile}")
+        generated+=("${outfile}")
+    done
 done
 
 echo "Generated ${#generated[@]} configs in ${OUTDIR}:"
