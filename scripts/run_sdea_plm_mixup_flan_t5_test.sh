@@ -10,7 +10,7 @@ set -euo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_ROOT="$( cd "${SCRIPT_DIR}/.." && pwd )"
 
-OUTDIR="${PROJECT_ROOT}/config/experiments/generated/plm_mixup_flan_t5_sdea_test"
+OUTDIR="${PROJECT_ROOT}/config/experiments/generated/sdea_plm_mixup_flan_t5_test"
 mkdir -p "${OUTDIR}"
 
 # ---- Datasets ---------------------------------------------------------------
@@ -25,11 +25,11 @@ DATASETS=(
 # ---- Reduction ratios -------------------------------------------------------
 REDUCTION_RATIOS=("0.1" "0.2" "0.3")
 
-# ---- Augmentation ratio (fixed) --------------------------------------------
-AUG_RATIO="0.5"
+# ---- Augmentation ratios (0.1 → 1.0) ----------------------------------------
+AUG_RATIOS=("0.1" "0.2" "0.3" "0.4" "0.5" "0.6" "0.7" "0.8" "0.9" "1.0")
 
 SEED="11037"
-SUITE="plm_mixup_flan_t5_sdea_test"
+SUITE="sdea_plm_mixup_flan_t5_test"
 
 # ---- Generate YAMLs ---------------------------------------------------------
 generated=()
@@ -38,10 +38,12 @@ for dataset in "${DATASETS[@]}"; do
     ds_slug="${dataset##*/}"
     for r in "${REDUCTION_RATIOS[@]}"; do
         r_tag="${r/./}"   # 0.1 → 01, 0.2 → 02, 0.3 → 03
-        exp_name="${ds_slug}_r${r_tag}_a${AUG_RATIO/./}"
-        outfile="${OUTDIR}/${exp_name}.yaml"
+        for a in "${AUG_RATIOS[@]}"; do
+            a_tag="${a/./}"   # 0.1 → 01, 1.0 → 10
+            exp_name="${ds_slug}_r${r_tag}_a${a_tag}"
+            outfile="${OUTDIR}/${exp_name}.yaml"
 
-        cat > "${outfile}" <<YAML
+            cat > "${outfile}" <<YAML
 experiment:
   suite: ${SUITE}
   name: ${exp_name}
@@ -57,7 +59,7 @@ experiment:
     save_model: false
   augmentation:
     method: plm_mixup
-    ratio: ${AUG_RATIO}
+    ratio: ${a}
     backbone: flan-t5-xl
     pretrained_model_dir: models/pretrained_plm/${ds_slug}
     writer:
@@ -71,7 +73,8 @@ experiment:
   clear: true
   overwrite_existing: true
 YAML
-        generated+=("${outfile}")
+            generated+=("${outfile}")
+        done
     done
 done
 
