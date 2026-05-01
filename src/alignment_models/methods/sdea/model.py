@@ -116,7 +116,8 @@ class SDEAAlignment:
         lineage = self.stage_config.get("lineage", {})
         artifact_root = Path(lineage.get("artifact_root", "results/artifact"))
         artifact_root.mkdir(parents=True, exist_ok=True)
-        self.checkpoint_dir = artifact_root / "sdea"
+        variant = self.stage_config.get("experiment", {}).get("augmentation", "baseline")
+        self.checkpoint_dir = artifact_root / "sdea" / variant
         self.checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
         sdea_cfg = self.stage_config.get("sdea", {})

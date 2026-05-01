@@ -112,7 +112,7 @@ class RelationTrainer:
         bert_model.to(device)
         bert_model.eval()
 
-        # Get/cache BERT entity embeddings
+        # Get/cache BERT entity embeddings (one cache file per variant checkpoint dir).
         if os.path.exists(_links.kb_prop_emb_1):
             all_embed1s_p = t.load(_links.kb_prop_emb_1, map_location=device)
         else:
