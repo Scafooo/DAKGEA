@@ -73,6 +73,14 @@ class RelationTrainer:
         self.all_ent1s = list(fs1.entity_ids.values())
         self.all_ent2s = list(fs2.entity_ids.values())
 
+        # Clip nearest_sample_num to the actual number of available candidate entities
+        # to avoid out-of-bounds indices in generate_train_tups and batch_topk.
+        self.nearest_sample_num = min(
+            self.nearest_sample_num,
+            max(1, len(self.all_ent1s_p)),
+            max(1, len(self.all_ent2s_p)),
+        )
+
         # Correct column indices for open evaluation (rank against all KG2 entities)
         ent2s_p_set = {e: i for i, e in enumerate(self.all_ent2s_p)}
         self.valid_correct_idx2s = [ent2s_p_set[e2] for e2 in self.valid_ent2s_p]

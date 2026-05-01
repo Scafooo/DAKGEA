@@ -30,6 +30,9 @@ def batch_topk(mat, bs=128, topn=50, largest=False):
     res_index = []
     axis_0 = mat.shape[0]
     topn = min(topn, mat.shape[1])
+    if topn == 0 or axis_0 == 0:
+        empty = torch.zeros(0, dtype=torch.long)
+        return empty, empty
     for i in range(0, axis_0, bs):
         temp_div_mat = mat[i:min(i + bs, axis_0)]
         score_mat, index_mat = temp_div_mat.topk(topn, largest=largest)
