@@ -16,6 +16,7 @@ _MODEL_MODULES: Dict[str, str] = {
     "multiKE": "src.alignment_models.methods.multiKE.model",
     "attrE": "src.alignment_models.methods.attrE.model",
     "sdea": "src.alignment_models.methods.sdea.model",
+    "bert_intA": "src.alignment_models.methods.bert_intA.model",
 }
 
 
