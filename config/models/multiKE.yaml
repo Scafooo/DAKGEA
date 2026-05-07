@@ -18,7 +18,7 @@ model:
 
   # Path to pre-trained word2vec embeddings used for literal encoding.
   # Must be set to a valid .vec file before running MultiKE.
-  word2vec_path: ""
+  word2vec_path: "data/embeddings/wiki-news-300d-1M.vec"
 
   # ============================================================================
   # Model architecture
@@ -28,7 +28,7 @@ model:
 
   # Literal encoder
   encoder_epoch: 100
-  encoder_active: thah
+  encoder_active: tanh
   encoder_normalize: true
   retrain_literal_embeds: true
   literal_normalize: true

@@ -1,0 +1,25 @@
+model:
+  # ============================================================================
+  # BERT pretrained backbone
+  # ============================================================================
+  # Path to a local BERT checkpoint OR a HuggingFace model ID.
+  # "bert-base-multilingual-cased" works for multilingual KGs (DBpedia, Wikidata).
+  pretrain_bert_path: "bert-base-multilingual-cased"
+
+  # ============================================================================
+  # Training epochs
+  # ============================================================================
+  pairwise_epochs: 30   # Phase 1: pairwise BERT contrastive training
+  relation_epochs: 30   # Phase 2: GRU relation-aware refinement
+
+  # ============================================================================
+  # Graph features
+  # ============================================================================
+  use_relation: true    # Include relational triples in Phase 2 refinement
+
+  # ============================================================================
+  # Data split (fraction of aligned pairs)
+  # ============================================================================
+  train_frac: 0.7
+  valid_frac: 0.1
+  # test_frac: 0.2 (remainder)

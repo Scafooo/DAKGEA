@@ -1015,6 +1015,10 @@ class ExperimentRunner:
         if "augmentation" in self.exp_cfg and isinstance(self.exp_cfg["augmentation"], dict):
             cfg["augmentation"] = dict(self.exp_cfg["augmentation"])
 
+        # Copy per-model config overrides if present
+        if "models" in self.exp_cfg and isinstance(self.exp_cfg["models"], dict):
+            cfg["models"] = dict(self.exp_cfg["models"])
+
         # Lineage: essential metadata for models to determine context and paths
         lineage = cfg.setdefault("lineage", {})
         lineage["evaluation_root"] = str((ratio_root / "evaluation").resolve())
