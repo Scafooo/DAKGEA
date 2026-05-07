@@ -616,8 +616,27 @@ class EvaluationStage:
             # Track timing for model training + evaluation
             model_start_time = time.time()
 
-            model = model_cls(stage_cfg_eval)
-            results = model.evaluate(dataset_reduced, dataset_augmented)
+            try:
+                model = model_cls(stage_cfg_eval)
+                results = model.evaluate(dataset_reduced, dataset_augmented)
+            except Exception as exc:  # noqa: BLE001
+                model_end_time = time.time()
+                model_timing = _format_timing(model_start_time, model_end_time)
+                logger.error(
+                    "[ERROR] Model '%s' evaluation failed after %.2fs: %s",
+                    model_name,
+                    model_timing["total_seconds"],
+                    exc,
+                    exc_info=True,
+                )
+                all_results[model_name] = {
+                    "error": str(exc),
+                    "hits@1": 0.0,
+                    "hits@10": 0.0,
+                    "mrr": 0.0,
+                    "timing": model_timing,
+                }
+                continue
 
             model_end_time = time.time()
             model_timing = _format_timing(model_start_time, model_end_time)
