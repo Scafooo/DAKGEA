@@ -18,10 +18,77 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import torch
 
+from rdflib import Literal, URIRef
+
 from src.alignment_models.registry import MODEL_REGISTRY
 from src.logger import get_logger
 
 logger = get_logger(__name__)
+
+
+def _read_id_map(path: Path) -> Dict[str, str]:
+    mapping = {}
+    if not path.exists():
+        return mapping
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            parts = line.rstrip("\n").split("\t")
+            if len(parts) == 2:
+                mapping[parts[0]] = parts[1]
+    return mapping
+
+
+def _inject_augmented_triples(dataset, lineage: Dict[str, Any]) -> None:
+    """Inject synthetic attribute and relation triples from BERT-INT augmentation files into rdflib graphs."""
+    aug_root = lineage.get("augmentation_root")
+    if not aug_root:
+        return
+    bert_int_dir = Path(aug_root) / "dataset" / "bert_int"
+    if not bert_int_dir.exists():
+        return
+    injected = 0
+
+    for fname, graph in [("attr_triples1", dataset.knowledge_graph_source),
+                          ("attr_triples2", dataset.knowledge_graph_target)]:
+        fpath = bert_int_dir / fname
+        if not fpath.exists():
+            continue
+        with open(fpath, encoding="utf-8") as f:
+            for line in f:
+                parts = line.rstrip("\n").split("\t")
+                if len(parts) != 3:
+                    continue
+                entity_uri, predicate_uri, value = parts
+                triple = (URIRef(entity_uri), URIRef(predicate_uri), Literal(value))
+                if triple not in graph:
+                    graph.add(triple)
+                    injected += 1
+
+    for kg_idx, graph in [(1, dataset.knowledge_graph_source),
+                           (2, dataset.knowledge_graph_target)]:
+        ent_map = _read_id_map(bert_int_dir / f"ent_ids_{kg_idx}")
+        rel_map = _read_id_map(bert_int_dir / f"rel_ids_{kg_idx}")
+        fpath = bert_int_dir / f"triples_{kg_idx}"
+        if not fpath.exists():
+            continue
+        with open(fpath, encoding="utf-8") as f:
+            for line in f:
+                parts = line.rstrip("\n").split("\t")
+                if len(parts) != 3:
+                    continue
+                h_id, r_id, t_id = parts
+                h_uri = ent_map.get(h_id)
+                r_uri = rel_map.get(r_id)
+                t_uri = ent_map.get(t_id)
+                if not (h_uri and r_uri and t_uri):
+                    continue
+                triple = (URIRef(h_uri), URIRef(r_uri), URIRef(t_uri))
+                if triple not in graph:
+                    graph.add(triple)
+                    injected += 1
+
+    if injected:
+        logger.info("[SDEA] Injected %d synthetic triples from augmentation files", injected)
 
 
 def _build_kb_store(kg) -> "KBStore":
@@ -138,6 +205,10 @@ class SDEAAlignment:
     def evaluate(self, dataset_reduced, dataset_augmented):
         """Run two-phase SDEA training and return hits@1/10 + MRR."""
         dataset = dataset_augmented
+
+        lineage = self.stage_config.get("lineage", {})
+        if dataset_augmented is not None:
+            _inject_augmented_triples(dataset, lineage)
 
         logger.info("[SDEA] Building KBStores from dataset...")
         fs1 = _build_kb_store(dataset.knowledge_graph_source)

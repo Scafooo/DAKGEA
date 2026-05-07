@@ -6,7 +6,10 @@ Replaces the legacy subprocess-based wrapper.
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import TYPE_CHECKING, Any, Dict, Optional
+
+from rdflib import Literal, URIRef
 
 from src.alignment_models.registry import MODEL_REGISTRY
 from src.config.loader import PROJECT_ROOT, load_yaml
@@ -16,6 +19,76 @@ if TYPE_CHECKING:
     from src.core.dataset import Dataset
 
 logger = get_logger(__name__)
+
+
+def _read_id_map(path: Path) -> Dict[str, str]:
+    """Read a BERT-INT id→uri mapping file into a dict."""
+    mapping = {}
+    if not path.exists():
+        return mapping
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            parts = line.rstrip("\n").split("\t")
+            if len(parts) == 2:
+                mapping[parts[0]] = parts[1]
+    return mapping
+
+
+def _inject_augmented_triples(dataset: "Dataset", lineage: Dict[str, Any]) -> None:
+    """Inject synthetic attribute and relation triples from BERT-INT augmentation files into rdflib graphs."""
+    aug_root = lineage.get("augmentation_root")
+    if not aug_root:
+        return
+
+    bert_int_dir = Path(aug_root) / "dataset" / "bert_int"
+    if not bert_int_dir.exists():
+        return
+
+    injected = 0
+
+    # --- Attribute triples: entity_uri TAB predicate_uri TAB value (plain text) ---
+    for fname, graph in [("attr_triples1", dataset.knowledge_graph_source),
+                          ("attr_triples2", dataset.knowledge_graph_target)]:
+        fpath = bert_int_dir / fname
+        if not fpath.exists():
+            continue
+        with open(fpath, encoding="utf-8") as f:
+            for line in f:
+                parts = line.rstrip("\n").split("\t")
+                if len(parts) != 3:
+                    continue
+                entity_uri, predicate_uri, value = parts
+                triple = (URIRef(entity_uri), URIRef(predicate_uri), Literal(value))
+                if triple not in graph:
+                    graph.add(triple)
+                    injected += 1
+
+    # --- Relation triples: int_head TAB int_rel TAB int_tail (need id maps) ---
+    for kg_idx, graph in [(1, dataset.knowledge_graph_source),
+                           (2, dataset.knowledge_graph_target)]:
+        ent_map = _read_id_map(bert_int_dir / f"ent_ids_{kg_idx}")
+        rel_map = _read_id_map(bert_int_dir / f"rel_ids_{kg_idx}")
+        fpath = bert_int_dir / f"triples_{kg_idx}"
+        if not fpath.exists():
+            continue
+        with open(fpath, encoding="utf-8") as f:
+            for line in f:
+                parts = line.rstrip("\n").split("\t")
+                if len(parts) != 3:
+                    continue
+                h_id, r_id, t_id = parts
+                h_uri = ent_map.get(h_id)
+                r_uri = rel_map.get(r_id)
+                t_uri = ent_map.get(t_id)
+                if not (h_uri and r_uri and t_uri):
+                    continue
+                triple = (URIRef(h_uri), URIRef(r_uri), URIRef(t_uri))
+                if triple not in graph:
+                    graph.add(triple)
+                    injected += 1
+
+    if injected:
+        logger.info("[MultiKE] Injected %d synthetic triples from augmentation files", injected)
 
 
 class _Args:
@@ -44,6 +117,10 @@ class MultiKEAlignment:
 
         dataset = dataset_augmented or dataset_reduced
         cfg = self.model_config
+
+        lineage = self.stage_config.get("lineage", {})
+        if dataset_augmented is not None:
+            _inject_augmented_triples(dataset, lineage)
 
         logger.info("[MultiKE] Evaluating (aligned=%d)", len(dataset.aligned_entities))
 
