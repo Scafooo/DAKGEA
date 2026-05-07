@@ -104,7 +104,11 @@ class MultiKEAlignment:
             predicate_soft_sim=args.predicate_soft_sim,
         )
 
-        trainer = MultiKETrainer(data, pred_align, args)
+        import torch
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        logger.info("[MultiKE] Using device: %s", device)
+
+        trainer = MultiKETrainer(data, pred_align, args, device=device)
         metrics = trainer.run()
 
         logger.info("[MultiKE] Metrics: hits@1=%.4f hits@10=%.4f mrr=%.4f",

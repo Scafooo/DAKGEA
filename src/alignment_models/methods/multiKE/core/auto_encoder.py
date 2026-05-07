@@ -50,10 +50,11 @@ class AutoEncoder(nn.Module):
     @torch.no_grad()
     def encode_batches(self, data: np.ndarray, batch_size: int = 512) -> np.ndarray:
         self.eval()
+        device = next(self.parameters()).device
         results = []
         for i in range(0, len(data), batch_size):
-            batch = torch.tensor(data[i:i + batch_size], dtype=torch.float32)
-            results.append(self.encode(batch).numpy())
+            batch = torch.tensor(data[i:i + batch_size], dtype=torch.float32).to(device)
+            results.append(self.encode(batch).cpu().numpy())
         return np.vstack(results)
 
 
@@ -65,9 +66,12 @@ def train_autoencoder(word_vec_array: np.ndarray, dim: int = 75,
     if normalize:
         word_vec_array = preprocessing.normalize(word_vec_array).astype(np.float32)
 
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
     model = AutoEncoder(
         input_dim=word_vec_array.shape[1], hidden_dims=hidden_dims,
         dim=dim, activation=activation, normalize=normalize)
+    model.to(device)
 
     opt_cls = {
         'Adam': torch.optim.Adam,
@@ -77,7 +81,7 @@ def train_autoencoder(word_vec_array: np.ndarray, dim: int = 75,
     }.get(optimizer_name, torch.optim.Adagrad)
     optimizer = opt_cls(model.parameters(), lr=learning_rate)
 
-    data_tensor = torch.tensor(word_vec_array, dtype=torch.float32)
+    data_tensor = torch.tensor(word_vec_array, dtype=torch.float32).to(device)
     n = len(data_tensor)
 
     model.train()
@@ -85,7 +89,7 @@ def train_autoencoder(word_vec_array: np.ndarray, dim: int = 75,
         t0 = time.time()
         total_loss = 0.0
         n_batches = 0
-        perm = torch.randperm(n)
+        perm = torch.randperm(n, device=device)
         for i in range(0, n, batch_size):
             batch = data_tensor[perm[i:i + batch_size]]
             optimizer.zero_grad()
