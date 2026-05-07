@@ -620,6 +620,7 @@ class EvaluationStage:
                 model = model_cls(stage_cfg_eval)
                 results = model.evaluate(dataset_reduced, dataset_augmented)
             except Exception as exc:  # noqa: BLE001
+                import traceback
                 model_end_time = time.time()
                 model_timing = _format_timing(model_start_time, model_end_time)
                 logger.error(
@@ -631,6 +632,7 @@ class EvaluationStage:
                 )
                 all_results[model_name] = {
                     "error": str(exc),
+                    "traceback": traceback.format_exc(),
                     "hits@1": 0.0,
                     "hits@10": 0.0,
                     "mrr": 0.0,
