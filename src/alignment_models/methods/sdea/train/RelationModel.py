@@ -12,8 +12,6 @@ class RelationModel(t.nn.Module):
         self.score_distance_level = SCORE_DISTANCE_LEVEL
         self.rel_count1 = rel_count1
         self.rel_count2 = rel_count2
-        self.rel_embedding1 = None
-        self.rel_embedding2 = None
         embedding_dim = bert_output_dim
 
         rnn_hidden_dim = 64
@@ -38,6 +36,9 @@ class RelationModel(t.nn.Module):
         self.ent_embedding2 = t.nn.Embedding.from_pretrained(
             all_embed2.detach(), padding_idx=all_embed2.shape[0] - 1
         )
+        # Relation type embeddings (same dim as entity embeddings for element-wise addition)
+        self.rel_embedding1 = t.nn.Embedding(rel_count1 + 1, embedding_dim, padding_idx=rel_count1)
+        self.rel_embedding2 = t.nn.Embedding(rel_count2 + 1, embedding_dim, padding_idx=rel_count2)
         self.to(device)
 
     def forward(self, pe1s, pe2s, ne1s, ne2s, bpn1s, bpn2s, bnn1s, bnn2s, bpr1s, bpr2s, bnr1s, bnr2s):
@@ -97,7 +98,8 @@ class RelationModel(t.nn.Module):
             ents, fs = batch
             ents = ents.to(self.device)
             pad_idx = all_embed.weight.shape[0] - 1
-            bns, brs = self.get_neighbors_batch(fs, pad_idx, device=self.device)
+            rel_pad_idx = rel_embedding.padding_idx if rel_embedding is not None else 0
+            bns, brs = self.get_neighbors_batch(fs, pad_idx, rel_pad_idx=rel_pad_idx, device=self.device)
             rel_embs = self.get_rel_embeds(bns, brs, ents, rel_embedding, all_embed)
             if mode == 'all':
                 # Mirror the training forward(): combiner([BERT|GRU]) → [GRU | combined]
@@ -113,13 +115,18 @@ class RelationModel(t.nn.Module):
         with t.no_grad():
             ents, fs = batch
             ents = ents.to(self.device)
-            bns, brs = self.get_neighbors_batch(fs, all_embed.weight.shape[0] - 1, device=self.device)
             pad_idx = all_embed.weight.shape[0] - 1
+            rel_pad_idx = rel_embedding.padding_idx if rel_embedding is not None else 0
+            bns, brs = self.get_neighbors_batch(fs, pad_idx, rel_pad_idx=rel_pad_idx, device=self.device)
             ones = t.ones(bns.shape, device=self.device)
             zeros = t.zeros(bns.shape, device=self.device)
             neighbor_mask = t.where(bns == pad_idx, ones, zeros)
             batch_nei_embs = all_embed(bns)
-            h = batch_nei_embs
+            if rel_embedding is not None and brs is not None:
+                batch_rel_embs = rel_embedding(brs.to(self.device))
+                h = batch_nei_embs + batch_rel_embs
+            else:
+                h = batch_nei_embs
             h_prime, weights = self.rnn(h, neighbor_mask)
             rel_embs = self.bn(h_prime)
             if mode == 'all':
@@ -136,14 +143,18 @@ class RelationModel(t.nn.Module):
         zeros = t.zeros(batch_neighbors.shape, device=self.device)
         neighbor_mask = t.where(batch_neighbors == pad_idx, ones, zeros)
         batch_nei_embs = all_embed(batch_neighbors)
-        h = batch_nei_embs
+        if rel_embedding is not None and batch_relations is not None:
+            batch_rel_embs = rel_embedding(batch_relations.to(self.device))
+            h = batch_nei_embs + batch_rel_embs
+        else:
+            h = batch_nei_embs
         h = t.nn.functional.relu(h)
         h_prime, _ = self.rnn(h, neighbor_mask)
         h_prime = self.bn(h_prime)
         return h_prime
 
     @staticmethod
-    def get_neighbors_batch(batch_facts, pad_idx, device=None):
+    def get_neighbors_batch(batch_facts, pad_idx, rel_pad_idx=0, device=None):
         if device is None:
             device = t.device('cpu')
         lens = [len(facts) if facts is not None else 0 for facts in batch_facts]
@@ -152,8 +163,14 @@ class RelationModel(t.nn.Module):
             [ent for rel, ent in facts] if facts is not None else []
             for facts in batch_facts
         ]
-        for neighbors in batch_neighbors:
+        batch_rels = [
+            [rel for rel, ent in facts] if facts is not None else []
+            for facts in batch_facts
+        ]
+        for neighbors, rels in zip(batch_neighbors, batch_rels):
             while len(neighbors) < N:
                 neighbors.append(pad_idx)
+                rels.append(rel_pad_idx)
         batch_neighbors = t.tensor(batch_neighbors, dtype=t.long, device=device)
-        return batch_neighbors, None
+        batch_rels = t.tensor(batch_rels, dtype=t.long, device=device)
+        return batch_neighbors, batch_rels
