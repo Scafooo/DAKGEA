@@ -857,10 +857,22 @@ class PLMAugmenter(AugmentationMethod):
                     if self.neighbor_handler._node_in_graph(dataset.knowledge_graph_target, neighbor):
                         dataset.knowledge_graph_target.add((neighbor_tgt_aug, predicate, tgt_aug))
             else:
-                # Connect original non-set node to augmented entities
-                self.neighbor_handler.connect_non_set_to_augmented(
-                    dataset, neighbor, predicate, direction, src_aug, tgt_aug
+                # Depth limit reached: create augmented copy without recursive expansion
+                neighbor_src_aug, neighbor_tgt_aug = self._expand_non_set_node(
+                    dataset, set_graph, neighbor
                 )
+                non_set_to_augmented[neighbor] = (neighbor_src_aug, neighbor_tgt_aug)
+                if direction == "out":
+                    if self.neighbor_handler._node_in_graph(dataset.knowledge_graph_source, neighbor):
+                        dataset.knowledge_graph_source.add((src_aug, predicate, neighbor_src_aug))
+                    if self.neighbor_handler._node_in_graph(dataset.knowledge_graph_target, neighbor):
+                        dataset.knowledge_graph_target.add((tgt_aug, predicate, neighbor_tgt_aug))
+                else:
+                    if self.neighbor_handler._node_in_graph(dataset.knowledge_graph_source, neighbor):
+                        dataset.knowledge_graph_source.add((neighbor_src_aug, predicate, src_aug))
+                    if self.neighbor_handler._node_in_graph(dataset.knowledge_graph_target, neighbor):
+                        dataset.knowledge_graph_target.add((neighbor_tgt_aug, predicate, tgt_aug))
+                self.logger.verbose("[PLM][NonSet] Created augmented copy at depth limit: %s", neighbor)
 
         # Check for bridging to other set nodes (2-hop expansion)
         if current_depth + 2 <= self.max_depth:

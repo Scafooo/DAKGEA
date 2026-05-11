@@ -144,6 +144,26 @@ class DataModel:
             print(f'[MultiKE] splits: train={len(train_links)}, valid={len(valid_links)}, '
                   f'test={len(test_links)} (internal split)')
 
+        # --- Ensure every aligned entity has at least one relation triple ---
+        # PLM-generated synthetic entities may have only attribute triples; KG.entities_set
+        # is built exclusively from relation triple heads/tails, so without a relation triple
+        # these entities get no integer ID and cause a KeyError in uris_pair_2ids.
+        # Fix: inject a self-loop stub triple for any entity missing from the relation graph.
+        _STUB_REL = 'http://dakgea.local/synthetic_entity'
+        stub1, stub2 = 0, 0
+        for e1, e2 in train_links + valid_links + test_links:
+            if e1 not in uri_kg1.entities_set:
+                uri_kg1.relation_triples_set.add((e1, _STUB_REL, e1))
+                stub1 += 1
+            if e2 not in uri_kg2.entities_set:
+                uri_kg2.relation_triples_set.add((e2, _STUB_REL, e2))
+                stub2 += 1
+        if stub1 or stub2:
+            uri_kg1.set_relations(uri_kg1.relation_triples_set)
+            uri_kg2.set_relations(uri_kg2.relation_triples_set)
+            print(f'[MultiKE] injected stub relation triples for {stub1} KG1 + {stub2} KG2 '
+                  f'synthetic entities (attribute-only, no relation triples)')
+
         # --- Build KGS (assigns integer IDs, including for attribute predicates) ---
         self.kgs = KGs(uri_kg1, uri_kg2, train_links, valid_links, test_links=test_links, mode=mode)
 
