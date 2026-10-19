@@ -63,3 +63,7 @@ bart_plm_model/
 tests/bart_test_model/
 *.bin
 *.safetensors
+
+# Luffy-L LLM cache (large; shipped separately, never committed)
+data/external/luffy_l/
+config/experiments/luffy_l*/

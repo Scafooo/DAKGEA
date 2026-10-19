@@ -1,0 +1,31 @@
+# Luffy-L defaults (src/augmentation/methods/llm/augmenter.py).
+# Experiment configs override these under `augmentation:`.
+# `variant` and `copy_original_literals` have NO default on purpose: every
+# experiment config must set them explicitly.
+augmentation:
+  method: llm
+  max_depth: 2                 # same d_max as Luffy-S (config/augmentation/plm.yaml)
+
+  llm:
+    provider: bedrock          # bedrock | replay (cache only, no API calls) | fake (dry run) | mock (tests)
+    model_id: us.meta.llama3-3-70b-instruct-v1:0
+    region: us-east-1
+    temperature: 0.7
+    top_p: 0.9
+    max_tokens: 8192           # the answer covers S and all its neighbours
+    requests_per_second: 2.0   # per process; total = this x parallel jobs
+    max_retries: 8
+    # One SQLite file shared by all runs. The key includes the seed, so the
+    # 5 seeds draw independent generations while af / variants of the same
+    # seed reuse responses. Ship this file to replay the datasets.
+    cache_path: data/external/luffy_l/llm_cache.sqlite
+
+  prompt:
+    max_neighbors: 40          # neighbours per call; more neighbours -> continuation calls
+    max_neighbor_values: 120   # neighbour attribute values per call
+    max_literals_target: 100   # attribute values of S per KG (values beyond the cap keep the original)
+    max_literals_neighbor: 30  # per neighbour per KG; a neighbour is primed in LLMCache only if
+                               # ALL its values were generated, otherwise it gets its own call
+    max_relations: 60          # relations of S shown per call
+    max_value_chars: 300       # longer values are cut in the prompt (e.g. DBpedia abstracts)
+    max_value_chars_neighbor: 150

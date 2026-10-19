@@ -12,6 +12,7 @@ _BUILTIN_AUGMENTATION_MODULES: Iterable[str] = (
     "src.augmentation.methods.plm_mixup.augmenter",
     "src.augmentation.methods.stub.augmenter",
     "src.augmentation.methods.eda.augmenter",
+    "src.augmentation.methods.llm.augmenter",
 )
 
 
