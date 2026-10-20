@@ -1,0 +1,2177 @@
+From a798bca1c1f70d30f7c19eabba3477c60ef78af5 Mon Sep 17 00:00:00 2001
+From: Marco Napoleone <napoleonemarco25@gmail.com>
+Date: Mon, 19 Oct 2026 18:46:06 +0200
+Subject: [PATCH] Add Luffy-L (LLM AugmentAttributes, Algorithm 3) on the
+ Luffy-S scaffold
+
+- augmentation method `llm`: subclasses PLMAugmenter, keeps Set-KG, BFS,
+  budget and edge replication; replaces literal generation with Algorithm 3
+  (LLMCache per Set-KG node, neighbour chunks + continuation calls)
+- variants full / no_cache / no_bfs / all_llm; copy_original_literals and
+  variant are required config keys
+- Bedrock Converse client with SQLite response cache (key includes seed),
+  replay and fake providers
+- deterministic neighbour order (loaders are set-ordered)
+- config generator, output verifier, manifest builder, offline tests
+- CLAUDE.md: phase-gated instructions for the generation campaign
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01E6XnfrodnSLwYnZBec9ewP
+---
+ .gitignore                                 |   4 +
+ CLAUDE.md                                  | 152 +++++++
+ config/augmentation/llm.yaml               |  31 ++
+ scripts/luffy_l/build_manifest.py          |  88 ++++
+ scripts/luffy_l/generate_configs.py        | 109 +++++
+ scripts/luffy_l/verify_outputs.py          | 142 ++++++
+ src/augmentation/methods/llm/__init__.py   |   1 +
+ src/augmentation/methods/llm/augmenter.py  | 453 +++++++++++++++++++
+ src/augmentation/methods/llm/llm_client.py | 295 +++++++++++++
+ src/augmentation/methods/llm/prompts.py    | 481 +++++++++++++++++++++
+ src/augmentation/registry.py               |   1 +
+ tests/augmentation/test_llm_augmenter.py   | 295 +++++++++++++
+ 12 files changed, 2052 insertions(+)
+ create mode 100644 CLAUDE.md
+ create mode 100644 config/augmentation/llm.yaml
+ create mode 100644 scripts/luffy_l/build_manifest.py
+ create mode 100644 scripts/luffy_l/generate_configs.py
+ create mode 100644 scripts/luffy_l/verify_outputs.py
+ create mode 100644 src/augmentation/methods/llm/__init__.py
+ create mode 100644 src/augmentation/methods/llm/augmenter.py
+ create mode 100644 src/augmentation/methods/llm/llm_client.py
+ create mode 100644 src/augmentation/methods/llm/prompts.py
+ create mode 100644 tests/augmentation/test_llm_augmenter.py
+
+diff --git a/.gitignore b/.gitignore
+index 78e16ad..28b716e 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -63,3 +63,7 @@ bart_plm_model/
+ tests/bart_test_model/
+ *.bin
+ *.safetensors
++
++# Luffy-L LLM cache (large; shipped separately, never committed)
++data/external/luffy_l/
++config/experiments/luffy_l*/
+diff --git a/CLAUDE.md b/CLAUDE.md
+new file mode 100644
+index 0000000..d7bff86
+--- /dev/null
++++ b/CLAUDE.md
+@@ -0,0 +1,152 @@
++# Luffy-L dataset generation — instructions for Claude Code
++
++Read this whole file before doing anything. It is the single source of truth for this task.
++When something here is ambiguous, or reality does not match what is written, **stop and ask
++Marco**; do not pick an interpretation yourself.
++
++## 1. Goal
++
++Generate the augmented training datasets of **Luffy-L** (paper: "Data Augmentation for Entity
++Resolution across Knowledge Graphs", Algorithm 1 + Algorithm 3) and its ablations, in exactly the
++same experimental protocol as the Luffy-S runs already done with this repository. Federico trains
++and evaluates BERT-INT on them; **we only generate the data**.
++
++- Datasets: `BBC_DB, D_W_15K_V1, D_W_15K_V2, ICEW_WIKI, ICEW_YAGO`
++- Training fraction tf ∈ {0.1 … 1.0} (`reduction.ratio`), augmentation factor af ∈ {0.1 … 1.0}
++  (`augmentation.ratio`)
++- Seeds: `11037, 11038, 11039, 11040, 11041` (confirmed by Federico: start at 11037, +1 per run)
++- Variants: `full`, `no_cache`, `no_bfs`, `all_llm`
++- LLM: Llama 3.3 70B Instruct on AWS Bedrock (`us.meta.llama3-3-70b-instruct-v1:0`), zero-shot
++
++## 2. What is already implemented and tested (do not rewrite it)
++
++| File | What it does |
++|---|---|
++| `src/augmentation/methods/llm/augmenter.py` | `LLMAugmenter`, registered as `augmentation.method: llm`. Subclasses `PLMAugmenter` (Luffy-S) and **inherits Set-KG, BFS, seed order, depth limit, budget and edge creation unchanged**. Replaces only literal generation (set-entities: `bootstrap_literals`; singletons: `_expand_non_set_node`) with Algorithm 3 (`LuffyLGenerator`, LLMCache keyed by Set-KG node). Neighbours are visited in sorted order (the DAKGEA loaders fill graphs from Python sets, so the native order changes with PYTHONHASHSEED). Also contains the `all_llm` path. Writes `augmentation/luffy_l_stats.json` and `augmentation/luffy_l_calls.jsonl`. |
++| `src/augmentation/methods/llm/prompts.py` | Context of a node (its literals and relations in each KG + its neighbours, matched pairs first, split in chunks of ≤40 neighbours / ≤120 values), the three **fixed** system prompts (Luffy-L, Luffy-L continuation chunk, all_llm), JSON parsing and validation against the input alphabet. |
++| `src/augmentation/methods/llm/llm_client.py` | Bedrock Converse backend with rate limit and retries; **SQLite cache of every call** keyed by sha256(model, decoding params, seed, prompt); providers `bedrock`, `replay` (cache only, error on miss), `fake` (placeholder answers for dry runs, isolated key space), `mock` (tests). |
++| `config/augmentation/llm.yaml` | Defaults: model, temperature 0.7, top_p 0.9, max_tokens 8192, prompt caps, cache path `data/external/luffy_l/llm_cache.sqlite`. |
++| `scripts/luffy_l/generate_configs.py` | One experiment YAML per (variant, dataset, tf, af, seed) under `config/experiments/luffy_l/<variant>/`. Same protocol as the Luffy-S configs; all evaluation off, `save_dataset: true`. |
++| `scripts/luffy_l/verify_outputs.py` | Checks one generated dataset (split, KG1 relations, budget, …). |
++| `scripts/luffy_l/build_manifest.py` | Finds every run under `results/`, verifies it, writes `results/luffy_l_manifest.csv` and `results/luffy_l_missing_runs.txt`. |
++| `tests/augmentation/test_llm_augmenter.py` | 13 offline tests (toy bowie/tm graph, 100-neighbour hub): edges to O_aug, LLMCache, same call for both sides, neighbour chunking, fallback, replay, fake isolation, order independence, all_llm alphabet, required flags. |
++
++Why the cache matters: with a fixed seed the BFS order does not depend on af, so the af=1.0 run
++contains every call of the smaller af. Run af=1.0 first; all other af and the `no_cache` prompts
++already seen are served from the cache (0 API calls). The seed is in the key, so the 5 seeds are
++independent generations, as the paper states.
++
++## 3. Rules
++
++MUST NOT:
++1. Modify anything under `src/augmentation/methods/plm/`, `src/reduction/`, `src/core/`,
++   `experiments/runner/`. Luffy-L must run on exactly the scaffold Luffy-S used. If you believe a
++   change there is needed, stop and ask.
++2. Change the system prompts, the prompt caps, temperature/top_p/max_tokens or the model **after
++   Phase 2 has started**. Any change invalidates the cache and makes runs inconsistent. Ask first.
++3. Choose `copy_original_literals` yourself (decision D1). The code refuses to run without it.
++4. Set any `eval: true`, train BERT-INT or any other model.
++5. Use anything from the old repository `llm_dakgea` (June/October outputs are invalid: wrong
++   split, no KG1 relations on ICEWS, non-conforming BFS/cache).
++6. Delete or overwrite `data/external/luffy_l/llm_cache.sqlite`. Back it up before Phase 3.
++7. Use `provider: fake` with the real cache path, or treat fake outputs as data.
++8. Retry a failing run more than once. Report it instead.
++9. Commit generated configs, the cache or results (they are in `.gitignore`).
++
++MUST:
++- After every phase, write a short report (what ran, numbers, problems) and **wait for Marco's OK**.
++- Quote exact numbers from `luffy_l_stats.json` / the manifest; never estimate silently.
++
++## 4. Decisions Marco must fill in before Phase 3
++
++| ID | Question | Answer |
++|---|---|---|
++| D1 | `copy_original_literals`: `true` = identical to how Luffy-S ran (the inherited scaffold copies every original literal of BOTH KGs onto the augmented entities, `PLMAugmenter._process_neighbors` → `attach_literal_to_augmented`); `false` = paper behaviour (only generated values). Decide with Federico. | ____ |
++| D2 | `no_bfs` is implemented as `max_depth = 0` (no neighbourhood expansion, LLMCache still on). Is this how "w/o BFS" was run for Luffy-S? (Federico) | ____ |
++| D3 | Delivery: (a) the BERT-INT folders (≈17 MB for BBC_DB tf=0.1, far more for ICEWS; ~10,000 runs → hundreds of GB), or (b) code branch + `llm_cache.sqlite`; Federico regenerates any run with `llm.provider: replay` (0 API calls, identical output). | ____ |
++| D4 | Scope of the ablations (`no_cache`, `no_bfs`, `all_llm`): full grid, or a subset of tf/af? | ____ |
++| D5 | Parallel jobs and Bedrock quota (requests/min, tokens/min) for the account. | ____ |
++
++## 5. Phases
++
++### Phase 0 — environment (no API calls)
++1. `git status` on branch `luffy-l`; activate the project venv.
++2. `pytest tests/augmentation/test_llm_augmenter.py -q` → **13 passed**. If not, stop.
++3. `python -c "import boto3"`; `aws sts get-caller-identity`; one test call:
++   `python -c "import boto3;c=boto3.client('bedrock-runtime','us-east-1');print(c.converse(modelId='us.meta.llama3-3-70b-instruct-v1:0',messages=[{'role':'user','content':[{'text':'Say OK'}]}],inferenceConfig={'maxTokens':8192})['output'])"`
++   If `maxTokens=8192` is rejected, report the model's maximum (do not change the config yet).
++Report and wait.
++
++### Phase 1 — dry run through the real runner (fake LLM, no API calls)
++```bash
++python scripts/luffy_l/generate_configs.py --copy-original-literals false \
++  --provider fake --cache-path data/external/luffy_l/fake_cache.sqlite \
++  --datasets BBC_DB --tf 1 --af 10 5 --seeds 11037 --out config/experiments/luffy_l_dryrun
++for f in config/experiments/luffy_l_dryrun/*/*_10_s*.yaml config/experiments/luffy_l_dryrun/*/*_05_s*.yaml; do
++  python experiments/runner/run.py "$f"; done          # af=1.0 first, then af=0.5
++python scripts/luffy_l/build_manifest.py --configs config/experiments/luffy_l_dryrun \
++  --out results/luffy_l_dryrun_manifest.csv
++```
++Check and report: where the dataset folder is (`…/augmentation/dataset/<writer>/`), that no model
++training started (logs), the manifest status of the 8 runs, and the `api_calls` of the af=0.5 runs
++(must be 0 because af=1.0 ran first).
++Also run one ICEWS dry run (`--datasets ICEW_WIKI --tf 1 --af 10 --variants full`) and report memory
++and time. Delete `fake_cache.sqlite` and the dry-run results afterwards. Wait.
++
++### Phase 2 — real pilot (Bedrock)
++```bash
++python scripts/luffy_l/generate_configs.py --copy-original-literals <D1> \
++  --datasets BBC_DB --tf 1 --af 10 5 --seeds 11037 --variants full all_llm --out config/experiments/luffy_l_pilot
++```
++Run the af=10 configs first, then af=5. Report from the stats/manifest: API calls, input/output
++tokens, wall time, `parse_failures`, `truncated_outputs`, `values_fallback_original`,
++`values_identical_to_original`, `llm_cache_hits`. Print 3 random synthetic entities next to their
++originals (`luffy_l_calls.jsonl` + the dataset's `attr_triples*`) so Marco can judge the values.
++Replay test: rerun the af=10 `full` config with `llm.provider: replay` and `overwrite_existing: true`
++→ 0 API calls and the same content as the first run: compare `attr_triples1/2` and `sup_pairs`
++after mapping ids to URIs (`ent_ids_*`) and sorting; line order and numeric ids may differ.
++Projection: from the pilot, estimate calls/tokens/cost/time of the full grid
++(calls scale ≈ linearly with the number of training pairs, i.e. with tf and dataset size; only
++af=1.0 runs cost calls). Report and **wait for explicit approval** of the budget.
++
++### Phase 3 — full grid
++1. Fill decisions D1–D5 in this file. Back up the cache.
++2. `python scripts/luffy_l/generate_configs.py --copy-original-literals <D1> [--variants … per D4]`
++3. Launch with `scripts/run_experiments_parallel.sh --dir config/experiments/luffy_l/<variant> --jobs <D5> --pattern "*_10_s*.yaml"`
++   first (af=1.0), then the remaining af. Variant order: `full`, `no_cache`, `no_bfs`, `all_llm`.
++4. Every few hours: `python scripts/luffy_l/build_manifest.py`; rerun FAIL/missing runs once with
++   `overwrite_existing: true` (cheap: answers come from the cache). Report runs still failing.
++   Note: with all evaluation off, the runner treats an experiment folder as complete if its
++   metadata exists, even after a crash; that is why the manifest — not the runner — decides.
++
++### Phase 4 — handover
++Final `build_manifest.py` must report `FAIL: 0` and `missing: 0`. Deliver per D3, together with
++`results/luffy_l_manifest.csv` and this file. Report the totals (calls, tokens, cost).
++
++## 6. Background (for understanding; do not act on it)
++
++- Algorithm 3: when the BFS visits set-entity S, if S is in LLMCache use its literals; else one LLM
++  call with the local context of S returns literals for S **and** its neighbours; neighbours are
++  stored in LLMCache and used when the BFS reaches them. Implementation details: (i) neighbours
++  that do not fit one prompt (ICEWS hubs have hundreds) are generated by continuation calls that
++  receive S's generated values, so every neighbour is still primed; (ii) a neighbour is primed
++  only if the call generated all its attribute values, otherwise it gets its own call;
++  (iii) when a matched pair is served from LLMCache, Algorithm 3 gives it no neighbour literals,
++  so its unprimed neighbours would each cost a call; they are instead generated by continuation
++  calls that see the pair's cached values (fewer calls, same coherence goal). Points (i)–(iii)
++  must be stated in the paper's implementation details.
++  Unparseable answers → original values kept (paper's fallback), counted in the stats.
++- The inherited BFS also creates augmented copies of the singleton neighbours of every visited
++  pair (as Luffy-S does). On ICEWS this dominates the number of generated entities; each singleton
++  is generated once per run, so calls per run are bounded by ≈ (#entities reached)/40 + #pairs.
++- `all_llm` = the naive baseline "ask an LLM with one prompt from the training data": one call per
++  sampled training pair (same context, model and decoding as Luffy-L); the model writes attributes
++  and relations of one synthetic pair; only attribute names, relation names and neighbour entities
++  present in the input are accepted (no new entities or relations, agreed with Federico); no
++  LLMCache, no BFS, no fallback (failed pairs are skipped and counted).
++- Known behaviours of the inherited Luffy-S scaffold (report, do not fix): (i) the literal copy of
++  D1; (ii) `config/augmentation/plm.yaml` is the default actually loaded (τ=0.6, name weight 0.85,
++  value cache scope `alignment_pair`), while the paper states τ=0.7, λ=0.7 and a global cache;
++  (iii) the BertInt writer drops a synthetic pair whose entity has no triple at all (seen with
++  `no_bfs` on BBC_DB: 158 of 187 pairs kept); (iv) the loaders' set-based order makes Luffy-S
++  traversals differ between processes even with the same seed (Luffy-L sorts neighbours).
+diff --git a/config/augmentation/llm.yaml b/config/augmentation/llm.yaml
+new file mode 100644
+index 0000000..e013d94
+--- /dev/null
++++ b/config/augmentation/llm.yaml
+@@ -0,0 +1,31 @@
++# Luffy-L defaults (src/augmentation/methods/llm/augmenter.py).
++# Experiment configs override these under `augmentation:`.
++# `variant` and `copy_original_literals` have NO default on purpose: every
++# experiment config must set them explicitly.
++augmentation:
++  method: llm
++  max_depth: 2                 # same d_max as Luffy-S (config/augmentation/plm.yaml)
++
++  llm:
++    provider: bedrock          # bedrock | replay (cache only, no API calls) | fake (dry run) | mock (tests)
++    model_id: us.meta.llama3-3-70b-instruct-v1:0
++    region: us-east-1
++    temperature: 0.7
++    top_p: 0.9
++    max_tokens: 8192           # the answer covers S and all its neighbours
++    requests_per_second: 2.0   # per process; total = this x parallel jobs
++    max_retries: 8
++    # One SQLite file shared by all runs. The key includes the seed, so the
++    # 5 seeds draw independent generations while af / variants of the same
++    # seed reuse responses. Ship this file to replay the datasets.
++    cache_path: data/external/luffy_l/llm_cache.sqlite
++
++  prompt:
++    max_neighbors: 40          # neighbours per call; more neighbours -> continuation calls
++    max_neighbor_values: 120   # neighbour attribute values per call
++    max_literals_target: 100   # attribute values of S per KG (values beyond the cap keep the original)
++    max_literals_neighbor: 30  # per neighbour per KG; a neighbour is primed in LLMCache only if
++                               # ALL its values were generated, otherwise it gets its own call
++    max_relations: 60          # relations of S shown per call
++    max_value_chars: 300       # longer values are cut in the prompt (e.g. DBpedia abstracts)
++    max_value_chars_neighbor: 150
+diff --git a/scripts/luffy_l/build_manifest.py b/scripts/luffy_l/build_manifest.py
+new file mode 100644
+index 0000000..8a7d44b
+--- /dev/null
++++ b/scripts/luffy_l/build_manifest.py
+@@ -0,0 +1,88 @@
++#!/usr/bin/env python3
++"""Collect every Luffy-L run under results/, verify it and write manifest.csv.
++
++Usage (repo root):
++  python scripts/luffy_l/build_manifest.py [--results results] [--out results/luffy_l_manifest.csv]
++
++A run is found through its augmentation/luffy_l_stats.json; its BERT-INT dataset
++is the folder under augmentation/dataset/ that contains sup_pairs.
++The experiment name must be <DATASET>_<tf:02d>_<af:02d>_s<seed> (as written by
++generate_configs.py). Exit code 1 if any run fails a hard check or is missing.
++"""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import json
++import re
++import sys
++from pathlib import Path
++
++sys.path.insert(0, str(Path(__file__).resolve().parent))
++from verify_outputs import verify  # noqa: E402
++
++NAME = re.compile(r"(?P<ds>[A-Z0-9_]+?)_(?P<tf>\d{2})_(?P<af>\d{2})_s(?P<seed>\d+)$")
++
++
++def main() -> int:
++    ap = argparse.ArgumentParser()
++    ap.add_argument("--results", default="results", type=Path)
++    ap.add_argument("--raw-root", default="data/raw/openea", type=Path)
++    ap.add_argument("--out", default="results/luffy_l_manifest.csv", type=Path)
++    ap.add_argument("--configs", default="config/experiments/luffy_l", type=Path,
++                    help="used to list expected runs that produced nothing")
++    args = ap.parse_args()
++
++    rows, seen, bad = [], set(), 0
++    for stats_path in sorted(args.results.rglob("augmentation/luffy_l_stats.json")):
++        stats = json.loads(stats_path.read_text())
++        name = next((p.name for p in stats_path.parents if NAME.match(p.name)), None)
++        if name is None:
++            print(f"skip (unrecognised experiment folder): {stats_path}")
++            continue
++        m = NAME.match(name)
++        variant = stats["variant"]
++        key = (variant, name)
++        if key in seen:
++            print(f"duplicate run for {key}: {stats_path}")
++            bad += 1
++            continue
++        seen.add(key)
++        ds_dirs = [p.parent for p in (stats_path.parent / "dataset").rglob("sup_pairs")]
++        row = {"variant": variant, "dataset": m["ds"], "tf": int(m["tf"]) / 10, "af": int(m["af"]) / 10,
++               "seed": int(m["seed"]), "path": str(ds_dirs[0]) if len(ds_dirs) == 1 else "",
++               **{k: stats.get(k) for k in (
++                   "copy_original_literals", "initial_pairs", "pair_budget", "pairs_augmented",
++                   "llm_requests", "api_calls", "disk_cache_hits", "llm_cache_hits",
++                   "parse_failures", "values_generated", "values_fallback_original",
++                   "values_identical_to_original", "out_of_alphabet_dropped", "truncated_outputs",
++                   "input_tokens", "output_tokens")}}
++        if len(ds_dirs) != 1:
++            row["status"], row["problems"] = "FAIL", f"expected 1 dataset folder, found {len(ds_dirs)}"
++        else:
++            res = verify(ds_dirs[0], stats_path, args.raw_root / m["ds"], int(m["tf"]) / 10, variant)
++            row["status"] = "FAIL" if res["failed"] else "OK"
++            row["problems"] = "; ".join(f"{k}:{v['status']} {v['detail']}"
++                                        for k, v in res["checks"].items() if v["status"] != "OK")
++        bad += row["status"] == "FAIL"
++        rows.append(row)
++
++    missing = []
++    if args.configs.exists():
++        for cfg in sorted(args.configs.rglob("*.yaml")):
++            if (cfg.parent.name, cfg.stem) not in seen:
++                missing.append(str(cfg))
++    args.out.parent.mkdir(parents=True, exist_ok=True)
++    if rows:
++        with open(args.out, "w", newline="", encoding="utf-8") as fh:
++            writer = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
++            writer.writeheader()
++            writer.writerows(rows)
++    (args.out.parent / "luffy_l_missing_runs.txt").write_text("\n".join(missing) + ("\n" if missing else ""))
++    print(f"runs: {len(rows)} | FAIL: {bad} | missing (config without output): {len(missing)} -> {args.out}")
++    return 1 if bad or missing else 0
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+diff --git a/scripts/luffy_l/generate_configs.py b/scripts/luffy_l/generate_configs.py
+new file mode 100644
+index 0000000..b2e5afa
+--- /dev/null
++++ b/scripts/luffy_l/generate_configs.py
+@@ -0,0 +1,109 @@
++#!/usr/bin/env python3
++"""Generate the Luffy-L experiment configs (generation only, no BERT-INT).
++
++The configs mirror the Luffy-S ones in config/experiments/massive/flan_t5_bert_int/
++(same dataset names, forget_labels reduction, bert_int writer with
++augmented_only_train) and differ only in the augmentation block and in the
++evaluation flags, which are all off: the runner stops after writing the
++augmented BERT-INT dataset.
++
++Usage (from the repo root):
++  python scripts/luffy_l/generate_configs.py --copy-original-literals {true,false} \
++      [--variants full no_cache no_bfs all_llm] [--datasets BBC_DB ...] \
++      [--seeds 11037 11038 11039 11040 11041] [--tf 1..10] [--af 1..10] \
++      [--provider bedrock|fake|replay] [--out config/experiments/luffy_l]
++
++One YAML per (variant, dataset, tf, af, seed):
++  <out>/<variant>/<DATASET>_<tf:02d>_<af:02d>_s<seed>.yaml
++"""
++
++from __future__ import annotations
++
++import argparse
++from pathlib import Path
++
++import yaml
++
++DATASETS = ["BBC_DB", "D_W_15K_V1", "D_W_15K_V2", "ICEW_WIKI", "ICEW_YAGO"]
++VARIANTS = ["full", "no_cache", "no_bfs", "all_llm"]
++SEEDS = [11037, 11038, 11039, 11040, 11041]      # Federico: start at 11037, +1 per run
++
++
++def parse_bool(text: str) -> bool:
++    if text.lower() in ("true", "1", "yes"):
++        return True
++    if text.lower() in ("false", "0", "no"):
++        return False
++    raise argparse.ArgumentTypeError("expected true or false")
++
++
++def make_config(variant, dataset, tf, af, seed, copy, provider, cache_path):
++    llm = {"provider": provider}
++    if cache_path:
++        llm["cache_path"] = cache_path
++    return {
++        "experiment": {
++            "suite": f"luffy_l_{variant}",
++            "name": f"{dataset}_{tf:02d}_{af:02d}_s{seed}",
++            "dataset": {"name": f"openea/{dataset}", "writer": "bert_int"},
++            "reduction": {
++                "method": "forget_labels",
++                "ratio": round(tf / 10, 1),
++                "writer": "bert_int",
++                "eval": False,
++                "save_dataset": False,
++                "save_model": False,
++            },
++            "augmentation": {
++                "method": "llm",
++                "ratio": round(af / 10, 1),
++                "variant": variant,
++                "copy_original_literals": copy,
++                "llm": llm,
++                "writer": {"type": "bert_int", "augmented_only_train": True},
++                "eval": False,
++                "save_dataset": True,
++                "save_model": False,
++            },
++            "model": "bert_int",
++            "seed": seed,
++            "clear": False,
++            "overwrite_existing": False,
++        }
++    }
++
++
++def main() -> None:
++    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
++    ap.add_argument("--copy-original-literals", type=parse_bool, required=True,
++                    help="true = same as the Luffy-S runs (original literals copied onto augmented "
++                         "entities); false = paper behaviour. Must be decided with Federico.")
++    ap.add_argument("--variants", nargs="+", default=VARIANTS, choices=VARIANTS)
++    ap.add_argument("--datasets", nargs="+", default=DATASETS, choices=DATASETS)
++    ap.add_argument("--seeds", nargs="+", type=int, default=SEEDS)
++    ap.add_argument("--tf", nargs="+", type=int, default=list(range(1, 11)), help="tenths: 1..10")
++    ap.add_argument("--af", nargs="+", type=int, default=list(range(1, 11)), help="tenths: 1..10")
++    ap.add_argument("--provider", default="bedrock", choices=["bedrock", "fake", "replay"])
++    ap.add_argument("--cache-path", default=None,
++                    help="override llm.cache_path (use a separate file for --provider fake)")
++    ap.add_argument("--out", default="config/experiments/luffy_l")
++    args = ap.parse_args()
++
++    out = Path(args.out)
++    n = 0
++    for variant in args.variants:
++        for dataset in args.datasets:
++            for tf in args.tf:
++                for af in args.af:
++                    for seed in args.seeds:
++                        cfg = make_config(variant, dataset, tf, af, seed,
++                                          args.copy_original_literals, args.provider, args.cache_path)
++                        path = out / variant / f"{dataset}_{tf:02d}_{af:02d}_s{seed}.yaml"
++                        path.parent.mkdir(parents=True, exist_ok=True)
++                        path.write_text(yaml.safe_dump(cfg, sort_keys=False))
++                        n += 1
++    print(f"wrote {n} configs under {out}/")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/scripts/luffy_l/verify_outputs.py b/scripts/luffy_l/verify_outputs.py
+new file mode 100644
+index 0000000..fb283f6
+--- /dev/null
++++ b/scripts/luffy_l/verify_outputs.py
+@@ -0,0 +1,142 @@
++#!/usr/bin/env python3
++"""Check Luffy-L generated datasets before handing them to Federico.
++
++Usage:
++  python scripts/luffy_l/verify_outputs.py --dataset-dir <bert_int dir> --stats <luffy_l_stats.json> \
++      --raw data/raw/openea/<DATASET> --tf 0.1 [--variant full]
++
++<bert_int dir> is the folder the runner wrote for the augmented dataset (it contains
++ent_ids_1, ent_ids_2, sup_pairs, ref_pairs, valid_pairs, triples_1, triples_2,
++attr_triples1, attr_triples2). Exit code 1 if a hard check fails.
++
++Hard checks (FAIL):
++  split      test set (ref_pairs + valid_pairs written by the writer, i.e. the
++             fixed test of forget_labels) contains only official test pairs, and
++             no official test pair appears in sup_pairs
++  train      every original (non-augmented) training pair is an official sup pair,
++             and their number matches int(tf * |official sup|)
++  kg1_rel    triples_1 is not empty (ICEWS: KG1 relations come from attribute_data/triples_1)
++  budget     pairs_augmented == pair_budget (or fewer only if the BFS ran out of seeds)
++Soft checks (WARN, report in the manifest):
++  aug_pairs  synthetic pairs that reached sup_pairs vs pairs_augmented
++  parse failures, fallbacks to original values, generated values identical to the original,
++  synthetic entities without any relation (expected only for no_bfs / all_llm with no edges)
++"""
++
++from __future__ import annotations
++
++import argparse
++import json
++import re
++import sys
++from pathlib import Path
++
++AUG = re.compile(r"_aug\d+$")
++
++
++def read_tsv(path: Path):
++    if not path.exists():
++        return []
++    with open(path, encoding="utf-8") as fh:
++        return [line.rstrip("\n").split("\t") for line in fh if line.strip()]
++
++
++def ids_to_uri(d: Path):
++    out = {}
++    for name in ("ent_ids_1", "ent_ids_2"):
++        for row in read_tsv(d / name):
++            if len(row) >= 2:
++                out[row[0]] = row[1]
++    return out
++
++
++def pairs(d: Path, name: str, id2uri):
++    return {(id2uri[a], id2uri[b]) for a, b, *_ in read_tsv(d / name) if a in id2uri and b in id2uri}
++
++
++def verify(dataset_dir: Path, stats_path: Path, raw_dir: Path, tf: float,
++           variant: str | None = None) -> dict:
++    """Run all checks; returns {"failed": bool, "checks": {...}}."""
++    d, raw = Path(dataset_dir), Path(raw_dir) / "attribute_data"
++    stats = json.loads(Path(stats_path).read_text())
++    variant = variant or stats.get("variant")
++    report, failed = {}, False
++
++    def check(name, ok, detail, hard=True):
++        nonlocal failed
++        status = "OK" if ok else ("FAIL" if hard else "WARN")
++        failed |= (not ok and hard)
++        report[name] = {"status": status, "detail": detail}
++
++    raw_ids = ids_to_uri(raw)
++    off_sup = pairs(raw, "sup_pairs", raw_ids)
++    off_test = pairs(raw, "ref_pairs", raw_ids) | pairs(raw, "valid_pairs", raw_ids)
++
++    id2uri = ids_to_uri(d)
++    sup = pairs(d, "sup_pairs", id2uri)
++    test = pairs(d, "ref_pairs", id2uri)
++    valid = pairs(d, "valid_pairs", id2uri)
++    orig_train = {p for p in sup | valid if not (AUG.search(p[0]) or AUG.search(p[1]))}
++    synthetic = {p for p in sup if AUG.search(p[0]) or AUG.search(p[1])}
++
++    check("split", test <= off_test and not (sup & off_test),
++          f"test={len(test)} (official test={len(off_test)}), test pairs in sup={len(sup & off_test)}")
++    check("train", orig_train <= off_sup,
++          f"original train pairs (sup+valid)={len(orig_train)}, not in official sup={len(orig_train - off_sup)}")
++    expected_train = max(1, int(len(off_sup) * tf))
++    check("train_size", abs(len(orig_train) - expected_train) <= max(1, 0.01 * expected_train),
++          f"original train={len(orig_train)}, int(tf*|official sup|)={expected_train} "
++          "(small gaps = official pairs missing from the loaded KG)", hard=False)
++    n_t1 = len(read_tsv(d / "triples_1"))
++    check("kg1_rel", n_t1 > 0, f"triples_1 lines={n_t1}")
++    budget, done = stats.get("pair_budget"), stats.get("pairs_augmented")
++    check("budget", done == budget, f"pairs_augmented={done}, pair_budget={budget}",
++          hard=(variant != "all_llm"))   # all_llm skips failed pairs (no fallback)
++    check("aug_pairs", len(synthetic) == done,
++          f"synthetic pairs in sup={len(synthetic)} of {done} generated. The BertInt writer drops a pair "
++          "when one synthetic entity has no triple at all (no attribute, no relation): expected for "
++          "no_bfs on KGs with attribute-less entities (Luffy-S has the same behaviour); report the "
++          "count, do not 'fix' it", hard=False)
++
++    # soft checks
++    req = max(1, stats.get("llm_requests", 0))
++    check("parse_failures", stats.get("parse_failures", 0) / req < 0.02,
++          f"{stats.get('parse_failures', 0)}/{req} requests", hard=False)
++    gen = stats.get("values_generated", 0)
++    fb = stats.get("values_fallback_original", 0)
++    check("fallbacks", fb <= 0.05 * max(1, gen + fb), f"fallback={fb}, generated={gen}", hard=False)
++    ident = stats.get("values_identical_to_original", 0)
++    check("copied_values", ident <= 0.05 * max(1, gen), f"identical to original={ident}/{gen}", hard=False)
++    trunc = stats.get("truncated_outputs", 0)
++    check("truncated_outputs", trunc == 0, f"answers cut by max_tokens={trunc}", hard=False)
++
++    aug_with_rel = set()
++    for row in read_tsv(d / "triples_1") + read_tsv(d / "triples_2"):
++        if len(row) >= 3:
++            for e in (row[0], row[2]):
++                uri = id2uri.get(e, "")
++                if AUG.search(uri):
++                    aug_with_rel.add(uri)
++    aug_ents = {e for p in synthetic for e in p}
++    frac = len(aug_ents & aug_with_rel) / max(1, len(aug_ents))
++    check("structure", frac > 0 or variant in ("no_bfs",),
++          f"synthetic anchors with >=1 relation: {frac:.1%}", hard=False)
++
++    return {"dataset_dir": str(d), "variant": variant, "failed": failed, "checks": report}
++
++
++def main() -> int:
++    ap = argparse.ArgumentParser()
++    ap.add_argument("--dataset-dir", required=True, type=Path)
++    ap.add_argument("--stats", required=True, type=Path)
++    ap.add_argument("--raw", required=True, type=Path, help="data/raw/openea/<DATASET>")
++    ap.add_argument("--tf", required=True, type=float)
++    ap.add_argument("--variant", default=None)
++    args = ap.parse_args()
++    result = verify(args.dataset_dir, args.stats, args.raw, args.tf, args.variant)
++    print(json.dumps(result, indent=2))
++    return 1 if result["failed"] else 0
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+diff --git a/src/augmentation/methods/llm/__init__.py b/src/augmentation/methods/llm/__init__.py
+new file mode 100644
+index 0000000..e0b5d32
+--- /dev/null
++++ b/src/augmentation/methods/llm/__init__.py
+@@ -0,0 +1 @@
++"""Luffy-L: LLM-based AugmentAttributes (see augmenter.py)."""
+diff --git a/src/augmentation/methods/llm/augmenter.py b/src/augmentation/methods/llm/augmenter.py
+new file mode 100644
+index 0000000..326fa95
+--- /dev/null
++++ b/src/augmentation/methods/llm/augmenter.py
+@@ -0,0 +1,453 @@
++"""Luffy-L: LLM instantiation of AugmentAttributes (paper, Algorithm 3).
++
++Design rule: structural replication is NOT reimplemented here. ``LLMAugmenter``
++subclasses ``PLMAugmenter`` (the class Luffy-S uses) and inherits, unchanged:
++
++* the Set-KG construction (``SetKnowledgeGraph.from_dataset``),
++* the BFS traversal, seed order, depth limit and budget
++  (``_bfs_expansion``, ``_process_neighbors``, ``_compute_pair_budget`` ...),
++* the creation of augmented relations (edges towards O_aug).
++
++Only the two places where Luffy-S generates literal values are replaced:
++
++* matched set-entities: ``NodeExpander.bootstrap_literals``  -> ``LuffyLGenerator``
++* singleton neighbours: ``PLMAugmenter._expand_non_set_node`` -> ``LuffyLGenerator``
++
++Variants (``augmentation.variant``, required):
++  full      Algorithm 1 + Algorithm 3 with LLMCache
++  no_cache  LLMCache disabled: every visited entity gets its own call
++  no_bfs    no neighbourhood expansion (``max_depth = 0``)
++  all_llm   ablation without scaffold: one call per sampled training pair,
++            the model writes the whole synthetic pair (attributes + relations),
++            restricted to the input alphabet (no new entities/predicates/relations)
++"""
++
++from __future__ import annotations
++
++import json
++import math
++import random
++from collections import OrderedDict
++from pathlib import Path
++from typing import Dict, List, Optional, Tuple
++
++import yaml
++from rdflib import Literal, URIRef
++
++from src.augmentation.registry import AUGMENTATION_REGISTRY
++from src.config.loader import PROJECT_ROOT
++from src.core.dataset import Dataset
++
++from ..plm.neighbor_handler import NeighborHandler
++from ..plm.node_expander import NodeExpander
++from ..plm.plm_augmenter import PLMAugmenter
++from ..plm.set_knowledge_graph.set_knowledge_graph import SetKnowledgeGraph
++from .llm_client import CachedLLMClient, build_client
++from .prompts import (
++    SIDES, SYSTEM_ALL_LLM, SYSTEM_LUFFY_L, SYSTEM_LUFFY_L_CONTINUATION, ContextBuilder, PromptContext,
++    build_user_prompt, domain_for, parse_all_llm, parse_luffy_l,
++)
++
++VARIANTS = ("full", "no_cache", "no_bfs", "all_llm")
++
++
++# ----------------------------------------------------------------------
++# Algorithm 3
++# ----------------------------------------------------------------------
++class LuffyLGenerator:
++    """AugmentAttributes for Luffy-L, with the LLMCache of Algorithm 3.
++
++    ``literals_for(node)`` returns, for each KG side where ``node`` exists, the
++    list of (predicate URI, value) to attach to the augmented copy.
++    """
++
++    def __init__(self, client: CachedLLMClient, ctx_builder: ContextBuilder,
++                 domain: str, use_cache: bool, stats: dict, log_path: Optional[Path] = None):
++        self.client = client
++        self.ctx = ctx_builder
++        self.domain = domain
++        self.use_cache = use_cache
++        self.stats = stats
++        self.log_path = log_path
++        # LLMCache: Set-KG node -> side -> predicate -> values (generated by an earlier call)
++        self.llm_cache: Dict[URIRef, Dict[str, Dict[URIRef, List[str]]]] = {}
++        self.generated: set = set()   # nodes whose literals were already written
++
++    def _log(self, record: dict) -> None:
++        if self.log_path is None:
++            return
++        with open(self.log_path, "a", encoding="utf-8") as fh:
++            fh.write(json.dumps(record, ensure_ascii=False) + "\n")
++
++    def _prime(self, ctx, parsed) -> None:
++        """foreach neighbour O with generated literals: LLMCache[O] <- (LN[O], {}).
++
++        O is primed only if the call generated ALL its attribute values; otherwise
++        (prompt cap or omissions by the model) O gets its own call when visited,
++        instead of falling back to original values for the missing ones."""
++        for lid, lits in parsed.values.items():
++            if lid == "S" or lid not in ctx.neighbors:
++                continue
++            nb = ctx.neighbors[lid]
++            if nb in self.generated:
++                continue
++            if self._covers_all(nb, lits):
++                self.llm_cache[nb] = lits
++                self.stats["llm_cache_primed"] += 1
++            else:
++                self.stats["llm_cache_not_primed_incomplete"] += 1
++
++    def _pending(self, neighbors: List[URIRef]) -> List[URIRef]:
++        return [nb for nb in neighbors if nb not in self.generated and nb not in self.llm_cache]
++
++    def _call(self, node: URIRef, chunk: List[URIRef], s_generated):
++        """One LLM call for S (+ chunk). Continuation call when ``s_generated`` is given."""
++        ctx = self.ctx.build(node, chunk, s_generated=s_generated)
++        system = SYSTEM_LUFFY_L if s_generated is None else SYSTEM_LUFFY_L_CONTINUATION
++        response = self.client.generate(system, build_user_prompt(ctx, self.domain))
++        self.stats["llm_requests"] += 1
++        if s_generated is not None:
++            self.stats["continuation_requests"] += 1
++        self.stats["context_literals_truncated"] += ctx.n_literals_truncated
++        parsed = parse_luffy_l(response.text, ctx)
++        if parsed is None:
++            self.stats["parse_failures"] += 1
++        else:
++            self.stats["unknown_keys_dropped"] += parsed.n_unknown_keys
++            if self.use_cache:
++                self._prime(ctx, parsed)
++        self._log({"node": str(node), "source": "llm",
++                   "kind": "first" if s_generated is None else "continuation",
++                   "parsed": parsed is not None, "disk_cache": response.from_cache,
++                   "n_neighbors": len(ctx.neighbors)})
++        return parsed
++
++    def _continue(self, node: URIRef, generated, chunks: List[List[URIRef]]) -> None:
++        if not self.use_cache:
++            return
++        for chunk in chunks:
++            if chunk:
++                self._call(node, chunk, generated)
++
++    def _covers_all(self, node: URIRef, lits: Dict[str, Dict[URIRef, List[str]]]) -> bool:
++        for side, ent in self.ctx.components(node).items():
++            preds = {p for p, _ in self.ctx._literals_of(side, ent)}
++            if not preds <= set(lits.get(side, {})):
++                return False
++        return True
++
++    def literals_for(self, node: URIRef) -> Dict[str, List[Tuple[URIRef, str]]]:
++        comps = self.ctx.components(node)
++        generated: Optional[Dict[str, Dict[URIRef, List[str]]]] = None
++
++        is_pair = self.ctx.set_graph.is_set_node(node)
++
++        if self.use_cache and node in self.llm_cache:
++            generated = self.llm_cache.pop(node)          # (L, LN) <- LLMCache[S]
++            self.stats["llm_cache_hits"] += 1
++            self._log({"node": str(node), "source": "llm_cache"})
++            chunks = []
++            if is_pair:
++                # Implementation choice (see CLAUDE.md): Algorithm 3 gives a cached S no
++                # neighbour literals (LN = {}), so each of its unprimed neighbours would
++                # later cost one call. On hubs (ICEWS) that is hundreds of calls per pair.
++                # Instead the pending neighbours are generated in continuation calls that
++                # receive S's cached values: same coherence goal, a fraction of the calls.
++                chunks = self.ctx.chunk_neighbors(self._pending(self.ctx.neighbor_nodes(node)))
++            self._continue(node, generated, chunks)
++        else:
++            # Algorithm 3: one call returns the literals of S and of its neighbours.
++            # Neighbours that do not fit one prompt go to continuation calls that receive
++            # S's generated values. Without LLMCache (no_cache) only the first call is
++            # made, its neighbours serving as context. A singleton S (only reached at the
++            # depth limit) gets one call: its own neighbours are never visited by the BFS.
++            all_nbs = self.ctx.neighbor_nodes(node)
++            if self.use_cache:
++                chunks = self.ctx.chunk_neighbors(self._pending(all_nbs)) or [[]]
++            else:
++                chunks = self.ctx.chunk_neighbors(all_nbs)[:1] or [[]]
++            if not is_pair:
++                chunks = chunks[:1]
++            first = self._call(node, chunks[0], None)
++            generated = first.values.get("S") if first is not None else None
++            generated = generated or None
++            if generated is not None:
++                self._continue(node, generated, chunks[1:])
++
++        self.generated.add(node)
++        out: Dict[str, List[Tuple[URIRef, str]]] = {}
++        for side, ent in comps.items():
++            originals: Dict[URIRef, List[str]] = {}
++            for p, v in self.ctx._literals_of(side, ent):
++                originals.setdefault(p, []).append(v)
++            gen_side = (generated or {}).get(side, {})
++            values: List[Tuple[URIRef, str]] = []
++            for p, orig_vals in originals.items():
++                new_vals = gen_side.get(p)
++                if new_vals:
++                    values.extend((p, v) for v in new_vals[: len(orig_vals)])
++                    self.stats["values_generated"] += min(len(new_vals), len(orig_vals))
++                    self.stats["values_identical_to_original"] += sum(
++                        1 for v in new_vals[: len(orig_vals)] if v in orig_vals)
++                else:
++                    # Paper: unparseable / missing output -> keep the original value
++                    values.extend((p, v) for v in orig_vals)
++                    self.stats["values_fallback_original"] += len(orig_vals)
++            out[side] = values
++        return out
++
++
++# ----------------------------------------------------------------------
++# Hooks into the Luffy-S scaffold
++# ----------------------------------------------------------------------
++class _SortedNeighborHandler(NeighborHandler):
++    """Same neighbours as Luffy-S, in a deterministic order.
++
++    The DAKGEA loaders fill the graphs from Python sets, so the triple order (and
++    therefore the BFS order) changes with PYTHONHASHSEED from one process to the
++    next. Luffy-L needs the same traversal in every run of a seed (af prefixes,
++    cache replay), so neighbours are sorted by (predicate, neighbour)."""
++
++    _MEMO_SIZE = 4096
++
++    def __init__(self):
++        super().__init__()
++        # (graph id, node) -> sorted neighbours. The Set-KG is never modified during the
++        # BFS; the scaffold asks for the same node several times (logging, bridging).
++        self._memo: "OrderedDict" = OrderedDict()
++
++    def iter_neighbors(self, graph, node):
++        key = (id(graph), node)
++        items = self._memo.get(key)
++        if items is not None:
++            self._memo.move_to_end(key)
++        else:
++            outgoing = sorted(((p, o) for _, p, o in graph.triples((node, None, None))),
++                              key=lambda t: (str(t[0]), str(t[1])))
++            incoming = sorted(((p, s) for s, p, _ in graph.triples((None, None, node))),
++                              key=lambda t: (str(t[0]), str(t[1])))
++            items = [("out", p, o) for p, o in outgoing] + [("in", p, s) for p, s in incoming]
++            self._memo[key] = items
++            if len(self._memo) > self._MEMO_SIZE:
++                self._memo.popitem(last=False)
++        return iter(items)
++
++
++class _NoCopyNeighborHandler(_SortedNeighborHandler):
++    """Drops the verbatim copy of original literals onto augmented entities."""
++
++    def attach_literal_to_augmented(self, *args, **kwargs) -> None:
++        return None
++
++
++class LLMNodeExpander(NodeExpander):
++    """NodeExpander whose literal generation is Algorithm 3."""
++
++    def __init__(self, derived_predicate, add_derived_predicate, generator: LuffyLGenerator):
++        super().__init__(derived_predicate, add_derived_predicate, None, {}, None,
++                         value_consistency_config={})
++        self.generator = generator
++        self._current_node: Optional[URIRef] = None
++
++    def expand_set_node(self, dataset, set_graph, set_node):
++        self._current_node = set_node      # remembered for bootstrap_literals below
++        return super().expand_set_node(dataset, set_graph, set_node)
++
++    def bootstrap_literals(self, dataset, src_component, tgt_component, src_aug, tgt_aug) -> None:
++        lits = self.generator.literals_for(self._current_node)
++        for p, v in lits.get("KG1", []):
++            dataset.knowledge_graph_source.add((src_aug, p, Literal(v)))
++        for p, v in lits.get("KG2", []):
++            dataset.knowledge_graph_target.add((tgt_aug, p, Literal(v)))
++
++
++@AUGMENTATION_REGISTRY.register("llm")
++class LLMAugmenter(PLMAugmenter):
++    registry_name = "llm_augmentation"
++    _LLM_DEFAULT_CONFIG = "config/augmentation/llm.yaml"
++
++    def __init__(self, config: Optional[dict] = None):
++        super().__init__(config)
++        aug = self.config.get("augmentation", {})
++        llm_defaults = {}
++        default_path = PROJECT_ROOT / self._LLM_DEFAULT_CONFIG
++        if default_path.exists():
++            llm_defaults = (yaml.safe_load(default_path.read_text()) or {}).get("augmentation", {})
++
++        self.variant = aug.get("variant")
++        if self.variant not in VARIANTS:
++            raise ValueError(f"augmentation.variant must be one of {VARIANTS}, got {self.variant!r}")
++        if "copy_original_literals" not in aug:
++            raise ValueError(
++                "augmentation.copy_original_literals is required (true = same as the Luffy-S "
++                "runs, which copy every original literal onto the augmented entities; "
++                "false = paper behaviour). Decide it explicitly."
++            )
++        self.copy_original_literals = bool(aug["copy_original_literals"])
++        self.llm_cfg = {**llm_defaults.get("llm", {}), **aug.get("llm", {})}
++        self.prompt_cfg = {**llm_defaults.get("prompt", {}), **aug.get("prompt", {})}
++        self.max_depth = int(aug.get("max_depth", llm_defaults.get("max_depth", 2)))
++        if self.variant == "no_bfs":
++            self.max_depth = 0
++        self.neighbor_handler = (_SortedNeighborHandler() if self.copy_original_literals
++                                 else _NoCopyNeighborHandler())
++
++        exp = self.config.get("experiment", {})
++        ds = exp.get("dataset", "")
++        self.dataset_name = ds.get("name", "") if isinstance(ds, dict) else str(ds)
++        self.stage_root = Path(aug["stage_root"]) if aug.get("stage_root") else None
++        self.mock_fn = None   # tests inject an offline backend here
++        self.stats = {k: 0 for k in (
++            "llm_requests", "llm_cache_hits", "llm_cache_primed", "llm_cache_not_primed_incomplete",
++            "continuation_requests",
++            "parse_failures",
++            "unknown_keys_dropped", "values_generated", "values_fallback_original",
++            "values_identical_to_original", "context_literals_truncated", "pairs_failed", "out_of_alphabet_dropped",
++        )}
++
++    # ------------------------------------------------------------------
++    def _make_client(self) -> CachedLLMClient:
++        cfg = dict(self.llm_cfg)
++        cache_path = Path(cfg["cache_path"])
++        cfg["cache_path"] = str(cache_path if cache_path.is_absolute() else PROJECT_ROOT / cache_path)
++        return build_client(cfg, self.seed, mock_fn=self.mock_fn)
++
++    def _ctx_builder(self, dataset: Dataset, set_graph: SetKnowledgeGraph) -> ContextBuilder:
++        c = self.prompt_cfg
++        return ContextBuilder(
++            dataset, set_graph,
++            max_neighbors=int(c.get("max_neighbors", 40)),
++            max_neighbor_values=int(c.get("max_neighbor_values", 120)),
++            max_literals_target=int(c.get("max_literals_target", 100)),
++            max_literals_neighbor=int(c.get("max_literals_neighbor", 30)),
++            max_relations=int(c.get("max_relations", 60)),
++            max_value_chars=int(c.get("max_value_chars", 300)),
++            max_value_chars_neighbor=int(c.get("max_value_chars_neighbor", 150)),
++        )
++
++    def _write_stats(self, client: CachedLLMClient, initial_pairs: int, budget, expanded: int) -> None:
++        payload = {
++            "variant": self.variant, "seed": self.seed, "dataset": self.dataset_name,
++            "copy_original_literals": self.copy_original_literals, "max_depth": self.max_depth,
++            "initial_pairs": initial_pairs, "pair_budget": budget, "pairs_augmented": expanded,
++            "api_calls": client.n_api_calls, "disk_cache_hits": client.n_disk_hits,
++            "input_tokens": client.input_tokens, "output_tokens": client.output_tokens,
++            "truncated_outputs": client.n_truncated_outputs,
++            "llm": {k: v for k, v in self.llm_cfg.items() if k != "cache_path"},
++            "prompt": self.prompt_cfg, **self.stats,
++        }
++        self.logger.info("[LUFFY-L] stats: %s", json.dumps(payload))
++        if self.stage_root:
++            self.stage_root.mkdir(parents=True, exist_ok=True)
++            (self.stage_root / "luffy_l_stats.json").write_text(json.dumps(payload, indent=2))
++
++    # ------------------------------------------------------------------
++    def augment(self, dataset: Dataset) -> Dataset:
++        initial_pairs = len(dataset.aligned_entities)
++        out = dataset.clone()
++        if not dataset.aligned_entities:
++            return out
++
++        set_graph = SetKnowledgeGraph.from_dataset(out)
++        ctx_builder = self._ctx_builder(out, set_graph)
++        client = self._make_client()
++        budget = self._compute_pair_budget(initial_pairs)
++        log_path = (self.stage_root / "luffy_l_calls.jsonl") if self.stage_root else None
++        if log_path:
++            log_path.parent.mkdir(parents=True, exist_ok=True)
++
++        if self.variant == "all_llm":
++            expanded = self._augment_all_llm(out, set_graph, ctx_builder, client, budget)
++        else:
++            generator = LuffyLGenerator(
++                client, ctx_builder, domain_for(self.dataset_name),
++                use_cache=(self.variant != "no_cache"), stats=self.stats, log_path=log_path,
++            )
++            self.node_expander = LLMNodeExpander(
++                self.derived_predicate, self.add_derived_predicate, generator)
++            self._generator = generator
++            set_nodes = sorted(set_graph.iter_set_nodes(), key=lambda uri: str(uri))
++            random.Random(self.seed).shuffle(set_nodes)      # same seed order as Luffy-S
++            self._log_augmentation_start(initial_pairs, budget)
++            expanded = self._bfs_expansion(out, set_graph, set_nodes, budget)
++
++        self._write_stats(client, initial_pairs, budget, expanded)
++        return out
++
++    # Singletons (|O| = 1): same URI minting and edges as Luffy-S, literals from Algorithm 3
++    def _expand_non_set_node(self, dataset, set_graph, non_set_node):
++        aug_counter = getattr(self, "_non_set_aug_counter", 0)
++        self._non_set_aug_counter = aug_counter + 1
++        in_source = self.neighbor_handler._node_in_graph(dataset.knowledge_graph_source, non_set_node)
++        in_target = self.neighbor_handler._node_in_graph(dataset.knowledge_graph_target, non_set_node)
++        src_aug = URIRef(f"{non_set_node}_aug{aug_counter}") if in_source else None
++        tgt_aug = URIRef(f"{non_set_node}_aug{aug_counter + 1}") if in_target else None
++
++        lits = self._generator.literals_for(non_set_node)
++        if src_aug is not None:
++            for p, v in lits.get("KG1", []):
++                dataset.knowledge_graph_source.add((src_aug, p, Literal(v)))
++        if tgt_aug is not None:
++            for p, v in lits.get("KG2", []):
++                dataset.knowledge_graph_target.add((tgt_aug, p, Literal(v)))
++        return src_aug, tgt_aug
++
++    # ------------------------------------------------------------------
++    # all_llm ablation: no Set-KG traversal, no cache, the LLM writes the pair
++    # ------------------------------------------------------------------
++    def _augment_all_llm(self, out: Dataset, set_graph: SetKnowledgeGraph,
++                         ctx_builder: ContextBuilder, client: CachedLLMClient, budget) -> int:
++        pairs = sorted(set_graph.iter_set_nodes(), key=lambda uri: str(uri))
++        random.Random(self.seed).shuffle(pairs)
++        if budget is not None:
++            pairs = pairs[:budget]
++        domain = domain_for(self.dataset_name)
++        kgs = {"KG1": out.knowledge_graph_source, "KG2": out.knowledge_graph_target}
++        alignments = list(out.aligned_entities)
++        counter = 0
++        created = 0
++        log_path = (self.stage_root / "luffy_l_calls.jsonl") if self.stage_root else None
++
++        for node in pairs:
++            ctx: PromptContext = ctx_builder.build(node)
++            response = client.generate(SYSTEM_ALL_LLM, build_user_prompt(ctx, domain))
++            self.stats["llm_requests"] += 1
++            parsed = parse_all_llm(response.text, ctx)
++            ok = parsed is not None and any(parsed.attributes.get(s) for s in ctx.sides)
++            if log_path:
++                with open(log_path, "a", encoding="utf-8") as fh:
++                    fh.write(json.dumps({"node": str(node), "ok": ok,
++                                         "disk_cache": response.from_cache}) + "\n")
++            if not ok:
++                self.stats["parse_failures" if parsed is None else "pairs_failed"] += 1
++                continue                                   # no fallback in all_llm
++            self.stats["out_of_alphabet_dropped"] += parsed.n_out_of_alphabet
++
++            aug = {}
++            for side, view in ctx.sides.items():
++                counter += 1
++                aug[side] = URIRef(f"{view.entity}_aug{counter}")
++                for p, vals in parsed.attributes.get(side, {}).items():
++                    for v in vals:
++                        kgs[side].add((aug[side], p, Literal(v)))
++                    self.stats["values_generated"] += len(vals)
++                if self.copy_original_literals:
++                    # same verbatim copy the Luffy-S scaffold performs on set-entities
++                    for other in SIDES:
++                        if other in ctx.sides:
++                            for p, v in ctx_builder._literals_of(other, ctx.sides[other].entity):
++                                kgs[side].add((aug[side], p, Literal(v)))
++                for rel, direction, lid in parsed.relations.get(side, []):
++                    target = ctx_builder.components(ctx.neighbors[lid]).get(side)
++                    if target is None:
++                        self.stats["out_of_alphabet_dropped"] += 1
++                        continue
++                    if direction == "->":
++                        kgs[side].add((aug[side], rel, target))
++                    else:
++                        kgs[side].add((target, rel, aug[side]))
++            alignments.append((str(aug["KG1"]), str(aug["KG2"])))
++            created += 1
++
++        out.aligned_entities = tuple(alignments)
++        return created
+diff --git a/src/augmentation/methods/llm/llm_client.py b/src/augmentation/methods/llm/llm_client.py
+new file mode 100644
+index 0000000..bb4bc7f
+--- /dev/null
++++ b/src/augmentation/methods/llm/llm_client.py
+@@ -0,0 +1,295 @@
++"""LLM clients for Luffy-L, with a persistent prompt->response cache.
++
++Every call goes through ``CachedLLMClient``:
++
++* the cache key is sha256(model_id, decoding params, seed, system, user);
++* on a hit the stored response is returned and no request is sent;
++* on a miss the backend is called and the response is stored *before* returning.
++
++Because the key includes the experiment seed, runs with the same seed reuse
++responses (e.g. af=0.5 replays the prefix of af=1.0, and the ``no_cache``
++ablation reuses the prompts of ``full``), while different seeds draw
++independent generations, as the paper's 5-run protocol requires.
++
++Backends:
++  bedrock  - AWS Bedrock Converse API (Llama 3.3 70B in the paper)
++  replay   - cache only; a miss raises ``CacheMiss`` (used to regenerate the
++             datasets deterministically from a shipped cache, zero API calls)
++  fake     - offline placeholder answers, to dry-run the pipeline end to end
++             (use a separate cache_path: fake answers must never mix with real ones)
++  mock     - user-supplied function, for unit tests
++"""
++
++from __future__ import annotations
++
++import hashlib
++import json
++import random
++import sqlite3
++import threading
++import time
++from dataclasses import dataclass
++from pathlib import Path
++from typing import Callable, Optional
++
++from src.logger import get_logger
++
++logger = get_logger(__name__)
++
++
++class CacheMiss(RuntimeError):
++    """Raised by the replay backend when a prompt is not in the cache."""
++
++
++@dataclass
++class LLMResponse:
++    text: str
++    from_cache: bool
++    latency_s: float = 0.0
++    input_tokens: int = 0
++    output_tokens: int = 0
++    stop_reason: str = ""
++
++
++# ----------------------------------------------------------------------
++# Persistent cache (SQLite, safe for several processes sharing one file)
++# ----------------------------------------------------------------------
++class ResponseCache:
++    def __init__(self, path: str | Path):
++        self.path = Path(path)
++        self.path.parent.mkdir(parents=True, exist_ok=True)
++        self._lock = threading.Lock()
++        self._conn = sqlite3.connect(str(self.path), timeout=120, check_same_thread=False)
++        self._conn.execute("PRAGMA journal_mode=WAL")
++        self._conn.execute("PRAGMA busy_timeout=120000")
++        self._conn.execute(
++            """CREATE TABLE IF NOT EXISTS calls (
++                   key TEXT PRIMARY KEY,
++                   model_id TEXT, seed INTEGER, params TEXT,
++                   system TEXT, user TEXT, response TEXT,
++                   latency_s REAL, input_tokens INTEGER, output_tokens INTEGER,
++                   created REAL)"""
++        )
++        self._conn.commit()
++
++    def get(self, key: str) -> Optional[str]:
++        with self._lock:
++            row = self._conn.execute("SELECT response FROM calls WHERE key=?", (key,)).fetchone()
++        return row[0] if row else None
++
++    def put(self, key: str, *, model_id: str, seed: int, params: dict, system: str,
++            user: str, response: LLMResponse) -> None:
++        with self._lock:
++            self._conn.execute(
++                "INSERT OR IGNORE INTO calls VALUES (?,?,?,?,?,?,?,?,?,?,?)",
++                (key, model_id, seed, json.dumps(params, sort_keys=True), system, user,
++                 response.text, response.latency_s, response.input_tokens,
++                 response.output_tokens, time.time()),
++            )
++            self._conn.commit()
++
++
++def cache_key(model_id: str, params: dict, seed: int, system: str, user: str) -> str:
++    payload = json.dumps(
++        {"model_id": model_id, "params": params, "seed": seed, "system": system, "user": user},
++        sort_keys=True, ensure_ascii=False,
++    )
++    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
++
++
++# ----------------------------------------------------------------------
++# Backends
++# ----------------------------------------------------------------------
++class _RateLimiter:
++    def __init__(self, rps: float):
++        self.interval = 1.0 / rps if rps and rps > 0 else 0.0
++        self._next = 0.0
++        self._lock = threading.Lock()
++
++    def wait(self) -> None:
++        if not self.interval:
++            return
++        with self._lock:
++            now = time.monotonic()
++            wait = self._next - now
++            self._next = max(now, self._next) + self.interval
++        if wait > 0:
++            time.sleep(wait)
++
++
++class BedrockBackend:
++    """AWS Bedrock Converse API backend (model-agnostic)."""
++
++    RETRYABLE = {
++        "ThrottlingException", "ServiceUnavailableException", "ModelTimeoutException",
++        "InternalServerException", "ModelNotReadyException", "TooManyRequestsException",
++    }
++
++    def __init__(self, model_id: str, region: str, params: dict,
++                 requests_per_second: float = 2.0, max_retries: int = 8):
++        import boto3  # imported lazily so tests do not need boto3
++        from botocore.config import Config as BotoConfig
++
++        self.model_id = model_id
++        self.params = params
++        self.max_retries = max_retries
++        self.rate = _RateLimiter(requests_per_second)
++        self.client = boto3.client(
++            "bedrock-runtime", region_name=region,
++            config=BotoConfig(read_timeout=300, retries={"max_attempts": 1}),
++        )
++
++    def __call__(self, system: str, user: str) -> LLMResponse:
++        from botocore.exceptions import ClientError
++
++        inference = {
++            "maxTokens": int(self.params["max_tokens"]),
++            "temperature": float(self.params["temperature"]),
++            "topP": float(self.params["top_p"]),
++        }
++        for attempt in range(self.max_retries + 1):
++            self.rate.wait()
++            t0 = time.monotonic()
++            try:
++                out = self.client.converse(
++                    modelId=self.model_id,
++                    system=[{"text": system}],
++                    messages=[{"role": "user", "content": [{"text": user}]}],
++                    inferenceConfig=inference,
++                )
++                text = "".join(
++                    block.get("text", "") for block in out["output"]["message"]["content"]
++                )
++                usage = out.get("usage", {})
++                return LLMResponse(
++                    text=text, from_cache=False, latency_s=time.monotonic() - t0,
++                    input_tokens=int(usage.get("inputTokens", 0)),
++                    output_tokens=int(usage.get("outputTokens", 0)),
++                    stop_reason=str(out.get("stopReason", "")),
++                )
++            except ClientError as exc:
++                code = exc.response.get("Error", {}).get("Code", "")
++                if code not in self.RETRYABLE or attempt == self.max_retries:
++                    raise
++                delay = min(60.0, 2.0 ** attempt) * (0.5 + random.random())
++                logger.warning("[LLM] %s (attempt %d/%d), retrying in %.1fs",
++                               code, attempt + 1, self.max_retries, delay)
++                time.sleep(delay)
++        raise RuntimeError("unreachable")
++
++
++class ReplayBackend:
++    def __call__(self, system: str, user: str) -> LLMResponse:
++        raise CacheMiss(
++            "Prompt not found in the LLM cache (provider=replay). The cache does not "
++            "match this run: check seed, model params, dataset and code version."
++        )
++
++
++class FakeBackend:
++    """Offline backend that answers every prompt with well-formed placeholder values.
++
++    Used to dry-run the whole pipeline (runner, writer, output folders) without
++    Bedrock: values look like "FAKE-c<call>-<id>-<KG>-<attribute>-<i>".
++    Never use its output as experimental data.
++    """
++
++    def __init__(self):
++        self.calls = 0
++
++    def __call__(self, system: str, user: str) -> LLMResponse:
++        self.calls += 1
++        data = json.loads(user.split("Input:\n", 1)[1])
++        c = self.calls
++
++        def fake(lid, side, attrs):
++            return {a: [f"FAKE-c{c}-{lid}-{side}-{a}-{i}" for i in range(len(v))]
++                    for a, v in attrs.items()}
++
++        sides = [s for s in ("KG1", "KG2") if s in data["S"]]
++        if "Create ONE new" in system:      # all_llm prompt
++            out = {s: {"attributes": fake("S", s, data["S"][s]["attributes"]),
++                       "relations": data["S"][s]["relations"]} for s in sides}
++        else:
++            out = {} if "ALREADY been replaced" in system else {
++                "S": {s: fake("S", s, data["S"][s]["attributes"]) for s in sides}}
++            for lid, nb in data["neighbors"].items():
++                out[lid] = {s: fake(lid, s, nb[s]["attributes"]) for s in ("KG1", "KG2") if s in nb}
++        return LLMResponse(text=json.dumps(out), from_cache=False)
++
++
++class MockBackend:
++    """Offline backend: ``fn(system, user) -> str``."""
++
++    def __init__(self, fn: Callable[[str, str], str]):
++        self.fn = fn
++
++    def __call__(self, system: str, user: str) -> LLMResponse:
++        return LLMResponse(text=self.fn(system, user), from_cache=False)
++
++
++# ----------------------------------------------------------------------
++# Front-end used by the augmenter
++# ----------------------------------------------------------------------
++class CachedLLMClient:
++    def __init__(self, backend, cache: ResponseCache, model_id: str, params: dict, seed: int):
++        self.backend = backend
++        self.cache = cache
++        self.model_id = model_id
++        self.params = dict(params)
++        self.seed = int(seed)
++        self.n_api_calls = 0
++        self.n_disk_hits = 0
++        self.input_tokens = 0
++        self.output_tokens = 0
++        self.n_truncated_outputs = 0   # stopReason == max_tokens (answer cut, JSON likely invalid)
++
++    def generate(self, system: str, user: str) -> LLMResponse:
++        key = cache_key(self.model_id, self.params, self.seed, system, user)
++        cached = self.cache.get(key)
++        if cached is not None:
++            self.n_disk_hits += 1
++            return LLMResponse(text=cached, from_cache=True)
++        response = self.backend(system, user)
++        self.n_api_calls += 1
++        self.input_tokens += response.input_tokens
++        self.output_tokens += response.output_tokens
++        if response.stop_reason == "max_tokens":
++            self.n_truncated_outputs += 1
++        self.cache.put(key, model_id=self.model_id, seed=self.seed, params=self.params,
++                       system=system, user=user, response=response)
++        return response
++
++
++def build_client(llm_cfg: dict, seed: int, mock_fn: Optional[Callable[[str, str], str]] = None
++                 ) -> CachedLLMClient:
++    """Create the client described by the ``augmentation.llm`` config block."""
++    provider = llm_cfg.get("provider", "bedrock")
++    model_id = llm_cfg["model_id"]
++    if provider == "fake" or (provider == "replay" and llm_cfg.get("replay_fake", False)):
++        # Placeholder answers live in their own key space, so they can never be
++        # served to a real run (replay of a dry run needs replay_fake: true).
++        model_id = f"fake::{model_id}"
++    params = {
++        "temperature": float(llm_cfg.get("temperature", 0.7)),
++        "top_p": float(llm_cfg.get("top_p", 0.9)),
++        "max_tokens": int(llm_cfg.get("max_tokens", 8192)),
++    }
++    cache = ResponseCache(llm_cfg["cache_path"])
++    if provider == "bedrock":
++        backend = BedrockBackend(
++            model_id, llm_cfg.get("region", "us-east-1"), params,
++            requests_per_second=float(llm_cfg.get("requests_per_second", 2.0)),
++            max_retries=int(llm_cfg.get("max_retries", 8)),
++        )
++    elif provider == "replay":
++        backend = ReplayBackend()
++    elif provider == "fake":
++        backend = FakeBackend()
++    elif provider == "mock":
++        if mock_fn is None:
++            raise ValueError("provider=mock requires mock_fn")
++        backend = MockBackend(mock_fn)
++    else:
++        raise ValueError(f"Unknown llm.provider '{provider}' (bedrock | replay | fake | mock)")
++    return CachedLLMClient(backend, cache, model_id, params, seed)
+diff --git a/src/augmentation/methods/llm/prompts.py b/src/augmentation/methods/llm/prompts.py
+new file mode 100644
+index 0000000..23e72b2
+--- /dev/null
++++ b/src/augmentation/methods/llm/prompts.py
+@@ -0,0 +1,481 @@
++"""Context serialisation, prompts and response parsing for Luffy-L.
++
++The same ``ContextBuilder`` output is used by every Luffy-L variant and by the
++``all_llm`` ablation, so the only thing that differs between them is what the
++model is asked to produce and what the code does with it.
++
++Identifiers inside a prompt are *local*: the visited set-entity is ``S`` and
++its immediate set-neighbours are ``N1``, ``N2``, ... ; attribute and relation
++predicates are referred to by readable labels that are unique per KG. The
++``PromptContext`` keeps the mapping back to URIs, so the model never has to
++reproduce a URI and every key it returns can be checked against the input.
++"""
++
++from __future__ import annotations
++
++import json
++import re
++from collections import Counter, defaultdict
++from dataclasses import dataclass, field
++from typing import Dict, List, Optional, Tuple
++
++from rdflib import Literal, URIRef
++
++SIDES = ("KG1", "KG2")
++_AUG_RE = re.compile(r"_aug\d+$")
++
++DOMAINS = {
++    "BBC_DB": "music (artists, bands, albums)",
++    "D_W_15K_V1": "general knowledge (DBpedia / Wikidata)",
++    "D_W_15K_V2": "general knowledge (DBpedia / Wikidata)",
++    "ICEW_WIKI": "political events (actors, organisations, countries)",
++    "ICEW_YAGO": "political events (actors, organisations, countries)",
++}
++
++
++def domain_for(dataset_name: str) -> str:
++    name = str(dataset_name or "").split("/")[-1]
++    return DOMAINS.get(name, "general knowledge")
++
++
++def _local_name(uri: str) -> str:
++    text = str(uri).rstrip("/")
++    for sep in ("#", "/", ":"):
++        if sep in text:
++            text = text.rsplit(sep, 1)[-1]
++    return text or str(uri)
++
++
++# ----------------------------------------------------------------------
++# Data structures
++# ----------------------------------------------------------------------
++@dataclass
++class EntityView:
++    """What the prompt shows of one node on one KG side."""
++
++    entity: URIRef                                   # original URI in that KG
++    attributes: Dict[str, List[str]] = field(default_factory=dict)   # label -> values
++    relations: List[Tuple[str, str, str]] = field(default_factory=list)  # (label, dir, local id)
++    n_truncated: int = 0                             # attribute values not shown (cap)
++
++
++@dataclass
++class PromptContext:
++    node: URIRef                                     # Set-KG node of the visited entity
++    is_pair: bool
++    sides: Dict[str, EntityView]                     # side -> view of S
++    neighbors: Dict[str, URIRef]                     # local id -> Set-KG node
++    neighbor_is_pair: Dict[str, bool]
++    neighbor_sides: Dict[str, Dict[str, EntityView]]
++    attr_label_to_uri: Dict[str, Dict[str, URIRef]]  # side -> label -> predicate URI
++    rel_label_to_uri: Dict[str, Dict[str, URIRef]]   # side -> label -> relation URI
++    n_neighbors_total: int = 0
++    n_literals_truncated: int = 0
++    # Continuation calls (neighbour chunks after the first): the values already
++    # generated for S, by KG and attribute label. None in the first call.
++    s_generated: Optional[Dict[str, Dict[str, List[str]]]] = None
++
++
++# ----------------------------------------------------------------------
++# Context builder
++# ----------------------------------------------------------------------
++class ContextBuilder:
++    """Builds the local context of a Set-KG node from the *original* KGs."""
++
++    def __init__(self, dataset, set_graph, *, max_neighbors: int = 40,
++                 max_neighbor_values: int = 120,
++                 max_literals_target: int = 100, max_literals_neighbor: int = 30,
++                 max_relations: int = 60, max_value_chars: int = 300,
++                 max_value_chars_neighbor: int = 150):
++        self.kgs = {"KG1": dataset.knowledge_graph_source, "KG2": dataset.knowledge_graph_target}
++        self.set_graph = set_graph
++        self.max_neighbors = max_neighbors              # neighbours per call
++        self.max_neighbor_values = max_neighbor_values  # neighbour attribute values per call
++        self.max_literals_target = max_literals_target
++        self.max_literals_neighbor = max_literals_neighbor
++        self.max_relations = max_relations
++        self.max_value_chars = max_value_chars
++        self.max_value_chars_neighbor = max_value_chars_neighbor
++
++        # entity URI -> Set-KG node, per side (matched entities collapse into set nodes)
++        self.to_node: Dict[str, Dict[URIRef, URIRef]] = {"KG1": {}, "KG2": {}}
++        for node, comps in set_graph.set_nodes.items():
++            if len(comps) >= 1:
++                self.to_node["KG1"][comps[0]] = node
++            if len(comps) >= 2:
++                self.to_node["KG2"][comps[1]] = node
++
++        self._lit_memo: Dict[Tuple[str, URIRef], List[Tuple[URIRef, str]]] = {}
++        self._nb_memo: Dict[URIRef, List[URIRef]] = {}
++
++        # Labels are computed once, before any augmented triple is written.
++        self.attr_labels = {s: self._make_labels(self.kgs[s], attr=True) for s in SIDES}
++        self.rel_labels = {s: self._make_labels(self.kgs[s], attr=False) for s in SIDES}
++
++    # -- access to ORIGINAL triples only ---------------------------------
++    # The KGs are augmented in place while the BFS runs, so every lookup
++    # skips augmented entities (URIs minted as "<original>_aug<N>").
++    @staticmethod
++    def is_augmented(uri) -> bool:
++        return bool(_AUG_RE.search(str(uri)))
++
++    def _literals_of(self, side: str, ent: URIRef) -> List[Tuple[URIRef, str]]:
++        # Original entities never gain literals during augmentation: safe to memoise.
++        key = (side, ent)
++        hit = self._lit_memo.get(key)
++        if hit is None:
++            hit = [(p, str(o)) for _, p, o in self.kgs[side].triples((ent, None, None))
++                   if isinstance(o, Literal)]
++            self._lit_memo[key] = hit
++        return hit
++
++    def _edges_of(self, side: str, ent: URIRef) -> List[Tuple[URIRef, str, URIRef]]:
++        kg = self.kgs[side]
++        out = [(p, "->", o) for _, p, o in kg.triples((ent, None, None))
++               if isinstance(o, URIRef) and not self.is_augmented(o)]
++        out += [(p, "<-", s) for s, p, _ in kg.triples((None, None, ent))
++                if isinstance(s, URIRef) and not self.is_augmented(s)]
++        return out
++
++    def _in_kg(self, side: str, ent: URIRef) -> bool:
++        kg = self.kgs[side]
++        for _ in kg.triples((ent, None, None)):
++            return True
++        for _ in kg.triples((None, None, ent)):
++            return True
++        return False
++
++    # -- labels ---------------------------------------------------------
++    def _make_labels(self, kg, attr: bool) -> Dict[URIRef, str]:
++        preds = set()
++        for _, p, o in kg.triples((None, None, None)):
++            if isinstance(o, Literal) == attr:
++                preds.add(p)
++        names = getattr(kg, "attr_to_name", {}) or {}
++        base = {p: str(names.get(str(p)) or names.get(p) or _local_name(p)).strip() for p in preds}
++        counts = Counter(base.values())
++        labels, seen = {}, Counter()
++        for p in sorted(preds, key=str):
++            label = base[p] or _local_name(p)
++            if counts[label] > 1:
++                seen[label] += 1
++                label = f"{label}#{seen[label]}"
++            labels[p] = label
++        return labels
++
++    # -- helpers --------------------------------------------------------
++    def components(self, node: URIRef) -> Dict[str, URIRef]:
++        """Original entity URI of ``node`` on each side where it exists."""
++        if self.set_graph.is_set_node(node):
++            comps = self.set_graph.get_components(node)
++            return {"KG1": comps[0], "KG2": comps[1]}
++        return {side: node for side in SIDES if self._in_kg(side, node)}
++
++    def _attributes(self, side: str, entity: URIRef, cap: int, max_chars: int
++                    ) -> Tuple[Dict[str, List[str]], int]:
++        items = sorted(self._literals_of(side, entity), key=lambda pv: (str(pv[0]), pv[1]))
++        truncated = max(0, len(items) - cap)
++        attrs: Dict[str, List[str]] = defaultdict(list)
++        for p, v in items[:cap]:
++            if len(v) > max_chars:
++                v = v[:max_chars] + "..."
++            attrs[self.attr_labels[side][p]].append(v)
++        return dict(attrs), truncated
++
++    def neighbor_nodes(self, node: URIRef) -> List[URIRef]:
++        """All immediate Set-KG neighbours of ``node``: matched pairs first, then by
++        number of connecting edges, then by URI (deterministic)."""
++        hit = self._nb_memo.get(node)
++        if hit is not None:
++            return hit
++        freq: Counter = Counter()
++        for side, ent in self.components(node).items():
++            for _, _, other in self._edges_of(side, ent):
++                nb = self.to_node[side].get(other, other)
++                if nb != node:
++                    freq[nb] += 1
++        hit = sorted(
++            freq,
++            key=lambda n: (0 if self.set_graph.is_set_node(n) else 1, -freq[n], str(n)),
++        )
++        self._nb_memo[node] = hit
++        return hit
++
++    def _n_values(self, nb: URIRef) -> int:
++        return sum(min(len(self._literals_of(side, ent)), self.max_literals_neighbor)
++                   for side, ent in self.components(nb).items())
++
++    def chunk_neighbors(self, neighbors: List[URIRef]) -> List[List[URIRef]]:
++        """Split neighbours into calls of at most ``max_neighbors`` entities and
++        ``max_neighbor_values`` attribute values (a single large neighbour still gets a call)."""
++        chunks: List[List[URIRef]] = []
++        current: List[URIRef] = []
++        values = 0
++        for nb in neighbors:
++            n = self._n_values(nb)
++            if current and (len(current) >= self.max_neighbors or values + n > self.max_neighbor_values):
++                chunks.append(current)
++                current, values = [], 0
++            current.append(nb)
++            values += n
++        if current:
++            chunks.append(current)
++        return chunks
++
++    # -- main entry point -----------------------------------------------
++    def build(self, node: URIRef, neighbors: Optional[List[URIRef]] = None,
++              s_generated: Optional[Dict[str, Dict[URIRef, List[str]]]] = None) -> PromptContext:
++        """Context of ``node`` with the given neighbours (default: the first chunk).
++
++        ``s_generated`` (predicate URIs) marks a continuation call: S is shown with the
++        values already generated for it and only the neighbours are to be generated.
++        """
++        comps = self.components(node)
++        all_nbs = self.neighbor_nodes(node)
++        n_total = len(all_nbs)
++        if neighbors is None:
++            chunks = self.chunk_neighbors(all_nbs)
++            neighbors = chunks[0] if chunks else []
++        nbs = list(neighbors)
++        local_ids = {nb: f"N{i + 1}" for i, nb in enumerate(nbs)}
++        truncated = 0
++
++        sides: Dict[str, EntityView] = {}
++        for side, ent in comps.items():
++            attrs, t = self._attributes(side, ent, self.max_literals_target, self.max_value_chars)
++            truncated += t
++            rels, seen = [], set()
++            for p, direction, other in self._edges_of(side, ent):
++                nb = self.to_node[side].get(other, other)
++                if nb not in local_ids:
++                    continue
++                item = (self.rel_labels[side][p], direction, local_ids[nb])
++                if item not in seen:
++                    seen.add(item)
++                    rels.append(item)
++            rels.sort()
++            sides[side] = EntityView(ent, attrs, rels[: self.max_relations], t)
++
++        nb_sides: Dict[str, Dict[str, EntityView]] = {}
++        for nb, lid in local_ids.items():
++            views = {}
++            for side, ent in self.components(nb).items():
++                attrs, t = self._attributes(side, ent, self.max_literals_neighbor,
++                                            self.max_value_chars_neighbor)
++                views[side] = EntityView(ent, attrs, [], t)
++            nb_sides[lid] = views
++
++        return PromptContext(
++            node=node,
++            is_pair=self.set_graph.is_set_node(node),
++            sides=sides,
++            neighbors={lid: nb for nb, lid in local_ids.items()},
++            neighbor_is_pair={lid: self.set_graph.is_set_node(nb) for nb, lid in local_ids.items()},
++            neighbor_sides=nb_sides,
++            attr_label_to_uri={s: {l: p for p, l in self.attr_labels[s].items()} for s in SIDES},
++            rel_label_to_uri={s: {l: p for p, l in self.rel_labels[s].items()} for s in SIDES},
++            n_neighbors_total=n_total,
++            n_literals_truncated=truncated,
++            s_generated=None if s_generated is None else {
++                side: {self.attr_labels[side][p]: vals for p, vals in preds.items()}
++                for side, preds in s_generated.items()
++            },
++        )
++
++
++# ----------------------------------------------------------------------
++# Serialisation (identical for Luffy-L and all_llm)
++# ----------------------------------------------------------------------
++def serialize_context(ctx: PromptContext, domain: str) -> str:
++    def view(v: EntityView, with_relations: bool) -> dict:
++        out = {"attributes": v.attributes}
++        if with_relations:
++            out["relations"] = [list(r) for r in v.relations]
++        return out
++
++    s_block = {
++        "kind": "matched pair (KG1 and KG2 describe the same real entity)" if ctx.is_pair
++        else "single entity",
++        **{side: view(v, True) for side, v in ctx.sides.items()},
++    }
++    if ctx.s_generated is not None:
++        s_block["already_generated_replacement"] = ctx.s_generated
++    payload = {
++        "domain": domain,
++        "S": s_block,
++        "neighbors": {
++            lid: {
++                "kind": "matched pair" if ctx.neighbor_is_pair[lid] else "single entity",
++                **{side: view(v, False) for side, v in ctx.neighbor_sides[lid].items()},
++            }
++            for lid in ctx.neighbors
++        },
++    }
++    return json.dumps(payload, ensure_ascii=False, separators=(", ", ": "))
++
++
++SYSTEM_LUFFY_L = """You generate synthetic training data for entity resolution across two knowledge graphs, KG1 and KG2.
++
++You receive the local context of an entity S: its attribute values in each KG where it exists, its relations to neighbouring entities N1, N2, ..., and the attribute values of those neighbours.
++
++Invent a NEW, FICTIONAL entity that replaces S, and fictional replacements for each neighbour, following these rules:
++1. For every attribute listed in the input, produce a new value for the same entity, KG and attribute name. Produce one new value for each original value.
++2. Never copy an original value and never use the name of a real-world entity. The new values must be plausible for the attribute and the domain.
++3. When an entity is a matched pair, its KG1 and KG2 values must describe the SAME fictional entity, each written in the surface style and format of its own KG (e.g. "Crowe, Daniel" in one KG and "Daniel Crowe" in the other).
++4. Keep the format of each original value: dates stay dates in the same format, numbers stay numbers, short names stay short, long texts stay of similar length.
++5. The fictional neighbours must be consistent with the fictional S and with the relations shown (e.g. the band of a fictional musician is a fictional band).
++6. Use exactly the identifiers (S, N1, N2, ...), KG names and attribute names given in the input. Do not add attributes, entities or KGs.
++
++Answer with JSON only, no explanation, in this format:
++{"S": {"KG1": {"<attribute>": ["<new value>", ...]}, "KG2": {...}}, "N1": {"KG1": {...}, "KG2": {...}}, ...}
++Include only the KGs in which each entity appears in the input."""
++
++
++SYSTEM_LUFFY_L_CONTINUATION = """You generate synthetic training data for entity resolution across two knowledge graphs, KG1 and KG2.
++
++You receive the local context of an entity S: its original attribute values, its relations to some neighbouring entities N1, N2, ..., and the attribute values of those neighbours. S has ALREADY been replaced by a fictional entity, given in S.already_generated_replacement.
++
++Invent fictional replacements for the neighbours only, following these rules:
++1. For every attribute of every neighbour listed in the input, produce a new value for the same neighbour, KG and attribute name. Produce one new value for each original value.
++2. Never copy an original value and never use the name of a real-world entity. The new values must be plausible for the attribute and the domain.
++3. When a neighbour is a matched pair, its KG1 and KG2 values must describe the SAME fictional entity, each written in the surface style and format of its own KG.
++4. Keep the format of each original value: dates stay dates in the same format, numbers stay numbers, short names stay short, long texts stay of similar length.
++5. The fictional neighbours must be consistent with the already generated replacement of S and with the relations shown.
++6. Use exactly the identifiers (N1, N2, ...), KG names and attribute names given in the input. Do not add attributes, entities or KGs. Do not output S.
++
++Answer with JSON only, no explanation, in this format:
++{"N1": {"KG1": {"<attribute>": ["<new value>", ...]}, "KG2": {...}}, "N2": {...}, ...}
++Include only the KGs in which each neighbour appears in the input."""
++
++
++SYSTEM_ALL_LLM = """You generate synthetic training data for entity resolution across two knowledge graphs, KG1 and KG2.
++
++You receive the local context of a matched pair S (the KG1 and KG2 descriptions of the same real entity): its attribute values, its relations to neighbouring entities N1, N2, ..., and the attribute values of those neighbours.
++
++Create ONE new, FICTIONAL matched pair that can be added to the training data, following these rules:
++1. Give the new entity attribute values in KG1 and in KG2, using only attribute names that appear in the input for that KG.
++2. Never copy an original value and never use the name of a real-world entity. The new values must be plausible for the attribute and the domain.
++3. The KG1 and KG2 values must describe the SAME fictional entity, each written in the surface style and format of its own KG.
++4. Give the new entity relations in KG1 and in KG2. Each relation must use a relation name that appears in the input for that KG and must point to one of the given neighbours N1, N2, ... that appears in that KG. Do not invent new entities or new relation names.
++
++Answer with JSON only, no explanation, in this format:
++{"KG1": {"attributes": {"<attribute>": ["<value>", ...]}, "relations": [["<relation>", "->" or "<-", "<neighbour id>"], ...]}, "KG2": {...}}"""
++
++
++def build_user_prompt(ctx: PromptContext, domain: str) -> str:
++    return "Input:\n" + serialize_context(ctx, domain)
++
++
++# ----------------------------------------------------------------------
++# Parsing and validation
++# ----------------------------------------------------------------------
++def extract_json(text: str) -> Optional[dict]:
++    """Return the outermost JSON object in ``text`` or None."""
++    if not text:
++        return None
++    cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip(), flags=re.IGNORECASE)
++    start = cleaned.find("{")
++    end = cleaned.rfind("}")
++    if start < 0 or end <= start:
++        return None
++    blob = cleaned[start:end + 1]
++    for candidate in (blob, re.sub(r",\s*([}\]])", r"\1", blob)):
++        try:
++            obj = json.loads(candidate)
++            return obj if isinstance(obj, dict) else None
++        except json.JSONDecodeError:
++            continue
++    return None
++
++
++def _as_values(raw) -> List[str]:
++    if isinstance(raw, list):
++        vals = raw
++    else:
++        vals = [raw]
++    out = []
++    for v in vals:
++        if isinstance(v, (str, int, float)) and str(v).strip():
++            out.append(str(v).strip())
++    return out
++
++
++@dataclass
++class ParsedLiterals:
++    """Generated literals per local id and side: id -> side -> predicate URI -> values."""
++
++    values: Dict[str, Dict[str, Dict[URIRef, List[str]]]]
++    n_unknown_keys: int = 0
++
++
++def parse_luffy_l(text: str, ctx: PromptContext) -> Optional[ParsedLiterals]:
++    obj = extract_json(text)
++    if obj is None:
++        return None
++    expected = {"S": ctx.sides}
++    expected.update(ctx.neighbor_sides)
++    unknown = 0
++    out: Dict[str, Dict[str, Dict[URIRef, List[str]]]] = {}
++    for lid, side_obj in obj.items():
++        if lid not in expected or not isinstance(side_obj, dict):
++            unknown += 1
++            continue
++        for side, attrs in side_obj.items():
++            if side not in expected[lid] or not isinstance(attrs, dict):
++                unknown += 1
++                continue
++            allowed = expected[lid][side].attributes
++            for label, raw in attrs.items():
++                if label not in allowed:
++                    unknown += 1
++                    continue
++                vals = _as_values(raw)
++                if vals:
++                    pred = ctx.attr_label_to_uri[side][label]
++                    out.setdefault(lid, {}).setdefault(side, {})[pred] = vals
++    return ParsedLiterals(out, unknown)
++
++
++@dataclass
++class ParsedPair:
++    attributes: Dict[str, Dict[URIRef, List[str]]]          # side -> pred -> values
++    relations: Dict[str, List[Tuple[URIRef, str, str]]]      # side -> (rel URI, dir, local id)
++    n_out_of_alphabet: int = 0
++
++
++def parse_all_llm(text: str, ctx: PromptContext) -> Optional[ParsedPair]:
++    obj = extract_json(text)
++    if obj is None:
++        return None
++    attrs: Dict[str, Dict[URIRef, List[str]]] = {}
++    rels: Dict[str, List[Tuple[URIRef, str, str]]] = {}
++    dropped = 0
++    for side, side_obj in obj.items():
++        if side not in ctx.sides or not isinstance(side_obj, dict):
++            dropped += 1
++            continue
++        allowed_attrs = set(ctx.sides[side].attributes)
++        for label, raw in (side_obj.get("attributes") or {}).items():
++            if label not in allowed_attrs:
++                dropped += 1
++                continue
++            vals = _as_values(raw)
++            if vals:
++                attrs.setdefault(side, {})[ctx.attr_label_to_uri[side][label]] = vals
++        allowed_rel_labels = {r[0] for r in ctx.sides[side].relations}
++        for item in side_obj.get("relations") or []:
++            if not (isinstance(item, (list, tuple)) and len(item) == 3):
++                dropped += 1
++                continue
++            label, direction, lid = (str(x) for x in item)
++            ok = (
++                label in allowed_rel_labels
++                and direction in ("->", "<-")
++                and lid in ctx.neighbor_sides
++                and side in ctx.neighbor_sides[lid]
++            )
++            if not ok:
++                dropped += 1
++                continue
++            rels.setdefault(side, []).append((ctx.rel_label_to_uri[side][label], direction, lid))
++    return ParsedPair(attrs, rels, dropped)
+diff --git a/src/augmentation/registry.py b/src/augmentation/registry.py
+index e3f1ac7..27062a8 100644
+--- a/src/augmentation/registry.py
++++ b/src/augmentation/registry.py
+@@ -12,6 +12,7 @@ _BUILTIN_AUGMENTATION_MODULES: Iterable[str] = (
+     "src.augmentation.methods.plm_mixup.augmenter",
+     "src.augmentation.methods.stub.augmenter",
+     "src.augmentation.methods.eda.augmenter",
++    "src.augmentation.methods.llm.augmenter",
+ )
+ 
+ 
+diff --git a/tests/augmentation/test_llm_augmenter.py b/tests/augmentation/test_llm_augmenter.py
+new file mode 100644
+index 0000000..8df6377
+--- /dev/null
++++ b/tests/augmentation/test_llm_augmenter.py
+@@ -0,0 +1,295 @@
++"""Offline tests for Luffy-L (no Bedrock): run with `pytest tests/augmentation/test_llm_augmenter.py -q`.
++
++Toy graph (the paper's running example):
++
++    KG1: bbc:bowie --member_of--> bbc:tm      bbc:bowie --label--> bbc:emi (singleton)
++    KG2: db:bowie  --member_of--> db:tm
++    training matches: (bbc:bowie, db:bowie), (bbc:tm, db:tm)
++"""
++
++import json
++import re
++
++import pytest
++from rdflib import Literal, URIRef
++
++from src.augmentation.methods.llm.augmenter import LLMAugmenter
++from src.augmentation.methods.llm.llm_client import CacheMiss
++from src.core.dataset import Dataset
++from src.core.knowledge_graph import KnowledgeGraph
++
++B, D = "http://bbc/", "http://db/"
++AUG = re.compile(r"_aug\d+$")
++
++
++def toy_dataset() -> Dataset:
++    k1, k2 = KnowledgeGraph(), KnowledgeGraph()
++    k1.add((URIRef(B + "bowie"), URIRef(B + "has_name"), Literal("Bowie, David")))
++    k1.add((URIRef(B + "bowie"), URIRef(B + "member_of"), URIRef(B + "tm")))
++    k1.add((URIRef(B + "bowie"), URIRef(B + "label"), URIRef(B + "emi")))
++    k1.add((URIRef(B + "tm"), URIRef(B + "has_name"), Literal("Tin Machine")))
++    k1.add((URIRef(B + "emi"), URIRef(B + "has_name"), Literal("EMI")))
++    k2.add((URIRef(D + "bowie"), URIRef(D + "name"), Literal("David Bowie")))
++    k2.add((URIRef(D + "bowie"), URIRef(D + "active_from"), Literal("1962")))
++    k2.add((URIRef(D + "bowie"), URIRef(D + "member_of"), URIRef(D + "tm")))
++    k2.add((URIRef(D + "tm"), URIRef(D + "name"), Literal("Tin Machine (band)")))
++    return Dataset(k1, k2, [(B + "bowie", D + "bowie"), (B + "tm", D + "tm")])
++
++
++class MockLLM:
++    """Deterministic stand-in for the LLM. Values encode the call number: FAKE-c<call>-..."""
++
++    def __init__(self, mode: str = "ok"):
++        self.mode = mode
++        self.calls = 0
++
++    def __call__(self, system: str, user: str) -> str:
++        self.calls += 1
++        if self.mode == "garbage":
++            return "Sorry, I cannot help with that."
++        data = json.loads(user.split("Input:\n", 1)[1])
++        c = self.calls
++
++        def fake(lid, side, attrs):
++            return {a: [f"FAKE-c{c}-{lid}-{side}-{a}-{i}" for i in range(len(v))] for a, v in attrs.items()}
++
++        if "Create ONE new" in system:                         # all_llm prompt
++            out = {}
++            for side in ("KG1", "KG2"):
++                if side in data["S"]:
++                    rels = [list(r) for r in data["S"][side]["relations"]]
++                    rels += [["invented_relation", "->", "N1"], [rels[0][0] if rels else "x", "->", "N99"]]
++                    out[side] = {"attributes": fake("S", side, data["S"][side]["attributes"]),
++                                 "relations": rels}
++            return json.dumps(out)
++        out = {}
++        if "ALREADY been replaced" not in system:              # continuation calls do not regenerate S
++            out["S"] = {s: fake("S", s, v["attributes"]) for s, v in data["S"].items() if s in ("KG1", "KG2")}
++        for lid, nb in data["neighbors"].items():
++            out[lid] = {s: fake(lid, s, v["attributes"]) for s, v in nb.items() if s in ("KG1", "KG2")}
++        return json.dumps(out)
++
++
++def run(tmp_path, variant="full", copy=False, ratio=1.0, provider="mock", mock=None, seed=11037,
++        **llm_extra):
++    cfg = {
++        "seed": seed,
++        "experiment": {"dataset": "openea/BBC_DB"},
++        "augmentation": {
++            "method": "llm", "ratio": ratio, "variant": variant, "copy_original_literals": copy,
++            "stage_root": str(tmp_path / f"stage_{variant}_{ratio}_{provider}"),
++            "llm": {"provider": provider, "cache_path": str(tmp_path / "cache.sqlite"), **llm_extra},
++        },
++    }
++    aug = LLMAugmenter(cfg)
++    aug.mock_fn = mock or MockLLM()
++    out = aug.augment(toy_dataset())
++    return out, aug
++
++
++def aug_pairs(ds):
++    return [(a, b) for a, b in ds.aligned_entities if AUG.search(a)]
++
++
++def new_triples(ds):
++    orig = toy_dataset()
++    return (set(ds.knowledge_graph_source) - set(orig.knowledge_graph_source),
++            set(ds.knowledge_graph_target) - set(orig.knowledge_graph_target))
++
++
++def literals(kg, ent):
++    return {(str(p), str(o)) for _, p, o in kg.triples((URIRef(ent), None, None)) if isinstance(o, Literal)}
++
++
++# ----------------------------------------------------------------------
++def test_full_structure_cache_and_same_call(tmp_path):
++    out, aug = run(tmp_path)
++    pairs = aug_pairs(out)
++    assert len(pairs) == 2                                         # budget = ceil(2 * 1.0)
++    by_orig = {AUG.sub("", a): (a, b) for a, b in pairs}
++    bowie, tm = by_orig[B + "bowie"], by_orig[B + "tm"]
++    # P1: relational edges point to the augmented neighbour pair (O_aug), in both KGs
++    assert (URIRef(bowie[0]), URIRef(B + "member_of"), URIRef(tm[0])) in out.knowledge_graph_source
++    assert (URIRef(bowie[1]), URIRef(D + "member_of"), URIRef(tm[1])) in out.knowledge_graph_target
++    # Algorithm 3: each node generated once; at least one neighbour served by LLMCache
++    s = aug.stats
++    assert s["llm_requests"] + s["llm_cache_hits"] == 3           # bowie, tm, emi
++    assert s["llm_cache_hits"] >= 1
++    # both sides of every augmented pair come from the same LLM call
++    for a, b in pairs:
++        calls = {v.split("-")[1] for _, v in literals(out.knowledge_graph_source, a) | literals(out.knowledge_graph_target, b)}
++        assert len(calls) == 1, calls
++    # no original value is copied when copy_original_literals = false
++    for kg_new in new_triples(out):
++        for _, _, o in kg_new:
++            if isinstance(o, Literal):
++                assert str(o).startswith("FAKE-"), o
++    stats = json.loads((tmp_path / "stage_full_1.0_mock" / "luffy_l_stats.json").read_text())
++    assert stats["variant"] == "full" and stats["api_calls"] == s["llm_requests"]
++
++
++def test_copy_original_literals_reproduces_luffy_s_scaffold(tmp_path):
++    out, _ = run(tmp_path, copy=True)
++    bowie = [a for a, _ in aug_pairs(out) if a.startswith(B + "bowie")][0]
++    lits = literals(out.knowledge_graph_source, bowie)
++    assert (B + "has_name", "Bowie, David") in lits               # original KG1 value copied
++    assert (D + "name", "David Bowie") in lits                    # ... and KG2 value too (as in Luffy-S)
++    assert any(v.startswith("FAKE-") for _, v in lits)
++
++
++def test_no_cache_makes_one_call_per_node(tmp_path):
++    _, aug = run(tmp_path, variant="no_cache")
++    assert aug.stats["llm_cache_hits"] == 0
++    assert aug.stats["llm_requests"] == 3
++
++
++def test_no_bfs_has_no_relational_edges(tmp_path):
++    out, aug = run(tmp_path, variant="no_bfs")
++    assert aug.max_depth == 0
++    assert len(aug_pairs(out)) == 2
++    for kg_new in new_triples(out):
++        assert not [t for t in kg_new if isinstance(t[2], URIRef)]
++
++
++def test_parse_failure_falls_back_to_original_values(tmp_path):
++    out, aug = run(tmp_path, mock=MockLLM("garbage"))
++    assert aug.stats["parse_failures"] >= 1
++    bowie = [a for a, _ in aug_pairs(out) if a.startswith(B + "bowie")][0]
++    assert (B + "has_name", "Bowie, David") in literals(out.knowledge_graph_source, bowie)
++
++
++def test_smaller_af_replays_prefix_without_api_calls(tmp_path):
++    full, _ = run(tmp_path, ratio=1.0)
++    half, aug = run(tmp_path, ratio=0.5, provider="replay")        # raises CacheMiss on any new prompt
++    assert len(aug_pairs(half)) == 1
++    assert aug_pairs(half)[0] in aug_pairs(full)
++    # deterministic replay of the full run gives exactly the same graphs
++    again, _ = run(tmp_path, ratio=1.0, provider="replay")
++    assert set(again.knowledge_graph_source) == set(full.knowledge_graph_source)
++    assert set(again.knowledge_graph_target) == set(full.knowledge_graph_target)
++
++
++def test_replay_with_other_seed_misses(tmp_path):
++    run(tmp_path, seed=11037)
++    with pytest.raises(CacheMiss):
++        run(tmp_path, seed=11038, provider="replay")
++
++
++def test_all_llm_stays_in_the_input_alphabet(tmp_path):
++    out, aug = run(tmp_path, variant="all_llm")
++    pairs = aug_pairs(out)
++    assert len(pairs) == 2 and aug.stats["llm_requests"] == 2
++    assert aug.stats["out_of_alphabet_dropped"] >= 2               # invented relation + unknown N99
++    orig = toy_dataset()
++    for kg_new, kg_orig, base in ((new_triples(out)[0], orig.knowledge_graph_source, B),
++                                  (new_triples(out)[1], orig.knowledge_graph_target, D)):
++        orig_rels = {p for _, p, o in kg_orig if isinstance(o, URIRef)}
++        orig_ents = {s for s, _, _ in kg_orig} | {o for _, _, o in kg_orig if isinstance(o, URIRef)}
++        for s, p, o in kg_new:
++            if isinstance(o, URIRef):
++                assert p in orig_rels                                # no new relation names
++                endpoint = o if AUG.search(str(s)) else s
++                assert endpoint in orig_ents                         # edges only to original entities
++        # every new triple touches a synthetic anchor: no new neighbour entities are created
++        for s, p, o in kg_new:
++            assert AUG.search(str(s)) or AUG.search(str(o))
++        new_aug = {x for t in kg_new for x in (t[0], t[2]) if isinstance(x, URIRef) and AUG.search(str(x))}
++        assert new_aug <= {URIRef(a) for pair in pairs for a in pair}
++
++
++def test_required_flags(tmp_path):
++    cfg = {"seed": 1, "augmentation": {"method": "llm", "ratio": 1.0, "variant": "full",
++                                       "llm": {"provider": "mock", "cache_path": str(tmp_path / "c.sqlite")}}}
++    with pytest.raises(ValueError, match="copy_original_literals"):
++        LLMAugmenter(cfg)
++    cfg["augmentation"]["copy_original_literals"] = False
++    cfg["augmentation"]["variant"] = "bogus"
++    with pytest.raises(ValueError, match="variant"):
++        LLMAugmenter(cfg)
++
++
++def test_fake_provider_never_feeds_real_runs(tmp_path):
++    fake_out, _ = run(tmp_path, provider="fake")
++    again, _ = run(tmp_path, provider="replay", replay_fake=True)     # dry-run replay works
++    assert set(again.knowledge_graph_source) == set(fake_out.knowledge_graph_source)
++    with pytest.raises(CacheMiss):                                     # a real replay does not see it
++        run(tmp_path, provider="replay")
++
++
++def star_dataset(n=100) -> Dataset:
++    """One matched hub with n singleton neighbours (like an ICEWS country), one value each."""
++    k1, k2 = KnowledgeGraph(), KnowledgeGraph()
++    k1.add((URIRef(B + "hub"), URIRef(B + "name"), Literal("Hub")))
++    k2.add((URIRef(D + "hub"), URIRef(D + "name"), Literal("Hub (KG2)")))
++    for i in range(n):
++        k1.add((URIRef(B + f"x{i:03d}"), URIRef(B + "related_to"), URIRef(B + "hub")))
++        k1.add((URIRef(B + f"x{i:03d}"), URIRef(B + "name"), Literal(f"Actor {i}")))
++    return Dataset(k1, k2, [(B + "hub", D + "hub")])
++
++
++def test_hub_neighbours_are_chunked_and_all_primed(tmp_path):
++    cfg = {"seed": 11037, "experiment": {"dataset": "openea/ICEW_WIKI"},
++           "augmentation": {"method": "llm", "ratio": 1.0, "variant": "full", "copy_original_literals": False,
++                            "stage_root": str(tmp_path / "stage"),
++                            "llm": {"provider": "mock", "cache_path": str(tmp_path / "c.sqlite")}}}
++    aug = LLMAugmenter(cfg)
++    systems = []
++    mock = MockLLM()
++    aug.mock_fn = lambda system, user: (systems.append(system), mock(system, user))[1]
++    out = aug.augment(star_dataset(100))
++    s = aug.stats
++    assert s["llm_requests"] == 3                        # ceil(100 / 40) calls, not 1 + 100
++    assert s["llm_cache_hits"] == 100                    # every singleton served by LLMCache
++    assert sum("ALREADY been replaced" in x for x in systems) == 2
++    new = set(out.knowledge_graph_source) - set(star_dataset(100).knowledge_graph_source)
++    assert all(str(o).startswith("FAKE-") for _, _, o in new if isinstance(o, Literal))
++    assert len({sub for sub, _, o in new if isinstance(o, Literal)}) == 101   # hub_aug + 100 x_aug
++
++
++def test_traversal_is_independent_of_triple_insertion_order(tmp_path):
++    """Same seed -> same prompts even if the graphs were filled in another order
++    (DAKGEA loaders fill graphs from Python sets, so order changes with PYTHONHASHSEED)."""
++    def shuffled(ds, seed):
++        import random as _r
++        out = []
++        for kg in (ds.knowledge_graph_source, ds.knowledge_graph_target):
++            triples = list(kg)
++            _r.Random(seed).shuffle(triples)
++            g = KnowledgeGraph()
++            for t in triples:
++                g.add(t)
++            out.append(g)
++        return Dataset(out[0], out[1], list(ds.aligned_entities)[::-1])
++
++    prompts = []
++    for order_seed in (1, 2):
++        cfg = {"seed": 11037, "experiment": {"dataset": "openea/BBC_DB"},
++               "augmentation": {"method": "llm", "ratio": 1.0, "variant": "full", "copy_original_literals": False,
++                                "llm": {"provider": "mock", "cache_path": str(tmp_path / f"c{order_seed}.sqlite")}}}
++        aug = LLMAugmenter(cfg)
++        seq = []
++        mock = MockLLM()
++        aug.mock_fn = lambda system, user, seq=seq, mock=mock: (seq.append(user), mock(system, user))[1]
++        aug.augment(shuffled(toy_dataset(), order_seed))
++        prompts.append(seq)
++    assert prompts[0] == prompts[1]
++
++
++def test_cached_pair_primes_its_own_pending_neighbours(tmp_path):
++    """bowie's call primes tm; when tm is served from LLMCache, tm's own singleton
++    neighbour (EMI-2) is generated by one continuation call that sees tm's values."""
++    ds = toy_dataset()
++    ds.knowledge_graph_source.add((URIRef(B + "tm"), URIRef(B + "label"), URIRef(B + "emi2")))
++    ds.knowledge_graph_source.add((URIRef(B + "emi2"), URIRef(B + "has_name"), Literal("EMI-2")))
++    cfg = {"seed": 11037, "experiment": {"dataset": "openea/BBC_DB"},
++           "augmentation": {"method": "llm", "ratio": 1.0, "variant": "full", "copy_original_literals": False,
++                            "llm": {"provider": "mock", "cache_path": str(tmp_path / "c.sqlite")}}}
++    aug = LLMAugmenter(cfg)
++    systems, mock = [], MockLLM()
++    aug.mock_fn = lambda system, user: (systems.append(user), mock(system, user))[1]
++    aug.augment(ds)
++    s = aug.stats
++    assert s["llm_requests"] == 2 and s["continuation_requests"] == 1
++    assert s["llm_cache_hits"] == 3                      # tm, emi, emi2
++    cont = [u for u in systems if "already_generated_replacement" in u]
++    assert len(cont) == 1 and "EMI-2" in cont[0]
+-- 
+2.43.0
